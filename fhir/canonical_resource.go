@@ -1,0 +1,152 @@
+package fhir_r4b_go
+
+import (
+	"encoding/json"
+	"errors"
+	"fmt"
+)
+
+// CanonicalResource represents the base definition for all FHIR canonical resources.
+type CanonicalResource struct {
+	DomainResource
+	URL          *FhirUri           `json:"url,omitempty"`
+	Version      *FhirString        `json:"version,omitempty"`
+	Status       *PublicationStatus `json:"status,omitempty"`
+	Experimental *FhirBoolean       `json:"experimental,omitempty"`
+	Date         *FhirDateTime      `json:"date,omitempty"`
+	Publisher    *FhirString        `json:"publisher,omitempty"`
+	Contact      []ContactDetail    `json:"contact,omitempty"`
+	Description  *FhirMarkdown      `json:"description,omitempty"`
+	UseContext   []UsageContext     `json:"useContext,omitempty"`
+	Jurisdiction []CodeableConcept  `json:"jurisdiction,omitempty"`
+}
+
+// NewCanonicalResource creates a new CanonicalResource instance.
+func NewCanonicalResource(
+	resourceType ResourceType,
+	id *FhirString,
+	meta *FhirMeta,
+	implicitRules *FhirUri,
+	language *CommonLanguages,
+	text *Narrative,
+	contained []Resource,
+	extension_ []FhirExtension,
+	modifierExtension []FhirExtension,
+	url *FhirUri,
+	version *FhirString,
+	status *PublicationStatus,
+	experimental *FhirBoolean,
+	date *FhirDateTime,
+	publisher *FhirString,
+	contact []ContactDetail,
+	description *FhirMarkdown,
+	useContext []UsageContext,
+	jurisdiction []CodeableConcept,
+) *CanonicalResource {
+	return &CanonicalResource{
+		DomainResource: DomainResource{
+			Resource: Resource{
+				ResourceType:  resourceType,
+				ID:            id,
+				Meta:          meta,
+				ImplicitRules: implicitRules,
+				Language:      language,
+			},
+			Text:             text,
+			Contained:        contained,
+			Extension_:       extension_,
+			ModifierExtension: modifierExtension,
+		},
+		URL:          url,
+		Version:      version,
+		Status:       status,
+		Experimental: experimental,
+		Date:         date,
+		Publisher:    publisher,
+		Contact:      contact,
+		Description:  description,
+		UseContext:   useContext,
+		Jurisdiction: jurisdiction,
+	}
+}
+
+// ToJSON converts the CanonicalResource to JSON data.
+func (c *CanonicalResource) ToJSON() ([]byte, error) {
+	return json.Marshal(c)
+}
+
+// FromJSON populates a CanonicalResource from JSON data.
+func (c *CanonicalResource) FromJSON(data []byte) error {
+	return json.Unmarshal(data, c)
+}
+
+// CopyWith creates a copy of CanonicalResource with optional updates.
+func (c *CanonicalResource) CopyWith(
+	id *FhirString,
+	meta *FhirMeta,
+	implicitRules *FhirUri,
+	language *CommonLanguages,
+	text *Narrative,
+	contained []Resource,
+	extension_ []FhirExtension,
+	modifierExtension []FhirExtension,
+	url *FhirUri,
+	version *FhirString,
+	status *PublicationStatus,
+	experimental *FhirBoolean,
+	date *FhirDateTime,
+	publisher *FhirString,
+	contact []ContactDetail,
+	description *FhirMarkdown,
+	useContext []UsageContext,
+	jurisdiction []CodeableConcept,
+) *CanonicalResource {
+	return &CanonicalResource{
+		DomainResource: DomainResource{
+			Resource: Resource{
+				ResourceType:  c.ResourceType,
+				ID:            ifNotNil(id, c.ID),
+				Meta:          ifNotNil(meta, c.Meta),
+				ImplicitRules: ifNotNil(implicitRules, c.ImplicitRules),
+				Language:      ifNotNil(language, c.Language),
+			},
+			Text:             ifNotNil(text, c.Text),
+			Contained:        ifNotNilSlice(contained, c.Contained),
+			Extension_:       ifNotNilSlice(extension_, c.Extension_),
+			ModifierExtension: ifNotNilSlice(modifierExtension, c.ModifierExtension),
+		},
+		URL:          ifNotNil(url, c.URL),
+		Version:      ifNotNil(version, c.Version),
+		Status:       ifNotNil(status, c.Status),
+		Experimental: ifNotNil(experimental, c.Experimental),
+		Date:         ifNotNil(date, c.Date),
+		Publisher:    ifNotNil(publisher, c.Publisher),
+		Contact:      ifNotNilSlice(contact, c.Contact),
+		Description:  ifNotNil(description, c.Description),
+		UseContext:   ifNotNilSlice(useContext, c.UseContext),
+		Jurisdiction: ifNotNilSlice(jurisdiction, c.Jurisdiction),
+	}
+}
+
+// FromYAML populates a CanonicalResource from YAML input.
+func CanonicalResourceFromYAML(yamlData interface{}) (*CanonicalResource, error) {
+	jsonData, err := convertYAMLToJSON(yamlData)
+	if err != nil {
+		return nil, err
+	}
+	var res CanonicalResource
+	if err := json.Unmarshal(jsonData, &res); err != nil {
+		return nil, errors.New("failed to parse CanonicalResource from YAML")
+	}
+	return &res, nil
+}
+
+// Path returns the local reference for this CanonicalResource in the form "ResourceType/Id".
+func (c *CanonicalResource) Path() string {
+	if c.ID != nil {
+		return fmt.Sprintf("%s/%s", c.ResourceType, *c.ID)
+	}
+	return fmt.Sprintf("%s/", c.ResourceType)
+}
+
+
