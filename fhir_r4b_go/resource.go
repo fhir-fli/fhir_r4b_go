@@ -71,9 +71,9 @@ func (r *Resource) ToJSON() ([]byte, error) {
 // Path returns the local reference for this Resource in the form "ResourceType/Id".
 func (r *Resource) Path() string {
 	if r.ID != nil {
-		return fmt.Sprintf("%s/%s", r.ResourceType, *r.ID)
+		return fmt.Sprintf("%s/%s", r.ResourceType.String(), *r.ID)
 	}
-	return fmt.Sprintf("%s/", r.ResourceType)
+	return fmt.Sprintf("%s/", r.ResourceType.String())
 }
 
 // GenerateNewID generates a new unique ID for the Resource.

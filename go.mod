@@ -4,6 +4,7 @@ go 1.23.0
 
 require (
 	github.com/antchfx/xmlquery v1.4.2
+	github.com/google/go-cmp v0.6.0
 	github.com/google/uuid v1.6.0
 )
 
