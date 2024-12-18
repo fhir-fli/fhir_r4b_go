@@ -1,27 +1,34 @@
 package fhir_r4b_go
 
 import (
+	"encoding/json"
 	"fmt"
 	"time"
 )
 
-// FhirDateTimeBase is the base struct for FHIR date types.
+// FhirDateTimeBase represents the base structure for FHIR date and time types.
 type FhirDateTimeBase struct {
-	Year        *int
-	Month       *int
-	Day         *int
-	Hour        *int
-	Minute      *int
-	Second      *int
-	Millisecond *int
-	Microsecond *string
-	TimeZone    *float64 // Represent timezone offset as float (e.g., +02:00 → 2.0)
-	IsUTC       bool
+	Year        *int     `json:"year,omitempty"`
+	Month       *int     `json:"month,omitempty"`
+	Day         *int     `json:"day,omitempty"`
+	Hour        *int     `json:"hour,omitempty"`
+	Minute      *int     `json:"minute,omitempty"`
+	Second      *int     `json:"second,omitempty"`
+	Millisecond *int     `json:"millisecond,omitempty"`
+	Microsecond *string  `json:"microsecond,omitempty"`
+	TimeZone    *float64 `json:"timezone,omitempty"` // Offset in hours
+	IsUTC       bool     `json:"isUTC"`
 }
 
-// NewFhirDateTimeBase initializes a new FhirDateTimeBase.
-func NewFhirDateTimeBase(year *int, isUTC bool, month, day, hour, minute, second, millisecond *int, microsecond *string, timeZone *float64) FhirDateTimeBase {
-	return FhirDateTimeBase{
+// NewFhirDateTimeBase creates a new FhirDateTimeBase instance.
+func NewFhirDateTimeBase(
+	year *int,
+	isUTC bool,
+	month, day, hour, minute, second, millisecond *int,
+	microsecond *string,
+	timeZone *float64,
+) *FhirDateTimeBase {
+	return &FhirDateTimeBase{
 		Year:        year,
 		Month:       month,
 		Day:         day,
@@ -35,8 +42,8 @@ func NewFhirDateTimeBase(year *int, isUTC bool, month, day, hour, minute, second
 	}
 }
 
-// Value returns the FhirDateTimeBase as a time.Time object.
-func (f FhirDateTimeBase) Value() *time.Time {
+// Value converts FhirDateTimeBase into a time.Time object.
+func (f *FhirDateTimeBase) Value() *time.Time {
 	if f.Year == nil {
 		return nil
 	}
@@ -74,18 +81,15 @@ func (f FhirDateTimeBase) Value() *time.Time {
 		loc = time.FixedZone("Offset", zoneOffset)
 	}
 
-	// Construct time.Time with microsecond handling
-	t := time.Date(year, time.Month(month), day, hour, minute, second, millisecond*1000, loc)
-	return &t
+	return timePtr(time.Date(year, time.Month(month), day, hour, minute, second, millisecond*1e6, loc))
 }
 
-// ToString returns the formatted FHIR date-time string.
-func (f FhirDateTimeBase) ToString() string {
+// ToString formats the FHIR date-time as a string.
+func (f *FhirDateTimeBase) ToString() string {
 	if f.Year == nil {
 		return ""
 	}
 
-	// Start building the date string
 	result := fmt.Sprintf("%04d", *f.Year)
 
 	if f.Month != nil {
@@ -116,7 +120,6 @@ func (f FhirDateTimeBase) ToString() string {
 		}
 	}
 
-	// Append time zone
 	if f.IsUTC {
 		result += "Z"
 	} else if f.TimeZone != nil {
@@ -133,8 +136,27 @@ func (f FhirDateTimeBase) ToString() string {
 	return result
 }
 
+// Clone creates a deep copy of FhirDateTimeBase.
+func (f *FhirDateTimeBase) Clone() *FhirDateTimeBase {
+	if f == nil {
+		return nil
+	}
+	return &FhirDateTimeBase{
+		Year:        intPtrIfNotNil(f.Year),
+		Month:       intPtrIfNotNil(f.Month),
+		Day:         intPtrIfNotNil(f.Day),
+		Hour:        intPtrIfNotNil(f.Hour),
+		Minute:      intPtrIfNotNil(f.Minute),
+		Second:      intPtrIfNotNil(f.Second),
+		Millisecond: intPtrIfNotNil(f.Millisecond),
+		Microsecond: strPtrIfNotNil(f.Microsecond),
+		TimeZone:    floatPtrIfNotNil(f.TimeZone),
+		IsUTC:       f.IsUTC,
+	}
+}
+
 // CompareTo compares two FhirDateTimeBase instances.
-func (f FhirDateTimeBase) CompareTo(other FhirDateTimeBase) int {
+func (f *FhirDateTimeBase) CompareTo(other *FhirDateTimeBase) int {
 	t1 := f.Value()
 	t2 := other.Value()
 
@@ -156,30 +178,41 @@ func (f FhirDateTimeBase) CompareTo(other FhirDateTimeBase) int {
 	return 0
 }
 
-// ToJSON serializes the FhirDateTimeBase into JSON format.
-func (f FhirDateTimeBase) ToJSON() map[string]interface{} {
+// MarshalJSON serializes FhirDateTimeBase to JSON.
+func (f *FhirDateTimeBase) MarshalJSON() ([]byte, error) {
 	if f.Year == nil {
-		return nil
+		return json.Marshal(nil)
 	}
-	return map[string]interface{}{
+	return json.Marshal(map[string]interface{}{
 		"value": f.ToString(),
+	})
+}
+
+// UnmarshalJSON deserializes JSON into FhirDateTimeBase.
+func (f *FhirDateTimeBase) UnmarshalJSON(data []byte) error {
+	var input string
+	if err := json.Unmarshal(data, &input); err != nil {
+		return err
 	}
+
+	parsed, err := FhirDateTimeBaseFromString(input)
+	if err != nil {
+		return err
+	}
+
+	*f = *parsed
+	return nil
 }
 
-// intPtr returns a pointer to an int.
-func intPtr(v int) *int {
-	return &v
-}
-
+// FhirDateTimeBaseFromString parses a FHIR date-time string into FhirDateTimeBase.
 func FhirDateTimeBaseFromString(input string) (*FhirDateTimeBase, error) {
 	t, err := time.Parse(time.RFC3339Nano, input)
 	if err != nil {
 		return nil, fmt.Errorf("invalid FHIR dateTime format: %v", err)
 	}
 
-	// Capture the zone name (unused) and offset in seconds
 	_, zoneOffset := t.Zone()
-	timeZone := float64(zoneOffset) / 3600 // Convert offset to hours
+	timeZone := float64(zoneOffset) / 3600
 
 	return &FhirDateTimeBase{
 		Year:        intPtr(t.Year()),
@@ -191,6 +224,28 @@ func FhirDateTimeBaseFromString(input string) (*FhirDateTimeBase, error) {
 		Second:      intPtr(t.Second()),
 		Millisecond: intPtr(t.Nanosecond() / 1e6),
 		Microsecond: nil,
-		TimeZone:    &timeZone, // Use TimeZone instead of Offset
+		TimeZone:    &timeZone,
 	}, nil
+}
+
+// Helper functions for creating pointers.
+func intPtr(v int) *int       { return &v }
+func intPtrIfNotNil(v *int) *int {
+	if v == nil {
+		return nil
+	}
+	return intPtr(*v)
+}
+
+func strPtrIfNotNil(v *string) *string {
+	if v == nil {
+		return nil
+	}
+	return strPtr(*v)
+}
+
+func floatPtr(v float64) *float64 { return &v }
+func strPtr(v string) *string     { return &v }
+func timePtr(t time.Time) *time.Time {
+	return &t
 }

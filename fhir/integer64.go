@@ -13,31 +13,38 @@ type FhirInteger64 struct {
 }
 
 // NewFhirInteger64 creates a new FhirInteger64 with validation.
-func NewFhirInteger64(input interface{}, element *Element) (*FhirInteger64, error) {
-	val, err := parseBigInt(input)
-	if err != nil {
-		return nil, err
+func NewFhirInteger64(input string, element *Element) (*FhirInteger64, error) {
+	val, success := new(big.Int).SetString(input, 10)
+	if !success {
+		return nil, errors.New("invalid FhirInteger64: " + input)
 	}
 	return &FhirInteger64{Value: val, Element: element}, nil
 }
 
-// parseBigInt validates and converts input into *big.Int.
-func parseBigInt(input interface{}) (*big.Int, error) {
-	switch v := input.(type) {
-	case int, int64:
-		return big.NewInt(int64(v.(int))), nil
-	case string:
-		bi := new(big.Int)
-		_, success := bi.SetString(v, 10)
-		if !success {
-			return nil, errors.New("invalid FhirInteger64 string format")
-		}
-		return bi, nil
-	case *big.Int:
-		return v, nil
-	default:
-		return nil, errors.New("unsupported type for FhirInteger64")
+// Clone creates a deep copy of FhirInteger64.
+func (f *FhirInteger64) Clone() *FhirInteger64 {
+	if f == nil {
+		return nil
 	}
+	var valueCopy *big.Int
+	if f.Value != nil {
+		valueCopy = new(big.Int).Set(f.Value)
+	}
+	return &FhirInteger64{
+		Value:   valueCopy,
+		Element: f.Element.Clone(),
+	}
+}
+
+// Equals checks equality with another FhirInteger64.
+func (f *FhirInteger64) Equals(other *FhirInteger64) bool {
+	if f == nil && other == nil {
+		return true
+	}
+	if f == nil || other == nil {
+		return false
+	}
+	return f.Value.Cmp(other.Value) == 0 && f.Element.Equals(other.Element)
 }
 
 // MarshalJSON serializes FhirInteger64 to JSON.
@@ -64,40 +71,20 @@ func (f *FhirInteger64) UnmarshalJSON(data []byte) error {
 	}
 
 	if temp.Value != "" {
-		bi := new(big.Int)
-		_, success := bi.SetString(temp.Value, 10)
+		val, success := new(big.Int).SetString(temp.Value, 10)
 		if !success {
 			return errors.New("invalid FhirInteger64 value")
 		}
-		f.Value = bi
+		f.Value = val
 	}
 	f.Element = temp.Element
 	return nil
 }
 
-// String returns the string representation of the value.
+// String returns the string representation of FhirInteger64.
 func (f *FhirInteger64) String() string {
 	if f.Value != nil {
 		return f.Value.String()
 	}
 	return ""
-}
-
-// Arithmetic and Comparison Methods
-
-// Add adds another FhirInteger64 or integer.
-func (f *FhirInteger64) Add(other *FhirInteger64) *FhirInteger64 {
-	result := new(big.Int).Add(f.Value, other.Value)
-	return &FhirInteger64{Value: result}
-}
-
-// Sub subtracts another FhirInteger64 or integer.
-func (f *FhirInteger64) Sub(other *FhirInteger64) *FhirInteger64 {
-	result := new(big.Int).Sub(f.Value, other.Value)
-	return &FhirInteger64{Value: result}
-}
-
-// Equal checks equality with another FhirInteger64.
-func (f *FhirInteger64) Equal(other *FhirInteger64) bool {
-	return f.Value.Cmp(other.Value) == 0
 }

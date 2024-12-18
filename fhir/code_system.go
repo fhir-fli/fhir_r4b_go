@@ -208,7 +208,7 @@ type CodeSystemProperty struct {
 	Code *FhirCode `json:"code,omitempty"`
 	Uri *FhirUri `json:"uri,omitempty"`
 	Description *FhirString `json:"description,omitempty"`
-	Type *PropertyTypeEnum `json:"type,omitempty"`
+	Type *PropertyType `json:"type,omitempty"`
 }
 
 // NewCodeSystemProperty creates a new CodeSystemProperty instance

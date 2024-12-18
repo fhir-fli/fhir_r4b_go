@@ -88,8 +88,8 @@ func UpdateMeta(currentMeta, oldMeta *FhirMeta, versionIDAsTime bool) *FhirMeta 
 		*newMeta = *oldMeta
 	}
 	now := time.Now()
-	newMeta.LastUpdated = FhirInstant{
-		FhirDateTimeBase: NewFhirDateTimeBase(
+	newMeta.LastUpdated = &FhirInstant{
+		FhirDateTimeBase: *NewFhirDateTimeBase(
 			intPtr(now.Year()), now.Location() == time.UTC,
 			intPtr(int(now.Month())), intPtr(now.Day()),
 			intPtr(now.Hour()), intPtr(now.Minute()),
@@ -98,9 +98,9 @@ func UpdateMeta(currentMeta, oldMeta *FhirMeta, versionIDAsTime bool) *FhirMeta 
 		),
 	}
 	if versionIDAsTime {
-		newMeta.VersionId = FhirId{Value: strPtr(now.Format(time.RFC3339))}
+		newMeta.VersionId = &FhirId{Value: strPtr(now.Format(time.RFC3339))}
 	} else {
-		newMeta.VersionId = FhirId{Value: strPtr("1")}
+		newMeta.VersionId = &FhirId{Value: strPtr("1")}
 	}
 	return newMeta
 }

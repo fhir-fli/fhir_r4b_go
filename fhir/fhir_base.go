@@ -12,9 +12,8 @@ type Equalable interface {
 	Equals(other Equalable) bool
 }
 
-// Cloneable is an interface for types that can clone themselves.
 type Cloneable[T any] interface {
-	Clone() *T
+	Clone() T
 }
 
 // FhirBase is the base type for all FHIR elements in Go.
@@ -160,16 +159,19 @@ func compareSlices(slice1, slice2 interface{}) bool {
 	return true
 }
 
-func cloneSlices[T Cloneable[T]](slice []T) []T {
+func cloneSlices[T any, PT interface {
+	*T
+	Clone() PT
+}](slice []PT) []PT {
 	if slice == nil {
 		return nil
 	}
-	clone := make([]T, len(slice))
+	clone := make([]PT, len(slice))
 	for i, item := range slice {
-		if item != nil {
-			clone[i] = item.Clone()
+		if item != nil { // Check if the item is non-nil
+			clone[i] = item.Clone() // Clone the non-nil item
 		} else {
-			clone[i] = nil
+			clone[i] = nil // Preserve nil for nil items
 		}
 	}
 	return clone
@@ -195,4 +197,12 @@ func convertYAMLToJSON(yamlData interface{}) ([]byte, error) {
 	default:
 		return nil, errors.New("invalid YAML input: unsupported type")
 	}
+}
+
+// Helper functions for pointer management and comparison.
+func floatPtrIfNotNil(f *float64) *float64 {
+	if f == nil {
+		return nil
+	}
+	return &(*f)
 }

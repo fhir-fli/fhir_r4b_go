@@ -3,6 +3,7 @@ package fhir_r4b_go
 import (
 	"encoding/json"
 	"errors"
+	"regexp"
 )
 
 // FhirMarkdown represents the FHIR primitive type "markdown".
@@ -21,7 +22,9 @@ func NewFhirMarkdown(input string, element *Element) (*FhirMarkdown, error) {
 
 // validateMarkdown ensures the input conforms to markdown rules.
 func validateMarkdown(input string) bool {
-	return len(input) > 0
+	// Markdown validation: allowing all valid UTF-8 characters except control characters
+	regex := regexp.MustCompile(`^[^\x00-\x08\x0B\x0C\x0E-\x1F]*$`)
+	return regex.MatchString(input)
 }
 
 // MarshalJSON serializes FhirMarkdown to JSON.
@@ -47,6 +50,10 @@ func (f *FhirMarkdown) UnmarshalJSON(data []byte) error {
 		return err
 	}
 
+	if !validateMarkdown(temp.Value) {
+		return errors.New("invalid FhirMarkdown: contains invalid characters")
+	}
+
 	f.Value = temp.Value
 	f.Element = temp.Element
 	return nil
@@ -57,7 +64,28 @@ func (f *FhirMarkdown) String() string {
 	return f.Value
 }
 
+// Clone creates a deep copy of FhirMarkdown.
+func (f *FhirMarkdown) Clone() *FhirMarkdown {
+	if f == nil {
+		return nil
+	}
+	var elementCopy *Element
+	if f.Element != nil {
+		elementCopy = f.Element.Clone()
+	}
+	return &FhirMarkdown{
+		Value:   f.Value,
+		Element: elementCopy,
+	}
+}
+
 // Equal checks equality between two FhirMarkdown instances.
-func (f *FhirMarkdown) Equal(other *FhirMarkdown) bool {
-	return f.Value == other.Value
+func (f *FhirMarkdown) Equals(other *FhirMarkdown) bool {
+	if f == nil && other == nil {
+		return true
+	}
+	if f == nil || other == nil {
+		return false
+	}
+	return f.Value == other.Value && f.Element.Equals(other.Element)
 }

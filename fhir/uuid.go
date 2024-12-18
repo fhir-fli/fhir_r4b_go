@@ -29,9 +29,8 @@ func GenerateFhirUuidV4(element *Element) *FhirUuid {
 
 // MarshalJSON serializes FhirUuid to JSON.
 func (f *FhirUuid) MarshalJSON() ([]byte, error) {
-	data := map[string]interface{}{
-		"value": f.Value.String(),
-	}
+	data := map[string]interface{}{}
+	data["value"] = f.Value.String()
 	if f.Element != nil {
 		data["_value"] = f.Element
 	}
@@ -59,16 +58,14 @@ func (f *FhirUuid) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-// String returns the UUID as a string.
-func (f *FhirUuid) String() string {
-	return f.Value.String()
-}
-
 // Clone creates a deep copy of FhirUuid.
 func (f *FhirUuid) Clone() *FhirUuid {
+	if f == nil {
+		return nil
+	}
 	var elementCopy *Element
 	if f.Element != nil {
-		elementCopy = f.Element.Copy()
+		elementCopy = f.Element.Clone()
 	}
 	return &FhirUuid{
 		Value:   f.Value,
@@ -76,7 +73,13 @@ func (f *FhirUuid) Clone() *FhirUuid {
 	}
 }
 
-// Equal checks equality between two FhirUuid instances.
-func (f *FhirUuid) Equal(other *FhirUuid) bool {
-	return f.Value == other.Value && compareElements(f.Element, other.Element)
+// Equals checks equality between two FhirUuid instances.
+func (f *FhirUuid) Equals(other *FhirUuid) bool {
+	if f == nil && other == nil {
+		return true
+	}
+	if f == nil || other == nil {
+		return false
+	}
+	return f.Value == other.Value && f.Element.Equals(other.Element)
 }

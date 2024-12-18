@@ -8,8 +8,8 @@ import (
 
 // FhirUrl represents a validated URL in the FHIR standard.
 type FhirUrl struct {
-	Value   *url.URL `json:"value,omitempty"`
-	Element *Element `json:"_value,omitempty"`
+	Value   *url.URL  `json:"value,omitempty"`
+	Element *Element  `json:"_value,omitempty"`
 }
 
 // NewFhirUrl creates a new FhirUrl instance with validation.
@@ -54,19 +54,14 @@ func (f *FhirUrl) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-// String returns the URL as a string.
-func (f *FhirUrl) String() string {
-	if f.Value != nil {
-		return f.Value.String()
-	}
-	return ""
-}
-
 // Clone creates a deep copy of FhirUrl.
 func (f *FhirUrl) Clone() *FhirUrl {
+	if f == nil {
+		return nil
+	}
 	var elementCopy *Element
 	if f.Element != nil {
-		elementCopy = f.Element.Copy()
+		elementCopy = f.Element.Clone()
 	}
 	return &FhirUrl{
 		Value:   f.Value,
@@ -74,7 +69,14 @@ func (f *FhirUrl) Clone() *FhirUrl {
 	}
 }
 
-// Equal checks equality between two FhirUrl instances.
-func (f *FhirUrl) Equal(other *FhirUrl) bool {
-	return f.String() == other.String() && compareElements(f.Element, other.Element)
+// Equals checks equality between two FhirUrl instances.
+func (f *FhirUrl) Equals(other *FhirUrl) bool {
+	if f == nil && other == nil {
+		return true
+	}
+	if f == nil || other == nil {
+		return false
+	}
+	return f.Value.String() == other.Value.String() && f.Element.Equals(other.Element)
 }
+

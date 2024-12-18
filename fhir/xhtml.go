@@ -36,11 +36,7 @@ func validateXhtml(xhtml string) error {
 	}
 
 	// Validate attributes and child elements recursively.
-	if err := validateElement(root, true); err != nil {
-		return err
-	}
-
-	return nil
+	return validateElement(root, true)
 }
 
 // isAllowedElement checks if the element is allowed in XHTML.
@@ -60,7 +56,7 @@ func isAllowedElement(name string) bool {
 // validateElement recursively validates an element's attributes and children.
 func validateElement(element *xmlquery.Node, isRoot bool) error {
 	for _, attr := range element.Attr {
-		if !isAllowedAttribute(attr.Name.Local, element.Data, isRoot) {
+		if !isAllowedAttribute(attr.Name.Local, isRoot) {
 			return errors.New("invalid attribute in element " + element.Data)
 		}
 	}
@@ -81,7 +77,7 @@ func validateElement(element *xmlquery.Node, isRoot bool) error {
 }
 
 // isAllowedAttribute validates attributes for a given element.
-func isAllowedAttribute(attrName, elementName string, isRoot bool) bool {
+func isAllowedAttribute(attrName string, isRoot bool) bool {
 	allowedAttributes := map[string]bool{
 		"style": true, "class": true, "src": true, "href": true, "name": true,
 		"alt": true, "title": true, "colspan": true, "rowspan": true, "width": true,
@@ -89,11 +85,7 @@ func isAllowedAttribute(attrName, elementName string, isRoot bool) bool {
 	}
 
 	// Allow xmlns attribute for the root element.
-	if isRoot && attrName == "xmlns" {
-		return true
-	}
-
-	return allowedAttributes[attrName]
+	return (isRoot && attrName == "xmlns") || allowedAttributes[attrName]
 }
 
 // MarshalJSON serializes FhirXhtml into JSON.
@@ -128,16 +120,14 @@ func (f *FhirXhtml) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-// String returns the XHTML content as a string.
-func (f *FhirXhtml) String() string {
-	return f.Value
-}
-
 // Clone creates a deep copy of FhirXhtml.
 func (f *FhirXhtml) Clone() *FhirXhtml {
+	if f == nil {
+		return nil
+	}
 	var elementCopy *Element
 	if f.Element != nil {
-		elementCopy = f.Element.Copy()
+		elementCopy = f.Element.Clone()
 	}
 	return &FhirXhtml{
 		Value:   f.Value,
@@ -145,7 +135,13 @@ func (f *FhirXhtml) Clone() *FhirXhtml {
 	}
 }
 
-// Equal checks equality between two FhirXhtml instances.
-func (f *FhirXhtml) Equal(other *FhirXhtml) bool {
-	return f.Value == other.Value && compareElements(f.Element, other.Element)
+// Equals checks equality between two FhirXhtml instances.
+func (f *FhirXhtml) Equals(other *FhirXhtml) bool {
+	if f == nil && other == nil {
+		return true
+	}
+	if f == nil || other == nil {
+		return false
+	}
+	return f.Value == other.Value && f.Element.Equals(other.Element)
 }

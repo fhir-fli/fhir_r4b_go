@@ -7,7 +7,7 @@ import (
 
 // BiologicallyDerivedProduct
 // A material substance originating from a biological entity intended to be transplanted or infused
-into another (possibly the same) biological entity.
+// into another (possibly the same) biological entity.
 type BiologicallyDerivedProduct struct {
 	DomainResource
 	Id *FhirString `json:"id,omitempty"`

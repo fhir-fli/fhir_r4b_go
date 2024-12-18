@@ -1,73 +1,71 @@
 package fhir_r4b_go
 
 import (
-	"errors"
+	"encoding/json"
 	"fmt"
 )
 
-// FhirPositiveInt represents the FHIR 'integer' type
+// FhirPositiveInt represents the FHIR 'integer' type.
 type FhirPositiveInt struct {
-	value   int64
-	element *Element
+	Value   int64    `json:"value,omitempty"`
+	Element *Element `json:"_value,omitempty"`
 }
 
-// NewFhirPositiveInt creates a new validated FhirPositiveInt
+// NewFhirPositiveInt creates a new validated FhirPositiveInt.
 func NewFhirPositiveInt(value int64, element *Element) *FhirPositiveInt {
-	return &FhirPositiveInt{value: value, element: element}
+	return &FhirPositiveInt{Value: value, Element: element}
 }
 
-// Value retrieves the integer's value as float64 (to satisfy FhirNumber)
-func (fi *FhirPositiveInt) Value() float64 {
-	return float64(fi.value)
-}
-
-// ToJSON serializes FhirPositiveInt to JSON
-func (fi *FhirPositiveInt) ToJSON() (map[string]interface{}, error) {
-	result := map[string]interface{}{"value": fi.value}
-	if fi.element != nil {
-		elementJSON, err := fi.element.ToJSON()
-		if err != nil {
-			return nil, err
-		}
-		result["_value"] = elementJSON
+// Clone creates a deep copy of FhirPositiveInt.
+func (fi *FhirPositiveInt) Clone() *FhirPositiveInt {
+	if fi == nil {
+		return nil
 	}
-	return result, nil
+	return &FhirPositiveInt{
+		Value:   fi.Value,
+		Element: fi.Element.Clone(),
+	}
 }
 
-// Equals checks equality between two FhirNumbers
-func (fi *FhirPositiveInt) Equals(other FhirNumber) bool {
-	if other == nil {
+// Equals checks equality between two FhirPositiveInt instances.
+func (fi *FhirPositiveInt) Equals(other *FhirPositiveInt) bool {
+	if fi == nil && other == nil {
+		return true
+	}
+	if fi == nil || other == nil {
 		return false
 	}
-	return fi.Value() == other.Value()
+	return fi.Value == other.Value && fi.Element.Equals(other.Element)
 }
 
-// Arithmetic operations
-func (fi *FhirPositiveInt) Add(other FhirNumber) FhirNumber {
-	return NewFhirPositiveInt(int64(fi.value)+int64(other.Value()), fi.element)
-}
-
-func (fi *FhirPositiveInt) Subtract(other FhirNumber) FhirNumber {
-	return NewFhirPositiveInt(int64(fi.value)-int64(other.Value()), fi.element)
-}
-
-func (fi *FhirPositiveInt) Multiply(other FhirNumber) FhirNumber {
-	return NewFhirPositiveInt(int64(fi.value)*int64(other.Value()), fi.element)
-}
-
-func (fi *FhirPositiveInt) Divide(other FhirNumber) (FhirNumber, error) {
-	if other.Value() == 0 {
-		return nil, errors.New("division by zero is not allowed")
+// MarshalJSON serializes FhirPositiveInt to JSON.
+func (fi *FhirPositiveInt) MarshalJSON() ([]byte, error) {
+	data := map[string]interface{}{
+		"value": fi.Value,
 	}
-	return NewFhirPositiveInt(int64(fi.value)/int64(other.Value()), fi.element), nil
+	if fi.Element != nil {
+		data["_value"] = fi.Element
+	}
+	return json.Marshal(data)
 }
 
-// Clone creates a deep copy of FhirPositiveInt
-func (fi *FhirPositiveInt) Clone() FhirNumber {
-	return NewFhirPositiveInt(fi.value, fi.element.Clone())
+// UnmarshalJSON deserializes JSON into FhirPositiveInt.
+func (fi *FhirPositiveInt) UnmarshalJSON(data []byte) error {
+	temp := struct {
+		Value   int64    `json:"value"`
+		Element *Element `json:"_value"`
+	}{}
+
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+
+	fi.Value = temp.Value
+	fi.Element = temp.Element
+	return nil
 }
 
-// String representation of FhirPositiveInt
+// String returns the string representation of FhirPositiveInt.
 func (fi *FhirPositiveInt) String() string {
-	return fmt.Sprintf("%d", fi.value)
+	return fmt.Sprintf("%d", fi.Value)
 }

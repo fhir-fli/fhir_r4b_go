@@ -1,74 +1,71 @@
 package fhir_r4b_go
 
 import (
-	"errors"
+	"encoding/json"
 	"fmt"
 )
 
-// FhirUnsignedInt represents the FHIR 'integer' type
+// FhirUnsignedInt represents the FHIR 'integer' type.
 type FhirUnsignedInt struct {
-	value   int64
-	element *Element
+	Value   int64    `json:"value,omitempty"`
+	Element *Element `json:"_value,omitempty"`
 }
 
-// NewFhirUnsignedInt creates a new validated FhirUnsignedInt
+// NewFhirUnsignedInt creates a new validated FhirUnsignedInt.
 func NewFhirUnsignedInt(value int64, element *Element) *FhirUnsignedInt {
-	return &FhirUnsignedInt{value: value, element: element}
+	return &FhirUnsignedInt{Value: value, Element: element}
 }
 
-// Value retrieves the integer's value as float64 (to satisfy FhirNumber)
-func (fi *FhirUnsignedInt) Value() float64 {
-	return float64(fi.value)
-}
-
-// ToJSON serializes FhirUnsignedInt to JSON
-func (fi *FhirUnsignedInt) ToJSON() (map[string]interface{}, error) {
-	result := map[string]interface{}{"value": fi.value}
-	if fi.element != nil {
-		elementJSON, err := fi.element.ToJSON()
-		if err != nil {
-			return nil, err
-		}
-		result["_value"] = elementJSON
+// Clone creates a deep copy of FhirUnsignedInt.
+func (fi *FhirUnsignedInt) Clone() *FhirUnsignedInt {
+	if fi == nil {
+		return nil
 	}
-	return result, nil
+	return &FhirUnsignedInt{
+		Value:   fi.Value,
+		Element: fi.Element.Clone(),
+	}
 }
 
-// Equals checks equality between two FhirNumbers
-func (fi *FhirUnsignedInt) Equals(other FhirNumber) bool {
-	if other == nil {
+// Equals checks equality between two FhirUnsignedInt instances.
+func (fi *FhirUnsignedInt) Equals(other *FhirUnsignedInt) bool {
+	if fi == nil && other == nil {
+		return true
+	}
+	if fi == nil || other == nil {
 		return false
 	}
-	return fi.Value() == other.Value()
+	return fi.Value == other.Value && fi.Element.Equals(other.Element)
 }
 
-// Arithmetic operations
-func (fi *FhirUnsignedInt) Add(other FhirNumber) FhirNumber {
-	return NewFhirUnsignedInt(int64(fi.value)+int64(other.Value()), fi.element)
-}
-
-func (fi *FhirUnsignedInt) Subtract(other FhirNumber) FhirNumber {
-	return NewFhirUnsignedInt(int64(fi.value)-int64(other.Value()), fi.element)
-}
-
-func (fi *FhirUnsignedInt) Multiply(other FhirNumber) FhirNumber {
-	return NewFhirUnsignedInt(int64(fi.value)*int64(other.Value()), fi.element)
-}
-
-func (fi *FhirUnsignedInt) Divide(other FhirNumber) (FhirNumber, error) {
-	if other.Value() == 0 {
-		return nil, errors.New("division by zero is not allowed")
+// MarshalJSON serializes FhirUnsignedInt to JSON.
+func (fi *FhirUnsignedInt) MarshalJSON() ([]byte, error) {
+	data := map[string]interface{}{
+		"value": fi.Value,
 	}
-	return NewFhirUnsignedInt(int64(fi.value)/int64(other.Value()), fi.element), nil
+	if fi.Element != nil {
+		data["_value"] = fi.Element
+	}
+	return json.Marshal(data)
 }
 
-// Clone creates a deep copy of FhirUnsignedInt
-func (fi *FhirUnsignedInt) Clone() FhirNumber {
-	clonedElement := fi.element.Clone() // Clone directly returns *Element
-	return NewFhirUnsignedInt(fi.value, clonedElement)
+// UnmarshalJSON deserializes JSON into FhirUnsignedInt.
+func (fi *FhirUnsignedInt) UnmarshalJSON(data []byte) error {
+	temp := struct {
+		Value   int64    `json:"value"`
+		Element *Element `json:"_value"`
+	}{}
+
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+
+	fi.Value = temp.Value
+	fi.Element = temp.Element
+	return nil
 }
 
-// String representation of FhirUnsignedInt
+// String returns the string representation of FhirUnsignedInt.
 func (fi *FhirUnsignedInt) String() string {
-	return fmt.Sprintf("%d", fi.value)
+	return fmt.Sprintf("%d", fi.Value)
 }

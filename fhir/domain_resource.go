@@ -8,7 +8,7 @@ import (
 type DomainResource struct {
 	Resource
 	Text              *Narrative      `json:"text,omitempty"`
-	Contained         []Resource      `json:"contained,omitempty"`
+	Contained         []*Resource      `json:"contained,omitempty"`
 	Extension_        []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierExtension,omitempty"`
 }
@@ -21,7 +21,7 @@ func NewDomainResource(
 	implicitRules *FhirUri,
 	language *CommonLanguages,
 	text *Narrative,
-	contained []Resource,
+	contained []*Resource,
 	extension_ []*FhirExtension,
 	modifierExtension []*FhirExtension,
 ) *DomainResource {

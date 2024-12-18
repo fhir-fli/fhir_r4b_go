@@ -56,10 +56,10 @@ func (fi *FhirId) Equals(other *FhirId) bool {
 		return false
 	}
 	if fi.Value == nil && other.Value == nil {
-		return fi.Element.EqualsDeep(other.Element)
+		return fi.Element.Equals(other.Element)
 	}
 	if fi.Value != nil && other.Value != nil {
-		return *fi.Value == *other.Value && fi.Element.EqualsDeep(other.Element)
+		return *fi.Value == *other.Value && fi.Element.Equals(other.Element)
 	}
 	return false
 }

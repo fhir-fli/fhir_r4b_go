@@ -71,7 +71,7 @@ func (f *FhirString) Equals(other Equalable) bool {
 	if !ok {
 		return false
 	}
-	return f.Value == otherFhirString.Value && compareElements(f.Element, otherFhirString.Element)
+	return f.Value == otherFhirString.Value && f.Element.Equals(otherFhirString.Element)
 }
 
 // Utility methods for FhirString.

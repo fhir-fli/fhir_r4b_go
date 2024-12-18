@@ -89,5 +89,5 @@ func equalElements(a, b *Element) bool {
 	if a == nil || b == nil {
 		return false
 	}
-	return a.EqualsDeep(b)
+	return a.Equals(b)
 }

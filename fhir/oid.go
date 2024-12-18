@@ -8,8 +8,8 @@ import (
 
 // FhirOid represents a validated OID value in the FHIR standard.
 type FhirOid struct {
-	Value   string        `json:"value,omitempty"`
-	Element *Element      `json:"_value,omitempty"`
+	Value   string   `json:"value,omitempty"`
+	Element *Element `json:"_value,omitempty"`
 }
 
 // NewFhirOid creates a new FhirOid instance with validation.
@@ -67,26 +67,15 @@ func (f *FhirOid) String() string {
 }
 
 // Equal checks equality between two FhirOid instances.
-func (f *FhirOid) Equal(other *FhirOid) bool {
-	return f.Value == other.Value && compareElements(f.Element, other.Element)
-}
-
-// compareElements compares two Element structs for equality.
-func compareElements(e1, e2 *Element) bool {
-	if e1 == nil && e2 == nil {
-		return true
-	}
-	if e1 == nil || e2 == nil {
-		return false
-	}
-	return e1.EqualsDeep(e2)
+func (f *FhirOid) Equals(other *FhirOid) bool {
+	return f.Value == other.Value && f.Element.Equals(other.Element)
 }
 
 // Clone creates a deep copy of the FhirOid instance.
 func (f *FhirOid) Clone() *FhirOid {
 	var elementCopy *Element
 	if f.Element != nil {
-		elementCopy = f.Element.Copy()
+		elementCopy = f.Element.Clone()
 	}
 	return &FhirOid{
 		Value:   f.Value,

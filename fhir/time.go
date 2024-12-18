@@ -11,8 +11,8 @@ import (
 
 // FhirTime represents a FHIR-compliant time value.
 type FhirTime struct {
-	Value   string
-	Element *Element
+	Value   string   `json:"value,omitempty"`
+	Element *Element `json:"_value,omitempty"`
 }
 
 // NewFhirTime validates and creates a new FhirTime instance.
@@ -31,7 +31,7 @@ func validateFhirTime(input string) bool {
 }
 
 // NewFhirTimeFromUnits creates FhirTime from individual components.
-func NewFhirTimeFromUnits(hour, minute, second, millisecond *int) *FhirTime {
+func NewFhirTimeFromUnits(hour, minute, second, millisecond *int, element *Element) *FhirTime {
 	timeParts := []string{padZero(hour, 2)}
 
 	if minute != nil {
@@ -45,7 +45,7 @@ func NewFhirTimeFromUnits(hour, minute, second, millisecond *int) *FhirTime {
 		}
 	}
 
-	return &FhirTime{Value: strings.Join(timeParts, ":")}
+	return &FhirTime{Value: strings.Join(timeParts, ":"), Element: element}
 }
 
 // padZero pads an integer to a string with leading zeros.
@@ -112,13 +112,12 @@ func (f *FhirTime) Add(hours, minutes, seconds, milliseconds int) *FhirTime {
 		time.Duration(seconds)*time.Second +
 		time.Duration(milliseconds)*time.Millisecond)
 
-	// Store results in variables to take their addresses
 	hour := t.Hour()
 	minute := t.Minute()
 	second := t.Second()
 	millisecond := t.Nanosecond() / 1e6
 
-	return NewFhirTimeFromUnits(&hour, &minute, &second, &millisecond)
+	return NewFhirTimeFromUnits(&hour, &minute, &second, &millisecond, f.Element.Clone())
 }
 
 // Subtract subtracts hours, minutes, seconds, and milliseconds from FhirTime.
@@ -149,23 +148,34 @@ func (f *FhirTime) toTime() time.Time {
 
 // MarshalJSON serializes FhirTime to JSON.
 func (f *FhirTime) MarshalJSON() ([]byte, error) {
-	return json.Marshal(map[string]string{"value": f.Value})
+	data := map[string]interface{}{}
+	if f.Value != "" {
+		data["value"] = f.Value
+	}
+	if f.Element != nil {
+		data["_value"] = f.Element
+	}
+	return json.Marshal(data)
 }
 
 // UnmarshalJSON deserializes JSON into FhirTime.
 func (f *FhirTime) UnmarshalJSON(data []byte) error {
-	var aux map[string]string
-	if err := json.Unmarshal(data, &aux); err != nil {
+	temp := struct {
+		Value   string   `json:"value"`
+		Element *Element `json:"_value"`
+	}{}
+
+	if err := json.Unmarshal(data, &temp); err != nil {
 		return err
 	}
-	if value, ok := aux["value"]; ok {
-		if !validateFhirTime(value) {
-			return fmt.Errorf("invalid FHIR time format: %s", value)
-		}
-		f.Value = value
-		return nil
+
+	if !validateFhirTime(temp.Value) {
+		return fmt.Errorf("invalid FHIR time format: %s", temp.Value)
 	}
-	return fmt.Errorf("invalid JSON for FhirTime")
+
+	f.Value = temp.Value
+	f.Element = temp.Element
+	return nil
 }
 
 // CompareTo compares two FhirTime objects.
@@ -176,6 +186,28 @@ func (f *FhirTime) CompareTo(other *FhirTime) int {
 		return -1
 	}
 	return 0
+}
+
+// Clone creates a deep copy of FhirTime.
+func (f *FhirTime) Clone() *FhirTime {
+	if f == nil {
+		return nil
+	}
+	return &FhirTime{
+		Value:   f.Value,
+		Element: f.Element.Clone(),
+	}
+}
+
+// Equal checks equality between two FhirTime instances.
+func (f *FhirTime) Equals(other *FhirTime) bool {
+	if f == nil && other == nil {
+		return true
+	}
+	if f == nil || other == nil {
+		return false
+	}
+	return f.Value == other.Value && f.Element.Equals(other.Element)
 }
 
 // String returns the FhirTime as a string.
