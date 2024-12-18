@@ -23356,52 +23356,6 @@ func (e *ContractResourcePublicationStatusCodes) Equals(other *ContractResourceP
 }
 
 
-// This value set contract specific codes for security classification.
-// ContractResourceScopeCodes represents the FHIR ValueSet as an enumeration
-type ContractResourceScopeCodes struct {
-	Value   *string  `json:"value,omitempty"`
-	Element *Element `json:"_value,omitempty"`
-}
-
-// Enum constants
-const (
-	ContractResourceScopeCodes_Policy = "policy" // Policy: To be completed
-)
-
-// Clone creates a deep copy of the enum
-func (e ContractResourceScopeCodes) Clone() *ContractResourceScopeCodes {
-	return &ContractResourceScopeCodes{Value: e.Value, Element: e.Element.Clone()}
-}
-
-// Equals checks equality between two enums
-func (e *ContractResourceScopeCodes) Equals(other *ContractResourceScopeCodes) bool {
-	return e.Value == other.Value && e.Element.Equals(other.Element)
-}
-
-
-// This value set contract specific codes for security category.
-// ContractResourceScopeCodes represents the FHIR ValueSet as an enumeration
-type ContractResourceScopeCodes struct {
-	Value   *string  `json:"value,omitempty"`
-	Element *Element `json:"_value,omitempty"`
-}
-
-// Enum constants
-const (
-	ContractResourceScopeCodes_Policy = "policy" // Policy: To be completed
-)
-
-// Clone creates a deep copy of the enum
-func (e ContractResourceScopeCodes) Clone() *ContractResourceScopeCodes {
-	return &ContractResourceScopeCodes{Value: e.Value, Element: e.Element.Clone()}
-}
-
-// Equals checks equality between two enums
-func (e *ContractResourceScopeCodes) Equals(other *ContractResourceScopeCodes) bool {
-	return e.Value == other.Value && e.Element.Equals(other.Element)
-}
-
-
 // This value set contract specific codes for security control.
 // ContractResourceSecurityControlCodes represents the FHIR ValueSet as an enumeration
 type ContractResourceSecurityControlCodes struct {
@@ -31160,38 +31114,6 @@ func (e ProvenanceActivityType) Clone() *ProvenanceActivityType {
 
 // Equals checks equality between two enums
 func (e *ProvenanceActivityType) Equals(other *ProvenanceActivityType) bool {
-	return e.Value == other.Value && e.Element.Equals(other.Element)
-}
-
-
-// The type of participation a provenance participant.
-// ProvenanceParticipantType represents the FHIR ValueSet as an enumeration
-type ProvenanceParticipantType struct {
-	Value   *string  `json:"value,omitempty"`
-	Element *Element `json:"_value,omitempty"`
-}
-
-// Enum constants
-const (
-	ProvenanceParticipantType_Enterer = "enterer" // Enterer: A person entering the data into the originating system
-	ProvenanceParticipantType_Performer = "performer" // Performer: A person, animal, organization or device that who actually and principally carries out the activity
-	ProvenanceParticipantType_Author = "author" // Author: A party that originates the resource and therefore has responsibility for the information given in the resource and ownership of this resource
-	ProvenanceParticipantType_Verifier = "verifier" // Verifier: A person who verifies the correctness and appropriateness of activity
-	ProvenanceParticipantType_Legal = "legal" // Legal Authenticator: The person authenticated the content and accepted legal responsibility for its content
-	ProvenanceParticipantType_Attester = "attester" // Attester: A verifier who attests to the accuracy of the resource
-	ProvenanceParticipantType_Informant = "informant" // Informant: A person who reported information that contributed to the resource
-	ProvenanceParticipantType_Custodian = "custodian" // Custodian: The entity that is accountable for maintaining a true an accurate copy of the original record
-	ProvenanceParticipantType_Assembler = "assembler" // Assembler: A device that operates independently of an author on custodian's algorithms for data extraction of existing information for purpose of generating a new artifact.
-	ProvenanceParticipantType_Composer = "composer" // Composer: A device used by an author to record new information, which may also be used by the author to select existing information for aggregation with newly recorded information for the purpose of generating a new artifact.
-)
-
-// Clone creates a deep copy of the enum
-func (e ProvenanceParticipantType) Clone() *ProvenanceParticipantType {
-	return &ProvenanceParticipantType{Value: e.Value, Element: e.Element.Clone()}
-}
-
-// Equals checks equality between two enums
-func (e *ProvenanceParticipantType) Equals(other *ProvenanceParticipantType) bool {
 	return e.Value == other.Value && e.Element.Equals(other.Element)
 }
 
