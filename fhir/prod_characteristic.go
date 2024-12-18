@@ -3,94 +3,33 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // ProdCharacteristic
 // The marketing status describes the date when a medicinal product is actually put on the market or the date as of which it is no longer available.
 type ProdCharacteristic struct {
 	BackboneType
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// height
-	// Where applicable, the height can be specified using a numerical value and its unit of measurement The unit of measurement shall be specified in accordance with ISO 11240 and the resulting terminology The symbol and the symbol identifier shall be used.
-	Height Quantity `json:"height,omitempty"`
-	// width
-	// Where applicable, the width can be specified using a numerical value and its unit of measurement The unit of measurement shall be specified in accordance with ISO 11240 and the resulting terminology The symbol and the symbol identifier shall be used.
-	Width Quantity `json:"width,omitempty"`
-	// depth
-	// Where applicable, the depth can be specified using a numerical value and its unit of measurement The unit of measurement shall be specified in accordance with ISO 11240 and the resulting terminology The symbol and the symbol identifier shall be used.
-	Depth Quantity `json:"depth,omitempty"`
-	// weight
-	// Where applicable, the weight can be specified using a numerical value and its unit of measurement The unit of measurement shall be specified in accordance with ISO 11240 and the resulting terminology The symbol and the symbol identifier shall be used.
-	Weight Quantity `json:"weight,omitempty"`
-	// nominalVolume
-	// Where applicable, the nominal volume can be specified using a numerical value and its unit of measurement The unit of measurement shall be specified in accordance with ISO 11240 and the resulting terminology The symbol and the symbol identifier shall be used.
-	NominalVolume Quantity `json:"nominalVolume,omitempty"`
-	// externalDiameter
-	// Where applicable, the external diameter can be specified using a numerical value and its unit of measurement The unit of measurement shall be specified in accordance with ISO 11240 and the resulting terminology The symbol and the symbol identifier shall be used.
-	ExternalDiameter Quantity `json:"externalDiameter,omitempty"`
-	// shape
-	// Where applicable, the shape can be specified An appropriate controlled vocabulary shall be used The term and the term identifier shall be used.
-	Shape FhirString `json:"shape,omitempty"`
-	// color
-	// Where applicable, the color can be specified An appropriate controlled vocabulary shall be used The term and the term identifier shall be used.
-	Color []FhirString `json:"color,omitempty"`
-	// imprint
-	// Where applicable, the imprint can be specified as text.
-	Imprint []FhirString `json:"imprint,omitempty"`
-	// image
-	// Where applicable, the image can be provided The format of the image attachment shall be specified by regional implementations.
-	Image []Attachment `json:"image,omitempty"`
-	// scoring
-	// Where applicable, the scoring can be specified An appropriate controlled vocabulary shall be used The term and the term identifier shall be used.
-	Scoring CodeableConcept `json:"scoring,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Height *Quantity `json:"height,omitempty"`
+	Width *Quantity `json:"width,omitempty"`
+	Depth *Quantity `json:"depth,omitempty"`
+	Weight *Quantity `json:"weight,omitempty"`
+	NominalVolume *Quantity `json:"nominalvolume,omitempty"`
+	ExternalDiameter *Quantity `json:"externaldiameter,omitempty"`
+	Shape *FhirString `json:"shape,omitempty"`
+	Color []*FhirString `json:"color,omitempty"`
+	Imprint []*FhirString `json:"imprint,omitempty"`
+	Image []*Attachment `json:"image,omitempty"`
+	Scoring *CodeableConcept `json:"scoring,omitempty"`
 }
 
 // NewProdCharacteristic creates a new ProdCharacteristic instance
-func NewProdCharacteristic(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	height Quantity,
-	width Quantity,
-	depth Quantity,
-	weight Quantity,
-	nominalVolume Quantity,
-	externalDiameter Quantity,
-	shape FhirString,
-	color []FhirString,
-	imprint []FhirString,
-	image []Attachment,
-	scoring CodeableConcept,
-) *ProdCharacteristic {
-	return &ProdCharacteristic{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Height: height,
-		Width: width,
-		Depth: depth,
-		Weight: weight,
-		NominalVolume: nominalVolume,
-		ExternalDiameter: externalDiameter,
-		Shape: shape,
-		Color: color,
-		Imprint: imprint,
-		Image: image,
-		Scoring: scoring,
-	}
+func NewProdCharacteristic() *ProdCharacteristic {
+	return &ProdCharacteristic{}
 }
+
 // FromJSON populates ProdCharacteristic from JSON data
 func (m *ProdCharacteristic) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -101,79 +40,45 @@ func (m *ProdCharacteristic) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ProdCharacteristic
-func (m *ProdCharacteristic) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	height *Quantity,
-	width *Quantity,
-	depth *Quantity,
-	weight *Quantity,
-	nominalVolume *Quantity,
-	externalDiameter *Quantity,
-	shape *FhirString,
-	color *[]FhirString,
-	imprint *[]FhirString,
-	image *[]Attachment,
-	scoring *CodeableConcept,
-) *ProdCharacteristic {
+// Clone creates a deep copy of ProdCharacteristic
+func (m *ProdCharacteristic) Clone() *ProdCharacteristic {
+	if m == nil { return nil }
 	return &ProdCharacteristic{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Height: func() Quantity {
-			if height != nil { return *height }
-			return m.Height
-		}(),
-		Width: func() Quantity {
-			if width != nil { return *width }
-			return m.Width
-		}(),
-		Depth: func() Quantity {
-			if depth != nil { return *depth }
-			return m.Depth
-		}(),
-		Weight: func() Quantity {
-			if weight != nil { return *weight }
-			return m.Weight
-		}(),
-		NominalVolume: func() Quantity {
-			if nominalVolume != nil { return *nominalVolume }
-			return m.NominalVolume
-		}(),
-		ExternalDiameter: func() Quantity {
-			if externalDiameter != nil { return *externalDiameter }
-			return m.ExternalDiameter
-		}(),
-		Shape: func() FhirString {
-			if shape != nil { return *shape }
-			return m.Shape
-		}(),
-		Color: func() []FhirString {
-			if color != nil { return *color }
-			return m.Color
-		}(),
-		Imprint: func() []FhirString {
-			if imprint != nil { return *imprint }
-			return m.Imprint
-		}(),
-		Image: func() []Attachment {
-			if image != nil { return *image }
-			return m.Image
-		}(),
-		Scoring: func() CodeableConcept {
-			if scoring != nil { return *scoring }
-			return m.Scoring
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Height: m.Height.Clone(),
+		Width: m.Width.Clone(),
+		Depth: m.Depth.Clone(),
+		Weight: m.Weight.Clone(),
+		NominalVolume: m.NominalVolume.Clone(),
+		ExternalDiameter: m.ExternalDiameter.Clone(),
+		Shape: m.Shape.Clone(),
+		Color: cloneSlices(m.Color),
+		Imprint: cloneSlices(m.Imprint),
+		Image: cloneSlices(m.Image),
+		Scoring: m.Scoring.Clone(),
 	}
 }
+
+// Equals checks for equality with another ProdCharacteristic instance
+func (m *ProdCharacteristic) Equals(other *ProdCharacteristic) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Height.Equals(other.Height) { return false }
+	if !m.Width.Equals(other.Width) { return false }
+	if !m.Depth.Equals(other.Depth) { return false }
+	if !m.Weight.Equals(other.Weight) { return false }
+	if !m.NominalVolume.Equals(other.NominalVolume) { return false }
+	if !m.ExternalDiameter.Equals(other.ExternalDiameter) { return false }
+	if !m.Shape.Equals(other.Shape) { return false }
+	if !compareSlices(m.Color, other.Color) { return false }
+	if !compareSlices(m.Imprint, other.Imprint) { return false }
+	if !compareSlices(m.Image, other.Image) { return false }
+	if !m.Scoring.Equals(other.Scoring) { return false }
+	return true
+}
+

@@ -3,164 +3,47 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // ImplementationGuide
 // A set of rules of how a particular interoperability or standards problem is solved - typically through the use of FHIR resources. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts.
 type ImplementationGuide struct {
 	CanonicalResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// url
-	// An absolute URI that is used to identify this implementation guide when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this implementation guide is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the implementation guide is stored on different servers.
-	Url FhirUri `json:"url,omitempty"`
-	// version
-	// The identifier that is used to identify this version of the implementation guide when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the implementation guide author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.
-	Version FhirString `json:"version,omitempty"`
-	// name
-	// A natural language name identifying the implementation guide. This name should be usable as an identifier for the module by machine processing applications such as code generation.
-	Name FhirString `json:"name,omitempty"`
-	// title
-	// A short, descriptive, user-friendly title for the implementation guide.
-	Title FhirString `json:"title,omitempty"`
-	// status
-	// The status of this implementation guide. Enables tracking the life-cycle of the content.
-	Status PublicationStatus `json:"status,omitempty"`
-	// experimental
-	// A Boolean value to indicate that this implementation guide is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.
-	Experimental FhirBoolean `json:"experimental,omitempty"`
-	// date
-	// The date  (and optionally time) when the implementation guide was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the implementation guide changes.
-	Date FhirDateTime `json:"date,omitempty"`
-	// publisher
-	// The name of the organization or individual that published the implementation guide.
-	Publisher FhirString `json:"publisher,omitempty"`
-	// contact
-	// Contact details to assist a user in finding and communicating with the publisher.
-	Contact []ContactDetail `json:"contact,omitempty"`
-	// description
-	// A free text natural language description of the implementation guide from a consumer's perspective.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// useContext
-	// The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate implementation guide instances.
-	UseContext []UsageContext `json:"useContext,omitempty"`
-	// jurisdiction
-	// A legal or geographic region in which the implementation guide is intended to be used.
-	Jurisdiction []CodeableConcept `json:"jurisdiction,omitempty"`
-	// copyright
-	// A copyright statement relating to the implementation guide and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the implementation guide.
-	Copyright FhirMarkdown `json:"copyright,omitempty"`
-	// packageId
-	// The NPM package name for this Implementation Guide, used in the NPM package distribution, which is the primary mechanism by which FHIR based tooling manages IG dependencies. This value must be globally unique, and should be assigned with care.
-	PackageId FhirId `json:"packageId,omitempty"`
-	// license
-	// The license that applies to this Implementation Guide, using an SPDX license code, or 'not-open-source'.
-	License SPDXLicense `json:"license,omitempty"`
-	// fhirVersion
-	// The version(s) of the FHIR specification that this ImplementationGuide targets - e.g. describes how to use. The value of this element is the formal version of the specification, without the revision number, e.g. [publication].[major].[minor], which is 4.3.0 for this version.
-	FhirVersion []FHIRVersion `json:"fhirVersion,omitempty"`
-	// dependsOn
-	// Another implementation guide that this implementation depends on. Typically, an implementation guide uses value sets, profiles etc.defined in other implementation guides.
-	DependsOn []ImplementationGuideDependsOn `json:"dependsOn,omitempty"`
-	// global
-	// A set of profiles that all resources covered by this implementation guide must conform to.
-	Global []ImplementationGuideGlobal `json:"global,omitempty"`
-	// definition
-	// The information needed by an IG publisher tool to publish the whole implementation guide.
-	Definition ImplementationGuideDefinition `json:"definition,omitempty"`
-	// manifest
-	// Information about an assembled implementation guide, created by the publication tooling.
-	Manifest ImplementationGuideManifest `json:"manifest,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Url *FhirUri `json:"url,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Title *FhirString `json:"title,omitempty"`
+	Status *PublicationStatus `json:"status,omitempty"`
+	Experimental *FhirBoolean `json:"experimental,omitempty"`
+	Date *FhirDateTime `json:"date,omitempty"`
+	Publisher *FhirString `json:"publisher,omitempty"`
+	Contact []*ContactDetail `json:"contact,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	UseContext []*UsageContext `json:"usecontext,omitempty"`
+	Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+	Copyright *FhirMarkdown `json:"copyright,omitempty"`
+	PackageId *FhirId `json:"packageid,omitempty"`
+	License *SPDXLicense `json:"license,omitempty"`
+	FhirVersion []*FHIRVersion `json:"fhirversion,omitempty"`
+	DependsOn []*ImplementationGuideDependsOn `json:"dependson,omitempty"`
+	Global []*ImplementationGuideGlobal `json:"global,omitempty"`
+	Definition *ImplementationGuideDefinition `json:"definition,omitempty"`
+	Manifest *ImplementationGuideManifest `json:"manifest,omitempty"`
 }
 
 // NewImplementationGuide creates a new ImplementationGuide instance
-func NewImplementationGuide(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	url FhirUri,
-	version FhirString,
-	name FhirString,
-	title FhirString,
-	status PublicationStatus,
-	experimental FhirBoolean,
-	date FhirDateTime,
-	publisher FhirString,
-	contact []ContactDetail,
-	description FhirMarkdown,
-	useContext []UsageContext,
-	jurisdiction []CodeableConcept,
-	copyright FhirMarkdown,
-	packageId FhirId,
-	license SPDXLicense,
-	fhirVersion []FHIRVersion,
-	dependsOn []ImplementationGuideDependsOn,
-	global []ImplementationGuideGlobal,
-	definition ImplementationGuideDefinition,
-	manifest ImplementationGuideManifest,
-) *ImplementationGuide {
-	return &ImplementationGuide{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Url: url,
-		Version: version,
-		Name: name,
-		Title: title,
-		Status: status,
-		Experimental: experimental,
-		Date: date,
-		Publisher: publisher,
-		Contact: contact,
-		Description: description,
-		UseContext: useContext,
-		Jurisdiction: jurisdiction,
-		Copyright: copyright,
-		PackageId: packageId,
-		License: license,
-		FhirVersion: fhirVersion,
-		DependsOn: dependsOn,
-		Global: global,
-		Definition: definition,
-		Manifest: manifest,
-	}
+func NewImplementationGuide() *ImplementationGuide {
+	return &ImplementationGuide{}
 }
+
 // FromJSON populates ImplementationGuide from JSON data
 func (m *ImplementationGuide) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -171,196 +54,93 @@ func (m *ImplementationGuide) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ImplementationGuide
-func (m *ImplementationGuide) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	url *FhirUri,
-	version *FhirString,
-	name *FhirString,
-	title *FhirString,
-	status *PublicationStatus,
-	experimental *FhirBoolean,
-	date *FhirDateTime,
-	publisher *FhirString,
-	contact *[]ContactDetail,
-	description *FhirMarkdown,
-	useContext *[]UsageContext,
-	jurisdiction *[]CodeableConcept,
-	copyright *FhirMarkdown,
-	packageId *FhirId,
-	license *SPDXLicense,
-	fhirVersion *[]FHIRVersion,
-	dependsOn *[]ImplementationGuideDependsOn,
-	global *[]ImplementationGuideGlobal,
-	definition *ImplementationGuideDefinition,
-	manifest *ImplementationGuideManifest,
-) *ImplementationGuide {
+// Clone creates a deep copy of ImplementationGuide
+func (m *ImplementationGuide) Clone() *ImplementationGuide {
+	if m == nil { return nil }
 	return &ImplementationGuide{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Url: func() FhirUri {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Title: func() FhirString {
-			if title != nil { return *title }
-			return m.Title
-		}(),
-		Status: func() PublicationStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Experimental: func() FhirBoolean {
-			if experimental != nil { return *experimental }
-			return m.Experimental
-		}(),
-		Date: func() FhirDateTime {
-			if date != nil { return *date }
-			return m.Date
-		}(),
-		Publisher: func() FhirString {
-			if publisher != nil { return *publisher }
-			return m.Publisher
-		}(),
-		Contact: func() []ContactDetail {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		UseContext: func() []UsageContext {
-			if useContext != nil { return *useContext }
-			return m.UseContext
-		}(),
-		Jurisdiction: func() []CodeableConcept {
-			if jurisdiction != nil { return *jurisdiction }
-			return m.Jurisdiction
-		}(),
-		Copyright: func() FhirMarkdown {
-			if copyright != nil { return *copyright }
-			return m.Copyright
-		}(),
-		PackageId: func() FhirId {
-			if packageId != nil { return *packageId }
-			return m.PackageId
-		}(),
-		License: func() SPDXLicense {
-			if license != nil { return *license }
-			return m.License
-		}(),
-		FhirVersion: func() []FHIRVersion {
-			if fhirVersion != nil { return *fhirVersion }
-			return m.FhirVersion
-		}(),
-		DependsOn: func() []ImplementationGuideDependsOn {
-			if dependsOn != nil { return *dependsOn }
-			return m.DependsOn
-		}(),
-		Global: func() []ImplementationGuideGlobal {
-			if global != nil { return *global }
-			return m.Global
-		}(),
-		Definition: func() ImplementationGuideDefinition {
-			if definition != nil { return *definition }
-			return m.Definition
-		}(),
-		Manifest: func() ImplementationGuideManifest {
-			if manifest != nil { return *manifest }
-			return m.Manifest
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Url: m.Url.Clone(),
+		Version: m.Version.Clone(),
+		Name: m.Name.Clone(),
+		Title: m.Title.Clone(),
+		Status: m.Status.Clone(),
+		Experimental: m.Experimental.Clone(),
+		Date: m.Date.Clone(),
+		Publisher: m.Publisher.Clone(),
+		Contact: cloneSlices(m.Contact),
+		Description: m.Description.Clone(),
+		UseContext: cloneSlices(m.UseContext),
+		Jurisdiction: cloneSlices(m.Jurisdiction),
+		Copyright: m.Copyright.Clone(),
+		PackageId: m.PackageId.Clone(),
+		License: m.License.Clone(),
+		FhirVersion: cloneSlices(m.FhirVersion),
+		DependsOn: cloneSlices(m.DependsOn),
+		Global: cloneSlices(m.Global),
+		Definition: m.Definition.Clone(),
+		Manifest: m.Manifest.Clone(),
 	}
 }
+
+// Equals checks for equality with another ImplementationGuide instance
+func (m *ImplementationGuide) Equals(other *ImplementationGuide) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Title.Equals(other.Title) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Experimental.Equals(other.Experimental) { return false }
+	if !m.Date.Equals(other.Date) { return false }
+	if !m.Publisher.Equals(other.Publisher) { return false }
+	if !compareSlices(m.Contact, other.Contact) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.UseContext, other.UseContext) { return false }
+	if !compareSlices(m.Jurisdiction, other.Jurisdiction) { return false }
+	if !m.Copyright.Equals(other.Copyright) { return false }
+	if !m.PackageId.Equals(other.PackageId) { return false }
+	if !m.License.Equals(other.License) { return false }
+	if !compareSlices(m.FhirVersion, other.FhirVersion) { return false }
+	if !compareSlices(m.DependsOn, other.DependsOn) { return false }
+	if !compareSlices(m.Global, other.Global) { return false }
+	if !m.Definition.Equals(other.Definition) { return false }
+	if !m.Manifest.Equals(other.Manifest) { return false }
+	return true
+}
+
 // ImplementationGuideDependsOn
 // Another implementation guide that this implementation depends on. Typically, an implementation guide uses value sets, profiles etc.defined in other implementation guides.
 type ImplementationGuideDependsOn struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// uri
-	// A canonical reference to the Implementation guide for the dependency.
-	Uri FhirCanonical `json:"uri,omitempty"`
-	// packageId
-	// The NPM package name for the Implementation Guide that this IG depends on.
-	PackageId FhirId `json:"packageId,omitempty"`
-	// version
-	// The version of the IG that is depended on, when the correct version is required to understand the IG correctly.
-	Version FhirString `json:"version,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Uri *FhirCanonical `json:"uri,omitempty"`
+	PackageId *FhirId `json:"packageid,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
 }
 
 // NewImplementationGuideDependsOn creates a new ImplementationGuideDependsOn instance
-func NewImplementationGuideDependsOn(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	uri FhirCanonical,
-	packageId FhirId,
-	version FhirString,
-) *ImplementationGuideDependsOn {
-	return &ImplementationGuideDependsOn{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Uri: uri,
-		PackageId: packageId,
-		Version: version,
-	}
+func NewImplementationGuideDependsOn() *ImplementationGuideDependsOn {
+	return &ImplementationGuideDependsOn{}
 }
+
 // FromJSON populates ImplementationGuideDependsOn from JSON data
 func (m *ImplementationGuideDependsOn) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -371,81 +151,48 @@ func (m *ImplementationGuideDependsOn) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ImplementationGuideDependsOn
-func (m *ImplementationGuideDependsOn) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	uri *FhirCanonical,
-	packageId *FhirId,
-	version *FhirString,
-) *ImplementationGuideDependsOn {
+// Clone creates a deep copy of ImplementationGuideDependsOn
+func (m *ImplementationGuideDependsOn) Clone() *ImplementationGuideDependsOn {
+	if m == nil { return nil }
 	return &ImplementationGuideDependsOn{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Uri: func() FhirCanonical {
-			if uri != nil { return *uri }
-			return m.Uri
-		}(),
-		PackageId: func() FhirId {
-			if packageId != nil { return *packageId }
-			return m.PackageId
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Uri: m.Uri.Clone(),
+		PackageId: m.PackageId.Clone(),
+		Version: m.Version.Clone(),
 	}
 }
+
+// Equals checks for equality with another ImplementationGuideDependsOn instance
+func (m *ImplementationGuideDependsOn) Equals(other *ImplementationGuideDependsOn) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Uri.Equals(other.Uri) { return false }
+	if !m.PackageId.Equals(other.PackageId) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	return true
+}
+
 // ImplementationGuideGlobal
 // A set of profiles that all resources covered by this implementation guide must conform to.
 type ImplementationGuideGlobal struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// The type of resource that all instances must conform to.
-	Type_ FhirCode `json:"type,omitempty"`
-	// profile
-	// A reference to the profile that all instances must conform to.
-	Profile FhirCanonical `json:"profile,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *FhirCode `json:"type,omitempty"`
+	Profile *FhirCanonical `json:"profile,omitempty"`
 }
 
 // NewImplementationGuideGlobal creates a new ImplementationGuideGlobal instance
-func NewImplementationGuideGlobal(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ FhirCode,
-	profile FhirCanonical,
-) *ImplementationGuideGlobal {
-	return &ImplementationGuideGlobal{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Profile: profile,
-	}
+func NewImplementationGuideGlobal() *ImplementationGuideGlobal {
+	return &ImplementationGuideGlobal{}
 }
+
 // FromJSON populates ImplementationGuideGlobal from JSON data
 func (m *ImplementationGuideGlobal) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -456,91 +203,49 @@ func (m *ImplementationGuideGlobal) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ImplementationGuideGlobal
-func (m *ImplementationGuideGlobal) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *FhirCode,
-	profile *FhirCanonical,
-) *ImplementationGuideGlobal {
+// Clone creates a deep copy of ImplementationGuideGlobal
+func (m *ImplementationGuideGlobal) Clone() *ImplementationGuideGlobal {
+	if m == nil { return nil }
 	return &ImplementationGuideGlobal{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() FhirCode {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Profile: func() FhirCanonical {
-			if profile != nil { return *profile }
-			return m.Profile
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Profile: m.Profile.Clone(),
 	}
 }
+
+// Equals checks for equality with another ImplementationGuideGlobal instance
+func (m *ImplementationGuideGlobal) Equals(other *ImplementationGuideGlobal) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Profile.Equals(other.Profile) { return false }
+	return true
+}
+
 // ImplementationGuideDefinition
 // The information needed by an IG publisher tool to publish the whole implementation guide.
 type ImplementationGuideDefinition struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// grouping
-	// A logical group of resources. Logical groups can be used when building pages.
-	Grouping []ImplementationGuideGrouping `json:"grouping,omitempty"`
-	// resource
-	// A resource that is part of the implementation guide. Conformance resources (value set, structure definition, capability statements etc.) are obvious candidates for inclusion, but any kind of resource can be included as an example resource.
-	Resource []ImplementationGuideResource `json:"resource,omitempty"`
-	// page
-	// A page / section in the implementation guide. The root page is the implementation guide home page.
-	Page ImplementationGuidePage `json:"page,omitempty"`
-	// parameter
-	// Defines how IG is built by tools.
-	Parameter []ImplementationGuideParameter `json:"parameter,omitempty"`
-	// template
-	// A template for building resources.
-	Template []ImplementationGuideTemplate `json:"template,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Grouping []*ImplementationGuideGrouping `json:"grouping,omitempty"`
+	Resource []*ImplementationGuideResource `json:"resource,omitempty"`
+	Page *ImplementationGuidePage `json:"page,omitempty"`
+	Parameter []*ImplementationGuideParameter `json:"parameter,omitempty"`
+	Template []*ImplementationGuideTemplate `json:"template,omitempty"`
 }
 
 // NewImplementationGuideDefinition creates a new ImplementationGuideDefinition instance
-func NewImplementationGuideDefinition(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	grouping []ImplementationGuideGrouping,
-	resource []ImplementationGuideResource,
-	page ImplementationGuidePage,
-	parameter []ImplementationGuideParameter,
-	template []ImplementationGuideTemplate,
-) *ImplementationGuideDefinition {
-	return &ImplementationGuideDefinition{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Grouping: grouping,
-		Resource: resource,
-		Page: page,
-		Parameter: parameter,
-		Template: template,
-	}
+func NewImplementationGuideDefinition() *ImplementationGuideDefinition {
+	return &ImplementationGuideDefinition{}
 }
+
 // FromJSON populates ImplementationGuideDefinition from JSON data
 func (m *ImplementationGuideDefinition) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -551,91 +256,52 @@ func (m *ImplementationGuideDefinition) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ImplementationGuideDefinition
-func (m *ImplementationGuideDefinition) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	grouping *[]ImplementationGuideGrouping,
-	resource *[]ImplementationGuideResource,
-	page *ImplementationGuidePage,
-	parameter *[]ImplementationGuideParameter,
-	template *[]ImplementationGuideTemplate,
-) *ImplementationGuideDefinition {
+// Clone creates a deep copy of ImplementationGuideDefinition
+func (m *ImplementationGuideDefinition) Clone() *ImplementationGuideDefinition {
+	if m == nil { return nil }
 	return &ImplementationGuideDefinition{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Grouping: func() []ImplementationGuideGrouping {
-			if grouping != nil { return *grouping }
-			return m.Grouping
-		}(),
-		Resource: func() []ImplementationGuideResource {
-			if resource != nil { return *resource }
-			return m.Resource
-		}(),
-		Page: func() ImplementationGuidePage {
-			if page != nil { return *page }
-			return m.Page
-		}(),
-		Parameter: func() []ImplementationGuideParameter {
-			if parameter != nil { return *parameter }
-			return m.Parameter
-		}(),
-		Template: func() []ImplementationGuideTemplate {
-			if template != nil { return *template }
-			return m.Template
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Grouping: cloneSlices(m.Grouping),
+		Resource: cloneSlices(m.Resource),
+		Page: m.Page.Clone(),
+		Parameter: cloneSlices(m.Parameter),
+		Template: cloneSlices(m.Template),
 	}
 }
+
+// Equals checks for equality with another ImplementationGuideDefinition instance
+func (m *ImplementationGuideDefinition) Equals(other *ImplementationGuideDefinition) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Grouping, other.Grouping) { return false }
+	if !compareSlices(m.Resource, other.Resource) { return false }
+	if !m.Page.Equals(other.Page) { return false }
+	if !compareSlices(m.Parameter, other.Parameter) { return false }
+	if !compareSlices(m.Template, other.Template) { return false }
+	return true
+}
+
 // ImplementationGuideGrouping
 // A logical group of resources. Logical groups can be used when building pages.
 type ImplementationGuideGrouping struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// name
-	// The human-readable title to display for the package of resources when rendering the implementation guide.
-	Name FhirString `json:"name,omitempty"`
-	// description
-	// Human readable text describing the package.
-	Description FhirString `json:"description,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
 }
 
 // NewImplementationGuideGrouping creates a new ImplementationGuideGrouping instance
-func NewImplementationGuideGrouping(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	name FhirString,
-	description FhirString,
-) *ImplementationGuideGrouping {
-	return &ImplementationGuideGrouping{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Name: name,
-		Description: description,
-	}
+func NewImplementationGuideGrouping() *ImplementationGuideGrouping {
+	return &ImplementationGuideGrouping{}
 }
+
 // FromJSON populates ImplementationGuideGrouping from JSON data
 func (m *ImplementationGuideGrouping) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -646,101 +312,51 @@ func (m *ImplementationGuideGrouping) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ImplementationGuideGrouping
-func (m *ImplementationGuideGrouping) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	name *FhirString,
-	description *FhirString,
-) *ImplementationGuideGrouping {
+// Clone creates a deep copy of ImplementationGuideGrouping
+func (m *ImplementationGuideGrouping) Clone() *ImplementationGuideGrouping {
+	if m == nil { return nil }
 	return &ImplementationGuideGrouping{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Name: m.Name.Clone(),
+		Description: m.Description.Clone(),
 	}
 }
+
+// Equals checks for equality with another ImplementationGuideGrouping instance
+func (m *ImplementationGuideGrouping) Equals(other *ImplementationGuideGrouping) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	return true
+}
+
 // ImplementationGuideResource
 // A resource that is part of the implementation guide. Conformance resources (value set, structure definition, capability statements etc.) are obvious candidates for inclusion, but any kind of resource can be included as an example resource.
 type ImplementationGuideResource struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// reference
-	// Where this resource is found.
-	Reference Reference `json:"reference,omitempty"`
-	// fhirVersion
-	// Indicates the FHIR Version(s) this artifact is intended to apply to. If no versions are specified, the resource is assumed to apply to all the versions stated in ImplementationGuide.fhirVersion.
-	FhirVersion []FHIRVersion `json:"fhirVersion,omitempty"`
-	// name
-	// A human assigned name for the resource. All resources SHOULD have a name, but the name may be extracted from the resource (e.g. ValueSet.name).
-	Name FhirString `json:"name,omitempty"`
-	// description
-	// A description of the reason that a resource has been included in the implementation guide.
-	Description FhirString `json:"description,omitempty"`
-	// exampleBoolean
-	// If true or a reference, indicates the resource is an example instance.  If a reference is present, indicates that the example is an example of the specified profile.
-	ExampleBoolean FhirBoolean `json:"exampleBoolean,omitempty"`
-	// exampleCanonical
-	// If true or a reference, indicates the resource is an example instance.  If a reference is present, indicates that the example is an example of the specified profile.
-	ExampleCanonical FhirCanonical `json:"exampleCanonical,omitempty"`
-	// groupingId
-	// Reference to the id of the grouping this resource appears in.
-	GroupingId FhirId `json:"groupingId,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Reference *Reference `json:"reference,omitempty"`
+	FhirVersion []*FHIRVersion `json:"fhirversion,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	ExampleBoolean *FhirBoolean `json:"exampleboolean,omitempty"`
+	ExampleCanonical *FhirCanonical `json:"examplecanonical,omitempty"`
+	GroupingId *FhirId `json:"groupingid,omitempty"`
 }
 
 // NewImplementationGuideResource creates a new ImplementationGuideResource instance
-func NewImplementationGuideResource(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	reference Reference,
-	fhirVersion []FHIRVersion,
-	name FhirString,
-	description FhirString,
-	exampleBoolean FhirBoolean,
-	exampleCanonical FhirCanonical,
-	groupingId FhirId,
-) *ImplementationGuideResource {
-	return &ImplementationGuideResource{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Reference: reference,
-		FhirVersion: fhirVersion,
-		Name: name,
-		Description: description,
-		ExampleBoolean: exampleBoolean,
-		ExampleCanonical: exampleCanonical,
-		GroupingId: groupingId,
-	}
+func NewImplementationGuideResource() *ImplementationGuideResource {
+	return &ImplementationGuideResource{}
 }
+
 // FromJSON populates ImplementationGuideResource from JSON data
 func (m *ImplementationGuideResource) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -751,116 +367,59 @@ func (m *ImplementationGuideResource) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ImplementationGuideResource
-func (m *ImplementationGuideResource) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	reference *Reference,
-	fhirVersion *[]FHIRVersion,
-	name *FhirString,
-	description *FhirString,
-	exampleBoolean *FhirBoolean,
-	exampleCanonical *FhirCanonical,
-	groupingId *FhirId,
-) *ImplementationGuideResource {
+// Clone creates a deep copy of ImplementationGuideResource
+func (m *ImplementationGuideResource) Clone() *ImplementationGuideResource {
+	if m == nil { return nil }
 	return &ImplementationGuideResource{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Reference: func() Reference {
-			if reference != nil { return *reference }
-			return m.Reference
-		}(),
-		FhirVersion: func() []FHIRVersion {
-			if fhirVersion != nil { return *fhirVersion }
-			return m.FhirVersion
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		ExampleBoolean: func() FhirBoolean {
-			if exampleBoolean != nil { return *exampleBoolean }
-			return m.ExampleBoolean
-		}(),
-		ExampleCanonical: func() FhirCanonical {
-			if exampleCanonical != nil { return *exampleCanonical }
-			return m.ExampleCanonical
-		}(),
-		GroupingId: func() FhirId {
-			if groupingId != nil { return *groupingId }
-			return m.GroupingId
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Reference: m.Reference.Clone(),
+		FhirVersion: cloneSlices(m.FhirVersion),
+		Name: m.Name.Clone(),
+		Description: m.Description.Clone(),
+		ExampleBoolean: m.ExampleBoolean.Clone(),
+		ExampleCanonical: m.ExampleCanonical.Clone(),
+		GroupingId: m.GroupingId.Clone(),
 	}
 }
+
+// Equals checks for equality with another ImplementationGuideResource instance
+func (m *ImplementationGuideResource) Equals(other *ImplementationGuideResource) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Reference.Equals(other.Reference) { return false }
+	if !compareSlices(m.FhirVersion, other.FhirVersion) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.ExampleBoolean.Equals(other.ExampleBoolean) { return false }
+	if !m.ExampleCanonical.Equals(other.ExampleCanonical) { return false }
+	if !m.GroupingId.Equals(other.GroupingId) { return false }
+	return true
+}
+
 // ImplementationGuidePage
 // A page / section in the implementation guide. The root page is the implementation guide home page.
 type ImplementationGuidePage struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// nameUrl
-	// The source address for the page.
-	NameUrl FhirUrl `json:"nameUrl,omitempty"`
-	// nameReference
-	// The source address for the page.
-	NameReference Reference `json:"nameReference,omitempty"`
-	// title
-	// A short title used to represent this page in navigational structures such as table of contents, bread crumbs, etc.
-	Title FhirString `json:"title,omitempty"`
-	// generation
-	// A code that indicates how the page is generated.
-	Generation GuidePageGeneration `json:"generation,omitempty"`
-	// page
-	// Nested Pages/Sections under this page.
-	Page []ImplementationGuidePage `json:"page,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	NameUrl *FhirUrl `json:"nameurl,omitempty"`
+	NameReference *Reference `json:"namereference,omitempty"`
+	Title *FhirString `json:"title,omitempty"`
+	Generation *GuidePageGeneration `json:"generation,omitempty"`
+	Page []*ImplementationGuidePage `json:"page,omitempty"`
 }
 
 // NewImplementationGuidePage creates a new ImplementationGuidePage instance
-func NewImplementationGuidePage(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	nameUrl FhirUrl,
-	nameReference Reference,
-	title FhirString,
-	generation GuidePageGeneration,
-	page []ImplementationGuidePage,
-) *ImplementationGuidePage {
-	return &ImplementationGuidePage{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		NameUrl: nameUrl,
-		NameReference: nameReference,
-		Title: title,
-		Generation: generation,
-		Page: page,
-	}
+func NewImplementationGuidePage() *ImplementationGuidePage {
+	return &ImplementationGuidePage{}
 }
+
 // FromJSON populates ImplementationGuidePage from JSON data
 func (m *ImplementationGuidePage) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -871,91 +430,52 @@ func (m *ImplementationGuidePage) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ImplementationGuidePage
-func (m *ImplementationGuidePage) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	nameUrl *FhirUrl,
-	nameReference *Reference,
-	title *FhirString,
-	generation *GuidePageGeneration,
-	page *[]ImplementationGuidePage,
-) *ImplementationGuidePage {
+// Clone creates a deep copy of ImplementationGuidePage
+func (m *ImplementationGuidePage) Clone() *ImplementationGuidePage {
+	if m == nil { return nil }
 	return &ImplementationGuidePage{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		NameUrl: func() FhirUrl {
-			if nameUrl != nil { return *nameUrl }
-			return m.NameUrl
-		}(),
-		NameReference: func() Reference {
-			if nameReference != nil { return *nameReference }
-			return m.NameReference
-		}(),
-		Title: func() FhirString {
-			if title != nil { return *title }
-			return m.Title
-		}(),
-		Generation: func() GuidePageGeneration {
-			if generation != nil { return *generation }
-			return m.Generation
-		}(),
-		Page: func() []ImplementationGuidePage {
-			if page != nil { return *page }
-			return m.Page
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		NameUrl: m.NameUrl.Clone(),
+		NameReference: m.NameReference.Clone(),
+		Title: m.Title.Clone(),
+		Generation: m.Generation.Clone(),
+		Page: cloneSlices(m.Page),
 	}
 }
+
+// Equals checks for equality with another ImplementationGuidePage instance
+func (m *ImplementationGuidePage) Equals(other *ImplementationGuidePage) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.NameUrl.Equals(other.NameUrl) { return false }
+	if !m.NameReference.Equals(other.NameReference) { return false }
+	if !m.Title.Equals(other.Title) { return false }
+	if !m.Generation.Equals(other.Generation) { return false }
+	if !compareSlices(m.Page, other.Page) { return false }
+	return true
+}
+
 // ImplementationGuideParameter
 // Defines how IG is built by tools.
 type ImplementationGuideParameter struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// apply | path-resource | path-pages | path-tx-cache | expansion-parameter | rule-broken-links | generate-xml | generate-json | generate-turtle | html-template.
-	Code GuideParameterCode `json:"code,omitempty"`
-	// value
-	// Value for named type.
-	Value FhirString `json:"value,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *GuideParameterCode `json:"code,omitempty"`
+	Value *FhirString `json:"value,omitempty"`
 }
 
 // NewImplementationGuideParameter creates a new ImplementationGuideParameter instance
-func NewImplementationGuideParameter(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code GuideParameterCode,
-	value FhirString,
-) *ImplementationGuideParameter {
-	return &ImplementationGuideParameter{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		Value: value,
-	}
+func NewImplementationGuideParameter() *ImplementationGuideParameter {
+	return &ImplementationGuideParameter{}
 }
+
 // FromJSON populates ImplementationGuideParameter from JSON data
 func (m *ImplementationGuideParameter) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -966,81 +486,47 @@ func (m *ImplementationGuideParameter) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ImplementationGuideParameter
-func (m *ImplementationGuideParameter) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *GuideParameterCode,
-	value *FhirString,
-) *ImplementationGuideParameter {
+// Clone creates a deep copy of ImplementationGuideParameter
+func (m *ImplementationGuideParameter) Clone() *ImplementationGuideParameter {
+	if m == nil { return nil }
 	return &ImplementationGuideParameter{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() GuideParameterCode {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Value: func() FhirString {
-			if value != nil { return *value }
-			return m.Value
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		Value: m.Value.Clone(),
 	}
 }
+
+// Equals checks for equality with another ImplementationGuideParameter instance
+func (m *ImplementationGuideParameter) Equals(other *ImplementationGuideParameter) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Value.Equals(other.Value) { return false }
+	return true
+}
+
 // ImplementationGuideTemplate
 // A template for building resources.
 type ImplementationGuideTemplate struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// Type of template specified.
-	Code FhirCode `json:"code,omitempty"`
-	// source
-	// The source location for the template.
-	Source FhirString `json:"source,omitempty"`
-	// scope
-	// The scope in which the template applies.
-	Scope FhirString `json:"scope,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *FhirCode `json:"code,omitempty"`
+	Source *FhirString `json:"source,omitempty"`
+	Scope *FhirString `json:"scope,omitempty"`
 }
 
 // NewImplementationGuideTemplate creates a new ImplementationGuideTemplate instance
-func NewImplementationGuideTemplate(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code FhirCode,
-	source FhirString,
-	scope FhirString,
-) *ImplementationGuideTemplate {
-	return &ImplementationGuideTemplate{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		Source: source,
-		Scope: scope,
-	}
+func NewImplementationGuideTemplate() *ImplementationGuideTemplate {
+	return &ImplementationGuideTemplate{}
 }
+
 // FromJSON populates ImplementationGuideTemplate from JSON data
 func (m *ImplementationGuideTemplate) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1051,96 +537,51 @@ func (m *ImplementationGuideTemplate) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ImplementationGuideTemplate
-func (m *ImplementationGuideTemplate) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *FhirCode,
-	source *FhirString,
-	scope *FhirString,
-) *ImplementationGuideTemplate {
+// Clone creates a deep copy of ImplementationGuideTemplate
+func (m *ImplementationGuideTemplate) Clone() *ImplementationGuideTemplate {
+	if m == nil { return nil }
 	return &ImplementationGuideTemplate{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() FhirCode {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Source: func() FhirString {
-			if source != nil { return *source }
-			return m.Source
-		}(),
-		Scope: func() FhirString {
-			if scope != nil { return *scope }
-			return m.Scope
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		Source: m.Source.Clone(),
+		Scope: m.Scope.Clone(),
 	}
 }
+
+// Equals checks for equality with another ImplementationGuideTemplate instance
+func (m *ImplementationGuideTemplate) Equals(other *ImplementationGuideTemplate) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Source.Equals(other.Source) { return false }
+	if !m.Scope.Equals(other.Scope) { return false }
+	return true
+}
+
 // ImplementationGuideManifest
 // Information about an assembled implementation guide, created by the publication tooling.
 type ImplementationGuideManifest struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// rendering
-	// A pointer to official web page, PDF or other rendering of the implementation guide.
-	Rendering FhirUrl `json:"rendering,omitempty"`
-	// resource
-	// A resource that is part of the implementation guide. Conformance resources (value set, structure definition, capability statements etc.) are obvious candidates for inclusion, but any kind of resource can be included as an example resource.
-	Resource []ImplementationGuideResource `json:"resource,omitempty"`
-	// page
-	// Information about a page within the IG.
-	Page []ImplementationGuidePage `json:"page,omitempty"`
-	// image
-	// Indicates a relative path to an image that exists within the IG.
-	Image []FhirString `json:"image,omitempty"`
-	// other
-	// Indicates the relative path of an additional non-page, non-image file that is part of the IG - e.g. zip, jar and similar files that could be the target of a hyperlink in a derived IG.
-	Other []FhirString `json:"other,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Rendering *FhirUrl `json:"rendering,omitempty"`
+	Resource []*ImplementationGuideResource `json:"resource,omitempty"`
+	Page []*ImplementationGuidePage `json:"page,omitempty"`
+	Image []*FhirString `json:"image,omitempty"`
+	Other []*FhirString `json:"other,omitempty"`
 }
 
 // NewImplementationGuideManifest creates a new ImplementationGuideManifest instance
-func NewImplementationGuideManifest(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	rendering FhirUrl,
-	resource []ImplementationGuideResource,
-	page []ImplementationGuidePage,
-	image []FhirString,
-	other []FhirString,
-) *ImplementationGuideManifest {
-	return &ImplementationGuideManifest{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Rendering: rendering,
-		Resource: resource,
-		Page: page,
-		Image: image,
-		Other: other,
-	}
+func NewImplementationGuideManifest() *ImplementationGuideManifest {
+	return &ImplementationGuideManifest{}
 }
+
 // FromJSON populates ImplementationGuideManifest from JSON data
 func (m *ImplementationGuideManifest) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1151,101 +592,54 @@ func (m *ImplementationGuideManifest) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ImplementationGuideManifest
-func (m *ImplementationGuideManifest) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	rendering *FhirUrl,
-	resource *[]ImplementationGuideResource,
-	page *[]ImplementationGuidePage,
-	image *[]FhirString,
-	other *[]FhirString,
-) *ImplementationGuideManifest {
+// Clone creates a deep copy of ImplementationGuideManifest
+func (m *ImplementationGuideManifest) Clone() *ImplementationGuideManifest {
+	if m == nil { return nil }
 	return &ImplementationGuideManifest{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Rendering: func() FhirUrl {
-			if rendering != nil { return *rendering }
-			return m.Rendering
-		}(),
-		Resource: func() []ImplementationGuideResource {
-			if resource != nil { return *resource }
-			return m.Resource
-		}(),
-		Page: func() []ImplementationGuidePage {
-			if page != nil { return *page }
-			return m.Page
-		}(),
-		Image: func() []FhirString {
-			if image != nil { return *image }
-			return m.Image
-		}(),
-		Other: func() []FhirString {
-			if other != nil { return *other }
-			return m.Other
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Rendering: m.Rendering.Clone(),
+		Resource: cloneSlices(m.Resource),
+		Page: cloneSlices(m.Page),
+		Image: cloneSlices(m.Image),
+		Other: cloneSlices(m.Other),
 	}
 }
+
+// Equals checks for equality with another ImplementationGuideManifest instance
+func (m *ImplementationGuideManifest) Equals(other *ImplementationGuideManifest) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Rendering.Equals(other.Rendering) { return false }
+	if !compareSlices(m.Resource, other.Resource) { return false }
+	if !compareSlices(m.Page, other.Page) { return false }
+	if !compareSlices(m.Image, other.Image) { return false }
+	if !compareSlices(m.Other, other.Other) { return false }
+	return true
+}
+
 // ImplementationGuideResource1
 // A resource that is part of the implementation guide. Conformance resources (value set, structure definition, capability statements etc.) are obvious candidates for inclusion, but any kind of resource can be included as an example resource.
 type ImplementationGuideResource1 struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// reference
-	// Where this resource is found.
-	Reference Reference `json:"reference,omitempty"`
-	// exampleBoolean
-	// If true or a reference, indicates the resource is an example instance.  If a reference is present, indicates that the example is an example of the specified profile.
-	ExampleBoolean FhirBoolean `json:"exampleBoolean,omitempty"`
-	// exampleCanonical
-	// If true or a reference, indicates the resource is an example instance.  If a reference is present, indicates that the example is an example of the specified profile.
-	ExampleCanonical FhirCanonical `json:"exampleCanonical,omitempty"`
-	// relativePath
-	// The relative path for primary page for this resource within the IG.
-	RelativePath FhirUrl `json:"relativePath,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Reference *Reference `json:"reference,omitempty"`
+	ExampleBoolean *FhirBoolean `json:"exampleboolean,omitempty"`
+	ExampleCanonical *FhirCanonical `json:"examplecanonical,omitempty"`
+	RelativePath *FhirUrl `json:"relativepath,omitempty"`
 }
 
 // NewImplementationGuideResource1 creates a new ImplementationGuideResource1 instance
-func NewImplementationGuideResource1(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	reference Reference,
-	exampleBoolean FhirBoolean,
-	exampleCanonical FhirCanonical,
-	relativePath FhirUrl,
-) *ImplementationGuideResource1 {
-	return &ImplementationGuideResource1{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Reference: reference,
-		ExampleBoolean: exampleBoolean,
-		ExampleCanonical: exampleCanonical,
-		RelativePath: relativePath,
-	}
+func NewImplementationGuideResource1() *ImplementationGuideResource1 {
+	return &ImplementationGuideResource1{}
 }
+
 // FromJSON populates ImplementationGuideResource1 from JSON data
 func (m *ImplementationGuideResource1) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1256,91 +650,51 @@ func (m *ImplementationGuideResource1) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ImplementationGuideResource1
-func (m *ImplementationGuideResource1) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	reference *Reference,
-	exampleBoolean *FhirBoolean,
-	exampleCanonical *FhirCanonical,
-	relativePath *FhirUrl,
-) *ImplementationGuideResource1 {
+// Clone creates a deep copy of ImplementationGuideResource1
+func (m *ImplementationGuideResource1) Clone() *ImplementationGuideResource1 {
+	if m == nil { return nil }
 	return &ImplementationGuideResource1{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Reference: func() Reference {
-			if reference != nil { return *reference }
-			return m.Reference
-		}(),
-		ExampleBoolean: func() FhirBoolean {
-			if exampleBoolean != nil { return *exampleBoolean }
-			return m.ExampleBoolean
-		}(),
-		ExampleCanonical: func() FhirCanonical {
-			if exampleCanonical != nil { return *exampleCanonical }
-			return m.ExampleCanonical
-		}(),
-		RelativePath: func() FhirUrl {
-			if relativePath != nil { return *relativePath }
-			return m.RelativePath
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Reference: m.Reference.Clone(),
+		ExampleBoolean: m.ExampleBoolean.Clone(),
+		ExampleCanonical: m.ExampleCanonical.Clone(),
+		RelativePath: m.RelativePath.Clone(),
 	}
 }
+
+// Equals checks for equality with another ImplementationGuideResource1 instance
+func (m *ImplementationGuideResource1) Equals(other *ImplementationGuideResource1) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Reference.Equals(other.Reference) { return false }
+	if !m.ExampleBoolean.Equals(other.ExampleBoolean) { return false }
+	if !m.ExampleCanonical.Equals(other.ExampleCanonical) { return false }
+	if !m.RelativePath.Equals(other.RelativePath) { return false }
+	return true
+}
+
 // ImplementationGuidePage1
 // Information about a page within the IG.
 type ImplementationGuidePage1 struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// name
-	// Relative path to the page.
-	Name FhirString `json:"name,omitempty"`
-	// title
-	// Label for the page intended for human display.
-	Title FhirString `json:"title,omitempty"`
-	// anchor
-	// The name of an anchor available on the page.
-	Anchor []FhirString `json:"anchor,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Title *FhirString `json:"title,omitempty"`
+	Anchor []*FhirString `json:"anchor,omitempty"`
 }
 
 // NewImplementationGuidePage1 creates a new ImplementationGuidePage1 instance
-func NewImplementationGuidePage1(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	name FhirString,
-	title FhirString,
-	anchor []FhirString,
-) *ImplementationGuidePage1 {
-	return &ImplementationGuidePage1{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Name: name,
-		Title: title,
-		Anchor: anchor,
-	}
+func NewImplementationGuidePage1() *ImplementationGuidePage1 {
+	return &ImplementationGuidePage1{}
 }
+
 // FromJSON populates ImplementationGuidePage1 from JSON data
 func (m *ImplementationGuidePage1) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1351,39 +705,29 @@ func (m *ImplementationGuidePage1) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ImplementationGuidePage1
-func (m *ImplementationGuidePage1) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	name *FhirString,
-	title *FhirString,
-	anchor *[]FhirString,
-) *ImplementationGuidePage1 {
+// Clone creates a deep copy of ImplementationGuidePage1
+func (m *ImplementationGuidePage1) Clone() *ImplementationGuidePage1 {
+	if m == nil { return nil }
 	return &ImplementationGuidePage1{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Title: func() FhirString {
-			if title != nil { return *title }
-			return m.Title
-		}(),
-		Anchor: func() []FhirString {
-			if anchor != nil { return *anchor }
-			return m.Anchor
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Name: m.Name.Clone(),
+		Title: m.Title.Clone(),
+		Anchor: cloneSlices(m.Anchor),
 	}
 }
+
+// Equals checks for equality with another ImplementationGuidePage1 instance
+func (m *ImplementationGuidePage1) Equals(other *ImplementationGuidePage1) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Title.Equals(other.Title) { return false }
+	if !compareSlices(m.Anchor, other.Anchor) { return false }
+	return true
+}
+

@@ -3,179 +3,50 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // Encounter
 // An interaction between a patient and healthcare provider(s) for the purpose of providing healthcare service(s) or assessing the health status of a patient.
 type Encounter struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// Identifier(s) by which this encounter is known.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// status
-	// planned | arrived | triaged | in-progress | onleave | finished | cancelled +.
-	Status EncounterStatus `json:"status,omitempty"`
-	// statusHistory
-	// The status history permits the encounter resource to contain the status history without needing to read through the historical versions of the resource, or even have the server store them.
-	StatusHistory []EncounterStatusHistory `json:"statusHistory,omitempty"`
-	// class
-	// Concepts representing classification of patient encounter such as ambulatory (outpatient), inpatient, emergency, home health or others due to local variations.
-	Class_ Coding `json:"class,omitempty"`
-	// classHistory
-	// The class history permits the tracking of the encounters transitions without needing to go  through the resource history.  This would be used for a case where an admission starts of as an emergency encounter, then transitions into an inpatient scenario. Doing this and not restarting a new encounter ensures that any lab/diagnostic results can more easily follow the patient and not require re-processing and not get lost or cancelled during a kind of discharge from emergency to inpatient.
-	ClassHistory []EncounterClassHistory `json:"classHistory,omitempty"`
-	// type
-	// Specific type of encounter (e.g. e-mail consultation, surgical day-care, skilled nursing, rehabilitation).
-	Type_ []CodeableConcept `json:"type,omitempty"`
-	// serviceType
-	// Broad categorization of the service that is to be provided (e.g. cardiology).
-	ServiceType CodeableConcept `json:"serviceType,omitempty"`
-	// priority
-	// Indicates the urgency of the encounter.
-	Priority CodeableConcept `json:"priority,omitempty"`
-	// subject
-	// The patient or group present at the encounter.
-	Subject Reference `json:"subject,omitempty"`
-	// episodeOfCare
-	// Where a specific encounter should be classified as a part of a specific episode(s) of care this field should be used. This association can facilitate grouping of related encounters together for a specific purpose, such as government reporting, issue tracking, association via a common problem.  The association is recorded on the encounter as these are typically created after the episode of care and grouped on entry rather than editing the episode of care to append another encounter to it (the episode of care could span years).
-	EpisodeOfCare []Reference `json:"episodeOfCare,omitempty"`
-	// basedOn
-	// The request this encounter satisfies (e.g. incoming referral or procedure request).
-	BasedOn []Reference `json:"basedOn,omitempty"`
-	// participant
-	// The list of people responsible for providing the service.
-	Participant []EncounterParticipant `json:"participant,omitempty"`
-	// appointment
-	// The appointment that scheduled this encounter.
-	Appointment []Reference `json:"appointment,omitempty"`
-	// period
-	// The start and end time of the encounter.
-	Period Period `json:"period,omitempty"`
-	// length
-	// Quantity of time the encounter lasted. This excludes the time during leaves of absence.
-	Length FhirDuration `json:"length,omitempty"`
-	// reasonCode
-	// Reason the encounter takes place, expressed as a code. For admissions, this can be used for a coded admission diagnosis.
-	ReasonCode []CodeableConcept `json:"reasonCode,omitempty"`
-	// reasonReference
-	// Reason the encounter takes place, expressed as a code. For admissions, this can be used for a coded admission diagnosis.
-	ReasonReference []Reference `json:"reasonReference,omitempty"`
-	// diagnosis
-	// The list of diagnosis relevant to this encounter.
-	Diagnosis []EncounterDiagnosis `json:"diagnosis,omitempty"`
-	// account
-	// The set of accounts that may be used for billing for this Encounter.
-	Account []Reference `json:"account,omitempty"`
-	// hospitalization
-	// Details about the admission to a healthcare service.
-	Hospitalization EncounterHospitalization `json:"hospitalization,omitempty"`
-	// location
-	// List of locations where  the patient has been during this encounter.
-	Location []EncounterLocation `json:"location,omitempty"`
-	// serviceProvider
-	// The organization that is primarily responsible for this Encounter's services. This MAY be the same as the organization on the Patient record, however it could be different, such as if the actor performing the services was from an external organization (which may be billed seperately) for an external consultation.  Refer to the example bundle showing an abbreviated set of Encounters for a colonoscopy.
-	ServiceProvider Reference `json:"serviceProvider,omitempty"`
-	// partOf
-	// Another Encounter of which this encounter is a part of (administratively or in time).
-	PartOf Reference `json:"partOf,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Status *EncounterStatus `json:"status,omitempty"`
+	StatusHistory []*EncounterStatusHistory `json:"statushistory,omitempty"`
+	Class_ *Coding `json:"class,omitempty"`
+	ClassHistory []*EncounterClassHistory `json:"classhistory,omitempty"`
+	Type []*CodeableConcept `json:"type,omitempty"`
+	ServiceType *CodeableConcept `json:"servicetype,omitempty"`
+	Priority *CodeableConcept `json:"priority,omitempty"`
+	Subject *Reference `json:"subject,omitempty"`
+	EpisodeOfCare []*Reference `json:"episodeofcare,omitempty"`
+	BasedOn []*Reference `json:"basedon,omitempty"`
+	Participant []*EncounterParticipant `json:"participant,omitempty"`
+	Appointment []*Reference `json:"appointment,omitempty"`
+	Period *Period `json:"period,omitempty"`
+	Length *FhirDuration `json:"length,omitempty"`
+	ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+	ReasonReference []*Reference `json:"reasonreference,omitempty"`
+	Diagnosis []*EncounterDiagnosis `json:"diagnosis,omitempty"`
+	Account []*Reference `json:"account,omitempty"`
+	Hospitalization *EncounterHospitalization `json:"hospitalization,omitempty"`
+	Location []*EncounterLocation `json:"location,omitempty"`
+	ServiceProvider *Reference `json:"serviceprovider,omitempty"`
+	PartOf *Reference `json:"partof,omitempty"`
 }
 
 // NewEncounter creates a new Encounter instance
-func NewEncounter(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	status EncounterStatus,
-	statusHistory []EncounterStatusHistory,
-	class_ Coding,
-	classHistory []EncounterClassHistory,
-	type_ []CodeableConcept,
-	serviceType CodeableConcept,
-	priority CodeableConcept,
-	subject Reference,
-	episodeOfCare []Reference,
-	basedOn []Reference,
-	participant []EncounterParticipant,
-	appointment []Reference,
-	period Period,
-	length FhirDuration,
-	reasonCode []CodeableConcept,
-	reasonReference []Reference,
-	diagnosis []EncounterDiagnosis,
-	account []Reference,
-	hospitalization EncounterHospitalization,
-	location []EncounterLocation,
-	serviceProvider Reference,
-	partOf Reference,
-) *Encounter {
-	return &Encounter{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Status: status,
-		StatusHistory: statusHistory,
-		Class_: class_,
-		ClassHistory: classHistory,
-		Type_: type_,
-		ServiceType: serviceType,
-		Priority: priority,
-		Subject: subject,
-		EpisodeOfCare: episodeOfCare,
-		BasedOn: basedOn,
-		Participant: participant,
-		Appointment: appointment,
-		Period: period,
-		Length: length,
-		ReasonCode: reasonCode,
-		ReasonReference: reasonReference,
-		Diagnosis: diagnosis,
-		Account: account,
-		Hospitalization: hospitalization,
-		Location: location,
-		ServiceProvider: serviceProvider,
-		PartOf: partOf,
-	}
+func NewEncounter() *Encounter {
+	return &Encounter{}
 }
+
 // FromJSON populates Encounter from JSON data
 func (m *Encounter) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -186,206 +57,98 @@ func (m *Encounter) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of Encounter
-func (m *Encounter) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	status *EncounterStatus,
-	statusHistory *[]EncounterStatusHistory,
-	class_ *Coding,
-	classHistory *[]EncounterClassHistory,
-	type_ *[]CodeableConcept,
-	serviceType *CodeableConcept,
-	priority *CodeableConcept,
-	subject *Reference,
-	episodeOfCare *[]Reference,
-	basedOn *[]Reference,
-	participant *[]EncounterParticipant,
-	appointment *[]Reference,
-	period *Period,
-	length *FhirDuration,
-	reasonCode *[]CodeableConcept,
-	reasonReference *[]Reference,
-	diagnosis *[]EncounterDiagnosis,
-	account *[]Reference,
-	hospitalization *EncounterHospitalization,
-	location *[]EncounterLocation,
-	serviceProvider *Reference,
-	partOf *Reference,
-) *Encounter {
+// Clone creates a deep copy of Encounter
+func (m *Encounter) Clone() *Encounter {
+	if m == nil { return nil }
 	return &Encounter{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Status: func() EncounterStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		StatusHistory: func() []EncounterStatusHistory {
-			if statusHistory != nil { return *statusHistory }
-			return m.StatusHistory
-		}(),
-		Class_: func() Coding {
-			if class_ != nil { return *class_ }
-			return m.Class_
-		}(),
-		ClassHistory: func() []EncounterClassHistory {
-			if classHistory != nil { return *classHistory }
-			return m.ClassHistory
-		}(),
-		Type_: func() []CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		ServiceType: func() CodeableConcept {
-			if serviceType != nil { return *serviceType }
-			return m.ServiceType
-		}(),
-		Priority: func() CodeableConcept {
-			if priority != nil { return *priority }
-			return m.Priority
-		}(),
-		Subject: func() Reference {
-			if subject != nil { return *subject }
-			return m.Subject
-		}(),
-		EpisodeOfCare: func() []Reference {
-			if episodeOfCare != nil { return *episodeOfCare }
-			return m.EpisodeOfCare
-		}(),
-		BasedOn: func() []Reference {
-			if basedOn != nil { return *basedOn }
-			return m.BasedOn
-		}(),
-		Participant: func() []EncounterParticipant {
-			if participant != nil { return *participant }
-			return m.Participant
-		}(),
-		Appointment: func() []Reference {
-			if appointment != nil { return *appointment }
-			return m.Appointment
-		}(),
-		Period: func() Period {
-			if period != nil { return *period }
-			return m.Period
-		}(),
-		Length: func() FhirDuration {
-			if length != nil { return *length }
-			return m.Length
-		}(),
-		ReasonCode: func() []CodeableConcept {
-			if reasonCode != nil { return *reasonCode }
-			return m.ReasonCode
-		}(),
-		ReasonReference: func() []Reference {
-			if reasonReference != nil { return *reasonReference }
-			return m.ReasonReference
-		}(),
-		Diagnosis: func() []EncounterDiagnosis {
-			if diagnosis != nil { return *diagnosis }
-			return m.Diagnosis
-		}(),
-		Account: func() []Reference {
-			if account != nil { return *account }
-			return m.Account
-		}(),
-		Hospitalization: func() EncounterHospitalization {
-			if hospitalization != nil { return *hospitalization }
-			return m.Hospitalization
-		}(),
-		Location: func() []EncounterLocation {
-			if location != nil { return *location }
-			return m.Location
-		}(),
-		ServiceProvider: func() Reference {
-			if serviceProvider != nil { return *serviceProvider }
-			return m.ServiceProvider
-		}(),
-		PartOf: func() Reference {
-			if partOf != nil { return *partOf }
-			return m.PartOf
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		Status: m.Status.Clone(),
+		StatusHistory: cloneSlices(m.StatusHistory),
+		Class_: m.Class_.Clone(),
+		ClassHistory: cloneSlices(m.ClassHistory),
+		Type: cloneSlices(m.Type),
+		ServiceType: m.ServiceType.Clone(),
+		Priority: m.Priority.Clone(),
+		Subject: m.Subject.Clone(),
+		EpisodeOfCare: cloneSlices(m.EpisodeOfCare),
+		BasedOn: cloneSlices(m.BasedOn),
+		Participant: cloneSlices(m.Participant),
+		Appointment: cloneSlices(m.Appointment),
+		Period: m.Period.Clone(),
+		Length: m.Length.Clone(),
+		ReasonCode: cloneSlices(m.ReasonCode),
+		ReasonReference: cloneSlices(m.ReasonReference),
+		Diagnosis: cloneSlices(m.Diagnosis),
+		Account: cloneSlices(m.Account),
+		Hospitalization: m.Hospitalization.Clone(),
+		Location: cloneSlices(m.Location),
+		ServiceProvider: m.ServiceProvider.Clone(),
+		PartOf: m.PartOf.Clone(),
 	}
 }
+
+// Equals checks for equality with another Encounter instance
+func (m *Encounter) Equals(other *Encounter) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !compareSlices(m.StatusHistory, other.StatusHistory) { return false }
+	if !m.Class_.Equals(other.Class_) { return false }
+	if !compareSlices(m.ClassHistory, other.ClassHistory) { return false }
+	if !compareSlices(m.Type, other.Type) { return false }
+	if !m.ServiceType.Equals(other.ServiceType) { return false }
+	if !m.Priority.Equals(other.Priority) { return false }
+	if !m.Subject.Equals(other.Subject) { return false }
+	if !compareSlices(m.EpisodeOfCare, other.EpisodeOfCare) { return false }
+	if !compareSlices(m.BasedOn, other.BasedOn) { return false }
+	if !compareSlices(m.Participant, other.Participant) { return false }
+	if !compareSlices(m.Appointment, other.Appointment) { return false }
+	if !m.Period.Equals(other.Period) { return false }
+	if !m.Length.Equals(other.Length) { return false }
+	if !compareSlices(m.ReasonCode, other.ReasonCode) { return false }
+	if !compareSlices(m.ReasonReference, other.ReasonReference) { return false }
+	if !compareSlices(m.Diagnosis, other.Diagnosis) { return false }
+	if !compareSlices(m.Account, other.Account) { return false }
+	if !m.Hospitalization.Equals(other.Hospitalization) { return false }
+	if !compareSlices(m.Location, other.Location) { return false }
+	if !m.ServiceProvider.Equals(other.ServiceProvider) { return false }
+	if !m.PartOf.Equals(other.PartOf) { return false }
+	return true
+}
+
 // EncounterStatusHistory
 // The status history permits the encounter resource to contain the status history without needing to read through the historical versions of the resource, or even have the server store them.
 type EncounterStatusHistory struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// status
-	// planned | arrived | triaged | in-progress | onleave | finished | cancelled +.
-	Status EncounterStatus `json:"status,omitempty"`
-	// period
-	// The time that the episode was in the specified status.
-	Period Period `json:"period,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Status *EncounterStatus `json:"status,omitempty"`
+	Period *Period `json:"period,omitempty"`
 }
 
 // NewEncounterStatusHistory creates a new EncounterStatusHistory instance
-func NewEncounterStatusHistory(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	status EncounterStatus,
-	period Period,
-) *EncounterStatusHistory {
-	return &EncounterStatusHistory{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Status: status,
-		Period: period,
-	}
+func NewEncounterStatusHistory() *EncounterStatusHistory {
+	return &EncounterStatusHistory{}
 }
+
 // FromJSON populates EncounterStatusHistory from JSON data
 func (m *EncounterStatusHistory) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -396,76 +159,46 @@ func (m *EncounterStatusHistory) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of EncounterStatusHistory
-func (m *EncounterStatusHistory) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	status *EncounterStatus,
-	period *Period,
-) *EncounterStatusHistory {
+// Clone creates a deep copy of EncounterStatusHistory
+func (m *EncounterStatusHistory) Clone() *EncounterStatusHistory {
+	if m == nil { return nil }
 	return &EncounterStatusHistory{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Status: func() EncounterStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Period: func() Period {
-			if period != nil { return *period }
-			return m.Period
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Status: m.Status.Clone(),
+		Period: m.Period.Clone(),
 	}
 }
+
+// Equals checks for equality with another EncounterStatusHistory instance
+func (m *EncounterStatusHistory) Equals(other *EncounterStatusHistory) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Period.Equals(other.Period) { return false }
+	return true
+}
+
 // EncounterClassHistory
 // The class history permits the tracking of the encounters transitions without needing to go  through the resource history.  This would be used for a case where an admission starts of as an emergency encounter, then transitions into an inpatient scenario. Doing this and not restarting a new encounter ensures that any lab/diagnostic results can more easily follow the patient and not require re-processing and not get lost or cancelled during a kind of discharge from emergency to inpatient.
 type EncounterClassHistory struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// class
-	// inpatient | outpatient | ambulatory | emergency +.
-	Class_ Coding `json:"class,omitempty"`
-	// period
-	// The time that the episode was in the specified class.
-	Period Period `json:"period,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Class_ *Coding `json:"class,omitempty"`
+	Period *Period `json:"period,omitempty"`
 }
 
 // NewEncounterClassHistory creates a new EncounterClassHistory instance
-func NewEncounterClassHistory(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	class_ Coding,
-	period Period,
-) *EncounterClassHistory {
-	return &EncounterClassHistory{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Class_: class_,
-		Period: period,
-	}
+func NewEncounterClassHistory() *EncounterClassHistory {
+	return &EncounterClassHistory{}
 }
+
 // FromJSON populates EncounterClassHistory from JSON data
 func (m *EncounterClassHistory) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -476,81 +209,47 @@ func (m *EncounterClassHistory) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of EncounterClassHistory
-func (m *EncounterClassHistory) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	class_ *Coding,
-	period *Period,
-) *EncounterClassHistory {
+// Clone creates a deep copy of EncounterClassHistory
+func (m *EncounterClassHistory) Clone() *EncounterClassHistory {
+	if m == nil { return nil }
 	return &EncounterClassHistory{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Class_: func() Coding {
-			if class_ != nil { return *class_ }
-			return m.Class_
-		}(),
-		Period: func() Period {
-			if period != nil { return *period }
-			return m.Period
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Class_: m.Class_.Clone(),
+		Period: m.Period.Clone(),
 	}
 }
+
+// Equals checks for equality with another EncounterClassHistory instance
+func (m *EncounterClassHistory) Equals(other *EncounterClassHistory) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Class_.Equals(other.Class_) { return false }
+	if !m.Period.Equals(other.Period) { return false }
+	return true
+}
+
 // EncounterParticipant
 // The list of people responsible for providing the service.
 type EncounterParticipant struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// Role of participant in encounter.
-	Type_ []CodeableConcept `json:"type,omitempty"`
-	// period
-	// The period of time that the specified participant participated in the encounter. These can overlap or be sub-sets of the overall encounter's period.
-	Period Period `json:"period,omitempty"`
-	// individual
-	// Persons involved in the encounter other than the patient.
-	Individual Reference `json:"individual,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type []*CodeableConcept `json:"type,omitempty"`
+	Period *Period `json:"period,omitempty"`
+	Individual *Reference `json:"individual,omitempty"`
 }
 
 // NewEncounterParticipant creates a new EncounterParticipant instance
-func NewEncounterParticipant(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ []CodeableConcept,
-	period Period,
-	individual Reference,
-) *EncounterParticipant {
-	return &EncounterParticipant{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Period: period,
-		Individual: individual,
-	}
+func NewEncounterParticipant() *EncounterParticipant {
+	return &EncounterParticipant{}
 }
+
 // FromJSON populates EncounterParticipant from JSON data
 func (m *EncounterParticipant) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -561,86 +260,49 @@ func (m *EncounterParticipant) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of EncounterParticipant
-func (m *EncounterParticipant) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *[]CodeableConcept,
-	period *Period,
-	individual *Reference,
-) *EncounterParticipant {
+// Clone creates a deep copy of EncounterParticipant
+func (m *EncounterParticipant) Clone() *EncounterParticipant {
+	if m == nil { return nil }
 	return &EncounterParticipant{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() []CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Period: func() Period {
-			if period != nil { return *period }
-			return m.Period
-		}(),
-		Individual: func() Reference {
-			if individual != nil { return *individual }
-			return m.Individual
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: cloneSlices(m.Type),
+		Period: m.Period.Clone(),
+		Individual: m.Individual.Clone(),
 	}
 }
+
+// Equals checks for equality with another EncounterParticipant instance
+func (m *EncounterParticipant) Equals(other *EncounterParticipant) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Type, other.Type) { return false }
+	if !m.Period.Equals(other.Period) { return false }
+	if !m.Individual.Equals(other.Individual) { return false }
+	return true
+}
+
 // EncounterDiagnosis
 // The list of diagnosis relevant to this encounter.
 type EncounterDiagnosis struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// condition
-	// Reason the encounter takes place, as specified using information from another resource. For admissions, this is the admission diagnosis. The indication will typically be a Condition (with other resources referenced in the evidence.detail), or a Procedure.
-	Condition Reference `json:"condition,omitempty"`
-	// use
-	// Role that this diagnosis has within the encounter (e.g. admission, billing, discharge …).
-	Use CodeableConcept `json:"use,omitempty"`
-	// rank
-	// Ranking of the diagnosis (for each role type).
-	Rank FhirPositiveInt `json:"rank,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Condition *Reference `json:"condition,omitempty"`
+	Use *CodeableConcept `json:"use,omitempty"`
+	Rank *FhirPositiveInt `json:"rank,omitempty"`
 }
 
 // NewEncounterDiagnosis creates a new EncounterDiagnosis instance
-func NewEncounterDiagnosis(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	condition Reference,
-	use CodeableConcept,
-	rank FhirPositiveInt,
-) *EncounterDiagnosis {
-	return &EncounterDiagnosis{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Condition: condition,
-		Use: use,
-		Rank: rank,
-	}
+func NewEncounterDiagnosis() *EncounterDiagnosis {
+	return &EncounterDiagnosis{}
 }
+
 // FromJSON populates EncounterDiagnosis from JSON data
 func (m *EncounterDiagnosis) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -651,116 +313,55 @@ func (m *EncounterDiagnosis) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of EncounterDiagnosis
-func (m *EncounterDiagnosis) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	condition *Reference,
-	use *CodeableConcept,
-	rank *FhirPositiveInt,
-) *EncounterDiagnosis {
+// Clone creates a deep copy of EncounterDiagnosis
+func (m *EncounterDiagnosis) Clone() *EncounterDiagnosis {
+	if m == nil { return nil }
 	return &EncounterDiagnosis{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Condition: func() Reference {
-			if condition != nil { return *condition }
-			return m.Condition
-		}(),
-		Use: func() CodeableConcept {
-			if use != nil { return *use }
-			return m.Use
-		}(),
-		Rank: func() FhirPositiveInt {
-			if rank != nil { return *rank }
-			return m.Rank
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Condition: m.Condition.Clone(),
+		Use: m.Use.Clone(),
+		Rank: m.Rank.Clone(),
 	}
 }
+
+// Equals checks for equality with another EncounterDiagnosis instance
+func (m *EncounterDiagnosis) Equals(other *EncounterDiagnosis) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Condition.Equals(other.Condition) { return false }
+	if !m.Use.Equals(other.Use) { return false }
+	if !m.Rank.Equals(other.Rank) { return false }
+	return true
+}
+
 // EncounterHospitalization
 // Details about the admission to a healthcare service.
 type EncounterHospitalization struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// preAdmissionIdentifier
-	// Pre-admission identifier.
-	PreAdmissionIdentifier Identifier `json:"preAdmissionIdentifier,omitempty"`
-	// origin
-	// The location/organization from which the patient came before admission.
-	Origin Reference `json:"origin,omitempty"`
-	// admitSource
-	// From where patient was admitted (physician referral, transfer).
-	AdmitSource CodeableConcept `json:"admitSource,omitempty"`
-	// reAdmission
-	// Whether this hospitalization is a readmission and why if known.
-	ReAdmission CodeableConcept `json:"reAdmission,omitempty"`
-	// dietPreference
-	// Diet preferences reported by the patient.
-	DietPreference []CodeableConcept `json:"dietPreference,omitempty"`
-	// specialCourtesy
-	// Special courtesies (VIP, board member).
-	SpecialCourtesy []CodeableConcept `json:"specialCourtesy,omitempty"`
-	// specialArrangement
-	// Any special requests that have been made for this hospitalization encounter, such as the provision of specific equipment or other things.
-	SpecialArrangement []CodeableConcept `json:"specialArrangement,omitempty"`
-	// destination
-	// Location/organization to which the patient is discharged.
-	Destination Reference `json:"destination,omitempty"`
-	// dischargeDisposition
-	// Category or kind of location after discharge.
-	DischargeDisposition CodeableConcept `json:"dischargeDisposition,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	PreAdmissionIdentifier *Identifier `json:"preadmissionidentifier,omitempty"`
+	Origin *Reference `json:"origin,omitempty"`
+	AdmitSource *CodeableConcept `json:"admitsource,omitempty"`
+	ReAdmission *CodeableConcept `json:"readmission,omitempty"`
+	DietPreference []*CodeableConcept `json:"dietpreference,omitempty"`
+	SpecialCourtesy []*CodeableConcept `json:"specialcourtesy,omitempty"`
+	SpecialArrangement []*CodeableConcept `json:"specialarrangement,omitempty"`
+	Destination *Reference `json:"destination,omitempty"`
+	DischargeDisposition *CodeableConcept `json:"dischargedisposition,omitempty"`
 }
 
 // NewEncounterHospitalization creates a new EncounterHospitalization instance
-func NewEncounterHospitalization(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	preAdmissionIdentifier Identifier,
-	origin Reference,
-	admitSource CodeableConcept,
-	reAdmission CodeableConcept,
-	dietPreference []CodeableConcept,
-	specialCourtesy []CodeableConcept,
-	specialArrangement []CodeableConcept,
-	destination Reference,
-	dischargeDisposition CodeableConcept,
-) *EncounterHospitalization {
-	return &EncounterHospitalization{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		PreAdmissionIdentifier: preAdmissionIdentifier,
-		Origin: origin,
-		AdmitSource: admitSource,
-		ReAdmission: reAdmission,
-		DietPreference: dietPreference,
-		SpecialCourtesy: specialCourtesy,
-		SpecialArrangement: specialArrangement,
-		Destination: destination,
-		DischargeDisposition: dischargeDisposition,
-	}
+func NewEncounterHospitalization() *EncounterHospitalization {
+	return &EncounterHospitalization{}
 }
+
 // FromJSON populates EncounterHospitalization from JSON data
 func (m *EncounterHospitalization) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -771,121 +372,62 @@ func (m *EncounterHospitalization) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of EncounterHospitalization
-func (m *EncounterHospitalization) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	preAdmissionIdentifier *Identifier,
-	origin *Reference,
-	admitSource *CodeableConcept,
-	reAdmission *CodeableConcept,
-	dietPreference *[]CodeableConcept,
-	specialCourtesy *[]CodeableConcept,
-	specialArrangement *[]CodeableConcept,
-	destination *Reference,
-	dischargeDisposition *CodeableConcept,
-) *EncounterHospitalization {
+// Clone creates a deep copy of EncounterHospitalization
+func (m *EncounterHospitalization) Clone() *EncounterHospitalization {
+	if m == nil { return nil }
 	return &EncounterHospitalization{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		PreAdmissionIdentifier: func() Identifier {
-			if preAdmissionIdentifier != nil { return *preAdmissionIdentifier }
-			return m.PreAdmissionIdentifier
-		}(),
-		Origin: func() Reference {
-			if origin != nil { return *origin }
-			return m.Origin
-		}(),
-		AdmitSource: func() CodeableConcept {
-			if admitSource != nil { return *admitSource }
-			return m.AdmitSource
-		}(),
-		ReAdmission: func() CodeableConcept {
-			if reAdmission != nil { return *reAdmission }
-			return m.ReAdmission
-		}(),
-		DietPreference: func() []CodeableConcept {
-			if dietPreference != nil { return *dietPreference }
-			return m.DietPreference
-		}(),
-		SpecialCourtesy: func() []CodeableConcept {
-			if specialCourtesy != nil { return *specialCourtesy }
-			return m.SpecialCourtesy
-		}(),
-		SpecialArrangement: func() []CodeableConcept {
-			if specialArrangement != nil { return *specialArrangement }
-			return m.SpecialArrangement
-		}(),
-		Destination: func() Reference {
-			if destination != nil { return *destination }
-			return m.Destination
-		}(),
-		DischargeDisposition: func() CodeableConcept {
-			if dischargeDisposition != nil { return *dischargeDisposition }
-			return m.DischargeDisposition
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		PreAdmissionIdentifier: m.PreAdmissionIdentifier.Clone(),
+		Origin: m.Origin.Clone(),
+		AdmitSource: m.AdmitSource.Clone(),
+		ReAdmission: m.ReAdmission.Clone(),
+		DietPreference: cloneSlices(m.DietPreference),
+		SpecialCourtesy: cloneSlices(m.SpecialCourtesy),
+		SpecialArrangement: cloneSlices(m.SpecialArrangement),
+		Destination: m.Destination.Clone(),
+		DischargeDisposition: m.DischargeDisposition.Clone(),
 	}
 }
+
+// Equals checks for equality with another EncounterHospitalization instance
+func (m *EncounterHospitalization) Equals(other *EncounterHospitalization) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.PreAdmissionIdentifier.Equals(other.PreAdmissionIdentifier) { return false }
+	if !m.Origin.Equals(other.Origin) { return false }
+	if !m.AdmitSource.Equals(other.AdmitSource) { return false }
+	if !m.ReAdmission.Equals(other.ReAdmission) { return false }
+	if !compareSlices(m.DietPreference, other.DietPreference) { return false }
+	if !compareSlices(m.SpecialCourtesy, other.SpecialCourtesy) { return false }
+	if !compareSlices(m.SpecialArrangement, other.SpecialArrangement) { return false }
+	if !m.Destination.Equals(other.Destination) { return false }
+	if !m.DischargeDisposition.Equals(other.DischargeDisposition) { return false }
+	return true
+}
+
 // EncounterLocation
 // List of locations where  the patient has been during this encounter.
 type EncounterLocation struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// location
-	// The location where the encounter takes place.
-	Location Reference `json:"location,omitempty"`
-	// status
-	// The status of the participants' presence at the specified location during the period specified. If the participant is no longer at the location, then the period will have an end date/time.
-	Status EncounterLocationStatus `json:"status,omitempty"`
-	// physicalType
-	// This will be used to specify the required levels (bed/ward/room/etc.) desired to be recorded to simplify either messaging or query.
-	PhysicalType CodeableConcept `json:"physicalType,omitempty"`
-	// period
-	// Time period during which the patient was present at the location.
-	Period Period `json:"period,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Location *Reference `json:"location,omitempty"`
+	Status *EncounterLocationStatus `json:"status,omitempty"`
+	PhysicalType *CodeableConcept `json:"physicaltype,omitempty"`
+	Period *Period `json:"period,omitempty"`
 }
 
 // NewEncounterLocation creates a new EncounterLocation instance
-func NewEncounterLocation(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	location Reference,
-	status EncounterLocationStatus,
-	physicalType CodeableConcept,
-	period Period,
-) *EncounterLocation {
-	return &EncounterLocation{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Location: location,
-		Status: status,
-		PhysicalType: physicalType,
-		Period: period,
-	}
+func NewEncounterLocation() *EncounterLocation {
+	return &EncounterLocation{}
 }
+
 // FromJSON populates EncounterLocation from JSON data
 func (m *EncounterLocation) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -896,44 +438,31 @@ func (m *EncounterLocation) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of EncounterLocation
-func (m *EncounterLocation) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	location *Reference,
-	status *EncounterLocationStatus,
-	physicalType *CodeableConcept,
-	period *Period,
-) *EncounterLocation {
+// Clone creates a deep copy of EncounterLocation
+func (m *EncounterLocation) Clone() *EncounterLocation {
+	if m == nil { return nil }
 	return &EncounterLocation{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Location: func() Reference {
-			if location != nil { return *location }
-			return m.Location
-		}(),
-		Status: func() EncounterLocationStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		PhysicalType: func() CodeableConcept {
-			if physicalType != nil { return *physicalType }
-			return m.PhysicalType
-		}(),
-		Period: func() Period {
-			if period != nil { return *period }
-			return m.Period
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Location: m.Location.Clone(),
+		Status: m.Status.Clone(),
+		PhysicalType: m.PhysicalType.Clone(),
+		Period: m.Period.Clone(),
 	}
 }
+
+// Equals checks for equality with another EncounterLocation instance
+func (m *EncounterLocation) Equals(other *EncounterLocation) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Location.Equals(other.Location) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.PhysicalType.Equals(other.PhysicalType) { return false }
+	if !m.Period.Equals(other.Period) { return false }
+	return true
+}
+

@@ -3,62 +3,27 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // FhirMeta
 // The metadata about a resource. This is content in the resource that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
 type FhirMeta struct {
 	DataType
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// versionId
-	// The version specific identifier, as it appears in the version portion of the URL. This value changes when the resource is created, updated, or deleted.
-	VersionId FhirId `json:"versionId,omitempty"`
-	// lastUpdated
-	// When the resource last changed - e.g. when the version changed.
-	LastUpdated FhirInstant `json:"lastUpdated,omitempty"`
-	// source
-	// A uri that identifies the source system of the resource. This provides a minimal amount of [Provenance](provenance.html#) information that can be used to track or differentiate the source of information in the resource. The source may identify another FHIR server, document, message, database, etc.
-	Source FhirUri `json:"source,omitempty"`
-	// profile
-	// A list of profiles (references to [StructureDefinition](structuredefinition.html#) resources) that this resource claims to conform to. The URL is a reference to [StructureDefinition.url](structuredefinition-definitions.html#StructureDefinition.url).
-	Profile []FhirCanonical `json:"profile,omitempty"`
-	// security
-	// Security labels applied to this resource. These tags connect specific resources to the overall security policy and infrastructure.
-	Security []Coding `json:"security,omitempty"`
-	// tag
-	// Tags applied to this resource. Tags are intended to be used to identify and relate resources to process and workflow, and applications are not required to consider the tags when interpreting the meaning of a resource.
-	Tag []Coding `json:"tag,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	VersionId *FhirId `json:"versionid,omitempty"`
+	LastUpdated *FhirInstant `json:"lastupdated,omitempty"`
+	Source *FhirUri `json:"source,omitempty"`
+	Profile []*FhirCanonical `json:"profile,omitempty"`
+	Security []*Coding `json:"security,omitempty"`
+	Tag []*Coding `json:"tag,omitempty"`
 }
 
 // NewFhirMeta creates a new FhirMeta instance
-func NewFhirMeta(
-	id FhirString,
-	extension_ []FhirExtension,
-	versionId FhirId,
-	lastUpdated FhirInstant,
-	source FhirUri,
-	profile []FhirCanonical,
-	security []Coding,
-	tag []Coding,
-) *FhirMeta {
-	return &FhirMeta{
-		Id: id,
-		Extension_: extension_,
-		VersionId: versionId,
-		LastUpdated: lastUpdated,
-		Source: source,
-		Profile: profile,
-		Security: security,
-		Tag: tag,
-	}
+func NewFhirMeta() *FhirMeta {
+	return &FhirMeta{}
 }
+
 // FromJSON populates FhirMeta from JSON data
 func (m *FhirMeta) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -69,49 +34,33 @@ func (m *FhirMeta) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of FhirMeta
-func (m *FhirMeta) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	versionId *FhirId,
-	lastUpdated *FhirInstant,
-	source *FhirUri,
-	profile *[]FhirCanonical,
-	security *[]Coding,
-	tag *[]Coding,
-) *FhirMeta {
+// Clone creates a deep copy of FhirMeta
+func (m *FhirMeta) Clone() *FhirMeta {
+	if m == nil { return nil }
 	return &FhirMeta{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		VersionId: func() FhirId {
-			if versionId != nil { return *versionId }
-			return m.VersionId
-		}(),
-		LastUpdated: func() FhirInstant {
-			if lastUpdated != nil { return *lastUpdated }
-			return m.LastUpdated
-		}(),
-		Source: func() FhirUri {
-			if source != nil { return *source }
-			return m.Source
-		}(),
-		Profile: func() []FhirCanonical {
-			if profile != nil { return *profile }
-			return m.Profile
-		}(),
-		Security: func() []Coding {
-			if security != nil { return *security }
-			return m.Security
-		}(),
-		Tag: func() []Coding {
-			if tag != nil { return *tag }
-			return m.Tag
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		VersionId: m.VersionId.Clone(),
+		LastUpdated: m.LastUpdated.Clone(),
+		Source: m.Source.Clone(),
+		Profile: cloneSlices(m.Profile),
+		Security: cloneSlices(m.Security),
+		Tag: cloneSlices(m.Tag),
 	}
 }
+
+// Equals checks for equality with another FhirMeta instance
+func (m *FhirMeta) Equals(other *FhirMeta) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !m.VersionId.Equals(other.VersionId) { return false }
+	if !m.LastUpdated.Equals(other.LastUpdated) { return false }
+	if !m.Source.Equals(other.Source) { return false }
+	if !compareSlices(m.Profile, other.Profile) { return false }
+	if !compareSlices(m.Security, other.Security) { return false }
+	if !compareSlices(m.Tag, other.Tag) { return false }
+	return true
+}
+

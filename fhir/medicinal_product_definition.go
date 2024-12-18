@@ -3,204 +3,55 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // MedicinalProductDefinition
 // A medicinal product, being a substance or combination of substances that is intended to treat, prevent or diagnose a disease, or to restore, correct or modify physiological functions by exerting a pharmacological, immunological or metabolic action. This resource is intended to define and detail such products and their properties, for uses other than direct patient care (e.g. regulatory use, or drug catalogs).
 type MedicinalProductDefinition struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// Business identifier for this product. Could be an MPID. When in development or being regulated, products are typically referenced by official identifiers, assigned by a manufacturer or regulator, and unique to a product (which, when compared to a product instance being prescribed, is actually a product type). See also MedicinalProductDefinition.code.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// type
-	// Regulatory type, e.g. Investigational or Authorized.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// domain
-	// If this medicine applies to human or veterinary uses.
-	Domain CodeableConcept `json:"domain,omitempty"`
-	// version
-	// A business identifier relating to a specific version of the product, this is commonly used to support revisions to an existing product.
-	Version FhirString `json:"version,omitempty"`
-	// status
-	// The status within the lifecycle of this product record. A high-level status, this is not intended to duplicate details carried elsewhere such as legal status, or authorization status.
-	Status CodeableConcept `json:"status,omitempty"`
-	// statusDate
-	// The date at which the given status became applicable.
-	StatusDate FhirDateTime `json:"statusDate,omitempty"`
-	// description
-	// General description of this product.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// combinedPharmaceuticalDoseForm
-	// The dose form for a single part product, or combined form of a multiple part product. This is one concept that describes all the components. It does not represent the form with components physically mixed, if that might be necessary, for which see (AdministrableProductDefinition.administrableDoseForm).
-	CombinedPharmaceuticalDoseForm CodeableConcept `json:"combinedPharmaceuticalDoseForm,omitempty"`
-	// route
-	// The path by which the product is taken into or makes contact with the body. In some regions this is referred to as the licenced or approved route. See also AdministrableProductDefinition resource. MedicinalProductDefinition.route is the same concept as AdministrableProductDefinition.routeOfAdministration.code, and they cannot be used together.
-	Route []CodeableConcept `json:"route,omitempty"`
-	// indication
-	// Description of indication(s) for this product, used when structured indications are not required. In cases where structured indications are required, they are captured using the ClinicalUseDefinition resource. An indication is a medical situation for which using the product is appropriate.
-	Indication FhirMarkdown `json:"indication,omitempty"`
-	// legalStatusOfSupply
-	// The legal status of supply of the medicinal product as classified by the regulator.
-	LegalStatusOfSupply CodeableConcept `json:"legalStatusOfSupply,omitempty"`
-	// additionalMonitoringIndicator
-	// Whether the Medicinal Product is subject to additional monitoring for regulatory reasons, such as heightened reporting requirements.
-	AdditionalMonitoringIndicator CodeableConcept `json:"additionalMonitoringIndicator,omitempty"`
-	// specialMeasures
-	// Whether the Medicinal Product is subject to special measures for regulatory reasons, such as a requirement to conduct post-authorisation studies.
-	SpecialMeasures []CodeableConcept `json:"specialMeasures,omitempty"`
-	// pediatricUseIndicator
-	// If authorised for use in children, or infants, neonates etc.
-	PediatricUseIndicator CodeableConcept `json:"pediatricUseIndicator,omitempty"`
-	// classification
-	// Allows the product to be classified by various systems, commonly WHO ATC.
-	Classification []CodeableConcept `json:"classification,omitempty"`
-	// marketingStatus
-	// Marketing status of the medicinal product, in contrast to marketing authorization. This refers to the product being actually 'on the market' as opposed to being allowed to be on the market (which is an authorization).
-	MarketingStatus []MarketingStatus `json:"marketingStatus,omitempty"`
-	// packagedMedicinalProduct
-	// Package type for the product. See also the PackagedProductDefinition resource.
-	PackagedMedicinalProduct []CodeableConcept `json:"packagedMedicinalProduct,omitempty"`
-	// ingredient
-	// The ingredients of this medicinal product - when not detailed in other resources. This is only needed if the ingredients are not specified by incoming references from the Ingredient resource, or indirectly via incoming AdministrableProductDefinition, PackagedProductDefinition or ManufacturedItemDefinition references. In cases where those levels of detail are not used, the ingredients may be specified directly here as codes.
-	Ingredient []CodeableConcept `json:"ingredient,omitempty"`
-	// impurity
-	// Any component of the drug product which is not the chemical entity defined as the drug substance, or an excipient in the drug product. This includes process-related impurities and contaminants, product-related impurities including degradation products.
-	Impurity []CodeableReference `json:"impurity,omitempty"`
-	// attachedDocument
-	// Additional information or supporting documentation about the medicinal product.
-	AttachedDocument []Reference `json:"attachedDocument,omitempty"`
-	// masterFile
-	// A master file for the medicinal product (e.g. Pharmacovigilance System Master File). Drug master files (DMFs) are documents submitted to regulatory agencies to provide confidential detailed information about facilities, processes or articles used in the manufacturing, processing, packaging and storing of drug products.
-	MasterFile []Reference `json:"masterFile,omitempty"`
-	// contact
-	// A product specific contact, person (in a role), or an organization.
-	Contact []MedicinalProductDefinitionContact `json:"contact,omitempty"`
-	// clinicalTrial
-	// Clinical trials or studies that this product is involved in.
-	ClinicalTrial []Reference `json:"clinicalTrial,omitempty"`
-	// code
-	// A code that this product is known by, usually within some formal terminology, perhaps assigned by a third party (i.e. not the manufacturer or regulator). Products (types of medications) tend to be known by identifiers during development and within regulatory process. However when they are prescribed they tend to be identified by codes. The same product may be have multiple codes, applied to it by multiple organizations.
-	Code []Coding `json:"code,omitempty"`
-	// name
-	// The product's name, including full name and possibly coded parts.
-	Name []MedicinalProductDefinitionName `json:"name,omitempty"`
-	// crossReference
-	// Reference to another product, e.g. for linking authorised to investigational product, or a virtual product.
-	CrossReference []MedicinalProductDefinitionCrossReference `json:"crossReference,omitempty"`
-	// operation
-	// A manufacturing or administrative process or step associated with (or performed on) the medicinal product.
-	Operation []MedicinalProductDefinitionOperation `json:"operation,omitempty"`
-	// characteristic
-	// Allows the key product features to be recorded, such as "sugar free", "modified release", "parallel import".
-	Characteristic []MedicinalProductDefinitionCharacteristic `json:"characteristic,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Domain *CodeableConcept `json:"domain,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
+	Status *CodeableConcept `json:"status,omitempty"`
+	StatusDate *FhirDateTime `json:"statusdate,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	CombinedPharmaceuticalDoseForm *CodeableConcept `json:"combinedpharmaceuticaldoseform,omitempty"`
+	Route []*CodeableConcept `json:"route,omitempty"`
+	Indication *FhirMarkdown `json:"indication,omitempty"`
+	LegalStatusOfSupply *CodeableConcept `json:"legalstatusofsupply,omitempty"`
+	AdditionalMonitoringIndicator *CodeableConcept `json:"additionalmonitoringindicator,omitempty"`
+	SpecialMeasures []*CodeableConcept `json:"specialmeasures,omitempty"`
+	PediatricUseIndicator *CodeableConcept `json:"pediatricuseindicator,omitempty"`
+	Classification []*CodeableConcept `json:"classification,omitempty"`
+	MarketingStatus []*MarketingStatus `json:"marketingstatus,omitempty"`
+	PackagedMedicinalProduct []*CodeableConcept `json:"packagedmedicinalproduct,omitempty"`
+	Ingredient []*CodeableConcept `json:"ingredient,omitempty"`
+	Impurity []*CodeableReference `json:"impurity,omitempty"`
+	AttachedDocument []*Reference `json:"attacheddocument,omitempty"`
+	MasterFile []*Reference `json:"masterfile,omitempty"`
+	Contact []*MedicinalProductDefinitionContact `json:"contact,omitempty"`
+	ClinicalTrial []*Reference `json:"clinicaltrial,omitempty"`
+	Code []*Coding `json:"code,omitempty"`
+	Name []*MedicinalProductDefinitionName `json:"name,omitempty"`
+	CrossReference []*MedicinalProductDefinitionCrossReference `json:"crossreference,omitempty"`
+	Operation []*MedicinalProductDefinitionOperation `json:"operation,omitempty"`
+	Characteristic []*MedicinalProductDefinitionCharacteristic `json:"characteristic,omitempty"`
 }
 
 // NewMedicinalProductDefinition creates a new MedicinalProductDefinition instance
-func NewMedicinalProductDefinition(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	type_ CodeableConcept,
-	domain CodeableConcept,
-	version FhirString,
-	status CodeableConcept,
-	statusDate FhirDateTime,
-	description FhirMarkdown,
-	combinedPharmaceuticalDoseForm CodeableConcept,
-	route []CodeableConcept,
-	indication FhirMarkdown,
-	legalStatusOfSupply CodeableConcept,
-	additionalMonitoringIndicator CodeableConcept,
-	specialMeasures []CodeableConcept,
-	pediatricUseIndicator CodeableConcept,
-	classification []CodeableConcept,
-	marketingStatus []MarketingStatus,
-	packagedMedicinalProduct []CodeableConcept,
-	ingredient []CodeableConcept,
-	impurity []CodeableReference,
-	attachedDocument []Reference,
-	masterFile []Reference,
-	contact []MedicinalProductDefinitionContact,
-	clinicalTrial []Reference,
-	code []Coding,
-	name []MedicinalProductDefinitionName,
-	crossReference []MedicinalProductDefinitionCrossReference,
-	operation []MedicinalProductDefinitionOperation,
-	characteristic []MedicinalProductDefinitionCharacteristic,
-) *MedicinalProductDefinition {
-	return &MedicinalProductDefinition{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Type_: type_,
-		Domain: domain,
-		Version: version,
-		Status: status,
-		StatusDate: statusDate,
-		Description: description,
-		CombinedPharmaceuticalDoseForm: combinedPharmaceuticalDoseForm,
-		Route: route,
-		Indication: indication,
-		LegalStatusOfSupply: legalStatusOfSupply,
-		AdditionalMonitoringIndicator: additionalMonitoringIndicator,
-		SpecialMeasures: specialMeasures,
-		PediatricUseIndicator: pediatricUseIndicator,
-		Classification: classification,
-		MarketingStatus: marketingStatus,
-		PackagedMedicinalProduct: packagedMedicinalProduct,
-		Ingredient: ingredient,
-		Impurity: impurity,
-		AttachedDocument: attachedDocument,
-		MasterFile: masterFile,
-		Contact: contact,
-		ClinicalTrial: clinicalTrial,
-		Code: code,
-		Name: name,
-		CrossReference: crossReference,
-		Operation: operation,
-		Characteristic: characteristic,
-	}
+func NewMedicinalProductDefinition() *MedicinalProductDefinition {
+	return &MedicinalProductDefinition{}
 }
+
 // FromJSON populates MedicinalProductDefinition from JSON data
 func (m *MedicinalProductDefinition) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -211,231 +62,108 @@ func (m *MedicinalProductDefinition) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicinalProductDefinition
-func (m *MedicinalProductDefinition) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	type_ *CodeableConcept,
-	domain *CodeableConcept,
-	version *FhirString,
-	status *CodeableConcept,
-	statusDate *FhirDateTime,
-	description *FhirMarkdown,
-	combinedPharmaceuticalDoseForm *CodeableConcept,
-	route *[]CodeableConcept,
-	indication *FhirMarkdown,
-	legalStatusOfSupply *CodeableConcept,
-	additionalMonitoringIndicator *CodeableConcept,
-	specialMeasures *[]CodeableConcept,
-	pediatricUseIndicator *CodeableConcept,
-	classification *[]CodeableConcept,
-	marketingStatus *[]MarketingStatus,
-	packagedMedicinalProduct *[]CodeableConcept,
-	ingredient *[]CodeableConcept,
-	impurity *[]CodeableReference,
-	attachedDocument *[]Reference,
-	masterFile *[]Reference,
-	contact *[]MedicinalProductDefinitionContact,
-	clinicalTrial *[]Reference,
-	code *[]Coding,
-	name *[]MedicinalProductDefinitionName,
-	crossReference *[]MedicinalProductDefinitionCrossReference,
-	operation *[]MedicinalProductDefinitionOperation,
-	characteristic *[]MedicinalProductDefinitionCharacteristic,
-) *MedicinalProductDefinition {
+// Clone creates a deep copy of MedicinalProductDefinition
+func (m *MedicinalProductDefinition) Clone() *MedicinalProductDefinition {
+	if m == nil { return nil }
 	return &MedicinalProductDefinition{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Domain: func() CodeableConcept {
-			if domain != nil { return *domain }
-			return m.Domain
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Status: func() CodeableConcept {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		StatusDate: func() FhirDateTime {
-			if statusDate != nil { return *statusDate }
-			return m.StatusDate
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		CombinedPharmaceuticalDoseForm: func() CodeableConcept {
-			if combinedPharmaceuticalDoseForm != nil { return *combinedPharmaceuticalDoseForm }
-			return m.CombinedPharmaceuticalDoseForm
-		}(),
-		Route: func() []CodeableConcept {
-			if route != nil { return *route }
-			return m.Route
-		}(),
-		Indication: func() FhirMarkdown {
-			if indication != nil { return *indication }
-			return m.Indication
-		}(),
-		LegalStatusOfSupply: func() CodeableConcept {
-			if legalStatusOfSupply != nil { return *legalStatusOfSupply }
-			return m.LegalStatusOfSupply
-		}(),
-		AdditionalMonitoringIndicator: func() CodeableConcept {
-			if additionalMonitoringIndicator != nil { return *additionalMonitoringIndicator }
-			return m.AdditionalMonitoringIndicator
-		}(),
-		SpecialMeasures: func() []CodeableConcept {
-			if specialMeasures != nil { return *specialMeasures }
-			return m.SpecialMeasures
-		}(),
-		PediatricUseIndicator: func() CodeableConcept {
-			if pediatricUseIndicator != nil { return *pediatricUseIndicator }
-			return m.PediatricUseIndicator
-		}(),
-		Classification: func() []CodeableConcept {
-			if classification != nil { return *classification }
-			return m.Classification
-		}(),
-		MarketingStatus: func() []MarketingStatus {
-			if marketingStatus != nil { return *marketingStatus }
-			return m.MarketingStatus
-		}(),
-		PackagedMedicinalProduct: func() []CodeableConcept {
-			if packagedMedicinalProduct != nil { return *packagedMedicinalProduct }
-			return m.PackagedMedicinalProduct
-		}(),
-		Ingredient: func() []CodeableConcept {
-			if ingredient != nil { return *ingredient }
-			return m.Ingredient
-		}(),
-		Impurity: func() []CodeableReference {
-			if impurity != nil { return *impurity }
-			return m.Impurity
-		}(),
-		AttachedDocument: func() []Reference {
-			if attachedDocument != nil { return *attachedDocument }
-			return m.AttachedDocument
-		}(),
-		MasterFile: func() []Reference {
-			if masterFile != nil { return *masterFile }
-			return m.MasterFile
-		}(),
-		Contact: func() []MedicinalProductDefinitionContact {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
-		ClinicalTrial: func() []Reference {
-			if clinicalTrial != nil { return *clinicalTrial }
-			return m.ClinicalTrial
-		}(),
-		Code: func() []Coding {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Name: func() []MedicinalProductDefinitionName {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		CrossReference: func() []MedicinalProductDefinitionCrossReference {
-			if crossReference != nil { return *crossReference }
-			return m.CrossReference
-		}(),
-		Operation: func() []MedicinalProductDefinitionOperation {
-			if operation != nil { return *operation }
-			return m.Operation
-		}(),
-		Characteristic: func() []MedicinalProductDefinitionCharacteristic {
-			if characteristic != nil { return *characteristic }
-			return m.Characteristic
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		Type: m.Type.Clone(),
+		Domain: m.Domain.Clone(),
+		Version: m.Version.Clone(),
+		Status: m.Status.Clone(),
+		StatusDate: m.StatusDate.Clone(),
+		Description: m.Description.Clone(),
+		CombinedPharmaceuticalDoseForm: m.CombinedPharmaceuticalDoseForm.Clone(),
+		Route: cloneSlices(m.Route),
+		Indication: m.Indication.Clone(),
+		LegalStatusOfSupply: m.LegalStatusOfSupply.Clone(),
+		AdditionalMonitoringIndicator: m.AdditionalMonitoringIndicator.Clone(),
+		SpecialMeasures: cloneSlices(m.SpecialMeasures),
+		PediatricUseIndicator: m.PediatricUseIndicator.Clone(),
+		Classification: cloneSlices(m.Classification),
+		MarketingStatus: cloneSlices(m.MarketingStatus),
+		PackagedMedicinalProduct: cloneSlices(m.PackagedMedicinalProduct),
+		Ingredient: cloneSlices(m.Ingredient),
+		Impurity: cloneSlices(m.Impurity),
+		AttachedDocument: cloneSlices(m.AttachedDocument),
+		MasterFile: cloneSlices(m.MasterFile),
+		Contact: cloneSlices(m.Contact),
+		ClinicalTrial: cloneSlices(m.ClinicalTrial),
+		Code: cloneSlices(m.Code),
+		Name: cloneSlices(m.Name),
+		CrossReference: cloneSlices(m.CrossReference),
+		Operation: cloneSlices(m.Operation),
+		Characteristic: cloneSlices(m.Characteristic),
 	}
 }
+
+// Equals checks for equality with another MedicinalProductDefinition instance
+func (m *MedicinalProductDefinition) Equals(other *MedicinalProductDefinition) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Domain.Equals(other.Domain) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.StatusDate.Equals(other.StatusDate) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.CombinedPharmaceuticalDoseForm.Equals(other.CombinedPharmaceuticalDoseForm) { return false }
+	if !compareSlices(m.Route, other.Route) { return false }
+	if !m.Indication.Equals(other.Indication) { return false }
+	if !m.LegalStatusOfSupply.Equals(other.LegalStatusOfSupply) { return false }
+	if !m.AdditionalMonitoringIndicator.Equals(other.AdditionalMonitoringIndicator) { return false }
+	if !compareSlices(m.SpecialMeasures, other.SpecialMeasures) { return false }
+	if !m.PediatricUseIndicator.Equals(other.PediatricUseIndicator) { return false }
+	if !compareSlices(m.Classification, other.Classification) { return false }
+	if !compareSlices(m.MarketingStatus, other.MarketingStatus) { return false }
+	if !compareSlices(m.PackagedMedicinalProduct, other.PackagedMedicinalProduct) { return false }
+	if !compareSlices(m.Ingredient, other.Ingredient) { return false }
+	if !compareSlices(m.Impurity, other.Impurity) { return false }
+	if !compareSlices(m.AttachedDocument, other.AttachedDocument) { return false }
+	if !compareSlices(m.MasterFile, other.MasterFile) { return false }
+	if !compareSlices(m.Contact, other.Contact) { return false }
+	if !compareSlices(m.ClinicalTrial, other.ClinicalTrial) { return false }
+	if !compareSlices(m.Code, other.Code) { return false }
+	if !compareSlices(m.Name, other.Name) { return false }
+	if !compareSlices(m.CrossReference, other.CrossReference) { return false }
+	if !compareSlices(m.Operation, other.Operation) { return false }
+	if !compareSlices(m.Characteristic, other.Characteristic) { return false }
+	return true
+}
+
 // MedicinalProductDefinitionContact
 // A product specific contact, person (in a role), or an organization.
 type MedicinalProductDefinitionContact struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// Allows the contact to be classified, for example QPPV, Pharmacovigilance Enquiry Information.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// contact
-	// A product specific contact, person (in a role), or an organization.
-	Contact Reference `json:"contact,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Contact *Reference `json:"contact,omitempty"`
 }
 
 // NewMedicinalProductDefinitionContact creates a new MedicinalProductDefinitionContact instance
-func NewMedicinalProductDefinitionContact(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	contact Reference,
-) *MedicinalProductDefinitionContact {
-	return &MedicinalProductDefinitionContact{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Contact: contact,
-	}
+func NewMedicinalProductDefinitionContact() *MedicinalProductDefinitionContact {
+	return &MedicinalProductDefinitionContact{}
 }
+
 // FromJSON populates MedicinalProductDefinitionContact from JSON data
 func (m *MedicinalProductDefinitionContact) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -446,86 +174,48 @@ func (m *MedicinalProductDefinitionContact) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicinalProductDefinitionContact
-func (m *MedicinalProductDefinitionContact) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	contact *Reference,
-) *MedicinalProductDefinitionContact {
+// Clone creates a deep copy of MedicinalProductDefinitionContact
+func (m *MedicinalProductDefinitionContact) Clone() *MedicinalProductDefinitionContact {
+	if m == nil { return nil }
 	return &MedicinalProductDefinitionContact{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Contact: func() Reference {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Contact: m.Contact.Clone(),
 	}
 }
+
+// Equals checks for equality with another MedicinalProductDefinitionContact instance
+func (m *MedicinalProductDefinitionContact) Equals(other *MedicinalProductDefinitionContact) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Contact.Equals(other.Contact) { return false }
+	return true
+}
+
 // MedicinalProductDefinitionName
 // The product's name, including full name and possibly coded parts.
 type MedicinalProductDefinitionName struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// productName
-	// The full product name.
-	ProductName FhirString `json:"productName,omitempty"`
-	// type
-	// Type of product name, such as rINN, BAN, Proprietary, Non-Proprietary.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// namePart
-	// Coding words or phrases of the name.
-	NamePart []MedicinalProductDefinitionNamePart `json:"namePart,omitempty"`
-	// countryLanguage
-	// Country and jurisdiction where the name applies, and associated language.
-	CountryLanguage []MedicinalProductDefinitionCountryLanguage `json:"countryLanguage,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	ProductName *FhirString `json:"productname,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	NamePart []*MedicinalProductDefinitionNamePart `json:"namepart,omitempty"`
+	CountryLanguage []*MedicinalProductDefinitionCountryLanguage `json:"countrylanguage,omitempty"`
 }
 
 // NewMedicinalProductDefinitionName creates a new MedicinalProductDefinitionName instance
-func NewMedicinalProductDefinitionName(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	productName FhirString,
-	type_ CodeableConcept,
-	namePart []MedicinalProductDefinitionNamePart,
-	countryLanguage []MedicinalProductDefinitionCountryLanguage,
-) *MedicinalProductDefinitionName {
-	return &MedicinalProductDefinitionName{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		ProductName: productName,
-		Type_: type_,
-		NamePart: namePart,
-		CountryLanguage: countryLanguage,
-	}
+func NewMedicinalProductDefinitionName() *MedicinalProductDefinitionName {
+	return &MedicinalProductDefinitionName{}
 }
+
 // FromJSON populates MedicinalProductDefinitionName from JSON data
 func (m *MedicinalProductDefinitionName) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -536,86 +226,50 @@ func (m *MedicinalProductDefinitionName) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicinalProductDefinitionName
-func (m *MedicinalProductDefinitionName) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	productName *FhirString,
-	type_ *CodeableConcept,
-	namePart *[]MedicinalProductDefinitionNamePart,
-	countryLanguage *[]MedicinalProductDefinitionCountryLanguage,
-) *MedicinalProductDefinitionName {
+// Clone creates a deep copy of MedicinalProductDefinitionName
+func (m *MedicinalProductDefinitionName) Clone() *MedicinalProductDefinitionName {
+	if m == nil { return nil }
 	return &MedicinalProductDefinitionName{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		ProductName: func() FhirString {
-			if productName != nil { return *productName }
-			return m.ProductName
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		NamePart: func() []MedicinalProductDefinitionNamePart {
-			if namePart != nil { return *namePart }
-			return m.NamePart
-		}(),
-		CountryLanguage: func() []MedicinalProductDefinitionCountryLanguage {
-			if countryLanguage != nil { return *countryLanguage }
-			return m.CountryLanguage
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		ProductName: m.ProductName.Clone(),
+		Type: m.Type.Clone(),
+		NamePart: cloneSlices(m.NamePart),
+		CountryLanguage: cloneSlices(m.CountryLanguage),
 	}
 }
+
+// Equals checks for equality with another MedicinalProductDefinitionName instance
+func (m *MedicinalProductDefinitionName) Equals(other *MedicinalProductDefinitionName) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.ProductName.Equals(other.ProductName) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !compareSlices(m.NamePart, other.NamePart) { return false }
+	if !compareSlices(m.CountryLanguage, other.CountryLanguage) { return false }
+	return true
+}
+
 // MedicinalProductDefinitionNamePart
 // Coding words or phrases of the name.
 type MedicinalProductDefinitionNamePart struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// part
-	// A fragment of a product name.
-	Part_ FhirString `json:"part,omitempty"`
-	// type
-	// Identifying type for this part of the name (e.g. strength part).
-	Type_ CodeableConcept `json:"type,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Part_ *FhirString `json:"part,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
 }
 
 // NewMedicinalProductDefinitionNamePart creates a new MedicinalProductDefinitionNamePart instance
-func NewMedicinalProductDefinitionNamePart(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	part_ FhirString,
-	type_ CodeableConcept,
-) *MedicinalProductDefinitionNamePart {
-	return &MedicinalProductDefinitionNamePart{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Part_: part_,
-		Type_: type_,
-	}
+func NewMedicinalProductDefinitionNamePart() *MedicinalProductDefinitionNamePart {
+	return &MedicinalProductDefinitionNamePart{}
 }
+
 // FromJSON populates MedicinalProductDefinitionNamePart from JSON data
 func (m *MedicinalProductDefinitionNamePart) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -626,81 +280,47 @@ func (m *MedicinalProductDefinitionNamePart) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicinalProductDefinitionNamePart
-func (m *MedicinalProductDefinitionNamePart) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	part_ *FhirString,
-	type_ *CodeableConcept,
-) *MedicinalProductDefinitionNamePart {
+// Clone creates a deep copy of MedicinalProductDefinitionNamePart
+func (m *MedicinalProductDefinitionNamePart) Clone() *MedicinalProductDefinitionNamePart {
+	if m == nil { return nil }
 	return &MedicinalProductDefinitionNamePart{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Part_: func() FhirString {
-			if part_ != nil { return *part_ }
-			return m.Part_
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Part_: m.Part_.Clone(),
+		Type: m.Type.Clone(),
 	}
 }
+
+// Equals checks for equality with another MedicinalProductDefinitionNamePart instance
+func (m *MedicinalProductDefinitionNamePart) Equals(other *MedicinalProductDefinitionNamePart) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Part_.Equals(other.Part_) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	return true
+}
+
 // MedicinalProductDefinitionCountryLanguage
 // Country and jurisdiction where the name applies, and associated language.
 type MedicinalProductDefinitionCountryLanguage struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// country
-	// Country code for where this name applies.
-	Country CodeableConcept `json:"country,omitempty"`
-	// jurisdiction
-	// Jurisdiction code for where this name applies. A jurisdiction may be a sub- or supra-national entity (e.g. a state or a geographic region).
-	Jurisdiction CodeableConcept `json:"jurisdiction,omitempty"`
-	// language
-	// Language code for this name.
-	Language CodeableConcept `json:"language,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Country *CodeableConcept `json:"country,omitempty"`
+	Jurisdiction *CodeableConcept `json:"jurisdiction,omitempty"`
+	Language *CodeableConcept `json:"language,omitempty"`
 }
 
 // NewMedicinalProductDefinitionCountryLanguage creates a new MedicinalProductDefinitionCountryLanguage instance
-func NewMedicinalProductDefinitionCountryLanguage(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	country CodeableConcept,
-	jurisdiction CodeableConcept,
-	language CodeableConcept,
-) *MedicinalProductDefinitionCountryLanguage {
-	return &MedicinalProductDefinitionCountryLanguage{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Country: country,
-		Jurisdiction: jurisdiction,
-		Language: language,
-	}
+func NewMedicinalProductDefinitionCountryLanguage() *MedicinalProductDefinitionCountryLanguage {
+	return &MedicinalProductDefinitionCountryLanguage{}
 }
+
 // FromJSON populates MedicinalProductDefinitionCountryLanguage from JSON data
 func (m *MedicinalProductDefinitionCountryLanguage) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -711,81 +331,48 @@ func (m *MedicinalProductDefinitionCountryLanguage) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicinalProductDefinitionCountryLanguage
-func (m *MedicinalProductDefinitionCountryLanguage) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	country *CodeableConcept,
-	jurisdiction *CodeableConcept,
-	language *CodeableConcept,
-) *MedicinalProductDefinitionCountryLanguage {
+// Clone creates a deep copy of MedicinalProductDefinitionCountryLanguage
+func (m *MedicinalProductDefinitionCountryLanguage) Clone() *MedicinalProductDefinitionCountryLanguage {
+	if m == nil { return nil }
 	return &MedicinalProductDefinitionCountryLanguage{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Country: func() CodeableConcept {
-			if country != nil { return *country }
-			return m.Country
-		}(),
-		Jurisdiction: func() CodeableConcept {
-			if jurisdiction != nil { return *jurisdiction }
-			return m.Jurisdiction
-		}(),
-		Language: func() CodeableConcept {
-			if language != nil { return *language }
-			return m.Language
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Country: m.Country.Clone(),
+		Jurisdiction: m.Jurisdiction.Clone(),
+		Language: m.Language.Clone(),
 	}
 }
+
+// Equals checks for equality with another MedicinalProductDefinitionCountryLanguage instance
+func (m *MedicinalProductDefinitionCountryLanguage) Equals(other *MedicinalProductDefinitionCountryLanguage) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Country.Equals(other.Country) { return false }
+	if !m.Jurisdiction.Equals(other.Jurisdiction) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	return true
+}
+
 // MedicinalProductDefinitionCrossReference
 // Reference to another product, e.g. for linking authorised to investigational product, or a virtual product.
 type MedicinalProductDefinitionCrossReference struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// product
-	// Reference to another product, e.g. for linking authorised to investigational product.
-	Product CodeableReference `json:"product,omitempty"`
-	// type
-	// The type of relationship, for instance branded to generic, virtual to actual product, product to development product (investigational), parallel import version.
-	Type_ CodeableConcept `json:"type,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Product *CodeableReference `json:"product,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
 }
 
 // NewMedicinalProductDefinitionCrossReference creates a new MedicinalProductDefinitionCrossReference instance
-func NewMedicinalProductDefinitionCrossReference(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	product CodeableReference,
-	type_ CodeableConcept,
-) *MedicinalProductDefinitionCrossReference {
-	return &MedicinalProductDefinitionCrossReference{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Product: product,
-		Type_: type_,
-	}
+func NewMedicinalProductDefinitionCrossReference() *MedicinalProductDefinitionCrossReference {
+	return &MedicinalProductDefinitionCrossReference{}
 }
+
 // FromJSON populates MedicinalProductDefinitionCrossReference from JSON data
 func (m *MedicinalProductDefinitionCrossReference) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -796,86 +383,48 @@ func (m *MedicinalProductDefinitionCrossReference) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicinalProductDefinitionCrossReference
-func (m *MedicinalProductDefinitionCrossReference) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	product *CodeableReference,
-	type_ *CodeableConcept,
-) *MedicinalProductDefinitionCrossReference {
+// Clone creates a deep copy of MedicinalProductDefinitionCrossReference
+func (m *MedicinalProductDefinitionCrossReference) Clone() *MedicinalProductDefinitionCrossReference {
+	if m == nil { return nil }
 	return &MedicinalProductDefinitionCrossReference{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Product: func() CodeableReference {
-			if product != nil { return *product }
-			return m.Product
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Product: m.Product.Clone(),
+		Type: m.Type.Clone(),
 	}
 }
+
+// Equals checks for equality with another MedicinalProductDefinitionCrossReference instance
+func (m *MedicinalProductDefinitionCrossReference) Equals(other *MedicinalProductDefinitionCrossReference) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Product.Equals(other.Product) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	return true
+}
+
 // MedicinalProductDefinitionOperation
 // A manufacturing or administrative process or step associated with (or performed on) the medicinal product.
 type MedicinalProductDefinitionOperation struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// The type of manufacturing operation e.g. manufacturing itself, re-packaging. For the authorization of this, a RegulatedAuthorization would point to the same plan or activity referenced here.
-	Type_ CodeableReference `json:"type,omitempty"`
-	// effectiveDate
-	// Date range of applicability.
-	EffectiveDate Period `json:"effectiveDate,omitempty"`
-	// organization
-	// The organization or establishment responsible for (or associated with) the particular process or step, examples include the manufacturer, importer, agent.
-	Organization []Reference `json:"organization,omitempty"`
-	// confidentialityIndicator
-	// Specifies whether this particular business or manufacturing process is considered proprietary or confidential.
-	ConfidentialityIndicator CodeableConcept `json:"confidentialityIndicator,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableReference `json:"type,omitempty"`
+	EffectiveDate *Period `json:"effectivedate,omitempty"`
+	Organization []*Reference `json:"organization,omitempty"`
+	ConfidentialityIndicator *CodeableConcept `json:"confidentialityindicator,omitempty"`
 }
 
 // NewMedicinalProductDefinitionOperation creates a new MedicinalProductDefinitionOperation instance
-func NewMedicinalProductDefinitionOperation(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableReference,
-	effectiveDate Period,
-	organization []Reference,
-	confidentialityIndicator CodeableConcept,
-) *MedicinalProductDefinitionOperation {
-	return &MedicinalProductDefinitionOperation{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		EffectiveDate: effectiveDate,
-		Organization: organization,
-		ConfidentialityIndicator: confidentialityIndicator,
-	}
+func NewMedicinalProductDefinitionOperation() *MedicinalProductDefinitionOperation {
+	return &MedicinalProductDefinitionOperation{}
 }
+
 // FromJSON populates MedicinalProductDefinitionOperation from JSON data
 func (m *MedicinalProductDefinitionOperation) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -886,106 +435,54 @@ func (m *MedicinalProductDefinitionOperation) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicinalProductDefinitionOperation
-func (m *MedicinalProductDefinitionOperation) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableReference,
-	effectiveDate *Period,
-	organization *[]Reference,
-	confidentialityIndicator *CodeableConcept,
-) *MedicinalProductDefinitionOperation {
+// Clone creates a deep copy of MedicinalProductDefinitionOperation
+func (m *MedicinalProductDefinitionOperation) Clone() *MedicinalProductDefinitionOperation {
+	if m == nil { return nil }
 	return &MedicinalProductDefinitionOperation{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableReference {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		EffectiveDate: func() Period {
-			if effectiveDate != nil { return *effectiveDate }
-			return m.EffectiveDate
-		}(),
-		Organization: func() []Reference {
-			if organization != nil { return *organization }
-			return m.Organization
-		}(),
-		ConfidentialityIndicator: func() CodeableConcept {
-			if confidentialityIndicator != nil { return *confidentialityIndicator }
-			return m.ConfidentialityIndicator
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		EffectiveDate: m.EffectiveDate.Clone(),
+		Organization: cloneSlices(m.Organization),
+		ConfidentialityIndicator: m.ConfidentialityIndicator.Clone(),
 	}
 }
+
+// Equals checks for equality with another MedicinalProductDefinitionOperation instance
+func (m *MedicinalProductDefinitionOperation) Equals(other *MedicinalProductDefinitionOperation) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.EffectiveDate.Equals(other.EffectiveDate) { return false }
+	if !compareSlices(m.Organization, other.Organization) { return false }
+	if !m.ConfidentialityIndicator.Equals(other.ConfidentialityIndicator) { return false }
+	return true
+}
+
 // MedicinalProductDefinitionCharacteristic
 // Allows the key product features to be recorded, such as "sugar free", "modified release", "parallel import".
 type MedicinalProductDefinitionCharacteristic struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// A code expressing the type of characteristic.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// valueCodeableConcept
-	// A value for the characteristic.
-	ValueCodeableConcept CodeableConcept `json:"valueCodeableConcept,omitempty"`
-	// valueQuantity
-	// A value for the characteristic.
-	ValueQuantity Quantity `json:"valueQuantity,omitempty"`
-	// valueDate
-	// A value for the characteristic.
-	ValueDate FhirDate `json:"valueDate,omitempty"`
-	// valueBoolean
-	// A value for the characteristic.
-	ValueBoolean FhirBoolean `json:"valueBoolean,omitempty"`
-	// valueAttachment
-	// A value for the characteristic.
-	ValueAttachment Attachment `json:"valueAttachment,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+	ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+	ValueDate *FhirDate `json:"valuedate,omitempty"`
+	ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
+	ValueAttachment *Attachment `json:"valueattachment,omitempty"`
 }
 
 // NewMedicinalProductDefinitionCharacteristic creates a new MedicinalProductDefinitionCharacteristic instance
-func NewMedicinalProductDefinitionCharacteristic(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	valueCodeableConcept CodeableConcept,
-	valueQuantity Quantity,
-	valueDate FhirDate,
-	valueBoolean FhirBoolean,
-	valueAttachment Attachment,
-) *MedicinalProductDefinitionCharacteristic {
-	return &MedicinalProductDefinitionCharacteristic{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		ValueCodeableConcept: valueCodeableConcept,
-		ValueQuantity: valueQuantity,
-		ValueDate: valueDate,
-		ValueBoolean: valueBoolean,
-		ValueAttachment: valueAttachment,
-	}
+func NewMedicinalProductDefinitionCharacteristic() *MedicinalProductDefinitionCharacteristic {
+	return &MedicinalProductDefinitionCharacteristic{}
 }
+
 // FromJSON populates MedicinalProductDefinitionCharacteristic from JSON data
 func (m *MedicinalProductDefinitionCharacteristic) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -996,54 +493,35 @@ func (m *MedicinalProductDefinitionCharacteristic) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicinalProductDefinitionCharacteristic
-func (m *MedicinalProductDefinitionCharacteristic) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	valueCodeableConcept *CodeableConcept,
-	valueQuantity *Quantity,
-	valueDate *FhirDate,
-	valueBoolean *FhirBoolean,
-	valueAttachment *Attachment,
-) *MedicinalProductDefinitionCharacteristic {
+// Clone creates a deep copy of MedicinalProductDefinitionCharacteristic
+func (m *MedicinalProductDefinitionCharacteristic) Clone() *MedicinalProductDefinitionCharacteristic {
+	if m == nil { return nil }
 	return &MedicinalProductDefinitionCharacteristic{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		ValueCodeableConcept: func() CodeableConcept {
-			if valueCodeableConcept != nil { return *valueCodeableConcept }
-			return m.ValueCodeableConcept
-		}(),
-		ValueQuantity: func() Quantity {
-			if valueQuantity != nil { return *valueQuantity }
-			return m.ValueQuantity
-		}(),
-		ValueDate: func() FhirDate {
-			if valueDate != nil { return *valueDate }
-			return m.ValueDate
-		}(),
-		ValueBoolean: func() FhirBoolean {
-			if valueBoolean != nil { return *valueBoolean }
-			return m.ValueBoolean
-		}(),
-		ValueAttachment: func() Attachment {
-			if valueAttachment != nil { return *valueAttachment }
-			return m.ValueAttachment
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		ValueCodeableConcept: m.ValueCodeableConcept.Clone(),
+		ValueQuantity: m.ValueQuantity.Clone(),
+		ValueDate: m.ValueDate.Clone(),
+		ValueBoolean: m.ValueBoolean.Clone(),
+		ValueAttachment: m.ValueAttachment.Clone(),
 	}
 }
+
+// Equals checks for equality with another MedicinalProductDefinitionCharacteristic instance
+func (m *MedicinalProductDefinitionCharacteristic) Equals(other *MedicinalProductDefinitionCharacteristic) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.ValueCodeableConcept.Equals(other.ValueCodeableConcept) { return false }
+	if !m.ValueQuantity.Equals(other.ValueQuantity) { return false }
+	if !m.ValueDate.Equals(other.ValueDate) { return false }
+	if !m.ValueBoolean.Equals(other.ValueBoolean) { return false }
+	if !m.ValueAttachment.Equals(other.ValueAttachment) { return false }
+	return true
+}
+

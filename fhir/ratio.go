@@ -3,42 +3,23 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // Ratio
 // A relationship of two Quantity values - expressed as a numerator and a denominator.
 type Ratio struct {
 	DataType
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// numerator
-	// The value of the numerator.
-	Numerator Quantity `json:"numerator,omitempty"`
-	// denominator
-	// The value of the denominator.
-	Denominator Quantity `json:"denominator,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	Numerator *Quantity `json:"numerator,omitempty"`
+	Denominator *Quantity `json:"denominator,omitempty"`
 }
 
 // NewRatio creates a new Ratio instance
-func NewRatio(
-	id FhirString,
-	extension_ []FhirExtension,
-	numerator Quantity,
-	denominator Quantity,
-) *Ratio {
-	return &Ratio{
-		Id: id,
-		Extension_: extension_,
-		Numerator: numerator,
-		Denominator: denominator,
-	}
+func NewRatio() *Ratio {
+	return &Ratio{}
 }
+
 // FromJSON populates Ratio from JSON data
 func (m *Ratio) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -49,29 +30,25 @@ func (m *Ratio) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of Ratio
-func (m *Ratio) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	numerator *Quantity,
-	denominator *Quantity,
-) *Ratio {
+// Clone creates a deep copy of Ratio
+func (m *Ratio) Clone() *Ratio {
+	if m == nil { return nil }
 	return &Ratio{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		Numerator: func() Quantity {
-			if numerator != nil { return *numerator }
-			return m.Numerator
-		}(),
-		Denominator: func() Quantity {
-			if denominator != nil { return *denominator }
-			return m.Denominator
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		Numerator: m.Numerator.Clone(),
+		Denominator: m.Denominator.Clone(),
 	}
 }
+
+// Equals checks for equality with another Ratio instance
+func (m *Ratio) Equals(other *Ratio) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !m.Numerator.Equals(other.Numerator) { return false }
+	if !m.Denominator.Equals(other.Denominator) { return false }
+	return true
+}
+

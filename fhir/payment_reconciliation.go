@@ -3,139 +3,42 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // PaymentReconciliation
 // This resource provides the details including amount of a payment and allocates the payment items being paid.
 type PaymentReconciliation struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// A unique identifier assigned to this payment reconciliation.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// status
-	// The status of the resource instance.
-	Status FinancialResourceStatusCodes `json:"status,omitempty"`
-	// period
-	// The period of time for which payments have been gathered into this bulk payment for settlement.
-	Period Period `json:"period,omitempty"`
-	// created
-	// The date when the resource was created.
-	Created FhirDateTime `json:"created,omitempty"`
-	// paymentIssuer
-	// The party who generated the payment.
-	PaymentIssuer Reference `json:"paymentIssuer,omitempty"`
-	// request
-	// Original request resource reference.
-	Request Reference `json:"request,omitempty"`
-	// requestor
-	// The practitioner who is responsible for the services rendered to the patient.
-	Requestor Reference `json:"requestor,omitempty"`
-	// outcome
-	// The outcome of a request for a reconciliation.
-	Outcome RemittanceOutcome `json:"outcome,omitempty"`
-	// disposition
-	// A human readable description of the status of the request for the reconciliation.
-	Disposition FhirString `json:"disposition,omitempty"`
-	// paymentDate
-	// The date of payment as indicated on the financial instrument.
-	PaymentDate FhirDate `json:"paymentDate,omitempty"`
-	// paymentAmount
-	// Total payment amount as indicated on the financial instrument.
-	PaymentAmount Money `json:"paymentAmount,omitempty"`
-	// paymentIdentifier
-	// Issuer's unique identifier for the payment instrument.
-	PaymentIdentifier Identifier `json:"paymentIdentifier,omitempty"`
-	// detail
-	// Distribution of the payment amount for a previously acknowledged payable.
-	Detail []PaymentReconciliationDetail `json:"detail,omitempty"`
-	// formCode
-	// A code for the form to be used for printing the content.
-	FormCode CodeableConcept `json:"formCode,omitempty"`
-	// processNote
-	// A note that describes or explains the processing in a human readable form.
-	ProcessNote []PaymentReconciliationProcessNote `json:"processNote,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Status *FinancialResourceStatusCodes `json:"status,omitempty"`
+	Period *Period `json:"period,omitempty"`
+	Created *FhirDateTime `json:"created,omitempty"`
+	PaymentIssuer *Reference `json:"paymentissuer,omitempty"`
+	Request *Reference `json:"request,omitempty"`
+	Requestor *Reference `json:"requestor,omitempty"`
+	Outcome *RemittanceOutcome `json:"outcome,omitempty"`
+	Disposition *FhirString `json:"disposition,omitempty"`
+	PaymentDate *FhirDate `json:"paymentdate,omitempty"`
+	PaymentAmount *Money `json:"paymentamount,omitempty"`
+	PaymentIdentifier *Identifier `json:"paymentidentifier,omitempty"`
+	Detail []*PaymentReconciliationDetail `json:"detail,omitempty"`
+	FormCode *CodeableConcept `json:"formcode,omitempty"`
+	ProcessNote []*PaymentReconciliationProcessNote `json:"processnote,omitempty"`
 }
 
 // NewPaymentReconciliation creates a new PaymentReconciliation instance
-func NewPaymentReconciliation(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	status FinancialResourceStatusCodes,
-	period Period,
-	created FhirDateTime,
-	paymentIssuer Reference,
-	request Reference,
-	requestor Reference,
-	outcome RemittanceOutcome,
-	disposition FhirString,
-	paymentDate FhirDate,
-	paymentAmount Money,
-	paymentIdentifier Identifier,
-	detail []PaymentReconciliationDetail,
-	formCode CodeableConcept,
-	processNote []PaymentReconciliationProcessNote,
-) *PaymentReconciliation {
-	return &PaymentReconciliation{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Status: status,
-		Period: period,
-		Created: created,
-		PaymentIssuer: paymentIssuer,
-		Request: request,
-		Requestor: requestor,
-		Outcome: outcome,
-		Disposition: disposition,
-		PaymentDate: paymentDate,
-		PaymentAmount: paymentAmount,
-		PaymentIdentifier: paymentIdentifier,
-		Detail: detail,
-		FormCode: formCode,
-		ProcessNote: processNote,
-	}
+func NewPaymentReconciliation() *PaymentReconciliation {
+	return &PaymentReconciliation{}
 }
+
 // FromJSON populates PaymentReconciliation from JSON data
 func (m *PaymentReconciliation) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -146,206 +49,90 @@ func (m *PaymentReconciliation) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of PaymentReconciliation
-func (m *PaymentReconciliation) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	status *FinancialResourceStatusCodes,
-	period *Period,
-	created *FhirDateTime,
-	paymentIssuer *Reference,
-	request *Reference,
-	requestor *Reference,
-	outcome *RemittanceOutcome,
-	disposition *FhirString,
-	paymentDate *FhirDate,
-	paymentAmount *Money,
-	paymentIdentifier *Identifier,
-	detail *[]PaymentReconciliationDetail,
-	formCode *CodeableConcept,
-	processNote *[]PaymentReconciliationProcessNote,
-) *PaymentReconciliation {
+// Clone creates a deep copy of PaymentReconciliation
+func (m *PaymentReconciliation) Clone() *PaymentReconciliation {
+	if m == nil { return nil }
 	return &PaymentReconciliation{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Status: func() FinancialResourceStatusCodes {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Period: func() Period {
-			if period != nil { return *period }
-			return m.Period
-		}(),
-		Created: func() FhirDateTime {
-			if created != nil { return *created }
-			return m.Created
-		}(),
-		PaymentIssuer: func() Reference {
-			if paymentIssuer != nil { return *paymentIssuer }
-			return m.PaymentIssuer
-		}(),
-		Request: func() Reference {
-			if request != nil { return *request }
-			return m.Request
-		}(),
-		Requestor: func() Reference {
-			if requestor != nil { return *requestor }
-			return m.Requestor
-		}(),
-		Outcome: func() RemittanceOutcome {
-			if outcome != nil { return *outcome }
-			return m.Outcome
-		}(),
-		Disposition: func() FhirString {
-			if disposition != nil { return *disposition }
-			return m.Disposition
-		}(),
-		PaymentDate: func() FhirDate {
-			if paymentDate != nil { return *paymentDate }
-			return m.PaymentDate
-		}(),
-		PaymentAmount: func() Money {
-			if paymentAmount != nil { return *paymentAmount }
-			return m.PaymentAmount
-		}(),
-		PaymentIdentifier: func() Identifier {
-			if paymentIdentifier != nil { return *paymentIdentifier }
-			return m.PaymentIdentifier
-		}(),
-		Detail: func() []PaymentReconciliationDetail {
-			if detail != nil { return *detail }
-			return m.Detail
-		}(),
-		FormCode: func() CodeableConcept {
-			if formCode != nil { return *formCode }
-			return m.FormCode
-		}(),
-		ProcessNote: func() []PaymentReconciliationProcessNote {
-			if processNote != nil { return *processNote }
-			return m.ProcessNote
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		Status: m.Status.Clone(),
+		Period: m.Period.Clone(),
+		Created: m.Created.Clone(),
+		PaymentIssuer: m.PaymentIssuer.Clone(),
+		Request: m.Request.Clone(),
+		Requestor: m.Requestor.Clone(),
+		Outcome: m.Outcome.Clone(),
+		Disposition: m.Disposition.Clone(),
+		PaymentDate: m.PaymentDate.Clone(),
+		PaymentAmount: m.PaymentAmount.Clone(),
+		PaymentIdentifier: m.PaymentIdentifier.Clone(),
+		Detail: cloneSlices(m.Detail),
+		FormCode: m.FormCode.Clone(),
+		ProcessNote: cloneSlices(m.ProcessNote),
 	}
 }
+
+// Equals checks for equality with another PaymentReconciliation instance
+func (m *PaymentReconciliation) Equals(other *PaymentReconciliation) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Period.Equals(other.Period) { return false }
+	if !m.Created.Equals(other.Created) { return false }
+	if !m.PaymentIssuer.Equals(other.PaymentIssuer) { return false }
+	if !m.Request.Equals(other.Request) { return false }
+	if !m.Requestor.Equals(other.Requestor) { return false }
+	if !m.Outcome.Equals(other.Outcome) { return false }
+	if !m.Disposition.Equals(other.Disposition) { return false }
+	if !m.PaymentDate.Equals(other.PaymentDate) { return false }
+	if !m.PaymentAmount.Equals(other.PaymentAmount) { return false }
+	if !m.PaymentIdentifier.Equals(other.PaymentIdentifier) { return false }
+	if !compareSlices(m.Detail, other.Detail) { return false }
+	if !m.FormCode.Equals(other.FormCode) { return false }
+	if !compareSlices(m.ProcessNote, other.ProcessNote) { return false }
+	return true
+}
+
 // PaymentReconciliationDetail
 // Distribution of the payment amount for a previously acknowledged payable.
 type PaymentReconciliationDetail struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// Unique identifier for the current payment item for the referenced payable.
-	Identifier Identifier `json:"identifier,omitempty"`
-	// predecessor
-	// Unique identifier for the prior payment item for the referenced payable.
-	Predecessor Identifier `json:"predecessor,omitempty"`
-	// type
-	// Code to indicate the nature of the payment.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// request
-	// A resource, such as a Claim, the evaluation of which could lead to payment.
-	Request Reference `json:"request,omitempty"`
-	// submitter
-	// The party which submitted the claim or financial transaction.
-	Submitter Reference `json:"submitter,omitempty"`
-	// response
-	// A resource, such as a ClaimResponse, which contains a commitment to payment.
-	Response Reference `json:"response,omitempty"`
-	// date
-	// The date from the response resource containing a commitment to pay.
-	Date FhirDate `json:"date,omitempty"`
-	// responsible
-	// A reference to the individual who is responsible for inquiries regarding the response and its payment.
-	Responsible Reference `json:"responsible,omitempty"`
-	// payee
-	// The party which is receiving the payment.
-	Payee Reference `json:"payee,omitempty"`
-	// amount
-	// The monetary amount allocated from the total payment to the payable.
-	Amount Money `json:"amount,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier *Identifier `json:"identifier,omitempty"`
+	Predecessor *Identifier `json:"predecessor,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Request *Reference `json:"request,omitempty"`
+	Submitter *Reference `json:"submitter,omitempty"`
+	Response *Reference `json:"response,omitempty"`
+	Date *FhirDate `json:"date,omitempty"`
+	Responsible *Reference `json:"responsible,omitempty"`
+	Payee *Reference `json:"payee,omitempty"`
+	Amount *Money `json:"amount,omitempty"`
 }
 
 // NewPaymentReconciliationDetail creates a new PaymentReconciliationDetail instance
-func NewPaymentReconciliationDetail(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier Identifier,
-	predecessor Identifier,
-	type_ CodeableConcept,
-	request Reference,
-	submitter Reference,
-	response Reference,
-	date FhirDate,
-	responsible Reference,
-	payee Reference,
-	amount Money,
-) *PaymentReconciliationDetail {
-	return &PaymentReconciliationDetail{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Predecessor: predecessor,
-		Type_: type_,
-		Request: request,
-		Submitter: submitter,
-		Response: response,
-		Date: date,
-		Responsible: responsible,
-		Payee: payee,
-		Amount: amount,
-	}
+func NewPaymentReconciliationDetail() *PaymentReconciliationDetail {
+	return &PaymentReconciliationDetail{}
 }
+
 // FromJSON populates PaymentReconciliationDetail from JSON data
 func (m *PaymentReconciliationDetail) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -356,116 +143,62 @@ func (m *PaymentReconciliationDetail) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of PaymentReconciliationDetail
-func (m *PaymentReconciliationDetail) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *Identifier,
-	predecessor *Identifier,
-	type_ *CodeableConcept,
-	request *Reference,
-	submitter *Reference,
-	response *Reference,
-	date *FhirDate,
-	responsible *Reference,
-	payee *Reference,
-	amount *Money,
-) *PaymentReconciliationDetail {
+// Clone creates a deep copy of PaymentReconciliationDetail
+func (m *PaymentReconciliationDetail) Clone() *PaymentReconciliationDetail {
+	if m == nil { return nil }
 	return &PaymentReconciliationDetail{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Predecessor: func() Identifier {
-			if predecessor != nil { return *predecessor }
-			return m.Predecessor
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Request: func() Reference {
-			if request != nil { return *request }
-			return m.Request
-		}(),
-		Submitter: func() Reference {
-			if submitter != nil { return *submitter }
-			return m.Submitter
-		}(),
-		Response: func() Reference {
-			if response != nil { return *response }
-			return m.Response
-		}(),
-		Date: func() FhirDate {
-			if date != nil { return *date }
-			return m.Date
-		}(),
-		Responsible: func() Reference {
-			if responsible != nil { return *responsible }
-			return m.Responsible
-		}(),
-		Payee: func() Reference {
-			if payee != nil { return *payee }
-			return m.Payee
-		}(),
-		Amount: func() Money {
-			if amount != nil { return *amount }
-			return m.Amount
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: m.Identifier.Clone(),
+		Predecessor: m.Predecessor.Clone(),
+		Type: m.Type.Clone(),
+		Request: m.Request.Clone(),
+		Submitter: m.Submitter.Clone(),
+		Response: m.Response.Clone(),
+		Date: m.Date.Clone(),
+		Responsible: m.Responsible.Clone(),
+		Payee: m.Payee.Clone(),
+		Amount: m.Amount.Clone(),
 	}
 }
+
+// Equals checks for equality with another PaymentReconciliationDetail instance
+func (m *PaymentReconciliationDetail) Equals(other *PaymentReconciliationDetail) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Identifier.Equals(other.Identifier) { return false }
+	if !m.Predecessor.Equals(other.Predecessor) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Request.Equals(other.Request) { return false }
+	if !m.Submitter.Equals(other.Submitter) { return false }
+	if !m.Response.Equals(other.Response) { return false }
+	if !m.Date.Equals(other.Date) { return false }
+	if !m.Responsible.Equals(other.Responsible) { return false }
+	if !m.Payee.Equals(other.Payee) { return false }
+	if !m.Amount.Equals(other.Amount) { return false }
+	return true
+}
+
 // PaymentReconciliationProcessNote
 // A note that describes or explains the processing in a human readable form.
 type PaymentReconciliationProcessNote struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// The business purpose of the note text.
-	Type_ NoteType `json:"type,omitempty"`
-	// text
-	// The explanation or description associated with the processing.
-	Text FhirString `json:"text,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *NoteType `json:"type,omitempty"`
+	Text *FhirString `json:"text,omitempty"`
 }
 
 // NewPaymentReconciliationProcessNote creates a new PaymentReconciliationProcessNote instance
-func NewPaymentReconciliationProcessNote(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ NoteType,
-	text FhirString,
-) *PaymentReconciliationProcessNote {
-	return &PaymentReconciliationProcessNote{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Text: text,
-	}
+func NewPaymentReconciliationProcessNote() *PaymentReconciliationProcessNote {
+	return &PaymentReconciliationProcessNote{}
 }
+
 // FromJSON populates PaymentReconciliationProcessNote from JSON data
 func (m *PaymentReconciliationProcessNote) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -476,34 +209,27 @@ func (m *PaymentReconciliationProcessNote) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of PaymentReconciliationProcessNote
-func (m *PaymentReconciliationProcessNote) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *NoteType,
-	text *FhirString,
-) *PaymentReconciliationProcessNote {
+// Clone creates a deep copy of PaymentReconciliationProcessNote
+func (m *PaymentReconciliationProcessNote) Clone() *PaymentReconciliationProcessNote {
+	if m == nil { return nil }
 	return &PaymentReconciliationProcessNote{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() NoteType {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Text: func() FhirString {
-			if text != nil { return *text }
-			return m.Text
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Text: m.Text.Clone(),
 	}
 }
+
+// Equals checks for equality with another PaymentReconciliationProcessNote instance
+func (m *PaymentReconciliationProcessNote) Equals(other *PaymentReconciliationProcessNote) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	return true
+}
+

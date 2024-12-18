@@ -3,67 +3,28 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // ParameterDefinition
 // The parameters to the module. This collection specifies both the input and output parameters. Input parameters are provided by the caller as part of the $evaluate operation. Output parameters are included in the GuidanceResponse.
 type ParameterDefinition struct {
 	DataType
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// name
-	// The name of the parameter used to allow access to the value of the parameter in evaluation contexts.
-	Name FhirCode `json:"name,omitempty"`
-	// use
-	// Whether the parameter is input or output for the module.
-	Use OperationParameterUse `json:"use,omitempty"`
-	// min
-	// The minimum number of times this parameter SHALL appear in the request or response.
-	Min FhirInteger `json:"min,omitempty"`
-	// max
-	// The maximum number of times this element is permitted to appear in the request or response.
-	Max FhirString `json:"max,omitempty"`
-	// documentation
-	// A brief discussion of what the parameter is for and how it is used by the module.
-	Documentation FhirString `json:"documentation,omitempty"`
-	// type
-	// The type of the parameter.
-	Type_ FHIRAllTypes `json:"type,omitempty"`
-	// profile
-	// If specified, this indicates a profile that the input data must conform to, or that the output data will conform to.
-	Profile FhirCanonical `json:"profile,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	Name *FhirCode `json:"name,omitempty"`
+	Use *OperationParameterUse `json:"use,omitempty"`
+	Min *FhirInteger `json:"min,omitempty"`
+	Max *FhirString `json:"max,omitempty"`
+	Documentation *FhirString `json:"documentation,omitempty"`
+	Type *FHIRAllTypes `json:"type,omitempty"`
+	Profile *FhirCanonical `json:"profile,omitempty"`
 }
 
 // NewParameterDefinition creates a new ParameterDefinition instance
-func NewParameterDefinition(
-	id FhirString,
-	extension_ []FhirExtension,
-	name FhirCode,
-	use OperationParameterUse,
-	min FhirInteger,
-	max FhirString,
-	documentation FhirString,
-	type_ FHIRAllTypes,
-	profile FhirCanonical,
-) *ParameterDefinition {
-	return &ParameterDefinition{
-		Id: id,
-		Extension_: extension_,
-		Name: name,
-		Use: use,
-		Min: min,
-		Max: max,
-		Documentation: documentation,
-		Type_: type_,
-		Profile: profile,
-	}
+func NewParameterDefinition() *ParameterDefinition {
+	return &ParameterDefinition{}
 }
+
 // FromJSON populates ParameterDefinition from JSON data
 func (m *ParameterDefinition) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -74,54 +35,35 @@ func (m *ParameterDefinition) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ParameterDefinition
-func (m *ParameterDefinition) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	name *FhirCode,
-	use *OperationParameterUse,
-	min *FhirInteger,
-	max *FhirString,
-	documentation *FhirString,
-	type_ *FHIRAllTypes,
-	profile *FhirCanonical,
-) *ParameterDefinition {
+// Clone creates a deep copy of ParameterDefinition
+func (m *ParameterDefinition) Clone() *ParameterDefinition {
+	if m == nil { return nil }
 	return &ParameterDefinition{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		Name: func() FhirCode {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Use: func() OperationParameterUse {
-			if use != nil { return *use }
-			return m.Use
-		}(),
-		Min: func() FhirInteger {
-			if min != nil { return *min }
-			return m.Min
-		}(),
-		Max: func() FhirString {
-			if max != nil { return *max }
-			return m.Max
-		}(),
-		Documentation: func() FhirString {
-			if documentation != nil { return *documentation }
-			return m.Documentation
-		}(),
-		Type_: func() FHIRAllTypes {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Profile: func() FhirCanonical {
-			if profile != nil { return *profile }
-			return m.Profile
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		Name: m.Name.Clone(),
+		Use: m.Use.Clone(),
+		Min: m.Min.Clone(),
+		Max: m.Max.Clone(),
+		Documentation: m.Documentation.Clone(),
+		Type: m.Type.Clone(),
+		Profile: m.Profile.Clone(),
 	}
 }
+
+// Equals checks for equality with another ParameterDefinition instance
+func (m *ParameterDefinition) Equals(other *ParameterDefinition) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Use.Equals(other.Use) { return false }
+	if !m.Min.Equals(other.Min) { return false }
+	if !m.Max.Equals(other.Max) { return false }
+	if !m.Documentation.Equals(other.Documentation) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Profile.Equals(other.Profile) { return false }
+	return true
+}
+

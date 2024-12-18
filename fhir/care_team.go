@@ -3,129 +3,40 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // CareTeam
 // The Care Team includes all the people and organizations who plan to participate in the coordination and delivery of care for a patient.
 type CareTeam struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// Business identifiers assigned to this care team by the performer or other systems which remain constant as the resource is updated and propagates from server to server.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// status
-	// Indicates the current state of the care team.
-	Status CareTeamStatus `json:"status,omitempty"`
-	// category
-	// Identifies what kind of team.  This is to support differentiation between multiple co-existing teams, such as care plan team, episode of care team, longitudinal care team.
-	Category []CodeableConcept `json:"category,omitempty"`
-	// name
-	// A label for human use intended to distinguish like teams.  E.g. the "red" vs. "green" trauma teams.
-	Name FhirString `json:"name,omitempty"`
-	// subject
-	// Identifies the patient or group whose intended care is handled by the team.
-	Subject Reference `json:"subject,omitempty"`
-	// encounter
-	// The Encounter during which this CareTeam was created or to which the creation of this record is tightly associated.
-	Encounter Reference `json:"encounter,omitempty"`
-	// period
-	// Indicates when the team did (or is intended to) come into effect and end.
-	Period Period `json:"period,omitempty"`
-	// participant
-	// Identifies all people and organizations who are expected to be involved in the care team.
-	Participant []CareTeamParticipant `json:"participant,omitempty"`
-	// reasonCode
-	// Describes why the care team exists.
-	ReasonCode []CodeableConcept `json:"reasonCode,omitempty"`
-	// reasonReference
-	// Condition(s) that this care team addresses.
-	ReasonReference []Reference `json:"reasonReference,omitempty"`
-	// managingOrganization
-	// The organization responsible for the care team.
-	ManagingOrganization []Reference `json:"managingOrganization,omitempty"`
-	// telecom
-	// A central contact detail for the care team (that applies to all members).
-	Telecom []ContactPoint `json:"telecom,omitempty"`
-	// note
-	// Comments made about the CareTeam.
-	Note []Annotation `json:"note,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Status *CareTeamStatus `json:"status,omitempty"`
+	Category []*CodeableConcept `json:"category,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Subject *Reference `json:"subject,omitempty"`
+	Encounter *Reference `json:"encounter,omitempty"`
+	Period *Period `json:"period,omitempty"`
+	Participant []*CareTeamParticipant `json:"participant,omitempty"`
+	ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+	ReasonReference []*Reference `json:"reasonreference,omitempty"`
+	ManagingOrganization []*Reference `json:"managingorganization,omitempty"`
+	Telecom []*ContactPoint `json:"telecom,omitempty"`
+	Note []*Annotation `json:"note,omitempty"`
 }
 
 // NewCareTeam creates a new CareTeam instance
-func NewCareTeam(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	status CareTeamStatus,
-	category []CodeableConcept,
-	name FhirString,
-	subject Reference,
-	encounter Reference,
-	period Period,
-	participant []CareTeamParticipant,
-	reasonCode []CodeableConcept,
-	reasonReference []Reference,
-	managingOrganization []Reference,
-	telecom []ContactPoint,
-	note []Annotation,
-) *CareTeam {
-	return &CareTeam{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Status: status,
-		Category: category,
-		Name: name,
-		Subject: subject,
-		Encounter: encounter,
-		Period: period,
-		Participant: participant,
-		ReasonCode: reasonCode,
-		ReasonReference: reasonReference,
-		ManagingOrganization: managingOrganization,
-		Telecom: telecom,
-		Note: note,
-	}
+func NewCareTeam() *CareTeam {
+	return &CareTeam{}
 }
+
 // FromJSON populates CareTeam from JSON data
 func (m *CareTeam) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -136,166 +47,80 @@ func (m *CareTeam) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CareTeam
-func (m *CareTeam) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	status *CareTeamStatus,
-	category *[]CodeableConcept,
-	name *FhirString,
-	subject *Reference,
-	encounter *Reference,
-	period *Period,
-	participant *[]CareTeamParticipant,
-	reasonCode *[]CodeableConcept,
-	reasonReference *[]Reference,
-	managingOrganization *[]Reference,
-	telecom *[]ContactPoint,
-	note *[]Annotation,
-) *CareTeam {
+// Clone creates a deep copy of CareTeam
+func (m *CareTeam) Clone() *CareTeam {
+	if m == nil { return nil }
 	return &CareTeam{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Status: func() CareTeamStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Category: func() []CodeableConcept {
-			if category != nil { return *category }
-			return m.Category
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Subject: func() Reference {
-			if subject != nil { return *subject }
-			return m.Subject
-		}(),
-		Encounter: func() Reference {
-			if encounter != nil { return *encounter }
-			return m.Encounter
-		}(),
-		Period: func() Period {
-			if period != nil { return *period }
-			return m.Period
-		}(),
-		Participant: func() []CareTeamParticipant {
-			if participant != nil { return *participant }
-			return m.Participant
-		}(),
-		ReasonCode: func() []CodeableConcept {
-			if reasonCode != nil { return *reasonCode }
-			return m.ReasonCode
-		}(),
-		ReasonReference: func() []Reference {
-			if reasonReference != nil { return *reasonReference }
-			return m.ReasonReference
-		}(),
-		ManagingOrganization: func() []Reference {
-			if managingOrganization != nil { return *managingOrganization }
-			return m.ManagingOrganization
-		}(),
-		Telecom: func() []ContactPoint {
-			if telecom != nil { return *telecom }
-			return m.Telecom
-		}(),
-		Note: func() []Annotation {
-			if note != nil { return *note }
-			return m.Note
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		Status: m.Status.Clone(),
+		Category: cloneSlices(m.Category),
+		Name: m.Name.Clone(),
+		Subject: m.Subject.Clone(),
+		Encounter: m.Encounter.Clone(),
+		Period: m.Period.Clone(),
+		Participant: cloneSlices(m.Participant),
+		ReasonCode: cloneSlices(m.ReasonCode),
+		ReasonReference: cloneSlices(m.ReasonReference),
+		ManagingOrganization: cloneSlices(m.ManagingOrganization),
+		Telecom: cloneSlices(m.Telecom),
+		Note: cloneSlices(m.Note),
 	}
 }
+
+// Equals checks for equality with another CareTeam instance
+func (m *CareTeam) Equals(other *CareTeam) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !compareSlices(m.Category, other.Category) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Subject.Equals(other.Subject) { return false }
+	if !m.Encounter.Equals(other.Encounter) { return false }
+	if !m.Period.Equals(other.Period) { return false }
+	if !compareSlices(m.Participant, other.Participant) { return false }
+	if !compareSlices(m.ReasonCode, other.ReasonCode) { return false }
+	if !compareSlices(m.ReasonReference, other.ReasonReference) { return false }
+	if !compareSlices(m.ManagingOrganization, other.ManagingOrganization) { return false }
+	if !compareSlices(m.Telecom, other.Telecom) { return false }
+	if !compareSlices(m.Note, other.Note) { return false }
+	return true
+}
+
 // CareTeamParticipant
 // Identifies all people and organizations who are expected to be involved in the care team.
 type CareTeamParticipant struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// role
-	// Indicates specific responsibility of an individual within the care team, such as "Primary care physician", "Trained social worker counselor", "Caregiver", etc.
-	Role []CodeableConcept `json:"role,omitempty"`
-	// member
-	// The specific person or organization who is participating/expected to participate in the care team.
-	Member Reference `json:"member,omitempty"`
-	// onBehalfOf
-	// The organization of the practitioner.
-	OnBehalfOf Reference `json:"onBehalfOf,omitempty"`
-	// period
-	// Indicates when the specific member or organization did (or is intended to) come into effect and end.
-	Period Period `json:"period,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Role []*CodeableConcept `json:"role,omitempty"`
+	Member *Reference `json:"member,omitempty"`
+	OnBehalfOf *Reference `json:"onbehalfof,omitempty"`
+	Period *Period `json:"period,omitempty"`
 }
 
 // NewCareTeamParticipant creates a new CareTeamParticipant instance
-func NewCareTeamParticipant(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	role []CodeableConcept,
-	member Reference,
-	onBehalfOf Reference,
-	period Period,
-) *CareTeamParticipant {
-	return &CareTeamParticipant{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Role: role,
-		Member: member,
-		OnBehalfOf: onBehalfOf,
-		Period: period,
-	}
+func NewCareTeamParticipant() *CareTeamParticipant {
+	return &CareTeamParticipant{}
 }
+
 // FromJSON populates CareTeamParticipant from JSON data
 func (m *CareTeamParticipant) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -306,44 +131,31 @@ func (m *CareTeamParticipant) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CareTeamParticipant
-func (m *CareTeamParticipant) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	role *[]CodeableConcept,
-	member *Reference,
-	onBehalfOf *Reference,
-	period *Period,
-) *CareTeamParticipant {
+// Clone creates a deep copy of CareTeamParticipant
+func (m *CareTeamParticipant) Clone() *CareTeamParticipant {
+	if m == nil { return nil }
 	return &CareTeamParticipant{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Role: func() []CodeableConcept {
-			if role != nil { return *role }
-			return m.Role
-		}(),
-		Member: func() Reference {
-			if member != nil { return *member }
-			return m.Member
-		}(),
-		OnBehalfOf: func() Reference {
-			if onBehalfOf != nil { return *onBehalfOf }
-			return m.OnBehalfOf
-		}(),
-		Period: func() Period {
-			if period != nil { return *period }
-			return m.Period
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Role: cloneSlices(m.Role),
+		Member: m.Member.Clone(),
+		OnBehalfOf: m.OnBehalfOf.Clone(),
+		Period: m.Period.Clone(),
 	}
 }
+
+// Equals checks for equality with another CareTeamParticipant instance
+func (m *CareTeamParticipant) Equals(other *CareTeamParticipant) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Role, other.Role) { return false }
+	if !m.Member.Equals(other.Member) { return false }
+	if !m.OnBehalfOf.Equals(other.OnBehalfOf) { return false }
+	if !m.Period.Equals(other.Period) { return false }
+	return true
+}
+

@@ -3,64 +3,27 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // MarketingStatus
 // The marketing status describes the date when a medicinal product is actually put on the market or the date as of which it is no longer available.
 type MarketingStatus struct {
 	BackboneType
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// country
-	// The country in which the marketing authorisation has been granted shall be specified It should be specified using the ISO 3166 ‑ 1 alpha-2 code elements.
-	Country CodeableConcept `json:"country,omitempty"`
-	// jurisdiction
-	// Where a Medicines Regulatory Agency has granted a marketing authorisation for which specific provisions within a jurisdiction apply, the jurisdiction can be specified using an appropriate controlled terminology The controlled term and the controlled term identifier shall be specified.
-	Jurisdiction CodeableConcept `json:"jurisdiction,omitempty"`
-	// status
-	// This attribute provides information on the status of the marketing of the medicinal product See ISO/TS 20443 for more information and examples.
-	Status CodeableConcept `json:"status,omitempty"`
-	// dateRange
-	// The date when the Medicinal Product is placed on the market by the Marketing Authorisation Holder (or where applicable, the manufacturer/distributor) in a country and/or jurisdiction shall be provided A complete date consisting of day, month and year shall be specified using the ISO 8601 date format NOTE “Placed on the market” refers to the release of the Medicinal Product into the distribution chain.
-	DateRange Period `json:"dateRange,omitempty"`
-	// restoreDate
-	// The date when the Medicinal Product is placed on the market by the Marketing Authorisation Holder (or where applicable, the manufacturer/distributor) in a country and/or jurisdiction shall be provided A complete date consisting of day, month and year shall be specified using the ISO 8601 date format NOTE “Placed on the market” refers to the release of the Medicinal Product into the distribution chain.
-	RestoreDate FhirDateTime `json:"restoreDate,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Country *CodeableConcept `json:"country,omitempty"`
+	Jurisdiction *CodeableConcept `json:"jurisdiction,omitempty"`
+	Status *CodeableConcept `json:"status,omitempty"`
+	DateRange *Period `json:"daterange,omitempty"`
+	RestoreDate *FhirDateTime `json:"restoredate,omitempty"`
 }
 
 // NewMarketingStatus creates a new MarketingStatus instance
-func NewMarketingStatus(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	country CodeableConcept,
-	jurisdiction CodeableConcept,
-	status CodeableConcept,
-	dateRange Period,
-	restoreDate FhirDateTime,
-) *MarketingStatus {
-	return &MarketingStatus{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Country: country,
-		Jurisdiction: jurisdiction,
-		Status: status,
-		DateRange: dateRange,
-		RestoreDate: restoreDate,
-	}
+func NewMarketingStatus() *MarketingStatus {
+	return &MarketingStatus{}
 }
+
 // FromJSON populates MarketingStatus from JSON data
 func (m *MarketingStatus) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -71,49 +34,33 @@ func (m *MarketingStatus) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MarketingStatus
-func (m *MarketingStatus) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	country *CodeableConcept,
-	jurisdiction *CodeableConcept,
-	status *CodeableConcept,
-	dateRange *Period,
-	restoreDate *FhirDateTime,
-) *MarketingStatus {
+// Clone creates a deep copy of MarketingStatus
+func (m *MarketingStatus) Clone() *MarketingStatus {
+	if m == nil { return nil }
 	return &MarketingStatus{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Country: func() CodeableConcept {
-			if country != nil { return *country }
-			return m.Country
-		}(),
-		Jurisdiction: func() CodeableConcept {
-			if jurisdiction != nil { return *jurisdiction }
-			return m.Jurisdiction
-		}(),
-		Status: func() CodeableConcept {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		DateRange: func() Period {
-			if dateRange != nil { return *dateRange }
-			return m.DateRange
-		}(),
-		RestoreDate: func() FhirDateTime {
-			if restoreDate != nil { return *restoreDate }
-			return m.RestoreDate
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Country: m.Country.Clone(),
+		Jurisdiction: m.Jurisdiction.Clone(),
+		Status: m.Status.Clone(),
+		DateRange: m.DateRange.Clone(),
+		RestoreDate: m.RestoreDate.Clone(),
 	}
 }
+
+// Equals checks for equality with another MarketingStatus instance
+func (m *MarketingStatus) Equals(other *MarketingStatus) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Country.Equals(other.Country) { return false }
+	if !m.Jurisdiction.Equals(other.Jurisdiction) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.DateRange.Equals(other.DateRange) { return false }
+	if !m.RestoreDate.Equals(other.RestoreDate) { return false }
+	return true
+}
+

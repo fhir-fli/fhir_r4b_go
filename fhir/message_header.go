@@ -3,124 +3,39 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // MessageHeader
 // The header for a message exchange that is either requesting or responding to an action.  The reference(s) that are the subject of the action as well as other information related to the action are typically transmitted in a bundle in which the MessageHeader resource instance is the first resource in the bundle.
 type MessageHeader struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// eventCoding
-	// Code that identifies the event this message represents and connects it with its definition. Events defined as part of the FHIR specification have the system value "http://terminology.hl7.org/CodeSystem/message-events".  Alternatively uri to the EventDefinition.
-	EventCoding Coding `json:"eventCoding,omitempty"`
-	// eventUri
-	// Code that identifies the event this message represents and connects it with its definition. Events defined as part of the FHIR specification have the system value "http://terminology.hl7.org/CodeSystem/message-events".  Alternatively uri to the EventDefinition.
-	EventUri FhirUri `json:"eventUri,omitempty"`
-	// destination
-	// The destination application which the message is intended for.
-	Destination []MessageHeaderDestination `json:"destination,omitempty"`
-	// sender
-	// Identifies the sending system to allow the use of a trust relationship.
-	Sender Reference `json:"sender,omitempty"`
-	// enterer
-	// The person or device that performed the data entry leading to this message. When there is more than one candidate, pick the most proximal to the message. Can provide other enterers in extensions.
-	Enterer Reference `json:"enterer,omitempty"`
-	// author
-	// The logical author of the message - the person or device that decided the described event should happen. When there is more than one candidate, pick the most proximal to the MessageHeader. Can provide other authors in extensions.
-	Author Reference `json:"author,omitempty"`
-	// source
-	// The source application from which this message originated.
-	Source MessageHeaderSource `json:"source,omitempty"`
-	// responsible
-	// The person or organization that accepts overall responsibility for the contents of the message. The implication is that the message event happened under the policies of the responsible party.
-	Responsible Reference `json:"responsible,omitempty"`
-	// reason
-	// Coded indication of the cause for the event - indicates  a reason for the occurrence of the event that is a focus of this message.
-	Reason CodeableConcept `json:"reason,omitempty"`
-	// response
-	// Information about the message that this message is a response to.  Only present if this message is a response.
-	Response MessageHeaderResponse `json:"response,omitempty"`
-	// focus
-	// The actual data of the message - a reference to the root/focus class of the event.
-	Focus []Reference `json:"focus,omitempty"`
-	// definition
-	// Permanent link to the MessageDefinition for this message.
-	Definition FhirCanonical `json:"definition,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	EventCoding *Coding `json:"eventcoding,omitempty"`
+	EventUri *FhirUri `json:"eventuri,omitempty"`
+	Destination []*MessageHeaderDestination `json:"destination,omitempty"`
+	Sender *Reference `json:"sender,omitempty"`
+	Enterer *Reference `json:"enterer,omitempty"`
+	Author *Reference `json:"author,omitempty"`
+	Source *MessageHeaderSource `json:"source,omitempty"`
+	Responsible *Reference `json:"responsible,omitempty"`
+	Reason *CodeableConcept `json:"reason,omitempty"`
+	Response *MessageHeaderResponse `json:"response,omitempty"`
+	Focus []*Reference `json:"focus,omitempty"`
+	Definition *FhirCanonical `json:"definition,omitempty"`
 }
 
 // NewMessageHeader creates a new MessageHeader instance
-func NewMessageHeader(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	eventCoding Coding,
-	eventUri FhirUri,
-	destination []MessageHeaderDestination,
-	sender Reference,
-	enterer Reference,
-	author Reference,
-	source MessageHeaderSource,
-	responsible Reference,
-	reason CodeableConcept,
-	response MessageHeaderResponse,
-	focus []Reference,
-	definition FhirCanonical,
-) *MessageHeader {
-	return &MessageHeader{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		EventCoding: eventCoding,
-		EventUri: eventUri,
-		Destination: destination,
-		Sender: sender,
-		Enterer: enterer,
-		Author: author,
-		Source: source,
-		Responsible: responsible,
-		Reason: reason,
-		Response: response,
-		Focus: focus,
-		Definition: definition,
-	}
+func NewMessageHeader() *MessageHeader {
+	return &MessageHeader{}
 }
+
 // FromJSON populates MessageHeader from JSON data
 func (m *MessageHeader) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -131,161 +46,78 @@ func (m *MessageHeader) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MessageHeader
-func (m *MessageHeader) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	eventCoding *Coding,
-	eventUri *FhirUri,
-	destination *[]MessageHeaderDestination,
-	sender *Reference,
-	enterer *Reference,
-	author *Reference,
-	source *MessageHeaderSource,
-	responsible *Reference,
-	reason *CodeableConcept,
-	response *MessageHeaderResponse,
-	focus *[]Reference,
-	definition *FhirCanonical,
-) *MessageHeader {
+// Clone creates a deep copy of MessageHeader
+func (m *MessageHeader) Clone() *MessageHeader {
+	if m == nil { return nil }
 	return &MessageHeader{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		EventCoding: func() Coding {
-			if eventCoding != nil { return *eventCoding }
-			return m.EventCoding
-		}(),
-		EventUri: func() FhirUri {
-			if eventUri != nil { return *eventUri }
-			return m.EventUri
-		}(),
-		Destination: func() []MessageHeaderDestination {
-			if destination != nil { return *destination }
-			return m.Destination
-		}(),
-		Sender: func() Reference {
-			if sender != nil { return *sender }
-			return m.Sender
-		}(),
-		Enterer: func() Reference {
-			if enterer != nil { return *enterer }
-			return m.Enterer
-		}(),
-		Author: func() Reference {
-			if author != nil { return *author }
-			return m.Author
-		}(),
-		Source: func() MessageHeaderSource {
-			if source != nil { return *source }
-			return m.Source
-		}(),
-		Responsible: func() Reference {
-			if responsible != nil { return *responsible }
-			return m.Responsible
-		}(),
-		Reason: func() CodeableConcept {
-			if reason != nil { return *reason }
-			return m.Reason
-		}(),
-		Response: func() MessageHeaderResponse {
-			if response != nil { return *response }
-			return m.Response
-		}(),
-		Focus: func() []Reference {
-			if focus != nil { return *focus }
-			return m.Focus
-		}(),
-		Definition: func() FhirCanonical {
-			if definition != nil { return *definition }
-			return m.Definition
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		EventCoding: m.EventCoding.Clone(),
+		EventUri: m.EventUri.Clone(),
+		Destination: cloneSlices(m.Destination),
+		Sender: m.Sender.Clone(),
+		Enterer: m.Enterer.Clone(),
+		Author: m.Author.Clone(),
+		Source: m.Source.Clone(),
+		Responsible: m.Responsible.Clone(),
+		Reason: m.Reason.Clone(),
+		Response: m.Response.Clone(),
+		Focus: cloneSlices(m.Focus),
+		Definition: m.Definition.Clone(),
 	}
 }
+
+// Equals checks for equality with another MessageHeader instance
+func (m *MessageHeader) Equals(other *MessageHeader) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.EventCoding.Equals(other.EventCoding) { return false }
+	if !m.EventUri.Equals(other.EventUri) { return false }
+	if !compareSlices(m.Destination, other.Destination) { return false }
+	if !m.Sender.Equals(other.Sender) { return false }
+	if !m.Enterer.Equals(other.Enterer) { return false }
+	if !m.Author.Equals(other.Author) { return false }
+	if !m.Source.Equals(other.Source) { return false }
+	if !m.Responsible.Equals(other.Responsible) { return false }
+	if !m.Reason.Equals(other.Reason) { return false }
+	if !m.Response.Equals(other.Response) { return false }
+	if !compareSlices(m.Focus, other.Focus) { return false }
+	if !m.Definition.Equals(other.Definition) { return false }
+	return true
+}
+
 // MessageHeaderDestination
 // The destination application which the message is intended for.
 type MessageHeaderDestination struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// name
-	// Human-readable name for the target system.
-	Name FhirString `json:"name,omitempty"`
-	// target
-	// Identifies the target end system in situations where the initial message transmission is to an intermediary system.
-	Target Reference `json:"target,omitempty"`
-	// endpoint
-	// Indicates where the message should be routed to.
-	Endpoint FhirUrl `json:"endpoint,omitempty"`
-	// receiver
-	// Allows data conveyed by a message to be addressed to a particular person or department when routing to a specific application isn't sufficient.
-	Receiver Reference `json:"receiver,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Target *Reference `json:"target,omitempty"`
+	Endpoint *FhirUrl `json:"endpoint,omitempty"`
+	Receiver *Reference `json:"receiver,omitempty"`
 }
 
 // NewMessageHeaderDestination creates a new MessageHeaderDestination instance
-func NewMessageHeaderDestination(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	name FhirString,
-	target Reference,
-	endpoint FhirUrl,
-	receiver Reference,
-) *MessageHeaderDestination {
-	return &MessageHeaderDestination{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Name: name,
-		Target: target,
-		Endpoint: endpoint,
-		Receiver: receiver,
-	}
+func NewMessageHeaderDestination() *MessageHeaderDestination {
+	return &MessageHeaderDestination{}
 }
+
 // FromJSON populates MessageHeaderDestination from JSON data
 func (m *MessageHeaderDestination) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -296,101 +128,53 @@ func (m *MessageHeaderDestination) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MessageHeaderDestination
-func (m *MessageHeaderDestination) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	name *FhirString,
-	target *Reference,
-	endpoint *FhirUrl,
-	receiver *Reference,
-) *MessageHeaderDestination {
+// Clone creates a deep copy of MessageHeaderDestination
+func (m *MessageHeaderDestination) Clone() *MessageHeaderDestination {
+	if m == nil { return nil }
 	return &MessageHeaderDestination{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Target: func() Reference {
-			if target != nil { return *target }
-			return m.Target
-		}(),
-		Endpoint: func() FhirUrl {
-			if endpoint != nil { return *endpoint }
-			return m.Endpoint
-		}(),
-		Receiver: func() Reference {
-			if receiver != nil { return *receiver }
-			return m.Receiver
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Name: m.Name.Clone(),
+		Target: m.Target.Clone(),
+		Endpoint: m.Endpoint.Clone(),
+		Receiver: m.Receiver.Clone(),
 	}
 }
+
+// Equals checks for equality with another MessageHeaderDestination instance
+func (m *MessageHeaderDestination) Equals(other *MessageHeaderDestination) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Target.Equals(other.Target) { return false }
+	if !m.Endpoint.Equals(other.Endpoint) { return false }
+	if !m.Receiver.Equals(other.Receiver) { return false }
+	return true
+}
+
 // MessageHeaderSource
 // The source application from which this message originated.
 type MessageHeaderSource struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// name
-	// Human-readable name for the source system.
-	Name FhirString `json:"name,omitempty"`
-	// software
-	// May include configuration or other information useful in debugging.
-	Software FhirString `json:"software,omitempty"`
-	// version
-	// Can convey versions of multiple systems in situations where a message passes through multiple hands.
-	Version FhirString `json:"version,omitempty"`
-	// contact
-	// An e-mail, phone, website or other contact point to use to resolve issues with message communications.
-	Contact ContactPoint `json:"contact,omitempty"`
-	// endpoint
-	// Identifies the routing target to send acknowledgements to.
-	Endpoint FhirUrl `json:"endpoint,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Software *FhirString `json:"software,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
+	Contact *ContactPoint `json:"contact,omitempty"`
+	Endpoint *FhirUrl `json:"endpoint,omitempty"`
 }
 
 // NewMessageHeaderSource creates a new MessageHeaderSource instance
-func NewMessageHeaderSource(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	name FhirString,
-	software FhirString,
-	version FhirString,
-	contact ContactPoint,
-	endpoint FhirUrl,
-) *MessageHeaderSource {
-	return &MessageHeaderSource{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Name: name,
-		Software: software,
-		Version: version,
-		Contact: contact,
-		Endpoint: endpoint,
-	}
+func NewMessageHeaderSource() *MessageHeaderSource {
+	return &MessageHeaderSource{}
 }
+
 // FromJSON populates MessageHeaderSource from JSON data
 func (m *MessageHeaderSource) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -401,96 +185,53 @@ func (m *MessageHeaderSource) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MessageHeaderSource
-func (m *MessageHeaderSource) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	name *FhirString,
-	software *FhirString,
-	version *FhirString,
-	contact *ContactPoint,
-	endpoint *FhirUrl,
-) *MessageHeaderSource {
+// Clone creates a deep copy of MessageHeaderSource
+func (m *MessageHeaderSource) Clone() *MessageHeaderSource {
+	if m == nil { return nil }
 	return &MessageHeaderSource{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Software: func() FhirString {
-			if software != nil { return *software }
-			return m.Software
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Contact: func() ContactPoint {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
-		Endpoint: func() FhirUrl {
-			if endpoint != nil { return *endpoint }
-			return m.Endpoint
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Name: m.Name.Clone(),
+		Software: m.Software.Clone(),
+		Version: m.Version.Clone(),
+		Contact: m.Contact.Clone(),
+		Endpoint: m.Endpoint.Clone(),
 	}
 }
+
+// Equals checks for equality with another MessageHeaderSource instance
+func (m *MessageHeaderSource) Equals(other *MessageHeaderSource) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Software.Equals(other.Software) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !m.Contact.Equals(other.Contact) { return false }
+	if !m.Endpoint.Equals(other.Endpoint) { return false }
+	return true
+}
+
 // MessageHeaderResponse
 // Information about the message that this message is a response to.  Only present if this message is a response.
 type MessageHeaderResponse struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// The MessageHeader.id of the message to which this message is a response.
-	Identifier FhirId `json:"identifier,omitempty"`
-	// code
-	// Code that identifies the type of response to the message - whether it was successful or not, and whether it should be resent or not.
-	Code ResponseType `json:"code,omitempty"`
-	// details
-	// Full details of any issues found in the message.
-	Details Reference `json:"details,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier *FhirId `json:"identifier,omitempty"`
+	Code *ResponseType `json:"code,omitempty"`
+	Details *Reference `json:"details,omitempty"`
 }
 
 // NewMessageHeaderResponse creates a new MessageHeaderResponse instance
-func NewMessageHeaderResponse(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier FhirId,
-	code ResponseType,
-	details Reference,
-) *MessageHeaderResponse {
-	return &MessageHeaderResponse{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Code: code,
-		Details: details,
-	}
+func NewMessageHeaderResponse() *MessageHeaderResponse {
+	return &MessageHeaderResponse{}
 }
+
 // FromJSON populates MessageHeaderResponse from JSON data
 func (m *MessageHeaderResponse) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -501,39 +242,29 @@ func (m *MessageHeaderResponse) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MessageHeaderResponse
-func (m *MessageHeaderResponse) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *FhirId,
-	code *ResponseType,
-	details *Reference,
-) *MessageHeaderResponse {
+// Clone creates a deep copy of MessageHeaderResponse
+func (m *MessageHeaderResponse) Clone() *MessageHeaderResponse {
+	if m == nil { return nil }
 	return &MessageHeaderResponse{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() FhirId {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Code: func() ResponseType {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Details: func() Reference {
-			if details != nil { return *details }
-			return m.Details
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: m.Identifier.Clone(),
+		Code: m.Code.Clone(),
+		Details: m.Details.Clone(),
 	}
 }
+
+// Equals checks for equality with another MessageHeaderResponse instance
+func (m *MessageHeaderResponse) Equals(other *MessageHeaderResponse) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Identifier.Equals(other.Identifier) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Details.Equals(other.Details) { return false }
+	return true
+}
+

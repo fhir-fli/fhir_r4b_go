@@ -3,154 +3,45 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // SupplyRequest
 // A record of a request for a medication, substance or device used in the healthcare setting.
 type SupplyRequest struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// Business identifiers assigned to this SupplyRequest by the author and/or other systems. These identifiers remain constant as the resource is updated and propagates from server to server.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// status
-	// Status of the supply request.
-	Status SupplyRequestStatus `json:"status,omitempty"`
-	// category
-	// Category of supply, e.g.  central, non-stock, etc. This is used to support work flows associated with the supply process.
-	Category CodeableConcept `json:"category,omitempty"`
-	// priority
-	// Indicates how quickly this SupplyRequest should be addressed with respect to other requests.
-	Priority RequestPriority `json:"priority,omitempty"`
-	// itemCodeableConcept
-	// The item that is requested to be supplied. This is either a link to a resource representing the details of the item or a code that identifies the item from a known list.
-	ItemCodeableConcept CodeableConcept `json:"itemCodeableConcept,omitempty"`
-	// itemReference
-	// The item that is requested to be supplied. This is either a link to a resource representing the details of the item or a code that identifies the item from a known list.
-	ItemReference Reference `json:"itemReference,omitempty"`
-	// quantity
-	// The amount that is being ordered of the indicated item.
-	Quantity Quantity `json:"quantity,omitempty"`
-	// parameter
-	// Specific parameters for the ordered item.  For example, the size of the indicated item.
-	Parameter []SupplyRequestParameter `json:"parameter,omitempty"`
-	// occurrenceDateTime
-	// When the request should be fulfilled.
-	OccurrenceDateTime FhirDateTime `json:"occurrenceDateTime,omitempty"`
-	// occurrencePeriod
-	// When the request should be fulfilled.
-	OccurrencePeriod Period `json:"occurrencePeriod,omitempty"`
-	// occurrenceTiming
-	// When the request should be fulfilled.
-	OccurrenceTiming Timing `json:"occurrenceTiming,omitempty"`
-	// authoredOn
-	// When the request was made.
-	AuthoredOn FhirDateTime `json:"authoredOn,omitempty"`
-	// requester
-	// The device, practitioner, etc. who initiated the request.
-	Requester Reference `json:"requester,omitempty"`
-	// supplier
-	// Who is intended to fulfill the request.
-	Supplier []Reference `json:"supplier,omitempty"`
-	// reasonCode
-	// The reason why the supply item was requested.
-	ReasonCode []CodeableConcept `json:"reasonCode,omitempty"`
-	// reasonReference
-	// The reason why the supply item was requested.
-	ReasonReference []Reference `json:"reasonReference,omitempty"`
-	// deliverFrom
-	// Where the supply is expected to come from.
-	DeliverFrom Reference `json:"deliverFrom,omitempty"`
-	// deliverTo
-	// Where the supply is destined to go.
-	DeliverTo Reference `json:"deliverTo,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Status *SupplyRequestStatus `json:"status,omitempty"`
+	Category *CodeableConcept `json:"category,omitempty"`
+	Priority *RequestPriority `json:"priority,omitempty"`
+	ItemCodeableConcept *CodeableConcept `json:"itemcodeableconcept,omitempty"`
+	ItemReference *Reference `json:"itemreference,omitempty"`
+	Quantity *Quantity `json:"quantity,omitempty"`
+	Parameter []*SupplyRequestParameter `json:"parameter,omitempty"`
+	OccurrenceDateTime *FhirDateTime `json:"occurrencedatetime,omitempty"`
+	OccurrencePeriod *Period `json:"occurrenceperiod,omitempty"`
+	OccurrenceTiming *Timing `json:"occurrencetiming,omitempty"`
+	AuthoredOn *FhirDateTime `json:"authoredon,omitempty"`
+	Requester *Reference `json:"requester,omitempty"`
+	Supplier []*Reference `json:"supplier,omitempty"`
+	ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+	ReasonReference []*Reference `json:"reasonreference,omitempty"`
+	DeliverFrom *Reference `json:"deliverfrom,omitempty"`
+	DeliverTo *Reference `json:"deliverto,omitempty"`
 }
 
 // NewSupplyRequest creates a new SupplyRequest instance
-func NewSupplyRequest(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	status SupplyRequestStatus,
-	category CodeableConcept,
-	priority RequestPriority,
-	itemCodeableConcept CodeableConcept,
-	itemReference Reference,
-	quantity Quantity,
-	parameter []SupplyRequestParameter,
-	occurrenceDateTime FhirDateTime,
-	occurrencePeriod Period,
-	occurrenceTiming Timing,
-	authoredOn FhirDateTime,
-	requester Reference,
-	supplier []Reference,
-	reasonCode []CodeableConcept,
-	reasonReference []Reference,
-	deliverFrom Reference,
-	deliverTo Reference,
-) *SupplyRequest {
-	return &SupplyRequest{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Status: status,
-		Category: category,
-		Priority: priority,
-		ItemCodeableConcept: itemCodeableConcept,
-		ItemReference: itemReference,
-		Quantity: quantity,
-		Parameter: parameter,
-		OccurrenceDateTime: occurrenceDateTime,
-		OccurrencePeriod: occurrencePeriod,
-		OccurrenceTiming: occurrenceTiming,
-		AuthoredOn: authoredOn,
-		Requester: requester,
-		Supplier: supplier,
-		ReasonCode: reasonCode,
-		ReasonReference: reasonReference,
-		DeliverFrom: deliverFrom,
-		DeliverTo: deliverTo,
-	}
+func NewSupplyRequest() *SupplyRequest {
+	return &SupplyRequest{}
 }
+
 // FromJSON populates SupplyRequest from JSON data
 func (m *SupplyRequest) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -161,196 +52,91 @@ func (m *SupplyRequest) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SupplyRequest
-func (m *SupplyRequest) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	status *SupplyRequestStatus,
-	category *CodeableConcept,
-	priority *RequestPriority,
-	itemCodeableConcept *CodeableConcept,
-	itemReference *Reference,
-	quantity *Quantity,
-	parameter *[]SupplyRequestParameter,
-	occurrenceDateTime *FhirDateTime,
-	occurrencePeriod *Period,
-	occurrenceTiming *Timing,
-	authoredOn *FhirDateTime,
-	requester *Reference,
-	supplier *[]Reference,
-	reasonCode *[]CodeableConcept,
-	reasonReference *[]Reference,
-	deliverFrom *Reference,
-	deliverTo *Reference,
-) *SupplyRequest {
+// Clone creates a deep copy of SupplyRequest
+func (m *SupplyRequest) Clone() *SupplyRequest {
+	if m == nil { return nil }
 	return &SupplyRequest{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Status: func() SupplyRequestStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Category: func() CodeableConcept {
-			if category != nil { return *category }
-			return m.Category
-		}(),
-		Priority: func() RequestPriority {
-			if priority != nil { return *priority }
-			return m.Priority
-		}(),
-		ItemCodeableConcept: func() CodeableConcept {
-			if itemCodeableConcept != nil { return *itemCodeableConcept }
-			return m.ItemCodeableConcept
-		}(),
-		ItemReference: func() Reference {
-			if itemReference != nil { return *itemReference }
-			return m.ItemReference
-		}(),
-		Quantity: func() Quantity {
-			if quantity != nil { return *quantity }
-			return m.Quantity
-		}(),
-		Parameter: func() []SupplyRequestParameter {
-			if parameter != nil { return *parameter }
-			return m.Parameter
-		}(),
-		OccurrenceDateTime: func() FhirDateTime {
-			if occurrenceDateTime != nil { return *occurrenceDateTime }
-			return m.OccurrenceDateTime
-		}(),
-		OccurrencePeriod: func() Period {
-			if occurrencePeriod != nil { return *occurrencePeriod }
-			return m.OccurrencePeriod
-		}(),
-		OccurrenceTiming: func() Timing {
-			if occurrenceTiming != nil { return *occurrenceTiming }
-			return m.OccurrenceTiming
-		}(),
-		AuthoredOn: func() FhirDateTime {
-			if authoredOn != nil { return *authoredOn }
-			return m.AuthoredOn
-		}(),
-		Requester: func() Reference {
-			if requester != nil { return *requester }
-			return m.Requester
-		}(),
-		Supplier: func() []Reference {
-			if supplier != nil { return *supplier }
-			return m.Supplier
-		}(),
-		ReasonCode: func() []CodeableConcept {
-			if reasonCode != nil { return *reasonCode }
-			return m.ReasonCode
-		}(),
-		ReasonReference: func() []Reference {
-			if reasonReference != nil { return *reasonReference }
-			return m.ReasonReference
-		}(),
-		DeliverFrom: func() Reference {
-			if deliverFrom != nil { return *deliverFrom }
-			return m.DeliverFrom
-		}(),
-		DeliverTo: func() Reference {
-			if deliverTo != nil { return *deliverTo }
-			return m.DeliverTo
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		Status: m.Status.Clone(),
+		Category: m.Category.Clone(),
+		Priority: m.Priority.Clone(),
+		ItemCodeableConcept: m.ItemCodeableConcept.Clone(),
+		ItemReference: m.ItemReference.Clone(),
+		Quantity: m.Quantity.Clone(),
+		Parameter: cloneSlices(m.Parameter),
+		OccurrenceDateTime: m.OccurrenceDateTime.Clone(),
+		OccurrencePeriod: m.OccurrencePeriod.Clone(),
+		OccurrenceTiming: m.OccurrenceTiming.Clone(),
+		AuthoredOn: m.AuthoredOn.Clone(),
+		Requester: m.Requester.Clone(),
+		Supplier: cloneSlices(m.Supplier),
+		ReasonCode: cloneSlices(m.ReasonCode),
+		ReasonReference: cloneSlices(m.ReasonReference),
+		DeliverFrom: m.DeliverFrom.Clone(),
+		DeliverTo: m.DeliverTo.Clone(),
 	}
 }
+
+// Equals checks for equality with another SupplyRequest instance
+func (m *SupplyRequest) Equals(other *SupplyRequest) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Category.Equals(other.Category) { return false }
+	if !m.Priority.Equals(other.Priority) { return false }
+	if !m.ItemCodeableConcept.Equals(other.ItemCodeableConcept) { return false }
+	if !m.ItemReference.Equals(other.ItemReference) { return false }
+	if !m.Quantity.Equals(other.Quantity) { return false }
+	if !compareSlices(m.Parameter, other.Parameter) { return false }
+	if !m.OccurrenceDateTime.Equals(other.OccurrenceDateTime) { return false }
+	if !m.OccurrencePeriod.Equals(other.OccurrencePeriod) { return false }
+	if !m.OccurrenceTiming.Equals(other.OccurrenceTiming) { return false }
+	if !m.AuthoredOn.Equals(other.AuthoredOn) { return false }
+	if !m.Requester.Equals(other.Requester) { return false }
+	if !compareSlices(m.Supplier, other.Supplier) { return false }
+	if !compareSlices(m.ReasonCode, other.ReasonCode) { return false }
+	if !compareSlices(m.ReasonReference, other.ReasonReference) { return false }
+	if !m.DeliverFrom.Equals(other.DeliverFrom) { return false }
+	if !m.DeliverTo.Equals(other.DeliverTo) { return false }
+	return true
+}
+
 // SupplyRequestParameter
 // Specific parameters for the ordered item.  For example, the size of the indicated item.
 type SupplyRequestParameter struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// A code or string that identifies the device detail being asserted.
-	Code CodeableConcept `json:"code,omitempty"`
-	// valueCodeableConcept
-	// The value of the device detail.
-	ValueCodeableConcept CodeableConcept `json:"valueCodeableConcept,omitempty"`
-	// valueQuantity
-	// The value of the device detail.
-	ValueQuantity Quantity `json:"valueQuantity,omitempty"`
-	// valueRange
-	// The value of the device detail.
-	ValueRange Range `json:"valueRange,omitempty"`
-	// valueBoolean
-	// The value of the device detail.
-	ValueBoolean FhirBoolean `json:"valueBoolean,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *CodeableConcept `json:"code,omitempty"`
+	ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+	ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+	ValueRange *Range `json:"valuerange,omitempty"`
+	ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
 }
 
 // NewSupplyRequestParameter creates a new SupplyRequestParameter instance
-func NewSupplyRequestParameter(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code CodeableConcept,
-	valueCodeableConcept CodeableConcept,
-	valueQuantity Quantity,
-	valueRange Range,
-	valueBoolean FhirBoolean,
-) *SupplyRequestParameter {
-	return &SupplyRequestParameter{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		ValueCodeableConcept: valueCodeableConcept,
-		ValueQuantity: valueQuantity,
-		ValueRange: valueRange,
-		ValueBoolean: valueBoolean,
-	}
+func NewSupplyRequestParameter() *SupplyRequestParameter {
+	return &SupplyRequestParameter{}
 }
+
 // FromJSON populates SupplyRequestParameter from JSON data
 func (m *SupplyRequestParameter) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -361,49 +147,33 @@ func (m *SupplyRequestParameter) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SupplyRequestParameter
-func (m *SupplyRequestParameter) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *CodeableConcept,
-	valueCodeableConcept *CodeableConcept,
-	valueQuantity *Quantity,
-	valueRange *Range,
-	valueBoolean *FhirBoolean,
-) *SupplyRequestParameter {
+// Clone creates a deep copy of SupplyRequestParameter
+func (m *SupplyRequestParameter) Clone() *SupplyRequestParameter {
+	if m == nil { return nil }
 	return &SupplyRequestParameter{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() CodeableConcept {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		ValueCodeableConcept: func() CodeableConcept {
-			if valueCodeableConcept != nil { return *valueCodeableConcept }
-			return m.ValueCodeableConcept
-		}(),
-		ValueQuantity: func() Quantity {
-			if valueQuantity != nil { return *valueQuantity }
-			return m.ValueQuantity
-		}(),
-		ValueRange: func() Range {
-			if valueRange != nil { return *valueRange }
-			return m.ValueRange
-		}(),
-		ValueBoolean: func() FhirBoolean {
-			if valueBoolean != nil { return *valueBoolean }
-			return m.ValueBoolean
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		ValueCodeableConcept: m.ValueCodeableConcept.Clone(),
+		ValueQuantity: m.ValueQuantity.Clone(),
+		ValueRange: m.ValueRange.Clone(),
+		ValueBoolean: m.ValueBoolean.Clone(),
 	}
 }
+
+// Equals checks for equality with another SupplyRequestParameter instance
+func (m *SupplyRequestParameter) Equals(other *SupplyRequestParameter) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.ValueCodeableConcept.Equals(other.ValueCodeableConcept) { return false }
+	if !m.ValueQuantity.Equals(other.ValueQuantity) { return false }
+	if !m.ValueRange.Equals(other.ValueRange) { return false }
+	if !m.ValueBoolean.Equals(other.ValueBoolean) { return false }
+	return true
+}
+

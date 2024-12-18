@@ -3,149 +3,44 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // NutritionOrder
 // A request to supply a diet, formula feeding (enteral) or oral nutritional supplement to a patient/resident.
 type NutritionOrder struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// Identifiers assigned to this order by the order sender or by the order receiver.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// instantiatesCanonical
-	// The URL pointing to a FHIR-defined protocol, guideline, orderset or other definition that is adhered to in whole or in part by this NutritionOrder.
-	InstantiatesCanonical []FhirCanonical `json:"instantiatesCanonical,omitempty"`
-	// instantiatesUri
-	// The URL pointing to an externally maintained protocol, guideline, orderset or other definition that is adhered to in whole or in part by this NutritionOrder.
-	InstantiatesUri []FhirUri `json:"instantiatesUri,omitempty"`
-	// instantiates
-	// The URL pointing to a protocol, guideline, orderset or other definition that is adhered to in whole or in part by this NutritionOrder.
-	Instantiates []FhirUri `json:"instantiates,omitempty"`
-	// status
-	// The workflow status of the nutrition order/request.
-	Status RequestStatus `json:"status,omitempty"`
-	// intent
-	// Indicates the level of authority/intentionality associated with the NutrionOrder and where the request fits into the workflow chain.
-	Intent RequestIntent `json:"intent,omitempty"`
-	// patient
-	// The person (patient) who needs the nutrition order for an oral diet, nutritional supplement and/or enteral or formula feeding.
-	Patient Reference `json:"patient,omitempty"`
-	// encounter
-	// An encounter that provides additional information about the healthcare context in which this request is made.
-	Encounter Reference `json:"encounter,omitempty"`
-	// dateTime
-	// The date and time that this nutrition order was requested.
-	DateTime FhirDateTime `json:"dateTime,omitempty"`
-	// orderer
-	// The practitioner that holds legal responsibility for ordering the diet, nutritional supplement, or formula feedings.
-	Orderer Reference `json:"orderer,omitempty"`
-	// allergyIntolerance
-	// A link to a record of allergies or intolerances  which should be included in the nutrition order.
-	AllergyIntolerance []Reference `json:"allergyIntolerance,omitempty"`
-	// foodPreferenceModifier
-	// This modifier is used to convey order-specific modifiers about the type of food that should be given. These can be derived from patient allergies, intolerances, or preferences such as Halal, Vegan or Kosher. This modifier applies to the entire nutrition order inclusive of the oral diet, nutritional supplements and enteral formula feedings.
-	FoodPreferenceModifier []CodeableConcept `json:"foodPreferenceModifier,omitempty"`
-	// excludeFoodModifier
-	// This modifier is used to convey Order-specific modifier about the type of oral food or oral fluids that should not be given. These can be derived from patient allergies, intolerances, or preferences such as No Red Meat, No Soy or No Wheat or  Gluten-Free.  While it should not be necessary to repeat allergy or intolerance information captured in the referenced AllergyIntolerance resource in the excludeFoodModifier, this element may be used to convey additional specificity related to foods that should be eliminated from the patient’s diet for any reason.  This modifier applies to the entire nutrition order inclusive of the oral diet, nutritional supplements and enteral formula feedings.
-	ExcludeFoodModifier []CodeableConcept `json:"excludeFoodModifier,omitempty"`
-	// oralDiet
-	// Diet given orally in contrast to enteral (tube) feeding.
-	OralDiet NutritionOrderOralDiet `json:"oralDiet,omitempty"`
-	// supplement
-	// Oral nutritional products given in order to add further nutritional value to the patient's diet.
-	Supplement []NutritionOrderSupplement `json:"supplement,omitempty"`
-	// enteralFormula
-	// Feeding provided through the gastrointestinal tract via a tube, catheter, or stoma that delivers nutrition distal to the oral cavity.
-	EnteralFormula NutritionOrderEnteralFormula `json:"enteralFormula,omitempty"`
-	// note
-	// Comments made about the {{title}} by the requester, performer, subject or other participants.
-	Note []Annotation `json:"note,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	InstantiatesCanonical []*FhirCanonical `json:"instantiatescanonical,omitempty"`
+	InstantiatesUri []*FhirUri `json:"instantiatesuri,omitempty"`
+	Instantiates []*FhirUri `json:"instantiates,omitempty"`
+	Status *RequestStatus `json:"status,omitempty"`
+	Intent *RequestIntent `json:"intent,omitempty"`
+	Patient *Reference `json:"patient,omitempty"`
+	Encounter *Reference `json:"encounter,omitempty"`
+	DateTime *FhirDateTime `json:"datetime,omitempty"`
+	Orderer *Reference `json:"orderer,omitempty"`
+	AllergyIntolerance []*Reference `json:"allergyintolerance,omitempty"`
+	FoodPreferenceModifier []*CodeableConcept `json:"foodpreferencemodifier,omitempty"`
+	ExcludeFoodModifier []*CodeableConcept `json:"excludefoodmodifier,omitempty"`
+	OralDiet *NutritionOrderOralDiet `json:"oraldiet,omitempty"`
+	Supplement []*NutritionOrderSupplement `json:"supplement,omitempty"`
+	EnteralFormula *NutritionOrderEnteralFormula `json:"enteralformula,omitempty"`
+	Note []*Annotation `json:"note,omitempty"`
 }
 
 // NewNutritionOrder creates a new NutritionOrder instance
-func NewNutritionOrder(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	instantiatesCanonical []FhirCanonical,
-	instantiatesUri []FhirUri,
-	instantiates []FhirUri,
-	status RequestStatus,
-	intent RequestIntent,
-	patient Reference,
-	encounter Reference,
-	dateTime FhirDateTime,
-	orderer Reference,
-	allergyIntolerance []Reference,
-	foodPreferenceModifier []CodeableConcept,
-	excludeFoodModifier []CodeableConcept,
-	oralDiet NutritionOrderOralDiet,
-	supplement []NutritionOrderSupplement,
-	enteralFormula NutritionOrderEnteralFormula,
-	note []Annotation,
-) *NutritionOrder {
-	return &NutritionOrder{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		InstantiatesCanonical: instantiatesCanonical,
-		InstantiatesUri: instantiatesUri,
-		Instantiates: instantiates,
-		Status: status,
-		Intent: intent,
-		Patient: patient,
-		Encounter: encounter,
-		DateTime: dateTime,
-		Orderer: orderer,
-		AllergyIntolerance: allergyIntolerance,
-		FoodPreferenceModifier: foodPreferenceModifier,
-		ExcludeFoodModifier: excludeFoodModifier,
-		OralDiet: oralDiet,
-		Supplement: supplement,
-		EnteralFormula: enteralFormula,
-		Note: note,
-	}
+func NewNutritionOrder() *NutritionOrder {
+	return &NutritionOrder{}
 }
+
 // FromJSON populates NutritionOrder from JSON data
 func (m *NutritionOrder) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -156,196 +51,90 @@ func (m *NutritionOrder) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of NutritionOrder
-func (m *NutritionOrder) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	instantiatesCanonical *[]FhirCanonical,
-	instantiatesUri *[]FhirUri,
-	instantiates *[]FhirUri,
-	status *RequestStatus,
-	intent *RequestIntent,
-	patient *Reference,
-	encounter *Reference,
-	dateTime *FhirDateTime,
-	orderer *Reference,
-	allergyIntolerance *[]Reference,
-	foodPreferenceModifier *[]CodeableConcept,
-	excludeFoodModifier *[]CodeableConcept,
-	oralDiet *NutritionOrderOralDiet,
-	supplement *[]NutritionOrderSupplement,
-	enteralFormula *NutritionOrderEnteralFormula,
-	note *[]Annotation,
-) *NutritionOrder {
+// Clone creates a deep copy of NutritionOrder
+func (m *NutritionOrder) Clone() *NutritionOrder {
+	if m == nil { return nil }
 	return &NutritionOrder{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		InstantiatesCanonical: func() []FhirCanonical {
-			if instantiatesCanonical != nil { return *instantiatesCanonical }
-			return m.InstantiatesCanonical
-		}(),
-		InstantiatesUri: func() []FhirUri {
-			if instantiatesUri != nil { return *instantiatesUri }
-			return m.InstantiatesUri
-		}(),
-		Instantiates: func() []FhirUri {
-			if instantiates != nil { return *instantiates }
-			return m.Instantiates
-		}(),
-		Status: func() RequestStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Intent: func() RequestIntent {
-			if intent != nil { return *intent }
-			return m.Intent
-		}(),
-		Patient: func() Reference {
-			if patient != nil { return *patient }
-			return m.Patient
-		}(),
-		Encounter: func() Reference {
-			if encounter != nil { return *encounter }
-			return m.Encounter
-		}(),
-		DateTime: func() FhirDateTime {
-			if dateTime != nil { return *dateTime }
-			return m.DateTime
-		}(),
-		Orderer: func() Reference {
-			if orderer != nil { return *orderer }
-			return m.Orderer
-		}(),
-		AllergyIntolerance: func() []Reference {
-			if allergyIntolerance != nil { return *allergyIntolerance }
-			return m.AllergyIntolerance
-		}(),
-		FoodPreferenceModifier: func() []CodeableConcept {
-			if foodPreferenceModifier != nil { return *foodPreferenceModifier }
-			return m.FoodPreferenceModifier
-		}(),
-		ExcludeFoodModifier: func() []CodeableConcept {
-			if excludeFoodModifier != nil { return *excludeFoodModifier }
-			return m.ExcludeFoodModifier
-		}(),
-		OralDiet: func() NutritionOrderOralDiet {
-			if oralDiet != nil { return *oralDiet }
-			return m.OralDiet
-		}(),
-		Supplement: func() []NutritionOrderSupplement {
-			if supplement != nil { return *supplement }
-			return m.Supplement
-		}(),
-		EnteralFormula: func() NutritionOrderEnteralFormula {
-			if enteralFormula != nil { return *enteralFormula }
-			return m.EnteralFormula
-		}(),
-		Note: func() []Annotation {
-			if note != nil { return *note }
-			return m.Note
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		InstantiatesCanonical: cloneSlices(m.InstantiatesCanonical),
+		InstantiatesUri: cloneSlices(m.InstantiatesUri),
+		Instantiates: cloneSlices(m.Instantiates),
+		Status: m.Status.Clone(),
+		Intent: m.Intent.Clone(),
+		Patient: m.Patient.Clone(),
+		Encounter: m.Encounter.Clone(),
+		DateTime: m.DateTime.Clone(),
+		Orderer: m.Orderer.Clone(),
+		AllergyIntolerance: cloneSlices(m.AllergyIntolerance),
+		FoodPreferenceModifier: cloneSlices(m.FoodPreferenceModifier),
+		ExcludeFoodModifier: cloneSlices(m.ExcludeFoodModifier),
+		OralDiet: m.OralDiet.Clone(),
+		Supplement: cloneSlices(m.Supplement),
+		EnteralFormula: m.EnteralFormula.Clone(),
+		Note: cloneSlices(m.Note),
 	}
 }
+
+// Equals checks for equality with another NutritionOrder instance
+func (m *NutritionOrder) Equals(other *NutritionOrder) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !compareSlices(m.InstantiatesCanonical, other.InstantiatesCanonical) { return false }
+	if !compareSlices(m.InstantiatesUri, other.InstantiatesUri) { return false }
+	if !compareSlices(m.Instantiates, other.Instantiates) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Intent.Equals(other.Intent) { return false }
+	if !m.Patient.Equals(other.Patient) { return false }
+	if !m.Encounter.Equals(other.Encounter) { return false }
+	if !m.DateTime.Equals(other.DateTime) { return false }
+	if !m.Orderer.Equals(other.Orderer) { return false }
+	if !compareSlices(m.AllergyIntolerance, other.AllergyIntolerance) { return false }
+	if !compareSlices(m.FoodPreferenceModifier, other.FoodPreferenceModifier) { return false }
+	if !compareSlices(m.ExcludeFoodModifier, other.ExcludeFoodModifier) { return false }
+	if !m.OralDiet.Equals(other.OralDiet) { return false }
+	if !compareSlices(m.Supplement, other.Supplement) { return false }
+	if !m.EnteralFormula.Equals(other.EnteralFormula) { return false }
+	if !compareSlices(m.Note, other.Note) { return false }
+	return true
+}
+
 // NutritionOrderOralDiet
 // Diet given orally in contrast to enteral (tube) feeding.
 type NutritionOrderOralDiet struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// The kind of diet or dietary restriction such as fiber restricted diet or diabetic diet.
-	Type_ []CodeableConcept `json:"type,omitempty"`
-	// schedule
-	// The time period and frequency at which the diet should be given.  The diet should be given for the combination of all schedules if more than one schedule is present.
-	Schedule []Timing `json:"schedule,omitempty"`
-	// nutrient
-	// Class that defines the quantity and type of nutrient modifications (for example carbohydrate, fiber or sodium) required for the oral diet.
-	Nutrient []NutritionOrderNutrient `json:"nutrient,omitempty"`
-	// texture
-	// Class that describes any texture modifications required for the patient to safely consume various types of solid foods.
-	Texture []NutritionOrderTexture `json:"texture,omitempty"`
-	// fluidConsistencyType
-	// The required consistency (e.g. honey-thick, nectar-thick, thin, thickened.) of liquids or fluids served to the patient.
-	FluidConsistencyType []CodeableConcept `json:"fluidConsistencyType,omitempty"`
-	// instruction
-	// Free text or additional instructions or information pertaining to the oral diet.
-	Instruction FhirString `json:"instruction,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type []*CodeableConcept `json:"type,omitempty"`
+	Schedule []*Timing `json:"schedule,omitempty"`
+	Nutrient []*NutritionOrderNutrient `json:"nutrient,omitempty"`
+	Texture []*NutritionOrderTexture `json:"texture,omitempty"`
+	FluidConsistencyType []*CodeableConcept `json:"fluidconsistencytype,omitempty"`
+	Instruction *FhirString `json:"instruction,omitempty"`
 }
 
 // NewNutritionOrderOralDiet creates a new NutritionOrderOralDiet instance
-func NewNutritionOrderOralDiet(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ []CodeableConcept,
-	schedule []Timing,
-	nutrient []NutritionOrderNutrient,
-	texture []NutritionOrderTexture,
-	fluidConsistencyType []CodeableConcept,
-	instruction FhirString,
-) *NutritionOrderOralDiet {
-	return &NutritionOrderOralDiet{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Schedule: schedule,
-		Nutrient: nutrient,
-		Texture: texture,
-		FluidConsistencyType: fluidConsistencyType,
-		Instruction: instruction,
-	}
+func NewNutritionOrderOralDiet() *NutritionOrderOralDiet {
+	return &NutritionOrderOralDiet{}
 }
+
 // FromJSON populates NutritionOrderOralDiet from JSON data
 func (m *NutritionOrderOralDiet) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -356,96 +145,54 @@ func (m *NutritionOrderOralDiet) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of NutritionOrderOralDiet
-func (m *NutritionOrderOralDiet) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *[]CodeableConcept,
-	schedule *[]Timing,
-	nutrient *[]NutritionOrderNutrient,
-	texture *[]NutritionOrderTexture,
-	fluidConsistencyType *[]CodeableConcept,
-	instruction *FhirString,
-) *NutritionOrderOralDiet {
+// Clone creates a deep copy of NutritionOrderOralDiet
+func (m *NutritionOrderOralDiet) Clone() *NutritionOrderOralDiet {
+	if m == nil { return nil }
 	return &NutritionOrderOralDiet{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() []CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Schedule: func() []Timing {
-			if schedule != nil { return *schedule }
-			return m.Schedule
-		}(),
-		Nutrient: func() []NutritionOrderNutrient {
-			if nutrient != nil { return *nutrient }
-			return m.Nutrient
-		}(),
-		Texture: func() []NutritionOrderTexture {
-			if texture != nil { return *texture }
-			return m.Texture
-		}(),
-		FluidConsistencyType: func() []CodeableConcept {
-			if fluidConsistencyType != nil { return *fluidConsistencyType }
-			return m.FluidConsistencyType
-		}(),
-		Instruction: func() FhirString {
-			if instruction != nil { return *instruction }
-			return m.Instruction
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: cloneSlices(m.Type),
+		Schedule: cloneSlices(m.Schedule),
+		Nutrient: cloneSlices(m.Nutrient),
+		Texture: cloneSlices(m.Texture),
+		FluidConsistencyType: cloneSlices(m.FluidConsistencyType),
+		Instruction: m.Instruction.Clone(),
 	}
 }
+
+// Equals checks for equality with another NutritionOrderOralDiet instance
+func (m *NutritionOrderOralDiet) Equals(other *NutritionOrderOralDiet) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Type, other.Type) { return false }
+	if !compareSlices(m.Schedule, other.Schedule) { return false }
+	if !compareSlices(m.Nutrient, other.Nutrient) { return false }
+	if !compareSlices(m.Texture, other.Texture) { return false }
+	if !compareSlices(m.FluidConsistencyType, other.FluidConsistencyType) { return false }
+	if !m.Instruction.Equals(other.Instruction) { return false }
+	return true
+}
+
 // NutritionOrderNutrient
 // Class that defines the quantity and type of nutrient modifications (for example carbohydrate, fiber or sodium) required for the oral diet.
 type NutritionOrderNutrient struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// modifier
-	// The nutrient that is being modified such as carbohydrate or sodium.
-	Modifier CodeableConcept `json:"modifier,omitempty"`
-	// amount
-	// The quantity of the specified nutrient to include in diet.
-	Amount Quantity `json:"amount,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Modifier *CodeableConcept `json:"modifier,omitempty"`
+	Amount *Quantity `json:"amount,omitempty"`
 }
 
 // NewNutritionOrderNutrient creates a new NutritionOrderNutrient instance
-func NewNutritionOrderNutrient(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	modifier CodeableConcept,
-	amount Quantity,
-) *NutritionOrderNutrient {
-	return &NutritionOrderNutrient{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Modifier: modifier,
-		Amount: amount,
-	}
+func NewNutritionOrderNutrient() *NutritionOrderNutrient {
+	return &NutritionOrderNutrient{}
 }
+
 // FromJSON populates NutritionOrderNutrient from JSON data
 func (m *NutritionOrderNutrient) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -456,76 +203,46 @@ func (m *NutritionOrderNutrient) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of NutritionOrderNutrient
-func (m *NutritionOrderNutrient) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	modifier *CodeableConcept,
-	amount *Quantity,
-) *NutritionOrderNutrient {
+// Clone creates a deep copy of NutritionOrderNutrient
+func (m *NutritionOrderNutrient) Clone() *NutritionOrderNutrient {
+	if m == nil { return nil }
 	return &NutritionOrderNutrient{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Modifier: func() CodeableConcept {
-			if modifier != nil { return *modifier }
-			return m.Modifier
-		}(),
-		Amount: func() Quantity {
-			if amount != nil { return *amount }
-			return m.Amount
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Modifier: m.Modifier.Clone(),
+		Amount: m.Amount.Clone(),
 	}
 }
+
+// Equals checks for equality with another NutritionOrderNutrient instance
+func (m *NutritionOrderNutrient) Equals(other *NutritionOrderNutrient) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Modifier.Equals(other.Modifier) { return false }
+	if !m.Amount.Equals(other.Amount) { return false }
+	return true
+}
+
 // NutritionOrderTexture
 // Class that describes any texture modifications required for the patient to safely consume various types of solid foods.
 type NutritionOrderTexture struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// modifier
-	// Any texture modifications (for solid foods) that should be made, e.g. easy to chew, chopped, ground, and pureed.
-	Modifier CodeableConcept `json:"modifier,omitempty"`
-	// foodType
-	// The food type(s) (e.g. meats, all foods)  that the texture modification applies to.  This could be all foods types.
-	FoodType CodeableConcept `json:"foodType,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Modifier *CodeableConcept `json:"modifier,omitempty"`
+	FoodType *CodeableConcept `json:"foodtype,omitempty"`
 }
 
 // NewNutritionOrderTexture creates a new NutritionOrderTexture instance
-func NewNutritionOrderTexture(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	modifier CodeableConcept,
-	foodType CodeableConcept,
-) *NutritionOrderTexture {
-	return &NutritionOrderTexture{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Modifier: modifier,
-		FoodType: foodType,
-	}
+func NewNutritionOrderTexture() *NutritionOrderTexture {
+	return &NutritionOrderTexture{}
 }
+
 // FromJSON populates NutritionOrderTexture from JSON data
 func (m *NutritionOrderTexture) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -536,91 +253,49 @@ func (m *NutritionOrderTexture) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of NutritionOrderTexture
-func (m *NutritionOrderTexture) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	modifier *CodeableConcept,
-	foodType *CodeableConcept,
-) *NutritionOrderTexture {
+// Clone creates a deep copy of NutritionOrderTexture
+func (m *NutritionOrderTexture) Clone() *NutritionOrderTexture {
+	if m == nil { return nil }
 	return &NutritionOrderTexture{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Modifier: func() CodeableConcept {
-			if modifier != nil { return *modifier }
-			return m.Modifier
-		}(),
-		FoodType: func() CodeableConcept {
-			if foodType != nil { return *foodType }
-			return m.FoodType
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Modifier: m.Modifier.Clone(),
+		FoodType: m.FoodType.Clone(),
 	}
 }
+
+// Equals checks for equality with another NutritionOrderTexture instance
+func (m *NutritionOrderTexture) Equals(other *NutritionOrderTexture) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Modifier.Equals(other.Modifier) { return false }
+	if !m.FoodType.Equals(other.FoodType) { return false }
+	return true
+}
+
 // NutritionOrderSupplement
 // Oral nutritional products given in order to add further nutritional value to the patient's diet.
 type NutritionOrderSupplement struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// The kind of nutritional supplement product required such as a high protein or pediatric clear liquid supplement.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// productName
-	// The product or brand name of the nutritional supplement such as "Acme Protein Shake".
-	ProductName FhirString `json:"productName,omitempty"`
-	// schedule
-	// The time period and frequency at which the supplement(s) should be given.  The supplement should be given for the combination of all schedules if more than one schedule is present.
-	Schedule []Timing `json:"schedule,omitempty"`
-	// quantity
-	// The amount of the nutritional supplement to be given.
-	Quantity Quantity `json:"quantity,omitempty"`
-	// instruction
-	// Free text or additional instructions or information pertaining to the oral supplement.
-	Instruction FhirString `json:"instruction,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	ProductName *FhirString `json:"productname,omitempty"`
+	Schedule []*Timing `json:"schedule,omitempty"`
+	Quantity *Quantity `json:"quantity,omitempty"`
+	Instruction *FhirString `json:"instruction,omitempty"`
 }
 
 // NewNutritionOrderSupplement creates a new NutritionOrderSupplement instance
-func NewNutritionOrderSupplement(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	productName FhirString,
-	schedule []Timing,
-	quantity Quantity,
-	instruction FhirString,
-) *NutritionOrderSupplement {
-	return &NutritionOrderSupplement{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		ProductName: productName,
-		Schedule: schedule,
-		Quantity: quantity,
-		Instruction: instruction,
-	}
+func NewNutritionOrderSupplement() *NutritionOrderSupplement {
+	return &NutritionOrderSupplement{}
 }
+
 // FromJSON populates NutritionOrderSupplement from JSON data
 func (m *NutritionOrderSupplement) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -631,126 +306,59 @@ func (m *NutritionOrderSupplement) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of NutritionOrderSupplement
-func (m *NutritionOrderSupplement) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	productName *FhirString,
-	schedule *[]Timing,
-	quantity *Quantity,
-	instruction *FhirString,
-) *NutritionOrderSupplement {
+// Clone creates a deep copy of NutritionOrderSupplement
+func (m *NutritionOrderSupplement) Clone() *NutritionOrderSupplement {
+	if m == nil { return nil }
 	return &NutritionOrderSupplement{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		ProductName: func() FhirString {
-			if productName != nil { return *productName }
-			return m.ProductName
-		}(),
-		Schedule: func() []Timing {
-			if schedule != nil { return *schedule }
-			return m.Schedule
-		}(),
-		Quantity: func() Quantity {
-			if quantity != nil { return *quantity }
-			return m.Quantity
-		}(),
-		Instruction: func() FhirString {
-			if instruction != nil { return *instruction }
-			return m.Instruction
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		ProductName: m.ProductName.Clone(),
+		Schedule: cloneSlices(m.Schedule),
+		Quantity: m.Quantity.Clone(),
+		Instruction: m.Instruction.Clone(),
 	}
 }
+
+// Equals checks for equality with another NutritionOrderSupplement instance
+func (m *NutritionOrderSupplement) Equals(other *NutritionOrderSupplement) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.ProductName.Equals(other.ProductName) { return false }
+	if !compareSlices(m.Schedule, other.Schedule) { return false }
+	if !m.Quantity.Equals(other.Quantity) { return false }
+	if !m.Instruction.Equals(other.Instruction) { return false }
+	return true
+}
+
 // NutritionOrderEnteralFormula
 // Feeding provided through the gastrointestinal tract via a tube, catheter, or stoma that delivers nutrition distal to the oral cavity.
 type NutritionOrderEnteralFormula struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// baseFormulaType
-	// The type of enteral or infant formula such as an adult standard formula with fiber or a soy-based infant formula.
-	BaseFormulaType CodeableConcept `json:"baseFormulaType,omitempty"`
-	// baseFormulaProductName
-	// The product or brand name of the enteral or infant formula product such as "ACME Adult Standard Formula".
-	BaseFormulaProductName FhirString `json:"baseFormulaProductName,omitempty"`
-	// additiveType
-	// Indicates the type of modular component such as protein, carbohydrate, fat or fiber to be provided in addition to or mixed with the base formula.
-	AdditiveType CodeableConcept `json:"additiveType,omitempty"`
-	// additiveProductName
-	// The product or brand name of the type of modular component to be added to the formula.
-	AdditiveProductName FhirString `json:"additiveProductName,omitempty"`
-	// caloricDensity
-	// The amount of energy (calories) that the formula should provide per specified volume, typically per mL or fluid oz.  For example, an infant may require a formula that provides 24 calories per fluid ounce or an adult may require an enteral formula that provides 1.5 calorie/mL.
-	CaloricDensity Quantity `json:"caloricDensity,omitempty"`
-	// routeofAdministration
-	// The route or physiological path of administration into the patient's gastrointestinal  tract for purposes of providing the formula feeding, e.g. nasogastric tube.
-	RouteofAdministration CodeableConcept `json:"routeofAdministration,omitempty"`
-	// administration
-	// Formula administration instructions as structured data.  This repeating structure allows for changing the administration rate or volume over time for both bolus and continuous feeding.  An example of this would be an instruction to increase the rate of continuous feeding every 2 hours.
-	Administration []NutritionOrderAdministration `json:"administration,omitempty"`
-	// maxVolumeToDeliver
-	// The maximum total quantity of formula that may be administered to a subject over the period of time, e.g. 1440 mL over 24 hours.
-	MaxVolumeToDeliver Quantity `json:"maxVolumeToDeliver,omitempty"`
-	// administrationInstruction
-	// Free text formula administration, feeding instructions or additional instructions or information.
-	AdministrationInstruction FhirString `json:"administrationInstruction,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	BaseFormulaType *CodeableConcept `json:"baseformulatype,omitempty"`
+	BaseFormulaProductName *FhirString `json:"baseformulaproductname,omitempty"`
+	AdditiveType *CodeableConcept `json:"additivetype,omitempty"`
+	AdditiveProductName *FhirString `json:"additiveproductname,omitempty"`
+	CaloricDensity *Quantity `json:"caloricdensity,omitempty"`
+	RouteofAdministration *CodeableConcept `json:"routeofadministration,omitempty"`
+	Administration []*NutritionOrderAdministration `json:"administration,omitempty"`
+	MaxVolumeToDeliver *Quantity `json:"maxvolumetodeliver,omitempty"`
+	AdministrationInstruction *FhirString `json:"administrationinstruction,omitempty"`
 }
 
 // NewNutritionOrderEnteralFormula creates a new NutritionOrderEnteralFormula instance
-func NewNutritionOrderEnteralFormula(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	baseFormulaType CodeableConcept,
-	baseFormulaProductName FhirString,
-	additiveType CodeableConcept,
-	additiveProductName FhirString,
-	caloricDensity Quantity,
-	routeofAdministration CodeableConcept,
-	administration []NutritionOrderAdministration,
-	maxVolumeToDeliver Quantity,
-	administrationInstruction FhirString,
-) *NutritionOrderEnteralFormula {
-	return &NutritionOrderEnteralFormula{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		BaseFormulaType: baseFormulaType,
-		BaseFormulaProductName: baseFormulaProductName,
-		AdditiveType: additiveType,
-		AdditiveProductName: additiveProductName,
-		CaloricDensity: caloricDensity,
-		RouteofAdministration: routeofAdministration,
-		Administration: administration,
-		MaxVolumeToDeliver: maxVolumeToDeliver,
-		AdministrationInstruction: administrationInstruction,
-	}
+func NewNutritionOrderEnteralFormula() *NutritionOrderEnteralFormula {
+	return &NutritionOrderEnteralFormula{}
 }
+
 // FromJSON populates NutritionOrderEnteralFormula from JSON data
 func (m *NutritionOrderEnteralFormula) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -761,121 +369,62 @@ func (m *NutritionOrderEnteralFormula) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of NutritionOrderEnteralFormula
-func (m *NutritionOrderEnteralFormula) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	baseFormulaType *CodeableConcept,
-	baseFormulaProductName *FhirString,
-	additiveType *CodeableConcept,
-	additiveProductName *FhirString,
-	caloricDensity *Quantity,
-	routeofAdministration *CodeableConcept,
-	administration *[]NutritionOrderAdministration,
-	maxVolumeToDeliver *Quantity,
-	administrationInstruction *FhirString,
-) *NutritionOrderEnteralFormula {
+// Clone creates a deep copy of NutritionOrderEnteralFormula
+func (m *NutritionOrderEnteralFormula) Clone() *NutritionOrderEnteralFormula {
+	if m == nil { return nil }
 	return &NutritionOrderEnteralFormula{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		BaseFormulaType: func() CodeableConcept {
-			if baseFormulaType != nil { return *baseFormulaType }
-			return m.BaseFormulaType
-		}(),
-		BaseFormulaProductName: func() FhirString {
-			if baseFormulaProductName != nil { return *baseFormulaProductName }
-			return m.BaseFormulaProductName
-		}(),
-		AdditiveType: func() CodeableConcept {
-			if additiveType != nil { return *additiveType }
-			return m.AdditiveType
-		}(),
-		AdditiveProductName: func() FhirString {
-			if additiveProductName != nil { return *additiveProductName }
-			return m.AdditiveProductName
-		}(),
-		CaloricDensity: func() Quantity {
-			if caloricDensity != nil { return *caloricDensity }
-			return m.CaloricDensity
-		}(),
-		RouteofAdministration: func() CodeableConcept {
-			if routeofAdministration != nil { return *routeofAdministration }
-			return m.RouteofAdministration
-		}(),
-		Administration: func() []NutritionOrderAdministration {
-			if administration != nil { return *administration }
-			return m.Administration
-		}(),
-		MaxVolumeToDeliver: func() Quantity {
-			if maxVolumeToDeliver != nil { return *maxVolumeToDeliver }
-			return m.MaxVolumeToDeliver
-		}(),
-		AdministrationInstruction: func() FhirString {
-			if administrationInstruction != nil { return *administrationInstruction }
-			return m.AdministrationInstruction
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		BaseFormulaType: m.BaseFormulaType.Clone(),
+		BaseFormulaProductName: m.BaseFormulaProductName.Clone(),
+		AdditiveType: m.AdditiveType.Clone(),
+		AdditiveProductName: m.AdditiveProductName.Clone(),
+		CaloricDensity: m.CaloricDensity.Clone(),
+		RouteofAdministration: m.RouteofAdministration.Clone(),
+		Administration: cloneSlices(m.Administration),
+		MaxVolumeToDeliver: m.MaxVolumeToDeliver.Clone(),
+		AdministrationInstruction: m.AdministrationInstruction.Clone(),
 	}
 }
+
+// Equals checks for equality with another NutritionOrderEnteralFormula instance
+func (m *NutritionOrderEnteralFormula) Equals(other *NutritionOrderEnteralFormula) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.BaseFormulaType.Equals(other.BaseFormulaType) { return false }
+	if !m.BaseFormulaProductName.Equals(other.BaseFormulaProductName) { return false }
+	if !m.AdditiveType.Equals(other.AdditiveType) { return false }
+	if !m.AdditiveProductName.Equals(other.AdditiveProductName) { return false }
+	if !m.CaloricDensity.Equals(other.CaloricDensity) { return false }
+	if !m.RouteofAdministration.Equals(other.RouteofAdministration) { return false }
+	if !compareSlices(m.Administration, other.Administration) { return false }
+	if !m.MaxVolumeToDeliver.Equals(other.MaxVolumeToDeliver) { return false }
+	if !m.AdministrationInstruction.Equals(other.AdministrationInstruction) { return false }
+	return true
+}
+
 // NutritionOrderAdministration
 // Formula administration instructions as structured data.  This repeating structure allows for changing the administration rate or volume over time for both bolus and continuous feeding.  An example of this would be an instruction to increase the rate of continuous feeding every 2 hours.
 type NutritionOrderAdministration struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// schedule
-	// The time period and frequency at which the enteral formula should be delivered to the patient.
-	Schedule Timing `json:"schedule,omitempty"`
-	// quantity
-	// The volume of formula to provide to the patient per the specified administration schedule.
-	Quantity Quantity `json:"quantity,omitempty"`
-	// rateQuantity
-	// The rate of administration of formula via a feeding pump, e.g. 60 mL per hour, according to the specified schedule.
-	RateQuantity Quantity `json:"rateQuantity,omitempty"`
-	// rateRatio
-	// The rate of administration of formula via a feeding pump, e.g. 60 mL per hour, according to the specified schedule.
-	RateRatio Ratio `json:"rateRatio,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Schedule *Timing `json:"schedule,omitempty"`
+	Quantity *Quantity `json:"quantity,omitempty"`
+	RateQuantity *Quantity `json:"ratequantity,omitempty"`
+	RateRatio *Ratio `json:"rateratio,omitempty"`
 }
 
 // NewNutritionOrderAdministration creates a new NutritionOrderAdministration instance
-func NewNutritionOrderAdministration(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	schedule Timing,
-	quantity Quantity,
-	rateQuantity Quantity,
-	rateRatio Ratio,
-) *NutritionOrderAdministration {
-	return &NutritionOrderAdministration{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Schedule: schedule,
-		Quantity: quantity,
-		RateQuantity: rateQuantity,
-		RateRatio: rateRatio,
-	}
+func NewNutritionOrderAdministration() *NutritionOrderAdministration {
+	return &NutritionOrderAdministration{}
 }
+
 // FromJSON populates NutritionOrderAdministration from JSON data
 func (m *NutritionOrderAdministration) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -886,44 +435,31 @@ func (m *NutritionOrderAdministration) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of NutritionOrderAdministration
-func (m *NutritionOrderAdministration) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	schedule *Timing,
-	quantity *Quantity,
-	rateQuantity *Quantity,
-	rateRatio *Ratio,
-) *NutritionOrderAdministration {
+// Clone creates a deep copy of NutritionOrderAdministration
+func (m *NutritionOrderAdministration) Clone() *NutritionOrderAdministration {
+	if m == nil { return nil }
 	return &NutritionOrderAdministration{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Schedule: func() Timing {
-			if schedule != nil { return *schedule }
-			return m.Schedule
-		}(),
-		Quantity: func() Quantity {
-			if quantity != nil { return *quantity }
-			return m.Quantity
-		}(),
-		RateQuantity: func() Quantity {
-			if rateQuantity != nil { return *rateQuantity }
-			return m.RateQuantity
-		}(),
-		RateRatio: func() Ratio {
-			if rateRatio != nil { return *rateRatio }
-			return m.RateRatio
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Schedule: m.Schedule.Clone(),
+		Quantity: m.Quantity.Clone(),
+		RateQuantity: m.RateQuantity.Clone(),
+		RateRatio: m.RateRatio.Clone(),
 	}
 }
+
+// Equals checks for equality with another NutritionOrderAdministration instance
+func (m *NutritionOrderAdministration) Equals(other *NutritionOrderAdministration) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Schedule.Equals(other.Schedule) { return false }
+	if !m.Quantity.Equals(other.Quantity) { return false }
+	if !m.RateQuantity.Equals(other.RateQuantity) { return false }
+	if !m.RateRatio.Equals(other.RateRatio) { return false }
+	return true
+}
+

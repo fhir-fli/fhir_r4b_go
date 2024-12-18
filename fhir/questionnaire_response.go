@@ -3,119 +3,38 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // QuestionnaireResponse
 // A structured set of questions and their answers. The questions are ordered and grouped into coherent subsets, corresponding to the structure of the grouping of the questionnaire being responded to.
 type QuestionnaireResponse struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// A business identifier assigned to a particular completed (or partially completed) questionnaire.
-	Identifier Identifier `json:"identifier,omitempty"`
-	// basedOn
-	// The order, proposal or plan that is fulfilled in whole or in part by this QuestionnaireResponse.  For example, a ServiceRequest seeking an intake assessment or a decision support recommendation to assess for post-partum depression.
-	BasedOn []Reference `json:"basedOn,omitempty"`
-	// partOf
-	// A procedure or observation that this questionnaire was performed as part of the execution of.  For example, the surgery a checklist was executed as part of.
-	PartOf []Reference `json:"partOf,omitempty"`
-	// questionnaire
-	// The Questionnaire that defines and organizes the questions for which answers are being provided.
-	Questionnaire FhirCanonical `json:"questionnaire,omitempty"`
-	// status
-	// The position of the questionnaire response within its overall lifecycle.
-	Status QuestionnaireResponseStatus `json:"status,omitempty"`
-	// subject
-	// The subject of the questionnaire response.  This could be a patient, organization, practitioner, device, etc.  This is who/what the answers apply to, but is not necessarily the source of information.
-	Subject Reference `json:"subject,omitempty"`
-	// encounter
-	// The Encounter during which this questionnaire response was created or to which the creation of this record is tightly associated.
-	Encounter Reference `json:"encounter,omitempty"`
-	// authored
-	// The date and/or time that this set of answers were last changed.
-	Authored FhirDateTime `json:"authored,omitempty"`
-	// author
-	// Person who received the answers to the questions in the QuestionnaireResponse and recorded them in the system.
-	Author Reference `json:"author,omitempty"`
-	// source
-	// The person who answered the questions about the subject.
-	Source Reference `json:"source,omitempty"`
-	// item
-	// A group or question item from the original questionnaire for which answers are provided.
-	Item []QuestionnaireResponseItem `json:"item,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier *Identifier `json:"identifier,omitempty"`
+	BasedOn []*Reference `json:"basedon,omitempty"`
+	PartOf []*Reference `json:"partof,omitempty"`
+	Questionnaire *FhirCanonical `json:"questionnaire,omitempty"`
+	Status *QuestionnaireResponseStatus `json:"status,omitempty"`
+	Subject *Reference `json:"subject,omitempty"`
+	Encounter *Reference `json:"encounter,omitempty"`
+	Authored *FhirDateTime `json:"authored,omitempty"`
+	Author *Reference `json:"author,omitempty"`
+	Source *Reference `json:"source,omitempty"`
+	Item []*QuestionnaireResponseItem `json:"item,omitempty"`
 }
 
 // NewQuestionnaireResponse creates a new QuestionnaireResponse instance
-func NewQuestionnaireResponse(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier Identifier,
-	basedOn []Reference,
-	partOf []Reference,
-	questionnaire FhirCanonical,
-	status QuestionnaireResponseStatus,
-	subject Reference,
-	encounter Reference,
-	authored FhirDateTime,
-	author Reference,
-	source Reference,
-	item []QuestionnaireResponseItem,
-) *QuestionnaireResponse {
-	return &QuestionnaireResponse{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		BasedOn: basedOn,
-		PartOf: partOf,
-		Questionnaire: questionnaire,
-		Status: status,
-		Subject: subject,
-		Encounter: encounter,
-		Authored: authored,
-		Author: author,
-		Source: source,
-		Item: item,
-	}
+func NewQuestionnaireResponse() *QuestionnaireResponse {
+	return &QuestionnaireResponse{}
 }
+
 // FromJSON populates QuestionnaireResponse from JSON data
 func (m *QuestionnaireResponse) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -126,161 +45,77 @@ func (m *QuestionnaireResponse) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of QuestionnaireResponse
-func (m *QuestionnaireResponse) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *Identifier,
-	basedOn *[]Reference,
-	partOf *[]Reference,
-	questionnaire *FhirCanonical,
-	status *QuestionnaireResponseStatus,
-	subject *Reference,
-	encounter *Reference,
-	authored *FhirDateTime,
-	author *Reference,
-	source *Reference,
-	item *[]QuestionnaireResponseItem,
-) *QuestionnaireResponse {
+// Clone creates a deep copy of QuestionnaireResponse
+func (m *QuestionnaireResponse) Clone() *QuestionnaireResponse {
+	if m == nil { return nil }
 	return &QuestionnaireResponse{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		BasedOn: func() []Reference {
-			if basedOn != nil { return *basedOn }
-			return m.BasedOn
-		}(),
-		PartOf: func() []Reference {
-			if partOf != nil { return *partOf }
-			return m.PartOf
-		}(),
-		Questionnaire: func() FhirCanonical {
-			if questionnaire != nil { return *questionnaire }
-			return m.Questionnaire
-		}(),
-		Status: func() QuestionnaireResponseStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Subject: func() Reference {
-			if subject != nil { return *subject }
-			return m.Subject
-		}(),
-		Encounter: func() Reference {
-			if encounter != nil { return *encounter }
-			return m.Encounter
-		}(),
-		Authored: func() FhirDateTime {
-			if authored != nil { return *authored }
-			return m.Authored
-		}(),
-		Author: func() Reference {
-			if author != nil { return *author }
-			return m.Author
-		}(),
-		Source: func() Reference {
-			if source != nil { return *source }
-			return m.Source
-		}(),
-		Item: func() []QuestionnaireResponseItem {
-			if item != nil { return *item }
-			return m.Item
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: m.Identifier.Clone(),
+		BasedOn: cloneSlices(m.BasedOn),
+		PartOf: cloneSlices(m.PartOf),
+		Questionnaire: m.Questionnaire.Clone(),
+		Status: m.Status.Clone(),
+		Subject: m.Subject.Clone(),
+		Encounter: m.Encounter.Clone(),
+		Authored: m.Authored.Clone(),
+		Author: m.Author.Clone(),
+		Source: m.Source.Clone(),
+		Item: cloneSlices(m.Item),
 	}
 }
+
+// Equals checks for equality with another QuestionnaireResponse instance
+func (m *QuestionnaireResponse) Equals(other *QuestionnaireResponse) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Identifier.Equals(other.Identifier) { return false }
+	if !compareSlices(m.BasedOn, other.BasedOn) { return false }
+	if !compareSlices(m.PartOf, other.PartOf) { return false }
+	if !m.Questionnaire.Equals(other.Questionnaire) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Subject.Equals(other.Subject) { return false }
+	if !m.Encounter.Equals(other.Encounter) { return false }
+	if !m.Authored.Equals(other.Authored) { return false }
+	if !m.Author.Equals(other.Author) { return false }
+	if !m.Source.Equals(other.Source) { return false }
+	if !compareSlices(m.Item, other.Item) { return false }
+	return true
+}
+
 // QuestionnaireResponseItem
 // A group or question item from the original questionnaire for which answers are provided.
 type QuestionnaireResponseItem struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// linkId
-	// The item from the Questionnaire that corresponds to this item in the QuestionnaireResponse resource.
-	LinkId FhirString `json:"linkId,omitempty"`
-	// definition
-	// A reference to an [ElementDefinition](elementdefinition.html) that provides the details for the item.
-	Definition FhirUri `json:"definition,omitempty"`
-	// text
-	// Text that is displayed above the contents of the group or as the text of the question being answered.
-	Text FhirString `json:"text,omitempty"`
-	// answer
-	// The respondent's answer(s) to the question.
-	Answer []QuestionnaireResponseAnswer `json:"answer,omitempty"`
-	// item
-	// Questions or sub-groups nested beneath a question or group.
-	Item []QuestionnaireResponseItem `json:"item,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	LinkId *FhirString `json:"linkid,omitempty"`
+	Definition *FhirUri `json:"definition,omitempty"`
+	Text *FhirString `json:"text,omitempty"`
+	Answer []*QuestionnaireResponseAnswer `json:"answer,omitempty"`
+	Item []*QuestionnaireResponseItem `json:"item,omitempty"`
 }
 
 // NewQuestionnaireResponseItem creates a new QuestionnaireResponseItem instance
-func NewQuestionnaireResponseItem(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	linkId FhirString,
-	definition FhirUri,
-	text FhirString,
-	answer []QuestionnaireResponseAnswer,
-	item []QuestionnaireResponseItem,
-) *QuestionnaireResponseItem {
-	return &QuestionnaireResponseItem{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		LinkId: linkId,
-		Definition: definition,
-		Text: text,
-		Answer: answer,
-		Item: item,
-	}
+func NewQuestionnaireResponseItem() *QuestionnaireResponseItem {
+	return &QuestionnaireResponseItem{}
 }
+
 // FromJSON populates QuestionnaireResponseItem from JSON data
 func (m *QuestionnaireResponseItem) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -291,146 +126,63 @@ func (m *QuestionnaireResponseItem) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of QuestionnaireResponseItem
-func (m *QuestionnaireResponseItem) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	linkId *FhirString,
-	definition *FhirUri,
-	text *FhirString,
-	answer *[]QuestionnaireResponseAnswer,
-	item *[]QuestionnaireResponseItem,
-) *QuestionnaireResponseItem {
+// Clone creates a deep copy of QuestionnaireResponseItem
+func (m *QuestionnaireResponseItem) Clone() *QuestionnaireResponseItem {
+	if m == nil { return nil }
 	return &QuestionnaireResponseItem{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		LinkId: func() FhirString {
-			if linkId != nil { return *linkId }
-			return m.LinkId
-		}(),
-		Definition: func() FhirUri {
-			if definition != nil { return *definition }
-			return m.Definition
-		}(),
-		Text: func() FhirString {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Answer: func() []QuestionnaireResponseAnswer {
-			if answer != nil { return *answer }
-			return m.Answer
-		}(),
-		Item: func() []QuestionnaireResponseItem {
-			if item != nil { return *item }
-			return m.Item
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		LinkId: m.LinkId.Clone(),
+		Definition: m.Definition.Clone(),
+		Text: m.Text.Clone(),
+		Answer: cloneSlices(m.Answer),
+		Item: cloneSlices(m.Item),
 	}
 }
+
+// Equals checks for equality with another QuestionnaireResponseItem instance
+func (m *QuestionnaireResponseItem) Equals(other *QuestionnaireResponseItem) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.LinkId.Equals(other.LinkId) { return false }
+	if !m.Definition.Equals(other.Definition) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Answer, other.Answer) { return false }
+	if !compareSlices(m.Item, other.Item) { return false }
+	return true
+}
+
 // QuestionnaireResponseAnswer
 // The respondent's answer(s) to the question.
 type QuestionnaireResponseAnswer struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// valueBoolean
-	// The answer (or one of the answers) provided by the respondent to the question.
-	ValueBoolean FhirBoolean `json:"valueBoolean,omitempty"`
-	// valueDecimal
-	// The answer (or one of the answers) provided by the respondent to the question.
-	ValueDecimal FhirDecimal `json:"valueDecimal,omitempty"`
-	// valueInteger
-	// The answer (or one of the answers) provided by the respondent to the question.
-	ValueInteger FhirInteger `json:"valueInteger,omitempty"`
-	// valueDate
-	// The answer (or one of the answers) provided by the respondent to the question.
-	ValueDate FhirDate `json:"valueDate,omitempty"`
-	// valueDateTime
-	// The answer (or one of the answers) provided by the respondent to the question.
-	ValueDateTime FhirDateTime `json:"valueDateTime,omitempty"`
-	// valueTime
-	// The answer (or one of the answers) provided by the respondent to the question.
-	ValueTime FhirTime `json:"valueTime,omitempty"`
-	// valueString
-	// The answer (or one of the answers) provided by the respondent to the question.
-	ValueString FhirString `json:"valueString,omitempty"`
-	// valueUri
-	// The answer (or one of the answers) provided by the respondent to the question.
-	ValueUri FhirUri `json:"valueUri,omitempty"`
-	// valueAttachment
-	// The answer (or one of the answers) provided by the respondent to the question.
-	ValueAttachment Attachment `json:"valueAttachment,omitempty"`
-	// valueCoding
-	// The answer (or one of the answers) provided by the respondent to the question.
-	ValueCoding Coding `json:"valueCoding,omitempty"`
-	// valueQuantity
-	// The answer (or one of the answers) provided by the respondent to the question.
-	ValueQuantity Quantity `json:"valueQuantity,omitempty"`
-	// valueReference
-	// The answer (or one of the answers) provided by the respondent to the question.
-	ValueReference Reference `json:"valueReference,omitempty"`
-	// item
-	// Nested groups and/or questions found within this particular answer.
-	Item []QuestionnaireResponseItem `json:"item,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
+	ValueDecimal *FhirDecimal `json:"valuedecimal,omitempty"`
+	ValueInteger *FhirInteger `json:"valueinteger,omitempty"`
+	ValueDate *FhirDate `json:"valuedate,omitempty"`
+	ValueDateTime *FhirDateTime `json:"valuedatetime,omitempty"`
+	ValueTime *FhirTime `json:"valuetime,omitempty"`
+	ValueString *FhirString `json:"valuestring,omitempty"`
+	ValueUri *FhirUri `json:"valueuri,omitempty"`
+	ValueAttachment *Attachment `json:"valueattachment,omitempty"`
+	ValueCoding *Coding `json:"valuecoding,omitempty"`
+	ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+	ValueReference *Reference `json:"valuereference,omitempty"`
+	Item []*QuestionnaireResponseItem `json:"item,omitempty"`
 }
 
 // NewQuestionnaireResponseAnswer creates a new QuestionnaireResponseAnswer instance
-func NewQuestionnaireResponseAnswer(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	valueBoolean FhirBoolean,
-	valueDecimal FhirDecimal,
-	valueInteger FhirInteger,
-	valueDate FhirDate,
-	valueDateTime FhirDateTime,
-	valueTime FhirTime,
-	valueString FhirString,
-	valueUri FhirUri,
-	valueAttachment Attachment,
-	valueCoding Coding,
-	valueQuantity Quantity,
-	valueReference Reference,
-	item []QuestionnaireResponseItem,
-) *QuestionnaireResponseAnswer {
-	return &QuestionnaireResponseAnswer{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		ValueBoolean: valueBoolean,
-		ValueDecimal: valueDecimal,
-		ValueInteger: valueInteger,
-		ValueDate: valueDate,
-		ValueDateTime: valueDateTime,
-		ValueTime: valueTime,
-		ValueString: valueString,
-		ValueUri: valueUri,
-		ValueAttachment: valueAttachment,
-		ValueCoding: valueCoding,
-		ValueQuantity: valueQuantity,
-		ValueReference: valueReference,
-		Item: item,
-	}
+func NewQuestionnaireResponseAnswer() *QuestionnaireResponseAnswer {
+	return &QuestionnaireResponseAnswer{}
 }
+
 // FromJSON populates QuestionnaireResponseAnswer from JSON data
 func (m *QuestionnaireResponseAnswer) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -441,89 +193,49 @@ func (m *QuestionnaireResponseAnswer) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of QuestionnaireResponseAnswer
-func (m *QuestionnaireResponseAnswer) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	valueBoolean *FhirBoolean,
-	valueDecimal *FhirDecimal,
-	valueInteger *FhirInteger,
-	valueDate *FhirDate,
-	valueDateTime *FhirDateTime,
-	valueTime *FhirTime,
-	valueString *FhirString,
-	valueUri *FhirUri,
-	valueAttachment *Attachment,
-	valueCoding *Coding,
-	valueQuantity *Quantity,
-	valueReference *Reference,
-	item *[]QuestionnaireResponseItem,
-) *QuestionnaireResponseAnswer {
+// Clone creates a deep copy of QuestionnaireResponseAnswer
+func (m *QuestionnaireResponseAnswer) Clone() *QuestionnaireResponseAnswer {
+	if m == nil { return nil }
 	return &QuestionnaireResponseAnswer{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		ValueBoolean: func() FhirBoolean {
-			if valueBoolean != nil { return *valueBoolean }
-			return m.ValueBoolean
-		}(),
-		ValueDecimal: func() FhirDecimal {
-			if valueDecimal != nil { return *valueDecimal }
-			return m.ValueDecimal
-		}(),
-		ValueInteger: func() FhirInteger {
-			if valueInteger != nil { return *valueInteger }
-			return m.ValueInteger
-		}(),
-		ValueDate: func() FhirDate {
-			if valueDate != nil { return *valueDate }
-			return m.ValueDate
-		}(),
-		ValueDateTime: func() FhirDateTime {
-			if valueDateTime != nil { return *valueDateTime }
-			return m.ValueDateTime
-		}(),
-		ValueTime: func() FhirTime {
-			if valueTime != nil { return *valueTime }
-			return m.ValueTime
-		}(),
-		ValueString: func() FhirString {
-			if valueString != nil { return *valueString }
-			return m.ValueString
-		}(),
-		ValueUri: func() FhirUri {
-			if valueUri != nil { return *valueUri }
-			return m.ValueUri
-		}(),
-		ValueAttachment: func() Attachment {
-			if valueAttachment != nil { return *valueAttachment }
-			return m.ValueAttachment
-		}(),
-		ValueCoding: func() Coding {
-			if valueCoding != nil { return *valueCoding }
-			return m.ValueCoding
-		}(),
-		ValueQuantity: func() Quantity {
-			if valueQuantity != nil { return *valueQuantity }
-			return m.ValueQuantity
-		}(),
-		ValueReference: func() Reference {
-			if valueReference != nil { return *valueReference }
-			return m.ValueReference
-		}(),
-		Item: func() []QuestionnaireResponseItem {
-			if item != nil { return *item }
-			return m.Item
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		ValueBoolean: m.ValueBoolean.Clone(),
+		ValueDecimal: m.ValueDecimal.Clone(),
+		ValueInteger: m.ValueInteger.Clone(),
+		ValueDate: m.ValueDate.Clone(),
+		ValueDateTime: m.ValueDateTime.Clone(),
+		ValueTime: m.ValueTime.Clone(),
+		ValueString: m.ValueString.Clone(),
+		ValueUri: m.ValueUri.Clone(),
+		ValueAttachment: m.ValueAttachment.Clone(),
+		ValueCoding: m.ValueCoding.Clone(),
+		ValueQuantity: m.ValueQuantity.Clone(),
+		ValueReference: m.ValueReference.Clone(),
+		Item: cloneSlices(m.Item),
 	}
 }
+
+// Equals checks for equality with another QuestionnaireResponseAnswer instance
+func (m *QuestionnaireResponseAnswer) Equals(other *QuestionnaireResponseAnswer) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.ValueBoolean.Equals(other.ValueBoolean) { return false }
+	if !m.ValueDecimal.Equals(other.ValueDecimal) { return false }
+	if !m.ValueInteger.Equals(other.ValueInteger) { return false }
+	if !m.ValueDate.Equals(other.ValueDate) { return false }
+	if !m.ValueDateTime.Equals(other.ValueDateTime) { return false }
+	if !m.ValueTime.Equals(other.ValueTime) { return false }
+	if !m.ValueString.Equals(other.ValueString) { return false }
+	if !m.ValueUri.Equals(other.ValueUri) { return false }
+	if !m.ValueAttachment.Equals(other.ValueAttachment) { return false }
+	if !m.ValueCoding.Equals(other.ValueCoding) { return false }
+	if !m.ValueQuantity.Equals(other.ValueQuantity) { return false }
+	if !m.ValueReference.Equals(other.ValueReference) { return false }
+	if !compareSlices(m.Item, other.Item) { return false }
+	return true
+}
+

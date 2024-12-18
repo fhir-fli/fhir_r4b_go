@@ -3,164 +3,47 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // AdverseEvent
 // Actual or  potential/avoided event causing unintended physical injury resulting from or contributed to by medical care, a research study or other healthcare setting factors that requires additional monitoring, treatment, or hospitalization, or that results in death.
 type AdverseEvent struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// Business identifiers assigned to this adverse event by the performer or other systems which remain constant as the resource is updated and propagates from server to server.
-	Identifier Identifier `json:"identifier,omitempty"`
-	// actuality
-	// Whether the event actually happened, or just had the potential to. Note that this is independent of whether anyone was affected or harmed or how severely.
-	Actuality AdverseEventActuality `json:"actuality,omitempty"`
-	// category
-	// The overall type of event, intended for search and filtering purposes.
-	Category []CodeableConcept `json:"category,omitempty"`
-	// event
-	// This element defines the specific type of event that occurred or that was prevented from occurring.
-	Event CodeableConcept `json:"event,omitempty"`
-	// subject
-	// This subject or group impacted by the event.
-	Subject Reference `json:"subject,omitempty"`
-	// encounter
-	// The Encounter during which AdverseEvent was created or to which the creation of this record is tightly associated.
-	Encounter Reference `json:"encounter,omitempty"`
-	// date
-	// The date (and perhaps time) when the adverse event occurred.
-	Date FhirDateTime `json:"date,omitempty"`
-	// detected
-	// Estimated or actual date the AdverseEvent began, in the opinion of the reporter.
-	Detected FhirDateTime `json:"detected,omitempty"`
-	// recordedDate
-	// The date on which the existence of the AdverseEvent was first recorded.
-	RecordedDate FhirDateTime `json:"recordedDate,omitempty"`
-	// resultingCondition
-	// Includes information about the reaction that occurred as a result of exposure to a substance (for example, a drug or a chemical).
-	ResultingCondition []Reference `json:"resultingCondition,omitempty"`
-	// location
-	// The information about where the adverse event occurred.
-	Location Reference `json:"location,omitempty"`
-	// seriousness
-	// Assessment whether this event was of real importance.
-	Seriousness CodeableConcept `json:"seriousness,omitempty"`
-	// severity
-	// Describes the severity of the adverse event, in relation to the subject. Contrast to AdverseEvent.seriousness - a severe rash might not be serious, but a mild heart problem is.
-	Severity CodeableConcept `json:"severity,omitempty"`
-	// outcome
-	// Describes the type of outcome from the adverse event.
-	Outcome CodeableConcept `json:"outcome,omitempty"`
-	// recorder
-	// Information on who recorded the adverse event.  May be the patient or a practitioner.
-	Recorder Reference `json:"recorder,omitempty"`
-	// contributor
-	// Parties that may or should contribute or have contributed information to the adverse event, which can consist of one or more activities.  Such information includes information leading to the decision to perform the activity and how to perform the activity (e.g. consultant), information that the activity itself seeks to reveal (e.g. informant of clinical history), or information about what activity was performed (e.g. informant witness).
-	Contributor []Reference `json:"contributor,omitempty"`
-	// suspectEntity
-	// Describes the entity that is suspected to have caused the adverse event.
-	SuspectEntity []AdverseEventSuspectEntity `json:"suspectEntity,omitempty"`
-	// subjectMedicalHistory
-	// AdverseEvent.subjectMedicalHistory.
-	SubjectMedicalHistory []Reference `json:"subjectMedicalHistory,omitempty"`
-	// referenceDocument
-	// AdverseEvent.referenceDocument.
-	ReferenceDocument []Reference `json:"referenceDocument,omitempty"`
-	// study
-	// AdverseEvent.study.
-	Study []Reference `json:"study,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier *Identifier `json:"identifier,omitempty"`
+	Actuality *AdverseEventActuality `json:"actuality,omitempty"`
+	Category []*CodeableConcept `json:"category,omitempty"`
+	Event *CodeableConcept `json:"event,omitempty"`
+	Subject *Reference `json:"subject,omitempty"`
+	Encounter *Reference `json:"encounter,omitempty"`
+	Date *FhirDateTime `json:"date,omitempty"`
+	Detected *FhirDateTime `json:"detected,omitempty"`
+	RecordedDate *FhirDateTime `json:"recordeddate,omitempty"`
+	ResultingCondition []*Reference `json:"resultingcondition,omitempty"`
+	Location *Reference `json:"location,omitempty"`
+	Seriousness *CodeableConcept `json:"seriousness,omitempty"`
+	Severity *CodeableConcept `json:"severity,omitempty"`
+	Outcome *CodeableConcept `json:"outcome,omitempty"`
+	Recorder *Reference `json:"recorder,omitempty"`
+	Contributor []*Reference `json:"contributor,omitempty"`
+	SuspectEntity []*AdverseEventSuspectEntity `json:"suspectentity,omitempty"`
+	SubjectMedicalHistory []*Reference `json:"subjectmedicalhistory,omitempty"`
+	ReferenceDocument []*Reference `json:"referencedocument,omitempty"`
+	Study []*Reference `json:"study,omitempty"`
 }
 
 // NewAdverseEvent creates a new AdverseEvent instance
-func NewAdverseEvent(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier Identifier,
-	actuality AdverseEventActuality,
-	category []CodeableConcept,
-	event CodeableConcept,
-	subject Reference,
-	encounter Reference,
-	date FhirDateTime,
-	detected FhirDateTime,
-	recordedDate FhirDateTime,
-	resultingCondition []Reference,
-	location Reference,
-	seriousness CodeableConcept,
-	severity CodeableConcept,
-	outcome CodeableConcept,
-	recorder Reference,
-	contributor []Reference,
-	suspectEntity []AdverseEventSuspectEntity,
-	subjectMedicalHistory []Reference,
-	referenceDocument []Reference,
-	study []Reference,
-) *AdverseEvent {
-	return &AdverseEvent{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Actuality: actuality,
-		Category: category,
-		Event: event,
-		Subject: subject,
-		Encounter: encounter,
-		Date: date,
-		Detected: detected,
-		RecordedDate: recordedDate,
-		ResultingCondition: resultingCondition,
-		Location: location,
-		Seriousness: seriousness,
-		Severity: severity,
-		Outcome: outcome,
-		Recorder: recorder,
-		Contributor: contributor,
-		SuspectEntity: suspectEntity,
-		SubjectMedicalHistory: subjectMedicalHistory,
-		ReferenceDocument: referenceDocument,
-		Study: study,
-	}
+func NewAdverseEvent() *AdverseEvent {
+	return &AdverseEvent{}
 }
+
 // FromJSON populates AdverseEvent from JSON data
 func (m *AdverseEvent) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -171,191 +54,92 @@ func (m *AdverseEvent) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of AdverseEvent
-func (m *AdverseEvent) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *Identifier,
-	actuality *AdverseEventActuality,
-	category *[]CodeableConcept,
-	event *CodeableConcept,
-	subject *Reference,
-	encounter *Reference,
-	date *FhirDateTime,
-	detected *FhirDateTime,
-	recordedDate *FhirDateTime,
-	resultingCondition *[]Reference,
-	location *Reference,
-	seriousness *CodeableConcept,
-	severity *CodeableConcept,
-	outcome *CodeableConcept,
-	recorder *Reference,
-	contributor *[]Reference,
-	suspectEntity *[]AdverseEventSuspectEntity,
-	subjectMedicalHistory *[]Reference,
-	referenceDocument *[]Reference,
-	study *[]Reference,
-) *AdverseEvent {
+// Clone creates a deep copy of AdverseEvent
+func (m *AdverseEvent) Clone() *AdverseEvent {
+	if m == nil { return nil }
 	return &AdverseEvent{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Actuality: func() AdverseEventActuality {
-			if actuality != nil { return *actuality }
-			return m.Actuality
-		}(),
-		Category: func() []CodeableConcept {
-			if category != nil { return *category }
-			return m.Category
-		}(),
-		Event: func() CodeableConcept {
-			if event != nil { return *event }
-			return m.Event
-		}(),
-		Subject: func() Reference {
-			if subject != nil { return *subject }
-			return m.Subject
-		}(),
-		Encounter: func() Reference {
-			if encounter != nil { return *encounter }
-			return m.Encounter
-		}(),
-		Date: func() FhirDateTime {
-			if date != nil { return *date }
-			return m.Date
-		}(),
-		Detected: func() FhirDateTime {
-			if detected != nil { return *detected }
-			return m.Detected
-		}(),
-		RecordedDate: func() FhirDateTime {
-			if recordedDate != nil { return *recordedDate }
-			return m.RecordedDate
-		}(),
-		ResultingCondition: func() []Reference {
-			if resultingCondition != nil { return *resultingCondition }
-			return m.ResultingCondition
-		}(),
-		Location: func() Reference {
-			if location != nil { return *location }
-			return m.Location
-		}(),
-		Seriousness: func() CodeableConcept {
-			if seriousness != nil { return *seriousness }
-			return m.Seriousness
-		}(),
-		Severity: func() CodeableConcept {
-			if severity != nil { return *severity }
-			return m.Severity
-		}(),
-		Outcome: func() CodeableConcept {
-			if outcome != nil { return *outcome }
-			return m.Outcome
-		}(),
-		Recorder: func() Reference {
-			if recorder != nil { return *recorder }
-			return m.Recorder
-		}(),
-		Contributor: func() []Reference {
-			if contributor != nil { return *contributor }
-			return m.Contributor
-		}(),
-		SuspectEntity: func() []AdverseEventSuspectEntity {
-			if suspectEntity != nil { return *suspectEntity }
-			return m.SuspectEntity
-		}(),
-		SubjectMedicalHistory: func() []Reference {
-			if subjectMedicalHistory != nil { return *subjectMedicalHistory }
-			return m.SubjectMedicalHistory
-		}(),
-		ReferenceDocument: func() []Reference {
-			if referenceDocument != nil { return *referenceDocument }
-			return m.ReferenceDocument
-		}(),
-		Study: func() []Reference {
-			if study != nil { return *study }
-			return m.Study
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: m.Identifier.Clone(),
+		Actuality: m.Actuality.Clone(),
+		Category: cloneSlices(m.Category),
+		Event: m.Event.Clone(),
+		Subject: m.Subject.Clone(),
+		Encounter: m.Encounter.Clone(),
+		Date: m.Date.Clone(),
+		Detected: m.Detected.Clone(),
+		RecordedDate: m.RecordedDate.Clone(),
+		ResultingCondition: cloneSlices(m.ResultingCondition),
+		Location: m.Location.Clone(),
+		Seriousness: m.Seriousness.Clone(),
+		Severity: m.Severity.Clone(),
+		Outcome: m.Outcome.Clone(),
+		Recorder: m.Recorder.Clone(),
+		Contributor: cloneSlices(m.Contributor),
+		SuspectEntity: cloneSlices(m.SuspectEntity),
+		SubjectMedicalHistory: cloneSlices(m.SubjectMedicalHistory),
+		ReferenceDocument: cloneSlices(m.ReferenceDocument),
+		Study: cloneSlices(m.Study),
 	}
 }
+
+// Equals checks for equality with another AdverseEvent instance
+func (m *AdverseEvent) Equals(other *AdverseEvent) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Identifier.Equals(other.Identifier) { return false }
+	if !m.Actuality.Equals(other.Actuality) { return false }
+	if !compareSlices(m.Category, other.Category) { return false }
+	if !m.Event.Equals(other.Event) { return false }
+	if !m.Subject.Equals(other.Subject) { return false }
+	if !m.Encounter.Equals(other.Encounter) { return false }
+	if !m.Date.Equals(other.Date) { return false }
+	if !m.Detected.Equals(other.Detected) { return false }
+	if !m.RecordedDate.Equals(other.RecordedDate) { return false }
+	if !compareSlices(m.ResultingCondition, other.ResultingCondition) { return false }
+	if !m.Location.Equals(other.Location) { return false }
+	if !m.Seriousness.Equals(other.Seriousness) { return false }
+	if !m.Severity.Equals(other.Severity) { return false }
+	if !m.Outcome.Equals(other.Outcome) { return false }
+	if !m.Recorder.Equals(other.Recorder) { return false }
+	if !compareSlices(m.Contributor, other.Contributor) { return false }
+	if !compareSlices(m.SuspectEntity, other.SuspectEntity) { return false }
+	if !compareSlices(m.SubjectMedicalHistory, other.SubjectMedicalHistory) { return false }
+	if !compareSlices(m.ReferenceDocument, other.ReferenceDocument) { return false }
+	if !compareSlices(m.Study, other.Study) { return false }
+	return true
+}
+
 // AdverseEventSuspectEntity
 // Describes the entity that is suspected to have caused the adverse event.
 type AdverseEventSuspectEntity struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// instance
-	// Identifies the actual instance of what caused the adverse event.  May be a substance, medication, medication administration, medication statement or a device.
-	Instance Reference `json:"instance,omitempty"`
-	// causality
-	// Information on the possible cause of the event.
-	Causality []AdverseEventCausality `json:"causality,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Instance *Reference `json:"instance,omitempty"`
+	Causality []*AdverseEventCausality `json:"causality,omitempty"`
 }
 
 // NewAdverseEventSuspectEntity creates a new AdverseEventSuspectEntity instance
-func NewAdverseEventSuspectEntity(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	instance Reference,
-	causality []AdverseEventCausality,
-) *AdverseEventSuspectEntity {
-	return &AdverseEventSuspectEntity{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Instance: instance,
-		Causality: causality,
-	}
+func NewAdverseEventSuspectEntity() *AdverseEventSuspectEntity {
+	return &AdverseEventSuspectEntity{}
 }
+
 // FromJSON populates AdverseEventSuspectEntity from JSON data
 func (m *AdverseEventSuspectEntity) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -366,86 +150,48 @@ func (m *AdverseEventSuspectEntity) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of AdverseEventSuspectEntity
-func (m *AdverseEventSuspectEntity) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	instance *Reference,
-	causality *[]AdverseEventCausality,
-) *AdverseEventSuspectEntity {
+// Clone creates a deep copy of AdverseEventSuspectEntity
+func (m *AdverseEventSuspectEntity) Clone() *AdverseEventSuspectEntity {
+	if m == nil { return nil }
 	return &AdverseEventSuspectEntity{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Instance: func() Reference {
-			if instance != nil { return *instance }
-			return m.Instance
-		}(),
-		Causality: func() []AdverseEventCausality {
-			if causality != nil { return *causality }
-			return m.Causality
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Instance: m.Instance.Clone(),
+		Causality: cloneSlices(m.Causality),
 	}
 }
+
+// Equals checks for equality with another AdverseEventSuspectEntity instance
+func (m *AdverseEventSuspectEntity) Equals(other *AdverseEventSuspectEntity) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Instance.Equals(other.Instance) { return false }
+	if !compareSlices(m.Causality, other.Causality) { return false }
+	return true
+}
+
 // AdverseEventCausality
 // Information on the possible cause of the event.
 type AdverseEventCausality struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// assessment
-	// Assessment of if the entity caused the event.
-	Assessment CodeableConcept `json:"assessment,omitempty"`
-	// productRelatedness
-	// AdverseEvent.suspectEntity.causalityProductRelatedness.
-	ProductRelatedness FhirString `json:"productRelatedness,omitempty"`
-	// author
-	// AdverseEvent.suspectEntity.causalityAuthor.
-	Author Reference `json:"author,omitempty"`
-	// method
-	// ProbabilityScale | Bayesian | Checklist.
-	Method CodeableConcept `json:"method,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Assessment *CodeableConcept `json:"assessment,omitempty"`
+	ProductRelatedness *FhirString `json:"productrelatedness,omitempty"`
+	Author *Reference `json:"author,omitempty"`
+	Method *CodeableConcept `json:"method,omitempty"`
 }
 
 // NewAdverseEventCausality creates a new AdverseEventCausality instance
-func NewAdverseEventCausality(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	assessment CodeableConcept,
-	productRelatedness FhirString,
-	author Reference,
-	method CodeableConcept,
-) *AdverseEventCausality {
-	return &AdverseEventCausality{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Assessment: assessment,
-		ProductRelatedness: productRelatedness,
-		Author: author,
-		Method: method,
-	}
+func NewAdverseEventCausality() *AdverseEventCausality {
+	return &AdverseEventCausality{}
 }
+
 // FromJSON populates AdverseEventCausality from JSON data
 func (m *AdverseEventCausality) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -456,44 +202,31 @@ func (m *AdverseEventCausality) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of AdverseEventCausality
-func (m *AdverseEventCausality) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	assessment *CodeableConcept,
-	productRelatedness *FhirString,
-	author *Reference,
-	method *CodeableConcept,
-) *AdverseEventCausality {
+// Clone creates a deep copy of AdverseEventCausality
+func (m *AdverseEventCausality) Clone() *AdverseEventCausality {
+	if m == nil { return nil }
 	return &AdverseEventCausality{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Assessment: func() CodeableConcept {
-			if assessment != nil { return *assessment }
-			return m.Assessment
-		}(),
-		ProductRelatedness: func() FhirString {
-			if productRelatedness != nil { return *productRelatedness }
-			return m.ProductRelatedness
-		}(),
-		Author: func() Reference {
-			if author != nil { return *author }
-			return m.Author
-		}(),
-		Method: func() CodeableConcept {
-			if method != nil { return *method }
-			return m.Method
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Assessment: m.Assessment.Clone(),
+		ProductRelatedness: m.ProductRelatedness.Clone(),
+		Author: m.Author.Clone(),
+		Method: m.Method.Clone(),
 	}
 }
+
+// Equals checks for equality with another AdverseEventCausality instance
+func (m *AdverseEventCausality) Equals(other *AdverseEventCausality) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Assessment.Equals(other.Assessment) { return false }
+	if !m.ProductRelatedness.Equals(other.ProductRelatedness) { return false }
+	if !m.Author.Equals(other.Author) { return false }
+	if !m.Method.Equals(other.Method) { return false }
+	return true
+}
+

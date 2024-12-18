@@ -3,57 +3,26 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // ContactPoint
 // Details for all kinds of technology mediated contact points for a person or organization, including telephone, email, etc.
 type ContactPoint struct {
 	DataType
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// system
-	// Telecommunications form for contact point - what communications system is required to make use of the contact.
-	System ContactPointSystem `json:"system,omitempty"`
-	// value
-	// The actual contact point details, in a form that is meaningful to the designated communication system (i.e. phone number or email address).
-	Value FhirString `json:"value,omitempty"`
-	// use
-	// Identifies the purpose for the contact point.
-	Use ContactPointUse `json:"use,omitempty"`
-	// rank
-	// Specifies a preferred order in which to use a set of contacts. ContactPoints with lower rank values are more preferred than those with higher rank values.
-	Rank FhirPositiveInt `json:"rank,omitempty"`
-	// period
-	// Time period when the contact point was/is in use.
-	Period Period `json:"period,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	System *ContactPointSystem `json:"system,omitempty"`
+	Value *FhirString `json:"value,omitempty"`
+	Use *ContactPointUse `json:"use,omitempty"`
+	Rank *FhirPositiveInt `json:"rank,omitempty"`
+	Period *Period `json:"period,omitempty"`
 }
 
 // NewContactPoint creates a new ContactPoint instance
-func NewContactPoint(
-	id FhirString,
-	extension_ []FhirExtension,
-	system ContactPointSystem,
-	value FhirString,
-	use ContactPointUse,
-	rank FhirPositiveInt,
-	period Period,
-) *ContactPoint {
-	return &ContactPoint{
-		Id: id,
-		Extension_: extension_,
-		System: system,
-		Value: value,
-		Use: use,
-		Rank: rank,
-		Period: period,
-	}
+func NewContactPoint() *ContactPoint {
+	return &ContactPoint{}
 }
+
 // FromJSON populates ContactPoint from JSON data
 func (m *ContactPoint) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -64,44 +33,31 @@ func (m *ContactPoint) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ContactPoint
-func (m *ContactPoint) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	system *ContactPointSystem,
-	value *FhirString,
-	use *ContactPointUse,
-	rank *FhirPositiveInt,
-	period *Period,
-) *ContactPoint {
+// Clone creates a deep copy of ContactPoint
+func (m *ContactPoint) Clone() *ContactPoint {
+	if m == nil { return nil }
 	return &ContactPoint{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		System: func() ContactPointSystem {
-			if system != nil { return *system }
-			return m.System
-		}(),
-		Value: func() FhirString {
-			if value != nil { return *value }
-			return m.Value
-		}(),
-		Use: func() ContactPointUse {
-			if use != nil { return *use }
-			return m.Use
-		}(),
-		Rank: func() FhirPositiveInt {
-			if rank != nil { return *rank }
-			return m.Rank
-		}(),
-		Period: func() Period {
-			if period != nil { return *period }
-			return m.Period
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		System: m.System.Clone(),
+		Value: m.Value.Clone(),
+		Use: m.Use.Clone(),
+		Rank: m.Rank.Clone(),
+		Period: m.Period.Clone(),
 	}
 }
+
+// Equals checks for equality with another ContactPoint instance
+func (m *ContactPoint) Equals(other *ContactPoint) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !m.System.Equals(other.System) { return false }
+	if !m.Value.Equals(other.Value) { return false }
+	if !m.Use.Equals(other.Use) { return false }
+	if !m.Rank.Equals(other.Rank) { return false }
+	if !m.Period.Equals(other.Period) { return false }
+	return true
+}
+

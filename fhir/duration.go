@@ -3,57 +3,26 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // FhirDuration
 // A length of time.
 type FhirDuration struct {
 	Quantity
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// value
-	// The value of the measured amount. The value includes an implicit precision in the presentation of the value.
-	Value FhirDecimal `json:"value,omitempty"`
-	// comparator
-	// How the value should be understood and represented - whether the actual value is greater or less than the stated value due to measurement issues; e.g. if the comparator is "<" , then the real value is < stated value.
-	Comparator QuantityComparator `json:"comparator,omitempty"`
-	// unit
-	// A human-readable form of the unit.
-	Unit FhirString `json:"unit,omitempty"`
-	// system
-	// The identification of the system that provides the coded form of the unit.
-	System FhirUri `json:"system,omitempty"`
-	// code
-	// A computer processable form of the unit in some unit representation system.
-	Code FhirCode `json:"code,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	Value *FhirDecimal `json:"value,omitempty"`
+	Comparator *QuantityComparator `json:"comparator,omitempty"`
+	Unit *FhirString `json:"unit,omitempty"`
+	System *FhirUri `json:"system,omitempty"`
+	Code *FhirCode `json:"code,omitempty"`
 }
 
 // NewFhirDuration creates a new FhirDuration instance
-func NewFhirDuration(
-	id FhirString,
-	extension_ []FhirExtension,
-	value FhirDecimal,
-	comparator QuantityComparator,
-	unit FhirString,
-	system FhirUri,
-	code FhirCode,
-) *FhirDuration {
-	return &FhirDuration{
-		Id: id,
-		Extension_: extension_,
-		Value: value,
-		Comparator: comparator,
-		Unit: unit,
-		System: system,
-		Code: code,
-	}
+func NewFhirDuration() *FhirDuration {
+	return &FhirDuration{}
 }
+
 // FromJSON populates FhirDuration from JSON data
 func (m *FhirDuration) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -64,44 +33,31 @@ func (m *FhirDuration) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of FhirDuration
-func (m *FhirDuration) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	value *FhirDecimal,
-	comparator *QuantityComparator,
-	unit *FhirString,
-	system *FhirUri,
-	code *FhirCode,
-) *FhirDuration {
+// Clone creates a deep copy of FhirDuration
+func (m *FhirDuration) Clone() *FhirDuration {
+	if m == nil { return nil }
 	return &FhirDuration{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		Value: func() FhirDecimal {
-			if value != nil { return *value }
-			return m.Value
-		}(),
-		Comparator: func() QuantityComparator {
-			if comparator != nil { return *comparator }
-			return m.Comparator
-		}(),
-		Unit: func() FhirString {
-			if unit != nil { return *unit }
-			return m.Unit
-		}(),
-		System: func() FhirUri {
-			if system != nil { return *system }
-			return m.System
-		}(),
-		Code: func() FhirCode {
-			if code != nil { return *code }
-			return m.Code
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		Value: m.Value.Clone(),
+		Comparator: m.Comparator.Clone(),
+		Unit: m.Unit.Clone(),
+		System: m.System.Clone(),
+		Code: m.Code.Clone(),
 	}
 }
+
+// Equals checks for equality with another FhirDuration instance
+func (m *FhirDuration) Equals(other *FhirDuration) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !m.Value.Equals(other.Value) { return false }
+	if !m.Comparator.Equals(other.Comparator) { return false }
+	if !m.Unit.Equals(other.Unit) { return false }
+	if !m.System.Equals(other.System) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	return true
+}
+

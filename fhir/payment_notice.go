@@ -3,124 +3,39 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // PaymentNotice
 // This resource provides the status of the payment for goods and services rendered, and the request and response resource references.
 type PaymentNotice struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// A unique identifier assigned to this payment notice.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// status
-	// The status of the resource instance.
-	Status FinancialResourceStatusCodes `json:"status,omitempty"`
-	// request
-	// Reference of resource for which payment is being made.
-	Request Reference `json:"request,omitempty"`
-	// response
-	// Reference of response to resource for which payment is being made.
-	Response Reference `json:"response,omitempty"`
-	// created
-	// The date when this resource was created.
-	Created FhirDateTime `json:"created,omitempty"`
-	// provider
-	// The practitioner who is responsible for the services rendered to the patient.
-	Provider Reference `json:"provider,omitempty"`
-	// payment
-	// A reference to the payment which is the subject of this notice.
-	Payment Reference `json:"payment,omitempty"`
-	// paymentDate
-	// The date when the above payment action occurred.
-	PaymentDate FhirDate `json:"paymentDate,omitempty"`
-	// payee
-	// The party who will receive or has received payment that is the subject of this notification.
-	Payee Reference `json:"payee,omitempty"`
-	// recipient
-	// The party who is notified of the payment status.
-	Recipient Reference `json:"recipient,omitempty"`
-	// amount
-	// The amount sent to the payee.
-	Amount Money `json:"amount,omitempty"`
-	// paymentStatus
-	// A code indicating whether payment has been sent or cleared.
-	PaymentStatus CodeableConcept `json:"paymentStatus,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Status *FinancialResourceStatusCodes `json:"status,omitempty"`
+	Request *Reference `json:"request,omitempty"`
+	Response *Reference `json:"response,omitempty"`
+	Created *FhirDateTime `json:"created,omitempty"`
+	Provider *Reference `json:"provider,omitempty"`
+	Payment *Reference `json:"payment,omitempty"`
+	PaymentDate *FhirDate `json:"paymentdate,omitempty"`
+	Payee *Reference `json:"payee,omitempty"`
+	Recipient *Reference `json:"recipient,omitempty"`
+	Amount *Money `json:"amount,omitempty"`
+	PaymentStatus *CodeableConcept `json:"paymentstatus,omitempty"`
 }
 
 // NewPaymentNotice creates a new PaymentNotice instance
-func NewPaymentNotice(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	status FinancialResourceStatusCodes,
-	request Reference,
-	response Reference,
-	created FhirDateTime,
-	provider Reference,
-	payment Reference,
-	paymentDate FhirDate,
-	payee Reference,
-	recipient Reference,
-	amount Money,
-	paymentStatus CodeableConcept,
-) *PaymentNotice {
-	return &PaymentNotice{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Status: status,
-		Request: request,
-		Response: response,
-		Created: created,
-		Provider: provider,
-		Payment: payment,
-		PaymentDate: paymentDate,
-		Payee: payee,
-		Recipient: recipient,
-		Amount: amount,
-		PaymentStatus: paymentStatus,
-	}
+func NewPaymentNotice() *PaymentNotice {
+	return &PaymentNotice{}
 }
+
 // FromJSON populates PaymentNotice from JSON data
 func (m *PaymentNotice) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -131,109 +46,57 @@ func (m *PaymentNotice) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of PaymentNotice
-func (m *PaymentNotice) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	status *FinancialResourceStatusCodes,
-	request *Reference,
-	response *Reference,
-	created *FhirDateTime,
-	provider *Reference,
-	payment *Reference,
-	paymentDate *FhirDate,
-	payee *Reference,
-	recipient *Reference,
-	amount *Money,
-	paymentStatus *CodeableConcept,
-) *PaymentNotice {
+// Clone creates a deep copy of PaymentNotice
+func (m *PaymentNotice) Clone() *PaymentNotice {
+	if m == nil { return nil }
 	return &PaymentNotice{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Status: func() FinancialResourceStatusCodes {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Request: func() Reference {
-			if request != nil { return *request }
-			return m.Request
-		}(),
-		Response: func() Reference {
-			if response != nil { return *response }
-			return m.Response
-		}(),
-		Created: func() FhirDateTime {
-			if created != nil { return *created }
-			return m.Created
-		}(),
-		Provider: func() Reference {
-			if provider != nil { return *provider }
-			return m.Provider
-		}(),
-		Payment: func() Reference {
-			if payment != nil { return *payment }
-			return m.Payment
-		}(),
-		PaymentDate: func() FhirDate {
-			if paymentDate != nil { return *paymentDate }
-			return m.PaymentDate
-		}(),
-		Payee: func() Reference {
-			if payee != nil { return *payee }
-			return m.Payee
-		}(),
-		Recipient: func() Reference {
-			if recipient != nil { return *recipient }
-			return m.Recipient
-		}(),
-		Amount: func() Money {
-			if amount != nil { return *amount }
-			return m.Amount
-		}(),
-		PaymentStatus: func() CodeableConcept {
-			if paymentStatus != nil { return *paymentStatus }
-			return m.PaymentStatus
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		Status: m.Status.Clone(),
+		Request: m.Request.Clone(),
+		Response: m.Response.Clone(),
+		Created: m.Created.Clone(),
+		Provider: m.Provider.Clone(),
+		Payment: m.Payment.Clone(),
+		PaymentDate: m.PaymentDate.Clone(),
+		Payee: m.Payee.Clone(),
+		Recipient: m.Recipient.Clone(),
+		Amount: m.Amount.Clone(),
+		PaymentStatus: m.PaymentStatus.Clone(),
 	}
 }
+
+// Equals checks for equality with another PaymentNotice instance
+func (m *PaymentNotice) Equals(other *PaymentNotice) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Request.Equals(other.Request) { return false }
+	if !m.Response.Equals(other.Response) { return false }
+	if !m.Created.Equals(other.Created) { return false }
+	if !m.Provider.Equals(other.Provider) { return false }
+	if !m.Payment.Equals(other.Payment) { return false }
+	if !m.PaymentDate.Equals(other.PaymentDate) { return false }
+	if !m.Payee.Equals(other.Payee) { return false }
+	if !m.Recipient.Equals(other.Recipient) { return false }
+	if !m.Amount.Equals(other.Amount) { return false }
+	if !m.PaymentStatus.Equals(other.PaymentStatus) { return false }
+	return true
+}
+

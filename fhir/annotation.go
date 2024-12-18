@@ -3,52 +3,25 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // Annotation
 // A  text note which also  contains information about who made the statement and when.
 type Annotation struct {
 	DataType
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// authorReference
-	// The individual responsible for making the annotation.
-	AuthorReference Reference `json:"authorReference,omitempty"`
-	// authorString
-	// The individual responsible for making the annotation.
-	AuthorString FhirString `json:"authorString,omitempty"`
-	// time
-	// Indicates when this particular annotation was made.
-	Time FhirDateTime `json:"time,omitempty"`
-	// text
-	// The text of the annotation in markdown format.
-	Text FhirMarkdown `json:"text,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	AuthorReference *Reference `json:"authorreference,omitempty"`
+	AuthorString *FhirString `json:"authorstring,omitempty"`
+	Time *FhirDateTime `json:"time,omitempty"`
+	Text *FhirMarkdown `json:"text,omitempty"`
 }
 
 // NewAnnotation creates a new Annotation instance
-func NewAnnotation(
-	id FhirString,
-	extension_ []FhirExtension,
-	authorReference Reference,
-	authorString FhirString,
-	time FhirDateTime,
-	text FhirMarkdown,
-) *Annotation {
-	return &Annotation{
-		Id: id,
-		Extension_: extension_,
-		AuthorReference: authorReference,
-		AuthorString: authorString,
-		Time: time,
-		Text: text,
-	}
+func NewAnnotation() *Annotation {
+	return &Annotation{}
 }
+
 // FromJSON populates Annotation from JSON data
 func (m *Annotation) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -59,39 +32,29 @@ func (m *Annotation) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of Annotation
-func (m *Annotation) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	authorReference *Reference,
-	authorString *FhirString,
-	time *FhirDateTime,
-	text *FhirMarkdown,
-) *Annotation {
+// Clone creates a deep copy of Annotation
+func (m *Annotation) Clone() *Annotation {
+	if m == nil { return nil }
 	return &Annotation{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		AuthorReference: func() Reference {
-			if authorReference != nil { return *authorReference }
-			return m.AuthorReference
-		}(),
-		AuthorString: func() FhirString {
-			if authorString != nil { return *authorString }
-			return m.AuthorString
-		}(),
-		Time: func() FhirDateTime {
-			if time != nil { return *time }
-			return m.Time
-		}(),
-		Text: func() FhirMarkdown {
-			if text != nil { return *text }
-			return m.Text
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		AuthorReference: m.AuthorReference.Clone(),
+		AuthorString: m.AuthorString.Clone(),
+		Time: m.Time.Clone(),
+		Text: m.Text.Clone(),
 	}
 }
+
+// Equals checks for equality with another Annotation instance
+func (m *Annotation) Equals(other *Annotation) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !m.AuthorReference.Equals(other.AuthorReference) { return false }
+	if !m.AuthorString.Equals(other.AuthorString) { return false }
+	if !m.Time.Equals(other.Time) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	return true
+}
+

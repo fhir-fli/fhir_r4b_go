@@ -3,119 +3,38 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // MeasureReport
 // The MeasureReport resource contains the results of the calculation of a measure; and optionally a reference to the resources involved in that calculation.
 type MeasureReport struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// A formal identifier that is used to identify this MeasureReport when it is represented in other formats or referenced in a specification, model, design or an instance.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// status
-	// The MeasureReport status. No data will be available until the MeasureReport status is complete.
-	Status MeasureReportStatus `json:"status,omitempty"`
-	// type
-	// The type of measure report. This may be an individual report, which provides the score for the measure for an individual member of the population; a subject-listing, which returns the list of members that meet the various criteria in the measure; a summary report, which returns a population count for each of the criteria in the measure; or a data-collection, which enables the MeasureReport to be used to exchange the data-of-interest for a quality measure.
-	Type_ MeasureReportType `json:"type,omitempty"`
-	// measure
-	// A reference to the Measure that was calculated to produce this report.
-	Measure FhirCanonical `json:"measure,omitempty"`
-	// subject
-	// Optional subject identifying the individual or individuals the report is for.
-	Subject Reference `json:"subject,omitempty"`
-	// date
-	// The date this measure report was generated.
-	Date FhirDateTime `json:"date,omitempty"`
-	// reporter
-	// The individual, location, or organization that is reporting the data.
-	Reporter Reference `json:"reporter,omitempty"`
-	// period
-	// The reporting period for which the report was calculated.
-	Period Period `json:"period,omitempty"`
-	// improvementNotation
-	// Whether improvement in the measure is noted by an increase or decrease in the measure score.
-	ImprovementNotation CodeableConcept `json:"improvementNotation,omitempty"`
-	// group
-	// The results of the calculation, one for each population group in the measure.
-	Group []MeasureReportGroup `json:"group,omitempty"`
-	// evaluatedResource
-	// A reference to a Bundle containing the Resources that were used in the calculation of this measure.
-	EvaluatedResource []Reference `json:"evaluatedResource,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Status *MeasureReportStatus `json:"status,omitempty"`
+	Type *MeasureReportType `json:"type,omitempty"`
+	Measure *FhirCanonical `json:"measure,omitempty"`
+	Subject *Reference `json:"subject,omitempty"`
+	Date *FhirDateTime `json:"date,omitempty"`
+	Reporter *Reference `json:"reporter,omitempty"`
+	Period *Period `json:"period,omitempty"`
+	ImprovementNotation *CodeableConcept `json:"improvementnotation,omitempty"`
+	Group []*MeasureReportGroup `json:"group,omitempty"`
+	EvaluatedResource []*Reference `json:"evaluatedresource,omitempty"`
 }
 
 // NewMeasureReport creates a new MeasureReport instance
-func NewMeasureReport(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	status MeasureReportStatus,
-	type_ MeasureReportType,
-	measure FhirCanonical,
-	subject Reference,
-	date FhirDateTime,
-	reporter Reference,
-	period Period,
-	improvementNotation CodeableConcept,
-	group []MeasureReportGroup,
-	evaluatedResource []Reference,
-) *MeasureReport {
-	return &MeasureReport{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Status: status,
-		Type_: type_,
-		Measure: measure,
-		Subject: subject,
-		Date: date,
-		Reporter: reporter,
-		Period: period,
-		ImprovementNotation: improvementNotation,
-		Group: group,
-		EvaluatedResource: evaluatedResource,
-	}
+func NewMeasureReport() *MeasureReport {
+	return &MeasureReport{}
 }
+
 // FromJSON populates MeasureReport from JSON data
 func (m *MeasureReport) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -126,156 +45,76 @@ func (m *MeasureReport) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MeasureReport
-func (m *MeasureReport) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	status *MeasureReportStatus,
-	type_ *MeasureReportType,
-	measure *FhirCanonical,
-	subject *Reference,
-	date *FhirDateTime,
-	reporter *Reference,
-	period *Period,
-	improvementNotation *CodeableConcept,
-	group *[]MeasureReportGroup,
-	evaluatedResource *[]Reference,
-) *MeasureReport {
+// Clone creates a deep copy of MeasureReport
+func (m *MeasureReport) Clone() *MeasureReport {
+	if m == nil { return nil }
 	return &MeasureReport{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Status: func() MeasureReportStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Type_: func() MeasureReportType {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Measure: func() FhirCanonical {
-			if measure != nil { return *measure }
-			return m.Measure
-		}(),
-		Subject: func() Reference {
-			if subject != nil { return *subject }
-			return m.Subject
-		}(),
-		Date: func() FhirDateTime {
-			if date != nil { return *date }
-			return m.Date
-		}(),
-		Reporter: func() Reference {
-			if reporter != nil { return *reporter }
-			return m.Reporter
-		}(),
-		Period: func() Period {
-			if period != nil { return *period }
-			return m.Period
-		}(),
-		ImprovementNotation: func() CodeableConcept {
-			if improvementNotation != nil { return *improvementNotation }
-			return m.ImprovementNotation
-		}(),
-		Group: func() []MeasureReportGroup {
-			if group != nil { return *group }
-			return m.Group
-		}(),
-		EvaluatedResource: func() []Reference {
-			if evaluatedResource != nil { return *evaluatedResource }
-			return m.EvaluatedResource
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		Status: m.Status.Clone(),
+		Type: m.Type.Clone(),
+		Measure: m.Measure.Clone(),
+		Subject: m.Subject.Clone(),
+		Date: m.Date.Clone(),
+		Reporter: m.Reporter.Clone(),
+		Period: m.Period.Clone(),
+		ImprovementNotation: m.ImprovementNotation.Clone(),
+		Group: cloneSlices(m.Group),
+		EvaluatedResource: cloneSlices(m.EvaluatedResource),
 	}
 }
+
+// Equals checks for equality with another MeasureReport instance
+func (m *MeasureReport) Equals(other *MeasureReport) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Measure.Equals(other.Measure) { return false }
+	if !m.Subject.Equals(other.Subject) { return false }
+	if !m.Date.Equals(other.Date) { return false }
+	if !m.Reporter.Equals(other.Reporter) { return false }
+	if !m.Period.Equals(other.Period) { return false }
+	if !m.ImprovementNotation.Equals(other.ImprovementNotation) { return false }
+	if !compareSlices(m.Group, other.Group) { return false }
+	if !compareSlices(m.EvaluatedResource, other.EvaluatedResource) { return false }
+	return true
+}
+
 // MeasureReportGroup
 // The results of the calculation, one for each population group in the measure.
 type MeasureReportGroup struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// The meaning of the population group as defined in the measure definition.
-	Code CodeableConcept `json:"code,omitempty"`
-	// population
-	// The populations that make up the population group, one for each type of population appropriate for the measure.
-	Population []MeasureReportPopulation `json:"population,omitempty"`
-	// measureScore
-	// The measure score for this population group, calculated as appropriate for the measure type and scoring method, and based on the contents of the populations defined in the group.
-	MeasureScore Quantity `json:"measureScore,omitempty"`
-	// stratifier
-	// When a measure includes multiple stratifiers, there will be a stratifier group for each stratifier defined by the measure.
-	Stratifier []MeasureReportStratifier `json:"stratifier,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *CodeableConcept `json:"code,omitempty"`
+	Population []*MeasureReportPopulation `json:"population,omitempty"`
+	MeasureScore *Quantity `json:"measurescore,omitempty"`
+	Stratifier []*MeasureReportStratifier `json:"stratifier,omitempty"`
 }
 
 // NewMeasureReportGroup creates a new MeasureReportGroup instance
-func NewMeasureReportGroup(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code CodeableConcept,
-	population []MeasureReportPopulation,
-	measureScore Quantity,
-	stratifier []MeasureReportStratifier,
-) *MeasureReportGroup {
-	return &MeasureReportGroup{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		Population: population,
-		MeasureScore: measureScore,
-		Stratifier: stratifier,
-	}
+func NewMeasureReportGroup() *MeasureReportGroup {
+	return &MeasureReportGroup{}
 }
+
 // FromJSON populates MeasureReportGroup from JSON data
 func (m *MeasureReportGroup) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -286,91 +125,51 @@ func (m *MeasureReportGroup) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MeasureReportGroup
-func (m *MeasureReportGroup) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *CodeableConcept,
-	population *[]MeasureReportPopulation,
-	measureScore *Quantity,
-	stratifier *[]MeasureReportStratifier,
-) *MeasureReportGroup {
+// Clone creates a deep copy of MeasureReportGroup
+func (m *MeasureReportGroup) Clone() *MeasureReportGroup {
+	if m == nil { return nil }
 	return &MeasureReportGroup{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() CodeableConcept {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Population: func() []MeasureReportPopulation {
-			if population != nil { return *population }
-			return m.Population
-		}(),
-		MeasureScore: func() Quantity {
-			if measureScore != nil { return *measureScore }
-			return m.MeasureScore
-		}(),
-		Stratifier: func() []MeasureReportStratifier {
-			if stratifier != nil { return *stratifier }
-			return m.Stratifier
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		Population: cloneSlices(m.Population),
+		MeasureScore: m.MeasureScore.Clone(),
+		Stratifier: cloneSlices(m.Stratifier),
 	}
 }
+
+// Equals checks for equality with another MeasureReportGroup instance
+func (m *MeasureReportGroup) Equals(other *MeasureReportGroup) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !compareSlices(m.Population, other.Population) { return false }
+	if !m.MeasureScore.Equals(other.MeasureScore) { return false }
+	if !compareSlices(m.Stratifier, other.Stratifier) { return false }
+	return true
+}
+
 // MeasureReportPopulation
 // The populations that make up the population group, one for each type of population appropriate for the measure.
 type MeasureReportPopulation struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// The type of the population.
-	Code CodeableConcept `json:"code,omitempty"`
-	// count
-	// The number of members of the population.
-	Count FhirInteger `json:"count,omitempty"`
-	// subjectResults
-	// This element refers to a List of subject level MeasureReport resources, one for each subject in this population.
-	SubjectResults Reference `json:"subjectResults,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *CodeableConcept `json:"code,omitempty"`
+	Count *FhirInteger `json:"count,omitempty"`
+	SubjectResults *Reference `json:"subjectresults,omitempty"`
 }
 
 // NewMeasureReportPopulation creates a new MeasureReportPopulation instance
-func NewMeasureReportPopulation(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code CodeableConcept,
-	count FhirInteger,
-	subjectResults Reference,
-) *MeasureReportPopulation {
-	return &MeasureReportPopulation{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		Count: count,
-		SubjectResults: subjectResults,
-	}
+func NewMeasureReportPopulation() *MeasureReportPopulation {
+	return &MeasureReportPopulation{}
 }
+
 // FromJSON populates MeasureReportPopulation from JSON data
 func (m *MeasureReportPopulation) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -381,81 +180,48 @@ func (m *MeasureReportPopulation) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MeasureReportPopulation
-func (m *MeasureReportPopulation) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *CodeableConcept,
-	count *FhirInteger,
-	subjectResults *Reference,
-) *MeasureReportPopulation {
+// Clone creates a deep copy of MeasureReportPopulation
+func (m *MeasureReportPopulation) Clone() *MeasureReportPopulation {
+	if m == nil { return nil }
 	return &MeasureReportPopulation{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() CodeableConcept {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Count: func() FhirInteger {
-			if count != nil { return *count }
-			return m.Count
-		}(),
-		SubjectResults: func() Reference {
-			if subjectResults != nil { return *subjectResults }
-			return m.SubjectResults
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		Count: m.Count.Clone(),
+		SubjectResults: m.SubjectResults.Clone(),
 	}
 }
+
+// Equals checks for equality with another MeasureReportPopulation instance
+func (m *MeasureReportPopulation) Equals(other *MeasureReportPopulation) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Count.Equals(other.Count) { return false }
+	if !m.SubjectResults.Equals(other.SubjectResults) { return false }
+	return true
+}
+
 // MeasureReportStratifier
 // When a measure includes multiple stratifiers, there will be a stratifier group for each stratifier defined by the measure.
 type MeasureReportStratifier struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// The meaning of this stratifier, as defined in the measure definition.
-	Code []CodeableConcept `json:"code,omitempty"`
-	// stratum
-	// This element contains the results for a single stratum within the stratifier. For example, when stratifying on administrative gender, there will be four strata, one for each possible gender value.
-	Stratum []MeasureReportStratum `json:"stratum,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code []*CodeableConcept `json:"code,omitempty"`
+	Stratum []*MeasureReportStratum `json:"stratum,omitempty"`
 }
 
 // NewMeasureReportStratifier creates a new MeasureReportStratifier instance
-func NewMeasureReportStratifier(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code []CodeableConcept,
-	stratum []MeasureReportStratum,
-) *MeasureReportStratifier {
-	return &MeasureReportStratifier{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		Stratum: stratum,
-	}
+func NewMeasureReportStratifier() *MeasureReportStratifier {
+	return &MeasureReportStratifier{}
 }
+
 // FromJSON populates MeasureReportStratifier from JSON data
 func (m *MeasureReportStratifier) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -466,86 +232,48 @@ func (m *MeasureReportStratifier) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MeasureReportStratifier
-func (m *MeasureReportStratifier) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *[]CodeableConcept,
-	stratum *[]MeasureReportStratum,
-) *MeasureReportStratifier {
+// Clone creates a deep copy of MeasureReportStratifier
+func (m *MeasureReportStratifier) Clone() *MeasureReportStratifier {
+	if m == nil { return nil }
 	return &MeasureReportStratifier{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() []CodeableConcept {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Stratum: func() []MeasureReportStratum {
-			if stratum != nil { return *stratum }
-			return m.Stratum
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: cloneSlices(m.Code),
+		Stratum: cloneSlices(m.Stratum),
 	}
 }
+
+// Equals checks for equality with another MeasureReportStratifier instance
+func (m *MeasureReportStratifier) Equals(other *MeasureReportStratifier) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Code, other.Code) { return false }
+	if !compareSlices(m.Stratum, other.Stratum) { return false }
+	return true
+}
+
 // MeasureReportStratum
 // This element contains the results for a single stratum within the stratifier. For example, when stratifying on administrative gender, there will be four strata, one for each possible gender value.
 type MeasureReportStratum struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// value
-	// The value for this stratum, expressed as a CodeableConcept. When defining stratifiers on complex values, the value must be rendered such that the value for each stratum within the stratifier is unique.
-	Value CodeableConcept `json:"value,omitempty"`
-	// component
-	// A stratifier component value.
-	Component []MeasureReportComponent `json:"component,omitempty"`
-	// population
-	// The populations that make up the stratum, one for each type of population appropriate to the measure.
-	Population []MeasureReportPopulation `json:"population,omitempty"`
-	// measureScore
-	// The measure score for this stratum, calculated as appropriate for the measure type and scoring method, and based on only the members of this stratum.
-	MeasureScore Quantity `json:"measureScore,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Value *CodeableConcept `json:"value,omitempty"`
+	Component []*MeasureReportComponent `json:"component,omitempty"`
+	Population []*MeasureReportPopulation `json:"population,omitempty"`
+	MeasureScore *Quantity `json:"measurescore,omitempty"`
 }
 
 // NewMeasureReportStratum creates a new MeasureReportStratum instance
-func NewMeasureReportStratum(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	value CodeableConcept,
-	component []MeasureReportComponent,
-	population []MeasureReportPopulation,
-	measureScore Quantity,
-) *MeasureReportStratum {
-	return &MeasureReportStratum{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Value: value,
-		Component: component,
-		Population: population,
-		MeasureScore: measureScore,
-	}
+func NewMeasureReportStratum() *MeasureReportStratum {
+	return &MeasureReportStratum{}
 }
+
 // FromJSON populates MeasureReportStratum from JSON data
 func (m *MeasureReportStratum) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -556,86 +284,50 @@ func (m *MeasureReportStratum) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MeasureReportStratum
-func (m *MeasureReportStratum) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	value *CodeableConcept,
-	component *[]MeasureReportComponent,
-	population *[]MeasureReportPopulation,
-	measureScore *Quantity,
-) *MeasureReportStratum {
+// Clone creates a deep copy of MeasureReportStratum
+func (m *MeasureReportStratum) Clone() *MeasureReportStratum {
+	if m == nil { return nil }
 	return &MeasureReportStratum{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Value: func() CodeableConcept {
-			if value != nil { return *value }
-			return m.Value
-		}(),
-		Component: func() []MeasureReportComponent {
-			if component != nil { return *component }
-			return m.Component
-		}(),
-		Population: func() []MeasureReportPopulation {
-			if population != nil { return *population }
-			return m.Population
-		}(),
-		MeasureScore: func() Quantity {
-			if measureScore != nil { return *measureScore }
-			return m.MeasureScore
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Value: m.Value.Clone(),
+		Component: cloneSlices(m.Component),
+		Population: cloneSlices(m.Population),
+		MeasureScore: m.MeasureScore.Clone(),
 	}
 }
+
+// Equals checks for equality with another MeasureReportStratum instance
+func (m *MeasureReportStratum) Equals(other *MeasureReportStratum) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Value.Equals(other.Value) { return false }
+	if !compareSlices(m.Component, other.Component) { return false }
+	if !compareSlices(m.Population, other.Population) { return false }
+	if !m.MeasureScore.Equals(other.MeasureScore) { return false }
+	return true
+}
+
 // MeasureReportComponent
 // A stratifier component value.
 type MeasureReportComponent struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// The code for the stratum component value.
-	Code CodeableConcept `json:"code,omitempty"`
-	// value
-	// The stratum component value.
-	Value CodeableConcept `json:"value,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *CodeableConcept `json:"code,omitempty"`
+	Value *CodeableConcept `json:"value,omitempty"`
 }
 
 // NewMeasureReportComponent creates a new MeasureReportComponent instance
-func NewMeasureReportComponent(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code CodeableConcept,
-	value CodeableConcept,
-) *MeasureReportComponent {
-	return &MeasureReportComponent{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		Value: value,
-	}
+func NewMeasureReportComponent() *MeasureReportComponent {
+	return &MeasureReportComponent{}
 }
+
 // FromJSON populates MeasureReportComponent from JSON data
 func (m *MeasureReportComponent) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -646,81 +338,47 @@ func (m *MeasureReportComponent) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MeasureReportComponent
-func (m *MeasureReportComponent) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *CodeableConcept,
-	value *CodeableConcept,
-) *MeasureReportComponent {
+// Clone creates a deep copy of MeasureReportComponent
+func (m *MeasureReportComponent) Clone() *MeasureReportComponent {
+	if m == nil { return nil }
 	return &MeasureReportComponent{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() CodeableConcept {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Value: func() CodeableConcept {
-			if value != nil { return *value }
-			return m.Value
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		Value: m.Value.Clone(),
 	}
 }
+
+// Equals checks for equality with another MeasureReportComponent instance
+func (m *MeasureReportComponent) Equals(other *MeasureReportComponent) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Value.Equals(other.Value) { return false }
+	return true
+}
+
 // MeasureReportPopulation1
 // The populations that make up the stratum, one for each type of population appropriate to the measure.
 type MeasureReportPopulation1 struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// The type of the population.
-	Code CodeableConcept `json:"code,omitempty"`
-	// count
-	// The number of members of the population in this stratum.
-	Count FhirInteger `json:"count,omitempty"`
-	// subjectResults
-	// This element refers to a List of subject level MeasureReport resources, one for each subject in this population in this stratum.
-	SubjectResults Reference `json:"subjectResults,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *CodeableConcept `json:"code,omitempty"`
+	Count *FhirInteger `json:"count,omitempty"`
+	SubjectResults *Reference `json:"subjectresults,omitempty"`
 }
 
 // NewMeasureReportPopulation1 creates a new MeasureReportPopulation1 instance
-func NewMeasureReportPopulation1(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code CodeableConcept,
-	count FhirInteger,
-	subjectResults Reference,
-) *MeasureReportPopulation1 {
-	return &MeasureReportPopulation1{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		Count: count,
-		SubjectResults: subjectResults,
-	}
+func NewMeasureReportPopulation1() *MeasureReportPopulation1 {
+	return &MeasureReportPopulation1{}
 }
+
 // FromJSON populates MeasureReportPopulation1 from JSON data
 func (m *MeasureReportPopulation1) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -731,39 +389,29 @@ func (m *MeasureReportPopulation1) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MeasureReportPopulation1
-func (m *MeasureReportPopulation1) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *CodeableConcept,
-	count *FhirInteger,
-	subjectResults *Reference,
-) *MeasureReportPopulation1 {
+// Clone creates a deep copy of MeasureReportPopulation1
+func (m *MeasureReportPopulation1) Clone() *MeasureReportPopulation1 {
+	if m == nil { return nil }
 	return &MeasureReportPopulation1{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() CodeableConcept {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Count: func() FhirInteger {
-			if count != nil { return *count }
-			return m.Count
-		}(),
-		SubjectResults: func() Reference {
-			if subjectResults != nil { return *subjectResults }
-			return m.SubjectResults
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		Count: m.Count.Clone(),
+		SubjectResults: m.SubjectResults.Clone(),
 	}
 }
+
+// Equals checks for equality with another MeasureReportPopulation1 instance
+func (m *MeasureReportPopulation1) Equals(other *MeasureReportPopulation1) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Count.Equals(other.Count) { return false }
+	if !m.SubjectResults.Equals(other.SubjectResults) { return false }
+	return true
+}
+

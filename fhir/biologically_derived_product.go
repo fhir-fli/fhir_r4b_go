@@ -3,120 +3,39 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // BiologicallyDerivedProduct
 // A material substance originating from a biological entity intended to be transplanted or infused
-// into another (possibly the same) biological entity.
+into another (possibly the same) biological entity.
 type BiologicallyDerivedProduct struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// This records identifiers associated with this biologically derived product instance that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate (e.g. in CDA documents, or in written / printed documentation).
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// productCategory
-	// Broad category of this product.
-	ProductCategory BiologicallyDerivedProductCategory `json:"productCategory,omitempty"`
-	// productCode
-	// A code that identifies the kind of this biologically derived product (SNOMED Ctcode).
-	ProductCode CodeableConcept `json:"productCode,omitempty"`
-	// status
-	// Whether the product is currently available.
-	Status BiologicallyDerivedProductStatus `json:"status,omitempty"`
-	// request
-	// Procedure request to obtain this biologically derived product.
-	Request []Reference `json:"request,omitempty"`
-	// quantity
-	// Number of discrete units within this product.
-	Quantity FhirInteger `json:"quantity,omitempty"`
-	// parent
-	// Parent product (if any).
-	Parent []Reference `json:"parent,omitempty"`
-	// collection
-	// How this product was collected.
-	Collection BiologicallyDerivedProductCollection `json:"collection,omitempty"`
-	// processing
-	// Any processing of the product during collection that does not change the fundamental nature of the product. For example adding anti-coagulants during the collection of Peripheral Blood Stem Cells.
-	Processing []BiologicallyDerivedProductProcessing `json:"processing,omitempty"`
-	// manipulation
-	// Any manipulation of product post-collection that is intended to alter the product.  For example a buffy-coat enrichment or CD8 reduction of Peripheral Blood Stem Cells to make it more suitable for infusion.
-	Manipulation BiologicallyDerivedProductManipulation `json:"manipulation,omitempty"`
-	// storage
-	// Product storage.
-	Storage []BiologicallyDerivedProductStorage `json:"storage,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	ProductCategory *BiologicallyDerivedProductCategory `json:"productcategory,omitempty"`
+	ProductCode *CodeableConcept `json:"productcode,omitempty"`
+	Status *BiologicallyDerivedProductStatus `json:"status,omitempty"`
+	Request []*Reference `json:"request,omitempty"`
+	Quantity *FhirInteger `json:"quantity,omitempty"`
+	Parent []*Reference `json:"parent,omitempty"`
+	Collection *BiologicallyDerivedProductCollection `json:"collection,omitempty"`
+	Processing []*BiologicallyDerivedProductProcessing `json:"processing,omitempty"`
+	Manipulation *BiologicallyDerivedProductManipulation `json:"manipulation,omitempty"`
+	Storage []*BiologicallyDerivedProductStorage `json:"storage,omitempty"`
 }
 
 // NewBiologicallyDerivedProduct creates a new BiologicallyDerivedProduct instance
-func NewBiologicallyDerivedProduct(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	productCategory BiologicallyDerivedProductCategory,
-	productCode CodeableConcept,
-	status BiologicallyDerivedProductStatus,
-	request []Reference,
-	quantity FhirInteger,
-	parent []Reference,
-	collection BiologicallyDerivedProductCollection,
-	processing []BiologicallyDerivedProductProcessing,
-	manipulation BiologicallyDerivedProductManipulation,
-	storage []BiologicallyDerivedProductStorage,
-) *BiologicallyDerivedProduct {
-	return &BiologicallyDerivedProduct{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		ProductCategory: productCategory,
-		ProductCode: productCode,
-		Status: status,
-		Request: request,
-		Quantity: quantity,
-		Parent: parent,
-		Collection: collection,
-		Processing: processing,
-		Manipulation: manipulation,
-		Storage: storage,
-	}
+func NewBiologicallyDerivedProduct() *BiologicallyDerivedProduct {
+	return &BiologicallyDerivedProduct{}
 }
+
 // FromJSON populates BiologicallyDerivedProduct from JSON data
 func (m *BiologicallyDerivedProduct) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -127,156 +46,76 @@ func (m *BiologicallyDerivedProduct) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of BiologicallyDerivedProduct
-func (m *BiologicallyDerivedProduct) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	productCategory *BiologicallyDerivedProductCategory,
-	productCode *CodeableConcept,
-	status *BiologicallyDerivedProductStatus,
-	request *[]Reference,
-	quantity *FhirInteger,
-	parent *[]Reference,
-	collection *BiologicallyDerivedProductCollection,
-	processing *[]BiologicallyDerivedProductProcessing,
-	manipulation *BiologicallyDerivedProductManipulation,
-	storage *[]BiologicallyDerivedProductStorage,
-) *BiologicallyDerivedProduct {
+// Clone creates a deep copy of BiologicallyDerivedProduct
+func (m *BiologicallyDerivedProduct) Clone() *BiologicallyDerivedProduct {
+	if m == nil { return nil }
 	return &BiologicallyDerivedProduct{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		ProductCategory: func() BiologicallyDerivedProductCategory {
-			if productCategory != nil { return *productCategory }
-			return m.ProductCategory
-		}(),
-		ProductCode: func() CodeableConcept {
-			if productCode != nil { return *productCode }
-			return m.ProductCode
-		}(),
-		Status: func() BiologicallyDerivedProductStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Request: func() []Reference {
-			if request != nil { return *request }
-			return m.Request
-		}(),
-		Quantity: func() FhirInteger {
-			if quantity != nil { return *quantity }
-			return m.Quantity
-		}(),
-		Parent: func() []Reference {
-			if parent != nil { return *parent }
-			return m.Parent
-		}(),
-		Collection: func() BiologicallyDerivedProductCollection {
-			if collection != nil { return *collection }
-			return m.Collection
-		}(),
-		Processing: func() []BiologicallyDerivedProductProcessing {
-			if processing != nil { return *processing }
-			return m.Processing
-		}(),
-		Manipulation: func() BiologicallyDerivedProductManipulation {
-			if manipulation != nil { return *manipulation }
-			return m.Manipulation
-		}(),
-		Storage: func() []BiologicallyDerivedProductStorage {
-			if storage != nil { return *storage }
-			return m.Storage
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		ProductCategory: m.ProductCategory.Clone(),
+		ProductCode: m.ProductCode.Clone(),
+		Status: m.Status.Clone(),
+		Request: cloneSlices(m.Request),
+		Quantity: m.Quantity.Clone(),
+		Parent: cloneSlices(m.Parent),
+		Collection: m.Collection.Clone(),
+		Processing: cloneSlices(m.Processing),
+		Manipulation: m.Manipulation.Clone(),
+		Storage: cloneSlices(m.Storage),
 	}
 }
+
+// Equals checks for equality with another BiologicallyDerivedProduct instance
+func (m *BiologicallyDerivedProduct) Equals(other *BiologicallyDerivedProduct) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.ProductCategory.Equals(other.ProductCategory) { return false }
+	if !m.ProductCode.Equals(other.ProductCode) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !compareSlices(m.Request, other.Request) { return false }
+	if !m.Quantity.Equals(other.Quantity) { return false }
+	if !compareSlices(m.Parent, other.Parent) { return false }
+	if !m.Collection.Equals(other.Collection) { return false }
+	if !compareSlices(m.Processing, other.Processing) { return false }
+	if !m.Manipulation.Equals(other.Manipulation) { return false }
+	if !compareSlices(m.Storage, other.Storage) { return false }
+	return true
+}
+
 // BiologicallyDerivedProductCollection
 // How this product was collected.
 type BiologicallyDerivedProductCollection struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// collector
-	// Healthcare professional who is performing the collection.
-	Collector Reference `json:"collector,omitempty"`
-	// source
-	// The patient or entity, such as a hospital or vendor in the case of a processed/manipulated/manufactured product, providing the product.
-	Source Reference `json:"source,omitempty"`
-	// collectedDateTime
-	// Time of product collection.
-	CollectedDateTime FhirDateTime `json:"collectedDateTime,omitempty"`
-	// collectedPeriod
-	// Time of product collection.
-	CollectedPeriod Period `json:"collectedPeriod,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Collector *Reference `json:"collector,omitempty"`
+	Source *Reference `json:"source,omitempty"`
+	CollectedDateTime *FhirDateTime `json:"collecteddatetime,omitempty"`
+	CollectedPeriod *Period `json:"collectedperiod,omitempty"`
 }
 
 // NewBiologicallyDerivedProductCollection creates a new BiologicallyDerivedProductCollection instance
-func NewBiologicallyDerivedProductCollection(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	collector Reference,
-	source Reference,
-	collectedDateTime FhirDateTime,
-	collectedPeriod Period,
-) *BiologicallyDerivedProductCollection {
-	return &BiologicallyDerivedProductCollection{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Collector: collector,
-		Source: source,
-		CollectedDateTime: collectedDateTime,
-		CollectedPeriod: collectedPeriod,
-	}
+func NewBiologicallyDerivedProductCollection() *BiologicallyDerivedProductCollection {
+	return &BiologicallyDerivedProductCollection{}
 }
+
 // FromJSON populates BiologicallyDerivedProductCollection from JSON data
 func (m *BiologicallyDerivedProductCollection) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -287,101 +126,53 @@ func (m *BiologicallyDerivedProductCollection) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of BiologicallyDerivedProductCollection
-func (m *BiologicallyDerivedProductCollection) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	collector *Reference,
-	source *Reference,
-	collectedDateTime *FhirDateTime,
-	collectedPeriod *Period,
-) *BiologicallyDerivedProductCollection {
+// Clone creates a deep copy of BiologicallyDerivedProductCollection
+func (m *BiologicallyDerivedProductCollection) Clone() *BiologicallyDerivedProductCollection {
+	if m == nil { return nil }
 	return &BiologicallyDerivedProductCollection{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Collector: func() Reference {
-			if collector != nil { return *collector }
-			return m.Collector
-		}(),
-		Source: func() Reference {
-			if source != nil { return *source }
-			return m.Source
-		}(),
-		CollectedDateTime: func() FhirDateTime {
-			if collectedDateTime != nil { return *collectedDateTime }
-			return m.CollectedDateTime
-		}(),
-		CollectedPeriod: func() Period {
-			if collectedPeriod != nil { return *collectedPeriod }
-			return m.CollectedPeriod
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Collector: m.Collector.Clone(),
+		Source: m.Source.Clone(),
+		CollectedDateTime: m.CollectedDateTime.Clone(),
+		CollectedPeriod: m.CollectedPeriod.Clone(),
 	}
 }
+
+// Equals checks for equality with another BiologicallyDerivedProductCollection instance
+func (m *BiologicallyDerivedProductCollection) Equals(other *BiologicallyDerivedProductCollection) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Collector.Equals(other.Collector) { return false }
+	if !m.Source.Equals(other.Source) { return false }
+	if !m.CollectedDateTime.Equals(other.CollectedDateTime) { return false }
+	if !m.CollectedPeriod.Equals(other.CollectedPeriod) { return false }
+	return true
+}
+
 // BiologicallyDerivedProductProcessing
 // Any processing of the product during collection that does not change the fundamental nature of the product. For example adding anti-coagulants during the collection of Peripheral Blood Stem Cells.
 type BiologicallyDerivedProductProcessing struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// description
-	// Description of of processing.
-	Description FhirString `json:"description,omitempty"`
-	// procedure
-	// Procesing code.
-	Procedure CodeableConcept `json:"procedure,omitempty"`
-	// additive
-	// Substance added during processing.
-	Additive Reference `json:"additive,omitempty"`
-	// timeDateTime
-	// Time of processing.
-	TimeDateTime FhirDateTime `json:"timeDateTime,omitempty"`
-	// timePeriod
-	// Time of processing.
-	TimePeriod Period `json:"timePeriod,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Procedure *CodeableConcept `json:"procedure,omitempty"`
+	Additive *Reference `json:"additive,omitempty"`
+	TimeDateTime *FhirDateTime `json:"timedatetime,omitempty"`
+	TimePeriod *Period `json:"timeperiod,omitempty"`
 }
 
 // NewBiologicallyDerivedProductProcessing creates a new BiologicallyDerivedProductProcessing instance
-func NewBiologicallyDerivedProductProcessing(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	description FhirString,
-	procedure CodeableConcept,
-	additive Reference,
-	timeDateTime FhirDateTime,
-	timePeriod Period,
-) *BiologicallyDerivedProductProcessing {
-	return &BiologicallyDerivedProductProcessing{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Description: description,
-		Procedure: procedure,
-		Additive: additive,
-		TimeDateTime: timeDateTime,
-		TimePeriod: timePeriod,
-	}
+func NewBiologicallyDerivedProductProcessing() *BiologicallyDerivedProductProcessing {
+	return &BiologicallyDerivedProductProcessing{}
 }
+
 // FromJSON populates BiologicallyDerivedProductProcessing from JSON data
 func (m *BiologicallyDerivedProductProcessing) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -392,96 +183,53 @@ func (m *BiologicallyDerivedProductProcessing) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of BiologicallyDerivedProductProcessing
-func (m *BiologicallyDerivedProductProcessing) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	description *FhirString,
-	procedure *CodeableConcept,
-	additive *Reference,
-	timeDateTime *FhirDateTime,
-	timePeriod *Period,
-) *BiologicallyDerivedProductProcessing {
+// Clone creates a deep copy of BiologicallyDerivedProductProcessing
+func (m *BiologicallyDerivedProductProcessing) Clone() *BiologicallyDerivedProductProcessing {
+	if m == nil { return nil }
 	return &BiologicallyDerivedProductProcessing{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Procedure: func() CodeableConcept {
-			if procedure != nil { return *procedure }
-			return m.Procedure
-		}(),
-		Additive: func() Reference {
-			if additive != nil { return *additive }
-			return m.Additive
-		}(),
-		TimeDateTime: func() FhirDateTime {
-			if timeDateTime != nil { return *timeDateTime }
-			return m.TimeDateTime
-		}(),
-		TimePeriod: func() Period {
-			if timePeriod != nil { return *timePeriod }
-			return m.TimePeriod
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Description: m.Description.Clone(),
+		Procedure: m.Procedure.Clone(),
+		Additive: m.Additive.Clone(),
+		TimeDateTime: m.TimeDateTime.Clone(),
+		TimePeriod: m.TimePeriod.Clone(),
 	}
 }
+
+// Equals checks for equality with another BiologicallyDerivedProductProcessing instance
+func (m *BiologicallyDerivedProductProcessing) Equals(other *BiologicallyDerivedProductProcessing) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.Procedure.Equals(other.Procedure) { return false }
+	if !m.Additive.Equals(other.Additive) { return false }
+	if !m.TimeDateTime.Equals(other.TimeDateTime) { return false }
+	if !m.TimePeriod.Equals(other.TimePeriod) { return false }
+	return true
+}
+
 // BiologicallyDerivedProductManipulation
 // Any manipulation of product post-collection that is intended to alter the product.  For example a buffy-coat enrichment or CD8 reduction of Peripheral Blood Stem Cells to make it more suitable for infusion.
 type BiologicallyDerivedProductManipulation struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// description
-	// Description of manipulation.
-	Description FhirString `json:"description,omitempty"`
-	// timeDateTime
-	// Time of manipulation.
-	TimeDateTime FhirDateTime `json:"timeDateTime,omitempty"`
-	// timePeriod
-	// Time of manipulation.
-	TimePeriod Period `json:"timePeriod,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	TimeDateTime *FhirDateTime `json:"timedatetime,omitempty"`
+	TimePeriod *Period `json:"timeperiod,omitempty"`
 }
 
 // NewBiologicallyDerivedProductManipulation creates a new BiologicallyDerivedProductManipulation instance
-func NewBiologicallyDerivedProductManipulation(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	description FhirString,
-	timeDateTime FhirDateTime,
-	timePeriod Period,
-) *BiologicallyDerivedProductManipulation {
-	return &BiologicallyDerivedProductManipulation{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Description: description,
-		TimeDateTime: timeDateTime,
-		TimePeriod: timePeriod,
-	}
+func NewBiologicallyDerivedProductManipulation() *BiologicallyDerivedProductManipulation {
+	return &BiologicallyDerivedProductManipulation{}
 }
+
 // FromJSON populates BiologicallyDerivedProductManipulation from JSON data
 func (m *BiologicallyDerivedProductManipulation) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -492,91 +240,50 @@ func (m *BiologicallyDerivedProductManipulation) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of BiologicallyDerivedProductManipulation
-func (m *BiologicallyDerivedProductManipulation) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	description *FhirString,
-	timeDateTime *FhirDateTime,
-	timePeriod *Period,
-) *BiologicallyDerivedProductManipulation {
+// Clone creates a deep copy of BiologicallyDerivedProductManipulation
+func (m *BiologicallyDerivedProductManipulation) Clone() *BiologicallyDerivedProductManipulation {
+	if m == nil { return nil }
 	return &BiologicallyDerivedProductManipulation{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		TimeDateTime: func() FhirDateTime {
-			if timeDateTime != nil { return *timeDateTime }
-			return m.TimeDateTime
-		}(),
-		TimePeriod: func() Period {
-			if timePeriod != nil { return *timePeriod }
-			return m.TimePeriod
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Description: m.Description.Clone(),
+		TimeDateTime: m.TimeDateTime.Clone(),
+		TimePeriod: m.TimePeriod.Clone(),
 	}
 }
+
+// Equals checks for equality with another BiologicallyDerivedProductManipulation instance
+func (m *BiologicallyDerivedProductManipulation) Equals(other *BiologicallyDerivedProductManipulation) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.TimeDateTime.Equals(other.TimeDateTime) { return false }
+	if !m.TimePeriod.Equals(other.TimePeriod) { return false }
+	return true
+}
+
 // BiologicallyDerivedProductStorage
 // Product storage.
 type BiologicallyDerivedProductStorage struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// description
-	// Description of storage.
-	Description FhirString `json:"description,omitempty"`
-	// temperature
-	// Storage temperature.
-	Temperature FhirDecimal `json:"temperature,omitempty"`
-	// scale
-	// Temperature scale used.
-	Scale BiologicallyDerivedProductStorageScale `json:"scale,omitempty"`
-	// duration
-	// Storage timeperiod.
-	Duration Period `json:"duration,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Temperature *FhirDecimal `json:"temperature,omitempty"`
+	Scale *BiologicallyDerivedProductStorageScale `json:"scale,omitempty"`
+	Duration *Period `json:"duration,omitempty"`
 }
 
 // NewBiologicallyDerivedProductStorage creates a new BiologicallyDerivedProductStorage instance
-func NewBiologicallyDerivedProductStorage(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	description FhirString,
-	temperature FhirDecimal,
-	scale BiologicallyDerivedProductStorageScale,
-	duration Period,
-) *BiologicallyDerivedProductStorage {
-	return &BiologicallyDerivedProductStorage{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Description: description,
-		Temperature: temperature,
-		Scale: scale,
-		Duration: duration,
-	}
+func NewBiologicallyDerivedProductStorage() *BiologicallyDerivedProductStorage {
+	return &BiologicallyDerivedProductStorage{}
 }
+
 // FromJSON populates BiologicallyDerivedProductStorage from JSON data
 func (m *BiologicallyDerivedProductStorage) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -587,44 +294,31 @@ func (m *BiologicallyDerivedProductStorage) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of BiologicallyDerivedProductStorage
-func (m *BiologicallyDerivedProductStorage) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	description *FhirString,
-	temperature *FhirDecimal,
-	scale *BiologicallyDerivedProductStorageScale,
-	duration *Period,
-) *BiologicallyDerivedProductStorage {
+// Clone creates a deep copy of BiologicallyDerivedProductStorage
+func (m *BiologicallyDerivedProductStorage) Clone() *BiologicallyDerivedProductStorage {
+	if m == nil { return nil }
 	return &BiologicallyDerivedProductStorage{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Temperature: func() FhirDecimal {
-			if temperature != nil { return *temperature }
-			return m.Temperature
-		}(),
-		Scale: func() BiologicallyDerivedProductStorageScale {
-			if scale != nil { return *scale }
-			return m.Scale
-		}(),
-		Duration: func() Period {
-			if duration != nil { return *duration }
-			return m.Duration
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Description: m.Description.Clone(),
+		Temperature: m.Temperature.Clone(),
+		Scale: m.Scale.Clone(),
+		Duration: m.Duration.Clone(),
 	}
 }
+
+// Equals checks for equality with another BiologicallyDerivedProductStorage instance
+func (m *BiologicallyDerivedProductStorage) Equals(other *BiologicallyDerivedProductStorage) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.Temperature.Equals(other.Temperature) { return false }
+	if !m.Scale.Equals(other.Scale) { return false }
+	if !m.Duration.Equals(other.Duration) { return false }
+	return true
+}
+

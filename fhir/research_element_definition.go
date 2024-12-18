@@ -3,234 +3,61 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // ResearchElementDefinition
 // The ResearchElementDefinition resource describes a "PICO" element that knowledge (evidence, assertion, recommendation) is about.
 type ResearchElementDefinition struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// url
-	// An absolute URI that is used to identify this research element definition when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this research element definition is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the research element definition is stored on different servers.
-	Url FhirUri `json:"url,omitempty"`
-	// identifier
-	// A formal identifier that is used to identify this research element definition when it is represented in other formats, or referenced in a specification, model, design or an instance.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// version
-	// The identifier that is used to identify this version of the research element definition when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the research element definition author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence. To provide a version consistent with the Decision Support Service specification, use the format Major.Minor.Revision (e.g. 1.0.0). For more information on versioning knowledge assets, refer to the Decision Support Service specification. Note that a version is required for non-experimental active artifacts.
-	Version FhirString `json:"version,omitempty"`
-	// name
-	// A natural language name identifying the research element definition. This name should be usable as an identifier for the module by machine processing applications such as code generation.
-	Name FhirString `json:"name,omitempty"`
-	// title
-	// A short, descriptive, user-friendly title for the research element definition.
-	Title FhirString `json:"title,omitempty"`
-	// shortTitle
-	// The short title provides an alternate title for use in informal descriptive contexts where the full, formal title is not necessary.
-	ShortTitle FhirString `json:"shortTitle,omitempty"`
-	// subtitle
-	// An explanatory or alternate title for the ResearchElementDefinition giving additional information about its content.
-	Subtitle FhirString `json:"subtitle,omitempty"`
-	// status
-	// The status of this research element definition. Enables tracking the life-cycle of the content.
-	Status PublicationStatus `json:"status,omitempty"`
-	// experimental
-	// A Boolean value to indicate that this research element definition is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.
-	Experimental FhirBoolean `json:"experimental,omitempty"`
-	// subjectCodeableConcept
-	// The intended subjects for the ResearchElementDefinition. If this element is not provided, a Patient subject is assumed, but the subject of the ResearchElementDefinition can be anything.
-	SubjectCodeableConcept CodeableConcept `json:"subjectCodeableConcept,omitempty"`
-	// subjectReference
-	// The intended subjects for the ResearchElementDefinition. If this element is not provided, a Patient subject is assumed, but the subject of the ResearchElementDefinition can be anything.
-	SubjectReference Reference `json:"subjectReference,omitempty"`
-	// date
-	// The date  (and optionally time) when the research element definition was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the research element definition changes.
-	Date FhirDateTime `json:"date,omitempty"`
-	// publisher
-	// The name of the organization or individual that published the research element definition.
-	Publisher FhirString `json:"publisher,omitempty"`
-	// contact
-	// Contact details to assist a user in finding and communicating with the publisher.
-	Contact []ContactDetail `json:"contact,omitempty"`
-	// description
-	// A free text natural language description of the research element definition from a consumer's perspective.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// comment
-	// A human-readable string to clarify or explain concepts about the resource.
-	Comment []FhirString `json:"comment,omitempty"`
-	// useContext
-	// The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate research element definition instances.
-	UseContext []UsageContext `json:"useContext,omitempty"`
-	// jurisdiction
-	// A legal or geographic region in which the research element definition is intended to be used.
-	Jurisdiction []CodeableConcept `json:"jurisdiction,omitempty"`
-	// purpose
-	// Explanation of why this research element definition is needed and why it has been designed as it has.
-	Purpose FhirMarkdown `json:"purpose,omitempty"`
-	// usage
-	// A detailed description, from a clinical perspective, of how the ResearchElementDefinition is used.
-	Usage FhirString `json:"usage,omitempty"`
-	// copyright
-	// A copyright statement relating to the research element definition and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the research element definition.
-	Copyright FhirMarkdown `json:"copyright,omitempty"`
-	// approvalDate
-	// The date on which the resource content was approved by the publisher. Approval happens once when the content is officially approved for usage.
-	ApprovalDate FhirDate `json:"approvalDate,omitempty"`
-	// lastReviewDate
-	// The date on which the resource content was last reviewed. Review happens periodically after approval but does not change the original approval date.
-	LastReviewDate FhirDate `json:"lastReviewDate,omitempty"`
-	// effectivePeriod
-	// The period during which the research element definition content was or is planned to be in active use.
-	EffectivePeriod Period `json:"effectivePeriod,omitempty"`
-	// topic
-	// Descriptive topics related to the content of the ResearchElementDefinition. Topics provide a high-level categorization grouping types of ResearchElementDefinitions that can be useful for filtering and searching.
-	Topic []CodeableConcept `json:"topic,omitempty"`
-	// author
-	// An individiual or organization primarily involved in the creation and maintenance of the content.
-	Author []ContactDetail `json:"author,omitempty"`
-	// editor
-	// An individual or organization primarily responsible for internal coherence of the content.
-	Editor []ContactDetail `json:"editor,omitempty"`
-	// reviewer
-	// An individual or organization primarily responsible for review of some aspect of the content.
-	Reviewer []ContactDetail `json:"reviewer,omitempty"`
-	// endorser
-	// An individual or organization responsible for officially endorsing the content for use in some setting.
-	Endorser []ContactDetail `json:"endorser,omitempty"`
-	// relatedArtifact
-	// Related artifacts such as additional documentation, justification, or bibliographic references.
-	RelatedArtifact []RelatedArtifact `json:"relatedArtifact,omitempty"`
-	// library
-	// A reference to a Library resource containing the formal logic used by the ResearchElementDefinition.
-	Library_ []FhirCanonical `json:"library,omitempty"`
-	// type
-	// The type of research element, a population, an exposure, or an outcome.
-	Type_ ResearchElementType `json:"type,omitempty"`
-	// variableType
-	// The type of the outcome (e.g. Dichotomous, Continuous, or Descriptive).
-	VariableType VariableType `json:"variableType,omitempty"`
-	// characteristic
-	// A characteristic that defines the members of the research element. Multiple characteristics are applied with "and" semantics.
-	Characteristic []ResearchElementDefinitionCharacteristic `json:"characteristic,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Url *FhirUri `json:"url,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Title *FhirString `json:"title,omitempty"`
+	ShortTitle *FhirString `json:"shorttitle,omitempty"`
+	Subtitle *FhirString `json:"subtitle,omitempty"`
+	Status *PublicationStatus `json:"status,omitempty"`
+	Experimental *FhirBoolean `json:"experimental,omitempty"`
+	SubjectCodeableConcept *CodeableConcept `json:"subjectcodeableconcept,omitempty"`
+	SubjectReference *Reference `json:"subjectreference,omitempty"`
+	Date *FhirDateTime `json:"date,omitempty"`
+	Publisher *FhirString `json:"publisher,omitempty"`
+	Contact []*ContactDetail `json:"contact,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	Comment []*FhirString `json:"comment,omitempty"`
+	UseContext []*UsageContext `json:"usecontext,omitempty"`
+	Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+	Purpose *FhirMarkdown `json:"purpose,omitempty"`
+	Usage *FhirString `json:"usage,omitempty"`
+	Copyright *FhirMarkdown `json:"copyright,omitempty"`
+	ApprovalDate *FhirDate `json:"approvaldate,omitempty"`
+	LastReviewDate *FhirDate `json:"lastreviewdate,omitempty"`
+	EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+	Topic []*CodeableConcept `json:"topic,omitempty"`
+	Author []*ContactDetail `json:"author,omitempty"`
+	Editor []*ContactDetail `json:"editor,omitempty"`
+	Reviewer []*ContactDetail `json:"reviewer,omitempty"`
+	Endorser []*ContactDetail `json:"endorser,omitempty"`
+	RelatedArtifact []*RelatedArtifact `json:"relatedartifact,omitempty"`
+	Library_ []*FhirCanonical `json:"library,omitempty"`
+	Type *ResearchElementType `json:"type,omitempty"`
+	VariableType *VariableType `json:"variabletype,omitempty"`
+	Characteristic []*ResearchElementDefinitionCharacteristic `json:"characteristic,omitempty"`
 }
 
 // NewResearchElementDefinition creates a new ResearchElementDefinition instance
-func NewResearchElementDefinition(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	url FhirUri,
-	identifier []Identifier,
-	version FhirString,
-	name FhirString,
-	title FhirString,
-	shortTitle FhirString,
-	subtitle FhirString,
-	status PublicationStatus,
-	experimental FhirBoolean,
-	subjectCodeableConcept CodeableConcept,
-	subjectReference Reference,
-	date FhirDateTime,
-	publisher FhirString,
-	contact []ContactDetail,
-	description FhirMarkdown,
-	comment []FhirString,
-	useContext []UsageContext,
-	jurisdiction []CodeableConcept,
-	purpose FhirMarkdown,
-	usage FhirString,
-	copyright FhirMarkdown,
-	approvalDate FhirDate,
-	lastReviewDate FhirDate,
-	effectivePeriod Period,
-	topic []CodeableConcept,
-	author []ContactDetail,
-	editor []ContactDetail,
-	reviewer []ContactDetail,
-	endorser []ContactDetail,
-	relatedArtifact []RelatedArtifact,
-	library_ []FhirCanonical,
-	type_ ResearchElementType,
-	variableType VariableType,
-	characteristic []ResearchElementDefinitionCharacteristic,
-) *ResearchElementDefinition {
-	return &ResearchElementDefinition{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Url: url,
-		Identifier: identifier,
-		Version: version,
-		Name: name,
-		Title: title,
-		ShortTitle: shortTitle,
-		Subtitle: subtitle,
-		Status: status,
-		Experimental: experimental,
-		SubjectCodeableConcept: subjectCodeableConcept,
-		SubjectReference: subjectReference,
-		Date: date,
-		Publisher: publisher,
-		Contact: contact,
-		Description: description,
-		Comment: comment,
-		UseContext: useContext,
-		Jurisdiction: jurisdiction,
-		Purpose: purpose,
-		Usage: usage,
-		Copyright: copyright,
-		ApprovalDate: approvalDate,
-		LastReviewDate: lastReviewDate,
-		EffectivePeriod: effectivePeriod,
-		Topic: topic,
-		Author: author,
-		Editor: editor,
-		Reviewer: reviewer,
-		Endorser: endorser,
-		RelatedArtifact: relatedArtifact,
-		Library_: library_,
-		Type_: type_,
-		VariableType: variableType,
-		Characteristic: characteristic,
-	}
+func NewResearchElementDefinition() *ResearchElementDefinition {
+	return &ResearchElementDefinition{}
 }
+
 // FromJSON populates ResearchElementDefinition from JSON data
 func (m *ResearchElementDefinition) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -241,356 +68,139 @@ func (m *ResearchElementDefinition) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ResearchElementDefinition
-func (m *ResearchElementDefinition) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	url *FhirUri,
-	identifier *[]Identifier,
-	version *FhirString,
-	name *FhirString,
-	title *FhirString,
-	shortTitle *FhirString,
-	subtitle *FhirString,
-	status *PublicationStatus,
-	experimental *FhirBoolean,
-	subjectCodeableConcept *CodeableConcept,
-	subjectReference *Reference,
-	date *FhirDateTime,
-	publisher *FhirString,
-	contact *[]ContactDetail,
-	description *FhirMarkdown,
-	comment *[]FhirString,
-	useContext *[]UsageContext,
-	jurisdiction *[]CodeableConcept,
-	purpose *FhirMarkdown,
-	usage *FhirString,
-	copyright *FhirMarkdown,
-	approvalDate *FhirDate,
-	lastReviewDate *FhirDate,
-	effectivePeriod *Period,
-	topic *[]CodeableConcept,
-	author *[]ContactDetail,
-	editor *[]ContactDetail,
-	reviewer *[]ContactDetail,
-	endorser *[]ContactDetail,
-	relatedArtifact *[]RelatedArtifact,
-	library_ *[]FhirCanonical,
-	type_ *ResearchElementType,
-	variableType *VariableType,
-	characteristic *[]ResearchElementDefinitionCharacteristic,
-) *ResearchElementDefinition {
+// Clone creates a deep copy of ResearchElementDefinition
+func (m *ResearchElementDefinition) Clone() *ResearchElementDefinition {
+	if m == nil { return nil }
 	return &ResearchElementDefinition{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Url: func() FhirUri {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Title: func() FhirString {
-			if title != nil { return *title }
-			return m.Title
-		}(),
-		ShortTitle: func() FhirString {
-			if shortTitle != nil { return *shortTitle }
-			return m.ShortTitle
-		}(),
-		Subtitle: func() FhirString {
-			if subtitle != nil { return *subtitle }
-			return m.Subtitle
-		}(),
-		Status: func() PublicationStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Experimental: func() FhirBoolean {
-			if experimental != nil { return *experimental }
-			return m.Experimental
-		}(),
-		SubjectCodeableConcept: func() CodeableConcept {
-			if subjectCodeableConcept != nil { return *subjectCodeableConcept }
-			return m.SubjectCodeableConcept
-		}(),
-		SubjectReference: func() Reference {
-			if subjectReference != nil { return *subjectReference }
-			return m.SubjectReference
-		}(),
-		Date: func() FhirDateTime {
-			if date != nil { return *date }
-			return m.Date
-		}(),
-		Publisher: func() FhirString {
-			if publisher != nil { return *publisher }
-			return m.Publisher
-		}(),
-		Contact: func() []ContactDetail {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Comment: func() []FhirString {
-			if comment != nil { return *comment }
-			return m.Comment
-		}(),
-		UseContext: func() []UsageContext {
-			if useContext != nil { return *useContext }
-			return m.UseContext
-		}(),
-		Jurisdiction: func() []CodeableConcept {
-			if jurisdiction != nil { return *jurisdiction }
-			return m.Jurisdiction
-		}(),
-		Purpose: func() FhirMarkdown {
-			if purpose != nil { return *purpose }
-			return m.Purpose
-		}(),
-		Usage: func() FhirString {
-			if usage != nil { return *usage }
-			return m.Usage
-		}(),
-		Copyright: func() FhirMarkdown {
-			if copyright != nil { return *copyright }
-			return m.Copyright
-		}(),
-		ApprovalDate: func() FhirDate {
-			if approvalDate != nil { return *approvalDate }
-			return m.ApprovalDate
-		}(),
-		LastReviewDate: func() FhirDate {
-			if lastReviewDate != nil { return *lastReviewDate }
-			return m.LastReviewDate
-		}(),
-		EffectivePeriod: func() Period {
-			if effectivePeriod != nil { return *effectivePeriod }
-			return m.EffectivePeriod
-		}(),
-		Topic: func() []CodeableConcept {
-			if topic != nil { return *topic }
-			return m.Topic
-		}(),
-		Author: func() []ContactDetail {
-			if author != nil { return *author }
-			return m.Author
-		}(),
-		Editor: func() []ContactDetail {
-			if editor != nil { return *editor }
-			return m.Editor
-		}(),
-		Reviewer: func() []ContactDetail {
-			if reviewer != nil { return *reviewer }
-			return m.Reviewer
-		}(),
-		Endorser: func() []ContactDetail {
-			if endorser != nil { return *endorser }
-			return m.Endorser
-		}(),
-		RelatedArtifact: func() []RelatedArtifact {
-			if relatedArtifact != nil { return *relatedArtifact }
-			return m.RelatedArtifact
-		}(),
-		Library_: func() []FhirCanonical {
-			if library_ != nil { return *library_ }
-			return m.Library_
-		}(),
-		Type_: func() ResearchElementType {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		VariableType: func() VariableType {
-			if variableType != nil { return *variableType }
-			return m.VariableType
-		}(),
-		Characteristic: func() []ResearchElementDefinitionCharacteristic {
-			if characteristic != nil { return *characteristic }
-			return m.Characteristic
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Url: m.Url.Clone(),
+		Identifier: cloneSlices(m.Identifier),
+		Version: m.Version.Clone(),
+		Name: m.Name.Clone(),
+		Title: m.Title.Clone(),
+		ShortTitle: m.ShortTitle.Clone(),
+		Subtitle: m.Subtitle.Clone(),
+		Status: m.Status.Clone(),
+		Experimental: m.Experimental.Clone(),
+		SubjectCodeableConcept: m.SubjectCodeableConcept.Clone(),
+		SubjectReference: m.SubjectReference.Clone(),
+		Date: m.Date.Clone(),
+		Publisher: m.Publisher.Clone(),
+		Contact: cloneSlices(m.Contact),
+		Description: m.Description.Clone(),
+		Comment: cloneSlices(m.Comment),
+		UseContext: cloneSlices(m.UseContext),
+		Jurisdiction: cloneSlices(m.Jurisdiction),
+		Purpose: m.Purpose.Clone(),
+		Usage: m.Usage.Clone(),
+		Copyright: m.Copyright.Clone(),
+		ApprovalDate: m.ApprovalDate.Clone(),
+		LastReviewDate: m.LastReviewDate.Clone(),
+		EffectivePeriod: m.EffectivePeriod.Clone(),
+		Topic: cloneSlices(m.Topic),
+		Author: cloneSlices(m.Author),
+		Editor: cloneSlices(m.Editor),
+		Reviewer: cloneSlices(m.Reviewer),
+		Endorser: cloneSlices(m.Endorser),
+		RelatedArtifact: cloneSlices(m.RelatedArtifact),
+		Library_: cloneSlices(m.Library_),
+		Type: m.Type.Clone(),
+		VariableType: m.VariableType.Clone(),
+		Characteristic: cloneSlices(m.Characteristic),
 	}
 }
+
+// Equals checks for equality with another ResearchElementDefinition instance
+func (m *ResearchElementDefinition) Equals(other *ResearchElementDefinition) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Title.Equals(other.Title) { return false }
+	if !m.ShortTitle.Equals(other.ShortTitle) { return false }
+	if !m.Subtitle.Equals(other.Subtitle) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Experimental.Equals(other.Experimental) { return false }
+	if !m.SubjectCodeableConcept.Equals(other.SubjectCodeableConcept) { return false }
+	if !m.SubjectReference.Equals(other.SubjectReference) { return false }
+	if !m.Date.Equals(other.Date) { return false }
+	if !m.Publisher.Equals(other.Publisher) { return false }
+	if !compareSlices(m.Contact, other.Contact) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.Comment, other.Comment) { return false }
+	if !compareSlices(m.UseContext, other.UseContext) { return false }
+	if !compareSlices(m.Jurisdiction, other.Jurisdiction) { return false }
+	if !m.Purpose.Equals(other.Purpose) { return false }
+	if !m.Usage.Equals(other.Usage) { return false }
+	if !m.Copyright.Equals(other.Copyright) { return false }
+	if !m.ApprovalDate.Equals(other.ApprovalDate) { return false }
+	if !m.LastReviewDate.Equals(other.LastReviewDate) { return false }
+	if !m.EffectivePeriod.Equals(other.EffectivePeriod) { return false }
+	if !compareSlices(m.Topic, other.Topic) { return false }
+	if !compareSlices(m.Author, other.Author) { return false }
+	if !compareSlices(m.Editor, other.Editor) { return false }
+	if !compareSlices(m.Reviewer, other.Reviewer) { return false }
+	if !compareSlices(m.Endorser, other.Endorser) { return false }
+	if !compareSlices(m.RelatedArtifact, other.RelatedArtifact) { return false }
+	if !compareSlices(m.Library_, other.Library_) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.VariableType.Equals(other.VariableType) { return false }
+	if !compareSlices(m.Characteristic, other.Characteristic) { return false }
+	return true
+}
+
 // ResearchElementDefinitionCharacteristic
 // A characteristic that defines the members of the research element. Multiple characteristics are applied with "and" semantics.
 type ResearchElementDefinitionCharacteristic struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// definitionCodeableConcept
-	// Define members of the research element using Codes (such as condition, medication, or observation), Expressions ( using an expression language such as FHIRPath or CQL) or DataRequirements (such as Diabetes diagnosis onset in the last year).
-	DefinitionCodeableConcept CodeableConcept `json:"definitionCodeableConcept,omitempty"`
-	// definitionCanonical
-	// Define members of the research element using Codes (such as condition, medication, or observation), Expressions ( using an expression language such as FHIRPath or CQL) or DataRequirements (such as Diabetes diagnosis onset in the last year).
-	DefinitionCanonical FhirCanonical `json:"definitionCanonical,omitempty"`
-	// definitionExpression
-	// Define members of the research element using Codes (such as condition, medication, or observation), Expressions ( using an expression language such as FHIRPath or CQL) or DataRequirements (such as Diabetes diagnosis onset in the last year).
-	DefinitionExpression FhirExpression `json:"definitionExpression,omitempty"`
-	// definitionDataRequirement
-	// Define members of the research element using Codes (such as condition, medication, or observation), Expressions ( using an expression language such as FHIRPath or CQL) or DataRequirements (such as Diabetes diagnosis onset in the last year).
-	DefinitionDataRequirement DataRequirement `json:"definitionDataRequirement,omitempty"`
-	// usageContext
-	// Use UsageContext to define the members of the population, such as Age Ranges, Genders, Settings.
-	UsageContext []UsageContext `json:"usageContext,omitempty"`
-	// exclude
-	// When true, members with this characteristic are excluded from the element.
-	Exclude FhirBoolean `json:"exclude,omitempty"`
-	// unitOfMeasure
-	// Specifies the UCUM unit for the outcome.
-	UnitOfMeasure CodeableConcept `json:"unitOfMeasure,omitempty"`
-	// studyEffectiveDescription
-	// A narrative description of the time period the study covers.
-	StudyEffectiveDescription FhirString `json:"studyEffectiveDescription,omitempty"`
-	// studyEffectiveDateTime
-	// Indicates what effective period the study covers.
-	StudyEffectiveDateTime FhirDateTime `json:"studyEffectiveDateTime,omitempty"`
-	// studyEffectivePeriod
-	// Indicates what effective period the study covers.
-	StudyEffectivePeriod Period `json:"studyEffectivePeriod,omitempty"`
-	// studyEffectiveDuration
-	// Indicates what effective period the study covers.
-	StudyEffectiveDuration FhirDuration `json:"studyEffectiveDuration,omitempty"`
-	// studyEffectiveTiming
-	// Indicates what effective period the study covers.
-	StudyEffectiveTiming Timing `json:"studyEffectiveTiming,omitempty"`
-	// studyEffectiveTimeFromStart
-	// Indicates duration from the study initiation.
-	StudyEffectiveTimeFromStart FhirDuration `json:"studyEffectiveTimeFromStart,omitempty"`
-	// studyEffectiveGroupMeasure
-	// Indicates how elements are aggregated within the study effective period.
-	StudyEffectiveGroupMeasure GroupMeasure `json:"studyEffectiveGroupMeasure,omitempty"`
-	// participantEffectiveDescription
-	// A narrative description of the time period the study covers.
-	ParticipantEffectiveDescription FhirString `json:"participantEffectiveDescription,omitempty"`
-	// participantEffectiveDateTime
-	// Indicates what effective period the study covers.
-	ParticipantEffectiveDateTime FhirDateTime `json:"participantEffectiveDateTime,omitempty"`
-	// participantEffectivePeriod
-	// Indicates what effective period the study covers.
-	ParticipantEffectivePeriod Period `json:"participantEffectivePeriod,omitempty"`
-	// participantEffectiveDuration
-	// Indicates what effective period the study covers.
-	ParticipantEffectiveDuration FhirDuration `json:"participantEffectiveDuration,omitempty"`
-	// participantEffectiveTiming
-	// Indicates what effective period the study covers.
-	ParticipantEffectiveTiming Timing `json:"participantEffectiveTiming,omitempty"`
-	// participantEffectiveTimeFromStart
-	// Indicates duration from the participant's study entry.
-	ParticipantEffectiveTimeFromStart FhirDuration `json:"participantEffectiveTimeFromStart,omitempty"`
-	// participantEffectiveGroupMeasure
-	// Indicates how elements are aggregated within the study effective period.
-	ParticipantEffectiveGroupMeasure GroupMeasure `json:"participantEffectiveGroupMeasure,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	DefinitionCodeableConcept *CodeableConcept `json:"definitioncodeableconcept,omitempty"`
+	DefinitionCanonical *FhirCanonical `json:"definitioncanonical,omitempty"`
+	DefinitionExpression *FhirExpression `json:"definitionexpression,omitempty"`
+	DefinitionDataRequirement *DataRequirement `json:"definitiondatarequirement,omitempty"`
+	UsageContext []*UsageContext `json:"usagecontext,omitempty"`
+	Exclude *FhirBoolean `json:"exclude,omitempty"`
+	UnitOfMeasure *CodeableConcept `json:"unitofmeasure,omitempty"`
+	StudyEffectiveDescription *FhirString `json:"studyeffectivedescription,omitempty"`
+	StudyEffectiveDateTime *FhirDateTime `json:"studyeffectivedatetime,omitempty"`
+	StudyEffectivePeriod *Period `json:"studyeffectiveperiod,omitempty"`
+	StudyEffectiveDuration *FhirDuration `json:"studyeffectiveduration,omitempty"`
+	StudyEffectiveTiming *Timing `json:"studyeffectivetiming,omitempty"`
+	StudyEffectiveTimeFromStart *FhirDuration `json:"studyeffectivetimefromstart,omitempty"`
+	StudyEffectiveGroupMeasure *GroupMeasure `json:"studyeffectivegroupmeasure,omitempty"`
+	ParticipantEffectiveDescription *FhirString `json:"participanteffectivedescription,omitempty"`
+	ParticipantEffectiveDateTime *FhirDateTime `json:"participanteffectivedatetime,omitempty"`
+	ParticipantEffectivePeriod *Period `json:"participanteffectiveperiod,omitempty"`
+	ParticipantEffectiveDuration *FhirDuration `json:"participanteffectiveduration,omitempty"`
+	ParticipantEffectiveTiming *Timing `json:"participanteffectivetiming,omitempty"`
+	ParticipantEffectiveTimeFromStart *FhirDuration `json:"participanteffectivetimefromstart,omitempty"`
+	ParticipantEffectiveGroupMeasure *GroupMeasure `json:"participanteffectivegroupmeasure,omitempty"`
 }
 
 // NewResearchElementDefinitionCharacteristic creates a new ResearchElementDefinitionCharacteristic instance
-func NewResearchElementDefinitionCharacteristic(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	definitionCodeableConcept CodeableConcept,
-	definitionCanonical FhirCanonical,
-	definitionExpression FhirExpression,
-	definitionDataRequirement DataRequirement,
-	usageContext []UsageContext,
-	exclude FhirBoolean,
-	unitOfMeasure CodeableConcept,
-	studyEffectiveDescription FhirString,
-	studyEffectiveDateTime FhirDateTime,
-	studyEffectivePeriod Period,
-	studyEffectiveDuration FhirDuration,
-	studyEffectiveTiming Timing,
-	studyEffectiveTimeFromStart FhirDuration,
-	studyEffectiveGroupMeasure GroupMeasure,
-	participantEffectiveDescription FhirString,
-	participantEffectiveDateTime FhirDateTime,
-	participantEffectivePeriod Period,
-	participantEffectiveDuration FhirDuration,
-	participantEffectiveTiming Timing,
-	participantEffectiveTimeFromStart FhirDuration,
-	participantEffectiveGroupMeasure GroupMeasure,
-) *ResearchElementDefinitionCharacteristic {
-	return &ResearchElementDefinitionCharacteristic{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		DefinitionCodeableConcept: definitionCodeableConcept,
-		DefinitionCanonical: definitionCanonical,
-		DefinitionExpression: definitionExpression,
-		DefinitionDataRequirement: definitionDataRequirement,
-		UsageContext: usageContext,
-		Exclude: exclude,
-		UnitOfMeasure: unitOfMeasure,
-		StudyEffectiveDescription: studyEffectiveDescription,
-		StudyEffectiveDateTime: studyEffectiveDateTime,
-		StudyEffectivePeriod: studyEffectivePeriod,
-		StudyEffectiveDuration: studyEffectiveDuration,
-		StudyEffectiveTiming: studyEffectiveTiming,
-		StudyEffectiveTimeFromStart: studyEffectiveTimeFromStart,
-		StudyEffectiveGroupMeasure: studyEffectiveGroupMeasure,
-		ParticipantEffectiveDescription: participantEffectiveDescription,
-		ParticipantEffectiveDateTime: participantEffectiveDateTime,
-		ParticipantEffectivePeriod: participantEffectivePeriod,
-		ParticipantEffectiveDuration: participantEffectiveDuration,
-		ParticipantEffectiveTiming: participantEffectiveTiming,
-		ParticipantEffectiveTimeFromStart: participantEffectiveTimeFromStart,
-		ParticipantEffectiveGroupMeasure: participantEffectiveGroupMeasure,
-	}
+func NewResearchElementDefinitionCharacteristic() *ResearchElementDefinitionCharacteristic {
+	return &ResearchElementDefinitionCharacteristic{}
 }
+
 // FromJSON populates ResearchElementDefinitionCharacteristic from JSON data
 func (m *ResearchElementDefinitionCharacteristic) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -601,129 +211,65 @@ func (m *ResearchElementDefinitionCharacteristic) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ResearchElementDefinitionCharacteristic
-func (m *ResearchElementDefinitionCharacteristic) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	definitionCodeableConcept *CodeableConcept,
-	definitionCanonical *FhirCanonical,
-	definitionExpression *FhirExpression,
-	definitionDataRequirement *DataRequirement,
-	usageContext *[]UsageContext,
-	exclude *FhirBoolean,
-	unitOfMeasure *CodeableConcept,
-	studyEffectiveDescription *FhirString,
-	studyEffectiveDateTime *FhirDateTime,
-	studyEffectivePeriod *Period,
-	studyEffectiveDuration *FhirDuration,
-	studyEffectiveTiming *Timing,
-	studyEffectiveTimeFromStart *FhirDuration,
-	studyEffectiveGroupMeasure *GroupMeasure,
-	participantEffectiveDescription *FhirString,
-	participantEffectiveDateTime *FhirDateTime,
-	participantEffectivePeriod *Period,
-	participantEffectiveDuration *FhirDuration,
-	participantEffectiveTiming *Timing,
-	participantEffectiveTimeFromStart *FhirDuration,
-	participantEffectiveGroupMeasure *GroupMeasure,
-) *ResearchElementDefinitionCharacteristic {
+// Clone creates a deep copy of ResearchElementDefinitionCharacteristic
+func (m *ResearchElementDefinitionCharacteristic) Clone() *ResearchElementDefinitionCharacteristic {
+	if m == nil { return nil }
 	return &ResearchElementDefinitionCharacteristic{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		DefinitionCodeableConcept: func() CodeableConcept {
-			if definitionCodeableConcept != nil { return *definitionCodeableConcept }
-			return m.DefinitionCodeableConcept
-		}(),
-		DefinitionCanonical: func() FhirCanonical {
-			if definitionCanonical != nil { return *definitionCanonical }
-			return m.DefinitionCanonical
-		}(),
-		DefinitionExpression: func() FhirExpression {
-			if definitionExpression != nil { return *definitionExpression }
-			return m.DefinitionExpression
-		}(),
-		DefinitionDataRequirement: func() DataRequirement {
-			if definitionDataRequirement != nil { return *definitionDataRequirement }
-			return m.DefinitionDataRequirement
-		}(),
-		UsageContext: func() []UsageContext {
-			if usageContext != nil { return *usageContext }
-			return m.UsageContext
-		}(),
-		Exclude: func() FhirBoolean {
-			if exclude != nil { return *exclude }
-			return m.Exclude
-		}(),
-		UnitOfMeasure: func() CodeableConcept {
-			if unitOfMeasure != nil { return *unitOfMeasure }
-			return m.UnitOfMeasure
-		}(),
-		StudyEffectiveDescription: func() FhirString {
-			if studyEffectiveDescription != nil { return *studyEffectiveDescription }
-			return m.StudyEffectiveDescription
-		}(),
-		StudyEffectiveDateTime: func() FhirDateTime {
-			if studyEffectiveDateTime != nil { return *studyEffectiveDateTime }
-			return m.StudyEffectiveDateTime
-		}(),
-		StudyEffectivePeriod: func() Period {
-			if studyEffectivePeriod != nil { return *studyEffectivePeriod }
-			return m.StudyEffectivePeriod
-		}(),
-		StudyEffectiveDuration: func() FhirDuration {
-			if studyEffectiveDuration != nil { return *studyEffectiveDuration }
-			return m.StudyEffectiveDuration
-		}(),
-		StudyEffectiveTiming: func() Timing {
-			if studyEffectiveTiming != nil { return *studyEffectiveTiming }
-			return m.StudyEffectiveTiming
-		}(),
-		StudyEffectiveTimeFromStart: func() FhirDuration {
-			if studyEffectiveTimeFromStart != nil { return *studyEffectiveTimeFromStart }
-			return m.StudyEffectiveTimeFromStart
-		}(),
-		StudyEffectiveGroupMeasure: func() GroupMeasure {
-			if studyEffectiveGroupMeasure != nil { return *studyEffectiveGroupMeasure }
-			return m.StudyEffectiveGroupMeasure
-		}(),
-		ParticipantEffectiveDescription: func() FhirString {
-			if participantEffectiveDescription != nil { return *participantEffectiveDescription }
-			return m.ParticipantEffectiveDescription
-		}(),
-		ParticipantEffectiveDateTime: func() FhirDateTime {
-			if participantEffectiveDateTime != nil { return *participantEffectiveDateTime }
-			return m.ParticipantEffectiveDateTime
-		}(),
-		ParticipantEffectivePeriod: func() Period {
-			if participantEffectivePeriod != nil { return *participantEffectivePeriod }
-			return m.ParticipantEffectivePeriod
-		}(),
-		ParticipantEffectiveDuration: func() FhirDuration {
-			if participantEffectiveDuration != nil { return *participantEffectiveDuration }
-			return m.ParticipantEffectiveDuration
-		}(),
-		ParticipantEffectiveTiming: func() Timing {
-			if participantEffectiveTiming != nil { return *participantEffectiveTiming }
-			return m.ParticipantEffectiveTiming
-		}(),
-		ParticipantEffectiveTimeFromStart: func() FhirDuration {
-			if participantEffectiveTimeFromStart != nil { return *participantEffectiveTimeFromStart }
-			return m.ParticipantEffectiveTimeFromStart
-		}(),
-		ParticipantEffectiveGroupMeasure: func() GroupMeasure {
-			if participantEffectiveGroupMeasure != nil { return *participantEffectiveGroupMeasure }
-			return m.ParticipantEffectiveGroupMeasure
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		DefinitionCodeableConcept: m.DefinitionCodeableConcept.Clone(),
+		DefinitionCanonical: m.DefinitionCanonical.Clone(),
+		DefinitionExpression: m.DefinitionExpression.Clone(),
+		DefinitionDataRequirement: m.DefinitionDataRequirement.Clone(),
+		UsageContext: cloneSlices(m.UsageContext),
+		Exclude: m.Exclude.Clone(),
+		UnitOfMeasure: m.UnitOfMeasure.Clone(),
+		StudyEffectiveDescription: m.StudyEffectiveDescription.Clone(),
+		StudyEffectiveDateTime: m.StudyEffectiveDateTime.Clone(),
+		StudyEffectivePeriod: m.StudyEffectivePeriod.Clone(),
+		StudyEffectiveDuration: m.StudyEffectiveDuration.Clone(),
+		StudyEffectiveTiming: m.StudyEffectiveTiming.Clone(),
+		StudyEffectiveTimeFromStart: m.StudyEffectiveTimeFromStart.Clone(),
+		StudyEffectiveGroupMeasure: m.StudyEffectiveGroupMeasure.Clone(),
+		ParticipantEffectiveDescription: m.ParticipantEffectiveDescription.Clone(),
+		ParticipantEffectiveDateTime: m.ParticipantEffectiveDateTime.Clone(),
+		ParticipantEffectivePeriod: m.ParticipantEffectivePeriod.Clone(),
+		ParticipantEffectiveDuration: m.ParticipantEffectiveDuration.Clone(),
+		ParticipantEffectiveTiming: m.ParticipantEffectiveTiming.Clone(),
+		ParticipantEffectiveTimeFromStart: m.ParticipantEffectiveTimeFromStart.Clone(),
+		ParticipantEffectiveGroupMeasure: m.ParticipantEffectiveGroupMeasure.Clone(),
 	}
 }
+
+// Equals checks for equality with another ResearchElementDefinitionCharacteristic instance
+func (m *ResearchElementDefinitionCharacteristic) Equals(other *ResearchElementDefinitionCharacteristic) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.DefinitionCodeableConcept.Equals(other.DefinitionCodeableConcept) { return false }
+	if !m.DefinitionCanonical.Equals(other.DefinitionCanonical) { return false }
+	if !m.DefinitionExpression.Equals(other.DefinitionExpression) { return false }
+	if !m.DefinitionDataRequirement.Equals(other.DefinitionDataRequirement) { return false }
+	if !compareSlices(m.UsageContext, other.UsageContext) { return false }
+	if !m.Exclude.Equals(other.Exclude) { return false }
+	if !m.UnitOfMeasure.Equals(other.UnitOfMeasure) { return false }
+	if !m.StudyEffectiveDescription.Equals(other.StudyEffectiveDescription) { return false }
+	if !m.StudyEffectiveDateTime.Equals(other.StudyEffectiveDateTime) { return false }
+	if !m.StudyEffectivePeriod.Equals(other.StudyEffectivePeriod) { return false }
+	if !m.StudyEffectiveDuration.Equals(other.StudyEffectiveDuration) { return false }
+	if !m.StudyEffectiveTiming.Equals(other.StudyEffectiveTiming) { return false }
+	if !m.StudyEffectiveTimeFromStart.Equals(other.StudyEffectiveTimeFromStart) { return false }
+	if !m.StudyEffectiveGroupMeasure.Equals(other.StudyEffectiveGroupMeasure) { return false }
+	if !m.ParticipantEffectiveDescription.Equals(other.ParticipantEffectiveDescription) { return false }
+	if !m.ParticipantEffectiveDateTime.Equals(other.ParticipantEffectiveDateTime) { return false }
+	if !m.ParticipantEffectivePeriod.Equals(other.ParticipantEffectivePeriod) { return false }
+	if !m.ParticipantEffectiveDuration.Equals(other.ParticipantEffectiveDuration) { return false }
+	if !m.ParticipantEffectiveTiming.Equals(other.ParticipantEffectiveTiming) { return false }
+	if !m.ParticipantEffectiveTimeFromStart.Equals(other.ParticipantEffectiveTimeFromStart) { return false }
+	if !m.ParticipantEffectiveGroupMeasure.Equals(other.ParticipantEffectiveGroupMeasure) { return false }
+	return true
+}
+

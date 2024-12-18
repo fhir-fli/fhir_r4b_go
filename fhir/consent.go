@@ -3,134 +3,41 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // Consent
 // A record of a healthcare consumer’s  choices, which permits or denies identified recipient(s) or recipient role(s) to perform one or more actions within a given policy context, for specific purposes and periods of time.
 type Consent struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// Unique identifier for this copy of the Consent Statement.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// status
-	// Indicates the current state of this consent.
-	Status ConsentState `json:"status,omitempty"`
-	// scope
-	// A selector of the type of consent being presented: ADR, Privacy, Treatment, Research.  This list is now extensible.
-	Scope CodeableConcept `json:"scope,omitempty"`
-	// category
-	// A classification of the type of consents found in the statement. This element supports indexing and retrieval of consent statements.
-	Category []CodeableConcept `json:"category,omitempty"`
-	// patient
-	// The patient/healthcare consumer to whom this consent applies.
-	Patient Reference `json:"patient,omitempty"`
-	// dateTime
-	// When this  Consent was issued / created / indexed.
-	DateTime FhirDateTime `json:"dateTime,omitempty"`
-	// performer
-	// Either the Grantor, which is the entity responsible for granting the rights listed in a Consent Directive or the Grantee, which is the entity responsible for complying with the Consent Directive, including any obligations or limitations on authorizations and enforcement of prohibitions.
-	Performer []Reference `json:"performer,omitempty"`
-	// organization
-	// The organization that manages the consent, and the framework within which it is executed.
-	Organization []Reference `json:"organization,omitempty"`
-	// sourceAttachment
-	// The source on which this consent statement is based. The source might be a scanned original paper form, or a reference to a consent that links back to such a source, a reference to a document repository (e.g. XDS) that stores the original consent document.
-	SourceAttachment Attachment `json:"sourceAttachment,omitempty"`
-	// sourceReference
-	// The source on which this consent statement is based. The source might be a scanned original paper form, or a reference to a consent that links back to such a source, a reference to a document repository (e.g. XDS) that stores the original consent document.
-	SourceReference Reference `json:"sourceReference,omitempty"`
-	// policy
-	// The references to the policies that are included in this consent scope. Policies may be organizational, but are often defined jurisdictionally, or in law.
-	Policy []ConsentPolicy `json:"policy,omitempty"`
-	// policyRule
-	// A reference to the specific base computable regulation or policy.
-	PolicyRule CodeableConcept `json:"policyRule,omitempty"`
-	// verification
-	// Whether a treatment instruction (e.g. artificial respiration yes or no) was verified with the patient, his/her family or another authorized person.
-	Verification []ConsentVerification `json:"verification,omitempty"`
-	// provision
-	// An exception to the base policy of this consent. An exception can be an addition or removal of access permissions.
-	Provision ConsentProvision `json:"provision,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Status *ConsentState `json:"status,omitempty"`
+	Scope *CodeableConcept `json:"scope,omitempty"`
+	Category []*CodeableConcept `json:"category,omitempty"`
+	Patient *Reference `json:"patient,omitempty"`
+	DateTime *FhirDateTime `json:"datetime,omitempty"`
+	Performer []*Reference `json:"performer,omitempty"`
+	Organization []*Reference `json:"organization,omitempty"`
+	SourceAttachment *Attachment `json:"sourceattachment,omitempty"`
+	SourceReference *Reference `json:"sourcereference,omitempty"`
+	Policy []*ConsentPolicy `json:"policy,omitempty"`
+	PolicyRule *CodeableConcept `json:"policyrule,omitempty"`
+	Verification []*ConsentVerification `json:"verification,omitempty"`
+	Provision *ConsentProvision `json:"provision,omitempty"`
 }
 
 // NewConsent creates a new Consent instance
-func NewConsent(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	status ConsentState,
-	scope CodeableConcept,
-	category []CodeableConcept,
-	patient Reference,
-	dateTime FhirDateTime,
-	performer []Reference,
-	organization []Reference,
-	sourceAttachment Attachment,
-	sourceReference Reference,
-	policy []ConsentPolicy,
-	policyRule CodeableConcept,
-	verification []ConsentVerification,
-	provision ConsentProvision,
-) *Consent {
-	return &Consent{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Status: status,
-		Scope: scope,
-		Category: category,
-		Patient: patient,
-		DateTime: dateTime,
-		Performer: performer,
-		Organization: organization,
-		SourceAttachment: sourceAttachment,
-		SourceReference: sourceReference,
-		Policy: policy,
-		PolicyRule: policyRule,
-		Verification: verification,
-		Provision: provision,
-	}
+func NewConsent() *Consent {
+	return &Consent{}
 }
+
 // FromJSON populates Consent from JSON data
 func (m *Consent) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -141,161 +48,80 @@ func (m *Consent) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of Consent
-func (m *Consent) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	status *ConsentState,
-	scope *CodeableConcept,
-	category *[]CodeableConcept,
-	patient *Reference,
-	dateTime *FhirDateTime,
-	performer *[]Reference,
-	organization *[]Reference,
-	sourceAttachment *Attachment,
-	sourceReference *Reference,
-	policy *[]ConsentPolicy,
-	policyRule *CodeableConcept,
-	verification *[]ConsentVerification,
-	provision *ConsentProvision,
-) *Consent {
+// Clone creates a deep copy of Consent
+func (m *Consent) Clone() *Consent {
+	if m == nil { return nil }
 	return &Consent{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Status: func() ConsentState {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Scope: func() CodeableConcept {
-			if scope != nil { return *scope }
-			return m.Scope
-		}(),
-		Category: func() []CodeableConcept {
-			if category != nil { return *category }
-			return m.Category
-		}(),
-		Patient: func() Reference {
-			if patient != nil { return *patient }
-			return m.Patient
-		}(),
-		DateTime: func() FhirDateTime {
-			if dateTime != nil { return *dateTime }
-			return m.DateTime
-		}(),
-		Performer: func() []Reference {
-			if performer != nil { return *performer }
-			return m.Performer
-		}(),
-		Organization: func() []Reference {
-			if organization != nil { return *organization }
-			return m.Organization
-		}(),
-		SourceAttachment: func() Attachment {
-			if sourceAttachment != nil { return *sourceAttachment }
-			return m.SourceAttachment
-		}(),
-		SourceReference: func() Reference {
-			if sourceReference != nil { return *sourceReference }
-			return m.SourceReference
-		}(),
-		Policy: func() []ConsentPolicy {
-			if policy != nil { return *policy }
-			return m.Policy
-		}(),
-		PolicyRule: func() CodeableConcept {
-			if policyRule != nil { return *policyRule }
-			return m.PolicyRule
-		}(),
-		Verification: func() []ConsentVerification {
-			if verification != nil { return *verification }
-			return m.Verification
-		}(),
-		Provision: func() ConsentProvision {
-			if provision != nil { return *provision }
-			return m.Provision
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		Status: m.Status.Clone(),
+		Scope: m.Scope.Clone(),
+		Category: cloneSlices(m.Category),
+		Patient: m.Patient.Clone(),
+		DateTime: m.DateTime.Clone(),
+		Performer: cloneSlices(m.Performer),
+		Organization: cloneSlices(m.Organization),
+		SourceAttachment: m.SourceAttachment.Clone(),
+		SourceReference: m.SourceReference.Clone(),
+		Policy: cloneSlices(m.Policy),
+		PolicyRule: m.PolicyRule.Clone(),
+		Verification: cloneSlices(m.Verification),
+		Provision: m.Provision.Clone(),
 	}
 }
+
+// Equals checks for equality with another Consent instance
+func (m *Consent) Equals(other *Consent) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Scope.Equals(other.Scope) { return false }
+	if !compareSlices(m.Category, other.Category) { return false }
+	if !m.Patient.Equals(other.Patient) { return false }
+	if !m.DateTime.Equals(other.DateTime) { return false }
+	if !compareSlices(m.Performer, other.Performer) { return false }
+	if !compareSlices(m.Organization, other.Organization) { return false }
+	if !m.SourceAttachment.Equals(other.SourceAttachment) { return false }
+	if !m.SourceReference.Equals(other.SourceReference) { return false }
+	if !compareSlices(m.Policy, other.Policy) { return false }
+	if !m.PolicyRule.Equals(other.PolicyRule) { return false }
+	if !compareSlices(m.Verification, other.Verification) { return false }
+	if !m.Provision.Equals(other.Provision) { return false }
+	return true
+}
+
 // ConsentPolicy
 // The references to the policies that are included in this consent scope. Policies may be organizational, but are often defined jurisdictionally, or in law.
 type ConsentPolicy struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// authority
-	// Entity or Organization having regulatory jurisdiction or accountability for  enforcing policies pertaining to Consent Directives.
-	Authority FhirUri `json:"authority,omitempty"`
-	// uri
-	// The references to the policies that are included in this consent scope. Policies may be organizational, but are often defined jurisdictionally, or in law.
-	Uri FhirUri `json:"uri,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Authority *FhirUri `json:"authority,omitempty"`
+	Uri *FhirUri `json:"uri,omitempty"`
 }
 
 // NewConsentPolicy creates a new ConsentPolicy instance
-func NewConsentPolicy(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	authority FhirUri,
-	uri FhirUri,
-) *ConsentPolicy {
-	return &ConsentPolicy{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Authority: authority,
-		Uri: uri,
-	}
+func NewConsentPolicy() *ConsentPolicy {
+	return &ConsentPolicy{}
 }
+
 // FromJSON populates ConsentPolicy from JSON data
 func (m *ConsentPolicy) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -306,81 +132,47 @@ func (m *ConsentPolicy) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ConsentPolicy
-func (m *ConsentPolicy) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	authority *FhirUri,
-	uri *FhirUri,
-) *ConsentPolicy {
+// Clone creates a deep copy of ConsentPolicy
+func (m *ConsentPolicy) Clone() *ConsentPolicy {
+	if m == nil { return nil }
 	return &ConsentPolicy{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Authority: func() FhirUri {
-			if authority != nil { return *authority }
-			return m.Authority
-		}(),
-		Uri: func() FhirUri {
-			if uri != nil { return *uri }
-			return m.Uri
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Authority: m.Authority.Clone(),
+		Uri: m.Uri.Clone(),
 	}
 }
+
+// Equals checks for equality with another ConsentPolicy instance
+func (m *ConsentPolicy) Equals(other *ConsentPolicy) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Authority.Equals(other.Authority) { return false }
+	if !m.Uri.Equals(other.Uri) { return false }
+	return true
+}
+
 // ConsentVerification
 // Whether a treatment instruction (e.g. artificial respiration yes or no) was verified with the patient, his/her family or another authorized person.
 type ConsentVerification struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// verified
-	// Has the instruction been verified.
-	Verified FhirBoolean `json:"verified,omitempty"`
-	// verifiedWith
-	// Who verified the instruction (Patient, Relative or other Authorized Person).
-	VerifiedWith Reference `json:"verifiedWith,omitempty"`
-	// verificationDate
-	// Date verification was collected.
-	VerificationDate FhirDateTime `json:"verificationDate,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Verified *FhirBoolean `json:"verified,omitempty"`
+	VerifiedWith *Reference `json:"verifiedwith,omitempty"`
+	VerificationDate *FhirDateTime `json:"verificationdate,omitempty"`
 }
 
 // NewConsentVerification creates a new ConsentVerification instance
-func NewConsentVerification(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	verified FhirBoolean,
-	verifiedWith Reference,
-	verificationDate FhirDateTime,
-) *ConsentVerification {
-	return &ConsentVerification{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Verified: verified,
-		VerifiedWith: verifiedWith,
-		VerificationDate: verificationDate,
-	}
+func NewConsentVerification() *ConsentVerification {
+	return &ConsentVerification{}
 }
+
 // FromJSON populates ConsentVerification from JSON data
 func (m *ConsentVerification) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -391,126 +183,57 @@ func (m *ConsentVerification) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ConsentVerification
-func (m *ConsentVerification) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	verified *FhirBoolean,
-	verifiedWith *Reference,
-	verificationDate *FhirDateTime,
-) *ConsentVerification {
+// Clone creates a deep copy of ConsentVerification
+func (m *ConsentVerification) Clone() *ConsentVerification {
+	if m == nil { return nil }
 	return &ConsentVerification{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Verified: func() FhirBoolean {
-			if verified != nil { return *verified }
-			return m.Verified
-		}(),
-		VerifiedWith: func() Reference {
-			if verifiedWith != nil { return *verifiedWith }
-			return m.VerifiedWith
-		}(),
-		VerificationDate: func() FhirDateTime {
-			if verificationDate != nil { return *verificationDate }
-			return m.VerificationDate
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Verified: m.Verified.Clone(),
+		VerifiedWith: m.VerifiedWith.Clone(),
+		VerificationDate: m.VerificationDate.Clone(),
 	}
 }
+
+// Equals checks for equality with another ConsentVerification instance
+func (m *ConsentVerification) Equals(other *ConsentVerification) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Verified.Equals(other.Verified) { return false }
+	if !m.VerifiedWith.Equals(other.VerifiedWith) { return false }
+	if !m.VerificationDate.Equals(other.VerificationDate) { return false }
+	return true
+}
+
 // ConsentProvision
 // An exception to the base policy of this consent. An exception can be an addition or removal of access permissions.
 type ConsentProvision struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// Action  to take - permit or deny - when the rule conditions are met.  Not permitted in root rule, required in all nested rules.
-	Type_ ConsentProvisionType `json:"type,omitempty"`
-	// period
-	// The timeframe in this rule is valid.
-	Period Period `json:"period,omitempty"`
-	// actor
-	// Who or what is controlled by this rule. Use group to identify a set of actors by some property they share (e.g. 'admitting officers').
-	Actor []ConsentActor `json:"actor,omitempty"`
-	// action
-	// Actions controlled by this Rule.
-	Action []CodeableConcept `json:"action,omitempty"`
-	// securityLabel
-	// A security label, comprised of 0..* security label fields (Privacy tags), which define which resources are controlled by this exception.
-	SecurityLabel []Coding `json:"securityLabel,omitempty"`
-	// purpose
-	// The context of the activities a user is taking - why the user is accessing the data - that are controlled by this rule.
-	Purpose []Coding `json:"purpose,omitempty"`
-	// class
-	// The class of information covered by this rule. The type can be a FHIR resource type, a profile on a type, or a CDA document, or some other type that indicates what sort of information the consent relates to.
-	Class_ []Coding `json:"class,omitempty"`
-	// code
-	// If this code is found in an instance, then the rule applies.
-	Code []CodeableConcept `json:"code,omitempty"`
-	// dataPeriod
-	// Clinical or Operational Relevant period of time that bounds the data controlled by this rule.
-	DataPeriod Period `json:"dataPeriod,omitempty"`
-	// data
-	// The resources controlled by this rule if specific resources are referenced.
-	Data []ConsentData `json:"data,omitempty"`
-	// provision
-	// Rules which provide exceptions to the base rule or subrules.
-	Provision []ConsentProvision `json:"provision,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *ConsentProvisionType `json:"type,omitempty"`
+	Period *Period `json:"period,omitempty"`
+	Actor []*ConsentActor `json:"actor,omitempty"`
+	Action []*CodeableConcept `json:"action,omitempty"`
+	SecurityLabel []*Coding `json:"securitylabel,omitempty"`
+	Purpose []*Coding `json:"purpose,omitempty"`
+	Class_ []*Coding `json:"class,omitempty"`
+	Code []*CodeableConcept `json:"code,omitempty"`
+	DataPeriod *Period `json:"dataperiod,omitempty"`
+	Data []*ConsentData `json:"data,omitempty"`
+	Provision []*ConsentProvision `json:"provision,omitempty"`
 }
 
 // NewConsentProvision creates a new ConsentProvision instance
-func NewConsentProvision(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ ConsentProvisionType,
-	period Period,
-	actor []ConsentActor,
-	action []CodeableConcept,
-	securityLabel []Coding,
-	purpose []Coding,
-	class_ []Coding,
-	code []CodeableConcept,
-	dataPeriod Period,
-	data []ConsentData,
-	provision []ConsentProvision,
-) *ConsentProvision {
-	return &ConsentProvision{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Period: period,
-		Actor: actor,
-		Action: action,
-		SecurityLabel: securityLabel,
-		Purpose: purpose,
-		Class_: class_,
-		Code: code,
-		DataPeriod: dataPeriod,
-		Data: data,
-		Provision: provision,
-	}
+func NewConsentProvision() *ConsentProvision {
+	return &ConsentProvision{}
 }
+
 // FromJSON populates ConsentProvision from JSON data
 func (m *ConsentProvision) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -521,121 +244,64 @@ func (m *ConsentProvision) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ConsentProvision
-func (m *ConsentProvision) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *ConsentProvisionType,
-	period *Period,
-	actor *[]ConsentActor,
-	action *[]CodeableConcept,
-	securityLabel *[]Coding,
-	purpose *[]Coding,
-	class_ *[]Coding,
-	code *[]CodeableConcept,
-	dataPeriod *Period,
-	data *[]ConsentData,
-	provision *[]ConsentProvision,
-) *ConsentProvision {
+// Clone creates a deep copy of ConsentProvision
+func (m *ConsentProvision) Clone() *ConsentProvision {
+	if m == nil { return nil }
 	return &ConsentProvision{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() ConsentProvisionType {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Period: func() Period {
-			if period != nil { return *period }
-			return m.Period
-		}(),
-		Actor: func() []ConsentActor {
-			if actor != nil { return *actor }
-			return m.Actor
-		}(),
-		Action: func() []CodeableConcept {
-			if action != nil { return *action }
-			return m.Action
-		}(),
-		SecurityLabel: func() []Coding {
-			if securityLabel != nil { return *securityLabel }
-			return m.SecurityLabel
-		}(),
-		Purpose: func() []Coding {
-			if purpose != nil { return *purpose }
-			return m.Purpose
-		}(),
-		Class_: func() []Coding {
-			if class_ != nil { return *class_ }
-			return m.Class_
-		}(),
-		Code: func() []CodeableConcept {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		DataPeriod: func() Period {
-			if dataPeriod != nil { return *dataPeriod }
-			return m.DataPeriod
-		}(),
-		Data: func() []ConsentData {
-			if data != nil { return *data }
-			return m.Data
-		}(),
-		Provision: func() []ConsentProvision {
-			if provision != nil { return *provision }
-			return m.Provision
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Period: m.Period.Clone(),
+		Actor: cloneSlices(m.Actor),
+		Action: cloneSlices(m.Action),
+		SecurityLabel: cloneSlices(m.SecurityLabel),
+		Purpose: cloneSlices(m.Purpose),
+		Class_: cloneSlices(m.Class_),
+		Code: cloneSlices(m.Code),
+		DataPeriod: m.DataPeriod.Clone(),
+		Data: cloneSlices(m.Data),
+		Provision: cloneSlices(m.Provision),
 	}
 }
+
+// Equals checks for equality with another ConsentProvision instance
+func (m *ConsentProvision) Equals(other *ConsentProvision) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Period.Equals(other.Period) { return false }
+	if !compareSlices(m.Actor, other.Actor) { return false }
+	if !compareSlices(m.Action, other.Action) { return false }
+	if !compareSlices(m.SecurityLabel, other.SecurityLabel) { return false }
+	if !compareSlices(m.Purpose, other.Purpose) { return false }
+	if !compareSlices(m.Class_, other.Class_) { return false }
+	if !compareSlices(m.Code, other.Code) { return false }
+	if !m.DataPeriod.Equals(other.DataPeriod) { return false }
+	if !compareSlices(m.Data, other.Data) { return false }
+	if !compareSlices(m.Provision, other.Provision) { return false }
+	return true
+}
+
 // ConsentActor
 // Who or what is controlled by this rule. Use group to identify a set of actors by some property they share (e.g. 'admitting officers').
 type ConsentActor struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// role
-	// How the individual is involved in the resources content that is described in the exception.
-	Role CodeableConcept `json:"role,omitempty"`
-	// reference
-	// The resource that identifies the actor. To identify actors by type, use group to identify a set of actors by some property they share (e.g. 'admitting officers').
-	Reference Reference `json:"reference,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Role *CodeableConcept `json:"role,omitempty"`
+	Reference *Reference `json:"reference,omitempty"`
 }
 
 // NewConsentActor creates a new ConsentActor instance
-func NewConsentActor(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	role CodeableConcept,
-	reference Reference,
-) *ConsentActor {
-	return &ConsentActor{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Role: role,
-		Reference: reference,
-	}
+func NewConsentActor() *ConsentActor {
+	return &ConsentActor{}
 }
+
 // FromJSON populates ConsentActor from JSON data
 func (m *ConsentActor) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -646,76 +312,46 @@ func (m *ConsentActor) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ConsentActor
-func (m *ConsentActor) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	role *CodeableConcept,
-	reference *Reference,
-) *ConsentActor {
+// Clone creates a deep copy of ConsentActor
+func (m *ConsentActor) Clone() *ConsentActor {
+	if m == nil { return nil }
 	return &ConsentActor{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Role: func() CodeableConcept {
-			if role != nil { return *role }
-			return m.Role
-		}(),
-		Reference: func() Reference {
-			if reference != nil { return *reference }
-			return m.Reference
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Role: m.Role.Clone(),
+		Reference: m.Reference.Clone(),
 	}
 }
+
+// Equals checks for equality with another ConsentActor instance
+func (m *ConsentActor) Equals(other *ConsentActor) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Role.Equals(other.Role) { return false }
+	if !m.Reference.Equals(other.Reference) { return false }
+	return true
+}
+
 // ConsentData
 // The resources controlled by this rule if specific resources are referenced.
 type ConsentData struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// meaning
-	// How the resource reference is interpreted when testing consent restrictions.
-	Meaning ConsentDataMeaning `json:"meaning,omitempty"`
-	// reference
-	// A reference to a specific resource that defines which resources are covered by this consent.
-	Reference Reference `json:"reference,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Meaning *ConsentDataMeaning `json:"meaning,omitempty"`
+	Reference *Reference `json:"reference,omitempty"`
 }
 
 // NewConsentData creates a new ConsentData instance
-func NewConsentData(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	meaning ConsentDataMeaning,
-	reference Reference,
-) *ConsentData {
-	return &ConsentData{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Meaning: meaning,
-		Reference: reference,
-	}
+func NewConsentData() *ConsentData {
+	return &ConsentData{}
 }
+
 // FromJSON populates ConsentData from JSON data
 func (m *ConsentData) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -726,34 +362,27 @@ func (m *ConsentData) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ConsentData
-func (m *ConsentData) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	meaning *ConsentDataMeaning,
-	reference *Reference,
-) *ConsentData {
+// Clone creates a deep copy of ConsentData
+func (m *ConsentData) Clone() *ConsentData {
+	if m == nil { return nil }
 	return &ConsentData{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Meaning: func() ConsentDataMeaning {
-			if meaning != nil { return *meaning }
-			return m.Meaning
-		}(),
-		Reference: func() Reference {
-			if reference != nil { return *reference }
-			return m.Reference
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Meaning: m.Meaning.Clone(),
+		Reference: m.Reference.Clone(),
 	}
 }
+
+// Equals checks for equality with another ConsentData instance
+func (m *ConsentData) Equals(other *ConsentData) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Meaning.Equals(other.Meaning) { return false }
+	if !m.Reference.Equals(other.Reference) { return false }
+	return true
+}
+

@@ -3,174 +3,49 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // SubscriptionTopic
 // Describes a stream of resource state changes or events and annotated with labels useful to filter projections from this topic.
 type SubscriptionTopic struct {
 	CanonicalResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// url
-	// An absolute URI that is used to identify this subscription topic when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this subscription topic is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the subscription topic is stored on different servers.
-	Url FhirUri `json:"url,omitempty"`
-	// identifier
-	// Business identifiers assigned to this subscription topic by the performer and/or other systems.  These identifiers remain constant as the resource is updated and propagates from server to server.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// version
-	// The identifier that is used to identify this version of the subscription topic when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the Topic author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions are orderable.
-	Version FhirString `json:"version,omitempty"`
-	// title
-	// A short, descriptive, user-friendly title for the SubscriptionTopic, for example, "admission".
-	Title FhirString `json:"title,omitempty"`
-	// derivedFrom
-	// The canonical URL pointing to another FHIR-defined SubscriptionTopic that is adhered to in whole or in part by this SubscriptionTopic.
-	DerivedFrom []FhirCanonical `json:"derivedFrom,omitempty"`
-	// status
-	// The current state of the SubscriptionTopic.
-	Status PublicationStatus `json:"status,omitempty"`
-	// experimental
-	// A flag to indicate that this TopSubscriptionTopicic is authored for testing purposes (or education/evaluation/marketing), and is not intended to be used for genuine usage.
-	Experimental FhirBoolean `json:"experimental,omitempty"`
-	// date
-	// For draft definitions, indicates the date of initial creation.  For active definitions, represents the date of activation.  For withdrawn definitions, indicates the date of withdrawal.
-	Date FhirDateTime `json:"date,omitempty"`
-	// publisher
-	// Helps establish the "authority/credibility" of the SubscriptionTopic.  May also allow for contact.
-	Publisher FhirString `json:"publisher,omitempty"`
-	// contact
-	// Contact details to assist a user in finding and communicating with the publisher.
-	Contact []ContactDetail `json:"contact,omitempty"`
-	// description
-	// A free text natural language description of the Topic from the consumer's perspective.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// useContext
-	// The content was developed with a focus and intent of supporting the contexts that are listed. These terms may be used to assist with indexing and searching of code system definitions.
-	UseContext []UsageContext `json:"useContext,omitempty"`
-	// jurisdiction
-	// A jurisdiction in which the Topic is intended to be used.
-	Jurisdiction []CodeableConcept `json:"jurisdiction,omitempty"`
-	// purpose
-	// Explains why this Topic is needed and why it has been designed as it has.
-	Purpose FhirMarkdown `json:"purpose,omitempty"`
-	// copyright
-	// A copyright statement relating to the SubscriptionTopic and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the SubscriptionTopic.
-	Copyright FhirMarkdown `json:"copyright,omitempty"`
-	// approvalDate
-	// The date on which the asset content was approved by the publisher. Approval happens once when the content is officially approved for usage.
-	ApprovalDate FhirDate `json:"approvalDate,omitempty"`
-	// lastReviewDate
-	// The date on which the asset content was last reviewed. Review happens periodically after that, but doesn't change the original approval date.
-	LastReviewDate FhirDate `json:"lastReviewDate,omitempty"`
-	// effectivePeriod
-	// The period during which the SubscriptionTopic content was or is planned to be effective.
-	EffectivePeriod Period `json:"effectivePeriod,omitempty"`
-	// resourceTrigger
-	// A definition of a resource-based event that triggers a notification based on the SubscriptionTopic. The criteria may be just a human readable description and/or a full FHIR search string or FHIRPath expression. Multiple triggers are considered OR joined (e.g., a resource update matching ANY of the definitions will trigger a notification).
-	ResourceTrigger []SubscriptionTopicResourceTrigger `json:"resourceTrigger,omitempty"`
-	// eventTrigger
-	// Event definition which can be used to trigger the SubscriptionTopic.
-	EventTrigger []SubscriptionTopicEventTrigger `json:"eventTrigger,omitempty"`
-	// canFilterBy
-	// List of properties by which Subscriptions on the SubscriptionTopic can be filtered. May be defined Search Parameters (e.g., Encounter.patient) or parameters defined within this SubscriptionTopic context (e.g., hub.event).
-	CanFilterBy []SubscriptionTopicCanFilterBy `json:"canFilterBy,omitempty"`
-	// notificationShape
-	// List of properties to describe the shape (e.g., resources) included in notifications from this Subscription Topic.
-	NotificationShape []SubscriptionTopicNotificationShape `json:"notificationShape,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Url *FhirUri `json:"url,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
+	Title *FhirString `json:"title,omitempty"`
+	DerivedFrom []*FhirCanonical `json:"derivedfrom,omitempty"`
+	Status *PublicationStatus `json:"status,omitempty"`
+	Experimental *FhirBoolean `json:"experimental,omitempty"`
+	Date *FhirDateTime `json:"date,omitempty"`
+	Publisher *FhirString `json:"publisher,omitempty"`
+	Contact []*ContactDetail `json:"contact,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	UseContext []*UsageContext `json:"usecontext,omitempty"`
+	Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+	Purpose *FhirMarkdown `json:"purpose,omitempty"`
+	Copyright *FhirMarkdown `json:"copyright,omitempty"`
+	ApprovalDate *FhirDate `json:"approvaldate,omitempty"`
+	LastReviewDate *FhirDate `json:"lastreviewdate,omitempty"`
+	EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+	ResourceTrigger []*SubscriptionTopicResourceTrigger `json:"resourcetrigger,omitempty"`
+	EventTrigger []*SubscriptionTopicEventTrigger `json:"eventtrigger,omitempty"`
+	CanFilterBy []*SubscriptionTopicCanFilterBy `json:"canfilterby,omitempty"`
+	NotificationShape []*SubscriptionTopicNotificationShape `json:"notificationshape,omitempty"`
 }
 
 // NewSubscriptionTopic creates a new SubscriptionTopic instance
-func NewSubscriptionTopic(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	url FhirUri,
-	identifier []Identifier,
-	version FhirString,
-	title FhirString,
-	derivedFrom []FhirCanonical,
-	status PublicationStatus,
-	experimental FhirBoolean,
-	date FhirDateTime,
-	publisher FhirString,
-	contact []ContactDetail,
-	description FhirMarkdown,
-	useContext []UsageContext,
-	jurisdiction []CodeableConcept,
-	purpose FhirMarkdown,
-	copyright FhirMarkdown,
-	approvalDate FhirDate,
-	lastReviewDate FhirDate,
-	effectivePeriod Period,
-	resourceTrigger []SubscriptionTopicResourceTrigger,
-	eventTrigger []SubscriptionTopicEventTrigger,
-	canFilterBy []SubscriptionTopicCanFilterBy,
-	notificationShape []SubscriptionTopicNotificationShape,
-) *SubscriptionTopic {
-	return &SubscriptionTopic{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Url: url,
-		Identifier: identifier,
-		Version: version,
-		Title: title,
-		DerivedFrom: derivedFrom,
-		Status: status,
-		Experimental: experimental,
-		Date: date,
-		Publisher: publisher,
-		Contact: contact,
-		Description: description,
-		UseContext: useContext,
-		Jurisdiction: jurisdiction,
-		Purpose: purpose,
-		Copyright: copyright,
-		ApprovalDate: approvalDate,
-		LastReviewDate: lastReviewDate,
-		EffectivePeriod: effectivePeriod,
-		ResourceTrigger: resourceTrigger,
-		EventTrigger: eventTrigger,
-		CanFilterBy: canFilterBy,
-		NotificationShape: notificationShape,
-	}
+func NewSubscriptionTopic() *SubscriptionTopic {
+	return &SubscriptionTopic{}
 }
+
 // FromJSON populates SubscriptionTopic from JSON data
 func (m *SubscriptionTopic) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -181,216 +56,99 @@ func (m *SubscriptionTopic) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SubscriptionTopic
-func (m *SubscriptionTopic) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	url *FhirUri,
-	identifier *[]Identifier,
-	version *FhirString,
-	title *FhirString,
-	derivedFrom *[]FhirCanonical,
-	status *PublicationStatus,
-	experimental *FhirBoolean,
-	date *FhirDateTime,
-	publisher *FhirString,
-	contact *[]ContactDetail,
-	description *FhirMarkdown,
-	useContext *[]UsageContext,
-	jurisdiction *[]CodeableConcept,
-	purpose *FhirMarkdown,
-	copyright *FhirMarkdown,
-	approvalDate *FhirDate,
-	lastReviewDate *FhirDate,
-	effectivePeriod *Period,
-	resourceTrigger *[]SubscriptionTopicResourceTrigger,
-	eventTrigger *[]SubscriptionTopicEventTrigger,
-	canFilterBy *[]SubscriptionTopicCanFilterBy,
-	notificationShape *[]SubscriptionTopicNotificationShape,
-) *SubscriptionTopic {
+// Clone creates a deep copy of SubscriptionTopic
+func (m *SubscriptionTopic) Clone() *SubscriptionTopic {
+	if m == nil { return nil }
 	return &SubscriptionTopic{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Url: func() FhirUri {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Title: func() FhirString {
-			if title != nil { return *title }
-			return m.Title
-		}(),
-		DerivedFrom: func() []FhirCanonical {
-			if derivedFrom != nil { return *derivedFrom }
-			return m.DerivedFrom
-		}(),
-		Status: func() PublicationStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Experimental: func() FhirBoolean {
-			if experimental != nil { return *experimental }
-			return m.Experimental
-		}(),
-		Date: func() FhirDateTime {
-			if date != nil { return *date }
-			return m.Date
-		}(),
-		Publisher: func() FhirString {
-			if publisher != nil { return *publisher }
-			return m.Publisher
-		}(),
-		Contact: func() []ContactDetail {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		UseContext: func() []UsageContext {
-			if useContext != nil { return *useContext }
-			return m.UseContext
-		}(),
-		Jurisdiction: func() []CodeableConcept {
-			if jurisdiction != nil { return *jurisdiction }
-			return m.Jurisdiction
-		}(),
-		Purpose: func() FhirMarkdown {
-			if purpose != nil { return *purpose }
-			return m.Purpose
-		}(),
-		Copyright: func() FhirMarkdown {
-			if copyright != nil { return *copyright }
-			return m.Copyright
-		}(),
-		ApprovalDate: func() FhirDate {
-			if approvalDate != nil { return *approvalDate }
-			return m.ApprovalDate
-		}(),
-		LastReviewDate: func() FhirDate {
-			if lastReviewDate != nil { return *lastReviewDate }
-			return m.LastReviewDate
-		}(),
-		EffectivePeriod: func() Period {
-			if effectivePeriod != nil { return *effectivePeriod }
-			return m.EffectivePeriod
-		}(),
-		ResourceTrigger: func() []SubscriptionTopicResourceTrigger {
-			if resourceTrigger != nil { return *resourceTrigger }
-			return m.ResourceTrigger
-		}(),
-		EventTrigger: func() []SubscriptionTopicEventTrigger {
-			if eventTrigger != nil { return *eventTrigger }
-			return m.EventTrigger
-		}(),
-		CanFilterBy: func() []SubscriptionTopicCanFilterBy {
-			if canFilterBy != nil { return *canFilterBy }
-			return m.CanFilterBy
-		}(),
-		NotificationShape: func() []SubscriptionTopicNotificationShape {
-			if notificationShape != nil { return *notificationShape }
-			return m.NotificationShape
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Url: m.Url.Clone(),
+		Identifier: cloneSlices(m.Identifier),
+		Version: m.Version.Clone(),
+		Title: m.Title.Clone(),
+		DerivedFrom: cloneSlices(m.DerivedFrom),
+		Status: m.Status.Clone(),
+		Experimental: m.Experimental.Clone(),
+		Date: m.Date.Clone(),
+		Publisher: m.Publisher.Clone(),
+		Contact: cloneSlices(m.Contact),
+		Description: m.Description.Clone(),
+		UseContext: cloneSlices(m.UseContext),
+		Jurisdiction: cloneSlices(m.Jurisdiction),
+		Purpose: m.Purpose.Clone(),
+		Copyright: m.Copyright.Clone(),
+		ApprovalDate: m.ApprovalDate.Clone(),
+		LastReviewDate: m.LastReviewDate.Clone(),
+		EffectivePeriod: m.EffectivePeriod.Clone(),
+		ResourceTrigger: cloneSlices(m.ResourceTrigger),
+		EventTrigger: cloneSlices(m.EventTrigger),
+		CanFilterBy: cloneSlices(m.CanFilterBy),
+		NotificationShape: cloneSlices(m.NotificationShape),
 	}
 }
+
+// Equals checks for equality with another SubscriptionTopic instance
+func (m *SubscriptionTopic) Equals(other *SubscriptionTopic) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !m.Title.Equals(other.Title) { return false }
+	if !compareSlices(m.DerivedFrom, other.DerivedFrom) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Experimental.Equals(other.Experimental) { return false }
+	if !m.Date.Equals(other.Date) { return false }
+	if !m.Publisher.Equals(other.Publisher) { return false }
+	if !compareSlices(m.Contact, other.Contact) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.UseContext, other.UseContext) { return false }
+	if !compareSlices(m.Jurisdiction, other.Jurisdiction) { return false }
+	if !m.Purpose.Equals(other.Purpose) { return false }
+	if !m.Copyright.Equals(other.Copyright) { return false }
+	if !m.ApprovalDate.Equals(other.ApprovalDate) { return false }
+	if !m.LastReviewDate.Equals(other.LastReviewDate) { return false }
+	if !m.EffectivePeriod.Equals(other.EffectivePeriod) { return false }
+	if !compareSlices(m.ResourceTrigger, other.ResourceTrigger) { return false }
+	if !compareSlices(m.EventTrigger, other.EventTrigger) { return false }
+	if !compareSlices(m.CanFilterBy, other.CanFilterBy) { return false }
+	if !compareSlices(m.NotificationShape, other.NotificationShape) { return false }
+	return true
+}
+
 // SubscriptionTopicResourceTrigger
 // A definition of a resource-based event that triggers a notification based on the SubscriptionTopic. The criteria may be just a human readable description and/or a full FHIR search string or FHIRPath expression. Multiple triggers are considered OR joined (e.g., a resource update matching ANY of the definitions will trigger a notification).
 type SubscriptionTopicResourceTrigger struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// description
-	// The human readable description of this resource trigger for the SubscriptionTopic -  for example, "An Encounter enters the 'in-progress' state".
-	Description FhirMarkdown `json:"description,omitempty"`
-	// resource
-	// URL of the Resource that is the type used in this resource trigger.  Relative URLs are relative to the StructureDefinition root of the implemented FHIR version (e.g., http://hl7.org/fhir/StructureDefinition). For example, "Patient" maps to http://hl7.org/fhir/StructureDefinition/Patient.  For more information, see <a href="elementdefinition-definitions.html#ElementDefinition.type.code">ElementDefinition.type.code</a>.
-	Resource FhirUri `json:"resource,omitempty"`
-	// supportedInteraction
-	// The FHIR RESTful interaction which can be used to trigger a notification for the SubscriptionTopic. Multiple values are considered OR joined (e.g., CREATE or UPDATE).
-	SupportedInteraction []InteractionTrigger `json:"supportedInteraction,omitempty"`
-	// queryCriteria
-	// The FHIR query based rules that the server should use to determine when to trigger a notification for this subscription topic.
-	QueryCriteria SubscriptionTopicQueryCriteria `json:"queryCriteria,omitempty"`
-	// fhirPathCriteria
-	// The FHIRPath based rules that the server should use to determine when to trigger a notification for this topic.
-	FhirPathCriteria FhirString `json:"fhirPathCriteria,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	Resource *FhirUri `json:"resource,omitempty"`
+	SupportedInteraction []*InteractionTrigger `json:"supportedinteraction,omitempty"`
+	QueryCriteria *SubscriptionTopicQueryCriteria `json:"querycriteria,omitempty"`
+	FhirPathCriteria *FhirString `json:"fhirpathcriteria,omitempty"`
 }
 
 // NewSubscriptionTopicResourceTrigger creates a new SubscriptionTopicResourceTrigger instance
-func NewSubscriptionTopicResourceTrigger(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	description FhirMarkdown,
-	resource FhirUri,
-	supportedInteraction []InteractionTrigger,
-	queryCriteria SubscriptionTopicQueryCriteria,
-	fhirPathCriteria FhirString,
-) *SubscriptionTopicResourceTrigger {
-	return &SubscriptionTopicResourceTrigger{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Description: description,
-		Resource: resource,
-		SupportedInteraction: supportedInteraction,
-		QueryCriteria: queryCriteria,
-		FhirPathCriteria: fhirPathCriteria,
-	}
+func NewSubscriptionTopicResourceTrigger() *SubscriptionTopicResourceTrigger {
+	return &SubscriptionTopicResourceTrigger{}
 }
+
 // FromJSON populates SubscriptionTopicResourceTrigger from JSON data
 func (m *SubscriptionTopicResourceTrigger) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -401,106 +159,55 @@ func (m *SubscriptionTopicResourceTrigger) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SubscriptionTopicResourceTrigger
-func (m *SubscriptionTopicResourceTrigger) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	description *FhirMarkdown,
-	resource *FhirUri,
-	supportedInteraction *[]InteractionTrigger,
-	queryCriteria *SubscriptionTopicQueryCriteria,
-	fhirPathCriteria *FhirString,
-) *SubscriptionTopicResourceTrigger {
+// Clone creates a deep copy of SubscriptionTopicResourceTrigger
+func (m *SubscriptionTopicResourceTrigger) Clone() *SubscriptionTopicResourceTrigger {
+	if m == nil { return nil }
 	return &SubscriptionTopicResourceTrigger{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Resource: func() FhirUri {
-			if resource != nil { return *resource }
-			return m.Resource
-		}(),
-		SupportedInteraction: func() []InteractionTrigger {
-			if supportedInteraction != nil { return *supportedInteraction }
-			return m.SupportedInteraction
-		}(),
-		QueryCriteria: func() SubscriptionTopicQueryCriteria {
-			if queryCriteria != nil { return *queryCriteria }
-			return m.QueryCriteria
-		}(),
-		FhirPathCriteria: func() FhirString {
-			if fhirPathCriteria != nil { return *fhirPathCriteria }
-			return m.FhirPathCriteria
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Description: m.Description.Clone(),
+		Resource: m.Resource.Clone(),
+		SupportedInteraction: cloneSlices(m.SupportedInteraction),
+		QueryCriteria: m.QueryCriteria.Clone(),
+		FhirPathCriteria: m.FhirPathCriteria.Clone(),
 	}
 }
+
+// Equals checks for equality with another SubscriptionTopicResourceTrigger instance
+func (m *SubscriptionTopicResourceTrigger) Equals(other *SubscriptionTopicResourceTrigger) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.Resource.Equals(other.Resource) { return false }
+	if !compareSlices(m.SupportedInteraction, other.SupportedInteraction) { return false }
+	if !m.QueryCriteria.Equals(other.QueryCriteria) { return false }
+	if !m.FhirPathCriteria.Equals(other.FhirPathCriteria) { return false }
+	return true
+}
+
 // SubscriptionTopicQueryCriteria
 // The FHIR query based rules that the server should use to determine when to trigger a notification for this subscription topic.
 type SubscriptionTopicQueryCriteria struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// previous
-	// The FHIR query based rules are applied to the previous resource state (e.g., state before an update).
-	Previous FhirString `json:"previous,omitempty"`
-	// resultForCreate
-	// For "create" interactions, should the "previous" criteria count as an automatic pass or an automatic fail.
-	ResultForCreate CriteriaNotExistsBehavior `json:"resultForCreate,omitempty"`
-	// current
-	// The FHIR query based rules are applied to the current resource state (e.g., state after an update).
-	Current FhirString `json:"current,omitempty"`
-	// resultForDelete
-	// For "delete" interactions, should the "current" criteria count as an automatic pass or an automatic fail.
-	ResultForDelete CriteriaNotExistsBehavior `json:"resultForDelete,omitempty"`
-	// requireBoth
-	// If set to true, both current and previous criteria must evaluate true to  trigger a notification for this topic.  Otherwise a notification for this topic will be triggered if either one evaluates to true.
-	RequireBoth FhirBoolean `json:"requireBoth,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Previous *FhirString `json:"previous,omitempty"`
+	ResultForCreate *CriteriaNotExistsBehavior `json:"resultforcreate,omitempty"`
+	Current *FhirString `json:"current,omitempty"`
+	ResultForDelete *CriteriaNotExistsBehavior `json:"resultfordelete,omitempty"`
+	RequireBoth *FhirBoolean `json:"requireboth,omitempty"`
 }
 
 // NewSubscriptionTopicQueryCriteria creates a new SubscriptionTopicQueryCriteria instance
-func NewSubscriptionTopicQueryCriteria(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	previous FhirString,
-	resultForCreate CriteriaNotExistsBehavior,
-	current FhirString,
-	resultForDelete CriteriaNotExistsBehavior,
-	requireBoth FhirBoolean,
-) *SubscriptionTopicQueryCriteria {
-	return &SubscriptionTopicQueryCriteria{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Previous: previous,
-		ResultForCreate: resultForCreate,
-		Current: current,
-		ResultForDelete: resultForDelete,
-		RequireBoth: requireBoth,
-	}
+func NewSubscriptionTopicQueryCriteria() *SubscriptionTopicQueryCriteria {
+	return &SubscriptionTopicQueryCriteria{}
 }
+
 // FromJSON populates SubscriptionTopicQueryCriteria from JSON data
 func (m *SubscriptionTopicQueryCriteria) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -511,96 +218,53 @@ func (m *SubscriptionTopicQueryCriteria) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SubscriptionTopicQueryCriteria
-func (m *SubscriptionTopicQueryCriteria) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	previous *FhirString,
-	resultForCreate *CriteriaNotExistsBehavior,
-	current *FhirString,
-	resultForDelete *CriteriaNotExistsBehavior,
-	requireBoth *FhirBoolean,
-) *SubscriptionTopicQueryCriteria {
+// Clone creates a deep copy of SubscriptionTopicQueryCriteria
+func (m *SubscriptionTopicQueryCriteria) Clone() *SubscriptionTopicQueryCriteria {
+	if m == nil { return nil }
 	return &SubscriptionTopicQueryCriteria{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Previous: func() FhirString {
-			if previous != nil { return *previous }
-			return m.Previous
-		}(),
-		ResultForCreate: func() CriteriaNotExistsBehavior {
-			if resultForCreate != nil { return *resultForCreate }
-			return m.ResultForCreate
-		}(),
-		Current: func() FhirString {
-			if current != nil { return *current }
-			return m.Current
-		}(),
-		ResultForDelete: func() CriteriaNotExistsBehavior {
-			if resultForDelete != nil { return *resultForDelete }
-			return m.ResultForDelete
-		}(),
-		RequireBoth: func() FhirBoolean {
-			if requireBoth != nil { return *requireBoth }
-			return m.RequireBoth
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Previous: m.Previous.Clone(),
+		ResultForCreate: m.ResultForCreate.Clone(),
+		Current: m.Current.Clone(),
+		ResultForDelete: m.ResultForDelete.Clone(),
+		RequireBoth: m.RequireBoth.Clone(),
 	}
 }
+
+// Equals checks for equality with another SubscriptionTopicQueryCriteria instance
+func (m *SubscriptionTopicQueryCriteria) Equals(other *SubscriptionTopicQueryCriteria) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Previous.Equals(other.Previous) { return false }
+	if !m.ResultForCreate.Equals(other.ResultForCreate) { return false }
+	if !m.Current.Equals(other.Current) { return false }
+	if !m.ResultForDelete.Equals(other.ResultForDelete) { return false }
+	if !m.RequireBoth.Equals(other.RequireBoth) { return false }
+	return true
+}
+
 // SubscriptionTopicEventTrigger
 // Event definition which can be used to trigger the SubscriptionTopic.
 type SubscriptionTopicEventTrigger struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// description
-	// The human readable description of an event to trigger a notification for the SubscriptionTopic - for example, "Patient Admission, as defined in HL7v2 via message ADT^A01". Multiple values are considered OR joined (e.g., matching any single event listed).
-	Description FhirMarkdown `json:"description,omitempty"`
-	// event
-	// A well-defined event which can be used to trigger notifications from the SubscriptionTopic.
-	Event CodeableConcept `json:"event,omitempty"`
-	// resource
-	// URL of the Resource that is the focus type used in this event trigger.  Relative URLs are relative to the StructureDefinition root of the implemented FHIR version (e.g., http://hl7.org/fhir/StructureDefinition). For example, "Patient" maps to http://hl7.org/fhir/StructureDefinition/Patient.  For more information, see <a href="elementdefinition-definitions.html#ElementDefinition.type.code">ElementDefinition.type.code</a>.
-	Resource FhirUri `json:"resource,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	Event *CodeableConcept `json:"event,omitempty"`
+	Resource *FhirUri `json:"resource,omitempty"`
 }
 
 // NewSubscriptionTopicEventTrigger creates a new SubscriptionTopicEventTrigger instance
-func NewSubscriptionTopicEventTrigger(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	description FhirMarkdown,
-	event CodeableConcept,
-	resource FhirUri,
-) *SubscriptionTopicEventTrigger {
-	return &SubscriptionTopicEventTrigger{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Description: description,
-		Event: event,
-		Resource: resource,
-	}
+func NewSubscriptionTopicEventTrigger() *SubscriptionTopicEventTrigger {
+	return &SubscriptionTopicEventTrigger{}
 }
+
 // FromJSON populates SubscriptionTopicEventTrigger from JSON data
 func (m *SubscriptionTopicEventTrigger) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -611,96 +275,51 @@ func (m *SubscriptionTopicEventTrigger) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SubscriptionTopicEventTrigger
-func (m *SubscriptionTopicEventTrigger) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	description *FhirMarkdown,
-	event *CodeableConcept,
-	resource *FhirUri,
-) *SubscriptionTopicEventTrigger {
+// Clone creates a deep copy of SubscriptionTopicEventTrigger
+func (m *SubscriptionTopicEventTrigger) Clone() *SubscriptionTopicEventTrigger {
+	if m == nil { return nil }
 	return &SubscriptionTopicEventTrigger{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Event: func() CodeableConcept {
-			if event != nil { return *event }
-			return m.Event
-		}(),
-		Resource: func() FhirUri {
-			if resource != nil { return *resource }
-			return m.Resource
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Description: m.Description.Clone(),
+		Event: m.Event.Clone(),
+		Resource: m.Resource.Clone(),
 	}
 }
+
+// Equals checks for equality with another SubscriptionTopicEventTrigger instance
+func (m *SubscriptionTopicEventTrigger) Equals(other *SubscriptionTopicEventTrigger) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.Event.Equals(other.Event) { return false }
+	if !m.Resource.Equals(other.Resource) { return false }
+	return true
+}
+
 // SubscriptionTopicCanFilterBy
 // List of properties by which Subscriptions on the SubscriptionTopic can be filtered. May be defined Search Parameters (e.g., Encounter.patient) or parameters defined within this SubscriptionTopic context (e.g., hub.event).
 type SubscriptionTopicCanFilterBy struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// description
-	// Description of how this filtering parameter is intended to be used.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// resource
-	// URL of the Resource that is the type used in this filter. This is the "focus" of the topic (or one of them if there are more than one). It will be the same, a generality, or a specificity of SubscriptionTopic.resourceTrigger.resource or SubscriptionTopic.eventTrigger.resource when they are present.
-	Resource FhirUri `json:"resource,omitempty"`
-	// filterParameter
-	// Either the canonical URL to a search parameter (like "http://hl7.org/fhir/SearchParameter/encounter-patient") or topic-defined parameter (like "hub.event") which is a label for the filter.
-	FilterParameter FhirString `json:"filterParameter,omitempty"`
-	// filterDefinition
-	// Either the canonical URL to a search parameter (like "http://hl7.org/fhir/SearchParameter/encounter-patient") or the officially-defined URI for a shared filter concept (like "http://example.org/concepts/shared-common-event").
-	FilterDefinition FhirUri `json:"filterDefinition,omitempty"`
-	// modifier
-	// Allowable operators to apply when determining matches (Search Modifiers).  If the filterParameter is a SearchParameter, this list of modifiers SHALL be a strict subset of the modifiers defined on that SearchParameter.
-	Modifier []SubscriptionSearchModifier `json:"modifier,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	Resource *FhirUri `json:"resource,omitempty"`
+	FilterParameter *FhirString `json:"filterparameter,omitempty"`
+	FilterDefinition *FhirUri `json:"filterdefinition,omitempty"`
+	Modifier []*SubscriptionSearchModifier `json:"modifier,omitempty"`
 }
 
 // NewSubscriptionTopicCanFilterBy creates a new SubscriptionTopicCanFilterBy instance
-func NewSubscriptionTopicCanFilterBy(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	description FhirMarkdown,
-	resource FhirUri,
-	filterParameter FhirString,
-	filterDefinition FhirUri,
-	modifier []SubscriptionSearchModifier,
-) *SubscriptionTopicCanFilterBy {
-	return &SubscriptionTopicCanFilterBy{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Description: description,
-		Resource: resource,
-		FilterParameter: filterParameter,
-		FilterDefinition: filterDefinition,
-		Modifier: modifier,
-	}
+func NewSubscriptionTopicCanFilterBy() *SubscriptionTopicCanFilterBy {
+	return &SubscriptionTopicCanFilterBy{}
 }
+
 // FromJSON populates SubscriptionTopicCanFilterBy from JSON data
 func (m *SubscriptionTopicCanFilterBy) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -711,96 +330,53 @@ func (m *SubscriptionTopicCanFilterBy) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SubscriptionTopicCanFilterBy
-func (m *SubscriptionTopicCanFilterBy) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	description *FhirMarkdown,
-	resource *FhirUri,
-	filterParameter *FhirString,
-	filterDefinition *FhirUri,
-	modifier *[]SubscriptionSearchModifier,
-) *SubscriptionTopicCanFilterBy {
+// Clone creates a deep copy of SubscriptionTopicCanFilterBy
+func (m *SubscriptionTopicCanFilterBy) Clone() *SubscriptionTopicCanFilterBy {
+	if m == nil { return nil }
 	return &SubscriptionTopicCanFilterBy{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Resource: func() FhirUri {
-			if resource != nil { return *resource }
-			return m.Resource
-		}(),
-		FilterParameter: func() FhirString {
-			if filterParameter != nil { return *filterParameter }
-			return m.FilterParameter
-		}(),
-		FilterDefinition: func() FhirUri {
-			if filterDefinition != nil { return *filterDefinition }
-			return m.FilterDefinition
-		}(),
-		Modifier: func() []SubscriptionSearchModifier {
-			if modifier != nil { return *modifier }
-			return m.Modifier
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Description: m.Description.Clone(),
+		Resource: m.Resource.Clone(),
+		FilterParameter: m.FilterParameter.Clone(),
+		FilterDefinition: m.FilterDefinition.Clone(),
+		Modifier: cloneSlices(m.Modifier),
 	}
 }
+
+// Equals checks for equality with another SubscriptionTopicCanFilterBy instance
+func (m *SubscriptionTopicCanFilterBy) Equals(other *SubscriptionTopicCanFilterBy) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.Resource.Equals(other.Resource) { return false }
+	if !m.FilterParameter.Equals(other.FilterParameter) { return false }
+	if !m.FilterDefinition.Equals(other.FilterDefinition) { return false }
+	if !compareSlices(m.Modifier, other.Modifier) { return false }
+	return true
+}
+
 // SubscriptionTopicNotificationShape
 // List of properties to describe the shape (e.g., resources) included in notifications from this Subscription Topic.
 type SubscriptionTopicNotificationShape struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// resource
-	// URL of the Resource that is the type used in this shape. This is the "focus" of the topic (or one of them if there are more than one) and the root resource for this shape definition. It will be the same, a generality, or a specificity of SubscriptionTopic.resourceTrigger.resource or SubscriptionTopic.eventTrigger.resource when they are present.
-	Resource FhirUri `json:"resource,omitempty"`
-	// include
-	// Search-style _include directives, rooted in the resource for this shape. Servers SHOULD include resources listed here, if they exist and the user is authorized to receive them.  Clients SHOULD be prepared to receive these additional resources, but SHALL function properly without them.
-	Include []FhirString `json:"include,omitempty"`
-	// revInclude
-	// Search-style _revinclude directives, rooted in the resource for this shape. Servers SHOULD include resources listed here, if they exist and the user is authorized to receive them.  Clients SHOULD be prepared to receive these additional resources, but SHALL function properly without them.
-	RevInclude []FhirString `json:"revInclude,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Resource *FhirUri `json:"resource,omitempty"`
+	Include []*FhirString `json:"include,omitempty"`
+	RevInclude []*FhirString `json:"revinclude,omitempty"`
 }
 
 // NewSubscriptionTopicNotificationShape creates a new SubscriptionTopicNotificationShape instance
-func NewSubscriptionTopicNotificationShape(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	resource FhirUri,
-	include []FhirString,
-	revInclude []FhirString,
-) *SubscriptionTopicNotificationShape {
-	return &SubscriptionTopicNotificationShape{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Resource: resource,
-		Include: include,
-		RevInclude: revInclude,
-	}
+func NewSubscriptionTopicNotificationShape() *SubscriptionTopicNotificationShape {
+	return &SubscriptionTopicNotificationShape{}
 }
+
 // FromJSON populates SubscriptionTopicNotificationShape from JSON data
 func (m *SubscriptionTopicNotificationShape) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -811,39 +387,29 @@ func (m *SubscriptionTopicNotificationShape) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SubscriptionTopicNotificationShape
-func (m *SubscriptionTopicNotificationShape) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	resource *FhirUri,
-	include *[]FhirString,
-	revInclude *[]FhirString,
-) *SubscriptionTopicNotificationShape {
+// Clone creates a deep copy of SubscriptionTopicNotificationShape
+func (m *SubscriptionTopicNotificationShape) Clone() *SubscriptionTopicNotificationShape {
+	if m == nil { return nil }
 	return &SubscriptionTopicNotificationShape{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Resource: func() FhirUri {
-			if resource != nil { return *resource }
-			return m.Resource
-		}(),
-		Include: func() []FhirString {
-			if include != nil { return *include }
-			return m.Include
-		}(),
-		RevInclude: func() []FhirString {
-			if revInclude != nil { return *revInclude }
-			return m.RevInclude
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Resource: m.Resource.Clone(),
+		Include: cloneSlices(m.Include),
+		RevInclude: cloneSlices(m.RevInclude),
 	}
 }
+
+// Equals checks for equality with another SubscriptionTopicNotificationShape instance
+func (m *SubscriptionTopicNotificationShape) Equals(other *SubscriptionTopicNotificationShape) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Resource.Equals(other.Resource) { return false }
+	if !compareSlices(m.Include, other.Include) { return false }
+	if !compareSlices(m.RevInclude, other.RevInclude) { return false }
+	return true
+}
+

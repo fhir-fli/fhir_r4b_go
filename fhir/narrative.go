@@ -3,42 +3,23 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // Narrative
 // A human-readable summary of the resource conveying the essential clinical and business information for the resource.
 type Narrative struct {
 	DataType
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// status
-	// The status of the narrative - whether it's entirely generated (from just the defined data or the extensions too), or whether a human authored it and it may contain additional data.
-	Status NarrativeStatus `json:"status,omitempty"`
-	// div
-	// The actual narrative content, a stripped down version of XHTML.
-	Div FhirXhtml `json:"div,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	Status *NarrativeStatus `json:"status,omitempty"`
+	Div *FhirXhtml `json:"div,omitempty"`
 }
 
 // NewNarrative creates a new Narrative instance
-func NewNarrative(
-	id FhirString,
-	extension_ []FhirExtension,
-	status NarrativeStatus,
-	div FhirXhtml,
-) *Narrative {
-	return &Narrative{
-		Id: id,
-		Extension_: extension_,
-		Status: status,
-		Div: div,
-	}
+func NewNarrative() *Narrative {
+	return &Narrative{}
 }
+
 // FromJSON populates Narrative from JSON data
 func (m *Narrative) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -49,29 +30,25 @@ func (m *Narrative) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of Narrative
-func (m *Narrative) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	status *NarrativeStatus,
-	div *FhirXhtml,
-) *Narrative {
+// Clone creates a deep copy of Narrative
+func (m *Narrative) Clone() *Narrative {
+	if m == nil { return nil }
 	return &Narrative{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		Status: func() NarrativeStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Div: func() FhirXhtml {
-			if div != nil { return *div }
-			return m.Div
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		Status: m.Status.Clone(),
+		Div: m.Div.Clone(),
 	}
 }
+
+// Equals checks for equality with another Narrative instance
+func (m *Narrative) Equals(other *Narrative) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Div.Equals(other.Div) { return false }
+	return true
+}
+

@@ -2,7 +2,6 @@ package fhir_r4b_go
 
 import (
 	"encoding/json"
-	"reflect"
 )
 
 // Element represents the base definition for all FHIR elements.
@@ -32,66 +31,13 @@ func (e *Element) ToJSON() ([]byte, error) {
 	return json.Marshal(e)
 }
 
-// HasID checks if the element has an ID.
-func (e *Element) HasID() bool {
-	return e.ID != nil && *e.ID != ""
-}
-
-// HasExtension checks if the element has extensions.
-func (e *Element) HasExtension() bool {
-	return len(e.Extension) > 0
-}
-
-// GetExtensionByURL retrieves extensions by their URL.
-func (e *Element) GetExtensionByURL(url string) []*FhirExtension {
-	var result []*FhirExtension
-	for _, ext := range e.Extension {
-		if ext != nil && ext.Url.Value == url {
-			result = append(result, ext)
-		}
-	}
-	return result
-}
-
-// AddExtension adds an extension to the element.
-func (e *Element) AddExtension(ext *FhirExtension) {
-	e.Extension = append(e.Extension, ext)
-}
-
-// RemoveExtensionByURL removes extensions matching the given URL.
-func (e *Element) RemoveExtensionByURL(url string) {
-	var filtered []*FhirExtension
-	for _, ext := range e.Extension {
-		if ext != nil && ext.Url.Value != url {
-			filtered = append(filtered, ext)
-		}
-	}
-	e.Extension = filtered
-}
-
-// Copy creates a deep copy of the Element.
-func (e *Element) Copy() *Element {
-	return e.Clone()
-}
-
-// EqualsDeep performs a deep equality check with another Element.
-func (e *Element) EqualsDeep(other *Element) bool {
-	if other == nil {
-		return false
-	}
-	if !reflect.DeepEqual(e.ID, other.ID) {
-		return false
-	}
-	return compareFhirExtensions(e.Extension, other.Extension)
-}
-
 // Clone creates a deep copy of the Element.
 func (e *Element) Clone() *Element {
 	if e == nil {
 		return nil
 	}
 
-	// Deep copy the Extensions slice
+	// Deep copy extensions
 	extensionsCopy := make([]*FhirExtension, len(e.Extension))
 	for i, ext := range e.Extension {
 		if ext != nil {
@@ -99,11 +45,11 @@ func (e *Element) Clone() *Element {
 		}
 	}
 
-	// Deep copy the ID pointer
+	// Deep copy ID
 	var idCopy *string
 	if e.ID != nil {
-		idVal := *e.ID
-		idCopy = &idVal
+		idValue := *e.ID
+		idCopy = &idValue
 	}
 
 	return &Element{
@@ -113,23 +59,68 @@ func (e *Element) Clone() *Element {
 	}
 }
 
-// compareFhirExtensions compares two slices of FhirExtension for deep equality.
-func compareFhirExtensions(ext1, ext2 []*FhirExtension) bool {
-	if len(ext1) != len(ext2) {
+// Equals performs a deep equality check with another Element.
+func (e *Element) Equals(other *Element) bool {
+	if e == nil && other == nil {
+		return true
+	}
+	if e == nil || other == nil {
 		return false
 	}
-	for i := range ext1 {
-		if !compareOptionalExtensions(ext1[i], ext2[i]) {
-			return false
-		}
+
+	// Compare IDs
+	if (e.ID == nil) != (other.ID == nil) || (e.ID != nil && *e.ID != *other.ID) {
+		return false
 	}
-	return true
+
+	// Compare extensions
+	if len(e.Extension) != len(other.Extension) {
+		return false
+	}
+	if(!compareSlices(e.Extension, other.Extension)){
+		return false
+	}
+	// Compare DisallowExtension
+	return e.DisallowExtension == other.DisallowExtension
 }
 
-// compareOptionalExtensions compares two FhirExtension pointers safely.
-func compareOptionalExtensions(ext1, ext2 *FhirExtension) bool {
-	if ext1 == nil || ext2 == nil {
-		return ext1 == ext2 // Both must be nil to be equal
+// IsEmpty checks whether the Element has no meaningful content.
+func (e *Element) IsEmpty() bool {
+	return e.ID == nil && len(e.Extension) == 0
+}
+
+// AddExtension appends an extension to the Element.
+func (e *Element) AddExtension(ext *FhirExtension) {
+	e.Extension = append(e.Extension, ext)
+}
+
+// GetExtensionByURL retrieves all extensions matching a specific URL.
+func (e *Element) GetExtensionByURL(url string) []*FhirExtension {
+	var matchingExtensions []*FhirExtension
+	for _, ext := range e.Extension {
+		if ext != nil && ext.Url.Value == url {
+			matchingExtensions = append(matchingExtensions, ext)
+		}
 	}
-	return ext1.EqualsDeep(ext2)
+	return matchingExtensions
+}
+
+// RemoveExtensionByURL removes extensions that match a specific URL.
+func (e *Element) RemoveExtensionByURL(url string) {
+	var filteredExtensions []*FhirExtension
+	for _, ext := range e.Extension {
+		if ext != nil && ext.Url.Value != url {
+			filteredExtensions = append(filteredExtensions, ext)
+		}
+	}
+	e.Extension = filteredExtensions
+}
+
+// String returns a string representation of the Element.
+func (e *Element) String() string {
+	data, err := e.ToJSON()
+	if err != nil {
+		return "<invalid Element>"
+	}
+	return string(data)
 }

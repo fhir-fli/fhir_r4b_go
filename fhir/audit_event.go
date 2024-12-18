@@ -3,119 +3,38 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // AuditEvent
 // A record of an event made for purposes of maintaining a security log. Typical uses include detection of intrusion attempts and monitoring for inappropriate usage.
 type AuditEvent struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// Identifier for a family of the event.  For example, a menu item, program, rule, policy, function code, application name or URL. It identifies the performed function.
-	Type_ Coding `json:"type,omitempty"`
-	// subtype
-	// Identifier for the category of event.
-	Subtype []Coding `json:"subtype,omitempty"`
-	// action
-	// Indicator for type of action performed during the event that generated the audit.
-	Action AuditEventAction `json:"action,omitempty"`
-	// period
-	// The period during which the activity occurred.
-	Period Period `json:"period,omitempty"`
-	// recorded
-	// The time when the event was recorded.
-	Recorded FhirInstant `json:"recorded,omitempty"`
-	// outcome
-	// Indicates whether the event succeeded or failed.
-	Outcome AuditEventOutcome `json:"outcome,omitempty"`
-	// outcomeDesc
-	// A free text description of the outcome of the event.
-	OutcomeDesc FhirString `json:"outcomeDesc,omitempty"`
-	// purposeOfEvent
-	// The purposeOfUse (reason) that was used during the event being recorded.
-	PurposeOfEvent []CodeableConcept `json:"purposeOfEvent,omitempty"`
-	// agent
-	// An actor taking an active role in the event or activity that is logged.
-	Agent []AuditEventAgent `json:"agent,omitempty"`
-	// source
-	// The system that is reporting the event.
-	Source AuditEventSource `json:"source,omitempty"`
-	// entity
-	// Specific instances of data or objects that have been accessed.
-	Entity []AuditEventEntity `json:"entity,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *Coding `json:"type,omitempty"`
+	Subtype []*Coding `json:"subtype,omitempty"`
+	Action *AuditEventAction `json:"action,omitempty"`
+	Period *Period `json:"period,omitempty"`
+	Recorded *FhirInstant `json:"recorded,omitempty"`
+	Outcome *AuditEventOutcome `json:"outcome,omitempty"`
+	OutcomeDesc *FhirString `json:"outcomedesc,omitempty"`
+	PurposeOfEvent []*CodeableConcept `json:"purposeofevent,omitempty"`
+	Agent []*AuditEventAgent `json:"agent,omitempty"`
+	Source *AuditEventSource `json:"source,omitempty"`
+	Entity []*AuditEventEntity `json:"entity,omitempty"`
 }
 
 // NewAuditEvent creates a new AuditEvent instance
-func NewAuditEvent(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ Coding,
-	subtype []Coding,
-	action AuditEventAction,
-	period Period,
-	recorded FhirInstant,
-	outcome AuditEventOutcome,
-	outcomeDesc FhirString,
-	purposeOfEvent []CodeableConcept,
-	agent []AuditEventAgent,
-	source AuditEventSource,
-	entity []AuditEventEntity,
-) *AuditEvent {
-	return &AuditEvent{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Subtype: subtype,
-		Action: action,
-		Period: period,
-		Recorded: recorded,
-		Outcome: outcome,
-		OutcomeDesc: outcomeDesc,
-		PurposeOfEvent: purposeOfEvent,
-		Agent: agent,
-		Source: source,
-		Entity: entity,
-	}
+func NewAuditEvent() *AuditEvent {
+	return &AuditEvent{}
 }
+
 // FromJSON populates AuditEvent from JSON data
 func (m *AuditEvent) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -126,191 +45,83 @@ func (m *AuditEvent) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of AuditEvent
-func (m *AuditEvent) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *Coding,
-	subtype *[]Coding,
-	action *AuditEventAction,
-	period *Period,
-	recorded *FhirInstant,
-	outcome *AuditEventOutcome,
-	outcomeDesc *FhirString,
-	purposeOfEvent *[]CodeableConcept,
-	agent *[]AuditEventAgent,
-	source *AuditEventSource,
-	entity *[]AuditEventEntity,
-) *AuditEvent {
+// Clone creates a deep copy of AuditEvent
+func (m *AuditEvent) Clone() *AuditEvent {
+	if m == nil { return nil }
 	return &AuditEvent{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() Coding {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Subtype: func() []Coding {
-			if subtype != nil { return *subtype }
-			return m.Subtype
-		}(),
-		Action: func() AuditEventAction {
-			if action != nil { return *action }
-			return m.Action
-		}(),
-		Period: func() Period {
-			if period != nil { return *period }
-			return m.Period
-		}(),
-		Recorded: func() FhirInstant {
-			if recorded != nil { return *recorded }
-			return m.Recorded
-		}(),
-		Outcome: func() AuditEventOutcome {
-			if outcome != nil { return *outcome }
-			return m.Outcome
-		}(),
-		OutcomeDesc: func() FhirString {
-			if outcomeDesc != nil { return *outcomeDesc }
-			return m.OutcomeDesc
-		}(),
-		PurposeOfEvent: func() []CodeableConcept {
-			if purposeOfEvent != nil { return *purposeOfEvent }
-			return m.PurposeOfEvent
-		}(),
-		Agent: func() []AuditEventAgent {
-			if agent != nil { return *agent }
-			return m.Agent
-		}(),
-		Source: func() AuditEventSource {
-			if source != nil { return *source }
-			return m.Source
-		}(),
-		Entity: func() []AuditEventEntity {
-			if entity != nil { return *entity }
-			return m.Entity
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Subtype: cloneSlices(m.Subtype),
+		Action: m.Action.Clone(),
+		Period: m.Period.Clone(),
+		Recorded: m.Recorded.Clone(),
+		Outcome: m.Outcome.Clone(),
+		OutcomeDesc: m.OutcomeDesc.Clone(),
+		PurposeOfEvent: cloneSlices(m.PurposeOfEvent),
+		Agent: cloneSlices(m.Agent),
+		Source: m.Source.Clone(),
+		Entity: cloneSlices(m.Entity),
 	}
 }
+
+// Equals checks for equality with another AuditEvent instance
+func (m *AuditEvent) Equals(other *AuditEvent) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !compareSlices(m.Subtype, other.Subtype) { return false }
+	if !m.Action.Equals(other.Action) { return false }
+	if !m.Period.Equals(other.Period) { return false }
+	if !m.Recorded.Equals(other.Recorded) { return false }
+	if !m.Outcome.Equals(other.Outcome) { return false }
+	if !m.OutcomeDesc.Equals(other.OutcomeDesc) { return false }
+	if !compareSlices(m.PurposeOfEvent, other.PurposeOfEvent) { return false }
+	if !compareSlices(m.Agent, other.Agent) { return false }
+	if !m.Source.Equals(other.Source) { return false }
+	if !compareSlices(m.Entity, other.Entity) { return false }
+	return true
+}
+
 // AuditEventAgent
 // An actor taking an active role in the event or activity that is logged.
 type AuditEventAgent struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// Specification of the participation type the user plays when performing the event.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// role
-	// The security role that the user was acting under, that come from local codes defined by the access control security system (e.g. RBAC, ABAC) used in the local context.
-	Role []CodeableConcept `json:"role,omitempty"`
-	// who
-	// Reference to who this agent is that was involved in the event.
-	Who Reference `json:"who,omitempty"`
-	// altId
-	// Alternative agent Identifier. For a human, this should be a user identifier text string from authentication system. This identifier would be one known to a common authentication system (e.g. single sign-on), if available.
-	AltId FhirString `json:"altId,omitempty"`
-	// name
-	// Human-meaningful name for the agent.
-	Name FhirString `json:"name,omitempty"`
-	// requestor
-	// Indicator that the user is or is not the requestor, or initiator, for the event being audited.
-	Requestor FhirBoolean `json:"requestor,omitempty"`
-	// location
-	// Where the event occurred.
-	Location Reference `json:"location,omitempty"`
-	// policy
-	// The policy or plan that authorized the activity being recorded. Typically, a single activity may have multiple applicable policies, such as patient consent, guarantor funding, etc. The policy would also indicate the security token used.
-	Policy []FhirUri `json:"policy,omitempty"`
-	// media
-	// Type of media involved. Used when the event is about exporting/importing onto media.
-	Media Coding `json:"media,omitempty"`
-	// network
-	// Logical network location for application activity, if the activity has a network location.
-	Network AuditEventNetwork `json:"network,omitempty"`
-	// purposeOfUse
-	// The reason (purpose of use), specific to this agent, that was used during the event being recorded.
-	PurposeOfUse []CodeableConcept `json:"purposeOfUse,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Role []*CodeableConcept `json:"role,omitempty"`
+	Who *Reference `json:"who,omitempty"`
+	AltId *FhirString `json:"altid,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Requestor *FhirBoolean `json:"requestor,omitempty"`
+	Location *Reference `json:"location,omitempty"`
+	Policy []*FhirUri `json:"policy,omitempty"`
+	Media *Coding `json:"media,omitempty"`
+	Network *AuditEventNetwork `json:"network,omitempty"`
+	PurposeOfUse []*CodeableConcept `json:"purposeofuse,omitempty"`
 }
 
 // NewAuditEventAgent creates a new AuditEventAgent instance
-func NewAuditEventAgent(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	role []CodeableConcept,
-	who Reference,
-	altId FhirString,
-	name FhirString,
-	requestor FhirBoolean,
-	location Reference,
-	policy []FhirUri,
-	media Coding,
-	network AuditEventNetwork,
-	purposeOfUse []CodeableConcept,
-) *AuditEventAgent {
-	return &AuditEventAgent{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Role: role,
-		Who: who,
-		AltId: altId,
-		Name: name,
-		Requestor: requestor,
-		Location: location,
-		Policy: policy,
-		Media: media,
-		Network: network,
-		PurposeOfUse: purposeOfUse,
-	}
+func NewAuditEventAgent() *AuditEventAgent {
+	return &AuditEventAgent{}
 }
+
 // FromJSON populates AuditEventAgent from JSON data
 func (m *AuditEventAgent) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -321,121 +132,64 @@ func (m *AuditEventAgent) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of AuditEventAgent
-func (m *AuditEventAgent) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	role *[]CodeableConcept,
-	who *Reference,
-	altId *FhirString,
-	name *FhirString,
-	requestor *FhirBoolean,
-	location *Reference,
-	policy *[]FhirUri,
-	media *Coding,
-	network *AuditEventNetwork,
-	purposeOfUse *[]CodeableConcept,
-) *AuditEventAgent {
+// Clone creates a deep copy of AuditEventAgent
+func (m *AuditEventAgent) Clone() *AuditEventAgent {
+	if m == nil { return nil }
 	return &AuditEventAgent{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Role: func() []CodeableConcept {
-			if role != nil { return *role }
-			return m.Role
-		}(),
-		Who: func() Reference {
-			if who != nil { return *who }
-			return m.Who
-		}(),
-		AltId: func() FhirString {
-			if altId != nil { return *altId }
-			return m.AltId
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Requestor: func() FhirBoolean {
-			if requestor != nil { return *requestor }
-			return m.Requestor
-		}(),
-		Location: func() Reference {
-			if location != nil { return *location }
-			return m.Location
-		}(),
-		Policy: func() []FhirUri {
-			if policy != nil { return *policy }
-			return m.Policy
-		}(),
-		Media: func() Coding {
-			if media != nil { return *media }
-			return m.Media
-		}(),
-		Network: func() AuditEventNetwork {
-			if network != nil { return *network }
-			return m.Network
-		}(),
-		PurposeOfUse: func() []CodeableConcept {
-			if purposeOfUse != nil { return *purposeOfUse }
-			return m.PurposeOfUse
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Role: cloneSlices(m.Role),
+		Who: m.Who.Clone(),
+		AltId: m.AltId.Clone(),
+		Name: m.Name.Clone(),
+		Requestor: m.Requestor.Clone(),
+		Location: m.Location.Clone(),
+		Policy: cloneSlices(m.Policy),
+		Media: m.Media.Clone(),
+		Network: m.Network.Clone(),
+		PurposeOfUse: cloneSlices(m.PurposeOfUse),
 	}
 }
+
+// Equals checks for equality with another AuditEventAgent instance
+func (m *AuditEventAgent) Equals(other *AuditEventAgent) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !compareSlices(m.Role, other.Role) { return false }
+	if !m.Who.Equals(other.Who) { return false }
+	if !m.AltId.Equals(other.AltId) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Requestor.Equals(other.Requestor) { return false }
+	if !m.Location.Equals(other.Location) { return false }
+	if !compareSlices(m.Policy, other.Policy) { return false }
+	if !m.Media.Equals(other.Media) { return false }
+	if !m.Network.Equals(other.Network) { return false }
+	if !compareSlices(m.PurposeOfUse, other.PurposeOfUse) { return false }
+	return true
+}
+
 // AuditEventNetwork
 // Logical network location for application activity, if the activity has a network location.
 type AuditEventNetwork struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// address
-	// An identifier for the network access point of the user device for the audit event.
-	Address FhirString `json:"address,omitempty"`
-	// type
-	// An identifier for the type of network access point that originated the audit event.
-	Type_ AuditEventAgentNetworkType `json:"type,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Address *FhirString `json:"address,omitempty"`
+	Type *AuditEventAgentNetworkType `json:"type,omitempty"`
 }
 
 // NewAuditEventNetwork creates a new AuditEventNetwork instance
-func NewAuditEventNetwork(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	address FhirString,
-	type_ AuditEventAgentNetworkType,
-) *AuditEventNetwork {
-	return &AuditEventNetwork{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Address: address,
-		Type_: type_,
-	}
+func NewAuditEventNetwork() *AuditEventNetwork {
+	return &AuditEventNetwork{}
 }
+
 // FromJSON populates AuditEventNetwork from JSON data
 func (m *AuditEventNetwork) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -446,81 +200,47 @@ func (m *AuditEventNetwork) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of AuditEventNetwork
-func (m *AuditEventNetwork) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	address *FhirString,
-	type_ *AuditEventAgentNetworkType,
-) *AuditEventNetwork {
+// Clone creates a deep copy of AuditEventNetwork
+func (m *AuditEventNetwork) Clone() *AuditEventNetwork {
+	if m == nil { return nil }
 	return &AuditEventNetwork{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Address: func() FhirString {
-			if address != nil { return *address }
-			return m.Address
-		}(),
-		Type_: func() AuditEventAgentNetworkType {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Address: m.Address.Clone(),
+		Type: m.Type.Clone(),
 	}
 }
+
+// Equals checks for equality with another AuditEventNetwork instance
+func (m *AuditEventNetwork) Equals(other *AuditEventNetwork) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Address.Equals(other.Address) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	return true
+}
+
 // AuditEventSource
 // The system that is reporting the event.
 type AuditEventSource struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// site
-	// Logical source location within the healthcare enterprise network.  For example, a hospital or other provider location within a multi-entity provider group.
-	Site FhirString `json:"site,omitempty"`
-	// observer
-	// Identifier of the source where the event was detected.
-	Observer Reference `json:"observer,omitempty"`
-	// type
-	// Code specifying the type of source where event originated.
-	Type_ []Coding `json:"type,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Site *FhirString `json:"site,omitempty"`
+	Observer *Reference `json:"observer,omitempty"`
+	Type []*Coding `json:"type,omitempty"`
 }
 
 // NewAuditEventSource creates a new AuditEventSource instance
-func NewAuditEventSource(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	site FhirString,
-	observer Reference,
-	type_ []Coding,
-) *AuditEventSource {
-	return &AuditEventSource{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Site: site,
-		Observer: observer,
-		Type_: type_,
-	}
+func NewAuditEventSource() *AuditEventSource {
+	return &AuditEventSource{}
 }
+
 // FromJSON populates AuditEventSource from JSON data
 func (m *AuditEventSource) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -531,116 +251,55 @@ func (m *AuditEventSource) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of AuditEventSource
-func (m *AuditEventSource) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	site *FhirString,
-	observer *Reference,
-	type_ *[]Coding,
-) *AuditEventSource {
+// Clone creates a deep copy of AuditEventSource
+func (m *AuditEventSource) Clone() *AuditEventSource {
+	if m == nil { return nil }
 	return &AuditEventSource{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Site: func() FhirString {
-			if site != nil { return *site }
-			return m.Site
-		}(),
-		Observer: func() Reference {
-			if observer != nil { return *observer }
-			return m.Observer
-		}(),
-		Type_: func() []Coding {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Site: m.Site.Clone(),
+		Observer: m.Observer.Clone(),
+		Type: cloneSlices(m.Type),
 	}
 }
+
+// Equals checks for equality with another AuditEventSource instance
+func (m *AuditEventSource) Equals(other *AuditEventSource) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Site.Equals(other.Site) { return false }
+	if !m.Observer.Equals(other.Observer) { return false }
+	if !compareSlices(m.Type, other.Type) { return false }
+	return true
+}
+
 // AuditEventEntity
 // Specific instances of data or objects that have been accessed.
 type AuditEventEntity struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// what
-	// Identifies a specific instance of the entity. The reference should be version specific.
-	What Reference `json:"what,omitempty"`
-	// type
-	// The type of the object that was involved in this audit event.
-	Type_ Coding `json:"type,omitempty"`
-	// role
-	// Code representing the role the entity played in the event being audited.
-	Role Coding `json:"role,omitempty"`
-	// lifecycle
-	// Identifier for the data life-cycle stage for the entity.
-	Lifecycle Coding `json:"lifecycle,omitempty"`
-	// securityLabel
-	// Security labels for the identified entity.
-	SecurityLabel []Coding `json:"securityLabel,omitempty"`
-	// name
-	// A name of the entity in the audit event.
-	Name FhirString `json:"name,omitempty"`
-	// description
-	// Text that describes the entity in more detail.
-	Description FhirString `json:"description,omitempty"`
-	// query
-	// The query parameters for a query-type entities.
-	Query FhirBase64Binary `json:"query,omitempty"`
-	// detail
-	// Tagged value pairs for conveying additional information about the entity.
-	Detail []AuditEventDetail `json:"detail,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	What *Reference `json:"what,omitempty"`
+	Type *Coding `json:"type,omitempty"`
+	Role *Coding `json:"role,omitempty"`
+	Lifecycle *Coding `json:"lifecycle,omitempty"`
+	SecurityLabel []*Coding `json:"securitylabel,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Query *FhirBase64Binary `json:"query,omitempty"`
+	Detail []*AuditEventDetail `json:"detail,omitempty"`
 }
 
 // NewAuditEventEntity creates a new AuditEventEntity instance
-func NewAuditEventEntity(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	what Reference,
-	type_ Coding,
-	role Coding,
-	lifecycle Coding,
-	securityLabel []Coding,
-	name FhirString,
-	description FhirString,
-	query FhirBase64Binary,
-	detail []AuditEventDetail,
-) *AuditEventEntity {
-	return &AuditEventEntity{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		What: what,
-		Type_: type_,
-		Role: role,
-		Lifecycle: lifecycle,
-		SecurityLabel: securityLabel,
-		Name: name,
-		Description: description,
-		Query: query,
-		Detail: detail,
-	}
+func NewAuditEventEntity() *AuditEventEntity {
+	return &AuditEventEntity{}
 }
+
 // FromJSON populates AuditEventEntity from JSON data
 func (m *AuditEventEntity) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -651,116 +310,61 @@ func (m *AuditEventEntity) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of AuditEventEntity
-func (m *AuditEventEntity) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	what *Reference,
-	type_ *Coding,
-	role *Coding,
-	lifecycle *Coding,
-	securityLabel *[]Coding,
-	name *FhirString,
-	description *FhirString,
-	query *FhirBase64Binary,
-	detail *[]AuditEventDetail,
-) *AuditEventEntity {
+// Clone creates a deep copy of AuditEventEntity
+func (m *AuditEventEntity) Clone() *AuditEventEntity {
+	if m == nil { return nil }
 	return &AuditEventEntity{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		What: func() Reference {
-			if what != nil { return *what }
-			return m.What
-		}(),
-		Type_: func() Coding {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Role: func() Coding {
-			if role != nil { return *role }
-			return m.Role
-		}(),
-		Lifecycle: func() Coding {
-			if lifecycle != nil { return *lifecycle }
-			return m.Lifecycle
-		}(),
-		SecurityLabel: func() []Coding {
-			if securityLabel != nil { return *securityLabel }
-			return m.SecurityLabel
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Query: func() FhirBase64Binary {
-			if query != nil { return *query }
-			return m.Query
-		}(),
-		Detail: func() []AuditEventDetail {
-			if detail != nil { return *detail }
-			return m.Detail
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		What: m.What.Clone(),
+		Type: m.Type.Clone(),
+		Role: m.Role.Clone(),
+		Lifecycle: m.Lifecycle.Clone(),
+		SecurityLabel: cloneSlices(m.SecurityLabel),
+		Name: m.Name.Clone(),
+		Description: m.Description.Clone(),
+		Query: m.Query.Clone(),
+		Detail: cloneSlices(m.Detail),
 	}
 }
+
+// Equals checks for equality with another AuditEventEntity instance
+func (m *AuditEventEntity) Equals(other *AuditEventEntity) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.What.Equals(other.What) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Role.Equals(other.Role) { return false }
+	if !m.Lifecycle.Equals(other.Lifecycle) { return false }
+	if !compareSlices(m.SecurityLabel, other.SecurityLabel) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.Query.Equals(other.Query) { return false }
+	if !compareSlices(m.Detail, other.Detail) { return false }
+	return true
+}
+
 // AuditEventDetail
 // Tagged value pairs for conveying additional information about the entity.
 type AuditEventDetail struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// The type of extra detail provided in the value.
-	Type_ FhirString `json:"type,omitempty"`
-	// valueString
-	// The  value of the extra detail.
-	ValueString FhirString `json:"valueString,omitempty"`
-	// valueBase64Binary
-	// The  value of the extra detail.
-	ValueBase64Binary FhirBase64Binary `json:"valueBase64Binary,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *FhirString `json:"type,omitempty"`
+	ValueString *FhirString `json:"valuestring,omitempty"`
+	ValueBase64Binary *FhirBase64Binary `json:"valuebase64binary,omitempty"`
 }
 
 // NewAuditEventDetail creates a new AuditEventDetail instance
-func NewAuditEventDetail(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ FhirString,
-	valueString FhirString,
-	valueBase64Binary FhirBase64Binary,
-) *AuditEventDetail {
-	return &AuditEventDetail{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		ValueString: valueString,
-		ValueBase64Binary: valueBase64Binary,
-	}
+func NewAuditEventDetail() *AuditEventDetail {
+	return &AuditEventDetail{}
 }
+
 // FromJSON populates AuditEventDetail from JSON data
 func (m *AuditEventDetail) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -771,39 +375,29 @@ func (m *AuditEventDetail) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of AuditEventDetail
-func (m *AuditEventDetail) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *FhirString,
-	valueString *FhirString,
-	valueBase64Binary *FhirBase64Binary,
-) *AuditEventDetail {
+// Clone creates a deep copy of AuditEventDetail
+func (m *AuditEventDetail) Clone() *AuditEventDetail {
+	if m == nil { return nil }
 	return &AuditEventDetail{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() FhirString {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		ValueString: func() FhirString {
-			if valueString != nil { return *valueString }
-			return m.ValueString
-		}(),
-		ValueBase64Binary: func() FhirBase64Binary {
-			if valueBase64Binary != nil { return *valueBase64Binary }
-			return m.ValueBase64Binary
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		ValueString: m.ValueString.Clone(),
+		ValueBase64Binary: m.ValueBase64Binary.Clone(),
 	}
 }
+
+// Equals checks for equality with another AuditEventDetail instance
+func (m *AuditEventDetail) Equals(other *AuditEventDetail) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.ValueString.Equals(other.ValueString) { return false }
+	if !m.ValueBase64Binary.Equals(other.ValueBase64Binary) { return false }
+	return true
+}
+

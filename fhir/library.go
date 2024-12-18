@@ -3,224 +3,59 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // Library
 // The Library resource is a general-purpose container for knowledge asset definitions. It can be used to describe and expose existing knowledge assets such as logic libraries and information model descriptions, as well as to describe a collection of knowledge assets.
 type Library struct {
 	CanonicalResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// url
-	// An absolute URI that is used to identify this library when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this library is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the library is stored on different servers.
-	Url FhirUri `json:"url,omitempty"`
-	// identifier
-	// A formal identifier that is used to identify this library when it is represented in other formats, or referenced in a specification, model, design or an instance. e.g. CMS or NQF identifiers for a measure artifact. Note that at least one identifier is required for non-experimental active artifacts.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// version
-	// The identifier that is used to identify this version of the library when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the library author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence. To provide a version consistent with the Decision Support Service specification, use the format Major.Minor.Revision (e.g. 1.0.0). For more information on versioning knowledge assets, refer to the Decision Support Service specification. Note that a version is required for non-experimental active artifacts.
-	Version FhirString `json:"version,omitempty"`
-	// name
-	// A natural language name identifying the library. This name should be usable as an identifier for the module by machine processing applications such as code generation.
-	Name FhirString `json:"name,omitempty"`
-	// title
-	// A short, descriptive, user-friendly title for the library.
-	Title FhirString `json:"title,omitempty"`
-	// subtitle
-	// An explanatory or alternate title for the library giving additional information about its content.
-	Subtitle FhirString `json:"subtitle,omitempty"`
-	// status
-	// The status of this library. Enables tracking the life-cycle of the content.
-	Status PublicationStatus `json:"status,omitempty"`
-	// experimental
-	// A Boolean value to indicate that this library is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.
-	Experimental FhirBoolean `json:"experimental,omitempty"`
-	// type
-	// Identifies the type of library such as a Logic Library, Model Definition, Asset Collection, or Module Definition.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// subjectCodeableConcept
-	// A code or group definition that describes the intended subject of the contents of the library.
-	SubjectCodeableConcept CodeableConcept `json:"subjectCodeableConcept,omitempty"`
-	// subjectReference
-	// A code or group definition that describes the intended subject of the contents of the library.
-	SubjectReference Reference `json:"subjectReference,omitempty"`
-	// date
-	// The date  (and optionally time) when the library was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the library changes.
-	Date FhirDateTime `json:"date,omitempty"`
-	// publisher
-	// The name of the organization or individual that published the library.
-	Publisher FhirString `json:"publisher,omitempty"`
-	// contact
-	// Contact details to assist a user in finding and communicating with the publisher.
-	Contact []ContactDetail `json:"contact,omitempty"`
-	// description
-	// A free text natural language description of the library from a consumer's perspective.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// useContext
-	// The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate library instances.
-	UseContext []UsageContext `json:"useContext,omitempty"`
-	// jurisdiction
-	// A legal or geographic region in which the library is intended to be used.
-	Jurisdiction []CodeableConcept `json:"jurisdiction,omitempty"`
-	// purpose
-	// Explanation of why this library is needed and why it has been designed as it has.
-	Purpose FhirMarkdown `json:"purpose,omitempty"`
-	// usage
-	// A detailed description of how the library is used from a clinical perspective.
-	Usage FhirString `json:"usage,omitempty"`
-	// copyright
-	// A copyright statement relating to the library and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the library.
-	Copyright FhirMarkdown `json:"copyright,omitempty"`
-	// approvalDate
-	// The date on which the resource content was approved by the publisher. Approval happens once when the content is officially approved for usage.
-	ApprovalDate FhirDate `json:"approvalDate,omitempty"`
-	// lastReviewDate
-	// The date on which the resource content was last reviewed. Review happens periodically after approval but does not change the original approval date.
-	LastReviewDate FhirDate `json:"lastReviewDate,omitempty"`
-	// effectivePeriod
-	// The period during which the library content was or is planned to be in active use.
-	EffectivePeriod Period `json:"effectivePeriod,omitempty"`
-	// topic
-	// Descriptive topics related to the content of the library. Topics provide a high-level categorization of the library that can be useful for filtering and searching.
-	Topic []CodeableConcept `json:"topic,omitempty"`
-	// author
-	// An individiual or organization primarily involved in the creation and maintenance of the content.
-	Author []ContactDetail `json:"author,omitempty"`
-	// editor
-	// An individual or organization primarily responsible for internal coherence of the content.
-	Editor []ContactDetail `json:"editor,omitempty"`
-	// reviewer
-	// An individual or organization primarily responsible for review of some aspect of the content.
-	Reviewer []ContactDetail `json:"reviewer,omitempty"`
-	// endorser
-	// An individual or organization responsible for officially endorsing the content for use in some setting.
-	Endorser []ContactDetail `json:"endorser,omitempty"`
-	// relatedArtifact
-	// Related artifacts such as additional documentation, justification, or bibliographic references.
-	RelatedArtifact []RelatedArtifact `json:"relatedArtifact,omitempty"`
-	// parameter
-	// The parameter element defines parameters used by the library.
-	Parameter []ParameterDefinition `json:"parameter,omitempty"`
-	// dataRequirement
-	// Describes a set of data that must be provided in order to be able to successfully perform the computations defined by the library.
-	DataRequirement []DataRequirement `json:"dataRequirement,omitempty"`
-	// content
-	// The content of the library as an Attachment. The content may be a reference to a url, or may be directly embedded as a base-64 string. Either way, the contentType of the attachment determines how to interpret the content.
-	Content []Attachment `json:"content,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Url *FhirUri `json:"url,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Title *FhirString `json:"title,omitempty"`
+	Subtitle *FhirString `json:"subtitle,omitempty"`
+	Status *PublicationStatus `json:"status,omitempty"`
+	Experimental *FhirBoolean `json:"experimental,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	SubjectCodeableConcept *CodeableConcept `json:"subjectcodeableconcept,omitempty"`
+	SubjectReference *Reference `json:"subjectreference,omitempty"`
+	Date *FhirDateTime `json:"date,omitempty"`
+	Publisher *FhirString `json:"publisher,omitempty"`
+	Contact []*ContactDetail `json:"contact,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	UseContext []*UsageContext `json:"usecontext,omitempty"`
+	Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+	Purpose *FhirMarkdown `json:"purpose,omitempty"`
+	Usage *FhirString `json:"usage,omitempty"`
+	Copyright *FhirMarkdown `json:"copyright,omitempty"`
+	ApprovalDate *FhirDate `json:"approvaldate,omitempty"`
+	LastReviewDate *FhirDate `json:"lastreviewdate,omitempty"`
+	EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+	Topic []*CodeableConcept `json:"topic,omitempty"`
+	Author []*ContactDetail `json:"author,omitempty"`
+	Editor []*ContactDetail `json:"editor,omitempty"`
+	Reviewer []*ContactDetail `json:"reviewer,omitempty"`
+	Endorser []*ContactDetail `json:"endorser,omitempty"`
+	RelatedArtifact []*RelatedArtifact `json:"relatedartifact,omitempty"`
+	Parameter []*ParameterDefinition `json:"parameter,omitempty"`
+	DataRequirement []*DataRequirement `json:"datarequirement,omitempty"`
+	Content []*Attachment `json:"content,omitempty"`
 }
 
 // NewLibrary creates a new Library instance
-func NewLibrary(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	url FhirUri,
-	identifier []Identifier,
-	version FhirString,
-	name FhirString,
-	title FhirString,
-	subtitle FhirString,
-	status PublicationStatus,
-	experimental FhirBoolean,
-	type_ CodeableConcept,
-	subjectCodeableConcept CodeableConcept,
-	subjectReference Reference,
-	date FhirDateTime,
-	publisher FhirString,
-	contact []ContactDetail,
-	description FhirMarkdown,
-	useContext []UsageContext,
-	jurisdiction []CodeableConcept,
-	purpose FhirMarkdown,
-	usage FhirString,
-	copyright FhirMarkdown,
-	approvalDate FhirDate,
-	lastReviewDate FhirDate,
-	effectivePeriod Period,
-	topic []CodeableConcept,
-	author []ContactDetail,
-	editor []ContactDetail,
-	reviewer []ContactDetail,
-	endorser []ContactDetail,
-	relatedArtifact []RelatedArtifact,
-	parameter []ParameterDefinition,
-	dataRequirement []DataRequirement,
-	content []Attachment,
-) *Library {
-	return &Library{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Url: url,
-		Identifier: identifier,
-		Version: version,
-		Name: name,
-		Title: title,
-		Subtitle: subtitle,
-		Status: status,
-		Experimental: experimental,
-		Type_: type_,
-		SubjectCodeableConcept: subjectCodeableConcept,
-		SubjectReference: subjectReference,
-		Date: date,
-		Publisher: publisher,
-		Contact: contact,
-		Description: description,
-		UseContext: useContext,
-		Jurisdiction: jurisdiction,
-		Purpose: purpose,
-		Usage: usage,
-		Copyright: copyright,
-		ApprovalDate: approvalDate,
-		LastReviewDate: lastReviewDate,
-		EffectivePeriod: effectivePeriod,
-		Topic: topic,
-		Author: author,
-		Editor: editor,
-		Reviewer: reviewer,
-		Endorser: endorser,
-		RelatedArtifact: relatedArtifact,
-		Parameter: parameter,
-		DataRequirement: dataRequirement,
-		Content: content,
-	}
+func NewLibrary() *Library {
+	return &Library{}
 }
+
 // FromJSON populates Library from JSON data
 func (m *Library) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -231,209 +66,97 @@ func (m *Library) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of Library
-func (m *Library) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	url *FhirUri,
-	identifier *[]Identifier,
-	version *FhirString,
-	name *FhirString,
-	title *FhirString,
-	subtitle *FhirString,
-	status *PublicationStatus,
-	experimental *FhirBoolean,
-	type_ *CodeableConcept,
-	subjectCodeableConcept *CodeableConcept,
-	subjectReference *Reference,
-	date *FhirDateTime,
-	publisher *FhirString,
-	contact *[]ContactDetail,
-	description *FhirMarkdown,
-	useContext *[]UsageContext,
-	jurisdiction *[]CodeableConcept,
-	purpose *FhirMarkdown,
-	usage *FhirString,
-	copyright *FhirMarkdown,
-	approvalDate *FhirDate,
-	lastReviewDate *FhirDate,
-	effectivePeriod *Period,
-	topic *[]CodeableConcept,
-	author *[]ContactDetail,
-	editor *[]ContactDetail,
-	reviewer *[]ContactDetail,
-	endorser *[]ContactDetail,
-	relatedArtifact *[]RelatedArtifact,
-	parameter *[]ParameterDefinition,
-	dataRequirement *[]DataRequirement,
-	content *[]Attachment,
-) *Library {
+// Clone creates a deep copy of Library
+func (m *Library) Clone() *Library {
+	if m == nil { return nil }
 	return &Library{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Url: func() FhirUri {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Title: func() FhirString {
-			if title != nil { return *title }
-			return m.Title
-		}(),
-		Subtitle: func() FhirString {
-			if subtitle != nil { return *subtitle }
-			return m.Subtitle
-		}(),
-		Status: func() PublicationStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Experimental: func() FhirBoolean {
-			if experimental != nil { return *experimental }
-			return m.Experimental
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		SubjectCodeableConcept: func() CodeableConcept {
-			if subjectCodeableConcept != nil { return *subjectCodeableConcept }
-			return m.SubjectCodeableConcept
-		}(),
-		SubjectReference: func() Reference {
-			if subjectReference != nil { return *subjectReference }
-			return m.SubjectReference
-		}(),
-		Date: func() FhirDateTime {
-			if date != nil { return *date }
-			return m.Date
-		}(),
-		Publisher: func() FhirString {
-			if publisher != nil { return *publisher }
-			return m.Publisher
-		}(),
-		Contact: func() []ContactDetail {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		UseContext: func() []UsageContext {
-			if useContext != nil { return *useContext }
-			return m.UseContext
-		}(),
-		Jurisdiction: func() []CodeableConcept {
-			if jurisdiction != nil { return *jurisdiction }
-			return m.Jurisdiction
-		}(),
-		Purpose: func() FhirMarkdown {
-			if purpose != nil { return *purpose }
-			return m.Purpose
-		}(),
-		Usage: func() FhirString {
-			if usage != nil { return *usage }
-			return m.Usage
-		}(),
-		Copyright: func() FhirMarkdown {
-			if copyright != nil { return *copyright }
-			return m.Copyright
-		}(),
-		ApprovalDate: func() FhirDate {
-			if approvalDate != nil { return *approvalDate }
-			return m.ApprovalDate
-		}(),
-		LastReviewDate: func() FhirDate {
-			if lastReviewDate != nil { return *lastReviewDate }
-			return m.LastReviewDate
-		}(),
-		EffectivePeriod: func() Period {
-			if effectivePeriod != nil { return *effectivePeriod }
-			return m.EffectivePeriod
-		}(),
-		Topic: func() []CodeableConcept {
-			if topic != nil { return *topic }
-			return m.Topic
-		}(),
-		Author: func() []ContactDetail {
-			if author != nil { return *author }
-			return m.Author
-		}(),
-		Editor: func() []ContactDetail {
-			if editor != nil { return *editor }
-			return m.Editor
-		}(),
-		Reviewer: func() []ContactDetail {
-			if reviewer != nil { return *reviewer }
-			return m.Reviewer
-		}(),
-		Endorser: func() []ContactDetail {
-			if endorser != nil { return *endorser }
-			return m.Endorser
-		}(),
-		RelatedArtifact: func() []RelatedArtifact {
-			if relatedArtifact != nil { return *relatedArtifact }
-			return m.RelatedArtifact
-		}(),
-		Parameter: func() []ParameterDefinition {
-			if parameter != nil { return *parameter }
-			return m.Parameter
-		}(),
-		DataRequirement: func() []DataRequirement {
-			if dataRequirement != nil { return *dataRequirement }
-			return m.DataRequirement
-		}(),
-		Content: func() []Attachment {
-			if content != nil { return *content }
-			return m.Content
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Url: m.Url.Clone(),
+		Identifier: cloneSlices(m.Identifier),
+		Version: m.Version.Clone(),
+		Name: m.Name.Clone(),
+		Title: m.Title.Clone(),
+		Subtitle: m.Subtitle.Clone(),
+		Status: m.Status.Clone(),
+		Experimental: m.Experimental.Clone(),
+		Type: m.Type.Clone(),
+		SubjectCodeableConcept: m.SubjectCodeableConcept.Clone(),
+		SubjectReference: m.SubjectReference.Clone(),
+		Date: m.Date.Clone(),
+		Publisher: m.Publisher.Clone(),
+		Contact: cloneSlices(m.Contact),
+		Description: m.Description.Clone(),
+		UseContext: cloneSlices(m.UseContext),
+		Jurisdiction: cloneSlices(m.Jurisdiction),
+		Purpose: m.Purpose.Clone(),
+		Usage: m.Usage.Clone(),
+		Copyright: m.Copyright.Clone(),
+		ApprovalDate: m.ApprovalDate.Clone(),
+		LastReviewDate: m.LastReviewDate.Clone(),
+		EffectivePeriod: m.EffectivePeriod.Clone(),
+		Topic: cloneSlices(m.Topic),
+		Author: cloneSlices(m.Author),
+		Editor: cloneSlices(m.Editor),
+		Reviewer: cloneSlices(m.Reviewer),
+		Endorser: cloneSlices(m.Endorser),
+		RelatedArtifact: cloneSlices(m.RelatedArtifact),
+		Parameter: cloneSlices(m.Parameter),
+		DataRequirement: cloneSlices(m.DataRequirement),
+		Content: cloneSlices(m.Content),
 	}
 }
+
+// Equals checks for equality with another Library instance
+func (m *Library) Equals(other *Library) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Title.Equals(other.Title) { return false }
+	if !m.Subtitle.Equals(other.Subtitle) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Experimental.Equals(other.Experimental) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.SubjectCodeableConcept.Equals(other.SubjectCodeableConcept) { return false }
+	if !m.SubjectReference.Equals(other.SubjectReference) { return false }
+	if !m.Date.Equals(other.Date) { return false }
+	if !m.Publisher.Equals(other.Publisher) { return false }
+	if !compareSlices(m.Contact, other.Contact) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.UseContext, other.UseContext) { return false }
+	if !compareSlices(m.Jurisdiction, other.Jurisdiction) { return false }
+	if !m.Purpose.Equals(other.Purpose) { return false }
+	if !m.Usage.Equals(other.Usage) { return false }
+	if !m.Copyright.Equals(other.Copyright) { return false }
+	if !m.ApprovalDate.Equals(other.ApprovalDate) { return false }
+	if !m.LastReviewDate.Equals(other.LastReviewDate) { return false }
+	if !m.EffectivePeriod.Equals(other.EffectivePeriod) { return false }
+	if !compareSlices(m.Topic, other.Topic) { return false }
+	if !compareSlices(m.Author, other.Author) { return false }
+	if !compareSlices(m.Editor, other.Editor) { return false }
+	if !compareSlices(m.Reviewer, other.Reviewer) { return false }
+	if !compareSlices(m.Endorser, other.Endorser) { return false }
+	if !compareSlices(m.RelatedArtifact, other.RelatedArtifact) { return false }
+	if !compareSlices(m.Parameter, other.Parameter) { return false }
+	if !compareSlices(m.DataRequirement, other.DataRequirement) { return false }
+	if !compareSlices(m.Content, other.Content) { return false }
+	return true
+}
+

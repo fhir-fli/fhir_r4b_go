@@ -3,42 +3,23 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // Range
 // A set of ordered Quantities defined by a low and high limit.
 type Range struct {
 	DataType
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// low
-	// The low limit. The boundary is inclusive.
-	Low Quantity `json:"low,omitempty"`
-	// high
-	// The high limit. The boundary is inclusive.
-	High Quantity `json:"high,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	Low *Quantity `json:"low,omitempty"`
+	High *Quantity `json:"high,omitempty"`
 }
 
 // NewRange creates a new Range instance
-func NewRange(
-	id FhirString,
-	extension_ []FhirExtension,
-	low Quantity,
-	high Quantity,
-) *Range {
-	return &Range{
-		Id: id,
-		Extension_: extension_,
-		Low: low,
-		High: high,
-	}
+func NewRange() *Range {
+	return &Range{}
 }
+
 // FromJSON populates Range from JSON data
 func (m *Range) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -49,29 +30,25 @@ func (m *Range) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of Range
-func (m *Range) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	low *Quantity,
-	high *Quantity,
-) *Range {
+// Clone creates a deep copy of Range
+func (m *Range) Clone() *Range {
+	if m == nil { return nil }
 	return &Range{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		Low: func() Quantity {
-			if low != nil { return *low }
-			return m.Low
-		}(),
-		High: func() Quantity {
-			if high != nil { return *high }
-			return m.High
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		Low: m.Low.Clone(),
+		High: m.High.Clone(),
 	}
 }
+
+// Equals checks for equality with another Range instance
+func (m *Range) Equals(other *Range) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !m.Low.Equals(other.Low) { return false }
+	if !m.High.Equals(other.High) { return false }
+	return true
+}
+

@@ -3,164 +3,47 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // ConceptMap
 // A statement of relationships from one set of concepts to one or more other concepts - either concepts in code systems, or data element/data element concepts, or classes in class models.
 type ConceptMap struct {
 	CanonicalResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// url
-	// An absolute URI that is used to identify this concept map when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this concept map is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the concept map is stored on different servers.
-	Url FhirUri `json:"url,omitempty"`
-	// identifier
-	// A formal identifier that is used to identify this concept map when it is represented in other formats, or referenced in a specification, model, design or an instance.
-	Identifier Identifier `json:"identifier,omitempty"`
-	// version
-	// The identifier that is used to identify this version of the concept map when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the concept map author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.
-	Version FhirString `json:"version,omitempty"`
-	// name
-	// A natural language name identifying the concept map. This name should be usable as an identifier for the module by machine processing applications such as code generation.
-	Name FhirString `json:"name,omitempty"`
-	// title
-	// A short, descriptive, user-friendly title for the concept map.
-	Title FhirString `json:"title,omitempty"`
-	// status
-	// The status of this concept map. Enables tracking the life-cycle of the content.
-	Status PublicationStatus `json:"status,omitempty"`
-	// experimental
-	// A Boolean value to indicate that this concept map is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.
-	Experimental FhirBoolean `json:"experimental,omitempty"`
-	// date
-	// The date  (and optionally time) when the concept map was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the concept map changes.
-	Date FhirDateTime `json:"date,omitempty"`
-	// publisher
-	// The name of the organization or individual that published the concept map.
-	Publisher FhirString `json:"publisher,omitempty"`
-	// contact
-	// Contact details to assist a user in finding and communicating with the publisher.
-	Contact []ContactDetail `json:"contact,omitempty"`
-	// description
-	// A free text natural language description of the concept map from a consumer's perspective.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// useContext
-	// The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate concept map instances.
-	UseContext []UsageContext `json:"useContext,omitempty"`
-	// jurisdiction
-	// A legal or geographic region in which the concept map is intended to be used.
-	Jurisdiction []CodeableConcept `json:"jurisdiction,omitempty"`
-	// purpose
-	// Explanation of why this concept map is needed and why it has been designed as it has.
-	Purpose FhirMarkdown `json:"purpose,omitempty"`
-	// copyright
-	// A copyright statement relating to the concept map and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the concept map.
-	Copyright FhirMarkdown `json:"copyright,omitempty"`
-	// sourceUri
-	// Identifier for the source value set that contains the concepts that are being mapped and provides context for the mappings.
-	SourceUri FhirUri `json:"sourceUri,omitempty"`
-	// sourceCanonical
-	// Identifier for the source value set that contains the concepts that are being mapped and provides context for the mappings.
-	SourceCanonical FhirCanonical `json:"sourceCanonical,omitempty"`
-	// targetUri
-	// The target value set provides context for the mappings. Note that the mapping is made between concepts, not between value sets, but the value set provides important context about how the concept mapping choices are made.
-	TargetUri FhirUri `json:"targetUri,omitempty"`
-	// targetCanonical
-	// The target value set provides context for the mappings. Note that the mapping is made between concepts, not between value sets, but the value set provides important context about how the concept mapping choices are made.
-	TargetCanonical FhirCanonical `json:"targetCanonical,omitempty"`
-	// group
-	// A group of mappings that all have the same source and target system.
-	Group []ConceptMapGroup `json:"group,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Url *FhirUri `json:"url,omitempty"`
+	Identifier *Identifier `json:"identifier,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Title *FhirString `json:"title,omitempty"`
+	Status *PublicationStatus `json:"status,omitempty"`
+	Experimental *FhirBoolean `json:"experimental,omitempty"`
+	Date *FhirDateTime `json:"date,omitempty"`
+	Publisher *FhirString `json:"publisher,omitempty"`
+	Contact []*ContactDetail `json:"contact,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	UseContext []*UsageContext `json:"usecontext,omitempty"`
+	Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+	Purpose *FhirMarkdown `json:"purpose,omitempty"`
+	Copyright *FhirMarkdown `json:"copyright,omitempty"`
+	SourceUri *FhirUri `json:"sourceuri,omitempty"`
+	SourceCanonical *FhirCanonical `json:"sourcecanonical,omitempty"`
+	TargetUri *FhirUri `json:"targeturi,omitempty"`
+	TargetCanonical *FhirCanonical `json:"targetcanonical,omitempty"`
+	Group []*ConceptMapGroup `json:"group,omitempty"`
 }
 
 // NewConceptMap creates a new ConceptMap instance
-func NewConceptMap(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	url FhirUri,
-	identifier Identifier,
-	version FhirString,
-	name FhirString,
-	title FhirString,
-	status PublicationStatus,
-	experimental FhirBoolean,
-	date FhirDateTime,
-	publisher FhirString,
-	contact []ContactDetail,
-	description FhirMarkdown,
-	useContext []UsageContext,
-	jurisdiction []CodeableConcept,
-	purpose FhirMarkdown,
-	copyright FhirMarkdown,
-	sourceUri FhirUri,
-	sourceCanonical FhirCanonical,
-	targetUri FhirUri,
-	targetCanonical FhirCanonical,
-	group []ConceptMapGroup,
-) *ConceptMap {
-	return &ConceptMap{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Url: url,
-		Identifier: identifier,
-		Version: version,
-		Name: name,
-		Title: title,
-		Status: status,
-		Experimental: experimental,
-		Date: date,
-		Publisher: publisher,
-		Contact: contact,
-		Description: description,
-		UseContext: useContext,
-		Jurisdiction: jurisdiction,
-		Purpose: purpose,
-		Copyright: copyright,
-		SourceUri: sourceUri,
-		SourceCanonical: sourceCanonical,
-		TargetUri: targetUri,
-		TargetCanonical: targetCanonical,
-		Group: group,
-	}
+func NewConceptMap() *ConceptMap {
+	return &ConceptMap{}
 }
+
 // FromJSON populates ConceptMap from JSON data
 func (m *ConceptMap) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -171,211 +54,96 @@ func (m *ConceptMap) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ConceptMap
-func (m *ConceptMap) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	url *FhirUri,
-	identifier *Identifier,
-	version *FhirString,
-	name *FhirString,
-	title *FhirString,
-	status *PublicationStatus,
-	experimental *FhirBoolean,
-	date *FhirDateTime,
-	publisher *FhirString,
-	contact *[]ContactDetail,
-	description *FhirMarkdown,
-	useContext *[]UsageContext,
-	jurisdiction *[]CodeableConcept,
-	purpose *FhirMarkdown,
-	copyright *FhirMarkdown,
-	sourceUri *FhirUri,
-	sourceCanonical *FhirCanonical,
-	targetUri *FhirUri,
-	targetCanonical *FhirCanonical,
-	group *[]ConceptMapGroup,
-) *ConceptMap {
+// Clone creates a deep copy of ConceptMap
+func (m *ConceptMap) Clone() *ConceptMap {
+	if m == nil { return nil }
 	return &ConceptMap{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Url: func() FhirUri {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		Identifier: func() Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Title: func() FhirString {
-			if title != nil { return *title }
-			return m.Title
-		}(),
-		Status: func() PublicationStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Experimental: func() FhirBoolean {
-			if experimental != nil { return *experimental }
-			return m.Experimental
-		}(),
-		Date: func() FhirDateTime {
-			if date != nil { return *date }
-			return m.Date
-		}(),
-		Publisher: func() FhirString {
-			if publisher != nil { return *publisher }
-			return m.Publisher
-		}(),
-		Contact: func() []ContactDetail {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		UseContext: func() []UsageContext {
-			if useContext != nil { return *useContext }
-			return m.UseContext
-		}(),
-		Jurisdiction: func() []CodeableConcept {
-			if jurisdiction != nil { return *jurisdiction }
-			return m.Jurisdiction
-		}(),
-		Purpose: func() FhirMarkdown {
-			if purpose != nil { return *purpose }
-			return m.Purpose
-		}(),
-		Copyright: func() FhirMarkdown {
-			if copyright != nil { return *copyright }
-			return m.Copyright
-		}(),
-		SourceUri: func() FhirUri {
-			if sourceUri != nil { return *sourceUri }
-			return m.SourceUri
-		}(),
-		SourceCanonical: func() FhirCanonical {
-			if sourceCanonical != nil { return *sourceCanonical }
-			return m.SourceCanonical
-		}(),
-		TargetUri: func() FhirUri {
-			if targetUri != nil { return *targetUri }
-			return m.TargetUri
-		}(),
-		TargetCanonical: func() FhirCanonical {
-			if targetCanonical != nil { return *targetCanonical }
-			return m.TargetCanonical
-		}(),
-		Group: func() []ConceptMapGroup {
-			if group != nil { return *group }
-			return m.Group
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Url: m.Url.Clone(),
+		Identifier: m.Identifier.Clone(),
+		Version: m.Version.Clone(),
+		Name: m.Name.Clone(),
+		Title: m.Title.Clone(),
+		Status: m.Status.Clone(),
+		Experimental: m.Experimental.Clone(),
+		Date: m.Date.Clone(),
+		Publisher: m.Publisher.Clone(),
+		Contact: cloneSlices(m.Contact),
+		Description: m.Description.Clone(),
+		UseContext: cloneSlices(m.UseContext),
+		Jurisdiction: cloneSlices(m.Jurisdiction),
+		Purpose: m.Purpose.Clone(),
+		Copyright: m.Copyright.Clone(),
+		SourceUri: m.SourceUri.Clone(),
+		SourceCanonical: m.SourceCanonical.Clone(),
+		TargetUri: m.TargetUri.Clone(),
+		TargetCanonical: m.TargetCanonical.Clone(),
+		Group: cloneSlices(m.Group),
 	}
 }
+
+// Equals checks for equality with another ConceptMap instance
+func (m *ConceptMap) Equals(other *ConceptMap) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !m.Identifier.Equals(other.Identifier) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Title.Equals(other.Title) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Experimental.Equals(other.Experimental) { return false }
+	if !m.Date.Equals(other.Date) { return false }
+	if !m.Publisher.Equals(other.Publisher) { return false }
+	if !compareSlices(m.Contact, other.Contact) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.UseContext, other.UseContext) { return false }
+	if !compareSlices(m.Jurisdiction, other.Jurisdiction) { return false }
+	if !m.Purpose.Equals(other.Purpose) { return false }
+	if !m.Copyright.Equals(other.Copyright) { return false }
+	if !m.SourceUri.Equals(other.SourceUri) { return false }
+	if !m.SourceCanonical.Equals(other.SourceCanonical) { return false }
+	if !m.TargetUri.Equals(other.TargetUri) { return false }
+	if !m.TargetCanonical.Equals(other.TargetCanonical) { return false }
+	if !compareSlices(m.Group, other.Group) { return false }
+	return true
+}
+
 // ConceptMapGroup
 // A group of mappings that all have the same source and target system.
 type ConceptMapGroup struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// source
-	// An absolute URI that identifies the source system where the concepts to be mapped are defined.
-	Source FhirUri `json:"source,omitempty"`
-	// sourceVersion
-	// The specific version of the code system, as determined by the code system authority.
-	SourceVersion FhirString `json:"sourceVersion,omitempty"`
-	// target
-	// An absolute URI that identifies the target system that the concepts will be mapped to.
-	Target FhirUri `json:"target,omitempty"`
-	// targetVersion
-	// The specific version of the code system, as determined by the code system authority.
-	TargetVersion FhirString `json:"targetVersion,omitempty"`
-	// element
-	// Mappings for an individual concept in the source to one or more concepts in the target.
-	Element []ConceptMapElement `json:"element,omitempty"`
-	// unmapped
-	// What to do when there is no mapping for the source concept. "Unmapped" does not include codes that are unmatched, and the unmapped element is ignored in a code is specified to have equivalence = unmatched.
-	Unmapped ConceptMapUnmapped `json:"unmapped,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Source *FhirUri `json:"source,omitempty"`
+	SourceVersion *FhirString `json:"sourceversion,omitempty"`
+	Target *FhirUri `json:"target,omitempty"`
+	TargetVersion *FhirString `json:"targetversion,omitempty"`
+	Element []*ConceptMapElement `json:"element,omitempty"`
+	Unmapped *ConceptMapUnmapped `json:"unmapped,omitempty"`
 }
 
 // NewConceptMapGroup creates a new ConceptMapGroup instance
-func NewConceptMapGroup(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	source FhirUri,
-	sourceVersion FhirString,
-	target FhirUri,
-	targetVersion FhirString,
-	element []ConceptMapElement,
-	unmapped ConceptMapUnmapped,
-) *ConceptMapGroup {
-	return &ConceptMapGroup{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Source: source,
-		SourceVersion: sourceVersion,
-		Target: target,
-		TargetVersion: targetVersion,
-		Element: element,
-		Unmapped: unmapped,
-	}
+func NewConceptMapGroup() *ConceptMapGroup {
+	return &ConceptMapGroup{}
 }
+
 // FromJSON populates ConceptMapGroup from JSON data
 func (m *ConceptMapGroup) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -386,101 +154,55 @@ func (m *ConceptMapGroup) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ConceptMapGroup
-func (m *ConceptMapGroup) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	source *FhirUri,
-	sourceVersion *FhirString,
-	target *FhirUri,
-	targetVersion *FhirString,
-	element *[]ConceptMapElement,
-	unmapped *ConceptMapUnmapped,
-) *ConceptMapGroup {
+// Clone creates a deep copy of ConceptMapGroup
+func (m *ConceptMapGroup) Clone() *ConceptMapGroup {
+	if m == nil { return nil }
 	return &ConceptMapGroup{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Source: func() FhirUri {
-			if source != nil { return *source }
-			return m.Source
-		}(),
-		SourceVersion: func() FhirString {
-			if sourceVersion != nil { return *sourceVersion }
-			return m.SourceVersion
-		}(),
-		Target: func() FhirUri {
-			if target != nil { return *target }
-			return m.Target
-		}(),
-		TargetVersion: func() FhirString {
-			if targetVersion != nil { return *targetVersion }
-			return m.TargetVersion
-		}(),
-		Element: func() []ConceptMapElement {
-			if element != nil { return *element }
-			return m.Element
-		}(),
-		Unmapped: func() ConceptMapUnmapped {
-			if unmapped != nil { return *unmapped }
-			return m.Unmapped
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Source: m.Source.Clone(),
+		SourceVersion: m.SourceVersion.Clone(),
+		Target: m.Target.Clone(),
+		TargetVersion: m.TargetVersion.Clone(),
+		Element: cloneSlices(m.Element),
+		Unmapped: m.Unmapped.Clone(),
 	}
 }
+
+// Equals checks for equality with another ConceptMapGroup instance
+func (m *ConceptMapGroup) Equals(other *ConceptMapGroup) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Source.Equals(other.Source) { return false }
+	if !m.SourceVersion.Equals(other.SourceVersion) { return false }
+	if !m.Target.Equals(other.Target) { return false }
+	if !m.TargetVersion.Equals(other.TargetVersion) { return false }
+	if !compareSlices(m.Element, other.Element) { return false }
+	if !m.Unmapped.Equals(other.Unmapped) { return false }
+	return true
+}
+
 // ConceptMapElement
 // Mappings for an individual concept in the source to one or more concepts in the target.
 type ConceptMapElement struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// Identity (code or path) or the element/item being mapped.
-	Code FhirCode `json:"code,omitempty"`
-	// display
-	// The display for the code. The display is only provided to help editors when editing the concept map.
-	Display FhirString `json:"display,omitempty"`
-	// target
-	// A concept from the target value set that this concept maps to.
-	Target []ConceptMapTarget `json:"target,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *FhirCode `json:"code,omitempty"`
+	Display *FhirString `json:"display,omitempty"`
+	Target []*ConceptMapTarget `json:"target,omitempty"`
 }
 
 // NewConceptMapElement creates a new ConceptMapElement instance
-func NewConceptMapElement(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code FhirCode,
-	display FhirString,
-	target []ConceptMapTarget,
-) *ConceptMapElement {
-	return &ConceptMapElement{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		Display: display,
-		Target: target,
-	}
+func NewConceptMapElement() *ConceptMapElement {
+	return &ConceptMapElement{}
 }
+
 // FromJSON populates ConceptMapElement from JSON data
 func (m *ConceptMapElement) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -491,101 +213,52 @@ func (m *ConceptMapElement) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ConceptMapElement
-func (m *ConceptMapElement) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *FhirCode,
-	display *FhirString,
-	target *[]ConceptMapTarget,
-) *ConceptMapElement {
+// Clone creates a deep copy of ConceptMapElement
+func (m *ConceptMapElement) Clone() *ConceptMapElement {
+	if m == nil { return nil }
 	return &ConceptMapElement{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() FhirCode {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Display: func() FhirString {
-			if display != nil { return *display }
-			return m.Display
-		}(),
-		Target: func() []ConceptMapTarget {
-			if target != nil { return *target }
-			return m.Target
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		Display: m.Display.Clone(),
+		Target: cloneSlices(m.Target),
 	}
 }
+
+// Equals checks for equality with another ConceptMapElement instance
+func (m *ConceptMapElement) Equals(other *ConceptMapElement) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Display.Equals(other.Display) { return false }
+	if !compareSlices(m.Target, other.Target) { return false }
+	return true
+}
+
 // ConceptMapTarget
 // A concept from the target value set that this concept maps to.
 type ConceptMapTarget struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// Identity (code or path) or the element/item that the map refers to.
-	Code FhirCode `json:"code,omitempty"`
-	// display
-	// The display for the code. The display is only provided to help editors when editing the concept map.
-	Display FhirString `json:"display,omitempty"`
-	// equivalence
-	// The equivalence between the source and target concepts (counting for the dependencies and products). The equivalence is read from target to source (e.g. the target is 'wider' than the source).
-	Equivalence ConceptMapEquivalence `json:"equivalence,omitempty"`
-	// comment
-	// A description of status/issues in mapping that conveys additional information not represented in  the structured data.
-	Comment FhirString `json:"comment,omitempty"`
-	// dependsOn
-	// A set of additional dependencies for this mapping to hold. This mapping is only applicable if the specified element can be resolved, and it has the specified value.
-	DependsOn []ConceptMapDependsOn `json:"dependsOn,omitempty"`
-	// product
-	// A set of additional outcomes from this mapping to other elements. To properly execute this mapping, the specified element must be mapped to some data element or source that is in context. The mapping may still be useful without a place for the additional data elements, but the equivalence cannot be relied on.
-	Product []ConceptMapDependsOn `json:"product,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *FhirCode `json:"code,omitempty"`
+	Display *FhirString `json:"display,omitempty"`
+	Equivalence *ConceptMapEquivalence `json:"equivalence,omitempty"`
+	Comment *FhirString `json:"comment,omitempty"`
+	DependsOn []*ConceptMapDependsOn `json:"dependson,omitempty"`
+	Product []*ConceptMapDependsOn `json:"product,omitempty"`
 }
 
 // NewConceptMapTarget creates a new ConceptMapTarget instance
-func NewConceptMapTarget(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code FhirCode,
-	display FhirString,
-	equivalence ConceptMapEquivalence,
-	comment FhirString,
-	dependsOn []ConceptMapDependsOn,
-	product []ConceptMapDependsOn,
-) *ConceptMapTarget {
-	return &ConceptMapTarget{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		Display: display,
-		Equivalence: equivalence,
-		Comment: comment,
-		DependsOn: dependsOn,
-		Product: product,
-	}
+func NewConceptMapTarget() *ConceptMapTarget {
+	return &ConceptMapTarget{}
 }
+
 // FromJSON populates ConceptMapTarget from JSON data
 func (m *ConceptMapTarget) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -596,106 +269,56 @@ func (m *ConceptMapTarget) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ConceptMapTarget
-func (m *ConceptMapTarget) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *FhirCode,
-	display *FhirString,
-	equivalence *ConceptMapEquivalence,
-	comment *FhirString,
-	dependsOn *[]ConceptMapDependsOn,
-	product *[]ConceptMapDependsOn,
-) *ConceptMapTarget {
+// Clone creates a deep copy of ConceptMapTarget
+func (m *ConceptMapTarget) Clone() *ConceptMapTarget {
+	if m == nil { return nil }
 	return &ConceptMapTarget{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() FhirCode {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Display: func() FhirString {
-			if display != nil { return *display }
-			return m.Display
-		}(),
-		Equivalence: func() ConceptMapEquivalence {
-			if equivalence != nil { return *equivalence }
-			return m.Equivalence
-		}(),
-		Comment: func() FhirString {
-			if comment != nil { return *comment }
-			return m.Comment
-		}(),
-		DependsOn: func() []ConceptMapDependsOn {
-			if dependsOn != nil { return *dependsOn }
-			return m.DependsOn
-		}(),
-		Product: func() []ConceptMapDependsOn {
-			if product != nil { return *product }
-			return m.Product
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		Display: m.Display.Clone(),
+		Equivalence: m.Equivalence.Clone(),
+		Comment: m.Comment.Clone(),
+		DependsOn: cloneSlices(m.DependsOn),
+		Product: cloneSlices(m.Product),
 	}
 }
+
+// Equals checks for equality with another ConceptMapTarget instance
+func (m *ConceptMapTarget) Equals(other *ConceptMapTarget) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Display.Equals(other.Display) { return false }
+	if !m.Equivalence.Equals(other.Equivalence) { return false }
+	if !m.Comment.Equals(other.Comment) { return false }
+	if !compareSlices(m.DependsOn, other.DependsOn) { return false }
+	if !compareSlices(m.Product, other.Product) { return false }
+	return true
+}
+
 // ConceptMapDependsOn
 // A set of additional dependencies for this mapping to hold. This mapping is only applicable if the specified element can be resolved, and it has the specified value.
 type ConceptMapDependsOn struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// property
-	// A reference to an element that holds a coded value that corresponds to a code system property. The idea is that the information model carries an element somewhere that is labeled to correspond with a code system property.
-	Property FhirUri `json:"property,omitempty"`
-	// system
-	// An absolute URI that identifies the code system of the dependency code (if the source/dependency is a value set that crosses code systems).
-	System FhirCanonical `json:"system,omitempty"`
-	// value
-	// Identity (code or path) or the element/item/ValueSet/text that the map depends on / refers to.
-	Value FhirString `json:"value,omitempty"`
-	// display
-	// The display for the code. The display is only provided to help editors when editing the concept map.
-	Display FhirString `json:"display,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Property *FhirUri `json:"property,omitempty"`
+	System *FhirCanonical `json:"system,omitempty"`
+	Value *FhirString `json:"value,omitempty"`
+	Display *FhirString `json:"display,omitempty"`
 }
 
 // NewConceptMapDependsOn creates a new ConceptMapDependsOn instance
-func NewConceptMapDependsOn(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	property FhirUri,
-	system FhirCanonical,
-	value FhirString,
-	display FhirString,
-) *ConceptMapDependsOn {
-	return &ConceptMapDependsOn{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Property: property,
-		System: system,
-		Value: value,
-		Display: display,
-	}
+func NewConceptMapDependsOn() *ConceptMapDependsOn {
+	return &ConceptMapDependsOn{}
 }
+
 // FromJSON populates ConceptMapDependsOn from JSON data
 func (m *ConceptMapDependsOn) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -706,96 +329,52 @@ func (m *ConceptMapDependsOn) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ConceptMapDependsOn
-func (m *ConceptMapDependsOn) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	property *FhirUri,
-	system *FhirCanonical,
-	value *FhirString,
-	display *FhirString,
-) *ConceptMapDependsOn {
+// Clone creates a deep copy of ConceptMapDependsOn
+func (m *ConceptMapDependsOn) Clone() *ConceptMapDependsOn {
+	if m == nil { return nil }
 	return &ConceptMapDependsOn{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Property: func() FhirUri {
-			if property != nil { return *property }
-			return m.Property
-		}(),
-		System: func() FhirCanonical {
-			if system != nil { return *system }
-			return m.System
-		}(),
-		Value: func() FhirString {
-			if value != nil { return *value }
-			return m.Value
-		}(),
-		Display: func() FhirString {
-			if display != nil { return *display }
-			return m.Display
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Property: m.Property.Clone(),
+		System: m.System.Clone(),
+		Value: m.Value.Clone(),
+		Display: m.Display.Clone(),
 	}
 }
+
+// Equals checks for equality with another ConceptMapDependsOn instance
+func (m *ConceptMapDependsOn) Equals(other *ConceptMapDependsOn) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Property.Equals(other.Property) { return false }
+	if !m.System.Equals(other.System) { return false }
+	if !m.Value.Equals(other.Value) { return false }
+	if !m.Display.Equals(other.Display) { return false }
+	return true
+}
+
 // ConceptMapUnmapped
 // What to do when there is no mapping for the source concept. "Unmapped" does not include codes that are unmatched, and the unmapped element is ignored in a code is specified to have equivalence = unmatched.
 type ConceptMapUnmapped struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// mode
-	// Defines which action to take if there is no match for the source concept in the target system designated for the group. One of 3 actions are possible: use the unmapped code (this is useful when doing a mapping between versions, and only a few codes have changed), use a fixed code (a default code), or alternatively, a reference to a different concept map can be provided (by canonical URL).
-	Mode ConceptMapGroupUnmappedMode `json:"mode,omitempty"`
-	// code
-	// The fixed code to use when the mode = 'fixed'  - all unmapped codes are mapped to a single fixed code.
-	Code FhirCode `json:"code,omitempty"`
-	// display
-	// The display for the code. The display is only provided to help editors when editing the concept map.
-	Display FhirString `json:"display,omitempty"`
-	// url
-	// The canonical reference to an additional ConceptMap resource instance to use for mapping if this ConceptMap resource contains no matching mapping for the source concept.
-	Url FhirCanonical `json:"url,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Mode *ConceptMapGroupUnmappedMode `json:"mode,omitempty"`
+	Code *FhirCode `json:"code,omitempty"`
+	Display *FhirString `json:"display,omitempty"`
+	Url *FhirCanonical `json:"url,omitempty"`
 }
 
 // NewConceptMapUnmapped creates a new ConceptMapUnmapped instance
-func NewConceptMapUnmapped(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	mode ConceptMapGroupUnmappedMode,
-	code FhirCode,
-	display FhirString,
-	url FhirCanonical,
-) *ConceptMapUnmapped {
-	return &ConceptMapUnmapped{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Mode: mode,
-		Code: code,
-		Display: display,
-		Url: url,
-	}
+func NewConceptMapUnmapped() *ConceptMapUnmapped {
+	return &ConceptMapUnmapped{}
 }
+
 // FromJSON populates ConceptMapUnmapped from JSON data
 func (m *ConceptMapUnmapped) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -806,44 +385,31 @@ func (m *ConceptMapUnmapped) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ConceptMapUnmapped
-func (m *ConceptMapUnmapped) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	mode *ConceptMapGroupUnmappedMode,
-	code *FhirCode,
-	display *FhirString,
-	url *FhirCanonical,
-) *ConceptMapUnmapped {
+// Clone creates a deep copy of ConceptMapUnmapped
+func (m *ConceptMapUnmapped) Clone() *ConceptMapUnmapped {
+	if m == nil { return nil }
 	return &ConceptMapUnmapped{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Mode: func() ConceptMapGroupUnmappedMode {
-			if mode != nil { return *mode }
-			return m.Mode
-		}(),
-		Code: func() FhirCode {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Display: func() FhirString {
-			if display != nil { return *display }
-			return m.Display
-		}(),
-		Url: func() FhirCanonical {
-			if url != nil { return *url }
-			return m.Url
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Mode: m.Mode.Clone(),
+		Code: m.Code.Clone(),
+		Display: m.Display.Clone(),
+		Url: m.Url.Clone(),
 	}
 }
+
+// Equals checks for equality with another ConceptMapUnmapped instance
+func (m *ConceptMapUnmapped) Equals(other *ConceptMapUnmapped) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Mode.Equals(other.Mode) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Display.Equals(other.Display) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	return true
+}
+

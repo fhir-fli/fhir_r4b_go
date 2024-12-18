@@ -3,109 +3,36 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // Dosage
 // Indicates how the medication is/was taken or should be taken by the patient.
 type Dosage struct {
 	BackboneType
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// sequence
-	// Indicates the order in which the dosage instructions should be applied or interpreted.
-	Sequence FhirInteger `json:"sequence,omitempty"`
-	// text
-	// Free text dosage instructions e.g. SIG.
-	Text FhirString `json:"text,omitempty"`
-	// additionalInstruction
-	// Supplemental instructions to the patient on how to take the medication  (e.g. "with meals" or"take half to one hour before food") or warnings for the patient about the medication (e.g. "may cause drowsiness" or "avoid exposure of skin to direct sunlight or sunlamps").
-	AdditionalInstruction []CodeableConcept `json:"additionalInstruction,omitempty"`
-	// patientInstruction
-	// Instructions in terms that are understood by the patient or consumer.
-	PatientInstruction FhirString `json:"patientInstruction,omitempty"`
-	// timing
-	// When medication should be administered.
-	Timing Timing `json:"timing,omitempty"`
-	// asNeededBoolean
-	// Indicates whether the Medication is only taken when needed within a specific dosing schedule (Boolean option), or it indicates the precondition for taking the Medication (CodeableConcept).
-	AsNeededBoolean FhirBoolean `json:"asNeededBoolean,omitempty"`
-	// asNeededCodeableConcept
-	// Indicates whether the Medication is only taken when needed within a specific dosing schedule (Boolean option), or it indicates the precondition for taking the Medication (CodeableConcept).
-	AsNeededCodeableConcept CodeableConcept `json:"asNeededCodeableConcept,omitempty"`
-	// site
-	// Body site to administer to.
-	Site CodeableConcept `json:"site,omitempty"`
-	// route
-	// How drug should enter body.
-	Route CodeableConcept `json:"route,omitempty"`
-	// method
-	// Technique for administering medication.
-	Method CodeableConcept `json:"method,omitempty"`
-	// doseAndRate
-	// The amount of medication administered.
-	DoseAndRate []DosageDoseAndRate `json:"doseAndRate,omitempty"`
-	// maxDosePerPeriod
-	// Upper limit on medication per unit of time.
-	MaxDosePerPeriod Ratio `json:"maxDosePerPeriod,omitempty"`
-	// maxDosePerAdministration
-	// Upper limit on medication per administration.
-	MaxDosePerAdministration Quantity `json:"maxDosePerAdministration,omitempty"`
-	// maxDosePerLifetime
-	// Upper limit on medication per lifetime of the patient.
-	MaxDosePerLifetime Quantity `json:"maxDosePerLifetime,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Sequence *FhirInteger `json:"sequence,omitempty"`
+	Text *FhirString `json:"text,omitempty"`
+	AdditionalInstruction []*CodeableConcept `json:"additionalinstruction,omitempty"`
+	PatientInstruction *FhirString `json:"patientinstruction,omitempty"`
+	Timing *Timing `json:"timing,omitempty"`
+	AsNeededBoolean *FhirBoolean `json:"asneededboolean,omitempty"`
+	AsNeededCodeableConcept *CodeableConcept `json:"asneededcodeableconcept,omitempty"`
+	Site *CodeableConcept `json:"site,omitempty"`
+	Route *CodeableConcept `json:"route,omitempty"`
+	Method *CodeableConcept `json:"method,omitempty"`
+	DoseAndRate []*DosageDoseAndRate `json:"doseandrate,omitempty"`
+	MaxDosePerPeriod *Ratio `json:"maxdoseperperiod,omitempty"`
+	MaxDosePerAdministration *Quantity `json:"maxdoseperadministration,omitempty"`
+	MaxDosePerLifetime *Quantity `json:"maxdoseperlifetime,omitempty"`
 }
 
 // NewDosage creates a new Dosage instance
-func NewDosage(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	sequence FhirInteger,
-	text FhirString,
-	additionalInstruction []CodeableConcept,
-	patientInstruction FhirString,
-	timing Timing,
-	asNeededBoolean FhirBoolean,
-	asNeededCodeableConcept CodeableConcept,
-	site CodeableConcept,
-	route CodeableConcept,
-	method CodeableConcept,
-	doseAndRate []DosageDoseAndRate,
-	maxDosePerPeriod Ratio,
-	maxDosePerAdministration Quantity,
-	maxDosePerLifetime Quantity,
-) *Dosage {
-	return &Dosage{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Sequence: sequence,
-		Text: text,
-		AdditionalInstruction: additionalInstruction,
-		PatientInstruction: patientInstruction,
-		Timing: timing,
-		AsNeededBoolean: asNeededBoolean,
-		AsNeededCodeableConcept: asNeededCodeableConcept,
-		Site: site,
-		Route: route,
-		Method: method,
-		DoseAndRate: doseAndRate,
-		MaxDosePerPeriod: maxDosePerPeriod,
-		MaxDosePerAdministration: maxDosePerAdministration,
-		MaxDosePerLifetime: maxDosePerLifetime,
-	}
+func NewDosage() *Dosage {
+	return &Dosage{}
 }
+
 // FromJSON populates Dosage from JSON data
 func (m *Dosage) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -116,149 +43,73 @@ func (m *Dosage) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of Dosage
-func (m *Dosage) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	sequence *FhirInteger,
-	text *FhirString,
-	additionalInstruction *[]CodeableConcept,
-	patientInstruction *FhirString,
-	timing *Timing,
-	asNeededBoolean *FhirBoolean,
-	asNeededCodeableConcept *CodeableConcept,
-	site *CodeableConcept,
-	route *CodeableConcept,
-	method *CodeableConcept,
-	doseAndRate *[]DosageDoseAndRate,
-	maxDosePerPeriod *Ratio,
-	maxDosePerAdministration *Quantity,
-	maxDosePerLifetime *Quantity,
-) *Dosage {
+// Clone creates a deep copy of Dosage
+func (m *Dosage) Clone() *Dosage {
+	if m == nil { return nil }
 	return &Dosage{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Sequence: func() FhirInteger {
-			if sequence != nil { return *sequence }
-			return m.Sequence
-		}(),
-		Text: func() FhirString {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		AdditionalInstruction: func() []CodeableConcept {
-			if additionalInstruction != nil { return *additionalInstruction }
-			return m.AdditionalInstruction
-		}(),
-		PatientInstruction: func() FhirString {
-			if patientInstruction != nil { return *patientInstruction }
-			return m.PatientInstruction
-		}(),
-		Timing: func() Timing {
-			if timing != nil { return *timing }
-			return m.Timing
-		}(),
-		AsNeededBoolean: func() FhirBoolean {
-			if asNeededBoolean != nil { return *asNeededBoolean }
-			return m.AsNeededBoolean
-		}(),
-		AsNeededCodeableConcept: func() CodeableConcept {
-			if asNeededCodeableConcept != nil { return *asNeededCodeableConcept }
-			return m.AsNeededCodeableConcept
-		}(),
-		Site: func() CodeableConcept {
-			if site != nil { return *site }
-			return m.Site
-		}(),
-		Route: func() CodeableConcept {
-			if route != nil { return *route }
-			return m.Route
-		}(),
-		Method: func() CodeableConcept {
-			if method != nil { return *method }
-			return m.Method
-		}(),
-		DoseAndRate: func() []DosageDoseAndRate {
-			if doseAndRate != nil { return *doseAndRate }
-			return m.DoseAndRate
-		}(),
-		MaxDosePerPeriod: func() Ratio {
-			if maxDosePerPeriod != nil { return *maxDosePerPeriod }
-			return m.MaxDosePerPeriod
-		}(),
-		MaxDosePerAdministration: func() Quantity {
-			if maxDosePerAdministration != nil { return *maxDosePerAdministration }
-			return m.MaxDosePerAdministration
-		}(),
-		MaxDosePerLifetime: func() Quantity {
-			if maxDosePerLifetime != nil { return *maxDosePerLifetime }
-			return m.MaxDosePerLifetime
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Sequence: m.Sequence.Clone(),
+		Text: m.Text.Clone(),
+		AdditionalInstruction: cloneSlices(m.AdditionalInstruction),
+		PatientInstruction: m.PatientInstruction.Clone(),
+		Timing: m.Timing.Clone(),
+		AsNeededBoolean: m.AsNeededBoolean.Clone(),
+		AsNeededCodeableConcept: m.AsNeededCodeableConcept.Clone(),
+		Site: m.Site.Clone(),
+		Route: m.Route.Clone(),
+		Method: m.Method.Clone(),
+		DoseAndRate: cloneSlices(m.DoseAndRate),
+		MaxDosePerPeriod: m.MaxDosePerPeriod.Clone(),
+		MaxDosePerAdministration: m.MaxDosePerAdministration.Clone(),
+		MaxDosePerLifetime: m.MaxDosePerLifetime.Clone(),
 	}
 }
+
+// Equals checks for equality with another Dosage instance
+func (m *Dosage) Equals(other *Dosage) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Sequence.Equals(other.Sequence) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.AdditionalInstruction, other.AdditionalInstruction) { return false }
+	if !m.PatientInstruction.Equals(other.PatientInstruction) { return false }
+	if !m.Timing.Equals(other.Timing) { return false }
+	if !m.AsNeededBoolean.Equals(other.AsNeededBoolean) { return false }
+	if !m.AsNeededCodeableConcept.Equals(other.AsNeededCodeableConcept) { return false }
+	if !m.Site.Equals(other.Site) { return false }
+	if !m.Route.Equals(other.Route) { return false }
+	if !m.Method.Equals(other.Method) { return false }
+	if !compareSlices(m.DoseAndRate, other.DoseAndRate) { return false }
+	if !m.MaxDosePerPeriod.Equals(other.MaxDosePerPeriod) { return false }
+	if !m.MaxDosePerAdministration.Equals(other.MaxDosePerAdministration) { return false }
+	if !m.MaxDosePerLifetime.Equals(other.MaxDosePerLifetime) { return false }
+	return true
+}
+
 // DosageDoseAndRate
 // The amount of medication administered.
 type DosageDoseAndRate struct {
 	Element
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// type
-	// The kind of dose or rate specified, for example, ordered or calculated.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// doseRange
-	// Amount of medication per dose.
-	DoseRange Range `json:"doseRange,omitempty"`
-	// doseQuantity
-	// Amount of medication per dose.
-	DoseQuantity Quantity `json:"doseQuantity,omitempty"`
-	// rateRatio
-	// Amount of medication per unit of time.
-	RateRatio Ratio `json:"rateRatio,omitempty"`
-	// rateRange
-	// Amount of medication per unit of time.
-	RateRange Range `json:"rateRange,omitempty"`
-	// rateQuantity
-	// Amount of medication per unit of time.
-	RateQuantity Quantity `json:"rateQuantity,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	DoseRange *Range `json:"doserange,omitempty"`
+	DoseQuantity *Quantity `json:"dosequantity,omitempty"`
+	RateRatio *Ratio `json:"rateratio,omitempty"`
+	RateRange *Range `json:"raterange,omitempty"`
+	RateQuantity *Quantity `json:"ratequantity,omitempty"`
 }
 
 // NewDosageDoseAndRate creates a new DosageDoseAndRate instance
-func NewDosageDoseAndRate(
-	id FhirString,
-	extension_ []FhirExtension,
-	type_ CodeableConcept,
-	doseRange Range,
-	doseQuantity Quantity,
-	rateRatio Ratio,
-	rateRange Range,
-	rateQuantity Quantity,
-) *DosageDoseAndRate {
-	return &DosageDoseAndRate{
-		Id: id,
-		Extension_: extension_,
-		Type_: type_,
-		DoseRange: doseRange,
-		DoseQuantity: doseQuantity,
-		RateRatio: rateRatio,
-		RateRange: rateRange,
-		RateQuantity: rateQuantity,
-	}
+func NewDosageDoseAndRate() *DosageDoseAndRate {
+	return &DosageDoseAndRate{}
 }
+
 // FromJSON populates DosageDoseAndRate from JSON data
 func (m *DosageDoseAndRate) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -269,49 +120,33 @@ func (m *DosageDoseAndRate) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of DosageDoseAndRate
-func (m *DosageDoseAndRate) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	type_ *CodeableConcept,
-	doseRange *Range,
-	doseQuantity *Quantity,
-	rateRatio *Ratio,
-	rateRange *Range,
-	rateQuantity *Quantity,
-) *DosageDoseAndRate {
+// Clone creates a deep copy of DosageDoseAndRate
+func (m *DosageDoseAndRate) Clone() *DosageDoseAndRate {
+	if m == nil { return nil }
 	return &DosageDoseAndRate{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		DoseRange: func() Range {
-			if doseRange != nil { return *doseRange }
-			return m.DoseRange
-		}(),
-		DoseQuantity: func() Quantity {
-			if doseQuantity != nil { return *doseQuantity }
-			return m.DoseQuantity
-		}(),
-		RateRatio: func() Ratio {
-			if rateRatio != nil { return *rateRatio }
-			return m.RateRatio
-		}(),
-		RateRange: func() Range {
-			if rateRange != nil { return *rateRange }
-			return m.RateRange
-		}(),
-		RateQuantity: func() Quantity {
-			if rateQuantity != nil { return *rateQuantity }
-			return m.RateQuantity
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		Type: m.Type.Clone(),
+		DoseRange: m.DoseRange.Clone(),
+		DoseQuantity: m.DoseQuantity.Clone(),
+		RateRatio: m.RateRatio.Clone(),
+		RateRange: m.RateRange.Clone(),
+		RateQuantity: m.RateQuantity.Clone(),
 	}
 }
+
+// Equals checks for equality with another DosageDoseAndRate instance
+func (m *DosageDoseAndRate) Equals(other *DosageDoseAndRate) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.DoseRange.Equals(other.DoseRange) { return false }
+	if !m.DoseQuantity.Equals(other.DoseQuantity) { return false }
+	if !m.RateRatio.Equals(other.RateRatio) { return false }
+	if !m.RateRange.Equals(other.RateRange) { return false }
+	if !m.RateQuantity.Equals(other.RateQuantity) { return false }
+	return true
+}
+

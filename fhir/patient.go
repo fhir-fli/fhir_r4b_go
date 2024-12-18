@@ -3,159 +3,45 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // Patient
 // Demographics and other administrative information about an individual or animal receiving care or other health-related services.
 type Patient struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// An identifier for this patient.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// active
-	// Whether this patient record is in active use. 
-// Many systems use this property to mark as non-current patients, such as those that have not been seen for a period of time based on an organization's business rules.
-// 
-// It is often used to filter patient lists to exclude inactive patients
-// 
-// Deceased patients may also be marked as inactive for the same reasons, but may be active for some time after death.
-	Active FhirBoolean `json:"active,omitempty"`
-	// name
-	// A name associated with the individual.
-	Name []HumanName `json:"name,omitempty"`
-	// telecom
-	// A contact detail (e.g. a telephone number or an email address) by which the individual may be contacted.
-	Telecom []ContactPoint `json:"telecom,omitempty"`
-	// gender
-	// Administrative Gender - the gender that the patient is considered to have for administration and record keeping purposes.
-	Gender AdministrativeGender `json:"gender,omitempty"`
-	// birthDate
-	// The date of birth for the individual.
-	BirthDate FhirDate `json:"birthDate,omitempty"`
-	// deceasedBoolean
-	// Indicates if the individual is deceased or not.
-	DeceasedBoolean FhirBoolean `json:"deceasedBoolean,omitempty"`
-	// deceasedDateTime
-	// Indicates if the individual is deceased or not.
-	DeceasedDateTime FhirDateTime `json:"deceasedDateTime,omitempty"`
-	// address
-	// An address for the individual.
-	Address []Address `json:"address,omitempty"`
-	// maritalStatus
-	// This field contains a patient's most recent marital (civil) status.
-	MaritalStatus CodeableConcept `json:"maritalStatus,omitempty"`
-	// multipleBirthBoolean
-	// Indicates whether the patient is part of a multiple (boolean) or indicates the actual birth order (integer).
-	MultipleBirthBoolean FhirBoolean `json:"multipleBirthBoolean,omitempty"`
-	// multipleBirthInteger
-	// Indicates whether the patient is part of a multiple (boolean) or indicates the actual birth order (integer).
-	MultipleBirthInteger FhirInteger `json:"multipleBirthInteger,omitempty"`
-	// photo
-	// Image of the patient.
-	Photo []Attachment `json:"photo,omitempty"`
-	// contact
-	// A contact party (e.g. guardian, partner, friend) for the patient.
-	Contact []PatientContact `json:"contact,omitempty"`
-	// communication
-	// A language which may be used to communicate with the patient about his or her health.
-	Communication []PatientCommunication `json:"communication,omitempty"`
-	// generalPractitioner
-	// Patient's nominated care provider.
-	GeneralPractitioner []Reference `json:"generalPractitioner,omitempty"`
-	// managingOrganization
-	// Organization that is the custodian of the patient record.
-	ManagingOrganization Reference `json:"managingOrganization,omitempty"`
-	// link
-	// Link to another patient resource that concerns the same actual patient.
-	Link []PatientLink `json:"link,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Active *FhirBoolean `json:"active,omitempty"`
+	Name []*HumanName `json:"name,omitempty"`
+	Telecom []*ContactPoint `json:"telecom,omitempty"`
+	Gender *AdministrativeGender `json:"gender,omitempty"`
+	BirthDate *FhirDate `json:"birthdate,omitempty"`
+	DeceasedBoolean *FhirBoolean `json:"deceasedboolean,omitempty"`
+	DeceasedDateTime *FhirDateTime `json:"deceaseddatetime,omitempty"`
+	Address []*Address `json:"address,omitempty"`
+	MaritalStatus *CodeableConcept `json:"maritalstatus,omitempty"`
+	MultipleBirthBoolean *FhirBoolean `json:"multiplebirthboolean,omitempty"`
+	MultipleBirthInteger *FhirInteger `json:"multiplebirthinteger,omitempty"`
+	Photo []*Attachment `json:"photo,omitempty"`
+	Contact []*PatientContact `json:"contact,omitempty"`
+	Communication []*PatientCommunication `json:"communication,omitempty"`
+	GeneralPractitioner []*Reference `json:"generalpractitioner,omitempty"`
+	ManagingOrganization *Reference `json:"managingorganization,omitempty"`
+	Link []*PatientLink `json:"link,omitempty"`
 }
 
 // NewPatient creates a new Patient instance
-func NewPatient(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	active FhirBoolean,
-	name []HumanName,
-	telecom []ContactPoint,
-	gender AdministrativeGender,
-	birthDate FhirDate,
-	deceasedBoolean FhirBoolean,
-	deceasedDateTime FhirDateTime,
-	address []Address,
-	maritalStatus CodeableConcept,
-	multipleBirthBoolean FhirBoolean,
-	multipleBirthInteger FhirInteger,
-	photo []Attachment,
-	contact []PatientContact,
-	communication []PatientCommunication,
-	generalPractitioner []Reference,
-	managingOrganization Reference,
-	link []PatientLink,
-) *Patient {
-	return &Patient{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Active: active,
-		Name: name,
-		Telecom: telecom,
-		Gender: gender,
-		BirthDate: birthDate,
-		DeceasedBoolean: deceasedBoolean,
-		DeceasedDateTime: deceasedDateTime,
-		Address: address,
-		MaritalStatus: maritalStatus,
-		MultipleBirthBoolean: multipleBirthBoolean,
-		MultipleBirthInteger: multipleBirthInteger,
-		Photo: photo,
-		Contact: contact,
-		Communication: communication,
-		GeneralPractitioner: generalPractitioner,
-		ManagingOrganization: managingOrganization,
-		Link: link,
-	}
+func NewPatient() *Patient {
+	return &Patient{}
 }
+
 // FromJSON populates Patient from JSON data
 func (m *Patient) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -166,206 +52,93 @@ func (m *Patient) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of Patient
-func (m *Patient) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	active *FhirBoolean,
-	name *[]HumanName,
-	telecom *[]ContactPoint,
-	gender *AdministrativeGender,
-	birthDate *FhirDate,
-	deceasedBoolean *FhirBoolean,
-	deceasedDateTime *FhirDateTime,
-	address *[]Address,
-	maritalStatus *CodeableConcept,
-	multipleBirthBoolean *FhirBoolean,
-	multipleBirthInteger *FhirInteger,
-	photo *[]Attachment,
-	contact *[]PatientContact,
-	communication *[]PatientCommunication,
-	generalPractitioner *[]Reference,
-	managingOrganization *Reference,
-	link *[]PatientLink,
-) *Patient {
+// Clone creates a deep copy of Patient
+func (m *Patient) Clone() *Patient {
+	if m == nil { return nil }
 	return &Patient{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Active: func() FhirBoolean {
-			if active != nil { return *active }
-			return m.Active
-		}(),
-		Name: func() []HumanName {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Telecom: func() []ContactPoint {
-			if telecom != nil { return *telecom }
-			return m.Telecom
-		}(),
-		Gender: func() AdministrativeGender {
-			if gender != nil { return *gender }
-			return m.Gender
-		}(),
-		BirthDate: func() FhirDate {
-			if birthDate != nil { return *birthDate }
-			return m.BirthDate
-		}(),
-		DeceasedBoolean: func() FhirBoolean {
-			if deceasedBoolean != nil { return *deceasedBoolean }
-			return m.DeceasedBoolean
-		}(),
-		DeceasedDateTime: func() FhirDateTime {
-			if deceasedDateTime != nil { return *deceasedDateTime }
-			return m.DeceasedDateTime
-		}(),
-		Address: func() []Address {
-			if address != nil { return *address }
-			return m.Address
-		}(),
-		MaritalStatus: func() CodeableConcept {
-			if maritalStatus != nil { return *maritalStatus }
-			return m.MaritalStatus
-		}(),
-		MultipleBirthBoolean: func() FhirBoolean {
-			if multipleBirthBoolean != nil { return *multipleBirthBoolean }
-			return m.MultipleBirthBoolean
-		}(),
-		MultipleBirthInteger: func() FhirInteger {
-			if multipleBirthInteger != nil { return *multipleBirthInteger }
-			return m.MultipleBirthInteger
-		}(),
-		Photo: func() []Attachment {
-			if photo != nil { return *photo }
-			return m.Photo
-		}(),
-		Contact: func() []PatientContact {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
-		Communication: func() []PatientCommunication {
-			if communication != nil { return *communication }
-			return m.Communication
-		}(),
-		GeneralPractitioner: func() []Reference {
-			if generalPractitioner != nil { return *generalPractitioner }
-			return m.GeneralPractitioner
-		}(),
-		ManagingOrganization: func() Reference {
-			if managingOrganization != nil { return *managingOrganization }
-			return m.ManagingOrganization
-		}(),
-		Link: func() []PatientLink {
-			if link != nil { return *link }
-			return m.Link
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		Active: m.Active.Clone(),
+		Name: cloneSlices(m.Name),
+		Telecom: cloneSlices(m.Telecom),
+		Gender: m.Gender.Clone(),
+		BirthDate: m.BirthDate.Clone(),
+		DeceasedBoolean: m.DeceasedBoolean.Clone(),
+		DeceasedDateTime: m.DeceasedDateTime.Clone(),
+		Address: cloneSlices(m.Address),
+		MaritalStatus: m.MaritalStatus.Clone(),
+		MultipleBirthBoolean: m.MultipleBirthBoolean.Clone(),
+		MultipleBirthInteger: m.MultipleBirthInteger.Clone(),
+		Photo: cloneSlices(m.Photo),
+		Contact: cloneSlices(m.Contact),
+		Communication: cloneSlices(m.Communication),
+		GeneralPractitioner: cloneSlices(m.GeneralPractitioner),
+		ManagingOrganization: m.ManagingOrganization.Clone(),
+		Link: cloneSlices(m.Link),
 	}
 }
+
+// Equals checks for equality with another Patient instance
+func (m *Patient) Equals(other *Patient) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Active.Equals(other.Active) { return false }
+	if !compareSlices(m.Name, other.Name) { return false }
+	if !compareSlices(m.Telecom, other.Telecom) { return false }
+	if !m.Gender.Equals(other.Gender) { return false }
+	if !m.BirthDate.Equals(other.BirthDate) { return false }
+	if !m.DeceasedBoolean.Equals(other.DeceasedBoolean) { return false }
+	if !m.DeceasedDateTime.Equals(other.DeceasedDateTime) { return false }
+	if !compareSlices(m.Address, other.Address) { return false }
+	if !m.MaritalStatus.Equals(other.MaritalStatus) { return false }
+	if !m.MultipleBirthBoolean.Equals(other.MultipleBirthBoolean) { return false }
+	if !m.MultipleBirthInteger.Equals(other.MultipleBirthInteger) { return false }
+	if !compareSlices(m.Photo, other.Photo) { return false }
+	if !compareSlices(m.Contact, other.Contact) { return false }
+	if !compareSlices(m.Communication, other.Communication) { return false }
+	if !compareSlices(m.GeneralPractitioner, other.GeneralPractitioner) { return false }
+	if !m.ManagingOrganization.Equals(other.ManagingOrganization) { return false }
+	if !compareSlices(m.Link, other.Link) { return false }
+	return true
+}
+
 // PatientContact
 // A contact party (e.g. guardian, partner, friend) for the patient.
 type PatientContact struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// relationship
-	// The nature of the relationship between the patient and the contact person.
-	Relationship []CodeableConcept `json:"relationship,omitempty"`
-	// name
-	// A name associated with the contact person.
-	Name HumanName `json:"name,omitempty"`
-	// telecom
-	// A contact detail for the person, e.g. a telephone number or an email address.
-	Telecom []ContactPoint `json:"telecom,omitempty"`
-	// address
-	// Address for the contact person.
-	Address Address `json:"address,omitempty"`
-	// gender
-	// Administrative Gender - the gender that the contact person is considered to have for administration and record keeping purposes.
-	Gender AdministrativeGender `json:"gender,omitempty"`
-	// organization
-	// Organization on behalf of which the contact is acting or for which the contact is working.
-	Organization Reference `json:"organization,omitempty"`
-	// period
-	// The period during which this contact person or organization is valid to be contacted relating to this patient.
-	Period Period `json:"period,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Relationship []*CodeableConcept `json:"relationship,omitempty"`
+	Name *HumanName `json:"name,omitempty"`
+	Telecom []*ContactPoint `json:"telecom,omitempty"`
+	Address *Address `json:"address,omitempty"`
+	Gender *AdministrativeGender `json:"gender,omitempty"`
+	Organization *Reference `json:"organization,omitempty"`
+	Period *Period `json:"period,omitempty"`
 }
 
 // NewPatientContact creates a new PatientContact instance
-func NewPatientContact(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	relationship []CodeableConcept,
-	name HumanName,
-	telecom []ContactPoint,
-	address Address,
-	gender AdministrativeGender,
-	organization Reference,
-	period Period,
-) *PatientContact {
-	return &PatientContact{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Relationship: relationship,
-		Name: name,
-		Telecom: telecom,
-		Address: address,
-		Gender: gender,
-		Organization: organization,
-		Period: period,
-	}
+func NewPatientContact() *PatientContact {
+	return &PatientContact{}
 }
+
 // FromJSON populates PatientContact from JSON data
 func (m *PatientContact) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -376,101 +149,56 @@ func (m *PatientContact) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of PatientContact
-func (m *PatientContact) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	relationship *[]CodeableConcept,
-	name *HumanName,
-	telecom *[]ContactPoint,
-	address *Address,
-	gender *AdministrativeGender,
-	organization *Reference,
-	period *Period,
-) *PatientContact {
+// Clone creates a deep copy of PatientContact
+func (m *PatientContact) Clone() *PatientContact {
+	if m == nil { return nil }
 	return &PatientContact{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Relationship: func() []CodeableConcept {
-			if relationship != nil { return *relationship }
-			return m.Relationship
-		}(),
-		Name: func() HumanName {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Telecom: func() []ContactPoint {
-			if telecom != nil { return *telecom }
-			return m.Telecom
-		}(),
-		Address: func() Address {
-			if address != nil { return *address }
-			return m.Address
-		}(),
-		Gender: func() AdministrativeGender {
-			if gender != nil { return *gender }
-			return m.Gender
-		}(),
-		Organization: func() Reference {
-			if organization != nil { return *organization }
-			return m.Organization
-		}(),
-		Period: func() Period {
-			if period != nil { return *period }
-			return m.Period
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Relationship: cloneSlices(m.Relationship),
+		Name: m.Name.Clone(),
+		Telecom: cloneSlices(m.Telecom),
+		Address: m.Address.Clone(),
+		Gender: m.Gender.Clone(),
+		Organization: m.Organization.Clone(),
+		Period: m.Period.Clone(),
 	}
 }
+
+// Equals checks for equality with another PatientContact instance
+func (m *PatientContact) Equals(other *PatientContact) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Relationship, other.Relationship) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !compareSlices(m.Telecom, other.Telecom) { return false }
+	if !m.Address.Equals(other.Address) { return false }
+	if !m.Gender.Equals(other.Gender) { return false }
+	if !m.Organization.Equals(other.Organization) { return false }
+	if !m.Period.Equals(other.Period) { return false }
+	return true
+}
+
 // PatientCommunication
 // A language which may be used to communicate with the patient about his or her health.
 type PatientCommunication struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// language
-	// The ISO-639-1 alpha 2 code in lower case for the language, optionally followed by a hyphen and the ISO-3166-1 alpha 2 code for the region in upper case; e.g. "en" for English, or "en-US" for American English versus "en-EN" for England English.
-	Language CodeableConcept `json:"language,omitempty"`
-	// preferred
-	// Indicates whether or not the patient prefers this language (over other languages he masters up a certain level).
-	Preferred FhirBoolean `json:"preferred,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Language *CodeableConcept `json:"language,omitempty"`
+	Preferred *FhirBoolean `json:"preferred,omitempty"`
 }
 
 // NewPatientCommunication creates a new PatientCommunication instance
-func NewPatientCommunication(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	language CodeableConcept,
-	preferred FhirBoolean,
-) *PatientCommunication {
-	return &PatientCommunication{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Language: language,
-		Preferred: preferred,
-	}
+func NewPatientCommunication() *PatientCommunication {
+	return &PatientCommunication{}
 }
+
 // FromJSON populates PatientCommunication from JSON data
 func (m *PatientCommunication) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -481,76 +209,46 @@ func (m *PatientCommunication) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of PatientCommunication
-func (m *PatientCommunication) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	language *CodeableConcept,
-	preferred *FhirBoolean,
-) *PatientCommunication {
+// Clone creates a deep copy of PatientCommunication
+func (m *PatientCommunication) Clone() *PatientCommunication {
+	if m == nil { return nil }
 	return &PatientCommunication{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Language: func() CodeableConcept {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Preferred: func() FhirBoolean {
-			if preferred != nil { return *preferred }
-			return m.Preferred
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Language: m.Language.Clone(),
+		Preferred: m.Preferred.Clone(),
 	}
 }
+
+// Equals checks for equality with another PatientCommunication instance
+func (m *PatientCommunication) Equals(other *PatientCommunication) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Preferred.Equals(other.Preferred) { return false }
+	return true
+}
+
 // PatientLink
 // Link to another patient resource that concerns the same actual patient.
 type PatientLink struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// other
-	// The other patient resource that the link refers to.
-	Other Reference `json:"other,omitempty"`
-	// type
-	// The type of link between this patient resource and another patient resource.
-	Type_ LinkType `json:"type,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Other *Reference `json:"other,omitempty"`
+	Type *LinkType `json:"type,omitempty"`
 }
 
 // NewPatientLink creates a new PatientLink instance
-func NewPatientLink(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	other Reference,
-	type_ LinkType,
-) *PatientLink {
-	return &PatientLink{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Other: other,
-		Type_: type_,
-	}
+func NewPatientLink() *PatientLink {
+	return &PatientLink{}
 }
+
 // FromJSON populates PatientLink from JSON data
 func (m *PatientLink) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -561,34 +259,27 @@ func (m *PatientLink) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of PatientLink
-func (m *PatientLink) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	other *Reference,
-	type_ *LinkType,
-) *PatientLink {
+// Clone creates a deep copy of PatientLink
+func (m *PatientLink) Clone() *PatientLink {
+	if m == nil { return nil }
 	return &PatientLink{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Other: func() Reference {
-			if other != nil { return *other }
-			return m.Other
-		}(),
-		Type_: func() LinkType {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Other: m.Other.Clone(),
+		Type: m.Type.Clone(),
 	}
 }
+
+// Equals checks for equality with another PatientLink instance
+func (m *PatientLink) Equals(other *PatientLink) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Other.Equals(other.Other) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	return true
+}
+

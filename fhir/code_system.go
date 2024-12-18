@@ -3,194 +3,53 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // CodeSystem
 // The CodeSystem resource is used to declare the existence of and describe a code system or code system supplement and its key properties, and optionally define a part or all of its content.
 type CodeSystem struct {
 	CanonicalResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// url
-	// An absolute URI that is used to identify this code system when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this code system is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the code system is stored on different servers. This is used in [Coding](datatypes.html#Coding).system.
-	Url FhirUri `json:"url,omitempty"`
-	// identifier
-	// A formal identifier that is used to identify this code system when it is represented in other formats, or referenced in a specification, model, design or an instance.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// version
-	// The identifier that is used to identify this version of the code system when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the code system author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence. This is used in [Coding](datatypes.html#Coding).version.
-	Version FhirString `json:"version,omitempty"`
-	// name
-	// A natural language name identifying the code system. This name should be usable as an identifier for the module by machine processing applications such as code generation.
-	Name FhirString `json:"name,omitempty"`
-	// title
-	// A short, descriptive, user-friendly title for the code system.
-	Title FhirString `json:"title,omitempty"`
-	// status
-	// The date (and optionally time) when the code system resource was created or revised.
-	Status PublicationStatus `json:"status,omitempty"`
-	// experimental
-	// A Boolean value to indicate that this code system is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.
-	Experimental FhirBoolean `json:"experimental,omitempty"`
-	// date
-	// The date  (and optionally time) when the code system was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the code system changes.
-	Date FhirDateTime `json:"date,omitempty"`
-	// publisher
-	// The name of the organization or individual that published the code system.
-	Publisher FhirString `json:"publisher,omitempty"`
-	// contact
-	// Contact details to assist a user in finding and communicating with the publisher.
-	Contact []ContactDetail `json:"contact,omitempty"`
-	// description
-	// A free text natural language description of the code system from a consumer's perspective.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// useContext
-	// The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate code system instances.
-	UseContext []UsageContext `json:"useContext,omitempty"`
-	// jurisdiction
-	// A legal or geographic region in which the code system is intended to be used.
-	Jurisdiction []CodeableConcept `json:"jurisdiction,omitempty"`
-	// purpose
-	// Explanation of why this code system is needed and why it has been designed as it has.
-	Purpose FhirMarkdown `json:"purpose,omitempty"`
-	// copyright
-	// A copyright statement relating to the code system and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the code system.
-	Copyright FhirMarkdown `json:"copyright,omitempty"`
-	// caseSensitive
-	// If code comparison is case sensitive when codes within this system are compared to each other.
-	CaseSensitive FhirBoolean `json:"caseSensitive,omitempty"`
-	// valueSet
-	// Canonical reference to the value set that contains the entire code system.
-	ValueSet FhirCanonical `json:"valueSet,omitempty"`
-	// hierarchyMeaning
-	// The meaning of the hierarchy of concepts as represented in this resource.
-	HierarchyMeaning CodeSystemHierarchyMeaning `json:"hierarchyMeaning,omitempty"`
-	// compositional
-	// The code system defines a compositional (post-coordination) grammar.
-	Compositional FhirBoolean `json:"compositional,omitempty"`
-	// versionNeeded
-	// This flag is used to signify that the code system does not commit to concept permanence across versions. If true, a version must be specified when referencing this code system.
-	VersionNeeded FhirBoolean `json:"versionNeeded,omitempty"`
-	// content
-	// The extent of the content of the code system (the concepts and codes it defines) are represented in this resource instance.
-	Content CodeSystemContentMode `json:"content,omitempty"`
-	// supplements
-	// The canonical URL of the code system that this code system supplement is adding designations and properties to.
-	Supplements FhirCanonical `json:"supplements,omitempty"`
-	// count
-	// The total number of concepts defined by the code system. Where the code system has a compositional grammar, the basis of this count is defined by the system steward.
-	Count FhirUnsignedInt `json:"count,omitempty"`
-	// filter
-	// A filter that can be used in a value set compose statement when selecting concepts using a filter.
-	Filter []CodeSystemFilter `json:"filter,omitempty"`
-	// property
-	// A property defines an additional slot through which additional information can be provided about a concept.
-	Property []CodeSystemProperty `json:"property,omitempty"`
-	// concept
-	// Concepts that are in the code system. The concept definitions are inherently hierarchical, but the definitions must be consulted to determine what the meanings of the hierarchical relationships are.
-	Concept []CodeSystemConcept `json:"concept,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Url *FhirUri `json:"url,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Title *FhirString `json:"title,omitempty"`
+	Status *PublicationStatus `json:"status,omitempty"`
+	Experimental *FhirBoolean `json:"experimental,omitempty"`
+	Date *FhirDateTime `json:"date,omitempty"`
+	Publisher *FhirString `json:"publisher,omitempty"`
+	Contact []*ContactDetail `json:"contact,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	UseContext []*UsageContext `json:"usecontext,omitempty"`
+	Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+	Purpose *FhirMarkdown `json:"purpose,omitempty"`
+	Copyright *FhirMarkdown `json:"copyright,omitempty"`
+	CaseSensitive *FhirBoolean `json:"casesensitive,omitempty"`
+	ValueSet *FhirCanonical `json:"valueset,omitempty"`
+	HierarchyMeaning *CodeSystemHierarchyMeaning `json:"hierarchymeaning,omitempty"`
+	Compositional *FhirBoolean `json:"compositional,omitempty"`
+	VersionNeeded *FhirBoolean `json:"versionneeded,omitempty"`
+	Content *CodeSystemContentMode `json:"content,omitempty"`
+	Supplements *FhirCanonical `json:"supplements,omitempty"`
+	Count *FhirUnsignedInt `json:"count,omitempty"`
+	Filter []*CodeSystemFilter `json:"filter,omitempty"`
+	Property []*CodeSystemProperty `json:"property,omitempty"`
+	Concept []*CodeSystemConcept `json:"concept,omitempty"`
 }
 
 // NewCodeSystem creates a new CodeSystem instance
-func NewCodeSystem(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	url FhirUri,
-	identifier []Identifier,
-	version FhirString,
-	name FhirString,
-	title FhirString,
-	status PublicationStatus,
-	experimental FhirBoolean,
-	date FhirDateTime,
-	publisher FhirString,
-	contact []ContactDetail,
-	description FhirMarkdown,
-	useContext []UsageContext,
-	jurisdiction []CodeableConcept,
-	purpose FhirMarkdown,
-	copyright FhirMarkdown,
-	caseSensitive FhirBoolean,
-	valueSet FhirCanonical,
-	hierarchyMeaning CodeSystemHierarchyMeaning,
-	compositional FhirBoolean,
-	versionNeeded FhirBoolean,
-	content CodeSystemContentMode,
-	supplements FhirCanonical,
-	count FhirUnsignedInt,
-	filter []CodeSystemFilter,
-	property []CodeSystemProperty,
-	concept []CodeSystemConcept,
-) *CodeSystem {
-	return &CodeSystem{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Url: url,
-		Identifier: identifier,
-		Version: version,
-		Name: name,
-		Title: title,
-		Status: status,
-		Experimental: experimental,
-		Date: date,
-		Publisher: publisher,
-		Contact: contact,
-		Description: description,
-		UseContext: useContext,
-		Jurisdiction: jurisdiction,
-		Purpose: purpose,
-		Copyright: copyright,
-		CaseSensitive: caseSensitive,
-		ValueSet: valueSet,
-		HierarchyMeaning: hierarchyMeaning,
-		Compositional: compositional,
-		VersionNeeded: versionNeeded,
-		Content: content,
-		Supplements: supplements,
-		Count: count,
-		Filter: filter,
-		Property: property,
-		Concept: concept,
-	}
+func NewCodeSystem() *CodeSystem {
+	return &CodeSystem{}
 }
+
 // FromJSON populates CodeSystem from JSON data
 func (m *CodeSystem) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -201,231 +60,106 @@ func (m *CodeSystem) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CodeSystem
-func (m *CodeSystem) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	url *FhirUri,
-	identifier *[]Identifier,
-	version *FhirString,
-	name *FhirString,
-	title *FhirString,
-	status *PublicationStatus,
-	experimental *FhirBoolean,
-	date *FhirDateTime,
-	publisher *FhirString,
-	contact *[]ContactDetail,
-	description *FhirMarkdown,
-	useContext *[]UsageContext,
-	jurisdiction *[]CodeableConcept,
-	purpose *FhirMarkdown,
-	copyright *FhirMarkdown,
-	caseSensitive *FhirBoolean,
-	valueSet *FhirCanonical,
-	hierarchyMeaning *CodeSystemHierarchyMeaning,
-	compositional *FhirBoolean,
-	versionNeeded *FhirBoolean,
-	content *CodeSystemContentMode,
-	supplements *FhirCanonical,
-	count *FhirUnsignedInt,
-	filter *[]CodeSystemFilter,
-	property *[]CodeSystemProperty,
-	concept *[]CodeSystemConcept,
-) *CodeSystem {
+// Clone creates a deep copy of CodeSystem
+func (m *CodeSystem) Clone() *CodeSystem {
+	if m == nil { return nil }
 	return &CodeSystem{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Url: func() FhirUri {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Title: func() FhirString {
-			if title != nil { return *title }
-			return m.Title
-		}(),
-		Status: func() PublicationStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Experimental: func() FhirBoolean {
-			if experimental != nil { return *experimental }
-			return m.Experimental
-		}(),
-		Date: func() FhirDateTime {
-			if date != nil { return *date }
-			return m.Date
-		}(),
-		Publisher: func() FhirString {
-			if publisher != nil { return *publisher }
-			return m.Publisher
-		}(),
-		Contact: func() []ContactDetail {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		UseContext: func() []UsageContext {
-			if useContext != nil { return *useContext }
-			return m.UseContext
-		}(),
-		Jurisdiction: func() []CodeableConcept {
-			if jurisdiction != nil { return *jurisdiction }
-			return m.Jurisdiction
-		}(),
-		Purpose: func() FhirMarkdown {
-			if purpose != nil { return *purpose }
-			return m.Purpose
-		}(),
-		Copyright: func() FhirMarkdown {
-			if copyright != nil { return *copyright }
-			return m.Copyright
-		}(),
-		CaseSensitive: func() FhirBoolean {
-			if caseSensitive != nil { return *caseSensitive }
-			return m.CaseSensitive
-		}(),
-		ValueSet: func() FhirCanonical {
-			if valueSet != nil { return *valueSet }
-			return m.ValueSet
-		}(),
-		HierarchyMeaning: func() CodeSystemHierarchyMeaning {
-			if hierarchyMeaning != nil { return *hierarchyMeaning }
-			return m.HierarchyMeaning
-		}(),
-		Compositional: func() FhirBoolean {
-			if compositional != nil { return *compositional }
-			return m.Compositional
-		}(),
-		VersionNeeded: func() FhirBoolean {
-			if versionNeeded != nil { return *versionNeeded }
-			return m.VersionNeeded
-		}(),
-		Content: func() CodeSystemContentMode {
-			if content != nil { return *content }
-			return m.Content
-		}(),
-		Supplements: func() FhirCanonical {
-			if supplements != nil { return *supplements }
-			return m.Supplements
-		}(),
-		Count: func() FhirUnsignedInt {
-			if count != nil { return *count }
-			return m.Count
-		}(),
-		Filter: func() []CodeSystemFilter {
-			if filter != nil { return *filter }
-			return m.Filter
-		}(),
-		Property: func() []CodeSystemProperty {
-			if property != nil { return *property }
-			return m.Property
-		}(),
-		Concept: func() []CodeSystemConcept {
-			if concept != nil { return *concept }
-			return m.Concept
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Url: m.Url.Clone(),
+		Identifier: cloneSlices(m.Identifier),
+		Version: m.Version.Clone(),
+		Name: m.Name.Clone(),
+		Title: m.Title.Clone(),
+		Status: m.Status.Clone(),
+		Experimental: m.Experimental.Clone(),
+		Date: m.Date.Clone(),
+		Publisher: m.Publisher.Clone(),
+		Contact: cloneSlices(m.Contact),
+		Description: m.Description.Clone(),
+		UseContext: cloneSlices(m.UseContext),
+		Jurisdiction: cloneSlices(m.Jurisdiction),
+		Purpose: m.Purpose.Clone(),
+		Copyright: m.Copyright.Clone(),
+		CaseSensitive: m.CaseSensitive.Clone(),
+		ValueSet: m.ValueSet.Clone(),
+		HierarchyMeaning: m.HierarchyMeaning.Clone(),
+		Compositional: m.Compositional.Clone(),
+		VersionNeeded: m.VersionNeeded.Clone(),
+		Content: m.Content.Clone(),
+		Supplements: m.Supplements.Clone(),
+		Count: m.Count.Clone(),
+		Filter: cloneSlices(m.Filter),
+		Property: cloneSlices(m.Property),
+		Concept: cloneSlices(m.Concept),
 	}
 }
+
+// Equals checks for equality with another CodeSystem instance
+func (m *CodeSystem) Equals(other *CodeSystem) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Title.Equals(other.Title) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Experimental.Equals(other.Experimental) { return false }
+	if !m.Date.Equals(other.Date) { return false }
+	if !m.Publisher.Equals(other.Publisher) { return false }
+	if !compareSlices(m.Contact, other.Contact) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.UseContext, other.UseContext) { return false }
+	if !compareSlices(m.Jurisdiction, other.Jurisdiction) { return false }
+	if !m.Purpose.Equals(other.Purpose) { return false }
+	if !m.Copyright.Equals(other.Copyright) { return false }
+	if !m.CaseSensitive.Equals(other.CaseSensitive) { return false }
+	if !m.ValueSet.Equals(other.ValueSet) { return false }
+	if !m.HierarchyMeaning.Equals(other.HierarchyMeaning) { return false }
+	if !m.Compositional.Equals(other.Compositional) { return false }
+	if !m.VersionNeeded.Equals(other.VersionNeeded) { return false }
+	if !m.Content.Equals(other.Content) { return false }
+	if !m.Supplements.Equals(other.Supplements) { return false }
+	if !m.Count.Equals(other.Count) { return false }
+	if !compareSlices(m.Filter, other.Filter) { return false }
+	if !compareSlices(m.Property, other.Property) { return false }
+	if !compareSlices(m.Concept, other.Concept) { return false }
+	return true
+}
+
 // CodeSystemFilter
 // A filter that can be used in a value set compose statement when selecting concepts using a filter.
 type CodeSystemFilter struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// The code that identifies this filter when it is used as a filter in [ValueSet](valueset.html#).compose.include.filter.
-	Code FhirCode `json:"code,omitempty"`
-	// description
-	// A description of how or why the filter is used.
-	Description FhirString `json:"description,omitempty"`
-	// operator
-	// A list of operators that can be used with the filter.
-	Operator_ []FilterOperator `json:"operator,omitempty"`
-	// value
-	// A description of what the value for the filter should be.
-	Value FhirString `json:"value,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *FhirCode `json:"code,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Operator_ []*FilterOperator `json:"operator,omitempty"`
+	Value *FhirString `json:"value,omitempty"`
 }
 
 // NewCodeSystemFilter creates a new CodeSystemFilter instance
-func NewCodeSystemFilter(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code FhirCode,
-	description FhirString,
-	operator_ []FilterOperator,
-	value FhirString,
-) *CodeSystemFilter {
-	return &CodeSystemFilter{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		Description: description,
-		Operator_: operator_,
-		Value: value,
-	}
+func NewCodeSystemFilter() *CodeSystemFilter {
+	return &CodeSystemFilter{}
 }
+
 // FromJSON populates CodeSystemFilter from JSON data
 func (m *CodeSystemFilter) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -436,96 +170,52 @@ func (m *CodeSystemFilter) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CodeSystemFilter
-func (m *CodeSystemFilter) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *FhirCode,
-	description *FhirString,
-	operator_ *[]FilterOperator,
-	value *FhirString,
-) *CodeSystemFilter {
+// Clone creates a deep copy of CodeSystemFilter
+func (m *CodeSystemFilter) Clone() *CodeSystemFilter {
+	if m == nil { return nil }
 	return &CodeSystemFilter{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() FhirCode {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Operator_: func() []FilterOperator {
-			if operator_ != nil { return *operator_ }
-			return m.Operator_
-		}(),
-		Value: func() FhirString {
-			if value != nil { return *value }
-			return m.Value
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		Description: m.Description.Clone(),
+		Operator_: cloneSlices(m.Operator_),
+		Value: m.Value.Clone(),
 	}
 }
+
+// Equals checks for equality with another CodeSystemFilter instance
+func (m *CodeSystemFilter) Equals(other *CodeSystemFilter) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.Operator_, other.Operator_) { return false }
+	if !m.Value.Equals(other.Value) { return false }
+	return true
+}
+
 // CodeSystemProperty
 // A property defines an additional slot through which additional information can be provided about a concept.
 type CodeSystemProperty struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// A code that is used to identify the property. The code is used internally (in CodeSystem.concept.property.code) and also externally, such as in property filters.
-	Code FhirCode `json:"code,omitempty"`
-	// uri
-	// Reference to the formal meaning of the property. One possible source of meaning is the [Concept Properties](codesystem-concept-properties.html) code system.
-	Uri FhirUri `json:"uri,omitempty"`
-	// description
-	// A description of the property- why it is defined, and how its value might be used.
-	Description FhirString `json:"description,omitempty"`
-	// type
-	// The type of the property value. Properties of type "code" contain a code defined by the code system (e.g. a reference to another defined concept).
-	Type_ PropertyTypeEnum `json:"type,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *FhirCode `json:"code,omitempty"`
+	Uri *FhirUri `json:"uri,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Type *PropertyTypeEnum `json:"type,omitempty"`
 }
 
 // NewCodeSystemProperty creates a new CodeSystemProperty instance
-func NewCodeSystemProperty(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code FhirCode,
-	uri FhirUri,
-	description FhirString,
-	type_ PropertyTypeEnum,
-) *CodeSystemProperty {
-	return &CodeSystemProperty{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		Uri: uri,
-		Description: description,
-		Type_: type_,
-	}
+func NewCodeSystemProperty() *CodeSystemProperty {
+	return &CodeSystemProperty{}
 }
+
 // FromJSON populates CodeSystemProperty from JSON data
 func (m *CodeSystemProperty) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -536,106 +226,54 @@ func (m *CodeSystemProperty) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CodeSystemProperty
-func (m *CodeSystemProperty) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *FhirCode,
-	uri *FhirUri,
-	description *FhirString,
-	type_ *PropertyTypeEnum,
-) *CodeSystemProperty {
+// Clone creates a deep copy of CodeSystemProperty
+func (m *CodeSystemProperty) Clone() *CodeSystemProperty {
+	if m == nil { return nil }
 	return &CodeSystemProperty{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() FhirCode {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Uri: func() FhirUri {
-			if uri != nil { return *uri }
-			return m.Uri
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Type_: func() PropertyTypeEnum {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		Uri: m.Uri.Clone(),
+		Description: m.Description.Clone(),
+		Type: m.Type.Clone(),
 	}
 }
+
+// Equals checks for equality with another CodeSystemProperty instance
+func (m *CodeSystemProperty) Equals(other *CodeSystemProperty) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Uri.Equals(other.Uri) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	return true
+}
+
 // CodeSystemConcept
 // Concepts that are in the code system. The concept definitions are inherently hierarchical, but the definitions must be consulted to determine what the meanings of the hierarchical relationships are.
 type CodeSystemConcept struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// A code - a text symbol - that uniquely identifies the concept within the code system.
-	Code FhirCode `json:"code,omitempty"`
-	// display
-	// A human readable string that is the recommended default way to present this concept to a user.
-	Display FhirString `json:"display,omitempty"`
-	// definition
-	// The formal definition of the concept. The code system resource does not make formal definitions required, because of the prevalence of legacy systems. However, they are highly recommended, as without them there is no formal meaning associated with the concept.
-	Definition FhirString `json:"definition,omitempty"`
-	// designation
-	// Additional representations for the concept - other languages, aliases, specialized purposes, used for particular purposes, etc.
-	Designation []CodeSystemDesignation `json:"designation,omitempty"`
-	// property
-	// A property value for this concept.
-	Property []CodeSystemProperty1 `json:"property,omitempty"`
-	// concept
-	// Defines children of a concept to produce a hierarchy of concepts. The nature of the relationships is variable (is-a/contains/categorizes) - see hierarchyMeaning.
-	Concept []CodeSystemConcept `json:"concept,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *FhirCode `json:"code,omitempty"`
+	Display *FhirString `json:"display,omitempty"`
+	Definition *FhirString `json:"definition,omitempty"`
+	Designation []*CodeSystemDesignation `json:"designation,omitempty"`
+	Property []*CodeSystemProperty1 `json:"property,omitempty"`
+	Concept []*CodeSystemConcept `json:"concept,omitempty"`
 }
 
 // NewCodeSystemConcept creates a new CodeSystemConcept instance
-func NewCodeSystemConcept(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code FhirCode,
-	display FhirString,
-	definition FhirString,
-	designation []CodeSystemDesignation,
-	property []CodeSystemProperty1,
-	concept []CodeSystemConcept,
-) *CodeSystemConcept {
-	return &CodeSystemConcept{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		Display: display,
-		Definition: definition,
-		Designation: designation,
-		Property: property,
-		Concept: concept,
-	}
+func NewCodeSystemConcept() *CodeSystemConcept {
+	return &CodeSystemConcept{}
 }
+
 // FromJSON populates CodeSystemConcept from JSON data
 func (m *CodeSystemConcept) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -646,101 +284,55 @@ func (m *CodeSystemConcept) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CodeSystemConcept
-func (m *CodeSystemConcept) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *FhirCode,
-	display *FhirString,
-	definition *FhirString,
-	designation *[]CodeSystemDesignation,
-	property *[]CodeSystemProperty1,
-	concept *[]CodeSystemConcept,
-) *CodeSystemConcept {
+// Clone creates a deep copy of CodeSystemConcept
+func (m *CodeSystemConcept) Clone() *CodeSystemConcept {
+	if m == nil { return nil }
 	return &CodeSystemConcept{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() FhirCode {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Display: func() FhirString {
-			if display != nil { return *display }
-			return m.Display
-		}(),
-		Definition: func() FhirString {
-			if definition != nil { return *definition }
-			return m.Definition
-		}(),
-		Designation: func() []CodeSystemDesignation {
-			if designation != nil { return *designation }
-			return m.Designation
-		}(),
-		Property: func() []CodeSystemProperty1 {
-			if property != nil { return *property }
-			return m.Property
-		}(),
-		Concept: func() []CodeSystemConcept {
-			if concept != nil { return *concept }
-			return m.Concept
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		Display: m.Display.Clone(),
+		Definition: m.Definition.Clone(),
+		Designation: cloneSlices(m.Designation),
+		Property: cloneSlices(m.Property),
+		Concept: cloneSlices(m.Concept),
 	}
 }
+
+// Equals checks for equality with another CodeSystemConcept instance
+func (m *CodeSystemConcept) Equals(other *CodeSystemConcept) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Display.Equals(other.Display) { return false }
+	if !m.Definition.Equals(other.Definition) { return false }
+	if !compareSlices(m.Designation, other.Designation) { return false }
+	if !compareSlices(m.Property, other.Property) { return false }
+	if !compareSlices(m.Concept, other.Concept) { return false }
+	return true
+}
+
 // CodeSystemDesignation
 // Additional representations for the concept - other languages, aliases, specialized purposes, used for particular purposes, etc.
 type CodeSystemDesignation struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// language
-	// The language this designation is defined for.
-	Language CommonLanguages `json:"language,omitempty"`
-	// use
-	// A code that details how this designation would be used.
-	Use Coding `json:"use,omitempty"`
-	// value
-	// The text value for this designation.
-	Value FhirString `json:"value,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Use *Coding `json:"use,omitempty"`
+	Value *FhirString `json:"value,omitempty"`
 }
 
 // NewCodeSystemDesignation creates a new CodeSystemDesignation instance
-func NewCodeSystemDesignation(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	language CommonLanguages,
-	use Coding,
-	value FhirString,
-) *CodeSystemDesignation {
-	return &CodeSystemDesignation{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Language: language,
-		Use: use,
-		Value: value,
-	}
+func NewCodeSystemDesignation() *CodeSystemDesignation {
+	return &CodeSystemDesignation{}
 }
+
 // FromJSON populates CodeSystemDesignation from JSON data
 func (m *CodeSystemDesignation) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -751,111 +343,54 @@ func (m *CodeSystemDesignation) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CodeSystemDesignation
-func (m *CodeSystemDesignation) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	language *CommonLanguages,
-	use *Coding,
-	value *FhirString,
-) *CodeSystemDesignation {
+// Clone creates a deep copy of CodeSystemDesignation
+func (m *CodeSystemDesignation) Clone() *CodeSystemDesignation {
+	if m == nil { return nil }
 	return &CodeSystemDesignation{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Use: func() Coding {
-			if use != nil { return *use }
-			return m.Use
-		}(),
-		Value: func() FhirString {
-			if value != nil { return *value }
-			return m.Value
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Language: m.Language.Clone(),
+		Use: m.Use.Clone(),
+		Value: m.Value.Clone(),
 	}
 }
+
+// Equals checks for equality with another CodeSystemDesignation instance
+func (m *CodeSystemDesignation) Equals(other *CodeSystemDesignation) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Use.Equals(other.Use) { return false }
+	if !m.Value.Equals(other.Value) { return false }
+	return true
+}
+
 // CodeSystemProperty1
 // A property value for this concept.
 type CodeSystemProperty1 struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// A code that is a reference to CodeSystem.property.code.
-	Code FhirCode `json:"code,omitempty"`
-	// valueCode
-	// The value of this property.
-	ValueCode FhirCode `json:"valueCode,omitempty"`
-	// valueCoding
-	// The value of this property.
-	ValueCoding Coding `json:"valueCoding,omitempty"`
-	// valueString
-	// The value of this property.
-	ValueString FhirString `json:"valueString,omitempty"`
-	// valueInteger
-	// The value of this property.
-	ValueInteger FhirInteger `json:"valueInteger,omitempty"`
-	// valueBoolean
-	// The value of this property.
-	ValueBoolean FhirBoolean `json:"valueBoolean,omitempty"`
-	// valueDateTime
-	// The value of this property.
-	ValueDateTime FhirDateTime `json:"valueDateTime,omitempty"`
-	// valueDecimal
-	// The value of this property.
-	ValueDecimal FhirDecimal `json:"valueDecimal,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *FhirCode `json:"code,omitempty"`
+	ValueCode *FhirCode `json:"valuecode,omitempty"`
+	ValueCoding *Coding `json:"valuecoding,omitempty"`
+	ValueString *FhirString `json:"valuestring,omitempty"`
+	ValueInteger *FhirInteger `json:"valueinteger,omitempty"`
+	ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
+	ValueDateTime *FhirDateTime `json:"valuedatetime,omitempty"`
+	ValueDecimal *FhirDecimal `json:"valuedecimal,omitempty"`
 }
 
 // NewCodeSystemProperty1 creates a new CodeSystemProperty1 instance
-func NewCodeSystemProperty1(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code FhirCode,
-	valueCode FhirCode,
-	valueCoding Coding,
-	valueString FhirString,
-	valueInteger FhirInteger,
-	valueBoolean FhirBoolean,
-	valueDateTime FhirDateTime,
-	valueDecimal FhirDecimal,
-) *CodeSystemProperty1 {
-	return &CodeSystemProperty1{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		ValueCode: valueCode,
-		ValueCoding: valueCoding,
-		ValueString: valueString,
-		ValueInteger: valueInteger,
-		ValueBoolean: valueBoolean,
-		ValueDateTime: valueDateTime,
-		ValueDecimal: valueDecimal,
-	}
+func NewCodeSystemProperty1() *CodeSystemProperty1 {
+	return &CodeSystemProperty1{}
 }
+
 // FromJSON populates CodeSystemProperty1 from JSON data
 func (m *CodeSystemProperty1) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -866,64 +401,39 @@ func (m *CodeSystemProperty1) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CodeSystemProperty1
-func (m *CodeSystemProperty1) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *FhirCode,
-	valueCode *FhirCode,
-	valueCoding *Coding,
-	valueString *FhirString,
-	valueInteger *FhirInteger,
-	valueBoolean *FhirBoolean,
-	valueDateTime *FhirDateTime,
-	valueDecimal *FhirDecimal,
-) *CodeSystemProperty1 {
+// Clone creates a deep copy of CodeSystemProperty1
+func (m *CodeSystemProperty1) Clone() *CodeSystemProperty1 {
+	if m == nil { return nil }
 	return &CodeSystemProperty1{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() FhirCode {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		ValueCode: func() FhirCode {
-			if valueCode != nil { return *valueCode }
-			return m.ValueCode
-		}(),
-		ValueCoding: func() Coding {
-			if valueCoding != nil { return *valueCoding }
-			return m.ValueCoding
-		}(),
-		ValueString: func() FhirString {
-			if valueString != nil { return *valueString }
-			return m.ValueString
-		}(),
-		ValueInteger: func() FhirInteger {
-			if valueInteger != nil { return *valueInteger }
-			return m.ValueInteger
-		}(),
-		ValueBoolean: func() FhirBoolean {
-			if valueBoolean != nil { return *valueBoolean }
-			return m.ValueBoolean
-		}(),
-		ValueDateTime: func() FhirDateTime {
-			if valueDateTime != nil { return *valueDateTime }
-			return m.ValueDateTime
-		}(),
-		ValueDecimal: func() FhirDecimal {
-			if valueDecimal != nil { return *valueDecimal }
-			return m.ValueDecimal
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		ValueCode: m.ValueCode.Clone(),
+		ValueCoding: m.ValueCoding.Clone(),
+		ValueString: m.ValueString.Clone(),
+		ValueInteger: m.ValueInteger.Clone(),
+		ValueBoolean: m.ValueBoolean.Clone(),
+		ValueDateTime: m.ValueDateTime.Clone(),
+		ValueDecimal: m.ValueDecimal.Clone(),
 	}
 }
+
+// Equals checks for equality with another CodeSystemProperty1 instance
+func (m *CodeSystemProperty1) Equals(other *CodeSystemProperty1) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.ValueCode.Equals(other.ValueCode) { return false }
+	if !m.ValueCoding.Equals(other.ValueCoding) { return false }
+	if !m.ValueString.Equals(other.ValueString) { return false }
+	if !m.ValueInteger.Equals(other.ValueInteger) { return false }
+	if !m.ValueBoolean.Equals(other.ValueBoolean) { return false }
+	if !m.ValueDateTime.Equals(other.ValueDateTime) { return false }
+	if !m.ValueDecimal.Equals(other.ValueDecimal) { return false }
+	return true
+}
+

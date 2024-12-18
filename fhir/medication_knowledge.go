@@ -3,174 +3,49 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // MedicationKnowledge
 // Information about a medication that is used to support knowledge.
 type MedicationKnowledge struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// A code that specifies this medication, or a textual description if no code is available. Usage note: This could be a standard medication code such as a code from RxNorm, SNOMED CT, IDMP etc. It could also be a national or local formulary code, optionally with translations to other code systems.
-	Code CodeableConcept `json:"code,omitempty"`
-	// status
-	// A code to indicate if the medication is in active use.  The status refers to the validity about the information of the medication and not to its medicinal properties.
-	Status MedicationKnowledgeStatusCodes `json:"status,omitempty"`
-	// manufacturer
-	// Describes the details of the manufacturer of the medication product.  This is not intended to represent the distributor of a medication product.
-	Manufacturer Reference `json:"manufacturer,omitempty"`
-	// doseForm
-	// Describes the form of the item.  Powder; tablets; capsule.
-	DoseForm CodeableConcept `json:"doseForm,omitempty"`
-	// amount
-	// Specific amount of the drug in the packaged product.  For example, when specifying a product that has the same strength (For example, Insulin glargine 100 unit per mL solution for injection), this attribute provides additional clarification of the package amount (For example, 3 mL, 10mL, etc.).
-	Amount Quantity `json:"amount,omitempty"`
-	// synonym
-	// Additional names for a medication, for example, the name(s) given to a medication in different countries.  For example, acetaminophen and paracetamol or salbutamol and albuterol.
-	Synonym []FhirString `json:"synonym,omitempty"`
-	// relatedMedicationKnowledge
-	// Associated or related knowledge about a medication.
-	RelatedMedicationKnowledge []MedicationKnowledgeRelatedMedicationKnowledge `json:"relatedMedicationKnowledge,omitempty"`
-	// associatedMedication
-	// Associated or related medications.  For example, if the medication is a branded product (e.g. Crestor), this is the Therapeutic Moeity (e.g. Rosuvastatin) or if this is a generic medication (e.g. Rosuvastatin), this would link to a branded product (e.g. Crestor).
-	AssociatedMedication []Reference `json:"associatedMedication,omitempty"`
-	// productType
-	// Category of the medication or product (e.g. branded product, therapeutic moeity, generic product, innovator product, etc.).
-	ProductType []CodeableConcept `json:"productType,omitempty"`
-	// monograph
-	// Associated documentation about the medication.
-	Monograph []MedicationKnowledgeMonograph `json:"monograph,omitempty"`
-	// ingredient
-	// Identifies a particular constituent of interest in the product.
-	Ingredient []MedicationKnowledgeIngredient `json:"ingredient,omitempty"`
-	// preparationInstruction
-	// The instructions for preparing the medication.
-	PreparationInstruction FhirMarkdown `json:"preparationInstruction,omitempty"`
-	// intendedRoute
-	// The intended or approved route of administration.
-	IntendedRoute []CodeableConcept `json:"intendedRoute,omitempty"`
-	// cost
-	// The price of the medication.
-	Cost []MedicationKnowledgeCost `json:"cost,omitempty"`
-	// monitoringProgram
-	// The program under which the medication is reviewed.
-	MonitoringProgram []MedicationKnowledgeMonitoringProgram `json:"monitoringProgram,omitempty"`
-	// administrationGuidelines
-	// Guidelines for the administration of the medication.
-	AdministrationGuidelines []MedicationKnowledgeAdministrationGuidelines `json:"administrationGuidelines,omitempty"`
-	// medicineClassification
-	// Categorization of the medication within a formulary or classification system.
-	MedicineClassification []MedicationKnowledgeMedicineClassification `json:"medicineClassification,omitempty"`
-	// packaging
-	// Information that only applies to packages (not products).
-	Packaging MedicationKnowledgePackaging `json:"packaging,omitempty"`
-	// drugCharacteristic
-	// Specifies descriptive properties of the medicine, such as color, shape, imprints, etc.
-	DrugCharacteristic []MedicationKnowledgeDrugCharacteristic `json:"drugCharacteristic,omitempty"`
-	// contraindication
-	// Potential clinical issue with or between medication(s) (for example, drug-drug interaction, drug-disease contraindication, drug-allergy interaction, etc.).
-	Contraindication []Reference `json:"contraindication,omitempty"`
-	// regulatory
-	// Regulatory information about a medication.
-	Regulatory []MedicationKnowledgeRegulatory `json:"regulatory,omitempty"`
-	// kinetics
-	// The time course of drug absorption, distribution, metabolism and excretion of a medication from the body.
-	Kinetics []MedicationKnowledgeKinetics `json:"kinetics,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *CodeableConcept `json:"code,omitempty"`
+	Status *MedicationKnowledgeStatusCodes `json:"status,omitempty"`
+	Manufacturer *Reference `json:"manufacturer,omitempty"`
+	DoseForm *CodeableConcept `json:"doseform,omitempty"`
+	Amount *Quantity `json:"amount,omitempty"`
+	Synonym []*FhirString `json:"synonym,omitempty"`
+	RelatedMedicationKnowledge []*MedicationKnowledgeRelatedMedicationKnowledge `json:"relatedmedicationknowledge,omitempty"`
+	AssociatedMedication []*Reference `json:"associatedmedication,omitempty"`
+	ProductType []*CodeableConcept `json:"producttype,omitempty"`
+	Monograph []*MedicationKnowledgeMonograph `json:"monograph,omitempty"`
+	Ingredient []*MedicationKnowledgeIngredient `json:"ingredient,omitempty"`
+	PreparationInstruction *FhirMarkdown `json:"preparationinstruction,omitempty"`
+	IntendedRoute []*CodeableConcept `json:"intendedroute,omitempty"`
+	Cost []*MedicationKnowledgeCost `json:"cost,omitempty"`
+	MonitoringProgram []*MedicationKnowledgeMonitoringProgram `json:"monitoringprogram,omitempty"`
+	AdministrationGuidelines []*MedicationKnowledgeAdministrationGuidelines `json:"administrationguidelines,omitempty"`
+	MedicineClassification []*MedicationKnowledgeMedicineClassification `json:"medicineclassification,omitempty"`
+	Packaging *MedicationKnowledgePackaging `json:"packaging,omitempty"`
+	DrugCharacteristic []*MedicationKnowledgeDrugCharacteristic `json:"drugcharacteristic,omitempty"`
+	Contraindication []*Reference `json:"contraindication,omitempty"`
+	Regulatory []*MedicationKnowledgeRegulatory `json:"regulatory,omitempty"`
+	Kinetics []*MedicationKnowledgeKinetics `json:"kinetics,omitempty"`
 }
 
 // NewMedicationKnowledge creates a new MedicationKnowledge instance
-func NewMedicationKnowledge(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code CodeableConcept,
-	status MedicationKnowledgeStatusCodes,
-	manufacturer Reference,
-	doseForm CodeableConcept,
-	amount Quantity,
-	synonym []FhirString,
-	relatedMedicationKnowledge []MedicationKnowledgeRelatedMedicationKnowledge,
-	associatedMedication []Reference,
-	productType []CodeableConcept,
-	monograph []MedicationKnowledgeMonograph,
-	ingredient []MedicationKnowledgeIngredient,
-	preparationInstruction FhirMarkdown,
-	intendedRoute []CodeableConcept,
-	cost []MedicationKnowledgeCost,
-	monitoringProgram []MedicationKnowledgeMonitoringProgram,
-	administrationGuidelines []MedicationKnowledgeAdministrationGuidelines,
-	medicineClassification []MedicationKnowledgeMedicineClassification,
-	packaging MedicationKnowledgePackaging,
-	drugCharacteristic []MedicationKnowledgeDrugCharacteristic,
-	contraindication []Reference,
-	regulatory []MedicationKnowledgeRegulatory,
-	kinetics []MedicationKnowledgeKinetics,
-) *MedicationKnowledge {
-	return &MedicationKnowledge{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		Status: status,
-		Manufacturer: manufacturer,
-		DoseForm: doseForm,
-		Amount: amount,
-		Synonym: synonym,
-		RelatedMedicationKnowledge: relatedMedicationKnowledge,
-		AssociatedMedication: associatedMedication,
-		ProductType: productType,
-		Monograph: monograph,
-		Ingredient: ingredient,
-		PreparationInstruction: preparationInstruction,
-		IntendedRoute: intendedRoute,
-		Cost: cost,
-		MonitoringProgram: monitoringProgram,
-		AdministrationGuidelines: administrationGuidelines,
-		MedicineClassification: medicineClassification,
-		Packaging: packaging,
-		DrugCharacteristic: drugCharacteristic,
-		Contraindication: contraindication,
-		Regulatory: regulatory,
-		Kinetics: kinetics,
-	}
+func NewMedicationKnowledge() *MedicationKnowledge {
+	return &MedicationKnowledge{}
 }
+
 // FromJSON populates MedicationKnowledge from JSON data
 func (m *MedicationKnowledge) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -181,201 +56,96 @@ func (m *MedicationKnowledge) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicationKnowledge
-func (m *MedicationKnowledge) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *CodeableConcept,
-	status *MedicationKnowledgeStatusCodes,
-	manufacturer *Reference,
-	doseForm *CodeableConcept,
-	amount *Quantity,
-	synonym *[]FhirString,
-	relatedMedicationKnowledge *[]MedicationKnowledgeRelatedMedicationKnowledge,
-	associatedMedication *[]Reference,
-	productType *[]CodeableConcept,
-	monograph *[]MedicationKnowledgeMonograph,
-	ingredient *[]MedicationKnowledgeIngredient,
-	preparationInstruction *FhirMarkdown,
-	intendedRoute *[]CodeableConcept,
-	cost *[]MedicationKnowledgeCost,
-	monitoringProgram *[]MedicationKnowledgeMonitoringProgram,
-	administrationGuidelines *[]MedicationKnowledgeAdministrationGuidelines,
-	medicineClassification *[]MedicationKnowledgeMedicineClassification,
-	packaging *MedicationKnowledgePackaging,
-	drugCharacteristic *[]MedicationKnowledgeDrugCharacteristic,
-	contraindication *[]Reference,
-	regulatory *[]MedicationKnowledgeRegulatory,
-	kinetics *[]MedicationKnowledgeKinetics,
-) *MedicationKnowledge {
+// Clone creates a deep copy of MedicationKnowledge
+func (m *MedicationKnowledge) Clone() *MedicationKnowledge {
+	if m == nil { return nil }
 	return &MedicationKnowledge{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() CodeableConcept {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Status: func() MedicationKnowledgeStatusCodes {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Manufacturer: func() Reference {
-			if manufacturer != nil { return *manufacturer }
-			return m.Manufacturer
-		}(),
-		DoseForm: func() CodeableConcept {
-			if doseForm != nil { return *doseForm }
-			return m.DoseForm
-		}(),
-		Amount: func() Quantity {
-			if amount != nil { return *amount }
-			return m.Amount
-		}(),
-		Synonym: func() []FhirString {
-			if synonym != nil { return *synonym }
-			return m.Synonym
-		}(),
-		RelatedMedicationKnowledge: func() []MedicationKnowledgeRelatedMedicationKnowledge {
-			if relatedMedicationKnowledge != nil { return *relatedMedicationKnowledge }
-			return m.RelatedMedicationKnowledge
-		}(),
-		AssociatedMedication: func() []Reference {
-			if associatedMedication != nil { return *associatedMedication }
-			return m.AssociatedMedication
-		}(),
-		ProductType: func() []CodeableConcept {
-			if productType != nil { return *productType }
-			return m.ProductType
-		}(),
-		Monograph: func() []MedicationKnowledgeMonograph {
-			if monograph != nil { return *monograph }
-			return m.Monograph
-		}(),
-		Ingredient: func() []MedicationKnowledgeIngredient {
-			if ingredient != nil { return *ingredient }
-			return m.Ingredient
-		}(),
-		PreparationInstruction: func() FhirMarkdown {
-			if preparationInstruction != nil { return *preparationInstruction }
-			return m.PreparationInstruction
-		}(),
-		IntendedRoute: func() []CodeableConcept {
-			if intendedRoute != nil { return *intendedRoute }
-			return m.IntendedRoute
-		}(),
-		Cost: func() []MedicationKnowledgeCost {
-			if cost != nil { return *cost }
-			return m.Cost
-		}(),
-		MonitoringProgram: func() []MedicationKnowledgeMonitoringProgram {
-			if monitoringProgram != nil { return *monitoringProgram }
-			return m.MonitoringProgram
-		}(),
-		AdministrationGuidelines: func() []MedicationKnowledgeAdministrationGuidelines {
-			if administrationGuidelines != nil { return *administrationGuidelines }
-			return m.AdministrationGuidelines
-		}(),
-		MedicineClassification: func() []MedicationKnowledgeMedicineClassification {
-			if medicineClassification != nil { return *medicineClassification }
-			return m.MedicineClassification
-		}(),
-		Packaging: func() MedicationKnowledgePackaging {
-			if packaging != nil { return *packaging }
-			return m.Packaging
-		}(),
-		DrugCharacteristic: func() []MedicationKnowledgeDrugCharacteristic {
-			if drugCharacteristic != nil { return *drugCharacteristic }
-			return m.DrugCharacteristic
-		}(),
-		Contraindication: func() []Reference {
-			if contraindication != nil { return *contraindication }
-			return m.Contraindication
-		}(),
-		Regulatory: func() []MedicationKnowledgeRegulatory {
-			if regulatory != nil { return *regulatory }
-			return m.Regulatory
-		}(),
-		Kinetics: func() []MedicationKnowledgeKinetics {
-			if kinetics != nil { return *kinetics }
-			return m.Kinetics
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		Status: m.Status.Clone(),
+		Manufacturer: m.Manufacturer.Clone(),
+		DoseForm: m.DoseForm.Clone(),
+		Amount: m.Amount.Clone(),
+		Synonym: cloneSlices(m.Synonym),
+		RelatedMedicationKnowledge: cloneSlices(m.RelatedMedicationKnowledge),
+		AssociatedMedication: cloneSlices(m.AssociatedMedication),
+		ProductType: cloneSlices(m.ProductType),
+		Monograph: cloneSlices(m.Monograph),
+		Ingredient: cloneSlices(m.Ingredient),
+		PreparationInstruction: m.PreparationInstruction.Clone(),
+		IntendedRoute: cloneSlices(m.IntendedRoute),
+		Cost: cloneSlices(m.Cost),
+		MonitoringProgram: cloneSlices(m.MonitoringProgram),
+		AdministrationGuidelines: cloneSlices(m.AdministrationGuidelines),
+		MedicineClassification: cloneSlices(m.MedicineClassification),
+		Packaging: m.Packaging.Clone(),
+		DrugCharacteristic: cloneSlices(m.DrugCharacteristic),
+		Contraindication: cloneSlices(m.Contraindication),
+		Regulatory: cloneSlices(m.Regulatory),
+		Kinetics: cloneSlices(m.Kinetics),
 	}
 }
+
+// Equals checks for equality with another MedicationKnowledge instance
+func (m *MedicationKnowledge) Equals(other *MedicationKnowledge) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Manufacturer.Equals(other.Manufacturer) { return false }
+	if !m.DoseForm.Equals(other.DoseForm) { return false }
+	if !m.Amount.Equals(other.Amount) { return false }
+	if !compareSlices(m.Synonym, other.Synonym) { return false }
+	if !compareSlices(m.RelatedMedicationKnowledge, other.RelatedMedicationKnowledge) { return false }
+	if !compareSlices(m.AssociatedMedication, other.AssociatedMedication) { return false }
+	if !compareSlices(m.ProductType, other.ProductType) { return false }
+	if !compareSlices(m.Monograph, other.Monograph) { return false }
+	if !compareSlices(m.Ingredient, other.Ingredient) { return false }
+	if !m.PreparationInstruction.Equals(other.PreparationInstruction) { return false }
+	if !compareSlices(m.IntendedRoute, other.IntendedRoute) { return false }
+	if !compareSlices(m.Cost, other.Cost) { return false }
+	if !compareSlices(m.MonitoringProgram, other.MonitoringProgram) { return false }
+	if !compareSlices(m.AdministrationGuidelines, other.AdministrationGuidelines) { return false }
+	if !compareSlices(m.MedicineClassification, other.MedicineClassification) { return false }
+	if !m.Packaging.Equals(other.Packaging) { return false }
+	if !compareSlices(m.DrugCharacteristic, other.DrugCharacteristic) { return false }
+	if !compareSlices(m.Contraindication, other.Contraindication) { return false }
+	if !compareSlices(m.Regulatory, other.Regulatory) { return false }
+	if !compareSlices(m.Kinetics, other.Kinetics) { return false }
+	return true
+}
+
 // MedicationKnowledgeRelatedMedicationKnowledge
 // Associated or related knowledge about a medication.
 type MedicationKnowledgeRelatedMedicationKnowledge struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// The category of the associated medication knowledge reference.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// reference
-	// Associated documentation about the associated medication knowledge.
-	Reference []Reference `json:"reference,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Reference []*Reference `json:"reference,omitempty"`
 }
 
 // NewMedicationKnowledgeRelatedMedicationKnowledge creates a new MedicationKnowledgeRelatedMedicationKnowledge instance
-func NewMedicationKnowledgeRelatedMedicationKnowledge(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	reference []Reference,
-) *MedicationKnowledgeRelatedMedicationKnowledge {
-	return &MedicationKnowledgeRelatedMedicationKnowledge{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Reference: reference,
-	}
+func NewMedicationKnowledgeRelatedMedicationKnowledge() *MedicationKnowledgeRelatedMedicationKnowledge {
+	return &MedicationKnowledgeRelatedMedicationKnowledge{}
 }
+
 // FromJSON populates MedicationKnowledgeRelatedMedicationKnowledge from JSON data
 func (m *MedicationKnowledgeRelatedMedicationKnowledge) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -386,76 +156,46 @@ func (m *MedicationKnowledgeRelatedMedicationKnowledge) ToJSON() ([]byte, error)
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicationKnowledgeRelatedMedicationKnowledge
-func (m *MedicationKnowledgeRelatedMedicationKnowledge) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	reference *[]Reference,
-) *MedicationKnowledgeRelatedMedicationKnowledge {
+// Clone creates a deep copy of MedicationKnowledgeRelatedMedicationKnowledge
+func (m *MedicationKnowledgeRelatedMedicationKnowledge) Clone() *MedicationKnowledgeRelatedMedicationKnowledge {
+	if m == nil { return nil }
 	return &MedicationKnowledgeRelatedMedicationKnowledge{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Reference: func() []Reference {
-			if reference != nil { return *reference }
-			return m.Reference
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Reference: cloneSlices(m.Reference),
 	}
 }
+
+// Equals checks for equality with another MedicationKnowledgeRelatedMedicationKnowledge instance
+func (m *MedicationKnowledgeRelatedMedicationKnowledge) Equals(other *MedicationKnowledgeRelatedMedicationKnowledge) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !compareSlices(m.Reference, other.Reference) { return false }
+	return true
+}
+
 // MedicationKnowledgeMonograph
 // Associated documentation about the medication.
 type MedicationKnowledgeMonograph struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// The category of documentation about the medication. (e.g. professional monograph, patient education monograph).
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// source
-	// Associated documentation about the medication.
-	Source Reference `json:"source,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Source *Reference `json:"source,omitempty"`
 }
 
 // NewMedicationKnowledgeMonograph creates a new MedicationKnowledgeMonograph instance
-func NewMedicationKnowledgeMonograph(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	source Reference,
-) *MedicationKnowledgeMonograph {
-	return &MedicationKnowledgeMonograph{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Source: source,
-	}
+func NewMedicationKnowledgeMonograph() *MedicationKnowledgeMonograph {
+	return &MedicationKnowledgeMonograph{}
 }
+
 // FromJSON populates MedicationKnowledgeMonograph from JSON data
 func (m *MedicationKnowledgeMonograph) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -466,86 +206,48 @@ func (m *MedicationKnowledgeMonograph) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicationKnowledgeMonograph
-func (m *MedicationKnowledgeMonograph) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	source *Reference,
-) *MedicationKnowledgeMonograph {
+// Clone creates a deep copy of MedicationKnowledgeMonograph
+func (m *MedicationKnowledgeMonograph) Clone() *MedicationKnowledgeMonograph {
+	if m == nil { return nil }
 	return &MedicationKnowledgeMonograph{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Source: func() Reference {
-			if source != nil { return *source }
-			return m.Source
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Source: m.Source.Clone(),
 	}
 }
+
+// Equals checks for equality with another MedicationKnowledgeMonograph instance
+func (m *MedicationKnowledgeMonograph) Equals(other *MedicationKnowledgeMonograph) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Source.Equals(other.Source) { return false }
+	return true
+}
+
 // MedicationKnowledgeIngredient
 // Identifies a particular constituent of interest in the product.
 type MedicationKnowledgeIngredient struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// itemCodeableConcept
-	// The actual ingredient - either a substance (simple ingredient) or another medication.
-	ItemCodeableConcept CodeableConcept `json:"itemCodeableConcept,omitempty"`
-	// itemReference
-	// The actual ingredient - either a substance (simple ingredient) or another medication.
-	ItemReference Reference `json:"itemReference,omitempty"`
-	// isActive
-	// Indication of whether this ingredient affects the therapeutic action of the drug.
-	IsActive FhirBoolean `json:"isActive,omitempty"`
-	// strength
-	// Specifies how many (or how much) of the items there are in this Medication.  For example, 250 mg per tablet.  This is expressed as a ratio where the numerator is 250mg and the denominator is 1 tablet.
-	Strength Ratio `json:"strength,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	ItemCodeableConcept *CodeableConcept `json:"itemcodeableconcept,omitempty"`
+	ItemReference *Reference `json:"itemreference,omitempty"`
+	IsActive *FhirBoolean `json:"isactive,omitempty"`
+	Strength *Ratio `json:"strength,omitempty"`
 }
 
 // NewMedicationKnowledgeIngredient creates a new MedicationKnowledgeIngredient instance
-func NewMedicationKnowledgeIngredient(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	itemCodeableConcept CodeableConcept,
-	itemReference Reference,
-	isActive FhirBoolean,
-	strength Ratio,
-) *MedicationKnowledgeIngredient {
-	return &MedicationKnowledgeIngredient{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		ItemCodeableConcept: itemCodeableConcept,
-		ItemReference: itemReference,
-		IsActive: isActive,
-		Strength: strength,
-	}
+func NewMedicationKnowledgeIngredient() *MedicationKnowledgeIngredient {
+	return &MedicationKnowledgeIngredient{}
 }
+
 // FromJSON populates MedicationKnowledgeIngredient from JSON data
 func (m *MedicationKnowledgeIngredient) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -556,91 +258,51 @@ func (m *MedicationKnowledgeIngredient) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicationKnowledgeIngredient
-func (m *MedicationKnowledgeIngredient) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	itemCodeableConcept *CodeableConcept,
-	itemReference *Reference,
-	isActive *FhirBoolean,
-	strength *Ratio,
-) *MedicationKnowledgeIngredient {
+// Clone creates a deep copy of MedicationKnowledgeIngredient
+func (m *MedicationKnowledgeIngredient) Clone() *MedicationKnowledgeIngredient {
+	if m == nil { return nil }
 	return &MedicationKnowledgeIngredient{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		ItemCodeableConcept: func() CodeableConcept {
-			if itemCodeableConcept != nil { return *itemCodeableConcept }
-			return m.ItemCodeableConcept
-		}(),
-		ItemReference: func() Reference {
-			if itemReference != nil { return *itemReference }
-			return m.ItemReference
-		}(),
-		IsActive: func() FhirBoolean {
-			if isActive != nil { return *isActive }
-			return m.IsActive
-		}(),
-		Strength: func() Ratio {
-			if strength != nil { return *strength }
-			return m.Strength
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		ItemCodeableConcept: m.ItemCodeableConcept.Clone(),
+		ItemReference: m.ItemReference.Clone(),
+		IsActive: m.IsActive.Clone(),
+		Strength: m.Strength.Clone(),
 	}
 }
+
+// Equals checks for equality with another MedicationKnowledgeIngredient instance
+func (m *MedicationKnowledgeIngredient) Equals(other *MedicationKnowledgeIngredient) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.ItemCodeableConcept.Equals(other.ItemCodeableConcept) { return false }
+	if !m.ItemReference.Equals(other.ItemReference) { return false }
+	if !m.IsActive.Equals(other.IsActive) { return false }
+	if !m.Strength.Equals(other.Strength) { return false }
+	return true
+}
+
 // MedicationKnowledgeCost
 // The price of the medication.
 type MedicationKnowledgeCost struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// The category of the cost information.  For example, manufacturers' cost, patient cost, claim reimbursement cost, actual acquisition cost.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// source
-	// The source or owner that assigns the price to the medication.
-	Source FhirString `json:"source,omitempty"`
-	// cost
-	// The price of the medication.
-	Cost Money `json:"cost,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Source *FhirString `json:"source,omitempty"`
+	Cost *Money `json:"cost,omitempty"`
 }
 
 // NewMedicationKnowledgeCost creates a new MedicationKnowledgeCost instance
-func NewMedicationKnowledgeCost(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	source FhirString,
-	cost Money,
-) *MedicationKnowledgeCost {
-	return &MedicationKnowledgeCost{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Source: source,
-		Cost: cost,
-	}
+func NewMedicationKnowledgeCost() *MedicationKnowledgeCost {
+	return &MedicationKnowledgeCost{}
 }
+
 // FromJSON populates MedicationKnowledgeCost from JSON data
 func (m *MedicationKnowledgeCost) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -651,81 +313,48 @@ func (m *MedicationKnowledgeCost) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicationKnowledgeCost
-func (m *MedicationKnowledgeCost) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	source *FhirString,
-	cost *Money,
-) *MedicationKnowledgeCost {
+// Clone creates a deep copy of MedicationKnowledgeCost
+func (m *MedicationKnowledgeCost) Clone() *MedicationKnowledgeCost {
+	if m == nil { return nil }
 	return &MedicationKnowledgeCost{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Source: func() FhirString {
-			if source != nil { return *source }
-			return m.Source
-		}(),
-		Cost: func() Money {
-			if cost != nil { return *cost }
-			return m.Cost
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Source: m.Source.Clone(),
+		Cost: m.Cost.Clone(),
 	}
 }
+
+// Equals checks for equality with another MedicationKnowledgeCost instance
+func (m *MedicationKnowledgeCost) Equals(other *MedicationKnowledgeCost) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Source.Equals(other.Source) { return false }
+	if !m.Cost.Equals(other.Cost) { return false }
+	return true
+}
+
 // MedicationKnowledgeMonitoringProgram
 // The program under which the medication is reviewed.
 type MedicationKnowledgeMonitoringProgram struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// Type of program under which the medication is monitored.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// name
-	// Name of the reviewing program.
-	Name FhirString `json:"name,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
 }
 
 // NewMedicationKnowledgeMonitoringProgram creates a new MedicationKnowledgeMonitoringProgram instance
-func NewMedicationKnowledgeMonitoringProgram(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	name FhirString,
-) *MedicationKnowledgeMonitoringProgram {
-	return &MedicationKnowledgeMonitoringProgram{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Name: name,
-	}
+func NewMedicationKnowledgeMonitoringProgram() *MedicationKnowledgeMonitoringProgram {
+	return &MedicationKnowledgeMonitoringProgram{}
 }
+
 // FromJSON populates MedicationKnowledgeMonitoringProgram from JSON data
 func (m *MedicationKnowledgeMonitoringProgram) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -736,86 +365,48 @@ func (m *MedicationKnowledgeMonitoringProgram) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicationKnowledgeMonitoringProgram
-func (m *MedicationKnowledgeMonitoringProgram) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	name *FhirString,
-) *MedicationKnowledgeMonitoringProgram {
+// Clone creates a deep copy of MedicationKnowledgeMonitoringProgram
+func (m *MedicationKnowledgeMonitoringProgram) Clone() *MedicationKnowledgeMonitoringProgram {
+	if m == nil { return nil }
 	return &MedicationKnowledgeMonitoringProgram{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Name: m.Name.Clone(),
 	}
 }
+
+// Equals checks for equality with another MedicationKnowledgeMonitoringProgram instance
+func (m *MedicationKnowledgeMonitoringProgram) Equals(other *MedicationKnowledgeMonitoringProgram) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	return true
+}
+
 // MedicationKnowledgeAdministrationGuidelines
 // Guidelines for the administration of the medication.
 type MedicationKnowledgeAdministrationGuidelines struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// dosage
-	// Dosage for the medication for the specific guidelines.
-	Dosage []MedicationKnowledgeDosage `json:"dosage,omitempty"`
-	// indicationCodeableConcept
-	// Indication for use that apply to the specific administration guidelines.
-	IndicationCodeableConcept CodeableConcept `json:"indicationCodeableConcept,omitempty"`
-	// indicationReference
-	// Indication for use that apply to the specific administration guidelines.
-	IndicationReference Reference `json:"indicationReference,omitempty"`
-	// patientCharacteristics
-	// Characteristics of the patient that are relevant to the administration guidelines (for example, height, weight, gender, etc.).
-	PatientCharacteristics []MedicationKnowledgePatientCharacteristics `json:"patientCharacteristics,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Dosage []*MedicationKnowledgeDosage `json:"dosage,omitempty"`
+	IndicationCodeableConcept *CodeableConcept `json:"indicationcodeableconcept,omitempty"`
+	IndicationReference *Reference `json:"indicationreference,omitempty"`
+	PatientCharacteristics []*MedicationKnowledgePatientCharacteristics `json:"patientcharacteristics,omitempty"`
 }
 
 // NewMedicationKnowledgeAdministrationGuidelines creates a new MedicationKnowledgeAdministrationGuidelines instance
-func NewMedicationKnowledgeAdministrationGuidelines(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	dosage []MedicationKnowledgeDosage,
-	indicationCodeableConcept CodeableConcept,
-	indicationReference Reference,
-	patientCharacteristics []MedicationKnowledgePatientCharacteristics,
-) *MedicationKnowledgeAdministrationGuidelines {
-	return &MedicationKnowledgeAdministrationGuidelines{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Dosage: dosage,
-		IndicationCodeableConcept: indicationCodeableConcept,
-		IndicationReference: indicationReference,
-		PatientCharacteristics: patientCharacteristics,
-	}
+func NewMedicationKnowledgeAdministrationGuidelines() *MedicationKnowledgeAdministrationGuidelines {
+	return &MedicationKnowledgeAdministrationGuidelines{}
 }
+
 // FromJSON populates MedicationKnowledgeAdministrationGuidelines from JSON data
 func (m *MedicationKnowledgeAdministrationGuidelines) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -826,86 +417,50 @@ func (m *MedicationKnowledgeAdministrationGuidelines) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicationKnowledgeAdministrationGuidelines
-func (m *MedicationKnowledgeAdministrationGuidelines) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	dosage *[]MedicationKnowledgeDosage,
-	indicationCodeableConcept *CodeableConcept,
-	indicationReference *Reference,
-	patientCharacteristics *[]MedicationKnowledgePatientCharacteristics,
-) *MedicationKnowledgeAdministrationGuidelines {
+// Clone creates a deep copy of MedicationKnowledgeAdministrationGuidelines
+func (m *MedicationKnowledgeAdministrationGuidelines) Clone() *MedicationKnowledgeAdministrationGuidelines {
+	if m == nil { return nil }
 	return &MedicationKnowledgeAdministrationGuidelines{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Dosage: func() []MedicationKnowledgeDosage {
-			if dosage != nil { return *dosage }
-			return m.Dosage
-		}(),
-		IndicationCodeableConcept: func() CodeableConcept {
-			if indicationCodeableConcept != nil { return *indicationCodeableConcept }
-			return m.IndicationCodeableConcept
-		}(),
-		IndicationReference: func() Reference {
-			if indicationReference != nil { return *indicationReference }
-			return m.IndicationReference
-		}(),
-		PatientCharacteristics: func() []MedicationKnowledgePatientCharacteristics {
-			if patientCharacteristics != nil { return *patientCharacteristics }
-			return m.PatientCharacteristics
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Dosage: cloneSlices(m.Dosage),
+		IndicationCodeableConcept: m.IndicationCodeableConcept.Clone(),
+		IndicationReference: m.IndicationReference.Clone(),
+		PatientCharacteristics: cloneSlices(m.PatientCharacteristics),
 	}
 }
+
+// Equals checks for equality with another MedicationKnowledgeAdministrationGuidelines instance
+func (m *MedicationKnowledgeAdministrationGuidelines) Equals(other *MedicationKnowledgeAdministrationGuidelines) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Dosage, other.Dosage) { return false }
+	if !m.IndicationCodeableConcept.Equals(other.IndicationCodeableConcept) { return false }
+	if !m.IndicationReference.Equals(other.IndicationReference) { return false }
+	if !compareSlices(m.PatientCharacteristics, other.PatientCharacteristics) { return false }
+	return true
+}
+
 // MedicationKnowledgeDosage
 // Dosage for the medication for the specific guidelines.
 type MedicationKnowledgeDosage struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// The type of dosage (for example, prophylaxis, maintenance, therapeutic, etc.).
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// dosage
-	// Dosage for the medication for the specific guidelines.
-	Dosage []Dosage `json:"dosage,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Dosage []*Dosage `json:"dosage,omitempty"`
 }
 
 // NewMedicationKnowledgeDosage creates a new MedicationKnowledgeDosage instance
-func NewMedicationKnowledgeDosage(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	dosage []Dosage,
-) *MedicationKnowledgeDosage {
-	return &MedicationKnowledgeDosage{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Dosage: dosage,
-	}
+func NewMedicationKnowledgeDosage() *MedicationKnowledgeDosage {
+	return &MedicationKnowledgeDosage{}
 }
+
 // FromJSON populates MedicationKnowledgeDosage from JSON data
 func (m *MedicationKnowledgeDosage) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -916,81 +471,47 @@ func (m *MedicationKnowledgeDosage) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicationKnowledgeDosage
-func (m *MedicationKnowledgeDosage) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	dosage *[]Dosage,
-) *MedicationKnowledgeDosage {
+// Clone creates a deep copy of MedicationKnowledgeDosage
+func (m *MedicationKnowledgeDosage) Clone() *MedicationKnowledgeDosage {
+	if m == nil { return nil }
 	return &MedicationKnowledgeDosage{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Dosage: func() []Dosage {
-			if dosage != nil { return *dosage }
-			return m.Dosage
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Dosage: cloneSlices(m.Dosage),
 	}
 }
+
+// Equals checks for equality with another MedicationKnowledgeDosage instance
+func (m *MedicationKnowledgeDosage) Equals(other *MedicationKnowledgeDosage) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !compareSlices(m.Dosage, other.Dosage) { return false }
+	return true
+}
+
 // MedicationKnowledgePatientCharacteristics
 // Characteristics of the patient that are relevant to the administration guidelines (for example, height, weight, gender, etc.).
 type MedicationKnowledgePatientCharacteristics struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// characteristicCodeableConcept
-	// Specific characteristic that is relevant to the administration guideline (e.g. height, weight, gender).
-	CharacteristicCodeableConcept CodeableConcept `json:"characteristicCodeableConcept,omitempty"`
-	// characteristicQuantity
-	// Specific characteristic that is relevant to the administration guideline (e.g. height, weight, gender).
-	CharacteristicQuantity Quantity `json:"characteristicQuantity,omitempty"`
-	// value
-	// The specific characteristic (e.g. height, weight, gender, etc.).
-	Value []FhirString `json:"value,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	CharacteristicCodeableConcept *CodeableConcept `json:"characteristiccodeableconcept,omitempty"`
+	CharacteristicQuantity *Quantity `json:"characteristicquantity,omitempty"`
+	Value []*FhirString `json:"value,omitempty"`
 }
 
 // NewMedicationKnowledgePatientCharacteristics creates a new MedicationKnowledgePatientCharacteristics instance
-func NewMedicationKnowledgePatientCharacteristics(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	characteristicCodeableConcept CodeableConcept,
-	characteristicQuantity Quantity,
-	value []FhirString,
-) *MedicationKnowledgePatientCharacteristics {
-	return &MedicationKnowledgePatientCharacteristics{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		CharacteristicCodeableConcept: characteristicCodeableConcept,
-		CharacteristicQuantity: characteristicQuantity,
-		Value: value,
-	}
+func NewMedicationKnowledgePatientCharacteristics() *MedicationKnowledgePatientCharacteristics {
+	return &MedicationKnowledgePatientCharacteristics{}
 }
+
 // FromJSON populates MedicationKnowledgePatientCharacteristics from JSON data
 func (m *MedicationKnowledgePatientCharacteristics) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1001,81 +522,48 @@ func (m *MedicationKnowledgePatientCharacteristics) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicationKnowledgePatientCharacteristics
-func (m *MedicationKnowledgePatientCharacteristics) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	characteristicCodeableConcept *CodeableConcept,
-	characteristicQuantity *Quantity,
-	value *[]FhirString,
-) *MedicationKnowledgePatientCharacteristics {
+// Clone creates a deep copy of MedicationKnowledgePatientCharacteristics
+func (m *MedicationKnowledgePatientCharacteristics) Clone() *MedicationKnowledgePatientCharacteristics {
+	if m == nil { return nil }
 	return &MedicationKnowledgePatientCharacteristics{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		CharacteristicCodeableConcept: func() CodeableConcept {
-			if characteristicCodeableConcept != nil { return *characteristicCodeableConcept }
-			return m.CharacteristicCodeableConcept
-		}(),
-		CharacteristicQuantity: func() Quantity {
-			if characteristicQuantity != nil { return *characteristicQuantity }
-			return m.CharacteristicQuantity
-		}(),
-		Value: func() []FhirString {
-			if value != nil { return *value }
-			return m.Value
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		CharacteristicCodeableConcept: m.CharacteristicCodeableConcept.Clone(),
+		CharacteristicQuantity: m.CharacteristicQuantity.Clone(),
+		Value: cloneSlices(m.Value),
 	}
 }
+
+// Equals checks for equality with another MedicationKnowledgePatientCharacteristics instance
+func (m *MedicationKnowledgePatientCharacteristics) Equals(other *MedicationKnowledgePatientCharacteristics) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.CharacteristicCodeableConcept.Equals(other.CharacteristicCodeableConcept) { return false }
+	if !m.CharacteristicQuantity.Equals(other.CharacteristicQuantity) { return false }
+	if !compareSlices(m.Value, other.Value) { return false }
+	return true
+}
+
 // MedicationKnowledgeMedicineClassification
 // Categorization of the medication within a formulary or classification system.
 type MedicationKnowledgeMedicineClassification struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// The type of category for the medication (for example, therapeutic classification, therapeutic sub-classification).
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// classification
-	// Specific category assigned to the medication (e.g. anti-infective, anti-hypertensive, antibiotic, etc.).
-	Classification []CodeableConcept `json:"classification,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Classification []*CodeableConcept `json:"classification,omitempty"`
 }
 
 // NewMedicationKnowledgeMedicineClassification creates a new MedicationKnowledgeMedicineClassification instance
-func NewMedicationKnowledgeMedicineClassification(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	classification []CodeableConcept,
-) *MedicationKnowledgeMedicineClassification {
-	return &MedicationKnowledgeMedicineClassification{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Classification: classification,
-	}
+func NewMedicationKnowledgeMedicineClassification() *MedicationKnowledgeMedicineClassification {
+	return &MedicationKnowledgeMedicineClassification{}
 }
+
 // FromJSON populates MedicationKnowledgeMedicineClassification from JSON data
 func (m *MedicationKnowledgeMedicineClassification) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1086,76 +574,46 @@ func (m *MedicationKnowledgeMedicineClassification) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicationKnowledgeMedicineClassification
-func (m *MedicationKnowledgeMedicineClassification) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	classification *[]CodeableConcept,
-) *MedicationKnowledgeMedicineClassification {
+// Clone creates a deep copy of MedicationKnowledgeMedicineClassification
+func (m *MedicationKnowledgeMedicineClassification) Clone() *MedicationKnowledgeMedicineClassification {
+	if m == nil { return nil }
 	return &MedicationKnowledgeMedicineClassification{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Classification: func() []CodeableConcept {
-			if classification != nil { return *classification }
-			return m.Classification
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Classification: cloneSlices(m.Classification),
 	}
 }
+
+// Equals checks for equality with another MedicationKnowledgeMedicineClassification instance
+func (m *MedicationKnowledgeMedicineClassification) Equals(other *MedicationKnowledgeMedicineClassification) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !compareSlices(m.Classification, other.Classification) { return false }
+	return true
+}
+
 // MedicationKnowledgePackaging
 // Information that only applies to packages (not products).
 type MedicationKnowledgePackaging struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// A code that defines the specific type of packaging that the medication can be found in (e.g. blister sleeve, tube, bottle).
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// quantity
-	// The number of product units the package would contain if fully loaded.
-	Quantity Quantity `json:"quantity,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Quantity *Quantity `json:"quantity,omitempty"`
 }
 
 // NewMedicationKnowledgePackaging creates a new MedicationKnowledgePackaging instance
-func NewMedicationKnowledgePackaging(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	quantity Quantity,
-) *MedicationKnowledgePackaging {
-	return &MedicationKnowledgePackaging{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Quantity: quantity,
-	}
+func NewMedicationKnowledgePackaging() *MedicationKnowledgePackaging {
+	return &MedicationKnowledgePackaging{}
 }
+
 // FromJSON populates MedicationKnowledgePackaging from JSON data
 func (m *MedicationKnowledgePackaging) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1166,91 +624,49 @@ func (m *MedicationKnowledgePackaging) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicationKnowledgePackaging
-func (m *MedicationKnowledgePackaging) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	quantity *Quantity,
-) *MedicationKnowledgePackaging {
+// Clone creates a deep copy of MedicationKnowledgePackaging
+func (m *MedicationKnowledgePackaging) Clone() *MedicationKnowledgePackaging {
+	if m == nil { return nil }
 	return &MedicationKnowledgePackaging{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Quantity: func() Quantity {
-			if quantity != nil { return *quantity }
-			return m.Quantity
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Quantity: m.Quantity.Clone(),
 	}
 }
+
+// Equals checks for equality with another MedicationKnowledgePackaging instance
+func (m *MedicationKnowledgePackaging) Equals(other *MedicationKnowledgePackaging) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Quantity.Equals(other.Quantity) { return false }
+	return true
+}
+
 // MedicationKnowledgeDrugCharacteristic
 // Specifies descriptive properties of the medicine, such as color, shape, imprints, etc.
 type MedicationKnowledgeDrugCharacteristic struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// A code specifying which characteristic of the medicine is being described (for example, colour, shape, imprint).
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// valueCodeableConcept
-	// Description of the characteristic.
-	ValueCodeableConcept CodeableConcept `json:"valueCodeableConcept,omitempty"`
-	// valueString
-	// Description of the characteristic.
-	ValueString FhirString `json:"valueString,omitempty"`
-	// valueQuantity
-	// Description of the characteristic.
-	ValueQuantity Quantity `json:"valueQuantity,omitempty"`
-	// valueBase64Binary
-	// Description of the characteristic.
-	ValueBase64Binary FhirBase64Binary `json:"valueBase64Binary,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+	ValueString *FhirString `json:"valuestring,omitempty"`
+	ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+	ValueBase64Binary *FhirBase64Binary `json:"valuebase64binary,omitempty"`
 }
 
 // NewMedicationKnowledgeDrugCharacteristic creates a new MedicationKnowledgeDrugCharacteristic instance
-func NewMedicationKnowledgeDrugCharacteristic(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	valueCodeableConcept CodeableConcept,
-	valueString FhirString,
-	valueQuantity Quantity,
-	valueBase64Binary FhirBase64Binary,
-) *MedicationKnowledgeDrugCharacteristic {
-	return &MedicationKnowledgeDrugCharacteristic{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		ValueCodeableConcept: valueCodeableConcept,
-		ValueString: valueString,
-		ValueQuantity: valueQuantity,
-		ValueBase64Binary: valueBase64Binary,
-	}
+func NewMedicationKnowledgeDrugCharacteristic() *MedicationKnowledgeDrugCharacteristic {
+	return &MedicationKnowledgeDrugCharacteristic{}
 }
+
 // FromJSON populates MedicationKnowledgeDrugCharacteristic from JSON data
 func (m *MedicationKnowledgeDrugCharacteristic) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1261,101 +677,54 @@ func (m *MedicationKnowledgeDrugCharacteristic) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicationKnowledgeDrugCharacteristic
-func (m *MedicationKnowledgeDrugCharacteristic) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	valueCodeableConcept *CodeableConcept,
-	valueString *FhirString,
-	valueQuantity *Quantity,
-	valueBase64Binary *FhirBase64Binary,
-) *MedicationKnowledgeDrugCharacteristic {
+// Clone creates a deep copy of MedicationKnowledgeDrugCharacteristic
+func (m *MedicationKnowledgeDrugCharacteristic) Clone() *MedicationKnowledgeDrugCharacteristic {
+	if m == nil { return nil }
 	return &MedicationKnowledgeDrugCharacteristic{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		ValueCodeableConcept: func() CodeableConcept {
-			if valueCodeableConcept != nil { return *valueCodeableConcept }
-			return m.ValueCodeableConcept
-		}(),
-		ValueString: func() FhirString {
-			if valueString != nil { return *valueString }
-			return m.ValueString
-		}(),
-		ValueQuantity: func() Quantity {
-			if valueQuantity != nil { return *valueQuantity }
-			return m.ValueQuantity
-		}(),
-		ValueBase64Binary: func() FhirBase64Binary {
-			if valueBase64Binary != nil { return *valueBase64Binary }
-			return m.ValueBase64Binary
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		ValueCodeableConcept: m.ValueCodeableConcept.Clone(),
+		ValueString: m.ValueString.Clone(),
+		ValueQuantity: m.ValueQuantity.Clone(),
+		ValueBase64Binary: m.ValueBase64Binary.Clone(),
 	}
 }
+
+// Equals checks for equality with another MedicationKnowledgeDrugCharacteristic instance
+func (m *MedicationKnowledgeDrugCharacteristic) Equals(other *MedicationKnowledgeDrugCharacteristic) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.ValueCodeableConcept.Equals(other.ValueCodeableConcept) { return false }
+	if !m.ValueString.Equals(other.ValueString) { return false }
+	if !m.ValueQuantity.Equals(other.ValueQuantity) { return false }
+	if !m.ValueBase64Binary.Equals(other.ValueBase64Binary) { return false }
+	return true
+}
+
 // MedicationKnowledgeRegulatory
 // Regulatory information about a medication.
 type MedicationKnowledgeRegulatory struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// regulatoryAuthority
-	// The authority that is specifying the regulations.
-	RegulatoryAuthority Reference `json:"regulatoryAuthority,omitempty"`
-	// substitution
-	// Specifies if changes are allowed when dispensing a medication from a regulatory perspective.
-	Substitution []MedicationKnowledgeSubstitution `json:"substitution,omitempty"`
-	// schedule
-	// Specifies the schedule of a medication in jurisdiction.
-	Schedule []MedicationKnowledgeSchedule `json:"schedule,omitempty"`
-	// maxDispense
-	// The maximum number of units of the medication that can be dispensed in a period.
-	MaxDispense MedicationKnowledgeMaxDispense `json:"maxDispense,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	RegulatoryAuthority *Reference `json:"regulatoryauthority,omitempty"`
+	Substitution []*MedicationKnowledgeSubstitution `json:"substitution,omitempty"`
+	Schedule []*MedicationKnowledgeSchedule `json:"schedule,omitempty"`
+	MaxDispense *MedicationKnowledgeMaxDispense `json:"maxdispense,omitempty"`
 }
 
 // NewMedicationKnowledgeRegulatory creates a new MedicationKnowledgeRegulatory instance
-func NewMedicationKnowledgeRegulatory(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	regulatoryAuthority Reference,
-	substitution []MedicationKnowledgeSubstitution,
-	schedule []MedicationKnowledgeSchedule,
-	maxDispense MedicationKnowledgeMaxDispense,
-) *MedicationKnowledgeRegulatory {
-	return &MedicationKnowledgeRegulatory{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		RegulatoryAuthority: regulatoryAuthority,
-		Substitution: substitution,
-		Schedule: schedule,
-		MaxDispense: maxDispense,
-	}
+func NewMedicationKnowledgeRegulatory() *MedicationKnowledgeRegulatory {
+	return &MedicationKnowledgeRegulatory{}
 }
+
 // FromJSON populates MedicationKnowledgeRegulatory from JSON data
 func (m *MedicationKnowledgeRegulatory) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1366,86 +735,50 @@ func (m *MedicationKnowledgeRegulatory) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicationKnowledgeRegulatory
-func (m *MedicationKnowledgeRegulatory) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	regulatoryAuthority *Reference,
-	substitution *[]MedicationKnowledgeSubstitution,
-	schedule *[]MedicationKnowledgeSchedule,
-	maxDispense *MedicationKnowledgeMaxDispense,
-) *MedicationKnowledgeRegulatory {
+// Clone creates a deep copy of MedicationKnowledgeRegulatory
+func (m *MedicationKnowledgeRegulatory) Clone() *MedicationKnowledgeRegulatory {
+	if m == nil { return nil }
 	return &MedicationKnowledgeRegulatory{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		RegulatoryAuthority: func() Reference {
-			if regulatoryAuthority != nil { return *regulatoryAuthority }
-			return m.RegulatoryAuthority
-		}(),
-		Substitution: func() []MedicationKnowledgeSubstitution {
-			if substitution != nil { return *substitution }
-			return m.Substitution
-		}(),
-		Schedule: func() []MedicationKnowledgeSchedule {
-			if schedule != nil { return *schedule }
-			return m.Schedule
-		}(),
-		MaxDispense: func() MedicationKnowledgeMaxDispense {
-			if maxDispense != nil { return *maxDispense }
-			return m.MaxDispense
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		RegulatoryAuthority: m.RegulatoryAuthority.Clone(),
+		Substitution: cloneSlices(m.Substitution),
+		Schedule: cloneSlices(m.Schedule),
+		MaxDispense: m.MaxDispense.Clone(),
 	}
 }
+
+// Equals checks for equality with another MedicationKnowledgeRegulatory instance
+func (m *MedicationKnowledgeRegulatory) Equals(other *MedicationKnowledgeRegulatory) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.RegulatoryAuthority.Equals(other.RegulatoryAuthority) { return false }
+	if !compareSlices(m.Substitution, other.Substitution) { return false }
+	if !compareSlices(m.Schedule, other.Schedule) { return false }
+	if !m.MaxDispense.Equals(other.MaxDispense) { return false }
+	return true
+}
+
 // MedicationKnowledgeSubstitution
 // Specifies if changes are allowed when dispensing a medication from a regulatory perspective.
 type MedicationKnowledgeSubstitution struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// Specifies the type of substitution allowed.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// allowed
-	// Specifies if regulation allows for changes in the medication when dispensing.
-	Allowed FhirBoolean `json:"allowed,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Allowed *FhirBoolean `json:"allowed,omitempty"`
 }
 
 // NewMedicationKnowledgeSubstitution creates a new MedicationKnowledgeSubstitution instance
-func NewMedicationKnowledgeSubstitution(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	allowed FhirBoolean,
-) *MedicationKnowledgeSubstitution {
-	return &MedicationKnowledgeSubstitution{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Allowed: allowed,
-	}
+func NewMedicationKnowledgeSubstitution() *MedicationKnowledgeSubstitution {
+	return &MedicationKnowledgeSubstitution{}
 }
+
 // FromJSON populates MedicationKnowledgeSubstitution from JSON data
 func (m *MedicationKnowledgeSubstitution) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1456,71 +789,45 @@ func (m *MedicationKnowledgeSubstitution) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicationKnowledgeSubstitution
-func (m *MedicationKnowledgeSubstitution) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	allowed *FhirBoolean,
-) *MedicationKnowledgeSubstitution {
+// Clone creates a deep copy of MedicationKnowledgeSubstitution
+func (m *MedicationKnowledgeSubstitution) Clone() *MedicationKnowledgeSubstitution {
+	if m == nil { return nil }
 	return &MedicationKnowledgeSubstitution{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Allowed: func() FhirBoolean {
-			if allowed != nil { return *allowed }
-			return m.Allowed
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Allowed: m.Allowed.Clone(),
 	}
 }
+
+// Equals checks for equality with another MedicationKnowledgeSubstitution instance
+func (m *MedicationKnowledgeSubstitution) Equals(other *MedicationKnowledgeSubstitution) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Allowed.Equals(other.Allowed) { return false }
+	return true
+}
+
 // MedicationKnowledgeSchedule
 // Specifies the schedule of a medication in jurisdiction.
 type MedicationKnowledgeSchedule struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// schedule
-	// Specifies the specific drug schedule.
-	Schedule CodeableConcept `json:"schedule,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Schedule *CodeableConcept `json:"schedule,omitempty"`
 }
 
 // NewMedicationKnowledgeSchedule creates a new MedicationKnowledgeSchedule instance
-func NewMedicationKnowledgeSchedule(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	schedule CodeableConcept,
-) *MedicationKnowledgeSchedule {
-	return &MedicationKnowledgeSchedule{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Schedule: schedule,
-	}
+func NewMedicationKnowledgeSchedule() *MedicationKnowledgeSchedule {
+	return &MedicationKnowledgeSchedule{}
 }
+
 // FromJSON populates MedicationKnowledgeSchedule from JSON data
 func (m *MedicationKnowledgeSchedule) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1531,71 +838,44 @@ func (m *MedicationKnowledgeSchedule) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicationKnowledgeSchedule
-func (m *MedicationKnowledgeSchedule) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	schedule *CodeableConcept,
-) *MedicationKnowledgeSchedule {
+// Clone creates a deep copy of MedicationKnowledgeSchedule
+func (m *MedicationKnowledgeSchedule) Clone() *MedicationKnowledgeSchedule {
+	if m == nil { return nil }
 	return &MedicationKnowledgeSchedule{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Schedule: func() CodeableConcept {
-			if schedule != nil { return *schedule }
-			return m.Schedule
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Schedule: m.Schedule.Clone(),
 	}
 }
+
+// Equals checks for equality with another MedicationKnowledgeSchedule instance
+func (m *MedicationKnowledgeSchedule) Equals(other *MedicationKnowledgeSchedule) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Schedule.Equals(other.Schedule) { return false }
+	return true
+}
+
 // MedicationKnowledgeMaxDispense
 // The maximum number of units of the medication that can be dispensed in a period.
 type MedicationKnowledgeMaxDispense struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// quantity
-	// The maximum number of units of the medication that can be dispensed.
-	Quantity Quantity `json:"quantity,omitempty"`
-	// period
-	// The period that applies to the maximum number of units.
-	Period FhirDuration `json:"period,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Quantity *Quantity `json:"quantity,omitempty"`
+	Period *FhirDuration `json:"period,omitempty"`
 }
 
 // NewMedicationKnowledgeMaxDispense creates a new MedicationKnowledgeMaxDispense instance
-func NewMedicationKnowledgeMaxDispense(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	quantity Quantity,
-	period FhirDuration,
-) *MedicationKnowledgeMaxDispense {
-	return &MedicationKnowledgeMaxDispense{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Quantity: quantity,
-		Period: period,
-	}
+func NewMedicationKnowledgeMaxDispense() *MedicationKnowledgeMaxDispense {
+	return &MedicationKnowledgeMaxDispense{}
 }
+
 // FromJSON populates MedicationKnowledgeMaxDispense from JSON data
 func (m *MedicationKnowledgeMaxDispense) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1606,81 +886,47 @@ func (m *MedicationKnowledgeMaxDispense) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicationKnowledgeMaxDispense
-func (m *MedicationKnowledgeMaxDispense) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	quantity *Quantity,
-	period *FhirDuration,
-) *MedicationKnowledgeMaxDispense {
+// Clone creates a deep copy of MedicationKnowledgeMaxDispense
+func (m *MedicationKnowledgeMaxDispense) Clone() *MedicationKnowledgeMaxDispense {
+	if m == nil { return nil }
 	return &MedicationKnowledgeMaxDispense{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Quantity: func() Quantity {
-			if quantity != nil { return *quantity }
-			return m.Quantity
-		}(),
-		Period: func() FhirDuration {
-			if period != nil { return *period }
-			return m.Period
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Quantity: m.Quantity.Clone(),
+		Period: m.Period.Clone(),
 	}
 }
+
+// Equals checks for equality with another MedicationKnowledgeMaxDispense instance
+func (m *MedicationKnowledgeMaxDispense) Equals(other *MedicationKnowledgeMaxDispense) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Quantity.Equals(other.Quantity) { return false }
+	if !m.Period.Equals(other.Period) { return false }
+	return true
+}
+
 // MedicationKnowledgeKinetics
 // The time course of drug absorption, distribution, metabolism and excretion of a medication from the body.
 type MedicationKnowledgeKinetics struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// areaUnderCurve
-	// The drug concentration measured at certain discrete points in time.
-	AreaUnderCurve []Quantity `json:"areaUnderCurve,omitempty"`
-	// lethalDose50
-	// The median lethal dose of a drug.
-	LethalDose50 []Quantity `json:"lethalDose50,omitempty"`
-	// halfLifePeriod
-	// The time required for any specified property (e.g., the concentration of a substance in the body) to decrease by half.
-	HalfLifePeriod FhirDuration `json:"halfLifePeriod,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	AreaUnderCurve []*Quantity `json:"areaundercurve,omitempty"`
+	LethalDose50 []*Quantity `json:"lethaldose50,omitempty"`
+	HalfLifePeriod *FhirDuration `json:"halflifeperiod,omitempty"`
 }
 
 // NewMedicationKnowledgeKinetics creates a new MedicationKnowledgeKinetics instance
-func NewMedicationKnowledgeKinetics(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	areaUnderCurve []Quantity,
-	lethalDose50 []Quantity,
-	halfLifePeriod FhirDuration,
-) *MedicationKnowledgeKinetics {
-	return &MedicationKnowledgeKinetics{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		AreaUnderCurve: areaUnderCurve,
-		LethalDose50: lethalDose50,
-		HalfLifePeriod: halfLifePeriod,
-	}
+func NewMedicationKnowledgeKinetics() *MedicationKnowledgeKinetics {
+	return &MedicationKnowledgeKinetics{}
 }
+
 // FromJSON populates MedicationKnowledgeKinetics from JSON data
 func (m *MedicationKnowledgeKinetics) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1691,39 +937,29 @@ func (m *MedicationKnowledgeKinetics) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicationKnowledgeKinetics
-func (m *MedicationKnowledgeKinetics) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	areaUnderCurve *[]Quantity,
-	lethalDose50 *[]Quantity,
-	halfLifePeriod *FhirDuration,
-) *MedicationKnowledgeKinetics {
+// Clone creates a deep copy of MedicationKnowledgeKinetics
+func (m *MedicationKnowledgeKinetics) Clone() *MedicationKnowledgeKinetics {
+	if m == nil { return nil }
 	return &MedicationKnowledgeKinetics{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		AreaUnderCurve: func() []Quantity {
-			if areaUnderCurve != nil { return *areaUnderCurve }
-			return m.AreaUnderCurve
-		}(),
-		LethalDose50: func() []Quantity {
-			if lethalDose50 != nil { return *lethalDose50 }
-			return m.LethalDose50
-		}(),
-		HalfLifePeriod: func() FhirDuration {
-			if halfLifePeriod != nil { return *halfLifePeriod }
-			return m.HalfLifePeriod
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		AreaUnderCurve: cloneSlices(m.AreaUnderCurve),
+		LethalDose50: cloneSlices(m.LethalDose50),
+		HalfLifePeriod: m.HalfLifePeriod.Clone(),
 	}
 }
+
+// Equals checks for equality with another MedicationKnowledgeKinetics instance
+func (m *MedicationKnowledgeKinetics) Equals(other *MedicationKnowledgeKinetics) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.AreaUnderCurve, other.AreaUnderCurve) { return false }
+	if !compareSlices(m.LethalDose50, other.LethalDose50) { return false }
+	if !m.HalfLifePeriod.Equals(other.HalfLifePeriod) { return false }
+	return true
+}
+

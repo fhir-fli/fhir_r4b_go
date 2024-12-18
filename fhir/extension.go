@@ -3,292 +3,73 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // FhirExtension
 // Optional Extension Element - found in all resources.
 type FhirExtension struct {
 	DataType
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// url
-	// Source of the definition for the extension code - a logical name or a URL.
-	Url FhirString `json:"url,omitempty"`
-	// valueBase64Binary
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueBase64Binary FhirBase64Binary `json:"valueBase64Binary,omitempty"`
-	// valueBoolean
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueBoolean FhirBoolean `json:"valueBoolean,omitempty"`
-	// valueCanonical
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueCanonical FhirCanonical `json:"valueCanonical,omitempty"`
-	// valueCode
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueCode FhirCode `json:"valueCode,omitempty"`
-	// valueDate
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueDate FhirDate `json:"valueDate,omitempty"`
-	// valueDateTime
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueDateTime FhirDateTime `json:"valueDateTime,omitempty"`
-	// valueDecimal
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueDecimal FhirDecimal `json:"valueDecimal,omitempty"`
-	// valueId
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueId FhirId `json:"valueId,omitempty"`
-	// valueInstant
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueInstant FhirInstant `json:"valueInstant,omitempty"`
-	// valueInteger
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueInteger FhirInteger `json:"valueInteger,omitempty"`
-	// valueMarkdown
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueMarkdown FhirMarkdown `json:"valueMarkdown,omitempty"`
-	// valueOid
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueOid FhirOid `json:"valueOid,omitempty"`
-	// valuePositiveInt
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValuePositiveInt FhirPositiveInt `json:"valuePositiveInt,omitempty"`
-	// valueString
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueString FhirString `json:"valueString,omitempty"`
-	// valueTime
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueTime FhirTime `json:"valueTime,omitempty"`
-	// valueUnsignedInt
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueUnsignedInt FhirUnsignedInt `json:"valueUnsignedInt,omitempty"`
-	// valueUri
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueUri FhirUri `json:"valueUri,omitempty"`
-	// valueUrl
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueUrl FhirUrl `json:"valueUrl,omitempty"`
-	// valueUuid
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueUuid FhirUuid `json:"valueUuid,omitempty"`
-	// valueAddress
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueAddress Address `json:"valueAddress,omitempty"`
-	// valueAge
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueAge Age `json:"valueAge,omitempty"`
-	// valueAnnotation
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueAnnotation Annotation `json:"valueAnnotation,omitempty"`
-	// valueAttachment
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueAttachment Attachment `json:"valueAttachment,omitempty"`
-	// valueCodeableConcept
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueCodeableConcept CodeableConcept `json:"valueCodeableConcept,omitempty"`
-	// valueCodeableReference
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueCodeableReference CodeableReference `json:"valueCodeableReference,omitempty"`
-	// valueCoding
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueCoding Coding `json:"valueCoding,omitempty"`
-	// valueContactPoint
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueContactPoint ContactPoint `json:"valueContactPoint,omitempty"`
-	// valueCount
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueCount Count `json:"valueCount,omitempty"`
-	// valueDistance
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueDistance Distance `json:"valueDistance,omitempty"`
-	// valueDuration
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueDuration FhirDuration `json:"valueDuration,omitempty"`
-	// valueHumanName
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueHumanName HumanName `json:"valueHumanName,omitempty"`
-	// valueIdentifier
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueIdentifier Identifier `json:"valueIdentifier,omitempty"`
-	// valueMoney
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueMoney Money `json:"valueMoney,omitempty"`
-	// valuePeriod
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValuePeriod Period `json:"valuePeriod,omitempty"`
-	// valueQuantity
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueQuantity Quantity `json:"valueQuantity,omitempty"`
-	// valueRange
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueRange Range `json:"valueRange,omitempty"`
-	// valueRatio
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueRatio Ratio `json:"valueRatio,omitempty"`
-	// valueRatioRange
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueRatioRange RatioRange `json:"valueRatioRange,omitempty"`
-	// valueReference
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueReference Reference `json:"valueReference,omitempty"`
-	// valueSampledData
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueSampledData SampledData `json:"valueSampledData,omitempty"`
-	// valueSignature
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueSignature Signature `json:"valueSignature,omitempty"`
-	// valueTiming
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueTiming Timing `json:"valueTiming,omitempty"`
-	// valueContactDetail
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueContactDetail ContactDetail `json:"valueContactDetail,omitempty"`
-	// valueContributor
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueContributor Contributor `json:"valueContributor,omitempty"`
-	// valueDataRequirement
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueDataRequirement DataRequirement `json:"valueDataRequirement,omitempty"`
-	// valueExpression
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueExpression FhirExpression `json:"valueExpression,omitempty"`
-	// valueParameterDefinition
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueParameterDefinition ParameterDefinition `json:"valueParameterDefinition,omitempty"`
-	// valueRelatedArtifact
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueRelatedArtifact RelatedArtifact `json:"valueRelatedArtifact,omitempty"`
-	// valueTriggerDefinition
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueTriggerDefinition TriggerDefinition `json:"valueTriggerDefinition,omitempty"`
-	// valueUsageContext
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueUsageContext UsageContext `json:"valueUsageContext,omitempty"`
-	// valueDosage
-	// Value of extension - must be one of a constrained set of the data types (see [Extensibility](extensibility.html) for a list).
-	ValueDosage Dosage `json:"valueDosage,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	Url *FhirString `json:"url,omitempty"`
+	ValueBase64Binary *FhirBase64Binary `json:"valuebase64binary,omitempty"`
+	ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
+	ValueCanonical *FhirCanonical `json:"valuecanonical,omitempty"`
+	ValueCode *FhirCode `json:"valuecode,omitempty"`
+	ValueDate *FhirDate `json:"valuedate,omitempty"`
+	ValueDateTime *FhirDateTime `json:"valuedatetime,omitempty"`
+	ValueDecimal *FhirDecimal `json:"valuedecimal,omitempty"`
+	ValueId *FhirId `json:"valueid,omitempty"`
+	ValueInstant *FhirInstant `json:"valueinstant,omitempty"`
+	ValueInteger *FhirInteger `json:"valueinteger,omitempty"`
+	ValueMarkdown *FhirMarkdown `json:"valuemarkdown,omitempty"`
+	ValueOid *FhirOid `json:"valueoid,omitempty"`
+	ValuePositiveInt *FhirPositiveInt `json:"valuepositiveint,omitempty"`
+	ValueString *FhirString `json:"valuestring,omitempty"`
+	ValueTime *FhirTime `json:"valuetime,omitempty"`
+	ValueUnsignedInt *FhirUnsignedInt `json:"valueunsignedint,omitempty"`
+	ValueUri *FhirUri `json:"valueuri,omitempty"`
+	ValueUrl *FhirUrl `json:"valueurl,omitempty"`
+	ValueUuid *FhirUuid `json:"valueuuid,omitempty"`
+	ValueAddress *Address `json:"valueaddress,omitempty"`
+	ValueAge *Age `json:"valueage,omitempty"`
+	ValueAnnotation *Annotation `json:"valueannotation,omitempty"`
+	ValueAttachment *Attachment `json:"valueattachment,omitempty"`
+	ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+	ValueCodeableReference *CodeableReference `json:"valuecodeablereference,omitempty"`
+	ValueCoding *Coding `json:"valuecoding,omitempty"`
+	ValueContactPoint *ContactPoint `json:"valuecontactpoint,omitempty"`
+	ValueCount *Count `json:"valuecount,omitempty"`
+	ValueDistance *Distance `json:"valuedistance,omitempty"`
+	ValueDuration *FhirDuration `json:"valueduration,omitempty"`
+	ValueHumanName *HumanName `json:"valuehumanname,omitempty"`
+	ValueIdentifier *Identifier `json:"valueidentifier,omitempty"`
+	ValueMoney *Money `json:"valuemoney,omitempty"`
+	ValuePeriod *Period `json:"valueperiod,omitempty"`
+	ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+	ValueRange *Range `json:"valuerange,omitempty"`
+	ValueRatio *Ratio `json:"valueratio,omitempty"`
+	ValueRatioRange *RatioRange `json:"valueratiorange,omitempty"`
+	ValueReference *Reference `json:"valuereference,omitempty"`
+	ValueSampledData *SampledData `json:"valuesampleddata,omitempty"`
+	ValueSignature *Signature `json:"valuesignature,omitempty"`
+	ValueTiming *Timing `json:"valuetiming,omitempty"`
+	ValueContactDetail *ContactDetail `json:"valuecontactdetail,omitempty"`
+	ValueContributor *Contributor `json:"valuecontributor,omitempty"`
+	ValueDataRequirement *DataRequirement `json:"valuedatarequirement,omitempty"`
+	ValueExpression *FhirExpression `json:"valueexpression,omitempty"`
+	ValueParameterDefinition *ParameterDefinition `json:"valueparameterdefinition,omitempty"`
+	ValueRelatedArtifact *RelatedArtifact `json:"valuerelatedartifact,omitempty"`
+	ValueTriggerDefinition *TriggerDefinition `json:"valuetriggerdefinition,omitempty"`
+	ValueUsageContext *UsageContext `json:"valueusagecontext,omitempty"`
+	ValueDosage *Dosage `json:"valuedosage,omitempty"`
 }
 
 // NewFhirExtension creates a new FhirExtension instance
-func NewFhirExtension(
-	id FhirString,
-	extension_ []FhirExtension,
-	url FhirString,
-	valueBase64Binary FhirBase64Binary,
-	valueBoolean FhirBoolean,
-	valueCanonical FhirCanonical,
-	valueCode FhirCode,
-	valueDate FhirDate,
-	valueDateTime FhirDateTime,
-	valueDecimal FhirDecimal,
-	valueId FhirId,
-	valueInstant FhirInstant,
-	valueInteger FhirInteger,
-	valueMarkdown FhirMarkdown,
-	valueOid FhirOid,
-	valuePositiveInt FhirPositiveInt,
-	valueString FhirString,
-	valueTime FhirTime,
-	valueUnsignedInt FhirUnsignedInt,
-	valueUri FhirUri,
-	valueUrl FhirUrl,
-	valueUuid FhirUuid,
-	valueAddress Address,
-	valueAge Age,
-	valueAnnotation Annotation,
-	valueAttachment Attachment,
-	valueCodeableConcept CodeableConcept,
-	valueCodeableReference CodeableReference,
-	valueCoding Coding,
-	valueContactPoint ContactPoint,
-	valueCount Count,
-	valueDistance Distance,
-	valueDuration FhirDuration,
-	valueHumanName HumanName,
-	valueIdentifier Identifier,
-	valueMoney Money,
-	valuePeriod Period,
-	valueQuantity Quantity,
-	valueRange Range,
-	valueRatio Ratio,
-	valueRatioRange RatioRange,
-	valueReference Reference,
-	valueSampledData SampledData,
-	valueSignature Signature,
-	valueTiming Timing,
-	valueContactDetail ContactDetail,
-	valueContributor Contributor,
-	valueDataRequirement DataRequirement,
-	valueExpression FhirExpression,
-	valueParameterDefinition ParameterDefinition,
-	valueRelatedArtifact RelatedArtifact,
-	valueTriggerDefinition TriggerDefinition,
-	valueUsageContext UsageContext,
-	valueDosage Dosage,
-) *FhirExtension {
-	return &FhirExtension{
-		Id: id,
-		Extension_: extension_,
-		Url: url,
-		ValueBase64Binary: valueBase64Binary,
-		ValueBoolean: valueBoolean,
-		ValueCanonical: valueCanonical,
-		ValueCode: valueCode,
-		ValueDate: valueDate,
-		ValueDateTime: valueDateTime,
-		ValueDecimal: valueDecimal,
-		ValueId: valueId,
-		ValueInstant: valueInstant,
-		ValueInteger: valueInteger,
-		ValueMarkdown: valueMarkdown,
-		ValueOid: valueOid,
-		ValuePositiveInt: valuePositiveInt,
-		ValueString: valueString,
-		ValueTime: valueTime,
-		ValueUnsignedInt: valueUnsignedInt,
-		ValueUri: valueUri,
-		ValueUrl: valueUrl,
-		ValueUuid: valueUuid,
-		ValueAddress: valueAddress,
-		ValueAge: valueAge,
-		ValueAnnotation: valueAnnotation,
-		ValueAttachment: valueAttachment,
-		ValueCodeableConcept: valueCodeableConcept,
-		ValueCodeableReference: valueCodeableReference,
-		ValueCoding: valueCoding,
-		ValueContactPoint: valueContactPoint,
-		ValueCount: valueCount,
-		ValueDistance: valueDistance,
-		ValueDuration: valueDuration,
-		ValueHumanName: valueHumanName,
-		ValueIdentifier: valueIdentifier,
-		ValueMoney: valueMoney,
-		ValuePeriod: valuePeriod,
-		ValueQuantity: valueQuantity,
-		ValueRange: valueRange,
-		ValueRatio: valueRatio,
-		ValueRatioRange: valueRatioRange,
-		ValueReference: valueReference,
-		ValueSampledData: valueSampledData,
-		ValueSignature: valueSignature,
-		ValueTiming: valueTiming,
-		ValueContactDetail: valueContactDetail,
-		ValueContributor: valueContributor,
-		ValueDataRequirement: valueDataRequirement,
-		ValueExpression: valueExpression,
-		ValueParameterDefinition: valueParameterDefinition,
-		ValueRelatedArtifact: valueRelatedArtifact,
-		ValueTriggerDefinition: valueTriggerDefinition,
-		ValueUsageContext: valueUsageContext,
-		ValueDosage: valueDosage,
-	}
+func NewFhirExtension() *FhirExtension {
+	return &FhirExtension{}
 }
+
 // FromJSON populates FhirExtension from JSON data
 func (m *FhirExtension) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -299,431 +80,125 @@ func (m *FhirExtension) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of FhirExtension
-func (m *FhirExtension) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	url *FhirString,
-	valueBase64Binary *FhirBase64Binary,
-	valueBoolean *FhirBoolean,
-	valueCanonical *FhirCanonical,
-	valueCode *FhirCode,
-	valueDate *FhirDate,
-	valueDateTime *FhirDateTime,
-	valueDecimal *FhirDecimal,
-	valueId *FhirId,
-	valueInstant *FhirInstant,
-	valueInteger *FhirInteger,
-	valueMarkdown *FhirMarkdown,
-	valueOid *FhirOid,
-	valuePositiveInt *FhirPositiveInt,
-	valueString *FhirString,
-	valueTime *FhirTime,
-	valueUnsignedInt *FhirUnsignedInt,
-	valueUri *FhirUri,
-	valueUrl *FhirUrl,
-	valueUuid *FhirUuid,
-	valueAddress *Address,
-	valueAge *Age,
-	valueAnnotation *Annotation,
-	valueAttachment *Attachment,
-	valueCodeableConcept *CodeableConcept,
-	valueCodeableReference *CodeableReference,
-	valueCoding *Coding,
-	valueContactPoint *ContactPoint,
-	valueCount *Count,
-	valueDistance *Distance,
-	valueDuration *FhirDuration,
-	valueHumanName *HumanName,
-	valueIdentifier *Identifier,
-	valueMoney *Money,
-	valuePeriod *Period,
-	valueQuantity *Quantity,
-	valueRange *Range,
-	valueRatio *Ratio,
-	valueRatioRange *RatioRange,
-	valueReference *Reference,
-	valueSampledData *SampledData,
-	valueSignature *Signature,
-	valueTiming *Timing,
-	valueContactDetail *ContactDetail,
-	valueContributor *Contributor,
-	valueDataRequirement *DataRequirement,
-	valueExpression *FhirExpression,
-	valueParameterDefinition *ParameterDefinition,
-	valueRelatedArtifact *RelatedArtifact,
-	valueTriggerDefinition *TriggerDefinition,
-	valueUsageContext *UsageContext,
-	valueDosage *Dosage,
-) *FhirExtension {
+// Clone creates a deep copy of FhirExtension
+func (m *FhirExtension) Clone() *FhirExtension {
+	if m == nil { return nil }
 	return &FhirExtension{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		Url: func() FhirString {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		ValueBase64Binary: func() FhirBase64Binary {
-			if valueBase64Binary != nil { return *valueBase64Binary }
-			return m.ValueBase64Binary
-		}(),
-		ValueBoolean: func() FhirBoolean {
-			if valueBoolean != nil { return *valueBoolean }
-			return m.ValueBoolean
-		}(),
-		ValueCanonical: func() FhirCanonical {
-			if valueCanonical != nil { return *valueCanonical }
-			return m.ValueCanonical
-		}(),
-		ValueCode: func() FhirCode {
-			if valueCode != nil { return *valueCode }
-			return m.ValueCode
-		}(),
-		ValueDate: func() FhirDate {
-			if valueDate != nil { return *valueDate }
-			return m.ValueDate
-		}(),
-		ValueDateTime: func() FhirDateTime {
-			if valueDateTime != nil { return *valueDateTime }
-			return m.ValueDateTime
-		}(),
-		ValueDecimal: func() FhirDecimal {
-			if valueDecimal != nil { return *valueDecimal }
-			return m.ValueDecimal
-		}(),
-		ValueId: func() FhirId {
-			if valueId != nil { return *valueId }
-			return m.ValueId
-		}(),
-		ValueInstant: func() FhirInstant {
-			if valueInstant != nil { return *valueInstant }
-			return m.ValueInstant
-		}(),
-		ValueInteger: func() FhirInteger {
-			if valueInteger != nil { return *valueInteger }
-			return m.ValueInteger
-		}(),
-		ValueMarkdown: func() FhirMarkdown {
-			if valueMarkdown != nil { return *valueMarkdown }
-			return m.ValueMarkdown
-		}(),
-		ValueOid: func() FhirOid {
-			if valueOid != nil { return *valueOid }
-			return m.ValueOid
-		}(),
-		ValuePositiveInt: func() FhirPositiveInt {
-			if valuePositiveInt != nil { return *valuePositiveInt }
-			return m.ValuePositiveInt
-		}(),
-		ValueString: func() FhirString {
-			if valueString != nil { return *valueString }
-			return m.ValueString
-		}(),
-		ValueTime: func() FhirTime {
-			if valueTime != nil { return *valueTime }
-			return m.ValueTime
-		}(),
-		ValueUnsignedInt: func() FhirUnsignedInt {
-			if valueUnsignedInt != nil { return *valueUnsignedInt }
-			return m.ValueUnsignedInt
-		}(),
-		ValueUri: func() FhirUri {
-			if valueUri != nil { return *valueUri }
-			return m.ValueUri
-		}(),
-		ValueUrl: func() FhirUrl {
-			if valueUrl != nil { return *valueUrl }
-			return m.ValueUrl
-		}(),
-		ValueUuid: func() FhirUuid {
-			if valueUuid != nil { return *valueUuid }
-			return m.ValueUuid
-		}(),
-		ValueAddress: func() Address {
-			if valueAddress != nil { return *valueAddress }
-			return m.ValueAddress
-		}(),
-		ValueAge: func() Age {
-			if valueAge != nil { return *valueAge }
-			return m.ValueAge
-		}(),
-		ValueAnnotation: func() Annotation {
-			if valueAnnotation != nil { return *valueAnnotation }
-			return m.ValueAnnotation
-		}(),
-		ValueAttachment: func() Attachment {
-			if valueAttachment != nil { return *valueAttachment }
-			return m.ValueAttachment
-		}(),
-		ValueCodeableConcept: func() CodeableConcept {
-			if valueCodeableConcept != nil { return *valueCodeableConcept }
-			return m.ValueCodeableConcept
-		}(),
-		ValueCodeableReference: func() CodeableReference {
-			if valueCodeableReference != nil { return *valueCodeableReference }
-			return m.ValueCodeableReference
-		}(),
-		ValueCoding: func() Coding {
-			if valueCoding != nil { return *valueCoding }
-			return m.ValueCoding
-		}(),
-		ValueContactPoint: func() ContactPoint {
-			if valueContactPoint != nil { return *valueContactPoint }
-			return m.ValueContactPoint
-		}(),
-		ValueCount: func() Count {
-			if valueCount != nil { return *valueCount }
-			return m.ValueCount
-		}(),
-		ValueDistance: func() Distance {
-			if valueDistance != nil { return *valueDistance }
-			return m.ValueDistance
-		}(),
-		ValueDuration: func() FhirDuration {
-			if valueDuration != nil { return *valueDuration }
-			return m.ValueDuration
-		}(),
-		ValueHumanName: func() HumanName {
-			if valueHumanName != nil { return *valueHumanName }
-			return m.ValueHumanName
-		}(),
-		ValueIdentifier: func() Identifier {
-			if valueIdentifier != nil { return *valueIdentifier }
-			return m.ValueIdentifier
-		}(),
-		ValueMoney: func() Money {
-			if valueMoney != nil { return *valueMoney }
-			return m.ValueMoney
-		}(),
-		ValuePeriod: func() Period {
-			if valuePeriod != nil { return *valuePeriod }
-			return m.ValuePeriod
-		}(),
-		ValueQuantity: func() Quantity {
-			if valueQuantity != nil { return *valueQuantity }
-			return m.ValueQuantity
-		}(),
-		ValueRange: func() Range {
-			if valueRange != nil { return *valueRange }
-			return m.ValueRange
-		}(),
-		ValueRatio: func() Ratio {
-			if valueRatio != nil { return *valueRatio }
-			return m.ValueRatio
-		}(),
-		ValueRatioRange: func() RatioRange {
-			if valueRatioRange != nil { return *valueRatioRange }
-			return m.ValueRatioRange
-		}(),
-		ValueReference: func() Reference {
-			if valueReference != nil { return *valueReference }
-			return m.ValueReference
-		}(),
-		ValueSampledData: func() SampledData {
-			if valueSampledData != nil { return *valueSampledData }
-			return m.ValueSampledData
-		}(),
-		ValueSignature: func() Signature {
-			if valueSignature != nil { return *valueSignature }
-			return m.ValueSignature
-		}(),
-		ValueTiming: func() Timing {
-			if valueTiming != nil { return *valueTiming }
-			return m.ValueTiming
-		}(),
-		ValueContactDetail: func() ContactDetail {
-			if valueContactDetail != nil { return *valueContactDetail }
-			return m.ValueContactDetail
-		}(),
-		ValueContributor: func() Contributor {
-			if valueContributor != nil { return *valueContributor }
-			return m.ValueContributor
-		}(),
-		ValueDataRequirement: func() DataRequirement {
-			if valueDataRequirement != nil { return *valueDataRequirement }
-			return m.ValueDataRequirement
-		}(),
-		ValueExpression: func() FhirExpression {
-			if valueExpression != nil { return *valueExpression }
-			return m.ValueExpression
-		}(),
-		ValueParameterDefinition: func() ParameterDefinition {
-			if valueParameterDefinition != nil { return *valueParameterDefinition }
-			return m.ValueParameterDefinition
-		}(),
-		ValueRelatedArtifact: func() RelatedArtifact {
-			if valueRelatedArtifact != nil { return *valueRelatedArtifact }
-			return m.ValueRelatedArtifact
-		}(),
-		ValueTriggerDefinition: func() TriggerDefinition {
-			if valueTriggerDefinition != nil { return *valueTriggerDefinition }
-			return m.ValueTriggerDefinition
-		}(),
-		ValueUsageContext: func() UsageContext {
-			if valueUsageContext != nil { return *valueUsageContext }
-			return m.ValueUsageContext
-		}(),
-		ValueDosage: func() Dosage {
-			if valueDosage != nil { return *valueDosage }
-			return m.ValueDosage
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		Url: m.Url.Clone(),
+		ValueBase64Binary: m.ValueBase64Binary.Clone(),
+		ValueBoolean: m.ValueBoolean.Clone(),
+		ValueCanonical: m.ValueCanonical.Clone(),
+		ValueCode: m.ValueCode.Clone(),
+		ValueDate: m.ValueDate.Clone(),
+		ValueDateTime: m.ValueDateTime.Clone(),
+		ValueDecimal: m.ValueDecimal.Clone(),
+		ValueId: m.ValueId.Clone(),
+		ValueInstant: m.ValueInstant.Clone(),
+		ValueInteger: m.ValueInteger.Clone(),
+		ValueMarkdown: m.ValueMarkdown.Clone(),
+		ValueOid: m.ValueOid.Clone(),
+		ValuePositiveInt: m.ValuePositiveInt.Clone(),
+		ValueString: m.ValueString.Clone(),
+		ValueTime: m.ValueTime.Clone(),
+		ValueUnsignedInt: m.ValueUnsignedInt.Clone(),
+		ValueUri: m.ValueUri.Clone(),
+		ValueUrl: m.ValueUrl.Clone(),
+		ValueUuid: m.ValueUuid.Clone(),
+		ValueAddress: m.ValueAddress.Clone(),
+		ValueAge: m.ValueAge.Clone(),
+		ValueAnnotation: m.ValueAnnotation.Clone(),
+		ValueAttachment: m.ValueAttachment.Clone(),
+		ValueCodeableConcept: m.ValueCodeableConcept.Clone(),
+		ValueCodeableReference: m.ValueCodeableReference.Clone(),
+		ValueCoding: m.ValueCoding.Clone(),
+		ValueContactPoint: m.ValueContactPoint.Clone(),
+		ValueCount: m.ValueCount.Clone(),
+		ValueDistance: m.ValueDistance.Clone(),
+		ValueDuration: m.ValueDuration.Clone(),
+		ValueHumanName: m.ValueHumanName.Clone(),
+		ValueIdentifier: m.ValueIdentifier.Clone(),
+		ValueMoney: m.ValueMoney.Clone(),
+		ValuePeriod: m.ValuePeriod.Clone(),
+		ValueQuantity: m.ValueQuantity.Clone(),
+		ValueRange: m.ValueRange.Clone(),
+		ValueRatio: m.ValueRatio.Clone(),
+		ValueRatioRange: m.ValueRatioRange.Clone(),
+		ValueReference: m.ValueReference.Clone(),
+		ValueSampledData: m.ValueSampledData.Clone(),
+		ValueSignature: m.ValueSignature.Clone(),
+		ValueTiming: m.ValueTiming.Clone(),
+		ValueContactDetail: m.ValueContactDetail.Clone(),
+		ValueContributor: m.ValueContributor.Clone(),
+		ValueDataRequirement: m.ValueDataRequirement.Clone(),
+		ValueExpression: m.ValueExpression.Clone(),
+		ValueParameterDefinition: m.ValueParameterDefinition.Clone(),
+		ValueRelatedArtifact: m.ValueRelatedArtifact.Clone(),
+		ValueTriggerDefinition: m.ValueTriggerDefinition.Clone(),
+		ValueUsageContext: m.ValueUsageContext.Clone(),
+		ValueDosage: m.ValueDosage.Clone(),
 	}
 }
 
-// Clone creates a deep copy of FhirExtension.
-func (fe *FhirExtension) Clone() *FhirExtension {
-	if fe == nil {
-		return nil
-	}
-
-	// Deep copy the Extension_ slice
-	var extensionCopy []FhirExtension
-	if fe.Extension_ != nil {
-		extensionCopy = make([]FhirExtension, len(fe.Extension_))
-		for i, ext := range fe.Extension_ {
-			extensionCopy[i] = *ext.Clone()
-		}
-	}
-
-	return &FhirExtension{
-		Id:                 fe.Id,                // Primitive type, can be copied directly
-		Extension_:         extensionCopy,        // Deep copy of the slice
-		Url:                fe.Url,               // Primitive type, can be copied directly
-		ValueBase64Binary:  fe.ValueBase64Binary, // Primitive type, can be copied directly
-		ValueBoolean:       fe.ValueBoolean,      // Primitive type, can be copied directly
-		ValueCanonical:     fe.ValueCanonical,    // Primitive type, can be copied directly
-		ValueCode:          fe.ValueCode,         // Primitive type, can be copied directly
-		ValueDate:          fe.ValueDate,         // Primitive type, can be copied directly
-		ValueDateTime:      fe.ValueDateTime,     // Primitive type, can be copied directly
-		ValueDecimal:       fe.ValueDecimal,      // Primitive type, can be copied directly
-		ValueId:            fe.ValueId,           // Primitive type, can be copied directly
-		ValueInstant:       fe.ValueInstant,      // Primitive type, can be copied directly
-		ValueInteger:       fe.ValueInteger,      // Primitive type, can be copied directly
-		ValueMarkdown:      fe.ValueMarkdown,     // Primitive type, can be copied directly
-		ValueOid:           fe.ValueOid,          // Primitive type, can be copied directly
-		ValuePositiveInt:   fe.ValuePositiveInt,  // Primitive type, can be copied directly
-		ValueString:        fe.ValueString,       // Primitive type, can be copied directly
-		ValueTime:          fe.ValueTime,         // Primitive type, can be copied directly
-		ValueUnsignedInt:   fe.ValueUnsignedInt,  // Primitive type, can be copied directly
-		ValueUri:           fe.ValueUri,          // Primitive type, can be copied directly
-		ValueUrl:           fe.ValueUrl,          // Primitive type, can be copied directly
-		ValueUuid:          fe.ValueUuid,         // Primitive type, can be copied directly
-		ValueAddress:       fe.ValueAddress,      // Composite type, assumed to have its own Clone method
-		ValueAge:           fe.ValueAge,          // Composite type, assumed to have its own Clone method
-		ValueAnnotation:    fe.ValueAnnotation,   // Composite type, assumed to have its own Clone method
-		ValueAttachment:    fe.ValueAttachment,   // Composite type, assumed to have its own Clone method
-		ValueCodeableConcept: fe.ValueCodeableConcept, // Composite type, assumed to have its own Clone method
-		ValueCodeableReference: fe.ValueCodeableReference, // Composite type, assumed to have its own Clone method
-		ValueCoding:        fe.ValueCoding,       // Composite type, assumed to have its own Clone method
-		ValueContactPoint:  fe.ValueContactPoint, // Composite type, assumed to have its own Clone method
-		ValueCount:         fe.ValueCount,        // Composite type, assumed to have its own Clone method
-		ValueDistance:      fe.ValueDistance,     // Composite type, assumed to have its own Clone method
-		ValueDuration:      fe.ValueDuration,     // Composite type, assumed to have its own Clone method
-		ValueHumanName:     fe.ValueHumanName,    // Composite type, assumed to have its own Clone method
-		ValueIdentifier:    fe.ValueIdentifier,   // Composite type, assumed to have its own Clone method
-		ValueMoney:         fe.ValueMoney,        // Composite type, assumed to have its own Clone method
-		ValuePeriod:        fe.ValuePeriod,       // Composite type, assumed to have its own Clone method
-		ValueQuantity:      fe.ValueQuantity,     // Composite type, assumed to have its own Clone method
-		ValueRange:         fe.ValueRange,        // Composite type, assumed to have its own Clone method
-		ValueRatio:         fe.ValueRatio,        // Composite type, assumed to have its own Clone method
-		ValueRatioRange:    fe.ValueRatioRange,   // Composite type, assumed to have its own Clone method
-		ValueReference:     fe.ValueReference,    // Composite type, assumed to have its own Clone method
-		ValueSampledData:   fe.ValueSampledData,  // Composite type, assumed to have its own Clone method
-		ValueSignature:     fe.ValueSignature,    // Composite type, assumed to have its own Clone method
-		ValueTiming:        fe.ValueTiming,       // Composite type, assumed to have its own Clone method
-		ValueContactDetail: fe.ValueContactDetail, // Composite type, assumed to have its own Clone method
-		ValueContributor:   fe.ValueContributor,  // Composite type, assumed to have its own Clone method
-		ValueDataRequirement: fe.ValueDataRequirement, // Composite type, assumed to have its own Clone method
-		ValueExpression:    fe.ValueExpression,   // Composite type, assumed to have its own Clone method
-		ValueParameterDefinition: fe.ValueParameterDefinition, // Composite type, assumed to have its own Clone method
-		ValueRelatedArtifact: fe.ValueRelatedArtifact, // Composite type, assumed to have its own Clone method
-		ValueTriggerDefinition: fe.ValueTriggerDefinition, // Composite type, assumed to have its own Clone method
-		ValueUsageContext:  fe.ValueUsageContext, // Composite type, assumed to have its own Clone method
-		ValueDosage:        fe.ValueDosage,       // Composite type, assumed to have its own Clone method
-	}
+// Equals checks for equality with another FhirExtension instance
+func (m *FhirExtension) Equals(other *FhirExtension) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !m.ValueBase64Binary.Equals(other.ValueBase64Binary) { return false }
+	if !m.ValueBoolean.Equals(other.ValueBoolean) { return false }
+	if !m.ValueCanonical.Equals(other.ValueCanonical) { return false }
+	if !m.ValueCode.Equals(other.ValueCode) { return false }
+	if !m.ValueDate.Equals(other.ValueDate) { return false }
+	if !m.ValueDateTime.Equals(other.ValueDateTime) { return false }
+	if !m.ValueDecimal.Equals(other.ValueDecimal) { return false }
+	if !m.ValueId.Equals(other.ValueId) { return false }
+	if !m.ValueInstant.Equals(other.ValueInstant) { return false }
+	if !m.ValueInteger.Equals(other.ValueInteger) { return false }
+	if !m.ValueMarkdown.Equals(other.ValueMarkdown) { return false }
+	if !m.ValueOid.Equals(other.ValueOid) { return false }
+	if !m.ValuePositiveInt.Equals(other.ValuePositiveInt) { return false }
+	if !m.ValueString.Equals(other.ValueString) { return false }
+	if !m.ValueTime.Equals(other.ValueTime) { return false }
+	if !m.ValueUnsignedInt.Equals(other.ValueUnsignedInt) { return false }
+	if !m.ValueUri.Equals(other.ValueUri) { return false }
+	if !m.ValueUrl.Equals(other.ValueUrl) { return false }
+	if !m.ValueUuid.Equals(other.ValueUuid) { return false }
+	if !m.ValueAddress.Equals(other.ValueAddress) { return false }
+	if !m.ValueAge.Equals(other.ValueAge) { return false }
+	if !m.ValueAnnotation.Equals(other.ValueAnnotation) { return false }
+	if !m.ValueAttachment.Equals(other.ValueAttachment) { return false }
+	if !m.ValueCodeableConcept.Equals(other.ValueCodeableConcept) { return false }
+	if !m.ValueCodeableReference.Equals(other.ValueCodeableReference) { return false }
+	if !m.ValueCoding.Equals(other.ValueCoding) { return false }
+	if !m.ValueContactPoint.Equals(other.ValueContactPoint) { return false }
+	if !m.ValueCount.Equals(other.ValueCount) { return false }
+	if !m.ValueDistance.Equals(other.ValueDistance) { return false }
+	if !m.ValueDuration.Equals(other.ValueDuration) { return false }
+	if !m.ValueHumanName.Equals(other.ValueHumanName) { return false }
+	if !m.ValueIdentifier.Equals(other.ValueIdentifier) { return false }
+	if !m.ValueMoney.Equals(other.ValueMoney) { return false }
+	if !m.ValuePeriod.Equals(other.ValuePeriod) { return false }
+	if !m.ValueQuantity.Equals(other.ValueQuantity) { return false }
+	if !m.ValueRange.Equals(other.ValueRange) { return false }
+	if !m.ValueRatio.Equals(other.ValueRatio) { return false }
+	if !m.ValueRatioRange.Equals(other.ValueRatioRange) { return false }
+	if !m.ValueReference.Equals(other.ValueReference) { return false }
+	if !m.ValueSampledData.Equals(other.ValueSampledData) { return false }
+	if !m.ValueSignature.Equals(other.ValueSignature) { return false }
+	if !m.ValueTiming.Equals(other.ValueTiming) { return false }
+	if !m.ValueContactDetail.Equals(other.ValueContactDetail) { return false }
+	if !m.ValueContributor.Equals(other.ValueContributor) { return false }
+	if !m.ValueDataRequirement.Equals(other.ValueDataRequirement) { return false }
+	if !m.ValueExpression.Equals(other.ValueExpression) { return false }
+	if !m.ValueParameterDefinition.Equals(other.ValueParameterDefinition) { return false }
+	if !m.ValueRelatedArtifact.Equals(other.ValueRelatedArtifact) { return false }
+	if !m.ValueTriggerDefinition.Equals(other.ValueTriggerDefinition) { return false }
+	if !m.ValueUsageContext.Equals(other.ValueUsageContext) { return false }
+	if !m.ValueDosage.Equals(other.ValueDosage) { return false }
+	return true
 }
 
-// EqualsDeep compares two FhirExtension instances for deep equality.
-func (fe *FhirExtension) EqualsDeep(other *FhirExtension) bool {
-	if other == nil {
-		return false
-	}
-
-	// Compare primitive fields
-	if fe.Id != other.Id || fe.Url != other.Url {
-		return false
-	}
-
-	// Compare extensions slice
-	if len(fe.Extension_) != len(other.Extension_) {
-		return false
-	}
-	for i := range fe.Extension_ {
-		if !fe.Extension_[i].EqualsDeep(&other.Extension_[i]) {
-			return false
-		}
-	}
-
-	// Compare non-primitive fields using their own equality methods
-	if !fe.ValueAddress.EqualsDeep(other.ValueAddress) ||
-		!fe.ValueAge.EqualsDeep(other.ValueAge) ||
-		!fe.ValueAnnotation.EqualsDeep(other.ValueAnnotation) ||
-		!fe.ValueAttachment.EqualsDeep(other.ValueAttachment) ||
-		!fe.ValueCodeableConcept.EqualsDeep(other.ValueCodeableConcept) ||
-		!fe.ValueCodeableReference.EqualsDeep(other.ValueCodeableReference) ||
-		!fe.ValueCoding.EqualsDeep(other.ValueCoding) ||
-		!fe.ValueContactPoint.EqualsDeep(other.ValueContactPoint) ||
-		!fe.ValueCount.EqualsDeep(other.ValueCount) ||
-		!fe.ValueDistance.EqualsDeep(other.ValueDistance) ||
-		!fe.ValueDuration.EqualsDeep(other.ValueDuration) ||
-		!fe.ValueHumanName.EqualsDeep(other.ValueHumanName) ||
-		!fe.ValueIdentifier.EqualsDeep(other.ValueIdentifier) ||
-		!fe.ValueMoney.EqualsDeep(other.ValueMoney) ||
-		!fe.ValuePeriod.EqualsDeep(other.ValuePeriod) ||
-		!fe.ValueQuantity.EqualsDeep(other.ValueQuantity) ||
-		!fe.ValueRange.EqualsDeep(other.ValueRange) ||
-		!fe.ValueRatio.EqualsDeep(other.ValueRatio) ||
-		!fe.ValueRatioRange.EqualsDeep(other.ValueRatioRange) ||
-		!fe.ValueReference.EqualsDeep(other.ValueReference) ||
-		!fe.ValueSampledData.EqualsDeep(other.ValueSampledData) ||
-		!fe.ValueSignature.EqualsDeep(other.ValueSignature) ||
-		!fe.ValueTiming.EqualsDeep(other.ValueTiming) ||
-		!fe.ValueContactDetail.EqualsDeep(other.ValueContactDetail) ||
-		!fe.ValueContributor.EqualsDeep(other.ValueContributor) ||
-		!fe.ValueDataRequirement.EqualsDeep(other.ValueDataRequirement) ||
-		!fe.ValueExpression.EqualsDeep(other.ValueExpression) ||
-		!fe.ValueParameterDefinition.EqualsDeep(other.ValueParameterDefinition) ||
-		!fe.ValueRelatedArtifact.EqualsDeep(other.ValueRelatedArtifact) ||
-		!fe.ValueTriggerDefinition.EqualsDeep(other.ValueTriggerDefinition) ||
-		!fe.ValueUsageContext.EqualsDeep(other.ValueUsageContext) ||
-		!fe.ValueDosage.EqualsDeep(other.ValueDosage) {
-		return false
-	}
-
-	// Compare remaining primitive fields
-	return fe.ValueBase64Binary == other.ValueBase64Binary &&
-		fe.ValueBoolean == other.ValueBoolean &&
-		fe.ValueCanonical == other.ValueCanonical &&
-		fe.ValueCode == other.ValueCode &&
-		fe.ValueDate == other.ValueDate &&
-		fe.ValueDateTime == other.ValueDateTime &&
-		fe.ValueDecimal == other.ValueDecimal &&
-		fe.ValueId == other.ValueId &&
-		fe.ValueInstant == other.ValueInstant &&
-		fe.ValueInteger == other.ValueInteger &&
-		fe.ValueMarkdown == other.ValueMarkdown &&
-		fe.ValueOid == other.ValueOid &&
-		fe.ValuePositiveInt == other.ValuePositiveInt &&
-		fe.ValueString == other.ValueString &&
-		fe.ValueTime == other.ValueTime &&
-		fe.ValueUnsignedInt == other.ValueUnsignedInt &&
-		fe.ValueUri == other.ValueUri &&
-		fe.ValueUrl == other.ValueUrl &&
-		fe.ValueUuid == other.ValueUuid
-}

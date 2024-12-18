@@ -3,129 +3,40 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // ObservationDefinition
 // Set of definitional characteristics for a kind of observation or measurement produced or consumed by an orderable health care service.
 type ObservationDefinition struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// category
-	// A code that classifies the general type of observation.
-	Category []CodeableConcept `json:"category,omitempty"`
-	// code
-	// Describes what will be observed. Sometimes this is called the observation "name".
-	Code CodeableConcept `json:"code,omitempty"`
-	// identifier
-	// A unique identifier assigned to this ObservationDefinition artifact.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// permittedDataType
-	// The data types allowed for the value element of the instance observations conforming to this ObservationDefinition.
-	PermittedDataType []ObservationDataType `json:"permittedDataType,omitempty"`
-	// multipleResultsAllowed
-	// Multiple results allowed for observations conforming to this ObservationDefinition.
-	MultipleResultsAllowed FhirBoolean `json:"multipleResultsAllowed,omitempty"`
-	// method
-	// The method or technique used to perform the observation.
-	Method CodeableConcept `json:"method,omitempty"`
-	// preferredReportName
-	// The preferred name to be used when reporting the results of observations conforming to this ObservationDefinition.
-	PreferredReportName FhirString `json:"preferredReportName,omitempty"`
-	// quantitativeDetails
-	// Characteristics for quantitative results of this observation.
-	QuantitativeDetails ObservationDefinitionQuantitativeDetails `json:"quantitativeDetails,omitempty"`
-	// qualifiedInterval
-	// Multiple  ranges of results qualified by different contexts for ordinal or continuous observations conforming to this ObservationDefinition.
-	QualifiedInterval []ObservationDefinitionQualifiedInterval `json:"qualifiedInterval,omitempty"`
-	// validCodedValueSet
-	// The set of valid coded results for the observations  conforming to this ObservationDefinition.
-	ValidCodedValueSet Reference `json:"validCodedValueSet,omitempty"`
-	// normalCodedValueSet
-	// The set of normal coded results for the observations conforming to this ObservationDefinition.
-	NormalCodedValueSet Reference `json:"normalCodedValueSet,omitempty"`
-	// abnormalCodedValueSet
-	// The set of abnormal coded results for the observation conforming to this ObservationDefinition.
-	AbnormalCodedValueSet Reference `json:"abnormalCodedValueSet,omitempty"`
-	// criticalCodedValueSet
-	// The set of critical coded results for the observation conforming to this ObservationDefinition.
-	CriticalCodedValueSet Reference `json:"criticalCodedValueSet,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Category []*CodeableConcept `json:"category,omitempty"`
+	Code *CodeableConcept `json:"code,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	PermittedDataType []*ObservationDataType `json:"permitteddatatype,omitempty"`
+	MultipleResultsAllowed *FhirBoolean `json:"multipleresultsallowed,omitempty"`
+	Method *CodeableConcept `json:"method,omitempty"`
+	PreferredReportName *FhirString `json:"preferredreportname,omitempty"`
+	QuantitativeDetails *ObservationDefinitionQuantitativeDetails `json:"quantitativedetails,omitempty"`
+	QualifiedInterval []*ObservationDefinitionQualifiedInterval `json:"qualifiedinterval,omitempty"`
+	ValidCodedValueSet *Reference `json:"validcodedvalueset,omitempty"`
+	NormalCodedValueSet *Reference `json:"normalcodedvalueset,omitempty"`
+	AbnormalCodedValueSet *Reference `json:"abnormalcodedvalueset,omitempty"`
+	CriticalCodedValueSet *Reference `json:"criticalcodedvalueset,omitempty"`
 }
 
 // NewObservationDefinition creates a new ObservationDefinition instance
-func NewObservationDefinition(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	category []CodeableConcept,
-	code CodeableConcept,
-	identifier []Identifier,
-	permittedDataType []ObservationDataType,
-	multipleResultsAllowed FhirBoolean,
-	method CodeableConcept,
-	preferredReportName FhirString,
-	quantitativeDetails ObservationDefinitionQuantitativeDetails,
-	qualifiedInterval []ObservationDefinitionQualifiedInterval,
-	validCodedValueSet Reference,
-	normalCodedValueSet Reference,
-	abnormalCodedValueSet Reference,
-	criticalCodedValueSet Reference,
-) *ObservationDefinition {
-	return &ObservationDefinition{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Category: category,
-		Code: code,
-		Identifier: identifier,
-		PermittedDataType: permittedDataType,
-		MultipleResultsAllowed: multipleResultsAllowed,
-		Method: method,
-		PreferredReportName: preferredReportName,
-		QuantitativeDetails: quantitativeDetails,
-		QualifiedInterval: qualifiedInterval,
-		ValidCodedValueSet: validCodedValueSet,
-		NormalCodedValueSet: normalCodedValueSet,
-		AbnormalCodedValueSet: abnormalCodedValueSet,
-		CriticalCodedValueSet: criticalCodedValueSet,
-	}
+func NewObservationDefinition() *ObservationDefinition {
+	return &ObservationDefinition{}
 }
+
 // FromJSON populates ObservationDefinition from JSON data
 func (m *ObservationDefinition) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -136,166 +47,80 @@ func (m *ObservationDefinition) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ObservationDefinition
-func (m *ObservationDefinition) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	category *[]CodeableConcept,
-	code *CodeableConcept,
-	identifier *[]Identifier,
-	permittedDataType *[]ObservationDataType,
-	multipleResultsAllowed *FhirBoolean,
-	method *CodeableConcept,
-	preferredReportName *FhirString,
-	quantitativeDetails *ObservationDefinitionQuantitativeDetails,
-	qualifiedInterval *[]ObservationDefinitionQualifiedInterval,
-	validCodedValueSet *Reference,
-	normalCodedValueSet *Reference,
-	abnormalCodedValueSet *Reference,
-	criticalCodedValueSet *Reference,
-) *ObservationDefinition {
+// Clone creates a deep copy of ObservationDefinition
+func (m *ObservationDefinition) Clone() *ObservationDefinition {
+	if m == nil { return nil }
 	return &ObservationDefinition{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Category: func() []CodeableConcept {
-			if category != nil { return *category }
-			return m.Category
-		}(),
-		Code: func() CodeableConcept {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		PermittedDataType: func() []ObservationDataType {
-			if permittedDataType != nil { return *permittedDataType }
-			return m.PermittedDataType
-		}(),
-		MultipleResultsAllowed: func() FhirBoolean {
-			if multipleResultsAllowed != nil { return *multipleResultsAllowed }
-			return m.MultipleResultsAllowed
-		}(),
-		Method: func() CodeableConcept {
-			if method != nil { return *method }
-			return m.Method
-		}(),
-		PreferredReportName: func() FhirString {
-			if preferredReportName != nil { return *preferredReportName }
-			return m.PreferredReportName
-		}(),
-		QuantitativeDetails: func() ObservationDefinitionQuantitativeDetails {
-			if quantitativeDetails != nil { return *quantitativeDetails }
-			return m.QuantitativeDetails
-		}(),
-		QualifiedInterval: func() []ObservationDefinitionQualifiedInterval {
-			if qualifiedInterval != nil { return *qualifiedInterval }
-			return m.QualifiedInterval
-		}(),
-		ValidCodedValueSet: func() Reference {
-			if validCodedValueSet != nil { return *validCodedValueSet }
-			return m.ValidCodedValueSet
-		}(),
-		NormalCodedValueSet: func() Reference {
-			if normalCodedValueSet != nil { return *normalCodedValueSet }
-			return m.NormalCodedValueSet
-		}(),
-		AbnormalCodedValueSet: func() Reference {
-			if abnormalCodedValueSet != nil { return *abnormalCodedValueSet }
-			return m.AbnormalCodedValueSet
-		}(),
-		CriticalCodedValueSet: func() Reference {
-			if criticalCodedValueSet != nil { return *criticalCodedValueSet }
-			return m.CriticalCodedValueSet
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Category: cloneSlices(m.Category),
+		Code: m.Code.Clone(),
+		Identifier: cloneSlices(m.Identifier),
+		PermittedDataType: cloneSlices(m.PermittedDataType),
+		MultipleResultsAllowed: m.MultipleResultsAllowed.Clone(),
+		Method: m.Method.Clone(),
+		PreferredReportName: m.PreferredReportName.Clone(),
+		QuantitativeDetails: m.QuantitativeDetails.Clone(),
+		QualifiedInterval: cloneSlices(m.QualifiedInterval),
+		ValidCodedValueSet: m.ValidCodedValueSet.Clone(),
+		NormalCodedValueSet: m.NormalCodedValueSet.Clone(),
+		AbnormalCodedValueSet: m.AbnormalCodedValueSet.Clone(),
+		CriticalCodedValueSet: m.CriticalCodedValueSet.Clone(),
 	}
 }
+
+// Equals checks for equality with another ObservationDefinition instance
+func (m *ObservationDefinition) Equals(other *ObservationDefinition) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Category, other.Category) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !compareSlices(m.PermittedDataType, other.PermittedDataType) { return false }
+	if !m.MultipleResultsAllowed.Equals(other.MultipleResultsAllowed) { return false }
+	if !m.Method.Equals(other.Method) { return false }
+	if !m.PreferredReportName.Equals(other.PreferredReportName) { return false }
+	if !m.QuantitativeDetails.Equals(other.QuantitativeDetails) { return false }
+	if !compareSlices(m.QualifiedInterval, other.QualifiedInterval) { return false }
+	if !m.ValidCodedValueSet.Equals(other.ValidCodedValueSet) { return false }
+	if !m.NormalCodedValueSet.Equals(other.NormalCodedValueSet) { return false }
+	if !m.AbnormalCodedValueSet.Equals(other.AbnormalCodedValueSet) { return false }
+	if !m.CriticalCodedValueSet.Equals(other.CriticalCodedValueSet) { return false }
+	return true
+}
+
 // ObservationDefinitionQuantitativeDetails
 // Characteristics for quantitative results of this observation.
 type ObservationDefinitionQuantitativeDetails struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// customaryUnit
-	// Customary unit used to report quantitative results of observations conforming to this ObservationDefinition.
-	CustomaryUnit CodeableConcept `json:"customaryUnit,omitempty"`
-	// unit
-	// SI unit used to report quantitative results of observations conforming to this ObservationDefinition.
-	Unit CodeableConcept `json:"unit,omitempty"`
-	// conversionFactor
-	// Factor for converting value expressed with SI unit to value expressed with customary unit.
-	ConversionFactor FhirDecimal `json:"conversionFactor,omitempty"`
-	// decimalPrecision
-	// Number of digits after decimal separator when the results of such observations are of type Quantity.
-	DecimalPrecision FhirInteger `json:"decimalPrecision,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	CustomaryUnit *CodeableConcept `json:"customaryunit,omitempty"`
+	Unit *CodeableConcept `json:"unit,omitempty"`
+	ConversionFactor *FhirDecimal `json:"conversionfactor,omitempty"`
+	DecimalPrecision *FhirInteger `json:"decimalprecision,omitempty"`
 }
 
 // NewObservationDefinitionQuantitativeDetails creates a new ObservationDefinitionQuantitativeDetails instance
-func NewObservationDefinitionQuantitativeDetails(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	customaryUnit CodeableConcept,
-	unit CodeableConcept,
-	conversionFactor FhirDecimal,
-	decimalPrecision FhirInteger,
-) *ObservationDefinitionQuantitativeDetails {
-	return &ObservationDefinitionQuantitativeDetails{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		CustomaryUnit: customaryUnit,
-		Unit: unit,
-		ConversionFactor: conversionFactor,
-		DecimalPrecision: decimalPrecision,
-	}
+func NewObservationDefinitionQuantitativeDetails() *ObservationDefinitionQuantitativeDetails {
+	return &ObservationDefinitionQuantitativeDetails{}
 }
+
 // FromJSON populates ObservationDefinitionQuantitativeDetails from JSON data
 func (m *ObservationDefinitionQuantitativeDetails) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -306,116 +131,56 @@ func (m *ObservationDefinitionQuantitativeDetails) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ObservationDefinitionQuantitativeDetails
-func (m *ObservationDefinitionQuantitativeDetails) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	customaryUnit *CodeableConcept,
-	unit *CodeableConcept,
-	conversionFactor *FhirDecimal,
-	decimalPrecision *FhirInteger,
-) *ObservationDefinitionQuantitativeDetails {
+// Clone creates a deep copy of ObservationDefinitionQuantitativeDetails
+func (m *ObservationDefinitionQuantitativeDetails) Clone() *ObservationDefinitionQuantitativeDetails {
+	if m == nil { return nil }
 	return &ObservationDefinitionQuantitativeDetails{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		CustomaryUnit: func() CodeableConcept {
-			if customaryUnit != nil { return *customaryUnit }
-			return m.CustomaryUnit
-		}(),
-		Unit: func() CodeableConcept {
-			if unit != nil { return *unit }
-			return m.Unit
-		}(),
-		ConversionFactor: func() FhirDecimal {
-			if conversionFactor != nil { return *conversionFactor }
-			return m.ConversionFactor
-		}(),
-		DecimalPrecision: func() FhirInteger {
-			if decimalPrecision != nil { return *decimalPrecision }
-			return m.DecimalPrecision
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		CustomaryUnit: m.CustomaryUnit.Clone(),
+		Unit: m.Unit.Clone(),
+		ConversionFactor: m.ConversionFactor.Clone(),
+		DecimalPrecision: m.DecimalPrecision.Clone(),
 	}
 }
+
+// Equals checks for equality with another ObservationDefinitionQuantitativeDetails instance
+func (m *ObservationDefinitionQuantitativeDetails) Equals(other *ObservationDefinitionQuantitativeDetails) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.CustomaryUnit.Equals(other.CustomaryUnit) { return false }
+	if !m.Unit.Equals(other.Unit) { return false }
+	if !m.ConversionFactor.Equals(other.ConversionFactor) { return false }
+	if !m.DecimalPrecision.Equals(other.DecimalPrecision) { return false }
+	return true
+}
+
 // ObservationDefinitionQualifiedInterval
 // Multiple  ranges of results qualified by different contexts for ordinal or continuous observations conforming to this ObservationDefinition.
 type ObservationDefinitionQualifiedInterval struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// category
-	// The category of interval of values for continuous or ordinal observations conforming to this ObservationDefinition.
-	Category ObservationRangeCategory `json:"category,omitempty"`
-	// range
-	// The low and high values determining the interval. There may be only one of the two.
-	Range_ Range `json:"range,omitempty"`
-	// context
-	// Codes to indicate the health context the range applies to. For example, the normal or therapeutic range.
-	Context CodeableConcept `json:"context,omitempty"`
-	// appliesTo
-	// Codes to indicate the target population this reference range applies to.
-	AppliesTo []CodeableConcept `json:"appliesTo,omitempty"`
-	// gender
-	// Sex of the population the range applies to.
-	Gender AdministrativeGender `json:"gender,omitempty"`
-	// age
-	// The age at which this reference range is applicable. This is a neonatal age (e.g. number of weeks at term) if the meaning says so.
-	Age Range `json:"age,omitempty"`
-	// gestationalAge
-	// The gestational age to which this reference range is applicable, in the context of pregnancy.
-	GestationalAge Range `json:"gestationalAge,omitempty"`
-	// condition
-	// Text based condition for which the reference range is valid.
-	Condition FhirString `json:"condition,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Category *ObservationRangeCategory `json:"category,omitempty"`
+	Range *Range `json:"range,omitempty"`
+	Context *CodeableConcept `json:"context,omitempty"`
+	AppliesTo []*CodeableConcept `json:"appliesto,omitempty"`
+	Gender *AdministrativeGender `json:"gender,omitempty"`
+	Age *Range `json:"age,omitempty"`
+	GestationalAge *Range `json:"gestationalage,omitempty"`
+	Condition *FhirString `json:"condition,omitempty"`
 }
 
 // NewObservationDefinitionQualifiedInterval creates a new ObservationDefinitionQualifiedInterval instance
-func NewObservationDefinitionQualifiedInterval(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	category ObservationRangeCategory,
-	range_ Range,
-	context CodeableConcept,
-	appliesTo []CodeableConcept,
-	gender AdministrativeGender,
-	age Range,
-	gestationalAge Range,
-	condition FhirString,
-) *ObservationDefinitionQualifiedInterval {
-	return &ObservationDefinitionQualifiedInterval{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Category: category,
-		Range_: range_,
-		Context: context,
-		AppliesTo: appliesTo,
-		Gender: gender,
-		Age: age,
-		GestationalAge: gestationalAge,
-		Condition: condition,
-	}
+func NewObservationDefinitionQualifiedInterval() *ObservationDefinitionQualifiedInterval {
+	return &ObservationDefinitionQualifiedInterval{}
 }
+
 // FromJSON populates ObservationDefinitionQualifiedInterval from JSON data
 func (m *ObservationDefinitionQualifiedInterval) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -426,64 +191,39 @@ func (m *ObservationDefinitionQualifiedInterval) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ObservationDefinitionQualifiedInterval
-func (m *ObservationDefinitionQualifiedInterval) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	category *ObservationRangeCategory,
-	range_ *Range,
-	context *CodeableConcept,
-	appliesTo *[]CodeableConcept,
-	gender *AdministrativeGender,
-	age *Range,
-	gestationalAge *Range,
-	condition *FhirString,
-) *ObservationDefinitionQualifiedInterval {
+// Clone creates a deep copy of ObservationDefinitionQualifiedInterval
+func (m *ObservationDefinitionQualifiedInterval) Clone() *ObservationDefinitionQualifiedInterval {
+	if m == nil { return nil }
 	return &ObservationDefinitionQualifiedInterval{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Category: func() ObservationRangeCategory {
-			if category != nil { return *category }
-			return m.Category
-		}(),
-		Range_: func() Range {
-			if range_ != nil { return *range_ }
-			return m.Range_
-		}(),
-		Context: func() CodeableConcept {
-			if context != nil { return *context }
-			return m.Context
-		}(),
-		AppliesTo: func() []CodeableConcept {
-			if appliesTo != nil { return *appliesTo }
-			return m.AppliesTo
-		}(),
-		Gender: func() AdministrativeGender {
-			if gender != nil { return *gender }
-			return m.Gender
-		}(),
-		Age: func() Range {
-			if age != nil { return *age }
-			return m.Age
-		}(),
-		GestationalAge: func() Range {
-			if gestationalAge != nil { return *gestationalAge }
-			return m.GestationalAge
-		}(),
-		Condition: func() FhirString {
-			if condition != nil { return *condition }
-			return m.Condition
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Category: m.Category.Clone(),
+		Range: m.Range.Clone(),
+		Context: m.Context.Clone(),
+		AppliesTo: cloneSlices(m.AppliesTo),
+		Gender: m.Gender.Clone(),
+		Age: m.Age.Clone(),
+		GestationalAge: m.GestationalAge.Clone(),
+		Condition: m.Condition.Clone(),
 	}
 }
+
+// Equals checks for equality with another ObservationDefinitionQualifiedInterval instance
+func (m *ObservationDefinitionQualifiedInterval) Equals(other *ObservationDefinitionQualifiedInterval) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Category.Equals(other.Category) { return false }
+	if !m.Range.Equals(other.Range) { return false }
+	if !m.Context.Equals(other.Context) { return false }
+	if !compareSlices(m.AppliesTo, other.AppliesTo) { return false }
+	if !m.Gender.Equals(other.Gender) { return false }
+	if !m.Age.Equals(other.Age) { return false }
+	if !m.GestationalAge.Equals(other.GestationalAge) { return false }
+	if !m.Condition.Equals(other.Condition) { return false }
+	return true
+}
+

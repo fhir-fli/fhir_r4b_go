@@ -3,67 +3,28 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // RelatedArtifact
 // Related artifacts such as additional documentation, justification, or bibliographic references.
 type RelatedArtifact struct {
 	DataType
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// type
-	// The type of relationship to the related artifact.
-	Type_ RelatedArtifactType `json:"type,omitempty"`
-	// label
-	// A short label that can be used to reference the citation from elsewhere in the containing artifact, such as a footnote index.
-	Label FhirString `json:"label,omitempty"`
-	// display
-	// A brief description of the document or knowledge resource being referenced, suitable for display to a consumer.
-	Display FhirString `json:"display,omitempty"`
-	// citation
-	// A bibliographic citation for the related artifact. This text SHOULD be formatted according to an accepted citation format.
-	Citation FhirMarkdown `json:"citation,omitempty"`
-	// url
-	// A url for the artifact that can be followed to access the actual content.
-	Url FhirUrl `json:"url,omitempty"`
-	// document
-	// The document being referenced, represented as an attachment. This is exclusive with the resource element.
-	Document Attachment `json:"document,omitempty"`
-	// resource
-	// The related resource, such as a library, value set, profile, or other knowledge resource.
-	Resource FhirCanonical `json:"resource,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	Type *RelatedArtifactType `json:"type,omitempty"`
+	Label *FhirString `json:"label,omitempty"`
+	Display *FhirString `json:"display,omitempty"`
+	Citation *FhirMarkdown `json:"citation,omitempty"`
+	Url *FhirUrl `json:"url,omitempty"`
+	Document *Attachment `json:"document,omitempty"`
+	Resource *FhirCanonical `json:"resource,omitempty"`
 }
 
 // NewRelatedArtifact creates a new RelatedArtifact instance
-func NewRelatedArtifact(
-	id FhirString,
-	extension_ []FhirExtension,
-	type_ RelatedArtifactType,
-	label FhirString,
-	display FhirString,
-	citation FhirMarkdown,
-	url FhirUrl,
-	document Attachment,
-	resource FhirCanonical,
-) *RelatedArtifact {
-	return &RelatedArtifact{
-		Id: id,
-		Extension_: extension_,
-		Type_: type_,
-		Label: label,
-		Display: display,
-		Citation: citation,
-		Url: url,
-		Document: document,
-		Resource: resource,
-	}
+func NewRelatedArtifact() *RelatedArtifact {
+	return &RelatedArtifact{}
 }
+
 // FromJSON populates RelatedArtifact from JSON data
 func (m *RelatedArtifact) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -74,54 +35,35 @@ func (m *RelatedArtifact) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of RelatedArtifact
-func (m *RelatedArtifact) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	type_ *RelatedArtifactType,
-	label *FhirString,
-	display *FhirString,
-	citation *FhirMarkdown,
-	url *FhirUrl,
-	document *Attachment,
-	resource *FhirCanonical,
-) *RelatedArtifact {
+// Clone creates a deep copy of RelatedArtifact
+func (m *RelatedArtifact) Clone() *RelatedArtifact {
+	if m == nil { return nil }
 	return &RelatedArtifact{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		Type_: func() RelatedArtifactType {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Label: func() FhirString {
-			if label != nil { return *label }
-			return m.Label
-		}(),
-		Display: func() FhirString {
-			if display != nil { return *display }
-			return m.Display
-		}(),
-		Citation: func() FhirMarkdown {
-			if citation != nil { return *citation }
-			return m.Citation
-		}(),
-		Url: func() FhirUrl {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		Document: func() Attachment {
-			if document != nil { return *document }
-			return m.Document
-		}(),
-		Resource: func() FhirCanonical {
-			if resource != nil { return *resource }
-			return m.Resource
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		Type: m.Type.Clone(),
+		Label: m.Label.Clone(),
+		Display: m.Display.Clone(),
+		Citation: m.Citation.Clone(),
+		Url: m.Url.Clone(),
+		Document: m.Document.Clone(),
+		Resource: m.Resource.Clone(),
 	}
 }
+
+// Equals checks for equality with another RelatedArtifact instance
+func (m *RelatedArtifact) Equals(other *RelatedArtifact) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Label.Equals(other.Label) { return false }
+	if !m.Display.Equals(other.Display) { return false }
+	if !m.Citation.Equals(other.Citation) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !m.Document.Equals(other.Document) { return false }
+	if !m.Resource.Equals(other.Resource) { return false }
+	return true
+}
+

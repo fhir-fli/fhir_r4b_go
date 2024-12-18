@@ -3,154 +3,45 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // RequestGroup
 // A group of related requests that can be used to capture intended activities that have inter-dependencies such as "give this medication after that one".
 type RequestGroup struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// Allows a service to provide a unique, business identifier for the request.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// instantiatesCanonical
-	// A canonical URL referencing a FHIR-defined protocol, guideline, orderset or other definition that is adhered to in whole or in part by this request.
-	InstantiatesCanonical []FhirCanonical `json:"instantiatesCanonical,omitempty"`
-	// instantiatesUri
-	// A URL referencing an externally defined protocol, guideline, orderset or other definition that is adhered to in whole or in part by this request.
-	InstantiatesUri []FhirUri `json:"instantiatesUri,omitempty"`
-	// basedOn
-	// A plan, proposal or order that is fulfilled in whole or in part by this request.
-	BasedOn []Reference `json:"basedOn,omitempty"`
-	// replaces
-	// Completed or terminated request(s) whose function is taken by this new request.
-	Replaces []Reference `json:"replaces,omitempty"`
-	// groupIdentifier
-	// A shared identifier common to all requests that were authorized more or less simultaneously by a single author, representing the identifier of the requisition, prescription or similar form.
-	GroupIdentifier Identifier `json:"groupIdentifier,omitempty"`
-	// status
-	// The current state of the request. For request groups, the status reflects the status of all the requests in the group.
-	Status RequestStatus `json:"status,omitempty"`
-	// intent
-	// Indicates the level of authority/intentionality associated with the request and where the request fits into the workflow chain.
-	Intent RequestIntent `json:"intent,omitempty"`
-	// priority
-	// Indicates how quickly the request should be addressed with respect to other requests.
-	Priority RequestPriority `json:"priority,omitempty"`
-	// code
-	// A code that identifies what the overall request group is.
-	Code CodeableConcept `json:"code,omitempty"`
-	// subject
-	// The subject for which the request group was created.
-	Subject Reference `json:"subject,omitempty"`
-	// encounter
-	// Describes the context of the request group, if any.
-	Encounter Reference `json:"encounter,omitempty"`
-	// authoredOn
-	// Indicates when the request group was created.
-	AuthoredOn FhirDateTime `json:"authoredOn,omitempty"`
-	// author
-	// Provides a reference to the author of the request group.
-	Author Reference `json:"author,omitempty"`
-	// reasonCode
-	// Describes the reason for the request group in coded or textual form.
-	ReasonCode []CodeableConcept `json:"reasonCode,omitempty"`
-	// reasonReference
-	// Indicates another resource whose existence justifies this request group.
-	ReasonReference []Reference `json:"reasonReference,omitempty"`
-	// note
-	// Provides a mechanism to communicate additional information about the response.
-	Note []Annotation `json:"note,omitempty"`
-	// action
-	// The actions, if any, produced by the evaluation of the artifact.
-	Action []RequestGroupAction `json:"action,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	InstantiatesCanonical []*FhirCanonical `json:"instantiatescanonical,omitempty"`
+	InstantiatesUri []*FhirUri `json:"instantiatesuri,omitempty"`
+	BasedOn []*Reference `json:"basedon,omitempty"`
+	Replaces []*Reference `json:"replaces,omitempty"`
+	GroupIdentifier *Identifier `json:"groupidentifier,omitempty"`
+	Status *RequestStatus `json:"status,omitempty"`
+	Intent *RequestIntent `json:"intent,omitempty"`
+	Priority *RequestPriority `json:"priority,omitempty"`
+	Code *CodeableConcept `json:"code,omitempty"`
+	Subject *Reference `json:"subject,omitempty"`
+	Encounter *Reference `json:"encounter,omitempty"`
+	AuthoredOn *FhirDateTime `json:"authoredon,omitempty"`
+	Author *Reference `json:"author,omitempty"`
+	ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+	ReasonReference []*Reference `json:"reasonreference,omitempty"`
+	Note []*Annotation `json:"note,omitempty"`
+	Action []*RequestGroupAction `json:"action,omitempty"`
 }
 
 // NewRequestGroup creates a new RequestGroup instance
-func NewRequestGroup(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	instantiatesCanonical []FhirCanonical,
-	instantiatesUri []FhirUri,
-	basedOn []Reference,
-	replaces []Reference,
-	groupIdentifier Identifier,
-	status RequestStatus,
-	intent RequestIntent,
-	priority RequestPriority,
-	code CodeableConcept,
-	subject Reference,
-	encounter Reference,
-	authoredOn FhirDateTime,
-	author Reference,
-	reasonCode []CodeableConcept,
-	reasonReference []Reference,
-	note []Annotation,
-	action []RequestGroupAction,
-) *RequestGroup {
-	return &RequestGroup{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		InstantiatesCanonical: instantiatesCanonical,
-		InstantiatesUri: instantiatesUri,
-		BasedOn: basedOn,
-		Replaces: replaces,
-		GroupIdentifier: groupIdentifier,
-		Status: status,
-		Intent: intent,
-		Priority: priority,
-		Code: code,
-		Subject: subject,
-		Encounter: encounter,
-		AuthoredOn: authoredOn,
-		Author: author,
-		ReasonCode: reasonCode,
-		ReasonReference: reasonReference,
-		Note: note,
-		Action: action,
-	}
+func NewRequestGroup() *RequestGroup {
+	return &RequestGroup{}
 }
+
 // FromJSON populates RequestGroup from JSON data
 func (m *RequestGroup) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -161,291 +52,110 @@ func (m *RequestGroup) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of RequestGroup
-func (m *RequestGroup) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	instantiatesCanonical *[]FhirCanonical,
-	instantiatesUri *[]FhirUri,
-	basedOn *[]Reference,
-	replaces *[]Reference,
-	groupIdentifier *Identifier,
-	status *RequestStatus,
-	intent *RequestIntent,
-	priority *RequestPriority,
-	code *CodeableConcept,
-	subject *Reference,
-	encounter *Reference,
-	authoredOn *FhirDateTime,
-	author *Reference,
-	reasonCode *[]CodeableConcept,
-	reasonReference *[]Reference,
-	note *[]Annotation,
-	action *[]RequestGroupAction,
-) *RequestGroup {
+// Clone creates a deep copy of RequestGroup
+func (m *RequestGroup) Clone() *RequestGroup {
+	if m == nil { return nil }
 	return &RequestGroup{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		InstantiatesCanonical: func() []FhirCanonical {
-			if instantiatesCanonical != nil { return *instantiatesCanonical }
-			return m.InstantiatesCanonical
-		}(),
-		InstantiatesUri: func() []FhirUri {
-			if instantiatesUri != nil { return *instantiatesUri }
-			return m.InstantiatesUri
-		}(),
-		BasedOn: func() []Reference {
-			if basedOn != nil { return *basedOn }
-			return m.BasedOn
-		}(),
-		Replaces: func() []Reference {
-			if replaces != nil { return *replaces }
-			return m.Replaces
-		}(),
-		GroupIdentifier: func() Identifier {
-			if groupIdentifier != nil { return *groupIdentifier }
-			return m.GroupIdentifier
-		}(),
-		Status: func() RequestStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Intent: func() RequestIntent {
-			if intent != nil { return *intent }
-			return m.Intent
-		}(),
-		Priority: func() RequestPriority {
-			if priority != nil { return *priority }
-			return m.Priority
-		}(),
-		Code: func() CodeableConcept {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Subject: func() Reference {
-			if subject != nil { return *subject }
-			return m.Subject
-		}(),
-		Encounter: func() Reference {
-			if encounter != nil { return *encounter }
-			return m.Encounter
-		}(),
-		AuthoredOn: func() FhirDateTime {
-			if authoredOn != nil { return *authoredOn }
-			return m.AuthoredOn
-		}(),
-		Author: func() Reference {
-			if author != nil { return *author }
-			return m.Author
-		}(),
-		ReasonCode: func() []CodeableConcept {
-			if reasonCode != nil { return *reasonCode }
-			return m.ReasonCode
-		}(),
-		ReasonReference: func() []Reference {
-			if reasonReference != nil { return *reasonReference }
-			return m.ReasonReference
-		}(),
-		Note: func() []Annotation {
-			if note != nil { return *note }
-			return m.Note
-		}(),
-		Action: func() []RequestGroupAction {
-			if action != nil { return *action }
-			return m.Action
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		InstantiatesCanonical: cloneSlices(m.InstantiatesCanonical),
+		InstantiatesUri: cloneSlices(m.InstantiatesUri),
+		BasedOn: cloneSlices(m.BasedOn),
+		Replaces: cloneSlices(m.Replaces),
+		GroupIdentifier: m.GroupIdentifier.Clone(),
+		Status: m.Status.Clone(),
+		Intent: m.Intent.Clone(),
+		Priority: m.Priority.Clone(),
+		Code: m.Code.Clone(),
+		Subject: m.Subject.Clone(),
+		Encounter: m.Encounter.Clone(),
+		AuthoredOn: m.AuthoredOn.Clone(),
+		Author: m.Author.Clone(),
+		ReasonCode: cloneSlices(m.ReasonCode),
+		ReasonReference: cloneSlices(m.ReasonReference),
+		Note: cloneSlices(m.Note),
+		Action: cloneSlices(m.Action),
 	}
 }
+
+// Equals checks for equality with another RequestGroup instance
+func (m *RequestGroup) Equals(other *RequestGroup) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !compareSlices(m.InstantiatesCanonical, other.InstantiatesCanonical) { return false }
+	if !compareSlices(m.InstantiatesUri, other.InstantiatesUri) { return false }
+	if !compareSlices(m.BasedOn, other.BasedOn) { return false }
+	if !compareSlices(m.Replaces, other.Replaces) { return false }
+	if !m.GroupIdentifier.Equals(other.GroupIdentifier) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Intent.Equals(other.Intent) { return false }
+	if !m.Priority.Equals(other.Priority) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Subject.Equals(other.Subject) { return false }
+	if !m.Encounter.Equals(other.Encounter) { return false }
+	if !m.AuthoredOn.Equals(other.AuthoredOn) { return false }
+	if !m.Author.Equals(other.Author) { return false }
+	if !compareSlices(m.ReasonCode, other.ReasonCode) { return false }
+	if !compareSlices(m.ReasonReference, other.ReasonReference) { return false }
+	if !compareSlices(m.Note, other.Note) { return false }
+	if !compareSlices(m.Action, other.Action) { return false }
+	return true
+}
+
 // RequestGroupAction
 // The actions, if any, produced by the evaluation of the artifact.
 type RequestGroupAction struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// prefix
-	// A user-visible prefix for the action.
-	Prefix FhirString `json:"prefix,omitempty"`
-	// title
-	// The title of the action displayed to a user.
-	Title FhirString `json:"title,omitempty"`
-	// description
-	// A short description of the action used to provide a summary to display to the user.
-	Description FhirString `json:"description,omitempty"`
-	// textEquivalent
-	// A text equivalent of the action to be performed. This provides a human-interpretable description of the action when the definition is consumed by a system that might not be capable of interpreting it dynamically.
-	TextEquivalent FhirString `json:"textEquivalent,omitempty"`
-	// priority
-	// Indicates how quickly the action should be addressed with respect to other actions.
-	Priority RequestPriority `json:"priority,omitempty"`
-	// code
-	// A code that provides meaning for the action or action group. For example, a section may have a LOINC code for a section of a documentation template.
-	Code []CodeableConcept `json:"code,omitempty"`
-	// documentation
-	// Didactic or other informational resources associated with the action that can be provided to the CDS recipient. Information resources can include inline text commentary and links to web resources.
-	Documentation []RelatedArtifact `json:"documentation,omitempty"`
-	// condition
-	// An expression that describes applicability criteria, or start/stop conditions for the action.
-	Condition []RequestGroupCondition `json:"condition,omitempty"`
-	// relatedAction
-	// A relationship to another action such as "before" or "30-60 minutes after start of".
-	RelatedAction []RequestGroupRelatedAction `json:"relatedAction,omitempty"`
-	// timingDateTime
-	// An optional value describing when the action should be performed.
-	TimingDateTime FhirDateTime `json:"timingDateTime,omitempty"`
-	// timingAge
-	// An optional value describing when the action should be performed.
-	TimingAge Age `json:"timingAge,omitempty"`
-	// timingPeriod
-	// An optional value describing when the action should be performed.
-	TimingPeriod Period `json:"timingPeriod,omitempty"`
-	// timingDuration
-	// An optional value describing when the action should be performed.
-	TimingDuration FhirDuration `json:"timingDuration,omitempty"`
-	// timingRange
-	// An optional value describing when the action should be performed.
-	TimingRange Range `json:"timingRange,omitempty"`
-	// timingTiming
-	// An optional value describing when the action should be performed.
-	TimingTiming Timing `json:"timingTiming,omitempty"`
-	// participant
-	// The participant that should perform or be responsible for this action.
-	Participant []Reference `json:"participant,omitempty"`
-	// type
-	// The type of action to perform (create, update, remove).
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// groupingBehavior
-	// Defines the grouping behavior for the action and its children.
-	GroupingBehavior ActionGroupingBehavior `json:"groupingBehavior,omitempty"`
-	// selectionBehavior
-	// Defines the selection behavior for the action and its children.
-	SelectionBehavior ActionSelectionBehavior `json:"selectionBehavior,omitempty"`
-	// requiredBehavior
-	// Defines expectations around whether an action is required.
-	RequiredBehavior ActionRequiredBehavior `json:"requiredBehavior,omitempty"`
-	// precheckBehavior
-	// Defines whether the action should usually be preselected.
-	PrecheckBehavior ActionPrecheckBehavior `json:"precheckBehavior,omitempty"`
-	// cardinalityBehavior
-	// Defines whether the action can be selected multiple times.
-	CardinalityBehavior ActionCardinalityBehavior `json:"cardinalityBehavior,omitempty"`
-	// resource
-	// The resource that is the target of the action (e.g. CommunicationRequest).
-	Resource Reference `json:"resource,omitempty"`
-	// action
-	// Sub actions.
-	Action []RequestGroupAction `json:"action,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Prefix *FhirString `json:"prefix,omitempty"`
+	Title *FhirString `json:"title,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	TextEquivalent *FhirString `json:"textequivalent,omitempty"`
+	Priority *RequestPriority `json:"priority,omitempty"`
+	Code []*CodeableConcept `json:"code,omitempty"`
+	Documentation []*RelatedArtifact `json:"documentation,omitempty"`
+	Condition []*RequestGroupCondition `json:"condition,omitempty"`
+	RelatedAction []*RequestGroupRelatedAction `json:"relatedaction,omitempty"`
+	TimingDateTime *FhirDateTime `json:"timingdatetime,omitempty"`
+	TimingAge *Age `json:"timingage,omitempty"`
+	TimingPeriod *Period `json:"timingperiod,omitempty"`
+	TimingDuration *FhirDuration `json:"timingduration,omitempty"`
+	TimingRange *Range `json:"timingrange,omitempty"`
+	TimingTiming *Timing `json:"timingtiming,omitempty"`
+	Participant []*Reference `json:"participant,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	GroupingBehavior *ActionGroupingBehavior `json:"groupingbehavior,omitempty"`
+	SelectionBehavior *ActionSelectionBehavior `json:"selectionbehavior,omitempty"`
+	RequiredBehavior *ActionRequiredBehavior `json:"requiredbehavior,omitempty"`
+	PrecheckBehavior *ActionPrecheckBehavior `json:"precheckbehavior,omitempty"`
+	CardinalityBehavior *ActionCardinalityBehavior `json:"cardinalitybehavior,omitempty"`
+	Resource *Reference `json:"resource,omitempty"`
+	Action []*RequestGroupAction `json:"action,omitempty"`
 }
 
 // NewRequestGroupAction creates a new RequestGroupAction instance
-func NewRequestGroupAction(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	prefix FhirString,
-	title FhirString,
-	description FhirString,
-	textEquivalent FhirString,
-	priority RequestPriority,
-	code []CodeableConcept,
-	documentation []RelatedArtifact,
-	condition []RequestGroupCondition,
-	relatedAction []RequestGroupRelatedAction,
-	timingDateTime FhirDateTime,
-	timingAge Age,
-	timingPeriod Period,
-	timingDuration FhirDuration,
-	timingRange Range,
-	timingTiming Timing,
-	participant []Reference,
-	type_ CodeableConcept,
-	groupingBehavior ActionGroupingBehavior,
-	selectionBehavior ActionSelectionBehavior,
-	requiredBehavior ActionRequiredBehavior,
-	precheckBehavior ActionPrecheckBehavior,
-	cardinalityBehavior ActionCardinalityBehavior,
-	resource Reference,
-	action []RequestGroupAction,
-) *RequestGroupAction {
-	return &RequestGroupAction{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Prefix: prefix,
-		Title: title,
-		Description: description,
-		TextEquivalent: textEquivalent,
-		Priority: priority,
-		Code: code,
-		Documentation: documentation,
-		Condition: condition,
-		RelatedAction: relatedAction,
-		TimingDateTime: timingDateTime,
-		TimingAge: timingAge,
-		TimingPeriod: timingPeriod,
-		TimingDuration: timingDuration,
-		TimingRange: timingRange,
-		TimingTiming: timingTiming,
-		Participant: participant,
-		Type_: type_,
-		GroupingBehavior: groupingBehavior,
-		SelectionBehavior: selectionBehavior,
-		RequiredBehavior: requiredBehavior,
-		PrecheckBehavior: precheckBehavior,
-		CardinalityBehavior: cardinalityBehavior,
-		Resource: resource,
-		Action: action,
-	}
+func NewRequestGroupAction() *RequestGroupAction {
+	return &RequestGroupAction{}
 }
+
 // FromJSON populates RequestGroupAction from JSON data
 func (m *RequestGroupAction) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -456,186 +166,90 @@ func (m *RequestGroupAction) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of RequestGroupAction
-func (m *RequestGroupAction) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	prefix *FhirString,
-	title *FhirString,
-	description *FhirString,
-	textEquivalent *FhirString,
-	priority *RequestPriority,
-	code *[]CodeableConcept,
-	documentation *[]RelatedArtifact,
-	condition *[]RequestGroupCondition,
-	relatedAction *[]RequestGroupRelatedAction,
-	timingDateTime *FhirDateTime,
-	timingAge *Age,
-	timingPeriod *Period,
-	timingDuration *FhirDuration,
-	timingRange *Range,
-	timingTiming *Timing,
-	participant *[]Reference,
-	type_ *CodeableConcept,
-	groupingBehavior *ActionGroupingBehavior,
-	selectionBehavior *ActionSelectionBehavior,
-	requiredBehavior *ActionRequiredBehavior,
-	precheckBehavior *ActionPrecheckBehavior,
-	cardinalityBehavior *ActionCardinalityBehavior,
-	resource *Reference,
-	action *[]RequestGroupAction,
-) *RequestGroupAction {
+// Clone creates a deep copy of RequestGroupAction
+func (m *RequestGroupAction) Clone() *RequestGroupAction {
+	if m == nil { return nil }
 	return &RequestGroupAction{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Prefix: func() FhirString {
-			if prefix != nil { return *prefix }
-			return m.Prefix
-		}(),
-		Title: func() FhirString {
-			if title != nil { return *title }
-			return m.Title
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		TextEquivalent: func() FhirString {
-			if textEquivalent != nil { return *textEquivalent }
-			return m.TextEquivalent
-		}(),
-		Priority: func() RequestPriority {
-			if priority != nil { return *priority }
-			return m.Priority
-		}(),
-		Code: func() []CodeableConcept {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Documentation: func() []RelatedArtifact {
-			if documentation != nil { return *documentation }
-			return m.Documentation
-		}(),
-		Condition: func() []RequestGroupCondition {
-			if condition != nil { return *condition }
-			return m.Condition
-		}(),
-		RelatedAction: func() []RequestGroupRelatedAction {
-			if relatedAction != nil { return *relatedAction }
-			return m.RelatedAction
-		}(),
-		TimingDateTime: func() FhirDateTime {
-			if timingDateTime != nil { return *timingDateTime }
-			return m.TimingDateTime
-		}(),
-		TimingAge: func() Age {
-			if timingAge != nil { return *timingAge }
-			return m.TimingAge
-		}(),
-		TimingPeriod: func() Period {
-			if timingPeriod != nil { return *timingPeriod }
-			return m.TimingPeriod
-		}(),
-		TimingDuration: func() FhirDuration {
-			if timingDuration != nil { return *timingDuration }
-			return m.TimingDuration
-		}(),
-		TimingRange: func() Range {
-			if timingRange != nil { return *timingRange }
-			return m.TimingRange
-		}(),
-		TimingTiming: func() Timing {
-			if timingTiming != nil { return *timingTiming }
-			return m.TimingTiming
-		}(),
-		Participant: func() []Reference {
-			if participant != nil { return *participant }
-			return m.Participant
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		GroupingBehavior: func() ActionGroupingBehavior {
-			if groupingBehavior != nil { return *groupingBehavior }
-			return m.GroupingBehavior
-		}(),
-		SelectionBehavior: func() ActionSelectionBehavior {
-			if selectionBehavior != nil { return *selectionBehavior }
-			return m.SelectionBehavior
-		}(),
-		RequiredBehavior: func() ActionRequiredBehavior {
-			if requiredBehavior != nil { return *requiredBehavior }
-			return m.RequiredBehavior
-		}(),
-		PrecheckBehavior: func() ActionPrecheckBehavior {
-			if precheckBehavior != nil { return *precheckBehavior }
-			return m.PrecheckBehavior
-		}(),
-		CardinalityBehavior: func() ActionCardinalityBehavior {
-			if cardinalityBehavior != nil { return *cardinalityBehavior }
-			return m.CardinalityBehavior
-		}(),
-		Resource: func() Reference {
-			if resource != nil { return *resource }
-			return m.Resource
-		}(),
-		Action: func() []RequestGroupAction {
-			if action != nil { return *action }
-			return m.Action
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Prefix: m.Prefix.Clone(),
+		Title: m.Title.Clone(),
+		Description: m.Description.Clone(),
+		TextEquivalent: m.TextEquivalent.Clone(),
+		Priority: m.Priority.Clone(),
+		Code: cloneSlices(m.Code),
+		Documentation: cloneSlices(m.Documentation),
+		Condition: cloneSlices(m.Condition),
+		RelatedAction: cloneSlices(m.RelatedAction),
+		TimingDateTime: m.TimingDateTime.Clone(),
+		TimingAge: m.TimingAge.Clone(),
+		TimingPeriod: m.TimingPeriod.Clone(),
+		TimingDuration: m.TimingDuration.Clone(),
+		TimingRange: m.TimingRange.Clone(),
+		TimingTiming: m.TimingTiming.Clone(),
+		Participant: cloneSlices(m.Participant),
+		Type: m.Type.Clone(),
+		GroupingBehavior: m.GroupingBehavior.Clone(),
+		SelectionBehavior: m.SelectionBehavior.Clone(),
+		RequiredBehavior: m.RequiredBehavior.Clone(),
+		PrecheckBehavior: m.PrecheckBehavior.Clone(),
+		CardinalityBehavior: m.CardinalityBehavior.Clone(),
+		Resource: m.Resource.Clone(),
+		Action: cloneSlices(m.Action),
 	}
 }
+
+// Equals checks for equality with another RequestGroupAction instance
+func (m *RequestGroupAction) Equals(other *RequestGroupAction) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Prefix.Equals(other.Prefix) { return false }
+	if !m.Title.Equals(other.Title) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.TextEquivalent.Equals(other.TextEquivalent) { return false }
+	if !m.Priority.Equals(other.Priority) { return false }
+	if !compareSlices(m.Code, other.Code) { return false }
+	if !compareSlices(m.Documentation, other.Documentation) { return false }
+	if !compareSlices(m.Condition, other.Condition) { return false }
+	if !compareSlices(m.RelatedAction, other.RelatedAction) { return false }
+	if !m.TimingDateTime.Equals(other.TimingDateTime) { return false }
+	if !m.TimingAge.Equals(other.TimingAge) { return false }
+	if !m.TimingPeriod.Equals(other.TimingPeriod) { return false }
+	if !m.TimingDuration.Equals(other.TimingDuration) { return false }
+	if !m.TimingRange.Equals(other.TimingRange) { return false }
+	if !m.TimingTiming.Equals(other.TimingTiming) { return false }
+	if !compareSlices(m.Participant, other.Participant) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.GroupingBehavior.Equals(other.GroupingBehavior) { return false }
+	if !m.SelectionBehavior.Equals(other.SelectionBehavior) { return false }
+	if !m.RequiredBehavior.Equals(other.RequiredBehavior) { return false }
+	if !m.PrecheckBehavior.Equals(other.PrecheckBehavior) { return false }
+	if !m.CardinalityBehavior.Equals(other.CardinalityBehavior) { return false }
+	if !m.Resource.Equals(other.Resource) { return false }
+	if !compareSlices(m.Action, other.Action) { return false }
+	return true
+}
+
 // RequestGroupCondition
 // An expression that describes applicability criteria, or start/stop conditions for the action.
 type RequestGroupCondition struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// kind
-	// The kind of condition.
-	Kind ActionConditionKind `json:"kind,omitempty"`
-	// expression
-	// An expression that returns true or false, indicating whether or not the condition is satisfied.
-	Expression FhirExpression `json:"expression,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Kind *ActionConditionKind `json:"kind,omitempty"`
+	Expression *FhirExpression `json:"expression,omitempty"`
 }
 
 // NewRequestGroupCondition creates a new RequestGroupCondition instance
-func NewRequestGroupCondition(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	kind ActionConditionKind,
-	expression FhirExpression,
-) *RequestGroupCondition {
-	return &RequestGroupCondition{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Kind: kind,
-		Expression: expression,
-	}
+func NewRequestGroupCondition() *RequestGroupCondition {
+	return &RequestGroupCondition{}
 }
+
 // FromJSON populates RequestGroupCondition from JSON data
 func (m *RequestGroupCondition) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -646,86 +260,48 @@ func (m *RequestGroupCondition) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of RequestGroupCondition
-func (m *RequestGroupCondition) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	kind *ActionConditionKind,
-	expression *FhirExpression,
-) *RequestGroupCondition {
+// Clone creates a deep copy of RequestGroupCondition
+func (m *RequestGroupCondition) Clone() *RequestGroupCondition {
+	if m == nil { return nil }
 	return &RequestGroupCondition{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Kind: func() ActionConditionKind {
-			if kind != nil { return *kind }
-			return m.Kind
-		}(),
-		Expression: func() FhirExpression {
-			if expression != nil { return *expression }
-			return m.Expression
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Kind: m.Kind.Clone(),
+		Expression: m.Expression.Clone(),
 	}
 }
+
+// Equals checks for equality with another RequestGroupCondition instance
+func (m *RequestGroupCondition) Equals(other *RequestGroupCondition) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Kind.Equals(other.Kind) { return false }
+	if !m.Expression.Equals(other.Expression) { return false }
+	return true
+}
+
 // RequestGroupRelatedAction
 // A relationship to another action such as "before" or "30-60 minutes after start of".
 type RequestGroupRelatedAction struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// actionId
-	// The element id of the action this is related to.
-	ActionId FhirId `json:"actionId,omitempty"`
-	// relationship
-	// The relationship of this action to the related action.
-	Relationship ActionRelationshipType `json:"relationship,omitempty"`
-	// offsetDuration
-	// A duration or range of durations to apply to the relationship. For example, 30-60 minutes before.
-	OffsetDuration FhirDuration `json:"offsetDuration,omitempty"`
-	// offsetRange
-	// A duration or range of durations to apply to the relationship. For example, 30-60 minutes before.
-	OffsetRange Range `json:"offsetRange,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	ActionId *FhirId `json:"actionid,omitempty"`
+	Relationship *ActionRelationshipType `json:"relationship,omitempty"`
+	OffsetDuration *FhirDuration `json:"offsetduration,omitempty"`
+	OffsetRange *Range `json:"offsetrange,omitempty"`
 }
 
 // NewRequestGroupRelatedAction creates a new RequestGroupRelatedAction instance
-func NewRequestGroupRelatedAction(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	actionId FhirId,
-	relationship ActionRelationshipType,
-	offsetDuration FhirDuration,
-	offsetRange Range,
-) *RequestGroupRelatedAction {
-	return &RequestGroupRelatedAction{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		ActionId: actionId,
-		Relationship: relationship,
-		OffsetDuration: offsetDuration,
-		OffsetRange: offsetRange,
-	}
+func NewRequestGroupRelatedAction() *RequestGroupRelatedAction {
+	return &RequestGroupRelatedAction{}
 }
+
 // FromJSON populates RequestGroupRelatedAction from JSON data
 func (m *RequestGroupRelatedAction) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -736,44 +312,31 @@ func (m *RequestGroupRelatedAction) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of RequestGroupRelatedAction
-func (m *RequestGroupRelatedAction) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	actionId *FhirId,
-	relationship *ActionRelationshipType,
-	offsetDuration *FhirDuration,
-	offsetRange *Range,
-) *RequestGroupRelatedAction {
+// Clone creates a deep copy of RequestGroupRelatedAction
+func (m *RequestGroupRelatedAction) Clone() *RequestGroupRelatedAction {
+	if m == nil { return nil }
 	return &RequestGroupRelatedAction{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		ActionId: func() FhirId {
-			if actionId != nil { return *actionId }
-			return m.ActionId
-		}(),
-		Relationship: func() ActionRelationshipType {
-			if relationship != nil { return *relationship }
-			return m.Relationship
-		}(),
-		OffsetDuration: func() FhirDuration {
-			if offsetDuration != nil { return *offsetDuration }
-			return m.OffsetDuration
-		}(),
-		OffsetRange: func() Range {
-			if offsetRange != nil { return *offsetRange }
-			return m.OffsetRange
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		ActionId: m.ActionId.Clone(),
+		Relationship: m.Relationship.Clone(),
+		OffsetDuration: m.OffsetDuration.Clone(),
+		OffsetRange: m.OffsetRange.Clone(),
 	}
 }
+
+// Equals checks for equality with another RequestGroupRelatedAction instance
+func (m *RequestGroupRelatedAction) Equals(other *RequestGroupRelatedAction) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.ActionId.Equals(other.ActionId) { return false }
+	if !m.Relationship.Equals(other.Relationship) { return false }
+	if !m.OffsetDuration.Equals(other.OffsetDuration) { return false }
+	if !m.OffsetRange.Equals(other.OffsetRange) { return false }
+	return true
+}
+

@@ -3,139 +3,42 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // DeviceUseStatement
 // A record of a device being used by a patient where the record is the result of a report from the patient or another clinician.
 type DeviceUseStatement struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// An external identifier for this statement such as an IRI.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// basedOn
-	// A plan, proposal or order that is fulfilled in whole or in part by this DeviceUseStatement.
-	BasedOn []Reference `json:"basedOn,omitempty"`
-	// status
-	// A code representing the patient or other source's judgment about the state of the device used that this statement is about.  Generally this will be active or completed.
-	Status DeviceUseStatementStatus `json:"status,omitempty"`
-	// subject
-	// The patient who used the device.
-	Subject Reference `json:"subject,omitempty"`
-	// derivedFrom
-	// Allows linking the DeviceUseStatement to the underlying Request, or to other information that supports or is used to derive the DeviceUseStatement.
-	DerivedFrom []Reference `json:"derivedFrom,omitempty"`
-	// timingTiming
-	// How often the device was used.
-	TimingTiming Timing `json:"timingTiming,omitempty"`
-	// timingPeriod
-	// How often the device was used.
-	TimingPeriod Period `json:"timingPeriod,omitempty"`
-	// timingDateTime
-	// How often the device was used.
-	TimingDateTime FhirDateTime `json:"timingDateTime,omitempty"`
-	// recordedOn
-	// The time at which the statement was made/recorded.
-	RecordedOn FhirDateTime `json:"recordedOn,omitempty"`
-	// source
-	// Who reported the device was being used by the patient.
-	Source Reference `json:"source,omitempty"`
-	// device
-	// The details of the device used.
-	Device Reference `json:"device,omitempty"`
-	// reasonCode
-	// Reason or justification for the use of the device.
-	ReasonCode []CodeableConcept `json:"reasonCode,omitempty"`
-	// reasonReference
-	// Indicates another resource whose existence justifies this DeviceUseStatement.
-	ReasonReference []Reference `json:"reasonReference,omitempty"`
-	// bodySite
-	// Indicates the anotomic location on the subject's body where the device was used ( i.e. the target).
-	BodySite CodeableConcept `json:"bodySite,omitempty"`
-	// note
-	// Details about the device statement that were not represented at all or sufficiently in one of the attributes provided in a class. These may include for example a comment, an instruction, or a note associated with the statement.
-	Note []Annotation `json:"note,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	BasedOn []*Reference `json:"basedon,omitempty"`
+	Status *DeviceUseStatementStatus `json:"status,omitempty"`
+	Subject *Reference `json:"subject,omitempty"`
+	DerivedFrom []*Reference `json:"derivedfrom,omitempty"`
+	TimingTiming *Timing `json:"timingtiming,omitempty"`
+	TimingPeriod *Period `json:"timingperiod,omitempty"`
+	TimingDateTime *FhirDateTime `json:"timingdatetime,omitempty"`
+	RecordedOn *FhirDateTime `json:"recordedon,omitempty"`
+	Source *Reference `json:"source,omitempty"`
+	Device *Reference `json:"device,omitempty"`
+	ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+	ReasonReference []*Reference `json:"reasonreference,omitempty"`
+	BodySite *CodeableConcept `json:"bodysite,omitempty"`
+	Note []*Annotation `json:"note,omitempty"`
 }
 
 // NewDeviceUseStatement creates a new DeviceUseStatement instance
-func NewDeviceUseStatement(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	basedOn []Reference,
-	status DeviceUseStatementStatus,
-	subject Reference,
-	derivedFrom []Reference,
-	timingTiming Timing,
-	timingPeriod Period,
-	timingDateTime FhirDateTime,
-	recordedOn FhirDateTime,
-	source Reference,
-	device Reference,
-	reasonCode []CodeableConcept,
-	reasonReference []Reference,
-	bodySite CodeableConcept,
-	note []Annotation,
-) *DeviceUseStatement {
-	return &DeviceUseStatement{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		BasedOn: basedOn,
-		Status: status,
-		Subject: subject,
-		DerivedFrom: derivedFrom,
-		TimingTiming: timingTiming,
-		TimingPeriod: timingPeriod,
-		TimingDateTime: timingDateTime,
-		RecordedOn: recordedOn,
-		Source: source,
-		Device: device,
-		ReasonCode: reasonCode,
-		ReasonReference: reasonReference,
-		BodySite: bodySite,
-		Note: note,
-	}
+func NewDeviceUseStatement() *DeviceUseStatement {
+	return &DeviceUseStatement{}
 }
+
 // FromJSON populates DeviceUseStatement from JSON data
 func (m *DeviceUseStatement) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -146,124 +49,63 @@ func (m *DeviceUseStatement) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of DeviceUseStatement
-func (m *DeviceUseStatement) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	basedOn *[]Reference,
-	status *DeviceUseStatementStatus,
-	subject *Reference,
-	derivedFrom *[]Reference,
-	timingTiming *Timing,
-	timingPeriod *Period,
-	timingDateTime *FhirDateTime,
-	recordedOn *FhirDateTime,
-	source *Reference,
-	device *Reference,
-	reasonCode *[]CodeableConcept,
-	reasonReference *[]Reference,
-	bodySite *CodeableConcept,
-	note *[]Annotation,
-) *DeviceUseStatement {
+// Clone creates a deep copy of DeviceUseStatement
+func (m *DeviceUseStatement) Clone() *DeviceUseStatement {
+	if m == nil { return nil }
 	return &DeviceUseStatement{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		BasedOn: func() []Reference {
-			if basedOn != nil { return *basedOn }
-			return m.BasedOn
-		}(),
-		Status: func() DeviceUseStatementStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Subject: func() Reference {
-			if subject != nil { return *subject }
-			return m.Subject
-		}(),
-		DerivedFrom: func() []Reference {
-			if derivedFrom != nil { return *derivedFrom }
-			return m.DerivedFrom
-		}(),
-		TimingTiming: func() Timing {
-			if timingTiming != nil { return *timingTiming }
-			return m.TimingTiming
-		}(),
-		TimingPeriod: func() Period {
-			if timingPeriod != nil { return *timingPeriod }
-			return m.TimingPeriod
-		}(),
-		TimingDateTime: func() FhirDateTime {
-			if timingDateTime != nil { return *timingDateTime }
-			return m.TimingDateTime
-		}(),
-		RecordedOn: func() FhirDateTime {
-			if recordedOn != nil { return *recordedOn }
-			return m.RecordedOn
-		}(),
-		Source: func() Reference {
-			if source != nil { return *source }
-			return m.Source
-		}(),
-		Device: func() Reference {
-			if device != nil { return *device }
-			return m.Device
-		}(),
-		ReasonCode: func() []CodeableConcept {
-			if reasonCode != nil { return *reasonCode }
-			return m.ReasonCode
-		}(),
-		ReasonReference: func() []Reference {
-			if reasonReference != nil { return *reasonReference }
-			return m.ReasonReference
-		}(),
-		BodySite: func() CodeableConcept {
-			if bodySite != nil { return *bodySite }
-			return m.BodySite
-		}(),
-		Note: func() []Annotation {
-			if note != nil { return *note }
-			return m.Note
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		BasedOn: cloneSlices(m.BasedOn),
+		Status: m.Status.Clone(),
+		Subject: m.Subject.Clone(),
+		DerivedFrom: cloneSlices(m.DerivedFrom),
+		TimingTiming: m.TimingTiming.Clone(),
+		TimingPeriod: m.TimingPeriod.Clone(),
+		TimingDateTime: m.TimingDateTime.Clone(),
+		RecordedOn: m.RecordedOn.Clone(),
+		Source: m.Source.Clone(),
+		Device: m.Device.Clone(),
+		ReasonCode: cloneSlices(m.ReasonCode),
+		ReasonReference: cloneSlices(m.ReasonReference),
+		BodySite: m.BodySite.Clone(),
+		Note: cloneSlices(m.Note),
 	}
 }
+
+// Equals checks for equality with another DeviceUseStatement instance
+func (m *DeviceUseStatement) Equals(other *DeviceUseStatement) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !compareSlices(m.BasedOn, other.BasedOn) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Subject.Equals(other.Subject) { return false }
+	if !compareSlices(m.DerivedFrom, other.DerivedFrom) { return false }
+	if !m.TimingTiming.Equals(other.TimingTiming) { return false }
+	if !m.TimingPeriod.Equals(other.TimingPeriod) { return false }
+	if !m.TimingDateTime.Equals(other.TimingDateTime) { return false }
+	if !m.RecordedOn.Equals(other.RecordedOn) { return false }
+	if !m.Source.Equals(other.Source) { return false }
+	if !m.Device.Equals(other.Device) { return false }
+	if !compareSlices(m.ReasonCode, other.ReasonCode) { return false }
+	if !compareSlices(m.ReasonReference, other.ReasonReference) { return false }
+	if !m.BodySite.Equals(other.BodySite) { return false }
+	if !compareSlices(m.Note, other.Note) { return false }
+	return true
+}
+

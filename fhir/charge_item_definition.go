@@ -3,179 +3,50 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // ChargeItemDefinition
 // The ChargeItemDefinition resource provides the properties that apply to the (billing) codes necessary to calculate costs and prices. The properties may differ largely depending on type and realm, therefore this resource gives only a rough structure and requires profiling for each type of billing code system.
 type ChargeItemDefinition struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// url
-	// An absolute URI that is used to identify this charge item definition when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this charge item definition is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the charge item definition is stored on different servers.
-	Url FhirUri `json:"url,omitempty"`
-	// identifier
-	// A formal identifier that is used to identify this charge item definition when it is represented in other formats, or referenced in a specification, model, design or an instance.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// version
-	// The identifier that is used to identify this version of the charge item definition when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the charge item definition author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence. To provide a version consistent with the Decision Support Service specification, use the format Major.Minor.Revision (e.g. 1.0.0). For more information on versioning knowledge assets, refer to the Decision Support Service specification. Note that a version is required for non-experimental active assets.
-	Version FhirString `json:"version,omitempty"`
-	// title
-	// A short, descriptive, user-friendly title for the charge item definition.
-	Title FhirString `json:"title,omitempty"`
-	// derivedFromUri
-	// The URL pointing to an externally-defined charge item definition that is adhered to in whole or in part by this definition.
-	DerivedFromUri []FhirUri `json:"derivedFromUri,omitempty"`
-	// partOf
-	// A larger definition of which this particular definition is a component or step.
-	PartOf []FhirCanonical `json:"partOf,omitempty"`
-	// replaces
-	// As new versions of a protocol or guideline are defined, allows identification of what versions are replaced by a new instance.
-	Replaces []FhirCanonical `json:"replaces,omitempty"`
-	// status
-	// The current state of the ChargeItemDefinition.
-	Status PublicationStatus `json:"status,omitempty"`
-	// experimental
-	// A Boolean value to indicate that this charge item definition is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.
-	Experimental FhirBoolean `json:"experimental,omitempty"`
-	// date
-	// The date  (and optionally time) when the charge item definition was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the charge item definition changes.
-	Date FhirDateTime `json:"date,omitempty"`
-	// publisher
-	// The name of the organization or individual that published the charge item definition.
-	Publisher FhirString `json:"publisher,omitempty"`
-	// contact
-	// Contact details to assist a user in finding and communicating with the publisher.
-	Contact []ContactDetail `json:"contact,omitempty"`
-	// description
-	// A free text natural language description of the charge item definition from a consumer's perspective.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// useContext
-	// The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate charge item definition instances.
-	UseContext []UsageContext `json:"useContext,omitempty"`
-	// jurisdiction
-	// A legal or geographic region in which the charge item definition is intended to be used.
-	Jurisdiction []CodeableConcept `json:"jurisdiction,omitempty"`
-	// copyright
-	// A copyright statement relating to the charge item definition and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the charge item definition.
-	Copyright FhirMarkdown `json:"copyright,omitempty"`
-	// approvalDate
-	// The date on which the resource content was approved by the publisher. Approval happens once when the content is officially approved for usage.
-	ApprovalDate FhirDate `json:"approvalDate,omitempty"`
-	// lastReviewDate
-	// The date on which the resource content was last reviewed. Review happens periodically after approval but does not change the original approval date.
-	LastReviewDate FhirDate `json:"lastReviewDate,omitempty"`
-	// effectivePeriod
-	// The period during which the charge item definition content was or is planned to be in active use.
-	EffectivePeriod Period `json:"effectivePeriod,omitempty"`
-	// code
-	// The defined billing details in this resource pertain to the given billing code.
-	Code CodeableConcept `json:"code,omitempty"`
-	// instance
-	// The defined billing details in this resource pertain to the given product instance(s).
-	Instance []Reference `json:"instance,omitempty"`
-	// applicability
-	// Expressions that describe applicability criteria for the billing code.
-	Applicability []ChargeItemDefinitionApplicability `json:"applicability,omitempty"`
-	// propertyGroup
-	// Group of properties which are applicable under the same conditions. If no applicability rules are established for the group, then all properties always apply.
-	PropertyGroup []ChargeItemDefinitionPropertyGroup `json:"propertyGroup,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Url *FhirUri `json:"url,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
+	Title *FhirString `json:"title,omitempty"`
+	DerivedFromUri []*FhirUri `json:"derivedfromuri,omitempty"`
+	PartOf []*FhirCanonical `json:"partof,omitempty"`
+	Replaces []*FhirCanonical `json:"replaces,omitempty"`
+	Status *PublicationStatus `json:"status,omitempty"`
+	Experimental *FhirBoolean `json:"experimental,omitempty"`
+	Date *FhirDateTime `json:"date,omitempty"`
+	Publisher *FhirString `json:"publisher,omitempty"`
+	Contact []*ContactDetail `json:"contact,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	UseContext []*UsageContext `json:"usecontext,omitempty"`
+	Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+	Copyright *FhirMarkdown `json:"copyright,omitempty"`
+	ApprovalDate *FhirDate `json:"approvaldate,omitempty"`
+	LastReviewDate *FhirDate `json:"lastreviewdate,omitempty"`
+	EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+	Code *CodeableConcept `json:"code,omitempty"`
+	Instance []*Reference `json:"instance,omitempty"`
+	Applicability []*ChargeItemDefinitionApplicability `json:"applicability,omitempty"`
+	PropertyGroup []*ChargeItemDefinitionPropertyGroup `json:"propertygroup,omitempty"`
 }
 
 // NewChargeItemDefinition creates a new ChargeItemDefinition instance
-func NewChargeItemDefinition(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	url FhirUri,
-	identifier []Identifier,
-	version FhirString,
-	title FhirString,
-	derivedFromUri []FhirUri,
-	partOf []FhirCanonical,
-	replaces []FhirCanonical,
-	status PublicationStatus,
-	experimental FhirBoolean,
-	date FhirDateTime,
-	publisher FhirString,
-	contact []ContactDetail,
-	description FhirMarkdown,
-	useContext []UsageContext,
-	jurisdiction []CodeableConcept,
-	copyright FhirMarkdown,
-	approvalDate FhirDate,
-	lastReviewDate FhirDate,
-	effectivePeriod Period,
-	code CodeableConcept,
-	instance []Reference,
-	applicability []ChargeItemDefinitionApplicability,
-	propertyGroup []ChargeItemDefinitionPropertyGroup,
-) *ChargeItemDefinition {
-	return &ChargeItemDefinition{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Url: url,
-		Identifier: identifier,
-		Version: version,
-		Title: title,
-		DerivedFromUri: derivedFromUri,
-		PartOf: partOf,
-		Replaces: replaces,
-		Status: status,
-		Experimental: experimental,
-		Date: date,
-		Publisher: publisher,
-		Contact: contact,
-		Description: description,
-		UseContext: useContext,
-		Jurisdiction: jurisdiction,
-		Copyright: copyright,
-		ApprovalDate: approvalDate,
-		LastReviewDate: lastReviewDate,
-		EffectivePeriod: effectivePeriod,
-		Code: code,
-		Instance: instance,
-		Applicability: applicability,
-		PropertyGroup: propertyGroup,
-	}
+func NewChargeItemDefinition() *ChargeItemDefinition {
+	return &ChargeItemDefinition{}
 }
+
 // FromJSON populates ChargeItemDefinition from JSON data
 func (m *ChargeItemDefinition) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -186,211 +57,99 @@ func (m *ChargeItemDefinition) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ChargeItemDefinition
-func (m *ChargeItemDefinition) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	url *FhirUri,
-	identifier *[]Identifier,
-	version *FhirString,
-	title *FhirString,
-	derivedFromUri *[]FhirUri,
-	partOf *[]FhirCanonical,
-	replaces *[]FhirCanonical,
-	status *PublicationStatus,
-	experimental *FhirBoolean,
-	date *FhirDateTime,
-	publisher *FhirString,
-	contact *[]ContactDetail,
-	description *FhirMarkdown,
-	useContext *[]UsageContext,
-	jurisdiction *[]CodeableConcept,
-	copyright *FhirMarkdown,
-	approvalDate *FhirDate,
-	lastReviewDate *FhirDate,
-	effectivePeriod *Period,
-	code *CodeableConcept,
-	instance *[]Reference,
-	applicability *[]ChargeItemDefinitionApplicability,
-	propertyGroup *[]ChargeItemDefinitionPropertyGroup,
-) *ChargeItemDefinition {
+// Clone creates a deep copy of ChargeItemDefinition
+func (m *ChargeItemDefinition) Clone() *ChargeItemDefinition {
+	if m == nil { return nil }
 	return &ChargeItemDefinition{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Url: func() FhirUri {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Title: func() FhirString {
-			if title != nil { return *title }
-			return m.Title
-		}(),
-		DerivedFromUri: func() []FhirUri {
-			if derivedFromUri != nil { return *derivedFromUri }
-			return m.DerivedFromUri
-		}(),
-		PartOf: func() []FhirCanonical {
-			if partOf != nil { return *partOf }
-			return m.PartOf
-		}(),
-		Replaces: func() []FhirCanonical {
-			if replaces != nil { return *replaces }
-			return m.Replaces
-		}(),
-		Status: func() PublicationStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Experimental: func() FhirBoolean {
-			if experimental != nil { return *experimental }
-			return m.Experimental
-		}(),
-		Date: func() FhirDateTime {
-			if date != nil { return *date }
-			return m.Date
-		}(),
-		Publisher: func() FhirString {
-			if publisher != nil { return *publisher }
-			return m.Publisher
-		}(),
-		Contact: func() []ContactDetail {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		UseContext: func() []UsageContext {
-			if useContext != nil { return *useContext }
-			return m.UseContext
-		}(),
-		Jurisdiction: func() []CodeableConcept {
-			if jurisdiction != nil { return *jurisdiction }
-			return m.Jurisdiction
-		}(),
-		Copyright: func() FhirMarkdown {
-			if copyright != nil { return *copyright }
-			return m.Copyright
-		}(),
-		ApprovalDate: func() FhirDate {
-			if approvalDate != nil { return *approvalDate }
-			return m.ApprovalDate
-		}(),
-		LastReviewDate: func() FhirDate {
-			if lastReviewDate != nil { return *lastReviewDate }
-			return m.LastReviewDate
-		}(),
-		EffectivePeriod: func() Period {
-			if effectivePeriod != nil { return *effectivePeriod }
-			return m.EffectivePeriod
-		}(),
-		Code: func() CodeableConcept {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Instance: func() []Reference {
-			if instance != nil { return *instance }
-			return m.Instance
-		}(),
-		Applicability: func() []ChargeItemDefinitionApplicability {
-			if applicability != nil { return *applicability }
-			return m.Applicability
-		}(),
-		PropertyGroup: func() []ChargeItemDefinitionPropertyGroup {
-			if propertyGroup != nil { return *propertyGroup }
-			return m.PropertyGroup
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Url: m.Url.Clone(),
+		Identifier: cloneSlices(m.Identifier),
+		Version: m.Version.Clone(),
+		Title: m.Title.Clone(),
+		DerivedFromUri: cloneSlices(m.DerivedFromUri),
+		PartOf: cloneSlices(m.PartOf),
+		Replaces: cloneSlices(m.Replaces),
+		Status: m.Status.Clone(),
+		Experimental: m.Experimental.Clone(),
+		Date: m.Date.Clone(),
+		Publisher: m.Publisher.Clone(),
+		Contact: cloneSlices(m.Contact),
+		Description: m.Description.Clone(),
+		UseContext: cloneSlices(m.UseContext),
+		Jurisdiction: cloneSlices(m.Jurisdiction),
+		Copyright: m.Copyright.Clone(),
+		ApprovalDate: m.ApprovalDate.Clone(),
+		LastReviewDate: m.LastReviewDate.Clone(),
+		EffectivePeriod: m.EffectivePeriod.Clone(),
+		Code: m.Code.Clone(),
+		Instance: cloneSlices(m.Instance),
+		Applicability: cloneSlices(m.Applicability),
+		PropertyGroup: cloneSlices(m.PropertyGroup),
 	}
 }
+
+// Equals checks for equality with another ChargeItemDefinition instance
+func (m *ChargeItemDefinition) Equals(other *ChargeItemDefinition) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !m.Title.Equals(other.Title) { return false }
+	if !compareSlices(m.DerivedFromUri, other.DerivedFromUri) { return false }
+	if !compareSlices(m.PartOf, other.PartOf) { return false }
+	if !compareSlices(m.Replaces, other.Replaces) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Experimental.Equals(other.Experimental) { return false }
+	if !m.Date.Equals(other.Date) { return false }
+	if !m.Publisher.Equals(other.Publisher) { return false }
+	if !compareSlices(m.Contact, other.Contact) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.UseContext, other.UseContext) { return false }
+	if !compareSlices(m.Jurisdiction, other.Jurisdiction) { return false }
+	if !m.Copyright.Equals(other.Copyright) { return false }
+	if !m.ApprovalDate.Equals(other.ApprovalDate) { return false }
+	if !m.LastReviewDate.Equals(other.LastReviewDate) { return false }
+	if !m.EffectivePeriod.Equals(other.EffectivePeriod) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !compareSlices(m.Instance, other.Instance) { return false }
+	if !compareSlices(m.Applicability, other.Applicability) { return false }
+	if !compareSlices(m.PropertyGroup, other.PropertyGroup) { return false }
+	return true
+}
+
 // ChargeItemDefinitionApplicability
 // Expressions that describe applicability criteria for the billing code.
 type ChargeItemDefinitionApplicability struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// description
-	// A brief, natural language description of the condition that effectively communicates the intended semantics.
-	Description FhirString `json:"description,omitempty"`
-	// language
-	// The media type of the language for the expression, e.g. "text/cql" for Clinical Query Language expressions or "text/fhirpath" for FHIRPath expressions.
-	Language FhirString `json:"language,omitempty"`
-	// expression
-	// An expression that returns true or false, indicating whether the condition is satisfied. When using FHIRPath expressions, the %context environment variable must be replaced at runtime with the ChargeItem resource to which this definition is applied.
-	Expression FhirString `json:"expression,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Language *FhirString `json:"language,omitempty"`
+	Expression *FhirString `json:"expression,omitempty"`
 }
 
 // NewChargeItemDefinitionApplicability creates a new ChargeItemDefinitionApplicability instance
-func NewChargeItemDefinitionApplicability(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	description FhirString,
-	language FhirString,
-	expression FhirString,
-) *ChargeItemDefinitionApplicability {
-	return &ChargeItemDefinitionApplicability{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Description: description,
-		Language: language,
-		Expression: expression,
-	}
+func NewChargeItemDefinitionApplicability() *ChargeItemDefinitionApplicability {
+	return &ChargeItemDefinitionApplicability{}
 }
+
 // FromJSON populates ChargeItemDefinitionApplicability from JSON data
 func (m *ChargeItemDefinitionApplicability) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -401,81 +160,48 @@ func (m *ChargeItemDefinitionApplicability) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ChargeItemDefinitionApplicability
-func (m *ChargeItemDefinitionApplicability) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	description *FhirString,
-	language *FhirString,
-	expression *FhirString,
-) *ChargeItemDefinitionApplicability {
+// Clone creates a deep copy of ChargeItemDefinitionApplicability
+func (m *ChargeItemDefinitionApplicability) Clone() *ChargeItemDefinitionApplicability {
+	if m == nil { return nil }
 	return &ChargeItemDefinitionApplicability{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Language: func() FhirString {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Expression: func() FhirString {
-			if expression != nil { return *expression }
-			return m.Expression
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Description: m.Description.Clone(),
+		Language: m.Language.Clone(),
+		Expression: m.Expression.Clone(),
 	}
 }
+
+// Equals checks for equality with another ChargeItemDefinitionApplicability instance
+func (m *ChargeItemDefinitionApplicability) Equals(other *ChargeItemDefinitionApplicability) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Expression.Equals(other.Expression) { return false }
+	return true
+}
+
 // ChargeItemDefinitionPropertyGroup
 // Group of properties which are applicable under the same conditions. If no applicability rules are established for the group, then all properties always apply.
 type ChargeItemDefinitionPropertyGroup struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// applicability
-	// Expressions that describe applicability criteria for the priceComponent.
-	Applicability []ChargeItemDefinitionApplicability `json:"applicability,omitempty"`
-	// priceComponent
-	// The price for a ChargeItem may be calculated as a base price with surcharges/deductions that apply in certain conditions. A ChargeItemDefinition resource that defines the prices, factors and conditions that apply to a billing code is currently under development. The priceComponent element can be used to offer transparency to the recipient of the Invoice of how the prices have been calculated.
-	PriceComponent []ChargeItemDefinitionPriceComponent `json:"priceComponent,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Applicability []*ChargeItemDefinitionApplicability `json:"applicability,omitempty"`
+	PriceComponent []*ChargeItemDefinitionPriceComponent `json:"pricecomponent,omitempty"`
 }
 
 // NewChargeItemDefinitionPropertyGroup creates a new ChargeItemDefinitionPropertyGroup instance
-func NewChargeItemDefinitionPropertyGroup(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	applicability []ChargeItemDefinitionApplicability,
-	priceComponent []ChargeItemDefinitionPriceComponent,
-) *ChargeItemDefinitionPropertyGroup {
-	return &ChargeItemDefinitionPropertyGroup{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Applicability: applicability,
-		PriceComponent: priceComponent,
-	}
+func NewChargeItemDefinitionPropertyGroup() *ChargeItemDefinitionPropertyGroup {
+	return &ChargeItemDefinitionPropertyGroup{}
 }
+
 // FromJSON populates ChargeItemDefinitionPropertyGroup from JSON data
 func (m *ChargeItemDefinitionPropertyGroup) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -486,86 +212,48 @@ func (m *ChargeItemDefinitionPropertyGroup) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ChargeItemDefinitionPropertyGroup
-func (m *ChargeItemDefinitionPropertyGroup) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	applicability *[]ChargeItemDefinitionApplicability,
-	priceComponent *[]ChargeItemDefinitionPriceComponent,
-) *ChargeItemDefinitionPropertyGroup {
+// Clone creates a deep copy of ChargeItemDefinitionPropertyGroup
+func (m *ChargeItemDefinitionPropertyGroup) Clone() *ChargeItemDefinitionPropertyGroup {
+	if m == nil { return nil }
 	return &ChargeItemDefinitionPropertyGroup{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Applicability: func() []ChargeItemDefinitionApplicability {
-			if applicability != nil { return *applicability }
-			return m.Applicability
-		}(),
-		PriceComponent: func() []ChargeItemDefinitionPriceComponent {
-			if priceComponent != nil { return *priceComponent }
-			return m.PriceComponent
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Applicability: cloneSlices(m.Applicability),
+		PriceComponent: cloneSlices(m.PriceComponent),
 	}
 }
+
+// Equals checks for equality with another ChargeItemDefinitionPropertyGroup instance
+func (m *ChargeItemDefinitionPropertyGroup) Equals(other *ChargeItemDefinitionPropertyGroup) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Applicability, other.Applicability) { return false }
+	if !compareSlices(m.PriceComponent, other.PriceComponent) { return false }
+	return true
+}
+
 // ChargeItemDefinitionPriceComponent
 // The price for a ChargeItem may be calculated as a base price with surcharges/deductions that apply in certain conditions. A ChargeItemDefinition resource that defines the prices, factors and conditions that apply to a billing code is currently under development. The priceComponent element can be used to offer transparency to the recipient of the Invoice of how the prices have been calculated.
 type ChargeItemDefinitionPriceComponent struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// This code identifies the type of the component.
-	Type_ InvoicePriceComponentType `json:"type,omitempty"`
-	// code
-	// A code that identifies the component. Codes may be used to differentiate between kinds of taxes, surcharges, discounts etc.
-	Code CodeableConcept `json:"code,omitempty"`
-	// factor
-	// The factor that has been applied on the base price for calculating this component.
-	Factor FhirDecimal `json:"factor,omitempty"`
-	// amount
-	// The amount calculated for this component.
-	Amount Money `json:"amount,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *InvoicePriceComponentType `json:"type,omitempty"`
+	Code *CodeableConcept `json:"code,omitempty"`
+	Factor *FhirDecimal `json:"factor,omitempty"`
+	Amount *Money `json:"amount,omitempty"`
 }
 
 // NewChargeItemDefinitionPriceComponent creates a new ChargeItemDefinitionPriceComponent instance
-func NewChargeItemDefinitionPriceComponent(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ InvoicePriceComponentType,
-	code CodeableConcept,
-	factor FhirDecimal,
-	amount Money,
-) *ChargeItemDefinitionPriceComponent {
-	return &ChargeItemDefinitionPriceComponent{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Code: code,
-		Factor: factor,
-		Amount: amount,
-	}
+func NewChargeItemDefinitionPriceComponent() *ChargeItemDefinitionPriceComponent {
+	return &ChargeItemDefinitionPriceComponent{}
 }
+
 // FromJSON populates ChargeItemDefinitionPriceComponent from JSON data
 func (m *ChargeItemDefinitionPriceComponent) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -576,44 +264,31 @@ func (m *ChargeItemDefinitionPriceComponent) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ChargeItemDefinitionPriceComponent
-func (m *ChargeItemDefinitionPriceComponent) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *InvoicePriceComponentType,
-	code *CodeableConcept,
-	factor *FhirDecimal,
-	amount *Money,
-) *ChargeItemDefinitionPriceComponent {
+// Clone creates a deep copy of ChargeItemDefinitionPriceComponent
+func (m *ChargeItemDefinitionPriceComponent) Clone() *ChargeItemDefinitionPriceComponent {
+	if m == nil { return nil }
 	return &ChargeItemDefinitionPriceComponent{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() InvoicePriceComponentType {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Code: func() CodeableConcept {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Factor: func() FhirDecimal {
-			if factor != nil { return *factor }
-			return m.Factor
-		}(),
-		Amount: func() Money {
-			if amount != nil { return *amount }
-			return m.Amount
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Code: m.Code.Clone(),
+		Factor: m.Factor.Clone(),
+		Amount: m.Amount.Clone(),
 	}
 }
+
+// Equals checks for equality with another ChargeItemDefinitionPriceComponent instance
+func (m *ChargeItemDefinitionPriceComponent) Equals(other *ChargeItemDefinitionPriceComponent) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Factor.Equals(other.Factor) { return false }
+	if !m.Amount.Equals(other.Amount) { return false }
+	return true
+}
+

@@ -57,7 +57,7 @@ func (f *FhirString) String() string {
 func (f *FhirString) Clone() *FhirString {
 	var elementCopy *Element
 	if f.Element != nil {
-		elementCopy = f.Element.Copy()
+		elementCopy = f.Element.Clone()
 	}
 	return &FhirString{
 		Value:   f.Value,
@@ -65,9 +65,13 @@ func (f *FhirString) Clone() *FhirString {
 	}
 }
 
-// Equal checks equality between two FhirString instances.
-func (f *FhirString) Equal(other *FhirString) bool {
-	return f.Value == other.Value && compareElements(f.Element, other.Element)
+// Equals checks equality between two FhirString instances.
+func (f *FhirString) Equals(other Equalable) bool {
+	otherFhirString, ok := other.(*FhirString)
+	if !ok {
+		return false
+	}
+	return f.Value == otherFhirString.Value && compareElements(f.Element, otherFhirString.Element)
 }
 
 // Utility methods for FhirString.

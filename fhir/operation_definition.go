@@ -3,194 +3,53 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // OperationDefinition
 // A formal computable definition of an operation (on the RESTful interface) or a named query (using the search interaction).
 type OperationDefinition struct {
 	CanonicalResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// url
-	// An absolute URI that is used to identify this operation definition when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this operation definition is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the operation definition is stored on different servers.
-	Url FhirUri `json:"url,omitempty"`
-	// version
-	// The identifier that is used to identify this version of the operation definition when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the operation definition author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.
-	Version FhirString `json:"version,omitempty"`
-	// name
-	// A natural language name identifying the operation definition. This name should be usable as an identifier for the module by machine processing applications such as code generation.
-	Name FhirString `json:"name,omitempty"`
-	// title
-	// A short, descriptive, user-friendly title for the operation definition.
-	Title FhirString `json:"title,omitempty"`
-	// status
-	// The status of this operation definition. Enables tracking the life-cycle of the content.
-	Status PublicationStatus `json:"status,omitempty"`
-	// kind
-	// Whether this is an operation or a named query.
-	Kind OperationKind `json:"kind,omitempty"`
-	// experimental
-	// A Boolean value to indicate that this operation definition is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.
-	Experimental FhirBoolean `json:"experimental,omitempty"`
-	// date
-	// The date  (and optionally time) when the operation definition was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the operation definition changes.
-	Date FhirDateTime `json:"date,omitempty"`
-	// publisher
-	// The name of the organization or individual that published the operation definition.
-	Publisher FhirString `json:"publisher,omitempty"`
-	// contact
-	// Contact details to assist a user in finding and communicating with the publisher.
-	Contact []ContactDetail `json:"contact,omitempty"`
-	// description
-	// A free text natural language description of the operation definition from a consumer's perspective.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// useContext
-	// The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate operation definition instances.
-	UseContext []UsageContext `json:"useContext,omitempty"`
-	// jurisdiction
-	// A legal or geographic region in which the operation definition is intended to be used.
-	Jurisdiction []CodeableConcept `json:"jurisdiction,omitempty"`
-	// purpose
-	// Explanation of why this operation definition is needed and why it has been designed as it has.
-	Purpose FhirMarkdown `json:"purpose,omitempty"`
-	// affectsState
-	// Whether the operation affects state. Side effects such as producing audit trail entries do not count as 'affecting  state'.
-	AffectsState FhirBoolean `json:"affectsState,omitempty"`
-	// code
-	// The name used to invoke the operation.
-	Code FhirCode `json:"code,omitempty"`
-	// comment
-	// Additional information about how to use this operation or named query.
-	Comment FhirMarkdown `json:"comment,omitempty"`
-	// base
-	// Indicates that this operation definition is a constraining profile on the base.
-	Base FhirCanonical `json:"base,omitempty"`
-	// resource
-	// The types on which this operation can be executed.
-	Resource []FhirCode `json:"resource,omitempty"`
-	// system
-	// Indicates whether this operation or named query can be invoked at the system level (e.g. without needing to choose a resource type for the context).
-	System FhirBoolean `json:"system,omitempty"`
-	// type
-	// Indicates whether this operation or named query can be invoked at the resource type level for any given resource type level (e.g. without needing to choose a specific resource id for the context).
-	Type_ FhirBoolean `json:"type,omitempty"`
-	// instance
-	// Indicates whether this operation can be invoked on a particular instance of one of the given types.
-	Instance FhirBoolean `json:"instance,omitempty"`
-	// inputProfile
-	// Additional validation information for the in parameters - a single profile that covers all the parameters. The profile is a constraint on the parameters resource as a whole.
-	InputProfile FhirCanonical `json:"inputProfile,omitempty"`
-	// outputProfile
-	// Additional validation information for the out parameters - a single profile that covers all the parameters. The profile is a constraint on the parameters resource.
-	OutputProfile FhirCanonical `json:"outputProfile,omitempty"`
-	// parameter
-	// The parameters for the operation/query.
-	Parameter []OperationDefinitionParameter `json:"parameter,omitempty"`
-	// overload
-	// Defines an appropriate combination of parameters to use when invoking this operation, to help code generators when generating overloaded parameter sets for this operation.
-	Overload []OperationDefinitionOverload `json:"overload,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Url *FhirUri `json:"url,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Title *FhirString `json:"title,omitempty"`
+	Status *PublicationStatus `json:"status,omitempty"`
+	Kind *OperationKind `json:"kind,omitempty"`
+	Experimental *FhirBoolean `json:"experimental,omitempty"`
+	Date *FhirDateTime `json:"date,omitempty"`
+	Publisher *FhirString `json:"publisher,omitempty"`
+	Contact []*ContactDetail `json:"contact,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	UseContext []*UsageContext `json:"usecontext,omitempty"`
+	Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+	Purpose *FhirMarkdown `json:"purpose,omitempty"`
+	AffectsState *FhirBoolean `json:"affectsstate,omitempty"`
+	Code *FhirCode `json:"code,omitempty"`
+	Comment *FhirMarkdown `json:"comment,omitempty"`
+	Base *FhirCanonical `json:"base,omitempty"`
+	Resource []*FhirCode `json:"resource,omitempty"`
+	System *FhirBoolean `json:"system,omitempty"`
+	Type *FhirBoolean `json:"type,omitempty"`
+	Instance *FhirBoolean `json:"instance,omitempty"`
+	InputProfile *FhirCanonical `json:"inputprofile,omitempty"`
+	OutputProfile *FhirCanonical `json:"outputprofile,omitempty"`
+	Parameter []*OperationDefinitionParameter `json:"parameter,omitempty"`
+	Overload []*OperationDefinitionOverload `json:"overload,omitempty"`
 }
 
 // NewOperationDefinition creates a new OperationDefinition instance
-func NewOperationDefinition(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	url FhirUri,
-	version FhirString,
-	name FhirString,
-	title FhirString,
-	status PublicationStatus,
-	kind OperationKind,
-	experimental FhirBoolean,
-	date FhirDateTime,
-	publisher FhirString,
-	contact []ContactDetail,
-	description FhirMarkdown,
-	useContext []UsageContext,
-	jurisdiction []CodeableConcept,
-	purpose FhirMarkdown,
-	affectsState FhirBoolean,
-	code FhirCode,
-	comment FhirMarkdown,
-	base FhirCanonical,
-	resource []FhirCode,
-	system FhirBoolean,
-	type_ FhirBoolean,
-	instance FhirBoolean,
-	inputProfile FhirCanonical,
-	outputProfile FhirCanonical,
-	parameter []OperationDefinitionParameter,
-	overload []OperationDefinitionOverload,
-) *OperationDefinition {
-	return &OperationDefinition{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Url: url,
-		Version: version,
-		Name: name,
-		Title: title,
-		Status: status,
-		Kind: kind,
-		Experimental: experimental,
-		Date: date,
-		Publisher: publisher,
-		Contact: contact,
-		Description: description,
-		UseContext: useContext,
-		Jurisdiction: jurisdiction,
-		Purpose: purpose,
-		AffectsState: affectsState,
-		Code: code,
-		Comment: comment,
-		Base: base,
-		Resource: resource,
-		System: system,
-		Type_: type_,
-		Instance: instance,
-		InputProfile: inputProfile,
-		OutputProfile: outputProfile,
-		Parameter: parameter,
-		Overload: overload,
-	}
+func NewOperationDefinition() *OperationDefinition {
+	return &OperationDefinition{}
 }
+
 // FromJSON populates OperationDefinition from JSON data
 func (m *OperationDefinition) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -201,266 +60,113 @@ func (m *OperationDefinition) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of OperationDefinition
-func (m *OperationDefinition) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	url *FhirUri,
-	version *FhirString,
-	name *FhirString,
-	title *FhirString,
-	status *PublicationStatus,
-	kind *OperationKind,
-	experimental *FhirBoolean,
-	date *FhirDateTime,
-	publisher *FhirString,
-	contact *[]ContactDetail,
-	description *FhirMarkdown,
-	useContext *[]UsageContext,
-	jurisdiction *[]CodeableConcept,
-	purpose *FhirMarkdown,
-	affectsState *FhirBoolean,
-	code *FhirCode,
-	comment *FhirMarkdown,
-	base *FhirCanonical,
-	resource *[]FhirCode,
-	system *FhirBoolean,
-	type_ *FhirBoolean,
-	instance *FhirBoolean,
-	inputProfile *FhirCanonical,
-	outputProfile *FhirCanonical,
-	parameter *[]OperationDefinitionParameter,
-	overload *[]OperationDefinitionOverload,
-) *OperationDefinition {
+// Clone creates a deep copy of OperationDefinition
+func (m *OperationDefinition) Clone() *OperationDefinition {
+	if m == nil { return nil }
 	return &OperationDefinition{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Url: func() FhirUri {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Title: func() FhirString {
-			if title != nil { return *title }
-			return m.Title
-		}(),
-		Status: func() PublicationStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Kind: func() OperationKind {
-			if kind != nil { return *kind }
-			return m.Kind
-		}(),
-		Experimental: func() FhirBoolean {
-			if experimental != nil { return *experimental }
-			return m.Experimental
-		}(),
-		Date: func() FhirDateTime {
-			if date != nil { return *date }
-			return m.Date
-		}(),
-		Publisher: func() FhirString {
-			if publisher != nil { return *publisher }
-			return m.Publisher
-		}(),
-		Contact: func() []ContactDetail {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		UseContext: func() []UsageContext {
-			if useContext != nil { return *useContext }
-			return m.UseContext
-		}(),
-		Jurisdiction: func() []CodeableConcept {
-			if jurisdiction != nil { return *jurisdiction }
-			return m.Jurisdiction
-		}(),
-		Purpose: func() FhirMarkdown {
-			if purpose != nil { return *purpose }
-			return m.Purpose
-		}(),
-		AffectsState: func() FhirBoolean {
-			if affectsState != nil { return *affectsState }
-			return m.AffectsState
-		}(),
-		Code: func() FhirCode {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Comment: func() FhirMarkdown {
-			if comment != nil { return *comment }
-			return m.Comment
-		}(),
-		Base: func() FhirCanonical {
-			if base != nil { return *base }
-			return m.Base
-		}(),
-		Resource: func() []FhirCode {
-			if resource != nil { return *resource }
-			return m.Resource
-		}(),
-		System: func() FhirBoolean {
-			if system != nil { return *system }
-			return m.System
-		}(),
-		Type_: func() FhirBoolean {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Instance: func() FhirBoolean {
-			if instance != nil { return *instance }
-			return m.Instance
-		}(),
-		InputProfile: func() FhirCanonical {
-			if inputProfile != nil { return *inputProfile }
-			return m.InputProfile
-		}(),
-		OutputProfile: func() FhirCanonical {
-			if outputProfile != nil { return *outputProfile }
-			return m.OutputProfile
-		}(),
-		Parameter: func() []OperationDefinitionParameter {
-			if parameter != nil { return *parameter }
-			return m.Parameter
-		}(),
-		Overload: func() []OperationDefinitionOverload {
-			if overload != nil { return *overload }
-			return m.Overload
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Url: m.Url.Clone(),
+		Version: m.Version.Clone(),
+		Name: m.Name.Clone(),
+		Title: m.Title.Clone(),
+		Status: m.Status.Clone(),
+		Kind: m.Kind.Clone(),
+		Experimental: m.Experimental.Clone(),
+		Date: m.Date.Clone(),
+		Publisher: m.Publisher.Clone(),
+		Contact: cloneSlices(m.Contact),
+		Description: m.Description.Clone(),
+		UseContext: cloneSlices(m.UseContext),
+		Jurisdiction: cloneSlices(m.Jurisdiction),
+		Purpose: m.Purpose.Clone(),
+		AffectsState: m.AffectsState.Clone(),
+		Code: m.Code.Clone(),
+		Comment: m.Comment.Clone(),
+		Base: m.Base.Clone(),
+		Resource: cloneSlices(m.Resource),
+		System: m.System.Clone(),
+		Type: m.Type.Clone(),
+		Instance: m.Instance.Clone(),
+		InputProfile: m.InputProfile.Clone(),
+		OutputProfile: m.OutputProfile.Clone(),
+		Parameter: cloneSlices(m.Parameter),
+		Overload: cloneSlices(m.Overload),
 	}
 }
+
+// Equals checks for equality with another OperationDefinition instance
+func (m *OperationDefinition) Equals(other *OperationDefinition) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Title.Equals(other.Title) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Kind.Equals(other.Kind) { return false }
+	if !m.Experimental.Equals(other.Experimental) { return false }
+	if !m.Date.Equals(other.Date) { return false }
+	if !m.Publisher.Equals(other.Publisher) { return false }
+	if !compareSlices(m.Contact, other.Contact) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.UseContext, other.UseContext) { return false }
+	if !compareSlices(m.Jurisdiction, other.Jurisdiction) { return false }
+	if !m.Purpose.Equals(other.Purpose) { return false }
+	if !m.AffectsState.Equals(other.AffectsState) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Comment.Equals(other.Comment) { return false }
+	if !m.Base.Equals(other.Base) { return false }
+	if !compareSlices(m.Resource, other.Resource) { return false }
+	if !m.System.Equals(other.System) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Instance.Equals(other.Instance) { return false }
+	if !m.InputProfile.Equals(other.InputProfile) { return false }
+	if !m.OutputProfile.Equals(other.OutputProfile) { return false }
+	if !compareSlices(m.Parameter, other.Parameter) { return false }
+	if !compareSlices(m.Overload, other.Overload) { return false }
+	return true
+}
+
 // OperationDefinitionParameter
 // The parameters for the operation/query.
 type OperationDefinitionParameter struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// name
-	// The name of used to identify the parameter.
-	Name FhirCode `json:"name,omitempty"`
-	// use
-	// Whether this is an input or an output parameter.
-	Use OperationParameterUse `json:"use,omitempty"`
-	// min
-	// The minimum number of times this parameter SHALL appear in the request or response.
-	Min FhirInteger `json:"min,omitempty"`
-	// max
-	// The maximum number of times this element is permitted to appear in the request or response.
-	Max FhirString `json:"max,omitempty"`
-	// documentation
-	// Describes the meaning or use of this parameter.
-	Documentation FhirString `json:"documentation,omitempty"`
-	// type
-	// The type for this parameter.
-	Type_ FHIRAllTypes `json:"type,omitempty"`
-	// targetProfile
-	// Used when the type is "Reference" or "canonical", and identifies a profile structure or implementation Guide that applies to the target of the reference this parameter refers to. If any profiles are specified, then the content must conform to at least one of them. The URL can be a local reference - to a contained StructureDefinition, or a reference to another StructureDefinition or Implementation Guide by a canonical URL. When an implementation guide is specified, the target resource SHALL conform to at least one profile defined in the implementation guide.
-	TargetProfile []FhirCanonical `json:"targetProfile,omitempty"`
-	// searchType
-	// How the parameter is understood as a search parameter. This is only used if the parameter type is 'string'.
-	SearchType SearchParamType `json:"searchType,omitempty"`
-	// binding
-	// Binds to a value set if this parameter is coded (code, Coding, CodeableConcept).
-	Binding OperationDefinitionBinding `json:"binding,omitempty"`
-	// referencedFrom
-	// Identifies other resource parameters within the operation invocation that are expected to resolve to this resource.
-	ReferencedFrom []OperationDefinitionReferencedFrom `json:"referencedFrom,omitempty"`
-	// part
-	// The parts of a nested Parameter.
-	Part_ []OperationDefinitionParameter `json:"part,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Name *FhirCode `json:"name,omitempty"`
+	Use *OperationParameterUse `json:"use,omitempty"`
+	Min *FhirInteger `json:"min,omitempty"`
+	Max *FhirString `json:"max,omitempty"`
+	Documentation *FhirString `json:"documentation,omitempty"`
+	Type *FHIRAllTypes `json:"type,omitempty"`
+	TargetProfile []*FhirCanonical `json:"targetprofile,omitempty"`
+	SearchType *SearchParamType `json:"searchtype,omitempty"`
+	Binding *OperationDefinitionBinding `json:"binding,omitempty"`
+	ReferencedFrom []*OperationDefinitionReferencedFrom `json:"referencedfrom,omitempty"`
+	Part_ []*OperationDefinitionParameter `json:"part,omitempty"`
 }
 
 // NewOperationDefinitionParameter creates a new OperationDefinitionParameter instance
-func NewOperationDefinitionParameter(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	name FhirCode,
-	use OperationParameterUse,
-	min FhirInteger,
-	max FhirString,
-	documentation FhirString,
-	type_ FHIRAllTypes,
-	targetProfile []FhirCanonical,
-	searchType SearchParamType,
-	binding OperationDefinitionBinding,
-	referencedFrom []OperationDefinitionReferencedFrom,
-	part_ []OperationDefinitionParameter,
-) *OperationDefinitionParameter {
-	return &OperationDefinitionParameter{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Name: name,
-		Use: use,
-		Min: min,
-		Max: max,
-		Documentation: documentation,
-		Type_: type_,
-		TargetProfile: targetProfile,
-		SearchType: searchType,
-		Binding: binding,
-		ReferencedFrom: referencedFrom,
-		Part_: part_,
-	}
+func NewOperationDefinitionParameter() *OperationDefinitionParameter {
+	return &OperationDefinitionParameter{}
 }
+
 // FromJSON populates OperationDefinitionParameter from JSON data
 func (m *OperationDefinitionParameter) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -471,121 +177,64 @@ func (m *OperationDefinitionParameter) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of OperationDefinitionParameter
-func (m *OperationDefinitionParameter) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	name *FhirCode,
-	use *OperationParameterUse,
-	min *FhirInteger,
-	max *FhirString,
-	documentation *FhirString,
-	type_ *FHIRAllTypes,
-	targetProfile *[]FhirCanonical,
-	searchType *SearchParamType,
-	binding *OperationDefinitionBinding,
-	referencedFrom *[]OperationDefinitionReferencedFrom,
-	part_ *[]OperationDefinitionParameter,
-) *OperationDefinitionParameter {
+// Clone creates a deep copy of OperationDefinitionParameter
+func (m *OperationDefinitionParameter) Clone() *OperationDefinitionParameter {
+	if m == nil { return nil }
 	return &OperationDefinitionParameter{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Name: func() FhirCode {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Use: func() OperationParameterUse {
-			if use != nil { return *use }
-			return m.Use
-		}(),
-		Min: func() FhirInteger {
-			if min != nil { return *min }
-			return m.Min
-		}(),
-		Max: func() FhirString {
-			if max != nil { return *max }
-			return m.Max
-		}(),
-		Documentation: func() FhirString {
-			if documentation != nil { return *documentation }
-			return m.Documentation
-		}(),
-		Type_: func() FHIRAllTypes {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		TargetProfile: func() []FhirCanonical {
-			if targetProfile != nil { return *targetProfile }
-			return m.TargetProfile
-		}(),
-		SearchType: func() SearchParamType {
-			if searchType != nil { return *searchType }
-			return m.SearchType
-		}(),
-		Binding: func() OperationDefinitionBinding {
-			if binding != nil { return *binding }
-			return m.Binding
-		}(),
-		ReferencedFrom: func() []OperationDefinitionReferencedFrom {
-			if referencedFrom != nil { return *referencedFrom }
-			return m.ReferencedFrom
-		}(),
-		Part_: func() []OperationDefinitionParameter {
-			if part_ != nil { return *part_ }
-			return m.Part_
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Name: m.Name.Clone(),
+		Use: m.Use.Clone(),
+		Min: m.Min.Clone(),
+		Max: m.Max.Clone(),
+		Documentation: m.Documentation.Clone(),
+		Type: m.Type.Clone(),
+		TargetProfile: cloneSlices(m.TargetProfile),
+		SearchType: m.SearchType.Clone(),
+		Binding: m.Binding.Clone(),
+		ReferencedFrom: cloneSlices(m.ReferencedFrom),
+		Part_: cloneSlices(m.Part_),
 	}
 }
+
+// Equals checks for equality with another OperationDefinitionParameter instance
+func (m *OperationDefinitionParameter) Equals(other *OperationDefinitionParameter) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Use.Equals(other.Use) { return false }
+	if !m.Min.Equals(other.Min) { return false }
+	if !m.Max.Equals(other.Max) { return false }
+	if !m.Documentation.Equals(other.Documentation) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !compareSlices(m.TargetProfile, other.TargetProfile) { return false }
+	if !m.SearchType.Equals(other.SearchType) { return false }
+	if !m.Binding.Equals(other.Binding) { return false }
+	if !compareSlices(m.ReferencedFrom, other.ReferencedFrom) { return false }
+	if !compareSlices(m.Part_, other.Part_) { return false }
+	return true
+}
+
 // OperationDefinitionBinding
 // Binds to a value set if this parameter is coded (code, Coding, CodeableConcept).
 type OperationDefinitionBinding struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// strength
-	// Indicates the degree of conformance expectations associated with this binding - that is, the degree to which the provided value set must be adhered to in the instances.
-	Strength BindingStrength `json:"strength,omitempty"`
-	// valueSet
-	// Points to the value set or external definition (e.g. implicit value set) that identifies the set of codes to be used.
-	ValueSet FhirCanonical `json:"valueSet,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Strength *BindingStrength `json:"strength,omitempty"`
+	ValueSet *FhirCanonical `json:"valueset,omitempty"`
 }
 
 // NewOperationDefinitionBinding creates a new OperationDefinitionBinding instance
-func NewOperationDefinitionBinding(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	strength BindingStrength,
-	valueSet FhirCanonical,
-) *OperationDefinitionBinding {
-	return &OperationDefinitionBinding{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Strength: strength,
-		ValueSet: valueSet,
-	}
+func NewOperationDefinitionBinding() *OperationDefinitionBinding {
+	return &OperationDefinitionBinding{}
 }
+
 // FromJSON populates OperationDefinitionBinding from JSON data
 func (m *OperationDefinitionBinding) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -596,76 +245,46 @@ func (m *OperationDefinitionBinding) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of OperationDefinitionBinding
-func (m *OperationDefinitionBinding) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	strength *BindingStrength,
-	valueSet *FhirCanonical,
-) *OperationDefinitionBinding {
+// Clone creates a deep copy of OperationDefinitionBinding
+func (m *OperationDefinitionBinding) Clone() *OperationDefinitionBinding {
+	if m == nil { return nil }
 	return &OperationDefinitionBinding{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Strength: func() BindingStrength {
-			if strength != nil { return *strength }
-			return m.Strength
-		}(),
-		ValueSet: func() FhirCanonical {
-			if valueSet != nil { return *valueSet }
-			return m.ValueSet
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Strength: m.Strength.Clone(),
+		ValueSet: m.ValueSet.Clone(),
 	}
 }
+
+// Equals checks for equality with another OperationDefinitionBinding instance
+func (m *OperationDefinitionBinding) Equals(other *OperationDefinitionBinding) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Strength.Equals(other.Strength) { return false }
+	if !m.ValueSet.Equals(other.ValueSet) { return false }
+	return true
+}
+
 // OperationDefinitionReferencedFrom
 // Identifies other resource parameters within the operation invocation that are expected to resolve to this resource.
 type OperationDefinitionReferencedFrom struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// source
-	// The name of the parameter or dot-separated path of parameter names pointing to the resource parameter that is expected to contain a reference to this resource.
-	Source FhirString `json:"source,omitempty"`
-	// sourceId
-	// The id of the element in the referencing resource that is expected to resolve to this resource.
-	SourceId FhirString `json:"sourceId,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Source *FhirString `json:"source,omitempty"`
+	SourceId *FhirString `json:"sourceid,omitempty"`
 }
 
 // NewOperationDefinitionReferencedFrom creates a new OperationDefinitionReferencedFrom instance
-func NewOperationDefinitionReferencedFrom(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	source FhirString,
-	sourceId FhirString,
-) *OperationDefinitionReferencedFrom {
-	return &OperationDefinitionReferencedFrom{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Source: source,
-		SourceId: sourceId,
-	}
+func NewOperationDefinitionReferencedFrom() *OperationDefinitionReferencedFrom {
+	return &OperationDefinitionReferencedFrom{}
 }
+
 // FromJSON populates OperationDefinitionReferencedFrom from JSON data
 func (m *OperationDefinitionReferencedFrom) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -676,76 +295,46 @@ func (m *OperationDefinitionReferencedFrom) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of OperationDefinitionReferencedFrom
-func (m *OperationDefinitionReferencedFrom) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	source *FhirString,
-	sourceId *FhirString,
-) *OperationDefinitionReferencedFrom {
+// Clone creates a deep copy of OperationDefinitionReferencedFrom
+func (m *OperationDefinitionReferencedFrom) Clone() *OperationDefinitionReferencedFrom {
+	if m == nil { return nil }
 	return &OperationDefinitionReferencedFrom{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Source: func() FhirString {
-			if source != nil { return *source }
-			return m.Source
-		}(),
-		SourceId: func() FhirString {
-			if sourceId != nil { return *sourceId }
-			return m.SourceId
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Source: m.Source.Clone(),
+		SourceId: m.SourceId.Clone(),
 	}
 }
+
+// Equals checks for equality with another OperationDefinitionReferencedFrom instance
+func (m *OperationDefinitionReferencedFrom) Equals(other *OperationDefinitionReferencedFrom) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Source.Equals(other.Source) { return false }
+	if !m.SourceId.Equals(other.SourceId) { return false }
+	return true
+}
+
 // OperationDefinitionOverload
 // Defines an appropriate combination of parameters to use when invoking this operation, to help code generators when generating overloaded parameter sets for this operation.
 type OperationDefinitionOverload struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// parameterName
-	// Name of parameter to include in overload.
-	ParameterName []FhirString `json:"parameterName,omitempty"`
-	// comment
-	// Comments to go on overload.
-	Comment FhirString `json:"comment,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	ParameterName []*FhirString `json:"parametername,omitempty"`
+	Comment *FhirString `json:"comment,omitempty"`
 }
 
 // NewOperationDefinitionOverload creates a new OperationDefinitionOverload instance
-func NewOperationDefinitionOverload(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	parameterName []FhirString,
-	comment FhirString,
-) *OperationDefinitionOverload {
-	return &OperationDefinitionOverload{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		ParameterName: parameterName,
-		Comment: comment,
-	}
+func NewOperationDefinitionOverload() *OperationDefinitionOverload {
+	return &OperationDefinitionOverload{}
 }
+
 // FromJSON populates OperationDefinitionOverload from JSON data
 func (m *OperationDefinitionOverload) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -756,34 +345,27 @@ func (m *OperationDefinitionOverload) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of OperationDefinitionOverload
-func (m *OperationDefinitionOverload) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	parameterName *[]FhirString,
-	comment *FhirString,
-) *OperationDefinitionOverload {
+// Clone creates a deep copy of OperationDefinitionOverload
+func (m *OperationDefinitionOverload) Clone() *OperationDefinitionOverload {
+	if m == nil { return nil }
 	return &OperationDefinitionOverload{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		ParameterName: func() []FhirString {
-			if parameterName != nil { return *parameterName }
-			return m.ParameterName
-		}(),
-		Comment: func() FhirString {
-			if comment != nil { return *comment }
-			return m.Comment
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		ParameterName: cloneSlices(m.ParameterName),
+		Comment: m.Comment.Clone(),
 	}
 }
+
+// Equals checks for equality with another OperationDefinitionOverload instance
+func (m *OperationDefinitionOverload) Equals(other *OperationDefinitionOverload) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.ParameterName, other.ParameterName) { return false }
+	if !m.Comment.Equals(other.Comment) { return false }
+	return true
+}
+

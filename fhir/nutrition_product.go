@@ -3,114 +3,37 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // NutritionProduct
 // A food or fluid product that is consumed by patients.
 type NutritionProduct struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// status
-	// The current state of the product.
-	Status NutritionProductStatus `json:"status,omitempty"`
-	// category
-	// Nutrition products can have different classifications - according to its nutritional properties, preparation methods, etc.
-	Category []CodeableConcept `json:"category,omitempty"`
-	// code
-	// The code assigned to the product, for example a manufacturer number or other terminology.
-	Code CodeableConcept `json:"code,omitempty"`
-	// manufacturer
-	// The organisation (manufacturer, representative or legal authorisation holder) that is responsible for the device.
-	Manufacturer []Reference `json:"manufacturer,omitempty"`
-	// nutrient
-	// The product's nutritional information expressed by the nutrients.
-	Nutrient []NutritionProductNutrient `json:"nutrient,omitempty"`
-	// ingredient
-	// Ingredients contained in this product.
-	Ingredient []NutritionProductIngredient `json:"ingredient,omitempty"`
-	// knownAllergen
-	// Allergens that are known or suspected to be a part of this nutrition product.
-	KnownAllergen []CodeableReference `json:"knownAllergen,omitempty"`
-	// productCharacteristic
-	// Specifies descriptive properties of the nutrition product.
-	ProductCharacteristic []NutritionProductProductCharacteristic `json:"productCharacteristic,omitempty"`
-	// instance
-	// Conveys instance-level information about this product item. One or several physical, countable instances or occurrences of the product.
-	Instance NutritionProductInstance `json:"instance,omitempty"`
-	// note
-	// Comments made about the product.
-	Note []Annotation `json:"note,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Status *NutritionProductStatus `json:"status,omitempty"`
+	Category []*CodeableConcept `json:"category,omitempty"`
+	Code *CodeableConcept `json:"code,omitempty"`
+	Manufacturer []*Reference `json:"manufacturer,omitempty"`
+	Nutrient []*NutritionProductNutrient `json:"nutrient,omitempty"`
+	Ingredient []*NutritionProductIngredient `json:"ingredient,omitempty"`
+	KnownAllergen []*CodeableReference `json:"knownallergen,omitempty"`
+	ProductCharacteristic []*NutritionProductProductCharacteristic `json:"productcharacteristic,omitempty"`
+	Instance *NutritionProductInstance `json:"instance,omitempty"`
+	Note []*Annotation `json:"note,omitempty"`
 }
 
 // NewNutritionProduct creates a new NutritionProduct instance
-func NewNutritionProduct(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	status NutritionProductStatus,
-	category []CodeableConcept,
-	code CodeableConcept,
-	manufacturer []Reference,
-	nutrient []NutritionProductNutrient,
-	ingredient []NutritionProductIngredient,
-	knownAllergen []CodeableReference,
-	productCharacteristic []NutritionProductProductCharacteristic,
-	instance NutritionProductInstance,
-	note []Annotation,
-) *NutritionProduct {
-	return &NutritionProduct{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Status: status,
-		Category: category,
-		Code: code,
-		Manufacturer: manufacturer,
-		Nutrient: nutrient,
-		Ingredient: ingredient,
-		KnownAllergen: knownAllergen,
-		ProductCharacteristic: productCharacteristic,
-		Instance: instance,
-		Note: note,
-	}
+func NewNutritionProduct() *NutritionProduct {
+	return &NutritionProduct{}
 }
+
 // FromJSON populates NutritionProduct from JSON data
 func (m *NutritionProduct) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -121,141 +44,72 @@ func (m *NutritionProduct) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of NutritionProduct
-func (m *NutritionProduct) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	status *NutritionProductStatus,
-	category *[]CodeableConcept,
-	code *CodeableConcept,
-	manufacturer *[]Reference,
-	nutrient *[]NutritionProductNutrient,
-	ingredient *[]NutritionProductIngredient,
-	knownAllergen *[]CodeableReference,
-	productCharacteristic *[]NutritionProductProductCharacteristic,
-	instance *NutritionProductInstance,
-	note *[]Annotation,
-) *NutritionProduct {
+// Clone creates a deep copy of NutritionProduct
+func (m *NutritionProduct) Clone() *NutritionProduct {
+	if m == nil { return nil }
 	return &NutritionProduct{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Status: func() NutritionProductStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Category: func() []CodeableConcept {
-			if category != nil { return *category }
-			return m.Category
-		}(),
-		Code: func() CodeableConcept {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Manufacturer: func() []Reference {
-			if manufacturer != nil { return *manufacturer }
-			return m.Manufacturer
-		}(),
-		Nutrient: func() []NutritionProductNutrient {
-			if nutrient != nil { return *nutrient }
-			return m.Nutrient
-		}(),
-		Ingredient: func() []NutritionProductIngredient {
-			if ingredient != nil { return *ingredient }
-			return m.Ingredient
-		}(),
-		KnownAllergen: func() []CodeableReference {
-			if knownAllergen != nil { return *knownAllergen }
-			return m.KnownAllergen
-		}(),
-		ProductCharacteristic: func() []NutritionProductProductCharacteristic {
-			if productCharacteristic != nil { return *productCharacteristic }
-			return m.ProductCharacteristic
-		}(),
-		Instance: func() NutritionProductInstance {
-			if instance != nil { return *instance }
-			return m.Instance
-		}(),
-		Note: func() []Annotation {
-			if note != nil { return *note }
-			return m.Note
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Status: m.Status.Clone(),
+		Category: cloneSlices(m.Category),
+		Code: m.Code.Clone(),
+		Manufacturer: cloneSlices(m.Manufacturer),
+		Nutrient: cloneSlices(m.Nutrient),
+		Ingredient: cloneSlices(m.Ingredient),
+		KnownAllergen: cloneSlices(m.KnownAllergen),
+		ProductCharacteristic: cloneSlices(m.ProductCharacteristic),
+		Instance: m.Instance.Clone(),
+		Note: cloneSlices(m.Note),
 	}
 }
+
+// Equals checks for equality with another NutritionProduct instance
+func (m *NutritionProduct) Equals(other *NutritionProduct) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !compareSlices(m.Category, other.Category) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !compareSlices(m.Manufacturer, other.Manufacturer) { return false }
+	if !compareSlices(m.Nutrient, other.Nutrient) { return false }
+	if !compareSlices(m.Ingredient, other.Ingredient) { return false }
+	if !compareSlices(m.KnownAllergen, other.KnownAllergen) { return false }
+	if !compareSlices(m.ProductCharacteristic, other.ProductCharacteristic) { return false }
+	if !m.Instance.Equals(other.Instance) { return false }
+	if !compareSlices(m.Note, other.Note) { return false }
+	return true
+}
+
 // NutritionProductNutrient
 // The product's nutritional information expressed by the nutrients.
 type NutritionProductNutrient struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// item
-	// The (relevant) nutrients in the product.
-	Item CodeableReference `json:"item,omitempty"`
-	// amount
-	// The amount of nutrient expressed in one or more units: X per pack / per serving / per dose.
-	Amount []Ratio `json:"amount,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Item *CodeableReference `json:"item,omitempty"`
+	Amount []*Ratio `json:"amount,omitempty"`
 }
 
 // NewNutritionProductNutrient creates a new NutritionProductNutrient instance
-func NewNutritionProductNutrient(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	item CodeableReference,
-	amount []Ratio,
-) *NutritionProductNutrient {
-	return &NutritionProductNutrient{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Item: item,
-		Amount: amount,
-	}
+func NewNutritionProductNutrient() *NutritionProductNutrient {
+	return &NutritionProductNutrient{}
 }
+
 // FromJSON populates NutritionProductNutrient from JSON data
 func (m *NutritionProductNutrient) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -266,76 +120,46 @@ func (m *NutritionProductNutrient) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of NutritionProductNutrient
-func (m *NutritionProductNutrient) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	item *CodeableReference,
-	amount *[]Ratio,
-) *NutritionProductNutrient {
+// Clone creates a deep copy of NutritionProductNutrient
+func (m *NutritionProductNutrient) Clone() *NutritionProductNutrient {
+	if m == nil { return nil }
 	return &NutritionProductNutrient{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Item: func() CodeableReference {
-			if item != nil { return *item }
-			return m.Item
-		}(),
-		Amount: func() []Ratio {
-			if amount != nil { return *amount }
-			return m.Amount
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Item: m.Item.Clone(),
+		Amount: cloneSlices(m.Amount),
 	}
 }
+
+// Equals checks for equality with another NutritionProductNutrient instance
+func (m *NutritionProductNutrient) Equals(other *NutritionProductNutrient) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Item.Equals(other.Item) { return false }
+	if !compareSlices(m.Amount, other.Amount) { return false }
+	return true
+}
+
 // NutritionProductIngredient
 // Ingredients contained in this product.
 type NutritionProductIngredient struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// item
-	// The ingredient contained in the product.
-	Item CodeableReference `json:"item,omitempty"`
-	// amount
-	// The amount of ingredient that is in the product.
-	Amount []Ratio `json:"amount,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Item *CodeableReference `json:"item,omitempty"`
+	Amount []*Ratio `json:"amount,omitempty"`
 }
 
 // NewNutritionProductIngredient creates a new NutritionProductIngredient instance
-func NewNutritionProductIngredient(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	item CodeableReference,
-	amount []Ratio,
-) *NutritionProductIngredient {
-	return &NutritionProductIngredient{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Item: item,
-		Amount: amount,
-	}
+func NewNutritionProductIngredient() *NutritionProductIngredient {
+	return &NutritionProductIngredient{}
 }
+
 // FromJSON populates NutritionProductIngredient from JSON data
 func (m *NutritionProductIngredient) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -346,101 +170,51 @@ func (m *NutritionProductIngredient) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of NutritionProductIngredient
-func (m *NutritionProductIngredient) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	item *CodeableReference,
-	amount *[]Ratio,
-) *NutritionProductIngredient {
+// Clone creates a deep copy of NutritionProductIngredient
+func (m *NutritionProductIngredient) Clone() *NutritionProductIngredient {
+	if m == nil { return nil }
 	return &NutritionProductIngredient{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Item: func() CodeableReference {
-			if item != nil { return *item }
-			return m.Item
-		}(),
-		Amount: func() []Ratio {
-			if amount != nil { return *amount }
-			return m.Amount
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Item: m.Item.Clone(),
+		Amount: cloneSlices(m.Amount),
 	}
 }
+
+// Equals checks for equality with another NutritionProductIngredient instance
+func (m *NutritionProductIngredient) Equals(other *NutritionProductIngredient) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Item.Equals(other.Item) { return false }
+	if !compareSlices(m.Amount, other.Amount) { return false }
+	return true
+}
+
 // NutritionProductProductCharacteristic
 // Specifies descriptive properties of the nutrition product.
 type NutritionProductProductCharacteristic struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// A code specifying which characteristic of the product is being described (for example, colour, shape).
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// valueCodeableConcept
-	// The actual characteristic value corresponding to the type.
-	ValueCodeableConcept CodeableConcept `json:"valueCodeableConcept,omitempty"`
-	// valueString
-	// The actual characteristic value corresponding to the type.
-	ValueString FhirString `json:"valueString,omitempty"`
-	// valueQuantity
-	// The actual characteristic value corresponding to the type.
-	ValueQuantity Quantity `json:"valueQuantity,omitempty"`
-	// valueBase64Binary
-	// The actual characteristic value corresponding to the type.
-	ValueBase64Binary FhirBase64Binary `json:"valueBase64Binary,omitempty"`
-	// valueAttachment
-	// The actual characteristic value corresponding to the type.
-	ValueAttachment Attachment `json:"valueAttachment,omitempty"`
-	// valueBoolean
-	// The actual characteristic value corresponding to the type.
-	ValueBoolean FhirBoolean `json:"valueBoolean,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+	ValueString *FhirString `json:"valuestring,omitempty"`
+	ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+	ValueBase64Binary *FhirBase64Binary `json:"valuebase64binary,omitempty"`
+	ValueAttachment *Attachment `json:"valueattachment,omitempty"`
+	ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
 }
 
 // NewNutritionProductProductCharacteristic creates a new NutritionProductProductCharacteristic instance
-func NewNutritionProductProductCharacteristic(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	valueCodeableConcept CodeableConcept,
-	valueString FhirString,
-	valueQuantity Quantity,
-	valueBase64Binary FhirBase64Binary,
-	valueAttachment Attachment,
-	valueBoolean FhirBoolean,
-) *NutritionProductProductCharacteristic {
-	return &NutritionProductProductCharacteristic{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		ValueCodeableConcept: valueCodeableConcept,
-		ValueString: valueString,
-		ValueQuantity: valueQuantity,
-		ValueBase64Binary: valueBase64Binary,
-		ValueAttachment: valueAttachment,
-		ValueBoolean: valueBoolean,
-	}
+func NewNutritionProductProductCharacteristic() *NutritionProductProductCharacteristic {
+	return &NutritionProductProductCharacteristic{}
 }
+
 // FromJSON populates NutritionProductProductCharacteristic from JSON data
 func (m *NutritionProductProductCharacteristic) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -451,116 +225,59 @@ func (m *NutritionProductProductCharacteristic) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of NutritionProductProductCharacteristic
-func (m *NutritionProductProductCharacteristic) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	valueCodeableConcept *CodeableConcept,
-	valueString *FhirString,
-	valueQuantity *Quantity,
-	valueBase64Binary *FhirBase64Binary,
-	valueAttachment *Attachment,
-	valueBoolean *FhirBoolean,
-) *NutritionProductProductCharacteristic {
+// Clone creates a deep copy of NutritionProductProductCharacteristic
+func (m *NutritionProductProductCharacteristic) Clone() *NutritionProductProductCharacteristic {
+	if m == nil { return nil }
 	return &NutritionProductProductCharacteristic{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		ValueCodeableConcept: func() CodeableConcept {
-			if valueCodeableConcept != nil { return *valueCodeableConcept }
-			return m.ValueCodeableConcept
-		}(),
-		ValueString: func() FhirString {
-			if valueString != nil { return *valueString }
-			return m.ValueString
-		}(),
-		ValueQuantity: func() Quantity {
-			if valueQuantity != nil { return *valueQuantity }
-			return m.ValueQuantity
-		}(),
-		ValueBase64Binary: func() FhirBase64Binary {
-			if valueBase64Binary != nil { return *valueBase64Binary }
-			return m.ValueBase64Binary
-		}(),
-		ValueAttachment: func() Attachment {
-			if valueAttachment != nil { return *valueAttachment }
-			return m.ValueAttachment
-		}(),
-		ValueBoolean: func() FhirBoolean {
-			if valueBoolean != nil { return *valueBoolean }
-			return m.ValueBoolean
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		ValueCodeableConcept: m.ValueCodeableConcept.Clone(),
+		ValueString: m.ValueString.Clone(),
+		ValueQuantity: m.ValueQuantity.Clone(),
+		ValueBase64Binary: m.ValueBase64Binary.Clone(),
+		ValueAttachment: m.ValueAttachment.Clone(),
+		ValueBoolean: m.ValueBoolean.Clone(),
 	}
 }
+
+// Equals checks for equality with another NutritionProductProductCharacteristic instance
+func (m *NutritionProductProductCharacteristic) Equals(other *NutritionProductProductCharacteristic) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.ValueCodeableConcept.Equals(other.ValueCodeableConcept) { return false }
+	if !m.ValueString.Equals(other.ValueString) { return false }
+	if !m.ValueQuantity.Equals(other.ValueQuantity) { return false }
+	if !m.ValueBase64Binary.Equals(other.ValueBase64Binary) { return false }
+	if !m.ValueAttachment.Equals(other.ValueAttachment) { return false }
+	if !m.ValueBoolean.Equals(other.ValueBoolean) { return false }
+	return true
+}
+
 // NutritionProductInstance
 // Conveys instance-level information about this product item. One or several physical, countable instances or occurrences of the product.
 type NutritionProductInstance struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// quantity
-	// The amount of items or instances that the resource considers, for instance when referring to 2 identical units together.
-	Quantity Quantity `json:"quantity,omitempty"`
-	// identifier
-	// The identifier for the physical instance, typically a serial number.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// lotNumber
-	// The identification of the batch or lot of the product.
-	LotNumber FhirString `json:"lotNumber,omitempty"`
-	// expiry
-	// The time after which the product is no longer expected to be in proper condition, or its use is not advised or not allowed.
-	Expiry FhirDateTime `json:"expiry,omitempty"`
-	// useBy
-	// The time after which the product is no longer expected to be in proper condition, or its use is not advised or not allowed.
-	UseBy FhirDateTime `json:"useBy,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Quantity *Quantity `json:"quantity,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	LotNumber *FhirString `json:"lotnumber,omitempty"`
+	Expiry *FhirDateTime `json:"expiry,omitempty"`
+	UseBy *FhirDateTime `json:"useby,omitempty"`
 }
 
 // NewNutritionProductInstance creates a new NutritionProductInstance instance
-func NewNutritionProductInstance(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	quantity Quantity,
-	identifier []Identifier,
-	lotNumber FhirString,
-	expiry FhirDateTime,
-	useBy FhirDateTime,
-) *NutritionProductInstance {
-	return &NutritionProductInstance{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Quantity: quantity,
-		Identifier: identifier,
-		LotNumber: lotNumber,
-		Expiry: expiry,
-		UseBy: useBy,
-	}
+func NewNutritionProductInstance() *NutritionProductInstance {
+	return &NutritionProductInstance{}
 }
+
 // FromJSON populates NutritionProductInstance from JSON data
 func (m *NutritionProductInstance) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -571,49 +288,33 @@ func (m *NutritionProductInstance) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of NutritionProductInstance
-func (m *NutritionProductInstance) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	quantity *Quantity,
-	identifier *[]Identifier,
-	lotNumber *FhirString,
-	expiry *FhirDateTime,
-	useBy *FhirDateTime,
-) *NutritionProductInstance {
+// Clone creates a deep copy of NutritionProductInstance
+func (m *NutritionProductInstance) Clone() *NutritionProductInstance {
+	if m == nil { return nil }
 	return &NutritionProductInstance{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Quantity: func() Quantity {
-			if quantity != nil { return *quantity }
-			return m.Quantity
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		LotNumber: func() FhirString {
-			if lotNumber != nil { return *lotNumber }
-			return m.LotNumber
-		}(),
-		Expiry: func() FhirDateTime {
-			if expiry != nil { return *expiry }
-			return m.Expiry
-		}(),
-		UseBy: func() FhirDateTime {
-			if useBy != nil { return *useBy }
-			return m.UseBy
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Quantity: m.Quantity.Clone(),
+		Identifier: cloneSlices(m.Identifier),
+		LotNumber: m.LotNumber.Clone(),
+		Expiry: m.Expiry.Clone(),
+		UseBy: m.UseBy.Clone(),
 	}
 }
+
+// Equals checks for equality with another NutritionProductInstance instance
+func (m *NutritionProductInstance) Equals(other *NutritionProductInstance) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Quantity.Equals(other.Quantity) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.LotNumber.Equals(other.LotNumber) { return false }
+	if !m.Expiry.Equals(other.Expiry) { return false }
+	if !m.UseBy.Equals(other.UseBy) { return false }
+	return true
+}
+

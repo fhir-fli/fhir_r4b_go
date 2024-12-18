@@ -3,334 +3,81 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // ActivityDefinition
 // This resource allows for the definition of some activity to be performed, independent of a particular patient, practitioner, or other performance context.
 type ActivityDefinition struct {
 	CanonicalResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// url
-	// An absolute URI that is used to identify this activity definition when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this activity definition is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the activity definition is stored on different servers.
-	Url FhirUri `json:"url,omitempty"`
-	// identifier
-	// A formal identifier that is used to identify this activity definition when it is represented in other formats, or referenced in a specification, model, design or an instance.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// version
-	// The identifier that is used to identify this version of the activity definition when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the activity definition author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence. To provide a version consistent with the Decision Support Service specification, use the format Major.Minor.Revision (e.g. 1.0.0). For more information on versioning knowledge assets, refer to the Decision Support Service specification. Note that a version is required for non-experimental active assets.
-	Version FhirString `json:"version,omitempty"`
-	// name
-	// A natural language name identifying the activity definition. This name should be usable as an identifier for the module by machine processing applications such as code generation.
-	Name FhirString `json:"name,omitempty"`
-	// title
-	// A short, descriptive, user-friendly title for the activity definition.
-	Title FhirString `json:"title,omitempty"`
-	// subtitle
-	// An explanatory or alternate title for the activity definition giving additional information about its content.
-	Subtitle FhirString `json:"subtitle,omitempty"`
-	// status
-	// The status of this activity definition. Enables tracking the life-cycle of the content.
-	Status PublicationStatus `json:"status,omitempty"`
-	// experimental
-	// A Boolean value to indicate that this activity definition is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.
-	Experimental FhirBoolean `json:"experimental,omitempty"`
-	// subjectCodeableConcept
-	// A code, group definition, or canonical reference that describes  or identifies the intended subject of the activity being defined.  Canonical references are allowed to support the definition of protocols for drug and substance quality specifications, and is allowed to reference a MedicinalProductDefinition, SubstanceDefinition, AdministrableProductDefinition, ManufacturedItemDefinition, or PackagedProductDefinition resource.
-	SubjectCodeableConcept CodeableConcept `json:"subjectCodeableConcept,omitempty"`
-	// subjectReference
-	// A code, group definition, or canonical reference that describes  or identifies the intended subject of the activity being defined.  Canonical references are allowed to support the definition of protocols for drug and substance quality specifications, and is allowed to reference a MedicinalProductDefinition, SubstanceDefinition, AdministrableProductDefinition, ManufacturedItemDefinition, or PackagedProductDefinition resource.
-	SubjectReference Reference `json:"subjectReference,omitempty"`
-	// subjectCanonical
-	// A code, group definition, or canonical reference that describes  or identifies the intended subject of the activity being defined.  Canonical references are allowed to support the definition of protocols for drug and substance quality specifications, and is allowed to reference a MedicinalProductDefinition, SubstanceDefinition, AdministrableProductDefinition, ManufacturedItemDefinition, or PackagedProductDefinition resource.
-	SubjectCanonical SubjectType `json:"subjectCanonical,omitempty"`
-	// date
-	// The date  (and optionally time) when the activity definition was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the activity definition changes.
-	Date FhirDateTime `json:"date,omitempty"`
-	// publisher
-	// The name of the organization or individual that published the activity definition.
-	Publisher FhirString `json:"publisher,omitempty"`
-	// contact
-	// Contact details to assist a user in finding and communicating with the publisher.
-	Contact []ContactDetail `json:"contact,omitempty"`
-	// description
-	// A free text natural language description of the activity definition from a consumer's perspective.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// useContext
-	// The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate activity definition instances.
-	UseContext []UsageContext `json:"useContext,omitempty"`
-	// jurisdiction
-	// A legal or geographic region in which the activity definition is intended to be used.
-	Jurisdiction []CodeableConcept `json:"jurisdiction,omitempty"`
-	// purpose
-	// Explanation of why this activity definition is needed and why it has been designed as it has.
-	Purpose FhirMarkdown `json:"purpose,omitempty"`
-	// usage
-	// A detailed description of how the activity definition is used from a clinical perspective.
-	Usage FhirString `json:"usage,omitempty"`
-	// copyright
-	// A copyright statement relating to the activity definition and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the activity definition.
-	Copyright FhirMarkdown `json:"copyright,omitempty"`
-	// approvalDate
-	// The date on which the resource content was approved by the publisher. Approval happens once when the content is officially approved for usage.
-	ApprovalDate FhirDate `json:"approvalDate,omitempty"`
-	// lastReviewDate
-	// The date on which the resource content was last reviewed. Review happens periodically after approval but does not change the original approval date.
-	LastReviewDate FhirDate `json:"lastReviewDate,omitempty"`
-	// effectivePeriod
-	// The period during which the activity definition content was or is planned to be in active use.
-	EffectivePeriod Period `json:"effectivePeriod,omitempty"`
-	// topic
-	// Descriptive topics related to the content of the activity. Topics provide a high-level categorization of the activity that can be useful for filtering and searching.
-	Topic []CodeableConcept `json:"topic,omitempty"`
-	// author
-	// An individiual or organization primarily involved in the creation and maintenance of the content.
-	Author []ContactDetail `json:"author,omitempty"`
-	// editor
-	// An individual or organization primarily responsible for internal coherence of the content.
-	Editor []ContactDetail `json:"editor,omitempty"`
-	// reviewer
-	// An individual or organization primarily responsible for review of some aspect of the content.
-	Reviewer []ContactDetail `json:"reviewer,omitempty"`
-	// endorser
-	// An individual or organization responsible for officially endorsing the content for use in some setting.
-	Endorser []ContactDetail `json:"endorser,omitempty"`
-	// relatedArtifact
-	// Related artifacts such as additional documentation, justification, or bibliographic references.
-	RelatedArtifact []RelatedArtifact `json:"relatedArtifact,omitempty"`
-	// library
-	// A reference to a Library resource containing any formal logic used by the activity definition.
-	Library_ []FhirCanonical `json:"library,omitempty"`
-	// kind
-	// A description of the kind of resource the activity definition is representing. For example, a MedicationRequest, a ServiceRequest, or a CommunicationRequest. Typically, but not always, this is a Request resource.
-	Kind RequestResourceType `json:"kind,omitempty"`
-	// profile
-	// A profile to which the target of the activity definition is expected to conform.
-	Profile FhirCanonical `json:"profile,omitempty"`
-	// code
-	// Detailed description of the type of activity; e.g. What lab test, what procedure, what kind of encounter.
-	Code CodeableConcept `json:"code,omitempty"`
-	// intent
-	// Indicates the level of authority/intentionality associated with the activity and where the request should fit into the workflow chain.
-	Intent RequestIntent `json:"intent,omitempty"`
-	// priority
-	// Indicates how quickly the activity  should be addressed with respect to other requests.
-	Priority RequestPriority `json:"priority,omitempty"`
-	// doNotPerform
-	// Set this to true if the definition is to indicate that a particular activity should NOT be performed. If true, this element should be interpreted to reinforce a negative coding. For example NPO as a code with a doNotPerform of true would still indicate to NOT perform the action.
-	DoNotPerform FhirBoolean `json:"doNotPerform,omitempty"`
-	// timingTiming
-	// The period, timing or frequency upon which the described activity is to occur.
-	TimingTiming Timing `json:"timingTiming,omitempty"`
-	// timingDateTime
-	// The period, timing or frequency upon which the described activity is to occur.
-	TimingDateTime FhirDateTime `json:"timingDateTime,omitempty"`
-	// timingAge
-	// The period, timing or frequency upon which the described activity is to occur.
-	TimingAge Age `json:"timingAge,omitempty"`
-	// timingPeriod
-	// The period, timing or frequency upon which the described activity is to occur.
-	TimingPeriod Period `json:"timingPeriod,omitempty"`
-	// timingRange
-	// The period, timing or frequency upon which the described activity is to occur.
-	TimingRange Range `json:"timingRange,omitempty"`
-	// timingDuration
-	// The period, timing or frequency upon which the described activity is to occur.
-	TimingDuration FhirDuration `json:"timingDuration,omitempty"`
-	// location
-	// Identifies the facility where the activity will occur; e.g. home, hospital, specific clinic, etc.
-	Location Reference `json:"location,omitempty"`
-	// participant
-	// Indicates who should participate in performing the action described.
-	Participant []ActivityDefinitionParticipant `json:"participant,omitempty"`
-	// productReference
-	// Identifies the food, drug or other product being consumed or supplied in the activity.
-	ProductReference Reference `json:"productReference,omitempty"`
-	// productCodeableConcept
-	// Identifies the food, drug or other product being consumed or supplied in the activity.
-	ProductCodeableConcept CodeableConcept `json:"productCodeableConcept,omitempty"`
-	// quantity
-	// Identifies the quantity expected to be consumed at once (per dose, per meal, etc.).
-	Quantity Quantity `json:"quantity,omitempty"`
-	// dosage
-	// Provides detailed dosage instructions in the same way that they are described for MedicationRequest resources.
-	Dosage []Dosage `json:"dosage,omitempty"`
-	// bodySite
-	// Indicates the sites on the subject's body where the procedure should be performed (I.e. the target sites).
-	BodySite []CodeableConcept `json:"bodySite,omitempty"`
-	// specimenRequirement
-	// Defines specimen requirements for the action to be performed, such as required specimens for a lab test.
-	SpecimenRequirement []Reference `json:"specimenRequirement,omitempty"`
-	// observationRequirement
-	// Defines observation requirements for the action to be performed, such as body weight or surface area.
-	ObservationRequirement []Reference `json:"observationRequirement,omitempty"`
-	// observationResultRequirement
-	// Defines the observations that are expected to be produced by the action.
-	ObservationResultRequirement []Reference `json:"observationResultRequirement,omitempty"`
-	// transform
-	// A reference to a StructureMap resource that defines a transform that can be executed to produce the intent resource using the ActivityDefinition instance as the input.
-	Transform FhirCanonical `json:"transform,omitempty"`
-	// dynamicValue
-	// Dynamic values that will be evaluated to produce values for elements of the resulting resource. For example, if the dosage of a medication must be computed based on the patient's weight, a dynamic value would be used to specify an expression that calculated the weight, and the path on the request resource that would contain the result.
-	DynamicValue []ActivityDefinitionDynamicValue `json:"dynamicValue,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Url *FhirUri `json:"url,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Title *FhirString `json:"title,omitempty"`
+	Subtitle *FhirString `json:"subtitle,omitempty"`
+	Status *PublicationStatus `json:"status,omitempty"`
+	Experimental *FhirBoolean `json:"experimental,omitempty"`
+	SubjectCodeableConcept *CodeableConcept `json:"subjectcodeableconcept,omitempty"`
+	SubjectReference *Reference `json:"subjectreference,omitempty"`
+	SubjectCanonical *SubjectType `json:"subjectcanonical,omitempty"`
+	Date *FhirDateTime `json:"date,omitempty"`
+	Publisher *FhirString `json:"publisher,omitempty"`
+	Contact []*ContactDetail `json:"contact,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	UseContext []*UsageContext `json:"usecontext,omitempty"`
+	Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+	Purpose *FhirMarkdown `json:"purpose,omitempty"`
+	Usage *FhirString `json:"usage,omitempty"`
+	Copyright *FhirMarkdown `json:"copyright,omitempty"`
+	ApprovalDate *FhirDate `json:"approvaldate,omitempty"`
+	LastReviewDate *FhirDate `json:"lastreviewdate,omitempty"`
+	EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+	Topic []*CodeableConcept `json:"topic,omitempty"`
+	Author []*ContactDetail `json:"author,omitempty"`
+	Editor []*ContactDetail `json:"editor,omitempty"`
+	Reviewer []*ContactDetail `json:"reviewer,omitempty"`
+	Endorser []*ContactDetail `json:"endorser,omitempty"`
+	RelatedArtifact []*RelatedArtifact `json:"relatedartifact,omitempty"`
+	Library_ []*FhirCanonical `json:"library,omitempty"`
+	Kind *RequestResourceType `json:"kind,omitempty"`
+	Profile *FhirCanonical `json:"profile,omitempty"`
+	Code *CodeableConcept `json:"code,omitempty"`
+	Intent *RequestIntent `json:"intent,omitempty"`
+	Priority *RequestPriority `json:"priority,omitempty"`
+	DoNotPerform *FhirBoolean `json:"donotperform,omitempty"`
+	TimingTiming *Timing `json:"timingtiming,omitempty"`
+	TimingDateTime *FhirDateTime `json:"timingdatetime,omitempty"`
+	TimingAge *Age `json:"timingage,omitempty"`
+	TimingPeriod *Period `json:"timingperiod,omitempty"`
+	TimingRange *Range `json:"timingrange,omitempty"`
+	TimingDuration *FhirDuration `json:"timingduration,omitempty"`
+	Location *Reference `json:"location,omitempty"`
+	Participant []*ActivityDefinitionParticipant `json:"participant,omitempty"`
+	ProductReference *Reference `json:"productreference,omitempty"`
+	ProductCodeableConcept *CodeableConcept `json:"productcodeableconcept,omitempty"`
+	Quantity *Quantity `json:"quantity,omitempty"`
+	Dosage []*Dosage `json:"dosage,omitempty"`
+	BodySite []*CodeableConcept `json:"bodysite,omitempty"`
+	SpecimenRequirement []*Reference `json:"specimenrequirement,omitempty"`
+	ObservationRequirement []*Reference `json:"observationrequirement,omitempty"`
+	ObservationResultRequirement []*Reference `json:"observationresultrequirement,omitempty"`
+	Transform *FhirCanonical `json:"transform,omitempty"`
+	DynamicValue []*ActivityDefinitionDynamicValue `json:"dynamicvalue,omitempty"`
 }
 
 // NewActivityDefinition creates a new ActivityDefinition instance
-func NewActivityDefinition(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	url FhirUri,
-	identifier []Identifier,
-	version FhirString,
-	name FhirString,
-	title FhirString,
-	subtitle FhirString,
-	status PublicationStatus,
-	experimental FhirBoolean,
-	subjectCodeableConcept CodeableConcept,
-	subjectReference Reference,
-	subjectCanonical SubjectType,
-	date FhirDateTime,
-	publisher FhirString,
-	contact []ContactDetail,
-	description FhirMarkdown,
-	useContext []UsageContext,
-	jurisdiction []CodeableConcept,
-	purpose FhirMarkdown,
-	usage FhirString,
-	copyright FhirMarkdown,
-	approvalDate FhirDate,
-	lastReviewDate FhirDate,
-	effectivePeriod Period,
-	topic []CodeableConcept,
-	author []ContactDetail,
-	editor []ContactDetail,
-	reviewer []ContactDetail,
-	endorser []ContactDetail,
-	relatedArtifact []RelatedArtifact,
-	library_ []FhirCanonical,
-	kind RequestResourceType,
-	profile FhirCanonical,
-	code CodeableConcept,
-	intent RequestIntent,
-	priority RequestPriority,
-	doNotPerform FhirBoolean,
-	timingTiming Timing,
-	timingDateTime FhirDateTime,
-	timingAge Age,
-	timingPeriod Period,
-	timingRange Range,
-	timingDuration FhirDuration,
-	location Reference,
-	participant []ActivityDefinitionParticipant,
-	productReference Reference,
-	productCodeableConcept CodeableConcept,
-	quantity Quantity,
-	dosage []Dosage,
-	bodySite []CodeableConcept,
-	specimenRequirement []Reference,
-	observationRequirement []Reference,
-	observationResultRequirement []Reference,
-	transform FhirCanonical,
-	dynamicValue []ActivityDefinitionDynamicValue,
-) *ActivityDefinition {
-	return &ActivityDefinition{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Url: url,
-		Identifier: identifier,
-		Version: version,
-		Name: name,
-		Title: title,
-		Subtitle: subtitle,
-		Status: status,
-		Experimental: experimental,
-		SubjectCodeableConcept: subjectCodeableConcept,
-		SubjectReference: subjectReference,
-		SubjectCanonical: subjectCanonical,
-		Date: date,
-		Publisher: publisher,
-		Contact: contact,
-		Description: description,
-		UseContext: useContext,
-		Jurisdiction: jurisdiction,
-		Purpose: purpose,
-		Usage: usage,
-		Copyright: copyright,
-		ApprovalDate: approvalDate,
-		LastReviewDate: lastReviewDate,
-		EffectivePeriod: effectivePeriod,
-		Topic: topic,
-		Author: author,
-		Editor: editor,
-		Reviewer: reviewer,
-		Endorser: endorser,
-		RelatedArtifact: relatedArtifact,
-		Library_: library_,
-		Kind: kind,
-		Profile: profile,
-		Code: code,
-		Intent: intent,
-		Priority: priority,
-		DoNotPerform: doNotPerform,
-		TimingTiming: timingTiming,
-		TimingDateTime: timingDateTime,
-		TimingAge: timingAge,
-		TimingPeriod: timingPeriod,
-		TimingRange: timingRange,
-		TimingDuration: timingDuration,
-		Location: location,
-		Participant: participant,
-		ProductReference: productReference,
-		ProductCodeableConcept: productCodeableConcept,
-		Quantity: quantity,
-		Dosage: dosage,
-		BodySite: bodySite,
-		SpecimenRequirement: specimenRequirement,
-		ObservationRequirement: observationRequirement,
-		ObservationResultRequirement: observationResultRequirement,
-		Transform: transform,
-		DynamicValue: dynamicValue,
-	}
+func NewActivityDefinition() *ActivityDefinition {
+	return &ActivityDefinition{}
 }
+
 // FromJSON populates ActivityDefinition from JSON data
 func (m *ActivityDefinition) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -341,361 +88,160 @@ func (m *ActivityDefinition) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ActivityDefinition
-func (m *ActivityDefinition) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	url *FhirUri,
-	identifier *[]Identifier,
-	version *FhirString,
-	name *FhirString,
-	title *FhirString,
-	subtitle *FhirString,
-	status *PublicationStatus,
-	experimental *FhirBoolean,
-	subjectCodeableConcept *CodeableConcept,
-	subjectReference *Reference,
-	subjectCanonical *SubjectType,
-	date *FhirDateTime,
-	publisher *FhirString,
-	contact *[]ContactDetail,
-	description *FhirMarkdown,
-	useContext *[]UsageContext,
-	jurisdiction *[]CodeableConcept,
-	purpose *FhirMarkdown,
-	usage *FhirString,
-	copyright *FhirMarkdown,
-	approvalDate *FhirDate,
-	lastReviewDate *FhirDate,
-	effectivePeriod *Period,
-	topic *[]CodeableConcept,
-	author *[]ContactDetail,
-	editor *[]ContactDetail,
-	reviewer *[]ContactDetail,
-	endorser *[]ContactDetail,
-	relatedArtifact *[]RelatedArtifact,
-	library_ *[]FhirCanonical,
-	kind *RequestResourceType,
-	profile *FhirCanonical,
-	code *CodeableConcept,
-	intent *RequestIntent,
-	priority *RequestPriority,
-	doNotPerform *FhirBoolean,
-	timingTiming *Timing,
-	timingDateTime *FhirDateTime,
-	timingAge *Age,
-	timingPeriod *Period,
-	timingRange *Range,
-	timingDuration *FhirDuration,
-	location *Reference,
-	participant *[]ActivityDefinitionParticipant,
-	productReference *Reference,
-	productCodeableConcept *CodeableConcept,
-	quantity *Quantity,
-	dosage *[]Dosage,
-	bodySite *[]CodeableConcept,
-	specimenRequirement *[]Reference,
-	observationRequirement *[]Reference,
-	observationResultRequirement *[]Reference,
-	transform *FhirCanonical,
-	dynamicValue *[]ActivityDefinitionDynamicValue,
-) *ActivityDefinition {
+// Clone creates a deep copy of ActivityDefinition
+func (m *ActivityDefinition) Clone() *ActivityDefinition {
+	if m == nil { return nil }
 	return &ActivityDefinition{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Url: func() FhirUri {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Title: func() FhirString {
-			if title != nil { return *title }
-			return m.Title
-		}(),
-		Subtitle: func() FhirString {
-			if subtitle != nil { return *subtitle }
-			return m.Subtitle
-		}(),
-		Status: func() PublicationStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Experimental: func() FhirBoolean {
-			if experimental != nil { return *experimental }
-			return m.Experimental
-		}(),
-		SubjectCodeableConcept: func() CodeableConcept {
-			if subjectCodeableConcept != nil { return *subjectCodeableConcept }
-			return m.SubjectCodeableConcept
-		}(),
-		SubjectReference: func() Reference {
-			if subjectReference != nil { return *subjectReference }
-			return m.SubjectReference
-		}(),
-		SubjectCanonical: func() SubjectType {
-			if subjectCanonical != nil { return *subjectCanonical }
-			return m.SubjectCanonical
-		}(),
-		Date: func() FhirDateTime {
-			if date != nil { return *date }
-			return m.Date
-		}(),
-		Publisher: func() FhirString {
-			if publisher != nil { return *publisher }
-			return m.Publisher
-		}(),
-		Contact: func() []ContactDetail {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		UseContext: func() []UsageContext {
-			if useContext != nil { return *useContext }
-			return m.UseContext
-		}(),
-		Jurisdiction: func() []CodeableConcept {
-			if jurisdiction != nil { return *jurisdiction }
-			return m.Jurisdiction
-		}(),
-		Purpose: func() FhirMarkdown {
-			if purpose != nil { return *purpose }
-			return m.Purpose
-		}(),
-		Usage: func() FhirString {
-			if usage != nil { return *usage }
-			return m.Usage
-		}(),
-		Copyright: func() FhirMarkdown {
-			if copyright != nil { return *copyright }
-			return m.Copyright
-		}(),
-		ApprovalDate: func() FhirDate {
-			if approvalDate != nil { return *approvalDate }
-			return m.ApprovalDate
-		}(),
-		LastReviewDate: func() FhirDate {
-			if lastReviewDate != nil { return *lastReviewDate }
-			return m.LastReviewDate
-		}(),
-		EffectivePeriod: func() Period {
-			if effectivePeriod != nil { return *effectivePeriod }
-			return m.EffectivePeriod
-		}(),
-		Topic: func() []CodeableConcept {
-			if topic != nil { return *topic }
-			return m.Topic
-		}(),
-		Author: func() []ContactDetail {
-			if author != nil { return *author }
-			return m.Author
-		}(),
-		Editor: func() []ContactDetail {
-			if editor != nil { return *editor }
-			return m.Editor
-		}(),
-		Reviewer: func() []ContactDetail {
-			if reviewer != nil { return *reviewer }
-			return m.Reviewer
-		}(),
-		Endorser: func() []ContactDetail {
-			if endorser != nil { return *endorser }
-			return m.Endorser
-		}(),
-		RelatedArtifact: func() []RelatedArtifact {
-			if relatedArtifact != nil { return *relatedArtifact }
-			return m.RelatedArtifact
-		}(),
-		Library_: func() []FhirCanonical {
-			if library_ != nil { return *library_ }
-			return m.Library_
-		}(),
-		Kind: func() RequestResourceType {
-			if kind != nil { return *kind }
-			return m.Kind
-		}(),
-		Profile: func() FhirCanonical {
-			if profile != nil { return *profile }
-			return m.Profile
-		}(),
-		Code: func() CodeableConcept {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Intent: func() RequestIntent {
-			if intent != nil { return *intent }
-			return m.Intent
-		}(),
-		Priority: func() RequestPriority {
-			if priority != nil { return *priority }
-			return m.Priority
-		}(),
-		DoNotPerform: func() FhirBoolean {
-			if doNotPerform != nil { return *doNotPerform }
-			return m.DoNotPerform
-		}(),
-		TimingTiming: func() Timing {
-			if timingTiming != nil { return *timingTiming }
-			return m.TimingTiming
-		}(),
-		TimingDateTime: func() FhirDateTime {
-			if timingDateTime != nil { return *timingDateTime }
-			return m.TimingDateTime
-		}(),
-		TimingAge: func() Age {
-			if timingAge != nil { return *timingAge }
-			return m.TimingAge
-		}(),
-		TimingPeriod: func() Period {
-			if timingPeriod != nil { return *timingPeriod }
-			return m.TimingPeriod
-		}(),
-		TimingRange: func() Range {
-			if timingRange != nil { return *timingRange }
-			return m.TimingRange
-		}(),
-		TimingDuration: func() FhirDuration {
-			if timingDuration != nil { return *timingDuration }
-			return m.TimingDuration
-		}(),
-		Location: func() Reference {
-			if location != nil { return *location }
-			return m.Location
-		}(),
-		Participant: func() []ActivityDefinitionParticipant {
-			if participant != nil { return *participant }
-			return m.Participant
-		}(),
-		ProductReference: func() Reference {
-			if productReference != nil { return *productReference }
-			return m.ProductReference
-		}(),
-		ProductCodeableConcept: func() CodeableConcept {
-			if productCodeableConcept != nil { return *productCodeableConcept }
-			return m.ProductCodeableConcept
-		}(),
-		Quantity: func() Quantity {
-			if quantity != nil { return *quantity }
-			return m.Quantity
-		}(),
-		Dosage: func() []Dosage {
-			if dosage != nil { return *dosage }
-			return m.Dosage
-		}(),
-		BodySite: func() []CodeableConcept {
-			if bodySite != nil { return *bodySite }
-			return m.BodySite
-		}(),
-		SpecimenRequirement: func() []Reference {
-			if specimenRequirement != nil { return *specimenRequirement }
-			return m.SpecimenRequirement
-		}(),
-		ObservationRequirement: func() []Reference {
-			if observationRequirement != nil { return *observationRequirement }
-			return m.ObservationRequirement
-		}(),
-		ObservationResultRequirement: func() []Reference {
-			if observationResultRequirement != nil { return *observationResultRequirement }
-			return m.ObservationResultRequirement
-		}(),
-		Transform: func() FhirCanonical {
-			if transform != nil { return *transform }
-			return m.Transform
-		}(),
-		DynamicValue: func() []ActivityDefinitionDynamicValue {
-			if dynamicValue != nil { return *dynamicValue }
-			return m.DynamicValue
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Url: m.Url.Clone(),
+		Identifier: cloneSlices(m.Identifier),
+		Version: m.Version.Clone(),
+		Name: m.Name.Clone(),
+		Title: m.Title.Clone(),
+		Subtitle: m.Subtitle.Clone(),
+		Status: m.Status.Clone(),
+		Experimental: m.Experimental.Clone(),
+		SubjectCodeableConcept: m.SubjectCodeableConcept.Clone(),
+		SubjectReference: m.SubjectReference.Clone(),
+		SubjectCanonical: m.SubjectCanonical.Clone(),
+		Date: m.Date.Clone(),
+		Publisher: m.Publisher.Clone(),
+		Contact: cloneSlices(m.Contact),
+		Description: m.Description.Clone(),
+		UseContext: cloneSlices(m.UseContext),
+		Jurisdiction: cloneSlices(m.Jurisdiction),
+		Purpose: m.Purpose.Clone(),
+		Usage: m.Usage.Clone(),
+		Copyright: m.Copyright.Clone(),
+		ApprovalDate: m.ApprovalDate.Clone(),
+		LastReviewDate: m.LastReviewDate.Clone(),
+		EffectivePeriod: m.EffectivePeriod.Clone(),
+		Topic: cloneSlices(m.Topic),
+		Author: cloneSlices(m.Author),
+		Editor: cloneSlices(m.Editor),
+		Reviewer: cloneSlices(m.Reviewer),
+		Endorser: cloneSlices(m.Endorser),
+		RelatedArtifact: cloneSlices(m.RelatedArtifact),
+		Library_: cloneSlices(m.Library_),
+		Kind: m.Kind.Clone(),
+		Profile: m.Profile.Clone(),
+		Code: m.Code.Clone(),
+		Intent: m.Intent.Clone(),
+		Priority: m.Priority.Clone(),
+		DoNotPerform: m.DoNotPerform.Clone(),
+		TimingTiming: m.TimingTiming.Clone(),
+		TimingDateTime: m.TimingDateTime.Clone(),
+		TimingAge: m.TimingAge.Clone(),
+		TimingPeriod: m.TimingPeriod.Clone(),
+		TimingRange: m.TimingRange.Clone(),
+		TimingDuration: m.TimingDuration.Clone(),
+		Location: m.Location.Clone(),
+		Participant: cloneSlices(m.Participant),
+		ProductReference: m.ProductReference.Clone(),
+		ProductCodeableConcept: m.ProductCodeableConcept.Clone(),
+		Quantity: m.Quantity.Clone(),
+		Dosage: cloneSlices(m.Dosage),
+		BodySite: cloneSlices(m.BodySite),
+		SpecimenRequirement: cloneSlices(m.SpecimenRequirement),
+		ObservationRequirement: cloneSlices(m.ObservationRequirement),
+		ObservationResultRequirement: cloneSlices(m.ObservationResultRequirement),
+		Transform: m.Transform.Clone(),
+		DynamicValue: cloneSlices(m.DynamicValue),
 	}
 }
+
+// Equals checks for equality with another ActivityDefinition instance
+func (m *ActivityDefinition) Equals(other *ActivityDefinition) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Title.Equals(other.Title) { return false }
+	if !m.Subtitle.Equals(other.Subtitle) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Experimental.Equals(other.Experimental) { return false }
+	if !m.SubjectCodeableConcept.Equals(other.SubjectCodeableConcept) { return false }
+	if !m.SubjectReference.Equals(other.SubjectReference) { return false }
+	if !m.SubjectCanonical.Equals(other.SubjectCanonical) { return false }
+	if !m.Date.Equals(other.Date) { return false }
+	if !m.Publisher.Equals(other.Publisher) { return false }
+	if !compareSlices(m.Contact, other.Contact) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.UseContext, other.UseContext) { return false }
+	if !compareSlices(m.Jurisdiction, other.Jurisdiction) { return false }
+	if !m.Purpose.Equals(other.Purpose) { return false }
+	if !m.Usage.Equals(other.Usage) { return false }
+	if !m.Copyright.Equals(other.Copyright) { return false }
+	if !m.ApprovalDate.Equals(other.ApprovalDate) { return false }
+	if !m.LastReviewDate.Equals(other.LastReviewDate) { return false }
+	if !m.EffectivePeriod.Equals(other.EffectivePeriod) { return false }
+	if !compareSlices(m.Topic, other.Topic) { return false }
+	if !compareSlices(m.Author, other.Author) { return false }
+	if !compareSlices(m.Editor, other.Editor) { return false }
+	if !compareSlices(m.Reviewer, other.Reviewer) { return false }
+	if !compareSlices(m.Endorser, other.Endorser) { return false }
+	if !compareSlices(m.RelatedArtifact, other.RelatedArtifact) { return false }
+	if !compareSlices(m.Library_, other.Library_) { return false }
+	if !m.Kind.Equals(other.Kind) { return false }
+	if !m.Profile.Equals(other.Profile) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Intent.Equals(other.Intent) { return false }
+	if !m.Priority.Equals(other.Priority) { return false }
+	if !m.DoNotPerform.Equals(other.DoNotPerform) { return false }
+	if !m.TimingTiming.Equals(other.TimingTiming) { return false }
+	if !m.TimingDateTime.Equals(other.TimingDateTime) { return false }
+	if !m.TimingAge.Equals(other.TimingAge) { return false }
+	if !m.TimingPeriod.Equals(other.TimingPeriod) { return false }
+	if !m.TimingRange.Equals(other.TimingRange) { return false }
+	if !m.TimingDuration.Equals(other.TimingDuration) { return false }
+	if !m.Location.Equals(other.Location) { return false }
+	if !compareSlices(m.Participant, other.Participant) { return false }
+	if !m.ProductReference.Equals(other.ProductReference) { return false }
+	if !m.ProductCodeableConcept.Equals(other.ProductCodeableConcept) { return false }
+	if !m.Quantity.Equals(other.Quantity) { return false }
+	if !compareSlices(m.Dosage, other.Dosage) { return false }
+	if !compareSlices(m.BodySite, other.BodySite) { return false }
+	if !compareSlices(m.SpecimenRequirement, other.SpecimenRequirement) { return false }
+	if !compareSlices(m.ObservationRequirement, other.ObservationRequirement) { return false }
+	if !compareSlices(m.ObservationResultRequirement, other.ObservationResultRequirement) { return false }
+	if !m.Transform.Equals(other.Transform) { return false }
+	if !compareSlices(m.DynamicValue, other.DynamicValue) { return false }
+	return true
+}
+
 // ActivityDefinitionParticipant
 // Indicates who should participate in performing the action described.
 type ActivityDefinitionParticipant struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// The type of participant in the action.
-	Type_ ActionParticipantType `json:"type,omitempty"`
-	// role
-	// The role the participant should play in performing the described action.
-	Role CodeableConcept `json:"role,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *ActionParticipantType `json:"type,omitempty"`
+	Role *CodeableConcept `json:"role,omitempty"`
 }
 
 // NewActivityDefinitionParticipant creates a new ActivityDefinitionParticipant instance
-func NewActivityDefinitionParticipant(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ ActionParticipantType,
-	role CodeableConcept,
-) *ActivityDefinitionParticipant {
-	return &ActivityDefinitionParticipant{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Role: role,
-	}
+func NewActivityDefinitionParticipant() *ActivityDefinitionParticipant {
+	return &ActivityDefinitionParticipant{}
 }
+
 // FromJSON populates ActivityDefinitionParticipant from JSON data
 func (m *ActivityDefinitionParticipant) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -706,76 +252,46 @@ func (m *ActivityDefinitionParticipant) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ActivityDefinitionParticipant
-func (m *ActivityDefinitionParticipant) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *ActionParticipantType,
-	role *CodeableConcept,
-) *ActivityDefinitionParticipant {
+// Clone creates a deep copy of ActivityDefinitionParticipant
+func (m *ActivityDefinitionParticipant) Clone() *ActivityDefinitionParticipant {
+	if m == nil { return nil }
 	return &ActivityDefinitionParticipant{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() ActionParticipantType {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Role: func() CodeableConcept {
-			if role != nil { return *role }
-			return m.Role
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Role: m.Role.Clone(),
 	}
 }
+
+// Equals checks for equality with another ActivityDefinitionParticipant instance
+func (m *ActivityDefinitionParticipant) Equals(other *ActivityDefinitionParticipant) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Role.Equals(other.Role) { return false }
+	return true
+}
+
 // ActivityDefinitionDynamicValue
 // Dynamic values that will be evaluated to produce values for elements of the resulting resource. For example, if the dosage of a medication must be computed based on the patient's weight, a dynamic value would be used to specify an expression that calculated the weight, and the path on the request resource that would contain the result.
 type ActivityDefinitionDynamicValue struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// path
-	// The path to the element to be customized. This is the path on the resource that will hold the result of the calculation defined by the expression. The specified path SHALL be a FHIRPath resolveable on the specified target type of the ActivityDefinition, and SHALL consist only of identifiers, constant indexers, and a restricted subset of functions. The path is allowed to contain qualifiers (.) to traverse sub-elements, as well as indexers ([x]) to traverse multiple-cardinality sub-elements (see the [Simple FHIRPath Profile](fhirpath.html#simple) for full details).
-	Path FhirString `json:"path,omitempty"`
-	// expression
-	// An expression specifying the value of the customized element.
-	Expression FhirExpression `json:"expression,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Path *FhirString `json:"path,omitempty"`
+	Expression *FhirExpression `json:"expression,omitempty"`
 }
 
 // NewActivityDefinitionDynamicValue creates a new ActivityDefinitionDynamicValue instance
-func NewActivityDefinitionDynamicValue(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	path FhirString,
-	expression FhirExpression,
-) *ActivityDefinitionDynamicValue {
-	return &ActivityDefinitionDynamicValue{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Path: path,
-		Expression: expression,
-	}
+func NewActivityDefinitionDynamicValue() *ActivityDefinitionDynamicValue {
+	return &ActivityDefinitionDynamicValue{}
 }
+
 // FromJSON populates ActivityDefinitionDynamicValue from JSON data
 func (m *ActivityDefinitionDynamicValue) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -786,34 +302,27 @@ func (m *ActivityDefinitionDynamicValue) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ActivityDefinitionDynamicValue
-func (m *ActivityDefinitionDynamicValue) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	path *FhirString,
-	expression *FhirExpression,
-) *ActivityDefinitionDynamicValue {
+// Clone creates a deep copy of ActivityDefinitionDynamicValue
+func (m *ActivityDefinitionDynamicValue) Clone() *ActivityDefinitionDynamicValue {
+	if m == nil { return nil }
 	return &ActivityDefinitionDynamicValue{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Path: func() FhirString {
-			if path != nil { return *path }
-			return m.Path
-		}(),
-		Expression: func() FhirExpression {
-			if expression != nil { return *expression }
-			return m.Expression
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Path: m.Path.Clone(),
+		Expression: m.Expression.Clone(),
 	}
 }
+
+// Equals checks for equality with another ActivityDefinitionDynamicValue instance
+func (m *ActivityDefinitionDynamicValue) Equals(other *ActivityDefinitionDynamicValue) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Path.Equals(other.Path) { return false }
+	if !m.Expression.Equals(other.Expression) { return false }
+	return true
+}
+

@@ -7,6 +7,16 @@ import (
 	"reflect"
 )
 
+// Equalable is an interface for types that can compare themselves to others.
+type Equalable interface {
+	Equals(other Equalable) bool
+}
+
+// Cloneable is an interface for types that can clone themselves.
+type Cloneable[T any] interface {
+	Clone() *T
+}
+
 // FhirBase is the base type for all FHIR elements in Go.
 type FhirBase struct {
 	UserData           map[string]interface{} `json:"userData,omitempty"`
@@ -73,132 +83,47 @@ func (fb *FhirBase) HasFormatComment() bool {
 	return len(fb.FormatCommentsPre) > 0 || len(fb.FormatCommentsPost) > 0
 }
 
-func (fb *FhirBase) EqualsDeep(other *FhirBase) bool {
-	if other == nil {
-		return false
-	}
-
-	if !reflect.DeepEqual(fb.UserData, other.UserData) {
-		return false
-	}
-
-	// Handle slices with compareSlices
-	if !compareSlices(fb.FormatCommentsPre, other.FormatCommentsPre) {
-		return false
-	}
-
-	if !compareSlices(fb.FormatCommentsPost, other.FormatCommentsPost) {
-		return false
-	}
-
-	if !compareSlices(fb.Annotations, other.Annotations) {
-		return false
-	}
-
-	return true
-}
-
-// CompareDeep compares two FhirBase objects for equality.
-func CompareDeep(f1, f2 *FhirBase, allowNull bool) bool {
-	if allowNull {
-		noLeft := f1 == nil || f1.IsEmpty()
-		noRight := f2 == nil || f2.IsEmpty()
-		if noLeft && noRight {
-			return true
-		}
-	}
-	if f1 == nil || f2 == nil {
-		return false
-	}
-	return f1.EqualsDeep(f2)
-}
-
-// CompareDeepLists compares two lists of FhirBase objects deeply.
-func CompareDeepLists(list1, list2 []*FhirBase, allowNull bool) bool {
-	if allowNull {
-		noLeft := len(list1) == 0
-		noRight := len(list2) == 0
-		if noLeft && noRight {
-			return true
-		}
-	}
-	if len(list1) != len(list2) {
-		return false
-	}
-	for i := range list1 {
-		if !CompareDeep(list1[i], list2[i], allowNull) {
-			return false
-		}
-	}
-	return true
-}
-
-// ToJSON converts FhirBase to a JSON representation.
-func (fb *FhirBase) ToJSON() ([]byte, error) {
-	return json.Marshal(fb)
-}
-
-// MarshalJSON provides custom JSON serialization.
-func (fb *FhirBase) MarshalJSON() ([]byte, error) {
-	return json.Marshal(struct {
-		UserData           map[string]interface{} `json:"userData,omitempty"`
-		FormatCommentsPre  []string               `json:"formatCommentsPre,omitempty"`
-		FormatCommentsPost []string               `json:"formatCommentsPost,omitempty"`
-		Annotations        []interface{}          `json:"annotations,omitempty"`
-	}{
-		UserData:           fb.UserData,
-		FormatCommentsPre:  fb.FormatCommentsPre,
-		FormatCommentsPost: fb.FormatCommentsPost,
-		Annotations:        fb.Annotations,
-	})
-}
-
-// UnmarshalJSON provides custom JSON deserialization.
-func (fb *FhirBase) UnmarshalJSON(data []byte) error {
-	temp := struct {
-		UserData           map[string]interface{} `json:"userData,omitempty"`
-		FormatCommentsPre  []string               `json:"formatCommentsPre,omitempty"`
-		FormatCommentsPost []string               `json:"formatCommentsPost,omitempty"`
-		Annotations        []interface{}          `json:"annotations,omitempty"`
-	}{}
-
-	if err := json.Unmarshal(data, &temp); err != nil {
-		return err
-	}
-
-	fb.UserData = temp.UserData
-	fb.FormatCommentsPre = temp.FormatCommentsPre
-	fb.FormatCommentsPost = temp.FormatCommentsPost
-	fb.Annotations = temp.Annotations
-	return nil
-}
-
 // Clone creates a deep copy of FhirBase.
 func (fb *FhirBase) Clone() *FhirBase {
-	clone := *fb
-	clone.UserData = make(map[string]interface{})
+	if fb == nil {
+		return nil
+	}
+
+	clone := &FhirBase{
+		UserData:           make(map[string]interface{}),
+		FormatCommentsPre:  append([]string{}, fb.FormatCommentsPre...),
+		FormatCommentsPost: append([]string{}, fb.FormatCommentsPost...),
+		Annotations:        append([]interface{}{}, fb.Annotations...),
+	}
 	for k, v := range fb.UserData {
 		clone.UserData[k] = v
 	}
-	clone.FormatCommentsPre = append([]string{}, fb.FormatCommentsPre...)
-	clone.FormatCommentsPost = append([]string{}, fb.FormatCommentsPost...)
-	clone.Annotations = append([]interface{}{}, fb.Annotations...)
-	return &clone
+	return clone
 }
 
-// Helper: compareMaps compares two maps.
-func compareMaps(m1, m2 map[string]interface{}) bool {
-	if len(m1) != len(m2) {
+// Equals compares equality between two FhirBase instances.
+func (fb *FhirBase) Equals(other Equalable) bool {
+	otherFhirBase, ok := other.(*FhirBase)
+	if !ok {
 		return false
 	}
-	for k, v := range m1 {
-		if m2[k] != v {
+
+	if len(fb.UserData) != len(otherFhirBase.UserData) {
+		return false
+	}
+
+	for k, v := range fb.UserData {
+		if otherFhirBase.UserData[k] != v {
 			return false
 		}
 	}
-	return true
+
+	return compareSlices(fb.FormatCommentsPre, otherFhirBase.FormatCommentsPre) &&
+		compareSlices(fb.FormatCommentsPost, otherFhirBase.FormatCommentsPost) &&
+		compareSlices(fb.Annotations, otherFhirBase.Annotations)
 }
 
+// Helper: compareSlices compares slices of Equalable or primitive types.
 func compareSlices(slice1, slice2 interface{}) bool {
 	v1 := reflect.ValueOf(slice1)
 	v2 := reflect.ValueOf(slice2)
@@ -212,12 +137,42 @@ func compareSlices(slice1, slice2 interface{}) bool {
 	}
 
 	for i := 0; i < v1.Len(); i++ {
-		if !reflect.DeepEqual(v1.Index(i).Interface(), v2.Index(i).Interface()) {
-			return false
+		item1 := v1.Index(i).Interface()
+		item2 := v2.Index(i).Interface()
+
+		// Check if the items implement Equalable
+		equalable1, ok1 := item1.(Equalable)
+		equalable2, ok2 := item2.(Equalable)
+
+		if ok1 && ok2 {
+			// Use the Equals method for comparison
+			if !equalable1.Equals(equalable2) {
+				return false
+			}
+		} else {
+			// Fall back to reflect.DeepEqual for non-Equalable items
+			if !reflect.DeepEqual(item1, item2) {
+				return false
+			}
 		}
 	}
 
 	return true
+}
+
+func cloneSlices[T Cloneable[T]](slice []T) []T {
+	if slice == nil {
+		return nil
+	}
+	clone := make([]T, len(slice))
+	for i, item := range slice {
+		if item != nil {
+			clone[i] = item.Clone()
+		} else {
+			clone[i] = nil
+		}
+	}
+	return clone
 }
 
 // Helper for safely returning the non-nil value.
@@ -232,13 +187,10 @@ func ifNotNil[T any](newValue, oldValue *T) *T {
 func convertYAMLToJSON(yamlData interface{}) ([]byte, error) {
 	switch v := yamlData.(type) {
 	case string:
-		// Convert simple YAML string
 		return json.Marshal(v)
 	case map[string]interface{}:
-		// Convert complex YAML structure
 		return json.Marshal(v)
 	case []interface{}:
-		// Handle YAML lists
 		return json.Marshal(v)
 	default:
 		return nil, errors.New("invalid YAML input: unsupported type")

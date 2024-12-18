@@ -3,47 +3,24 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // RatioRange
 // A range of ratios expressed as a low and high numerator and a denominator.
 type RatioRange struct {
 	DataType
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// lowNumerator
-	// The value of the low limit numerator.
-	LowNumerator Quantity `json:"lowNumerator,omitempty"`
-	// highNumerator
-	// The value of the high limit numerator.
-	HighNumerator Quantity `json:"highNumerator,omitempty"`
-	// denominator
-	// The value of the denominator.
-	Denominator Quantity `json:"denominator,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	LowNumerator *Quantity `json:"lownumerator,omitempty"`
+	HighNumerator *Quantity `json:"highnumerator,omitempty"`
+	Denominator *Quantity `json:"denominator,omitempty"`
 }
 
 // NewRatioRange creates a new RatioRange instance
-func NewRatioRange(
-	id FhirString,
-	extension_ []FhirExtension,
-	lowNumerator Quantity,
-	highNumerator Quantity,
-	denominator Quantity,
-) *RatioRange {
-	return &RatioRange{
-		Id: id,
-		Extension_: extension_,
-		LowNumerator: lowNumerator,
-		HighNumerator: highNumerator,
-		Denominator: denominator,
-	}
+func NewRatioRange() *RatioRange {
+	return &RatioRange{}
 }
+
 // FromJSON populates RatioRange from JSON data
 func (m *RatioRange) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -54,34 +31,27 @@ func (m *RatioRange) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of RatioRange
-func (m *RatioRange) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	lowNumerator *Quantity,
-	highNumerator *Quantity,
-	denominator *Quantity,
-) *RatioRange {
+// Clone creates a deep copy of RatioRange
+func (m *RatioRange) Clone() *RatioRange {
+	if m == nil { return nil }
 	return &RatioRange{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		LowNumerator: func() Quantity {
-			if lowNumerator != nil { return *lowNumerator }
-			return m.LowNumerator
-		}(),
-		HighNumerator: func() Quantity {
-			if highNumerator != nil { return *highNumerator }
-			return m.HighNumerator
-		}(),
-		Denominator: func() Quantity {
-			if denominator != nil { return *denominator }
-			return m.Denominator
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		LowNumerator: m.LowNumerator.Clone(),
+		HighNumerator: m.HighNumerator.Clone(),
+		Denominator: m.Denominator.Clone(),
 	}
 }
+
+// Equals checks for equality with another RatioRange instance
+func (m *RatioRange) Equals(other *RatioRange) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !m.LowNumerator.Equals(other.LowNumerator) { return false }
+	if !m.HighNumerator.Equals(other.HighNumerator) { return false }
+	if !m.Denominator.Equals(other.Denominator) { return false }
+	return true
+}
+

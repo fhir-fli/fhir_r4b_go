@@ -3,47 +3,24 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // Parameters
 // This resource is a non-persisted resource used to pass information into and back from an [operation](operations.html). It has no other use, and there is no RESTful endpoint associated with it.
 type Parameters struct {
 	Resource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// parameter
-	// A parameter passed to or received from the operation.
-	Parameter []ParametersParameter `json:"parameter,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Parameter []*ParametersParameter `json:"parameter,omitempty"`
 }
 
 // NewParameters creates a new Parameters instance
-func NewParameters(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	parameter []ParametersParameter,
-) *Parameters {
-	return &Parameters{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Parameter: parameter,
-	}
+func NewParameters() *Parameters {
+	return &Parameters{}
 }
+
 // FromJSON populates Parameters from JSON data
 func (m *Parameters) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -54,331 +31,97 @@ func (m *Parameters) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of Parameters
-func (m *Parameters) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	parameter *[]ParametersParameter,
-) *Parameters {
+// Clone creates a deep copy of Parameters
+func (m *Parameters) Clone() *Parameters {
+	if m == nil { return nil }
 	return &Parameters{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Parameter: func() []ParametersParameter {
-			if parameter != nil { return *parameter }
-			return m.Parameter
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Parameter: cloneSlices(m.Parameter),
 	}
 }
+
+// Equals checks for equality with another Parameters instance
+func (m *Parameters) Equals(other *Parameters) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !compareSlices(m.Parameter, other.Parameter) { return false }
+	return true
+}
+
 // ParametersParameter
 // A parameter passed to or received from the operation.
 type ParametersParameter struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// name
-	// The name of the parameter (reference to the operation definition).
-	Name FhirString `json:"name,omitempty"`
-	// valueBase64Binary
-	// Conveys the content if the parameter is a data type.
-	ValueBase64Binary FhirBase64Binary `json:"valueBase64Binary,omitempty"`
-	// valueBoolean
-	// Conveys the content if the parameter is a data type.
-	ValueBoolean FhirBoolean `json:"valueBoolean,omitempty"`
-	// valueCanonical
-	// Conveys the content if the parameter is a data type.
-	ValueCanonical FhirCanonical `json:"valueCanonical,omitempty"`
-	// valueCode
-	// Conveys the content if the parameter is a data type.
-	ValueCode FhirCode `json:"valueCode,omitempty"`
-	// valueDate
-	// Conveys the content if the parameter is a data type.
-	ValueDate FhirDate `json:"valueDate,omitempty"`
-	// valueDateTime
-	// Conveys the content if the parameter is a data type.
-	ValueDateTime FhirDateTime `json:"valueDateTime,omitempty"`
-	// valueDecimal
-	// Conveys the content if the parameter is a data type.
-	ValueDecimal FhirDecimal `json:"valueDecimal,omitempty"`
-	// valueId
-	// Conveys the content if the parameter is a data type.
-	ValueId FhirId `json:"valueId,omitempty"`
-	// valueInstant
-	// Conveys the content if the parameter is a data type.
-	ValueInstant FhirInstant `json:"valueInstant,omitempty"`
-	// valueInteger
-	// Conveys the content if the parameter is a data type.
-	ValueInteger FhirInteger `json:"valueInteger,omitempty"`
-	// valueMarkdown
-	// Conveys the content if the parameter is a data type.
-	ValueMarkdown FhirMarkdown `json:"valueMarkdown,omitempty"`
-	// valueOid
-	// Conveys the content if the parameter is a data type.
-	ValueOid FhirOid `json:"valueOid,omitempty"`
-	// valuePositiveInt
-	// Conveys the content if the parameter is a data type.
-	ValuePositiveInt FhirPositiveInt `json:"valuePositiveInt,omitempty"`
-	// valueString
-	// Conveys the content if the parameter is a data type.
-	ValueString FhirString `json:"valueString,omitempty"`
-	// valueTime
-	// Conveys the content if the parameter is a data type.
-	ValueTime FhirTime `json:"valueTime,omitempty"`
-	// valueUnsignedInt
-	// Conveys the content if the parameter is a data type.
-	ValueUnsignedInt FhirUnsignedInt `json:"valueUnsignedInt,omitempty"`
-	// valueUri
-	// Conveys the content if the parameter is a data type.
-	ValueUri FhirUri `json:"valueUri,omitempty"`
-	// valueUrl
-	// Conveys the content if the parameter is a data type.
-	ValueUrl FhirUrl `json:"valueUrl,omitempty"`
-	// valueUuid
-	// Conveys the content if the parameter is a data type.
-	ValueUuid FhirUuid `json:"valueUuid,omitempty"`
-	// valueAddress
-	// Conveys the content if the parameter is a data type.
-	ValueAddress Address `json:"valueAddress,omitempty"`
-	// valueAge
-	// Conveys the content if the parameter is a data type.
-	ValueAge Age `json:"valueAge,omitempty"`
-	// valueAnnotation
-	// Conveys the content if the parameter is a data type.
-	ValueAnnotation Annotation `json:"valueAnnotation,omitempty"`
-	// valueAttachment
-	// Conveys the content if the parameter is a data type.
-	ValueAttachment Attachment `json:"valueAttachment,omitempty"`
-	// valueCodeableConcept
-	// Conveys the content if the parameter is a data type.
-	ValueCodeableConcept CodeableConcept `json:"valueCodeableConcept,omitempty"`
-	// valueCoding
-	// Conveys the content if the parameter is a data type.
-	ValueCoding Coding `json:"valueCoding,omitempty"`
-	// valueContactPoint
-	// Conveys the content if the parameter is a data type.
-	ValueContactPoint ContactPoint `json:"valueContactPoint,omitempty"`
-	// valueCount
-	// Conveys the content if the parameter is a data type.
-	ValueCount Count `json:"valueCount,omitempty"`
-	// valueDistance
-	// Conveys the content if the parameter is a data type.
-	ValueDistance Distance `json:"valueDistance,omitempty"`
-	// valueDuration
-	// Conveys the content if the parameter is a data type.
-	ValueDuration FhirDuration `json:"valueDuration,omitempty"`
-	// valueHumanName
-	// Conveys the content if the parameter is a data type.
-	ValueHumanName HumanName `json:"valueHumanName,omitempty"`
-	// valueIdentifier
-	// Conveys the content if the parameter is a data type.
-	ValueIdentifier Identifier `json:"valueIdentifier,omitempty"`
-	// valueMoney
-	// Conveys the content if the parameter is a data type.
-	ValueMoney Money `json:"valueMoney,omitempty"`
-	// valuePeriod
-	// Conveys the content if the parameter is a data type.
-	ValuePeriod Period `json:"valuePeriod,omitempty"`
-	// valueQuantity
-	// Conveys the content if the parameter is a data type.
-	ValueQuantity Quantity `json:"valueQuantity,omitempty"`
-	// valueRange
-	// Conveys the content if the parameter is a data type.
-	ValueRange Range `json:"valueRange,omitempty"`
-	// valueRatio
-	// Conveys the content if the parameter is a data type.
-	ValueRatio Ratio `json:"valueRatio,omitempty"`
-	// valueReference
-	// Conveys the content if the parameter is a data type.
-	ValueReference Reference `json:"valueReference,omitempty"`
-	// valueSampledData
-	// Conveys the content if the parameter is a data type.
-	ValueSampledData SampledData `json:"valueSampledData,omitempty"`
-	// valueSignature
-	// Conveys the content if the parameter is a data type.
-	ValueSignature Signature `json:"valueSignature,omitempty"`
-	// valueTiming
-	// Conveys the content if the parameter is a data type.
-	ValueTiming Timing `json:"valueTiming,omitempty"`
-	// valueContactDetail
-	// Conveys the content if the parameter is a data type.
-	ValueContactDetail ContactDetail `json:"valueContactDetail,omitempty"`
-	// valueContributor
-	// Conveys the content if the parameter is a data type.
-	ValueContributor Contributor `json:"valueContributor,omitempty"`
-	// valueDataRequirement
-	// Conveys the content if the parameter is a data type.
-	ValueDataRequirement DataRequirement `json:"valueDataRequirement,omitempty"`
-	// valueExpression
-	// Conveys the content if the parameter is a data type.
-	ValueExpression FhirExpression `json:"valueExpression,omitempty"`
-	// valueParameterDefinition
-	// Conveys the content if the parameter is a data type.
-	ValueParameterDefinition ParameterDefinition `json:"valueParameterDefinition,omitempty"`
-	// valueRelatedArtifact
-	// Conveys the content if the parameter is a data type.
-	ValueRelatedArtifact RelatedArtifact `json:"valueRelatedArtifact,omitempty"`
-	// valueTriggerDefinition
-	// Conveys the content if the parameter is a data type.
-	ValueTriggerDefinition TriggerDefinition `json:"valueTriggerDefinition,omitempty"`
-	// valueUsageContext
-	// Conveys the content if the parameter is a data type.
-	ValueUsageContext UsageContext `json:"valueUsageContext,omitempty"`
-	// valueDosage
-	// Conveys the content if the parameter is a data type.
-	ValueDosage Dosage `json:"valueDosage,omitempty"`
-	// valueMeta
-	// Conveys the content if the parameter is a data type.
-	ValueMeta FhirMeta `json:"valueMeta,omitempty"`
-	// resource
-	// If the parameter is a whole resource.
-	Resource Resource `json:"resource,omitempty"`
-	// part
-	// A named part of a multi-part parameter.
-	Part_ []ParametersParameter `json:"part,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	ValueBase64Binary *FhirBase64Binary `json:"valuebase64binary,omitempty"`
+	ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
+	ValueCanonical *FhirCanonical `json:"valuecanonical,omitempty"`
+	ValueCode *FhirCode `json:"valuecode,omitempty"`
+	ValueDate *FhirDate `json:"valuedate,omitempty"`
+	ValueDateTime *FhirDateTime `json:"valuedatetime,omitempty"`
+	ValueDecimal *FhirDecimal `json:"valuedecimal,omitempty"`
+	ValueId *FhirId `json:"valueid,omitempty"`
+	ValueInstant *FhirInstant `json:"valueinstant,omitempty"`
+	ValueInteger *FhirInteger `json:"valueinteger,omitempty"`
+	ValueMarkdown *FhirMarkdown `json:"valuemarkdown,omitempty"`
+	ValueOid *FhirOid `json:"valueoid,omitempty"`
+	ValuePositiveInt *FhirPositiveInt `json:"valuepositiveint,omitempty"`
+	ValueString *FhirString `json:"valuestring,omitempty"`
+	ValueTime *FhirTime `json:"valuetime,omitempty"`
+	ValueUnsignedInt *FhirUnsignedInt `json:"valueunsignedint,omitempty"`
+	ValueUri *FhirUri `json:"valueuri,omitempty"`
+	ValueUrl *FhirUrl `json:"valueurl,omitempty"`
+	ValueUuid *FhirUuid `json:"valueuuid,omitempty"`
+	ValueAddress *Address `json:"valueaddress,omitempty"`
+	ValueAge *Age `json:"valueage,omitempty"`
+	ValueAnnotation *Annotation `json:"valueannotation,omitempty"`
+	ValueAttachment *Attachment `json:"valueattachment,omitempty"`
+	ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+	ValueCoding *Coding `json:"valuecoding,omitempty"`
+	ValueContactPoint *ContactPoint `json:"valuecontactpoint,omitempty"`
+	ValueCount *Count `json:"valuecount,omitempty"`
+	ValueDistance *Distance `json:"valuedistance,omitempty"`
+	ValueDuration *FhirDuration `json:"valueduration,omitempty"`
+	ValueHumanName *HumanName `json:"valuehumanname,omitempty"`
+	ValueIdentifier *Identifier `json:"valueidentifier,omitempty"`
+	ValueMoney *Money `json:"valuemoney,omitempty"`
+	ValuePeriod *Period `json:"valueperiod,omitempty"`
+	ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+	ValueRange *Range `json:"valuerange,omitempty"`
+	ValueRatio *Ratio `json:"valueratio,omitempty"`
+	ValueReference *Reference `json:"valuereference,omitempty"`
+	ValueSampledData *SampledData `json:"valuesampleddata,omitempty"`
+	ValueSignature *Signature `json:"valuesignature,omitempty"`
+	ValueTiming *Timing `json:"valuetiming,omitempty"`
+	ValueContactDetail *ContactDetail `json:"valuecontactdetail,omitempty"`
+	ValueContributor *Contributor `json:"valuecontributor,omitempty"`
+	ValueDataRequirement *DataRequirement `json:"valuedatarequirement,omitempty"`
+	ValueExpression *FhirExpression `json:"valueexpression,omitempty"`
+	ValueParameterDefinition *ParameterDefinition `json:"valueparameterdefinition,omitempty"`
+	ValueRelatedArtifact *RelatedArtifact `json:"valuerelatedartifact,omitempty"`
+	ValueTriggerDefinition *TriggerDefinition `json:"valuetriggerdefinition,omitempty"`
+	ValueUsageContext *UsageContext `json:"valueusagecontext,omitempty"`
+	ValueDosage *Dosage `json:"valuedosage,omitempty"`
+	ValueMeta *FhirMeta `json:"valuemeta,omitempty"`
+	Resource *Resource `json:"resource,omitempty"`
+	Part_ []*ParametersParameter `json:"part,omitempty"`
 }
 
 // NewParametersParameter creates a new ParametersParameter instance
-func NewParametersParameter(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	name FhirString,
-	valueBase64Binary FhirBase64Binary,
-	valueBoolean FhirBoolean,
-	valueCanonical FhirCanonical,
-	valueCode FhirCode,
-	valueDate FhirDate,
-	valueDateTime FhirDateTime,
-	valueDecimal FhirDecimal,
-	valueId FhirId,
-	valueInstant FhirInstant,
-	valueInteger FhirInteger,
-	valueMarkdown FhirMarkdown,
-	valueOid FhirOid,
-	valuePositiveInt FhirPositiveInt,
-	valueString FhirString,
-	valueTime FhirTime,
-	valueUnsignedInt FhirUnsignedInt,
-	valueUri FhirUri,
-	valueUrl FhirUrl,
-	valueUuid FhirUuid,
-	valueAddress Address,
-	valueAge Age,
-	valueAnnotation Annotation,
-	valueAttachment Attachment,
-	valueCodeableConcept CodeableConcept,
-	valueCoding Coding,
-	valueContactPoint ContactPoint,
-	valueCount Count,
-	valueDistance Distance,
-	valueDuration FhirDuration,
-	valueHumanName HumanName,
-	valueIdentifier Identifier,
-	valueMoney Money,
-	valuePeriod Period,
-	valueQuantity Quantity,
-	valueRange Range,
-	valueRatio Ratio,
-	valueReference Reference,
-	valueSampledData SampledData,
-	valueSignature Signature,
-	valueTiming Timing,
-	valueContactDetail ContactDetail,
-	valueContributor Contributor,
-	valueDataRequirement DataRequirement,
-	valueExpression FhirExpression,
-	valueParameterDefinition ParameterDefinition,
-	valueRelatedArtifact RelatedArtifact,
-	valueTriggerDefinition TriggerDefinition,
-	valueUsageContext UsageContext,
-	valueDosage Dosage,
-	valueMeta FhirMeta,
-	resource Resource,
-	part_ []ParametersParameter,
-) *ParametersParameter {
-	return &ParametersParameter{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Name: name,
-		ValueBase64Binary: valueBase64Binary,
-		ValueBoolean: valueBoolean,
-		ValueCanonical: valueCanonical,
-		ValueCode: valueCode,
-		ValueDate: valueDate,
-		ValueDateTime: valueDateTime,
-		ValueDecimal: valueDecimal,
-		ValueId: valueId,
-		ValueInstant: valueInstant,
-		ValueInteger: valueInteger,
-		ValueMarkdown: valueMarkdown,
-		ValueOid: valueOid,
-		ValuePositiveInt: valuePositiveInt,
-		ValueString: valueString,
-		ValueTime: valueTime,
-		ValueUnsignedInt: valueUnsignedInt,
-		ValueUri: valueUri,
-		ValueUrl: valueUrl,
-		ValueUuid: valueUuid,
-		ValueAddress: valueAddress,
-		ValueAge: valueAge,
-		ValueAnnotation: valueAnnotation,
-		ValueAttachment: valueAttachment,
-		ValueCodeableConcept: valueCodeableConcept,
-		ValueCoding: valueCoding,
-		ValueContactPoint: valueContactPoint,
-		ValueCount: valueCount,
-		ValueDistance: valueDistance,
-		ValueDuration: valueDuration,
-		ValueHumanName: valueHumanName,
-		ValueIdentifier: valueIdentifier,
-		ValueMoney: valueMoney,
-		ValuePeriod: valuePeriod,
-		ValueQuantity: valueQuantity,
-		ValueRange: valueRange,
-		ValueRatio: valueRatio,
-		ValueReference: valueReference,
-		ValueSampledData: valueSampledData,
-		ValueSignature: valueSignature,
-		ValueTiming: valueTiming,
-		ValueContactDetail: valueContactDetail,
-		ValueContributor: valueContributor,
-		ValueDataRequirement: valueDataRequirement,
-		ValueExpression: valueExpression,
-		ValueParameterDefinition: valueParameterDefinition,
-		ValueRelatedArtifact: valueRelatedArtifact,
-		ValueTriggerDefinition: valueTriggerDefinition,
-		ValueUsageContext: valueUsageContext,
-		ValueDosage: valueDosage,
-		ValueMeta: valueMeta,
-		Resource: resource,
-		Part_: part_,
-	}
+func NewParametersParameter() *ParametersParameter {
+	return &ParametersParameter{}
 }
+
 // FromJSON populates ParametersParameter from JSON data
 func (m *ParametersParameter) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -389,289 +132,129 @@ func (m *ParametersParameter) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ParametersParameter
-func (m *ParametersParameter) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	name *FhirString,
-	valueBase64Binary *FhirBase64Binary,
-	valueBoolean *FhirBoolean,
-	valueCanonical *FhirCanonical,
-	valueCode *FhirCode,
-	valueDate *FhirDate,
-	valueDateTime *FhirDateTime,
-	valueDecimal *FhirDecimal,
-	valueId *FhirId,
-	valueInstant *FhirInstant,
-	valueInteger *FhirInteger,
-	valueMarkdown *FhirMarkdown,
-	valueOid *FhirOid,
-	valuePositiveInt *FhirPositiveInt,
-	valueString *FhirString,
-	valueTime *FhirTime,
-	valueUnsignedInt *FhirUnsignedInt,
-	valueUri *FhirUri,
-	valueUrl *FhirUrl,
-	valueUuid *FhirUuid,
-	valueAddress *Address,
-	valueAge *Age,
-	valueAnnotation *Annotation,
-	valueAttachment *Attachment,
-	valueCodeableConcept *CodeableConcept,
-	valueCoding *Coding,
-	valueContactPoint *ContactPoint,
-	valueCount *Count,
-	valueDistance *Distance,
-	valueDuration *FhirDuration,
-	valueHumanName *HumanName,
-	valueIdentifier *Identifier,
-	valueMoney *Money,
-	valuePeriod *Period,
-	valueQuantity *Quantity,
-	valueRange *Range,
-	valueRatio *Ratio,
-	valueReference *Reference,
-	valueSampledData *SampledData,
-	valueSignature *Signature,
-	valueTiming *Timing,
-	valueContactDetail *ContactDetail,
-	valueContributor *Contributor,
-	valueDataRequirement *DataRequirement,
-	valueExpression *FhirExpression,
-	valueParameterDefinition *ParameterDefinition,
-	valueRelatedArtifact *RelatedArtifact,
-	valueTriggerDefinition *TriggerDefinition,
-	valueUsageContext *UsageContext,
-	valueDosage *Dosage,
-	valueMeta *FhirMeta,
-	resource *Resource,
-	part_ *[]ParametersParameter,
-) *ParametersParameter {
+// Clone creates a deep copy of ParametersParameter
+func (m *ParametersParameter) Clone() *ParametersParameter {
+	if m == nil { return nil }
 	return &ParametersParameter{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		ValueBase64Binary: func() FhirBase64Binary {
-			if valueBase64Binary != nil { return *valueBase64Binary }
-			return m.ValueBase64Binary
-		}(),
-		ValueBoolean: func() FhirBoolean {
-			if valueBoolean != nil { return *valueBoolean }
-			return m.ValueBoolean
-		}(),
-		ValueCanonical: func() FhirCanonical {
-			if valueCanonical != nil { return *valueCanonical }
-			return m.ValueCanonical
-		}(),
-		ValueCode: func() FhirCode {
-			if valueCode != nil { return *valueCode }
-			return m.ValueCode
-		}(),
-		ValueDate: func() FhirDate {
-			if valueDate != nil { return *valueDate }
-			return m.ValueDate
-		}(),
-		ValueDateTime: func() FhirDateTime {
-			if valueDateTime != nil { return *valueDateTime }
-			return m.ValueDateTime
-		}(),
-		ValueDecimal: func() FhirDecimal {
-			if valueDecimal != nil { return *valueDecimal }
-			return m.ValueDecimal
-		}(),
-		ValueId: func() FhirId {
-			if valueId != nil { return *valueId }
-			return m.ValueId
-		}(),
-		ValueInstant: func() FhirInstant {
-			if valueInstant != nil { return *valueInstant }
-			return m.ValueInstant
-		}(),
-		ValueInteger: func() FhirInteger {
-			if valueInteger != nil { return *valueInteger }
-			return m.ValueInteger
-		}(),
-		ValueMarkdown: func() FhirMarkdown {
-			if valueMarkdown != nil { return *valueMarkdown }
-			return m.ValueMarkdown
-		}(),
-		ValueOid: func() FhirOid {
-			if valueOid != nil { return *valueOid }
-			return m.ValueOid
-		}(),
-		ValuePositiveInt: func() FhirPositiveInt {
-			if valuePositiveInt != nil { return *valuePositiveInt }
-			return m.ValuePositiveInt
-		}(),
-		ValueString: func() FhirString {
-			if valueString != nil { return *valueString }
-			return m.ValueString
-		}(),
-		ValueTime: func() FhirTime {
-			if valueTime != nil { return *valueTime }
-			return m.ValueTime
-		}(),
-		ValueUnsignedInt: func() FhirUnsignedInt {
-			if valueUnsignedInt != nil { return *valueUnsignedInt }
-			return m.ValueUnsignedInt
-		}(),
-		ValueUri: func() FhirUri {
-			if valueUri != nil { return *valueUri }
-			return m.ValueUri
-		}(),
-		ValueUrl: func() FhirUrl {
-			if valueUrl != nil { return *valueUrl }
-			return m.ValueUrl
-		}(),
-		ValueUuid: func() FhirUuid {
-			if valueUuid != nil { return *valueUuid }
-			return m.ValueUuid
-		}(),
-		ValueAddress: func() Address {
-			if valueAddress != nil { return *valueAddress }
-			return m.ValueAddress
-		}(),
-		ValueAge: func() Age {
-			if valueAge != nil { return *valueAge }
-			return m.ValueAge
-		}(),
-		ValueAnnotation: func() Annotation {
-			if valueAnnotation != nil { return *valueAnnotation }
-			return m.ValueAnnotation
-		}(),
-		ValueAttachment: func() Attachment {
-			if valueAttachment != nil { return *valueAttachment }
-			return m.ValueAttachment
-		}(),
-		ValueCodeableConcept: func() CodeableConcept {
-			if valueCodeableConcept != nil { return *valueCodeableConcept }
-			return m.ValueCodeableConcept
-		}(),
-		ValueCoding: func() Coding {
-			if valueCoding != nil { return *valueCoding }
-			return m.ValueCoding
-		}(),
-		ValueContactPoint: func() ContactPoint {
-			if valueContactPoint != nil { return *valueContactPoint }
-			return m.ValueContactPoint
-		}(),
-		ValueCount: func() Count {
-			if valueCount != nil { return *valueCount }
-			return m.ValueCount
-		}(),
-		ValueDistance: func() Distance {
-			if valueDistance != nil { return *valueDistance }
-			return m.ValueDistance
-		}(),
-		ValueDuration: func() FhirDuration {
-			if valueDuration != nil { return *valueDuration }
-			return m.ValueDuration
-		}(),
-		ValueHumanName: func() HumanName {
-			if valueHumanName != nil { return *valueHumanName }
-			return m.ValueHumanName
-		}(),
-		ValueIdentifier: func() Identifier {
-			if valueIdentifier != nil { return *valueIdentifier }
-			return m.ValueIdentifier
-		}(),
-		ValueMoney: func() Money {
-			if valueMoney != nil { return *valueMoney }
-			return m.ValueMoney
-		}(),
-		ValuePeriod: func() Period {
-			if valuePeriod != nil { return *valuePeriod }
-			return m.ValuePeriod
-		}(),
-		ValueQuantity: func() Quantity {
-			if valueQuantity != nil { return *valueQuantity }
-			return m.ValueQuantity
-		}(),
-		ValueRange: func() Range {
-			if valueRange != nil { return *valueRange }
-			return m.ValueRange
-		}(),
-		ValueRatio: func() Ratio {
-			if valueRatio != nil { return *valueRatio }
-			return m.ValueRatio
-		}(),
-		ValueReference: func() Reference {
-			if valueReference != nil { return *valueReference }
-			return m.ValueReference
-		}(),
-		ValueSampledData: func() SampledData {
-			if valueSampledData != nil { return *valueSampledData }
-			return m.ValueSampledData
-		}(),
-		ValueSignature: func() Signature {
-			if valueSignature != nil { return *valueSignature }
-			return m.ValueSignature
-		}(),
-		ValueTiming: func() Timing {
-			if valueTiming != nil { return *valueTiming }
-			return m.ValueTiming
-		}(),
-		ValueContactDetail: func() ContactDetail {
-			if valueContactDetail != nil { return *valueContactDetail }
-			return m.ValueContactDetail
-		}(),
-		ValueContributor: func() Contributor {
-			if valueContributor != nil { return *valueContributor }
-			return m.ValueContributor
-		}(),
-		ValueDataRequirement: func() DataRequirement {
-			if valueDataRequirement != nil { return *valueDataRequirement }
-			return m.ValueDataRequirement
-		}(),
-		ValueExpression: func() FhirExpression {
-			if valueExpression != nil { return *valueExpression }
-			return m.ValueExpression
-		}(),
-		ValueParameterDefinition: func() ParameterDefinition {
-			if valueParameterDefinition != nil { return *valueParameterDefinition }
-			return m.ValueParameterDefinition
-		}(),
-		ValueRelatedArtifact: func() RelatedArtifact {
-			if valueRelatedArtifact != nil { return *valueRelatedArtifact }
-			return m.ValueRelatedArtifact
-		}(),
-		ValueTriggerDefinition: func() TriggerDefinition {
-			if valueTriggerDefinition != nil { return *valueTriggerDefinition }
-			return m.ValueTriggerDefinition
-		}(),
-		ValueUsageContext: func() UsageContext {
-			if valueUsageContext != nil { return *valueUsageContext }
-			return m.ValueUsageContext
-		}(),
-		ValueDosage: func() Dosage {
-			if valueDosage != nil { return *valueDosage }
-			return m.ValueDosage
-		}(),
-		ValueMeta: func() FhirMeta {
-			if valueMeta != nil { return *valueMeta }
-			return m.ValueMeta
-		}(),
-		Resource: func() Resource {
-			if resource != nil { return *resource }
-			return m.Resource
-		}(),
-		Part_: func() []ParametersParameter {
-			if part_ != nil { return *part_ }
-			return m.Part_
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Name: m.Name.Clone(),
+		ValueBase64Binary: m.ValueBase64Binary.Clone(),
+		ValueBoolean: m.ValueBoolean.Clone(),
+		ValueCanonical: m.ValueCanonical.Clone(),
+		ValueCode: m.ValueCode.Clone(),
+		ValueDate: m.ValueDate.Clone(),
+		ValueDateTime: m.ValueDateTime.Clone(),
+		ValueDecimal: m.ValueDecimal.Clone(),
+		ValueId: m.ValueId.Clone(),
+		ValueInstant: m.ValueInstant.Clone(),
+		ValueInteger: m.ValueInteger.Clone(),
+		ValueMarkdown: m.ValueMarkdown.Clone(),
+		ValueOid: m.ValueOid.Clone(),
+		ValuePositiveInt: m.ValuePositiveInt.Clone(),
+		ValueString: m.ValueString.Clone(),
+		ValueTime: m.ValueTime.Clone(),
+		ValueUnsignedInt: m.ValueUnsignedInt.Clone(),
+		ValueUri: m.ValueUri.Clone(),
+		ValueUrl: m.ValueUrl.Clone(),
+		ValueUuid: m.ValueUuid.Clone(),
+		ValueAddress: m.ValueAddress.Clone(),
+		ValueAge: m.ValueAge.Clone(),
+		ValueAnnotation: m.ValueAnnotation.Clone(),
+		ValueAttachment: m.ValueAttachment.Clone(),
+		ValueCodeableConcept: m.ValueCodeableConcept.Clone(),
+		ValueCoding: m.ValueCoding.Clone(),
+		ValueContactPoint: m.ValueContactPoint.Clone(),
+		ValueCount: m.ValueCount.Clone(),
+		ValueDistance: m.ValueDistance.Clone(),
+		ValueDuration: m.ValueDuration.Clone(),
+		ValueHumanName: m.ValueHumanName.Clone(),
+		ValueIdentifier: m.ValueIdentifier.Clone(),
+		ValueMoney: m.ValueMoney.Clone(),
+		ValuePeriod: m.ValuePeriod.Clone(),
+		ValueQuantity: m.ValueQuantity.Clone(),
+		ValueRange: m.ValueRange.Clone(),
+		ValueRatio: m.ValueRatio.Clone(),
+		ValueReference: m.ValueReference.Clone(),
+		ValueSampledData: m.ValueSampledData.Clone(),
+		ValueSignature: m.ValueSignature.Clone(),
+		ValueTiming: m.ValueTiming.Clone(),
+		ValueContactDetail: m.ValueContactDetail.Clone(),
+		ValueContributor: m.ValueContributor.Clone(),
+		ValueDataRequirement: m.ValueDataRequirement.Clone(),
+		ValueExpression: m.ValueExpression.Clone(),
+		ValueParameterDefinition: m.ValueParameterDefinition.Clone(),
+		ValueRelatedArtifact: m.ValueRelatedArtifact.Clone(),
+		ValueTriggerDefinition: m.ValueTriggerDefinition.Clone(),
+		ValueUsageContext: m.ValueUsageContext.Clone(),
+		ValueDosage: m.ValueDosage.Clone(),
+		ValueMeta: m.ValueMeta.Clone(),
+		Resource: m.Resource.Clone(),
+		Part_: cloneSlices(m.Part_),
 	}
 }
+
+// Equals checks for equality with another ParametersParameter instance
+func (m *ParametersParameter) Equals(other *ParametersParameter) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.ValueBase64Binary.Equals(other.ValueBase64Binary) { return false }
+	if !m.ValueBoolean.Equals(other.ValueBoolean) { return false }
+	if !m.ValueCanonical.Equals(other.ValueCanonical) { return false }
+	if !m.ValueCode.Equals(other.ValueCode) { return false }
+	if !m.ValueDate.Equals(other.ValueDate) { return false }
+	if !m.ValueDateTime.Equals(other.ValueDateTime) { return false }
+	if !m.ValueDecimal.Equals(other.ValueDecimal) { return false }
+	if !m.ValueId.Equals(other.ValueId) { return false }
+	if !m.ValueInstant.Equals(other.ValueInstant) { return false }
+	if !m.ValueInteger.Equals(other.ValueInteger) { return false }
+	if !m.ValueMarkdown.Equals(other.ValueMarkdown) { return false }
+	if !m.ValueOid.Equals(other.ValueOid) { return false }
+	if !m.ValuePositiveInt.Equals(other.ValuePositiveInt) { return false }
+	if !m.ValueString.Equals(other.ValueString) { return false }
+	if !m.ValueTime.Equals(other.ValueTime) { return false }
+	if !m.ValueUnsignedInt.Equals(other.ValueUnsignedInt) { return false }
+	if !m.ValueUri.Equals(other.ValueUri) { return false }
+	if !m.ValueUrl.Equals(other.ValueUrl) { return false }
+	if !m.ValueUuid.Equals(other.ValueUuid) { return false }
+	if !m.ValueAddress.Equals(other.ValueAddress) { return false }
+	if !m.ValueAge.Equals(other.ValueAge) { return false }
+	if !m.ValueAnnotation.Equals(other.ValueAnnotation) { return false }
+	if !m.ValueAttachment.Equals(other.ValueAttachment) { return false }
+	if !m.ValueCodeableConcept.Equals(other.ValueCodeableConcept) { return false }
+	if !m.ValueCoding.Equals(other.ValueCoding) { return false }
+	if !m.ValueContactPoint.Equals(other.ValueContactPoint) { return false }
+	if !m.ValueCount.Equals(other.ValueCount) { return false }
+	if !m.ValueDistance.Equals(other.ValueDistance) { return false }
+	if !m.ValueDuration.Equals(other.ValueDuration) { return false }
+	if !m.ValueHumanName.Equals(other.ValueHumanName) { return false }
+	if !m.ValueIdentifier.Equals(other.ValueIdentifier) { return false }
+	if !m.ValueMoney.Equals(other.ValueMoney) { return false }
+	if !m.ValuePeriod.Equals(other.ValuePeriod) { return false }
+	if !m.ValueQuantity.Equals(other.ValueQuantity) { return false }
+	if !m.ValueRange.Equals(other.ValueRange) { return false }
+	if !m.ValueRatio.Equals(other.ValueRatio) { return false }
+	if !m.ValueReference.Equals(other.ValueReference) { return false }
+	if !m.ValueSampledData.Equals(other.ValueSampledData) { return false }
+	if !m.ValueSignature.Equals(other.ValueSignature) { return false }
+	if !m.ValueTiming.Equals(other.ValueTiming) { return false }
+	if !m.ValueContactDetail.Equals(other.ValueContactDetail) { return false }
+	if !m.ValueContributor.Equals(other.ValueContributor) { return false }
+	if !m.ValueDataRequirement.Equals(other.ValueDataRequirement) { return false }
+	if !m.ValueExpression.Equals(other.ValueExpression) { return false }
+	if !m.ValueParameterDefinition.Equals(other.ValueParameterDefinition) { return false }
+	if !m.ValueRelatedArtifact.Equals(other.ValueRelatedArtifact) { return false }
+	if !m.ValueTriggerDefinition.Equals(other.ValueTriggerDefinition) { return false }
+	if !m.ValueUsageContext.Equals(other.ValueUsageContext) { return false }
+	if !m.ValueDosage.Equals(other.ValueDosage) { return false }
+	if !m.ValueMeta.Equals(other.ValueMeta) { return false }
+	if !m.Resource.Equals(other.Resource) { return false }
+	if !compareSlices(m.Part_, other.Part_) { return false }
+	return true
+}
+

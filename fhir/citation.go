@@ -3,209 +3,56 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // Citation
 // The Citation Resource enables reference to any knowledge artifact for purposes of identification and attribution. The Citation Resource supports existing reference structures and developing publication practices such as versioning, expressing complex contributorship roles, and referencing computable resources.
 type Citation struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// url
-	// An absolute URI that is used to identify this citation when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this summary is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the summary is stored on different servers.
-	Url FhirUri `json:"url,omitempty"`
-	// identifier
-	// A formal identifier that is used to identify this citation when it is represented in other formats, or referenced in a specification, model, design or an instance.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// version
-	// The identifier that is used to identify this version of the citation when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the citation author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.
-	Version FhirString `json:"version,omitempty"`
-	// name
-	// A natural language name identifying the citation. This name should be usable as an identifier for the module by machine processing applications such as code generation.
-	Name FhirString `json:"name,omitempty"`
-	// title
-	// A short, descriptive, user-friendly title for the citation.
-	Title FhirString `json:"title,omitempty"`
-	// status
-	// The status of this summary. Enables tracking the life-cycle of the content.
-	Status PublicationStatus `json:"status,omitempty"`
-	// experimental
-	// A Boolean value to indicate that this citation is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.
-	Experimental FhirBoolean `json:"experimental,omitempty"`
-	// date
-	// The date  (and optionally time) when the citation was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the citation changes.
-	Date FhirDateTime `json:"date,omitempty"`
-	// publisher
-	// The name of the organization or individual that published the citation.
-	Publisher FhirString `json:"publisher,omitempty"`
-	// contact
-	// Contact details to assist a user in finding and communicating with the publisher.
-	Contact []ContactDetail `json:"contact,omitempty"`
-	// description
-	// A free text natural language description of the citation from a consumer's perspective.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// useContext
-	// The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate citation instances.
-	UseContext []UsageContext `json:"useContext,omitempty"`
-	// jurisdiction
-	// A legal or geographic region in which the citation is intended to be used.
-	Jurisdiction []CodeableConcept `json:"jurisdiction,omitempty"`
-	// purpose
-	// Explanation of why this citation is needed and why it has been designed as it has.
-	Purpose FhirMarkdown `json:"purpose,omitempty"`
-	// copyright
-	// Use and/or publishing restrictions for the Citation, not for the cited artifact.
-	Copyright FhirMarkdown `json:"copyright,omitempty"`
-	// approvalDate
-	// The date on which the resource content was approved by the publisher. Approval happens once when the content is officially approved for usage.
-	ApprovalDate FhirDate `json:"approvalDate,omitempty"`
-	// lastReviewDate
-	// The date on which the resource content was last reviewed. Review happens periodically after approval but does not change the original approval date.
-	LastReviewDate FhirDate `json:"lastReviewDate,omitempty"`
-	// effectivePeriod
-	// The period during which the citation content was or is planned to be in active use.
-	EffectivePeriod Period `json:"effectivePeriod,omitempty"`
-	// author
-	// Who authored the Citation.
-	Author []ContactDetail `json:"author,omitempty"`
-	// editor
-	// Who edited the Citation.
-	Editor []ContactDetail `json:"editor,omitempty"`
-	// reviewer
-	// Who reviewed the Citation.
-	Reviewer []ContactDetail `json:"reviewer,omitempty"`
-	// endorser
-	// Who endorsed the Citation.
-	Endorser []ContactDetail `json:"endorser,omitempty"`
-	// summary
-	// A human-readable display of the citation.
-	Summary []CitationSummary `json:"summary,omitempty"`
-	// classification
-	// The assignment to an organizing scheme.
-	Classification []CitationClassification `json:"classification,omitempty"`
-	// note
-	// Used for general notes and annotations not coded elsewhere.
-	Note []Annotation `json:"note,omitempty"`
-	// currentState
-	// The status of the citation.
-	CurrentState []CodeableConcept `json:"currentState,omitempty"`
-	// statusDate
-	// An effective date or period for a status of the citation.
-	StatusDate []CitationStatusDate `json:"statusDate,omitempty"`
-	// relatesTo
-	// Artifact related to the Citation Resource.
-	RelatesTo []CitationRelatesTo `json:"relatesTo,omitempty"`
-	// citedArtifact
-	// The article or artifact being described.
-	CitedArtifact CitationCitedArtifact `json:"citedArtifact,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Url *FhirUri `json:"url,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Title *FhirString `json:"title,omitempty"`
+	Status *PublicationStatus `json:"status,omitempty"`
+	Experimental *FhirBoolean `json:"experimental,omitempty"`
+	Date *FhirDateTime `json:"date,omitempty"`
+	Publisher *FhirString `json:"publisher,omitempty"`
+	Contact []*ContactDetail `json:"contact,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	UseContext []*UsageContext `json:"usecontext,omitempty"`
+	Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+	Purpose *FhirMarkdown `json:"purpose,omitempty"`
+	Copyright *FhirMarkdown `json:"copyright,omitempty"`
+	ApprovalDate *FhirDate `json:"approvaldate,omitempty"`
+	LastReviewDate *FhirDate `json:"lastreviewdate,omitempty"`
+	EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+	Author []*ContactDetail `json:"author,omitempty"`
+	Editor []*ContactDetail `json:"editor,omitempty"`
+	Reviewer []*ContactDetail `json:"reviewer,omitempty"`
+	Endorser []*ContactDetail `json:"endorser,omitempty"`
+	Summary []*CitationSummary `json:"summary,omitempty"`
+	Classification []*CitationClassification `json:"classification,omitempty"`
+	Note []*Annotation `json:"note,omitempty"`
+	CurrentState []*CodeableConcept `json:"currentstate,omitempty"`
+	StatusDate []*CitationStatusDate `json:"statusdate,omitempty"`
+	RelatesTo []*CitationRelatesTo `json:"relatesto,omitempty"`
+	CitedArtifact *CitationCitedArtifact `json:"citedartifact,omitempty"`
 }
 
 // NewCitation creates a new Citation instance
-func NewCitation(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	url FhirUri,
-	identifier []Identifier,
-	version FhirString,
-	name FhirString,
-	title FhirString,
-	status PublicationStatus,
-	experimental FhirBoolean,
-	date FhirDateTime,
-	publisher FhirString,
-	contact []ContactDetail,
-	description FhirMarkdown,
-	useContext []UsageContext,
-	jurisdiction []CodeableConcept,
-	purpose FhirMarkdown,
-	copyright FhirMarkdown,
-	approvalDate FhirDate,
-	lastReviewDate FhirDate,
-	effectivePeriod Period,
-	author []ContactDetail,
-	editor []ContactDetail,
-	reviewer []ContactDetail,
-	endorser []ContactDetail,
-	summary []CitationSummary,
-	classification []CitationClassification,
-	note []Annotation,
-	currentState []CodeableConcept,
-	statusDate []CitationStatusDate,
-	relatesTo []CitationRelatesTo,
-	citedArtifact CitationCitedArtifact,
-) *Citation {
-	return &Citation{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Url: url,
-		Identifier: identifier,
-		Version: version,
-		Name: name,
-		Title: title,
-		Status: status,
-		Experimental: experimental,
-		Date: date,
-		Publisher: publisher,
-		Contact: contact,
-		Description: description,
-		UseContext: useContext,
-		Jurisdiction: jurisdiction,
-		Purpose: purpose,
-		Copyright: copyright,
-		ApprovalDate: approvalDate,
-		LastReviewDate: lastReviewDate,
-		EffectivePeriod: effectivePeriod,
-		Author: author,
-		Editor: editor,
-		Reviewer: reviewer,
-		Endorser: endorser,
-		Summary: summary,
-		Classification: classification,
-		Note: note,
-		CurrentState: currentState,
-		StatusDate: statusDate,
-		RelatesTo: relatesTo,
-		CitedArtifact: citedArtifact,
-	}
+func NewCitation() *Citation {
+	return &Citation{}
 }
+
 // FromJSON populates Citation from JSON data
 func (m *Citation) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -216,236 +63,110 @@ func (m *Citation) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of Citation
-func (m *Citation) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	url *FhirUri,
-	identifier *[]Identifier,
-	version *FhirString,
-	name *FhirString,
-	title *FhirString,
-	status *PublicationStatus,
-	experimental *FhirBoolean,
-	date *FhirDateTime,
-	publisher *FhirString,
-	contact *[]ContactDetail,
-	description *FhirMarkdown,
-	useContext *[]UsageContext,
-	jurisdiction *[]CodeableConcept,
-	purpose *FhirMarkdown,
-	copyright *FhirMarkdown,
-	approvalDate *FhirDate,
-	lastReviewDate *FhirDate,
-	effectivePeriod *Period,
-	author *[]ContactDetail,
-	editor *[]ContactDetail,
-	reviewer *[]ContactDetail,
-	endorser *[]ContactDetail,
-	summary *[]CitationSummary,
-	classification *[]CitationClassification,
-	note *[]Annotation,
-	currentState *[]CodeableConcept,
-	statusDate *[]CitationStatusDate,
-	relatesTo *[]CitationRelatesTo,
-	citedArtifact *CitationCitedArtifact,
-) *Citation {
+// Clone creates a deep copy of Citation
+func (m *Citation) Clone() *Citation {
+	if m == nil { return nil }
 	return &Citation{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Url: func() FhirUri {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Title: func() FhirString {
-			if title != nil { return *title }
-			return m.Title
-		}(),
-		Status: func() PublicationStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Experimental: func() FhirBoolean {
-			if experimental != nil { return *experimental }
-			return m.Experimental
-		}(),
-		Date: func() FhirDateTime {
-			if date != nil { return *date }
-			return m.Date
-		}(),
-		Publisher: func() FhirString {
-			if publisher != nil { return *publisher }
-			return m.Publisher
-		}(),
-		Contact: func() []ContactDetail {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		UseContext: func() []UsageContext {
-			if useContext != nil { return *useContext }
-			return m.UseContext
-		}(),
-		Jurisdiction: func() []CodeableConcept {
-			if jurisdiction != nil { return *jurisdiction }
-			return m.Jurisdiction
-		}(),
-		Purpose: func() FhirMarkdown {
-			if purpose != nil { return *purpose }
-			return m.Purpose
-		}(),
-		Copyright: func() FhirMarkdown {
-			if copyright != nil { return *copyright }
-			return m.Copyright
-		}(),
-		ApprovalDate: func() FhirDate {
-			if approvalDate != nil { return *approvalDate }
-			return m.ApprovalDate
-		}(),
-		LastReviewDate: func() FhirDate {
-			if lastReviewDate != nil { return *lastReviewDate }
-			return m.LastReviewDate
-		}(),
-		EffectivePeriod: func() Period {
-			if effectivePeriod != nil { return *effectivePeriod }
-			return m.EffectivePeriod
-		}(),
-		Author: func() []ContactDetail {
-			if author != nil { return *author }
-			return m.Author
-		}(),
-		Editor: func() []ContactDetail {
-			if editor != nil { return *editor }
-			return m.Editor
-		}(),
-		Reviewer: func() []ContactDetail {
-			if reviewer != nil { return *reviewer }
-			return m.Reviewer
-		}(),
-		Endorser: func() []ContactDetail {
-			if endorser != nil { return *endorser }
-			return m.Endorser
-		}(),
-		Summary: func() []CitationSummary {
-			if summary != nil { return *summary }
-			return m.Summary
-		}(),
-		Classification: func() []CitationClassification {
-			if classification != nil { return *classification }
-			return m.Classification
-		}(),
-		Note: func() []Annotation {
-			if note != nil { return *note }
-			return m.Note
-		}(),
-		CurrentState: func() []CodeableConcept {
-			if currentState != nil { return *currentState }
-			return m.CurrentState
-		}(),
-		StatusDate: func() []CitationStatusDate {
-			if statusDate != nil { return *statusDate }
-			return m.StatusDate
-		}(),
-		RelatesTo: func() []CitationRelatesTo {
-			if relatesTo != nil { return *relatesTo }
-			return m.RelatesTo
-		}(),
-		CitedArtifact: func() CitationCitedArtifact {
-			if citedArtifact != nil { return *citedArtifact }
-			return m.CitedArtifact
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Url: m.Url.Clone(),
+		Identifier: cloneSlices(m.Identifier),
+		Version: m.Version.Clone(),
+		Name: m.Name.Clone(),
+		Title: m.Title.Clone(),
+		Status: m.Status.Clone(),
+		Experimental: m.Experimental.Clone(),
+		Date: m.Date.Clone(),
+		Publisher: m.Publisher.Clone(),
+		Contact: cloneSlices(m.Contact),
+		Description: m.Description.Clone(),
+		UseContext: cloneSlices(m.UseContext),
+		Jurisdiction: cloneSlices(m.Jurisdiction),
+		Purpose: m.Purpose.Clone(),
+		Copyright: m.Copyright.Clone(),
+		ApprovalDate: m.ApprovalDate.Clone(),
+		LastReviewDate: m.LastReviewDate.Clone(),
+		EffectivePeriod: m.EffectivePeriod.Clone(),
+		Author: cloneSlices(m.Author),
+		Editor: cloneSlices(m.Editor),
+		Reviewer: cloneSlices(m.Reviewer),
+		Endorser: cloneSlices(m.Endorser),
+		Summary: cloneSlices(m.Summary),
+		Classification: cloneSlices(m.Classification),
+		Note: cloneSlices(m.Note),
+		CurrentState: cloneSlices(m.CurrentState),
+		StatusDate: cloneSlices(m.StatusDate),
+		RelatesTo: cloneSlices(m.RelatesTo),
+		CitedArtifact: m.CitedArtifact.Clone(),
 	}
 }
+
+// Equals checks for equality with another Citation instance
+func (m *Citation) Equals(other *Citation) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Title.Equals(other.Title) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Experimental.Equals(other.Experimental) { return false }
+	if !m.Date.Equals(other.Date) { return false }
+	if !m.Publisher.Equals(other.Publisher) { return false }
+	if !compareSlices(m.Contact, other.Contact) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.UseContext, other.UseContext) { return false }
+	if !compareSlices(m.Jurisdiction, other.Jurisdiction) { return false }
+	if !m.Purpose.Equals(other.Purpose) { return false }
+	if !m.Copyright.Equals(other.Copyright) { return false }
+	if !m.ApprovalDate.Equals(other.ApprovalDate) { return false }
+	if !m.LastReviewDate.Equals(other.LastReviewDate) { return false }
+	if !m.EffectivePeriod.Equals(other.EffectivePeriod) { return false }
+	if !compareSlices(m.Author, other.Author) { return false }
+	if !compareSlices(m.Editor, other.Editor) { return false }
+	if !compareSlices(m.Reviewer, other.Reviewer) { return false }
+	if !compareSlices(m.Endorser, other.Endorser) { return false }
+	if !compareSlices(m.Summary, other.Summary) { return false }
+	if !compareSlices(m.Classification, other.Classification) { return false }
+	if !compareSlices(m.Note, other.Note) { return false }
+	if !compareSlices(m.CurrentState, other.CurrentState) { return false }
+	if !compareSlices(m.StatusDate, other.StatusDate) { return false }
+	if !compareSlices(m.RelatesTo, other.RelatesTo) { return false }
+	if !m.CitedArtifact.Equals(other.CitedArtifact) { return false }
+	return true
+}
+
 // CitationSummary
 // A human-readable display of the citation.
 type CitationSummary struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// style
-	// Format for display of the citation.
-	Style CodeableConcept `json:"style,omitempty"`
-	// text
-	// The human-readable display of the citation.
-	Text FhirMarkdown `json:"text,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Style *CodeableConcept `json:"style,omitempty"`
+	Text *FhirMarkdown `json:"text,omitempty"`
 }
 
 // NewCitationSummary creates a new CitationSummary instance
-func NewCitationSummary(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	style CodeableConcept,
-	text FhirMarkdown,
-) *CitationSummary {
-	return &CitationSummary{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Style: style,
-		Text: text,
-	}
+func NewCitationSummary() *CitationSummary {
+	return &CitationSummary{}
 }
+
 // FromJSON populates CitationSummary from JSON data
 func (m *CitationSummary) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -456,76 +177,46 @@ func (m *CitationSummary) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CitationSummary
-func (m *CitationSummary) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	style *CodeableConcept,
-	text *FhirMarkdown,
-) *CitationSummary {
+// Clone creates a deep copy of CitationSummary
+func (m *CitationSummary) Clone() *CitationSummary {
+	if m == nil { return nil }
 	return &CitationSummary{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Style: func() CodeableConcept {
-			if style != nil { return *style }
-			return m.Style
-		}(),
-		Text: func() FhirMarkdown {
-			if text != nil { return *text }
-			return m.Text
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Style: m.Style.Clone(),
+		Text: m.Text.Clone(),
 	}
 }
+
+// Equals checks for equality with another CitationSummary instance
+func (m *CitationSummary) Equals(other *CitationSummary) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Style.Equals(other.Style) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	return true
+}
+
 // CitationClassification
 // The assignment to an organizing scheme.
 type CitationClassification struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// The kind of classifier (e.g. publication type, keyword).
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// classifier
-	// The specific classification value.
-	Classifier []CodeableConcept `json:"classifier,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Classifier []*CodeableConcept `json:"classifier,omitempty"`
 }
 
 // NewCitationClassification creates a new CitationClassification instance
-func NewCitationClassification(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	classifier []CodeableConcept,
-) *CitationClassification {
-	return &CitationClassification{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Classifier: classifier,
-	}
+func NewCitationClassification() *CitationClassification {
+	return &CitationClassification{}
 }
+
 // FromJSON populates CitationClassification from JSON data
 func (m *CitationClassification) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -536,81 +227,47 @@ func (m *CitationClassification) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CitationClassification
-func (m *CitationClassification) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	classifier *[]CodeableConcept,
-) *CitationClassification {
+// Clone creates a deep copy of CitationClassification
+func (m *CitationClassification) Clone() *CitationClassification {
+	if m == nil { return nil }
 	return &CitationClassification{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Classifier: func() []CodeableConcept {
-			if classifier != nil { return *classifier }
-			return m.Classifier
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Classifier: cloneSlices(m.Classifier),
 	}
 }
+
+// Equals checks for equality with another CitationClassification instance
+func (m *CitationClassification) Equals(other *CitationClassification) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !compareSlices(m.Classifier, other.Classifier) { return false }
+	return true
+}
+
 // CitationStatusDate
 // An effective date or period for a status of the citation.
 type CitationStatusDate struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// activity
-	// Classification of the status.
-	Activity CodeableConcept `json:"activity,omitempty"`
-	// actual
-	// Either occurred or expected.
-	Actual FhirBoolean `json:"actual,omitempty"`
-	// period
-	// When the status started and/or ended.
-	Period Period `json:"period,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Activity *CodeableConcept `json:"activity,omitempty"`
+	Actual *FhirBoolean `json:"actual,omitempty"`
+	Period *Period `json:"period,omitempty"`
 }
 
 // NewCitationStatusDate creates a new CitationStatusDate instance
-func NewCitationStatusDate(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	activity CodeableConcept,
-	actual FhirBoolean,
-	period Period,
-) *CitationStatusDate {
-	return &CitationStatusDate{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Activity: activity,
-		Actual: actual,
-		Period: period,
-	}
+func NewCitationStatusDate() *CitationStatusDate {
+	return &CitationStatusDate{}
 }
+
 // FromJSON populates CitationStatusDate from JSON data
 func (m *CitationStatusDate) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -621,101 +278,52 @@ func (m *CitationStatusDate) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CitationStatusDate
-func (m *CitationStatusDate) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	activity *CodeableConcept,
-	actual *FhirBoolean,
-	period *Period,
-) *CitationStatusDate {
+// Clone creates a deep copy of CitationStatusDate
+func (m *CitationStatusDate) Clone() *CitationStatusDate {
+	if m == nil { return nil }
 	return &CitationStatusDate{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Activity: func() CodeableConcept {
-			if activity != nil { return *activity }
-			return m.Activity
-		}(),
-		Actual: func() FhirBoolean {
-			if actual != nil { return *actual }
-			return m.Actual
-		}(),
-		Period: func() Period {
-			if period != nil { return *period }
-			return m.Period
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Activity: m.Activity.Clone(),
+		Actual: m.Actual.Clone(),
+		Period: m.Period.Clone(),
 	}
 }
+
+// Equals checks for equality with another CitationStatusDate instance
+func (m *CitationStatusDate) Equals(other *CitationStatusDate) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Activity.Equals(other.Activity) { return false }
+	if !m.Actual.Equals(other.Actual) { return false }
+	if !m.Period.Equals(other.Period) { return false }
+	return true
+}
+
 // CitationRelatesTo
 // Artifact related to the Citation Resource.
 type CitationRelatesTo struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// relationshipType
-	// How the Citation resource relates to the target artifact.
-	RelationshipType CodeableConcept `json:"relationshipType,omitempty"`
-	// targetClassifier
-	// The clasification of the related artifact.
-	TargetClassifier []CodeableConcept `json:"targetClassifier,omitempty"`
-	// targetUri
-	// The article or artifact that the Citation Resource is related to.
-	TargetUri FhirUri `json:"targetUri,omitempty"`
-	// targetIdentifier
-	// The article or artifact that the Citation Resource is related to.
-	TargetIdentifier Identifier `json:"targetIdentifier,omitempty"`
-	// targetReference
-	// The article or artifact that the Citation Resource is related to.
-	TargetReference Reference `json:"targetReference,omitempty"`
-	// targetAttachment
-	// The article or artifact that the Citation Resource is related to.
-	TargetAttachment Attachment `json:"targetAttachment,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	RelationshipType *CodeableConcept `json:"relationshiptype,omitempty"`
+	TargetClassifier []*CodeableConcept `json:"targetclassifier,omitempty"`
+	TargetUri *FhirUri `json:"targeturi,omitempty"`
+	TargetIdentifier *Identifier `json:"targetidentifier,omitempty"`
+	TargetReference *Reference `json:"targetreference,omitempty"`
+	TargetAttachment *Attachment `json:"targetattachment,omitempty"`
 }
 
 // NewCitationRelatesTo creates a new CitationRelatesTo instance
-func NewCitationRelatesTo(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	relationshipType CodeableConcept,
-	targetClassifier []CodeableConcept,
-	targetUri FhirUri,
-	targetIdentifier Identifier,
-	targetReference Reference,
-	targetAttachment Attachment,
-) *CitationRelatesTo {
-	return &CitationRelatesTo{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		RelationshipType: relationshipType,
-		TargetClassifier: targetClassifier,
-		TargetUri: targetUri,
-		TargetIdentifier: targetIdentifier,
-		TargetReference: targetReference,
-		TargetAttachment: targetAttachment,
-	}
+func NewCitationRelatesTo() *CitationRelatesTo {
+	return &CitationRelatesTo{}
 }
+
 // FromJSON populates CitationRelatesTo from JSON data
 func (m *CitationRelatesTo) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -726,161 +334,67 @@ func (m *CitationRelatesTo) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CitationRelatesTo
-func (m *CitationRelatesTo) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	relationshipType *CodeableConcept,
-	targetClassifier *[]CodeableConcept,
-	targetUri *FhirUri,
-	targetIdentifier *Identifier,
-	targetReference *Reference,
-	targetAttachment *Attachment,
-) *CitationRelatesTo {
+// Clone creates a deep copy of CitationRelatesTo
+func (m *CitationRelatesTo) Clone() *CitationRelatesTo {
+	if m == nil { return nil }
 	return &CitationRelatesTo{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		RelationshipType: func() CodeableConcept {
-			if relationshipType != nil { return *relationshipType }
-			return m.RelationshipType
-		}(),
-		TargetClassifier: func() []CodeableConcept {
-			if targetClassifier != nil { return *targetClassifier }
-			return m.TargetClassifier
-		}(),
-		TargetUri: func() FhirUri {
-			if targetUri != nil { return *targetUri }
-			return m.TargetUri
-		}(),
-		TargetIdentifier: func() Identifier {
-			if targetIdentifier != nil { return *targetIdentifier }
-			return m.TargetIdentifier
-		}(),
-		TargetReference: func() Reference {
-			if targetReference != nil { return *targetReference }
-			return m.TargetReference
-		}(),
-		TargetAttachment: func() Attachment {
-			if targetAttachment != nil { return *targetAttachment }
-			return m.TargetAttachment
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		RelationshipType: m.RelationshipType.Clone(),
+		TargetClassifier: cloneSlices(m.TargetClassifier),
+		TargetUri: m.TargetUri.Clone(),
+		TargetIdentifier: m.TargetIdentifier.Clone(),
+		TargetReference: m.TargetReference.Clone(),
+		TargetAttachment: m.TargetAttachment.Clone(),
 	}
 }
+
+// Equals checks for equality with another CitationRelatesTo instance
+func (m *CitationRelatesTo) Equals(other *CitationRelatesTo) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.RelationshipType.Equals(other.RelationshipType) { return false }
+	if !compareSlices(m.TargetClassifier, other.TargetClassifier) { return false }
+	if !m.TargetUri.Equals(other.TargetUri) { return false }
+	if !m.TargetIdentifier.Equals(other.TargetIdentifier) { return false }
+	if !m.TargetReference.Equals(other.TargetReference) { return false }
+	if !m.TargetAttachment.Equals(other.TargetAttachment) { return false }
+	return true
+}
+
 // CitationCitedArtifact
 // The article or artifact being described.
 type CitationCitedArtifact struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// A formal identifier that is used to identify this citation when it is represented in other formats, or referenced in a specification, model, design or an instance.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// relatedIdentifier
-	// A formal identifier that is used to identify things closely related to this citation.
-	RelatedIdentifier []Identifier `json:"relatedIdentifier,omitempty"`
-	// dateAccessed
-	// When the cited artifact was accessed.
-	DateAccessed FhirDateTime `json:"dateAccessed,omitempty"`
-	// version
-	// The defined version of the cited artifact.
-	Version CitationVersion `json:"version,omitempty"`
-	// currentState
-	// The status of the cited artifact.
-	CurrentState []CodeableConcept `json:"currentState,omitempty"`
-	// statusDate
-	// An effective date or period for a status of the cited artifact.
-	StatusDate []CitationStatusDate `json:"statusDate,omitempty"`
-	// title
-	// The title details of the article or artifact.
-	Title []CitationTitle `json:"title,omitempty"`
-	// abstract
-	// Summary of the article or artifact.
-	Abstract_ []CitationAbstract `json:"abstract,omitempty"`
-	// part
-	// The component of the article or artifact.
-	Part_ CitationPart `json:"part,omitempty"`
-	// relatesTo
-	// The artifact related to the cited artifact.
-	RelatesTo []CitationRelatesTo `json:"relatesTo,omitempty"`
-	// publicationForm
-	// If multiple, used to represent alternative forms of the article that are not separate citations.
-	PublicationForm []CitationPublicationForm `json:"publicationForm,omitempty"`
-	// webLocation
-	// Used for any URL for the article or artifact cited.
-	WebLocation []CitationWebLocation `json:"webLocation,omitempty"`
-	// classification
-	// The assignment to an organizing scheme.
-	Classification []CitationClassification `json:"classification,omitempty"`
-	// contributorship
-	// This element is used to list authors and other contributors, their contact information, specific contributions, and summary statements.
-	Contributorship CitationContributorship `json:"contributorship,omitempty"`
-	// note
-	// Any additional information or content for the article or artifact.
-	Note []Annotation `json:"note,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	RelatedIdentifier []*Identifier `json:"relatedidentifier,omitempty"`
+	DateAccessed *FhirDateTime `json:"dateaccessed,omitempty"`
+	Version *CitationVersion `json:"version,omitempty"`
+	CurrentState []*CodeableConcept `json:"currentstate,omitempty"`
+	StatusDate []*CitationStatusDate `json:"statusdate,omitempty"`
+	Title []*CitationTitle `json:"title,omitempty"`
+	Abstract_ []*CitationAbstract `json:"abstract,omitempty"`
+	Part_ *CitationPart `json:"part,omitempty"`
+	RelatesTo []*CitationRelatesTo `json:"relatesto,omitempty"`
+	PublicationForm []*CitationPublicationForm `json:"publicationform,omitempty"`
+	WebLocation []*CitationWebLocation `json:"weblocation,omitempty"`
+	Classification []*CitationClassification `json:"classification,omitempty"`
+	Contributorship *CitationContributorship `json:"contributorship,omitempty"`
+	Note []*Annotation `json:"note,omitempty"`
 }
 
 // NewCitationCitedArtifact creates a new CitationCitedArtifact instance
-func NewCitationCitedArtifact(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	relatedIdentifier []Identifier,
-	dateAccessed FhirDateTime,
-	version CitationVersion,
-	currentState []CodeableConcept,
-	statusDate []CitationStatusDate,
-	title []CitationTitle,
-	abstract_ []CitationAbstract,
-	part_ CitationPart,
-	relatesTo []CitationRelatesTo,
-	publicationForm []CitationPublicationForm,
-	webLocation []CitationWebLocation,
-	classification []CitationClassification,
-	contributorship CitationContributorship,
-	note []Annotation,
-) *CitationCitedArtifact {
-	return &CitationCitedArtifact{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		RelatedIdentifier: relatedIdentifier,
-		DateAccessed: dateAccessed,
-		Version: version,
-		CurrentState: currentState,
-		StatusDate: statusDate,
-		Title: title,
-		Abstract_: abstract_,
-		Part_: part_,
-		RelatesTo: relatesTo,
-		PublicationForm: publicationForm,
-		WebLocation: webLocation,
-		Classification: classification,
-		Contributorship: contributorship,
-		Note: note,
-	}
+func NewCitationCitedArtifact() *CitationCitedArtifact {
+	return &CitationCitedArtifact{}
 }
+
 // FromJSON populates CitationCitedArtifact from JSON data
 func (m *CitationCitedArtifact) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -891,141 +405,72 @@ func (m *CitationCitedArtifact) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CitationCitedArtifact
-func (m *CitationCitedArtifact) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	relatedIdentifier *[]Identifier,
-	dateAccessed *FhirDateTime,
-	version *CitationVersion,
-	currentState *[]CodeableConcept,
-	statusDate *[]CitationStatusDate,
-	title *[]CitationTitle,
-	abstract_ *[]CitationAbstract,
-	part_ *CitationPart,
-	relatesTo *[]CitationRelatesTo,
-	publicationForm *[]CitationPublicationForm,
-	webLocation *[]CitationWebLocation,
-	classification *[]CitationClassification,
-	contributorship *CitationContributorship,
-	note *[]Annotation,
-) *CitationCitedArtifact {
+// Clone creates a deep copy of CitationCitedArtifact
+func (m *CitationCitedArtifact) Clone() *CitationCitedArtifact {
+	if m == nil { return nil }
 	return &CitationCitedArtifact{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		RelatedIdentifier: func() []Identifier {
-			if relatedIdentifier != nil { return *relatedIdentifier }
-			return m.RelatedIdentifier
-		}(),
-		DateAccessed: func() FhirDateTime {
-			if dateAccessed != nil { return *dateAccessed }
-			return m.DateAccessed
-		}(),
-		Version: func() CitationVersion {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		CurrentState: func() []CodeableConcept {
-			if currentState != nil { return *currentState }
-			return m.CurrentState
-		}(),
-		StatusDate: func() []CitationStatusDate {
-			if statusDate != nil { return *statusDate }
-			return m.StatusDate
-		}(),
-		Title: func() []CitationTitle {
-			if title != nil { return *title }
-			return m.Title
-		}(),
-		Abstract_: func() []CitationAbstract {
-			if abstract_ != nil { return *abstract_ }
-			return m.Abstract_
-		}(),
-		Part_: func() CitationPart {
-			if part_ != nil { return *part_ }
-			return m.Part_
-		}(),
-		RelatesTo: func() []CitationRelatesTo {
-			if relatesTo != nil { return *relatesTo }
-			return m.RelatesTo
-		}(),
-		PublicationForm: func() []CitationPublicationForm {
-			if publicationForm != nil { return *publicationForm }
-			return m.PublicationForm
-		}(),
-		WebLocation: func() []CitationWebLocation {
-			if webLocation != nil { return *webLocation }
-			return m.WebLocation
-		}(),
-		Classification: func() []CitationClassification {
-			if classification != nil { return *classification }
-			return m.Classification
-		}(),
-		Contributorship: func() CitationContributorship {
-			if contributorship != nil { return *contributorship }
-			return m.Contributorship
-		}(),
-		Note: func() []Annotation {
-			if note != nil { return *note }
-			return m.Note
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		RelatedIdentifier: cloneSlices(m.RelatedIdentifier),
+		DateAccessed: m.DateAccessed.Clone(),
+		Version: m.Version.Clone(),
+		CurrentState: cloneSlices(m.CurrentState),
+		StatusDate: cloneSlices(m.StatusDate),
+		Title: cloneSlices(m.Title),
+		Abstract_: cloneSlices(m.Abstract_),
+		Part_: m.Part_.Clone(),
+		RelatesTo: cloneSlices(m.RelatesTo),
+		PublicationForm: cloneSlices(m.PublicationForm),
+		WebLocation: cloneSlices(m.WebLocation),
+		Classification: cloneSlices(m.Classification),
+		Contributorship: m.Contributorship.Clone(),
+		Note: cloneSlices(m.Note),
 	}
 }
+
+// Equals checks for equality with another CitationCitedArtifact instance
+func (m *CitationCitedArtifact) Equals(other *CitationCitedArtifact) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !compareSlices(m.RelatedIdentifier, other.RelatedIdentifier) { return false }
+	if !m.DateAccessed.Equals(other.DateAccessed) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !compareSlices(m.CurrentState, other.CurrentState) { return false }
+	if !compareSlices(m.StatusDate, other.StatusDate) { return false }
+	if !compareSlices(m.Title, other.Title) { return false }
+	if !compareSlices(m.Abstract_, other.Abstract_) { return false }
+	if !m.Part_.Equals(other.Part_) { return false }
+	if !compareSlices(m.RelatesTo, other.RelatesTo) { return false }
+	if !compareSlices(m.PublicationForm, other.PublicationForm) { return false }
+	if !compareSlices(m.WebLocation, other.WebLocation) { return false }
+	if !compareSlices(m.Classification, other.Classification) { return false }
+	if !m.Contributorship.Equals(other.Contributorship) { return false }
+	if !compareSlices(m.Note, other.Note) { return false }
+	return true
+}
+
 // CitationVersion
 // The defined version of the cited artifact.
 type CitationVersion struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// value
-	// The version number or other version identifier.
-	Value FhirString `json:"value,omitempty"`
-	// baseCitation
-	// Citation for the main version of the cited artifact.
-	BaseCitation Reference `json:"baseCitation,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Value *FhirString `json:"value,omitempty"`
+	BaseCitation *Reference `json:"basecitation,omitempty"`
 }
 
 // NewCitationVersion creates a new CitationVersion instance
-func NewCitationVersion(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	value FhirString,
-	baseCitation Reference,
-) *CitationVersion {
-	return &CitationVersion{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Value: value,
-		BaseCitation: baseCitation,
-	}
+func NewCitationVersion() *CitationVersion {
+	return &CitationVersion{}
 }
+
 // FromJSON populates CitationVersion from JSON data
 func (m *CitationVersion) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1036,81 +481,47 @@ func (m *CitationVersion) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CitationVersion
-func (m *CitationVersion) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	value *FhirString,
-	baseCitation *Reference,
-) *CitationVersion {
+// Clone creates a deep copy of CitationVersion
+func (m *CitationVersion) Clone() *CitationVersion {
+	if m == nil { return nil }
 	return &CitationVersion{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Value: func() FhirString {
-			if value != nil { return *value }
-			return m.Value
-		}(),
-		BaseCitation: func() Reference {
-			if baseCitation != nil { return *baseCitation }
-			return m.BaseCitation
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Value: m.Value.Clone(),
+		BaseCitation: m.BaseCitation.Clone(),
 	}
 }
+
+// Equals checks for equality with another CitationVersion instance
+func (m *CitationVersion) Equals(other *CitationVersion) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Value.Equals(other.Value) { return false }
+	if !m.BaseCitation.Equals(other.BaseCitation) { return false }
+	return true
+}
+
 // CitationStatusDate1
 // An effective date or period for a status of the cited artifact.
 type CitationStatusDate1 struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// activity
-	// Classification of the status.
-	Activity CodeableConcept `json:"activity,omitempty"`
-	// actual
-	// Either occurred or expected.
-	Actual FhirBoolean `json:"actual,omitempty"`
-	// period
-	// When the status started and/or ended.
-	Period Period `json:"period,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Activity *CodeableConcept `json:"activity,omitempty"`
+	Actual *FhirBoolean `json:"actual,omitempty"`
+	Period *Period `json:"period,omitempty"`
 }
 
 // NewCitationStatusDate1 creates a new CitationStatusDate1 instance
-func NewCitationStatusDate1(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	activity CodeableConcept,
-	actual FhirBoolean,
-	period Period,
-) *CitationStatusDate1 {
-	return &CitationStatusDate1{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Activity: activity,
-		Actual: actual,
-		Period: period,
-	}
+func NewCitationStatusDate1() *CitationStatusDate1 {
+	return &CitationStatusDate1{}
 }
+
 // FromJSON populates CitationStatusDate1 from JSON data
 func (m *CitationStatusDate1) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1121,86 +532,49 @@ func (m *CitationStatusDate1) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CitationStatusDate1
-func (m *CitationStatusDate1) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	activity *CodeableConcept,
-	actual *FhirBoolean,
-	period *Period,
-) *CitationStatusDate1 {
+// Clone creates a deep copy of CitationStatusDate1
+func (m *CitationStatusDate1) Clone() *CitationStatusDate1 {
+	if m == nil { return nil }
 	return &CitationStatusDate1{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Activity: func() CodeableConcept {
-			if activity != nil { return *activity }
-			return m.Activity
-		}(),
-		Actual: func() FhirBoolean {
-			if actual != nil { return *actual }
-			return m.Actual
-		}(),
-		Period: func() Period {
-			if period != nil { return *period }
-			return m.Period
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Activity: m.Activity.Clone(),
+		Actual: m.Actual.Clone(),
+		Period: m.Period.Clone(),
 	}
 }
+
+// Equals checks for equality with another CitationStatusDate1 instance
+func (m *CitationStatusDate1) Equals(other *CitationStatusDate1) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Activity.Equals(other.Activity) { return false }
+	if !m.Actual.Equals(other.Actual) { return false }
+	if !m.Period.Equals(other.Period) { return false }
+	return true
+}
+
 // CitationTitle
 // The title details of the article or artifact.
 type CitationTitle struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// Used to express the reason or specific aspect for the title.
-	Type_ []CodeableConcept `json:"type,omitempty"`
-	// language
-	// Used to express the specific language.
-	Language CodeableConcept `json:"language,omitempty"`
-	// text
-	// The title of the article or artifact.
-	Text FhirMarkdown `json:"text,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type []*CodeableConcept `json:"type,omitempty"`
+	Language *CodeableConcept `json:"language,omitempty"`
+	Text *FhirMarkdown `json:"text,omitempty"`
 }
 
 // NewCitationTitle creates a new CitationTitle instance
-func NewCitationTitle(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ []CodeableConcept,
-	language CodeableConcept,
-	text FhirMarkdown,
-) *CitationTitle {
-	return &CitationTitle{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Language: language,
-		Text: text,
-	}
+func NewCitationTitle() *CitationTitle {
+	return &CitationTitle{}
 }
+
 // FromJSON populates CitationTitle from JSON data
 func (m *CitationTitle) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1211,91 +585,50 @@ func (m *CitationTitle) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CitationTitle
-func (m *CitationTitle) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *[]CodeableConcept,
-	language *CodeableConcept,
-	text *FhirMarkdown,
-) *CitationTitle {
+// Clone creates a deep copy of CitationTitle
+func (m *CitationTitle) Clone() *CitationTitle {
+	if m == nil { return nil }
 	return &CitationTitle{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() []CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Language: func() CodeableConcept {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() FhirMarkdown {
-			if text != nil { return *text }
-			return m.Text
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: cloneSlices(m.Type),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
 	}
 }
+
+// Equals checks for equality with another CitationTitle instance
+func (m *CitationTitle) Equals(other *CitationTitle) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Type, other.Type) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	return true
+}
+
 // CitationAbstract
 // Summary of the article or artifact.
 type CitationAbstract struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// Used to express the reason or specific aspect for the abstract.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// language
-	// Used to express the specific language.
-	Language CodeableConcept `json:"language,omitempty"`
-	// text
-	// Abstract content.
-	Text FhirMarkdown `json:"text,omitempty"`
-	// copyright
-	// Copyright notice for the abstract.
-	Copyright FhirMarkdown `json:"copyright,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Language *CodeableConcept `json:"language,omitempty"`
+	Text *FhirMarkdown `json:"text,omitempty"`
+	Copyright *FhirMarkdown `json:"copyright,omitempty"`
 }
 
 // NewCitationAbstract creates a new CitationAbstract instance
-func NewCitationAbstract(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	language CodeableConcept,
-	text FhirMarkdown,
-	copyright FhirMarkdown,
-) *CitationAbstract {
-	return &CitationAbstract{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Language: language,
-		Text: text,
-		Copyright: copyright,
-	}
+func NewCitationAbstract() *CitationAbstract {
+	return &CitationAbstract{}
 }
+
 // FromJSON populates CitationAbstract from JSON data
 func (m *CitationAbstract) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1306,91 +639,51 @@ func (m *CitationAbstract) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CitationAbstract
-func (m *CitationAbstract) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	language *CodeableConcept,
-	text *FhirMarkdown,
-	copyright *FhirMarkdown,
-) *CitationAbstract {
+// Clone creates a deep copy of CitationAbstract
+func (m *CitationAbstract) Clone() *CitationAbstract {
+	if m == nil { return nil }
 	return &CitationAbstract{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Language: func() CodeableConcept {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() FhirMarkdown {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Copyright: func() FhirMarkdown {
-			if copyright != nil { return *copyright }
-			return m.Copyright
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Copyright: m.Copyright.Clone(),
 	}
 }
+
+// Equals checks for equality with another CitationAbstract instance
+func (m *CitationAbstract) Equals(other *CitationAbstract) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !m.Copyright.Equals(other.Copyright) { return false }
+	return true
+}
+
 // CitationPart
 // The component of the article or artifact.
 type CitationPart struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// The kind of component.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// value
-	// The specification of the component.
-	Value FhirString `json:"value,omitempty"`
-	// baseCitation
-	// The citation for the full article or artifact.
-	BaseCitation Reference `json:"baseCitation,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Value *FhirString `json:"value,omitempty"`
+	BaseCitation *Reference `json:"basecitation,omitempty"`
 }
 
 // NewCitationPart creates a new CitationPart instance
-func NewCitationPart(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	value FhirString,
-	baseCitation Reference,
-) *CitationPart {
-	return &CitationPart{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Value: value,
-		BaseCitation: baseCitation,
-	}
+func NewCitationPart() *CitationPart {
+	return &CitationPart{}
 }
+
 // FromJSON populates CitationPart from JSON data
 func (m *CitationPart) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1401,101 +694,52 @@ func (m *CitationPart) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CitationPart
-func (m *CitationPart) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	value *FhirString,
-	baseCitation *Reference,
-) *CitationPart {
+// Clone creates a deep copy of CitationPart
+func (m *CitationPart) Clone() *CitationPart {
+	if m == nil { return nil }
 	return &CitationPart{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Value: func() FhirString {
-			if value != nil { return *value }
-			return m.Value
-		}(),
-		BaseCitation: func() Reference {
-			if baseCitation != nil { return *baseCitation }
-			return m.BaseCitation
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Value: m.Value.Clone(),
+		BaseCitation: m.BaseCitation.Clone(),
 	}
 }
+
+// Equals checks for equality with another CitationPart instance
+func (m *CitationPart) Equals(other *CitationPart) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Value.Equals(other.Value) { return false }
+	if !m.BaseCitation.Equals(other.BaseCitation) { return false }
+	return true
+}
+
 // CitationRelatesTo1
 // The artifact related to the cited artifact.
 type CitationRelatesTo1 struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// relationshipType
-	// How the cited artifact relates to the target artifact.
-	RelationshipType CodeableConcept `json:"relationshipType,omitempty"`
-	// targetClassifier
-	// The clasification of the related artifact.
-	TargetClassifier []CodeableConcept `json:"targetClassifier,omitempty"`
-	// targetUri
-	// The article or artifact that the cited artifact is related to.
-	TargetUri FhirUri `json:"targetUri,omitempty"`
-	// targetIdentifier
-	// The article or artifact that the cited artifact is related to.
-	TargetIdentifier Identifier `json:"targetIdentifier,omitempty"`
-	// targetReference
-	// The article or artifact that the cited artifact is related to.
-	TargetReference Reference `json:"targetReference,omitempty"`
-	// targetAttachment
-	// The article or artifact that the cited artifact is related to.
-	TargetAttachment Attachment `json:"targetAttachment,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	RelationshipType *CodeableConcept `json:"relationshiptype,omitempty"`
+	TargetClassifier []*CodeableConcept `json:"targetclassifier,omitempty"`
+	TargetUri *FhirUri `json:"targeturi,omitempty"`
+	TargetIdentifier *Identifier `json:"targetidentifier,omitempty"`
+	TargetReference *Reference `json:"targetreference,omitempty"`
+	TargetAttachment *Attachment `json:"targetattachment,omitempty"`
 }
 
 // NewCitationRelatesTo1 creates a new CitationRelatesTo1 instance
-func NewCitationRelatesTo1(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	relationshipType CodeableConcept,
-	targetClassifier []CodeableConcept,
-	targetUri FhirUri,
-	targetIdentifier Identifier,
-	targetReference Reference,
-	targetAttachment Attachment,
-) *CitationRelatesTo1 {
-	return &CitationRelatesTo1{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		RelationshipType: relationshipType,
-		TargetClassifier: targetClassifier,
-		TargetUri: targetUri,
-		TargetIdentifier: targetIdentifier,
-		TargetReference: targetReference,
-		TargetAttachment: targetAttachment,
-	}
+func NewCitationRelatesTo1() *CitationRelatesTo1 {
+	return &CitationRelatesTo1{}
 }
+
 // FromJSON populates CitationRelatesTo1 from JSON data
 func (m *CitationRelatesTo1) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1506,141 +750,63 @@ func (m *CitationRelatesTo1) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CitationRelatesTo1
-func (m *CitationRelatesTo1) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	relationshipType *CodeableConcept,
-	targetClassifier *[]CodeableConcept,
-	targetUri *FhirUri,
-	targetIdentifier *Identifier,
-	targetReference *Reference,
-	targetAttachment *Attachment,
-) *CitationRelatesTo1 {
+// Clone creates a deep copy of CitationRelatesTo1
+func (m *CitationRelatesTo1) Clone() *CitationRelatesTo1 {
+	if m == nil { return nil }
 	return &CitationRelatesTo1{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		RelationshipType: func() CodeableConcept {
-			if relationshipType != nil { return *relationshipType }
-			return m.RelationshipType
-		}(),
-		TargetClassifier: func() []CodeableConcept {
-			if targetClassifier != nil { return *targetClassifier }
-			return m.TargetClassifier
-		}(),
-		TargetUri: func() FhirUri {
-			if targetUri != nil { return *targetUri }
-			return m.TargetUri
-		}(),
-		TargetIdentifier: func() Identifier {
-			if targetIdentifier != nil { return *targetIdentifier }
-			return m.TargetIdentifier
-		}(),
-		TargetReference: func() Reference {
-			if targetReference != nil { return *targetReference }
-			return m.TargetReference
-		}(),
-		TargetAttachment: func() Attachment {
-			if targetAttachment != nil { return *targetAttachment }
-			return m.TargetAttachment
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		RelationshipType: m.RelationshipType.Clone(),
+		TargetClassifier: cloneSlices(m.TargetClassifier),
+		TargetUri: m.TargetUri.Clone(),
+		TargetIdentifier: m.TargetIdentifier.Clone(),
+		TargetReference: m.TargetReference.Clone(),
+		TargetAttachment: m.TargetAttachment.Clone(),
 	}
 }
+
+// Equals checks for equality with another CitationRelatesTo1 instance
+func (m *CitationRelatesTo1) Equals(other *CitationRelatesTo1) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.RelationshipType.Equals(other.RelationshipType) { return false }
+	if !compareSlices(m.TargetClassifier, other.TargetClassifier) { return false }
+	if !m.TargetUri.Equals(other.TargetUri) { return false }
+	if !m.TargetIdentifier.Equals(other.TargetIdentifier) { return false }
+	if !m.TargetReference.Equals(other.TargetReference) { return false }
+	if !m.TargetAttachment.Equals(other.TargetAttachment) { return false }
+	return true
+}
+
 // CitationPublicationForm
 // If multiple, used to represent alternative forms of the article that are not separate citations.
 type CitationPublicationForm struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// publishedIn
-	// The collection the cited article or artifact is published in.
-	PublishedIn CitationPublishedIn `json:"publishedIn,omitempty"`
-	// periodicRelease
-	// The specific issue in which the cited article resides.
-	PeriodicRelease CitationPeriodicRelease `json:"periodicRelease,omitempty"`
-	// articleDate
-	// The date the article was added to the database, or the date the article was released (which may differ from the journal issue publication date).
-	ArticleDate FhirDateTime `json:"articleDate,omitempty"`
-	// lastRevisionDate
-	// The date the article was last revised or updated in the database.
-	LastRevisionDate FhirDateTime `json:"lastRevisionDate,omitempty"`
-	// language
-	// Language in which this form of the article is published.
-	Language []CodeableConcept `json:"language,omitempty"`
-	// accessionNumber
-	// Entry number or identifier for inclusion in a database.
-	AccessionNumber FhirString `json:"accessionNumber,omitempty"`
-	// pageString
-	// Used for full display of pagination.
-	PageString FhirString `json:"pageString,omitempty"`
-	// firstPage
-	// Used for isolated representation of first page.
-	FirstPage FhirString `json:"firstPage,omitempty"`
-	// lastPage
-	// Used for isolated representation of last page.
-	LastPage FhirString `json:"lastPage,omitempty"`
-	// pageCount
-	// Actual or approximate number of pages or screens.
-	PageCount FhirString `json:"pageCount,omitempty"`
-	// copyright
-	// Copyright notice for the full article or artifact.
-	Copyright FhirMarkdown `json:"copyright,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	PublishedIn *CitationPublishedIn `json:"publishedin,omitempty"`
+	PeriodicRelease *CitationPeriodicRelease `json:"periodicrelease,omitempty"`
+	ArticleDate *FhirDateTime `json:"articledate,omitempty"`
+	LastRevisionDate *FhirDateTime `json:"lastrevisiondate,omitempty"`
+	Language []*CodeableConcept `json:"language,omitempty"`
+	AccessionNumber *FhirString `json:"accessionnumber,omitempty"`
+	PageString *FhirString `json:"pagestring,omitempty"`
+	FirstPage *FhirString `json:"firstpage,omitempty"`
+	LastPage *FhirString `json:"lastpage,omitempty"`
+	PageCount *FhirString `json:"pagecount,omitempty"`
+	Copyright *FhirMarkdown `json:"copyright,omitempty"`
 }
 
 // NewCitationPublicationForm creates a new CitationPublicationForm instance
-func NewCitationPublicationForm(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	publishedIn CitationPublishedIn,
-	periodicRelease CitationPeriodicRelease,
-	articleDate FhirDateTime,
-	lastRevisionDate FhirDateTime,
-	language []CodeableConcept,
-	accessionNumber FhirString,
-	pageString FhirString,
-	firstPage FhirString,
-	lastPage FhirString,
-	pageCount FhirString,
-	copyright FhirMarkdown,
-) *CitationPublicationForm {
-	return &CitationPublicationForm{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		PublishedIn: publishedIn,
-		PeriodicRelease: periodicRelease,
-		ArticleDate: articleDate,
-		LastRevisionDate: lastRevisionDate,
-		Language: language,
-		AccessionNumber: accessionNumber,
-		PageString: pageString,
-		FirstPage: firstPage,
-		LastPage: lastPage,
-		PageCount: pageCount,
-		Copyright: copyright,
-	}
+func NewCitationPublicationForm() *CitationPublicationForm {
+	return &CitationPublicationForm{}
 }
+
 // FromJSON populates CitationPublicationForm from JSON data
 func (m *CitationPublicationForm) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1651,136 +817,67 @@ func (m *CitationPublicationForm) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CitationPublicationForm
-func (m *CitationPublicationForm) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	publishedIn *CitationPublishedIn,
-	periodicRelease *CitationPeriodicRelease,
-	articleDate *FhirDateTime,
-	lastRevisionDate *FhirDateTime,
-	language *[]CodeableConcept,
-	accessionNumber *FhirString,
-	pageString *FhirString,
-	firstPage *FhirString,
-	lastPage *FhirString,
-	pageCount *FhirString,
-	copyright *FhirMarkdown,
-) *CitationPublicationForm {
+// Clone creates a deep copy of CitationPublicationForm
+func (m *CitationPublicationForm) Clone() *CitationPublicationForm {
+	if m == nil { return nil }
 	return &CitationPublicationForm{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		PublishedIn: func() CitationPublishedIn {
-			if publishedIn != nil { return *publishedIn }
-			return m.PublishedIn
-		}(),
-		PeriodicRelease: func() CitationPeriodicRelease {
-			if periodicRelease != nil { return *periodicRelease }
-			return m.PeriodicRelease
-		}(),
-		ArticleDate: func() FhirDateTime {
-			if articleDate != nil { return *articleDate }
-			return m.ArticleDate
-		}(),
-		LastRevisionDate: func() FhirDateTime {
-			if lastRevisionDate != nil { return *lastRevisionDate }
-			return m.LastRevisionDate
-		}(),
-		Language: func() []CodeableConcept {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		AccessionNumber: func() FhirString {
-			if accessionNumber != nil { return *accessionNumber }
-			return m.AccessionNumber
-		}(),
-		PageString: func() FhirString {
-			if pageString != nil { return *pageString }
-			return m.PageString
-		}(),
-		FirstPage: func() FhirString {
-			if firstPage != nil { return *firstPage }
-			return m.FirstPage
-		}(),
-		LastPage: func() FhirString {
-			if lastPage != nil { return *lastPage }
-			return m.LastPage
-		}(),
-		PageCount: func() FhirString {
-			if pageCount != nil { return *pageCount }
-			return m.PageCount
-		}(),
-		Copyright: func() FhirMarkdown {
-			if copyright != nil { return *copyright }
-			return m.Copyright
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		PublishedIn: m.PublishedIn.Clone(),
+		PeriodicRelease: m.PeriodicRelease.Clone(),
+		ArticleDate: m.ArticleDate.Clone(),
+		LastRevisionDate: m.LastRevisionDate.Clone(),
+		Language: cloneSlices(m.Language),
+		AccessionNumber: m.AccessionNumber.Clone(),
+		PageString: m.PageString.Clone(),
+		FirstPage: m.FirstPage.Clone(),
+		LastPage: m.LastPage.Clone(),
+		PageCount: m.PageCount.Clone(),
+		Copyright: m.Copyright.Clone(),
 	}
 }
+
+// Equals checks for equality with another CitationPublicationForm instance
+func (m *CitationPublicationForm) Equals(other *CitationPublicationForm) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.PublishedIn.Equals(other.PublishedIn) { return false }
+	if !m.PeriodicRelease.Equals(other.PeriodicRelease) { return false }
+	if !m.ArticleDate.Equals(other.ArticleDate) { return false }
+	if !m.LastRevisionDate.Equals(other.LastRevisionDate) { return false }
+	if !compareSlices(m.Language, other.Language) { return false }
+	if !m.AccessionNumber.Equals(other.AccessionNumber) { return false }
+	if !m.PageString.Equals(other.PageString) { return false }
+	if !m.FirstPage.Equals(other.FirstPage) { return false }
+	if !m.LastPage.Equals(other.LastPage) { return false }
+	if !m.PageCount.Equals(other.PageCount) { return false }
+	if !m.Copyright.Equals(other.Copyright) { return false }
+	return true
+}
+
 // CitationPublishedIn
 // The collection the cited article or artifact is published in.
 type CitationPublishedIn struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// Kind of container (e.g. Periodical, database, or book).
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// identifier
-	// Journal identifiers include ISSN, ISO Abbreviation and NLMuniqueID; Book identifiers include ISBN.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// title
-	// Name of the database or title of the book or journal.
-	Title FhirString `json:"title,omitempty"`
-	// publisher
-	// Name of the publisher.
-	Publisher Reference `json:"publisher,omitempty"`
-	// publisherLocation
-	// Geographic location of the publisher.
-	PublisherLocation FhirString `json:"publisherLocation,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Title *FhirString `json:"title,omitempty"`
+	Publisher *Reference `json:"publisher,omitempty"`
+	PublisherLocation *FhirString `json:"publisherlocation,omitempty"`
 }
 
 // NewCitationPublishedIn creates a new CitationPublishedIn instance
-func NewCitationPublishedIn(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	identifier []Identifier,
-	title FhirString,
-	publisher Reference,
-	publisherLocation FhirString,
-) *CitationPublishedIn {
-	return &CitationPublishedIn{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Identifier: identifier,
-		Title: title,
-		Publisher: publisher,
-		PublisherLocation: publisherLocation,
-	}
+func NewCitationPublishedIn() *CitationPublishedIn {
+	return &CitationPublishedIn{}
 }
+
 // FromJSON populates CitationPublishedIn from JSON data
 func (m *CitationPublishedIn) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1791,101 +888,54 @@ func (m *CitationPublishedIn) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CitationPublishedIn
-func (m *CitationPublishedIn) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	identifier *[]Identifier,
-	title *FhirString,
-	publisher *Reference,
-	publisherLocation *FhirString,
-) *CitationPublishedIn {
+// Clone creates a deep copy of CitationPublishedIn
+func (m *CitationPublishedIn) Clone() *CitationPublishedIn {
+	if m == nil { return nil }
 	return &CitationPublishedIn{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Title: func() FhirString {
-			if title != nil { return *title }
-			return m.Title
-		}(),
-		Publisher: func() Reference {
-			if publisher != nil { return *publisher }
-			return m.Publisher
-		}(),
-		PublisherLocation: func() FhirString {
-			if publisherLocation != nil { return *publisherLocation }
-			return m.PublisherLocation
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Identifier: cloneSlices(m.Identifier),
+		Title: m.Title.Clone(),
+		Publisher: m.Publisher.Clone(),
+		PublisherLocation: m.PublisherLocation.Clone(),
 	}
 }
+
+// Equals checks for equality with another CitationPublishedIn instance
+func (m *CitationPublishedIn) Equals(other *CitationPublishedIn) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Title.Equals(other.Title) { return false }
+	if !m.Publisher.Equals(other.Publisher) { return false }
+	if !m.PublisherLocation.Equals(other.PublisherLocation) { return false }
+	return true
+}
+
 // CitationPeriodicRelease
 // The specific issue in which the cited article resides.
 type CitationPeriodicRelease struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// citedMedium
-	// Describes the form of the medium cited. Common codes are "Internet" or "Print".
-	CitedMedium CodeableConcept `json:"citedMedium,omitempty"`
-	// volume
-	// Volume number of journal in which the article is published.
-	Volume FhirString `json:"volume,omitempty"`
-	// issue
-	// Issue, part or supplement of journal in which the article is published.
-	Issue FhirString `json:"issue,omitempty"`
-	// dateOfPublication
-	// Defining the date on which the issue of the journal was published.
-	DateOfPublication CitationDateOfPublication `json:"dateOfPublication,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	CitedMedium *CodeableConcept `json:"citedmedium,omitempty"`
+	Volume *FhirString `json:"volume,omitempty"`
+	Issue *FhirString `json:"issue,omitempty"`
+	DateOfPublication *CitationDateOfPublication `json:"dateofpublication,omitempty"`
 }
 
 // NewCitationPeriodicRelease creates a new CitationPeriodicRelease instance
-func NewCitationPeriodicRelease(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	citedMedium CodeableConcept,
-	volume FhirString,
-	issue FhirString,
-	dateOfPublication CitationDateOfPublication,
-) *CitationPeriodicRelease {
-	return &CitationPeriodicRelease{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		CitedMedium: citedMedium,
-		Volume: volume,
-		Issue: issue,
-		DateOfPublication: dateOfPublication,
-	}
+func NewCitationPeriodicRelease() *CitationPeriodicRelease {
+	return &CitationPeriodicRelease{}
 }
+
 // FromJSON populates CitationPeriodicRelease from JSON data
 func (m *CitationPeriodicRelease) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1896,106 +946,54 @@ func (m *CitationPeriodicRelease) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CitationPeriodicRelease
-func (m *CitationPeriodicRelease) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	citedMedium *CodeableConcept,
-	volume *FhirString,
-	issue *FhirString,
-	dateOfPublication *CitationDateOfPublication,
-) *CitationPeriodicRelease {
+// Clone creates a deep copy of CitationPeriodicRelease
+func (m *CitationPeriodicRelease) Clone() *CitationPeriodicRelease {
+	if m == nil { return nil }
 	return &CitationPeriodicRelease{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		CitedMedium: func() CodeableConcept {
-			if citedMedium != nil { return *citedMedium }
-			return m.CitedMedium
-		}(),
-		Volume: func() FhirString {
-			if volume != nil { return *volume }
-			return m.Volume
-		}(),
-		Issue: func() FhirString {
-			if issue != nil { return *issue }
-			return m.Issue
-		}(),
-		DateOfPublication: func() CitationDateOfPublication {
-			if dateOfPublication != nil { return *dateOfPublication }
-			return m.DateOfPublication
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		CitedMedium: m.CitedMedium.Clone(),
+		Volume: m.Volume.Clone(),
+		Issue: m.Issue.Clone(),
+		DateOfPublication: m.DateOfPublication.Clone(),
 	}
 }
+
+// Equals checks for equality with another CitationPeriodicRelease instance
+func (m *CitationPeriodicRelease) Equals(other *CitationPeriodicRelease) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.CitedMedium.Equals(other.CitedMedium) { return false }
+	if !m.Volume.Equals(other.Volume) { return false }
+	if !m.Issue.Equals(other.Issue) { return false }
+	if !m.DateOfPublication.Equals(other.DateOfPublication) { return false }
+	return true
+}
+
 // CitationDateOfPublication
 // Defining the date on which the issue of the journal was published.
 type CitationDateOfPublication struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// date
-	// Date on which the issue of the journal was published.
-	Date FhirDate `json:"date,omitempty"`
-	// year
-	// Year on which the issue of the journal was published.
-	Year FhirString `json:"year,omitempty"`
-	// month
-	// Month on which the issue of the journal was published.
-	Month FhirString `json:"month,omitempty"`
-	// day
-	// Day on which the issue of the journal was published.
-	Day FhirString `json:"day,omitempty"`
-	// season
-	// Spring, Summer, Fall/Autumn, Winter.
-	Season FhirString `json:"season,omitempty"`
-	// text
-	// Text representation of the date of which the issue of the journal was published.
-	Text FhirString `json:"text,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Date *FhirDate `json:"date,omitempty"`
+	Year *FhirString `json:"year,omitempty"`
+	Month *FhirString `json:"month,omitempty"`
+	Day *FhirString `json:"day,omitempty"`
+	Season *FhirString `json:"season,omitempty"`
+	Text *FhirString `json:"text,omitempty"`
 }
 
 // NewCitationDateOfPublication creates a new CitationDateOfPublication instance
-func NewCitationDateOfPublication(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	date FhirDate,
-	year FhirString,
-	month FhirString,
-	day FhirString,
-	season FhirString,
-	text FhirString,
-) *CitationDateOfPublication {
-	return &CitationDateOfPublication{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Date: date,
-		Year: year,
-		Month: month,
-		Day: day,
-		Season: season,
-		Text: text,
-	}
+func NewCitationDateOfPublication() *CitationDateOfPublication {
+	return &CitationDateOfPublication{}
 }
+
 // FromJSON populates CitationDateOfPublication from JSON data
 func (m *CitationDateOfPublication) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -2006,96 +1004,54 @@ func (m *CitationDateOfPublication) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CitationDateOfPublication
-func (m *CitationDateOfPublication) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	date *FhirDate,
-	year *FhirString,
-	month *FhirString,
-	day *FhirString,
-	season *FhirString,
-	text *FhirString,
-) *CitationDateOfPublication {
+// Clone creates a deep copy of CitationDateOfPublication
+func (m *CitationDateOfPublication) Clone() *CitationDateOfPublication {
+	if m == nil { return nil }
 	return &CitationDateOfPublication{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Date: func() FhirDate {
-			if date != nil { return *date }
-			return m.Date
-		}(),
-		Year: func() FhirString {
-			if year != nil { return *year }
-			return m.Year
-		}(),
-		Month: func() FhirString {
-			if month != nil { return *month }
-			return m.Month
-		}(),
-		Day: func() FhirString {
-			if day != nil { return *day }
-			return m.Day
-		}(),
-		Season: func() FhirString {
-			if season != nil { return *season }
-			return m.Season
-		}(),
-		Text: func() FhirString {
-			if text != nil { return *text }
-			return m.Text
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Date: m.Date.Clone(),
+		Year: m.Year.Clone(),
+		Month: m.Month.Clone(),
+		Day: m.Day.Clone(),
+		Season: m.Season.Clone(),
+		Text: m.Text.Clone(),
 	}
 }
+
+// Equals checks for equality with another CitationDateOfPublication instance
+func (m *CitationDateOfPublication) Equals(other *CitationDateOfPublication) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Date.Equals(other.Date) { return false }
+	if !m.Year.Equals(other.Year) { return false }
+	if !m.Month.Equals(other.Month) { return false }
+	if !m.Day.Equals(other.Day) { return false }
+	if !m.Season.Equals(other.Season) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	return true
+}
+
 // CitationWebLocation
 // Used for any URL for the article or artifact cited.
 type CitationWebLocation struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// Code the reason for different URLs, e.g. abstract and full-text.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// url
-	// The specific URL.
-	Url FhirUri `json:"url,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Url *FhirUri `json:"url,omitempty"`
 }
 
 // NewCitationWebLocation creates a new CitationWebLocation instance
-func NewCitationWebLocation(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	url FhirUri,
-) *CitationWebLocation {
-	return &CitationWebLocation{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Url: url,
-	}
+func NewCitationWebLocation() *CitationWebLocation {
+	return &CitationWebLocation{}
 }
+
 // FromJSON populates CitationWebLocation from JSON data
 func (m *CitationWebLocation) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -2106,81 +1062,47 @@ func (m *CitationWebLocation) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CitationWebLocation
-func (m *CitationWebLocation) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	url *FhirUri,
-) *CitationWebLocation {
+// Clone creates a deep copy of CitationWebLocation
+func (m *CitationWebLocation) Clone() *CitationWebLocation {
+	if m == nil { return nil }
 	return &CitationWebLocation{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Url: func() FhirUri {
-			if url != nil { return *url }
-			return m.Url
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Url: m.Url.Clone(),
 	}
 }
+
+// Equals checks for equality with another CitationWebLocation instance
+func (m *CitationWebLocation) Equals(other *CitationWebLocation) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	return true
+}
+
 // CitationClassification1
 // The assignment to an organizing scheme.
 type CitationClassification1 struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// The kind of classifier (e.g. publication type, keyword).
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// classifier
-	// The specific classification value.
-	Classifier []CodeableConcept `json:"classifier,omitempty"`
-	// whoClassified
-	// Provenance and copyright of classification.
-	WhoClassified CitationWhoClassified `json:"whoClassified,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Classifier []*CodeableConcept `json:"classifier,omitempty"`
+	WhoClassified *CitationWhoClassified `json:"whoclassified,omitempty"`
 }
 
 // NewCitationClassification1 creates a new CitationClassification1 instance
-func NewCitationClassification1(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	classifier []CodeableConcept,
-	whoClassified CitationWhoClassified,
-) *CitationClassification1 {
-	return &CitationClassification1{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Classifier: classifier,
-		WhoClassified: whoClassified,
-	}
+func NewCitationClassification1() *CitationClassification1 {
+	return &CitationClassification1{}
 }
+
 // FromJSON populates CitationClassification1 from JSON data
 func (m *CitationClassification1) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -2191,96 +1113,51 @@ func (m *CitationClassification1) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CitationClassification1
-func (m *CitationClassification1) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	classifier *[]CodeableConcept,
-	whoClassified *CitationWhoClassified,
-) *CitationClassification1 {
+// Clone creates a deep copy of CitationClassification1
+func (m *CitationClassification1) Clone() *CitationClassification1 {
+	if m == nil { return nil }
 	return &CitationClassification1{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Classifier: func() []CodeableConcept {
-			if classifier != nil { return *classifier }
-			return m.Classifier
-		}(),
-		WhoClassified: func() CitationWhoClassified {
-			if whoClassified != nil { return *whoClassified }
-			return m.WhoClassified
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Classifier: cloneSlices(m.Classifier),
+		WhoClassified: m.WhoClassified.Clone(),
 	}
 }
+
+// Equals checks for equality with another CitationClassification1 instance
+func (m *CitationClassification1) Equals(other *CitationClassification1) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !compareSlices(m.Classifier, other.Classifier) { return false }
+	if !m.WhoClassified.Equals(other.WhoClassified) { return false }
+	return true
+}
+
 // CitationWhoClassified
 // Provenance and copyright of classification.
 type CitationWhoClassified struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// person
-	// Person who created the classification.
-	Person Reference `json:"person,omitempty"`
-	// organization
-	// Organization who created the classification.
-	Organization Reference `json:"organization,omitempty"`
-	// publisher
-	// The publisher of the classification, not the publisher of the article or artifact being cited.
-	Publisher Reference `json:"publisher,omitempty"`
-	// classifierCopyright
-	// Rights management statement for the classification.
-	ClassifierCopyright FhirString `json:"classifierCopyright,omitempty"`
-	// freeToShare
-	// Acceptable to re-use the classification.
-	FreeToShare FhirBoolean `json:"freeToShare,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Person *Reference `json:"person,omitempty"`
+	Organization *Reference `json:"organization,omitempty"`
+	Publisher *Reference `json:"publisher,omitempty"`
+	ClassifierCopyright *FhirString `json:"classifiercopyright,omitempty"`
+	FreeToShare *FhirBoolean `json:"freetoshare,omitempty"`
 }
 
 // NewCitationWhoClassified creates a new CitationWhoClassified instance
-func NewCitationWhoClassified(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	person Reference,
-	organization Reference,
-	publisher Reference,
-	classifierCopyright FhirString,
-	freeToShare FhirBoolean,
-) *CitationWhoClassified {
-	return &CitationWhoClassified{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Person: person,
-		Organization: organization,
-		Publisher: publisher,
-		ClassifierCopyright: classifierCopyright,
-		FreeToShare: freeToShare,
-	}
+func NewCitationWhoClassified() *CitationWhoClassified {
+	return &CitationWhoClassified{}
 }
+
 // FromJSON populates CitationWhoClassified from JSON data
 func (m *CitationWhoClassified) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -2291,96 +1168,53 @@ func (m *CitationWhoClassified) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CitationWhoClassified
-func (m *CitationWhoClassified) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	person *Reference,
-	organization *Reference,
-	publisher *Reference,
-	classifierCopyright *FhirString,
-	freeToShare *FhirBoolean,
-) *CitationWhoClassified {
+// Clone creates a deep copy of CitationWhoClassified
+func (m *CitationWhoClassified) Clone() *CitationWhoClassified {
+	if m == nil { return nil }
 	return &CitationWhoClassified{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Person: func() Reference {
-			if person != nil { return *person }
-			return m.Person
-		}(),
-		Organization: func() Reference {
-			if organization != nil { return *organization }
-			return m.Organization
-		}(),
-		Publisher: func() Reference {
-			if publisher != nil { return *publisher }
-			return m.Publisher
-		}(),
-		ClassifierCopyright: func() FhirString {
-			if classifierCopyright != nil { return *classifierCopyright }
-			return m.ClassifierCopyright
-		}(),
-		FreeToShare: func() FhirBoolean {
-			if freeToShare != nil { return *freeToShare }
-			return m.FreeToShare
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Person: m.Person.Clone(),
+		Organization: m.Organization.Clone(),
+		Publisher: m.Publisher.Clone(),
+		ClassifierCopyright: m.ClassifierCopyright.Clone(),
+		FreeToShare: m.FreeToShare.Clone(),
 	}
 }
+
+// Equals checks for equality with another CitationWhoClassified instance
+func (m *CitationWhoClassified) Equals(other *CitationWhoClassified) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Person.Equals(other.Person) { return false }
+	if !m.Organization.Equals(other.Organization) { return false }
+	if !m.Publisher.Equals(other.Publisher) { return false }
+	if !m.ClassifierCopyright.Equals(other.ClassifierCopyright) { return false }
+	if !m.FreeToShare.Equals(other.FreeToShare) { return false }
+	return true
+}
+
 // CitationContributorship
 // This element is used to list authors and other contributors, their contact information, specific contributions, and summary statements.
 type CitationContributorship struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// complete
-	// Indicates if the list includes all authors and/or contributors.
-	Complete FhirBoolean `json:"complete,omitempty"`
-	// entry
-	// An individual entity named in the author list or contributor list.
-	Entry []CitationEntry `json:"entry,omitempty"`
-	// summary
-	// Used to record a display of the author/contributor list without separate coding for each list member.
-	Summary []CitationSummary `json:"summary,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Complete *FhirBoolean `json:"complete,omitempty"`
+	Entry []*CitationEntry `json:"entry,omitempty"`
+	Summary []*CitationSummary `json:"summary,omitempty"`
 }
 
 // NewCitationContributorship creates a new CitationContributorship instance
-func NewCitationContributorship(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	complete FhirBoolean,
-	entry []CitationEntry,
-	summary []CitationSummary,
-) *CitationContributorship {
-	return &CitationContributorship{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Complete: complete,
-		Entry: entry,
-		Summary: summary,
-	}
+func NewCitationContributorship() *CitationContributorship {
+	return &CitationContributorship{}
 }
+
 // FromJSON populates CitationContributorship from JSON data
 func (m *CitationContributorship) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -2391,131 +1225,58 @@ func (m *CitationContributorship) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CitationContributorship
-func (m *CitationContributorship) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	complete *FhirBoolean,
-	entry *[]CitationEntry,
-	summary *[]CitationSummary,
-) *CitationContributorship {
+// Clone creates a deep copy of CitationContributorship
+func (m *CitationContributorship) Clone() *CitationContributorship {
+	if m == nil { return nil }
 	return &CitationContributorship{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Complete: func() FhirBoolean {
-			if complete != nil { return *complete }
-			return m.Complete
-		}(),
-		Entry: func() []CitationEntry {
-			if entry != nil { return *entry }
-			return m.Entry
-		}(),
-		Summary: func() []CitationSummary {
-			if summary != nil { return *summary }
-			return m.Summary
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Complete: m.Complete.Clone(),
+		Entry: cloneSlices(m.Entry),
+		Summary: cloneSlices(m.Summary),
 	}
 }
+
+// Equals checks for equality with another CitationContributorship instance
+func (m *CitationContributorship) Equals(other *CitationContributorship) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Complete.Equals(other.Complete) { return false }
+	if !compareSlices(m.Entry, other.Entry) { return false }
+	if !compareSlices(m.Summary, other.Summary) { return false }
+	return true
+}
+
 // CitationEntry
 // An individual entity named in the author list or contributor list.
 type CitationEntry struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// name
-	// A name associated with the individual.
-	Name HumanName `json:"name,omitempty"`
-	// initials
-	// Initials for forename.
-	Initials FhirString `json:"initials,omitempty"`
-	// collectiveName
-	// Used for collective or corporate name as an author.
-	CollectiveName FhirString `json:"collectiveName,omitempty"`
-	// identifier
-	// Unique person identifier.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// affiliationInfo
-	// Organization affiliated with the entity.
-	AffiliationInfo []CitationAffiliationInfo `json:"affiliationInfo,omitempty"`
-	// address
-	// Physical mailing address for the author or contributor.
-	Address []Address `json:"address,omitempty"`
-	// telecom
-	// Email or telephone contact methods for the author or contributor.
-	Telecom []ContactPoint `json:"telecom,omitempty"`
-	// contributionType
-	// This element identifies the specific nature of an individual’s contribution with respect to the cited work.
-	ContributionType []CodeableConcept `json:"contributionType,omitempty"`
-	// role
-	// The role of the contributor (e.g. author, editor, reviewer).
-	Role CodeableConcept `json:"role,omitempty"`
-	// contributionInstance
-	// Contributions with accounting for time or number.
-	ContributionInstance []CitationContributionInstance `json:"contributionInstance,omitempty"`
-	// correspondingContact
-	// Indication of which contributor is the corresponding contributor for the role.
-	CorrespondingContact FhirBoolean `json:"correspondingContact,omitempty"`
-	// listOrder
-	// Used to code order of authors.
-	ListOrder FhirPositiveInt `json:"listOrder,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Name *HumanName `json:"name,omitempty"`
+	Initials *FhirString `json:"initials,omitempty"`
+	CollectiveName *FhirString `json:"collectivename,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	AffiliationInfo []*CitationAffiliationInfo `json:"affiliationinfo,omitempty"`
+	Address []*Address `json:"address,omitempty"`
+	Telecom []*ContactPoint `json:"telecom,omitempty"`
+	ContributionType []*CodeableConcept `json:"contributiontype,omitempty"`
+	Role *CodeableConcept `json:"role,omitempty"`
+	ContributionInstance []*CitationContributionInstance `json:"contributioninstance,omitempty"`
+	CorrespondingContact *FhirBoolean `json:"correspondingcontact,omitempty"`
+	ListOrder *FhirPositiveInt `json:"listorder,omitempty"`
 }
 
 // NewCitationEntry creates a new CitationEntry instance
-func NewCitationEntry(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	name HumanName,
-	initials FhirString,
-	collectiveName FhirString,
-	identifier []Identifier,
-	affiliationInfo []CitationAffiliationInfo,
-	address []Address,
-	telecom []ContactPoint,
-	contributionType []CodeableConcept,
-	role CodeableConcept,
-	contributionInstance []CitationContributionInstance,
-	correspondingContact FhirBoolean,
-	listOrder FhirPositiveInt,
-) *CitationEntry {
-	return &CitationEntry{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Name: name,
-		Initials: initials,
-		CollectiveName: collectiveName,
-		Identifier: identifier,
-		AffiliationInfo: affiliationInfo,
-		Address: address,
-		Telecom: telecom,
-		ContributionType: contributionType,
-		Role: role,
-		ContributionInstance: contributionInstance,
-		CorrespondingContact: correspondingContact,
-		ListOrder: listOrder,
-	}
+func NewCitationEntry() *CitationEntry {
+	return &CitationEntry{}
 }
+
 // FromJSON populates CitationEntry from JSON data
 func (m *CitationEntry) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -2526,131 +1287,67 @@ func (m *CitationEntry) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CitationEntry
-func (m *CitationEntry) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	name *HumanName,
-	initials *FhirString,
-	collectiveName *FhirString,
-	identifier *[]Identifier,
-	affiliationInfo *[]CitationAffiliationInfo,
-	address *[]Address,
-	telecom *[]ContactPoint,
-	contributionType *[]CodeableConcept,
-	role *CodeableConcept,
-	contributionInstance *[]CitationContributionInstance,
-	correspondingContact *FhirBoolean,
-	listOrder *FhirPositiveInt,
-) *CitationEntry {
+// Clone creates a deep copy of CitationEntry
+func (m *CitationEntry) Clone() *CitationEntry {
+	if m == nil { return nil }
 	return &CitationEntry{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Name: func() HumanName {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Initials: func() FhirString {
-			if initials != nil { return *initials }
-			return m.Initials
-		}(),
-		CollectiveName: func() FhirString {
-			if collectiveName != nil { return *collectiveName }
-			return m.CollectiveName
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		AffiliationInfo: func() []CitationAffiliationInfo {
-			if affiliationInfo != nil { return *affiliationInfo }
-			return m.AffiliationInfo
-		}(),
-		Address: func() []Address {
-			if address != nil { return *address }
-			return m.Address
-		}(),
-		Telecom: func() []ContactPoint {
-			if telecom != nil { return *telecom }
-			return m.Telecom
-		}(),
-		ContributionType: func() []CodeableConcept {
-			if contributionType != nil { return *contributionType }
-			return m.ContributionType
-		}(),
-		Role: func() CodeableConcept {
-			if role != nil { return *role }
-			return m.Role
-		}(),
-		ContributionInstance: func() []CitationContributionInstance {
-			if contributionInstance != nil { return *contributionInstance }
-			return m.ContributionInstance
-		}(),
-		CorrespondingContact: func() FhirBoolean {
-			if correspondingContact != nil { return *correspondingContact }
-			return m.CorrespondingContact
-		}(),
-		ListOrder: func() FhirPositiveInt {
-			if listOrder != nil { return *listOrder }
-			return m.ListOrder
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Name: m.Name.Clone(),
+		Initials: m.Initials.Clone(),
+		CollectiveName: m.CollectiveName.Clone(),
+		Identifier: cloneSlices(m.Identifier),
+		AffiliationInfo: cloneSlices(m.AffiliationInfo),
+		Address: cloneSlices(m.Address),
+		Telecom: cloneSlices(m.Telecom),
+		ContributionType: cloneSlices(m.ContributionType),
+		Role: m.Role.Clone(),
+		ContributionInstance: cloneSlices(m.ContributionInstance),
+		CorrespondingContact: m.CorrespondingContact.Clone(),
+		ListOrder: m.ListOrder.Clone(),
 	}
 }
+
+// Equals checks for equality with another CitationEntry instance
+func (m *CitationEntry) Equals(other *CitationEntry) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Initials.Equals(other.Initials) { return false }
+	if !m.CollectiveName.Equals(other.CollectiveName) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !compareSlices(m.AffiliationInfo, other.AffiliationInfo) { return false }
+	if !compareSlices(m.Address, other.Address) { return false }
+	if !compareSlices(m.Telecom, other.Telecom) { return false }
+	if !compareSlices(m.ContributionType, other.ContributionType) { return false }
+	if !m.Role.Equals(other.Role) { return false }
+	if !compareSlices(m.ContributionInstance, other.ContributionInstance) { return false }
+	if !m.CorrespondingContact.Equals(other.CorrespondingContact) { return false }
+	if !m.ListOrder.Equals(other.ListOrder) { return false }
+	return true
+}
+
 // CitationAffiliationInfo
 // Organization affiliated with the entity.
 type CitationAffiliationInfo struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// affiliation
-	// Display for the organization.
-	Affiliation FhirString `json:"affiliation,omitempty"`
-	// role
-	// Role within the organization, such as professional title.
-	Role FhirString `json:"role,omitempty"`
-	// identifier
-	// Identifier for the organization.
-	Identifier []Identifier `json:"identifier,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Affiliation *FhirString `json:"affiliation,omitempty"`
+	Role *FhirString `json:"role,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
 }
 
 // NewCitationAffiliationInfo creates a new CitationAffiliationInfo instance
-func NewCitationAffiliationInfo(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	affiliation FhirString,
-	role FhirString,
-	identifier []Identifier,
-) *CitationAffiliationInfo {
-	return &CitationAffiliationInfo{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Affiliation: affiliation,
-		Role: role,
-		Identifier: identifier,
-	}
+func NewCitationAffiliationInfo() *CitationAffiliationInfo {
+	return &CitationAffiliationInfo{}
 }
+
 // FromJSON populates CitationAffiliationInfo from JSON data
 func (m *CitationAffiliationInfo) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -2661,81 +1358,48 @@ func (m *CitationAffiliationInfo) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CitationAffiliationInfo
-func (m *CitationAffiliationInfo) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	affiliation *FhirString,
-	role *FhirString,
-	identifier *[]Identifier,
-) *CitationAffiliationInfo {
+// Clone creates a deep copy of CitationAffiliationInfo
+func (m *CitationAffiliationInfo) Clone() *CitationAffiliationInfo {
+	if m == nil { return nil }
 	return &CitationAffiliationInfo{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Affiliation: func() FhirString {
-			if affiliation != nil { return *affiliation }
-			return m.Affiliation
-		}(),
-		Role: func() FhirString {
-			if role != nil { return *role }
-			return m.Role
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Affiliation: m.Affiliation.Clone(),
+		Role: m.Role.Clone(),
+		Identifier: cloneSlices(m.Identifier),
 	}
 }
+
+// Equals checks for equality with another CitationAffiliationInfo instance
+func (m *CitationAffiliationInfo) Equals(other *CitationAffiliationInfo) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Affiliation.Equals(other.Affiliation) { return false }
+	if !m.Role.Equals(other.Role) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	return true
+}
+
 // CitationContributionInstance
 // Contributions with accounting for time or number.
 type CitationContributionInstance struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// The specific contribution.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// time
-	// The time that the contribution was made.
-	Time FhirDateTime `json:"time,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Time *FhirDateTime `json:"time,omitempty"`
 }
 
 // NewCitationContributionInstance creates a new CitationContributionInstance instance
-func NewCitationContributionInstance(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	time FhirDateTime,
-) *CitationContributionInstance {
-	return &CitationContributionInstance{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Time: time,
-	}
+func NewCitationContributionInstance() *CitationContributionInstance {
+	return &CitationContributionInstance{}
 }
+
 // FromJSON populates CitationContributionInstance from JSON data
 func (m *CitationContributionInstance) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -2746,86 +1410,48 @@ func (m *CitationContributionInstance) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CitationContributionInstance
-func (m *CitationContributionInstance) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	time *FhirDateTime,
-) *CitationContributionInstance {
+// Clone creates a deep copy of CitationContributionInstance
+func (m *CitationContributionInstance) Clone() *CitationContributionInstance {
+	if m == nil { return nil }
 	return &CitationContributionInstance{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Time: func() FhirDateTime {
-			if time != nil { return *time }
-			return m.Time
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Time: m.Time.Clone(),
 	}
 }
+
+// Equals checks for equality with another CitationContributionInstance instance
+func (m *CitationContributionInstance) Equals(other *CitationContributionInstance) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Time.Equals(other.Time) { return false }
+	return true
+}
+
 // CitationSummary1
 // Used to record a display of the author/contributor list without separate coding for each list member.
 type CitationSummary1 struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// Used most commonly to express an author list or a contributorship statement.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// style
-	// The format for the display string.
-	Style CodeableConcept `json:"style,omitempty"`
-	// source
-	// Used to code the producer or rule for creating the display string.
-	Source CodeableConcept `json:"source,omitempty"`
-	// value
-	// The display string for the author list, contributor list, or contributorship statement.
-	Value FhirMarkdown `json:"value,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Style *CodeableConcept `json:"style,omitempty"`
+	Source *CodeableConcept `json:"source,omitempty"`
+	Value *FhirMarkdown `json:"value,omitempty"`
 }
 
 // NewCitationSummary1 creates a new CitationSummary1 instance
-func NewCitationSummary1(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	style CodeableConcept,
-	source CodeableConcept,
-	value FhirMarkdown,
-) *CitationSummary1 {
-	return &CitationSummary1{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Style: style,
-		Source: source,
-		Value: value,
-	}
+func NewCitationSummary1() *CitationSummary1 {
+	return &CitationSummary1{}
 }
+
 // FromJSON populates CitationSummary1 from JSON data
 func (m *CitationSummary1) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -2836,44 +1462,31 @@ func (m *CitationSummary1) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CitationSummary1
-func (m *CitationSummary1) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	style *CodeableConcept,
-	source *CodeableConcept,
-	value *FhirMarkdown,
-) *CitationSummary1 {
+// Clone creates a deep copy of CitationSummary1
+func (m *CitationSummary1) Clone() *CitationSummary1 {
+	if m == nil { return nil }
 	return &CitationSummary1{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Style: func() CodeableConcept {
-			if style != nil { return *style }
-			return m.Style
-		}(),
-		Source: func() CodeableConcept {
-			if source != nil { return *source }
-			return m.Source
-		}(),
-		Value: func() FhirMarkdown {
-			if value != nil { return *value }
-			return m.Value
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Style: m.Style.Clone(),
+		Source: m.Source.Clone(),
+		Value: m.Value.Clone(),
 	}
 }
+
+// Equals checks for equality with another CitationSummary1 instance
+func (m *CitationSummary1) Equals(other *CitationSummary1) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Style.Equals(other.Style) { return false }
+	if !m.Source.Equals(other.Source) { return false }
+	if !m.Value.Equals(other.Value) { return false }
+	return true
+}
+

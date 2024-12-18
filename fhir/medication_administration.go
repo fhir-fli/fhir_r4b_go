@@ -3,169 +3,48 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // MedicationAdministration
 // Describes the event of a patient consuming or otherwise being administered a medication.  This may be as simple as swallowing a tablet or it may be a long running infusion.  Related resources tie this event to the authorizing prescription, and the specific encounter between patient and health care practitioner.
 type MedicationAdministration struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// Identifiers associated with this Medication Administration that are defined by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate. They are business identifiers assigned to this resource by the performer or other systems and remain constant as the resource is updated and propagates from server to server.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// instantiates
-	// A protocol, guideline, orderset, or other definition that was adhered to in whole or in part by this event.
-	Instantiates []FhirUri `json:"instantiates,omitempty"`
-	// partOf
-	// A larger event of which this particular event is a component or step.
-	PartOf []Reference `json:"partOf,omitempty"`
-	// status
-	// Will generally be set to show that the administration has been completed.  For some long running administrations such as infusions, it is possible for an administration to be started but not completed or it may be paused while some other process is under way.
-	Status MedicationAdministrationStatusCodes `json:"status,omitempty"`
-	// statusReason
-	// A code indicating why the administration was not performed.
-	StatusReason []CodeableConcept `json:"statusReason,omitempty"`
-	// category
-	// Indicates where the medication is expected to be consumed or administered.
-	Category CodeableConcept `json:"category,omitempty"`
-	// medicationCodeableConcept
-	// Identifies the medication that was administered. This is either a link to a resource representing the details of the medication or a simple attribute carrying a code that identifies the medication from a known list of medications.
-	MedicationCodeableConcept CodeableConcept `json:"medicationCodeableConcept,omitempty"`
-	// medicationReference
-	// Identifies the medication that was administered. This is either a link to a resource representing the details of the medication or a simple attribute carrying a code that identifies the medication from a known list of medications.
-	MedicationReference Reference `json:"medicationReference,omitempty"`
-	// subject
-	// The person or animal or group receiving the medication.
-	Subject Reference `json:"subject,omitempty"`
-	// context
-	// The visit, admission, or other contact between patient and health care provider during which the medication administration was performed.
-	Context Reference `json:"context,omitempty"`
-	// supportingInformation
-	// Additional information (for example, patient height and weight) that supports the administration of the medication.
-	SupportingInformation []Reference `json:"supportingInformation,omitempty"`
-	// effectiveDateTime
-	// A specific date/time or interval of time during which the administration took place (or did not take place, when the 'notGiven' attribute is true). For many administrations, such as swallowing a tablet the use of dateTime is more appropriate.
-	EffectiveDateTime FhirDateTime `json:"effectiveDateTime,omitempty"`
-	// effectivePeriod
-	// A specific date/time or interval of time during which the administration took place (or did not take place, when the 'notGiven' attribute is true). For many administrations, such as swallowing a tablet the use of dateTime is more appropriate.
-	EffectivePeriod Period `json:"effectivePeriod,omitempty"`
-	// performer
-	// Indicates who or what performed the medication administration and how they were involved.
-	Performer []MedicationAdministrationPerformer `json:"performer,omitempty"`
-	// reasonCode
-	// A code indicating why the medication was given.
-	ReasonCode []CodeableConcept `json:"reasonCode,omitempty"`
-	// reasonReference
-	// Condition or observation that supports why the medication was administered.
-	ReasonReference []Reference `json:"reasonReference,omitempty"`
-	// request
-	// The original request, instruction or authority to perform the administration.
-	Request Reference `json:"request,omitempty"`
-	// device
-	// The device used in administering the medication to the patient.  For example, a particular infusion pump.
-	Device []Reference `json:"device,omitempty"`
-	// note
-	// Extra information about the medication administration that is not conveyed by the other attributes.
-	Note []Annotation `json:"note,omitempty"`
-	// dosage
-	// Describes the medication dosage information details e.g. dose, rate, site, route, etc.
-	Dosage MedicationAdministrationDosage `json:"dosage,omitempty"`
-	// eventHistory
-	// A summary of the events of interest that have occurred, such as when the administration was verified.
-	EventHistory []Reference `json:"eventHistory,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Instantiates []*FhirUri `json:"instantiates,omitempty"`
+	PartOf []*Reference `json:"partof,omitempty"`
+	Status *MedicationAdministrationStatusCodes `json:"status,omitempty"`
+	StatusReason []*CodeableConcept `json:"statusreason,omitempty"`
+	Category *CodeableConcept `json:"category,omitempty"`
+	MedicationCodeableConcept *CodeableConcept `json:"medicationcodeableconcept,omitempty"`
+	MedicationReference *Reference `json:"medicationreference,omitempty"`
+	Subject *Reference `json:"subject,omitempty"`
+	Context *Reference `json:"context,omitempty"`
+	SupportingInformation []*Reference `json:"supportinginformation,omitempty"`
+	EffectiveDateTime *FhirDateTime `json:"effectivedatetime,omitempty"`
+	EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+	Performer []*MedicationAdministrationPerformer `json:"performer,omitempty"`
+	ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+	ReasonReference []*Reference `json:"reasonreference,omitempty"`
+	Request *Reference `json:"request,omitempty"`
+	Device []*Reference `json:"device,omitempty"`
+	Note []*Annotation `json:"note,omitempty"`
+	Dosage *MedicationAdministrationDosage `json:"dosage,omitempty"`
+	EventHistory []*Reference `json:"eventhistory,omitempty"`
 }
 
 // NewMedicationAdministration creates a new MedicationAdministration instance
-func NewMedicationAdministration(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	instantiates []FhirUri,
-	partOf []Reference,
-	status MedicationAdministrationStatusCodes,
-	statusReason []CodeableConcept,
-	category CodeableConcept,
-	medicationCodeableConcept CodeableConcept,
-	medicationReference Reference,
-	subject Reference,
-	context Reference,
-	supportingInformation []Reference,
-	effectiveDateTime FhirDateTime,
-	effectivePeriod Period,
-	performer []MedicationAdministrationPerformer,
-	reasonCode []CodeableConcept,
-	reasonReference []Reference,
-	request Reference,
-	device []Reference,
-	note []Annotation,
-	dosage MedicationAdministrationDosage,
-	eventHistory []Reference,
-) *MedicationAdministration {
-	return &MedicationAdministration{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Instantiates: instantiates,
-		PartOf: partOf,
-		Status: status,
-		StatusReason: statusReason,
-		Category: category,
-		MedicationCodeableConcept: medicationCodeableConcept,
-		MedicationReference: medicationReference,
-		Subject: subject,
-		Context: context,
-		SupportingInformation: supportingInformation,
-		EffectiveDateTime: effectiveDateTime,
-		EffectivePeriod: effectivePeriod,
-		Performer: performer,
-		ReasonCode: reasonCode,
-		ReasonReference: reasonReference,
-		Request: request,
-		Device: device,
-		Note: note,
-		Dosage: dosage,
-		EventHistory: eventHistory,
-	}
+func NewMedicationAdministration() *MedicationAdministration {
+	return &MedicationAdministration{}
 }
+
 // FromJSON populates MedicationAdministration from JSON data
 func (m *MedicationAdministration) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -176,196 +55,94 @@ func (m *MedicationAdministration) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicationAdministration
-func (m *MedicationAdministration) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	instantiates *[]FhirUri,
-	partOf *[]Reference,
-	status *MedicationAdministrationStatusCodes,
-	statusReason *[]CodeableConcept,
-	category *CodeableConcept,
-	medicationCodeableConcept *CodeableConcept,
-	medicationReference *Reference,
-	subject *Reference,
-	context *Reference,
-	supportingInformation *[]Reference,
-	effectiveDateTime *FhirDateTime,
-	effectivePeriod *Period,
-	performer *[]MedicationAdministrationPerformer,
-	reasonCode *[]CodeableConcept,
-	reasonReference *[]Reference,
-	request *Reference,
-	device *[]Reference,
-	note *[]Annotation,
-	dosage *MedicationAdministrationDosage,
-	eventHistory *[]Reference,
-) *MedicationAdministration {
+// Clone creates a deep copy of MedicationAdministration
+func (m *MedicationAdministration) Clone() *MedicationAdministration {
+	if m == nil { return nil }
 	return &MedicationAdministration{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Instantiates: func() []FhirUri {
-			if instantiates != nil { return *instantiates }
-			return m.Instantiates
-		}(),
-		PartOf: func() []Reference {
-			if partOf != nil { return *partOf }
-			return m.PartOf
-		}(),
-		Status: func() MedicationAdministrationStatusCodes {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		StatusReason: func() []CodeableConcept {
-			if statusReason != nil { return *statusReason }
-			return m.StatusReason
-		}(),
-		Category: func() CodeableConcept {
-			if category != nil { return *category }
-			return m.Category
-		}(),
-		MedicationCodeableConcept: func() CodeableConcept {
-			if medicationCodeableConcept != nil { return *medicationCodeableConcept }
-			return m.MedicationCodeableConcept
-		}(),
-		MedicationReference: func() Reference {
-			if medicationReference != nil { return *medicationReference }
-			return m.MedicationReference
-		}(),
-		Subject: func() Reference {
-			if subject != nil { return *subject }
-			return m.Subject
-		}(),
-		Context: func() Reference {
-			if context != nil { return *context }
-			return m.Context
-		}(),
-		SupportingInformation: func() []Reference {
-			if supportingInformation != nil { return *supportingInformation }
-			return m.SupportingInformation
-		}(),
-		EffectiveDateTime: func() FhirDateTime {
-			if effectiveDateTime != nil { return *effectiveDateTime }
-			return m.EffectiveDateTime
-		}(),
-		EffectivePeriod: func() Period {
-			if effectivePeriod != nil { return *effectivePeriod }
-			return m.EffectivePeriod
-		}(),
-		Performer: func() []MedicationAdministrationPerformer {
-			if performer != nil { return *performer }
-			return m.Performer
-		}(),
-		ReasonCode: func() []CodeableConcept {
-			if reasonCode != nil { return *reasonCode }
-			return m.ReasonCode
-		}(),
-		ReasonReference: func() []Reference {
-			if reasonReference != nil { return *reasonReference }
-			return m.ReasonReference
-		}(),
-		Request: func() Reference {
-			if request != nil { return *request }
-			return m.Request
-		}(),
-		Device: func() []Reference {
-			if device != nil { return *device }
-			return m.Device
-		}(),
-		Note: func() []Annotation {
-			if note != nil { return *note }
-			return m.Note
-		}(),
-		Dosage: func() MedicationAdministrationDosage {
-			if dosage != nil { return *dosage }
-			return m.Dosage
-		}(),
-		EventHistory: func() []Reference {
-			if eventHistory != nil { return *eventHistory }
-			return m.EventHistory
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		Instantiates: cloneSlices(m.Instantiates),
+		PartOf: cloneSlices(m.PartOf),
+		Status: m.Status.Clone(),
+		StatusReason: cloneSlices(m.StatusReason),
+		Category: m.Category.Clone(),
+		MedicationCodeableConcept: m.MedicationCodeableConcept.Clone(),
+		MedicationReference: m.MedicationReference.Clone(),
+		Subject: m.Subject.Clone(),
+		Context: m.Context.Clone(),
+		SupportingInformation: cloneSlices(m.SupportingInformation),
+		EffectiveDateTime: m.EffectiveDateTime.Clone(),
+		EffectivePeriod: m.EffectivePeriod.Clone(),
+		Performer: cloneSlices(m.Performer),
+		ReasonCode: cloneSlices(m.ReasonCode),
+		ReasonReference: cloneSlices(m.ReasonReference),
+		Request: m.Request.Clone(),
+		Device: cloneSlices(m.Device),
+		Note: cloneSlices(m.Note),
+		Dosage: m.Dosage.Clone(),
+		EventHistory: cloneSlices(m.EventHistory),
 	}
 }
+
+// Equals checks for equality with another MedicationAdministration instance
+func (m *MedicationAdministration) Equals(other *MedicationAdministration) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !compareSlices(m.Instantiates, other.Instantiates) { return false }
+	if !compareSlices(m.PartOf, other.PartOf) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !compareSlices(m.StatusReason, other.StatusReason) { return false }
+	if !m.Category.Equals(other.Category) { return false }
+	if !m.MedicationCodeableConcept.Equals(other.MedicationCodeableConcept) { return false }
+	if !m.MedicationReference.Equals(other.MedicationReference) { return false }
+	if !m.Subject.Equals(other.Subject) { return false }
+	if !m.Context.Equals(other.Context) { return false }
+	if !compareSlices(m.SupportingInformation, other.SupportingInformation) { return false }
+	if !m.EffectiveDateTime.Equals(other.EffectiveDateTime) { return false }
+	if !m.EffectivePeriod.Equals(other.EffectivePeriod) { return false }
+	if !compareSlices(m.Performer, other.Performer) { return false }
+	if !compareSlices(m.ReasonCode, other.ReasonCode) { return false }
+	if !compareSlices(m.ReasonReference, other.ReasonReference) { return false }
+	if !m.Request.Equals(other.Request) { return false }
+	if !compareSlices(m.Device, other.Device) { return false }
+	if !compareSlices(m.Note, other.Note) { return false }
+	if !m.Dosage.Equals(other.Dosage) { return false }
+	if !compareSlices(m.EventHistory, other.EventHistory) { return false }
+	return true
+}
+
 // MedicationAdministrationPerformer
 // Indicates who or what performed the medication administration and how they were involved.
 type MedicationAdministrationPerformer struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// function
-	// Distinguishes the type of involvement of the performer in the medication administration.
-	Function_ CodeableConcept `json:"function,omitempty"`
-	// actor
-	// Indicates who or what performed the medication administration.
-	Actor Reference `json:"actor,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Function_ *CodeableConcept `json:"function,omitempty"`
+	Actor *Reference `json:"actor,omitempty"`
 }
 
 // NewMedicationAdministrationPerformer creates a new MedicationAdministrationPerformer instance
-func NewMedicationAdministrationPerformer(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	function_ CodeableConcept,
-	actor Reference,
-) *MedicationAdministrationPerformer {
-	return &MedicationAdministrationPerformer{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Function_: function_,
-		Actor: actor,
-	}
+func NewMedicationAdministrationPerformer() *MedicationAdministrationPerformer {
+	return &MedicationAdministrationPerformer{}
 }
+
 // FromJSON populates MedicationAdministrationPerformer from JSON data
 func (m *MedicationAdministrationPerformer) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -376,101 +153,51 @@ func (m *MedicationAdministrationPerformer) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicationAdministrationPerformer
-func (m *MedicationAdministrationPerformer) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	function_ *CodeableConcept,
-	actor *Reference,
-) *MedicationAdministrationPerformer {
+// Clone creates a deep copy of MedicationAdministrationPerformer
+func (m *MedicationAdministrationPerformer) Clone() *MedicationAdministrationPerformer {
+	if m == nil { return nil }
 	return &MedicationAdministrationPerformer{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Function_: func() CodeableConcept {
-			if function_ != nil { return *function_ }
-			return m.Function_
-		}(),
-		Actor: func() Reference {
-			if actor != nil { return *actor }
-			return m.Actor
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Function_: m.Function_.Clone(),
+		Actor: m.Actor.Clone(),
 	}
 }
+
+// Equals checks for equality with another MedicationAdministrationPerformer instance
+func (m *MedicationAdministrationPerformer) Equals(other *MedicationAdministrationPerformer) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Function_.Equals(other.Function_) { return false }
+	if !m.Actor.Equals(other.Actor) { return false }
+	return true
+}
+
 // MedicationAdministrationDosage
 // Describes the medication dosage information details e.g. dose, rate, site, route, etc.
 type MedicationAdministrationDosage struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// text
-	// Free text dosage can be used for cases where the dosage administered is too complex to code. When coded dosage is present, the free text dosage may still be present for display to humans.The dosage instructions should reflect the dosage of the medication that was administered.
-	Text FhirString `json:"text,omitempty"`
-	// site
-	// A coded specification of the anatomic site where the medication first entered the body.  For example, "left arm".
-	Site CodeableConcept `json:"site,omitempty"`
-	// route
-	// A code specifying the route or physiological path of administration of a therapeutic agent into or onto the patient.  For example, topical, intravenous, etc.
-	Route CodeableConcept `json:"route,omitempty"`
-	// method
-	// A coded value indicating the method by which the medication is intended to be or was introduced into or on the body.  This attribute will most often NOT be populated.  It is most commonly used for injections.  For example, Slow Push, Deep IV.
-	Method CodeableConcept `json:"method,omitempty"`
-	// dose
-	// The amount of the medication given at one administration event.   Use this value when the administration is essentially an instantaneous event such as a swallowing a tablet or giving an injection.
-	Dose Quantity `json:"dose,omitempty"`
-	// rateRatio
-	// Identifies the speed with which the medication was or will be introduced into the patient.  Typically, the rate for an infusion e.g. 100 ml per 1 hour or 100 ml/hr.  May also be expressed as a rate per unit of time, e.g. 500 ml per 2 hours.  Other examples:  200 mcg/min or 200 mcg/1 minute; 1 liter/8 hours.
-	RateRatio Ratio `json:"rateRatio,omitempty"`
-	// rateQuantity
-	// Identifies the speed with which the medication was or will be introduced into the patient.  Typically, the rate for an infusion e.g. 100 ml per 1 hour or 100 ml/hr.  May also be expressed as a rate per unit of time, e.g. 500 ml per 2 hours.  Other examples:  200 mcg/min or 200 mcg/1 minute; 1 liter/8 hours.
-	RateQuantity Quantity `json:"rateQuantity,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Text *FhirString `json:"text,omitempty"`
+	Site *CodeableConcept `json:"site,omitempty"`
+	Route *CodeableConcept `json:"route,omitempty"`
+	Method *CodeableConcept `json:"method,omitempty"`
+	Dose *Quantity `json:"dose,omitempty"`
+	RateRatio *Ratio `json:"rateratio,omitempty"`
+	RateQuantity *Quantity `json:"ratequantity,omitempty"`
 }
 
 // NewMedicationAdministrationDosage creates a new MedicationAdministrationDosage instance
-func NewMedicationAdministrationDosage(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	text FhirString,
-	site CodeableConcept,
-	route CodeableConcept,
-	method CodeableConcept,
-	dose Quantity,
-	rateRatio Ratio,
-	rateQuantity Quantity,
-) *MedicationAdministrationDosage {
-	return &MedicationAdministrationDosage{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Text: text,
-		Site: site,
-		Route: route,
-		Method: method,
-		Dose: dose,
-		RateRatio: rateRatio,
-		RateQuantity: rateQuantity,
-	}
+func NewMedicationAdministrationDosage() *MedicationAdministrationDosage {
+	return &MedicationAdministrationDosage{}
 }
+
 // FromJSON populates MedicationAdministrationDosage from JSON data
 func (m *MedicationAdministrationDosage) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -481,59 +208,37 @@ func (m *MedicationAdministrationDosage) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MedicationAdministrationDosage
-func (m *MedicationAdministrationDosage) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	text *FhirString,
-	site *CodeableConcept,
-	route *CodeableConcept,
-	method *CodeableConcept,
-	dose *Quantity,
-	rateRatio *Ratio,
-	rateQuantity *Quantity,
-) *MedicationAdministrationDosage {
+// Clone creates a deep copy of MedicationAdministrationDosage
+func (m *MedicationAdministrationDosage) Clone() *MedicationAdministrationDosage {
+	if m == nil { return nil }
 	return &MedicationAdministrationDosage{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Text: func() FhirString {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Site: func() CodeableConcept {
-			if site != nil { return *site }
-			return m.Site
-		}(),
-		Route: func() CodeableConcept {
-			if route != nil { return *route }
-			return m.Route
-		}(),
-		Method: func() CodeableConcept {
-			if method != nil { return *method }
-			return m.Method
-		}(),
-		Dose: func() Quantity {
-			if dose != nil { return *dose }
-			return m.Dose
-		}(),
-		RateRatio: func() Ratio {
-			if rateRatio != nil { return *rateRatio }
-			return m.RateRatio
-		}(),
-		RateQuantity: func() Quantity {
-			if rateQuantity != nil { return *rateQuantity }
-			return m.RateQuantity
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Text: m.Text.Clone(),
+		Site: m.Site.Clone(),
+		Route: m.Route.Clone(),
+		Method: m.Method.Clone(),
+		Dose: m.Dose.Clone(),
+		RateRatio: m.RateRatio.Clone(),
+		RateQuantity: m.RateQuantity.Clone(),
 	}
 }
+
+// Equals checks for equality with another MedicationAdministrationDosage instance
+func (m *MedicationAdministrationDosage) Equals(other *MedicationAdministrationDosage) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !m.Site.Equals(other.Site) { return false }
+	if !m.Route.Equals(other.Route) { return false }
+	if !m.Method.Equals(other.Method) { return false }
+	if !m.Dose.Equals(other.Dose) { return false }
+	if !m.RateRatio.Equals(other.RateRatio) { return false }
+	if !m.RateQuantity.Equals(other.RateQuantity) { return false }
+	return true
+}
+

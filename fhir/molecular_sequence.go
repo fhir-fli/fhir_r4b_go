@@ -3,144 +3,43 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // MolecularSequence
 // Raw data describing a biological sequence.
 type MolecularSequence struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// A unique identifier for this particular sequence instance. This is a FHIR-defined id.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// type
-	// Amino Acid Sequence/ DNA Sequence / RNA Sequence.
-	Type_ SequenceType `json:"type,omitempty"`
-	// coordinateSystem
-	// Whether the sequence is numbered starting at 0 (0-based numbering or coordinates, inclusive start, exclusive end) or starting at 1 (1-based numbering, inclusive start and inclusive end).
-	CoordinateSystem FhirInteger `json:"coordinateSystem,omitempty"`
-	// patient
-	// The patient whose sequencing results are described by this resource.
-	Patient Reference `json:"patient,omitempty"`
-	// specimen
-	// Specimen used for sequencing.
-	Specimen Reference `json:"specimen,omitempty"`
-	// device
-	// The method for sequencing, for example, chip information.
-	Device Reference `json:"device,omitempty"`
-	// performer
-	// The organization or lab that should be responsible for this result.
-	Performer Reference `json:"performer,omitempty"`
-	// quantity
-	// The number of copies of the sequence of interest. (RNASeq).
-	Quantity Quantity `json:"quantity,omitempty"`
-	// referenceSeq
-	// A sequence that is used as a reference to describe variants that are present in a sequence analyzed.
-	ReferenceSeq MolecularSequenceReferenceSeq `json:"referenceSeq,omitempty"`
-	// variant
-	// The definition of variant here originates from Sequence ontology ([variant_of](http://www.sequenceontology.org/browser/current_svn/term/variant_of)). This element can represent amino acid or nucleic sequence change(including insertion,deletion,SNP,etc.)  It can represent some complex mutation or segment variation with the assist of CIGAR string.
-	Variant []MolecularSequenceVariant `json:"variant,omitempty"`
-	// observedSeq
-	// Sequence that was observed. It is the result marked by referenceSeq along with variant records on referenceSeq. This shall start from referenceSeq.windowStart and end by referenceSeq.windowEnd.
-	ObservedSeq FhirString `json:"observedSeq,omitempty"`
-	// quality
-	// An experimental feature attribute that defines the quality of the feature in a quantitative way, such as a phred quality score ([SO:0001686](http://www.sequenceontology.org/browser/current_svn/term/SO:0001686)).
-	Quality []MolecularSequenceQuality `json:"quality,omitempty"`
-	// readCoverage
-	// Coverage (read depth or depth) is the average number of reads representing a given nucleotide in the reconstructed sequence.
-	ReadCoverage FhirInteger `json:"readCoverage,omitempty"`
-	// repository
-	// Configurations of the external repository. The repository shall store target's observedSeq or records related with target's observedSeq.
-	Repository []MolecularSequenceRepository `json:"repository,omitempty"`
-	// pointer
-	// Pointer to next atomic sequence which at most contains one variant.
-	Pointer []Reference `json:"pointer,omitempty"`
-	// structureVariant
-	// Information about chromosome structure variation.
-	StructureVariant []MolecularSequenceStructureVariant `json:"structureVariant,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Type *SequenceType `json:"type,omitempty"`
+	CoordinateSystem *FhirInteger `json:"coordinatesystem,omitempty"`
+	Patient *Reference `json:"patient,omitempty"`
+	Specimen *Reference `json:"specimen,omitempty"`
+	Device *Reference `json:"device,omitempty"`
+	Performer *Reference `json:"performer,omitempty"`
+	Quantity *Quantity `json:"quantity,omitempty"`
+	ReferenceSeq *MolecularSequenceReferenceSeq `json:"referenceseq,omitempty"`
+	Variant []*MolecularSequenceVariant `json:"variant,omitempty"`
+	ObservedSeq *FhirString `json:"observedseq,omitempty"`
+	Quality []*MolecularSequenceQuality `json:"quality,omitempty"`
+	ReadCoverage *FhirInteger `json:"readcoverage,omitempty"`
+	Repository []*MolecularSequenceRepository `json:"repository,omitempty"`
+	Pointer []*Reference `json:"pointer,omitempty"`
+	StructureVariant []*MolecularSequenceStructureVariant `json:"structurevariant,omitempty"`
 }
 
 // NewMolecularSequence creates a new MolecularSequence instance
-func NewMolecularSequence(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	type_ SequenceType,
-	coordinateSystem FhirInteger,
-	patient Reference,
-	specimen Reference,
-	device Reference,
-	performer Reference,
-	quantity Quantity,
-	referenceSeq MolecularSequenceReferenceSeq,
-	variant []MolecularSequenceVariant,
-	observedSeq FhirString,
-	quality []MolecularSequenceQuality,
-	readCoverage FhirInteger,
-	repository []MolecularSequenceRepository,
-	pointer []Reference,
-	structureVariant []MolecularSequenceStructureVariant,
-) *MolecularSequence {
-	return &MolecularSequence{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Type_: type_,
-		CoordinateSystem: coordinateSystem,
-		Patient: patient,
-		Specimen: specimen,
-		Device: device,
-		Performer: performer,
-		Quantity: quantity,
-		ReferenceSeq: referenceSeq,
-		Variant: variant,
-		ObservedSeq: observedSeq,
-		Quality: quality,
-		ReadCoverage: readCoverage,
-		Repository: repository,
-		Pointer: pointer,
-		StructureVariant: structureVariant,
-	}
+func NewMolecularSequence() *MolecularSequence {
+	return &MolecularSequence{}
 }
+
 // FromJSON populates MolecularSequence from JSON data
 func (m *MolecularSequence) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -151,206 +50,91 @@ func (m *MolecularSequence) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MolecularSequence
-func (m *MolecularSequence) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	type_ *SequenceType,
-	coordinateSystem *FhirInteger,
-	patient *Reference,
-	specimen *Reference,
-	device *Reference,
-	performer *Reference,
-	quantity *Quantity,
-	referenceSeq *MolecularSequenceReferenceSeq,
-	variant *[]MolecularSequenceVariant,
-	observedSeq *FhirString,
-	quality *[]MolecularSequenceQuality,
-	readCoverage *FhirInteger,
-	repository *[]MolecularSequenceRepository,
-	pointer *[]Reference,
-	structureVariant *[]MolecularSequenceStructureVariant,
-) *MolecularSequence {
+// Clone creates a deep copy of MolecularSequence
+func (m *MolecularSequence) Clone() *MolecularSequence {
+	if m == nil { return nil }
 	return &MolecularSequence{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Type_: func() SequenceType {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		CoordinateSystem: func() FhirInteger {
-			if coordinateSystem != nil { return *coordinateSystem }
-			return m.CoordinateSystem
-		}(),
-		Patient: func() Reference {
-			if patient != nil { return *patient }
-			return m.Patient
-		}(),
-		Specimen: func() Reference {
-			if specimen != nil { return *specimen }
-			return m.Specimen
-		}(),
-		Device: func() Reference {
-			if device != nil { return *device }
-			return m.Device
-		}(),
-		Performer: func() Reference {
-			if performer != nil { return *performer }
-			return m.Performer
-		}(),
-		Quantity: func() Quantity {
-			if quantity != nil { return *quantity }
-			return m.Quantity
-		}(),
-		ReferenceSeq: func() MolecularSequenceReferenceSeq {
-			if referenceSeq != nil { return *referenceSeq }
-			return m.ReferenceSeq
-		}(),
-		Variant: func() []MolecularSequenceVariant {
-			if variant != nil { return *variant }
-			return m.Variant
-		}(),
-		ObservedSeq: func() FhirString {
-			if observedSeq != nil { return *observedSeq }
-			return m.ObservedSeq
-		}(),
-		Quality: func() []MolecularSequenceQuality {
-			if quality != nil { return *quality }
-			return m.Quality
-		}(),
-		ReadCoverage: func() FhirInteger {
-			if readCoverage != nil { return *readCoverage }
-			return m.ReadCoverage
-		}(),
-		Repository: func() []MolecularSequenceRepository {
-			if repository != nil { return *repository }
-			return m.Repository
-		}(),
-		Pointer: func() []Reference {
-			if pointer != nil { return *pointer }
-			return m.Pointer
-		}(),
-		StructureVariant: func() []MolecularSequenceStructureVariant {
-			if structureVariant != nil { return *structureVariant }
-			return m.StructureVariant
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		Type: m.Type.Clone(),
+		CoordinateSystem: m.CoordinateSystem.Clone(),
+		Patient: m.Patient.Clone(),
+		Specimen: m.Specimen.Clone(),
+		Device: m.Device.Clone(),
+		Performer: m.Performer.Clone(),
+		Quantity: m.Quantity.Clone(),
+		ReferenceSeq: m.ReferenceSeq.Clone(),
+		Variant: cloneSlices(m.Variant),
+		ObservedSeq: m.ObservedSeq.Clone(),
+		Quality: cloneSlices(m.Quality),
+		ReadCoverage: m.ReadCoverage.Clone(),
+		Repository: cloneSlices(m.Repository),
+		Pointer: cloneSlices(m.Pointer),
+		StructureVariant: cloneSlices(m.StructureVariant),
 	}
 }
+
+// Equals checks for equality with another MolecularSequence instance
+func (m *MolecularSequence) Equals(other *MolecularSequence) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.CoordinateSystem.Equals(other.CoordinateSystem) { return false }
+	if !m.Patient.Equals(other.Patient) { return false }
+	if !m.Specimen.Equals(other.Specimen) { return false }
+	if !m.Device.Equals(other.Device) { return false }
+	if !m.Performer.Equals(other.Performer) { return false }
+	if !m.Quantity.Equals(other.Quantity) { return false }
+	if !m.ReferenceSeq.Equals(other.ReferenceSeq) { return false }
+	if !compareSlices(m.Variant, other.Variant) { return false }
+	if !m.ObservedSeq.Equals(other.ObservedSeq) { return false }
+	if !compareSlices(m.Quality, other.Quality) { return false }
+	if !m.ReadCoverage.Equals(other.ReadCoverage) { return false }
+	if !compareSlices(m.Repository, other.Repository) { return false }
+	if !compareSlices(m.Pointer, other.Pointer) { return false }
+	if !compareSlices(m.StructureVariant, other.StructureVariant) { return false }
+	return true
+}
+
 // MolecularSequenceReferenceSeq
 // A sequence that is used as a reference to describe variants that are present in a sequence analyzed.
 type MolecularSequenceReferenceSeq struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// chromosome
-	// Structural unit composed of a nucleic acid molecule which controls its own replication through the interaction of specific proteins at one or more origins of replication ([SO:0000340](http://www.sequenceontology.org/browser/current_svn/term/SO:0000340)).
-	Chromosome CodeableConcept `json:"chromosome,omitempty"`
-	// genomeBuild
-	// The Genome Build used for reference, following GRCh build versions e.g. 'GRCh 37'.  Version number must be included if a versioned release of a primary build was used.
-	GenomeBuild FhirString `json:"genomeBuild,omitempty"`
-	// orientation
-	// A relative reference to a DNA strand based on gene orientation. The strand that contains the open reading frame of the gene is the "sense" strand, and the opposite complementary strand is the "antisense" strand.
-	Orientation OrientationType `json:"orientation,omitempty"`
-	// referenceSeqId
-	// Reference identifier of reference sequence submitted to NCBI. It must match the type in the MolecularSequence.type field. For example, the prefix, “NG_” identifies reference sequence for genes, “NM_” for messenger RNA transcripts, and “NP_” for amino acid sequences.
-	ReferenceSeqId CodeableConcept `json:"referenceSeqId,omitempty"`
-	// referenceSeqPointer
-	// A pointer to another MolecularSequence entity as reference sequence.
-	ReferenceSeqPointer Reference `json:"referenceSeqPointer,omitempty"`
-	// referenceSeqString
-	// A string like "ACGT".
-	ReferenceSeqString FhirString `json:"referenceSeqString,omitempty"`
-	// strand
-	// An absolute reference to a strand. The Watson strand is the strand whose 5'-end is on the short arm of the chromosome, and the Crick strand as the one whose 5'-end is on the long arm.
-	Strand StrandType `json:"strand,omitempty"`
-	// windowStart
-	// Start position of the window on the reference sequence. If the coordinate system is either 0-based or 1-based, then start position is inclusive.
-	WindowStart FhirInteger `json:"windowStart,omitempty"`
-	// windowEnd
-	// End position of the window on the reference sequence. If the coordinate system is 0-based then end is exclusive and does not include the last position. If the coordinate system is 1-base, then end is inclusive and includes the last position.
-	WindowEnd FhirInteger `json:"windowEnd,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Chromosome *CodeableConcept `json:"chromosome,omitempty"`
+	GenomeBuild *FhirString `json:"genomebuild,omitempty"`
+	Orientation *OrientationType `json:"orientation,omitempty"`
+	ReferenceSeqId *CodeableConcept `json:"referenceseqid,omitempty"`
+	ReferenceSeqPointer *Reference `json:"referenceseqpointer,omitempty"`
+	ReferenceSeqString *FhirString `json:"referenceseqstring,omitempty"`
+	Strand *StrandType `json:"strand,omitempty"`
+	WindowStart *FhirInteger `json:"windowstart,omitempty"`
+	WindowEnd *FhirInteger `json:"windowend,omitempty"`
 }
 
 // NewMolecularSequenceReferenceSeq creates a new MolecularSequenceReferenceSeq instance
-func NewMolecularSequenceReferenceSeq(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	chromosome CodeableConcept,
-	genomeBuild FhirString,
-	orientation OrientationType,
-	referenceSeqId CodeableConcept,
-	referenceSeqPointer Reference,
-	referenceSeqString FhirString,
-	strand StrandType,
-	windowStart FhirInteger,
-	windowEnd FhirInteger,
-) *MolecularSequenceReferenceSeq {
-	return &MolecularSequenceReferenceSeq{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Chromosome: chromosome,
-		GenomeBuild: genomeBuild,
-		Orientation: orientation,
-		ReferenceSeqId: referenceSeqId,
-		ReferenceSeqPointer: referenceSeqPointer,
-		ReferenceSeqString: referenceSeqString,
-		Strand: strand,
-		WindowStart: windowStart,
-		WindowEnd: windowEnd,
-	}
+func NewMolecularSequenceReferenceSeq() *MolecularSequenceReferenceSeq {
+	return &MolecularSequenceReferenceSeq{}
 }
+
 // FromJSON populates MolecularSequenceReferenceSeq from JSON data
 func (m *MolecularSequenceReferenceSeq) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -361,131 +145,64 @@ func (m *MolecularSequenceReferenceSeq) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MolecularSequenceReferenceSeq
-func (m *MolecularSequenceReferenceSeq) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	chromosome *CodeableConcept,
-	genomeBuild *FhirString,
-	orientation *OrientationType,
-	referenceSeqId *CodeableConcept,
-	referenceSeqPointer *Reference,
-	referenceSeqString *FhirString,
-	strand *StrandType,
-	windowStart *FhirInteger,
-	windowEnd *FhirInteger,
-) *MolecularSequenceReferenceSeq {
+// Clone creates a deep copy of MolecularSequenceReferenceSeq
+func (m *MolecularSequenceReferenceSeq) Clone() *MolecularSequenceReferenceSeq {
+	if m == nil { return nil }
 	return &MolecularSequenceReferenceSeq{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Chromosome: func() CodeableConcept {
-			if chromosome != nil { return *chromosome }
-			return m.Chromosome
-		}(),
-		GenomeBuild: func() FhirString {
-			if genomeBuild != nil { return *genomeBuild }
-			return m.GenomeBuild
-		}(),
-		Orientation: func() OrientationType {
-			if orientation != nil { return *orientation }
-			return m.Orientation
-		}(),
-		ReferenceSeqId: func() CodeableConcept {
-			if referenceSeqId != nil { return *referenceSeqId }
-			return m.ReferenceSeqId
-		}(),
-		ReferenceSeqPointer: func() Reference {
-			if referenceSeqPointer != nil { return *referenceSeqPointer }
-			return m.ReferenceSeqPointer
-		}(),
-		ReferenceSeqString: func() FhirString {
-			if referenceSeqString != nil { return *referenceSeqString }
-			return m.ReferenceSeqString
-		}(),
-		Strand: func() StrandType {
-			if strand != nil { return *strand }
-			return m.Strand
-		}(),
-		WindowStart: func() FhirInteger {
-			if windowStart != nil { return *windowStart }
-			return m.WindowStart
-		}(),
-		WindowEnd: func() FhirInteger {
-			if windowEnd != nil { return *windowEnd }
-			return m.WindowEnd
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Chromosome: m.Chromosome.Clone(),
+		GenomeBuild: m.GenomeBuild.Clone(),
+		Orientation: m.Orientation.Clone(),
+		ReferenceSeqId: m.ReferenceSeqId.Clone(),
+		ReferenceSeqPointer: m.ReferenceSeqPointer.Clone(),
+		ReferenceSeqString: m.ReferenceSeqString.Clone(),
+		Strand: m.Strand.Clone(),
+		WindowStart: m.WindowStart.Clone(),
+		WindowEnd: m.WindowEnd.Clone(),
 	}
 }
+
+// Equals checks for equality with another MolecularSequenceReferenceSeq instance
+func (m *MolecularSequenceReferenceSeq) Equals(other *MolecularSequenceReferenceSeq) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Chromosome.Equals(other.Chromosome) { return false }
+	if !m.GenomeBuild.Equals(other.GenomeBuild) { return false }
+	if !m.Orientation.Equals(other.Orientation) { return false }
+	if !m.ReferenceSeqId.Equals(other.ReferenceSeqId) { return false }
+	if !m.ReferenceSeqPointer.Equals(other.ReferenceSeqPointer) { return false }
+	if !m.ReferenceSeqString.Equals(other.ReferenceSeqString) { return false }
+	if !m.Strand.Equals(other.Strand) { return false }
+	if !m.WindowStart.Equals(other.WindowStart) { return false }
+	if !m.WindowEnd.Equals(other.WindowEnd) { return false }
+	return true
+}
+
 // MolecularSequenceVariant
 // The definition of variant here originates from Sequence ontology ([variant_of](http://www.sequenceontology.org/browser/current_svn/term/variant_of)). This element can represent amino acid or nucleic sequence change(including insertion,deletion,SNP,etc.)  It can represent some complex mutation or segment variation with the assist of CIGAR string.
 type MolecularSequenceVariant struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// start
-	// Start position of the variant on the  reference sequence. If the coordinate system is either 0-based or 1-based, then start position is inclusive.
-	Start FhirInteger `json:"start,omitempty"`
-	// end
-	// End position of the variant on the reference sequence. If the coordinate system is 0-based then end is exclusive and does not include the last position. If the coordinate system is 1-base, then end is inclusive and includes the last position.
-	End FhirInteger `json:"end,omitempty"`
-	// observedAllele
-	// An allele is one of a set of coexisting sequence variants of a gene ([SO:0001023](http://www.sequenceontology.org/browser/current_svn/term/SO:0001023)).  Nucleotide(s)/amino acids from start position of sequence to stop position of sequence on the positive (+) strand of the observed  sequence. When the sequence  type is DNA, it should be the sequence on the positive (+) strand. This will lay in the range between variant.start and variant.end.
-	ObservedAllele FhirString `json:"observedAllele,omitempty"`
-	// referenceAllele
-	// An allele is one of a set of coexisting sequence variants of a gene ([SO:0001023](http://www.sequenceontology.org/browser/current_svn/term/SO:0001023)). Nucleotide(s)/amino acids from start position of sequence to stop position of sequence on the positive (+) strand of the reference sequence. When the sequence  type is DNA, it should be the sequence on the positive (+) strand. This will lay in the range between variant.start and variant.end.
-	ReferenceAllele FhirString `json:"referenceAllele,omitempty"`
-	// cigar
-	// Extended CIGAR string for aligning the sequence with reference bases. See detailed documentation [here](http://support.illumina.com/help/SequencingAnalysisWorkflow/Content/Vault/Informatics/Sequencing_Analysis/CASAVA/swSEQ_mCA_ExtendedCIGARFormat.htm).
-	Cigar FhirString `json:"cigar,omitempty"`
-	// variantPointer
-	// A pointer to an Observation containing variant information.
-	VariantPointer Reference `json:"variantPointer,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Start *FhirInteger `json:"start,omitempty"`
+	End *FhirInteger `json:"end,omitempty"`
+	ObservedAllele *FhirString `json:"observedallele,omitempty"`
+	ReferenceAllele *FhirString `json:"referenceallele,omitempty"`
+	Cigar *FhirString `json:"cigar,omitempty"`
+	VariantPointer *Reference `json:"variantpointer,omitempty"`
 }
 
 // NewMolecularSequenceVariant creates a new MolecularSequenceVariant instance
-func NewMolecularSequenceVariant(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	start FhirInteger,
-	end FhirInteger,
-	observedAllele FhirString,
-	referenceAllele FhirString,
-	cigar FhirString,
-	variantPointer Reference,
-) *MolecularSequenceVariant {
-	return &MolecularSequenceVariant{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Start: start,
-		End: end,
-		ObservedAllele: observedAllele,
-		ReferenceAllele: referenceAllele,
-		Cigar: cigar,
-		VariantPointer: variantPointer,
-	}
+func NewMolecularSequenceVariant() *MolecularSequenceVariant {
+	return &MolecularSequenceVariant{}
 }
+
 // FromJSON populates MolecularSequenceVariant from JSON data
 func (m *MolecularSequenceVariant) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -496,161 +213,67 @@ func (m *MolecularSequenceVariant) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MolecularSequenceVariant
-func (m *MolecularSequenceVariant) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	start *FhirInteger,
-	end *FhirInteger,
-	observedAllele *FhirString,
-	referenceAllele *FhirString,
-	cigar *FhirString,
-	variantPointer *Reference,
-) *MolecularSequenceVariant {
+// Clone creates a deep copy of MolecularSequenceVariant
+func (m *MolecularSequenceVariant) Clone() *MolecularSequenceVariant {
+	if m == nil { return nil }
 	return &MolecularSequenceVariant{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Start: func() FhirInteger {
-			if start != nil { return *start }
-			return m.Start
-		}(),
-		End: func() FhirInteger {
-			if end != nil { return *end }
-			return m.End
-		}(),
-		ObservedAllele: func() FhirString {
-			if observedAllele != nil { return *observedAllele }
-			return m.ObservedAllele
-		}(),
-		ReferenceAllele: func() FhirString {
-			if referenceAllele != nil { return *referenceAllele }
-			return m.ReferenceAllele
-		}(),
-		Cigar: func() FhirString {
-			if cigar != nil { return *cigar }
-			return m.Cigar
-		}(),
-		VariantPointer: func() Reference {
-			if variantPointer != nil { return *variantPointer }
-			return m.VariantPointer
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Start: m.Start.Clone(),
+		End: m.End.Clone(),
+		ObservedAllele: m.ObservedAllele.Clone(),
+		ReferenceAllele: m.ReferenceAllele.Clone(),
+		Cigar: m.Cigar.Clone(),
+		VariantPointer: m.VariantPointer.Clone(),
 	}
 }
+
+// Equals checks for equality with another MolecularSequenceVariant instance
+func (m *MolecularSequenceVariant) Equals(other *MolecularSequenceVariant) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Start.Equals(other.Start) { return false }
+	if !m.End.Equals(other.End) { return false }
+	if !m.ObservedAllele.Equals(other.ObservedAllele) { return false }
+	if !m.ReferenceAllele.Equals(other.ReferenceAllele) { return false }
+	if !m.Cigar.Equals(other.Cigar) { return false }
+	if !m.VariantPointer.Equals(other.VariantPointer) { return false }
+	return true
+}
+
 // MolecularSequenceQuality
 // An experimental feature attribute that defines the quality of the feature in a quantitative way, such as a phred quality score ([SO:0001686](http://www.sequenceontology.org/browser/current_svn/term/SO:0001686)).
 type MolecularSequenceQuality struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// INDEL / SNP / Undefined variant.
-	Type_ QualityType `json:"type,omitempty"`
-	// standardSequence
-	// Gold standard sequence used for comparing against.
-	StandardSequence CodeableConcept `json:"standardSequence,omitempty"`
-	// start
-	// Start position of the sequence. If the coordinate system is either 0-based or 1-based, then start position is inclusive.
-	Start FhirInteger `json:"start,omitempty"`
-	// end
-	// End position of the sequence. If the coordinate system is 0-based then end is exclusive and does not include the last position. If the coordinate system is 1-base, then end is inclusive and includes the last position.
-	End FhirInteger `json:"end,omitempty"`
-	// score
-	// The score of an experimentally derived feature such as a p-value ([SO:0001685](http://www.sequenceontology.org/browser/current_svn/term/SO:0001685)).
-	Score Quantity `json:"score,omitempty"`
-	// method
-	// Which method is used to get sequence quality.
-	Method CodeableConcept `json:"method,omitempty"`
-	// truthTP
-	// True positives, from the perspective of the truth data, i.e. the number of sites in the Truth Call Set for which there are paths through the Query Call Set that are consistent with all of the alleles at this site, and for which there is an accurate genotype call for the event.
-	TruthTP FhirDecimal `json:"truthTP,omitempty"`
-	// queryTP
-	// True positives, from the perspective of the query data, i.e. the number of sites in the Query Call Set for which there are paths through the Truth Call Set that are consistent with all of the alleles at this site, and for which there is an accurate genotype call for the event.
-	QueryTP FhirDecimal `json:"queryTP,omitempty"`
-	// truthFN
-	// False negatives, i.e. the number of sites in the Truth Call Set for which there is no path through the Query Call Set that is consistent with all of the alleles at this site, or sites for which there is an inaccurate genotype call for the event. Sites with correct variant but incorrect genotype are counted here.
-	TruthFN FhirDecimal `json:"truthFN,omitempty"`
-	// queryFP
-	// False positives, i.e. the number of sites in the Query Call Set for which there is no path through the Truth Call Set that is consistent with this site. Sites with correct variant but incorrect genotype are counted here.
-	QueryFP FhirDecimal `json:"queryFP,omitempty"`
-	// gtFP
-	// The number of false positives where the non-REF alleles in the Truth and Query Call Sets match (i.e. cases where the truth is 1/1 and the query is 0/1 or similar).
-	GtFP FhirDecimal `json:"gtFP,omitempty"`
-	// precision
-	// QUERY.TP / (QUERY.TP + QUERY.FP).
-	Precision FhirDecimal `json:"precision,omitempty"`
-	// recall
-	// TRUTH.TP / (TRUTH.TP + TRUTH.FN).
-	Recall FhirDecimal `json:"recall,omitempty"`
-	// fScore
-	// Harmonic mean of Recall and Precision, computed as: 2 * precision * recall / (precision + recall).
-	FScore FhirDecimal `json:"fScore,omitempty"`
-	// roc
-	// Receiver Operator Characteristic (ROC) Curve  to give sensitivity/specificity tradeoff.
-	Roc MolecularSequenceRoc `json:"roc,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *QualityType `json:"type,omitempty"`
+	StandardSequence *CodeableConcept `json:"standardsequence,omitempty"`
+	Start *FhirInteger `json:"start,omitempty"`
+	End *FhirInteger `json:"end,omitempty"`
+	Score *Quantity `json:"score,omitempty"`
+	Method *CodeableConcept `json:"method,omitempty"`
+	TruthTP *FhirDecimal `json:"truthtp,omitempty"`
+	QueryTP *FhirDecimal `json:"querytp,omitempty"`
+	TruthFN *FhirDecimal `json:"truthfn,omitempty"`
+	QueryFP *FhirDecimal `json:"queryfp,omitempty"`
+	GtFP *FhirDecimal `json:"gtfp,omitempty"`
+	Precision *FhirDecimal `json:"precision,omitempty"`
+	Recall *FhirDecimal `json:"recall,omitempty"`
+	FScore *FhirDecimal `json:"fscore,omitempty"`
+	Roc *MolecularSequenceRoc `json:"roc,omitempty"`
 }
 
 // NewMolecularSequenceQuality creates a new MolecularSequenceQuality instance
-func NewMolecularSequenceQuality(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ QualityType,
-	standardSequence CodeableConcept,
-	start FhirInteger,
-	end FhirInteger,
-	score Quantity,
-	method CodeableConcept,
-	truthTP FhirDecimal,
-	queryTP FhirDecimal,
-	truthFN FhirDecimal,
-	queryFP FhirDecimal,
-	gtFP FhirDecimal,
-	precision FhirDecimal,
-	recall FhirDecimal,
-	fScore FhirDecimal,
-	roc MolecularSequenceRoc,
-) *MolecularSequenceQuality {
-	return &MolecularSequenceQuality{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		StandardSequence: standardSequence,
-		Start: start,
-		End: end,
-		Score: score,
-		Method: method,
-		TruthTP: truthTP,
-		QueryTP: queryTP,
-		TruthFN: truthFN,
-		QueryFP: queryFP,
-		GtFP: gtFP,
-		Precision: precision,
-		Recall: recall,
-		FScore: fScore,
-		Roc: roc,
-	}
+func NewMolecularSequenceQuality() *MolecularSequenceQuality {
+	return &MolecularSequenceQuality{}
 }
+
 // FromJSON populates MolecularSequenceQuality from JSON data
 func (m *MolecularSequenceQuality) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -661,166 +284,77 @@ func (m *MolecularSequenceQuality) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MolecularSequenceQuality
-func (m *MolecularSequenceQuality) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *QualityType,
-	standardSequence *CodeableConcept,
-	start *FhirInteger,
-	end *FhirInteger,
-	score *Quantity,
-	method *CodeableConcept,
-	truthTP *FhirDecimal,
-	queryTP *FhirDecimal,
-	truthFN *FhirDecimal,
-	queryFP *FhirDecimal,
-	gtFP *FhirDecimal,
-	precision *FhirDecimal,
-	recall *FhirDecimal,
-	fScore *FhirDecimal,
-	roc *MolecularSequenceRoc,
-) *MolecularSequenceQuality {
+// Clone creates a deep copy of MolecularSequenceQuality
+func (m *MolecularSequenceQuality) Clone() *MolecularSequenceQuality {
+	if m == nil { return nil }
 	return &MolecularSequenceQuality{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() QualityType {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		StandardSequence: func() CodeableConcept {
-			if standardSequence != nil { return *standardSequence }
-			return m.StandardSequence
-		}(),
-		Start: func() FhirInteger {
-			if start != nil { return *start }
-			return m.Start
-		}(),
-		End: func() FhirInteger {
-			if end != nil { return *end }
-			return m.End
-		}(),
-		Score: func() Quantity {
-			if score != nil { return *score }
-			return m.Score
-		}(),
-		Method: func() CodeableConcept {
-			if method != nil { return *method }
-			return m.Method
-		}(),
-		TruthTP: func() FhirDecimal {
-			if truthTP != nil { return *truthTP }
-			return m.TruthTP
-		}(),
-		QueryTP: func() FhirDecimal {
-			if queryTP != nil { return *queryTP }
-			return m.QueryTP
-		}(),
-		TruthFN: func() FhirDecimal {
-			if truthFN != nil { return *truthFN }
-			return m.TruthFN
-		}(),
-		QueryFP: func() FhirDecimal {
-			if queryFP != nil { return *queryFP }
-			return m.QueryFP
-		}(),
-		GtFP: func() FhirDecimal {
-			if gtFP != nil { return *gtFP }
-			return m.GtFP
-		}(),
-		Precision: func() FhirDecimal {
-			if precision != nil { return *precision }
-			return m.Precision
-		}(),
-		Recall: func() FhirDecimal {
-			if recall != nil { return *recall }
-			return m.Recall
-		}(),
-		FScore: func() FhirDecimal {
-			if fScore != nil { return *fScore }
-			return m.FScore
-		}(),
-		Roc: func() MolecularSequenceRoc {
-			if roc != nil { return *roc }
-			return m.Roc
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		StandardSequence: m.StandardSequence.Clone(),
+		Start: m.Start.Clone(),
+		End: m.End.Clone(),
+		Score: m.Score.Clone(),
+		Method: m.Method.Clone(),
+		TruthTP: m.TruthTP.Clone(),
+		QueryTP: m.QueryTP.Clone(),
+		TruthFN: m.TruthFN.Clone(),
+		QueryFP: m.QueryFP.Clone(),
+		GtFP: m.GtFP.Clone(),
+		Precision: m.Precision.Clone(),
+		Recall: m.Recall.Clone(),
+		FScore: m.FScore.Clone(),
+		Roc: m.Roc.Clone(),
 	}
 }
+
+// Equals checks for equality with another MolecularSequenceQuality instance
+func (m *MolecularSequenceQuality) Equals(other *MolecularSequenceQuality) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.StandardSequence.Equals(other.StandardSequence) { return false }
+	if !m.Start.Equals(other.Start) { return false }
+	if !m.End.Equals(other.End) { return false }
+	if !m.Score.Equals(other.Score) { return false }
+	if !m.Method.Equals(other.Method) { return false }
+	if !m.TruthTP.Equals(other.TruthTP) { return false }
+	if !m.QueryTP.Equals(other.QueryTP) { return false }
+	if !m.TruthFN.Equals(other.TruthFN) { return false }
+	if !m.QueryFP.Equals(other.QueryFP) { return false }
+	if !m.GtFP.Equals(other.GtFP) { return false }
+	if !m.Precision.Equals(other.Precision) { return false }
+	if !m.Recall.Equals(other.Recall) { return false }
+	if !m.FScore.Equals(other.FScore) { return false }
+	if !m.Roc.Equals(other.Roc) { return false }
+	return true
+}
+
 // MolecularSequenceRoc
 // Receiver Operator Characteristic (ROC) Curve  to give sensitivity/specificity tradeoff.
 type MolecularSequenceRoc struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// score
-	// Invidual data point representing the GQ (genotype quality) score threshold.
-	Score []FhirInteger `json:"score,omitempty"`
-	// numTP
-	// The number of true positives if the GQ score threshold was set to "score" field value.
-	NumTP []FhirInteger `json:"numTP,omitempty"`
-	// numFP
-	// The number of false positives if the GQ score threshold was set to "score" field value.
-	NumFP []FhirInteger `json:"numFP,omitempty"`
-	// numFN
-	// The number of false negatives if the GQ score threshold was set to "score" field value.
-	NumFN []FhirInteger `json:"numFN,omitempty"`
-	// precision
-	// Calculated precision if the GQ score threshold was set to "score" field value.
-	Precision []FhirDecimal `json:"precision,omitempty"`
-	// sensitivity
-	// Calculated sensitivity if the GQ score threshold was set to "score" field value.
-	Sensitivity []FhirDecimal `json:"sensitivity,omitempty"`
-	// fMeasure
-	// Calculated fScore if the GQ score threshold was set to "score" field value.
-	FMeasure []FhirDecimal `json:"fMeasure,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Score []*FhirInteger `json:"score,omitempty"`
+	NumTP []*FhirInteger `json:"numtp,omitempty"`
+	NumFP []*FhirInteger `json:"numfp,omitempty"`
+	NumFN []*FhirInteger `json:"numfn,omitempty"`
+	Precision []*FhirDecimal `json:"precision,omitempty"`
+	Sensitivity []*FhirDecimal `json:"sensitivity,omitempty"`
+	FMeasure []*FhirDecimal `json:"fmeasure,omitempty"`
 }
 
 // NewMolecularSequenceRoc creates a new MolecularSequenceRoc instance
-func NewMolecularSequenceRoc(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	score []FhirInteger,
-	numTP []FhirInteger,
-	numFP []FhirInteger,
-	numFN []FhirInteger,
-	precision []FhirDecimal,
-	sensitivity []FhirDecimal,
-	fMeasure []FhirDecimal,
-) *MolecularSequenceRoc {
-	return &MolecularSequenceRoc{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Score: score,
-		NumTP: numTP,
-		NumFP: numFP,
-		NumFN: numFN,
-		Precision: precision,
-		Sensitivity: sensitivity,
-		FMeasure: fMeasure,
-	}
+func NewMolecularSequenceRoc() *MolecularSequenceRoc {
+	return &MolecularSequenceRoc{}
 }
+
 // FromJSON populates MolecularSequenceRoc from JSON data
 func (m *MolecularSequenceRoc) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -831,121 +365,60 @@ func (m *MolecularSequenceRoc) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MolecularSequenceRoc
-func (m *MolecularSequenceRoc) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	score *[]FhirInteger,
-	numTP *[]FhirInteger,
-	numFP *[]FhirInteger,
-	numFN *[]FhirInteger,
-	precision *[]FhirDecimal,
-	sensitivity *[]FhirDecimal,
-	fMeasure *[]FhirDecimal,
-) *MolecularSequenceRoc {
+// Clone creates a deep copy of MolecularSequenceRoc
+func (m *MolecularSequenceRoc) Clone() *MolecularSequenceRoc {
+	if m == nil { return nil }
 	return &MolecularSequenceRoc{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Score: func() []FhirInteger {
-			if score != nil { return *score }
-			return m.Score
-		}(),
-		NumTP: func() []FhirInteger {
-			if numTP != nil { return *numTP }
-			return m.NumTP
-		}(),
-		NumFP: func() []FhirInteger {
-			if numFP != nil { return *numFP }
-			return m.NumFP
-		}(),
-		NumFN: func() []FhirInteger {
-			if numFN != nil { return *numFN }
-			return m.NumFN
-		}(),
-		Precision: func() []FhirDecimal {
-			if precision != nil { return *precision }
-			return m.Precision
-		}(),
-		Sensitivity: func() []FhirDecimal {
-			if sensitivity != nil { return *sensitivity }
-			return m.Sensitivity
-		}(),
-		FMeasure: func() []FhirDecimal {
-			if fMeasure != nil { return *fMeasure }
-			return m.FMeasure
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Score: cloneSlices(m.Score),
+		NumTP: cloneSlices(m.NumTP),
+		NumFP: cloneSlices(m.NumFP),
+		NumFN: cloneSlices(m.NumFN),
+		Precision: cloneSlices(m.Precision),
+		Sensitivity: cloneSlices(m.Sensitivity),
+		FMeasure: cloneSlices(m.FMeasure),
 	}
 }
+
+// Equals checks for equality with another MolecularSequenceRoc instance
+func (m *MolecularSequenceRoc) Equals(other *MolecularSequenceRoc) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Score, other.Score) { return false }
+	if !compareSlices(m.NumTP, other.NumTP) { return false }
+	if !compareSlices(m.NumFP, other.NumFP) { return false }
+	if !compareSlices(m.NumFN, other.NumFN) { return false }
+	if !compareSlices(m.Precision, other.Precision) { return false }
+	if !compareSlices(m.Sensitivity, other.Sensitivity) { return false }
+	if !compareSlices(m.FMeasure, other.FMeasure) { return false }
+	return true
+}
+
 // MolecularSequenceRepository
 // Configurations of the external repository. The repository shall store target's observedSeq or records related with target's observedSeq.
 type MolecularSequenceRepository struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// Click and see / RESTful API / Need login to see / RESTful API with authentication / Other ways to see resource.
-	Type_ RepositoryType `json:"type,omitempty"`
-	// url
-	// URI of an external repository which contains further details about the genetics data.
-	Url FhirUri `json:"url,omitempty"`
-	// name
-	// URI of an external repository which contains further details about the genetics data.
-	Name FhirString `json:"name,omitempty"`
-	// datasetId
-	// Id of the variant in this external repository. The server will understand how to use this id to call for more info about datasets in external repository.
-	DatasetId FhirString `json:"datasetId,omitempty"`
-	// variantsetId
-	// Id of the variantset in this external repository. The server will understand how to use this id to call for more info about variantsets in external repository.
-	VariantsetId FhirString `json:"variantsetId,omitempty"`
-	// readsetId
-	// Id of the read in this external repository.
-	ReadsetId FhirString `json:"readsetId,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *RepositoryType `json:"type,omitempty"`
+	Url *FhirUri `json:"url,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	DatasetId *FhirString `json:"datasetid,omitempty"`
+	VariantsetId *FhirString `json:"variantsetid,omitempty"`
+	ReadsetId *FhirString `json:"readsetid,omitempty"`
 }
 
 // NewMolecularSequenceRepository creates a new MolecularSequenceRepository instance
-func NewMolecularSequenceRepository(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ RepositoryType,
-	url FhirUri,
-	name FhirString,
-	datasetId FhirString,
-	variantsetId FhirString,
-	readsetId FhirString,
-) *MolecularSequenceRepository {
-	return &MolecularSequenceRepository{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Url: url,
-		Name: name,
-		DatasetId: datasetId,
-		VariantsetId: variantsetId,
-		ReadsetId: readsetId,
-	}
+func NewMolecularSequenceRepository() *MolecularSequenceRepository {
+	return &MolecularSequenceRepository{}
 }
+
 // FromJSON populates MolecularSequenceRepository from JSON data
 func (m *MolecularSequenceRepository) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -956,111 +429,57 @@ func (m *MolecularSequenceRepository) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MolecularSequenceRepository
-func (m *MolecularSequenceRepository) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *RepositoryType,
-	url *FhirUri,
-	name *FhirString,
-	datasetId *FhirString,
-	variantsetId *FhirString,
-	readsetId *FhirString,
-) *MolecularSequenceRepository {
+// Clone creates a deep copy of MolecularSequenceRepository
+func (m *MolecularSequenceRepository) Clone() *MolecularSequenceRepository {
+	if m == nil { return nil }
 	return &MolecularSequenceRepository{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() RepositoryType {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Url: func() FhirUri {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		DatasetId: func() FhirString {
-			if datasetId != nil { return *datasetId }
-			return m.DatasetId
-		}(),
-		VariantsetId: func() FhirString {
-			if variantsetId != nil { return *variantsetId }
-			return m.VariantsetId
-		}(),
-		ReadsetId: func() FhirString {
-			if readsetId != nil { return *readsetId }
-			return m.ReadsetId
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Url: m.Url.Clone(),
+		Name: m.Name.Clone(),
+		DatasetId: m.DatasetId.Clone(),
+		VariantsetId: m.VariantsetId.Clone(),
+		ReadsetId: m.ReadsetId.Clone(),
 	}
 }
+
+// Equals checks for equality with another MolecularSequenceRepository instance
+func (m *MolecularSequenceRepository) Equals(other *MolecularSequenceRepository) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.DatasetId.Equals(other.DatasetId) { return false }
+	if !m.VariantsetId.Equals(other.VariantsetId) { return false }
+	if !m.ReadsetId.Equals(other.ReadsetId) { return false }
+	return true
+}
+
 // MolecularSequenceStructureVariant
 // Information about chromosome structure variation.
 type MolecularSequenceStructureVariant struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// variantType
-	// Information about chromosome structure variation DNA change type.
-	VariantType CodeableConcept `json:"variantType,omitempty"`
-	// exact
-	// Used to indicate if the outer and inner start-end values have the same meaning.
-	Exact FhirBoolean `json:"exact,omitempty"`
-	// length
-	// Length of the variant chromosome.
-	Length FhirInteger `json:"length,omitempty"`
-	// outer
-	// Structural variant outer.
-	Outer MolecularSequenceOuter `json:"outer,omitempty"`
-	// inner
-	// Structural variant inner.
-	Inner MolecularSequenceInner `json:"inner,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	VariantType *CodeableConcept `json:"varianttype,omitempty"`
+	Exact *FhirBoolean `json:"exact,omitempty"`
+	Length *FhirInteger `json:"length,omitempty"`
+	Outer *MolecularSequenceOuter `json:"outer,omitempty"`
+	Inner *MolecularSequenceInner `json:"inner,omitempty"`
 }
 
 // NewMolecularSequenceStructureVariant creates a new MolecularSequenceStructureVariant instance
-func NewMolecularSequenceStructureVariant(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	variantType CodeableConcept,
-	exact FhirBoolean,
-	length FhirInteger,
-	outer MolecularSequenceOuter,
-	inner MolecularSequenceInner,
-) *MolecularSequenceStructureVariant {
-	return &MolecularSequenceStructureVariant{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		VariantType: variantType,
-		Exact: exact,
-		Length: length,
-		Outer: outer,
-		Inner: inner,
-	}
+func NewMolecularSequenceStructureVariant() *MolecularSequenceStructureVariant {
+	return &MolecularSequenceStructureVariant{}
 }
+
 // FromJSON populates MolecularSequenceStructureVariant from JSON data
 func (m *MolecularSequenceStructureVariant) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1071,91 +490,52 @@ func (m *MolecularSequenceStructureVariant) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MolecularSequenceStructureVariant
-func (m *MolecularSequenceStructureVariant) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	variantType *CodeableConcept,
-	exact *FhirBoolean,
-	length *FhirInteger,
-	outer *MolecularSequenceOuter,
-	inner *MolecularSequenceInner,
-) *MolecularSequenceStructureVariant {
+// Clone creates a deep copy of MolecularSequenceStructureVariant
+func (m *MolecularSequenceStructureVariant) Clone() *MolecularSequenceStructureVariant {
+	if m == nil { return nil }
 	return &MolecularSequenceStructureVariant{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		VariantType: func() CodeableConcept {
-			if variantType != nil { return *variantType }
-			return m.VariantType
-		}(),
-		Exact: func() FhirBoolean {
-			if exact != nil { return *exact }
-			return m.Exact
-		}(),
-		Length: func() FhirInteger {
-			if length != nil { return *length }
-			return m.Length
-		}(),
-		Outer: func() MolecularSequenceOuter {
-			if outer != nil { return *outer }
-			return m.Outer
-		}(),
-		Inner: func() MolecularSequenceInner {
-			if inner != nil { return *inner }
-			return m.Inner
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		VariantType: m.VariantType.Clone(),
+		Exact: m.Exact.Clone(),
+		Length: m.Length.Clone(),
+		Outer: m.Outer.Clone(),
+		Inner: m.Inner.Clone(),
 	}
 }
+
+// Equals checks for equality with another MolecularSequenceStructureVariant instance
+func (m *MolecularSequenceStructureVariant) Equals(other *MolecularSequenceStructureVariant) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.VariantType.Equals(other.VariantType) { return false }
+	if !m.Exact.Equals(other.Exact) { return false }
+	if !m.Length.Equals(other.Length) { return false }
+	if !m.Outer.Equals(other.Outer) { return false }
+	if !m.Inner.Equals(other.Inner) { return false }
+	return true
+}
+
 // MolecularSequenceOuter
 // Structural variant outer.
 type MolecularSequenceOuter struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// start
-	// Structural variant outer start. If the coordinate system is either 0-based or 1-based, then start position is inclusive.
-	Start FhirInteger `json:"start,omitempty"`
-	// end
-	// Structural variant outer end. If the coordinate system is 0-based then end is exclusive and does not include the last position. If the coordinate system is 1-base, then end is inclusive and includes the last position.
-	End FhirInteger `json:"end,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Start *FhirInteger `json:"start,omitempty"`
+	End *FhirInteger `json:"end,omitempty"`
 }
 
 // NewMolecularSequenceOuter creates a new MolecularSequenceOuter instance
-func NewMolecularSequenceOuter(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	start FhirInteger,
-	end FhirInteger,
-) *MolecularSequenceOuter {
-	return &MolecularSequenceOuter{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Start: start,
-		End: end,
-	}
+func NewMolecularSequenceOuter() *MolecularSequenceOuter {
+	return &MolecularSequenceOuter{}
 }
+
 // FromJSON populates MolecularSequenceOuter from JSON data
 func (m *MolecularSequenceOuter) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1166,76 +546,46 @@ func (m *MolecularSequenceOuter) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MolecularSequenceOuter
-func (m *MolecularSequenceOuter) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	start *FhirInteger,
-	end *FhirInteger,
-) *MolecularSequenceOuter {
+// Clone creates a deep copy of MolecularSequenceOuter
+func (m *MolecularSequenceOuter) Clone() *MolecularSequenceOuter {
+	if m == nil { return nil }
 	return &MolecularSequenceOuter{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Start: func() FhirInteger {
-			if start != nil { return *start }
-			return m.Start
-		}(),
-		End: func() FhirInteger {
-			if end != nil { return *end }
-			return m.End
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Start: m.Start.Clone(),
+		End: m.End.Clone(),
 	}
 }
+
+// Equals checks for equality with another MolecularSequenceOuter instance
+func (m *MolecularSequenceOuter) Equals(other *MolecularSequenceOuter) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Start.Equals(other.Start) { return false }
+	if !m.End.Equals(other.End) { return false }
+	return true
+}
+
 // MolecularSequenceInner
 // Structural variant inner.
 type MolecularSequenceInner struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// start
-	// Structural variant inner start. If the coordinate system is either 0-based or 1-based, then start position is inclusive.
-	Start FhirInteger `json:"start,omitempty"`
-	// end
-	// Structural variant inner end. If the coordinate system is 0-based then end is exclusive and does not include the last position. If the coordinate system is 1-base, then end is inclusive and includes the last position.
-	End FhirInteger `json:"end,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Start *FhirInteger `json:"start,omitempty"`
+	End *FhirInteger `json:"end,omitempty"`
 }
 
 // NewMolecularSequenceInner creates a new MolecularSequenceInner instance
-func NewMolecularSequenceInner(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	start FhirInteger,
-	end FhirInteger,
-) *MolecularSequenceInner {
-	return &MolecularSequenceInner{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Start: start,
-		End: end,
-	}
+func NewMolecularSequenceInner() *MolecularSequenceInner {
+	return &MolecularSequenceInner{}
 }
+
 // FromJSON populates MolecularSequenceInner from JSON data
 func (m *MolecularSequenceInner) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1246,34 +596,27 @@ func (m *MolecularSequenceInner) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MolecularSequenceInner
-func (m *MolecularSequenceInner) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	start *FhirInteger,
-	end *FhirInteger,
-) *MolecularSequenceInner {
+// Clone creates a deep copy of MolecularSequenceInner
+func (m *MolecularSequenceInner) Clone() *MolecularSequenceInner {
+	if m == nil { return nil }
 	return &MolecularSequenceInner{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Start: func() FhirInteger {
-			if start != nil { return *start }
-			return m.Start
-		}(),
-		End: func() FhirInteger {
-			if end != nil { return *end }
-			return m.End
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Start: m.Start.Clone(),
+		End: m.End.Clone(),
 	}
 }
+
+// Equals checks for equality with another MolecularSequenceInner instance
+func (m *MolecularSequenceInner) Equals(other *MolecularSequenceInner) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Start.Equals(other.Start) { return false }
+	if !m.End.Equals(other.End) { return false }
+	return true
+}
+

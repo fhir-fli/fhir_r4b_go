@@ -3,219 +3,58 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // Task
 // A task to be performed.
 type Task struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// The business identifier for this task.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// instantiatesCanonical
-	// The URL pointing to a *FHIR*-defined protocol, guideline, orderset or other definition that is adhered to in whole or in part by this Task.
-	InstantiatesCanonical FhirCanonical `json:"instantiatesCanonical,omitempty"`
-	// instantiatesUri
-	// The URL pointing to an *externally* maintained  protocol, guideline, orderset or other definition that is adhered to in whole or in part by this Task.
-	InstantiatesUri FhirUri `json:"instantiatesUri,omitempty"`
-	// basedOn
-	// BasedOn refers to a higher-level authorization that triggered the creation of the task.  It references a "request" resource such as a ServiceRequest, MedicationRequest, ServiceRequest, CarePlan, etc. which is distinct from the "request" resource the task is seeking to fulfill.  This latter resource is referenced by FocusOn.  For example, based on a ServiceRequest (= BasedOn), a task is created to fulfill a procedureRequest ( = FocusOn ) to collect a specimen from a patient.
-	BasedOn []Reference `json:"basedOn,omitempty"`
-	// groupIdentifier
-	// An identifier that links together multiple tasks and other requests that were created in the same context.
-	GroupIdentifier Identifier `json:"groupIdentifier,omitempty"`
-	// partOf
-	// Task that this particular task is part of.
-	PartOf []Reference `json:"partOf,omitempty"`
-	// status
-	// The current status of the task.
-	Status TaskStatus `json:"status,omitempty"`
-	// statusReason
-	// An explanation as to why this task is held, failed, was refused, etc.
-	StatusReason CodeableConcept `json:"statusReason,omitempty"`
-	// businessStatus
-	// Contains business-specific nuances of the business state.
-	BusinessStatus CodeableConcept `json:"businessStatus,omitempty"`
-	// intent
-	// Indicates the "level" of actionability associated with the Task, i.e. i+R[9]Cs this a proposed task, a planned task, an actionable task, etc.
-	Intent TaskIntent `json:"intent,omitempty"`
-	// priority
-	// Indicates how quickly the Task should be addressed with respect to other requests.
-	Priority RequestPriority `json:"priority,omitempty"`
-	// code
-	// A name or code (or both) briefly describing what the task involves.
-	Code CodeableConcept `json:"code,omitempty"`
-	// description
-	// A free-text description of what is to be performed.
-	Description FhirString `json:"description,omitempty"`
-	// focus
-	// The request being actioned or the resource being manipulated by this task.
-	Focus Reference `json:"focus,omitempty"`
-	// for
-	// The entity who benefits from the performance of the service specified in the task (e.g., the patient).
-	For_ Reference `json:"for,omitempty"`
-	// encounter
-	// The healthcare event  (e.g. a patient and healthcare provider interaction) during which this task was created.
-	Encounter Reference `json:"encounter,omitempty"`
-	// executionPeriod
-	// Identifies the time action was first taken against the task (start) and/or the time final action was taken against the task prior to marking it as completed (end).
-	ExecutionPeriod Period `json:"executionPeriod,omitempty"`
-	// authoredOn
-	// The date and time this task was created.
-	AuthoredOn FhirDateTime `json:"authoredOn,omitempty"`
-	// lastModified
-	// The date and time of last modification to this task.
-	LastModified FhirDateTime `json:"lastModified,omitempty"`
-	// requester
-	// The creator of the task.
-	Requester Reference `json:"requester,omitempty"`
-	// performerType
-	// The kind of participant that should perform the task.
-	PerformerType []CodeableConcept `json:"performerType,omitempty"`
-	// owner
-	// Individual organization or Device currently responsible for task execution.
-	Owner Reference `json:"owner,omitempty"`
-	// location
-	// Principal physical location where the this task is performed.
-	Location Reference `json:"location,omitempty"`
-	// reasonCode
-	// A description or code indicating why this task needs to be performed.
-	ReasonCode CodeableConcept `json:"reasonCode,omitempty"`
-	// reasonReference
-	// A resource reference indicating why this task needs to be performed.
-	ReasonReference Reference `json:"reasonReference,omitempty"`
-	// insurance
-	// Insurance plans, coverage extensions, pre-authorizations and/or pre-determinations that may be relevant to the Task.
-	Insurance []Reference `json:"insurance,omitempty"`
-	// note
-	// Free-text information captured about the task as it progresses.
-	Note []Annotation `json:"note,omitempty"`
-	// relevantHistory
-	// Links to Provenance records for past versions of this Task that identify key state transitions or updates that are likely to be relevant to a user looking at the current version of the task.
-	RelevantHistory []Reference `json:"relevantHistory,omitempty"`
-	// restriction
-	// If the Task.focus is a request resource and the task is seeking fulfillment (i.e. is asking for the request to be actioned), this element identifies any limitations on what parts of the referenced request should be actioned.
-	Restriction TaskRestriction `json:"restriction,omitempty"`
-	// input
-	// Additional information that may be needed in the execution of the task.
-	Input []TaskInput `json:"input,omitempty"`
-	// output
-	// Outputs produced by the Task.
-	Output []TaskOutput `json:"output,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	InstantiatesCanonical *FhirCanonical `json:"instantiatescanonical,omitempty"`
+	InstantiatesUri *FhirUri `json:"instantiatesuri,omitempty"`
+	BasedOn []*Reference `json:"basedon,omitempty"`
+	GroupIdentifier *Identifier `json:"groupidentifier,omitempty"`
+	PartOf []*Reference `json:"partof,omitempty"`
+	Status *TaskStatus `json:"status,omitempty"`
+	StatusReason *CodeableConcept `json:"statusreason,omitempty"`
+	BusinessStatus *CodeableConcept `json:"businessstatus,omitempty"`
+	Intent *TaskIntent `json:"intent,omitempty"`
+	Priority *RequestPriority `json:"priority,omitempty"`
+	Code *CodeableConcept `json:"code,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Focus *Reference `json:"focus,omitempty"`
+	For_ *Reference `json:"for,omitempty"`
+	Encounter *Reference `json:"encounter,omitempty"`
+	ExecutionPeriod *Period `json:"executionperiod,omitempty"`
+	AuthoredOn *FhirDateTime `json:"authoredon,omitempty"`
+	LastModified *FhirDateTime `json:"lastmodified,omitempty"`
+	Requester *Reference `json:"requester,omitempty"`
+	PerformerType []*CodeableConcept `json:"performertype,omitempty"`
+	Owner *Reference `json:"owner,omitempty"`
+	Location *Reference `json:"location,omitempty"`
+	ReasonCode *CodeableConcept `json:"reasoncode,omitempty"`
+	ReasonReference *Reference `json:"reasonreference,omitempty"`
+	Insurance []*Reference `json:"insurance,omitempty"`
+	Note []*Annotation `json:"note,omitempty"`
+	RelevantHistory []*Reference `json:"relevanthistory,omitempty"`
+	Restriction *TaskRestriction `json:"restriction,omitempty"`
+	Input []*TaskInput `json:"input,omitempty"`
+	Output []*TaskOutput `json:"output,omitempty"`
 }
 
 // NewTask creates a new Task instance
-func NewTask(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	instantiatesCanonical FhirCanonical,
-	instantiatesUri FhirUri,
-	basedOn []Reference,
-	groupIdentifier Identifier,
-	partOf []Reference,
-	status TaskStatus,
-	statusReason CodeableConcept,
-	businessStatus CodeableConcept,
-	intent TaskIntent,
-	priority RequestPriority,
-	code CodeableConcept,
-	description FhirString,
-	focus Reference,
-	for_ Reference,
-	encounter Reference,
-	executionPeriod Period,
-	authoredOn FhirDateTime,
-	lastModified FhirDateTime,
-	requester Reference,
-	performerType []CodeableConcept,
-	owner Reference,
-	location Reference,
-	reasonCode CodeableConcept,
-	reasonReference Reference,
-	insurance []Reference,
-	note []Annotation,
-	relevantHistory []Reference,
-	restriction TaskRestriction,
-	input []TaskInput,
-	output []TaskOutput,
-) *Task {
-	return &Task{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		InstantiatesCanonical: instantiatesCanonical,
-		InstantiatesUri: instantiatesUri,
-		BasedOn: basedOn,
-		GroupIdentifier: groupIdentifier,
-		PartOf: partOf,
-		Status: status,
-		StatusReason: statusReason,
-		BusinessStatus: businessStatus,
-		Intent: intent,
-		Priority: priority,
-		Code: code,
-		Description: description,
-		Focus: focus,
-		For_: for_,
-		Encounter: encounter,
-		ExecutionPeriod: executionPeriod,
-		AuthoredOn: authoredOn,
-		LastModified: lastModified,
-		Requester: requester,
-		PerformerType: performerType,
-		Owner: owner,
-		Location: location,
-		ReasonCode: reasonCode,
-		ReasonReference: reasonReference,
-		Insurance: insurance,
-		Note: note,
-		RelevantHistory: relevantHistory,
-		Restriction: restriction,
-		Input: input,
-		Output: output,
-	}
+func NewTask() *Task {
+	return &Task{}
 }
+
 // FromJSON populates Task from JSON data
 func (m *Task) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -226,251 +65,115 @@ func (m *Task) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of Task
-func (m *Task) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	instantiatesCanonical *FhirCanonical,
-	instantiatesUri *FhirUri,
-	basedOn *[]Reference,
-	groupIdentifier *Identifier,
-	partOf *[]Reference,
-	status *TaskStatus,
-	statusReason *CodeableConcept,
-	businessStatus *CodeableConcept,
-	intent *TaskIntent,
-	priority *RequestPriority,
-	code *CodeableConcept,
-	description *FhirString,
-	focus *Reference,
-	for_ *Reference,
-	encounter *Reference,
-	executionPeriod *Period,
-	authoredOn *FhirDateTime,
-	lastModified *FhirDateTime,
-	requester *Reference,
-	performerType *[]CodeableConcept,
-	owner *Reference,
-	location *Reference,
-	reasonCode *CodeableConcept,
-	reasonReference *Reference,
-	insurance *[]Reference,
-	note *[]Annotation,
-	relevantHistory *[]Reference,
-	restriction *TaskRestriction,
-	input *[]TaskInput,
-	output *[]TaskOutput,
-) *Task {
+// Clone creates a deep copy of Task
+func (m *Task) Clone() *Task {
+	if m == nil { return nil }
 	return &Task{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		InstantiatesCanonical: func() FhirCanonical {
-			if instantiatesCanonical != nil { return *instantiatesCanonical }
-			return m.InstantiatesCanonical
-		}(),
-		InstantiatesUri: func() FhirUri {
-			if instantiatesUri != nil { return *instantiatesUri }
-			return m.InstantiatesUri
-		}(),
-		BasedOn: func() []Reference {
-			if basedOn != nil { return *basedOn }
-			return m.BasedOn
-		}(),
-		GroupIdentifier: func() Identifier {
-			if groupIdentifier != nil { return *groupIdentifier }
-			return m.GroupIdentifier
-		}(),
-		PartOf: func() []Reference {
-			if partOf != nil { return *partOf }
-			return m.PartOf
-		}(),
-		Status: func() TaskStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		StatusReason: func() CodeableConcept {
-			if statusReason != nil { return *statusReason }
-			return m.StatusReason
-		}(),
-		BusinessStatus: func() CodeableConcept {
-			if businessStatus != nil { return *businessStatus }
-			return m.BusinessStatus
-		}(),
-		Intent: func() TaskIntent {
-			if intent != nil { return *intent }
-			return m.Intent
-		}(),
-		Priority: func() RequestPriority {
-			if priority != nil { return *priority }
-			return m.Priority
-		}(),
-		Code: func() CodeableConcept {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Focus: func() Reference {
-			if focus != nil { return *focus }
-			return m.Focus
-		}(),
-		For_: func() Reference {
-			if for_ != nil { return *for_ }
-			return m.For_
-		}(),
-		Encounter: func() Reference {
-			if encounter != nil { return *encounter }
-			return m.Encounter
-		}(),
-		ExecutionPeriod: func() Period {
-			if executionPeriod != nil { return *executionPeriod }
-			return m.ExecutionPeriod
-		}(),
-		AuthoredOn: func() FhirDateTime {
-			if authoredOn != nil { return *authoredOn }
-			return m.AuthoredOn
-		}(),
-		LastModified: func() FhirDateTime {
-			if lastModified != nil { return *lastModified }
-			return m.LastModified
-		}(),
-		Requester: func() Reference {
-			if requester != nil { return *requester }
-			return m.Requester
-		}(),
-		PerformerType: func() []CodeableConcept {
-			if performerType != nil { return *performerType }
-			return m.PerformerType
-		}(),
-		Owner: func() Reference {
-			if owner != nil { return *owner }
-			return m.Owner
-		}(),
-		Location: func() Reference {
-			if location != nil { return *location }
-			return m.Location
-		}(),
-		ReasonCode: func() CodeableConcept {
-			if reasonCode != nil { return *reasonCode }
-			return m.ReasonCode
-		}(),
-		ReasonReference: func() Reference {
-			if reasonReference != nil { return *reasonReference }
-			return m.ReasonReference
-		}(),
-		Insurance: func() []Reference {
-			if insurance != nil { return *insurance }
-			return m.Insurance
-		}(),
-		Note: func() []Annotation {
-			if note != nil { return *note }
-			return m.Note
-		}(),
-		RelevantHistory: func() []Reference {
-			if relevantHistory != nil { return *relevantHistory }
-			return m.RelevantHistory
-		}(),
-		Restriction: func() TaskRestriction {
-			if restriction != nil { return *restriction }
-			return m.Restriction
-		}(),
-		Input: func() []TaskInput {
-			if input != nil { return *input }
-			return m.Input
-		}(),
-		Output: func() []TaskOutput {
-			if output != nil { return *output }
-			return m.Output
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		InstantiatesCanonical: m.InstantiatesCanonical.Clone(),
+		InstantiatesUri: m.InstantiatesUri.Clone(),
+		BasedOn: cloneSlices(m.BasedOn),
+		GroupIdentifier: m.GroupIdentifier.Clone(),
+		PartOf: cloneSlices(m.PartOf),
+		Status: m.Status.Clone(),
+		StatusReason: m.StatusReason.Clone(),
+		BusinessStatus: m.BusinessStatus.Clone(),
+		Intent: m.Intent.Clone(),
+		Priority: m.Priority.Clone(),
+		Code: m.Code.Clone(),
+		Description: m.Description.Clone(),
+		Focus: m.Focus.Clone(),
+		For_: m.For_.Clone(),
+		Encounter: m.Encounter.Clone(),
+		ExecutionPeriod: m.ExecutionPeriod.Clone(),
+		AuthoredOn: m.AuthoredOn.Clone(),
+		LastModified: m.LastModified.Clone(),
+		Requester: m.Requester.Clone(),
+		PerformerType: cloneSlices(m.PerformerType),
+		Owner: m.Owner.Clone(),
+		Location: m.Location.Clone(),
+		ReasonCode: m.ReasonCode.Clone(),
+		ReasonReference: m.ReasonReference.Clone(),
+		Insurance: cloneSlices(m.Insurance),
+		Note: cloneSlices(m.Note),
+		RelevantHistory: cloneSlices(m.RelevantHistory),
+		Restriction: m.Restriction.Clone(),
+		Input: cloneSlices(m.Input),
+		Output: cloneSlices(m.Output),
 	}
 }
+
+// Equals checks for equality with another Task instance
+func (m *Task) Equals(other *Task) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.InstantiatesCanonical.Equals(other.InstantiatesCanonical) { return false }
+	if !m.InstantiatesUri.Equals(other.InstantiatesUri) { return false }
+	if !compareSlices(m.BasedOn, other.BasedOn) { return false }
+	if !m.GroupIdentifier.Equals(other.GroupIdentifier) { return false }
+	if !compareSlices(m.PartOf, other.PartOf) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.StatusReason.Equals(other.StatusReason) { return false }
+	if !m.BusinessStatus.Equals(other.BusinessStatus) { return false }
+	if !m.Intent.Equals(other.Intent) { return false }
+	if !m.Priority.Equals(other.Priority) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.Focus.Equals(other.Focus) { return false }
+	if !m.For_.Equals(other.For_) { return false }
+	if !m.Encounter.Equals(other.Encounter) { return false }
+	if !m.ExecutionPeriod.Equals(other.ExecutionPeriod) { return false }
+	if !m.AuthoredOn.Equals(other.AuthoredOn) { return false }
+	if !m.LastModified.Equals(other.LastModified) { return false }
+	if !m.Requester.Equals(other.Requester) { return false }
+	if !compareSlices(m.PerformerType, other.PerformerType) { return false }
+	if !m.Owner.Equals(other.Owner) { return false }
+	if !m.Location.Equals(other.Location) { return false }
+	if !m.ReasonCode.Equals(other.ReasonCode) { return false }
+	if !m.ReasonReference.Equals(other.ReasonReference) { return false }
+	if !compareSlices(m.Insurance, other.Insurance) { return false }
+	if !compareSlices(m.Note, other.Note) { return false }
+	if !compareSlices(m.RelevantHistory, other.RelevantHistory) { return false }
+	if !m.Restriction.Equals(other.Restriction) { return false }
+	if !compareSlices(m.Input, other.Input) { return false }
+	if !compareSlices(m.Output, other.Output) { return false }
+	return true
+}
+
 // TaskRestriction
 // If the Task.focus is a request resource and the task is seeking fulfillment (i.e. is asking for the request to be actioned), this element identifies any limitations on what parts of the referenced request should be actioned.
 type TaskRestriction struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// repetitions
-	// Indicates the number of times the requested action should occur.
-	Repetitions FhirPositiveInt `json:"repetitions,omitempty"`
-	// period
-	// Over what time-period is fulfillment sought.
-	Period Period `json:"period,omitempty"`
-	// recipient
-	// For requests that are targeted to more than on potential recipient/target, for whom is fulfillment sought?
-	Recipient []Reference `json:"recipient,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Repetitions *FhirPositiveInt `json:"repetitions,omitempty"`
+	Period *Period `json:"period,omitempty"`
+	Recipient []*Reference `json:"recipient,omitempty"`
 }
 
 // NewTaskRestriction creates a new TaskRestriction instance
-func NewTaskRestriction(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	repetitions FhirPositiveInt,
-	period Period,
-	recipient []Reference,
-) *TaskRestriction {
-	return &TaskRestriction{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Repetitions: repetitions,
-		Period: period,
-		Recipient: recipient,
-	}
+func NewTaskRestriction() *TaskRestriction {
+	return &TaskRestriction{}
 }
+
 // FromJSON populates TaskRestriction from JSON data
 func (m *TaskRestriction) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -481,326 +184,97 @@ func (m *TaskRestriction) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TaskRestriction
-func (m *TaskRestriction) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	repetitions *FhirPositiveInt,
-	period *Period,
-	recipient *[]Reference,
-) *TaskRestriction {
+// Clone creates a deep copy of TaskRestriction
+func (m *TaskRestriction) Clone() *TaskRestriction {
+	if m == nil { return nil }
 	return &TaskRestriction{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Repetitions: func() FhirPositiveInt {
-			if repetitions != nil { return *repetitions }
-			return m.Repetitions
-		}(),
-		Period: func() Period {
-			if period != nil { return *period }
-			return m.Period
-		}(),
-		Recipient: func() []Reference {
-			if recipient != nil { return *recipient }
-			return m.Recipient
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Repetitions: m.Repetitions.Clone(),
+		Period: m.Period.Clone(),
+		Recipient: cloneSlices(m.Recipient),
 	}
 }
+
+// Equals checks for equality with another TaskRestriction instance
+func (m *TaskRestriction) Equals(other *TaskRestriction) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Repetitions.Equals(other.Repetitions) { return false }
+	if !m.Period.Equals(other.Period) { return false }
+	if !compareSlices(m.Recipient, other.Recipient) { return false }
+	return true
+}
+
 // TaskInput
 // Additional information that may be needed in the execution of the task.
 type TaskInput struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// A code or description indicating how the input is intended to be used as part of the task execution.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// valueBase64Binary
-	// The value of the input parameter as a basic type.
-	ValueBase64Binary FhirBase64Binary `json:"valueBase64Binary,omitempty"`
-	// valueBoolean
-	// The value of the input parameter as a basic type.
-	ValueBoolean FhirBoolean `json:"valueBoolean,omitempty"`
-	// valueCanonical
-	// The value of the input parameter as a basic type.
-	ValueCanonical FhirCanonical `json:"valueCanonical,omitempty"`
-	// valueCode
-	// The value of the input parameter as a basic type.
-	ValueCode FhirCode `json:"valueCode,omitempty"`
-	// valueDate
-	// The value of the input parameter as a basic type.
-	ValueDate FhirDate `json:"valueDate,omitempty"`
-	// valueDateTime
-	// The value of the input parameter as a basic type.
-	ValueDateTime FhirDateTime `json:"valueDateTime,omitempty"`
-	// valueDecimal
-	// The value of the input parameter as a basic type.
-	ValueDecimal FhirDecimal `json:"valueDecimal,omitempty"`
-	// valueId
-	// The value of the input parameter as a basic type.
-	ValueId FhirId `json:"valueId,omitempty"`
-	// valueInstant
-	// The value of the input parameter as a basic type.
-	ValueInstant FhirInstant `json:"valueInstant,omitempty"`
-	// valueInteger
-	// The value of the input parameter as a basic type.
-	ValueInteger FhirInteger `json:"valueInteger,omitempty"`
-	// valueMarkdown
-	// The value of the input parameter as a basic type.
-	ValueMarkdown FhirMarkdown `json:"valueMarkdown,omitempty"`
-	// valueOid
-	// The value of the input parameter as a basic type.
-	ValueOid FhirOid `json:"valueOid,omitempty"`
-	// valuePositiveInt
-	// The value of the input parameter as a basic type.
-	ValuePositiveInt FhirPositiveInt `json:"valuePositiveInt,omitempty"`
-	// valueString
-	// The value of the input parameter as a basic type.
-	ValueString FhirString `json:"valueString,omitempty"`
-	// valueTime
-	// The value of the input parameter as a basic type.
-	ValueTime FhirTime `json:"valueTime,omitempty"`
-	// valueUnsignedInt
-	// The value of the input parameter as a basic type.
-	ValueUnsignedInt FhirUnsignedInt `json:"valueUnsignedInt,omitempty"`
-	// valueUri
-	// The value of the input parameter as a basic type.
-	ValueUri FhirUri `json:"valueUri,omitempty"`
-	// valueUrl
-	// The value of the input parameter as a basic type.
-	ValueUrl FhirUrl `json:"valueUrl,omitempty"`
-	// valueUuid
-	// The value of the input parameter as a basic type.
-	ValueUuid FhirUuid `json:"valueUuid,omitempty"`
-	// valueAddress
-	// The value of the input parameter as a basic type.
-	ValueAddress Address `json:"valueAddress,omitempty"`
-	// valueAge
-	// The value of the input parameter as a basic type.
-	ValueAge Age `json:"valueAge,omitempty"`
-	// valueAnnotation
-	// The value of the input parameter as a basic type.
-	ValueAnnotation Annotation `json:"valueAnnotation,omitempty"`
-	// valueAttachment
-	// The value of the input parameter as a basic type.
-	ValueAttachment Attachment `json:"valueAttachment,omitempty"`
-	// valueCodeableConcept
-	// The value of the input parameter as a basic type.
-	ValueCodeableConcept CodeableConcept `json:"valueCodeableConcept,omitempty"`
-	// valueCoding
-	// The value of the input parameter as a basic type.
-	ValueCoding Coding `json:"valueCoding,omitempty"`
-	// valueContactPoint
-	// The value of the input parameter as a basic type.
-	ValueContactPoint ContactPoint `json:"valueContactPoint,omitempty"`
-	// valueCount
-	// The value of the input parameter as a basic type.
-	ValueCount Count `json:"valueCount,omitempty"`
-	// valueDistance
-	// The value of the input parameter as a basic type.
-	ValueDistance Distance `json:"valueDistance,omitempty"`
-	// valueDuration
-	// The value of the input parameter as a basic type.
-	ValueDuration FhirDuration `json:"valueDuration,omitempty"`
-	// valueHumanName
-	// The value of the input parameter as a basic type.
-	ValueHumanName HumanName `json:"valueHumanName,omitempty"`
-	// valueIdentifier
-	// The value of the input parameter as a basic type.
-	ValueIdentifier Identifier `json:"valueIdentifier,omitempty"`
-	// valueMoney
-	// The value of the input parameter as a basic type.
-	ValueMoney Money `json:"valueMoney,omitempty"`
-	// valuePeriod
-	// The value of the input parameter as a basic type.
-	ValuePeriod Period `json:"valuePeriod,omitempty"`
-	// valueQuantity
-	// The value of the input parameter as a basic type.
-	ValueQuantity Quantity `json:"valueQuantity,omitempty"`
-	// valueRange
-	// The value of the input parameter as a basic type.
-	ValueRange Range `json:"valueRange,omitempty"`
-	// valueRatio
-	// The value of the input parameter as a basic type.
-	ValueRatio Ratio `json:"valueRatio,omitempty"`
-	// valueReference
-	// The value of the input parameter as a basic type.
-	ValueReference Reference `json:"valueReference,omitempty"`
-	// valueSampledData
-	// The value of the input parameter as a basic type.
-	ValueSampledData SampledData `json:"valueSampledData,omitempty"`
-	// valueSignature
-	// The value of the input parameter as a basic type.
-	ValueSignature Signature `json:"valueSignature,omitempty"`
-	// valueTiming
-	// The value of the input parameter as a basic type.
-	ValueTiming Timing `json:"valueTiming,omitempty"`
-	// valueContactDetail
-	// The value of the input parameter as a basic type.
-	ValueContactDetail ContactDetail `json:"valueContactDetail,omitempty"`
-	// valueContributor
-	// The value of the input parameter as a basic type.
-	ValueContributor Contributor `json:"valueContributor,omitempty"`
-	// valueDataRequirement
-	// The value of the input parameter as a basic type.
-	ValueDataRequirement DataRequirement `json:"valueDataRequirement,omitempty"`
-	// valueExpression
-	// The value of the input parameter as a basic type.
-	ValueExpression FhirExpression `json:"valueExpression,omitempty"`
-	// valueParameterDefinition
-	// The value of the input parameter as a basic type.
-	ValueParameterDefinition ParameterDefinition `json:"valueParameterDefinition,omitempty"`
-	// valueRelatedArtifact
-	// The value of the input parameter as a basic type.
-	ValueRelatedArtifact RelatedArtifact `json:"valueRelatedArtifact,omitempty"`
-	// valueTriggerDefinition
-	// The value of the input parameter as a basic type.
-	ValueTriggerDefinition TriggerDefinition `json:"valueTriggerDefinition,omitempty"`
-	// valueUsageContext
-	// The value of the input parameter as a basic type.
-	ValueUsageContext UsageContext `json:"valueUsageContext,omitempty"`
-	// valueDosage
-	// The value of the input parameter as a basic type.
-	ValueDosage Dosage `json:"valueDosage,omitempty"`
-	// valueMeta
-	// The value of the input parameter as a basic type.
-	ValueMeta FhirMeta `json:"valueMeta,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	ValueBase64Binary *FhirBase64Binary `json:"valuebase64binary,omitempty"`
+	ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
+	ValueCanonical *FhirCanonical `json:"valuecanonical,omitempty"`
+	ValueCode *FhirCode `json:"valuecode,omitempty"`
+	ValueDate *FhirDate `json:"valuedate,omitempty"`
+	ValueDateTime *FhirDateTime `json:"valuedatetime,omitempty"`
+	ValueDecimal *FhirDecimal `json:"valuedecimal,omitempty"`
+	ValueId *FhirId `json:"valueid,omitempty"`
+	ValueInstant *FhirInstant `json:"valueinstant,omitempty"`
+	ValueInteger *FhirInteger `json:"valueinteger,omitempty"`
+	ValueMarkdown *FhirMarkdown `json:"valuemarkdown,omitempty"`
+	ValueOid *FhirOid `json:"valueoid,omitempty"`
+	ValuePositiveInt *FhirPositiveInt `json:"valuepositiveint,omitempty"`
+	ValueString *FhirString `json:"valuestring,omitempty"`
+	ValueTime *FhirTime `json:"valuetime,omitempty"`
+	ValueUnsignedInt *FhirUnsignedInt `json:"valueunsignedint,omitempty"`
+	ValueUri *FhirUri `json:"valueuri,omitempty"`
+	ValueUrl *FhirUrl `json:"valueurl,omitempty"`
+	ValueUuid *FhirUuid `json:"valueuuid,omitempty"`
+	ValueAddress *Address `json:"valueaddress,omitempty"`
+	ValueAge *Age `json:"valueage,omitempty"`
+	ValueAnnotation *Annotation `json:"valueannotation,omitempty"`
+	ValueAttachment *Attachment `json:"valueattachment,omitempty"`
+	ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+	ValueCoding *Coding `json:"valuecoding,omitempty"`
+	ValueContactPoint *ContactPoint `json:"valuecontactpoint,omitempty"`
+	ValueCount *Count `json:"valuecount,omitempty"`
+	ValueDistance *Distance `json:"valuedistance,omitempty"`
+	ValueDuration *FhirDuration `json:"valueduration,omitempty"`
+	ValueHumanName *HumanName `json:"valuehumanname,omitempty"`
+	ValueIdentifier *Identifier `json:"valueidentifier,omitempty"`
+	ValueMoney *Money `json:"valuemoney,omitempty"`
+	ValuePeriod *Period `json:"valueperiod,omitempty"`
+	ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+	ValueRange *Range `json:"valuerange,omitempty"`
+	ValueRatio *Ratio `json:"valueratio,omitempty"`
+	ValueReference *Reference `json:"valuereference,omitempty"`
+	ValueSampledData *SampledData `json:"valuesampleddata,omitempty"`
+	ValueSignature *Signature `json:"valuesignature,omitempty"`
+	ValueTiming *Timing `json:"valuetiming,omitempty"`
+	ValueContactDetail *ContactDetail `json:"valuecontactdetail,omitempty"`
+	ValueContributor *Contributor `json:"valuecontributor,omitempty"`
+	ValueDataRequirement *DataRequirement `json:"valuedatarequirement,omitempty"`
+	ValueExpression *FhirExpression `json:"valueexpression,omitempty"`
+	ValueParameterDefinition *ParameterDefinition `json:"valueparameterdefinition,omitempty"`
+	ValueRelatedArtifact *RelatedArtifact `json:"valuerelatedartifact,omitempty"`
+	ValueTriggerDefinition *TriggerDefinition `json:"valuetriggerdefinition,omitempty"`
+	ValueUsageContext *UsageContext `json:"valueusagecontext,omitempty"`
+	ValueDosage *Dosage `json:"valuedosage,omitempty"`
+	ValueMeta *FhirMeta `json:"valuemeta,omitempty"`
 }
 
 // NewTaskInput creates a new TaskInput instance
-func NewTaskInput(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	valueBase64Binary FhirBase64Binary,
-	valueBoolean FhirBoolean,
-	valueCanonical FhirCanonical,
-	valueCode FhirCode,
-	valueDate FhirDate,
-	valueDateTime FhirDateTime,
-	valueDecimal FhirDecimal,
-	valueId FhirId,
-	valueInstant FhirInstant,
-	valueInteger FhirInteger,
-	valueMarkdown FhirMarkdown,
-	valueOid FhirOid,
-	valuePositiveInt FhirPositiveInt,
-	valueString FhirString,
-	valueTime FhirTime,
-	valueUnsignedInt FhirUnsignedInt,
-	valueUri FhirUri,
-	valueUrl FhirUrl,
-	valueUuid FhirUuid,
-	valueAddress Address,
-	valueAge Age,
-	valueAnnotation Annotation,
-	valueAttachment Attachment,
-	valueCodeableConcept CodeableConcept,
-	valueCoding Coding,
-	valueContactPoint ContactPoint,
-	valueCount Count,
-	valueDistance Distance,
-	valueDuration FhirDuration,
-	valueHumanName HumanName,
-	valueIdentifier Identifier,
-	valueMoney Money,
-	valuePeriod Period,
-	valueQuantity Quantity,
-	valueRange Range,
-	valueRatio Ratio,
-	valueReference Reference,
-	valueSampledData SampledData,
-	valueSignature Signature,
-	valueTiming Timing,
-	valueContactDetail ContactDetail,
-	valueContributor Contributor,
-	valueDataRequirement DataRequirement,
-	valueExpression FhirExpression,
-	valueParameterDefinition ParameterDefinition,
-	valueRelatedArtifact RelatedArtifact,
-	valueTriggerDefinition TriggerDefinition,
-	valueUsageContext UsageContext,
-	valueDosage Dosage,
-	valueMeta FhirMeta,
-) *TaskInput {
-	return &TaskInput{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		ValueBase64Binary: valueBase64Binary,
-		ValueBoolean: valueBoolean,
-		ValueCanonical: valueCanonical,
-		ValueCode: valueCode,
-		ValueDate: valueDate,
-		ValueDateTime: valueDateTime,
-		ValueDecimal: valueDecimal,
-		ValueId: valueId,
-		ValueInstant: valueInstant,
-		ValueInteger: valueInteger,
-		ValueMarkdown: valueMarkdown,
-		ValueOid: valueOid,
-		ValuePositiveInt: valuePositiveInt,
-		ValueString: valueString,
-		ValueTime: valueTime,
-		ValueUnsignedInt: valueUnsignedInt,
-		ValueUri: valueUri,
-		ValueUrl: valueUrl,
-		ValueUuid: valueUuid,
-		ValueAddress: valueAddress,
-		ValueAge: valueAge,
-		ValueAnnotation: valueAnnotation,
-		ValueAttachment: valueAttachment,
-		ValueCodeableConcept: valueCodeableConcept,
-		ValueCoding: valueCoding,
-		ValueContactPoint: valueContactPoint,
-		ValueCount: valueCount,
-		ValueDistance: valueDistance,
-		ValueDuration: valueDuration,
-		ValueHumanName: valueHumanName,
-		ValueIdentifier: valueIdentifier,
-		ValueMoney: valueMoney,
-		ValuePeriod: valuePeriod,
-		ValueQuantity: valueQuantity,
-		ValueRange: valueRange,
-		ValueRatio: valueRatio,
-		ValueReference: valueReference,
-		ValueSampledData: valueSampledData,
-		ValueSignature: valueSignature,
-		ValueTiming: valueTiming,
-		ValueContactDetail: valueContactDetail,
-		ValueContributor: valueContributor,
-		ValueDataRequirement: valueDataRequirement,
-		ValueExpression: valueExpression,
-		ValueParameterDefinition: valueParameterDefinition,
-		ValueRelatedArtifact: valueRelatedArtifact,
-		ValueTriggerDefinition: valueTriggerDefinition,
-		ValueUsageContext: valueUsageContext,
-		ValueDosage: valueDosage,
-		ValueMeta: valueMeta,
-	}
+func NewTaskInput() *TaskInput {
+	return &TaskInput{}
 }
+
 // FromJSON populates TaskInput from JSON data
 func (m *TaskInput) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -811,566 +285,193 @@ func (m *TaskInput) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TaskInput
-func (m *TaskInput) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	valueBase64Binary *FhirBase64Binary,
-	valueBoolean *FhirBoolean,
-	valueCanonical *FhirCanonical,
-	valueCode *FhirCode,
-	valueDate *FhirDate,
-	valueDateTime *FhirDateTime,
-	valueDecimal *FhirDecimal,
-	valueId *FhirId,
-	valueInstant *FhirInstant,
-	valueInteger *FhirInteger,
-	valueMarkdown *FhirMarkdown,
-	valueOid *FhirOid,
-	valuePositiveInt *FhirPositiveInt,
-	valueString *FhirString,
-	valueTime *FhirTime,
-	valueUnsignedInt *FhirUnsignedInt,
-	valueUri *FhirUri,
-	valueUrl *FhirUrl,
-	valueUuid *FhirUuid,
-	valueAddress *Address,
-	valueAge *Age,
-	valueAnnotation *Annotation,
-	valueAttachment *Attachment,
-	valueCodeableConcept *CodeableConcept,
-	valueCoding *Coding,
-	valueContactPoint *ContactPoint,
-	valueCount *Count,
-	valueDistance *Distance,
-	valueDuration *FhirDuration,
-	valueHumanName *HumanName,
-	valueIdentifier *Identifier,
-	valueMoney *Money,
-	valuePeriod *Period,
-	valueQuantity *Quantity,
-	valueRange *Range,
-	valueRatio *Ratio,
-	valueReference *Reference,
-	valueSampledData *SampledData,
-	valueSignature *Signature,
-	valueTiming *Timing,
-	valueContactDetail *ContactDetail,
-	valueContributor *Contributor,
-	valueDataRequirement *DataRequirement,
-	valueExpression *FhirExpression,
-	valueParameterDefinition *ParameterDefinition,
-	valueRelatedArtifact *RelatedArtifact,
-	valueTriggerDefinition *TriggerDefinition,
-	valueUsageContext *UsageContext,
-	valueDosage *Dosage,
-	valueMeta *FhirMeta,
-) *TaskInput {
+// Clone creates a deep copy of TaskInput
+func (m *TaskInput) Clone() *TaskInput {
+	if m == nil { return nil }
 	return &TaskInput{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		ValueBase64Binary: func() FhirBase64Binary {
-			if valueBase64Binary != nil { return *valueBase64Binary }
-			return m.ValueBase64Binary
-		}(),
-		ValueBoolean: func() FhirBoolean {
-			if valueBoolean != nil { return *valueBoolean }
-			return m.ValueBoolean
-		}(),
-		ValueCanonical: func() FhirCanonical {
-			if valueCanonical != nil { return *valueCanonical }
-			return m.ValueCanonical
-		}(),
-		ValueCode: func() FhirCode {
-			if valueCode != nil { return *valueCode }
-			return m.ValueCode
-		}(),
-		ValueDate: func() FhirDate {
-			if valueDate != nil { return *valueDate }
-			return m.ValueDate
-		}(),
-		ValueDateTime: func() FhirDateTime {
-			if valueDateTime != nil { return *valueDateTime }
-			return m.ValueDateTime
-		}(),
-		ValueDecimal: func() FhirDecimal {
-			if valueDecimal != nil { return *valueDecimal }
-			return m.ValueDecimal
-		}(),
-		ValueId: func() FhirId {
-			if valueId != nil { return *valueId }
-			return m.ValueId
-		}(),
-		ValueInstant: func() FhirInstant {
-			if valueInstant != nil { return *valueInstant }
-			return m.ValueInstant
-		}(),
-		ValueInteger: func() FhirInteger {
-			if valueInteger != nil { return *valueInteger }
-			return m.ValueInteger
-		}(),
-		ValueMarkdown: func() FhirMarkdown {
-			if valueMarkdown != nil { return *valueMarkdown }
-			return m.ValueMarkdown
-		}(),
-		ValueOid: func() FhirOid {
-			if valueOid != nil { return *valueOid }
-			return m.ValueOid
-		}(),
-		ValuePositiveInt: func() FhirPositiveInt {
-			if valuePositiveInt != nil { return *valuePositiveInt }
-			return m.ValuePositiveInt
-		}(),
-		ValueString: func() FhirString {
-			if valueString != nil { return *valueString }
-			return m.ValueString
-		}(),
-		ValueTime: func() FhirTime {
-			if valueTime != nil { return *valueTime }
-			return m.ValueTime
-		}(),
-		ValueUnsignedInt: func() FhirUnsignedInt {
-			if valueUnsignedInt != nil { return *valueUnsignedInt }
-			return m.ValueUnsignedInt
-		}(),
-		ValueUri: func() FhirUri {
-			if valueUri != nil { return *valueUri }
-			return m.ValueUri
-		}(),
-		ValueUrl: func() FhirUrl {
-			if valueUrl != nil { return *valueUrl }
-			return m.ValueUrl
-		}(),
-		ValueUuid: func() FhirUuid {
-			if valueUuid != nil { return *valueUuid }
-			return m.ValueUuid
-		}(),
-		ValueAddress: func() Address {
-			if valueAddress != nil { return *valueAddress }
-			return m.ValueAddress
-		}(),
-		ValueAge: func() Age {
-			if valueAge != nil { return *valueAge }
-			return m.ValueAge
-		}(),
-		ValueAnnotation: func() Annotation {
-			if valueAnnotation != nil { return *valueAnnotation }
-			return m.ValueAnnotation
-		}(),
-		ValueAttachment: func() Attachment {
-			if valueAttachment != nil { return *valueAttachment }
-			return m.ValueAttachment
-		}(),
-		ValueCodeableConcept: func() CodeableConcept {
-			if valueCodeableConcept != nil { return *valueCodeableConcept }
-			return m.ValueCodeableConcept
-		}(),
-		ValueCoding: func() Coding {
-			if valueCoding != nil { return *valueCoding }
-			return m.ValueCoding
-		}(),
-		ValueContactPoint: func() ContactPoint {
-			if valueContactPoint != nil { return *valueContactPoint }
-			return m.ValueContactPoint
-		}(),
-		ValueCount: func() Count {
-			if valueCount != nil { return *valueCount }
-			return m.ValueCount
-		}(),
-		ValueDistance: func() Distance {
-			if valueDistance != nil { return *valueDistance }
-			return m.ValueDistance
-		}(),
-		ValueDuration: func() FhirDuration {
-			if valueDuration != nil { return *valueDuration }
-			return m.ValueDuration
-		}(),
-		ValueHumanName: func() HumanName {
-			if valueHumanName != nil { return *valueHumanName }
-			return m.ValueHumanName
-		}(),
-		ValueIdentifier: func() Identifier {
-			if valueIdentifier != nil { return *valueIdentifier }
-			return m.ValueIdentifier
-		}(),
-		ValueMoney: func() Money {
-			if valueMoney != nil { return *valueMoney }
-			return m.ValueMoney
-		}(),
-		ValuePeriod: func() Period {
-			if valuePeriod != nil { return *valuePeriod }
-			return m.ValuePeriod
-		}(),
-		ValueQuantity: func() Quantity {
-			if valueQuantity != nil { return *valueQuantity }
-			return m.ValueQuantity
-		}(),
-		ValueRange: func() Range {
-			if valueRange != nil { return *valueRange }
-			return m.ValueRange
-		}(),
-		ValueRatio: func() Ratio {
-			if valueRatio != nil { return *valueRatio }
-			return m.ValueRatio
-		}(),
-		ValueReference: func() Reference {
-			if valueReference != nil { return *valueReference }
-			return m.ValueReference
-		}(),
-		ValueSampledData: func() SampledData {
-			if valueSampledData != nil { return *valueSampledData }
-			return m.ValueSampledData
-		}(),
-		ValueSignature: func() Signature {
-			if valueSignature != nil { return *valueSignature }
-			return m.ValueSignature
-		}(),
-		ValueTiming: func() Timing {
-			if valueTiming != nil { return *valueTiming }
-			return m.ValueTiming
-		}(),
-		ValueContactDetail: func() ContactDetail {
-			if valueContactDetail != nil { return *valueContactDetail }
-			return m.ValueContactDetail
-		}(),
-		ValueContributor: func() Contributor {
-			if valueContributor != nil { return *valueContributor }
-			return m.ValueContributor
-		}(),
-		ValueDataRequirement: func() DataRequirement {
-			if valueDataRequirement != nil { return *valueDataRequirement }
-			return m.ValueDataRequirement
-		}(),
-		ValueExpression: func() FhirExpression {
-			if valueExpression != nil { return *valueExpression }
-			return m.ValueExpression
-		}(),
-		ValueParameterDefinition: func() ParameterDefinition {
-			if valueParameterDefinition != nil { return *valueParameterDefinition }
-			return m.ValueParameterDefinition
-		}(),
-		ValueRelatedArtifact: func() RelatedArtifact {
-			if valueRelatedArtifact != nil { return *valueRelatedArtifact }
-			return m.ValueRelatedArtifact
-		}(),
-		ValueTriggerDefinition: func() TriggerDefinition {
-			if valueTriggerDefinition != nil { return *valueTriggerDefinition }
-			return m.ValueTriggerDefinition
-		}(),
-		ValueUsageContext: func() UsageContext {
-			if valueUsageContext != nil { return *valueUsageContext }
-			return m.ValueUsageContext
-		}(),
-		ValueDosage: func() Dosage {
-			if valueDosage != nil { return *valueDosage }
-			return m.ValueDosage
-		}(),
-		ValueMeta: func() FhirMeta {
-			if valueMeta != nil { return *valueMeta }
-			return m.ValueMeta
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		ValueBase64Binary: m.ValueBase64Binary.Clone(),
+		ValueBoolean: m.ValueBoolean.Clone(),
+		ValueCanonical: m.ValueCanonical.Clone(),
+		ValueCode: m.ValueCode.Clone(),
+		ValueDate: m.ValueDate.Clone(),
+		ValueDateTime: m.ValueDateTime.Clone(),
+		ValueDecimal: m.ValueDecimal.Clone(),
+		ValueId: m.ValueId.Clone(),
+		ValueInstant: m.ValueInstant.Clone(),
+		ValueInteger: m.ValueInteger.Clone(),
+		ValueMarkdown: m.ValueMarkdown.Clone(),
+		ValueOid: m.ValueOid.Clone(),
+		ValuePositiveInt: m.ValuePositiveInt.Clone(),
+		ValueString: m.ValueString.Clone(),
+		ValueTime: m.ValueTime.Clone(),
+		ValueUnsignedInt: m.ValueUnsignedInt.Clone(),
+		ValueUri: m.ValueUri.Clone(),
+		ValueUrl: m.ValueUrl.Clone(),
+		ValueUuid: m.ValueUuid.Clone(),
+		ValueAddress: m.ValueAddress.Clone(),
+		ValueAge: m.ValueAge.Clone(),
+		ValueAnnotation: m.ValueAnnotation.Clone(),
+		ValueAttachment: m.ValueAttachment.Clone(),
+		ValueCodeableConcept: m.ValueCodeableConcept.Clone(),
+		ValueCoding: m.ValueCoding.Clone(),
+		ValueContactPoint: m.ValueContactPoint.Clone(),
+		ValueCount: m.ValueCount.Clone(),
+		ValueDistance: m.ValueDistance.Clone(),
+		ValueDuration: m.ValueDuration.Clone(),
+		ValueHumanName: m.ValueHumanName.Clone(),
+		ValueIdentifier: m.ValueIdentifier.Clone(),
+		ValueMoney: m.ValueMoney.Clone(),
+		ValuePeriod: m.ValuePeriod.Clone(),
+		ValueQuantity: m.ValueQuantity.Clone(),
+		ValueRange: m.ValueRange.Clone(),
+		ValueRatio: m.ValueRatio.Clone(),
+		ValueReference: m.ValueReference.Clone(),
+		ValueSampledData: m.ValueSampledData.Clone(),
+		ValueSignature: m.ValueSignature.Clone(),
+		ValueTiming: m.ValueTiming.Clone(),
+		ValueContactDetail: m.ValueContactDetail.Clone(),
+		ValueContributor: m.ValueContributor.Clone(),
+		ValueDataRequirement: m.ValueDataRequirement.Clone(),
+		ValueExpression: m.ValueExpression.Clone(),
+		ValueParameterDefinition: m.ValueParameterDefinition.Clone(),
+		ValueRelatedArtifact: m.ValueRelatedArtifact.Clone(),
+		ValueTriggerDefinition: m.ValueTriggerDefinition.Clone(),
+		ValueUsageContext: m.ValueUsageContext.Clone(),
+		ValueDosage: m.ValueDosage.Clone(),
+		ValueMeta: m.ValueMeta.Clone(),
 	}
 }
+
+// Equals checks for equality with another TaskInput instance
+func (m *TaskInput) Equals(other *TaskInput) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.ValueBase64Binary.Equals(other.ValueBase64Binary) { return false }
+	if !m.ValueBoolean.Equals(other.ValueBoolean) { return false }
+	if !m.ValueCanonical.Equals(other.ValueCanonical) { return false }
+	if !m.ValueCode.Equals(other.ValueCode) { return false }
+	if !m.ValueDate.Equals(other.ValueDate) { return false }
+	if !m.ValueDateTime.Equals(other.ValueDateTime) { return false }
+	if !m.ValueDecimal.Equals(other.ValueDecimal) { return false }
+	if !m.ValueId.Equals(other.ValueId) { return false }
+	if !m.ValueInstant.Equals(other.ValueInstant) { return false }
+	if !m.ValueInteger.Equals(other.ValueInteger) { return false }
+	if !m.ValueMarkdown.Equals(other.ValueMarkdown) { return false }
+	if !m.ValueOid.Equals(other.ValueOid) { return false }
+	if !m.ValuePositiveInt.Equals(other.ValuePositiveInt) { return false }
+	if !m.ValueString.Equals(other.ValueString) { return false }
+	if !m.ValueTime.Equals(other.ValueTime) { return false }
+	if !m.ValueUnsignedInt.Equals(other.ValueUnsignedInt) { return false }
+	if !m.ValueUri.Equals(other.ValueUri) { return false }
+	if !m.ValueUrl.Equals(other.ValueUrl) { return false }
+	if !m.ValueUuid.Equals(other.ValueUuid) { return false }
+	if !m.ValueAddress.Equals(other.ValueAddress) { return false }
+	if !m.ValueAge.Equals(other.ValueAge) { return false }
+	if !m.ValueAnnotation.Equals(other.ValueAnnotation) { return false }
+	if !m.ValueAttachment.Equals(other.ValueAttachment) { return false }
+	if !m.ValueCodeableConcept.Equals(other.ValueCodeableConcept) { return false }
+	if !m.ValueCoding.Equals(other.ValueCoding) { return false }
+	if !m.ValueContactPoint.Equals(other.ValueContactPoint) { return false }
+	if !m.ValueCount.Equals(other.ValueCount) { return false }
+	if !m.ValueDistance.Equals(other.ValueDistance) { return false }
+	if !m.ValueDuration.Equals(other.ValueDuration) { return false }
+	if !m.ValueHumanName.Equals(other.ValueHumanName) { return false }
+	if !m.ValueIdentifier.Equals(other.ValueIdentifier) { return false }
+	if !m.ValueMoney.Equals(other.ValueMoney) { return false }
+	if !m.ValuePeriod.Equals(other.ValuePeriod) { return false }
+	if !m.ValueQuantity.Equals(other.ValueQuantity) { return false }
+	if !m.ValueRange.Equals(other.ValueRange) { return false }
+	if !m.ValueRatio.Equals(other.ValueRatio) { return false }
+	if !m.ValueReference.Equals(other.ValueReference) { return false }
+	if !m.ValueSampledData.Equals(other.ValueSampledData) { return false }
+	if !m.ValueSignature.Equals(other.ValueSignature) { return false }
+	if !m.ValueTiming.Equals(other.ValueTiming) { return false }
+	if !m.ValueContactDetail.Equals(other.ValueContactDetail) { return false }
+	if !m.ValueContributor.Equals(other.ValueContributor) { return false }
+	if !m.ValueDataRequirement.Equals(other.ValueDataRequirement) { return false }
+	if !m.ValueExpression.Equals(other.ValueExpression) { return false }
+	if !m.ValueParameterDefinition.Equals(other.ValueParameterDefinition) { return false }
+	if !m.ValueRelatedArtifact.Equals(other.ValueRelatedArtifact) { return false }
+	if !m.ValueTriggerDefinition.Equals(other.ValueTriggerDefinition) { return false }
+	if !m.ValueUsageContext.Equals(other.ValueUsageContext) { return false }
+	if !m.ValueDosage.Equals(other.ValueDosage) { return false }
+	if !m.ValueMeta.Equals(other.ValueMeta) { return false }
+	return true
+}
+
 // TaskOutput
 // Outputs produced by the Task.
 type TaskOutput struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// The name of the Output parameter.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// valueBase64Binary
-	// The value of the Output parameter as a basic type.
-	ValueBase64Binary FhirBase64Binary `json:"valueBase64Binary,omitempty"`
-	// valueBoolean
-	// The value of the Output parameter as a basic type.
-	ValueBoolean FhirBoolean `json:"valueBoolean,omitempty"`
-	// valueCanonical
-	// The value of the Output parameter as a basic type.
-	ValueCanonical FhirCanonical `json:"valueCanonical,omitempty"`
-	// valueCode
-	// The value of the Output parameter as a basic type.
-	ValueCode FhirCode `json:"valueCode,omitempty"`
-	// valueDate
-	// The value of the Output parameter as a basic type.
-	ValueDate FhirDate `json:"valueDate,omitempty"`
-	// valueDateTime
-	// The value of the Output parameter as a basic type.
-	ValueDateTime FhirDateTime `json:"valueDateTime,omitempty"`
-	// valueDecimal
-	// The value of the Output parameter as a basic type.
-	ValueDecimal FhirDecimal `json:"valueDecimal,omitempty"`
-	// valueId
-	// The value of the Output parameter as a basic type.
-	ValueId FhirId `json:"valueId,omitempty"`
-	// valueInstant
-	// The value of the Output parameter as a basic type.
-	ValueInstant FhirInstant `json:"valueInstant,omitempty"`
-	// valueInteger
-	// The value of the Output parameter as a basic type.
-	ValueInteger FhirInteger `json:"valueInteger,omitempty"`
-	// valueMarkdown
-	// The value of the Output parameter as a basic type.
-	ValueMarkdown FhirMarkdown `json:"valueMarkdown,omitempty"`
-	// valueOid
-	// The value of the Output parameter as a basic type.
-	ValueOid FhirOid `json:"valueOid,omitempty"`
-	// valuePositiveInt
-	// The value of the Output parameter as a basic type.
-	ValuePositiveInt FhirPositiveInt `json:"valuePositiveInt,omitempty"`
-	// valueString
-	// The value of the Output parameter as a basic type.
-	ValueString FhirString `json:"valueString,omitempty"`
-	// valueTime
-	// The value of the Output parameter as a basic type.
-	ValueTime FhirTime `json:"valueTime,omitempty"`
-	// valueUnsignedInt
-	// The value of the Output parameter as a basic type.
-	ValueUnsignedInt FhirUnsignedInt `json:"valueUnsignedInt,omitempty"`
-	// valueUri
-	// The value of the Output parameter as a basic type.
-	ValueUri FhirUri `json:"valueUri,omitempty"`
-	// valueUrl
-	// The value of the Output parameter as a basic type.
-	ValueUrl FhirUrl `json:"valueUrl,omitempty"`
-	// valueUuid
-	// The value of the Output parameter as a basic type.
-	ValueUuid FhirUuid `json:"valueUuid,omitempty"`
-	// valueAddress
-	// The value of the Output parameter as a basic type.
-	ValueAddress Address `json:"valueAddress,omitempty"`
-	// valueAge
-	// The value of the Output parameter as a basic type.
-	ValueAge Age `json:"valueAge,omitempty"`
-	// valueAnnotation
-	// The value of the Output parameter as a basic type.
-	ValueAnnotation Annotation `json:"valueAnnotation,omitempty"`
-	// valueAttachment
-	// The value of the Output parameter as a basic type.
-	ValueAttachment Attachment `json:"valueAttachment,omitempty"`
-	// valueCodeableConcept
-	// The value of the Output parameter as a basic type.
-	ValueCodeableConcept CodeableConcept `json:"valueCodeableConcept,omitempty"`
-	// valueCoding
-	// The value of the Output parameter as a basic type.
-	ValueCoding Coding `json:"valueCoding,omitempty"`
-	// valueContactPoint
-	// The value of the Output parameter as a basic type.
-	ValueContactPoint ContactPoint `json:"valueContactPoint,omitempty"`
-	// valueCount
-	// The value of the Output parameter as a basic type.
-	ValueCount Count `json:"valueCount,omitempty"`
-	// valueDistance
-	// The value of the Output parameter as a basic type.
-	ValueDistance Distance `json:"valueDistance,omitempty"`
-	// valueDuration
-	// The value of the Output parameter as a basic type.
-	ValueDuration FhirDuration `json:"valueDuration,omitempty"`
-	// valueHumanName
-	// The value of the Output parameter as a basic type.
-	ValueHumanName HumanName `json:"valueHumanName,omitempty"`
-	// valueIdentifier
-	// The value of the Output parameter as a basic type.
-	ValueIdentifier Identifier `json:"valueIdentifier,omitempty"`
-	// valueMoney
-	// The value of the Output parameter as a basic type.
-	ValueMoney Money `json:"valueMoney,omitempty"`
-	// valuePeriod
-	// The value of the Output parameter as a basic type.
-	ValuePeriod Period `json:"valuePeriod,omitempty"`
-	// valueQuantity
-	// The value of the Output parameter as a basic type.
-	ValueQuantity Quantity `json:"valueQuantity,omitempty"`
-	// valueRange
-	// The value of the Output parameter as a basic type.
-	ValueRange Range `json:"valueRange,omitempty"`
-	// valueRatio
-	// The value of the Output parameter as a basic type.
-	ValueRatio Ratio `json:"valueRatio,omitempty"`
-	// valueReference
-	// The value of the Output parameter as a basic type.
-	ValueReference Reference `json:"valueReference,omitempty"`
-	// valueSampledData
-	// The value of the Output parameter as a basic type.
-	ValueSampledData SampledData `json:"valueSampledData,omitempty"`
-	// valueSignature
-	// The value of the Output parameter as a basic type.
-	ValueSignature Signature `json:"valueSignature,omitempty"`
-	// valueTiming
-	// The value of the Output parameter as a basic type.
-	ValueTiming Timing `json:"valueTiming,omitempty"`
-	// valueContactDetail
-	// The value of the Output parameter as a basic type.
-	ValueContactDetail ContactDetail `json:"valueContactDetail,omitempty"`
-	// valueContributor
-	// The value of the Output parameter as a basic type.
-	ValueContributor Contributor `json:"valueContributor,omitempty"`
-	// valueDataRequirement
-	// The value of the Output parameter as a basic type.
-	ValueDataRequirement DataRequirement `json:"valueDataRequirement,omitempty"`
-	// valueExpression
-	// The value of the Output parameter as a basic type.
-	ValueExpression FhirExpression `json:"valueExpression,omitempty"`
-	// valueParameterDefinition
-	// The value of the Output parameter as a basic type.
-	ValueParameterDefinition ParameterDefinition `json:"valueParameterDefinition,omitempty"`
-	// valueRelatedArtifact
-	// The value of the Output parameter as a basic type.
-	ValueRelatedArtifact RelatedArtifact `json:"valueRelatedArtifact,omitempty"`
-	// valueTriggerDefinition
-	// The value of the Output parameter as a basic type.
-	ValueTriggerDefinition TriggerDefinition `json:"valueTriggerDefinition,omitempty"`
-	// valueUsageContext
-	// The value of the Output parameter as a basic type.
-	ValueUsageContext UsageContext `json:"valueUsageContext,omitempty"`
-	// valueDosage
-	// The value of the Output parameter as a basic type.
-	ValueDosage Dosage `json:"valueDosage,omitempty"`
-	// valueMeta
-	// The value of the Output parameter as a basic type.
-	ValueMeta FhirMeta `json:"valueMeta,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	ValueBase64Binary *FhirBase64Binary `json:"valuebase64binary,omitempty"`
+	ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
+	ValueCanonical *FhirCanonical `json:"valuecanonical,omitempty"`
+	ValueCode *FhirCode `json:"valuecode,omitempty"`
+	ValueDate *FhirDate `json:"valuedate,omitempty"`
+	ValueDateTime *FhirDateTime `json:"valuedatetime,omitempty"`
+	ValueDecimal *FhirDecimal `json:"valuedecimal,omitempty"`
+	ValueId *FhirId `json:"valueid,omitempty"`
+	ValueInstant *FhirInstant `json:"valueinstant,omitempty"`
+	ValueInteger *FhirInteger `json:"valueinteger,omitempty"`
+	ValueMarkdown *FhirMarkdown `json:"valuemarkdown,omitempty"`
+	ValueOid *FhirOid `json:"valueoid,omitempty"`
+	ValuePositiveInt *FhirPositiveInt `json:"valuepositiveint,omitempty"`
+	ValueString *FhirString `json:"valuestring,omitempty"`
+	ValueTime *FhirTime `json:"valuetime,omitempty"`
+	ValueUnsignedInt *FhirUnsignedInt `json:"valueunsignedint,omitempty"`
+	ValueUri *FhirUri `json:"valueuri,omitempty"`
+	ValueUrl *FhirUrl `json:"valueurl,omitempty"`
+	ValueUuid *FhirUuid `json:"valueuuid,omitempty"`
+	ValueAddress *Address `json:"valueaddress,omitempty"`
+	ValueAge *Age `json:"valueage,omitempty"`
+	ValueAnnotation *Annotation `json:"valueannotation,omitempty"`
+	ValueAttachment *Attachment `json:"valueattachment,omitempty"`
+	ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+	ValueCoding *Coding `json:"valuecoding,omitempty"`
+	ValueContactPoint *ContactPoint `json:"valuecontactpoint,omitempty"`
+	ValueCount *Count `json:"valuecount,omitempty"`
+	ValueDistance *Distance `json:"valuedistance,omitempty"`
+	ValueDuration *FhirDuration `json:"valueduration,omitempty"`
+	ValueHumanName *HumanName `json:"valuehumanname,omitempty"`
+	ValueIdentifier *Identifier `json:"valueidentifier,omitempty"`
+	ValueMoney *Money `json:"valuemoney,omitempty"`
+	ValuePeriod *Period `json:"valueperiod,omitempty"`
+	ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+	ValueRange *Range `json:"valuerange,omitempty"`
+	ValueRatio *Ratio `json:"valueratio,omitempty"`
+	ValueReference *Reference `json:"valuereference,omitempty"`
+	ValueSampledData *SampledData `json:"valuesampleddata,omitempty"`
+	ValueSignature *Signature `json:"valuesignature,omitempty"`
+	ValueTiming *Timing `json:"valuetiming,omitempty"`
+	ValueContactDetail *ContactDetail `json:"valuecontactdetail,omitempty"`
+	ValueContributor *Contributor `json:"valuecontributor,omitempty"`
+	ValueDataRequirement *DataRequirement `json:"valuedatarequirement,omitempty"`
+	ValueExpression *FhirExpression `json:"valueexpression,omitempty"`
+	ValueParameterDefinition *ParameterDefinition `json:"valueparameterdefinition,omitempty"`
+	ValueRelatedArtifact *RelatedArtifact `json:"valuerelatedartifact,omitempty"`
+	ValueTriggerDefinition *TriggerDefinition `json:"valuetriggerdefinition,omitempty"`
+	ValueUsageContext *UsageContext `json:"valueusagecontext,omitempty"`
+	ValueDosage *Dosage `json:"valuedosage,omitempty"`
+	ValueMeta *FhirMeta `json:"valuemeta,omitempty"`
 }
 
 // NewTaskOutput creates a new TaskOutput instance
-func NewTaskOutput(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	valueBase64Binary FhirBase64Binary,
-	valueBoolean FhirBoolean,
-	valueCanonical FhirCanonical,
-	valueCode FhirCode,
-	valueDate FhirDate,
-	valueDateTime FhirDateTime,
-	valueDecimal FhirDecimal,
-	valueId FhirId,
-	valueInstant FhirInstant,
-	valueInteger FhirInteger,
-	valueMarkdown FhirMarkdown,
-	valueOid FhirOid,
-	valuePositiveInt FhirPositiveInt,
-	valueString FhirString,
-	valueTime FhirTime,
-	valueUnsignedInt FhirUnsignedInt,
-	valueUri FhirUri,
-	valueUrl FhirUrl,
-	valueUuid FhirUuid,
-	valueAddress Address,
-	valueAge Age,
-	valueAnnotation Annotation,
-	valueAttachment Attachment,
-	valueCodeableConcept CodeableConcept,
-	valueCoding Coding,
-	valueContactPoint ContactPoint,
-	valueCount Count,
-	valueDistance Distance,
-	valueDuration FhirDuration,
-	valueHumanName HumanName,
-	valueIdentifier Identifier,
-	valueMoney Money,
-	valuePeriod Period,
-	valueQuantity Quantity,
-	valueRange Range,
-	valueRatio Ratio,
-	valueReference Reference,
-	valueSampledData SampledData,
-	valueSignature Signature,
-	valueTiming Timing,
-	valueContactDetail ContactDetail,
-	valueContributor Contributor,
-	valueDataRequirement DataRequirement,
-	valueExpression FhirExpression,
-	valueParameterDefinition ParameterDefinition,
-	valueRelatedArtifact RelatedArtifact,
-	valueTriggerDefinition TriggerDefinition,
-	valueUsageContext UsageContext,
-	valueDosage Dosage,
-	valueMeta FhirMeta,
-) *TaskOutput {
-	return &TaskOutput{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		ValueBase64Binary: valueBase64Binary,
-		ValueBoolean: valueBoolean,
-		ValueCanonical: valueCanonical,
-		ValueCode: valueCode,
-		ValueDate: valueDate,
-		ValueDateTime: valueDateTime,
-		ValueDecimal: valueDecimal,
-		ValueId: valueId,
-		ValueInstant: valueInstant,
-		ValueInteger: valueInteger,
-		ValueMarkdown: valueMarkdown,
-		ValueOid: valueOid,
-		ValuePositiveInt: valuePositiveInt,
-		ValueString: valueString,
-		ValueTime: valueTime,
-		ValueUnsignedInt: valueUnsignedInt,
-		ValueUri: valueUri,
-		ValueUrl: valueUrl,
-		ValueUuid: valueUuid,
-		ValueAddress: valueAddress,
-		ValueAge: valueAge,
-		ValueAnnotation: valueAnnotation,
-		ValueAttachment: valueAttachment,
-		ValueCodeableConcept: valueCodeableConcept,
-		ValueCoding: valueCoding,
-		ValueContactPoint: valueContactPoint,
-		ValueCount: valueCount,
-		ValueDistance: valueDistance,
-		ValueDuration: valueDuration,
-		ValueHumanName: valueHumanName,
-		ValueIdentifier: valueIdentifier,
-		ValueMoney: valueMoney,
-		ValuePeriod: valuePeriod,
-		ValueQuantity: valueQuantity,
-		ValueRange: valueRange,
-		ValueRatio: valueRatio,
-		ValueReference: valueReference,
-		ValueSampledData: valueSampledData,
-		ValueSignature: valueSignature,
-		ValueTiming: valueTiming,
-		ValueContactDetail: valueContactDetail,
-		ValueContributor: valueContributor,
-		ValueDataRequirement: valueDataRequirement,
-		ValueExpression: valueExpression,
-		ValueParameterDefinition: valueParameterDefinition,
-		ValueRelatedArtifact: valueRelatedArtifact,
-		ValueTriggerDefinition: valueTriggerDefinition,
-		ValueUsageContext: valueUsageContext,
-		ValueDosage: valueDosage,
-		ValueMeta: valueMeta,
-	}
+func NewTaskOutput() *TaskOutput {
+	return &TaskOutput{}
 }
+
 // FromJSON populates TaskOutput from JSON data
 func (m *TaskOutput) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1381,279 +482,125 @@ func (m *TaskOutput) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TaskOutput
-func (m *TaskOutput) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	valueBase64Binary *FhirBase64Binary,
-	valueBoolean *FhirBoolean,
-	valueCanonical *FhirCanonical,
-	valueCode *FhirCode,
-	valueDate *FhirDate,
-	valueDateTime *FhirDateTime,
-	valueDecimal *FhirDecimal,
-	valueId *FhirId,
-	valueInstant *FhirInstant,
-	valueInteger *FhirInteger,
-	valueMarkdown *FhirMarkdown,
-	valueOid *FhirOid,
-	valuePositiveInt *FhirPositiveInt,
-	valueString *FhirString,
-	valueTime *FhirTime,
-	valueUnsignedInt *FhirUnsignedInt,
-	valueUri *FhirUri,
-	valueUrl *FhirUrl,
-	valueUuid *FhirUuid,
-	valueAddress *Address,
-	valueAge *Age,
-	valueAnnotation *Annotation,
-	valueAttachment *Attachment,
-	valueCodeableConcept *CodeableConcept,
-	valueCoding *Coding,
-	valueContactPoint *ContactPoint,
-	valueCount *Count,
-	valueDistance *Distance,
-	valueDuration *FhirDuration,
-	valueHumanName *HumanName,
-	valueIdentifier *Identifier,
-	valueMoney *Money,
-	valuePeriod *Period,
-	valueQuantity *Quantity,
-	valueRange *Range,
-	valueRatio *Ratio,
-	valueReference *Reference,
-	valueSampledData *SampledData,
-	valueSignature *Signature,
-	valueTiming *Timing,
-	valueContactDetail *ContactDetail,
-	valueContributor *Contributor,
-	valueDataRequirement *DataRequirement,
-	valueExpression *FhirExpression,
-	valueParameterDefinition *ParameterDefinition,
-	valueRelatedArtifact *RelatedArtifact,
-	valueTriggerDefinition *TriggerDefinition,
-	valueUsageContext *UsageContext,
-	valueDosage *Dosage,
-	valueMeta *FhirMeta,
-) *TaskOutput {
+// Clone creates a deep copy of TaskOutput
+func (m *TaskOutput) Clone() *TaskOutput {
+	if m == nil { return nil }
 	return &TaskOutput{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		ValueBase64Binary: func() FhirBase64Binary {
-			if valueBase64Binary != nil { return *valueBase64Binary }
-			return m.ValueBase64Binary
-		}(),
-		ValueBoolean: func() FhirBoolean {
-			if valueBoolean != nil { return *valueBoolean }
-			return m.ValueBoolean
-		}(),
-		ValueCanonical: func() FhirCanonical {
-			if valueCanonical != nil { return *valueCanonical }
-			return m.ValueCanonical
-		}(),
-		ValueCode: func() FhirCode {
-			if valueCode != nil { return *valueCode }
-			return m.ValueCode
-		}(),
-		ValueDate: func() FhirDate {
-			if valueDate != nil { return *valueDate }
-			return m.ValueDate
-		}(),
-		ValueDateTime: func() FhirDateTime {
-			if valueDateTime != nil { return *valueDateTime }
-			return m.ValueDateTime
-		}(),
-		ValueDecimal: func() FhirDecimal {
-			if valueDecimal != nil { return *valueDecimal }
-			return m.ValueDecimal
-		}(),
-		ValueId: func() FhirId {
-			if valueId != nil { return *valueId }
-			return m.ValueId
-		}(),
-		ValueInstant: func() FhirInstant {
-			if valueInstant != nil { return *valueInstant }
-			return m.ValueInstant
-		}(),
-		ValueInteger: func() FhirInteger {
-			if valueInteger != nil { return *valueInteger }
-			return m.ValueInteger
-		}(),
-		ValueMarkdown: func() FhirMarkdown {
-			if valueMarkdown != nil { return *valueMarkdown }
-			return m.ValueMarkdown
-		}(),
-		ValueOid: func() FhirOid {
-			if valueOid != nil { return *valueOid }
-			return m.ValueOid
-		}(),
-		ValuePositiveInt: func() FhirPositiveInt {
-			if valuePositiveInt != nil { return *valuePositiveInt }
-			return m.ValuePositiveInt
-		}(),
-		ValueString: func() FhirString {
-			if valueString != nil { return *valueString }
-			return m.ValueString
-		}(),
-		ValueTime: func() FhirTime {
-			if valueTime != nil { return *valueTime }
-			return m.ValueTime
-		}(),
-		ValueUnsignedInt: func() FhirUnsignedInt {
-			if valueUnsignedInt != nil { return *valueUnsignedInt }
-			return m.ValueUnsignedInt
-		}(),
-		ValueUri: func() FhirUri {
-			if valueUri != nil { return *valueUri }
-			return m.ValueUri
-		}(),
-		ValueUrl: func() FhirUrl {
-			if valueUrl != nil { return *valueUrl }
-			return m.ValueUrl
-		}(),
-		ValueUuid: func() FhirUuid {
-			if valueUuid != nil { return *valueUuid }
-			return m.ValueUuid
-		}(),
-		ValueAddress: func() Address {
-			if valueAddress != nil { return *valueAddress }
-			return m.ValueAddress
-		}(),
-		ValueAge: func() Age {
-			if valueAge != nil { return *valueAge }
-			return m.ValueAge
-		}(),
-		ValueAnnotation: func() Annotation {
-			if valueAnnotation != nil { return *valueAnnotation }
-			return m.ValueAnnotation
-		}(),
-		ValueAttachment: func() Attachment {
-			if valueAttachment != nil { return *valueAttachment }
-			return m.ValueAttachment
-		}(),
-		ValueCodeableConcept: func() CodeableConcept {
-			if valueCodeableConcept != nil { return *valueCodeableConcept }
-			return m.ValueCodeableConcept
-		}(),
-		ValueCoding: func() Coding {
-			if valueCoding != nil { return *valueCoding }
-			return m.ValueCoding
-		}(),
-		ValueContactPoint: func() ContactPoint {
-			if valueContactPoint != nil { return *valueContactPoint }
-			return m.ValueContactPoint
-		}(),
-		ValueCount: func() Count {
-			if valueCount != nil { return *valueCount }
-			return m.ValueCount
-		}(),
-		ValueDistance: func() Distance {
-			if valueDistance != nil { return *valueDistance }
-			return m.ValueDistance
-		}(),
-		ValueDuration: func() FhirDuration {
-			if valueDuration != nil { return *valueDuration }
-			return m.ValueDuration
-		}(),
-		ValueHumanName: func() HumanName {
-			if valueHumanName != nil { return *valueHumanName }
-			return m.ValueHumanName
-		}(),
-		ValueIdentifier: func() Identifier {
-			if valueIdentifier != nil { return *valueIdentifier }
-			return m.ValueIdentifier
-		}(),
-		ValueMoney: func() Money {
-			if valueMoney != nil { return *valueMoney }
-			return m.ValueMoney
-		}(),
-		ValuePeriod: func() Period {
-			if valuePeriod != nil { return *valuePeriod }
-			return m.ValuePeriod
-		}(),
-		ValueQuantity: func() Quantity {
-			if valueQuantity != nil { return *valueQuantity }
-			return m.ValueQuantity
-		}(),
-		ValueRange: func() Range {
-			if valueRange != nil { return *valueRange }
-			return m.ValueRange
-		}(),
-		ValueRatio: func() Ratio {
-			if valueRatio != nil { return *valueRatio }
-			return m.ValueRatio
-		}(),
-		ValueReference: func() Reference {
-			if valueReference != nil { return *valueReference }
-			return m.ValueReference
-		}(),
-		ValueSampledData: func() SampledData {
-			if valueSampledData != nil { return *valueSampledData }
-			return m.ValueSampledData
-		}(),
-		ValueSignature: func() Signature {
-			if valueSignature != nil { return *valueSignature }
-			return m.ValueSignature
-		}(),
-		ValueTiming: func() Timing {
-			if valueTiming != nil { return *valueTiming }
-			return m.ValueTiming
-		}(),
-		ValueContactDetail: func() ContactDetail {
-			if valueContactDetail != nil { return *valueContactDetail }
-			return m.ValueContactDetail
-		}(),
-		ValueContributor: func() Contributor {
-			if valueContributor != nil { return *valueContributor }
-			return m.ValueContributor
-		}(),
-		ValueDataRequirement: func() DataRequirement {
-			if valueDataRequirement != nil { return *valueDataRequirement }
-			return m.ValueDataRequirement
-		}(),
-		ValueExpression: func() FhirExpression {
-			if valueExpression != nil { return *valueExpression }
-			return m.ValueExpression
-		}(),
-		ValueParameterDefinition: func() ParameterDefinition {
-			if valueParameterDefinition != nil { return *valueParameterDefinition }
-			return m.ValueParameterDefinition
-		}(),
-		ValueRelatedArtifact: func() RelatedArtifact {
-			if valueRelatedArtifact != nil { return *valueRelatedArtifact }
-			return m.ValueRelatedArtifact
-		}(),
-		ValueTriggerDefinition: func() TriggerDefinition {
-			if valueTriggerDefinition != nil { return *valueTriggerDefinition }
-			return m.ValueTriggerDefinition
-		}(),
-		ValueUsageContext: func() UsageContext {
-			if valueUsageContext != nil { return *valueUsageContext }
-			return m.ValueUsageContext
-		}(),
-		ValueDosage: func() Dosage {
-			if valueDosage != nil { return *valueDosage }
-			return m.ValueDosage
-		}(),
-		ValueMeta: func() FhirMeta {
-			if valueMeta != nil { return *valueMeta }
-			return m.ValueMeta
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		ValueBase64Binary: m.ValueBase64Binary.Clone(),
+		ValueBoolean: m.ValueBoolean.Clone(),
+		ValueCanonical: m.ValueCanonical.Clone(),
+		ValueCode: m.ValueCode.Clone(),
+		ValueDate: m.ValueDate.Clone(),
+		ValueDateTime: m.ValueDateTime.Clone(),
+		ValueDecimal: m.ValueDecimal.Clone(),
+		ValueId: m.ValueId.Clone(),
+		ValueInstant: m.ValueInstant.Clone(),
+		ValueInteger: m.ValueInteger.Clone(),
+		ValueMarkdown: m.ValueMarkdown.Clone(),
+		ValueOid: m.ValueOid.Clone(),
+		ValuePositiveInt: m.ValuePositiveInt.Clone(),
+		ValueString: m.ValueString.Clone(),
+		ValueTime: m.ValueTime.Clone(),
+		ValueUnsignedInt: m.ValueUnsignedInt.Clone(),
+		ValueUri: m.ValueUri.Clone(),
+		ValueUrl: m.ValueUrl.Clone(),
+		ValueUuid: m.ValueUuid.Clone(),
+		ValueAddress: m.ValueAddress.Clone(),
+		ValueAge: m.ValueAge.Clone(),
+		ValueAnnotation: m.ValueAnnotation.Clone(),
+		ValueAttachment: m.ValueAttachment.Clone(),
+		ValueCodeableConcept: m.ValueCodeableConcept.Clone(),
+		ValueCoding: m.ValueCoding.Clone(),
+		ValueContactPoint: m.ValueContactPoint.Clone(),
+		ValueCount: m.ValueCount.Clone(),
+		ValueDistance: m.ValueDistance.Clone(),
+		ValueDuration: m.ValueDuration.Clone(),
+		ValueHumanName: m.ValueHumanName.Clone(),
+		ValueIdentifier: m.ValueIdentifier.Clone(),
+		ValueMoney: m.ValueMoney.Clone(),
+		ValuePeriod: m.ValuePeriod.Clone(),
+		ValueQuantity: m.ValueQuantity.Clone(),
+		ValueRange: m.ValueRange.Clone(),
+		ValueRatio: m.ValueRatio.Clone(),
+		ValueReference: m.ValueReference.Clone(),
+		ValueSampledData: m.ValueSampledData.Clone(),
+		ValueSignature: m.ValueSignature.Clone(),
+		ValueTiming: m.ValueTiming.Clone(),
+		ValueContactDetail: m.ValueContactDetail.Clone(),
+		ValueContributor: m.ValueContributor.Clone(),
+		ValueDataRequirement: m.ValueDataRequirement.Clone(),
+		ValueExpression: m.ValueExpression.Clone(),
+		ValueParameterDefinition: m.ValueParameterDefinition.Clone(),
+		ValueRelatedArtifact: m.ValueRelatedArtifact.Clone(),
+		ValueTriggerDefinition: m.ValueTriggerDefinition.Clone(),
+		ValueUsageContext: m.ValueUsageContext.Clone(),
+		ValueDosage: m.ValueDosage.Clone(),
+		ValueMeta: m.ValueMeta.Clone(),
 	}
 }
+
+// Equals checks for equality with another TaskOutput instance
+func (m *TaskOutput) Equals(other *TaskOutput) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.ValueBase64Binary.Equals(other.ValueBase64Binary) { return false }
+	if !m.ValueBoolean.Equals(other.ValueBoolean) { return false }
+	if !m.ValueCanonical.Equals(other.ValueCanonical) { return false }
+	if !m.ValueCode.Equals(other.ValueCode) { return false }
+	if !m.ValueDate.Equals(other.ValueDate) { return false }
+	if !m.ValueDateTime.Equals(other.ValueDateTime) { return false }
+	if !m.ValueDecimal.Equals(other.ValueDecimal) { return false }
+	if !m.ValueId.Equals(other.ValueId) { return false }
+	if !m.ValueInstant.Equals(other.ValueInstant) { return false }
+	if !m.ValueInteger.Equals(other.ValueInteger) { return false }
+	if !m.ValueMarkdown.Equals(other.ValueMarkdown) { return false }
+	if !m.ValueOid.Equals(other.ValueOid) { return false }
+	if !m.ValuePositiveInt.Equals(other.ValuePositiveInt) { return false }
+	if !m.ValueString.Equals(other.ValueString) { return false }
+	if !m.ValueTime.Equals(other.ValueTime) { return false }
+	if !m.ValueUnsignedInt.Equals(other.ValueUnsignedInt) { return false }
+	if !m.ValueUri.Equals(other.ValueUri) { return false }
+	if !m.ValueUrl.Equals(other.ValueUrl) { return false }
+	if !m.ValueUuid.Equals(other.ValueUuid) { return false }
+	if !m.ValueAddress.Equals(other.ValueAddress) { return false }
+	if !m.ValueAge.Equals(other.ValueAge) { return false }
+	if !m.ValueAnnotation.Equals(other.ValueAnnotation) { return false }
+	if !m.ValueAttachment.Equals(other.ValueAttachment) { return false }
+	if !m.ValueCodeableConcept.Equals(other.ValueCodeableConcept) { return false }
+	if !m.ValueCoding.Equals(other.ValueCoding) { return false }
+	if !m.ValueContactPoint.Equals(other.ValueContactPoint) { return false }
+	if !m.ValueCount.Equals(other.ValueCount) { return false }
+	if !m.ValueDistance.Equals(other.ValueDistance) { return false }
+	if !m.ValueDuration.Equals(other.ValueDuration) { return false }
+	if !m.ValueHumanName.Equals(other.ValueHumanName) { return false }
+	if !m.ValueIdentifier.Equals(other.ValueIdentifier) { return false }
+	if !m.ValueMoney.Equals(other.ValueMoney) { return false }
+	if !m.ValuePeriod.Equals(other.ValuePeriod) { return false }
+	if !m.ValueQuantity.Equals(other.ValueQuantity) { return false }
+	if !m.ValueRange.Equals(other.ValueRange) { return false }
+	if !m.ValueRatio.Equals(other.ValueRatio) { return false }
+	if !m.ValueReference.Equals(other.ValueReference) { return false }
+	if !m.ValueSampledData.Equals(other.ValueSampledData) { return false }
+	if !m.ValueSignature.Equals(other.ValueSignature) { return false }
+	if !m.ValueTiming.Equals(other.ValueTiming) { return false }
+	if !m.ValueContactDetail.Equals(other.ValueContactDetail) { return false }
+	if !m.ValueContributor.Equals(other.ValueContributor) { return false }
+	if !m.ValueDataRequirement.Equals(other.ValueDataRequirement) { return false }
+	if !m.ValueExpression.Equals(other.ValueExpression) { return false }
+	if !m.ValueParameterDefinition.Equals(other.ValueParameterDefinition) { return false }
+	if !m.ValueRelatedArtifact.Equals(other.ValueRelatedArtifact) { return false }
+	if !m.ValueTriggerDefinition.Equals(other.ValueTriggerDefinition) { return false }
+	if !m.ValueUsageContext.Equals(other.ValueUsageContext) { return false }
+	if !m.ValueDosage.Equals(other.ValueDosage) { return false }
+	if !m.ValueMeta.Equals(other.ValueMeta) { return false }
+	return true
+}
+

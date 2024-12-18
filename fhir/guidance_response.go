@@ -3,149 +3,44 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // GuidanceResponse
 // A guidance response is the formal response to a guidance request, including any output parameters returned by the evaluation, as well as the description of any proposed actions to be taken.
 type GuidanceResponse struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// requestIdentifier
-	// The identifier of the request associated with this response. If an identifier was given as part of the request, it will be reproduced here to enable the requester to more easily identify the response in a multi-request scenario.
-	RequestIdentifier Identifier `json:"requestIdentifier,omitempty"`
-	// identifier
-	// Allows a service to provide  unique, business identifiers for the response.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// moduleUri
-	// An identifier, CodeableConcept or canonical reference to the guidance that was requested.
-	ModuleUri FhirUri `json:"moduleUri,omitempty"`
-	// moduleCanonical
-	// An identifier, CodeableConcept or canonical reference to the guidance that was requested.
-	ModuleCanonical FhirCanonical `json:"moduleCanonical,omitempty"`
-	// moduleCodeableConcept
-	// An identifier, CodeableConcept or canonical reference to the guidance that was requested.
-	ModuleCodeableConcept CodeableConcept `json:"moduleCodeableConcept,omitempty"`
-	// status
-	// The status of the response. If the evaluation is completed successfully, the status will indicate success. However, in order to complete the evaluation, the engine may require more information. In this case, the status will be data-required, and the response will contain a description of the additional required information. If the evaluation completed successfully, but the engine determines that a potentially more accurate response could be provided if more data was available, the status will be data-requested, and the response will contain a description of the additional requested information.
-	Status GuidanceResponseStatus `json:"status,omitempty"`
-	// subject
-	// The patient for which the request was processed.
-	Subject Reference `json:"subject,omitempty"`
-	// encounter
-	// The encounter during which this response was created or to which the creation of this record is tightly associated.
-	Encounter Reference `json:"encounter,omitempty"`
-	// occurrenceDateTime
-	// Indicates when the guidance response was processed.
-	OccurrenceDateTime FhirDateTime `json:"occurrenceDateTime,omitempty"`
-	// performer
-	// Provides a reference to the device that performed the guidance.
-	Performer Reference `json:"performer,omitempty"`
-	// reasonCode
-	// Describes the reason for the guidance response in coded or textual form.
-	ReasonCode []CodeableConcept `json:"reasonCode,omitempty"`
-	// reasonReference
-	// Indicates the reason the request was initiated. This is typically provided as a parameter to the evaluation and echoed by the service, although for some use cases, such as subscription- or event-based scenarios, it may provide an indication of the cause for the response.
-	ReasonReference []Reference `json:"reasonReference,omitempty"`
-	// note
-	// Provides a mechanism to communicate additional information about the response.
-	Note []Annotation `json:"note,omitempty"`
-	// evaluationMessage
-	// Messages resulting from the evaluation of the artifact or artifacts. As part of evaluating the request, the engine may produce informational or warning messages. These messages will be provided by this element.
-	EvaluationMessage []Reference `json:"evaluationMessage,omitempty"`
-	// outputParameters
-	// The output parameters of the evaluation, if any. Many modules will result in the return of specific resources such as procedure or communication requests that are returned as part of the operation result. However, modules may define specific outputs that would be returned as the result of the evaluation, and these would be returned in this element.
-	OutputParameters Reference `json:"outputParameters,omitempty"`
-	// result
-	// The actions, if any, produced by the evaluation of the artifact.
-	Result Reference `json:"result,omitempty"`
-	// dataRequirement
-	// If the evaluation could not be completed due to lack of information, or additional information would potentially result in a more accurate response, this element will a description of the data required in order to proceed with the evaluation. A subsequent request to the service should include this data.
-	DataRequirement []DataRequirement `json:"dataRequirement,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	RequestIdentifier *Identifier `json:"requestidentifier,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	ModuleUri *FhirUri `json:"moduleuri,omitempty"`
+	ModuleCanonical *FhirCanonical `json:"modulecanonical,omitempty"`
+	ModuleCodeableConcept *CodeableConcept `json:"modulecodeableconcept,omitempty"`
+	Status *GuidanceResponseStatus `json:"status,omitempty"`
+	Subject *Reference `json:"subject,omitempty"`
+	Encounter *Reference `json:"encounter,omitempty"`
+	OccurrenceDateTime *FhirDateTime `json:"occurrencedatetime,omitempty"`
+	Performer *Reference `json:"performer,omitempty"`
+	ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+	ReasonReference []*Reference `json:"reasonreference,omitempty"`
+	Note []*Annotation `json:"note,omitempty"`
+	EvaluationMessage []*Reference `json:"evaluationmessage,omitempty"`
+	OutputParameters *Reference `json:"outputparameters,omitempty"`
+	Result *Reference `json:"result,omitempty"`
+	DataRequirement []*DataRequirement `json:"datarequirement,omitempty"`
 }
 
 // NewGuidanceResponse creates a new GuidanceResponse instance
-func NewGuidanceResponse(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	requestIdentifier Identifier,
-	identifier []Identifier,
-	moduleUri FhirUri,
-	moduleCanonical FhirCanonical,
-	moduleCodeableConcept CodeableConcept,
-	status GuidanceResponseStatus,
-	subject Reference,
-	encounter Reference,
-	occurrenceDateTime FhirDateTime,
-	performer Reference,
-	reasonCode []CodeableConcept,
-	reasonReference []Reference,
-	note []Annotation,
-	evaluationMessage []Reference,
-	outputParameters Reference,
-	result Reference,
-	dataRequirement []DataRequirement,
-) *GuidanceResponse {
-	return &GuidanceResponse{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		RequestIdentifier: requestIdentifier,
-		Identifier: identifier,
-		ModuleUri: moduleUri,
-		ModuleCanonical: moduleCanonical,
-		ModuleCodeableConcept: moduleCodeableConcept,
-		Status: status,
-		Subject: subject,
-		Encounter: encounter,
-		OccurrenceDateTime: occurrenceDateTime,
-		Performer: performer,
-		ReasonCode: reasonCode,
-		ReasonReference: reasonReference,
-		Note: note,
-		EvaluationMessage: evaluationMessage,
-		OutputParameters: outputParameters,
-		Result: result,
-		DataRequirement: dataRequirement,
-	}
+func NewGuidanceResponse() *GuidanceResponse {
+	return &GuidanceResponse{}
 }
+
 // FromJSON populates GuidanceResponse from JSON data
 func (m *GuidanceResponse) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -156,134 +51,67 @@ func (m *GuidanceResponse) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of GuidanceResponse
-func (m *GuidanceResponse) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	requestIdentifier *Identifier,
-	identifier *[]Identifier,
-	moduleUri *FhirUri,
-	moduleCanonical *FhirCanonical,
-	moduleCodeableConcept *CodeableConcept,
-	status *GuidanceResponseStatus,
-	subject *Reference,
-	encounter *Reference,
-	occurrenceDateTime *FhirDateTime,
-	performer *Reference,
-	reasonCode *[]CodeableConcept,
-	reasonReference *[]Reference,
-	note *[]Annotation,
-	evaluationMessage *[]Reference,
-	outputParameters *Reference,
-	result *Reference,
-	dataRequirement *[]DataRequirement,
-) *GuidanceResponse {
+// Clone creates a deep copy of GuidanceResponse
+func (m *GuidanceResponse) Clone() *GuidanceResponse {
+	if m == nil { return nil }
 	return &GuidanceResponse{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		RequestIdentifier: func() Identifier {
-			if requestIdentifier != nil { return *requestIdentifier }
-			return m.RequestIdentifier
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		ModuleUri: func() FhirUri {
-			if moduleUri != nil { return *moduleUri }
-			return m.ModuleUri
-		}(),
-		ModuleCanonical: func() FhirCanonical {
-			if moduleCanonical != nil { return *moduleCanonical }
-			return m.ModuleCanonical
-		}(),
-		ModuleCodeableConcept: func() CodeableConcept {
-			if moduleCodeableConcept != nil { return *moduleCodeableConcept }
-			return m.ModuleCodeableConcept
-		}(),
-		Status: func() GuidanceResponseStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Subject: func() Reference {
-			if subject != nil { return *subject }
-			return m.Subject
-		}(),
-		Encounter: func() Reference {
-			if encounter != nil { return *encounter }
-			return m.Encounter
-		}(),
-		OccurrenceDateTime: func() FhirDateTime {
-			if occurrenceDateTime != nil { return *occurrenceDateTime }
-			return m.OccurrenceDateTime
-		}(),
-		Performer: func() Reference {
-			if performer != nil { return *performer }
-			return m.Performer
-		}(),
-		ReasonCode: func() []CodeableConcept {
-			if reasonCode != nil { return *reasonCode }
-			return m.ReasonCode
-		}(),
-		ReasonReference: func() []Reference {
-			if reasonReference != nil { return *reasonReference }
-			return m.ReasonReference
-		}(),
-		Note: func() []Annotation {
-			if note != nil { return *note }
-			return m.Note
-		}(),
-		EvaluationMessage: func() []Reference {
-			if evaluationMessage != nil { return *evaluationMessage }
-			return m.EvaluationMessage
-		}(),
-		OutputParameters: func() Reference {
-			if outputParameters != nil { return *outputParameters }
-			return m.OutputParameters
-		}(),
-		Result: func() Reference {
-			if result != nil { return *result }
-			return m.Result
-		}(),
-		DataRequirement: func() []DataRequirement {
-			if dataRequirement != nil { return *dataRequirement }
-			return m.DataRequirement
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		RequestIdentifier: m.RequestIdentifier.Clone(),
+		Identifier: cloneSlices(m.Identifier),
+		ModuleUri: m.ModuleUri.Clone(),
+		ModuleCanonical: m.ModuleCanonical.Clone(),
+		ModuleCodeableConcept: m.ModuleCodeableConcept.Clone(),
+		Status: m.Status.Clone(),
+		Subject: m.Subject.Clone(),
+		Encounter: m.Encounter.Clone(),
+		OccurrenceDateTime: m.OccurrenceDateTime.Clone(),
+		Performer: m.Performer.Clone(),
+		ReasonCode: cloneSlices(m.ReasonCode),
+		ReasonReference: cloneSlices(m.ReasonReference),
+		Note: cloneSlices(m.Note),
+		EvaluationMessage: cloneSlices(m.EvaluationMessage),
+		OutputParameters: m.OutputParameters.Clone(),
+		Result: m.Result.Clone(),
+		DataRequirement: cloneSlices(m.DataRequirement),
 	}
 }
+
+// Equals checks for equality with another GuidanceResponse instance
+func (m *GuidanceResponse) Equals(other *GuidanceResponse) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.RequestIdentifier.Equals(other.RequestIdentifier) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.ModuleUri.Equals(other.ModuleUri) { return false }
+	if !m.ModuleCanonical.Equals(other.ModuleCanonical) { return false }
+	if !m.ModuleCodeableConcept.Equals(other.ModuleCodeableConcept) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Subject.Equals(other.Subject) { return false }
+	if !m.Encounter.Equals(other.Encounter) { return false }
+	if !m.OccurrenceDateTime.Equals(other.OccurrenceDateTime) { return false }
+	if !m.Performer.Equals(other.Performer) { return false }
+	if !compareSlices(m.ReasonCode, other.ReasonCode) { return false }
+	if !compareSlices(m.ReasonReference, other.ReasonReference) { return false }
+	if !compareSlices(m.Note, other.Note) { return false }
+	if !compareSlices(m.EvaluationMessage, other.EvaluationMessage) { return false }
+	if !m.OutputParameters.Equals(other.OutputParameters) { return false }
+	if !m.Result.Equals(other.Result) { return false }
+	if !compareSlices(m.DataRequirement, other.DataRequirement) { return false }
+	return true
+}
+

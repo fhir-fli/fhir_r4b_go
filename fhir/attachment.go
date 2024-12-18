@@ -3,72 +3,29 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // Attachment
 // For referring to data content defined in other formats.
 type Attachment struct {
 	DataType
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// contentType
-	// Identifies the type of the data in the attachment and allows a method to be chosen to interpret or render the data. Includes mime type parameters such as charset where appropriate.
-	ContentType FhirCode `json:"contentType,omitempty"`
-	// language
-	// The human language of the content. The value can be any valid value according to BCP 47.
-	Language CommonLanguages `json:"language,omitempty"`
-	// data
-	// The actual data of the attachment - a sequence of bytes, base64 encoded.
-	Data FhirBase64Binary `json:"data,omitempty"`
-	// url
-	// A location where the data can be accessed.
-	Url FhirUrl `json:"url,omitempty"`
-	// size
-	// The number of bytes of data that make up this attachment (before base64 encoding, if that is done).
-	Size FhirUnsignedInt `json:"size,omitempty"`
-	// hash
-	// The calculated hash of the data using SHA-1. Represented using base64.
-	Hash FhirBase64Binary `json:"hash,omitempty"`
-	// title
-	// A label or set of text to display in place of the data.
-	Title FhirString `json:"title,omitempty"`
-	// creation
-	// The date that the attachment was first created.
-	Creation FhirDateTime `json:"creation,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ContentType *FhirCode `json:"contenttype,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Data *FhirBase64Binary `json:"data,omitempty"`
+	Url *FhirUrl `json:"url,omitempty"`
+	Size *FhirUnsignedInt `json:"size,omitempty"`
+	Hash *FhirBase64Binary `json:"hash,omitempty"`
+	Title *FhirString `json:"title,omitempty"`
+	Creation *FhirDateTime `json:"creation,omitempty"`
 }
 
 // NewAttachment creates a new Attachment instance
-func NewAttachment(
-	id FhirString,
-	extension_ []FhirExtension,
-	contentType FhirCode,
-	language CommonLanguages,
-	data FhirBase64Binary,
-	url FhirUrl,
-	size FhirUnsignedInt,
-	hash FhirBase64Binary,
-	title FhirString,
-	creation FhirDateTime,
-) *Attachment {
-	return &Attachment{
-		Id: id,
-		Extension_: extension_,
-		ContentType: contentType,
-		Language: language,
-		Data: data,
-		Url: url,
-		Size: size,
-		Hash: hash,
-		Title: title,
-		Creation: creation,
-	}
+func NewAttachment() *Attachment {
+	return &Attachment{}
 }
+
 // FromJSON populates Attachment from JSON data
 func (m *Attachment) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -79,59 +36,37 @@ func (m *Attachment) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of Attachment
-func (m *Attachment) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	contentType *FhirCode,
-	language *CommonLanguages,
-	data *FhirBase64Binary,
-	url *FhirUrl,
-	size *FhirUnsignedInt,
-	hash *FhirBase64Binary,
-	title *FhirString,
-	creation *FhirDateTime,
-) *Attachment {
+// Clone creates a deep copy of Attachment
+func (m *Attachment) Clone() *Attachment {
+	if m == nil { return nil }
 	return &Attachment{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ContentType: func() FhirCode {
-			if contentType != nil { return *contentType }
-			return m.ContentType
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Data: func() FhirBase64Binary {
-			if data != nil { return *data }
-			return m.Data
-		}(),
-		Url: func() FhirUrl {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		Size: func() FhirUnsignedInt {
-			if size != nil { return *size }
-			return m.Size
-		}(),
-		Hash: func() FhirBase64Binary {
-			if hash != nil { return *hash }
-			return m.Hash
-		}(),
-		Title: func() FhirString {
-			if title != nil { return *title }
-			return m.Title
-		}(),
-		Creation: func() FhirDateTime {
-			if creation != nil { return *creation }
-			return m.Creation
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ContentType: m.ContentType.Clone(),
+		Language: m.Language.Clone(),
+		Data: m.Data.Clone(),
+		Url: m.Url.Clone(),
+		Size: m.Size.Clone(),
+		Hash: m.Hash.Clone(),
+		Title: m.Title.Clone(),
+		Creation: m.Creation.Clone(),
 	}
 }
+
+// Equals checks for equality with another Attachment instance
+func (m *Attachment) Equals(other *Attachment) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !m.ContentType.Equals(other.ContentType) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Data.Equals(other.Data) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !m.Size.Equals(other.Size) { return false }
+	if !m.Hash.Equals(other.Hash) { return false }
+	if !m.Title.Equals(other.Title) { return false }
+	if !m.Creation.Equals(other.Creation) { return false }
+	return true
+}
+

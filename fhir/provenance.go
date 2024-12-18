@@ -3,119 +3,38 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // Provenance
 // Provenance of a resource is a record that describes entities and processes involved in producing and delivering or otherwise influencing that resource. Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility. Provenance assertions are a form of contextual metadata and can themselves become important records with their own provenance. Provenance statement indicates clinical significance in terms of confidence in authenticity, reliability, and trustworthiness, integrity, and stage in lifecycle (e.g. Document Completion - has the artifact been legally authenticated), all of which may impact security, privacy, and trust policies.
 type Provenance struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// target
-	// The Reference(s) that were generated or updated by  the activity described in this resource. A provenance can point to more than one target if multiple resources were created/updated by the same activity.
-	Target []Reference `json:"target,omitempty"`
-	// occurredPeriod
-	// The period during which the activity occurred.
-	OccurredPeriod Period `json:"occurredPeriod,omitempty"`
-	// occurredDateTime
-	// The period during which the activity occurred.
-	OccurredDateTime FhirDateTime `json:"occurredDateTime,omitempty"`
-	// recorded
-	// The instant of time at which the activity was recorded.
-	Recorded FhirInstant `json:"recorded,omitempty"`
-	// policy
-	// Policy or plan the activity was defined by. Typically, a single activity may have multiple applicable policy documents, such as patient consent, guarantor funding, etc.
-	Policy []FhirUri `json:"policy,omitempty"`
-	// location
-	// Where the activity occurred, if relevant.
-	Location Reference `json:"location,omitempty"`
-	// reason
-	// The reason that the activity was taking place.
-	Reason []CodeableConcept `json:"reason,omitempty"`
-	// activity
-	// An activity is something that occurs over a period of time and acts upon or with entities; it may include consuming, processing, transforming, modifying, relocating, using, or generating entities.
-	Activity CodeableConcept `json:"activity,omitempty"`
-	// agent
-	// An actor taking a role in an activity  for which it can be assigned some degree of responsibility for the activity taking place.
-	Agent []ProvenanceAgent `json:"agent,omitempty"`
-	// entity
-	// An entity used in this activity.
-	Entity []ProvenanceEntity `json:"entity,omitempty"`
-	// signature
-	// A digital signature on the target Reference(s). The signer should match a Provenance.agent. The purpose of the signature is indicated.
-	Signature []Signature `json:"signature,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Target []*Reference `json:"target,omitempty"`
+	OccurredPeriod *Period `json:"occurredperiod,omitempty"`
+	OccurredDateTime *FhirDateTime `json:"occurreddatetime,omitempty"`
+	Recorded *FhirInstant `json:"recorded,omitempty"`
+	Policy []*FhirUri `json:"policy,omitempty"`
+	Location *Reference `json:"location,omitempty"`
+	Reason []*CodeableConcept `json:"reason,omitempty"`
+	Activity *CodeableConcept `json:"activity,omitempty"`
+	Agent []*ProvenanceAgent `json:"agent,omitempty"`
+	Entity []*ProvenanceEntity `json:"entity,omitempty"`
+	Signature []*Signature `json:"signature,omitempty"`
 }
 
 // NewProvenance creates a new Provenance instance
-func NewProvenance(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	target []Reference,
-	occurredPeriod Period,
-	occurredDateTime FhirDateTime,
-	recorded FhirInstant,
-	policy []FhirUri,
-	location Reference,
-	reason []CodeableConcept,
-	activity CodeableConcept,
-	agent []ProvenanceAgent,
-	entity []ProvenanceEntity,
-	signature []Signature,
-) *Provenance {
-	return &Provenance{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Target: target,
-		OccurredPeriod: occurredPeriod,
-		OccurredDateTime: occurredDateTime,
-		Recorded: recorded,
-		Policy: policy,
-		Location: location,
-		Reason: reason,
-		Activity: activity,
-		Agent: agent,
-		Entity: entity,
-		Signature: signature,
-	}
+func NewProvenance() *Provenance {
+	return &Provenance{}
 }
+
 // FromJSON populates Provenance from JSON data
 func (m *Provenance) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -126,156 +45,76 @@ func (m *Provenance) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of Provenance
-func (m *Provenance) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	target *[]Reference,
-	occurredPeriod *Period,
-	occurredDateTime *FhirDateTime,
-	recorded *FhirInstant,
-	policy *[]FhirUri,
-	location *Reference,
-	reason *[]CodeableConcept,
-	activity *CodeableConcept,
-	agent *[]ProvenanceAgent,
-	entity *[]ProvenanceEntity,
-	signature *[]Signature,
-) *Provenance {
+// Clone creates a deep copy of Provenance
+func (m *Provenance) Clone() *Provenance {
+	if m == nil { return nil }
 	return &Provenance{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Target: func() []Reference {
-			if target != nil { return *target }
-			return m.Target
-		}(),
-		OccurredPeriod: func() Period {
-			if occurredPeriod != nil { return *occurredPeriod }
-			return m.OccurredPeriod
-		}(),
-		OccurredDateTime: func() FhirDateTime {
-			if occurredDateTime != nil { return *occurredDateTime }
-			return m.OccurredDateTime
-		}(),
-		Recorded: func() FhirInstant {
-			if recorded != nil { return *recorded }
-			return m.Recorded
-		}(),
-		Policy: func() []FhirUri {
-			if policy != nil { return *policy }
-			return m.Policy
-		}(),
-		Location: func() Reference {
-			if location != nil { return *location }
-			return m.Location
-		}(),
-		Reason: func() []CodeableConcept {
-			if reason != nil { return *reason }
-			return m.Reason
-		}(),
-		Activity: func() CodeableConcept {
-			if activity != nil { return *activity }
-			return m.Activity
-		}(),
-		Agent: func() []ProvenanceAgent {
-			if agent != nil { return *agent }
-			return m.Agent
-		}(),
-		Entity: func() []ProvenanceEntity {
-			if entity != nil { return *entity }
-			return m.Entity
-		}(),
-		Signature: func() []Signature {
-			if signature != nil { return *signature }
-			return m.Signature
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Target: cloneSlices(m.Target),
+		OccurredPeriod: m.OccurredPeriod.Clone(),
+		OccurredDateTime: m.OccurredDateTime.Clone(),
+		Recorded: m.Recorded.Clone(),
+		Policy: cloneSlices(m.Policy),
+		Location: m.Location.Clone(),
+		Reason: cloneSlices(m.Reason),
+		Activity: m.Activity.Clone(),
+		Agent: cloneSlices(m.Agent),
+		Entity: cloneSlices(m.Entity),
+		Signature: cloneSlices(m.Signature),
 	}
 }
+
+// Equals checks for equality with another Provenance instance
+func (m *Provenance) Equals(other *Provenance) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Target, other.Target) { return false }
+	if !m.OccurredPeriod.Equals(other.OccurredPeriod) { return false }
+	if !m.OccurredDateTime.Equals(other.OccurredDateTime) { return false }
+	if !m.Recorded.Equals(other.Recorded) { return false }
+	if !compareSlices(m.Policy, other.Policy) { return false }
+	if !m.Location.Equals(other.Location) { return false }
+	if !compareSlices(m.Reason, other.Reason) { return false }
+	if !m.Activity.Equals(other.Activity) { return false }
+	if !compareSlices(m.Agent, other.Agent) { return false }
+	if !compareSlices(m.Entity, other.Entity) { return false }
+	if !compareSlices(m.Signature, other.Signature) { return false }
+	return true
+}
+
 // ProvenanceAgent
 // An actor taking a role in an activity  for which it can be assigned some degree of responsibility for the activity taking place.
 type ProvenanceAgent struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// The participation the agent had with respect to the activity.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// role
-	// The function of the agent with respect to the activity. The security role enabling the agent with respect to the activity.
-	Role []CodeableConcept `json:"role,omitempty"`
-	// who
-	// The individual, device or organization that participated in the event.
-	Who Reference `json:"who,omitempty"`
-	// onBehalfOf
-	// The individual, device, or organization for whom the change was made.
-	OnBehalfOf Reference `json:"onBehalfOf,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Role []*CodeableConcept `json:"role,omitempty"`
+	Who *Reference `json:"who,omitempty"`
+	OnBehalfOf *Reference `json:"onbehalfof,omitempty"`
 }
 
 // NewProvenanceAgent creates a new ProvenanceAgent instance
-func NewProvenanceAgent(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	role []CodeableConcept,
-	who Reference,
-	onBehalfOf Reference,
-) *ProvenanceAgent {
-	return &ProvenanceAgent{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Role: role,
-		Who: who,
-		OnBehalfOf: onBehalfOf,
-	}
+func NewProvenanceAgent() *ProvenanceAgent {
+	return &ProvenanceAgent{}
 }
+
 // FromJSON populates ProvenanceAgent from JSON data
 func (m *ProvenanceAgent) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -286,91 +125,51 @@ func (m *ProvenanceAgent) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ProvenanceAgent
-func (m *ProvenanceAgent) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	role *[]CodeableConcept,
-	who *Reference,
-	onBehalfOf *Reference,
-) *ProvenanceAgent {
+// Clone creates a deep copy of ProvenanceAgent
+func (m *ProvenanceAgent) Clone() *ProvenanceAgent {
+	if m == nil { return nil }
 	return &ProvenanceAgent{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Role: func() []CodeableConcept {
-			if role != nil { return *role }
-			return m.Role
-		}(),
-		Who: func() Reference {
-			if who != nil { return *who }
-			return m.Who
-		}(),
-		OnBehalfOf: func() Reference {
-			if onBehalfOf != nil { return *onBehalfOf }
-			return m.OnBehalfOf
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Role: cloneSlices(m.Role),
+		Who: m.Who.Clone(),
+		OnBehalfOf: m.OnBehalfOf.Clone(),
 	}
 }
+
+// Equals checks for equality with another ProvenanceAgent instance
+func (m *ProvenanceAgent) Equals(other *ProvenanceAgent) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !compareSlices(m.Role, other.Role) { return false }
+	if !m.Who.Equals(other.Who) { return false }
+	if !m.OnBehalfOf.Equals(other.OnBehalfOf) { return false }
+	return true
+}
+
 // ProvenanceEntity
 // An entity used in this activity.
 type ProvenanceEntity struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// role
-	// How the entity was used during the activity.
-	Role ProvenanceEntityRole `json:"role,omitempty"`
-	// what
-	// Identity of the  Entity used. May be a logical or physical uri and maybe absolute or relative.
-	What Reference `json:"what,omitempty"`
-	// agent
-	// The entity is attributed to an agent to express the agent's responsibility for that entity, possibly along with other agents. This description can be understood as shorthand for saying that the agent was responsible for the activity which generated the entity.
-	Agent []ProvenanceAgent `json:"agent,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Role *ProvenanceEntityRole `json:"role,omitempty"`
+	What *Reference `json:"what,omitempty"`
+	Agent []*ProvenanceAgent `json:"agent,omitempty"`
 }
 
 // NewProvenanceEntity creates a new ProvenanceEntity instance
-func NewProvenanceEntity(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	role ProvenanceEntityRole,
-	what Reference,
-	agent []ProvenanceAgent,
-) *ProvenanceEntity {
-	return &ProvenanceEntity{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Role: role,
-		What: what,
-		Agent: agent,
-	}
+func NewProvenanceEntity() *ProvenanceEntity {
+	return &ProvenanceEntity{}
 }
+
 // FromJSON populates ProvenanceEntity from JSON data
 func (m *ProvenanceEntity) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -381,39 +180,29 @@ func (m *ProvenanceEntity) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ProvenanceEntity
-func (m *ProvenanceEntity) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	role *ProvenanceEntityRole,
-	what *Reference,
-	agent *[]ProvenanceAgent,
-) *ProvenanceEntity {
+// Clone creates a deep copy of ProvenanceEntity
+func (m *ProvenanceEntity) Clone() *ProvenanceEntity {
+	if m == nil { return nil }
 	return &ProvenanceEntity{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Role: func() ProvenanceEntityRole {
-			if role != nil { return *role }
-			return m.Role
-		}(),
-		What: func() Reference {
-			if what != nil { return *what }
-			return m.What
-		}(),
-		Agent: func() []ProvenanceAgent {
-			if agent != nil { return *agent }
-			return m.Agent
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Role: m.Role.Clone(),
+		What: m.What.Clone(),
+		Agent: cloneSlices(m.Agent),
 	}
 }
+
+// Equals checks for equality with another ProvenanceEntity instance
+func (m *ProvenanceEntity) Equals(other *ProvenanceEntity) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Role.Equals(other.Role) { return false }
+	if !m.What.Equals(other.What) { return false }
+	if !compareSlices(m.Agent, other.Agent) { return false }
+	return true
+}
+

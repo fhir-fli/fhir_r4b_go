@@ -3,159 +3,46 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // SubstanceDefinition
 // The detailed description of a substance, typically at a level beyond what is used for prescribing.
 type SubstanceDefinition struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// Identifier by which this substance is known.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// version
-	// A business level version identifier of the substance.
-	Version FhirString `json:"version,omitempty"`
-	// status
-	// Status of substance within the catalogue e.g. active, retired.
-	Status CodeableConcept `json:"status,omitempty"`
-	// classification
-	// A high level categorization, e.g. polymer or nucleic acid, or food, chemical, biological, or a lower level such as the general types of polymer (linear or branch chain) or type of impurity (process related or contaminant).
-	Classification []CodeableConcept `json:"classification,omitempty"`
-	// domain
-	// If the substance applies to human or veterinary use.
-	Domain CodeableConcept `json:"domain,omitempty"`
-	// grade
-	// The quality standard, established benchmark, to which substance complies (e.g. USP/NF, Ph. Eur, JP, BP, Company Standard).
-	Grade []CodeableConcept `json:"grade,omitempty"`
-	// description
-	// Textual description of the substance.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// informationSource
-	// Supporting literature.
-	InformationSource []Reference `json:"informationSource,omitempty"`
-	// note
-	// Textual comment about the substance's catalogue or registry record.
-	Note []Annotation `json:"note,omitempty"`
-	// manufacturer
-	// The entity that creates, makes, produces or fabricates the substance. This is a set of potential manufacturers but is not necessarily comprehensive.
-	Manufacturer []Reference `json:"manufacturer,omitempty"`
-	// supplier
-	// An entity that is the source for the substance. It may be different from the manufacturer. Supplier is synonymous to a distributor.
-	Supplier []Reference `json:"supplier,omitempty"`
-	// moiety
-	// Moiety, for structural modifications.
-	Moiety []SubstanceDefinitionMoiety `json:"moiety,omitempty"`
-	// property
-	// General specifications for this substance.
-	Property []SubstanceDefinitionProperty `json:"property,omitempty"`
-	// molecularWeight
-	// The molecular weight or weight range (for proteins, polymers or nucleic acids).
-	MolecularWeight []SubstanceDefinitionMolecularWeight `json:"molecularWeight,omitempty"`
-	// structure
-	// Structural information.
-	Structure SubstanceDefinitionStructure `json:"structure,omitempty"`
-	// code
-	// Codes associated with the substance.
-	Code []SubstanceDefinitionCode `json:"code,omitempty"`
-	// name
-	// Names applicable to this substance.
-	Name []SubstanceDefinitionName `json:"name,omitempty"`
-	// relationship
-	// A link between this substance and another, with details of the relationship.
-	Relationship []SubstanceDefinitionRelationship `json:"relationship,omitempty"`
-	// sourceMaterial
-	// Material or taxonomic/anatomical source for the substance.
-	SourceMaterial SubstanceDefinitionSourceMaterial `json:"sourceMaterial,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
+	Status *CodeableConcept `json:"status,omitempty"`
+	Classification []*CodeableConcept `json:"classification,omitempty"`
+	Domain *CodeableConcept `json:"domain,omitempty"`
+	Grade []*CodeableConcept `json:"grade,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	InformationSource []*Reference `json:"informationsource,omitempty"`
+	Note []*Annotation `json:"note,omitempty"`
+	Manufacturer []*Reference `json:"manufacturer,omitempty"`
+	Supplier []*Reference `json:"supplier,omitempty"`
+	Moiety []*SubstanceDefinitionMoiety `json:"moiety,omitempty"`
+	Property []*SubstanceDefinitionProperty `json:"property,omitempty"`
+	MolecularWeight []*SubstanceDefinitionMolecularWeight `json:"molecularweight,omitempty"`
+	Structure *SubstanceDefinitionStructure `json:"structure,omitempty"`
+	Code []*SubstanceDefinitionCode `json:"code,omitempty"`
+	Name []*SubstanceDefinitionName `json:"name,omitempty"`
+	Relationship []*SubstanceDefinitionRelationship `json:"relationship,omitempty"`
+	SourceMaterial *SubstanceDefinitionSourceMaterial `json:"sourcematerial,omitempty"`
 }
 
 // NewSubstanceDefinition creates a new SubstanceDefinition instance
-func NewSubstanceDefinition(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	version FhirString,
-	status CodeableConcept,
-	classification []CodeableConcept,
-	domain CodeableConcept,
-	grade []CodeableConcept,
-	description FhirMarkdown,
-	informationSource []Reference,
-	note []Annotation,
-	manufacturer []Reference,
-	supplier []Reference,
-	moiety []SubstanceDefinitionMoiety,
-	property []SubstanceDefinitionProperty,
-	molecularWeight []SubstanceDefinitionMolecularWeight,
-	structure SubstanceDefinitionStructure,
-	code []SubstanceDefinitionCode,
-	name []SubstanceDefinitionName,
-	relationship []SubstanceDefinitionRelationship,
-	sourceMaterial SubstanceDefinitionSourceMaterial,
-) *SubstanceDefinition {
-	return &SubstanceDefinition{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Version: version,
-		Status: status,
-		Classification: classification,
-		Domain: domain,
-		Grade: grade,
-		Description: description,
-		InformationSource: informationSource,
-		Note: note,
-		Manufacturer: manufacturer,
-		Supplier: supplier,
-		Moiety: moiety,
-		Property: property,
-		MolecularWeight: molecularWeight,
-		Structure: structure,
-		Code: code,
-		Name: name,
-		Relationship: relationship,
-		SourceMaterial: sourceMaterial,
-	}
+func NewSubstanceDefinition() *SubstanceDefinition {
+	return &SubstanceDefinition{}
 }
+
 // FromJSON populates SubstanceDefinition from JSON data
 func (m *SubstanceDefinition) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -166,221 +53,97 @@ func (m *SubstanceDefinition) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SubstanceDefinition
-func (m *SubstanceDefinition) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	version *FhirString,
-	status *CodeableConcept,
-	classification *[]CodeableConcept,
-	domain *CodeableConcept,
-	grade *[]CodeableConcept,
-	description *FhirMarkdown,
-	informationSource *[]Reference,
-	note *[]Annotation,
-	manufacturer *[]Reference,
-	supplier *[]Reference,
-	moiety *[]SubstanceDefinitionMoiety,
-	property *[]SubstanceDefinitionProperty,
-	molecularWeight *[]SubstanceDefinitionMolecularWeight,
-	structure *SubstanceDefinitionStructure,
-	code *[]SubstanceDefinitionCode,
-	name *[]SubstanceDefinitionName,
-	relationship *[]SubstanceDefinitionRelationship,
-	sourceMaterial *SubstanceDefinitionSourceMaterial,
-) *SubstanceDefinition {
+// Clone creates a deep copy of SubstanceDefinition
+func (m *SubstanceDefinition) Clone() *SubstanceDefinition {
+	if m == nil { return nil }
 	return &SubstanceDefinition{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Status: func() CodeableConcept {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Classification: func() []CodeableConcept {
-			if classification != nil { return *classification }
-			return m.Classification
-		}(),
-		Domain: func() CodeableConcept {
-			if domain != nil { return *domain }
-			return m.Domain
-		}(),
-		Grade: func() []CodeableConcept {
-			if grade != nil { return *grade }
-			return m.Grade
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		InformationSource: func() []Reference {
-			if informationSource != nil { return *informationSource }
-			return m.InformationSource
-		}(),
-		Note: func() []Annotation {
-			if note != nil { return *note }
-			return m.Note
-		}(),
-		Manufacturer: func() []Reference {
-			if manufacturer != nil { return *manufacturer }
-			return m.Manufacturer
-		}(),
-		Supplier: func() []Reference {
-			if supplier != nil { return *supplier }
-			return m.Supplier
-		}(),
-		Moiety: func() []SubstanceDefinitionMoiety {
-			if moiety != nil { return *moiety }
-			return m.Moiety
-		}(),
-		Property: func() []SubstanceDefinitionProperty {
-			if property != nil { return *property }
-			return m.Property
-		}(),
-		MolecularWeight: func() []SubstanceDefinitionMolecularWeight {
-			if molecularWeight != nil { return *molecularWeight }
-			return m.MolecularWeight
-		}(),
-		Structure: func() SubstanceDefinitionStructure {
-			if structure != nil { return *structure }
-			return m.Structure
-		}(),
-		Code: func() []SubstanceDefinitionCode {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Name: func() []SubstanceDefinitionName {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Relationship: func() []SubstanceDefinitionRelationship {
-			if relationship != nil { return *relationship }
-			return m.Relationship
-		}(),
-		SourceMaterial: func() SubstanceDefinitionSourceMaterial {
-			if sourceMaterial != nil { return *sourceMaterial }
-			return m.SourceMaterial
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		Version: m.Version.Clone(),
+		Status: m.Status.Clone(),
+		Classification: cloneSlices(m.Classification),
+		Domain: m.Domain.Clone(),
+		Grade: cloneSlices(m.Grade),
+		Description: m.Description.Clone(),
+		InformationSource: cloneSlices(m.InformationSource),
+		Note: cloneSlices(m.Note),
+		Manufacturer: cloneSlices(m.Manufacturer),
+		Supplier: cloneSlices(m.Supplier),
+		Moiety: cloneSlices(m.Moiety),
+		Property: cloneSlices(m.Property),
+		MolecularWeight: cloneSlices(m.MolecularWeight),
+		Structure: m.Structure.Clone(),
+		Code: cloneSlices(m.Code),
+		Name: cloneSlices(m.Name),
+		Relationship: cloneSlices(m.Relationship),
+		SourceMaterial: m.SourceMaterial.Clone(),
 	}
 }
+
+// Equals checks for equality with another SubstanceDefinition instance
+func (m *SubstanceDefinition) Equals(other *SubstanceDefinition) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !compareSlices(m.Classification, other.Classification) { return false }
+	if !m.Domain.Equals(other.Domain) { return false }
+	if !compareSlices(m.Grade, other.Grade) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.InformationSource, other.InformationSource) { return false }
+	if !compareSlices(m.Note, other.Note) { return false }
+	if !compareSlices(m.Manufacturer, other.Manufacturer) { return false }
+	if !compareSlices(m.Supplier, other.Supplier) { return false }
+	if !compareSlices(m.Moiety, other.Moiety) { return false }
+	if !compareSlices(m.Property, other.Property) { return false }
+	if !compareSlices(m.MolecularWeight, other.MolecularWeight) { return false }
+	if !m.Structure.Equals(other.Structure) { return false }
+	if !compareSlices(m.Code, other.Code) { return false }
+	if !compareSlices(m.Name, other.Name) { return false }
+	if !compareSlices(m.Relationship, other.Relationship) { return false }
+	if !m.SourceMaterial.Equals(other.SourceMaterial) { return false }
+	return true
+}
+
 // SubstanceDefinitionMoiety
 // Moiety, for structural modifications.
 type SubstanceDefinitionMoiety struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// role
-	// Role that the moiety is playing.
-	Role CodeableConcept `json:"role,omitempty"`
-	// identifier
-	// Identifier by which this moiety substance is known.
-	Identifier Identifier `json:"identifier,omitempty"`
-	// name
-	// Textual name for this moiety substance.
-	Name FhirString `json:"name,omitempty"`
-	// stereochemistry
-	// Stereochemistry type.
-	Stereochemistry CodeableConcept `json:"stereochemistry,omitempty"`
-	// opticalActivity
-	// Optical activity type.
-	OpticalActivity CodeableConcept `json:"opticalActivity,omitempty"`
-	// molecularFormula
-	// Molecular formula for this moiety of this substance, typically using the Hill system.
-	MolecularFormula FhirString `json:"molecularFormula,omitempty"`
-	// amountQuantity
-	// Quantitative value for this moiety.
-	AmountQuantity Quantity `json:"amountQuantity,omitempty"`
-	// amountString
-	// Quantitative value for this moiety.
-	AmountString FhirString `json:"amountString,omitempty"`
-	// measurementType
-	// The measurement type of the quantitative value. In capturing the actual relative amounts of substances or molecular fragments it may be necessary to indicate whether the amount refers to, for example, a mole ratio or weight ratio.
-	MeasurementType CodeableConcept `json:"measurementType,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Role *CodeableConcept `json:"role,omitempty"`
+	Identifier *Identifier `json:"identifier,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Stereochemistry *CodeableConcept `json:"stereochemistry,omitempty"`
+	OpticalActivity *CodeableConcept `json:"opticalactivity,omitempty"`
+	MolecularFormula *FhirString `json:"molecularformula,omitempty"`
+	AmountQuantity *Quantity `json:"amountquantity,omitempty"`
+	AmountString *FhirString `json:"amountstring,omitempty"`
+	MeasurementType *CodeableConcept `json:"measurementtype,omitempty"`
 }
 
 // NewSubstanceDefinitionMoiety creates a new SubstanceDefinitionMoiety instance
-func NewSubstanceDefinitionMoiety(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	role CodeableConcept,
-	identifier Identifier,
-	name FhirString,
-	stereochemistry CodeableConcept,
-	opticalActivity CodeableConcept,
-	molecularFormula FhirString,
-	amountQuantity Quantity,
-	amountString FhirString,
-	measurementType CodeableConcept,
-) *SubstanceDefinitionMoiety {
-	return &SubstanceDefinitionMoiety{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Role: role,
-		Identifier: identifier,
-		Name: name,
-		Stereochemistry: stereochemistry,
-		OpticalActivity: opticalActivity,
-		MolecularFormula: molecularFormula,
-		AmountQuantity: amountQuantity,
-		AmountString: amountString,
-		MeasurementType: measurementType,
-	}
+func NewSubstanceDefinitionMoiety() *SubstanceDefinitionMoiety {
+	return &SubstanceDefinitionMoiety{}
 }
+
 // FromJSON populates SubstanceDefinitionMoiety from JSON data
 func (m *SubstanceDefinitionMoiety) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -391,131 +154,64 @@ func (m *SubstanceDefinitionMoiety) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SubstanceDefinitionMoiety
-func (m *SubstanceDefinitionMoiety) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	role *CodeableConcept,
-	identifier *Identifier,
-	name *FhirString,
-	stereochemistry *CodeableConcept,
-	opticalActivity *CodeableConcept,
-	molecularFormula *FhirString,
-	amountQuantity *Quantity,
-	amountString *FhirString,
-	measurementType *CodeableConcept,
-) *SubstanceDefinitionMoiety {
+// Clone creates a deep copy of SubstanceDefinitionMoiety
+func (m *SubstanceDefinitionMoiety) Clone() *SubstanceDefinitionMoiety {
+	if m == nil { return nil }
 	return &SubstanceDefinitionMoiety{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Role: func() CodeableConcept {
-			if role != nil { return *role }
-			return m.Role
-		}(),
-		Identifier: func() Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Stereochemistry: func() CodeableConcept {
-			if stereochemistry != nil { return *stereochemistry }
-			return m.Stereochemistry
-		}(),
-		OpticalActivity: func() CodeableConcept {
-			if opticalActivity != nil { return *opticalActivity }
-			return m.OpticalActivity
-		}(),
-		MolecularFormula: func() FhirString {
-			if molecularFormula != nil { return *molecularFormula }
-			return m.MolecularFormula
-		}(),
-		AmountQuantity: func() Quantity {
-			if amountQuantity != nil { return *amountQuantity }
-			return m.AmountQuantity
-		}(),
-		AmountString: func() FhirString {
-			if amountString != nil { return *amountString }
-			return m.AmountString
-		}(),
-		MeasurementType: func() CodeableConcept {
-			if measurementType != nil { return *measurementType }
-			return m.MeasurementType
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Role: m.Role.Clone(),
+		Identifier: m.Identifier.Clone(),
+		Name: m.Name.Clone(),
+		Stereochemistry: m.Stereochemistry.Clone(),
+		OpticalActivity: m.OpticalActivity.Clone(),
+		MolecularFormula: m.MolecularFormula.Clone(),
+		AmountQuantity: m.AmountQuantity.Clone(),
+		AmountString: m.AmountString.Clone(),
+		MeasurementType: m.MeasurementType.Clone(),
 	}
 }
+
+// Equals checks for equality with another SubstanceDefinitionMoiety instance
+func (m *SubstanceDefinitionMoiety) Equals(other *SubstanceDefinitionMoiety) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Role.Equals(other.Role) { return false }
+	if !m.Identifier.Equals(other.Identifier) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Stereochemistry.Equals(other.Stereochemistry) { return false }
+	if !m.OpticalActivity.Equals(other.OpticalActivity) { return false }
+	if !m.MolecularFormula.Equals(other.MolecularFormula) { return false }
+	if !m.AmountQuantity.Equals(other.AmountQuantity) { return false }
+	if !m.AmountString.Equals(other.AmountString) { return false }
+	if !m.MeasurementType.Equals(other.MeasurementType) { return false }
+	return true
+}
+
 // SubstanceDefinitionProperty
 // General specifications for this substance.
 type SubstanceDefinitionProperty struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// A code expressing the type of property.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// valueCodeableConcept
-	// A value for the property.
-	ValueCodeableConcept CodeableConcept `json:"valueCodeableConcept,omitempty"`
-	// valueQuantity
-	// A value for the property.
-	ValueQuantity Quantity `json:"valueQuantity,omitempty"`
-	// valueDate
-	// A value for the property.
-	ValueDate FhirDate `json:"valueDate,omitempty"`
-	// valueBoolean
-	// A value for the property.
-	ValueBoolean FhirBoolean `json:"valueBoolean,omitempty"`
-	// valueAttachment
-	// A value for the property.
-	ValueAttachment Attachment `json:"valueAttachment,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+	ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+	ValueDate *FhirDate `json:"valuedate,omitempty"`
+	ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
+	ValueAttachment *Attachment `json:"valueattachment,omitempty"`
 }
 
 // NewSubstanceDefinitionProperty creates a new SubstanceDefinitionProperty instance
-func NewSubstanceDefinitionProperty(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	valueCodeableConcept CodeableConcept,
-	valueQuantity Quantity,
-	valueDate FhirDate,
-	valueBoolean FhirBoolean,
-	valueAttachment Attachment,
-) *SubstanceDefinitionProperty {
-	return &SubstanceDefinitionProperty{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		ValueCodeableConcept: valueCodeableConcept,
-		ValueQuantity: valueQuantity,
-		ValueDate: valueDate,
-		ValueBoolean: valueBoolean,
-		ValueAttachment: valueAttachment,
-	}
+func NewSubstanceDefinitionProperty() *SubstanceDefinitionProperty {
+	return &SubstanceDefinitionProperty{}
 }
+
 // FromJSON populates SubstanceDefinitionProperty from JSON data
 func (m *SubstanceDefinitionProperty) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -526,101 +222,55 @@ func (m *SubstanceDefinitionProperty) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SubstanceDefinitionProperty
-func (m *SubstanceDefinitionProperty) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	valueCodeableConcept *CodeableConcept,
-	valueQuantity *Quantity,
-	valueDate *FhirDate,
-	valueBoolean *FhirBoolean,
-	valueAttachment *Attachment,
-) *SubstanceDefinitionProperty {
+// Clone creates a deep copy of SubstanceDefinitionProperty
+func (m *SubstanceDefinitionProperty) Clone() *SubstanceDefinitionProperty {
+	if m == nil { return nil }
 	return &SubstanceDefinitionProperty{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		ValueCodeableConcept: func() CodeableConcept {
-			if valueCodeableConcept != nil { return *valueCodeableConcept }
-			return m.ValueCodeableConcept
-		}(),
-		ValueQuantity: func() Quantity {
-			if valueQuantity != nil { return *valueQuantity }
-			return m.ValueQuantity
-		}(),
-		ValueDate: func() FhirDate {
-			if valueDate != nil { return *valueDate }
-			return m.ValueDate
-		}(),
-		ValueBoolean: func() FhirBoolean {
-			if valueBoolean != nil { return *valueBoolean }
-			return m.ValueBoolean
-		}(),
-		ValueAttachment: func() Attachment {
-			if valueAttachment != nil { return *valueAttachment }
-			return m.ValueAttachment
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		ValueCodeableConcept: m.ValueCodeableConcept.Clone(),
+		ValueQuantity: m.ValueQuantity.Clone(),
+		ValueDate: m.ValueDate.Clone(),
+		ValueBoolean: m.ValueBoolean.Clone(),
+		ValueAttachment: m.ValueAttachment.Clone(),
 	}
 }
+
+// Equals checks for equality with another SubstanceDefinitionProperty instance
+func (m *SubstanceDefinitionProperty) Equals(other *SubstanceDefinitionProperty) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.ValueCodeableConcept.Equals(other.ValueCodeableConcept) { return false }
+	if !m.ValueQuantity.Equals(other.ValueQuantity) { return false }
+	if !m.ValueDate.Equals(other.ValueDate) { return false }
+	if !m.ValueBoolean.Equals(other.ValueBoolean) { return false }
+	if !m.ValueAttachment.Equals(other.ValueAttachment) { return false }
+	return true
+}
+
 // SubstanceDefinitionMolecularWeight
 // The molecular weight or weight range (for proteins, polymers or nucleic acids).
 type SubstanceDefinitionMolecularWeight struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// method
-	// The method by which the molecular weight was determined.
-	Method CodeableConcept `json:"method,omitempty"`
-	// type
-	// Type of molecular weight such as exact, average (also known as. number average), weight average.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// amount
-	// Used to capture quantitative values for a variety of elements. If only limits are given, the arithmetic mean would be the average. If only a single definite value for a given element is given, it would be captured in this field.
-	Amount Quantity `json:"amount,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Method *CodeableConcept `json:"method,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Amount *Quantity `json:"amount,omitempty"`
 }
 
 // NewSubstanceDefinitionMolecularWeight creates a new SubstanceDefinitionMolecularWeight instance
-func NewSubstanceDefinitionMolecularWeight(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	method CodeableConcept,
-	type_ CodeableConcept,
-	amount Quantity,
-) *SubstanceDefinitionMolecularWeight {
-	return &SubstanceDefinitionMolecularWeight{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Method: method,
-		Type_: type_,
-		Amount: amount,
-	}
+func NewSubstanceDefinitionMolecularWeight() *SubstanceDefinitionMolecularWeight {
+	return &SubstanceDefinitionMolecularWeight{}
 }
+
 // FromJSON populates SubstanceDefinitionMolecularWeight from JSON data
 func (m *SubstanceDefinitionMolecularWeight) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -631,111 +281,54 @@ func (m *SubstanceDefinitionMolecularWeight) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SubstanceDefinitionMolecularWeight
-func (m *SubstanceDefinitionMolecularWeight) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	method *CodeableConcept,
-	type_ *CodeableConcept,
-	amount *Quantity,
-) *SubstanceDefinitionMolecularWeight {
+// Clone creates a deep copy of SubstanceDefinitionMolecularWeight
+func (m *SubstanceDefinitionMolecularWeight) Clone() *SubstanceDefinitionMolecularWeight {
+	if m == nil { return nil }
 	return &SubstanceDefinitionMolecularWeight{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Method: func() CodeableConcept {
-			if method != nil { return *method }
-			return m.Method
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Amount: func() Quantity {
-			if amount != nil { return *amount }
-			return m.Amount
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Method: m.Method.Clone(),
+		Type: m.Type.Clone(),
+		Amount: m.Amount.Clone(),
 	}
 }
+
+// Equals checks for equality with another SubstanceDefinitionMolecularWeight instance
+func (m *SubstanceDefinitionMolecularWeight) Equals(other *SubstanceDefinitionMolecularWeight) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Method.Equals(other.Method) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Amount.Equals(other.Amount) { return false }
+	return true
+}
+
 // SubstanceDefinitionStructure
 // Structural information.
 type SubstanceDefinitionStructure struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// stereochemistry
-	// Stereochemistry type.
-	Stereochemistry CodeableConcept `json:"stereochemistry,omitempty"`
-	// opticalActivity
-	// Optical activity type.
-	OpticalActivity CodeableConcept `json:"opticalActivity,omitempty"`
-	// molecularFormula
-	// Molecular formula of this substance, typically using the Hill system.
-	MolecularFormula FhirString `json:"molecularFormula,omitempty"`
-	// molecularFormulaByMoiety
-	// Specified per moiety according to the Hill system, i.e. first C, then H, then alphabetical, each moiety separated by a dot.
-	MolecularFormulaByMoiety FhirString `json:"molecularFormulaByMoiety,omitempty"`
-	// molecularWeight
-	// The molecular weight or weight range (for proteins, polymers or nucleic acids).
-	MolecularWeight SubstanceDefinitionMolecularWeight `json:"molecularWeight,omitempty"`
-	// technique
-	// The method used to elucidate the structure or characterization of the drug substance. Examples: X-ray, HPLC, NMR, Peptide mapping, Ligand binding assay.
-	Technique []CodeableConcept `json:"technique,omitempty"`
-	// sourceDocument
-	// The source of information about the structure.
-	SourceDocument []Reference `json:"sourceDocument,omitempty"`
-	// representation
-	// A depiction of the structure or characterization of the substance.
-	Representation []SubstanceDefinitionRepresentation `json:"representation,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Stereochemistry *CodeableConcept `json:"stereochemistry,omitempty"`
+	OpticalActivity *CodeableConcept `json:"opticalactivity,omitempty"`
+	MolecularFormula *FhirString `json:"molecularformula,omitempty"`
+	MolecularFormulaByMoiety *FhirString `json:"molecularformulabymoiety,omitempty"`
+	MolecularWeight *SubstanceDefinitionMolecularWeight `json:"molecularweight,omitempty"`
+	Technique []*CodeableConcept `json:"technique,omitempty"`
+	SourceDocument []*Reference `json:"sourcedocument,omitempty"`
+	Representation []*SubstanceDefinitionRepresentation `json:"representation,omitempty"`
 }
 
 // NewSubstanceDefinitionStructure creates a new SubstanceDefinitionStructure instance
-func NewSubstanceDefinitionStructure(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	stereochemistry CodeableConcept,
-	opticalActivity CodeableConcept,
-	molecularFormula FhirString,
-	molecularFormulaByMoiety FhirString,
-	molecularWeight SubstanceDefinitionMolecularWeight,
-	technique []CodeableConcept,
-	sourceDocument []Reference,
-	representation []SubstanceDefinitionRepresentation,
-) *SubstanceDefinitionStructure {
-	return &SubstanceDefinitionStructure{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Stereochemistry: stereochemistry,
-		OpticalActivity: opticalActivity,
-		MolecularFormula: molecularFormula,
-		MolecularFormulaByMoiety: molecularFormulaByMoiety,
-		MolecularWeight: molecularWeight,
-		Technique: technique,
-		SourceDocument: sourceDocument,
-		Representation: representation,
-	}
+func NewSubstanceDefinitionStructure() *SubstanceDefinitionStructure {
+	return &SubstanceDefinitionStructure{}
 }
+
 // FromJSON populates SubstanceDefinitionStructure from JSON data
 func (m *SubstanceDefinitionStructure) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -746,116 +339,60 @@ func (m *SubstanceDefinitionStructure) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SubstanceDefinitionStructure
-func (m *SubstanceDefinitionStructure) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	stereochemistry *CodeableConcept,
-	opticalActivity *CodeableConcept,
-	molecularFormula *FhirString,
-	molecularFormulaByMoiety *FhirString,
-	molecularWeight *SubstanceDefinitionMolecularWeight,
-	technique *[]CodeableConcept,
-	sourceDocument *[]Reference,
-	representation *[]SubstanceDefinitionRepresentation,
-) *SubstanceDefinitionStructure {
+// Clone creates a deep copy of SubstanceDefinitionStructure
+func (m *SubstanceDefinitionStructure) Clone() *SubstanceDefinitionStructure {
+	if m == nil { return nil }
 	return &SubstanceDefinitionStructure{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Stereochemistry: func() CodeableConcept {
-			if stereochemistry != nil { return *stereochemistry }
-			return m.Stereochemistry
-		}(),
-		OpticalActivity: func() CodeableConcept {
-			if opticalActivity != nil { return *opticalActivity }
-			return m.OpticalActivity
-		}(),
-		MolecularFormula: func() FhirString {
-			if molecularFormula != nil { return *molecularFormula }
-			return m.MolecularFormula
-		}(),
-		MolecularFormulaByMoiety: func() FhirString {
-			if molecularFormulaByMoiety != nil { return *molecularFormulaByMoiety }
-			return m.MolecularFormulaByMoiety
-		}(),
-		MolecularWeight: func() SubstanceDefinitionMolecularWeight {
-			if molecularWeight != nil { return *molecularWeight }
-			return m.MolecularWeight
-		}(),
-		Technique: func() []CodeableConcept {
-			if technique != nil { return *technique }
-			return m.Technique
-		}(),
-		SourceDocument: func() []Reference {
-			if sourceDocument != nil { return *sourceDocument }
-			return m.SourceDocument
-		}(),
-		Representation: func() []SubstanceDefinitionRepresentation {
-			if representation != nil { return *representation }
-			return m.Representation
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Stereochemistry: m.Stereochemistry.Clone(),
+		OpticalActivity: m.OpticalActivity.Clone(),
+		MolecularFormula: m.MolecularFormula.Clone(),
+		MolecularFormulaByMoiety: m.MolecularFormulaByMoiety.Clone(),
+		MolecularWeight: m.MolecularWeight.Clone(),
+		Technique: cloneSlices(m.Technique),
+		SourceDocument: cloneSlices(m.SourceDocument),
+		Representation: cloneSlices(m.Representation),
 	}
 }
+
+// Equals checks for equality with another SubstanceDefinitionStructure instance
+func (m *SubstanceDefinitionStructure) Equals(other *SubstanceDefinitionStructure) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Stereochemistry.Equals(other.Stereochemistry) { return false }
+	if !m.OpticalActivity.Equals(other.OpticalActivity) { return false }
+	if !m.MolecularFormula.Equals(other.MolecularFormula) { return false }
+	if !m.MolecularFormulaByMoiety.Equals(other.MolecularFormulaByMoiety) { return false }
+	if !m.MolecularWeight.Equals(other.MolecularWeight) { return false }
+	if !compareSlices(m.Technique, other.Technique) { return false }
+	if !compareSlices(m.SourceDocument, other.SourceDocument) { return false }
+	if !compareSlices(m.Representation, other.Representation) { return false }
+	return true
+}
+
 // SubstanceDefinitionRepresentation
 // A depiction of the structure or characterization of the substance.
 type SubstanceDefinitionRepresentation struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// The kind of structural representation (e.g. full, partial).
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// representation
-	// The structural representation or characterization as a text string in a standard format.
-	Representation FhirString `json:"representation,omitempty"`
-	// format
-	// The format of the representation e.g. InChI, SMILES, MOLFILE, CDX, SDF, PDB, mmCIF. The logical content type rather than the physical file format of a document.
-	Format CodeableConcept `json:"format,omitempty"`
-	// document
-	// An attached file with the structural representation or characterization e.g. a molecular structure graphic of the substance, a JCAMP or AnIML file.
-	Document Reference `json:"document,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Representation *FhirString `json:"representation,omitempty"`
+	Format *CodeableConcept `json:"format,omitempty"`
+	Document *Reference `json:"document,omitempty"`
 }
 
 // NewSubstanceDefinitionRepresentation creates a new SubstanceDefinitionRepresentation instance
-func NewSubstanceDefinitionRepresentation(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	representation FhirString,
-	format CodeableConcept,
-	document Reference,
-) *SubstanceDefinitionRepresentation {
-	return &SubstanceDefinitionRepresentation{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Representation: representation,
-		Format: format,
-		Document: document,
-	}
+func NewSubstanceDefinitionRepresentation() *SubstanceDefinitionRepresentation {
+	return &SubstanceDefinitionRepresentation{}
 }
+
 // FromJSON populates SubstanceDefinitionRepresentation from JSON data
 func (m *SubstanceDefinitionRepresentation) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -866,101 +403,53 @@ func (m *SubstanceDefinitionRepresentation) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SubstanceDefinitionRepresentation
-func (m *SubstanceDefinitionRepresentation) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	representation *FhirString,
-	format *CodeableConcept,
-	document *Reference,
-) *SubstanceDefinitionRepresentation {
+// Clone creates a deep copy of SubstanceDefinitionRepresentation
+func (m *SubstanceDefinitionRepresentation) Clone() *SubstanceDefinitionRepresentation {
+	if m == nil { return nil }
 	return &SubstanceDefinitionRepresentation{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Representation: func() FhirString {
-			if representation != nil { return *representation }
-			return m.Representation
-		}(),
-		Format: func() CodeableConcept {
-			if format != nil { return *format }
-			return m.Format
-		}(),
-		Document: func() Reference {
-			if document != nil { return *document }
-			return m.Document
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Representation: m.Representation.Clone(),
+		Format: m.Format.Clone(),
+		Document: m.Document.Clone(),
 	}
 }
+
+// Equals checks for equality with another SubstanceDefinitionRepresentation instance
+func (m *SubstanceDefinitionRepresentation) Equals(other *SubstanceDefinitionRepresentation) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Representation.Equals(other.Representation) { return false }
+	if !m.Format.Equals(other.Format) { return false }
+	if !m.Document.Equals(other.Document) { return false }
+	return true
+}
+
 // SubstanceDefinitionCode
 // Codes associated with the substance.
 type SubstanceDefinitionCode struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// The specific code.
-	Code CodeableConcept `json:"code,omitempty"`
-	// status
-	// Status of the code assignment, for example 'provisional', 'approved'.
-	Status CodeableConcept `json:"status,omitempty"`
-	// statusDate
-	// The date at which the code status was changed as part of the terminology maintenance.
-	StatusDate FhirDateTime `json:"statusDate,omitempty"`
-	// note
-	// Any comment can be provided in this field, if necessary.
-	Note []Annotation `json:"note,omitempty"`
-	// source
-	// Supporting literature.
-	Source []Reference `json:"source,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *CodeableConcept `json:"code,omitempty"`
+	Status *CodeableConcept `json:"status,omitempty"`
+	StatusDate *FhirDateTime `json:"statusdate,omitempty"`
+	Note []*Annotation `json:"note,omitempty"`
+	Source []*Reference `json:"source,omitempty"`
 }
 
 // NewSubstanceDefinitionCode creates a new SubstanceDefinitionCode instance
-func NewSubstanceDefinitionCode(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code CodeableConcept,
-	status CodeableConcept,
-	statusDate FhirDateTime,
-	note []Annotation,
-	source []Reference,
-) *SubstanceDefinitionCode {
-	return &SubstanceDefinitionCode{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		Status: status,
-		StatusDate: statusDate,
-		Note: note,
-		Source: source,
-	}
+func NewSubstanceDefinitionCode() *SubstanceDefinitionCode {
+	return &SubstanceDefinitionCode{}
 }
+
 // FromJSON populates SubstanceDefinitionCode from JSON data
 func (m *SubstanceDefinitionCode) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -971,136 +460,61 @@ func (m *SubstanceDefinitionCode) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SubstanceDefinitionCode
-func (m *SubstanceDefinitionCode) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *CodeableConcept,
-	status *CodeableConcept,
-	statusDate *FhirDateTime,
-	note *[]Annotation,
-	source *[]Reference,
-) *SubstanceDefinitionCode {
+// Clone creates a deep copy of SubstanceDefinitionCode
+func (m *SubstanceDefinitionCode) Clone() *SubstanceDefinitionCode {
+	if m == nil { return nil }
 	return &SubstanceDefinitionCode{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() CodeableConcept {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Status: func() CodeableConcept {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		StatusDate: func() FhirDateTime {
-			if statusDate != nil { return *statusDate }
-			return m.StatusDate
-		}(),
-		Note: func() []Annotation {
-			if note != nil { return *note }
-			return m.Note
-		}(),
-		Source: func() []Reference {
-			if source != nil { return *source }
-			return m.Source
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		Status: m.Status.Clone(),
+		StatusDate: m.StatusDate.Clone(),
+		Note: cloneSlices(m.Note),
+		Source: cloneSlices(m.Source),
 	}
 }
+
+// Equals checks for equality with another SubstanceDefinitionCode instance
+func (m *SubstanceDefinitionCode) Equals(other *SubstanceDefinitionCode) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.StatusDate.Equals(other.StatusDate) { return false }
+	if !compareSlices(m.Note, other.Note) { return false }
+	if !compareSlices(m.Source, other.Source) { return false }
+	return true
+}
+
 // SubstanceDefinitionName
 // Names applicable to this substance.
 type SubstanceDefinitionName struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// name
-	// The actual name.
-	Name FhirString `json:"name,omitempty"`
-	// type
-	// Name type, for example 'systematic',  'scientific, 'brand'.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// status
-	// The status of the name, for example 'current', 'proposed'.
-	Status CodeableConcept `json:"status,omitempty"`
-	// preferred
-	// If this is the preferred name for this substance.
-	Preferred FhirBoolean `json:"preferred,omitempty"`
-	// language
-	// Human language that the name is written in.
-	Language []CodeableConcept `json:"language,omitempty"`
-	// domain
-	// The use context of this name for example if there is a different name a drug active ingredient as opposed to a food colour additive.
-	Domain []CodeableConcept `json:"domain,omitempty"`
-	// jurisdiction
-	// The jurisdiction where this name applies.
-	Jurisdiction []CodeableConcept `json:"jurisdiction,omitempty"`
-	// synonym
-	// A synonym of this particular name, by which the substance is also known.
-	Synonym []SubstanceDefinitionName `json:"synonym,omitempty"`
-	// translation
-	// A translation for this name into another human language.
-	Translation []SubstanceDefinitionName `json:"translation,omitempty"`
-	// official
-	// Details of the official nature of this name.
-	Official []SubstanceDefinitionOfficial `json:"official,omitempty"`
-	// source
-	// Supporting literature.
-	Source []Reference `json:"source,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Status *CodeableConcept `json:"status,omitempty"`
+	Preferred *FhirBoolean `json:"preferred,omitempty"`
+	Language []*CodeableConcept `json:"language,omitempty"`
+	Domain []*CodeableConcept `json:"domain,omitempty"`
+	Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+	Synonym []*SubstanceDefinitionName `json:"synonym,omitempty"`
+	Translation []*SubstanceDefinitionName `json:"translation,omitempty"`
+	Official []*SubstanceDefinitionOfficial `json:"official,omitempty"`
+	Source []*Reference `json:"source,omitempty"`
 }
 
 // NewSubstanceDefinitionName creates a new SubstanceDefinitionName instance
-func NewSubstanceDefinitionName(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	name FhirString,
-	type_ CodeableConcept,
-	status CodeableConcept,
-	preferred FhirBoolean,
-	language []CodeableConcept,
-	domain []CodeableConcept,
-	jurisdiction []CodeableConcept,
-	synonym []SubstanceDefinitionName,
-	translation []SubstanceDefinitionName,
-	official []SubstanceDefinitionOfficial,
-	source []Reference,
-) *SubstanceDefinitionName {
-	return &SubstanceDefinitionName{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Name: name,
-		Type_: type_,
-		Status: status,
-		Preferred: preferred,
-		Language: language,
-		Domain: domain,
-		Jurisdiction: jurisdiction,
-		Synonym: synonym,
-		Translation: translation,
-		Official: official,
-		Source: source,
-	}
+func NewSubstanceDefinitionName() *SubstanceDefinitionName {
+	return &SubstanceDefinitionName{}
 }
+
 // FromJSON populates SubstanceDefinitionName from JSON data
 func (m *SubstanceDefinitionName) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1111,126 +525,65 @@ func (m *SubstanceDefinitionName) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SubstanceDefinitionName
-func (m *SubstanceDefinitionName) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	name *FhirString,
-	type_ *CodeableConcept,
-	status *CodeableConcept,
-	preferred *FhirBoolean,
-	language *[]CodeableConcept,
-	domain *[]CodeableConcept,
-	jurisdiction *[]CodeableConcept,
-	synonym *[]SubstanceDefinitionName,
-	translation *[]SubstanceDefinitionName,
-	official *[]SubstanceDefinitionOfficial,
-	source *[]Reference,
-) *SubstanceDefinitionName {
+// Clone creates a deep copy of SubstanceDefinitionName
+func (m *SubstanceDefinitionName) Clone() *SubstanceDefinitionName {
+	if m == nil { return nil }
 	return &SubstanceDefinitionName{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Status: func() CodeableConcept {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Preferred: func() FhirBoolean {
-			if preferred != nil { return *preferred }
-			return m.Preferred
-		}(),
-		Language: func() []CodeableConcept {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Domain: func() []CodeableConcept {
-			if domain != nil { return *domain }
-			return m.Domain
-		}(),
-		Jurisdiction: func() []CodeableConcept {
-			if jurisdiction != nil { return *jurisdiction }
-			return m.Jurisdiction
-		}(),
-		Synonym: func() []SubstanceDefinitionName {
-			if synonym != nil { return *synonym }
-			return m.Synonym
-		}(),
-		Translation: func() []SubstanceDefinitionName {
-			if translation != nil { return *translation }
-			return m.Translation
-		}(),
-		Official: func() []SubstanceDefinitionOfficial {
-			if official != nil { return *official }
-			return m.Official
-		}(),
-		Source: func() []Reference {
-			if source != nil { return *source }
-			return m.Source
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Name: m.Name.Clone(),
+		Type: m.Type.Clone(),
+		Status: m.Status.Clone(),
+		Preferred: m.Preferred.Clone(),
+		Language: cloneSlices(m.Language),
+		Domain: cloneSlices(m.Domain),
+		Jurisdiction: cloneSlices(m.Jurisdiction),
+		Synonym: cloneSlices(m.Synonym),
+		Translation: cloneSlices(m.Translation),
+		Official: cloneSlices(m.Official),
+		Source: cloneSlices(m.Source),
 	}
 }
+
+// Equals checks for equality with another SubstanceDefinitionName instance
+func (m *SubstanceDefinitionName) Equals(other *SubstanceDefinitionName) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Preferred.Equals(other.Preferred) { return false }
+	if !compareSlices(m.Language, other.Language) { return false }
+	if !compareSlices(m.Domain, other.Domain) { return false }
+	if !compareSlices(m.Jurisdiction, other.Jurisdiction) { return false }
+	if !compareSlices(m.Synonym, other.Synonym) { return false }
+	if !compareSlices(m.Translation, other.Translation) { return false }
+	if !compareSlices(m.Official, other.Official) { return false }
+	if !compareSlices(m.Source, other.Source) { return false }
+	return true
+}
+
 // SubstanceDefinitionOfficial
 // Details of the official nature of this name.
 type SubstanceDefinitionOfficial struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// authority
-	// Which authority uses this official name.
-	Authority CodeableConcept `json:"authority,omitempty"`
-	// status
-	// The status of the official name, for example 'draft', 'active', 'retired'.
-	Status CodeableConcept `json:"status,omitempty"`
-	// date
-	// Date of the official name change.
-	Date FhirDateTime `json:"date,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Authority *CodeableConcept `json:"authority,omitempty"`
+	Status *CodeableConcept `json:"status,omitempty"`
+	Date *FhirDateTime `json:"date,omitempty"`
 }
 
 // NewSubstanceDefinitionOfficial creates a new SubstanceDefinitionOfficial instance
-func NewSubstanceDefinitionOfficial(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	authority CodeableConcept,
-	status CodeableConcept,
-	date FhirDateTime,
-) *SubstanceDefinitionOfficial {
-	return &SubstanceDefinitionOfficial{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Authority: authority,
-		Status: status,
-		Date: date,
-	}
+func NewSubstanceDefinitionOfficial() *SubstanceDefinitionOfficial {
+	return &SubstanceDefinitionOfficial{}
 }
+
 // FromJSON populates SubstanceDefinitionOfficial from JSON data
 func (m *SubstanceDefinitionOfficial) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1241,121 +594,56 @@ func (m *SubstanceDefinitionOfficial) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SubstanceDefinitionOfficial
-func (m *SubstanceDefinitionOfficial) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	authority *CodeableConcept,
-	status *CodeableConcept,
-	date *FhirDateTime,
-) *SubstanceDefinitionOfficial {
+// Clone creates a deep copy of SubstanceDefinitionOfficial
+func (m *SubstanceDefinitionOfficial) Clone() *SubstanceDefinitionOfficial {
+	if m == nil { return nil }
 	return &SubstanceDefinitionOfficial{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Authority: func() CodeableConcept {
-			if authority != nil { return *authority }
-			return m.Authority
-		}(),
-		Status: func() CodeableConcept {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Date: func() FhirDateTime {
-			if date != nil { return *date }
-			return m.Date
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Authority: m.Authority.Clone(),
+		Status: m.Status.Clone(),
+		Date: m.Date.Clone(),
 	}
 }
+
+// Equals checks for equality with another SubstanceDefinitionOfficial instance
+func (m *SubstanceDefinitionOfficial) Equals(other *SubstanceDefinitionOfficial) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Authority.Equals(other.Authority) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Date.Equals(other.Date) { return false }
+	return true
+}
+
 // SubstanceDefinitionRelationship
 // A link between this substance and another, with details of the relationship.
 type SubstanceDefinitionRelationship struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// substanceDefinitionReference
-	// A pointer to another substance, as a resource or just a representational code.
-	SubstanceDefinitionReference Reference `json:"substanceDefinitionReference,omitempty"`
-	// substanceDefinitionCodeableConcept
-	// A pointer to another substance, as a resource or just a representational code.
-	SubstanceDefinitionCodeableConcept CodeableConcept `json:"substanceDefinitionCodeableConcept,omitempty"`
-	// type
-	// For example "salt to parent", "active moiety", "starting material", "polymorph", "impurity of".
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// isDefining
-	// For example where an enzyme strongly bonds with a particular substance, this is a defining relationship for that enzyme, out of several possible substance relationships.
-	IsDefining FhirBoolean `json:"isDefining,omitempty"`
-	// amountQuantity
-	// A numeric factor for the relationship, for instance to express that the salt of a substance has some percentage of the active substance in relation to some other.
-	AmountQuantity Quantity `json:"amountQuantity,omitempty"`
-	// amountRatio
-	// A numeric factor for the relationship, for instance to express that the salt of a substance has some percentage of the active substance in relation to some other.
-	AmountRatio Ratio `json:"amountRatio,omitempty"`
-	// amountString
-	// A numeric factor for the relationship, for instance to express that the salt of a substance has some percentage of the active substance in relation to some other.
-	AmountString FhirString `json:"amountString,omitempty"`
-	// ratioHighLimitAmount
-	// For use when the numeric has an uncertain range.
-	RatioHighLimitAmount Ratio `json:"ratioHighLimitAmount,omitempty"`
-	// comparator
-	// An operator for the amount, for example "average", "approximately", "less than".
-	Comparator CodeableConcept `json:"comparator,omitempty"`
-	// source
-	// Supporting literature.
-	Source []Reference `json:"source,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	SubstanceDefinitionReference *Reference `json:"substancedefinitionreference,omitempty"`
+	SubstanceDefinitionCodeableConcept *CodeableConcept `json:"substancedefinitioncodeableconcept,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	IsDefining *FhirBoolean `json:"isdefining,omitempty"`
+	AmountQuantity *Quantity `json:"amountquantity,omitempty"`
+	AmountRatio *Ratio `json:"amountratio,omitempty"`
+	AmountString *FhirString `json:"amountstring,omitempty"`
+	RatioHighLimitAmount *Ratio `json:"ratiohighlimitamount,omitempty"`
+	Comparator *CodeableConcept `json:"comparator,omitempty"`
+	Source []*Reference `json:"source,omitempty"`
 }
 
 // NewSubstanceDefinitionRelationship creates a new SubstanceDefinitionRelationship instance
-func NewSubstanceDefinitionRelationship(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	substanceDefinitionReference Reference,
-	substanceDefinitionCodeableConcept CodeableConcept,
-	type_ CodeableConcept,
-	isDefining FhirBoolean,
-	amountQuantity Quantity,
-	amountRatio Ratio,
-	amountString FhirString,
-	ratioHighLimitAmount Ratio,
-	comparator CodeableConcept,
-	source []Reference,
-) *SubstanceDefinitionRelationship {
-	return &SubstanceDefinitionRelationship{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		SubstanceDefinitionReference: substanceDefinitionReference,
-		SubstanceDefinitionCodeableConcept: substanceDefinitionCodeableConcept,
-		Type_: type_,
-		IsDefining: isDefining,
-		AmountQuantity: amountQuantity,
-		AmountRatio: amountRatio,
-		AmountString: amountString,
-		RatioHighLimitAmount: ratioHighLimitAmount,
-		Comparator: comparator,
-		Source: source,
-	}
+func NewSubstanceDefinitionRelationship() *SubstanceDefinitionRelationship {
+	return &SubstanceDefinitionRelationship{}
 }
+
 // FromJSON populates SubstanceDefinitionRelationship from JSON data
 func (m *SubstanceDefinitionRelationship) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1366,131 +654,65 @@ func (m *SubstanceDefinitionRelationship) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SubstanceDefinitionRelationship
-func (m *SubstanceDefinitionRelationship) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	substanceDefinitionReference *Reference,
-	substanceDefinitionCodeableConcept *CodeableConcept,
-	type_ *CodeableConcept,
-	isDefining *FhirBoolean,
-	amountQuantity *Quantity,
-	amountRatio *Ratio,
-	amountString *FhirString,
-	ratioHighLimitAmount *Ratio,
-	comparator *CodeableConcept,
-	source *[]Reference,
-) *SubstanceDefinitionRelationship {
+// Clone creates a deep copy of SubstanceDefinitionRelationship
+func (m *SubstanceDefinitionRelationship) Clone() *SubstanceDefinitionRelationship {
+	if m == nil { return nil }
 	return &SubstanceDefinitionRelationship{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		SubstanceDefinitionReference: func() Reference {
-			if substanceDefinitionReference != nil { return *substanceDefinitionReference }
-			return m.SubstanceDefinitionReference
-		}(),
-		SubstanceDefinitionCodeableConcept: func() CodeableConcept {
-			if substanceDefinitionCodeableConcept != nil { return *substanceDefinitionCodeableConcept }
-			return m.SubstanceDefinitionCodeableConcept
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		IsDefining: func() FhirBoolean {
-			if isDefining != nil { return *isDefining }
-			return m.IsDefining
-		}(),
-		AmountQuantity: func() Quantity {
-			if amountQuantity != nil { return *amountQuantity }
-			return m.AmountQuantity
-		}(),
-		AmountRatio: func() Ratio {
-			if amountRatio != nil { return *amountRatio }
-			return m.AmountRatio
-		}(),
-		AmountString: func() FhirString {
-			if amountString != nil { return *amountString }
-			return m.AmountString
-		}(),
-		RatioHighLimitAmount: func() Ratio {
-			if ratioHighLimitAmount != nil { return *ratioHighLimitAmount }
-			return m.RatioHighLimitAmount
-		}(),
-		Comparator: func() CodeableConcept {
-			if comparator != nil { return *comparator }
-			return m.Comparator
-		}(),
-		Source: func() []Reference {
-			if source != nil { return *source }
-			return m.Source
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		SubstanceDefinitionReference: m.SubstanceDefinitionReference.Clone(),
+		SubstanceDefinitionCodeableConcept: m.SubstanceDefinitionCodeableConcept.Clone(),
+		Type: m.Type.Clone(),
+		IsDefining: m.IsDefining.Clone(),
+		AmountQuantity: m.AmountQuantity.Clone(),
+		AmountRatio: m.AmountRatio.Clone(),
+		AmountString: m.AmountString.Clone(),
+		RatioHighLimitAmount: m.RatioHighLimitAmount.Clone(),
+		Comparator: m.Comparator.Clone(),
+		Source: cloneSlices(m.Source),
 	}
 }
+
+// Equals checks for equality with another SubstanceDefinitionRelationship instance
+func (m *SubstanceDefinitionRelationship) Equals(other *SubstanceDefinitionRelationship) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.SubstanceDefinitionReference.Equals(other.SubstanceDefinitionReference) { return false }
+	if !m.SubstanceDefinitionCodeableConcept.Equals(other.SubstanceDefinitionCodeableConcept) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.IsDefining.Equals(other.IsDefining) { return false }
+	if !m.AmountQuantity.Equals(other.AmountQuantity) { return false }
+	if !m.AmountRatio.Equals(other.AmountRatio) { return false }
+	if !m.AmountString.Equals(other.AmountString) { return false }
+	if !m.RatioHighLimitAmount.Equals(other.RatioHighLimitAmount) { return false }
+	if !m.Comparator.Equals(other.Comparator) { return false }
+	if !compareSlices(m.Source, other.Source) { return false }
+	return true
+}
+
 // SubstanceDefinitionSourceMaterial
 // Material or taxonomic/anatomical source for the substance.
 type SubstanceDefinitionSourceMaterial struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// A classification that provides the origin of the raw material. Example: cat hair would be an Animal source type.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// genus
-	// The genus of an organism, typically referring to the Latin epithet of the genus element of the plant/animal scientific name.
-	Genus CodeableConcept `json:"genus,omitempty"`
-	// species
-	// The species of an organism, typically referring to the Latin epithet of the species of the plant/animal.
-	Species CodeableConcept `json:"species,omitempty"`
-	// part
-	// An anatomical origin of the source material within an organism.
-	Part_ CodeableConcept `json:"part,omitempty"`
-	// countryOfOrigin
-	// The country or countries where the material is harvested.
-	CountryOfOrigin []CodeableConcept `json:"countryOfOrigin,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Genus *CodeableConcept `json:"genus,omitempty"`
+	Species *CodeableConcept `json:"species,omitempty"`
+	Part_ *CodeableConcept `json:"part,omitempty"`
+	CountryOfOrigin []*CodeableConcept `json:"countryoforigin,omitempty"`
 }
 
 // NewSubstanceDefinitionSourceMaterial creates a new SubstanceDefinitionSourceMaterial instance
-func NewSubstanceDefinitionSourceMaterial(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	genus CodeableConcept,
-	species CodeableConcept,
-	part_ CodeableConcept,
-	countryOfOrigin []CodeableConcept,
-) *SubstanceDefinitionSourceMaterial {
-	return &SubstanceDefinitionSourceMaterial{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Genus: genus,
-		Species: species,
-		Part_: part_,
-		CountryOfOrigin: countryOfOrigin,
-	}
+func NewSubstanceDefinitionSourceMaterial() *SubstanceDefinitionSourceMaterial {
+	return &SubstanceDefinitionSourceMaterial{}
 }
+
 // FromJSON populates SubstanceDefinitionSourceMaterial from JSON data
 func (m *SubstanceDefinitionSourceMaterial) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1501,49 +723,33 @@ func (m *SubstanceDefinitionSourceMaterial) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SubstanceDefinitionSourceMaterial
-func (m *SubstanceDefinitionSourceMaterial) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	genus *CodeableConcept,
-	species *CodeableConcept,
-	part_ *CodeableConcept,
-	countryOfOrigin *[]CodeableConcept,
-) *SubstanceDefinitionSourceMaterial {
+// Clone creates a deep copy of SubstanceDefinitionSourceMaterial
+func (m *SubstanceDefinitionSourceMaterial) Clone() *SubstanceDefinitionSourceMaterial {
+	if m == nil { return nil }
 	return &SubstanceDefinitionSourceMaterial{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Genus: func() CodeableConcept {
-			if genus != nil { return *genus }
-			return m.Genus
-		}(),
-		Species: func() CodeableConcept {
-			if species != nil { return *species }
-			return m.Species
-		}(),
-		Part_: func() CodeableConcept {
-			if part_ != nil { return *part_ }
-			return m.Part_
-		}(),
-		CountryOfOrigin: func() []CodeableConcept {
-			if countryOfOrigin != nil { return *countryOfOrigin }
-			return m.CountryOfOrigin
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Genus: m.Genus.Clone(),
+		Species: m.Species.Clone(),
+		Part_: m.Part_.Clone(),
+		CountryOfOrigin: cloneSlices(m.CountryOfOrigin),
 	}
 }
+
+// Equals checks for equality with another SubstanceDefinitionSourceMaterial instance
+func (m *SubstanceDefinitionSourceMaterial) Equals(other *SubstanceDefinitionSourceMaterial) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Genus.Equals(other.Genus) { return false }
+	if !m.Species.Equals(other.Species) { return false }
+	if !m.Part_.Equals(other.Part_) { return false }
+	if !compareSlices(m.CountryOfOrigin, other.CountryOfOrigin) { return false }
+	return true
+}
+

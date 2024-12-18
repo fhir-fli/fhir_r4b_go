@@ -3,94 +3,33 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // SpecimenDefinition
 // A kind of specimen with associated set of requirements.
 type SpecimenDefinition struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// A business identifier associated with the kind of specimen.
-	Identifier Identifier `json:"identifier,omitempty"`
-	// typeCollected
-	// The kind of material to be collected.
-	TypeCollected CodeableConcept `json:"typeCollected,omitempty"`
-	// patientPreparation
-	// Preparation of the patient for specimen collection.
-	PatientPreparation []CodeableConcept `json:"patientPreparation,omitempty"`
-	// timeAspect
-	// Time aspect of specimen collection (duration or offset).
-	TimeAspect FhirString `json:"timeAspect,omitempty"`
-	// collection
-	// The action to be performed for collecting the specimen.
-	Collection []CodeableConcept `json:"collection,omitempty"`
-	// typeTested
-	// Specimen conditioned in a container as expected by the testing laboratory.
-	TypeTested []SpecimenDefinitionTypeTested `json:"typeTested,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier *Identifier `json:"identifier,omitempty"`
+	TypeCollected *CodeableConcept `json:"typecollected,omitempty"`
+	PatientPreparation []*CodeableConcept `json:"patientpreparation,omitempty"`
+	TimeAspect *FhirString `json:"timeaspect,omitempty"`
+	Collection []*CodeableConcept `json:"collection,omitempty"`
+	TypeTested []*SpecimenDefinitionTypeTested `json:"typetested,omitempty"`
 }
 
 // NewSpecimenDefinition creates a new SpecimenDefinition instance
-func NewSpecimenDefinition(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier Identifier,
-	typeCollected CodeableConcept,
-	patientPreparation []CodeableConcept,
-	timeAspect FhirString,
-	collection []CodeableConcept,
-	typeTested []SpecimenDefinitionTypeTested,
-) *SpecimenDefinition {
-	return &SpecimenDefinition{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		TypeCollected: typeCollected,
-		PatientPreparation: patientPreparation,
-		TimeAspect: timeAspect,
-		Collection: collection,
-		TypeTested: typeTested,
-	}
+func NewSpecimenDefinition() *SpecimenDefinition {
+	return &SpecimenDefinition{}
 }
+
 // FromJSON populates SpecimenDefinition from JSON data
 func (m *SpecimenDefinition) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -101,151 +40,70 @@ func (m *SpecimenDefinition) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SpecimenDefinition
-func (m *SpecimenDefinition) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *Identifier,
-	typeCollected *CodeableConcept,
-	patientPreparation *[]CodeableConcept,
-	timeAspect *FhirString,
-	collection *[]CodeableConcept,
-	typeTested *[]SpecimenDefinitionTypeTested,
-) *SpecimenDefinition {
+// Clone creates a deep copy of SpecimenDefinition
+func (m *SpecimenDefinition) Clone() *SpecimenDefinition {
+	if m == nil { return nil }
 	return &SpecimenDefinition{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		TypeCollected: func() CodeableConcept {
-			if typeCollected != nil { return *typeCollected }
-			return m.TypeCollected
-		}(),
-		PatientPreparation: func() []CodeableConcept {
-			if patientPreparation != nil { return *patientPreparation }
-			return m.PatientPreparation
-		}(),
-		TimeAspect: func() FhirString {
-			if timeAspect != nil { return *timeAspect }
-			return m.TimeAspect
-		}(),
-		Collection: func() []CodeableConcept {
-			if collection != nil { return *collection }
-			return m.Collection
-		}(),
-		TypeTested: func() []SpecimenDefinitionTypeTested {
-			if typeTested != nil { return *typeTested }
-			return m.TypeTested
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: m.Identifier.Clone(),
+		TypeCollected: m.TypeCollected.Clone(),
+		PatientPreparation: cloneSlices(m.PatientPreparation),
+		TimeAspect: m.TimeAspect.Clone(),
+		Collection: cloneSlices(m.Collection),
+		TypeTested: cloneSlices(m.TypeTested),
 	}
 }
+
+// Equals checks for equality with another SpecimenDefinition instance
+func (m *SpecimenDefinition) Equals(other *SpecimenDefinition) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Identifier.Equals(other.Identifier) { return false }
+	if !m.TypeCollected.Equals(other.TypeCollected) { return false }
+	if !compareSlices(m.PatientPreparation, other.PatientPreparation) { return false }
+	if !m.TimeAspect.Equals(other.TimeAspect) { return false }
+	if !compareSlices(m.Collection, other.Collection) { return false }
+	if !compareSlices(m.TypeTested, other.TypeTested) { return false }
+	return true
+}
+
 // SpecimenDefinitionTypeTested
 // Specimen conditioned in a container as expected by the testing laboratory.
 type SpecimenDefinitionTypeTested struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// isDerived
-	// Primary of secondary specimen.
-	IsDerived FhirBoolean `json:"isDerived,omitempty"`
-	// type
-	// The kind of specimen conditioned for testing expected by lab.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// preference
-	// The preference for this type of conditioned specimen.
-	Preference SpecimenContainedPreference `json:"preference,omitempty"`
-	// container
-	// The specimen's container.
-	Container SpecimenDefinitionContainer `json:"container,omitempty"`
-	// requirement
-	// Requirements for delivery and special handling of this kind of conditioned specimen.
-	Requirement FhirString `json:"requirement,omitempty"`
-	// retentionTime
-	// The usual time that a specimen of this kind is retained after the ordered tests are completed, for the purpose of additional testing.
-	RetentionTime FhirDuration `json:"retentionTime,omitempty"`
-	// rejectionCriterion
-	// Criterion for rejection of the specimen in its container by the laboratory.
-	RejectionCriterion []CodeableConcept `json:"rejectionCriterion,omitempty"`
-	// handling
-	// Set of instructions for preservation/transport of the specimen at a defined temperature interval, prior the testing process.
-	Handling []SpecimenDefinitionHandling `json:"handling,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	IsDerived *FhirBoolean `json:"isderived,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Preference *SpecimenContainedPreference `json:"preference,omitempty"`
+	Container *SpecimenDefinitionContainer `json:"container,omitempty"`
+	Requirement *FhirString `json:"requirement,omitempty"`
+	RetentionTime *FhirDuration `json:"retentiontime,omitempty"`
+	RejectionCriterion []*CodeableConcept `json:"rejectioncriterion,omitempty"`
+	Handling []*SpecimenDefinitionHandling `json:"handling,omitempty"`
 }
 
 // NewSpecimenDefinitionTypeTested creates a new SpecimenDefinitionTypeTested instance
-func NewSpecimenDefinitionTypeTested(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	isDerived FhirBoolean,
-	type_ CodeableConcept,
-	preference SpecimenContainedPreference,
-	container SpecimenDefinitionContainer,
-	requirement FhirString,
-	retentionTime FhirDuration,
-	rejectionCriterion []CodeableConcept,
-	handling []SpecimenDefinitionHandling,
-) *SpecimenDefinitionTypeTested {
-	return &SpecimenDefinitionTypeTested{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		IsDerived: isDerived,
-		Type_: type_,
-		Preference: preference,
-		Container: container,
-		Requirement: requirement,
-		RetentionTime: retentionTime,
-		RejectionCriterion: rejectionCriterion,
-		Handling: handling,
-	}
+func NewSpecimenDefinitionTypeTested() *SpecimenDefinitionTypeTested {
+	return &SpecimenDefinitionTypeTested{}
 }
+
 // FromJSON populates SpecimenDefinitionTypeTested from JSON data
 func (m *SpecimenDefinitionTypeTested) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -256,141 +114,65 @@ func (m *SpecimenDefinitionTypeTested) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SpecimenDefinitionTypeTested
-func (m *SpecimenDefinitionTypeTested) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	isDerived *FhirBoolean,
-	type_ *CodeableConcept,
-	preference *SpecimenContainedPreference,
-	container *SpecimenDefinitionContainer,
-	requirement *FhirString,
-	retentionTime *FhirDuration,
-	rejectionCriterion *[]CodeableConcept,
-	handling *[]SpecimenDefinitionHandling,
-) *SpecimenDefinitionTypeTested {
+// Clone creates a deep copy of SpecimenDefinitionTypeTested
+func (m *SpecimenDefinitionTypeTested) Clone() *SpecimenDefinitionTypeTested {
+	if m == nil { return nil }
 	return &SpecimenDefinitionTypeTested{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		IsDerived: func() FhirBoolean {
-			if isDerived != nil { return *isDerived }
-			return m.IsDerived
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Preference: func() SpecimenContainedPreference {
-			if preference != nil { return *preference }
-			return m.Preference
-		}(),
-		Container: func() SpecimenDefinitionContainer {
-			if container != nil { return *container }
-			return m.Container
-		}(),
-		Requirement: func() FhirString {
-			if requirement != nil { return *requirement }
-			return m.Requirement
-		}(),
-		RetentionTime: func() FhirDuration {
-			if retentionTime != nil { return *retentionTime }
-			return m.RetentionTime
-		}(),
-		RejectionCriterion: func() []CodeableConcept {
-			if rejectionCriterion != nil { return *rejectionCriterion }
-			return m.RejectionCriterion
-		}(),
-		Handling: func() []SpecimenDefinitionHandling {
-			if handling != nil { return *handling }
-			return m.Handling
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		IsDerived: m.IsDerived.Clone(),
+		Type: m.Type.Clone(),
+		Preference: m.Preference.Clone(),
+		Container: m.Container.Clone(),
+		Requirement: m.Requirement.Clone(),
+		RetentionTime: m.RetentionTime.Clone(),
+		RejectionCriterion: cloneSlices(m.RejectionCriterion),
+		Handling: cloneSlices(m.Handling),
 	}
 }
+
+// Equals checks for equality with another SpecimenDefinitionTypeTested instance
+func (m *SpecimenDefinitionTypeTested) Equals(other *SpecimenDefinitionTypeTested) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.IsDerived.Equals(other.IsDerived) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Preference.Equals(other.Preference) { return false }
+	if !m.Container.Equals(other.Container) { return false }
+	if !m.Requirement.Equals(other.Requirement) { return false }
+	if !m.RetentionTime.Equals(other.RetentionTime) { return false }
+	if !compareSlices(m.RejectionCriterion, other.RejectionCriterion) { return false }
+	if !compareSlices(m.Handling, other.Handling) { return false }
+	return true
+}
+
 // SpecimenDefinitionContainer
 // The specimen's container.
 type SpecimenDefinitionContainer struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// material
-	// The type of material of the container.
-	Material CodeableConcept `json:"material,omitempty"`
-	// type
-	// The type of container used to contain this kind of specimen.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// cap
-	// Color of container cap.
-	Cap CodeableConcept `json:"cap,omitempty"`
-	// description
-	// The textual description of the kind of container.
-	Description FhirString `json:"description,omitempty"`
-	// capacity
-	// The capacity (volume or other measure) of this kind of container.
-	Capacity Quantity `json:"capacity,omitempty"`
-	// minimumVolumeQuantity
-	// The minimum volume to be conditioned in the container.
-	MinimumVolumeQuantity Quantity `json:"minimumVolumeQuantity,omitempty"`
-	// minimumVolumeString
-	// The minimum volume to be conditioned in the container.
-	MinimumVolumeString FhirString `json:"minimumVolumeString,omitempty"`
-	// additive
-	// Substance introduced in the kind of container to preserve, maintain or enhance the specimen. Examples: Formalin, Citrate, EDTA.
-	Additive []SpecimenDefinitionAdditive `json:"additive,omitempty"`
-	// preparation
-	// Special processing that should be applied to the container for this kind of specimen.
-	Preparation FhirString `json:"preparation,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Material *CodeableConcept `json:"material,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Cap *CodeableConcept `json:"cap,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Capacity *Quantity `json:"capacity,omitempty"`
+	MinimumVolumeQuantity *Quantity `json:"minimumvolumequantity,omitempty"`
+	MinimumVolumeString *FhirString `json:"minimumvolumestring,omitempty"`
+	Additive []*SpecimenDefinitionAdditive `json:"additive,omitempty"`
+	Preparation *FhirString `json:"preparation,omitempty"`
 }
 
 // NewSpecimenDefinitionContainer creates a new SpecimenDefinitionContainer instance
-func NewSpecimenDefinitionContainer(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	material CodeableConcept,
-	type_ CodeableConcept,
-	cap CodeableConcept,
-	description FhirString,
-	capacity Quantity,
-	minimumVolumeQuantity Quantity,
-	minimumVolumeString FhirString,
-	additive []SpecimenDefinitionAdditive,
-	preparation FhirString,
-) *SpecimenDefinitionContainer {
-	return &SpecimenDefinitionContainer{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Material: material,
-		Type_: type_,
-		Cap: cap,
-		Description: description,
-		Capacity: capacity,
-		MinimumVolumeQuantity: minimumVolumeQuantity,
-		MinimumVolumeString: minimumVolumeString,
-		Additive: additive,
-		Preparation: preparation,
-	}
+func NewSpecimenDefinitionContainer() *SpecimenDefinitionContainer {
+	return &SpecimenDefinitionContainer{}
 }
+
 // FromJSON populates SpecimenDefinitionContainer from JSON data
 func (m *SpecimenDefinitionContainer) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -401,111 +183,60 @@ func (m *SpecimenDefinitionContainer) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SpecimenDefinitionContainer
-func (m *SpecimenDefinitionContainer) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	material *CodeableConcept,
-	type_ *CodeableConcept,
-	cap *CodeableConcept,
-	description *FhirString,
-	capacity *Quantity,
-	minimumVolumeQuantity *Quantity,
-	minimumVolumeString *FhirString,
-	additive *[]SpecimenDefinitionAdditive,
-	preparation *FhirString,
-) *SpecimenDefinitionContainer {
+// Clone creates a deep copy of SpecimenDefinitionContainer
+func (m *SpecimenDefinitionContainer) Clone() *SpecimenDefinitionContainer {
+	if m == nil { return nil }
 	return &SpecimenDefinitionContainer{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Material: func() CodeableConcept {
-			if material != nil { return *material }
-			return m.Material
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Cap: func() CodeableConcept {
-			if cap != nil { return *cap }
-			return m.Cap
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Capacity: func() Quantity {
-			if capacity != nil { return *capacity }
-			return m.Capacity
-		}(),
-		MinimumVolumeQuantity: func() Quantity {
-			if minimumVolumeQuantity != nil { return *minimumVolumeQuantity }
-			return m.MinimumVolumeQuantity
-		}(),
-		MinimumVolumeString: func() FhirString {
-			if minimumVolumeString != nil { return *minimumVolumeString }
-			return m.MinimumVolumeString
-		}(),
-		Additive: func() []SpecimenDefinitionAdditive {
-			if additive != nil { return *additive }
-			return m.Additive
-		}(),
-		Preparation: func() FhirString {
-			if preparation != nil { return *preparation }
-			return m.Preparation
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Material: m.Material.Clone(),
+		Type: m.Type.Clone(),
+		Cap: m.Cap.Clone(),
+		Description: m.Description.Clone(),
+		Capacity: m.Capacity.Clone(),
+		MinimumVolumeQuantity: m.MinimumVolumeQuantity.Clone(),
+		MinimumVolumeString: m.MinimumVolumeString.Clone(),
+		Additive: cloneSlices(m.Additive),
+		Preparation: m.Preparation.Clone(),
 	}
 }
+
+// Equals checks for equality with another SpecimenDefinitionContainer instance
+func (m *SpecimenDefinitionContainer) Equals(other *SpecimenDefinitionContainer) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Material.Equals(other.Material) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Cap.Equals(other.Cap) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.Capacity.Equals(other.Capacity) { return false }
+	if !m.MinimumVolumeQuantity.Equals(other.MinimumVolumeQuantity) { return false }
+	if !m.MinimumVolumeString.Equals(other.MinimumVolumeString) { return false }
+	if !compareSlices(m.Additive, other.Additive) { return false }
+	if !m.Preparation.Equals(other.Preparation) { return false }
+	return true
+}
+
 // SpecimenDefinitionAdditive
 // Substance introduced in the kind of container to preserve, maintain or enhance the specimen. Examples: Formalin, Citrate, EDTA.
 type SpecimenDefinitionAdditive struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// additiveCodeableConcept
-	// Substance introduced in the kind of container to preserve, maintain or enhance the specimen. Examples: Formalin, Citrate, EDTA.
-	AdditiveCodeableConcept CodeableConcept `json:"additiveCodeableConcept,omitempty"`
-	// additiveReference
-	// Substance introduced in the kind of container to preserve, maintain or enhance the specimen. Examples: Formalin, Citrate, EDTA.
-	AdditiveReference Reference `json:"additiveReference,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	AdditiveCodeableConcept *CodeableConcept `json:"additivecodeableconcept,omitempty"`
+	AdditiveReference *Reference `json:"additivereference,omitempty"`
 }
 
 // NewSpecimenDefinitionAdditive creates a new SpecimenDefinitionAdditive instance
-func NewSpecimenDefinitionAdditive(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	additiveCodeableConcept CodeableConcept,
-	additiveReference Reference,
-) *SpecimenDefinitionAdditive {
-	return &SpecimenDefinitionAdditive{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		AdditiveCodeableConcept: additiveCodeableConcept,
-		AdditiveReference: additiveReference,
-	}
+func NewSpecimenDefinitionAdditive() *SpecimenDefinitionAdditive {
+	return &SpecimenDefinitionAdditive{}
 }
+
 // FromJSON populates SpecimenDefinitionAdditive from JSON data
 func (m *SpecimenDefinitionAdditive) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -516,86 +247,48 @@ func (m *SpecimenDefinitionAdditive) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SpecimenDefinitionAdditive
-func (m *SpecimenDefinitionAdditive) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	additiveCodeableConcept *CodeableConcept,
-	additiveReference *Reference,
-) *SpecimenDefinitionAdditive {
+// Clone creates a deep copy of SpecimenDefinitionAdditive
+func (m *SpecimenDefinitionAdditive) Clone() *SpecimenDefinitionAdditive {
+	if m == nil { return nil }
 	return &SpecimenDefinitionAdditive{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		AdditiveCodeableConcept: func() CodeableConcept {
-			if additiveCodeableConcept != nil { return *additiveCodeableConcept }
-			return m.AdditiveCodeableConcept
-		}(),
-		AdditiveReference: func() Reference {
-			if additiveReference != nil { return *additiveReference }
-			return m.AdditiveReference
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		AdditiveCodeableConcept: m.AdditiveCodeableConcept.Clone(),
+		AdditiveReference: m.AdditiveReference.Clone(),
 	}
 }
+
+// Equals checks for equality with another SpecimenDefinitionAdditive instance
+func (m *SpecimenDefinitionAdditive) Equals(other *SpecimenDefinitionAdditive) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.AdditiveCodeableConcept.Equals(other.AdditiveCodeableConcept) { return false }
+	if !m.AdditiveReference.Equals(other.AdditiveReference) { return false }
+	return true
+}
+
 // SpecimenDefinitionHandling
 // Set of instructions for preservation/transport of the specimen at a defined temperature interval, prior the testing process.
 type SpecimenDefinitionHandling struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// temperatureQualifier
-	// It qualifies the interval of temperature, which characterizes an occurrence of handling. Conditions that are not related to temperature may be handled in the instruction element.
-	TemperatureQualifier CodeableConcept `json:"temperatureQualifier,omitempty"`
-	// temperatureRange
-	// The temperature interval for this set of handling instructions.
-	TemperatureRange Range `json:"temperatureRange,omitempty"`
-	// maxDuration
-	// The maximum time interval of preservation of the specimen with these conditions.
-	MaxDuration FhirDuration `json:"maxDuration,omitempty"`
-	// instruction
-	// Additional textual instructions for the preservation or transport of the specimen. For instance, 'Protect from light exposure'.
-	Instruction FhirString `json:"instruction,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	TemperatureQualifier *CodeableConcept `json:"temperaturequalifier,omitempty"`
+	TemperatureRange *Range `json:"temperaturerange,omitempty"`
+	MaxDuration *FhirDuration `json:"maxduration,omitempty"`
+	Instruction *FhirString `json:"instruction,omitempty"`
 }
 
 // NewSpecimenDefinitionHandling creates a new SpecimenDefinitionHandling instance
-func NewSpecimenDefinitionHandling(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	temperatureQualifier CodeableConcept,
-	temperatureRange Range,
-	maxDuration FhirDuration,
-	instruction FhirString,
-) *SpecimenDefinitionHandling {
-	return &SpecimenDefinitionHandling{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		TemperatureQualifier: temperatureQualifier,
-		TemperatureRange: temperatureRange,
-		MaxDuration: maxDuration,
-		Instruction: instruction,
-	}
+func NewSpecimenDefinitionHandling() *SpecimenDefinitionHandling {
+	return &SpecimenDefinitionHandling{}
 }
+
 // FromJSON populates SpecimenDefinitionHandling from JSON data
 func (m *SpecimenDefinitionHandling) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -606,44 +299,31 @@ func (m *SpecimenDefinitionHandling) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SpecimenDefinitionHandling
-func (m *SpecimenDefinitionHandling) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	temperatureQualifier *CodeableConcept,
-	temperatureRange *Range,
-	maxDuration *FhirDuration,
-	instruction *FhirString,
-) *SpecimenDefinitionHandling {
+// Clone creates a deep copy of SpecimenDefinitionHandling
+func (m *SpecimenDefinitionHandling) Clone() *SpecimenDefinitionHandling {
+	if m == nil { return nil }
 	return &SpecimenDefinitionHandling{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		TemperatureQualifier: func() CodeableConcept {
-			if temperatureQualifier != nil { return *temperatureQualifier }
-			return m.TemperatureQualifier
-		}(),
-		TemperatureRange: func() Range {
-			if temperatureRange != nil { return *temperatureRange }
-			return m.TemperatureRange
-		}(),
-		MaxDuration: func() FhirDuration {
-			if maxDuration != nil { return *maxDuration }
-			return m.MaxDuration
-		}(),
-		Instruction: func() FhirString {
-			if instruction != nil { return *instruction }
-			return m.Instruction
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		TemperatureQualifier: m.TemperatureQualifier.Clone(),
+		TemperatureRange: m.TemperatureRange.Clone(),
+		MaxDuration: m.MaxDuration.Clone(),
+		Instruction: m.Instruction.Clone(),
 	}
 }
+
+// Equals checks for equality with another SpecimenDefinitionHandling instance
+func (m *SpecimenDefinitionHandling) Equals(other *SpecimenDefinitionHandling) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.TemperatureQualifier.Equals(other.TemperatureQualifier) { return false }
+	if !m.TemperatureRange.Equals(other.TemperatureRange) { return false }
+	if !m.MaxDuration.Equals(other.MaxDuration) { return false }
+	if !m.Instruction.Equals(other.Instruction) { return false }
+	return true
+}
+

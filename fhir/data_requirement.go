@@ -3,79 +3,30 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // DataRequirement
 // Describes a required data item for evaluation in terms of the type of data, and optional code or date-based filters of the data.
 type DataRequirement struct {
 	DataType
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// type
-	// The type of the required data, specified as the type name of a resource. For profiles, this value is set to the type of the base resource of the profile.
-	Type_ FHIRAllTypes `json:"type,omitempty"`
-	// profile
-	// The profile of the required data, specified as the uri of the profile definition.
-	Profile []FhirCanonical `json:"profile,omitempty"`
-	// subjectCodeableConcept
-	// The intended subjects of the data requirement. If this element is not provided, a Patient subject is assumed.
-	SubjectCodeableConcept CodeableConcept `json:"subjectCodeableConcept,omitempty"`
-	// subjectReference
-	// The intended subjects of the data requirement. If this element is not provided, a Patient subject is assumed.
-	SubjectReference Reference `json:"subjectReference,omitempty"`
-	// mustSupport
-	// Indicates that specific elements of the type are referenced by the knowledge module and must be supported by the consumer in order to obtain an effective evaluation. This does not mean that a value is required for this element, only that the consuming system must understand the element and be able to provide values for it if they are available. 
-// 
-// The value of mustSupport SHALL be a FHIRPath resolveable on the type of the DataRequirement. The path SHALL consist only of identifiers, constant indexers, and .resolve() (see the [Simple FHIRPath Profile](fhirpath.html#simple) for full details).
-	MustSupport []FhirString `json:"mustSupport,omitempty"`
-	// codeFilter
-	// Code filters specify additional constraints on the data, specifying the value set of interest for a particular element of the data. Each code filter defines an additional constraint on the data, i.e. code filters are AND'ed, not OR'ed.
-	CodeFilter []DataRequirementCodeFilter `json:"codeFilter,omitempty"`
-	// dateFilter
-	// Date filters specify additional constraints on the data in terms of the applicable date range for specific elements. Each date filter specifies an additional constraint on the data, i.e. date filters are AND'ed, not OR'ed.
-	DateFilter []DataRequirementDateFilter `json:"dateFilter,omitempty"`
-	// limit
-	// Specifies a maximum number of results that are required (uses the _count search parameter).
-	Limit FhirPositiveInt `json:"limit,omitempty"`
-	// sort
-	// Specifies the order of the results to be returned.
-	Sort []DataRequirementSort `json:"sort,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	Type *FHIRAllTypes `json:"type,omitempty"`
+	Profile []*FhirCanonical `json:"profile,omitempty"`
+	SubjectCodeableConcept *CodeableConcept `json:"subjectcodeableconcept,omitempty"`
+	SubjectReference *Reference `json:"subjectreference,omitempty"`
+	MustSupport []*FhirString `json:"mustsupport,omitempty"`
+	CodeFilter []*DataRequirementCodeFilter `json:"codefilter,omitempty"`
+	DateFilter []*DataRequirementDateFilter `json:"datefilter,omitempty"`
+	Limit *FhirPositiveInt `json:"limit,omitempty"`
+	Sort []*DataRequirementSort `json:"sort,omitempty"`
 }
 
 // NewDataRequirement creates a new DataRequirement instance
-func NewDataRequirement(
-	id FhirString,
-	extension_ []FhirExtension,
-	type_ FHIRAllTypes,
-	profile []FhirCanonical,
-	subjectCodeableConcept CodeableConcept,
-	subjectReference Reference,
-	mustSupport []FhirString,
-	codeFilter []DataRequirementCodeFilter,
-	dateFilter []DataRequirementDateFilter,
-	limit FhirPositiveInt,
-	sort []DataRequirementSort,
-) *DataRequirement {
-	return &DataRequirement{
-		Id: id,
-		Extension_: extension_,
-		Type_: type_,
-		Profile: profile,
-		SubjectCodeableConcept: subjectCodeableConcept,
-		SubjectReference: subjectReference,
-		MustSupport: mustSupport,
-		CodeFilter: codeFilter,
-		DateFilter: dateFilter,
-		Limit: limit,
-		Sort: sort,
-	}
+func NewDataRequirement() *DataRequirement {
+	return &DataRequirement{}
 }
+
 // FromJSON populates DataRequirement from JSON data
 func (m *DataRequirement) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -86,109 +37,59 @@ func (m *DataRequirement) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of DataRequirement
-func (m *DataRequirement) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	type_ *FHIRAllTypes,
-	profile *[]FhirCanonical,
-	subjectCodeableConcept *CodeableConcept,
-	subjectReference *Reference,
-	mustSupport *[]FhirString,
-	codeFilter *[]DataRequirementCodeFilter,
-	dateFilter *[]DataRequirementDateFilter,
-	limit *FhirPositiveInt,
-	sort *[]DataRequirementSort,
-) *DataRequirement {
+// Clone creates a deep copy of DataRequirement
+func (m *DataRequirement) Clone() *DataRequirement {
+	if m == nil { return nil }
 	return &DataRequirement{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		Type_: func() FHIRAllTypes {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Profile: func() []FhirCanonical {
-			if profile != nil { return *profile }
-			return m.Profile
-		}(),
-		SubjectCodeableConcept: func() CodeableConcept {
-			if subjectCodeableConcept != nil { return *subjectCodeableConcept }
-			return m.SubjectCodeableConcept
-		}(),
-		SubjectReference: func() Reference {
-			if subjectReference != nil { return *subjectReference }
-			return m.SubjectReference
-		}(),
-		MustSupport: func() []FhirString {
-			if mustSupport != nil { return *mustSupport }
-			return m.MustSupport
-		}(),
-		CodeFilter: func() []DataRequirementCodeFilter {
-			if codeFilter != nil { return *codeFilter }
-			return m.CodeFilter
-		}(),
-		DateFilter: func() []DataRequirementDateFilter {
-			if dateFilter != nil { return *dateFilter }
-			return m.DateFilter
-		}(),
-		Limit: func() FhirPositiveInt {
-			if limit != nil { return *limit }
-			return m.Limit
-		}(),
-		Sort: func() []DataRequirementSort {
-			if sort != nil { return *sort }
-			return m.Sort
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		Type: m.Type.Clone(),
+		Profile: cloneSlices(m.Profile),
+		SubjectCodeableConcept: m.SubjectCodeableConcept.Clone(),
+		SubjectReference: m.SubjectReference.Clone(),
+		MustSupport: cloneSlices(m.MustSupport),
+		CodeFilter: cloneSlices(m.CodeFilter),
+		DateFilter: cloneSlices(m.DateFilter),
+		Limit: m.Limit.Clone(),
+		Sort: cloneSlices(m.Sort),
 	}
 }
+
+// Equals checks for equality with another DataRequirement instance
+func (m *DataRequirement) Equals(other *DataRequirement) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !compareSlices(m.Profile, other.Profile) { return false }
+	if !m.SubjectCodeableConcept.Equals(other.SubjectCodeableConcept) { return false }
+	if !m.SubjectReference.Equals(other.SubjectReference) { return false }
+	if !compareSlices(m.MustSupport, other.MustSupport) { return false }
+	if !compareSlices(m.CodeFilter, other.CodeFilter) { return false }
+	if !compareSlices(m.DateFilter, other.DateFilter) { return false }
+	if !m.Limit.Equals(other.Limit) { return false }
+	if !compareSlices(m.Sort, other.Sort) { return false }
+	return true
+}
+
 // DataRequirementCodeFilter
 // Code filters specify additional constraints on the data, specifying the value set of interest for a particular element of the data. Each code filter defines an additional constraint on the data, i.e. code filters are AND'ed, not OR'ed.
 type DataRequirementCodeFilter struct {
 	Element
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// path
-	// The code-valued attribute of the filter. The specified path SHALL be a FHIRPath resolveable on the specified type of the DataRequirement, and SHALL consist only of identifiers, constant indexers, and .resolve(). The path is allowed to contain qualifiers (.) to traverse sub-elements, as well as indexers ([x]) to traverse multiple-cardinality sub-elements (see the [Simple FHIRPath Profile](fhirpath.html#simple) for full details). Note that the index must be an integer constant. The path must resolve to an element of type code, Coding, or CodeableConcept.
-	Path FhirString `json:"path,omitempty"`
-	// searchParam
-	// A token parameter that refers to a search parameter defined on the specified type of the DataRequirement, and which searches on elements of type code, Coding, or CodeableConcept.
-	SearchParam FhirString `json:"searchParam,omitempty"`
-	// valueSet
-	// The valueset for the code filter. The valueSet and code elements are additive. If valueSet is specified, the filter will return only those data items for which the value of the code-valued element specified in the path is a member of the specified valueset.
-	ValueSet FhirCanonical `json:"valueSet,omitempty"`
-	// code
-	// The codes for the code filter. If values are given, the filter will return only those data items for which the code-valued attribute specified by the path has a value that is one of the specified codes. If codes are specified in addition to a value set, the filter returns items matching a code in the value set or one of the specified codes.
-	Code []Coding `json:"code,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	Path *FhirString `json:"path,omitempty"`
+	SearchParam *FhirString `json:"searchparam,omitempty"`
+	ValueSet *FhirCanonical `json:"valueset,omitempty"`
+	Code []*Coding `json:"code,omitempty"`
 }
 
 // NewDataRequirementCodeFilter creates a new DataRequirementCodeFilter instance
-func NewDataRequirementCodeFilter(
-	id FhirString,
-	extension_ []FhirExtension,
-	path FhirString,
-	searchParam FhirString,
-	valueSet FhirCanonical,
-	code []Coding,
-) *DataRequirementCodeFilter {
-	return &DataRequirementCodeFilter{
-		Id: id,
-		Extension_: extension_,
-		Path: path,
-		SearchParam: searchParam,
-		ValueSet: valueSet,
-		Code: code,
-	}
+func NewDataRequirementCodeFilter() *DataRequirementCodeFilter {
+	return &DataRequirementCodeFilter{}
 }
+
 // FromJSON populates DataRequirementCodeFilter from JSON data
 func (m *DataRequirementCodeFilter) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -199,89 +100,50 @@ func (m *DataRequirementCodeFilter) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of DataRequirementCodeFilter
-func (m *DataRequirementCodeFilter) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	path *FhirString,
-	searchParam *FhirString,
-	valueSet *FhirCanonical,
-	code *[]Coding,
-) *DataRequirementCodeFilter {
+// Clone creates a deep copy of DataRequirementCodeFilter
+func (m *DataRequirementCodeFilter) Clone() *DataRequirementCodeFilter {
+	if m == nil { return nil }
 	return &DataRequirementCodeFilter{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		Path: func() FhirString {
-			if path != nil { return *path }
-			return m.Path
-		}(),
-		SearchParam: func() FhirString {
-			if searchParam != nil { return *searchParam }
-			return m.SearchParam
-		}(),
-		ValueSet: func() FhirCanonical {
-			if valueSet != nil { return *valueSet }
-			return m.ValueSet
-		}(),
-		Code: func() []Coding {
-			if code != nil { return *code }
-			return m.Code
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		Path: m.Path.Clone(),
+		SearchParam: m.SearchParam.Clone(),
+		ValueSet: m.ValueSet.Clone(),
+		Code: cloneSlices(m.Code),
 	}
 }
+
+// Equals checks for equality with another DataRequirementCodeFilter instance
+func (m *DataRequirementCodeFilter) Equals(other *DataRequirementCodeFilter) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !m.Path.Equals(other.Path) { return false }
+	if !m.SearchParam.Equals(other.SearchParam) { return false }
+	if !m.ValueSet.Equals(other.ValueSet) { return false }
+	if !compareSlices(m.Code, other.Code) { return false }
+	return true
+}
+
 // DataRequirementDateFilter
 // Date filters specify additional constraints on the data in terms of the applicable date range for specific elements. Each date filter specifies an additional constraint on the data, i.e. date filters are AND'ed, not OR'ed.
 type DataRequirementDateFilter struct {
 	Element
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// path
-	// The date-valued attribute of the filter. The specified path SHALL be a FHIRPath resolveable on the specified type of the DataRequirement, and SHALL consist only of identifiers, constant indexers, and .resolve(). The path is allowed to contain qualifiers (.) to traverse sub-elements, as well as indexers ([x]) to traverse multiple-cardinality sub-elements (see the [Simple FHIRPath Profile](fhirpath.html#simple) for full details). Note that the index must be an integer constant. The path must resolve to an element of type date, dateTime, Period, Schedule, or Timing.
-	Path FhirString `json:"path,omitempty"`
-	// searchParam
-	// A date parameter that refers to a search parameter defined on the specified type of the DataRequirement, and which searches on elements of type date, dateTime, Period, Schedule, or Timing.
-	SearchParam FhirString `json:"searchParam,omitempty"`
-	// valueDateTime
-	// The value of the filter. If period is specified, the filter will return only those data items that fall within the bounds determined by the Period, inclusive of the period boundaries. If dateTime is specified, the filter will return only those data items that are equal to the specified dateTime. If a Duration is specified, the filter will return only those data items that fall within Duration before now.
-	ValueDateTime FhirDateTime `json:"valueDateTime,omitempty"`
-	// valuePeriod
-	// The value of the filter. If period is specified, the filter will return only those data items that fall within the bounds determined by the Period, inclusive of the period boundaries. If dateTime is specified, the filter will return only those data items that are equal to the specified dateTime. If a Duration is specified, the filter will return only those data items that fall within Duration before now.
-	ValuePeriod Period `json:"valuePeriod,omitempty"`
-	// valueDuration
-	// The value of the filter. If period is specified, the filter will return only those data items that fall within the bounds determined by the Period, inclusive of the period boundaries. If dateTime is specified, the filter will return only those data items that are equal to the specified dateTime. If a Duration is specified, the filter will return only those data items that fall within Duration before now.
-	ValueDuration FhirDuration `json:"valueDuration,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	Path *FhirString `json:"path,omitempty"`
+	SearchParam *FhirString `json:"searchparam,omitempty"`
+	ValueDateTime *FhirDateTime `json:"valuedatetime,omitempty"`
+	ValuePeriod *Period `json:"valueperiod,omitempty"`
+	ValueDuration *FhirDuration `json:"valueduration,omitempty"`
 }
 
 // NewDataRequirementDateFilter creates a new DataRequirementDateFilter instance
-func NewDataRequirementDateFilter(
-	id FhirString,
-	extension_ []FhirExtension,
-	path FhirString,
-	searchParam FhirString,
-	valueDateTime FhirDateTime,
-	valuePeriod Period,
-	valueDuration FhirDuration,
-) *DataRequirementDateFilter {
-	return &DataRequirementDateFilter{
-		Id: id,
-		Extension_: extension_,
-		Path: path,
-		SearchParam: searchParam,
-		ValueDateTime: valueDateTime,
-		ValuePeriod: valuePeriod,
-		ValueDuration: valueDuration,
-	}
+func NewDataRequirementDateFilter() *DataRequirementDateFilter {
+	return &DataRequirementDateFilter{}
 }
+
 // FromJSON populates DataRequirementDateFilter from JSON data
 func (m *DataRequirementDateFilter) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -292,79 +154,49 @@ func (m *DataRequirementDateFilter) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of DataRequirementDateFilter
-func (m *DataRequirementDateFilter) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	path *FhirString,
-	searchParam *FhirString,
-	valueDateTime *FhirDateTime,
-	valuePeriod *Period,
-	valueDuration *FhirDuration,
-) *DataRequirementDateFilter {
+// Clone creates a deep copy of DataRequirementDateFilter
+func (m *DataRequirementDateFilter) Clone() *DataRequirementDateFilter {
+	if m == nil { return nil }
 	return &DataRequirementDateFilter{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		Path: func() FhirString {
-			if path != nil { return *path }
-			return m.Path
-		}(),
-		SearchParam: func() FhirString {
-			if searchParam != nil { return *searchParam }
-			return m.SearchParam
-		}(),
-		ValueDateTime: func() FhirDateTime {
-			if valueDateTime != nil { return *valueDateTime }
-			return m.ValueDateTime
-		}(),
-		ValuePeriod: func() Period {
-			if valuePeriod != nil { return *valuePeriod }
-			return m.ValuePeriod
-		}(),
-		ValueDuration: func() FhirDuration {
-			if valueDuration != nil { return *valueDuration }
-			return m.ValueDuration
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		Path: m.Path.Clone(),
+		SearchParam: m.SearchParam.Clone(),
+		ValueDateTime: m.ValueDateTime.Clone(),
+		ValuePeriod: m.ValuePeriod.Clone(),
+		ValueDuration: m.ValueDuration.Clone(),
 	}
 }
+
+// Equals checks for equality with another DataRequirementDateFilter instance
+func (m *DataRequirementDateFilter) Equals(other *DataRequirementDateFilter) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !m.Path.Equals(other.Path) { return false }
+	if !m.SearchParam.Equals(other.SearchParam) { return false }
+	if !m.ValueDateTime.Equals(other.ValueDateTime) { return false }
+	if !m.ValuePeriod.Equals(other.ValuePeriod) { return false }
+	if !m.ValueDuration.Equals(other.ValueDuration) { return false }
+	return true
+}
+
 // DataRequirementSort
 // Specifies the order of the results to be returned.
 type DataRequirementSort struct {
 	Element
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// path
-	// The attribute of the sort. The specified path must be resolvable from the type of the required data. The path is allowed to contain qualifiers (.) to traverse sub-elements, as well as indexers ([x]) to traverse multiple-cardinality sub-elements. Note that the index must be an integer constant.
-	Path FhirString `json:"path,omitempty"`
-	// direction
-	// The direction of the sort, ascending or descending.
-	Direction SortDirection `json:"direction,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	Path *FhirString `json:"path,omitempty"`
+	Direction *SortDirection `json:"direction,omitempty"`
 }
 
 // NewDataRequirementSort creates a new DataRequirementSort instance
-func NewDataRequirementSort(
-	id FhirString,
-	extension_ []FhirExtension,
-	path FhirString,
-	direction SortDirection,
-) *DataRequirementSort {
-	return &DataRequirementSort{
-		Id: id,
-		Extension_: extension_,
-		Path: path,
-		Direction: direction,
-	}
+func NewDataRequirementSort() *DataRequirementSort {
+	return &DataRequirementSort{}
 }
+
 // FromJSON populates DataRequirementSort from JSON data
 func (m *DataRequirementSort) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -375,29 +207,25 @@ func (m *DataRequirementSort) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of DataRequirementSort
-func (m *DataRequirementSort) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	path *FhirString,
-	direction *SortDirection,
-) *DataRequirementSort {
+// Clone creates a deep copy of DataRequirementSort
+func (m *DataRequirementSort) Clone() *DataRequirementSort {
+	if m == nil { return nil }
 	return &DataRequirementSort{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		Path: func() FhirString {
-			if path != nil { return *path }
-			return m.Path
-		}(),
-		Direction: func() SortDirection {
-			if direction != nil { return *direction }
-			return m.Direction
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		Path: m.Path.Clone(),
+		Direction: m.Direction.Clone(),
 	}
 }
+
+// Equals checks for equality with another DataRequirementSort instance
+func (m *DataRequirementSort) Equals(other *DataRequirementSort) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !m.Path.Equals(other.Path) { return false }
+	if !m.Direction.Equals(other.Direction) { return false }
+	return true
+}
+

@@ -3,99 +3,34 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // Subscription
 // The subscription resource is used to define a push-based subscription from a server to another system. Once a subscription is registered with the server, the server checks every resource that is created or updated, and if the resource matches the given criteria, it sends a message on the defined "channel" so that another system can take an appropriate action.
 type Subscription struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// status
-	// The status of the subscription, which marks the server state for managing the subscription.
-	Status SubscriptionStatusCodes `json:"status,omitempty"`
-	// contact
-	// Contact details for a human to contact about the subscription. The primary use of this for system administrator troubleshooting.
-	Contact []ContactPoint `json:"contact,omitempty"`
-	// end
-	// The time for the server to turn the subscription off.
-	End FhirInstant `json:"end,omitempty"`
-	// reason
-	// A description of why this subscription is defined.
-	Reason FhirString `json:"reason,omitempty"`
-	// criteria
-	// The rules that the server should use to determine when to generate notifications for this subscription.
-	Criteria FhirString `json:"criteria,omitempty"`
-	// error
-	// A record of the last error that occurred when the server processed a notification.
-	Error FhirString `json:"error,omitempty"`
-	// channel
-	// Details where to send notifications when resources are received that meet the criteria.
-	Channel SubscriptionChannel `json:"channel,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Status *SubscriptionStatusCodes `json:"status,omitempty"`
+	Contact []*ContactPoint `json:"contact,omitempty"`
+	End *FhirInstant `json:"end,omitempty"`
+	Reason *FhirString `json:"reason,omitempty"`
+	Criteria *FhirString `json:"criteria,omitempty"`
+	Error *FhirString `json:"error,omitempty"`
+	Channel *SubscriptionChannel `json:"channel,omitempty"`
 }
 
 // NewSubscription creates a new Subscription instance
-func NewSubscription(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	status SubscriptionStatusCodes,
-	contact []ContactPoint,
-	end FhirInstant,
-	reason FhirString,
-	criteria FhirString,
-	error FhirString,
-	channel SubscriptionChannel,
-) *Subscription {
-	return &Subscription{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Status: status,
-		Contact: contact,
-		End: end,
-		Reason: reason,
-		Criteria: criteria,
-		Error: error,
-		Channel: channel,
-	}
+func NewSubscription() *Subscription {
+	return &Subscription{}
 }
+
 // FromJSON populates Subscription from JSON data
 func (m *Subscription) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -106,136 +41,68 @@ func (m *Subscription) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of Subscription
-func (m *Subscription) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	status *SubscriptionStatusCodes,
-	contact *[]ContactPoint,
-	end *FhirInstant,
-	reason *FhirString,
-	criteria *FhirString,
-	error *FhirString,
-	channel *SubscriptionChannel,
-) *Subscription {
+// Clone creates a deep copy of Subscription
+func (m *Subscription) Clone() *Subscription {
+	if m == nil { return nil }
 	return &Subscription{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Status: func() SubscriptionStatusCodes {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Contact: func() []ContactPoint {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
-		End: func() FhirInstant {
-			if end != nil { return *end }
-			return m.End
-		}(),
-		Reason: func() FhirString {
-			if reason != nil { return *reason }
-			return m.Reason
-		}(),
-		Criteria: func() FhirString {
-			if criteria != nil { return *criteria }
-			return m.Criteria
-		}(),
-		Error: func() FhirString {
-			if error != nil { return *error }
-			return m.Error
-		}(),
-		Channel: func() SubscriptionChannel {
-			if channel != nil { return *channel }
-			return m.Channel
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Status: m.Status.Clone(),
+		Contact: cloneSlices(m.Contact),
+		End: m.End.Clone(),
+		Reason: m.Reason.Clone(),
+		Criteria: m.Criteria.Clone(),
+		Error: m.Error.Clone(),
+		Channel: m.Channel.Clone(),
 	}
 }
+
+// Equals checks for equality with another Subscription instance
+func (m *Subscription) Equals(other *Subscription) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !compareSlices(m.Contact, other.Contact) { return false }
+	if !m.End.Equals(other.End) { return false }
+	if !m.Reason.Equals(other.Reason) { return false }
+	if !m.Criteria.Equals(other.Criteria) { return false }
+	if !m.Error.Equals(other.Error) { return false }
+	if !m.Channel.Equals(other.Channel) { return false }
+	return true
+}
+
 // SubscriptionChannel
 // Details where to send notifications when resources are received that meet the criteria.
 type SubscriptionChannel struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// The type of channel to send notifications on.
-	Type_ SubscriptionChannelType `json:"type,omitempty"`
-	// endpoint
-	// The url that describes the actual end-point to send messages to.
-	Endpoint FhirUrl `json:"endpoint,omitempty"`
-	// payload
-	// The mime type to send the payload in - either application/fhir+xml, or application/fhir+json. If the payload is not present, then there is no payload in the notification, just a notification. The mime type "text/plain" may also be used for Email and SMS subscriptions.
-	Payload FhirCode `json:"payload,omitempty"`
-	// header
-	// Additional headers / information to send as part of the notification.
-	Header []FhirString `json:"header,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *SubscriptionChannelType `json:"type,omitempty"`
+	Endpoint *FhirUrl `json:"endpoint,omitempty"`
+	Payload *FhirCode `json:"payload,omitempty"`
+	Header []*FhirString `json:"header,omitempty"`
 }
 
 // NewSubscriptionChannel creates a new SubscriptionChannel instance
-func NewSubscriptionChannel(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ SubscriptionChannelType,
-	endpoint FhirUrl,
-	payload FhirCode,
-	header []FhirString,
-) *SubscriptionChannel {
-	return &SubscriptionChannel{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Endpoint: endpoint,
-		Payload: payload,
-		Header: header,
-	}
+func NewSubscriptionChannel() *SubscriptionChannel {
+	return &SubscriptionChannel{}
 }
+
 // FromJSON populates SubscriptionChannel from JSON data
 func (m *SubscriptionChannel) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -246,44 +113,31 @@ func (m *SubscriptionChannel) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SubscriptionChannel
-func (m *SubscriptionChannel) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *SubscriptionChannelType,
-	endpoint *FhirUrl,
-	payload *FhirCode,
-	header *[]FhirString,
-) *SubscriptionChannel {
+// Clone creates a deep copy of SubscriptionChannel
+func (m *SubscriptionChannel) Clone() *SubscriptionChannel {
+	if m == nil { return nil }
 	return &SubscriptionChannel{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() SubscriptionChannelType {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Endpoint: func() FhirUrl {
-			if endpoint != nil { return *endpoint }
-			return m.Endpoint
-		}(),
-		Payload: func() FhirCode {
-			if payload != nil { return *payload }
-			return m.Payload
-		}(),
-		Header: func() []FhirString {
-			if header != nil { return *header }
-			return m.Header
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Endpoint: m.Endpoint.Clone(),
+		Payload: m.Payload.Clone(),
+		Header: cloneSlices(m.Header),
 	}
 }
+
+// Equals checks for equality with another SubscriptionChannel instance
+func (m *SubscriptionChannel) Equals(other *SubscriptionChannel) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Endpoint.Equals(other.Endpoint) { return false }
+	if !m.Payload.Equals(other.Payload) { return false }
+	if !compareSlices(m.Header, other.Header) { return false }
+	return true
+}
+

@@ -3,274 +3,69 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // Measure
 // The Measure resource provides the definition of a quality measure.
 type Measure struct {
 	CanonicalResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// url
-	// An absolute URI that is used to identify this measure when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this measure is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the measure is stored on different servers.
-	Url FhirUri `json:"url,omitempty"`
-	// identifier
-	// A formal identifier that is used to identify this measure when it is represented in other formats, or referenced in a specification, model, design or an instance.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// version
-	// The identifier that is used to identify this version of the measure when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the measure author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence. To provide a version consistent with the Decision Support Service specification, use the format Major.Minor.Revision (e.g. 1.0.0). For more information on versioning knowledge assets, refer to the Decision Support Service specification. Note that a version is required for non-experimental active artifacts.
-	Version FhirString `json:"version,omitempty"`
-	// name
-	// A natural language name identifying the measure. This name should be usable as an identifier for the module by machine processing applications such as code generation.
-	Name FhirString `json:"name,omitempty"`
-	// title
-	// A short, descriptive, user-friendly title for the measure.
-	Title FhirString `json:"title,omitempty"`
-	// subtitle
-	// An explanatory or alternate title for the measure giving additional information about its content.
-	Subtitle FhirString `json:"subtitle,omitempty"`
-	// status
-	// The status of this measure. Enables tracking the life-cycle of the content.
-	Status PublicationStatus `json:"status,omitempty"`
-	// experimental
-	// A Boolean value to indicate that this measure is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.
-	Experimental FhirBoolean `json:"experimental,omitempty"`
-	// subjectCodeableConcept
-	// The intended subjects for the measure. If this element is not provided, a Patient subject is assumed, but the subject of the measure can be anything.
-	SubjectCodeableConcept CodeableConcept `json:"subjectCodeableConcept,omitempty"`
-	// subjectReference
-	// The intended subjects for the measure. If this element is not provided, a Patient subject is assumed, but the subject of the measure can be anything.
-	SubjectReference Reference `json:"subjectReference,omitempty"`
-	// date
-	// The date  (and optionally time) when the measure was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the measure changes.
-	Date FhirDateTime `json:"date,omitempty"`
-	// publisher
-	// The name of the organization or individual that published the measure.
-	Publisher FhirString `json:"publisher,omitempty"`
-	// contact
-	// Contact details to assist a user in finding and communicating with the publisher.
-	Contact []ContactDetail `json:"contact,omitempty"`
-	// description
-	// A free text natural language description of the measure from a consumer's perspective.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// useContext
-	// The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate measure instances.
-	UseContext []UsageContext `json:"useContext,omitempty"`
-	// jurisdiction
-	// A legal or geographic region in which the measure is intended to be used.
-	Jurisdiction []CodeableConcept `json:"jurisdiction,omitempty"`
-	// purpose
-	// Explanation of why this measure is needed and why it has been designed as it has.
-	Purpose FhirMarkdown `json:"purpose,omitempty"`
-	// usage
-	// A detailed description, from a clinical perspective, of how the measure is used.
-	Usage FhirString `json:"usage,omitempty"`
-	// copyright
-	// A copyright statement relating to the measure and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the measure.
-	Copyright FhirMarkdown `json:"copyright,omitempty"`
-	// approvalDate
-	// The date on which the resource content was approved by the publisher. Approval happens once when the content is officially approved for usage.
-	ApprovalDate FhirDate `json:"approvalDate,omitempty"`
-	// lastReviewDate
-	// The date on which the resource content was last reviewed. Review happens periodically after approval but does not change the original approval date.
-	LastReviewDate FhirDate `json:"lastReviewDate,omitempty"`
-	// effectivePeriod
-	// The period during which the measure content was or is planned to be in active use.
-	EffectivePeriod Period `json:"effectivePeriod,omitempty"`
-	// topic
-	// Descriptive topics related to the content of the measure. Topics provide a high-level categorization grouping types of measures that can be useful for filtering and searching.
-	Topic []CodeableConcept `json:"topic,omitempty"`
-	// author
-	// An individiual or organization primarily involved in the creation and maintenance of the content.
-	Author []ContactDetail `json:"author,omitempty"`
-	// editor
-	// An individual or organization primarily responsible for internal coherence of the content.
-	Editor []ContactDetail `json:"editor,omitempty"`
-	// reviewer
-	// An individual or organization primarily responsible for review of some aspect of the content.
-	Reviewer []ContactDetail `json:"reviewer,omitempty"`
-	// endorser
-	// An individual or organization responsible for officially endorsing the content for use in some setting.
-	Endorser []ContactDetail `json:"endorser,omitempty"`
-	// relatedArtifact
-	// Related artifacts such as additional documentation, justification, or bibliographic references.
-	RelatedArtifact []RelatedArtifact `json:"relatedArtifact,omitempty"`
-	// library
-	// A reference to a Library resource containing the formal logic used by the measure.
-	Library_ []FhirCanonical `json:"library,omitempty"`
-	// disclaimer
-	// Notices and disclaimers regarding the use of the measure or related to intellectual property (such as code systems) referenced by the measure.
-	Disclaimer FhirMarkdown `json:"disclaimer,omitempty"`
-	// scoring
-	// Indicates how the calculation is performed for the measure, including proportion, ratio, continuous-variable, and cohort. The value set is extensible, allowing additional measure scoring types to be represented.
-	Scoring CodeableConcept `json:"scoring,omitempty"`
-	// compositeScoring
-	// If this is a composite measure, the scoring method used to combine the component measures to determine the composite score.
-	CompositeScoring CodeableConcept `json:"compositeScoring,omitempty"`
-	// type
-	// Indicates whether the measure is used to examine a process, an outcome over time, a patient-reported outcome, or a structure measure such as utilization.
-	Type_ []CodeableConcept `json:"type,omitempty"`
-	// riskAdjustment
-	// A description of the risk adjustment factors that may impact the resulting score for the measure and how they may be accounted for when computing and reporting measure results.
-	RiskAdjustment FhirString `json:"riskAdjustment,omitempty"`
-	// rateAggregation
-	// Describes how to combine the information calculated, based on logic in each of several populations, into one summarized result.
-	RateAggregation FhirString `json:"rateAggregation,omitempty"`
-	// rationale
-	// Provides a succinct statement of the need for the measure. Usually includes statements pertaining to importance criterion: impact, gap in care, and evidence.
-	Rationale FhirMarkdown `json:"rationale,omitempty"`
-	// clinicalRecommendationStatement
-	// Provides a summary of relevant clinical guidelines or other clinical recommendations supporting the measure.
-	ClinicalRecommendationStatement FhirMarkdown `json:"clinicalRecommendationStatement,omitempty"`
-	// improvementNotation
-	// Information on whether an increase or decrease in score is the preferred result (e.g., a higher score indicates better quality OR a lower score indicates better quality OR quality is within a range).
-	ImprovementNotation CodeableConcept `json:"improvementNotation,omitempty"`
-	// definition
-	// Provides a description of an individual term used within the measure.
-	Definition []FhirMarkdown `json:"definition,omitempty"`
-	// guidance
-	// Additional guidance for the measure including how it can be used in a clinical context, and the intent of the measure.
-	Guidance FhirMarkdown `json:"guidance,omitempty"`
-	// group
-	// A group of population criteria for the measure.
-	Group []MeasureGroup `json:"group,omitempty"`
-	// supplementalData
-	// The supplemental data criteria for the measure report, specified as either the name of a valid CQL expression within a referenced library, or a valid FHIR Resource Path.
-	SupplementalData []MeasureSupplementalData `json:"supplementalData,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Url *FhirUri `json:"url,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Title *FhirString `json:"title,omitempty"`
+	Subtitle *FhirString `json:"subtitle,omitempty"`
+	Status *PublicationStatus `json:"status,omitempty"`
+	Experimental *FhirBoolean `json:"experimental,omitempty"`
+	SubjectCodeableConcept *CodeableConcept `json:"subjectcodeableconcept,omitempty"`
+	SubjectReference *Reference `json:"subjectreference,omitempty"`
+	Date *FhirDateTime `json:"date,omitempty"`
+	Publisher *FhirString `json:"publisher,omitempty"`
+	Contact []*ContactDetail `json:"contact,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	UseContext []*UsageContext `json:"usecontext,omitempty"`
+	Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+	Purpose *FhirMarkdown `json:"purpose,omitempty"`
+	Usage *FhirString `json:"usage,omitempty"`
+	Copyright *FhirMarkdown `json:"copyright,omitempty"`
+	ApprovalDate *FhirDate `json:"approvaldate,omitempty"`
+	LastReviewDate *FhirDate `json:"lastreviewdate,omitempty"`
+	EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+	Topic []*CodeableConcept `json:"topic,omitempty"`
+	Author []*ContactDetail `json:"author,omitempty"`
+	Editor []*ContactDetail `json:"editor,omitempty"`
+	Reviewer []*ContactDetail `json:"reviewer,omitempty"`
+	Endorser []*ContactDetail `json:"endorser,omitempty"`
+	RelatedArtifact []*RelatedArtifact `json:"relatedartifact,omitempty"`
+	Library_ []*FhirCanonical `json:"library,omitempty"`
+	Disclaimer *FhirMarkdown `json:"disclaimer,omitempty"`
+	Scoring *CodeableConcept `json:"scoring,omitempty"`
+	CompositeScoring *CodeableConcept `json:"compositescoring,omitempty"`
+	Type []*CodeableConcept `json:"type,omitempty"`
+	RiskAdjustment *FhirString `json:"riskadjustment,omitempty"`
+	RateAggregation *FhirString `json:"rateaggregation,omitempty"`
+	Rationale *FhirMarkdown `json:"rationale,omitempty"`
+	ClinicalRecommendationStatement *FhirMarkdown `json:"clinicalrecommendationstatement,omitempty"`
+	ImprovementNotation *CodeableConcept `json:"improvementnotation,omitempty"`
+	Definition []*FhirMarkdown `json:"definition,omitempty"`
+	Guidance *FhirMarkdown `json:"guidance,omitempty"`
+	Group []*MeasureGroup `json:"group,omitempty"`
+	SupplementalData []*MeasureSupplementalData `json:"supplementaldata,omitempty"`
 }
 
 // NewMeasure creates a new Measure instance
-func NewMeasure(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	url FhirUri,
-	identifier []Identifier,
-	version FhirString,
-	name FhirString,
-	title FhirString,
-	subtitle FhirString,
-	status PublicationStatus,
-	experimental FhirBoolean,
-	subjectCodeableConcept CodeableConcept,
-	subjectReference Reference,
-	date FhirDateTime,
-	publisher FhirString,
-	contact []ContactDetail,
-	description FhirMarkdown,
-	useContext []UsageContext,
-	jurisdiction []CodeableConcept,
-	purpose FhirMarkdown,
-	usage FhirString,
-	copyright FhirMarkdown,
-	approvalDate FhirDate,
-	lastReviewDate FhirDate,
-	effectivePeriod Period,
-	topic []CodeableConcept,
-	author []ContactDetail,
-	editor []ContactDetail,
-	reviewer []ContactDetail,
-	endorser []ContactDetail,
-	relatedArtifact []RelatedArtifact,
-	library_ []FhirCanonical,
-	disclaimer FhirMarkdown,
-	scoring CodeableConcept,
-	compositeScoring CodeableConcept,
-	type_ []CodeableConcept,
-	riskAdjustment FhirString,
-	rateAggregation FhirString,
-	rationale FhirMarkdown,
-	clinicalRecommendationStatement FhirMarkdown,
-	improvementNotation CodeableConcept,
-	definition []FhirMarkdown,
-	guidance FhirMarkdown,
-	group []MeasureGroup,
-	supplementalData []MeasureSupplementalData,
-) *Measure {
-	return &Measure{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Url: url,
-		Identifier: identifier,
-		Version: version,
-		Name: name,
-		Title: title,
-		Subtitle: subtitle,
-		Status: status,
-		Experimental: experimental,
-		SubjectCodeableConcept: subjectCodeableConcept,
-		SubjectReference: subjectReference,
-		Date: date,
-		Publisher: publisher,
-		Contact: contact,
-		Description: description,
-		UseContext: useContext,
-		Jurisdiction: jurisdiction,
-		Purpose: purpose,
-		Usage: usage,
-		Copyright: copyright,
-		ApprovalDate: approvalDate,
-		LastReviewDate: lastReviewDate,
-		EffectivePeriod: effectivePeriod,
-		Topic: topic,
-		Author: author,
-		Editor: editor,
-		Reviewer: reviewer,
-		Endorser: endorser,
-		RelatedArtifact: relatedArtifact,
-		Library_: library_,
-		Disclaimer: disclaimer,
-		Scoring: scoring,
-		CompositeScoring: compositeScoring,
-		Type_: type_,
-		RiskAdjustment: riskAdjustment,
-		RateAggregation: rateAggregation,
-		Rationale: rationale,
-		ClinicalRecommendationStatement: clinicalRecommendationStatement,
-		ImprovementNotation: improvementNotation,
-		Definition: definition,
-		Guidance: guidance,
-		Group: group,
-		SupplementalData: supplementalData,
-	}
+func NewMeasure() *Measure {
+	return &Measure{}
 }
+
 // FromJSON populates Measure from JSON data
 func (m *Measure) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -281,311 +76,138 @@ func (m *Measure) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of Measure
-func (m *Measure) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	url *FhirUri,
-	identifier *[]Identifier,
-	version *FhirString,
-	name *FhirString,
-	title *FhirString,
-	subtitle *FhirString,
-	status *PublicationStatus,
-	experimental *FhirBoolean,
-	subjectCodeableConcept *CodeableConcept,
-	subjectReference *Reference,
-	date *FhirDateTime,
-	publisher *FhirString,
-	contact *[]ContactDetail,
-	description *FhirMarkdown,
-	useContext *[]UsageContext,
-	jurisdiction *[]CodeableConcept,
-	purpose *FhirMarkdown,
-	usage *FhirString,
-	copyright *FhirMarkdown,
-	approvalDate *FhirDate,
-	lastReviewDate *FhirDate,
-	effectivePeriod *Period,
-	topic *[]CodeableConcept,
-	author *[]ContactDetail,
-	editor *[]ContactDetail,
-	reviewer *[]ContactDetail,
-	endorser *[]ContactDetail,
-	relatedArtifact *[]RelatedArtifact,
-	library_ *[]FhirCanonical,
-	disclaimer *FhirMarkdown,
-	scoring *CodeableConcept,
-	compositeScoring *CodeableConcept,
-	type_ *[]CodeableConcept,
-	riskAdjustment *FhirString,
-	rateAggregation *FhirString,
-	rationale *FhirMarkdown,
-	clinicalRecommendationStatement *FhirMarkdown,
-	improvementNotation *CodeableConcept,
-	definition *[]FhirMarkdown,
-	guidance *FhirMarkdown,
-	group *[]MeasureGroup,
-	supplementalData *[]MeasureSupplementalData,
-) *Measure {
+// Clone creates a deep copy of Measure
+func (m *Measure) Clone() *Measure {
+	if m == nil { return nil }
 	return &Measure{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Url: func() FhirUri {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Title: func() FhirString {
-			if title != nil { return *title }
-			return m.Title
-		}(),
-		Subtitle: func() FhirString {
-			if subtitle != nil { return *subtitle }
-			return m.Subtitle
-		}(),
-		Status: func() PublicationStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Experimental: func() FhirBoolean {
-			if experimental != nil { return *experimental }
-			return m.Experimental
-		}(),
-		SubjectCodeableConcept: func() CodeableConcept {
-			if subjectCodeableConcept != nil { return *subjectCodeableConcept }
-			return m.SubjectCodeableConcept
-		}(),
-		SubjectReference: func() Reference {
-			if subjectReference != nil { return *subjectReference }
-			return m.SubjectReference
-		}(),
-		Date: func() FhirDateTime {
-			if date != nil { return *date }
-			return m.Date
-		}(),
-		Publisher: func() FhirString {
-			if publisher != nil { return *publisher }
-			return m.Publisher
-		}(),
-		Contact: func() []ContactDetail {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		UseContext: func() []UsageContext {
-			if useContext != nil { return *useContext }
-			return m.UseContext
-		}(),
-		Jurisdiction: func() []CodeableConcept {
-			if jurisdiction != nil { return *jurisdiction }
-			return m.Jurisdiction
-		}(),
-		Purpose: func() FhirMarkdown {
-			if purpose != nil { return *purpose }
-			return m.Purpose
-		}(),
-		Usage: func() FhirString {
-			if usage != nil { return *usage }
-			return m.Usage
-		}(),
-		Copyright: func() FhirMarkdown {
-			if copyright != nil { return *copyright }
-			return m.Copyright
-		}(),
-		ApprovalDate: func() FhirDate {
-			if approvalDate != nil { return *approvalDate }
-			return m.ApprovalDate
-		}(),
-		LastReviewDate: func() FhirDate {
-			if lastReviewDate != nil { return *lastReviewDate }
-			return m.LastReviewDate
-		}(),
-		EffectivePeriod: func() Period {
-			if effectivePeriod != nil { return *effectivePeriod }
-			return m.EffectivePeriod
-		}(),
-		Topic: func() []CodeableConcept {
-			if topic != nil { return *topic }
-			return m.Topic
-		}(),
-		Author: func() []ContactDetail {
-			if author != nil { return *author }
-			return m.Author
-		}(),
-		Editor: func() []ContactDetail {
-			if editor != nil { return *editor }
-			return m.Editor
-		}(),
-		Reviewer: func() []ContactDetail {
-			if reviewer != nil { return *reviewer }
-			return m.Reviewer
-		}(),
-		Endorser: func() []ContactDetail {
-			if endorser != nil { return *endorser }
-			return m.Endorser
-		}(),
-		RelatedArtifact: func() []RelatedArtifact {
-			if relatedArtifact != nil { return *relatedArtifact }
-			return m.RelatedArtifact
-		}(),
-		Library_: func() []FhirCanonical {
-			if library_ != nil { return *library_ }
-			return m.Library_
-		}(),
-		Disclaimer: func() FhirMarkdown {
-			if disclaimer != nil { return *disclaimer }
-			return m.Disclaimer
-		}(),
-		Scoring: func() CodeableConcept {
-			if scoring != nil { return *scoring }
-			return m.Scoring
-		}(),
-		CompositeScoring: func() CodeableConcept {
-			if compositeScoring != nil { return *compositeScoring }
-			return m.CompositeScoring
-		}(),
-		Type_: func() []CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		RiskAdjustment: func() FhirString {
-			if riskAdjustment != nil { return *riskAdjustment }
-			return m.RiskAdjustment
-		}(),
-		RateAggregation: func() FhirString {
-			if rateAggregation != nil { return *rateAggregation }
-			return m.RateAggregation
-		}(),
-		Rationale: func() FhirMarkdown {
-			if rationale != nil { return *rationale }
-			return m.Rationale
-		}(),
-		ClinicalRecommendationStatement: func() FhirMarkdown {
-			if clinicalRecommendationStatement != nil { return *clinicalRecommendationStatement }
-			return m.ClinicalRecommendationStatement
-		}(),
-		ImprovementNotation: func() CodeableConcept {
-			if improvementNotation != nil { return *improvementNotation }
-			return m.ImprovementNotation
-		}(),
-		Definition: func() []FhirMarkdown {
-			if definition != nil { return *definition }
-			return m.Definition
-		}(),
-		Guidance: func() FhirMarkdown {
-			if guidance != nil { return *guidance }
-			return m.Guidance
-		}(),
-		Group: func() []MeasureGroup {
-			if group != nil { return *group }
-			return m.Group
-		}(),
-		SupplementalData: func() []MeasureSupplementalData {
-			if supplementalData != nil { return *supplementalData }
-			return m.SupplementalData
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Url: m.Url.Clone(),
+		Identifier: cloneSlices(m.Identifier),
+		Version: m.Version.Clone(),
+		Name: m.Name.Clone(),
+		Title: m.Title.Clone(),
+		Subtitle: m.Subtitle.Clone(),
+		Status: m.Status.Clone(),
+		Experimental: m.Experimental.Clone(),
+		SubjectCodeableConcept: m.SubjectCodeableConcept.Clone(),
+		SubjectReference: m.SubjectReference.Clone(),
+		Date: m.Date.Clone(),
+		Publisher: m.Publisher.Clone(),
+		Contact: cloneSlices(m.Contact),
+		Description: m.Description.Clone(),
+		UseContext: cloneSlices(m.UseContext),
+		Jurisdiction: cloneSlices(m.Jurisdiction),
+		Purpose: m.Purpose.Clone(),
+		Usage: m.Usage.Clone(),
+		Copyright: m.Copyright.Clone(),
+		ApprovalDate: m.ApprovalDate.Clone(),
+		LastReviewDate: m.LastReviewDate.Clone(),
+		EffectivePeriod: m.EffectivePeriod.Clone(),
+		Topic: cloneSlices(m.Topic),
+		Author: cloneSlices(m.Author),
+		Editor: cloneSlices(m.Editor),
+		Reviewer: cloneSlices(m.Reviewer),
+		Endorser: cloneSlices(m.Endorser),
+		RelatedArtifact: cloneSlices(m.RelatedArtifact),
+		Library_: cloneSlices(m.Library_),
+		Disclaimer: m.Disclaimer.Clone(),
+		Scoring: m.Scoring.Clone(),
+		CompositeScoring: m.CompositeScoring.Clone(),
+		Type: cloneSlices(m.Type),
+		RiskAdjustment: m.RiskAdjustment.Clone(),
+		RateAggregation: m.RateAggregation.Clone(),
+		Rationale: m.Rationale.Clone(),
+		ClinicalRecommendationStatement: m.ClinicalRecommendationStatement.Clone(),
+		ImprovementNotation: m.ImprovementNotation.Clone(),
+		Definition: cloneSlices(m.Definition),
+		Guidance: m.Guidance.Clone(),
+		Group: cloneSlices(m.Group),
+		SupplementalData: cloneSlices(m.SupplementalData),
 	}
 }
+
+// Equals checks for equality with another Measure instance
+func (m *Measure) Equals(other *Measure) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Title.Equals(other.Title) { return false }
+	if !m.Subtitle.Equals(other.Subtitle) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Experimental.Equals(other.Experimental) { return false }
+	if !m.SubjectCodeableConcept.Equals(other.SubjectCodeableConcept) { return false }
+	if !m.SubjectReference.Equals(other.SubjectReference) { return false }
+	if !m.Date.Equals(other.Date) { return false }
+	if !m.Publisher.Equals(other.Publisher) { return false }
+	if !compareSlices(m.Contact, other.Contact) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.UseContext, other.UseContext) { return false }
+	if !compareSlices(m.Jurisdiction, other.Jurisdiction) { return false }
+	if !m.Purpose.Equals(other.Purpose) { return false }
+	if !m.Usage.Equals(other.Usage) { return false }
+	if !m.Copyright.Equals(other.Copyright) { return false }
+	if !m.ApprovalDate.Equals(other.ApprovalDate) { return false }
+	if !m.LastReviewDate.Equals(other.LastReviewDate) { return false }
+	if !m.EffectivePeriod.Equals(other.EffectivePeriod) { return false }
+	if !compareSlices(m.Topic, other.Topic) { return false }
+	if !compareSlices(m.Author, other.Author) { return false }
+	if !compareSlices(m.Editor, other.Editor) { return false }
+	if !compareSlices(m.Reviewer, other.Reviewer) { return false }
+	if !compareSlices(m.Endorser, other.Endorser) { return false }
+	if !compareSlices(m.RelatedArtifact, other.RelatedArtifact) { return false }
+	if !compareSlices(m.Library_, other.Library_) { return false }
+	if !m.Disclaimer.Equals(other.Disclaimer) { return false }
+	if !m.Scoring.Equals(other.Scoring) { return false }
+	if !m.CompositeScoring.Equals(other.CompositeScoring) { return false }
+	if !compareSlices(m.Type, other.Type) { return false }
+	if !m.RiskAdjustment.Equals(other.RiskAdjustment) { return false }
+	if !m.RateAggregation.Equals(other.RateAggregation) { return false }
+	if !m.Rationale.Equals(other.Rationale) { return false }
+	if !m.ClinicalRecommendationStatement.Equals(other.ClinicalRecommendationStatement) { return false }
+	if !m.ImprovementNotation.Equals(other.ImprovementNotation) { return false }
+	if !compareSlices(m.Definition, other.Definition) { return false }
+	if !m.Guidance.Equals(other.Guidance) { return false }
+	if !compareSlices(m.Group, other.Group) { return false }
+	if !compareSlices(m.SupplementalData, other.SupplementalData) { return false }
+	return true
+}
+
 // MeasureGroup
 // A group of population criteria for the measure.
 type MeasureGroup struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// Indicates a meaning for the group. This can be as simple as a unique identifier, or it can establish meaning in a broader context by drawing from a terminology, allowing groups to be correlated across measures.
-	Code CodeableConcept `json:"code,omitempty"`
-	// description
-	// The human readable description of this population group.
-	Description FhirString `json:"description,omitempty"`
-	// population
-	// A population criteria for the measure.
-	Population []MeasurePopulation `json:"population,omitempty"`
-	// stratifier
-	// The stratifier criteria for the measure report, specified as either the name of a valid CQL expression defined within a referenced library or a valid FHIR Resource Path.
-	Stratifier []MeasureStratifier `json:"stratifier,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *CodeableConcept `json:"code,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Population []*MeasurePopulation `json:"population,omitempty"`
+	Stratifier []*MeasureStratifier `json:"stratifier,omitempty"`
 }
 
 // NewMeasureGroup creates a new MeasureGroup instance
-func NewMeasureGroup(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code CodeableConcept,
-	description FhirString,
-	population []MeasurePopulation,
-	stratifier []MeasureStratifier,
-) *MeasureGroup {
-	return &MeasureGroup{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		Description: description,
-		Population: population,
-		Stratifier: stratifier,
-	}
+func NewMeasureGroup() *MeasureGroup {
+	return &MeasureGroup{}
 }
+
 // FromJSON populates MeasureGroup from JSON data
 func (m *MeasureGroup) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -596,91 +218,51 @@ func (m *MeasureGroup) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MeasureGroup
-func (m *MeasureGroup) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *CodeableConcept,
-	description *FhirString,
-	population *[]MeasurePopulation,
-	stratifier *[]MeasureStratifier,
-) *MeasureGroup {
+// Clone creates a deep copy of MeasureGroup
+func (m *MeasureGroup) Clone() *MeasureGroup {
+	if m == nil { return nil }
 	return &MeasureGroup{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() CodeableConcept {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Population: func() []MeasurePopulation {
-			if population != nil { return *population }
-			return m.Population
-		}(),
-		Stratifier: func() []MeasureStratifier {
-			if stratifier != nil { return *stratifier }
-			return m.Stratifier
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		Description: m.Description.Clone(),
+		Population: cloneSlices(m.Population),
+		Stratifier: cloneSlices(m.Stratifier),
 	}
 }
+
+// Equals checks for equality with another MeasureGroup instance
+func (m *MeasureGroup) Equals(other *MeasureGroup) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.Population, other.Population) { return false }
+	if !compareSlices(m.Stratifier, other.Stratifier) { return false }
+	return true
+}
+
 // MeasurePopulation
 // A population criteria for the measure.
 type MeasurePopulation struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// The type of population criteria.
-	Code CodeableConcept `json:"code,omitempty"`
-	// description
-	// The human readable description of this population criteria.
-	Description FhirString `json:"description,omitempty"`
-	// criteria
-	// An expression that specifies the criteria for the population, typically the name of an expression in a library.
-	Criteria FhirExpression `json:"criteria,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *CodeableConcept `json:"code,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Criteria *FhirExpression `json:"criteria,omitempty"`
 }
 
 // NewMeasurePopulation creates a new MeasurePopulation instance
-func NewMeasurePopulation(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code CodeableConcept,
-	description FhirString,
-	criteria FhirExpression,
-) *MeasurePopulation {
-	return &MeasurePopulation{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		Description: description,
-		Criteria: criteria,
-	}
+func NewMeasurePopulation() *MeasurePopulation {
+	return &MeasurePopulation{}
 }
+
 // FromJSON populates MeasurePopulation from JSON data
 func (m *MeasurePopulation) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -691,91 +273,50 @@ func (m *MeasurePopulation) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MeasurePopulation
-func (m *MeasurePopulation) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *CodeableConcept,
-	description *FhirString,
-	criteria *FhirExpression,
-) *MeasurePopulation {
+// Clone creates a deep copy of MeasurePopulation
+func (m *MeasurePopulation) Clone() *MeasurePopulation {
+	if m == nil { return nil }
 	return &MeasurePopulation{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() CodeableConcept {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Criteria: func() FhirExpression {
-			if criteria != nil { return *criteria }
-			return m.Criteria
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		Description: m.Description.Clone(),
+		Criteria: m.Criteria.Clone(),
 	}
 }
+
+// Equals checks for equality with another MeasurePopulation instance
+func (m *MeasurePopulation) Equals(other *MeasurePopulation) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.Criteria.Equals(other.Criteria) { return false }
+	return true
+}
+
 // MeasureStratifier
 // The stratifier criteria for the measure report, specified as either the name of a valid CQL expression defined within a referenced library or a valid FHIR Resource Path.
 type MeasureStratifier struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// Indicates a meaning for the stratifier. This can be as simple as a unique identifier, or it can establish meaning in a broader context by drawing from a terminology, allowing stratifiers to be correlated across measures.
-	Code CodeableConcept `json:"code,omitempty"`
-	// description
-	// The human readable description of this stratifier criteria.
-	Description FhirString `json:"description,omitempty"`
-	// criteria
-	// An expression that specifies the criteria for the stratifier. This is typically the name of an expression defined within a referenced library, but it may also be a path to a stratifier element.
-	Criteria FhirExpression `json:"criteria,omitempty"`
-	// component
-	// A component of the stratifier criteria for the measure report, specified as either the name of a valid CQL expression defined within a referenced library or a valid FHIR Resource Path.
-	Component []MeasureComponent `json:"component,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *CodeableConcept `json:"code,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Criteria *FhirExpression `json:"criteria,omitempty"`
+	Component []*MeasureComponent `json:"component,omitempty"`
 }
 
 // NewMeasureStratifier creates a new MeasureStratifier instance
-func NewMeasureStratifier(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code CodeableConcept,
-	description FhirString,
-	criteria FhirExpression,
-	component []MeasureComponent,
-) *MeasureStratifier {
-	return &MeasureStratifier{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		Description: description,
-		Criteria: criteria,
-		Component: component,
-	}
+func NewMeasureStratifier() *MeasureStratifier {
+	return &MeasureStratifier{}
 }
+
 // FromJSON populates MeasureStratifier from JSON data
 func (m *MeasureStratifier) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -786,91 +327,51 @@ func (m *MeasureStratifier) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MeasureStratifier
-func (m *MeasureStratifier) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *CodeableConcept,
-	description *FhirString,
-	criteria *FhirExpression,
-	component *[]MeasureComponent,
-) *MeasureStratifier {
+// Clone creates a deep copy of MeasureStratifier
+func (m *MeasureStratifier) Clone() *MeasureStratifier {
+	if m == nil { return nil }
 	return &MeasureStratifier{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() CodeableConcept {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Criteria: func() FhirExpression {
-			if criteria != nil { return *criteria }
-			return m.Criteria
-		}(),
-		Component: func() []MeasureComponent {
-			if component != nil { return *component }
-			return m.Component
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		Description: m.Description.Clone(),
+		Criteria: m.Criteria.Clone(),
+		Component: cloneSlices(m.Component),
 	}
 }
+
+// Equals checks for equality with another MeasureStratifier instance
+func (m *MeasureStratifier) Equals(other *MeasureStratifier) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.Criteria.Equals(other.Criteria) { return false }
+	if !compareSlices(m.Component, other.Component) { return false }
+	return true
+}
+
 // MeasureComponent
 // A component of the stratifier criteria for the measure report, specified as either the name of a valid CQL expression defined within a referenced library or a valid FHIR Resource Path.
 type MeasureComponent struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// Indicates a meaning for the stratifier component. This can be as simple as a unique identifier, or it can establish meaning in a broader context by drawing from a terminology, allowing stratifiers to be correlated across measures.
-	Code CodeableConcept `json:"code,omitempty"`
-	// description
-	// The human readable description of this stratifier criteria component.
-	Description FhirString `json:"description,omitempty"`
-	// criteria
-	// An expression that specifies the criteria for this component of the stratifier. This is typically the name of an expression defined within a referenced library, but it may also be a path to a stratifier element.
-	Criteria FhirExpression `json:"criteria,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *CodeableConcept `json:"code,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Criteria *FhirExpression `json:"criteria,omitempty"`
 }
 
 // NewMeasureComponent creates a new MeasureComponent instance
-func NewMeasureComponent(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code CodeableConcept,
-	description FhirString,
-	criteria FhirExpression,
-) *MeasureComponent {
-	return &MeasureComponent{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		Description: description,
-		Criteria: criteria,
-	}
+func NewMeasureComponent() *MeasureComponent {
+	return &MeasureComponent{}
 }
+
 // FromJSON populates MeasureComponent from JSON data
 func (m *MeasureComponent) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -881,91 +382,50 @@ func (m *MeasureComponent) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MeasureComponent
-func (m *MeasureComponent) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *CodeableConcept,
-	description *FhirString,
-	criteria *FhirExpression,
-) *MeasureComponent {
+// Clone creates a deep copy of MeasureComponent
+func (m *MeasureComponent) Clone() *MeasureComponent {
+	if m == nil { return nil }
 	return &MeasureComponent{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() CodeableConcept {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Criteria: func() FhirExpression {
-			if criteria != nil { return *criteria }
-			return m.Criteria
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		Description: m.Description.Clone(),
+		Criteria: m.Criteria.Clone(),
 	}
 }
+
+// Equals checks for equality with another MeasureComponent instance
+func (m *MeasureComponent) Equals(other *MeasureComponent) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.Criteria.Equals(other.Criteria) { return false }
+	return true
+}
+
 // MeasureSupplementalData
 // The supplemental data criteria for the measure report, specified as either the name of a valid CQL expression within a referenced library, or a valid FHIR Resource Path.
 type MeasureSupplementalData struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// Indicates a meaning for the supplemental data. This can be as simple as a unique identifier, or it can establish meaning in a broader context by drawing from a terminology, allowing supplemental data to be correlated across measures.
-	Code CodeableConcept `json:"code,omitempty"`
-	// usage
-	// An indicator of the intended usage for the supplemental data element. Supplemental data indicates the data is additional information requested to augment the measure information. Risk adjustment factor indicates the data is additional information used to calculate risk adjustment factors when applying a risk model to the measure calculation.
-	Usage []CodeableConcept `json:"usage,omitempty"`
-	// description
-	// The human readable description of this supplemental data.
-	Description FhirString `json:"description,omitempty"`
-	// criteria
-	// The criteria for the supplemental data. This is typically the name of a valid expression defined within a referenced library, but it may also be a path to a specific data element. The criteria defines the data to be returned for this element.
-	Criteria FhirExpression `json:"criteria,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *CodeableConcept `json:"code,omitempty"`
+	Usage []*CodeableConcept `json:"usage,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Criteria *FhirExpression `json:"criteria,omitempty"`
 }
 
 // NewMeasureSupplementalData creates a new MeasureSupplementalData instance
-func NewMeasureSupplementalData(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code CodeableConcept,
-	usage []CodeableConcept,
-	description FhirString,
-	criteria FhirExpression,
-) *MeasureSupplementalData {
-	return &MeasureSupplementalData{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		Usage: usage,
-		Description: description,
-		Criteria: criteria,
-	}
+func NewMeasureSupplementalData() *MeasureSupplementalData {
+	return &MeasureSupplementalData{}
 }
+
 // FromJSON populates MeasureSupplementalData from JSON data
 func (m *MeasureSupplementalData) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -976,44 +436,31 @@ func (m *MeasureSupplementalData) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of MeasureSupplementalData
-func (m *MeasureSupplementalData) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *CodeableConcept,
-	usage *[]CodeableConcept,
-	description *FhirString,
-	criteria *FhirExpression,
-) *MeasureSupplementalData {
+// Clone creates a deep copy of MeasureSupplementalData
+func (m *MeasureSupplementalData) Clone() *MeasureSupplementalData {
+	if m == nil { return nil }
 	return &MeasureSupplementalData{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() CodeableConcept {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Usage: func() []CodeableConcept {
-			if usage != nil { return *usage }
-			return m.Usage
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Criteria: func() FhirExpression {
-			if criteria != nil { return *criteria }
-			return m.Criteria
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		Usage: cloneSlices(m.Usage),
+		Description: m.Description.Clone(),
+		Criteria: m.Criteria.Clone(),
 	}
 }
+
+// Equals checks for equality with another MeasureSupplementalData instance
+func (m *MeasureSupplementalData) Equals(other *MeasureSupplementalData) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !compareSlices(m.Usage, other.Usage) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.Criteria.Equals(other.Criteria) { return false }
+	return true
+}
+

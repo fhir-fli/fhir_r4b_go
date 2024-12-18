@@ -3,67 +3,28 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // HumanName
 // A human's name with the ability to identify parts and usage.
 type HumanName struct {
 	DataType
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// use
-	// Identifies the purpose for this name.
-	Use NameUse `json:"use,omitempty"`
-	// text
-	// Specifies the entire name as it should be displayed e.g. on an application UI. This may be provided instead of or as well as the specific parts.
-	Text FhirString `json:"text,omitempty"`
-	// family
-	// The part of a name that links to the genealogy. In some cultures (e.g. Eritrea) the family name of a son is the first name of his father.
-	Family FhirString `json:"family,omitempty"`
-	// given
-	// Given name.
-	Given []FhirString `json:"given,omitempty"`
-	// prefix
-	// Part of the name that is acquired as a title due to academic, legal, employment or nobility status, etc. and that appears at the start of the name.
-	Prefix []FhirString `json:"prefix,omitempty"`
-	// suffix
-	// Part of the name that is acquired as a title due to academic, legal, employment or nobility status, etc. and that appears at the end of the name.
-	Suffix []FhirString `json:"suffix,omitempty"`
-	// period
-	// Indicates the period of time when this name was valid for the named person.
-	Period Period `json:"period,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	Use *NameUse `json:"use,omitempty"`
+	Text *FhirString `json:"text,omitempty"`
+	Family *FhirString `json:"family,omitempty"`
+	Given []*FhirString `json:"given,omitempty"`
+	Prefix []*FhirString `json:"prefix,omitempty"`
+	Suffix []*FhirString `json:"suffix,omitempty"`
+	Period *Period `json:"period,omitempty"`
 }
 
 // NewHumanName creates a new HumanName instance
-func NewHumanName(
-	id FhirString,
-	extension_ []FhirExtension,
-	use NameUse,
-	text FhirString,
-	family FhirString,
-	given []FhirString,
-	prefix []FhirString,
-	suffix []FhirString,
-	period Period,
-) *HumanName {
-	return &HumanName{
-		Id: id,
-		Extension_: extension_,
-		Use: use,
-		Text: text,
-		Family: family,
-		Given: given,
-		Prefix: prefix,
-		Suffix: suffix,
-		Period: period,
-	}
+func NewHumanName() *HumanName {
+	return &HumanName{}
 }
+
 // FromJSON populates HumanName from JSON data
 func (m *HumanName) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -74,54 +35,35 @@ func (m *HumanName) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of HumanName
-func (m *HumanName) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	use *NameUse,
-	text *FhirString,
-	family *FhirString,
-	given *[]FhirString,
-	prefix *[]FhirString,
-	suffix *[]FhirString,
-	period *Period,
-) *HumanName {
+// Clone creates a deep copy of HumanName
+func (m *HumanName) Clone() *HumanName {
+	if m == nil { return nil }
 	return &HumanName{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		Use: func() NameUse {
-			if use != nil { return *use }
-			return m.Use
-		}(),
-		Text: func() FhirString {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Family: func() FhirString {
-			if family != nil { return *family }
-			return m.Family
-		}(),
-		Given: func() []FhirString {
-			if given != nil { return *given }
-			return m.Given
-		}(),
-		Prefix: func() []FhirString {
-			if prefix != nil { return *prefix }
-			return m.Prefix
-		}(),
-		Suffix: func() []FhirString {
-			if suffix != nil { return *suffix }
-			return m.Suffix
-		}(),
-		Period: func() Period {
-			if period != nil { return *period }
-			return m.Period
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		Use: m.Use.Clone(),
+		Text: m.Text.Clone(),
+		Family: m.Family.Clone(),
+		Given: cloneSlices(m.Given),
+		Prefix: cloneSlices(m.Prefix),
+		Suffix: cloneSlices(m.Suffix),
+		Period: m.Period.Clone(),
 	}
 }
+
+// Equals checks for equality with another HumanName instance
+func (m *HumanName) Equals(other *HumanName) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !m.Use.Equals(other.Use) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !m.Family.Equals(other.Family) { return false }
+	if !compareSlices(m.Given, other.Given) { return false }
+	if !compareSlices(m.Prefix, other.Prefix) { return false }
+	if !compareSlices(m.Suffix, other.Suffix) { return false }
+	if !m.Period.Equals(other.Period) { return false }
+	return true
+}
+

@@ -3,42 +3,23 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // CodeableConcept
 // A concept that may be defined by a formal reference to a terminology or ontology or may be provided by text.
 type CodeableConcept struct {
 	DataType
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// coding
-	// A reference to a code defined by a terminology system.
-	Coding []Coding `json:"coding,omitempty"`
-	// text
-	// A human language representation of the concept as seen/selected/uttered by the user who entered the data and/or which represents the intended meaning of the user.
-	Text FhirString `json:"text,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	Coding []*Coding `json:"coding,omitempty"`
+	Text *FhirString `json:"text,omitempty"`
 }
 
 // NewCodeableConcept creates a new CodeableConcept instance
-func NewCodeableConcept(
-	id FhirString,
-	extension_ []FhirExtension,
-	coding []Coding,
-	text FhirString,
-) *CodeableConcept {
-	return &CodeableConcept{
-		Id: id,
-		Extension_: extension_,
-		Coding: coding,
-		Text: text,
-	}
+func NewCodeableConcept() *CodeableConcept {
+	return &CodeableConcept{}
 }
+
 // FromJSON populates CodeableConcept from JSON data
 func (m *CodeableConcept) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -49,29 +30,25 @@ func (m *CodeableConcept) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CodeableConcept
-func (m *CodeableConcept) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	coding *[]Coding,
-	text *FhirString,
-) *CodeableConcept {
+// Clone creates a deep copy of CodeableConcept
+func (m *CodeableConcept) Clone() *CodeableConcept {
+	if m == nil { return nil }
 	return &CodeableConcept{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		Coding: func() []Coding {
-			if coding != nil { return *coding }
-			return m.Coding
-		}(),
-		Text: func() FhirString {
-			if text != nil { return *text }
-			return m.Text
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		Coding: cloneSlices(m.Coding),
+		Text: m.Text.Clone(),
 	}
 }
+
+// Equals checks for equality with another CodeableConcept instance
+func (m *CodeableConcept) Equals(other *CodeableConcept) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.Coding, other.Coding) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	return true
+}
+

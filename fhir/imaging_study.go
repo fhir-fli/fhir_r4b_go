@@ -3,164 +3,47 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // ImagingStudy
 // Representation of the content produced in a DICOM imaging study. A study comprises a set of series, each of which includes a set of Service-Object Pair Instances (SOP Instances - images or other data) acquired or produced in a common context.  A series is of only one modality (e.g. X-ray, CT, MR, ultrasound), but a study may have multiple series of different modalities.
 type ImagingStudy struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// Identifiers for the ImagingStudy such as DICOM Study Instance UID, and Accession Number.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// status
-	// The current state of the ImagingStudy.
-	Status ImagingStudyStatus `json:"status,omitempty"`
-	// modality
-	// A list of all the series.modality values that are actual acquisition modalities, i.e. those in the DICOM Context Group 29 (value set OID 1.2.840.10008.6.1.19).
-	Modality []Coding `json:"modality,omitempty"`
-	// subject
-	// The subject, typically a patient, of the imaging study.
-	Subject Reference `json:"subject,omitempty"`
-	// encounter
-	// The healthcare event (e.g. a patient and healthcare provider interaction) during which this ImagingStudy is made.
-	Encounter Reference `json:"encounter,omitempty"`
-	// started
-	// Date and time the study started.
-	Started FhirDateTime `json:"started,omitempty"`
-	// basedOn
-	// A list of the diagnostic requests that resulted in this imaging study being performed.
-	BasedOn []Reference `json:"basedOn,omitempty"`
-	// referrer
-	// The requesting/referring physician.
-	Referrer Reference `json:"referrer,omitempty"`
-	// interpreter
-	// Who read the study and interpreted the images or other content.
-	Interpreter []Reference `json:"interpreter,omitempty"`
-	// endpoint
-	// The network service providing access (e.g., query, view, or retrieval) for the study. See implementation notes for information about using DICOM endpoints. A study-level endpoint applies to each series in the study, unless overridden by a series-level endpoint with the same Endpoint.connectionType.
-	Endpoint []Reference `json:"endpoint,omitempty"`
-	// numberOfSeries
-	// Number of Series in the Study. This value given may be larger than the number of series elements this Resource contains due to resource availability, security, or other factors. This element should be present if any series elements are present.
-	NumberOfSeries FhirUnsignedInt `json:"numberOfSeries,omitempty"`
-	// numberOfInstances
-	// Number of SOP Instances in Study. This value given may be larger than the number of instance elements this resource contains due to resource availability, security, or other factors. This element should be present if any instance elements are present.
-	NumberOfInstances FhirUnsignedInt `json:"numberOfInstances,omitempty"`
-	// procedureReference
-	// The procedure which this ImagingStudy was part of.
-	ProcedureReference Reference `json:"procedureReference,omitempty"`
-	// procedureCode
-	// The code for the performed procedure type.
-	ProcedureCode []CodeableConcept `json:"procedureCode,omitempty"`
-	// location
-	// The principal physical location where the ImagingStudy was performed.
-	Location Reference `json:"location,omitempty"`
-	// reasonCode
-	// Description of clinical condition indicating why the ImagingStudy was requested.
-	ReasonCode []CodeableConcept `json:"reasonCode,omitempty"`
-	// reasonReference
-	// Indicates another resource whose existence justifies this Study.
-	ReasonReference []Reference `json:"reasonReference,omitempty"`
-	// note
-	// Per the recommended DICOM mapping, this element is derived from the Study Description attribute (0008,1030). Observations or findings about the imaging study should be recorded in another resource, e.g. Observation, and not in this element.
-	Note []Annotation `json:"note,omitempty"`
-	// description
-	// The Imaging Manager description of the study. Institution-generated description or classification of the Study (component) performed.
-	Description FhirString `json:"description,omitempty"`
-	// series
-	// Each study has one or more series of images or other content.
-	Series []ImagingStudySeries `json:"series,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Status *ImagingStudyStatus `json:"status,omitempty"`
+	Modality []*Coding `json:"modality,omitempty"`
+	Subject *Reference `json:"subject,omitempty"`
+	Encounter *Reference `json:"encounter,omitempty"`
+	Started *FhirDateTime `json:"started,omitempty"`
+	BasedOn []*Reference `json:"basedon,omitempty"`
+	Referrer *Reference `json:"referrer,omitempty"`
+	Interpreter []*Reference `json:"interpreter,omitempty"`
+	Endpoint []*Reference `json:"endpoint,omitempty"`
+	NumberOfSeries *FhirUnsignedInt `json:"numberofseries,omitempty"`
+	NumberOfInstances *FhirUnsignedInt `json:"numberofinstances,omitempty"`
+	ProcedureReference *Reference `json:"procedurereference,omitempty"`
+	ProcedureCode []*CodeableConcept `json:"procedurecode,omitempty"`
+	Location *Reference `json:"location,omitempty"`
+	ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+	ReasonReference []*Reference `json:"reasonreference,omitempty"`
+	Note []*Annotation `json:"note,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Series []*ImagingStudySeries `json:"series,omitempty"`
 }
 
 // NewImagingStudy creates a new ImagingStudy instance
-func NewImagingStudy(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	status ImagingStudyStatus,
-	modality []Coding,
-	subject Reference,
-	encounter Reference,
-	started FhirDateTime,
-	basedOn []Reference,
-	referrer Reference,
-	interpreter []Reference,
-	endpoint []Reference,
-	numberOfSeries FhirUnsignedInt,
-	numberOfInstances FhirUnsignedInt,
-	procedureReference Reference,
-	procedureCode []CodeableConcept,
-	location Reference,
-	reasonCode []CodeableConcept,
-	reasonReference []Reference,
-	note []Annotation,
-	description FhirString,
-	series []ImagingStudySeries,
-) *ImagingStudy {
-	return &ImagingStudy{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Status: status,
-		Modality: modality,
-		Subject: subject,
-		Encounter: encounter,
-		Started: started,
-		BasedOn: basedOn,
-		Referrer: referrer,
-		Interpreter: interpreter,
-		Endpoint: endpoint,
-		NumberOfSeries: numberOfSeries,
-		NumberOfInstances: numberOfInstances,
-		ProcedureReference: procedureReference,
-		ProcedureCode: procedureCode,
-		Location: location,
-		ReasonCode: reasonCode,
-		ReasonReference: reasonReference,
-		Note: note,
-		Description: description,
-		Series: series,
-	}
+func NewImagingStudy() *ImagingStudy {
+	return &ImagingStudy{}
 }
+
 // FromJSON populates ImagingStudy from JSON data
 func (m *ImagingStudy) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -171,241 +54,102 @@ func (m *ImagingStudy) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ImagingStudy
-func (m *ImagingStudy) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	status *ImagingStudyStatus,
-	modality *[]Coding,
-	subject *Reference,
-	encounter *Reference,
-	started *FhirDateTime,
-	basedOn *[]Reference,
-	referrer *Reference,
-	interpreter *[]Reference,
-	endpoint *[]Reference,
-	numberOfSeries *FhirUnsignedInt,
-	numberOfInstances *FhirUnsignedInt,
-	procedureReference *Reference,
-	procedureCode *[]CodeableConcept,
-	location *Reference,
-	reasonCode *[]CodeableConcept,
-	reasonReference *[]Reference,
-	note *[]Annotation,
-	description *FhirString,
-	series *[]ImagingStudySeries,
-) *ImagingStudy {
+// Clone creates a deep copy of ImagingStudy
+func (m *ImagingStudy) Clone() *ImagingStudy {
+	if m == nil { return nil }
 	return &ImagingStudy{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Status: func() ImagingStudyStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Modality: func() []Coding {
-			if modality != nil { return *modality }
-			return m.Modality
-		}(),
-		Subject: func() Reference {
-			if subject != nil { return *subject }
-			return m.Subject
-		}(),
-		Encounter: func() Reference {
-			if encounter != nil { return *encounter }
-			return m.Encounter
-		}(),
-		Started: func() FhirDateTime {
-			if started != nil { return *started }
-			return m.Started
-		}(),
-		BasedOn: func() []Reference {
-			if basedOn != nil { return *basedOn }
-			return m.BasedOn
-		}(),
-		Referrer: func() Reference {
-			if referrer != nil { return *referrer }
-			return m.Referrer
-		}(),
-		Interpreter: func() []Reference {
-			if interpreter != nil { return *interpreter }
-			return m.Interpreter
-		}(),
-		Endpoint: func() []Reference {
-			if endpoint != nil { return *endpoint }
-			return m.Endpoint
-		}(),
-		NumberOfSeries: func() FhirUnsignedInt {
-			if numberOfSeries != nil { return *numberOfSeries }
-			return m.NumberOfSeries
-		}(),
-		NumberOfInstances: func() FhirUnsignedInt {
-			if numberOfInstances != nil { return *numberOfInstances }
-			return m.NumberOfInstances
-		}(),
-		ProcedureReference: func() Reference {
-			if procedureReference != nil { return *procedureReference }
-			return m.ProcedureReference
-		}(),
-		ProcedureCode: func() []CodeableConcept {
-			if procedureCode != nil { return *procedureCode }
-			return m.ProcedureCode
-		}(),
-		Location: func() Reference {
-			if location != nil { return *location }
-			return m.Location
-		}(),
-		ReasonCode: func() []CodeableConcept {
-			if reasonCode != nil { return *reasonCode }
-			return m.ReasonCode
-		}(),
-		ReasonReference: func() []Reference {
-			if reasonReference != nil { return *reasonReference }
-			return m.ReasonReference
-		}(),
-		Note: func() []Annotation {
-			if note != nil { return *note }
-			return m.Note
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Series: func() []ImagingStudySeries {
-			if series != nil { return *series }
-			return m.Series
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		Status: m.Status.Clone(),
+		Modality: cloneSlices(m.Modality),
+		Subject: m.Subject.Clone(),
+		Encounter: m.Encounter.Clone(),
+		Started: m.Started.Clone(),
+		BasedOn: cloneSlices(m.BasedOn),
+		Referrer: m.Referrer.Clone(),
+		Interpreter: cloneSlices(m.Interpreter),
+		Endpoint: cloneSlices(m.Endpoint),
+		NumberOfSeries: m.NumberOfSeries.Clone(),
+		NumberOfInstances: m.NumberOfInstances.Clone(),
+		ProcedureReference: m.ProcedureReference.Clone(),
+		ProcedureCode: cloneSlices(m.ProcedureCode),
+		Location: m.Location.Clone(),
+		ReasonCode: cloneSlices(m.ReasonCode),
+		ReasonReference: cloneSlices(m.ReasonReference),
+		Note: cloneSlices(m.Note),
+		Description: m.Description.Clone(),
+		Series: cloneSlices(m.Series),
 	}
 }
+
+// Equals checks for equality with another ImagingStudy instance
+func (m *ImagingStudy) Equals(other *ImagingStudy) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !compareSlices(m.Modality, other.Modality) { return false }
+	if !m.Subject.Equals(other.Subject) { return false }
+	if !m.Encounter.Equals(other.Encounter) { return false }
+	if !m.Started.Equals(other.Started) { return false }
+	if !compareSlices(m.BasedOn, other.BasedOn) { return false }
+	if !m.Referrer.Equals(other.Referrer) { return false }
+	if !compareSlices(m.Interpreter, other.Interpreter) { return false }
+	if !compareSlices(m.Endpoint, other.Endpoint) { return false }
+	if !m.NumberOfSeries.Equals(other.NumberOfSeries) { return false }
+	if !m.NumberOfInstances.Equals(other.NumberOfInstances) { return false }
+	if !m.ProcedureReference.Equals(other.ProcedureReference) { return false }
+	if !compareSlices(m.ProcedureCode, other.ProcedureCode) { return false }
+	if !m.Location.Equals(other.Location) { return false }
+	if !compareSlices(m.ReasonCode, other.ReasonCode) { return false }
+	if !compareSlices(m.ReasonReference, other.ReasonReference) { return false }
+	if !compareSlices(m.Note, other.Note) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.Series, other.Series) { return false }
+	return true
+}
+
 // ImagingStudySeries
 // Each study has one or more series of images or other content.
 type ImagingStudySeries struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// uid
-	// The DICOM Series Instance UID for the series.
-	Uid FhirId `json:"uid,omitempty"`
-	// number
-	// The numeric identifier of this series in the study.
-	Number FhirUnsignedInt `json:"number,omitempty"`
-	// modality
-	// The modality of this series sequence.
-	Modality Coding `json:"modality,omitempty"`
-	// description
-	// A description of the series.
-	Description FhirString `json:"description,omitempty"`
-	// numberOfInstances
-	// Number of SOP Instances in the Study. The value given may be larger than the number of instance elements this resource contains due to resource availability, security, or other factors. This element should be present if any instance elements are present.
-	NumberOfInstances FhirUnsignedInt `json:"numberOfInstances,omitempty"`
-	// endpoint
-	// The network service providing access (e.g., query, view, or retrieval) for this series. See implementation notes for information about using DICOM endpoints. A series-level endpoint, if present, has precedence over a study-level endpoint with the same Endpoint.connectionType.
-	Endpoint []Reference `json:"endpoint,omitempty"`
-	// bodySite
-	// The anatomic structures examined. See DICOM Part 16 Annex L (http://dicom.nema.org/medical/dicom/current/output/chtml/part16/chapter_L.html) for DICOM to SNOMED-CT mappings. The bodySite may indicate the laterality of body part imaged; if so, it shall be consistent with any content of ImagingStudy.series.laterality.
-	BodySite Coding `json:"bodySite,omitempty"`
-	// laterality
-	// The laterality of the (possibly paired) anatomic structures examined. E.g., the left knee, both lungs, or unpaired abdomen. If present, shall be consistent with any laterality information indicated in ImagingStudy.series.bodySite.
-	Laterality Coding `json:"laterality,omitempty"`
-	// specimen
-	// The specimen imaged, e.g., for whole slide imaging of a biopsy.
-	Specimen []Reference `json:"specimen,omitempty"`
-	// started
-	// The date and time the series was started.
-	Started FhirDateTime `json:"started,omitempty"`
-	// performer
-	// Indicates who or what performed the series and how they were involved.
-	Performer []ImagingStudyPerformer `json:"performer,omitempty"`
-	// instance
-	// A single SOP instance within the series, e.g. an image, or presentation state.
-	Instance []ImagingStudyInstance `json:"instance,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Uid *FhirId `json:"uid,omitempty"`
+	Number *FhirUnsignedInt `json:"number,omitempty"`
+	Modality *Coding `json:"modality,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	NumberOfInstances *FhirUnsignedInt `json:"numberofinstances,omitempty"`
+	Endpoint []*Reference `json:"endpoint,omitempty"`
+	BodySite *Coding `json:"bodysite,omitempty"`
+	Laterality *Coding `json:"laterality,omitempty"`
+	Specimen []*Reference `json:"specimen,omitempty"`
+	Started *FhirDateTime `json:"started,omitempty"`
+	Performer []*ImagingStudyPerformer `json:"performer,omitempty"`
+	Instance []*ImagingStudyInstance `json:"instance,omitempty"`
 }
 
 // NewImagingStudySeries creates a new ImagingStudySeries instance
-func NewImagingStudySeries(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	uid FhirId,
-	number FhirUnsignedInt,
-	modality Coding,
-	description FhirString,
-	numberOfInstances FhirUnsignedInt,
-	endpoint []Reference,
-	bodySite Coding,
-	laterality Coding,
-	specimen []Reference,
-	started FhirDateTime,
-	performer []ImagingStudyPerformer,
-	instance []ImagingStudyInstance,
-) *ImagingStudySeries {
-	return &ImagingStudySeries{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Uid: uid,
-		Number: number,
-		Modality: modality,
-		Description: description,
-		NumberOfInstances: numberOfInstances,
-		Endpoint: endpoint,
-		BodySite: bodySite,
-		Laterality: laterality,
-		Specimen: specimen,
-		Started: started,
-		Performer: performer,
-		Instance: instance,
-	}
+func NewImagingStudySeries() *ImagingStudySeries {
+	return &ImagingStudySeries{}
 }
+
 // FromJSON populates ImagingStudySeries from JSON data
 func (m *ImagingStudySeries) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -416,126 +160,66 @@ func (m *ImagingStudySeries) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ImagingStudySeries
-func (m *ImagingStudySeries) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	uid *FhirId,
-	number *FhirUnsignedInt,
-	modality *Coding,
-	description *FhirString,
-	numberOfInstances *FhirUnsignedInt,
-	endpoint *[]Reference,
-	bodySite *Coding,
-	laterality *Coding,
-	specimen *[]Reference,
-	started *FhirDateTime,
-	performer *[]ImagingStudyPerformer,
-	instance *[]ImagingStudyInstance,
-) *ImagingStudySeries {
+// Clone creates a deep copy of ImagingStudySeries
+func (m *ImagingStudySeries) Clone() *ImagingStudySeries {
+	if m == nil { return nil }
 	return &ImagingStudySeries{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Uid: func() FhirId {
-			if uid != nil { return *uid }
-			return m.Uid
-		}(),
-		Number: func() FhirUnsignedInt {
-			if number != nil { return *number }
-			return m.Number
-		}(),
-		Modality: func() Coding {
-			if modality != nil { return *modality }
-			return m.Modality
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		NumberOfInstances: func() FhirUnsignedInt {
-			if numberOfInstances != nil { return *numberOfInstances }
-			return m.NumberOfInstances
-		}(),
-		Endpoint: func() []Reference {
-			if endpoint != nil { return *endpoint }
-			return m.Endpoint
-		}(),
-		BodySite: func() Coding {
-			if bodySite != nil { return *bodySite }
-			return m.BodySite
-		}(),
-		Laterality: func() Coding {
-			if laterality != nil { return *laterality }
-			return m.Laterality
-		}(),
-		Specimen: func() []Reference {
-			if specimen != nil { return *specimen }
-			return m.Specimen
-		}(),
-		Started: func() FhirDateTime {
-			if started != nil { return *started }
-			return m.Started
-		}(),
-		Performer: func() []ImagingStudyPerformer {
-			if performer != nil { return *performer }
-			return m.Performer
-		}(),
-		Instance: func() []ImagingStudyInstance {
-			if instance != nil { return *instance }
-			return m.Instance
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Uid: m.Uid.Clone(),
+		Number: m.Number.Clone(),
+		Modality: m.Modality.Clone(),
+		Description: m.Description.Clone(),
+		NumberOfInstances: m.NumberOfInstances.Clone(),
+		Endpoint: cloneSlices(m.Endpoint),
+		BodySite: m.BodySite.Clone(),
+		Laterality: m.Laterality.Clone(),
+		Specimen: cloneSlices(m.Specimen),
+		Started: m.Started.Clone(),
+		Performer: cloneSlices(m.Performer),
+		Instance: cloneSlices(m.Instance),
 	}
 }
+
+// Equals checks for equality with another ImagingStudySeries instance
+func (m *ImagingStudySeries) Equals(other *ImagingStudySeries) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Uid.Equals(other.Uid) { return false }
+	if !m.Number.Equals(other.Number) { return false }
+	if !m.Modality.Equals(other.Modality) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.NumberOfInstances.Equals(other.NumberOfInstances) { return false }
+	if !compareSlices(m.Endpoint, other.Endpoint) { return false }
+	if !m.BodySite.Equals(other.BodySite) { return false }
+	if !m.Laterality.Equals(other.Laterality) { return false }
+	if !compareSlices(m.Specimen, other.Specimen) { return false }
+	if !m.Started.Equals(other.Started) { return false }
+	if !compareSlices(m.Performer, other.Performer) { return false }
+	if !compareSlices(m.Instance, other.Instance) { return false }
+	return true
+}
+
 // ImagingStudyPerformer
 // Indicates who or what performed the series and how they were involved.
 type ImagingStudyPerformer struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// function
-	// Distinguishes the type of involvement of the performer in the series.
-	Function_ CodeableConcept `json:"function,omitempty"`
-	// actor
-	// Indicates who or what performed the series.
-	Actor Reference `json:"actor,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Function_ *CodeableConcept `json:"function,omitempty"`
+	Actor *Reference `json:"actor,omitempty"`
 }
 
 // NewImagingStudyPerformer creates a new ImagingStudyPerformer instance
-func NewImagingStudyPerformer(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	function_ CodeableConcept,
-	actor Reference,
-) *ImagingStudyPerformer {
-	return &ImagingStudyPerformer{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Function_: function_,
-		Actor: actor,
-	}
+func NewImagingStudyPerformer() *ImagingStudyPerformer {
+	return &ImagingStudyPerformer{}
 }
+
 // FromJSON populates ImagingStudyPerformer from JSON data
 func (m *ImagingStudyPerformer) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -546,86 +230,48 @@ func (m *ImagingStudyPerformer) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ImagingStudyPerformer
-func (m *ImagingStudyPerformer) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	function_ *CodeableConcept,
-	actor *Reference,
-) *ImagingStudyPerformer {
+// Clone creates a deep copy of ImagingStudyPerformer
+func (m *ImagingStudyPerformer) Clone() *ImagingStudyPerformer {
+	if m == nil { return nil }
 	return &ImagingStudyPerformer{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Function_: func() CodeableConcept {
-			if function_ != nil { return *function_ }
-			return m.Function_
-		}(),
-		Actor: func() Reference {
-			if actor != nil { return *actor }
-			return m.Actor
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Function_: m.Function_.Clone(),
+		Actor: m.Actor.Clone(),
 	}
 }
+
+// Equals checks for equality with another ImagingStudyPerformer instance
+func (m *ImagingStudyPerformer) Equals(other *ImagingStudyPerformer) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Function_.Equals(other.Function_) { return false }
+	if !m.Actor.Equals(other.Actor) { return false }
+	return true
+}
+
 // ImagingStudyInstance
 // A single SOP instance within the series, e.g. an image, or presentation state.
 type ImagingStudyInstance struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// uid
-	// The DICOM SOP Instance UID for this image or other DICOM content.
-	Uid FhirId `json:"uid,omitempty"`
-	// sopClass
-	// DICOM instance  type.
-	SopClass Coding `json:"sopClass,omitempty"`
-	// number
-	// The number of instance in the series.
-	Number FhirUnsignedInt `json:"number,omitempty"`
-	// title
-	// The description of the instance.
-	Title FhirString `json:"title,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Uid *FhirId `json:"uid,omitempty"`
+	SopClass *Coding `json:"sopclass,omitempty"`
+	Number *FhirUnsignedInt `json:"number,omitempty"`
+	Title *FhirString `json:"title,omitempty"`
 }
 
 // NewImagingStudyInstance creates a new ImagingStudyInstance instance
-func NewImagingStudyInstance(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	uid FhirId,
-	sopClass Coding,
-	number FhirUnsignedInt,
-	title FhirString,
-) *ImagingStudyInstance {
-	return &ImagingStudyInstance{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Uid: uid,
-		SopClass: sopClass,
-		Number: number,
-		Title: title,
-	}
+func NewImagingStudyInstance() *ImagingStudyInstance {
+	return &ImagingStudyInstance{}
 }
+
 // FromJSON populates ImagingStudyInstance from JSON data
 func (m *ImagingStudyInstance) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -636,44 +282,31 @@ func (m *ImagingStudyInstance) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ImagingStudyInstance
-func (m *ImagingStudyInstance) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	uid *FhirId,
-	sopClass *Coding,
-	number *FhirUnsignedInt,
-	title *FhirString,
-) *ImagingStudyInstance {
+// Clone creates a deep copy of ImagingStudyInstance
+func (m *ImagingStudyInstance) Clone() *ImagingStudyInstance {
+	if m == nil { return nil }
 	return &ImagingStudyInstance{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Uid: func() FhirId {
-			if uid != nil { return *uid }
-			return m.Uid
-		}(),
-		SopClass: func() Coding {
-			if sopClass != nil { return *sopClass }
-			return m.SopClass
-		}(),
-		Number: func() FhirUnsignedInt {
-			if number != nil { return *number }
-			return m.Number
-		}(),
-		Title: func() FhirString {
-			if title != nil { return *title }
-			return m.Title
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Uid: m.Uid.Clone(),
+		SopClass: m.SopClass.Clone(),
+		Number: m.Number.Clone(),
+		Title: m.Title.Clone(),
 	}
 }
+
+// Equals checks for equality with another ImagingStudyInstance instance
+func (m *ImagingStudyInstance) Equals(other *ImagingStudyInstance) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Uid.Equals(other.Uid) { return false }
+	if !m.SopClass.Equals(other.SopClass) { return false }
+	if !m.Number.Equals(other.Number) { return false }
+	if !m.Title.Equals(other.Title) { return false }
+	return true
+}
+

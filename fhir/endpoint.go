@@ -3,119 +3,38 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // FhirEndpoint
 // The technical details of an endpoint that can be used for electronic services, such as for web services providing XDS.b or a REST endpoint for another FHIR server. This may include any security context information.
 type FhirEndpoint struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// Identifier for the organization that is used to identify the endpoint across multiple disparate systems.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// status
-	// active | suspended | error | off | test.
-	Status EndpointStatus `json:"status,omitempty"`
-	// connectionType
-	// A coded value that represents the technical details of the usage of this endpoint, such as what WSDLs should be used in what way. (e.g. XDS.b/DICOM/cds-hook).
-	ConnectionType Coding `json:"connectionType,omitempty"`
-	// name
-	// A friendly name that this endpoint can be referred to with.
-	Name FhirString `json:"name,omitempty"`
-	// managingOrganization
-	// The organization that manages this endpoint (even if technically another organization is hosting this in the cloud, it is the organization associated with the data).
-	ManagingOrganization Reference `json:"managingOrganization,omitempty"`
-	// contact
-	// Contact details for a human to contact about the subscription. The primary use of this for system administrator troubleshooting.
-	Contact []ContactPoint `json:"contact,omitempty"`
-	// period
-	// The interval during which the endpoint is expected to be operational.
-	Period Period `json:"period,omitempty"`
-	// payloadType
-	// The payload type describes the acceptable content that can be communicated on the endpoint.
-	PayloadType []CodeableConcept `json:"payloadType,omitempty"`
-	// payloadMimeType
-	// The mime type to send the payload in - e.g. application/fhir+xml, application/fhir+json. If the mime type is not specified, then the sender could send any content (including no content depending on the connectionType).
-	PayloadMimeType []FhirCode `json:"payloadMimeType,omitempty"`
-	// address
-	// The uri that describes the actual end-point to connect to.
-	Address FhirUrl `json:"address,omitempty"`
-	// header
-	// Additional headers / information to send as part of the notification.
-	Header []FhirString `json:"header,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Status *EndpointStatus `json:"status,omitempty"`
+	ConnectionType *Coding `json:"connectiontype,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	ManagingOrganization *Reference `json:"managingorganization,omitempty"`
+	Contact []*ContactPoint `json:"contact,omitempty"`
+	Period *Period `json:"period,omitempty"`
+	PayloadType []*CodeableConcept `json:"payloadtype,omitempty"`
+	PayloadMimeType []*FhirCode `json:"payloadmimetype,omitempty"`
+	Address *FhirUrl `json:"address,omitempty"`
+	Header []*FhirString `json:"header,omitempty"`
 }
 
 // NewFhirEndpoint creates a new FhirEndpoint instance
-func NewFhirEndpoint(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	status EndpointStatus,
-	connectionType Coding,
-	name FhirString,
-	managingOrganization Reference,
-	contact []ContactPoint,
-	period Period,
-	payloadType []CodeableConcept,
-	payloadMimeType []FhirCode,
-	address FhirUrl,
-	header []FhirString,
-) *FhirEndpoint {
-	return &FhirEndpoint{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Status: status,
-		ConnectionType: connectionType,
-		Name: name,
-		ManagingOrganization: managingOrganization,
-		Contact: contact,
-		Period: period,
-		PayloadType: payloadType,
-		PayloadMimeType: payloadMimeType,
-		Address: address,
-		Header: header,
-	}
+func NewFhirEndpoint() *FhirEndpoint {
+	return &FhirEndpoint{}
 }
+
 // FromJSON populates FhirEndpoint from JSON data
 func (m *FhirEndpoint) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -126,104 +45,55 @@ func (m *FhirEndpoint) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of FhirEndpoint
-func (m *FhirEndpoint) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	status *EndpointStatus,
-	connectionType *Coding,
-	name *FhirString,
-	managingOrganization *Reference,
-	contact *[]ContactPoint,
-	period *Period,
-	payloadType *[]CodeableConcept,
-	payloadMimeType *[]FhirCode,
-	address *FhirUrl,
-	header *[]FhirString,
-) *FhirEndpoint {
+// Clone creates a deep copy of FhirEndpoint
+func (m *FhirEndpoint) Clone() *FhirEndpoint {
+	if m == nil { return nil }
 	return &FhirEndpoint{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Status: func() EndpointStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		ConnectionType: func() Coding {
-			if connectionType != nil { return *connectionType }
-			return m.ConnectionType
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		ManagingOrganization: func() Reference {
-			if managingOrganization != nil { return *managingOrganization }
-			return m.ManagingOrganization
-		}(),
-		Contact: func() []ContactPoint {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
-		Period: func() Period {
-			if period != nil { return *period }
-			return m.Period
-		}(),
-		PayloadType: func() []CodeableConcept {
-			if payloadType != nil { return *payloadType }
-			return m.PayloadType
-		}(),
-		PayloadMimeType: func() []FhirCode {
-			if payloadMimeType != nil { return *payloadMimeType }
-			return m.PayloadMimeType
-		}(),
-		Address: func() FhirUrl {
-			if address != nil { return *address }
-			return m.Address
-		}(),
-		Header: func() []FhirString {
-			if header != nil { return *header }
-			return m.Header
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		Status: m.Status.Clone(),
+		ConnectionType: m.ConnectionType.Clone(),
+		Name: m.Name.Clone(),
+		ManagingOrganization: m.ManagingOrganization.Clone(),
+		Contact: cloneSlices(m.Contact),
+		Period: m.Period.Clone(),
+		PayloadType: cloneSlices(m.PayloadType),
+		PayloadMimeType: cloneSlices(m.PayloadMimeType),
+		Address: m.Address.Clone(),
+		Header: cloneSlices(m.Header),
 	}
 }
+
+// Equals checks for equality with another FhirEndpoint instance
+func (m *FhirEndpoint) Equals(other *FhirEndpoint) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.ConnectionType.Equals(other.ConnectionType) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.ManagingOrganization.Equals(other.ManagingOrganization) { return false }
+	if !compareSlices(m.Contact, other.Contact) { return false }
+	if !m.Period.Equals(other.Period) { return false }
+	if !compareSlices(m.PayloadType, other.PayloadType) { return false }
+	if !compareSlices(m.PayloadMimeType, other.PayloadMimeType) { return false }
+	if !m.Address.Equals(other.Address) { return false }
+	if !compareSlices(m.Header, other.Header) { return false }
+	return true
+}
+

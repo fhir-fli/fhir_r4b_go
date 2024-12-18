@@ -3,82 +3,31 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // Address
 // An address expressed using postal conventions (as opposed to GPS or other location definition formats).  This data type may be used to convey addresses for use in delivering mail as well as for visiting locations which might not be valid for mail delivery.  There are a variety of postal address formats defined around the world.
 type Address struct {
 	DataType
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// use
-	// The purpose of this address.
-	Use AddressUse `json:"use,omitempty"`
-	// type
-	// Distinguishes between physical addresses (those you can visit) and mailing addresses (e.g. PO Boxes and care-of addresses). Most addresses are both.
-	Type_ AddressType `json:"type,omitempty"`
-	// text
-	// Specifies the entire address as it should be displayed e.g. on a postal label. This may be provided instead of or as well as the specific parts.
-	Text FhirString `json:"text,omitempty"`
-	// line
-	// This component contains the house number, apartment number, street name, street direction,  P.O. Box number, delivery hints, and similar address information.
-	Line []FhirString `json:"line,omitempty"`
-	// city
-	// The name of the city, town, suburb, village or other community or delivery center.
-	City FhirString `json:"city,omitempty"`
-	// district
-	// The name of the administrative area (county).
-	District FhirString `json:"district,omitempty"`
-	// state
-	// Sub-unit of a country with limited sovereignty in a federally organized country. A code may be used if codes are in common use (e.g. US 2 letter state codes).
-	State FhirString `json:"state,omitempty"`
-	// postalCode
-	// A postal code designating a region defined by the postal service.
-	PostalCode FhirString `json:"postalCode,omitempty"`
-	// country
-	// Country - a nation as commonly understood or generally accepted.
-	Country FhirString `json:"country,omitempty"`
-	// period
-	// Time period when address was/is in use.
-	Period Period `json:"period,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	Use *AddressUse `json:"use,omitempty"`
+	Type *AddressType `json:"type,omitempty"`
+	Text *FhirString `json:"text,omitempty"`
+	Line []*FhirString `json:"line,omitempty"`
+	City *FhirString `json:"city,omitempty"`
+	District *FhirString `json:"district,omitempty"`
+	State *FhirString `json:"state,omitempty"`
+	PostalCode *FhirString `json:"postalcode,omitempty"`
+	Country *FhirString `json:"country,omitempty"`
+	Period *Period `json:"period,omitempty"`
 }
 
 // NewAddress creates a new Address instance
-func NewAddress(
-	id FhirString,
-	extension_ []FhirExtension,
-	use AddressUse,
-	type_ AddressType,
-	text FhirString,
-	line []FhirString,
-	city FhirString,
-	district FhirString,
-	state FhirString,
-	postalCode FhirString,
-	country FhirString,
-	period Period,
-) *Address {
-	return &Address{
-		Id: id,
-		Extension_: extension_,
-		Use: use,
-		Type_: type_,
-		Text: text,
-		Line: line,
-		City: city,
-		District: district,
-		State: state,
-		PostalCode: postalCode,
-		Country: country,
-		Period: period,
-	}
+func NewAddress() *Address {
+	return &Address{}
 }
+
 // FromJSON populates Address from JSON data
 func (m *Address) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -89,69 +38,41 @@ func (m *Address) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of Address
-func (m *Address) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	use *AddressUse,
-	type_ *AddressType,
-	text *FhirString,
-	line *[]FhirString,
-	city *FhirString,
-	district *FhirString,
-	state *FhirString,
-	postalCode *FhirString,
-	country *FhirString,
-	period *Period,
-) *Address {
+// Clone creates a deep copy of Address
+func (m *Address) Clone() *Address {
+	if m == nil { return nil }
 	return &Address{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		Use: func() AddressUse {
-			if use != nil { return *use }
-			return m.Use
-		}(),
-		Type_: func() AddressType {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Text: func() FhirString {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Line: func() []FhirString {
-			if line != nil { return *line }
-			return m.Line
-		}(),
-		City: func() FhirString {
-			if city != nil { return *city }
-			return m.City
-		}(),
-		District: func() FhirString {
-			if district != nil { return *district }
-			return m.District
-		}(),
-		State: func() FhirString {
-			if state != nil { return *state }
-			return m.State
-		}(),
-		PostalCode: func() FhirString {
-			if postalCode != nil { return *postalCode }
-			return m.PostalCode
-		}(),
-		Country: func() FhirString {
-			if country != nil { return *country }
-			return m.Country
-		}(),
-		Period: func() Period {
-			if period != nil { return *period }
-			return m.Period
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		Use: m.Use.Clone(),
+		Type: m.Type.Clone(),
+		Text: m.Text.Clone(),
+		Line: cloneSlices(m.Line),
+		City: m.City.Clone(),
+		District: m.District.Clone(),
+		State: m.State.Clone(),
+		PostalCode: m.PostalCode.Clone(),
+		Country: m.Country.Clone(),
+		Period: m.Period.Clone(),
 	}
 }
+
+// Equals checks for equality with another Address instance
+func (m *Address) Equals(other *Address) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !m.Use.Equals(other.Use) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Line, other.Line) { return false }
+	if !m.City.Equals(other.City) { return false }
+	if !m.District.Equals(other.District) { return false }
+	if !m.State.Equals(other.State) { return false }
+	if !m.PostalCode.Equals(other.PostalCode) { return false }
+	if !m.Country.Equals(other.Country) { return false }
+	if !m.Period.Equals(other.Period) { return false }
+	return true
+}
+

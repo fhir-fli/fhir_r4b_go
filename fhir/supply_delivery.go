@@ -3,129 +3,40 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // SupplyDelivery
 // Record of delivery of what is supplied.
 type SupplyDelivery struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// Identifier for the supply delivery event that is used to identify it across multiple disparate systems.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// basedOn
-	// A plan, proposal or order that is fulfilled in whole or in part by this event.
-	BasedOn []Reference `json:"basedOn,omitempty"`
-	// partOf
-	// A larger event of which this particular event is a component or step.
-	PartOf []Reference `json:"partOf,omitempty"`
-	// status
-	// A code specifying the state of the dispense event.
-	Status SupplyDeliveryStatus `json:"status,omitempty"`
-	// patient
-	// A link to a resource representing the person whom the delivered item is for.
-	Patient Reference `json:"patient,omitempty"`
-	// type
-	// Indicates the type of dispensing event that is performed. Examples include: Trial Fill, Completion of Trial, Partial Fill, Emergency Fill, Samples, etc.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// suppliedItem
-	// The item that is being delivered or has been supplied.
-	SuppliedItem SupplyDeliverySuppliedItem `json:"suppliedItem,omitempty"`
-	// occurrenceDateTime
-	// The date or time(s) the activity occurred.
-	OccurrenceDateTime FhirDateTime `json:"occurrenceDateTime,omitempty"`
-	// occurrencePeriod
-	// The date or time(s) the activity occurred.
-	OccurrencePeriod Period `json:"occurrencePeriod,omitempty"`
-	// occurrenceTiming
-	// The date or time(s) the activity occurred.
-	OccurrenceTiming Timing `json:"occurrenceTiming,omitempty"`
-	// supplier
-	// The individual responsible for dispensing the medication, supplier or device.
-	Supplier Reference `json:"supplier,omitempty"`
-	// destination
-	// Identification of the facility/location where the Supply was shipped to, as part of the dispense event.
-	Destination Reference `json:"destination,omitempty"`
-	// receiver
-	// Identifies the person who picked up the Supply.
-	Receiver []Reference `json:"receiver,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	BasedOn []*Reference `json:"basedon,omitempty"`
+	PartOf []*Reference `json:"partof,omitempty"`
+	Status *SupplyDeliveryStatus `json:"status,omitempty"`
+	Patient *Reference `json:"patient,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	SuppliedItem *SupplyDeliverySuppliedItem `json:"supplieditem,omitempty"`
+	OccurrenceDateTime *FhirDateTime `json:"occurrencedatetime,omitempty"`
+	OccurrencePeriod *Period `json:"occurrenceperiod,omitempty"`
+	OccurrenceTiming *Timing `json:"occurrencetiming,omitempty"`
+	Supplier *Reference `json:"supplier,omitempty"`
+	Destination *Reference `json:"destination,omitempty"`
+	Receiver []*Reference `json:"receiver,omitempty"`
 }
 
 // NewSupplyDelivery creates a new SupplyDelivery instance
-func NewSupplyDelivery(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	basedOn []Reference,
-	partOf []Reference,
-	status SupplyDeliveryStatus,
-	patient Reference,
-	type_ CodeableConcept,
-	suppliedItem SupplyDeliverySuppliedItem,
-	occurrenceDateTime FhirDateTime,
-	occurrencePeriod Period,
-	occurrenceTiming Timing,
-	supplier Reference,
-	destination Reference,
-	receiver []Reference,
-) *SupplyDelivery {
-	return &SupplyDelivery{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		BasedOn: basedOn,
-		PartOf: partOf,
-		Status: status,
-		Patient: patient,
-		Type_: type_,
-		SuppliedItem: suppliedItem,
-		OccurrenceDateTime: occurrenceDateTime,
-		OccurrencePeriod: occurrencePeriod,
-		OccurrenceTiming: occurrenceTiming,
-		Supplier: supplier,
-		Destination: destination,
-		Receiver: receiver,
-	}
+func NewSupplyDelivery() *SupplyDelivery {
+	return &SupplyDelivery{}
 }
+
 // FromJSON populates SupplyDelivery from JSON data
 func (m *SupplyDelivery) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -136,161 +47,79 @@ func (m *SupplyDelivery) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SupplyDelivery
-func (m *SupplyDelivery) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	basedOn *[]Reference,
-	partOf *[]Reference,
-	status *SupplyDeliveryStatus,
-	patient *Reference,
-	type_ *CodeableConcept,
-	suppliedItem *SupplyDeliverySuppliedItem,
-	occurrenceDateTime *FhirDateTime,
-	occurrencePeriod *Period,
-	occurrenceTiming *Timing,
-	supplier *Reference,
-	destination *Reference,
-	receiver *[]Reference,
-) *SupplyDelivery {
+// Clone creates a deep copy of SupplyDelivery
+func (m *SupplyDelivery) Clone() *SupplyDelivery {
+	if m == nil { return nil }
 	return &SupplyDelivery{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		BasedOn: func() []Reference {
-			if basedOn != nil { return *basedOn }
-			return m.BasedOn
-		}(),
-		PartOf: func() []Reference {
-			if partOf != nil { return *partOf }
-			return m.PartOf
-		}(),
-		Status: func() SupplyDeliveryStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Patient: func() Reference {
-			if patient != nil { return *patient }
-			return m.Patient
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		SuppliedItem: func() SupplyDeliverySuppliedItem {
-			if suppliedItem != nil { return *suppliedItem }
-			return m.SuppliedItem
-		}(),
-		OccurrenceDateTime: func() FhirDateTime {
-			if occurrenceDateTime != nil { return *occurrenceDateTime }
-			return m.OccurrenceDateTime
-		}(),
-		OccurrencePeriod: func() Period {
-			if occurrencePeriod != nil { return *occurrencePeriod }
-			return m.OccurrencePeriod
-		}(),
-		OccurrenceTiming: func() Timing {
-			if occurrenceTiming != nil { return *occurrenceTiming }
-			return m.OccurrenceTiming
-		}(),
-		Supplier: func() Reference {
-			if supplier != nil { return *supplier }
-			return m.Supplier
-		}(),
-		Destination: func() Reference {
-			if destination != nil { return *destination }
-			return m.Destination
-		}(),
-		Receiver: func() []Reference {
-			if receiver != nil { return *receiver }
-			return m.Receiver
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		BasedOn: cloneSlices(m.BasedOn),
+		PartOf: cloneSlices(m.PartOf),
+		Status: m.Status.Clone(),
+		Patient: m.Patient.Clone(),
+		Type: m.Type.Clone(),
+		SuppliedItem: m.SuppliedItem.Clone(),
+		OccurrenceDateTime: m.OccurrenceDateTime.Clone(),
+		OccurrencePeriod: m.OccurrencePeriod.Clone(),
+		OccurrenceTiming: m.OccurrenceTiming.Clone(),
+		Supplier: m.Supplier.Clone(),
+		Destination: m.Destination.Clone(),
+		Receiver: cloneSlices(m.Receiver),
 	}
 }
+
+// Equals checks for equality with another SupplyDelivery instance
+func (m *SupplyDelivery) Equals(other *SupplyDelivery) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !compareSlices(m.BasedOn, other.BasedOn) { return false }
+	if !compareSlices(m.PartOf, other.PartOf) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Patient.Equals(other.Patient) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.SuppliedItem.Equals(other.SuppliedItem) { return false }
+	if !m.OccurrenceDateTime.Equals(other.OccurrenceDateTime) { return false }
+	if !m.OccurrencePeriod.Equals(other.OccurrencePeriod) { return false }
+	if !m.OccurrenceTiming.Equals(other.OccurrenceTiming) { return false }
+	if !m.Supplier.Equals(other.Supplier) { return false }
+	if !m.Destination.Equals(other.Destination) { return false }
+	if !compareSlices(m.Receiver, other.Receiver) { return false }
+	return true
+}
+
 // SupplyDeliverySuppliedItem
 // The item that is being delivered or has been supplied.
 type SupplyDeliverySuppliedItem struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// quantity
-	// The amount of supply that has been dispensed. Includes unit of measure.
-	Quantity Quantity `json:"quantity,omitempty"`
-	// itemCodeableConcept
-	// Identifies the medication, substance or device being dispensed. This is either a link to a resource representing the details of the item or a code that identifies the item from a known list.
-	ItemCodeableConcept CodeableConcept `json:"itemCodeableConcept,omitempty"`
-	// itemReference
-	// Identifies the medication, substance or device being dispensed. This is either a link to a resource representing the details of the item or a code that identifies the item from a known list.
-	ItemReference Reference `json:"itemReference,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Quantity *Quantity `json:"quantity,omitempty"`
+	ItemCodeableConcept *CodeableConcept `json:"itemcodeableconcept,omitempty"`
+	ItemReference *Reference `json:"itemreference,omitempty"`
 }
 
 // NewSupplyDeliverySuppliedItem creates a new SupplyDeliverySuppliedItem instance
-func NewSupplyDeliverySuppliedItem(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	quantity Quantity,
-	itemCodeableConcept CodeableConcept,
-	itemReference Reference,
-) *SupplyDeliverySuppliedItem {
-	return &SupplyDeliverySuppliedItem{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Quantity: quantity,
-		ItemCodeableConcept: itemCodeableConcept,
-		ItemReference: itemReference,
-	}
+func NewSupplyDeliverySuppliedItem() *SupplyDeliverySuppliedItem {
+	return &SupplyDeliverySuppliedItem{}
 }
+
 // FromJSON populates SupplyDeliverySuppliedItem from JSON data
 func (m *SupplyDeliverySuppliedItem) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -301,39 +130,29 @@ func (m *SupplyDeliverySuppliedItem) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SupplyDeliverySuppliedItem
-func (m *SupplyDeliverySuppliedItem) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	quantity *Quantity,
-	itemCodeableConcept *CodeableConcept,
-	itemReference *Reference,
-) *SupplyDeliverySuppliedItem {
+// Clone creates a deep copy of SupplyDeliverySuppliedItem
+func (m *SupplyDeliverySuppliedItem) Clone() *SupplyDeliverySuppliedItem {
+	if m == nil { return nil }
 	return &SupplyDeliverySuppliedItem{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Quantity: func() Quantity {
-			if quantity != nil { return *quantity }
-			return m.Quantity
-		}(),
-		ItemCodeableConcept: func() CodeableConcept {
-			if itemCodeableConcept != nil { return *itemCodeableConcept }
-			return m.ItemCodeableConcept
-		}(),
-		ItemReference: func() Reference {
-			if itemReference != nil { return *itemReference }
-			return m.ItemReference
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Quantity: m.Quantity.Clone(),
+		ItemCodeableConcept: m.ItemCodeableConcept.Clone(),
+		ItemReference: m.ItemReference.Clone(),
 	}
 }
+
+// Equals checks for equality with another SupplyDeliverySuppliedItem instance
+func (m *SupplyDeliverySuppliedItem) Equals(other *SupplyDeliverySuppliedItem) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Quantity.Equals(other.Quantity) { return false }
+	if !m.ItemCodeableConcept.Equals(other.ItemCodeableConcept) { return false }
+	if !m.ItemReference.Equals(other.ItemReference) { return false }
+	return true
+}
+

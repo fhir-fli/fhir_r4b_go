@@ -3,67 +3,28 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // Signature
 // A signature along with supporting context. The signature may be a digital signature that is cryptographic in nature, or some other signature acceptable to the domain. This other signature may be as simple as a graphical image representing a hand-written signature, or a signature ceremony Different signature approaches have different utilities.
 type Signature struct {
 	DataType
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// type
-	// An indication of the reason that the entity signed this document. This may be explicitly included as part of the signature information and can be used when determining accountability for various actions concerning the document.
-	Type_ []Coding `json:"type,omitempty"`
-	// when
-	// When the digital signature was signed.
-	When FhirInstant `json:"when,omitempty"`
-	// who
-	// A reference to an application-usable description of the identity that signed  (e.g. the signature used their private key).
-	Who Reference `json:"who,omitempty"`
-	// onBehalfOf
-	// A reference to an application-usable description of the identity that is represented by the signature.
-	OnBehalfOf Reference `json:"onBehalfOf,omitempty"`
-	// targetFormat
-	// A mime type that indicates the technical format of the target resources signed by the signature.
-	TargetFormat FhirCode `json:"targetFormat,omitempty"`
-	// sigFormat
-	// A mime type that indicates the technical format of the signature. Important mime types are application/signature+xml for X ML DigSig, application/jose for JWS, and image/* for a graphical image of a signature, etc.
-	SigFormat FhirCode `json:"sigFormat,omitempty"`
-	// data
-	// The base64 encoding of the Signature content. When signature is not recorded electronically this element would be empty.
-	Data FhirBase64Binary `json:"data,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	Type []*Coding `json:"type,omitempty"`
+	When *FhirInstant `json:"when,omitempty"`
+	Who *Reference `json:"who,omitempty"`
+	OnBehalfOf *Reference `json:"onbehalfof,omitempty"`
+	TargetFormat *FhirCode `json:"targetformat,omitempty"`
+	SigFormat *FhirCode `json:"sigformat,omitempty"`
+	Data *FhirBase64Binary `json:"data,omitempty"`
 }
 
 // NewSignature creates a new Signature instance
-func NewSignature(
-	id FhirString,
-	extension_ []FhirExtension,
-	type_ []Coding,
-	when FhirInstant,
-	who Reference,
-	onBehalfOf Reference,
-	targetFormat FhirCode,
-	sigFormat FhirCode,
-	data FhirBase64Binary,
-) *Signature {
-	return &Signature{
-		Id: id,
-		Extension_: extension_,
-		Type_: type_,
-		When: when,
-		Who: who,
-		OnBehalfOf: onBehalfOf,
-		TargetFormat: targetFormat,
-		SigFormat: sigFormat,
-		Data: data,
-	}
+func NewSignature() *Signature {
+	return &Signature{}
 }
+
 // FromJSON populates Signature from JSON data
 func (m *Signature) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -74,54 +35,35 @@ func (m *Signature) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of Signature
-func (m *Signature) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	type_ *[]Coding,
-	when *FhirInstant,
-	who *Reference,
-	onBehalfOf *Reference,
-	targetFormat *FhirCode,
-	sigFormat *FhirCode,
-	data *FhirBase64Binary,
-) *Signature {
+// Clone creates a deep copy of Signature
+func (m *Signature) Clone() *Signature {
+	if m == nil { return nil }
 	return &Signature{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		Type_: func() []Coding {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		When: func() FhirInstant {
-			if when != nil { return *when }
-			return m.When
-		}(),
-		Who: func() Reference {
-			if who != nil { return *who }
-			return m.Who
-		}(),
-		OnBehalfOf: func() Reference {
-			if onBehalfOf != nil { return *onBehalfOf }
-			return m.OnBehalfOf
-		}(),
-		TargetFormat: func() FhirCode {
-			if targetFormat != nil { return *targetFormat }
-			return m.TargetFormat
-		}(),
-		SigFormat: func() FhirCode {
-			if sigFormat != nil { return *sigFormat }
-			return m.SigFormat
-		}(),
-		Data: func() FhirBase64Binary {
-			if data != nil { return *data }
-			return m.Data
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		Type: cloneSlices(m.Type),
+		When: m.When.Clone(),
+		Who: m.Who.Clone(),
+		OnBehalfOf: m.OnBehalfOf.Clone(),
+		TargetFormat: m.TargetFormat.Clone(),
+		SigFormat: m.SigFormat.Clone(),
+		Data: m.Data.Clone(),
 	}
 }
+
+// Equals checks for equality with another Signature instance
+func (m *Signature) Equals(other *Signature) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.Type, other.Type) { return false }
+	if !m.When.Equals(other.When) { return false }
+	if !m.Who.Equals(other.Who) { return false }
+	if !m.OnBehalfOf.Equals(other.OnBehalfOf) { return false }
+	if !m.TargetFormat.Equals(other.TargetFormat) { return false }
+	if !m.SigFormat.Equals(other.SigFormat) { return false }
+	if !m.Data.Equals(other.Data) { return false }
+	return true
+}
+

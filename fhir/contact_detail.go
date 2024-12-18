@@ -3,42 +3,23 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // ContactDetail
 // Specifies contact information for a person or organization.
 type ContactDetail struct {
 	DataType
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// name
-	// The name of an individual to contact.
-	Name FhirString `json:"name,omitempty"`
-	// telecom
-	// The contact details for the individual (if a name was provided) or the organization.
-	Telecom []ContactPoint `json:"telecom,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Telecom []*ContactPoint `json:"telecom,omitempty"`
 }
 
 // NewContactDetail creates a new ContactDetail instance
-func NewContactDetail(
-	id FhirString,
-	extension_ []FhirExtension,
-	name FhirString,
-	telecom []ContactPoint,
-) *ContactDetail {
-	return &ContactDetail{
-		Id: id,
-		Extension_: extension_,
-		Name: name,
-		Telecom: telecom,
-	}
+func NewContactDetail() *ContactDetail {
+	return &ContactDetail{}
 }
+
 // FromJSON populates ContactDetail from JSON data
 func (m *ContactDetail) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -49,29 +30,25 @@ func (m *ContactDetail) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ContactDetail
-func (m *ContactDetail) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	name *FhirString,
-	telecom *[]ContactPoint,
-) *ContactDetail {
+// Clone creates a deep copy of ContactDetail
+func (m *ContactDetail) Clone() *ContactDetail {
+	if m == nil { return nil }
 	return &ContactDetail{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Telecom: func() []ContactPoint {
-			if telecom != nil { return *telecom }
-			return m.Telecom
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		Name: m.Name.Clone(),
+		Telecom: cloneSlices(m.Telecom),
 	}
 }
+
+// Equals checks for equality with another ContactDetail instance
+func (m *ContactDetail) Equals(other *ContactDetail) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !compareSlices(m.Telecom, other.Telecom) { return false }
+	return true
+}
+

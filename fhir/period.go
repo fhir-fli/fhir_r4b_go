@@ -3,42 +3,23 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // Period
 // A time period defined by a start and end date and optionally time.
 type Period struct {
 	DataType
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// start
-	// The start of the period. The boundary is inclusive.
-	Start FhirDateTime `json:"start,omitempty"`
-	// end
-	// The end of the period. If the end of the period is missing, it means no end was known or planned at the time the instance was created. The start may be in the past, and the end date in the future, which means that period is expected/planned to end at that time.
-	End FhirDateTime `json:"end,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	Start *FhirDateTime `json:"start,omitempty"`
+	End *FhirDateTime `json:"end,omitempty"`
 }
 
 // NewPeriod creates a new Period instance
-func NewPeriod(
-	id FhirString,
-	extension_ []FhirExtension,
-	start FhirDateTime,
-	end FhirDateTime,
-) *Period {
-	return &Period{
-		Id: id,
-		Extension_: extension_,
-		Start: start,
-		End: end,
-	}
+func NewPeriod() *Period {
+	return &Period{}
 }
+
 // FromJSON populates Period from JSON data
 func (m *Period) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -49,29 +30,25 @@ func (m *Period) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of Period
-func (m *Period) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	start *FhirDateTime,
-	end *FhirDateTime,
-) *Period {
+// Clone creates a deep copy of Period
+func (m *Period) Clone() *Period {
+	if m == nil { return nil }
 	return &Period{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		Start: func() FhirDateTime {
-			if start != nil { return *start }
-			return m.Start
-		}(),
-		End: func() FhirDateTime {
-			if end != nil { return *end }
-			return m.End
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		Start: m.Start.Clone(),
+		End: m.End.Clone(),
 	}
 }
+
+// Equals checks for equality with another Period instance
+func (m *Period) Equals(other *Period) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !m.Start.Equals(other.Start) { return false }
+	if !m.End.Equals(other.End) { return false }
+	return true
+}
+

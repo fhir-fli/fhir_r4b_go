@@ -3,134 +3,41 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // VerificationResult
 // Describes validation requirements, source(s), status and dates for one or more elements.
 type VerificationResult struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// target
-	// A resource that was validated.
-	Target []Reference `json:"target,omitempty"`
-	// targetLocation
-	// The fhirpath location(s) within the resource that was validated.
-	TargetLocation []FhirString `json:"targetLocation,omitempty"`
-	// need
-	// The frequency with which the target must be validated (none; initial; periodic).
-	Need CodeableConcept `json:"need,omitempty"`
-	// status
-	// The validation status of the target (attested; validated; in process; requires revalidation; validation failed; revalidation failed).
-	Status Status `json:"status,omitempty"`
-	// statusDate
-	// When the validation status was updated.
-	StatusDate FhirDateTime `json:"statusDate,omitempty"`
-	// validationType
-	// What the target is validated against (nothing; primary source; multiple sources).
-	ValidationType CodeableConcept `json:"validationType,omitempty"`
-	// validationProcess
-	// The primary process by which the target is validated (edit check; value set; primary source; multiple sources; standalone; in context).
-	ValidationProcess []CodeableConcept `json:"validationProcess,omitempty"`
-	// frequency
-	// Frequency of revalidation.
-	Frequency Timing `json:"frequency,omitempty"`
-	// lastPerformed
-	// The date/time validation was last completed (including failed validations).
-	LastPerformed FhirDateTime `json:"lastPerformed,omitempty"`
-	// nextScheduled
-	// The date when target is next validated, if appropriate.
-	NextScheduled FhirDate `json:"nextScheduled,omitempty"`
-	// failureAction
-	// The result if validation fails (fatal; warning; record only; none).
-	FailureAction CodeableConcept `json:"failureAction,omitempty"`
-	// primarySource
-	// Information about the primary source(s) involved in validation.
-	PrimarySource []VerificationResultPrimarySource `json:"primarySource,omitempty"`
-	// attestation
-	// Information about the entity attesting to information.
-	Attestation VerificationResultAttestation `json:"attestation,omitempty"`
-	// validator
-	// Information about the entity validating information.
-	Validator []VerificationResultValidator `json:"validator,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Target []*Reference `json:"target,omitempty"`
+	TargetLocation []*FhirString `json:"targetlocation,omitempty"`
+	Need *CodeableConcept `json:"need,omitempty"`
+	Status *Status `json:"status,omitempty"`
+	StatusDate *FhirDateTime `json:"statusdate,omitempty"`
+	ValidationType *CodeableConcept `json:"validationtype,omitempty"`
+	ValidationProcess []*CodeableConcept `json:"validationprocess,omitempty"`
+	Frequency *Timing `json:"frequency,omitempty"`
+	LastPerformed *FhirDateTime `json:"lastperformed,omitempty"`
+	NextScheduled *FhirDate `json:"nextscheduled,omitempty"`
+	FailureAction *CodeableConcept `json:"failureaction,omitempty"`
+	PrimarySource []*VerificationResultPrimarySource `json:"primarysource,omitempty"`
+	Attestation *VerificationResultAttestation `json:"attestation,omitempty"`
+	Validator []*VerificationResultValidator `json:"validator,omitempty"`
 }
 
 // NewVerificationResult creates a new VerificationResult instance
-func NewVerificationResult(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	target []Reference,
-	targetLocation []FhirString,
-	need CodeableConcept,
-	status Status,
-	statusDate FhirDateTime,
-	validationType CodeableConcept,
-	validationProcess []CodeableConcept,
-	frequency Timing,
-	lastPerformed FhirDateTime,
-	nextScheduled FhirDate,
-	failureAction CodeableConcept,
-	primarySource []VerificationResultPrimarySource,
-	attestation VerificationResultAttestation,
-	validator []VerificationResultValidator,
-) *VerificationResult {
-	return &VerificationResult{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Target: target,
-		TargetLocation: targetLocation,
-		Need: need,
-		Status: status,
-		StatusDate: statusDate,
-		ValidationType: validationType,
-		ValidationProcess: validationProcess,
-		Frequency: frequency,
-		LastPerformed: lastPerformed,
-		NextScheduled: nextScheduled,
-		FailureAction: failureAction,
-		PrimarySource: primarySource,
-		Attestation: attestation,
-		Validator: validator,
-	}
+func NewVerificationResult() *VerificationResult {
+	return &VerificationResult{}
 }
+
 // FromJSON populates VerificationResult from JSON data
 func (m *VerificationResult) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -141,186 +48,85 @@ func (m *VerificationResult) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of VerificationResult
-func (m *VerificationResult) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	target *[]Reference,
-	targetLocation *[]FhirString,
-	need *CodeableConcept,
-	status *Status,
-	statusDate *FhirDateTime,
-	validationType *CodeableConcept,
-	validationProcess *[]CodeableConcept,
-	frequency *Timing,
-	lastPerformed *FhirDateTime,
-	nextScheduled *FhirDate,
-	failureAction *CodeableConcept,
-	primarySource *[]VerificationResultPrimarySource,
-	attestation *VerificationResultAttestation,
-	validator *[]VerificationResultValidator,
-) *VerificationResult {
+// Clone creates a deep copy of VerificationResult
+func (m *VerificationResult) Clone() *VerificationResult {
+	if m == nil { return nil }
 	return &VerificationResult{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Target: func() []Reference {
-			if target != nil { return *target }
-			return m.Target
-		}(),
-		TargetLocation: func() []FhirString {
-			if targetLocation != nil { return *targetLocation }
-			return m.TargetLocation
-		}(),
-		Need: func() CodeableConcept {
-			if need != nil { return *need }
-			return m.Need
-		}(),
-		Status: func() Status {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		StatusDate: func() FhirDateTime {
-			if statusDate != nil { return *statusDate }
-			return m.StatusDate
-		}(),
-		ValidationType: func() CodeableConcept {
-			if validationType != nil { return *validationType }
-			return m.ValidationType
-		}(),
-		ValidationProcess: func() []CodeableConcept {
-			if validationProcess != nil { return *validationProcess }
-			return m.ValidationProcess
-		}(),
-		Frequency: func() Timing {
-			if frequency != nil { return *frequency }
-			return m.Frequency
-		}(),
-		LastPerformed: func() FhirDateTime {
-			if lastPerformed != nil { return *lastPerformed }
-			return m.LastPerformed
-		}(),
-		NextScheduled: func() FhirDate {
-			if nextScheduled != nil { return *nextScheduled }
-			return m.NextScheduled
-		}(),
-		FailureAction: func() CodeableConcept {
-			if failureAction != nil { return *failureAction }
-			return m.FailureAction
-		}(),
-		PrimarySource: func() []VerificationResultPrimarySource {
-			if primarySource != nil { return *primarySource }
-			return m.PrimarySource
-		}(),
-		Attestation: func() VerificationResultAttestation {
-			if attestation != nil { return *attestation }
-			return m.Attestation
-		}(),
-		Validator: func() []VerificationResultValidator {
-			if validator != nil { return *validator }
-			return m.Validator
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Target: cloneSlices(m.Target),
+		TargetLocation: cloneSlices(m.TargetLocation),
+		Need: m.Need.Clone(),
+		Status: m.Status.Clone(),
+		StatusDate: m.StatusDate.Clone(),
+		ValidationType: m.ValidationType.Clone(),
+		ValidationProcess: cloneSlices(m.ValidationProcess),
+		Frequency: m.Frequency.Clone(),
+		LastPerformed: m.LastPerformed.Clone(),
+		NextScheduled: m.NextScheduled.Clone(),
+		FailureAction: m.FailureAction.Clone(),
+		PrimarySource: cloneSlices(m.PrimarySource),
+		Attestation: m.Attestation.Clone(),
+		Validator: cloneSlices(m.Validator),
 	}
 }
+
+// Equals checks for equality with another VerificationResult instance
+func (m *VerificationResult) Equals(other *VerificationResult) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Target, other.Target) { return false }
+	if !compareSlices(m.TargetLocation, other.TargetLocation) { return false }
+	if !m.Need.Equals(other.Need) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.StatusDate.Equals(other.StatusDate) { return false }
+	if !m.ValidationType.Equals(other.ValidationType) { return false }
+	if !compareSlices(m.ValidationProcess, other.ValidationProcess) { return false }
+	if !m.Frequency.Equals(other.Frequency) { return false }
+	if !m.LastPerformed.Equals(other.LastPerformed) { return false }
+	if !m.NextScheduled.Equals(other.NextScheduled) { return false }
+	if !m.FailureAction.Equals(other.FailureAction) { return false }
+	if !compareSlices(m.PrimarySource, other.PrimarySource) { return false }
+	if !m.Attestation.Equals(other.Attestation) { return false }
+	if !compareSlices(m.Validator, other.Validator) { return false }
+	return true
+}
+
 // VerificationResultPrimarySource
 // Information about the primary source(s) involved in validation.
 type VerificationResultPrimarySource struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// who
-	// Reference to the primary source.
-	Who Reference `json:"who,omitempty"`
-	// type
-	// Type of primary source (License Board; Primary Education; Continuing Education; Postal Service; Relationship owner; Registration Authority; legal source; issuing source; authoritative source).
-	Type_ []CodeableConcept `json:"type,omitempty"`
-	// communicationMethod
-	// Method for communicating with the primary source (manual; API; Push).
-	CommunicationMethod []CodeableConcept `json:"communicationMethod,omitempty"`
-	// validationStatus
-	// Status of the validation of the target against the primary source (successful; failed; unknown).
-	ValidationStatus CodeableConcept `json:"validationStatus,omitempty"`
-	// validationDate
-	// When the target was validated against the primary source.
-	ValidationDate FhirDateTime `json:"validationDate,omitempty"`
-	// canPushUpdates
-	// Ability of the primary source to push updates/alerts (yes; no; undetermined).
-	CanPushUpdates CodeableConcept `json:"canPushUpdates,omitempty"`
-	// pushTypeAvailable
-	// Type of alerts/updates the primary source can send (specific requested changes; any changes; as defined by source).
-	PushTypeAvailable []CodeableConcept `json:"pushTypeAvailable,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Who *Reference `json:"who,omitempty"`
+	Type []*CodeableConcept `json:"type,omitempty"`
+	CommunicationMethod []*CodeableConcept `json:"communicationmethod,omitempty"`
+	ValidationStatus *CodeableConcept `json:"validationstatus,omitempty"`
+	ValidationDate *FhirDateTime `json:"validationdate,omitempty"`
+	CanPushUpdates *CodeableConcept `json:"canpushupdates,omitempty"`
+	PushTypeAvailable []*CodeableConcept `json:"pushtypeavailable,omitempty"`
 }
 
 // NewVerificationResultPrimarySource creates a new VerificationResultPrimarySource instance
-func NewVerificationResultPrimarySource(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	who Reference,
-	type_ []CodeableConcept,
-	communicationMethod []CodeableConcept,
-	validationStatus CodeableConcept,
-	validationDate FhirDateTime,
-	canPushUpdates CodeableConcept,
-	pushTypeAvailable []CodeableConcept,
-) *VerificationResultPrimarySource {
-	return &VerificationResultPrimarySource{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Who: who,
-		Type_: type_,
-		CommunicationMethod: communicationMethod,
-		ValidationStatus: validationStatus,
-		ValidationDate: validationDate,
-		CanPushUpdates: canPushUpdates,
-		PushTypeAvailable: pushTypeAvailable,
-	}
+func NewVerificationResultPrimarySource() *VerificationResultPrimarySource {
+	return &VerificationResultPrimarySource{}
 }
+
 // FromJSON populates VerificationResultPrimarySource from JSON data
 func (m *VerificationResultPrimarySource) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -331,131 +137,62 @@ func (m *VerificationResultPrimarySource) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of VerificationResultPrimarySource
-func (m *VerificationResultPrimarySource) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	who *Reference,
-	type_ *[]CodeableConcept,
-	communicationMethod *[]CodeableConcept,
-	validationStatus *CodeableConcept,
-	validationDate *FhirDateTime,
-	canPushUpdates *CodeableConcept,
-	pushTypeAvailable *[]CodeableConcept,
-) *VerificationResultPrimarySource {
+// Clone creates a deep copy of VerificationResultPrimarySource
+func (m *VerificationResultPrimarySource) Clone() *VerificationResultPrimarySource {
+	if m == nil { return nil }
 	return &VerificationResultPrimarySource{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Who: func() Reference {
-			if who != nil { return *who }
-			return m.Who
-		}(),
-		Type_: func() []CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		CommunicationMethod: func() []CodeableConcept {
-			if communicationMethod != nil { return *communicationMethod }
-			return m.CommunicationMethod
-		}(),
-		ValidationStatus: func() CodeableConcept {
-			if validationStatus != nil { return *validationStatus }
-			return m.ValidationStatus
-		}(),
-		ValidationDate: func() FhirDateTime {
-			if validationDate != nil { return *validationDate }
-			return m.ValidationDate
-		}(),
-		CanPushUpdates: func() CodeableConcept {
-			if canPushUpdates != nil { return *canPushUpdates }
-			return m.CanPushUpdates
-		}(),
-		PushTypeAvailable: func() []CodeableConcept {
-			if pushTypeAvailable != nil { return *pushTypeAvailable }
-			return m.PushTypeAvailable
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Who: m.Who.Clone(),
+		Type: cloneSlices(m.Type),
+		CommunicationMethod: cloneSlices(m.CommunicationMethod),
+		ValidationStatus: m.ValidationStatus.Clone(),
+		ValidationDate: m.ValidationDate.Clone(),
+		CanPushUpdates: m.CanPushUpdates.Clone(),
+		PushTypeAvailable: cloneSlices(m.PushTypeAvailable),
 	}
 }
+
+// Equals checks for equality with another VerificationResultPrimarySource instance
+func (m *VerificationResultPrimarySource) Equals(other *VerificationResultPrimarySource) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Who.Equals(other.Who) { return false }
+	if !compareSlices(m.Type, other.Type) { return false }
+	if !compareSlices(m.CommunicationMethod, other.CommunicationMethod) { return false }
+	if !m.ValidationStatus.Equals(other.ValidationStatus) { return false }
+	if !m.ValidationDate.Equals(other.ValidationDate) { return false }
+	if !m.CanPushUpdates.Equals(other.CanPushUpdates) { return false }
+	if !compareSlices(m.PushTypeAvailable, other.PushTypeAvailable) { return false }
+	return true
+}
+
 // VerificationResultAttestation
 // Information about the entity attesting to information.
 type VerificationResultAttestation struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// who
-	// The individual or organization attesting to information.
-	Who Reference `json:"who,omitempty"`
-	// onBehalfOf
-	// When the who is asserting on behalf of another (organization or individual).
-	OnBehalfOf Reference `json:"onBehalfOf,omitempty"`
-	// communicationMethod
-	// The method by which attested information was submitted/retrieved (manual; API; Push).
-	CommunicationMethod CodeableConcept `json:"communicationMethod,omitempty"`
-	// date
-	// The date the information was attested to.
-	Date FhirDate `json:"date,omitempty"`
-	// sourceIdentityCertificate
-	// A digital identity certificate associated with the attestation source.
-	SourceIdentityCertificate FhirString `json:"sourceIdentityCertificate,omitempty"`
-	// proxyIdentityCertificate
-	// A digital identity certificate associated with the proxy entity submitting attested information on behalf of the attestation source.
-	ProxyIdentityCertificate FhirString `json:"proxyIdentityCertificate,omitempty"`
-	// proxySignature
-	// Signed assertion by the proxy entity indicating that they have the right to submit attested information on behalf of the attestation source.
-	ProxySignature Signature `json:"proxySignature,omitempty"`
-	// sourceSignature
-	// Signed assertion by the attestation source that they have attested to the information.
-	SourceSignature Signature `json:"sourceSignature,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Who *Reference `json:"who,omitempty"`
+	OnBehalfOf *Reference `json:"onbehalfof,omitempty"`
+	CommunicationMethod *CodeableConcept `json:"communicationmethod,omitempty"`
+	Date *FhirDate `json:"date,omitempty"`
+	SourceIdentityCertificate *FhirString `json:"sourceidentitycertificate,omitempty"`
+	ProxyIdentityCertificate *FhirString `json:"proxyidentitycertificate,omitempty"`
+	ProxySignature *Signature `json:"proxysignature,omitempty"`
+	SourceSignature *Signature `json:"sourcesignature,omitempty"`
 }
 
 // NewVerificationResultAttestation creates a new VerificationResultAttestation instance
-func NewVerificationResultAttestation(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	who Reference,
-	onBehalfOf Reference,
-	communicationMethod CodeableConcept,
-	date FhirDate,
-	sourceIdentityCertificate FhirString,
-	proxyIdentityCertificate FhirString,
-	proxySignature Signature,
-	sourceSignature Signature,
-) *VerificationResultAttestation {
-	return &VerificationResultAttestation{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Who: who,
-		OnBehalfOf: onBehalfOf,
-		CommunicationMethod: communicationMethod,
-		Date: date,
-		SourceIdentityCertificate: sourceIdentityCertificate,
-		ProxyIdentityCertificate: proxyIdentityCertificate,
-		ProxySignature: proxySignature,
-		SourceSignature: sourceSignature,
-	}
+func NewVerificationResultAttestation() *VerificationResultAttestation {
+	return &VerificationResultAttestation{}
 }
+
 // FromJSON populates VerificationResultAttestation from JSON data
 func (m *VerificationResultAttestation) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -466,111 +203,59 @@ func (m *VerificationResultAttestation) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of VerificationResultAttestation
-func (m *VerificationResultAttestation) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	who *Reference,
-	onBehalfOf *Reference,
-	communicationMethod *CodeableConcept,
-	date *FhirDate,
-	sourceIdentityCertificate *FhirString,
-	proxyIdentityCertificate *FhirString,
-	proxySignature *Signature,
-	sourceSignature *Signature,
-) *VerificationResultAttestation {
+// Clone creates a deep copy of VerificationResultAttestation
+func (m *VerificationResultAttestation) Clone() *VerificationResultAttestation {
+	if m == nil { return nil }
 	return &VerificationResultAttestation{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Who: func() Reference {
-			if who != nil { return *who }
-			return m.Who
-		}(),
-		OnBehalfOf: func() Reference {
-			if onBehalfOf != nil { return *onBehalfOf }
-			return m.OnBehalfOf
-		}(),
-		CommunicationMethod: func() CodeableConcept {
-			if communicationMethod != nil { return *communicationMethod }
-			return m.CommunicationMethod
-		}(),
-		Date: func() FhirDate {
-			if date != nil { return *date }
-			return m.Date
-		}(),
-		SourceIdentityCertificate: func() FhirString {
-			if sourceIdentityCertificate != nil { return *sourceIdentityCertificate }
-			return m.SourceIdentityCertificate
-		}(),
-		ProxyIdentityCertificate: func() FhirString {
-			if proxyIdentityCertificate != nil { return *proxyIdentityCertificate }
-			return m.ProxyIdentityCertificate
-		}(),
-		ProxySignature: func() Signature {
-			if proxySignature != nil { return *proxySignature }
-			return m.ProxySignature
-		}(),
-		SourceSignature: func() Signature {
-			if sourceSignature != nil { return *sourceSignature }
-			return m.SourceSignature
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Who: m.Who.Clone(),
+		OnBehalfOf: m.OnBehalfOf.Clone(),
+		CommunicationMethod: m.CommunicationMethod.Clone(),
+		Date: m.Date.Clone(),
+		SourceIdentityCertificate: m.SourceIdentityCertificate.Clone(),
+		ProxyIdentityCertificate: m.ProxyIdentityCertificate.Clone(),
+		ProxySignature: m.ProxySignature.Clone(),
+		SourceSignature: m.SourceSignature.Clone(),
 	}
 }
+
+// Equals checks for equality with another VerificationResultAttestation instance
+func (m *VerificationResultAttestation) Equals(other *VerificationResultAttestation) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Who.Equals(other.Who) { return false }
+	if !m.OnBehalfOf.Equals(other.OnBehalfOf) { return false }
+	if !m.CommunicationMethod.Equals(other.CommunicationMethod) { return false }
+	if !m.Date.Equals(other.Date) { return false }
+	if !m.SourceIdentityCertificate.Equals(other.SourceIdentityCertificate) { return false }
+	if !m.ProxyIdentityCertificate.Equals(other.ProxyIdentityCertificate) { return false }
+	if !m.ProxySignature.Equals(other.ProxySignature) { return false }
+	if !m.SourceSignature.Equals(other.SourceSignature) { return false }
+	return true
+}
+
 // VerificationResultValidator
 // Information about the entity validating information.
 type VerificationResultValidator struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// organization
-	// Reference to the organization validating information.
-	Organization Reference `json:"organization,omitempty"`
-	// identityCertificate
-	// A digital identity certificate associated with the validator.
-	IdentityCertificate FhirString `json:"identityCertificate,omitempty"`
-	// attestationSignature
-	// Signed assertion by the validator that they have validated the information.
-	AttestationSignature Signature `json:"attestationSignature,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Organization *Reference `json:"organization,omitempty"`
+	IdentityCertificate *FhirString `json:"identitycertificate,omitempty"`
+	AttestationSignature *Signature `json:"attestationsignature,omitempty"`
 }
 
 // NewVerificationResultValidator creates a new VerificationResultValidator instance
-func NewVerificationResultValidator(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	organization Reference,
-	identityCertificate FhirString,
-	attestationSignature Signature,
-) *VerificationResultValidator {
-	return &VerificationResultValidator{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Organization: organization,
-		IdentityCertificate: identityCertificate,
-		AttestationSignature: attestationSignature,
-	}
+func NewVerificationResultValidator() *VerificationResultValidator {
+	return &VerificationResultValidator{}
 }
+
 // FromJSON populates VerificationResultValidator from JSON data
 func (m *VerificationResultValidator) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -581,39 +266,29 @@ func (m *VerificationResultValidator) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of VerificationResultValidator
-func (m *VerificationResultValidator) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	organization *Reference,
-	identityCertificate *FhirString,
-	attestationSignature *Signature,
-) *VerificationResultValidator {
+// Clone creates a deep copy of VerificationResultValidator
+func (m *VerificationResultValidator) Clone() *VerificationResultValidator {
+	if m == nil { return nil }
 	return &VerificationResultValidator{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Organization: func() Reference {
-			if organization != nil { return *organization }
-			return m.Organization
-		}(),
-		IdentityCertificate: func() FhirString {
-			if identityCertificate != nil { return *identityCertificate }
-			return m.IdentityCertificate
-		}(),
-		AttestationSignature: func() Signature {
-			if attestationSignature != nil { return *attestationSignature }
-			return m.AttestationSignature
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Organization: m.Organization.Clone(),
+		IdentityCertificate: m.IdentityCertificate.Clone(),
+		AttestationSignature: m.AttestationSignature.Clone(),
 	}
 }
+
+// Equals checks for equality with another VerificationResultValidator instance
+func (m *VerificationResultValidator) Equals(other *VerificationResultValidator) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Organization.Equals(other.Organization) { return false }
+	if !m.IdentityCertificate.Equals(other.IdentityCertificate) { return false }
+	if !m.AttestationSignature.Equals(other.AttestationSignature) { return false }
+	return true
+}
+

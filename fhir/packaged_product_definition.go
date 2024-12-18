@@ -3,134 +3,41 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // PackagedProductDefinition
 // A medically related item or items, in a container or package.
 type PackagedProductDefinition struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// A unique identifier for this package as whole. Unique instance identifiers assigned to a package by manufacturers, regulators, drug catalogue custodians or other organizations.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// name
-	// A name for this package. Typically what it would be listed as in a drug formulary or catalogue, inventory etc.
-	Name FhirString `json:"name,omitempty"`
-	// type
-	// A high level category e.g. medicinal product, raw material, shipping/transport container, etc.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// packageFor
-	// The product that this is a pack for.
-	PackageFor []Reference `json:"packageFor,omitempty"`
-	// status
-	// The status within the lifecycle of this item. A high level status, this is not intended to duplicate details carried elsewhere such as legal status, or authorization or marketing status.
-	Status CodeableConcept `json:"status,omitempty"`
-	// statusDate
-	// The date at which the given status became applicable.
-	StatusDate FhirDateTime `json:"statusDate,omitempty"`
-	// containedItemQuantity
-	// A total of the complete count of contained items of a particular type/form, independent of sub-packaging or organization. This can be considered as the pack size. This attribute differs from containedItem.amount in that it can give a single aggregated count of all tablet types in a pack, even when these are different manufactured items. For example a pill pack of 21 tablets plus 7 sugar tablets, can be denoted here as '28 tablets'. This attribute is repeatable so that the different item types in one pack type can be counted (e.g. a count of vials and count of syringes). Each repeat must have different units, so that it is clear what the different sets of counted items are, and it is not intended to allow different counts of similar items (e.g. not '2 tubes and 3 tubes'). Repeats are not to be used to represent different pack sizes (e.g. 20 pack vs. 50 pack) - which would be different instances of this resource.
-	ContainedItemQuantity []Quantity `json:"containedItemQuantity,omitempty"`
-	// description
-	// Textual description. Note that this is not the name of the package or product.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// legalStatusOfSupply
-	// The legal status of supply of the packaged item as classified by the regulator.
-	LegalStatusOfSupply []PackagedProductDefinitionLegalStatusOfSupply `json:"legalStatusOfSupply,omitempty"`
-	// marketingStatus
-	// Allows specifying that an item is on the market for sale, or that it is not available, and the dates and locations associated.
-	MarketingStatus []MarketingStatus `json:"marketingStatus,omitempty"`
-	// characteristic
-	// Allows the key features to be recorded, such as "hospital pack", "nurse prescribable", "calendar pack".
-	Characteristic []CodeableConcept `json:"characteristic,omitempty"`
-	// copackagedIndicator
-	// States whether a drug product is supplied with another item such as a diluent or adjuvant.
-	CopackagedIndicator FhirBoolean `json:"copackagedIndicator,omitempty"`
-	// manufacturer
-	// Manufacturer of this package type. When there are multiple it means these are all possible manufacturers.
-	Manufacturer []Reference `json:"manufacturer,omitempty"`
-	// package
-	// A packaging item, as a container for medically related items, possibly with other packaging items within, or a packaging component, such as bottle cap (which is not a device or a medication manufactured item).
-	Package PackagedProductDefinitionPackage `json:"package,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	PackageFor []*Reference `json:"packagefor,omitempty"`
+	Status *CodeableConcept `json:"status,omitempty"`
+	StatusDate *FhirDateTime `json:"statusdate,omitempty"`
+	ContainedItemQuantity []*Quantity `json:"containeditemquantity,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	LegalStatusOfSupply []*PackagedProductDefinitionLegalStatusOfSupply `json:"legalstatusofsupply,omitempty"`
+	MarketingStatus []*MarketingStatus `json:"marketingstatus,omitempty"`
+	Characteristic []*CodeableConcept `json:"characteristic,omitempty"`
+	CopackagedIndicator *FhirBoolean `json:"copackagedindicator,omitempty"`
+	Manufacturer []*Reference `json:"manufacturer,omitempty"`
+	Package *PackagedProductDefinitionPackage `json:"package,omitempty"`
 }
 
 // NewPackagedProductDefinition creates a new PackagedProductDefinition instance
-func NewPackagedProductDefinition(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	name FhirString,
-	type_ CodeableConcept,
-	packageFor []Reference,
-	status CodeableConcept,
-	statusDate FhirDateTime,
-	containedItemQuantity []Quantity,
-	description FhirMarkdown,
-	legalStatusOfSupply []PackagedProductDefinitionLegalStatusOfSupply,
-	marketingStatus []MarketingStatus,
-	characteristic []CodeableConcept,
-	copackagedIndicator FhirBoolean,
-	manufacturer []Reference,
-	package PackagedProductDefinitionPackage,
-) *PackagedProductDefinition {
-	return &PackagedProductDefinition{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Name: name,
-		Type_: type_,
-		PackageFor: packageFor,
-		Status: status,
-		StatusDate: statusDate,
-		ContainedItemQuantity: containedItemQuantity,
-		Description: description,
-		LegalStatusOfSupply: legalStatusOfSupply,
-		MarketingStatus: marketingStatus,
-		Characteristic: characteristic,
-		CopackagedIndicator: copackagedIndicator,
-		Manufacturer: manufacturer,
-		Package: package,
-	}
+func NewPackagedProductDefinition() *PackagedProductDefinition {
+	return &PackagedProductDefinition{}
 }
+
 // FromJSON populates PackagedProductDefinition from JSON data
 func (m *PackagedProductDefinition) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -141,161 +48,80 @@ func (m *PackagedProductDefinition) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of PackagedProductDefinition
-func (m *PackagedProductDefinition) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	name *FhirString,
-	type_ *CodeableConcept,
-	packageFor *[]Reference,
-	status *CodeableConcept,
-	statusDate *FhirDateTime,
-	containedItemQuantity *[]Quantity,
-	description *FhirMarkdown,
-	legalStatusOfSupply *[]PackagedProductDefinitionLegalStatusOfSupply,
-	marketingStatus *[]MarketingStatus,
-	characteristic *[]CodeableConcept,
-	copackagedIndicator *FhirBoolean,
-	manufacturer *[]Reference,
-	package *PackagedProductDefinitionPackage,
-) *PackagedProductDefinition {
+// Clone creates a deep copy of PackagedProductDefinition
+func (m *PackagedProductDefinition) Clone() *PackagedProductDefinition {
+	if m == nil { return nil }
 	return &PackagedProductDefinition{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		PackageFor: func() []Reference {
-			if packageFor != nil { return *packageFor }
-			return m.PackageFor
-		}(),
-		Status: func() CodeableConcept {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		StatusDate: func() FhirDateTime {
-			if statusDate != nil { return *statusDate }
-			return m.StatusDate
-		}(),
-		ContainedItemQuantity: func() []Quantity {
-			if containedItemQuantity != nil { return *containedItemQuantity }
-			return m.ContainedItemQuantity
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		LegalStatusOfSupply: func() []PackagedProductDefinitionLegalStatusOfSupply {
-			if legalStatusOfSupply != nil { return *legalStatusOfSupply }
-			return m.LegalStatusOfSupply
-		}(),
-		MarketingStatus: func() []MarketingStatus {
-			if marketingStatus != nil { return *marketingStatus }
-			return m.MarketingStatus
-		}(),
-		Characteristic: func() []CodeableConcept {
-			if characteristic != nil { return *characteristic }
-			return m.Characteristic
-		}(),
-		CopackagedIndicator: func() FhirBoolean {
-			if copackagedIndicator != nil { return *copackagedIndicator }
-			return m.CopackagedIndicator
-		}(),
-		Manufacturer: func() []Reference {
-			if manufacturer != nil { return *manufacturer }
-			return m.Manufacturer
-		}(),
-		Package: func() PackagedProductDefinitionPackage {
-			if package != nil { return *package }
-			return m.Package
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		Name: m.Name.Clone(),
+		Type: m.Type.Clone(),
+		PackageFor: cloneSlices(m.PackageFor),
+		Status: m.Status.Clone(),
+		StatusDate: m.StatusDate.Clone(),
+		ContainedItemQuantity: cloneSlices(m.ContainedItemQuantity),
+		Description: m.Description.Clone(),
+		LegalStatusOfSupply: cloneSlices(m.LegalStatusOfSupply),
+		MarketingStatus: cloneSlices(m.MarketingStatus),
+		Characteristic: cloneSlices(m.Characteristic),
+		CopackagedIndicator: m.CopackagedIndicator.Clone(),
+		Manufacturer: cloneSlices(m.Manufacturer),
+		Package: m.Package.Clone(),
 	}
 }
+
+// Equals checks for equality with another PackagedProductDefinition instance
+func (m *PackagedProductDefinition) Equals(other *PackagedProductDefinition) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !compareSlices(m.PackageFor, other.PackageFor) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.StatusDate.Equals(other.StatusDate) { return false }
+	if !compareSlices(m.ContainedItemQuantity, other.ContainedItemQuantity) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.LegalStatusOfSupply, other.LegalStatusOfSupply) { return false }
+	if !compareSlices(m.MarketingStatus, other.MarketingStatus) { return false }
+	if !compareSlices(m.Characteristic, other.Characteristic) { return false }
+	if !m.CopackagedIndicator.Equals(other.CopackagedIndicator) { return false }
+	if !compareSlices(m.Manufacturer, other.Manufacturer) { return false }
+	if !m.Package.Equals(other.Package) { return false }
+	return true
+}
+
 // PackagedProductDefinitionLegalStatusOfSupply
 // The legal status of supply of the packaged item as classified by the regulator.
 type PackagedProductDefinitionLegalStatusOfSupply struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// The actual status of supply. Conveys in what situation this package type may be supplied for use.
-	Code CodeableConcept `json:"code,omitempty"`
-	// jurisdiction
-	// The place where the legal status of supply applies. When not specified, this indicates it is unknown in this context.
-	Jurisdiction CodeableConcept `json:"jurisdiction,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *CodeableConcept `json:"code,omitempty"`
+	Jurisdiction *CodeableConcept `json:"jurisdiction,omitempty"`
 }
 
 // NewPackagedProductDefinitionLegalStatusOfSupply creates a new PackagedProductDefinitionLegalStatusOfSupply instance
-func NewPackagedProductDefinitionLegalStatusOfSupply(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code CodeableConcept,
-	jurisdiction CodeableConcept,
-) *PackagedProductDefinitionLegalStatusOfSupply {
-	return &PackagedProductDefinitionLegalStatusOfSupply{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		Jurisdiction: jurisdiction,
-	}
+func NewPackagedProductDefinitionLegalStatusOfSupply() *PackagedProductDefinitionLegalStatusOfSupply {
+	return &PackagedProductDefinitionLegalStatusOfSupply{}
 }
+
 // FromJSON populates PackagedProductDefinitionLegalStatusOfSupply from JSON data
 func (m *PackagedProductDefinitionLegalStatusOfSupply) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -306,116 +132,54 @@ func (m *PackagedProductDefinitionLegalStatusOfSupply) ToJSON() ([]byte, error) 
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of PackagedProductDefinitionLegalStatusOfSupply
-func (m *PackagedProductDefinitionLegalStatusOfSupply) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *CodeableConcept,
-	jurisdiction *CodeableConcept,
-) *PackagedProductDefinitionLegalStatusOfSupply {
+// Clone creates a deep copy of PackagedProductDefinitionLegalStatusOfSupply
+func (m *PackagedProductDefinitionLegalStatusOfSupply) Clone() *PackagedProductDefinitionLegalStatusOfSupply {
+	if m == nil { return nil }
 	return &PackagedProductDefinitionLegalStatusOfSupply{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() CodeableConcept {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Jurisdiction: func() CodeableConcept {
-			if jurisdiction != nil { return *jurisdiction }
-			return m.Jurisdiction
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		Jurisdiction: m.Jurisdiction.Clone(),
 	}
 }
+
+// Equals checks for equality with another PackagedProductDefinitionLegalStatusOfSupply instance
+func (m *PackagedProductDefinitionLegalStatusOfSupply) Equals(other *PackagedProductDefinitionLegalStatusOfSupply) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Jurisdiction.Equals(other.Jurisdiction) { return false }
+	return true
+}
+
 // PackagedProductDefinitionPackage
 // A packaging item, as a container for medically related items, possibly with other packaging items within, or a packaging component, such as bottle cap (which is not a device or a medication manufactured item).
 type PackagedProductDefinitionPackage struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// An identifier that is specific to this particular part of the packaging. Including possibly Data Carrier Identifier (a GS1 barcode).
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// type
-	// The physical type of the container of the items.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// quantity
-	// The quantity of this level of packaging in the package that contains it. If specified, the outermost level is always 1.
-	Quantity FhirInteger `json:"quantity,omitempty"`
-	// material
-	// Material type of the package item.
-	Material []CodeableConcept `json:"material,omitempty"`
-	// alternateMaterial
-	// A possible alternate material for this part of the packaging, that is allowed to be used instead of the usual material (e.g. different types of plastic for a blister sleeve).
-	AlternateMaterial []CodeableConcept `json:"alternateMaterial,omitempty"`
-	// shelfLifeStorage
-	// Shelf Life and storage information.
-	ShelfLifeStorage []PackagedProductDefinitionShelfLifeStorage `json:"shelfLifeStorage,omitempty"`
-	// manufacturer
-	// Manufacturer of this package Item. When there are multiple it means these are all possible manufacturers.
-	Manufacturer []Reference `json:"manufacturer,omitempty"`
-	// property
-	// General characteristics of this item.
-	Property []PackagedProductDefinitionProperty `json:"property,omitempty"`
-	// containedItem
-	// The item(s) within the packaging.
-	ContainedItem []PackagedProductDefinitionContainedItem `json:"containedItem,omitempty"`
-	// package
-	// Allows containers (and parts of containers) parwithin containers, still a single packaged product.  See also PackagedProductDefinition.package.containedItem.item(PackagedProductDefinition).
-	Package []PackagedProductDefinitionPackage `json:"package,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Quantity *FhirInteger `json:"quantity,omitempty"`
+	Material []*CodeableConcept `json:"material,omitempty"`
+	AlternateMaterial []*CodeableConcept `json:"alternatematerial,omitempty"`
+	ShelfLifeStorage []*PackagedProductDefinitionShelfLifeStorage `json:"shelflifestorage,omitempty"`
+	Manufacturer []*Reference `json:"manufacturer,omitempty"`
+	Property []*PackagedProductDefinitionProperty `json:"property,omitempty"`
+	ContainedItem []*PackagedProductDefinitionContainedItem `json:"containeditem,omitempty"`
+	Package []*PackagedProductDefinitionPackage `json:"package,omitempty"`
 }
 
 // NewPackagedProductDefinitionPackage creates a new PackagedProductDefinitionPackage instance
-func NewPackagedProductDefinitionPackage(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	type_ CodeableConcept,
-	quantity FhirInteger,
-	material []CodeableConcept,
-	alternateMaterial []CodeableConcept,
-	shelfLifeStorage []PackagedProductDefinitionShelfLifeStorage,
-	manufacturer []Reference,
-	property []PackagedProductDefinitionProperty,
-	containedItem []PackagedProductDefinitionContainedItem,
-	package []PackagedProductDefinitionPackage,
-) *PackagedProductDefinitionPackage {
-	return &PackagedProductDefinitionPackage{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Type_: type_,
-		Quantity: quantity,
-		Material: material,
-		AlternateMaterial: alternateMaterial,
-		ShelfLifeStorage: shelfLifeStorage,
-		Manufacturer: manufacturer,
-		Property: property,
-		ContainedItem: containedItem,
-		Package: package,
-	}
+func NewPackagedProductDefinitionPackage() *PackagedProductDefinitionPackage {
+	return &PackagedProductDefinitionPackage{}
 }
+
 // FromJSON populates PackagedProductDefinitionPackage from JSON data
 func (m *PackagedProductDefinitionPackage) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -426,126 +190,64 @@ func (m *PackagedProductDefinitionPackage) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of PackagedProductDefinitionPackage
-func (m *PackagedProductDefinitionPackage) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	type_ *CodeableConcept,
-	quantity *FhirInteger,
-	material *[]CodeableConcept,
-	alternateMaterial *[]CodeableConcept,
-	shelfLifeStorage *[]PackagedProductDefinitionShelfLifeStorage,
-	manufacturer *[]Reference,
-	property *[]PackagedProductDefinitionProperty,
-	containedItem *[]PackagedProductDefinitionContainedItem,
-	package *[]PackagedProductDefinitionPackage,
-) *PackagedProductDefinitionPackage {
+// Clone creates a deep copy of PackagedProductDefinitionPackage
+func (m *PackagedProductDefinitionPackage) Clone() *PackagedProductDefinitionPackage {
+	if m == nil { return nil }
 	return &PackagedProductDefinitionPackage{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Quantity: func() FhirInteger {
-			if quantity != nil { return *quantity }
-			return m.Quantity
-		}(),
-		Material: func() []CodeableConcept {
-			if material != nil { return *material }
-			return m.Material
-		}(),
-		AlternateMaterial: func() []CodeableConcept {
-			if alternateMaterial != nil { return *alternateMaterial }
-			return m.AlternateMaterial
-		}(),
-		ShelfLifeStorage: func() []PackagedProductDefinitionShelfLifeStorage {
-			if shelfLifeStorage != nil { return *shelfLifeStorage }
-			return m.ShelfLifeStorage
-		}(),
-		Manufacturer: func() []Reference {
-			if manufacturer != nil { return *manufacturer }
-			return m.Manufacturer
-		}(),
-		Property: func() []PackagedProductDefinitionProperty {
-			if property != nil { return *property }
-			return m.Property
-		}(),
-		ContainedItem: func() []PackagedProductDefinitionContainedItem {
-			if containedItem != nil { return *containedItem }
-			return m.ContainedItem
-		}(),
-		Package: func() []PackagedProductDefinitionPackage {
-			if package != nil { return *package }
-			return m.Package
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		Type: m.Type.Clone(),
+		Quantity: m.Quantity.Clone(),
+		Material: cloneSlices(m.Material),
+		AlternateMaterial: cloneSlices(m.AlternateMaterial),
+		ShelfLifeStorage: cloneSlices(m.ShelfLifeStorage),
+		Manufacturer: cloneSlices(m.Manufacturer),
+		Property: cloneSlices(m.Property),
+		ContainedItem: cloneSlices(m.ContainedItem),
+		Package: cloneSlices(m.Package),
 	}
 }
+
+// Equals checks for equality with another PackagedProductDefinitionPackage instance
+func (m *PackagedProductDefinitionPackage) Equals(other *PackagedProductDefinitionPackage) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Quantity.Equals(other.Quantity) { return false }
+	if !compareSlices(m.Material, other.Material) { return false }
+	if !compareSlices(m.AlternateMaterial, other.AlternateMaterial) { return false }
+	if !compareSlices(m.ShelfLifeStorage, other.ShelfLifeStorage) { return false }
+	if !compareSlices(m.Manufacturer, other.Manufacturer) { return false }
+	if !compareSlices(m.Property, other.Property) { return false }
+	if !compareSlices(m.ContainedItem, other.ContainedItem) { return false }
+	if !compareSlices(m.Package, other.Package) { return false }
+	return true
+}
+
 // PackagedProductDefinitionShelfLifeStorage
 // Shelf Life and storage information.
 type PackagedProductDefinitionShelfLifeStorage struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// This describes the shelf life, taking into account various scenarios such as shelf life of the packaged Medicinal Product itself, shelf life after transformation where necessary and shelf life after the first opening of a bottle, etc. The shelf life type shall be specified using an appropriate controlled vocabulary The controlled term and the controlled term identifier shall be specified.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// periodDuration
-	// The shelf life time period can be specified using a numerical value for the period of time and its unit of time measurement The unit of measurement shall be specified in accordance with ISO 11240 and the resulting terminology The symbol and the symbol identifier shall be used.
-	PeriodDuration FhirDuration `json:"periodDuration,omitempty"`
-	// periodString
-	// The shelf life time period can be specified using a numerical value for the period of time and its unit of time measurement The unit of measurement shall be specified in accordance with ISO 11240 and the resulting terminology The symbol and the symbol identifier shall be used.
-	PeriodString FhirString `json:"periodString,omitempty"`
-	// specialPrecautionsForStorage
-	// Special precautions for storage, if any, can be specified using an appropriate controlled vocabulary. The controlled term and the controlled term identifier shall be specified.
-	SpecialPrecautionsForStorage []CodeableConcept `json:"specialPrecautionsForStorage,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	PeriodDuration *FhirDuration `json:"periodduration,omitempty"`
+	PeriodString *FhirString `json:"periodstring,omitempty"`
+	SpecialPrecautionsForStorage []*CodeableConcept `json:"specialprecautionsforstorage,omitempty"`
 }
 
 // NewPackagedProductDefinitionShelfLifeStorage creates a new PackagedProductDefinitionShelfLifeStorage instance
-func NewPackagedProductDefinitionShelfLifeStorage(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	periodDuration FhirDuration,
-	periodString FhirString,
-	specialPrecautionsForStorage []CodeableConcept,
-) *PackagedProductDefinitionShelfLifeStorage {
-	return &PackagedProductDefinitionShelfLifeStorage{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		PeriodDuration: periodDuration,
-		PeriodString: periodString,
-		SpecialPrecautionsForStorage: specialPrecautionsForStorage,
-	}
+func NewPackagedProductDefinitionShelfLifeStorage() *PackagedProductDefinitionShelfLifeStorage {
+	return &PackagedProductDefinitionShelfLifeStorage{}
 }
+
 // FromJSON populates PackagedProductDefinitionShelfLifeStorage from JSON data
 func (m *PackagedProductDefinitionShelfLifeStorage) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -556,106 +258,54 @@ func (m *PackagedProductDefinitionShelfLifeStorage) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of PackagedProductDefinitionShelfLifeStorage
-func (m *PackagedProductDefinitionShelfLifeStorage) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	periodDuration *FhirDuration,
-	periodString *FhirString,
-	specialPrecautionsForStorage *[]CodeableConcept,
-) *PackagedProductDefinitionShelfLifeStorage {
+// Clone creates a deep copy of PackagedProductDefinitionShelfLifeStorage
+func (m *PackagedProductDefinitionShelfLifeStorage) Clone() *PackagedProductDefinitionShelfLifeStorage {
+	if m == nil { return nil }
 	return &PackagedProductDefinitionShelfLifeStorage{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		PeriodDuration: func() FhirDuration {
-			if periodDuration != nil { return *periodDuration }
-			return m.PeriodDuration
-		}(),
-		PeriodString: func() FhirString {
-			if periodString != nil { return *periodString }
-			return m.PeriodString
-		}(),
-		SpecialPrecautionsForStorage: func() []CodeableConcept {
-			if specialPrecautionsForStorage != nil { return *specialPrecautionsForStorage }
-			return m.SpecialPrecautionsForStorage
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		PeriodDuration: m.PeriodDuration.Clone(),
+		PeriodString: m.PeriodString.Clone(),
+		SpecialPrecautionsForStorage: cloneSlices(m.SpecialPrecautionsForStorage),
 	}
 }
+
+// Equals checks for equality with another PackagedProductDefinitionShelfLifeStorage instance
+func (m *PackagedProductDefinitionShelfLifeStorage) Equals(other *PackagedProductDefinitionShelfLifeStorage) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.PeriodDuration.Equals(other.PeriodDuration) { return false }
+	if !m.PeriodString.Equals(other.PeriodString) { return false }
+	if !compareSlices(m.SpecialPrecautionsForStorage, other.SpecialPrecautionsForStorage) { return false }
+	return true
+}
+
 // PackagedProductDefinitionProperty
 // General characteristics of this item.
 type PackagedProductDefinitionProperty struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// A code expressing the type of characteristic.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// valueCodeableConcept
-	// A value for the characteristic.
-	ValueCodeableConcept CodeableConcept `json:"valueCodeableConcept,omitempty"`
-	// valueQuantity
-	// A value for the characteristic.
-	ValueQuantity Quantity `json:"valueQuantity,omitempty"`
-	// valueDate
-	// A value for the characteristic.
-	ValueDate FhirDate `json:"valueDate,omitempty"`
-	// valueBoolean
-	// A value for the characteristic.
-	ValueBoolean FhirBoolean `json:"valueBoolean,omitempty"`
-	// valueAttachment
-	// A value for the characteristic.
-	ValueAttachment Attachment `json:"valueAttachment,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+	ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+	ValueDate *FhirDate `json:"valuedate,omitempty"`
+	ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
+	ValueAttachment *Attachment `json:"valueattachment,omitempty"`
 }
 
 // NewPackagedProductDefinitionProperty creates a new PackagedProductDefinitionProperty instance
-func NewPackagedProductDefinitionProperty(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	valueCodeableConcept CodeableConcept,
-	valueQuantity Quantity,
-	valueDate FhirDate,
-	valueBoolean FhirBoolean,
-	valueAttachment Attachment,
-) *PackagedProductDefinitionProperty {
-	return &PackagedProductDefinitionProperty{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		ValueCodeableConcept: valueCodeableConcept,
-		ValueQuantity: valueQuantity,
-		ValueDate: valueDate,
-		ValueBoolean: valueBoolean,
-		ValueAttachment: valueAttachment,
-	}
+func NewPackagedProductDefinitionProperty() *PackagedProductDefinitionProperty {
+	return &PackagedProductDefinitionProperty{}
 }
+
 // FromJSON populates PackagedProductDefinitionProperty from JSON data
 func (m *PackagedProductDefinitionProperty) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -666,96 +316,54 @@ func (m *PackagedProductDefinitionProperty) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of PackagedProductDefinitionProperty
-func (m *PackagedProductDefinitionProperty) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	valueCodeableConcept *CodeableConcept,
-	valueQuantity *Quantity,
-	valueDate *FhirDate,
-	valueBoolean *FhirBoolean,
-	valueAttachment *Attachment,
-) *PackagedProductDefinitionProperty {
+// Clone creates a deep copy of PackagedProductDefinitionProperty
+func (m *PackagedProductDefinitionProperty) Clone() *PackagedProductDefinitionProperty {
+	if m == nil { return nil }
 	return &PackagedProductDefinitionProperty{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		ValueCodeableConcept: func() CodeableConcept {
-			if valueCodeableConcept != nil { return *valueCodeableConcept }
-			return m.ValueCodeableConcept
-		}(),
-		ValueQuantity: func() Quantity {
-			if valueQuantity != nil { return *valueQuantity }
-			return m.ValueQuantity
-		}(),
-		ValueDate: func() FhirDate {
-			if valueDate != nil { return *valueDate }
-			return m.ValueDate
-		}(),
-		ValueBoolean: func() FhirBoolean {
-			if valueBoolean != nil { return *valueBoolean }
-			return m.ValueBoolean
-		}(),
-		ValueAttachment: func() Attachment {
-			if valueAttachment != nil { return *valueAttachment }
-			return m.ValueAttachment
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		ValueCodeableConcept: m.ValueCodeableConcept.Clone(),
+		ValueQuantity: m.ValueQuantity.Clone(),
+		ValueDate: m.ValueDate.Clone(),
+		ValueBoolean: m.ValueBoolean.Clone(),
+		ValueAttachment: m.ValueAttachment.Clone(),
 	}
 }
+
+// Equals checks for equality with another PackagedProductDefinitionProperty instance
+func (m *PackagedProductDefinitionProperty) Equals(other *PackagedProductDefinitionProperty) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.ValueCodeableConcept.Equals(other.ValueCodeableConcept) { return false }
+	if !m.ValueQuantity.Equals(other.ValueQuantity) { return false }
+	if !m.ValueDate.Equals(other.ValueDate) { return false }
+	if !m.ValueBoolean.Equals(other.ValueBoolean) { return false }
+	if !m.ValueAttachment.Equals(other.ValueAttachment) { return false }
+	return true
+}
+
 // PackagedProductDefinitionContainedItem
 // The item(s) within the packaging.
 type PackagedProductDefinitionContainedItem struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// item
-	// The actual item(s) of medication, as manufactured, or a device (typically, but not necessarily, a co-packaged one), or other medically related item (such as food, biologicals, raw materials, medical fluids, gases etc.), as contained in the package. This also allows another whole packaged product to be included, which is solely for the case where a package of other entire packages is wanted - such as a wholesale or distribution pack (for layers within one package, use PackagedProductDefinition.package.package).
-	Item CodeableReference `json:"item,omitempty"`
-	// amount
-	// The number of this type of item within this packaging.
-	Amount Quantity `json:"amount,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Item *CodeableReference `json:"item,omitempty"`
+	Amount *Quantity `json:"amount,omitempty"`
 }
 
 // NewPackagedProductDefinitionContainedItem creates a new PackagedProductDefinitionContainedItem instance
-func NewPackagedProductDefinitionContainedItem(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	item CodeableReference,
-	amount Quantity,
-) *PackagedProductDefinitionContainedItem {
-	return &PackagedProductDefinitionContainedItem{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Item: item,
-		Amount: amount,
-	}
+func NewPackagedProductDefinitionContainedItem() *PackagedProductDefinitionContainedItem {
+	return &PackagedProductDefinitionContainedItem{}
 }
+
 // FromJSON populates PackagedProductDefinitionContainedItem from JSON data
 func (m *PackagedProductDefinitionContainedItem) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -766,34 +374,27 @@ func (m *PackagedProductDefinitionContainedItem) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of PackagedProductDefinitionContainedItem
-func (m *PackagedProductDefinitionContainedItem) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	item *CodeableReference,
-	amount *Quantity,
-) *PackagedProductDefinitionContainedItem {
+// Clone creates a deep copy of PackagedProductDefinitionContainedItem
+func (m *PackagedProductDefinitionContainedItem) Clone() *PackagedProductDefinitionContainedItem {
+	if m == nil { return nil }
 	return &PackagedProductDefinitionContainedItem{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Item: func() CodeableReference {
-			if item != nil { return *item }
-			return m.Item
-		}(),
-		Amount: func() Quantity {
-			if amount != nil { return *amount }
-			return m.Amount
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Item: m.Item.Clone(),
+		Amount: m.Amount.Clone(),
 	}
 }
+
+// Equals checks for equality with another PackagedProductDefinitionContainedItem instance
+func (m *PackagedProductDefinitionContainedItem) Equals(other *PackagedProductDefinitionContainedItem) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Item.Equals(other.Item) { return false }
+	if !m.Amount.Equals(other.Amount) { return false }
+	return true
+}
+

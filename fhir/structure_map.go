@@ -3,154 +3,45 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // StructureMap
 // A Map of relationships between 2 structures that can be used to transform data.
 type StructureMap struct {
 	CanonicalResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// url
-	// An absolute URI that is used to identify this structure map when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this structure map is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the structure map is stored on different servers.
-	Url FhirUri `json:"url,omitempty"`
-	// identifier
-	// A formal identifier that is used to identify this structure map when it is represented in other formats, or referenced in a specification, model, design or an instance.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// version
-	// The identifier that is used to identify this version of the structure map when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the structure map author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.
-	Version FhirString `json:"version,omitempty"`
-	// name
-	// A natural language name identifying the structure map. This name should be usable as an identifier for the module by machine processing applications such as code generation.
-	Name FhirString `json:"name,omitempty"`
-	// title
-	// A short, descriptive, user-friendly title for the structure map.
-	Title FhirString `json:"title,omitempty"`
-	// status
-	// The status of this structure map. Enables tracking the life-cycle of the content.
-	Status PublicationStatus `json:"status,omitempty"`
-	// experimental
-	// A Boolean value to indicate that this structure map is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.
-	Experimental FhirBoolean `json:"experimental,omitempty"`
-	// date
-	// The date  (and optionally time) when the structure map was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the structure map changes.
-	Date FhirDateTime `json:"date,omitempty"`
-	// publisher
-	// The name of the organization or individual that published the structure map.
-	Publisher FhirString `json:"publisher,omitempty"`
-	// contact
-	// Contact details to assist a user in finding and communicating with the publisher.
-	Contact []ContactDetail `json:"contact,omitempty"`
-	// description
-	// A free text natural language description of the structure map from a consumer's perspective.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// useContext
-	// The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate structure map instances.
-	UseContext []UsageContext `json:"useContext,omitempty"`
-	// jurisdiction
-	// A legal or geographic region in which the structure map is intended to be used.
-	Jurisdiction []CodeableConcept `json:"jurisdiction,omitempty"`
-	// purpose
-	// Explanation of why this structure map is needed and why it has been designed as it has.
-	Purpose FhirMarkdown `json:"purpose,omitempty"`
-	// copyright
-	// A copyright statement relating to the structure map and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the structure map.
-	Copyright FhirMarkdown `json:"copyright,omitempty"`
-	// structure
-	// A structure definition used by this map. The structure definition may describe instances that are converted, or the instances that are produced.
-	Structure []StructureMapStructure `json:"structure,omitempty"`
-	// import
-	// Other maps used by this map (canonical URLs).
-	Import_ []FhirCanonical `json:"import,omitempty"`
-	// group
-	// Organizes the mapping into manageable chunks for human review/ease of maintenance.
-	Group []StructureMapGroup `json:"group,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Url *FhirUri `json:"url,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Title *FhirString `json:"title,omitempty"`
+	Status *PublicationStatus `json:"status,omitempty"`
+	Experimental *FhirBoolean `json:"experimental,omitempty"`
+	Date *FhirDateTime `json:"date,omitempty"`
+	Publisher *FhirString `json:"publisher,omitempty"`
+	Contact []*ContactDetail `json:"contact,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	UseContext []*UsageContext `json:"usecontext,omitempty"`
+	Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+	Purpose *FhirMarkdown `json:"purpose,omitempty"`
+	Copyright *FhirMarkdown `json:"copyright,omitempty"`
+	Structure []*StructureMapStructure `json:"structure,omitempty"`
+	Import_ []*FhirCanonical `json:"import,omitempty"`
+	Group []*StructureMapGroup `json:"group,omitempty"`
 }
 
 // NewStructureMap creates a new StructureMap instance
-func NewStructureMap(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	url FhirUri,
-	identifier []Identifier,
-	version FhirString,
-	name FhirString,
-	title FhirString,
-	status PublicationStatus,
-	experimental FhirBoolean,
-	date FhirDateTime,
-	publisher FhirString,
-	contact []ContactDetail,
-	description FhirMarkdown,
-	useContext []UsageContext,
-	jurisdiction []CodeableConcept,
-	purpose FhirMarkdown,
-	copyright FhirMarkdown,
-	structure []StructureMapStructure,
-	import_ []FhirCanonical,
-	group []StructureMapGroup,
-) *StructureMap {
-	return &StructureMap{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Url: url,
-		Identifier: identifier,
-		Version: version,
-		Name: name,
-		Title: title,
-		Status: status,
-		Experimental: experimental,
-		Date: date,
-		Publisher: publisher,
-		Contact: contact,
-		Description: description,
-		UseContext: useContext,
-		Jurisdiction: jurisdiction,
-		Purpose: purpose,
-		Copyright: copyright,
-		Structure: structure,
-		Import_: import_,
-		Group: group,
-	}
+func NewStructureMap() *StructureMap {
+	return &StructureMap{}
 }
+
 // FromJSON populates StructureMap from JSON data
 func (m *StructureMap) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -161,191 +52,90 @@ func (m *StructureMap) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of StructureMap
-func (m *StructureMap) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	url *FhirUri,
-	identifier *[]Identifier,
-	version *FhirString,
-	name *FhirString,
-	title *FhirString,
-	status *PublicationStatus,
-	experimental *FhirBoolean,
-	date *FhirDateTime,
-	publisher *FhirString,
-	contact *[]ContactDetail,
-	description *FhirMarkdown,
-	useContext *[]UsageContext,
-	jurisdiction *[]CodeableConcept,
-	purpose *FhirMarkdown,
-	copyright *FhirMarkdown,
-	structure *[]StructureMapStructure,
-	import_ *[]FhirCanonical,
-	group *[]StructureMapGroup,
-) *StructureMap {
+// Clone creates a deep copy of StructureMap
+func (m *StructureMap) Clone() *StructureMap {
+	if m == nil { return nil }
 	return &StructureMap{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Url: func() FhirUri {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Title: func() FhirString {
-			if title != nil { return *title }
-			return m.Title
-		}(),
-		Status: func() PublicationStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Experimental: func() FhirBoolean {
-			if experimental != nil { return *experimental }
-			return m.Experimental
-		}(),
-		Date: func() FhirDateTime {
-			if date != nil { return *date }
-			return m.Date
-		}(),
-		Publisher: func() FhirString {
-			if publisher != nil { return *publisher }
-			return m.Publisher
-		}(),
-		Contact: func() []ContactDetail {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		UseContext: func() []UsageContext {
-			if useContext != nil { return *useContext }
-			return m.UseContext
-		}(),
-		Jurisdiction: func() []CodeableConcept {
-			if jurisdiction != nil { return *jurisdiction }
-			return m.Jurisdiction
-		}(),
-		Purpose: func() FhirMarkdown {
-			if purpose != nil { return *purpose }
-			return m.Purpose
-		}(),
-		Copyright: func() FhirMarkdown {
-			if copyright != nil { return *copyright }
-			return m.Copyright
-		}(),
-		Structure: func() []StructureMapStructure {
-			if structure != nil { return *structure }
-			return m.Structure
-		}(),
-		Import_: func() []FhirCanonical {
-			if import_ != nil { return *import_ }
-			return m.Import_
-		}(),
-		Group: func() []StructureMapGroup {
-			if group != nil { return *group }
-			return m.Group
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Url: m.Url.Clone(),
+		Identifier: cloneSlices(m.Identifier),
+		Version: m.Version.Clone(),
+		Name: m.Name.Clone(),
+		Title: m.Title.Clone(),
+		Status: m.Status.Clone(),
+		Experimental: m.Experimental.Clone(),
+		Date: m.Date.Clone(),
+		Publisher: m.Publisher.Clone(),
+		Contact: cloneSlices(m.Contact),
+		Description: m.Description.Clone(),
+		UseContext: cloneSlices(m.UseContext),
+		Jurisdiction: cloneSlices(m.Jurisdiction),
+		Purpose: m.Purpose.Clone(),
+		Copyright: m.Copyright.Clone(),
+		Structure: cloneSlices(m.Structure),
+		Import_: cloneSlices(m.Import_),
+		Group: cloneSlices(m.Group),
 	}
 }
+
+// Equals checks for equality with another StructureMap instance
+func (m *StructureMap) Equals(other *StructureMap) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Title.Equals(other.Title) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Experimental.Equals(other.Experimental) { return false }
+	if !m.Date.Equals(other.Date) { return false }
+	if !m.Publisher.Equals(other.Publisher) { return false }
+	if !compareSlices(m.Contact, other.Contact) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.UseContext, other.UseContext) { return false }
+	if !compareSlices(m.Jurisdiction, other.Jurisdiction) { return false }
+	if !m.Purpose.Equals(other.Purpose) { return false }
+	if !m.Copyright.Equals(other.Copyright) { return false }
+	if !compareSlices(m.Structure, other.Structure) { return false }
+	if !compareSlices(m.Import_, other.Import_) { return false }
+	if !compareSlices(m.Group, other.Group) { return false }
+	return true
+}
+
 // StructureMapStructure
 // A structure definition used by this map. The structure definition may describe instances that are converted, or the instances that are produced.
 type StructureMapStructure struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// url
-	// The canonical reference to the structure.
-	Url FhirCanonical `json:"url,omitempty"`
-	// mode
-	// How the referenced structure is used in this mapping.
-	Mode StructureMapModelMode `json:"mode,omitempty"`
-	// alias
-	// The name used for this type in the map.
-	Alias FhirString `json:"alias,omitempty"`
-	// documentation
-	// Documentation that describes how the structure is used in the mapping.
-	Documentation FhirString `json:"documentation,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Url *FhirCanonical `json:"url,omitempty"`
+	Mode *StructureMapModelMode `json:"mode,omitempty"`
+	Alias *FhirString `json:"alias,omitempty"`
+	Documentation *FhirString `json:"documentation,omitempty"`
 }
 
 // NewStructureMapStructure creates a new StructureMapStructure instance
-func NewStructureMapStructure(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	url FhirCanonical,
-	mode StructureMapModelMode,
-	alias FhirString,
-	documentation FhirString,
-) *StructureMapStructure {
-	return &StructureMapStructure{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Url: url,
-		Mode: mode,
-		Alias: alias,
-		Documentation: documentation,
-	}
+func NewStructureMapStructure() *StructureMapStructure {
+	return &StructureMapStructure{}
 }
+
 // FromJSON populates StructureMapStructure from JSON data
 func (m *StructureMapStructure) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -356,106 +146,54 @@ func (m *StructureMapStructure) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of StructureMapStructure
-func (m *StructureMapStructure) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	url *FhirCanonical,
-	mode *StructureMapModelMode,
-	alias *FhirString,
-	documentation *FhirString,
-) *StructureMapStructure {
+// Clone creates a deep copy of StructureMapStructure
+func (m *StructureMapStructure) Clone() *StructureMapStructure {
+	if m == nil { return nil }
 	return &StructureMapStructure{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Url: func() FhirCanonical {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		Mode: func() StructureMapModelMode {
-			if mode != nil { return *mode }
-			return m.Mode
-		}(),
-		Alias: func() FhirString {
-			if alias != nil { return *alias }
-			return m.Alias
-		}(),
-		Documentation: func() FhirString {
-			if documentation != nil { return *documentation }
-			return m.Documentation
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Url: m.Url.Clone(),
+		Mode: m.Mode.Clone(),
+		Alias: m.Alias.Clone(),
+		Documentation: m.Documentation.Clone(),
 	}
 }
+
+// Equals checks for equality with another StructureMapStructure instance
+func (m *StructureMapStructure) Equals(other *StructureMapStructure) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !m.Mode.Equals(other.Mode) { return false }
+	if !m.Alias.Equals(other.Alias) { return false }
+	if !m.Documentation.Equals(other.Documentation) { return false }
+	return true
+}
+
 // StructureMapGroup
 // Organizes the mapping into manageable chunks for human review/ease of maintenance.
 type StructureMapGroup struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// name
-	// A unique name for the group for the convenience of human readers.
-	Name FhirId `json:"name,omitempty"`
-	// extends
-	// Another group that this group adds rules to.
-	Extends_ FhirId `json:"extends,omitempty"`
-	// typeMode
-	// If this is the default rule set to apply for the source type or this combination of types.
-	TypeMode StructureMapGroupTypeMode `json:"typeMode,omitempty"`
-	// documentation
-	// Additional supporting documentation that explains the purpose of the group and the types of mappings within it.
-	Documentation FhirString `json:"documentation,omitempty"`
-	// input
-	// A name assigned to an instance of data. The instance must be provided when the mapping is invoked.
-	Input []StructureMapInput `json:"input,omitempty"`
-	// rule
-	// Transform Rule from source to target.
-	Rule []StructureMapRule `json:"rule,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Name *FhirId `json:"name,omitempty"`
+	Extends_ *FhirId `json:"extends,omitempty"`
+	TypeMode *StructureMapGroupTypeMode `json:"typemode,omitempty"`
+	Documentation *FhirString `json:"documentation,omitempty"`
+	Input []*StructureMapInput `json:"input,omitempty"`
+	Rule []*StructureMapRule `json:"rule,omitempty"`
 }
 
 // NewStructureMapGroup creates a new StructureMapGroup instance
-func NewStructureMapGroup(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	name FhirId,
-	extends_ FhirId,
-	typeMode StructureMapGroupTypeMode,
-	documentation FhirString,
-	input []StructureMapInput,
-	rule []StructureMapRule,
-) *StructureMapGroup {
-	return &StructureMapGroup{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Name: name,
-		Extends_: extends_,
-		TypeMode: typeMode,
-		Documentation: documentation,
-		Input: input,
-		Rule: rule,
-	}
+func NewStructureMapGroup() *StructureMapGroup {
+	return &StructureMapGroup{}
 }
+
 // FromJSON populates StructureMapGroup from JSON data
 func (m *StructureMapGroup) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -466,106 +204,56 @@ func (m *StructureMapGroup) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of StructureMapGroup
-func (m *StructureMapGroup) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	name *FhirId,
-	extends_ *FhirId,
-	typeMode *StructureMapGroupTypeMode,
-	documentation *FhirString,
-	input *[]StructureMapInput,
-	rule *[]StructureMapRule,
-) *StructureMapGroup {
+// Clone creates a deep copy of StructureMapGroup
+func (m *StructureMapGroup) Clone() *StructureMapGroup {
+	if m == nil { return nil }
 	return &StructureMapGroup{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Name: func() FhirId {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Extends_: func() FhirId {
-			if extends_ != nil { return *extends_ }
-			return m.Extends_
-		}(),
-		TypeMode: func() StructureMapGroupTypeMode {
-			if typeMode != nil { return *typeMode }
-			return m.TypeMode
-		}(),
-		Documentation: func() FhirString {
-			if documentation != nil { return *documentation }
-			return m.Documentation
-		}(),
-		Input: func() []StructureMapInput {
-			if input != nil { return *input }
-			return m.Input
-		}(),
-		Rule: func() []StructureMapRule {
-			if rule != nil { return *rule }
-			return m.Rule
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Name: m.Name.Clone(),
+		Extends_: m.Extends_.Clone(),
+		TypeMode: m.TypeMode.Clone(),
+		Documentation: m.Documentation.Clone(),
+		Input: cloneSlices(m.Input),
+		Rule: cloneSlices(m.Rule),
 	}
 }
+
+// Equals checks for equality with another StructureMapGroup instance
+func (m *StructureMapGroup) Equals(other *StructureMapGroup) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Extends_.Equals(other.Extends_) { return false }
+	if !m.TypeMode.Equals(other.TypeMode) { return false }
+	if !m.Documentation.Equals(other.Documentation) { return false }
+	if !compareSlices(m.Input, other.Input) { return false }
+	if !compareSlices(m.Rule, other.Rule) { return false }
+	return true
+}
+
 // StructureMapInput
 // A name assigned to an instance of data. The instance must be provided when the mapping is invoked.
 type StructureMapInput struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// name
-	// Name for this instance of data.
-	Name FhirId `json:"name,omitempty"`
-	// type
-	// Type for this instance of data.
-	Type_ FhirString `json:"type,omitempty"`
-	// mode
-	// Mode for this instance of data.
-	Mode StructureMapInputMode `json:"mode,omitempty"`
-	// documentation
-	// Documentation for this instance of data.
-	Documentation FhirString `json:"documentation,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Name *FhirId `json:"name,omitempty"`
+	Type *FhirString `json:"type,omitempty"`
+	Mode *StructureMapInputMode `json:"mode,omitempty"`
+	Documentation *FhirString `json:"documentation,omitempty"`
 }
 
 // NewStructureMapInput creates a new StructureMapInput instance
-func NewStructureMapInput(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	name FhirId,
-	type_ FhirString,
-	mode StructureMapInputMode,
-	documentation FhirString,
-) *StructureMapInput {
-	return &StructureMapInput{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Name: name,
-		Type_: type_,
-		Mode: mode,
-		Documentation: documentation,
-	}
+func NewStructureMapInput() *StructureMapInput {
+	return &StructureMapInput{}
 }
+
 // FromJSON populates StructureMapInput from JSON data
 func (m *StructureMapInput) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -576,106 +264,54 @@ func (m *StructureMapInput) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of StructureMapInput
-func (m *StructureMapInput) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	name *FhirId,
-	type_ *FhirString,
-	mode *StructureMapInputMode,
-	documentation *FhirString,
-) *StructureMapInput {
+// Clone creates a deep copy of StructureMapInput
+func (m *StructureMapInput) Clone() *StructureMapInput {
+	if m == nil { return nil }
 	return &StructureMapInput{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Name: func() FhirId {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Type_: func() FhirString {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Mode: func() StructureMapInputMode {
-			if mode != nil { return *mode }
-			return m.Mode
-		}(),
-		Documentation: func() FhirString {
-			if documentation != nil { return *documentation }
-			return m.Documentation
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Name: m.Name.Clone(),
+		Type: m.Type.Clone(),
+		Mode: m.Mode.Clone(),
+		Documentation: m.Documentation.Clone(),
 	}
 }
+
+// Equals checks for equality with another StructureMapInput instance
+func (m *StructureMapInput) Equals(other *StructureMapInput) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Mode.Equals(other.Mode) { return false }
+	if !m.Documentation.Equals(other.Documentation) { return false }
+	return true
+}
+
 // StructureMapRule
 // Transform Rule from source to target.
 type StructureMapRule struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// name
-	// Name of the rule for internal references.
-	Name FhirId `json:"name,omitempty"`
-	// source
-	// Source inputs to the mapping.
-	Source []StructureMapSource `json:"source,omitempty"`
-	// target
-	// Content to create because of this mapping rule.
-	Target []StructureMapTarget `json:"target,omitempty"`
-	// rule
-	// Rules contained in this rule.
-	Rule []StructureMapRule `json:"rule,omitempty"`
-	// dependent
-	// Which other rules to apply in the context of this rule.
-	Dependent []StructureMapDependent `json:"dependent,omitempty"`
-	// documentation
-	// Documentation for this instance of data.
-	Documentation FhirString `json:"documentation,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Name *FhirId `json:"name,omitempty"`
+	Source []*StructureMapSource `json:"source,omitempty"`
+	Target []*StructureMapTarget `json:"target,omitempty"`
+	Rule []*StructureMapRule `json:"rule,omitempty"`
+	Dependent []*StructureMapDependent `json:"dependent,omitempty"`
+	Documentation *FhirString `json:"documentation,omitempty"`
 }
 
 // NewStructureMapRule creates a new StructureMapRule instance
-func NewStructureMapRule(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	name FhirId,
-	source []StructureMapSource,
-	target []StructureMapTarget,
-	rule []StructureMapRule,
-	dependent []StructureMapDependent,
-	documentation FhirString,
-) *StructureMapRule {
-	return &StructureMapRule{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Name: name,
-		Source: source,
-		Target: target,
-		Rule: rule,
-		Dependent: dependent,
-		Documentation: documentation,
-	}
+func NewStructureMapRule() *StructureMapRule {
+	return &StructureMapRule{}
 }
+
 // FromJSON populates StructureMapRule from JSON data
 func (m *StructureMapRule) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -686,386 +322,112 @@ func (m *StructureMapRule) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of StructureMapRule
-func (m *StructureMapRule) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	name *FhirId,
-	source *[]StructureMapSource,
-	target *[]StructureMapTarget,
-	rule *[]StructureMapRule,
-	dependent *[]StructureMapDependent,
-	documentation *FhirString,
-) *StructureMapRule {
+// Clone creates a deep copy of StructureMapRule
+func (m *StructureMapRule) Clone() *StructureMapRule {
+	if m == nil { return nil }
 	return &StructureMapRule{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Name: func() FhirId {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Source: func() []StructureMapSource {
-			if source != nil { return *source }
-			return m.Source
-		}(),
-		Target: func() []StructureMapTarget {
-			if target != nil { return *target }
-			return m.Target
-		}(),
-		Rule: func() []StructureMapRule {
-			if rule != nil { return *rule }
-			return m.Rule
-		}(),
-		Dependent: func() []StructureMapDependent {
-			if dependent != nil { return *dependent }
-			return m.Dependent
-		}(),
-		Documentation: func() FhirString {
-			if documentation != nil { return *documentation }
-			return m.Documentation
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Name: m.Name.Clone(),
+		Source: cloneSlices(m.Source),
+		Target: cloneSlices(m.Target),
+		Rule: cloneSlices(m.Rule),
+		Dependent: cloneSlices(m.Dependent),
+		Documentation: m.Documentation.Clone(),
 	}
 }
+
+// Equals checks for equality with another StructureMapRule instance
+func (m *StructureMapRule) Equals(other *StructureMapRule) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !compareSlices(m.Source, other.Source) { return false }
+	if !compareSlices(m.Target, other.Target) { return false }
+	if !compareSlices(m.Rule, other.Rule) { return false }
+	if !compareSlices(m.Dependent, other.Dependent) { return false }
+	if !m.Documentation.Equals(other.Documentation) { return false }
+	return true
+}
+
 // StructureMapSource
 // Source inputs to the mapping.
 type StructureMapSource struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// context
-	// Type or variable this rule applies to.
-	Context FhirId `json:"context,omitempty"`
-	// min
-	// Specified minimum cardinality for the element. This is optional; if present, it acts an implicit check on the input content.
-	Min FhirInteger `json:"min,omitempty"`
-	// max
-	// Specified maximum cardinality for the element - a number or a "*". This is optional; if present, it acts an implicit check on the input content (* just serves as documentation; it's the default value).
-	Max FhirString `json:"max,omitempty"`
-	// type
-	// Specified type for the element. This works as a condition on the mapping - use for polymorphic elements.
-	Type_ FhirString `json:"type,omitempty"`
-	// defaultValueBase64Binary
-	// A value to use if there is no existing value in the source object.
-	DefaultValueBase64Binary FhirBase64Binary `json:"defaultValueBase64Binary,omitempty"`
-	// defaultValueBoolean
-	// A value to use if there is no existing value in the source object.
-	DefaultValueBoolean FhirBoolean `json:"defaultValueBoolean,omitempty"`
-	// defaultValueCanonical
-	// A value to use if there is no existing value in the source object.
-	DefaultValueCanonical FhirCanonical `json:"defaultValueCanonical,omitempty"`
-	// defaultValueCode
-	// A value to use if there is no existing value in the source object.
-	DefaultValueCode FhirCode `json:"defaultValueCode,omitempty"`
-	// defaultValueDate
-	// A value to use if there is no existing value in the source object.
-	DefaultValueDate FhirDate `json:"defaultValueDate,omitempty"`
-	// defaultValueDateTime
-	// A value to use if there is no existing value in the source object.
-	DefaultValueDateTime FhirDateTime `json:"defaultValueDateTime,omitempty"`
-	// defaultValueDecimal
-	// A value to use if there is no existing value in the source object.
-	DefaultValueDecimal FhirDecimal `json:"defaultValueDecimal,omitempty"`
-	// defaultValueId
-	// A value to use if there is no existing value in the source object.
-	DefaultValueId FhirId `json:"defaultValueId,omitempty"`
-	// defaultValueInstant
-	// A value to use if there is no existing value in the source object.
-	DefaultValueInstant FhirInstant `json:"defaultValueInstant,omitempty"`
-	// defaultValueInteger
-	// A value to use if there is no existing value in the source object.
-	DefaultValueInteger FhirInteger `json:"defaultValueInteger,omitempty"`
-	// defaultValueMarkdown
-	// A value to use if there is no existing value in the source object.
-	DefaultValueMarkdown FhirMarkdown `json:"defaultValueMarkdown,omitempty"`
-	// defaultValueOid
-	// A value to use if there is no existing value in the source object.
-	DefaultValueOid FhirOid `json:"defaultValueOid,omitempty"`
-	// defaultValuePositiveInt
-	// A value to use if there is no existing value in the source object.
-	DefaultValuePositiveInt FhirPositiveInt `json:"defaultValuePositiveInt,omitempty"`
-	// defaultValueString
-	// A value to use if there is no existing value in the source object.
-	DefaultValueString FhirString `json:"defaultValueString,omitempty"`
-	// defaultValueTime
-	// A value to use if there is no existing value in the source object.
-	DefaultValueTime FhirTime `json:"defaultValueTime,omitempty"`
-	// defaultValueUnsignedInt
-	// A value to use if there is no existing value in the source object.
-	DefaultValueUnsignedInt FhirUnsignedInt `json:"defaultValueUnsignedInt,omitempty"`
-	// defaultValueUri
-	// A value to use if there is no existing value in the source object.
-	DefaultValueUri FhirUri `json:"defaultValueUri,omitempty"`
-	// defaultValueUrl
-	// A value to use if there is no existing value in the source object.
-	DefaultValueUrl FhirUrl `json:"defaultValueUrl,omitempty"`
-	// defaultValueUuid
-	// A value to use if there is no existing value in the source object.
-	DefaultValueUuid FhirUuid `json:"defaultValueUuid,omitempty"`
-	// defaultValueAddress
-	// A value to use if there is no existing value in the source object.
-	DefaultValueAddress Address `json:"defaultValueAddress,omitempty"`
-	// defaultValueAge
-	// A value to use if there is no existing value in the source object.
-	DefaultValueAge Age `json:"defaultValueAge,omitempty"`
-	// defaultValueAnnotation
-	// A value to use if there is no existing value in the source object.
-	DefaultValueAnnotation Annotation `json:"defaultValueAnnotation,omitempty"`
-	// defaultValueAttachment
-	// A value to use if there is no existing value in the source object.
-	DefaultValueAttachment Attachment `json:"defaultValueAttachment,omitempty"`
-	// defaultValueCodeableConcept
-	// A value to use if there is no existing value in the source object.
-	DefaultValueCodeableConcept CodeableConcept `json:"defaultValueCodeableConcept,omitempty"`
-	// defaultValueCoding
-	// A value to use if there is no existing value in the source object.
-	DefaultValueCoding Coding `json:"defaultValueCoding,omitempty"`
-	// defaultValueContactPoint
-	// A value to use if there is no existing value in the source object.
-	DefaultValueContactPoint ContactPoint `json:"defaultValueContactPoint,omitempty"`
-	// defaultValueCount
-	// A value to use if there is no existing value in the source object.
-	DefaultValueCount Count `json:"defaultValueCount,omitempty"`
-	// defaultValueDistance
-	// A value to use if there is no existing value in the source object.
-	DefaultValueDistance Distance `json:"defaultValueDistance,omitempty"`
-	// defaultValueDuration
-	// A value to use if there is no existing value in the source object.
-	DefaultValueDuration FhirDuration `json:"defaultValueDuration,omitempty"`
-	// defaultValueHumanName
-	// A value to use if there is no existing value in the source object.
-	DefaultValueHumanName HumanName `json:"defaultValueHumanName,omitempty"`
-	// defaultValueIdentifier
-	// A value to use if there is no existing value in the source object.
-	DefaultValueIdentifier Identifier `json:"defaultValueIdentifier,omitempty"`
-	// defaultValueMoney
-	// A value to use if there is no existing value in the source object.
-	DefaultValueMoney Money `json:"defaultValueMoney,omitempty"`
-	// defaultValuePeriod
-	// A value to use if there is no existing value in the source object.
-	DefaultValuePeriod Period `json:"defaultValuePeriod,omitempty"`
-	// defaultValueQuantity
-	// A value to use if there is no existing value in the source object.
-	DefaultValueQuantity Quantity `json:"defaultValueQuantity,omitempty"`
-	// defaultValueRange
-	// A value to use if there is no existing value in the source object.
-	DefaultValueRange Range `json:"defaultValueRange,omitempty"`
-	// defaultValueRatio
-	// A value to use if there is no existing value in the source object.
-	DefaultValueRatio Ratio `json:"defaultValueRatio,omitempty"`
-	// defaultValueReference
-	// A value to use if there is no existing value in the source object.
-	DefaultValueReference Reference `json:"defaultValueReference,omitempty"`
-	// defaultValueSampledData
-	// A value to use if there is no existing value in the source object.
-	DefaultValueSampledData SampledData `json:"defaultValueSampledData,omitempty"`
-	// defaultValueSignature
-	// A value to use if there is no existing value in the source object.
-	DefaultValueSignature Signature `json:"defaultValueSignature,omitempty"`
-	// defaultValueTiming
-	// A value to use if there is no existing value in the source object.
-	DefaultValueTiming Timing `json:"defaultValueTiming,omitempty"`
-	// defaultValueContactDetail
-	// A value to use if there is no existing value in the source object.
-	DefaultValueContactDetail ContactDetail `json:"defaultValueContactDetail,omitempty"`
-	// defaultValueContributor
-	// A value to use if there is no existing value in the source object.
-	DefaultValueContributor Contributor `json:"defaultValueContributor,omitempty"`
-	// defaultValueDataRequirement
-	// A value to use if there is no existing value in the source object.
-	DefaultValueDataRequirement DataRequirement `json:"defaultValueDataRequirement,omitempty"`
-	// defaultValueExpression
-	// A value to use if there is no existing value in the source object.
-	DefaultValueExpression FhirExpression `json:"defaultValueExpression,omitempty"`
-	// defaultValueParameterDefinition
-	// A value to use if there is no existing value in the source object.
-	DefaultValueParameterDefinition ParameterDefinition `json:"defaultValueParameterDefinition,omitempty"`
-	// defaultValueRelatedArtifact
-	// A value to use if there is no existing value in the source object.
-	DefaultValueRelatedArtifact RelatedArtifact `json:"defaultValueRelatedArtifact,omitempty"`
-	// defaultValueTriggerDefinition
-	// A value to use if there is no existing value in the source object.
-	DefaultValueTriggerDefinition TriggerDefinition `json:"defaultValueTriggerDefinition,omitempty"`
-	// defaultValueUsageContext
-	// A value to use if there is no existing value in the source object.
-	DefaultValueUsageContext UsageContext `json:"defaultValueUsageContext,omitempty"`
-	// defaultValueDosage
-	// A value to use if there is no existing value in the source object.
-	DefaultValueDosage Dosage `json:"defaultValueDosage,omitempty"`
-	// defaultValueMeta
-	// A value to use if there is no existing value in the source object.
-	DefaultValueMeta FhirMeta `json:"defaultValueMeta,omitempty"`
-	// element
-	// Optional field for this source.
-	Element FhirString `json:"element,omitempty"`
-	// listMode
-	// How to handle the list mode for this element.
-	ListMode StructureMapSourceListMode `json:"listMode,omitempty"`
-	// variable
-	// Named context for field, if a field is specified.
-	Variable FhirId `json:"variable,omitempty"`
-	// condition
-	// FHIRPath expression  - must be true or the rule does not apply.
-	Condition FhirString `json:"condition,omitempty"`
-	// check
-	// FHIRPath expression  - must be true or the mapping engine throws an error instead of completing.
-	Check FhirString `json:"check,omitempty"`
-	// logMessage
-	// A FHIRPath expression which specifies a message to put in the transform log when content matching the source rule is found.
-	LogMessage FhirString `json:"logMessage,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Context *FhirId `json:"context,omitempty"`
+	Min *FhirInteger `json:"min,omitempty"`
+	Max *FhirString `json:"max,omitempty"`
+	Type *FhirString `json:"type,omitempty"`
+	DefaultValueBase64Binary *FhirBase64Binary `json:"defaultvaluebase64binary,omitempty"`
+	DefaultValueBoolean *FhirBoolean `json:"defaultvalueboolean,omitempty"`
+	DefaultValueCanonical *FhirCanonical `json:"defaultvaluecanonical,omitempty"`
+	DefaultValueCode *FhirCode `json:"defaultvaluecode,omitempty"`
+	DefaultValueDate *FhirDate `json:"defaultvaluedate,omitempty"`
+	DefaultValueDateTime *FhirDateTime `json:"defaultvaluedatetime,omitempty"`
+	DefaultValueDecimal *FhirDecimal `json:"defaultvaluedecimal,omitempty"`
+	DefaultValueId *FhirId `json:"defaultvalueid,omitempty"`
+	DefaultValueInstant *FhirInstant `json:"defaultvalueinstant,omitempty"`
+	DefaultValueInteger *FhirInteger `json:"defaultvalueinteger,omitempty"`
+	DefaultValueMarkdown *FhirMarkdown `json:"defaultvaluemarkdown,omitempty"`
+	DefaultValueOid *FhirOid `json:"defaultvalueoid,omitempty"`
+	DefaultValuePositiveInt *FhirPositiveInt `json:"defaultvaluepositiveint,omitempty"`
+	DefaultValueString *FhirString `json:"defaultvaluestring,omitempty"`
+	DefaultValueTime *FhirTime `json:"defaultvaluetime,omitempty"`
+	DefaultValueUnsignedInt *FhirUnsignedInt `json:"defaultvalueunsignedint,omitempty"`
+	DefaultValueUri *FhirUri `json:"defaultvalueuri,omitempty"`
+	DefaultValueUrl *FhirUrl `json:"defaultvalueurl,omitempty"`
+	DefaultValueUuid *FhirUuid `json:"defaultvalueuuid,omitempty"`
+	DefaultValueAddress *Address `json:"defaultvalueaddress,omitempty"`
+	DefaultValueAge *Age `json:"defaultvalueage,omitempty"`
+	DefaultValueAnnotation *Annotation `json:"defaultvalueannotation,omitempty"`
+	DefaultValueAttachment *Attachment `json:"defaultvalueattachment,omitempty"`
+	DefaultValueCodeableConcept *CodeableConcept `json:"defaultvaluecodeableconcept,omitempty"`
+	DefaultValueCoding *Coding `json:"defaultvaluecoding,omitempty"`
+	DefaultValueContactPoint *ContactPoint `json:"defaultvaluecontactpoint,omitempty"`
+	DefaultValueCount *Count `json:"defaultvaluecount,omitempty"`
+	DefaultValueDistance *Distance `json:"defaultvaluedistance,omitempty"`
+	DefaultValueDuration *FhirDuration `json:"defaultvalueduration,omitempty"`
+	DefaultValueHumanName *HumanName `json:"defaultvaluehumanname,omitempty"`
+	DefaultValueIdentifier *Identifier `json:"defaultvalueidentifier,omitempty"`
+	DefaultValueMoney *Money `json:"defaultvaluemoney,omitempty"`
+	DefaultValuePeriod *Period `json:"defaultvalueperiod,omitempty"`
+	DefaultValueQuantity *Quantity `json:"defaultvaluequantity,omitempty"`
+	DefaultValueRange *Range `json:"defaultvaluerange,omitempty"`
+	DefaultValueRatio *Ratio `json:"defaultvalueratio,omitempty"`
+	DefaultValueReference *Reference `json:"defaultvaluereference,omitempty"`
+	DefaultValueSampledData *SampledData `json:"defaultvaluesampleddata,omitempty"`
+	DefaultValueSignature *Signature `json:"defaultvaluesignature,omitempty"`
+	DefaultValueTiming *Timing `json:"defaultvaluetiming,omitempty"`
+	DefaultValueContactDetail *ContactDetail `json:"defaultvaluecontactdetail,omitempty"`
+	DefaultValueContributor *Contributor `json:"defaultvaluecontributor,omitempty"`
+	DefaultValueDataRequirement *DataRequirement `json:"defaultvaluedatarequirement,omitempty"`
+	DefaultValueExpression *FhirExpression `json:"defaultvalueexpression,omitempty"`
+	DefaultValueParameterDefinition *ParameterDefinition `json:"defaultvalueparameterdefinition,omitempty"`
+	DefaultValueRelatedArtifact *RelatedArtifact `json:"defaultvaluerelatedartifact,omitempty"`
+	DefaultValueTriggerDefinition *TriggerDefinition `json:"defaultvaluetriggerdefinition,omitempty"`
+	DefaultValueUsageContext *UsageContext `json:"defaultvalueusagecontext,omitempty"`
+	DefaultValueDosage *Dosage `json:"defaultvaluedosage,omitempty"`
+	DefaultValueMeta *FhirMeta `json:"defaultvaluemeta,omitempty"`
+	Element *FhirString `json:"element,omitempty"`
+	ListMode *StructureMapSourceListMode `json:"listmode,omitempty"`
+	Variable *FhirId `json:"variable,omitempty"`
+	Condition *FhirString `json:"condition,omitempty"`
+	Check *FhirString `json:"check,omitempty"`
+	LogMessage *FhirString `json:"logmessage,omitempty"`
 }
 
 // NewStructureMapSource creates a new StructureMapSource instance
-func NewStructureMapSource(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	context FhirId,
-	min FhirInteger,
-	max FhirString,
-	type_ FhirString,
-	defaultValueBase64Binary FhirBase64Binary,
-	defaultValueBoolean FhirBoolean,
-	defaultValueCanonical FhirCanonical,
-	defaultValueCode FhirCode,
-	defaultValueDate FhirDate,
-	defaultValueDateTime FhirDateTime,
-	defaultValueDecimal FhirDecimal,
-	defaultValueId FhirId,
-	defaultValueInstant FhirInstant,
-	defaultValueInteger FhirInteger,
-	defaultValueMarkdown FhirMarkdown,
-	defaultValueOid FhirOid,
-	defaultValuePositiveInt FhirPositiveInt,
-	defaultValueString FhirString,
-	defaultValueTime FhirTime,
-	defaultValueUnsignedInt FhirUnsignedInt,
-	defaultValueUri FhirUri,
-	defaultValueUrl FhirUrl,
-	defaultValueUuid FhirUuid,
-	defaultValueAddress Address,
-	defaultValueAge Age,
-	defaultValueAnnotation Annotation,
-	defaultValueAttachment Attachment,
-	defaultValueCodeableConcept CodeableConcept,
-	defaultValueCoding Coding,
-	defaultValueContactPoint ContactPoint,
-	defaultValueCount Count,
-	defaultValueDistance Distance,
-	defaultValueDuration FhirDuration,
-	defaultValueHumanName HumanName,
-	defaultValueIdentifier Identifier,
-	defaultValueMoney Money,
-	defaultValuePeriod Period,
-	defaultValueQuantity Quantity,
-	defaultValueRange Range,
-	defaultValueRatio Ratio,
-	defaultValueReference Reference,
-	defaultValueSampledData SampledData,
-	defaultValueSignature Signature,
-	defaultValueTiming Timing,
-	defaultValueContactDetail ContactDetail,
-	defaultValueContributor Contributor,
-	defaultValueDataRequirement DataRequirement,
-	defaultValueExpression FhirExpression,
-	defaultValueParameterDefinition ParameterDefinition,
-	defaultValueRelatedArtifact RelatedArtifact,
-	defaultValueTriggerDefinition TriggerDefinition,
-	defaultValueUsageContext UsageContext,
-	defaultValueDosage Dosage,
-	defaultValueMeta FhirMeta,
-	element FhirString,
-	listMode StructureMapSourceListMode,
-	variable FhirId,
-	condition FhirString,
-	check FhirString,
-	logMessage FhirString,
-) *StructureMapSource {
-	return &StructureMapSource{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Context: context,
-		Min: min,
-		Max: max,
-		Type_: type_,
-		DefaultValueBase64Binary: defaultValueBase64Binary,
-		DefaultValueBoolean: defaultValueBoolean,
-		DefaultValueCanonical: defaultValueCanonical,
-		DefaultValueCode: defaultValueCode,
-		DefaultValueDate: defaultValueDate,
-		DefaultValueDateTime: defaultValueDateTime,
-		DefaultValueDecimal: defaultValueDecimal,
-		DefaultValueId: defaultValueId,
-		DefaultValueInstant: defaultValueInstant,
-		DefaultValueInteger: defaultValueInteger,
-		DefaultValueMarkdown: defaultValueMarkdown,
-		DefaultValueOid: defaultValueOid,
-		DefaultValuePositiveInt: defaultValuePositiveInt,
-		DefaultValueString: defaultValueString,
-		DefaultValueTime: defaultValueTime,
-		DefaultValueUnsignedInt: defaultValueUnsignedInt,
-		DefaultValueUri: defaultValueUri,
-		DefaultValueUrl: defaultValueUrl,
-		DefaultValueUuid: defaultValueUuid,
-		DefaultValueAddress: defaultValueAddress,
-		DefaultValueAge: defaultValueAge,
-		DefaultValueAnnotation: defaultValueAnnotation,
-		DefaultValueAttachment: defaultValueAttachment,
-		DefaultValueCodeableConcept: defaultValueCodeableConcept,
-		DefaultValueCoding: defaultValueCoding,
-		DefaultValueContactPoint: defaultValueContactPoint,
-		DefaultValueCount: defaultValueCount,
-		DefaultValueDistance: defaultValueDistance,
-		DefaultValueDuration: defaultValueDuration,
-		DefaultValueHumanName: defaultValueHumanName,
-		DefaultValueIdentifier: defaultValueIdentifier,
-		DefaultValueMoney: defaultValueMoney,
-		DefaultValuePeriod: defaultValuePeriod,
-		DefaultValueQuantity: defaultValueQuantity,
-		DefaultValueRange: defaultValueRange,
-		DefaultValueRatio: defaultValueRatio,
-		DefaultValueReference: defaultValueReference,
-		DefaultValueSampledData: defaultValueSampledData,
-		DefaultValueSignature: defaultValueSignature,
-		DefaultValueTiming: defaultValueTiming,
-		DefaultValueContactDetail: defaultValueContactDetail,
-		DefaultValueContributor: defaultValueContributor,
-		DefaultValueDataRequirement: defaultValueDataRequirement,
-		DefaultValueExpression: defaultValueExpression,
-		DefaultValueParameterDefinition: defaultValueParameterDefinition,
-		DefaultValueRelatedArtifact: defaultValueRelatedArtifact,
-		DefaultValueTriggerDefinition: defaultValueTriggerDefinition,
-		DefaultValueUsageContext: defaultValueUsageContext,
-		DefaultValueDosage: defaultValueDosage,
-		DefaultValueMeta: defaultValueMeta,
-		Element: element,
-		ListMode: listMode,
-		Variable: variable,
-		Condition: condition,
-		Check: check,
-		LogMessage: logMessage,
-	}
+func NewStructureMapSource() *StructureMapSource {
+	return &StructureMapSource{}
 }
+
 // FromJSON populates StructureMapSource from JSON data
 func (m *StructureMapSource) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1076,396 +438,168 @@ func (m *StructureMapSource) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of StructureMapSource
-func (m *StructureMapSource) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	context *FhirId,
-	min *FhirInteger,
-	max *FhirString,
-	type_ *FhirString,
-	defaultValueBase64Binary *FhirBase64Binary,
-	defaultValueBoolean *FhirBoolean,
-	defaultValueCanonical *FhirCanonical,
-	defaultValueCode *FhirCode,
-	defaultValueDate *FhirDate,
-	defaultValueDateTime *FhirDateTime,
-	defaultValueDecimal *FhirDecimal,
-	defaultValueId *FhirId,
-	defaultValueInstant *FhirInstant,
-	defaultValueInteger *FhirInteger,
-	defaultValueMarkdown *FhirMarkdown,
-	defaultValueOid *FhirOid,
-	defaultValuePositiveInt *FhirPositiveInt,
-	defaultValueString *FhirString,
-	defaultValueTime *FhirTime,
-	defaultValueUnsignedInt *FhirUnsignedInt,
-	defaultValueUri *FhirUri,
-	defaultValueUrl *FhirUrl,
-	defaultValueUuid *FhirUuid,
-	defaultValueAddress *Address,
-	defaultValueAge *Age,
-	defaultValueAnnotation *Annotation,
-	defaultValueAttachment *Attachment,
-	defaultValueCodeableConcept *CodeableConcept,
-	defaultValueCoding *Coding,
-	defaultValueContactPoint *ContactPoint,
-	defaultValueCount *Count,
-	defaultValueDistance *Distance,
-	defaultValueDuration *FhirDuration,
-	defaultValueHumanName *HumanName,
-	defaultValueIdentifier *Identifier,
-	defaultValueMoney *Money,
-	defaultValuePeriod *Period,
-	defaultValueQuantity *Quantity,
-	defaultValueRange *Range,
-	defaultValueRatio *Ratio,
-	defaultValueReference *Reference,
-	defaultValueSampledData *SampledData,
-	defaultValueSignature *Signature,
-	defaultValueTiming *Timing,
-	defaultValueContactDetail *ContactDetail,
-	defaultValueContributor *Contributor,
-	defaultValueDataRequirement *DataRequirement,
-	defaultValueExpression *FhirExpression,
-	defaultValueParameterDefinition *ParameterDefinition,
-	defaultValueRelatedArtifact *RelatedArtifact,
-	defaultValueTriggerDefinition *TriggerDefinition,
-	defaultValueUsageContext *UsageContext,
-	defaultValueDosage *Dosage,
-	defaultValueMeta *FhirMeta,
-	element *FhirString,
-	listMode *StructureMapSourceListMode,
-	variable *FhirId,
-	condition *FhirString,
-	check *FhirString,
-	logMessage *FhirString,
-) *StructureMapSource {
+// Clone creates a deep copy of StructureMapSource
+func (m *StructureMapSource) Clone() *StructureMapSource {
+	if m == nil { return nil }
 	return &StructureMapSource{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Context: func() FhirId {
-			if context != nil { return *context }
-			return m.Context
-		}(),
-		Min: func() FhirInteger {
-			if min != nil { return *min }
-			return m.Min
-		}(),
-		Max: func() FhirString {
-			if max != nil { return *max }
-			return m.Max
-		}(),
-		Type_: func() FhirString {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		DefaultValueBase64Binary: func() FhirBase64Binary {
-			if defaultValueBase64Binary != nil { return *defaultValueBase64Binary }
-			return m.DefaultValueBase64Binary
-		}(),
-		DefaultValueBoolean: func() FhirBoolean {
-			if defaultValueBoolean != nil { return *defaultValueBoolean }
-			return m.DefaultValueBoolean
-		}(),
-		DefaultValueCanonical: func() FhirCanonical {
-			if defaultValueCanonical != nil { return *defaultValueCanonical }
-			return m.DefaultValueCanonical
-		}(),
-		DefaultValueCode: func() FhirCode {
-			if defaultValueCode != nil { return *defaultValueCode }
-			return m.DefaultValueCode
-		}(),
-		DefaultValueDate: func() FhirDate {
-			if defaultValueDate != nil { return *defaultValueDate }
-			return m.DefaultValueDate
-		}(),
-		DefaultValueDateTime: func() FhirDateTime {
-			if defaultValueDateTime != nil { return *defaultValueDateTime }
-			return m.DefaultValueDateTime
-		}(),
-		DefaultValueDecimal: func() FhirDecimal {
-			if defaultValueDecimal != nil { return *defaultValueDecimal }
-			return m.DefaultValueDecimal
-		}(),
-		DefaultValueId: func() FhirId {
-			if defaultValueId != nil { return *defaultValueId }
-			return m.DefaultValueId
-		}(),
-		DefaultValueInstant: func() FhirInstant {
-			if defaultValueInstant != nil { return *defaultValueInstant }
-			return m.DefaultValueInstant
-		}(),
-		DefaultValueInteger: func() FhirInteger {
-			if defaultValueInteger != nil { return *defaultValueInteger }
-			return m.DefaultValueInteger
-		}(),
-		DefaultValueMarkdown: func() FhirMarkdown {
-			if defaultValueMarkdown != nil { return *defaultValueMarkdown }
-			return m.DefaultValueMarkdown
-		}(),
-		DefaultValueOid: func() FhirOid {
-			if defaultValueOid != nil { return *defaultValueOid }
-			return m.DefaultValueOid
-		}(),
-		DefaultValuePositiveInt: func() FhirPositiveInt {
-			if defaultValuePositiveInt != nil { return *defaultValuePositiveInt }
-			return m.DefaultValuePositiveInt
-		}(),
-		DefaultValueString: func() FhirString {
-			if defaultValueString != nil { return *defaultValueString }
-			return m.DefaultValueString
-		}(),
-		DefaultValueTime: func() FhirTime {
-			if defaultValueTime != nil { return *defaultValueTime }
-			return m.DefaultValueTime
-		}(),
-		DefaultValueUnsignedInt: func() FhirUnsignedInt {
-			if defaultValueUnsignedInt != nil { return *defaultValueUnsignedInt }
-			return m.DefaultValueUnsignedInt
-		}(),
-		DefaultValueUri: func() FhirUri {
-			if defaultValueUri != nil { return *defaultValueUri }
-			return m.DefaultValueUri
-		}(),
-		DefaultValueUrl: func() FhirUrl {
-			if defaultValueUrl != nil { return *defaultValueUrl }
-			return m.DefaultValueUrl
-		}(),
-		DefaultValueUuid: func() FhirUuid {
-			if defaultValueUuid != nil { return *defaultValueUuid }
-			return m.DefaultValueUuid
-		}(),
-		DefaultValueAddress: func() Address {
-			if defaultValueAddress != nil { return *defaultValueAddress }
-			return m.DefaultValueAddress
-		}(),
-		DefaultValueAge: func() Age {
-			if defaultValueAge != nil { return *defaultValueAge }
-			return m.DefaultValueAge
-		}(),
-		DefaultValueAnnotation: func() Annotation {
-			if defaultValueAnnotation != nil { return *defaultValueAnnotation }
-			return m.DefaultValueAnnotation
-		}(),
-		DefaultValueAttachment: func() Attachment {
-			if defaultValueAttachment != nil { return *defaultValueAttachment }
-			return m.DefaultValueAttachment
-		}(),
-		DefaultValueCodeableConcept: func() CodeableConcept {
-			if defaultValueCodeableConcept != nil { return *defaultValueCodeableConcept }
-			return m.DefaultValueCodeableConcept
-		}(),
-		DefaultValueCoding: func() Coding {
-			if defaultValueCoding != nil { return *defaultValueCoding }
-			return m.DefaultValueCoding
-		}(),
-		DefaultValueContactPoint: func() ContactPoint {
-			if defaultValueContactPoint != nil { return *defaultValueContactPoint }
-			return m.DefaultValueContactPoint
-		}(),
-		DefaultValueCount: func() Count {
-			if defaultValueCount != nil { return *defaultValueCount }
-			return m.DefaultValueCount
-		}(),
-		DefaultValueDistance: func() Distance {
-			if defaultValueDistance != nil { return *defaultValueDistance }
-			return m.DefaultValueDistance
-		}(),
-		DefaultValueDuration: func() FhirDuration {
-			if defaultValueDuration != nil { return *defaultValueDuration }
-			return m.DefaultValueDuration
-		}(),
-		DefaultValueHumanName: func() HumanName {
-			if defaultValueHumanName != nil { return *defaultValueHumanName }
-			return m.DefaultValueHumanName
-		}(),
-		DefaultValueIdentifier: func() Identifier {
-			if defaultValueIdentifier != nil { return *defaultValueIdentifier }
-			return m.DefaultValueIdentifier
-		}(),
-		DefaultValueMoney: func() Money {
-			if defaultValueMoney != nil { return *defaultValueMoney }
-			return m.DefaultValueMoney
-		}(),
-		DefaultValuePeriod: func() Period {
-			if defaultValuePeriod != nil { return *defaultValuePeriod }
-			return m.DefaultValuePeriod
-		}(),
-		DefaultValueQuantity: func() Quantity {
-			if defaultValueQuantity != nil { return *defaultValueQuantity }
-			return m.DefaultValueQuantity
-		}(),
-		DefaultValueRange: func() Range {
-			if defaultValueRange != nil { return *defaultValueRange }
-			return m.DefaultValueRange
-		}(),
-		DefaultValueRatio: func() Ratio {
-			if defaultValueRatio != nil { return *defaultValueRatio }
-			return m.DefaultValueRatio
-		}(),
-		DefaultValueReference: func() Reference {
-			if defaultValueReference != nil { return *defaultValueReference }
-			return m.DefaultValueReference
-		}(),
-		DefaultValueSampledData: func() SampledData {
-			if defaultValueSampledData != nil { return *defaultValueSampledData }
-			return m.DefaultValueSampledData
-		}(),
-		DefaultValueSignature: func() Signature {
-			if defaultValueSignature != nil { return *defaultValueSignature }
-			return m.DefaultValueSignature
-		}(),
-		DefaultValueTiming: func() Timing {
-			if defaultValueTiming != nil { return *defaultValueTiming }
-			return m.DefaultValueTiming
-		}(),
-		DefaultValueContactDetail: func() ContactDetail {
-			if defaultValueContactDetail != nil { return *defaultValueContactDetail }
-			return m.DefaultValueContactDetail
-		}(),
-		DefaultValueContributor: func() Contributor {
-			if defaultValueContributor != nil { return *defaultValueContributor }
-			return m.DefaultValueContributor
-		}(),
-		DefaultValueDataRequirement: func() DataRequirement {
-			if defaultValueDataRequirement != nil { return *defaultValueDataRequirement }
-			return m.DefaultValueDataRequirement
-		}(),
-		DefaultValueExpression: func() FhirExpression {
-			if defaultValueExpression != nil { return *defaultValueExpression }
-			return m.DefaultValueExpression
-		}(),
-		DefaultValueParameterDefinition: func() ParameterDefinition {
-			if defaultValueParameterDefinition != nil { return *defaultValueParameterDefinition }
-			return m.DefaultValueParameterDefinition
-		}(),
-		DefaultValueRelatedArtifact: func() RelatedArtifact {
-			if defaultValueRelatedArtifact != nil { return *defaultValueRelatedArtifact }
-			return m.DefaultValueRelatedArtifact
-		}(),
-		DefaultValueTriggerDefinition: func() TriggerDefinition {
-			if defaultValueTriggerDefinition != nil { return *defaultValueTriggerDefinition }
-			return m.DefaultValueTriggerDefinition
-		}(),
-		DefaultValueUsageContext: func() UsageContext {
-			if defaultValueUsageContext != nil { return *defaultValueUsageContext }
-			return m.DefaultValueUsageContext
-		}(),
-		DefaultValueDosage: func() Dosage {
-			if defaultValueDosage != nil { return *defaultValueDosage }
-			return m.DefaultValueDosage
-		}(),
-		DefaultValueMeta: func() FhirMeta {
-			if defaultValueMeta != nil { return *defaultValueMeta }
-			return m.DefaultValueMeta
-		}(),
-		Element: func() FhirString {
-			if element != nil { return *element }
-			return m.Element
-		}(),
-		ListMode: func() StructureMapSourceListMode {
-			if listMode != nil { return *listMode }
-			return m.ListMode
-		}(),
-		Variable: func() FhirId {
-			if variable != nil { return *variable }
-			return m.Variable
-		}(),
-		Condition: func() FhirString {
-			if condition != nil { return *condition }
-			return m.Condition
-		}(),
-		Check: func() FhirString {
-			if check != nil { return *check }
-			return m.Check
-		}(),
-		LogMessage: func() FhirString {
-			if logMessage != nil { return *logMessage }
-			return m.LogMessage
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Context: m.Context.Clone(),
+		Min: m.Min.Clone(),
+		Max: m.Max.Clone(),
+		Type: m.Type.Clone(),
+		DefaultValueBase64Binary: m.DefaultValueBase64Binary.Clone(),
+		DefaultValueBoolean: m.DefaultValueBoolean.Clone(),
+		DefaultValueCanonical: m.DefaultValueCanonical.Clone(),
+		DefaultValueCode: m.DefaultValueCode.Clone(),
+		DefaultValueDate: m.DefaultValueDate.Clone(),
+		DefaultValueDateTime: m.DefaultValueDateTime.Clone(),
+		DefaultValueDecimal: m.DefaultValueDecimal.Clone(),
+		DefaultValueId: m.DefaultValueId.Clone(),
+		DefaultValueInstant: m.DefaultValueInstant.Clone(),
+		DefaultValueInteger: m.DefaultValueInteger.Clone(),
+		DefaultValueMarkdown: m.DefaultValueMarkdown.Clone(),
+		DefaultValueOid: m.DefaultValueOid.Clone(),
+		DefaultValuePositiveInt: m.DefaultValuePositiveInt.Clone(),
+		DefaultValueString: m.DefaultValueString.Clone(),
+		DefaultValueTime: m.DefaultValueTime.Clone(),
+		DefaultValueUnsignedInt: m.DefaultValueUnsignedInt.Clone(),
+		DefaultValueUri: m.DefaultValueUri.Clone(),
+		DefaultValueUrl: m.DefaultValueUrl.Clone(),
+		DefaultValueUuid: m.DefaultValueUuid.Clone(),
+		DefaultValueAddress: m.DefaultValueAddress.Clone(),
+		DefaultValueAge: m.DefaultValueAge.Clone(),
+		DefaultValueAnnotation: m.DefaultValueAnnotation.Clone(),
+		DefaultValueAttachment: m.DefaultValueAttachment.Clone(),
+		DefaultValueCodeableConcept: m.DefaultValueCodeableConcept.Clone(),
+		DefaultValueCoding: m.DefaultValueCoding.Clone(),
+		DefaultValueContactPoint: m.DefaultValueContactPoint.Clone(),
+		DefaultValueCount: m.DefaultValueCount.Clone(),
+		DefaultValueDistance: m.DefaultValueDistance.Clone(),
+		DefaultValueDuration: m.DefaultValueDuration.Clone(),
+		DefaultValueHumanName: m.DefaultValueHumanName.Clone(),
+		DefaultValueIdentifier: m.DefaultValueIdentifier.Clone(),
+		DefaultValueMoney: m.DefaultValueMoney.Clone(),
+		DefaultValuePeriod: m.DefaultValuePeriod.Clone(),
+		DefaultValueQuantity: m.DefaultValueQuantity.Clone(),
+		DefaultValueRange: m.DefaultValueRange.Clone(),
+		DefaultValueRatio: m.DefaultValueRatio.Clone(),
+		DefaultValueReference: m.DefaultValueReference.Clone(),
+		DefaultValueSampledData: m.DefaultValueSampledData.Clone(),
+		DefaultValueSignature: m.DefaultValueSignature.Clone(),
+		DefaultValueTiming: m.DefaultValueTiming.Clone(),
+		DefaultValueContactDetail: m.DefaultValueContactDetail.Clone(),
+		DefaultValueContributor: m.DefaultValueContributor.Clone(),
+		DefaultValueDataRequirement: m.DefaultValueDataRequirement.Clone(),
+		DefaultValueExpression: m.DefaultValueExpression.Clone(),
+		DefaultValueParameterDefinition: m.DefaultValueParameterDefinition.Clone(),
+		DefaultValueRelatedArtifact: m.DefaultValueRelatedArtifact.Clone(),
+		DefaultValueTriggerDefinition: m.DefaultValueTriggerDefinition.Clone(),
+		DefaultValueUsageContext: m.DefaultValueUsageContext.Clone(),
+		DefaultValueDosage: m.DefaultValueDosage.Clone(),
+		DefaultValueMeta: m.DefaultValueMeta.Clone(),
+		Element: m.Element.Clone(),
+		ListMode: m.ListMode.Clone(),
+		Variable: m.Variable.Clone(),
+		Condition: m.Condition.Clone(),
+		Check: m.Check.Clone(),
+		LogMessage: m.LogMessage.Clone(),
 	}
 }
+
+// Equals checks for equality with another StructureMapSource instance
+func (m *StructureMapSource) Equals(other *StructureMapSource) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Context.Equals(other.Context) { return false }
+	if !m.Min.Equals(other.Min) { return false }
+	if !m.Max.Equals(other.Max) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.DefaultValueBase64Binary.Equals(other.DefaultValueBase64Binary) { return false }
+	if !m.DefaultValueBoolean.Equals(other.DefaultValueBoolean) { return false }
+	if !m.DefaultValueCanonical.Equals(other.DefaultValueCanonical) { return false }
+	if !m.DefaultValueCode.Equals(other.DefaultValueCode) { return false }
+	if !m.DefaultValueDate.Equals(other.DefaultValueDate) { return false }
+	if !m.DefaultValueDateTime.Equals(other.DefaultValueDateTime) { return false }
+	if !m.DefaultValueDecimal.Equals(other.DefaultValueDecimal) { return false }
+	if !m.DefaultValueId.Equals(other.DefaultValueId) { return false }
+	if !m.DefaultValueInstant.Equals(other.DefaultValueInstant) { return false }
+	if !m.DefaultValueInteger.Equals(other.DefaultValueInteger) { return false }
+	if !m.DefaultValueMarkdown.Equals(other.DefaultValueMarkdown) { return false }
+	if !m.DefaultValueOid.Equals(other.DefaultValueOid) { return false }
+	if !m.DefaultValuePositiveInt.Equals(other.DefaultValuePositiveInt) { return false }
+	if !m.DefaultValueString.Equals(other.DefaultValueString) { return false }
+	if !m.DefaultValueTime.Equals(other.DefaultValueTime) { return false }
+	if !m.DefaultValueUnsignedInt.Equals(other.DefaultValueUnsignedInt) { return false }
+	if !m.DefaultValueUri.Equals(other.DefaultValueUri) { return false }
+	if !m.DefaultValueUrl.Equals(other.DefaultValueUrl) { return false }
+	if !m.DefaultValueUuid.Equals(other.DefaultValueUuid) { return false }
+	if !m.DefaultValueAddress.Equals(other.DefaultValueAddress) { return false }
+	if !m.DefaultValueAge.Equals(other.DefaultValueAge) { return false }
+	if !m.DefaultValueAnnotation.Equals(other.DefaultValueAnnotation) { return false }
+	if !m.DefaultValueAttachment.Equals(other.DefaultValueAttachment) { return false }
+	if !m.DefaultValueCodeableConcept.Equals(other.DefaultValueCodeableConcept) { return false }
+	if !m.DefaultValueCoding.Equals(other.DefaultValueCoding) { return false }
+	if !m.DefaultValueContactPoint.Equals(other.DefaultValueContactPoint) { return false }
+	if !m.DefaultValueCount.Equals(other.DefaultValueCount) { return false }
+	if !m.DefaultValueDistance.Equals(other.DefaultValueDistance) { return false }
+	if !m.DefaultValueDuration.Equals(other.DefaultValueDuration) { return false }
+	if !m.DefaultValueHumanName.Equals(other.DefaultValueHumanName) { return false }
+	if !m.DefaultValueIdentifier.Equals(other.DefaultValueIdentifier) { return false }
+	if !m.DefaultValueMoney.Equals(other.DefaultValueMoney) { return false }
+	if !m.DefaultValuePeriod.Equals(other.DefaultValuePeriod) { return false }
+	if !m.DefaultValueQuantity.Equals(other.DefaultValueQuantity) { return false }
+	if !m.DefaultValueRange.Equals(other.DefaultValueRange) { return false }
+	if !m.DefaultValueRatio.Equals(other.DefaultValueRatio) { return false }
+	if !m.DefaultValueReference.Equals(other.DefaultValueReference) { return false }
+	if !m.DefaultValueSampledData.Equals(other.DefaultValueSampledData) { return false }
+	if !m.DefaultValueSignature.Equals(other.DefaultValueSignature) { return false }
+	if !m.DefaultValueTiming.Equals(other.DefaultValueTiming) { return false }
+	if !m.DefaultValueContactDetail.Equals(other.DefaultValueContactDetail) { return false }
+	if !m.DefaultValueContributor.Equals(other.DefaultValueContributor) { return false }
+	if !m.DefaultValueDataRequirement.Equals(other.DefaultValueDataRequirement) { return false }
+	if !m.DefaultValueExpression.Equals(other.DefaultValueExpression) { return false }
+	if !m.DefaultValueParameterDefinition.Equals(other.DefaultValueParameterDefinition) { return false }
+	if !m.DefaultValueRelatedArtifact.Equals(other.DefaultValueRelatedArtifact) { return false }
+	if !m.DefaultValueTriggerDefinition.Equals(other.DefaultValueTriggerDefinition) { return false }
+	if !m.DefaultValueUsageContext.Equals(other.DefaultValueUsageContext) { return false }
+	if !m.DefaultValueDosage.Equals(other.DefaultValueDosage) { return false }
+	if !m.DefaultValueMeta.Equals(other.DefaultValueMeta) { return false }
+	if !m.Element.Equals(other.Element) { return false }
+	if !m.ListMode.Equals(other.ListMode) { return false }
+	if !m.Variable.Equals(other.Variable) { return false }
+	if !m.Condition.Equals(other.Condition) { return false }
+	if !m.Check.Equals(other.Check) { return false }
+	if !m.LogMessage.Equals(other.LogMessage) { return false }
+	return true
+}
+
 // StructureMapTarget
 // Content to create because of this mapping rule.
 type StructureMapTarget struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// context
-	// Type or variable this rule applies to.
-	Context FhirId `json:"context,omitempty"`
-	// contextType
-	// How to interpret the context.
-	ContextType StructureMapContextType `json:"contextType,omitempty"`
-	// element
-	// Field to create in the context.
-	Element FhirString `json:"element,omitempty"`
-	// variable
-	// Named context for field, if desired, and a field is specified.
-	Variable FhirId `json:"variable,omitempty"`
-	// listMode
-	// If field is a list, how to manage the list.
-	ListMode []StructureMapTargetListMode `json:"listMode,omitempty"`
-	// listRuleId
-	// Internal rule reference for shared list items.
-	ListRuleId FhirId `json:"listRuleId,omitempty"`
-	// transform
-	// How the data is copied / created.
-	Transform StructureMapTransform `json:"transform,omitempty"`
-	// parameter
-	// Parameters to the transform.
-	Parameter []StructureMapParameter `json:"parameter,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Context *FhirId `json:"context,omitempty"`
+	ContextType *StructureMapContextType `json:"contexttype,omitempty"`
+	Element *FhirString `json:"element,omitempty"`
+	Variable *FhirId `json:"variable,omitempty"`
+	ListMode []*StructureMapTargetListMode `json:"listmode,omitempty"`
+	ListRuleId *FhirId `json:"listruleid,omitempty"`
+	Transform *StructureMapTransform `json:"transform,omitempty"`
+	Parameter []*StructureMapParameter `json:"parameter,omitempty"`
 }
 
 // NewStructureMapTarget creates a new StructureMapTarget instance
-func NewStructureMapTarget(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	context FhirId,
-	contextType StructureMapContextType,
-	element FhirString,
-	variable FhirId,
-	listMode []StructureMapTargetListMode,
-	listRuleId FhirId,
-	transform StructureMapTransform,
-	parameter []StructureMapParameter,
-) *StructureMapTarget {
-	return &StructureMapTarget{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Context: context,
-		ContextType: contextType,
-		Element: element,
-		Variable: variable,
-		ListMode: listMode,
-		ListRuleId: listRuleId,
-		Transform: transform,
-		Parameter: parameter,
-	}
+func NewStructureMapTarget() *StructureMapTarget {
+	return &StructureMapTarget{}
 }
+
 // FromJSON populates StructureMapTarget from JSON data
 func (m *StructureMapTarget) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1476,121 +610,61 @@ func (m *StructureMapTarget) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of StructureMapTarget
-func (m *StructureMapTarget) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	context *FhirId,
-	contextType *StructureMapContextType,
-	element *FhirString,
-	variable *FhirId,
-	listMode *[]StructureMapTargetListMode,
-	listRuleId *FhirId,
-	transform *StructureMapTransform,
-	parameter *[]StructureMapParameter,
-) *StructureMapTarget {
+// Clone creates a deep copy of StructureMapTarget
+func (m *StructureMapTarget) Clone() *StructureMapTarget {
+	if m == nil { return nil }
 	return &StructureMapTarget{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Context: func() FhirId {
-			if context != nil { return *context }
-			return m.Context
-		}(),
-		ContextType: func() StructureMapContextType {
-			if contextType != nil { return *contextType }
-			return m.ContextType
-		}(),
-		Element: func() FhirString {
-			if element != nil { return *element }
-			return m.Element
-		}(),
-		Variable: func() FhirId {
-			if variable != nil { return *variable }
-			return m.Variable
-		}(),
-		ListMode: func() []StructureMapTargetListMode {
-			if listMode != nil { return *listMode }
-			return m.ListMode
-		}(),
-		ListRuleId: func() FhirId {
-			if listRuleId != nil { return *listRuleId }
-			return m.ListRuleId
-		}(),
-		Transform: func() StructureMapTransform {
-			if transform != nil { return *transform }
-			return m.Transform
-		}(),
-		Parameter: func() []StructureMapParameter {
-			if parameter != nil { return *parameter }
-			return m.Parameter
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Context: m.Context.Clone(),
+		ContextType: m.ContextType.Clone(),
+		Element: m.Element.Clone(),
+		Variable: m.Variable.Clone(),
+		ListMode: cloneSlices(m.ListMode),
+		ListRuleId: m.ListRuleId.Clone(),
+		Transform: m.Transform.Clone(),
+		Parameter: cloneSlices(m.Parameter),
 	}
 }
+
+// Equals checks for equality with another StructureMapTarget instance
+func (m *StructureMapTarget) Equals(other *StructureMapTarget) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Context.Equals(other.Context) { return false }
+	if !m.ContextType.Equals(other.ContextType) { return false }
+	if !m.Element.Equals(other.Element) { return false }
+	if !m.Variable.Equals(other.Variable) { return false }
+	if !compareSlices(m.ListMode, other.ListMode) { return false }
+	if !m.ListRuleId.Equals(other.ListRuleId) { return false }
+	if !m.Transform.Equals(other.Transform) { return false }
+	if !compareSlices(m.Parameter, other.Parameter) { return false }
+	return true
+}
+
 // StructureMapParameter
 // Parameters to the transform.
 type StructureMapParameter struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// valueId
-	// Parameter value - variable or literal.
-	ValueId FhirId `json:"valueId,omitempty"`
-	// valueString
-	// Parameter value - variable or literal.
-	ValueString FhirString `json:"valueString,omitempty"`
-	// valueBoolean
-	// Parameter value - variable or literal.
-	ValueBoolean FhirBoolean `json:"valueBoolean,omitempty"`
-	// valueInteger
-	// Parameter value - variable or literal.
-	ValueInteger FhirInteger `json:"valueInteger,omitempty"`
-	// valueDecimal
-	// Parameter value - variable or literal.
-	ValueDecimal FhirDecimal `json:"valueDecimal,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	ValueId *FhirId `json:"valueid,omitempty"`
+	ValueString *FhirString `json:"valuestring,omitempty"`
+	ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
+	ValueInteger *FhirInteger `json:"valueinteger,omitempty"`
+	ValueDecimal *FhirDecimal `json:"valuedecimal,omitempty"`
 }
 
 // NewStructureMapParameter creates a new StructureMapParameter instance
-func NewStructureMapParameter(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	valueId FhirId,
-	valueString FhirString,
-	valueBoolean FhirBoolean,
-	valueInteger FhirInteger,
-	valueDecimal FhirDecimal,
-) *StructureMapParameter {
-	return &StructureMapParameter{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		ValueId: valueId,
-		ValueString: valueString,
-		ValueBoolean: valueBoolean,
-		ValueInteger: valueInteger,
-		ValueDecimal: valueDecimal,
-	}
+func NewStructureMapParameter() *StructureMapParameter {
+	return &StructureMapParameter{}
 }
+
 // FromJSON populates StructureMapParameter from JSON data
 func (m *StructureMapParameter) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1601,91 +675,52 @@ func (m *StructureMapParameter) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of StructureMapParameter
-func (m *StructureMapParameter) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	valueId *FhirId,
-	valueString *FhirString,
-	valueBoolean *FhirBoolean,
-	valueInteger *FhirInteger,
-	valueDecimal *FhirDecimal,
-) *StructureMapParameter {
+// Clone creates a deep copy of StructureMapParameter
+func (m *StructureMapParameter) Clone() *StructureMapParameter {
+	if m == nil { return nil }
 	return &StructureMapParameter{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		ValueId: func() FhirId {
-			if valueId != nil { return *valueId }
-			return m.ValueId
-		}(),
-		ValueString: func() FhirString {
-			if valueString != nil { return *valueString }
-			return m.ValueString
-		}(),
-		ValueBoolean: func() FhirBoolean {
-			if valueBoolean != nil { return *valueBoolean }
-			return m.ValueBoolean
-		}(),
-		ValueInteger: func() FhirInteger {
-			if valueInteger != nil { return *valueInteger }
-			return m.ValueInteger
-		}(),
-		ValueDecimal: func() FhirDecimal {
-			if valueDecimal != nil { return *valueDecimal }
-			return m.ValueDecimal
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		ValueId: m.ValueId.Clone(),
+		ValueString: m.ValueString.Clone(),
+		ValueBoolean: m.ValueBoolean.Clone(),
+		ValueInteger: m.ValueInteger.Clone(),
+		ValueDecimal: m.ValueDecimal.Clone(),
 	}
 }
+
+// Equals checks for equality with another StructureMapParameter instance
+func (m *StructureMapParameter) Equals(other *StructureMapParameter) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.ValueId.Equals(other.ValueId) { return false }
+	if !m.ValueString.Equals(other.ValueString) { return false }
+	if !m.ValueBoolean.Equals(other.ValueBoolean) { return false }
+	if !m.ValueInteger.Equals(other.ValueInteger) { return false }
+	if !m.ValueDecimal.Equals(other.ValueDecimal) { return false }
+	return true
+}
+
 // StructureMapDependent
 // Which other rules to apply in the context of this rule.
 type StructureMapDependent struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// name
-	// Name of a rule or group to apply.
-	Name FhirId `json:"name,omitempty"`
-	// variable
-	// Variable to pass to the rule or group.
-	Variable []FhirString `json:"variable,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Name *FhirId `json:"name,omitempty"`
+	Variable []*FhirString `json:"variable,omitempty"`
 }
 
 // NewStructureMapDependent creates a new StructureMapDependent instance
-func NewStructureMapDependent(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	name FhirId,
-	variable []FhirString,
-) *StructureMapDependent {
-	return &StructureMapDependent{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Name: name,
-		Variable: variable,
-	}
+func NewStructureMapDependent() *StructureMapDependent {
+	return &StructureMapDependent{}
 }
+
 // FromJSON populates StructureMapDependent from JSON data
 func (m *StructureMapDependent) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1696,34 +731,27 @@ func (m *StructureMapDependent) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of StructureMapDependent
-func (m *StructureMapDependent) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	name *FhirId,
-	variable *[]FhirString,
-) *StructureMapDependent {
+// Clone creates a deep copy of StructureMapDependent
+func (m *StructureMapDependent) Clone() *StructureMapDependent {
+	if m == nil { return nil }
 	return &StructureMapDependent{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Name: func() FhirId {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Variable: func() []FhirString {
-			if variable != nil { return *variable }
-			return m.Variable
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Name: m.Name.Clone(),
+		Variable: cloneSlices(m.Variable),
 	}
 }
+
+// Equals checks for equality with another StructureMapDependent instance
+func (m *StructureMapDependent) Equals(other *StructureMapDependent) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !compareSlices(m.Variable, other.Variable) { return false }
+	return true
+}
+

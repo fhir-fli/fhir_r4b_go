@@ -3,179 +3,50 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // DeviceDefinition
 // The characteristics, operational status and capabilities of a medical-related component of a medical device.
 type DeviceDefinition struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// Unique instance identifiers assigned to a device by the software, manufacturers, other organizations or owners. For example: handle ID.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// udiDeviceIdentifier
-	// Unique device identifier (UDI) assigned to device label or package.  Note that the Device may include multiple udiCarriers as it either may include just the udiCarrier for the jurisdiction it is sold, or for multiple jurisdictions it could have been sold.
-	UdiDeviceIdentifier []DeviceDefinitionUdiDeviceIdentifier `json:"udiDeviceIdentifier,omitempty"`
-	// manufacturerString
-	// A name of the manufacturer.
-	ManufacturerString FhirString `json:"manufacturerString,omitempty"`
-	// manufacturerReference
-	// A name of the manufacturer.
-	ManufacturerReference Reference `json:"manufacturerReference,omitempty"`
-	// deviceName
-	// A name given to the device to identify it.
-	DeviceName []DeviceDefinitionDeviceName `json:"deviceName,omitempty"`
-	// modelNumber
-	// The model number for the device.
-	ModelNumber FhirString `json:"modelNumber,omitempty"`
-	// type
-	// What kind of device or device system this is.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// specialization
-	// The capabilities supported on a  device, the standards to which the device conforms for a particular purpose, and used for the communication.
-	Specialization []DeviceDefinitionSpecialization `json:"specialization,omitempty"`
-	// version
-	// The available versions of the device, e.g., software versions.
-	Version []FhirString `json:"version,omitempty"`
-	// safety
-	// Safety characteristics of the device.
-	Safety []CodeableConcept `json:"safety,omitempty"`
-	// shelfLifeStorage
-	// Shelf Life and storage information.
-	ShelfLifeStorage []ProductShelfLife `json:"shelfLifeStorage,omitempty"`
-	// physicalCharacteristics
-	// Dimensions, color etc.
-	PhysicalCharacteristics ProdCharacteristic `json:"physicalCharacteristics,omitempty"`
-	// languageCode
-	// Language code for the human-readable text strings produced by the device (all supported).
-	LanguageCode []CodeableConcept `json:"languageCode,omitempty"`
-	// capability
-	// Device capabilities.
-	Capability []DeviceDefinitionCapability `json:"capability,omitempty"`
-	// property
-	// The actual configuration settings of a device as it actually operates, e.g., regulation status, time properties.
-	Property []DeviceDefinitionProperty `json:"property,omitempty"`
-	// owner
-	// An organization that is responsible for the provision and ongoing maintenance of the device.
-	Owner Reference `json:"owner,omitempty"`
-	// contact
-	// Contact details for an organization or a particular human that is responsible for the device.
-	Contact []ContactPoint `json:"contact,omitempty"`
-	// url
-	// A network address on which the device may be contacted directly.
-	Url FhirUri `json:"url,omitempty"`
-	// onlineInformation
-	// Access to on-line information about the device.
-	OnlineInformation FhirUri `json:"onlineInformation,omitempty"`
-	// note
-	// Descriptive information, usage information or implantation information that is not captured in an existing element.
-	Note []Annotation `json:"note,omitempty"`
-	// quantity
-	// The quantity of the device present in the packaging (e.g. the number of devices present in a pack, or the number of devices in the same package of the medicinal product).
-	Quantity Quantity `json:"quantity,omitempty"`
-	// parentDevice
-	// The parent device it can be part of.
-	ParentDevice Reference `json:"parentDevice,omitempty"`
-	// material
-	// A substance used to create the material(s) of which the device is made.
-	Material []DeviceDefinitionMaterial `json:"material,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	UdiDeviceIdentifier []*DeviceDefinitionUdiDeviceIdentifier `json:"udideviceidentifier,omitempty"`
+	ManufacturerString *FhirString `json:"manufacturerstring,omitempty"`
+	ManufacturerReference *Reference `json:"manufacturerreference,omitempty"`
+	DeviceName []*DeviceDefinitionDeviceName `json:"devicename,omitempty"`
+	ModelNumber *FhirString `json:"modelnumber,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Specialization []*DeviceDefinitionSpecialization `json:"specialization,omitempty"`
+	Version []*FhirString `json:"version,omitempty"`
+	Safety []*CodeableConcept `json:"safety,omitempty"`
+	ShelfLifeStorage []*ProductShelfLife `json:"shelflifestorage,omitempty"`
+	PhysicalCharacteristics *ProdCharacteristic `json:"physicalcharacteristics,omitempty"`
+	LanguageCode []*CodeableConcept `json:"languagecode,omitempty"`
+	Capability []*DeviceDefinitionCapability `json:"capability,omitempty"`
+	Property []*DeviceDefinitionProperty `json:"property,omitempty"`
+	Owner *Reference `json:"owner,omitempty"`
+	Contact []*ContactPoint `json:"contact,omitempty"`
+	Url *FhirUri `json:"url,omitempty"`
+	OnlineInformation *FhirUri `json:"onlineinformation,omitempty"`
+	Note []*Annotation `json:"note,omitempty"`
+	Quantity *Quantity `json:"quantity,omitempty"`
+	ParentDevice *Reference `json:"parentdevice,omitempty"`
+	Material []*DeviceDefinitionMaterial `json:"material,omitempty"`
 }
 
 // NewDeviceDefinition creates a new DeviceDefinition instance
-func NewDeviceDefinition(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	udiDeviceIdentifier []DeviceDefinitionUdiDeviceIdentifier,
-	manufacturerString FhirString,
-	manufacturerReference Reference,
-	deviceName []DeviceDefinitionDeviceName,
-	modelNumber FhirString,
-	type_ CodeableConcept,
-	specialization []DeviceDefinitionSpecialization,
-	version []FhirString,
-	safety []CodeableConcept,
-	shelfLifeStorage []ProductShelfLife,
-	physicalCharacteristics ProdCharacteristic,
-	languageCode []CodeableConcept,
-	capability []DeviceDefinitionCapability,
-	property []DeviceDefinitionProperty,
-	owner Reference,
-	contact []ContactPoint,
-	url FhirUri,
-	onlineInformation FhirUri,
-	note []Annotation,
-	quantity Quantity,
-	parentDevice Reference,
-	material []DeviceDefinitionMaterial,
-) *DeviceDefinition {
-	return &DeviceDefinition{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		UdiDeviceIdentifier: udiDeviceIdentifier,
-		ManufacturerString: manufacturerString,
-		ManufacturerReference: manufacturerReference,
-		DeviceName: deviceName,
-		ModelNumber: modelNumber,
-		Type_: type_,
-		Specialization: specialization,
-		Version: version,
-		Safety: safety,
-		ShelfLifeStorage: shelfLifeStorage,
-		PhysicalCharacteristics: physicalCharacteristics,
-		LanguageCode: languageCode,
-		Capability: capability,
-		Property: property,
-		Owner: owner,
-		Contact: contact,
-		Url: url,
-		OnlineInformation: onlineInformation,
-		Note: note,
-		Quantity: quantity,
-		ParentDevice: parentDevice,
-		Material: material,
-	}
+func NewDeviceDefinition() *DeviceDefinition {
+	return &DeviceDefinition{}
 }
+
 // FromJSON populates DeviceDefinition from JSON data
 func (m *DeviceDefinition) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -186,211 +57,99 @@ func (m *DeviceDefinition) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of DeviceDefinition
-func (m *DeviceDefinition) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	udiDeviceIdentifier *[]DeviceDefinitionUdiDeviceIdentifier,
-	manufacturerString *FhirString,
-	manufacturerReference *Reference,
-	deviceName *[]DeviceDefinitionDeviceName,
-	modelNumber *FhirString,
-	type_ *CodeableConcept,
-	specialization *[]DeviceDefinitionSpecialization,
-	version *[]FhirString,
-	safety *[]CodeableConcept,
-	shelfLifeStorage *[]ProductShelfLife,
-	physicalCharacteristics *ProdCharacteristic,
-	languageCode *[]CodeableConcept,
-	capability *[]DeviceDefinitionCapability,
-	property *[]DeviceDefinitionProperty,
-	owner *Reference,
-	contact *[]ContactPoint,
-	url *FhirUri,
-	onlineInformation *FhirUri,
-	note *[]Annotation,
-	quantity *Quantity,
-	parentDevice *Reference,
-	material *[]DeviceDefinitionMaterial,
-) *DeviceDefinition {
+// Clone creates a deep copy of DeviceDefinition
+func (m *DeviceDefinition) Clone() *DeviceDefinition {
+	if m == nil { return nil }
 	return &DeviceDefinition{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		UdiDeviceIdentifier: func() []DeviceDefinitionUdiDeviceIdentifier {
-			if udiDeviceIdentifier != nil { return *udiDeviceIdentifier }
-			return m.UdiDeviceIdentifier
-		}(),
-		ManufacturerString: func() FhirString {
-			if manufacturerString != nil { return *manufacturerString }
-			return m.ManufacturerString
-		}(),
-		ManufacturerReference: func() Reference {
-			if manufacturerReference != nil { return *manufacturerReference }
-			return m.ManufacturerReference
-		}(),
-		DeviceName: func() []DeviceDefinitionDeviceName {
-			if deviceName != nil { return *deviceName }
-			return m.DeviceName
-		}(),
-		ModelNumber: func() FhirString {
-			if modelNumber != nil { return *modelNumber }
-			return m.ModelNumber
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Specialization: func() []DeviceDefinitionSpecialization {
-			if specialization != nil { return *specialization }
-			return m.Specialization
-		}(),
-		Version: func() []FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Safety: func() []CodeableConcept {
-			if safety != nil { return *safety }
-			return m.Safety
-		}(),
-		ShelfLifeStorage: func() []ProductShelfLife {
-			if shelfLifeStorage != nil { return *shelfLifeStorage }
-			return m.ShelfLifeStorage
-		}(),
-		PhysicalCharacteristics: func() ProdCharacteristic {
-			if physicalCharacteristics != nil { return *physicalCharacteristics }
-			return m.PhysicalCharacteristics
-		}(),
-		LanguageCode: func() []CodeableConcept {
-			if languageCode != nil { return *languageCode }
-			return m.LanguageCode
-		}(),
-		Capability: func() []DeviceDefinitionCapability {
-			if capability != nil { return *capability }
-			return m.Capability
-		}(),
-		Property: func() []DeviceDefinitionProperty {
-			if property != nil { return *property }
-			return m.Property
-		}(),
-		Owner: func() Reference {
-			if owner != nil { return *owner }
-			return m.Owner
-		}(),
-		Contact: func() []ContactPoint {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
-		Url: func() FhirUri {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		OnlineInformation: func() FhirUri {
-			if onlineInformation != nil { return *onlineInformation }
-			return m.OnlineInformation
-		}(),
-		Note: func() []Annotation {
-			if note != nil { return *note }
-			return m.Note
-		}(),
-		Quantity: func() Quantity {
-			if quantity != nil { return *quantity }
-			return m.Quantity
-		}(),
-		ParentDevice: func() Reference {
-			if parentDevice != nil { return *parentDevice }
-			return m.ParentDevice
-		}(),
-		Material: func() []DeviceDefinitionMaterial {
-			if material != nil { return *material }
-			return m.Material
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		UdiDeviceIdentifier: cloneSlices(m.UdiDeviceIdentifier),
+		ManufacturerString: m.ManufacturerString.Clone(),
+		ManufacturerReference: m.ManufacturerReference.Clone(),
+		DeviceName: cloneSlices(m.DeviceName),
+		ModelNumber: m.ModelNumber.Clone(),
+		Type: m.Type.Clone(),
+		Specialization: cloneSlices(m.Specialization),
+		Version: cloneSlices(m.Version),
+		Safety: cloneSlices(m.Safety),
+		ShelfLifeStorage: cloneSlices(m.ShelfLifeStorage),
+		PhysicalCharacteristics: m.PhysicalCharacteristics.Clone(),
+		LanguageCode: cloneSlices(m.LanguageCode),
+		Capability: cloneSlices(m.Capability),
+		Property: cloneSlices(m.Property),
+		Owner: m.Owner.Clone(),
+		Contact: cloneSlices(m.Contact),
+		Url: m.Url.Clone(),
+		OnlineInformation: m.OnlineInformation.Clone(),
+		Note: cloneSlices(m.Note),
+		Quantity: m.Quantity.Clone(),
+		ParentDevice: m.ParentDevice.Clone(),
+		Material: cloneSlices(m.Material),
 	}
 }
+
+// Equals checks for equality with another DeviceDefinition instance
+func (m *DeviceDefinition) Equals(other *DeviceDefinition) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !compareSlices(m.UdiDeviceIdentifier, other.UdiDeviceIdentifier) { return false }
+	if !m.ManufacturerString.Equals(other.ManufacturerString) { return false }
+	if !m.ManufacturerReference.Equals(other.ManufacturerReference) { return false }
+	if !compareSlices(m.DeviceName, other.DeviceName) { return false }
+	if !m.ModelNumber.Equals(other.ModelNumber) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !compareSlices(m.Specialization, other.Specialization) { return false }
+	if !compareSlices(m.Version, other.Version) { return false }
+	if !compareSlices(m.Safety, other.Safety) { return false }
+	if !compareSlices(m.ShelfLifeStorage, other.ShelfLifeStorage) { return false }
+	if !m.PhysicalCharacteristics.Equals(other.PhysicalCharacteristics) { return false }
+	if !compareSlices(m.LanguageCode, other.LanguageCode) { return false }
+	if !compareSlices(m.Capability, other.Capability) { return false }
+	if !compareSlices(m.Property, other.Property) { return false }
+	if !m.Owner.Equals(other.Owner) { return false }
+	if !compareSlices(m.Contact, other.Contact) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !m.OnlineInformation.Equals(other.OnlineInformation) { return false }
+	if !compareSlices(m.Note, other.Note) { return false }
+	if !m.Quantity.Equals(other.Quantity) { return false }
+	if !m.ParentDevice.Equals(other.ParentDevice) { return false }
+	if !compareSlices(m.Material, other.Material) { return false }
+	return true
+}
+
 // DeviceDefinitionUdiDeviceIdentifier
 // Unique device identifier (UDI) assigned to device label or package.  Note that the Device may include multiple udiCarriers as it either may include just the udiCarrier for the jurisdiction it is sold, or for multiple jurisdictions it could have been sold.
 type DeviceDefinitionUdiDeviceIdentifier struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// deviceIdentifier
-	// The identifier that is to be associated with every Device that references this DeviceDefintiion for the issuer and jurisdication porvided in the DeviceDefinition.udiDeviceIdentifier.
-	DeviceIdentifier FhirString `json:"deviceIdentifier,omitempty"`
-	// issuer
-	// The organization that assigns the identifier algorithm.
-	Issuer FhirUri `json:"issuer,omitempty"`
-	// jurisdiction
-	// The jurisdiction to which the deviceIdentifier applies.
-	Jurisdiction FhirUri `json:"jurisdiction,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	DeviceIdentifier *FhirString `json:"deviceidentifier,omitempty"`
+	Issuer *FhirUri `json:"issuer,omitempty"`
+	Jurisdiction *FhirUri `json:"jurisdiction,omitempty"`
 }
 
 // NewDeviceDefinitionUdiDeviceIdentifier creates a new DeviceDefinitionUdiDeviceIdentifier instance
-func NewDeviceDefinitionUdiDeviceIdentifier(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	deviceIdentifier FhirString,
-	issuer FhirUri,
-	jurisdiction FhirUri,
-) *DeviceDefinitionUdiDeviceIdentifier {
-	return &DeviceDefinitionUdiDeviceIdentifier{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		DeviceIdentifier: deviceIdentifier,
-		Issuer: issuer,
-		Jurisdiction: jurisdiction,
-	}
+func NewDeviceDefinitionUdiDeviceIdentifier() *DeviceDefinitionUdiDeviceIdentifier {
+	return &DeviceDefinitionUdiDeviceIdentifier{}
 }
+
 // FromJSON populates DeviceDefinitionUdiDeviceIdentifier from JSON data
 func (m *DeviceDefinitionUdiDeviceIdentifier) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -401,82 +160,48 @@ func (m *DeviceDefinitionUdiDeviceIdentifier) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of DeviceDefinitionUdiDeviceIdentifier
-func (m *DeviceDefinitionUdiDeviceIdentifier) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	deviceIdentifier *FhirString,
-	issuer *FhirUri,
-	jurisdiction *FhirUri,
-) *DeviceDefinitionUdiDeviceIdentifier {
+// Clone creates a deep copy of DeviceDefinitionUdiDeviceIdentifier
+func (m *DeviceDefinitionUdiDeviceIdentifier) Clone() *DeviceDefinitionUdiDeviceIdentifier {
+	if m == nil { return nil }
 	return &DeviceDefinitionUdiDeviceIdentifier{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		DeviceIdentifier: func() FhirString {
-			if deviceIdentifier != nil { return *deviceIdentifier }
-			return m.DeviceIdentifier
-		}(),
-		Issuer: func() FhirUri {
-			if issuer != nil { return *issuer }
-			return m.Issuer
-		}(),
-		Jurisdiction: func() FhirUri {
-			if jurisdiction != nil { return *jurisdiction }
-			return m.Jurisdiction
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		DeviceIdentifier: m.DeviceIdentifier.Clone(),
+		Issuer: m.Issuer.Clone(),
+		Jurisdiction: m.Jurisdiction.Clone(),
 	}
 }
+
+// Equals checks for equality with another DeviceDefinitionUdiDeviceIdentifier instance
+func (m *DeviceDefinitionUdiDeviceIdentifier) Equals(other *DeviceDefinitionUdiDeviceIdentifier) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.DeviceIdentifier.Equals(other.DeviceIdentifier) { return false }
+	if !m.Issuer.Equals(other.Issuer) { return false }
+	if !m.Jurisdiction.Equals(other.Jurisdiction) { return false }
+	return true
+}
+
 // DeviceDefinitionDeviceName
 // A name given to the device to identify it.
 type DeviceDefinitionDeviceName struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// name
-	// The name of the device.
-	Name FhirString `json:"name,omitempty"`
-	// type
-	// The type of deviceName.
-// UDILabelName | UserFriendlyName | PatientReportedName | ManufactureDeviceName | ModelName.
-	Type_ DeviceNameType `json:"type,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Type *DeviceNameType `json:"type,omitempty"`
 }
 
 // NewDeviceDefinitionDeviceName creates a new DeviceDefinitionDeviceName instance
-func NewDeviceDefinitionDeviceName(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	name FhirString,
-	type_ DeviceNameType,
-) *DeviceDefinitionDeviceName {
-	return &DeviceDefinitionDeviceName{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Name: name,
-		Type_: type_,
-	}
+func NewDeviceDefinitionDeviceName() *DeviceDefinitionDeviceName {
+	return &DeviceDefinitionDeviceName{}
 }
+
 // FromJSON populates DeviceDefinitionDeviceName from JSON data
 func (m *DeviceDefinitionDeviceName) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -487,76 +212,46 @@ func (m *DeviceDefinitionDeviceName) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of DeviceDefinitionDeviceName
-func (m *DeviceDefinitionDeviceName) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	name *FhirString,
-	type_ *DeviceNameType,
-) *DeviceDefinitionDeviceName {
+// Clone creates a deep copy of DeviceDefinitionDeviceName
+func (m *DeviceDefinitionDeviceName) Clone() *DeviceDefinitionDeviceName {
+	if m == nil { return nil }
 	return &DeviceDefinitionDeviceName{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Type_: func() DeviceNameType {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Name: m.Name.Clone(),
+		Type: m.Type.Clone(),
 	}
 }
+
+// Equals checks for equality with another DeviceDefinitionDeviceName instance
+func (m *DeviceDefinitionDeviceName) Equals(other *DeviceDefinitionDeviceName) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	return true
+}
+
 // DeviceDefinitionSpecialization
 // The capabilities supported on a  device, the standards to which the device conforms for a particular purpose, and used for the communication.
 type DeviceDefinitionSpecialization struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// systemType
-	// The standard that is used to operate and communicate.
-	SystemType FhirString `json:"systemType,omitempty"`
-	// version
-	// The version of the standard that is used to operate and communicate.
-	Version FhirString `json:"version,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	SystemType *FhirString `json:"systemtype,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
 }
 
 // NewDeviceDefinitionSpecialization creates a new DeviceDefinitionSpecialization instance
-func NewDeviceDefinitionSpecialization(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	systemType FhirString,
-	version FhirString,
-) *DeviceDefinitionSpecialization {
-	return &DeviceDefinitionSpecialization{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		SystemType: systemType,
-		Version: version,
-	}
+func NewDeviceDefinitionSpecialization() *DeviceDefinitionSpecialization {
+	return &DeviceDefinitionSpecialization{}
 }
+
 // FromJSON populates DeviceDefinitionSpecialization from JSON data
 func (m *DeviceDefinitionSpecialization) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -567,76 +262,46 @@ func (m *DeviceDefinitionSpecialization) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of DeviceDefinitionSpecialization
-func (m *DeviceDefinitionSpecialization) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	systemType *FhirString,
-	version *FhirString,
-) *DeviceDefinitionSpecialization {
+// Clone creates a deep copy of DeviceDefinitionSpecialization
+func (m *DeviceDefinitionSpecialization) Clone() *DeviceDefinitionSpecialization {
+	if m == nil { return nil }
 	return &DeviceDefinitionSpecialization{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		SystemType: func() FhirString {
-			if systemType != nil { return *systemType }
-			return m.SystemType
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		SystemType: m.SystemType.Clone(),
+		Version: m.Version.Clone(),
 	}
 }
+
+// Equals checks for equality with another DeviceDefinitionSpecialization instance
+func (m *DeviceDefinitionSpecialization) Equals(other *DeviceDefinitionSpecialization) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.SystemType.Equals(other.SystemType) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	return true
+}
+
 // DeviceDefinitionCapability
 // Device capabilities.
 type DeviceDefinitionCapability struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// Type of capability.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// description
-	// Description of capability.
-	Description []CodeableConcept `json:"description,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Description []*CodeableConcept `json:"description,omitempty"`
 }
 
 // NewDeviceDefinitionCapability creates a new DeviceDefinitionCapability instance
-func NewDeviceDefinitionCapability(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	description []CodeableConcept,
-) *DeviceDefinitionCapability {
-	return &DeviceDefinitionCapability{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Description: description,
-	}
+func NewDeviceDefinitionCapability() *DeviceDefinitionCapability {
+	return &DeviceDefinitionCapability{}
 }
+
 // FromJSON populates DeviceDefinitionCapability from JSON data
 func (m *DeviceDefinitionCapability) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -647,81 +312,47 @@ func (m *DeviceDefinitionCapability) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of DeviceDefinitionCapability
-func (m *DeviceDefinitionCapability) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	description *[]CodeableConcept,
-) *DeviceDefinitionCapability {
+// Clone creates a deep copy of DeviceDefinitionCapability
+func (m *DeviceDefinitionCapability) Clone() *DeviceDefinitionCapability {
+	if m == nil { return nil }
 	return &DeviceDefinitionCapability{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Description: func() []CodeableConcept {
-			if description != nil { return *description }
-			return m.Description
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Description: cloneSlices(m.Description),
 	}
 }
+
+// Equals checks for equality with another DeviceDefinitionCapability instance
+func (m *DeviceDefinitionCapability) Equals(other *DeviceDefinitionCapability) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !compareSlices(m.Description, other.Description) { return false }
+	return true
+}
+
 // DeviceDefinitionProperty
 // The actual configuration settings of a device as it actually operates, e.g., regulation status, time properties.
 type DeviceDefinitionProperty struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// Code that specifies the property DeviceDefinitionPropetyCode (Extensible).
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// valueQuantity
-	// Property value as a quantity.
-	ValueQuantity []Quantity `json:"valueQuantity,omitempty"`
-	// valueCode
-	// Property value as a code, e.g., NTP4 (synced to NTP).
-	ValueCode []CodeableConcept `json:"valueCode,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	ValueQuantity []*Quantity `json:"valuequantity,omitempty"`
+	ValueCode []*CodeableConcept `json:"valuecode,omitempty"`
 }
 
 // NewDeviceDefinitionProperty creates a new DeviceDefinitionProperty instance
-func NewDeviceDefinitionProperty(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	valueQuantity []Quantity,
-	valueCode []CodeableConcept,
-) *DeviceDefinitionProperty {
-	return &DeviceDefinitionProperty{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		ValueQuantity: valueQuantity,
-		ValueCode: valueCode,
-	}
+func NewDeviceDefinitionProperty() *DeviceDefinitionProperty {
+	return &DeviceDefinitionProperty{}
 }
+
 // FromJSON populates DeviceDefinitionProperty from JSON data
 func (m *DeviceDefinitionProperty) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -732,86 +363,49 @@ func (m *DeviceDefinitionProperty) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of DeviceDefinitionProperty
-func (m *DeviceDefinitionProperty) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	valueQuantity *[]Quantity,
-	valueCode *[]CodeableConcept,
-) *DeviceDefinitionProperty {
+// Clone creates a deep copy of DeviceDefinitionProperty
+func (m *DeviceDefinitionProperty) Clone() *DeviceDefinitionProperty {
+	if m == nil { return nil }
 	return &DeviceDefinitionProperty{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		ValueQuantity: func() []Quantity {
-			if valueQuantity != nil { return *valueQuantity }
-			return m.ValueQuantity
-		}(),
-		ValueCode: func() []CodeableConcept {
-			if valueCode != nil { return *valueCode }
-			return m.ValueCode
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		ValueQuantity: cloneSlices(m.ValueQuantity),
+		ValueCode: cloneSlices(m.ValueCode),
 	}
 }
+
+// Equals checks for equality with another DeviceDefinitionProperty instance
+func (m *DeviceDefinitionProperty) Equals(other *DeviceDefinitionProperty) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !compareSlices(m.ValueQuantity, other.ValueQuantity) { return false }
+	if !compareSlices(m.ValueCode, other.ValueCode) { return false }
+	return true
+}
+
 // DeviceDefinitionMaterial
 // A substance used to create the material(s) of which the device is made.
 type DeviceDefinitionMaterial struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// substance
-	// The substance.
-	Substance CodeableConcept `json:"substance,omitempty"`
-	// alternate
-	// Indicates an alternative material of the device.
-	Alternate FhirBoolean `json:"alternate,omitempty"`
-	// allergenicIndicator
-	// Whether the substance is a known or suspected allergen.
-	AllergenicIndicator FhirBoolean `json:"allergenicIndicator,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Substance *CodeableConcept `json:"substance,omitempty"`
+	Alternate *FhirBoolean `json:"alternate,omitempty"`
+	AllergenicIndicator *FhirBoolean `json:"allergenicindicator,omitempty"`
 }
 
 // NewDeviceDefinitionMaterial creates a new DeviceDefinitionMaterial instance
-func NewDeviceDefinitionMaterial(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	substance CodeableConcept,
-	alternate FhirBoolean,
-	allergenicIndicator FhirBoolean,
-) *DeviceDefinitionMaterial {
-	return &DeviceDefinitionMaterial{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Substance: substance,
-		Alternate: alternate,
-		AllergenicIndicator: allergenicIndicator,
-	}
+func NewDeviceDefinitionMaterial() *DeviceDefinitionMaterial {
+	return &DeviceDefinitionMaterial{}
 }
+
 // FromJSON populates DeviceDefinitionMaterial from JSON data
 func (m *DeviceDefinitionMaterial) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -822,39 +416,29 @@ func (m *DeviceDefinitionMaterial) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of DeviceDefinitionMaterial
-func (m *DeviceDefinitionMaterial) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	substance *CodeableConcept,
-	alternate *FhirBoolean,
-	allergenicIndicator *FhirBoolean,
-) *DeviceDefinitionMaterial {
+// Clone creates a deep copy of DeviceDefinitionMaterial
+func (m *DeviceDefinitionMaterial) Clone() *DeviceDefinitionMaterial {
+	if m == nil { return nil }
 	return &DeviceDefinitionMaterial{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Substance: func() CodeableConcept {
-			if substance != nil { return *substance }
-			return m.Substance
-		}(),
-		Alternate: func() FhirBoolean {
-			if alternate != nil { return *alternate }
-			return m.Alternate
-		}(),
-		AllergenicIndicator: func() FhirBoolean {
-			if allergenicIndicator != nil { return *allergenicIndicator }
-			return m.AllergenicIndicator
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Substance: m.Substance.Clone(),
+		Alternate: m.Alternate.Clone(),
+		AllergenicIndicator: m.AllergenicIndicator.Clone(),
 	}
 }
+
+// Equals checks for equality with another DeviceDefinitionMaterial instance
+func (m *DeviceDefinitionMaterial) Equals(other *DeviceDefinitionMaterial) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Substance.Equals(other.Substance) { return false }
+	if !m.Alternate.Equals(other.Alternate) { return false }
+	if !m.AllergenicIndicator.Equals(other.AllergenicIndicator) { return false }
+	return true
+}
+

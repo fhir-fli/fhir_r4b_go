@@ -3,194 +3,53 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // Evidence
 // The Evidence Resource provides a machine-interpretable expression of an evidence concept including the evidence variables (eg population, exposures/interventions, comparators, outcomes, measured variables, confounding variables), the statistics, and the certainty of this evidence.
 type Evidence struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// url
-	// An absolute URI that is used to identify this evidence when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this summary is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the summary is stored on different servers.
-	Url FhirUri `json:"url,omitempty"`
-	// identifier
-	// A formal identifier that is used to identify this summary when it is represented in other formats, or referenced in a specification, model, design or an instance.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// version
-	// The identifier that is used to identify this version of the summary when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the summary author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.
-	Version FhirString `json:"version,omitempty"`
-	// title
-	// A short, descriptive, user-friendly title for the summary.
-	Title FhirString `json:"title,omitempty"`
-	// citeAsReference
-	// Citation Resource or display of suggested citation for this evidence.
-	CiteAsReference Reference `json:"citeAsReference,omitempty"`
-	// citeAsMarkdown
-	// Citation Resource or display of suggested citation for this evidence.
-	CiteAsMarkdown FhirMarkdown `json:"citeAsMarkdown,omitempty"`
-	// status
-	// The status of this summary. Enables tracking the life-cycle of the content.
-	Status PublicationStatus `json:"status,omitempty"`
-	// date
-	// The date  (and optionally time) when the summary was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the summary changes.
-	Date FhirDateTime `json:"date,omitempty"`
-	// useContext
-	// The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate evidence instances.
-	UseContext []UsageContext `json:"useContext,omitempty"`
-	// approvalDate
-	// The date on which the resource content was approved by the publisher. Approval happens once when the content is officially approved for usage.
-	ApprovalDate FhirDate `json:"approvalDate,omitempty"`
-	// lastReviewDate
-	// The date on which the resource content was last reviewed. Review happens periodically after approval but does not change the original approval date.
-	LastReviewDate FhirDate `json:"lastReviewDate,omitempty"`
-	// publisher
-	// The name of the organization or individual that published the evidence.
-	Publisher FhirString `json:"publisher,omitempty"`
-	// contact
-	// Contact details to assist a user in finding and communicating with the publisher.
-	Contact []ContactDetail `json:"contact,omitempty"`
-	// author
-	// An individiual, organization, or device primarily involved in the creation and maintenance of the content.
-	Author []ContactDetail `json:"author,omitempty"`
-	// editor
-	// An individiual, organization, or device primarily responsible for internal coherence of the content.
-	Editor []ContactDetail `json:"editor,omitempty"`
-	// reviewer
-	// An individiual, organization, or device primarily responsible for review of some aspect of the content.
-	Reviewer []ContactDetail `json:"reviewer,omitempty"`
-	// endorser
-	// An individiual, organization, or device responsible for officially endorsing the content for use in some setting.
-	Endorser []ContactDetail `json:"endorser,omitempty"`
-	// relatedArtifact
-	// Link or citation to artifact associated with the summary.
-	RelatedArtifact []RelatedArtifact `json:"relatedArtifact,omitempty"`
-	// description
-	// A free text natural language description of the evidence from a consumer's perspective.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// assertion
-	// Declarative description of the Evidence.
-	Assertion FhirMarkdown `json:"assertion,omitempty"`
-	// note
-	// Footnotes and/or explanatory notes.
-	Note []Annotation `json:"note,omitempty"`
-	// variableDefinition
-	// Evidence variable such as population, exposure, or outcome.
-	VariableDefinition []EvidenceVariableDefinition `json:"variableDefinition,omitempty"`
-	// synthesisType
-	// The method to combine studies.
-	SynthesisType CodeableConcept `json:"synthesisType,omitempty"`
-	// studyType
-	// The type of study that produced this evidence.
-	StudyType CodeableConcept `json:"studyType,omitempty"`
-	// statistic
-	// Values and parameters for a single statistic.
-	Statistic []EvidenceStatistic `json:"statistic,omitempty"`
-	// certainty
-	// Assessment of certainty, confidence in the estimates, or quality of the evidence.
-	Certainty []EvidenceCertainty `json:"certainty,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Url *FhirUri `json:"url,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
+	Title *FhirString `json:"title,omitempty"`
+	CiteAsReference *Reference `json:"citeasreference,omitempty"`
+	CiteAsMarkdown *FhirMarkdown `json:"citeasmarkdown,omitempty"`
+	Status *PublicationStatus `json:"status,omitempty"`
+	Date *FhirDateTime `json:"date,omitempty"`
+	UseContext []*UsageContext `json:"usecontext,omitempty"`
+	ApprovalDate *FhirDate `json:"approvaldate,omitempty"`
+	LastReviewDate *FhirDate `json:"lastreviewdate,omitempty"`
+	Publisher *FhirString `json:"publisher,omitempty"`
+	Contact []*ContactDetail `json:"contact,omitempty"`
+	Author []*ContactDetail `json:"author,omitempty"`
+	Editor []*ContactDetail `json:"editor,omitempty"`
+	Reviewer []*ContactDetail `json:"reviewer,omitempty"`
+	Endorser []*ContactDetail `json:"endorser,omitempty"`
+	RelatedArtifact []*RelatedArtifact `json:"relatedartifact,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	Assertion *FhirMarkdown `json:"assertion,omitempty"`
+	Note []*Annotation `json:"note,omitempty"`
+	VariableDefinition []*EvidenceVariableDefinition `json:"variabledefinition,omitempty"`
+	SynthesisType *CodeableConcept `json:"synthesistype,omitempty"`
+	StudyType *CodeableConcept `json:"studytype,omitempty"`
+	Statistic []*EvidenceStatistic `json:"statistic,omitempty"`
+	Certainty []*EvidenceCertainty `json:"certainty,omitempty"`
 }
 
 // NewEvidence creates a new Evidence instance
-func NewEvidence(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	url FhirUri,
-	identifier []Identifier,
-	version FhirString,
-	title FhirString,
-	citeAsReference Reference,
-	citeAsMarkdown FhirMarkdown,
-	status PublicationStatus,
-	date FhirDateTime,
-	useContext []UsageContext,
-	approvalDate FhirDate,
-	lastReviewDate FhirDate,
-	publisher FhirString,
-	contact []ContactDetail,
-	author []ContactDetail,
-	editor []ContactDetail,
-	reviewer []ContactDetail,
-	endorser []ContactDetail,
-	relatedArtifact []RelatedArtifact,
-	description FhirMarkdown,
-	assertion FhirMarkdown,
-	note []Annotation,
-	variableDefinition []EvidenceVariableDefinition,
-	synthesisType CodeableConcept,
-	studyType CodeableConcept,
-	statistic []EvidenceStatistic,
-	certainty []EvidenceCertainty,
-) *Evidence {
-	return &Evidence{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Url: url,
-		Identifier: identifier,
-		Version: version,
-		Title: title,
-		CiteAsReference: citeAsReference,
-		CiteAsMarkdown: citeAsMarkdown,
-		Status: status,
-		Date: date,
-		UseContext: useContext,
-		ApprovalDate: approvalDate,
-		LastReviewDate: lastReviewDate,
-		Publisher: publisher,
-		Contact: contact,
-		Author: author,
-		Editor: editor,
-		Reviewer: reviewer,
-		Endorser: endorser,
-		RelatedArtifact: relatedArtifact,
-		Description: description,
-		Assertion: assertion,
-		Note: note,
-		VariableDefinition: variableDefinition,
-		SynthesisType: synthesisType,
-		StudyType: studyType,
-		Statistic: statistic,
-		Certainty: certainty,
-	}
+func NewEvidence() *Evidence {
+	return &Evidence{}
 }
+
 // FromJSON populates Evidence from JSON data
 func (m *Evidence) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -201,241 +60,108 @@ func (m *Evidence) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of Evidence
-func (m *Evidence) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	url *FhirUri,
-	identifier *[]Identifier,
-	version *FhirString,
-	title *FhirString,
-	citeAsReference *Reference,
-	citeAsMarkdown *FhirMarkdown,
-	status *PublicationStatus,
-	date *FhirDateTime,
-	useContext *[]UsageContext,
-	approvalDate *FhirDate,
-	lastReviewDate *FhirDate,
-	publisher *FhirString,
-	contact *[]ContactDetail,
-	author *[]ContactDetail,
-	editor *[]ContactDetail,
-	reviewer *[]ContactDetail,
-	endorser *[]ContactDetail,
-	relatedArtifact *[]RelatedArtifact,
-	description *FhirMarkdown,
-	assertion *FhirMarkdown,
-	note *[]Annotation,
-	variableDefinition *[]EvidenceVariableDefinition,
-	synthesisType *CodeableConcept,
-	studyType *CodeableConcept,
-	statistic *[]EvidenceStatistic,
-	certainty *[]EvidenceCertainty,
-) *Evidence {
+// Clone creates a deep copy of Evidence
+func (m *Evidence) Clone() *Evidence {
+	if m == nil { return nil }
 	return &Evidence{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Url: func() FhirUri {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Title: func() FhirString {
-			if title != nil { return *title }
-			return m.Title
-		}(),
-		CiteAsReference: func() Reference {
-			if citeAsReference != nil { return *citeAsReference }
-			return m.CiteAsReference
-		}(),
-		CiteAsMarkdown: func() FhirMarkdown {
-			if citeAsMarkdown != nil { return *citeAsMarkdown }
-			return m.CiteAsMarkdown
-		}(),
-		Status: func() PublicationStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Date: func() FhirDateTime {
-			if date != nil { return *date }
-			return m.Date
-		}(),
-		UseContext: func() []UsageContext {
-			if useContext != nil { return *useContext }
-			return m.UseContext
-		}(),
-		ApprovalDate: func() FhirDate {
-			if approvalDate != nil { return *approvalDate }
-			return m.ApprovalDate
-		}(),
-		LastReviewDate: func() FhirDate {
-			if lastReviewDate != nil { return *lastReviewDate }
-			return m.LastReviewDate
-		}(),
-		Publisher: func() FhirString {
-			if publisher != nil { return *publisher }
-			return m.Publisher
-		}(),
-		Contact: func() []ContactDetail {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
-		Author: func() []ContactDetail {
-			if author != nil { return *author }
-			return m.Author
-		}(),
-		Editor: func() []ContactDetail {
-			if editor != nil { return *editor }
-			return m.Editor
-		}(),
-		Reviewer: func() []ContactDetail {
-			if reviewer != nil { return *reviewer }
-			return m.Reviewer
-		}(),
-		Endorser: func() []ContactDetail {
-			if endorser != nil { return *endorser }
-			return m.Endorser
-		}(),
-		RelatedArtifact: func() []RelatedArtifact {
-			if relatedArtifact != nil { return *relatedArtifact }
-			return m.RelatedArtifact
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Assertion: func() FhirMarkdown {
-			if assertion != nil { return *assertion }
-			return m.Assertion
-		}(),
-		Note: func() []Annotation {
-			if note != nil { return *note }
-			return m.Note
-		}(),
-		VariableDefinition: func() []EvidenceVariableDefinition {
-			if variableDefinition != nil { return *variableDefinition }
-			return m.VariableDefinition
-		}(),
-		SynthesisType: func() CodeableConcept {
-			if synthesisType != nil { return *synthesisType }
-			return m.SynthesisType
-		}(),
-		StudyType: func() CodeableConcept {
-			if studyType != nil { return *studyType }
-			return m.StudyType
-		}(),
-		Statistic: func() []EvidenceStatistic {
-			if statistic != nil { return *statistic }
-			return m.Statistic
-		}(),
-		Certainty: func() []EvidenceCertainty {
-			if certainty != nil { return *certainty }
-			return m.Certainty
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Url: m.Url.Clone(),
+		Identifier: cloneSlices(m.Identifier),
+		Version: m.Version.Clone(),
+		Title: m.Title.Clone(),
+		CiteAsReference: m.CiteAsReference.Clone(),
+		CiteAsMarkdown: m.CiteAsMarkdown.Clone(),
+		Status: m.Status.Clone(),
+		Date: m.Date.Clone(),
+		UseContext: cloneSlices(m.UseContext),
+		ApprovalDate: m.ApprovalDate.Clone(),
+		LastReviewDate: m.LastReviewDate.Clone(),
+		Publisher: m.Publisher.Clone(),
+		Contact: cloneSlices(m.Contact),
+		Author: cloneSlices(m.Author),
+		Editor: cloneSlices(m.Editor),
+		Reviewer: cloneSlices(m.Reviewer),
+		Endorser: cloneSlices(m.Endorser),
+		RelatedArtifact: cloneSlices(m.RelatedArtifact),
+		Description: m.Description.Clone(),
+		Assertion: m.Assertion.Clone(),
+		Note: cloneSlices(m.Note),
+		VariableDefinition: cloneSlices(m.VariableDefinition),
+		SynthesisType: m.SynthesisType.Clone(),
+		StudyType: m.StudyType.Clone(),
+		Statistic: cloneSlices(m.Statistic),
+		Certainty: cloneSlices(m.Certainty),
 	}
 }
+
+// Equals checks for equality with another Evidence instance
+func (m *Evidence) Equals(other *Evidence) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !m.Title.Equals(other.Title) { return false }
+	if !m.CiteAsReference.Equals(other.CiteAsReference) { return false }
+	if !m.CiteAsMarkdown.Equals(other.CiteAsMarkdown) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Date.Equals(other.Date) { return false }
+	if !compareSlices(m.UseContext, other.UseContext) { return false }
+	if !m.ApprovalDate.Equals(other.ApprovalDate) { return false }
+	if !m.LastReviewDate.Equals(other.LastReviewDate) { return false }
+	if !m.Publisher.Equals(other.Publisher) { return false }
+	if !compareSlices(m.Contact, other.Contact) { return false }
+	if !compareSlices(m.Author, other.Author) { return false }
+	if !compareSlices(m.Editor, other.Editor) { return false }
+	if !compareSlices(m.Reviewer, other.Reviewer) { return false }
+	if !compareSlices(m.Endorser, other.Endorser) { return false }
+	if !compareSlices(m.RelatedArtifact, other.RelatedArtifact) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.Assertion.Equals(other.Assertion) { return false }
+	if !compareSlices(m.Note, other.Note) { return false }
+	if !compareSlices(m.VariableDefinition, other.VariableDefinition) { return false }
+	if !m.SynthesisType.Equals(other.SynthesisType) { return false }
+	if !m.StudyType.Equals(other.StudyType) { return false }
+	if !compareSlices(m.Statistic, other.Statistic) { return false }
+	if !compareSlices(m.Certainty, other.Certainty) { return false }
+	return true
+}
+
 // EvidenceVariableDefinition
 // Evidence variable such as population, exposure, or outcome.
 type EvidenceVariableDefinition struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// description
-	// A text description or summary of the variable.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// note
-	// Footnotes and/or explanatory notes.
-	Note []Annotation `json:"note,omitempty"`
-	// variableRole
-	// population | subpopulation | exposure | referenceExposure | measuredVariable | confounder.
-	VariableRole CodeableConcept `json:"variableRole,omitempty"`
-	// observed
-	// Definition of the actual variable related to the statistic(s).
-	Observed Reference `json:"observed,omitempty"`
-	// intended
-	// Definition of the intended variable related to the Evidence.
-	Intended Reference `json:"intended,omitempty"`
-	// directnessMatch
-	// Indication of quality of match between intended variable to actual variable.
-	DirectnessMatch CodeableConcept `json:"directnessMatch,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	Note []*Annotation `json:"note,omitempty"`
+	VariableRole *CodeableConcept `json:"variablerole,omitempty"`
+	Observed *Reference `json:"observed,omitempty"`
+	Intended *Reference `json:"intended,omitempty"`
+	DirectnessMatch *CodeableConcept `json:"directnessmatch,omitempty"`
 }
 
 // NewEvidenceVariableDefinition creates a new EvidenceVariableDefinition instance
-func NewEvidenceVariableDefinition(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	description FhirMarkdown,
-	note []Annotation,
-	variableRole CodeableConcept,
-	observed Reference,
-	intended Reference,
-	directnessMatch CodeableConcept,
-) *EvidenceVariableDefinition {
-	return &EvidenceVariableDefinition{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Description: description,
-		Note: note,
-		VariableRole: variableRole,
-		Observed: observed,
-		Intended: intended,
-		DirectnessMatch: directnessMatch,
-	}
+func NewEvidenceVariableDefinition() *EvidenceVariableDefinition {
+	return &EvidenceVariableDefinition{}
 }
+
 // FromJSON populates EvidenceVariableDefinition from JSON data
 func (m *EvidenceVariableDefinition) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -446,136 +172,62 @@ func (m *EvidenceVariableDefinition) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of EvidenceVariableDefinition
-func (m *EvidenceVariableDefinition) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	description *FhirMarkdown,
-	note *[]Annotation,
-	variableRole *CodeableConcept,
-	observed *Reference,
-	intended *Reference,
-	directnessMatch *CodeableConcept,
-) *EvidenceVariableDefinition {
+// Clone creates a deep copy of EvidenceVariableDefinition
+func (m *EvidenceVariableDefinition) Clone() *EvidenceVariableDefinition {
+	if m == nil { return nil }
 	return &EvidenceVariableDefinition{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Note: func() []Annotation {
-			if note != nil { return *note }
-			return m.Note
-		}(),
-		VariableRole: func() CodeableConcept {
-			if variableRole != nil { return *variableRole }
-			return m.VariableRole
-		}(),
-		Observed: func() Reference {
-			if observed != nil { return *observed }
-			return m.Observed
-		}(),
-		Intended: func() Reference {
-			if intended != nil { return *intended }
-			return m.Intended
-		}(),
-		DirectnessMatch: func() CodeableConcept {
-			if directnessMatch != nil { return *directnessMatch }
-			return m.DirectnessMatch
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Description: m.Description.Clone(),
+		Note: cloneSlices(m.Note),
+		VariableRole: m.VariableRole.Clone(),
+		Observed: m.Observed.Clone(),
+		Intended: m.Intended.Clone(),
+		DirectnessMatch: m.DirectnessMatch.Clone(),
 	}
 }
+
+// Equals checks for equality with another EvidenceVariableDefinition instance
+func (m *EvidenceVariableDefinition) Equals(other *EvidenceVariableDefinition) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.Note, other.Note) { return false }
+	if !m.VariableRole.Equals(other.VariableRole) { return false }
+	if !m.Observed.Equals(other.Observed) { return false }
+	if !m.Intended.Equals(other.Intended) { return false }
+	if !m.DirectnessMatch.Equals(other.DirectnessMatch) { return false }
+	return true
+}
+
 // EvidenceStatistic
 // Values and parameters for a single statistic.
 type EvidenceStatistic struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// description
-	// A description of the content value of the statistic.
-	Description FhirString `json:"description,omitempty"`
-	// note
-	// Footnotes and/or explanatory notes.
-	Note []Annotation `json:"note,omitempty"`
-	// statisticType
-	// Type of statistic, eg relative risk.
-	StatisticType CodeableConcept `json:"statisticType,omitempty"`
-	// category
-	// When the measured variable is handled categorically, the category element is used to define which category the statistic is reporting.
-	Category CodeableConcept `json:"category,omitempty"`
-	// quantity
-	// Statistic value.
-	Quantity Quantity `json:"quantity,omitempty"`
-	// numberOfEvents
-	// The number of events associated with the statistic, where the unit of analysis is different from numberAffected, sampleSize.knownDataCount and sampleSize.numberOfParticipants.
-	NumberOfEvents FhirUnsignedInt `json:"numberOfEvents,omitempty"`
-	// numberAffected
-	// The number of participants affected where the unit of analysis is the same as sampleSize.knownDataCount and sampleSize.numberOfParticipants.
-	NumberAffected FhirUnsignedInt `json:"numberAffected,omitempty"`
-	// sampleSize
-	// Number of samples in the statistic.
-	SampleSize EvidenceSampleSize `json:"sampleSize,omitempty"`
-	// attributeEstimate
-	// A statistical attribute of the statistic such as a measure of heterogeneity.
-	AttributeEstimate []EvidenceAttributeEstimate `json:"attributeEstimate,omitempty"`
-	// modelCharacteristic
-	// A component of the method to generate the statistic.
-	ModelCharacteristic []EvidenceModelCharacteristic `json:"modelCharacteristic,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Note []*Annotation `json:"note,omitempty"`
+	StatisticType *CodeableConcept `json:"statistictype,omitempty"`
+	Category *CodeableConcept `json:"category,omitempty"`
+	Quantity *Quantity `json:"quantity,omitempty"`
+	NumberOfEvents *FhirUnsignedInt `json:"numberofevents,omitempty"`
+	NumberAffected *FhirUnsignedInt `json:"numberaffected,omitempty"`
+	SampleSize *EvidenceSampleSize `json:"samplesize,omitempty"`
+	AttributeEstimate []*EvidenceAttributeEstimate `json:"attributeestimate,omitempty"`
+	ModelCharacteristic []*EvidenceModelCharacteristic `json:"modelcharacteristic,omitempty"`
 }
 
 // NewEvidenceStatistic creates a new EvidenceStatistic instance
-func NewEvidenceStatistic(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	description FhirString,
-	note []Annotation,
-	statisticType CodeableConcept,
-	category CodeableConcept,
-	quantity Quantity,
-	numberOfEvents FhirUnsignedInt,
-	numberAffected FhirUnsignedInt,
-	sampleSize EvidenceSampleSize,
-	attributeEstimate []EvidenceAttributeEstimate,
-	modelCharacteristic []EvidenceModelCharacteristic,
-) *EvidenceStatistic {
-	return &EvidenceStatistic{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Description: description,
-		Note: note,
-		StatisticType: statisticType,
-		Category: category,
-		Quantity: quantity,
-		NumberOfEvents: numberOfEvents,
-		NumberAffected: numberAffected,
-		SampleSize: sampleSize,
-		AttributeEstimate: attributeEstimate,
-		ModelCharacteristic: modelCharacteristic,
-	}
+func NewEvidenceStatistic() *EvidenceStatistic {
+	return &EvidenceStatistic{}
 }
+
 // FromJSON populates EvidenceStatistic from JSON data
 func (m *EvidenceStatistic) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -586,131 +238,65 @@ func (m *EvidenceStatistic) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of EvidenceStatistic
-func (m *EvidenceStatistic) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	description *FhirString,
-	note *[]Annotation,
-	statisticType *CodeableConcept,
-	category *CodeableConcept,
-	quantity *Quantity,
-	numberOfEvents *FhirUnsignedInt,
-	numberAffected *FhirUnsignedInt,
-	sampleSize *EvidenceSampleSize,
-	attributeEstimate *[]EvidenceAttributeEstimate,
-	modelCharacteristic *[]EvidenceModelCharacteristic,
-) *EvidenceStatistic {
+// Clone creates a deep copy of EvidenceStatistic
+func (m *EvidenceStatistic) Clone() *EvidenceStatistic {
+	if m == nil { return nil }
 	return &EvidenceStatistic{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Note: func() []Annotation {
-			if note != nil { return *note }
-			return m.Note
-		}(),
-		StatisticType: func() CodeableConcept {
-			if statisticType != nil { return *statisticType }
-			return m.StatisticType
-		}(),
-		Category: func() CodeableConcept {
-			if category != nil { return *category }
-			return m.Category
-		}(),
-		Quantity: func() Quantity {
-			if quantity != nil { return *quantity }
-			return m.Quantity
-		}(),
-		NumberOfEvents: func() FhirUnsignedInt {
-			if numberOfEvents != nil { return *numberOfEvents }
-			return m.NumberOfEvents
-		}(),
-		NumberAffected: func() FhirUnsignedInt {
-			if numberAffected != nil { return *numberAffected }
-			return m.NumberAffected
-		}(),
-		SampleSize: func() EvidenceSampleSize {
-			if sampleSize != nil { return *sampleSize }
-			return m.SampleSize
-		}(),
-		AttributeEstimate: func() []EvidenceAttributeEstimate {
-			if attributeEstimate != nil { return *attributeEstimate }
-			return m.AttributeEstimate
-		}(),
-		ModelCharacteristic: func() []EvidenceModelCharacteristic {
-			if modelCharacteristic != nil { return *modelCharacteristic }
-			return m.ModelCharacteristic
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Description: m.Description.Clone(),
+		Note: cloneSlices(m.Note),
+		StatisticType: m.StatisticType.Clone(),
+		Category: m.Category.Clone(),
+		Quantity: m.Quantity.Clone(),
+		NumberOfEvents: m.NumberOfEvents.Clone(),
+		NumberAffected: m.NumberAffected.Clone(),
+		SampleSize: m.SampleSize.Clone(),
+		AttributeEstimate: cloneSlices(m.AttributeEstimate),
+		ModelCharacteristic: cloneSlices(m.ModelCharacteristic),
 	}
 }
+
+// Equals checks for equality with another EvidenceStatistic instance
+func (m *EvidenceStatistic) Equals(other *EvidenceStatistic) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.Note, other.Note) { return false }
+	if !m.StatisticType.Equals(other.StatisticType) { return false }
+	if !m.Category.Equals(other.Category) { return false }
+	if !m.Quantity.Equals(other.Quantity) { return false }
+	if !m.NumberOfEvents.Equals(other.NumberOfEvents) { return false }
+	if !m.NumberAffected.Equals(other.NumberAffected) { return false }
+	if !m.SampleSize.Equals(other.SampleSize) { return false }
+	if !compareSlices(m.AttributeEstimate, other.AttributeEstimate) { return false }
+	if !compareSlices(m.ModelCharacteristic, other.ModelCharacteristic) { return false }
+	return true
+}
+
 // EvidenceSampleSize
 // Number of samples in the statistic.
 type EvidenceSampleSize struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// description
-	// Human-readable summary of population sample size.
-	Description FhirString `json:"description,omitempty"`
-	// note
-	// Footnote or explanatory note about the sample size.
-	Note []Annotation `json:"note,omitempty"`
-	// numberOfStudies
-	// Number of participants in the population.
-	NumberOfStudies FhirUnsignedInt `json:"numberOfStudies,omitempty"`
-	// numberOfParticipants
-	// A human-readable string to clarify or explain concepts about the sample size.
-	NumberOfParticipants FhirUnsignedInt `json:"numberOfParticipants,omitempty"`
-	// knownDataCount
-	// Number of participants with known results for measured variables.
-	KnownDataCount FhirUnsignedInt `json:"knownDataCount,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Note []*Annotation `json:"note,omitempty"`
+	NumberOfStudies *FhirUnsignedInt `json:"numberofstudies,omitempty"`
+	NumberOfParticipants *FhirUnsignedInt `json:"numberofparticipants,omitempty"`
+	KnownDataCount *FhirUnsignedInt `json:"knowndatacount,omitempty"`
 }
 
 // NewEvidenceSampleSize creates a new EvidenceSampleSize instance
-func NewEvidenceSampleSize(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	description FhirString,
-	note []Annotation,
-	numberOfStudies FhirUnsignedInt,
-	numberOfParticipants FhirUnsignedInt,
-	knownDataCount FhirUnsignedInt,
-) *EvidenceSampleSize {
-	return &EvidenceSampleSize{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Description: description,
-		Note: note,
-		NumberOfStudies: numberOfStudies,
-		NumberOfParticipants: numberOfParticipants,
-		KnownDataCount: knownDataCount,
-	}
+func NewEvidenceSampleSize() *EvidenceSampleSize {
+	return &EvidenceSampleSize{}
 }
+
 // FromJSON populates EvidenceSampleSize from JSON data
 func (m *EvidenceSampleSize) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -721,116 +307,57 @@ func (m *EvidenceSampleSize) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of EvidenceSampleSize
-func (m *EvidenceSampleSize) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	description *FhirString,
-	note *[]Annotation,
-	numberOfStudies *FhirUnsignedInt,
-	numberOfParticipants *FhirUnsignedInt,
-	knownDataCount *FhirUnsignedInt,
-) *EvidenceSampleSize {
+// Clone creates a deep copy of EvidenceSampleSize
+func (m *EvidenceSampleSize) Clone() *EvidenceSampleSize {
+	if m == nil { return nil }
 	return &EvidenceSampleSize{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Note: func() []Annotation {
-			if note != nil { return *note }
-			return m.Note
-		}(),
-		NumberOfStudies: func() FhirUnsignedInt {
-			if numberOfStudies != nil { return *numberOfStudies }
-			return m.NumberOfStudies
-		}(),
-		NumberOfParticipants: func() FhirUnsignedInt {
-			if numberOfParticipants != nil { return *numberOfParticipants }
-			return m.NumberOfParticipants
-		}(),
-		KnownDataCount: func() FhirUnsignedInt {
-			if knownDataCount != nil { return *knownDataCount }
-			return m.KnownDataCount
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Description: m.Description.Clone(),
+		Note: cloneSlices(m.Note),
+		NumberOfStudies: m.NumberOfStudies.Clone(),
+		NumberOfParticipants: m.NumberOfParticipants.Clone(),
+		KnownDataCount: m.KnownDataCount.Clone(),
 	}
 }
+
+// Equals checks for equality with another EvidenceSampleSize instance
+func (m *EvidenceSampleSize) Equals(other *EvidenceSampleSize) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.Note, other.Note) { return false }
+	if !m.NumberOfStudies.Equals(other.NumberOfStudies) { return false }
+	if !m.NumberOfParticipants.Equals(other.NumberOfParticipants) { return false }
+	if !m.KnownDataCount.Equals(other.KnownDataCount) { return false }
+	return true
+}
+
 // EvidenceAttributeEstimate
 // A statistical attribute of the statistic such as a measure of heterogeneity.
 type EvidenceAttributeEstimate struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// description
-	// Human-readable summary of the estimate.
-	Description FhirString `json:"description,omitempty"`
-	// note
-	// Footnote or explanatory note about the estimate.
-	Note []Annotation `json:"note,omitempty"`
-	// type
-	// The type of attribute estimate, eg confidence interval or p value.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// quantity
-	// The singular quantity of the attribute estimate, for attribute estimates represented as single values; also used to report unit of measure.
-	Quantity Quantity `json:"quantity,omitempty"`
-	// level
-	// Use 95 for a 95% confidence interval.
-	Level FhirDecimal `json:"level,omitempty"`
-	// range
-	// Lower bound of confidence interval.
-	Range_ Range `json:"range,omitempty"`
-	// attributeEstimate
-	// A nested attribute estimate; which is the attribute estimate of an attribute estimate.
-	AttributeEstimate []EvidenceAttributeEstimate `json:"attributeEstimate,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Note []*Annotation `json:"note,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Quantity *Quantity `json:"quantity,omitempty"`
+	Level *FhirDecimal `json:"level,omitempty"`
+	Range *Range `json:"range,omitempty"`
+	AttributeEstimate []*EvidenceAttributeEstimate `json:"attributeestimate,omitempty"`
 }
 
 // NewEvidenceAttributeEstimate creates a new EvidenceAttributeEstimate instance
-func NewEvidenceAttributeEstimate(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	description FhirString,
-	note []Annotation,
-	type_ CodeableConcept,
-	quantity Quantity,
-	level FhirDecimal,
-	range_ Range,
-	attributeEstimate []EvidenceAttributeEstimate,
-) *EvidenceAttributeEstimate {
-	return &EvidenceAttributeEstimate{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Description: description,
-		Note: note,
-		Type_: type_,
-		Quantity: quantity,
-		Level: level,
-		Range_: range_,
-		AttributeEstimate: attributeEstimate,
-	}
+func NewEvidenceAttributeEstimate() *EvidenceAttributeEstimate {
+	return &EvidenceAttributeEstimate{}
 }
+
 // FromJSON populates EvidenceAttributeEstimate from JSON data
 func (m *EvidenceAttributeEstimate) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -841,111 +368,58 @@ func (m *EvidenceAttributeEstimate) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of EvidenceAttributeEstimate
-func (m *EvidenceAttributeEstimate) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	description *FhirString,
-	note *[]Annotation,
-	type_ *CodeableConcept,
-	quantity *Quantity,
-	level *FhirDecimal,
-	range_ *Range,
-	attributeEstimate *[]EvidenceAttributeEstimate,
-) *EvidenceAttributeEstimate {
+// Clone creates a deep copy of EvidenceAttributeEstimate
+func (m *EvidenceAttributeEstimate) Clone() *EvidenceAttributeEstimate {
+	if m == nil { return nil }
 	return &EvidenceAttributeEstimate{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Note: func() []Annotation {
-			if note != nil { return *note }
-			return m.Note
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Quantity: func() Quantity {
-			if quantity != nil { return *quantity }
-			return m.Quantity
-		}(),
-		Level: func() FhirDecimal {
-			if level != nil { return *level }
-			return m.Level
-		}(),
-		Range_: func() Range {
-			if range_ != nil { return *range_ }
-			return m.Range_
-		}(),
-		AttributeEstimate: func() []EvidenceAttributeEstimate {
-			if attributeEstimate != nil { return *attributeEstimate }
-			return m.AttributeEstimate
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Description: m.Description.Clone(),
+		Note: cloneSlices(m.Note),
+		Type: m.Type.Clone(),
+		Quantity: m.Quantity.Clone(),
+		Level: m.Level.Clone(),
+		Range: m.Range.Clone(),
+		AttributeEstimate: cloneSlices(m.AttributeEstimate),
 	}
 }
+
+// Equals checks for equality with another EvidenceAttributeEstimate instance
+func (m *EvidenceAttributeEstimate) Equals(other *EvidenceAttributeEstimate) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.Note, other.Note) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Quantity.Equals(other.Quantity) { return false }
+	if !m.Level.Equals(other.Level) { return false }
+	if !m.Range.Equals(other.Range) { return false }
+	if !compareSlices(m.AttributeEstimate, other.AttributeEstimate) { return false }
+	return true
+}
+
 // EvidenceModelCharacteristic
 // A component of the method to generate the statistic.
 type EvidenceModelCharacteristic struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// Description of a component of the method to generate the statistic.
-	Code CodeableConcept `json:"code,omitempty"`
-	// value
-	// Further specification of the quantified value of the component of the method to generate the statistic.
-	Value Quantity `json:"value,omitempty"`
-	// variable
-	// A variable adjusted for in the adjusted analysis.
-	Variable []EvidenceModelCharacteristicVariable `json:"variable,omitempty"`
-	// attributeEstimate
-	// An attribute of the statistic used as a model characteristic.
-	AttributeEstimate []EvidenceAttributeEstimate `json:"attributeEstimate,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *CodeableConcept `json:"code,omitempty"`
+	Value *Quantity `json:"value,omitempty"`
+	Variable []*EvidenceModelCharacteristicVariable `json:"variable,omitempty"`
+	AttributeEstimate []*EvidenceAttributeEstimate `json:"attributeestimate,omitempty"`
 }
 
 // NewEvidenceModelCharacteristic creates a new EvidenceModelCharacteristic instance
-func NewEvidenceModelCharacteristic(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code CodeableConcept,
-	value Quantity,
-	variable []EvidenceModelCharacteristicVariable,
-	attributeEstimate []EvidenceAttributeEstimate,
-) *EvidenceModelCharacteristic {
-	return &EvidenceModelCharacteristic{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		Value: value,
-		Variable: variable,
-		AttributeEstimate: attributeEstimate,
-	}
+func NewEvidenceModelCharacteristic() *EvidenceModelCharacteristic {
+	return &EvidenceModelCharacteristic{}
 }
+
 // FromJSON populates EvidenceModelCharacteristic from JSON data
 func (m *EvidenceModelCharacteristic) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -956,101 +430,53 @@ func (m *EvidenceModelCharacteristic) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of EvidenceModelCharacteristic
-func (m *EvidenceModelCharacteristic) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *CodeableConcept,
-	value *Quantity,
-	variable *[]EvidenceModelCharacteristicVariable,
-	attributeEstimate *[]EvidenceAttributeEstimate,
-) *EvidenceModelCharacteristic {
+// Clone creates a deep copy of EvidenceModelCharacteristic
+func (m *EvidenceModelCharacteristic) Clone() *EvidenceModelCharacteristic {
+	if m == nil { return nil }
 	return &EvidenceModelCharacteristic{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() CodeableConcept {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Value: func() Quantity {
-			if value != nil { return *value }
-			return m.Value
-		}(),
-		Variable: func() []EvidenceModelCharacteristicVariable {
-			if variable != nil { return *variable }
-			return m.Variable
-		}(),
-		AttributeEstimate: func() []EvidenceAttributeEstimate {
-			if attributeEstimate != nil { return *attributeEstimate }
-			return m.AttributeEstimate
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		Value: m.Value.Clone(),
+		Variable: cloneSlices(m.Variable),
+		AttributeEstimate: cloneSlices(m.AttributeEstimate),
 	}
 }
+
+// Equals checks for equality with another EvidenceModelCharacteristic instance
+func (m *EvidenceModelCharacteristic) Equals(other *EvidenceModelCharacteristic) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Value.Equals(other.Value) { return false }
+	if !compareSlices(m.Variable, other.Variable) { return false }
+	if !compareSlices(m.AttributeEstimate, other.AttributeEstimate) { return false }
+	return true
+}
+
 // EvidenceModelCharacteristicVariable
 // A variable adjusted for in the adjusted analysis.
 type EvidenceModelCharacteristicVariable struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// variableDefinition
-	// Description of the variable.
-	VariableDefinition Reference `json:"variableDefinition,omitempty"`
-	// handling
-	// How the variable is classified for use in adjusted analysis.
-	Handling EvidenceVariableHandling `json:"handling,omitempty"`
-	// valueCategory
-	// Description for grouping of ordinal or polychotomous variables.
-	ValueCategory []CodeableConcept `json:"valueCategory,omitempty"`
-	// valueQuantity
-	// Discrete value for grouping of ordinal or polychotomous variables.
-	ValueQuantity []Quantity `json:"valueQuantity,omitempty"`
-	// valueRange
-	// Range of values for grouping of ordinal or polychotomous variables.
-	ValueRange []Range `json:"valueRange,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	VariableDefinition *Reference `json:"variabledefinition,omitempty"`
+	Handling *EvidenceVariableHandling `json:"handling,omitempty"`
+	ValueCategory []*CodeableConcept `json:"valuecategory,omitempty"`
+	ValueQuantity []*Quantity `json:"valuequantity,omitempty"`
+	ValueRange []*Range `json:"valuerange,omitempty"`
 }
 
 // NewEvidenceModelCharacteristicVariable creates a new EvidenceModelCharacteristicVariable instance
-func NewEvidenceModelCharacteristicVariable(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	variableDefinition Reference,
-	handling EvidenceVariableHandling,
-	valueCategory []CodeableConcept,
-	valueQuantity []Quantity,
-	valueRange []Range,
-) *EvidenceModelCharacteristicVariable {
-	return &EvidenceModelCharacteristicVariable{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		VariableDefinition: variableDefinition,
-		Handling: handling,
-		ValueCategory: valueCategory,
-		ValueQuantity: valueQuantity,
-		ValueRange: valueRange,
-	}
+func NewEvidenceModelCharacteristicVariable() *EvidenceModelCharacteristicVariable {
+	return &EvidenceModelCharacteristicVariable{}
 }
+
 // FromJSON populates EvidenceModelCharacteristicVariable from JSON data
 func (m *EvidenceModelCharacteristicVariable) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1061,111 +487,56 @@ func (m *EvidenceModelCharacteristicVariable) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of EvidenceModelCharacteristicVariable
-func (m *EvidenceModelCharacteristicVariable) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	variableDefinition *Reference,
-	handling *EvidenceVariableHandling,
-	valueCategory *[]CodeableConcept,
-	valueQuantity *[]Quantity,
-	valueRange *[]Range,
-) *EvidenceModelCharacteristicVariable {
+// Clone creates a deep copy of EvidenceModelCharacteristicVariable
+func (m *EvidenceModelCharacteristicVariable) Clone() *EvidenceModelCharacteristicVariable {
+	if m == nil { return nil }
 	return &EvidenceModelCharacteristicVariable{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		VariableDefinition: func() Reference {
-			if variableDefinition != nil { return *variableDefinition }
-			return m.VariableDefinition
-		}(),
-		Handling: func() EvidenceVariableHandling {
-			if handling != nil { return *handling }
-			return m.Handling
-		}(),
-		ValueCategory: func() []CodeableConcept {
-			if valueCategory != nil { return *valueCategory }
-			return m.ValueCategory
-		}(),
-		ValueQuantity: func() []Quantity {
-			if valueQuantity != nil { return *valueQuantity }
-			return m.ValueQuantity
-		}(),
-		ValueRange: func() []Range {
-			if valueRange != nil { return *valueRange }
-			return m.ValueRange
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		VariableDefinition: m.VariableDefinition.Clone(),
+		Handling: m.Handling.Clone(),
+		ValueCategory: cloneSlices(m.ValueCategory),
+		ValueQuantity: cloneSlices(m.ValueQuantity),
+		ValueRange: cloneSlices(m.ValueRange),
 	}
 }
+
+// Equals checks for equality with another EvidenceModelCharacteristicVariable instance
+func (m *EvidenceModelCharacteristicVariable) Equals(other *EvidenceModelCharacteristicVariable) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.VariableDefinition.Equals(other.VariableDefinition) { return false }
+	if !m.Handling.Equals(other.Handling) { return false }
+	if !compareSlices(m.ValueCategory, other.ValueCategory) { return false }
+	if !compareSlices(m.ValueQuantity, other.ValueQuantity) { return false }
+	if !compareSlices(m.ValueRange, other.ValueRange) { return false }
+	return true
+}
+
 // EvidenceCertainty
 // Assessment of certainty, confidence in the estimates, or quality of the evidence.
 type EvidenceCertainty struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// description
-	// Textual description of certainty.
-	Description FhirString `json:"description,omitempty"`
-	// note
-	// Footnotes and/or explanatory notes.
-	Note []Annotation `json:"note,omitempty"`
-	// type
-	// Aspect of certainty being rated.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// rating
-	// Assessment or judgement of the aspect.
-	Rating CodeableConcept `json:"rating,omitempty"`
-	// rater
-	// Individual or group who did the rating.
-	Rater FhirString `json:"rater,omitempty"`
-	// subcomponent
-	// A domain or subdomain of certainty.
-	Subcomponent []EvidenceCertainty `json:"subcomponent,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Note []*Annotation `json:"note,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Rating *CodeableConcept `json:"rating,omitempty"`
+	Rater *FhirString `json:"rater,omitempty"`
+	Subcomponent []*EvidenceCertainty `json:"subcomponent,omitempty"`
 }
 
 // NewEvidenceCertainty creates a new EvidenceCertainty instance
-func NewEvidenceCertainty(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	description FhirString,
-	note []Annotation,
-	type_ CodeableConcept,
-	rating CodeableConcept,
-	rater FhirString,
-	subcomponent []EvidenceCertainty,
-) *EvidenceCertainty {
-	return &EvidenceCertainty{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Description: description,
-		Note: note,
-		Type_: type_,
-		Rating: rating,
-		Rater: rater,
-		Subcomponent: subcomponent,
-	}
+func NewEvidenceCertainty() *EvidenceCertainty {
+	return &EvidenceCertainty{}
 }
+
 // FromJSON populates EvidenceCertainty from JSON data
 func (m *EvidenceCertainty) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1176,54 +547,35 @@ func (m *EvidenceCertainty) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of EvidenceCertainty
-func (m *EvidenceCertainty) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	description *FhirString,
-	note *[]Annotation,
-	type_ *CodeableConcept,
-	rating *CodeableConcept,
-	rater *FhirString,
-	subcomponent *[]EvidenceCertainty,
-) *EvidenceCertainty {
+// Clone creates a deep copy of EvidenceCertainty
+func (m *EvidenceCertainty) Clone() *EvidenceCertainty {
+	if m == nil { return nil }
 	return &EvidenceCertainty{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Note: func() []Annotation {
-			if note != nil { return *note }
-			return m.Note
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Rating: func() CodeableConcept {
-			if rating != nil { return *rating }
-			return m.Rating
-		}(),
-		Rater: func() FhirString {
-			if rater != nil { return *rater }
-			return m.Rater
-		}(),
-		Subcomponent: func() []EvidenceCertainty {
-			if subcomponent != nil { return *subcomponent }
-			return m.Subcomponent
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Description: m.Description.Clone(),
+		Note: cloneSlices(m.Note),
+		Type: m.Type.Clone(),
+		Rating: m.Rating.Clone(),
+		Rater: m.Rater.Clone(),
+		Subcomponent: cloneSlices(m.Subcomponent),
 	}
 }
+
+// Equals checks for equality with another EvidenceCertainty instance
+func (m *EvidenceCertainty) Equals(other *EvidenceCertainty) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.Note, other.Note) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Rating.Equals(other.Rating) { return false }
+	if !m.Rater.Equals(other.Rater) { return false }
+	if !compareSlices(m.Subcomponent, other.Subcomponent) { return false }
+	return true
+}
+

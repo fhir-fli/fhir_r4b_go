@@ -3,184 +3,51 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // ResearchStudy
 // A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge.  This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques.  A ResearchStudy involves the gathering of information about human or animal subjects.
 type ResearchStudy struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// Identifiers assigned to this research study by the sponsor or other systems.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// title
-	// A short, descriptive user-friendly label for the study.
-	Title FhirString `json:"title,omitempty"`
-	// protocol
-	// The set of steps expected to be performed as part of the execution of the study.
-	Protocol []Reference `json:"protocol,omitempty"`
-	// partOf
-	// A larger research study of which this particular study is a component or step.
-	PartOf []Reference `json:"partOf,omitempty"`
-	// status
-	// The current state of the study.
-	Status ResearchStudyStatus `json:"status,omitempty"`
-	// primaryPurposeType
-	// The type of study based upon the intent of the study's activities. A classification of the intent of the study.
-	PrimaryPurposeType CodeableConcept `json:"primaryPurposeType,omitempty"`
-	// phase
-	// The stage in the progression of a therapy from initial experimental use in humans in clinical trials to post-market evaluation.
-	Phase CodeableConcept `json:"phase,omitempty"`
-	// category
-	// Codes categorizing the type of study such as investigational vs. observational, type of blinding, type of randomization, safety vs. efficacy, etc.
-	Category []CodeableConcept `json:"category,omitempty"`
-	// focus
-	// The medication(s), food(s), therapy(ies), device(s) or other concerns or interventions that the study is seeking to gain more information about.
-	Focus []CodeableConcept `json:"focus,omitempty"`
-	// condition
-	// The condition that is the focus of the study.  For example, In a study to examine risk factors for Lupus, might have as an inclusion criterion "healthy volunteer", but the target condition code would be a Lupus SNOMED code.
-	Condition []CodeableConcept `json:"condition,omitempty"`
-	// contact
-	// Contact details to assist a user in learning more about or engaging with the study.
-	Contact []ContactDetail `json:"contact,omitempty"`
-	// relatedArtifact
-	// Citations, references and other related documents.
-	RelatedArtifact []RelatedArtifact `json:"relatedArtifact,omitempty"`
-	// keyword
-	// Key terms to aid in searching for or filtering the study.
-	Keyword []CodeableConcept `json:"keyword,omitempty"`
-	// location
-	// Indicates a country, state or other region where the study is taking place.
-	Location []CodeableConcept `json:"location,omitempty"`
-	// description
-	// A full description of how the study is being conducted.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// enrollment
-	// Reference to a Group that defines the criteria for and quantity of subjects participating in the study.  E.g. " 200 female Europeans between the ages of 20 and 45 with early onset diabetes".
-	Enrollment []Reference `json:"enrollment,omitempty"`
-	// period
-	// Identifies the start date and the expected (or actual, depending on status) end date for the study.
-	Period Period `json:"period,omitempty"`
-	// sponsor
-	// An organization that initiates the investigation and is legally responsible for the study.
-	Sponsor Reference `json:"sponsor,omitempty"`
-	// principalInvestigator
-	// A researcher in a study who oversees multiple aspects of the study, such as concept development, protocol writing, protocol submission for IRB approval, participant recruitment, informed consent, data collection, analysis, interpretation and presentation.
-	PrincipalInvestigator Reference `json:"principalInvestigator,omitempty"`
-	// site
-	// A facility in which study activities are conducted.
-	Site []Reference `json:"site,omitempty"`
-	// reasonStopped
-	// A description and/or code explaining the premature termination of the study.
-	ReasonStopped CodeableConcept `json:"reasonStopped,omitempty"`
-	// note
-	// Comments made about the study by the performer, subject or other participants.
-	Note []Annotation `json:"note,omitempty"`
-	// arm
-	// Describes an expected sequence of events for one of the participants of a study.  E.g. Exposure to drug A, wash-out, exposure to drug B, wash-out, follow-up.
-	Arm []ResearchStudyArm `json:"arm,omitempty"`
-	// objective
-	// A goal that the study is aiming to achieve in terms of a scientific question to be answered by the analysis of data collected during the study.
-	Objective []ResearchStudyObjective `json:"objective,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Title *FhirString `json:"title,omitempty"`
+	Protocol []*Reference `json:"protocol,omitempty"`
+	PartOf []*Reference `json:"partof,omitempty"`
+	Status *ResearchStudyStatus `json:"status,omitempty"`
+	PrimaryPurposeType *CodeableConcept `json:"primarypurposetype,omitempty"`
+	Phase *CodeableConcept `json:"phase,omitempty"`
+	Category []*CodeableConcept `json:"category,omitempty"`
+	Focus []*CodeableConcept `json:"focus,omitempty"`
+	Condition []*CodeableConcept `json:"condition,omitempty"`
+	Contact []*ContactDetail `json:"contact,omitempty"`
+	RelatedArtifact []*RelatedArtifact `json:"relatedartifact,omitempty"`
+	Keyword []*CodeableConcept `json:"keyword,omitempty"`
+	Location []*CodeableConcept `json:"location,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	Enrollment []*Reference `json:"enrollment,omitempty"`
+	Period *Period `json:"period,omitempty"`
+	Sponsor *Reference `json:"sponsor,omitempty"`
+	PrincipalInvestigator *Reference `json:"principalinvestigator,omitempty"`
+	Site []*Reference `json:"site,omitempty"`
+	ReasonStopped *CodeableConcept `json:"reasonstopped,omitempty"`
+	Note []*Annotation `json:"note,omitempty"`
+	Arm []*ResearchStudyArm `json:"arm,omitempty"`
+	Objective []*ResearchStudyObjective `json:"objective,omitempty"`
 }
 
 // NewResearchStudy creates a new ResearchStudy instance
-func NewResearchStudy(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	title FhirString,
-	protocol []Reference,
-	partOf []Reference,
-	status ResearchStudyStatus,
-	primaryPurposeType CodeableConcept,
-	phase CodeableConcept,
-	category []CodeableConcept,
-	focus []CodeableConcept,
-	condition []CodeableConcept,
-	contact []ContactDetail,
-	relatedArtifact []RelatedArtifact,
-	keyword []CodeableConcept,
-	location []CodeableConcept,
-	description FhirMarkdown,
-	enrollment []Reference,
-	period Period,
-	sponsor Reference,
-	principalInvestigator Reference,
-	site []Reference,
-	reasonStopped CodeableConcept,
-	note []Annotation,
-	arm []ResearchStudyArm,
-	objective []ResearchStudyObjective,
-) *ResearchStudy {
-	return &ResearchStudy{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Title: title,
-		Protocol: protocol,
-		PartOf: partOf,
-		Status: status,
-		PrimaryPurposeType: primaryPurposeType,
-		Phase: phase,
-		Category: category,
-		Focus: focus,
-		Condition: condition,
-		Contact: contact,
-		RelatedArtifact: relatedArtifact,
-		Keyword: keyword,
-		Location: location,
-		Description: description,
-		Enrollment: enrollment,
-		Period: period,
-		Sponsor: sponsor,
-		PrincipalInvestigator: principalInvestigator,
-		Site: site,
-		ReasonStopped: reasonStopped,
-		Note: note,
-		Arm: arm,
-		Objective: objective,
-	}
+func NewResearchStudy() *ResearchStudy {
+	return &ResearchStudy{}
 }
+
 // FromJSON populates ResearchStudy from JSON data
 func (m *ResearchStudy) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -191,216 +58,101 @@ func (m *ResearchStudy) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ResearchStudy
-func (m *ResearchStudy) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	title *FhirString,
-	protocol *[]Reference,
-	partOf *[]Reference,
-	status *ResearchStudyStatus,
-	primaryPurposeType *CodeableConcept,
-	phase *CodeableConcept,
-	category *[]CodeableConcept,
-	focus *[]CodeableConcept,
-	condition *[]CodeableConcept,
-	contact *[]ContactDetail,
-	relatedArtifact *[]RelatedArtifact,
-	keyword *[]CodeableConcept,
-	location *[]CodeableConcept,
-	description *FhirMarkdown,
-	enrollment *[]Reference,
-	period *Period,
-	sponsor *Reference,
-	principalInvestigator *Reference,
-	site *[]Reference,
-	reasonStopped *CodeableConcept,
-	note *[]Annotation,
-	arm *[]ResearchStudyArm,
-	objective *[]ResearchStudyObjective,
-) *ResearchStudy {
+// Clone creates a deep copy of ResearchStudy
+func (m *ResearchStudy) Clone() *ResearchStudy {
+	if m == nil { return nil }
 	return &ResearchStudy{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Title: func() FhirString {
-			if title != nil { return *title }
-			return m.Title
-		}(),
-		Protocol: func() []Reference {
-			if protocol != nil { return *protocol }
-			return m.Protocol
-		}(),
-		PartOf: func() []Reference {
-			if partOf != nil { return *partOf }
-			return m.PartOf
-		}(),
-		Status: func() ResearchStudyStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		PrimaryPurposeType: func() CodeableConcept {
-			if primaryPurposeType != nil { return *primaryPurposeType }
-			return m.PrimaryPurposeType
-		}(),
-		Phase: func() CodeableConcept {
-			if phase != nil { return *phase }
-			return m.Phase
-		}(),
-		Category: func() []CodeableConcept {
-			if category != nil { return *category }
-			return m.Category
-		}(),
-		Focus: func() []CodeableConcept {
-			if focus != nil { return *focus }
-			return m.Focus
-		}(),
-		Condition: func() []CodeableConcept {
-			if condition != nil { return *condition }
-			return m.Condition
-		}(),
-		Contact: func() []ContactDetail {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
-		RelatedArtifact: func() []RelatedArtifact {
-			if relatedArtifact != nil { return *relatedArtifact }
-			return m.RelatedArtifact
-		}(),
-		Keyword: func() []CodeableConcept {
-			if keyword != nil { return *keyword }
-			return m.Keyword
-		}(),
-		Location: func() []CodeableConcept {
-			if location != nil { return *location }
-			return m.Location
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Enrollment: func() []Reference {
-			if enrollment != nil { return *enrollment }
-			return m.Enrollment
-		}(),
-		Period: func() Period {
-			if period != nil { return *period }
-			return m.Period
-		}(),
-		Sponsor: func() Reference {
-			if sponsor != nil { return *sponsor }
-			return m.Sponsor
-		}(),
-		PrincipalInvestigator: func() Reference {
-			if principalInvestigator != nil { return *principalInvestigator }
-			return m.PrincipalInvestigator
-		}(),
-		Site: func() []Reference {
-			if site != nil { return *site }
-			return m.Site
-		}(),
-		ReasonStopped: func() CodeableConcept {
-			if reasonStopped != nil { return *reasonStopped }
-			return m.ReasonStopped
-		}(),
-		Note: func() []Annotation {
-			if note != nil { return *note }
-			return m.Note
-		}(),
-		Arm: func() []ResearchStudyArm {
-			if arm != nil { return *arm }
-			return m.Arm
-		}(),
-		Objective: func() []ResearchStudyObjective {
-			if objective != nil { return *objective }
-			return m.Objective
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		Title: m.Title.Clone(),
+		Protocol: cloneSlices(m.Protocol),
+		PartOf: cloneSlices(m.PartOf),
+		Status: m.Status.Clone(),
+		PrimaryPurposeType: m.PrimaryPurposeType.Clone(),
+		Phase: m.Phase.Clone(),
+		Category: cloneSlices(m.Category),
+		Focus: cloneSlices(m.Focus),
+		Condition: cloneSlices(m.Condition),
+		Contact: cloneSlices(m.Contact),
+		RelatedArtifact: cloneSlices(m.RelatedArtifact),
+		Keyword: cloneSlices(m.Keyword),
+		Location: cloneSlices(m.Location),
+		Description: m.Description.Clone(),
+		Enrollment: cloneSlices(m.Enrollment),
+		Period: m.Period.Clone(),
+		Sponsor: m.Sponsor.Clone(),
+		PrincipalInvestigator: m.PrincipalInvestigator.Clone(),
+		Site: cloneSlices(m.Site),
+		ReasonStopped: m.ReasonStopped.Clone(),
+		Note: cloneSlices(m.Note),
+		Arm: cloneSlices(m.Arm),
+		Objective: cloneSlices(m.Objective),
 	}
 }
+
+// Equals checks for equality with another ResearchStudy instance
+func (m *ResearchStudy) Equals(other *ResearchStudy) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Title.Equals(other.Title) { return false }
+	if !compareSlices(m.Protocol, other.Protocol) { return false }
+	if !compareSlices(m.PartOf, other.PartOf) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.PrimaryPurposeType.Equals(other.PrimaryPurposeType) { return false }
+	if !m.Phase.Equals(other.Phase) { return false }
+	if !compareSlices(m.Category, other.Category) { return false }
+	if !compareSlices(m.Focus, other.Focus) { return false }
+	if !compareSlices(m.Condition, other.Condition) { return false }
+	if !compareSlices(m.Contact, other.Contact) { return false }
+	if !compareSlices(m.RelatedArtifact, other.RelatedArtifact) { return false }
+	if !compareSlices(m.Keyword, other.Keyword) { return false }
+	if !compareSlices(m.Location, other.Location) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.Enrollment, other.Enrollment) { return false }
+	if !m.Period.Equals(other.Period) { return false }
+	if !m.Sponsor.Equals(other.Sponsor) { return false }
+	if !m.PrincipalInvestigator.Equals(other.PrincipalInvestigator) { return false }
+	if !compareSlices(m.Site, other.Site) { return false }
+	if !m.ReasonStopped.Equals(other.ReasonStopped) { return false }
+	if !compareSlices(m.Note, other.Note) { return false }
+	if !compareSlices(m.Arm, other.Arm) { return false }
+	if !compareSlices(m.Objective, other.Objective) { return false }
+	return true
+}
+
 // ResearchStudyArm
 // Describes an expected sequence of events for one of the participants of a study.  E.g. Exposure to drug A, wash-out, exposure to drug B, wash-out, follow-up.
 type ResearchStudyArm struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// name
-	// Unique, human-readable label for this arm of the study.
-	Name FhirString `json:"name,omitempty"`
-	// type
-	// Categorization of study arm, e.g. experimental, active comparator, placebo comparater.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// description
-	// A succinct description of the path through the study that would be followed by a subject adhering to this arm.
-	Description FhirString `json:"description,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
 }
 
 // NewResearchStudyArm creates a new ResearchStudyArm instance
-func NewResearchStudyArm(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	name FhirString,
-	type_ CodeableConcept,
-	description FhirString,
-) *ResearchStudyArm {
-	return &ResearchStudyArm{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Name: name,
-		Type_: type_,
-		Description: description,
-	}
+func NewResearchStudyArm() *ResearchStudyArm {
+	return &ResearchStudyArm{}
 }
+
 // FromJSON populates ResearchStudyArm from JSON data
 func (m *ResearchStudyArm) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -411,81 +163,48 @@ func (m *ResearchStudyArm) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ResearchStudyArm
-func (m *ResearchStudyArm) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	name *FhirString,
-	type_ *CodeableConcept,
-	description *FhirString,
-) *ResearchStudyArm {
+// Clone creates a deep copy of ResearchStudyArm
+func (m *ResearchStudyArm) Clone() *ResearchStudyArm {
+	if m == nil { return nil }
 	return &ResearchStudyArm{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Name: m.Name.Clone(),
+		Type: m.Type.Clone(),
+		Description: m.Description.Clone(),
 	}
 }
+
+// Equals checks for equality with another ResearchStudyArm instance
+func (m *ResearchStudyArm) Equals(other *ResearchStudyArm) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	return true
+}
+
 // ResearchStudyObjective
 // A goal that the study is aiming to achieve in terms of a scientific question to be answered by the analysis of data collected during the study.
 type ResearchStudyObjective struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// name
-	// Unique, human-readable label for this objective of the study.
-	Name FhirString `json:"name,omitempty"`
-	// type
-	// The kind of study objective.
-	Type_ CodeableConcept `json:"type,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
 }
 
 // NewResearchStudyObjective creates a new ResearchStudyObjective instance
-func NewResearchStudyObjective(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	name FhirString,
-	type_ CodeableConcept,
-) *ResearchStudyObjective {
-	return &ResearchStudyObjective{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Name: name,
-		Type_: type_,
-	}
+func NewResearchStudyObjective() *ResearchStudyObjective {
+	return &ResearchStudyObjective{}
 }
+
 // FromJSON populates ResearchStudyObjective from JSON data
 func (m *ResearchStudyObjective) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -496,34 +215,27 @@ func (m *ResearchStudyObjective) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ResearchStudyObjective
-func (m *ResearchStudyObjective) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	name *FhirString,
-	type_ *CodeableConcept,
-) *ResearchStudyObjective {
+// Clone creates a deep copy of ResearchStudyObjective
+func (m *ResearchStudyObjective) Clone() *ResearchStudyObjective {
+	if m == nil { return nil }
 	return &ResearchStudyObjective{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Name: m.Name.Clone(),
+		Type: m.Type.Clone(),
 	}
 }
+
+// Equals checks for equality with another ResearchStudyObjective instance
+func (m *ResearchStudyObjective) Equals(other *ResearchStudyObjective) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	return true
+}
+

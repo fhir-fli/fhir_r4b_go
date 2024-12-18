@@ -3,239 +3,62 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // Contract
 // Legally enforceable, formally recorded unilateral or bilateral directive i.e., a policy or agreement.
 type Contract struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// Unique identifier for this Contract or a derivative that references a Source Contract.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// url
-	// Canonical identifier for this contract, represented as a URI (globally unique).
-	Url FhirUri `json:"url,omitempty"`
-	// version
-	// An edition identifier used for business purposes to label business significant variants.
-	Version FhirString `json:"version,omitempty"`
-	// status
-	// The status of the resource instance.
-	Status ContractResourceStatusCodes `json:"status,omitempty"`
-	// legalState
-	// Legal states of the formation of a legal instrument, which is a formally executed written document that can be formally attributed to its author, records and formally expresses a legally enforceable act, process, or contractual duty, obligation, or right, and therefore evidences that act, process, or agreement.
-	LegalState CodeableConcept `json:"legalState,omitempty"`
-	// instantiatesCanonical
-	// The URL pointing to a FHIR-defined Contract Definition that is adhered to in whole or part by this Contract.
-	InstantiatesCanonical Reference `json:"instantiatesCanonical,omitempty"`
-	// instantiatesUri
-	// The URL pointing to an externally maintained definition that is adhered to in whole or in part by this Contract.
-	InstantiatesUri FhirUri `json:"instantiatesUri,omitempty"`
-	// contentDerivative
-	// The minimal content derived from the basal information source at a specific stage in its lifecycle.
-	ContentDerivative CodeableConcept `json:"contentDerivative,omitempty"`
-	// issued
-	// When this  Contract was issued.
-	Issued FhirDateTime `json:"issued,omitempty"`
-	// applies
-	// Relevant time or time-period when this Contract is applicable.
-	Applies Period `json:"applies,omitempty"`
-	// expirationType
-	// Event resulting in discontinuation or termination of this Contract instance by one or more parties to the contract.
-	ExpirationType CodeableConcept `json:"expirationType,omitempty"`
-	// subject
-	// The target entity impacted by or of interest to parties to the agreement.
-	Subject []Reference `json:"subject,omitempty"`
-	// authority
-	// A formally or informally recognized grouping of people, principals, organizations, or jurisdictions formed for the purpose of achieving some form of collective action such as the promulgation, administration and enforcement of contracts and policies.
-	Authority []Reference `json:"authority,omitempty"`
-	// domain
-	// Recognized governance framework or system operating with a circumscribed scope in accordance with specified principles, policies, processes or procedures for managing rights, actions, or behaviors of parties or principals relative to resources.
-	Domain []Reference `json:"domain,omitempty"`
-	// site
-	// Sites in which the contract is complied with,  exercised, or in force.
-	Site []Reference `json:"site,omitempty"`
-	// name
-	// A natural language name identifying this Contract definition, derivative, or instance in any legal state. Provides additional information about its content. This name should be usable as an identifier for the module by machine processing applications such as code generation.
-	Name FhirString `json:"name,omitempty"`
-	// title
-	// A short, descriptive, user-friendly title for this Contract definition, derivative, or instance in any legal state.t giving additional information about its content.
-	Title FhirString `json:"title,omitempty"`
-	// subtitle
-	// An explanatory or alternate user-friendly title for this Contract definition, derivative, or instance in any legal state.t giving additional information about its content.
-	Subtitle FhirString `json:"subtitle,omitempty"`
-	// alias
-	// Alternative representation of the title for this Contract definition, derivative, or instance in any legal state., e.g., a domain specific contract number related to legislation.
-	Alias []FhirString `json:"alias,omitempty"`
-	// author
-	// The individual or organization that authored the Contract definition, derivative, or instance in any legal state.
-	Author Reference `json:"author,omitempty"`
-	// scope
-	// A selector of legal concerns for this Contract definition, derivative, or instance in any legal state.
-	Scope CodeableConcept `json:"scope,omitempty"`
-	// topicCodeableConcept
-	// Narrows the range of legal concerns to focus on the achievement of specific contractual objectives.
-	TopicCodeableConcept CodeableConcept `json:"topicCodeableConcept,omitempty"`
-	// topicReference
-	// Narrows the range of legal concerns to focus on the achievement of specific contractual objectives.
-	TopicReference Reference `json:"topicReference,omitempty"`
-	// type
-	// A high-level category for the legal instrument, whether constructed as a Contract definition, derivative, or instance in any legal state.  Provides additional information about its content within the context of the Contract's scope to distinguish the kinds of systems that would be interested in the contract.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// subType
-	// Sub-category for the Contract that distinguishes the kinds of systems that would be interested in the Contract within the context of the Contract's scope.
-	SubType []CodeableConcept `json:"subType,omitempty"`
-	// contentDefinition
-	// Precusory content developed with a focus and intent of supporting the formation a Contract instance, which may be associated with and transformable into a Contract.
-	ContentDefinition ContractContentDefinition `json:"contentDefinition,omitempty"`
-	// term
-	// One or more Contract Provisions, which may be related and conveyed as a group, and may contain nested groups.
-	Term []ContractTerm `json:"term,omitempty"`
-	// supportingInfo
-	// Information that may be needed by/relevant to the performer in their execution of this term action.
-	SupportingInfo []Reference `json:"supportingInfo,omitempty"`
-	// relevantHistory
-	// Links to Provenance records for past versions of this Contract definition, derivative, or instance, which identify key state transitions or updates that are likely to be relevant to a user looking at the current version of the Contract.  The Provence.entity indicates the target that was changed in the update. http://build.fhir.org/provenance-definitions.html#Provenance.entity.
-	RelevantHistory []Reference `json:"relevantHistory,omitempty"`
-	// signer
-	// Parties with legal standing in the Contract, including the principal parties, the grantor(s) and grantee(s), which are any person or organization bound by the contract, and any ancillary parties, which facilitate the execution of the contract such as a notary or witness.
-	Signer []ContractSigner `json:"signer,omitempty"`
-	// friendly
-	// The "patient friendly language" versionof the Contract in whole or in parts. "Patient friendly language" means the representation of the Contract and Contract Provisions in a manner that is readily accessible and understandable by a layperson in accordance with best practices for communication styles that ensure that those agreeing to or signing the Contract understand the roles, actions, obligations, responsibilities, and implication of the agreement.
-	Friendly []ContractFriendly `json:"friendly,omitempty"`
-	// legal
-	// List of Legal expressions or representations of this Contract.
-	Legal []ContractLegal `json:"legal,omitempty"`
-	// rule
-	// List of Computable Policy Rule Language Representations of this Contract.
-	Rule []ContractRule `json:"rule,omitempty"`
-	// legallyBindingAttachment
-	// Legally binding Contract: This is the signed and legally recognized representation of the Contract, which is considered the "source of truth" and which would be the basis for legal action related to enforcement of this Contract.
-	LegallyBindingAttachment Attachment `json:"legallyBindingAttachment,omitempty"`
-	// legallyBindingReference
-	// Legally binding Contract: This is the signed and legally recognized representation of the Contract, which is considered the "source of truth" and which would be the basis for legal action related to enforcement of this Contract.
-	LegallyBindingReference Reference `json:"legallyBindingReference,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Url *FhirUri `json:"url,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
+	Status *ContractResourceStatusCodes `json:"status,omitempty"`
+	LegalState *CodeableConcept `json:"legalstate,omitempty"`
+	InstantiatesCanonical *Reference `json:"instantiatescanonical,omitempty"`
+	InstantiatesUri *FhirUri `json:"instantiatesuri,omitempty"`
+	ContentDerivative *CodeableConcept `json:"contentderivative,omitempty"`
+	Issued *FhirDateTime `json:"issued,omitempty"`
+	Applies *Period `json:"applies,omitempty"`
+	ExpirationType *CodeableConcept `json:"expirationtype,omitempty"`
+	Subject []*Reference `json:"subject,omitempty"`
+	Authority []*Reference `json:"authority,omitempty"`
+	Domain []*Reference `json:"domain,omitempty"`
+	Site []*Reference `json:"site,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Title *FhirString `json:"title,omitempty"`
+	Subtitle *FhirString `json:"subtitle,omitempty"`
+	Alias []*FhirString `json:"alias,omitempty"`
+	Author *Reference `json:"author,omitempty"`
+	Scope *CodeableConcept `json:"scope,omitempty"`
+	TopicCodeableConcept *CodeableConcept `json:"topiccodeableconcept,omitempty"`
+	TopicReference *Reference `json:"topicreference,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	SubType []*CodeableConcept `json:"subtype,omitempty"`
+	ContentDefinition *ContractContentDefinition `json:"contentdefinition,omitempty"`
+	Term []*ContractTerm `json:"term,omitempty"`
+	SupportingInfo []*Reference `json:"supportinginfo,omitempty"`
+	RelevantHistory []*Reference `json:"relevanthistory,omitempty"`
+	Signer []*ContractSigner `json:"signer,omitempty"`
+	Friendly []*ContractFriendly `json:"friendly,omitempty"`
+	Legal []*ContractLegal `json:"legal,omitempty"`
+	Rule []*ContractRule `json:"rule,omitempty"`
+	LegallyBindingAttachment *Attachment `json:"legallybindingattachment,omitempty"`
+	LegallyBindingReference *Reference `json:"legallybindingreference,omitempty"`
 }
 
 // NewContract creates a new Contract instance
-func NewContract(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	url FhirUri,
-	version FhirString,
-	status ContractResourceStatusCodes,
-	legalState CodeableConcept,
-	instantiatesCanonical Reference,
-	instantiatesUri FhirUri,
-	contentDerivative CodeableConcept,
-	issued FhirDateTime,
-	applies Period,
-	expirationType CodeableConcept,
-	subject []Reference,
-	authority []Reference,
-	domain []Reference,
-	site []Reference,
-	name FhirString,
-	title FhirString,
-	subtitle FhirString,
-	alias []FhirString,
-	author Reference,
-	scope CodeableConcept,
-	topicCodeableConcept CodeableConcept,
-	topicReference Reference,
-	type_ CodeableConcept,
-	subType []CodeableConcept,
-	contentDefinition ContractContentDefinition,
-	term []ContractTerm,
-	supportingInfo []Reference,
-	relevantHistory []Reference,
-	signer []ContractSigner,
-	friendly []ContractFriendly,
-	legal []ContractLegal,
-	rule []ContractRule,
-	legallyBindingAttachment Attachment,
-	legallyBindingReference Reference,
-) *Contract {
-	return &Contract{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Url: url,
-		Version: version,
-		Status: status,
-		LegalState: legalState,
-		InstantiatesCanonical: instantiatesCanonical,
-		InstantiatesUri: instantiatesUri,
-		ContentDerivative: contentDerivative,
-		Issued: issued,
-		Applies: applies,
-		ExpirationType: expirationType,
-		Subject: subject,
-		Authority: authority,
-		Domain: domain,
-		Site: site,
-		Name: name,
-		Title: title,
-		Subtitle: subtitle,
-		Alias: alias,
-		Author: author,
-		Scope: scope,
-		TopicCodeableConcept: topicCodeableConcept,
-		TopicReference: topicReference,
-		Type_: type_,
-		SubType: subType,
-		ContentDefinition: contentDefinition,
-		Term: term,
-		SupportingInfo: supportingInfo,
-		RelevantHistory: relevantHistory,
-		Signer: signer,
-		Friendly: friendly,
-		Legal: legal,
-		Rule: rule,
-		LegallyBindingAttachment: legallyBindingAttachment,
-		LegallyBindingReference: legallyBindingReference,
-	}
+func NewContract() *Contract {
+	return &Contract{}
 }
+
 // FromJSON populates Contract from JSON data
 func (m *Contract) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -246,286 +69,126 @@ func (m *Contract) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of Contract
-func (m *Contract) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	url *FhirUri,
-	version *FhirString,
-	status *ContractResourceStatusCodes,
-	legalState *CodeableConcept,
-	instantiatesCanonical *Reference,
-	instantiatesUri *FhirUri,
-	contentDerivative *CodeableConcept,
-	issued *FhirDateTime,
-	applies *Period,
-	expirationType *CodeableConcept,
-	subject *[]Reference,
-	authority *[]Reference,
-	domain *[]Reference,
-	site *[]Reference,
-	name *FhirString,
-	title *FhirString,
-	subtitle *FhirString,
-	alias *[]FhirString,
-	author *Reference,
-	scope *CodeableConcept,
-	topicCodeableConcept *CodeableConcept,
-	topicReference *Reference,
-	type_ *CodeableConcept,
-	subType *[]CodeableConcept,
-	contentDefinition *ContractContentDefinition,
-	term *[]ContractTerm,
-	supportingInfo *[]Reference,
-	relevantHistory *[]Reference,
-	signer *[]ContractSigner,
-	friendly *[]ContractFriendly,
-	legal *[]ContractLegal,
-	rule *[]ContractRule,
-	legallyBindingAttachment *Attachment,
-	legallyBindingReference *Reference,
-) *Contract {
+// Clone creates a deep copy of Contract
+func (m *Contract) Clone() *Contract {
+	if m == nil { return nil }
 	return &Contract{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Url: func() FhirUri {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Status: func() ContractResourceStatusCodes {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		LegalState: func() CodeableConcept {
-			if legalState != nil { return *legalState }
-			return m.LegalState
-		}(),
-		InstantiatesCanonical: func() Reference {
-			if instantiatesCanonical != nil { return *instantiatesCanonical }
-			return m.InstantiatesCanonical
-		}(),
-		InstantiatesUri: func() FhirUri {
-			if instantiatesUri != nil { return *instantiatesUri }
-			return m.InstantiatesUri
-		}(),
-		ContentDerivative: func() CodeableConcept {
-			if contentDerivative != nil { return *contentDerivative }
-			return m.ContentDerivative
-		}(),
-		Issued: func() FhirDateTime {
-			if issued != nil { return *issued }
-			return m.Issued
-		}(),
-		Applies: func() Period {
-			if applies != nil { return *applies }
-			return m.Applies
-		}(),
-		ExpirationType: func() CodeableConcept {
-			if expirationType != nil { return *expirationType }
-			return m.ExpirationType
-		}(),
-		Subject: func() []Reference {
-			if subject != nil { return *subject }
-			return m.Subject
-		}(),
-		Authority: func() []Reference {
-			if authority != nil { return *authority }
-			return m.Authority
-		}(),
-		Domain: func() []Reference {
-			if domain != nil { return *domain }
-			return m.Domain
-		}(),
-		Site: func() []Reference {
-			if site != nil { return *site }
-			return m.Site
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Title: func() FhirString {
-			if title != nil { return *title }
-			return m.Title
-		}(),
-		Subtitle: func() FhirString {
-			if subtitle != nil { return *subtitle }
-			return m.Subtitle
-		}(),
-		Alias: func() []FhirString {
-			if alias != nil { return *alias }
-			return m.Alias
-		}(),
-		Author: func() Reference {
-			if author != nil { return *author }
-			return m.Author
-		}(),
-		Scope: func() CodeableConcept {
-			if scope != nil { return *scope }
-			return m.Scope
-		}(),
-		TopicCodeableConcept: func() CodeableConcept {
-			if topicCodeableConcept != nil { return *topicCodeableConcept }
-			return m.TopicCodeableConcept
-		}(),
-		TopicReference: func() Reference {
-			if topicReference != nil { return *topicReference }
-			return m.TopicReference
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		SubType: func() []CodeableConcept {
-			if subType != nil { return *subType }
-			return m.SubType
-		}(),
-		ContentDefinition: func() ContractContentDefinition {
-			if contentDefinition != nil { return *contentDefinition }
-			return m.ContentDefinition
-		}(),
-		Term: func() []ContractTerm {
-			if term != nil { return *term }
-			return m.Term
-		}(),
-		SupportingInfo: func() []Reference {
-			if supportingInfo != nil { return *supportingInfo }
-			return m.SupportingInfo
-		}(),
-		RelevantHistory: func() []Reference {
-			if relevantHistory != nil { return *relevantHistory }
-			return m.RelevantHistory
-		}(),
-		Signer: func() []ContractSigner {
-			if signer != nil { return *signer }
-			return m.Signer
-		}(),
-		Friendly: func() []ContractFriendly {
-			if friendly != nil { return *friendly }
-			return m.Friendly
-		}(),
-		Legal: func() []ContractLegal {
-			if legal != nil { return *legal }
-			return m.Legal
-		}(),
-		Rule: func() []ContractRule {
-			if rule != nil { return *rule }
-			return m.Rule
-		}(),
-		LegallyBindingAttachment: func() Attachment {
-			if legallyBindingAttachment != nil { return *legallyBindingAttachment }
-			return m.LegallyBindingAttachment
-		}(),
-		LegallyBindingReference: func() Reference {
-			if legallyBindingReference != nil { return *legallyBindingReference }
-			return m.LegallyBindingReference
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		Url: m.Url.Clone(),
+		Version: m.Version.Clone(),
+		Status: m.Status.Clone(),
+		LegalState: m.LegalState.Clone(),
+		InstantiatesCanonical: m.InstantiatesCanonical.Clone(),
+		InstantiatesUri: m.InstantiatesUri.Clone(),
+		ContentDerivative: m.ContentDerivative.Clone(),
+		Issued: m.Issued.Clone(),
+		Applies: m.Applies.Clone(),
+		ExpirationType: m.ExpirationType.Clone(),
+		Subject: cloneSlices(m.Subject),
+		Authority: cloneSlices(m.Authority),
+		Domain: cloneSlices(m.Domain),
+		Site: cloneSlices(m.Site),
+		Name: m.Name.Clone(),
+		Title: m.Title.Clone(),
+		Subtitle: m.Subtitle.Clone(),
+		Alias: cloneSlices(m.Alias),
+		Author: m.Author.Clone(),
+		Scope: m.Scope.Clone(),
+		TopicCodeableConcept: m.TopicCodeableConcept.Clone(),
+		TopicReference: m.TopicReference.Clone(),
+		Type: m.Type.Clone(),
+		SubType: cloneSlices(m.SubType),
+		ContentDefinition: m.ContentDefinition.Clone(),
+		Term: cloneSlices(m.Term),
+		SupportingInfo: cloneSlices(m.SupportingInfo),
+		RelevantHistory: cloneSlices(m.RelevantHistory),
+		Signer: cloneSlices(m.Signer),
+		Friendly: cloneSlices(m.Friendly),
+		Legal: cloneSlices(m.Legal),
+		Rule: cloneSlices(m.Rule),
+		LegallyBindingAttachment: m.LegallyBindingAttachment.Clone(),
+		LegallyBindingReference: m.LegallyBindingReference.Clone(),
 	}
 }
+
+// Equals checks for equality with another Contract instance
+func (m *Contract) Equals(other *Contract) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.LegalState.Equals(other.LegalState) { return false }
+	if !m.InstantiatesCanonical.Equals(other.InstantiatesCanonical) { return false }
+	if !m.InstantiatesUri.Equals(other.InstantiatesUri) { return false }
+	if !m.ContentDerivative.Equals(other.ContentDerivative) { return false }
+	if !m.Issued.Equals(other.Issued) { return false }
+	if !m.Applies.Equals(other.Applies) { return false }
+	if !m.ExpirationType.Equals(other.ExpirationType) { return false }
+	if !compareSlices(m.Subject, other.Subject) { return false }
+	if !compareSlices(m.Authority, other.Authority) { return false }
+	if !compareSlices(m.Domain, other.Domain) { return false }
+	if !compareSlices(m.Site, other.Site) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Title.Equals(other.Title) { return false }
+	if !m.Subtitle.Equals(other.Subtitle) { return false }
+	if !compareSlices(m.Alias, other.Alias) { return false }
+	if !m.Author.Equals(other.Author) { return false }
+	if !m.Scope.Equals(other.Scope) { return false }
+	if !m.TopicCodeableConcept.Equals(other.TopicCodeableConcept) { return false }
+	if !m.TopicReference.Equals(other.TopicReference) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !compareSlices(m.SubType, other.SubType) { return false }
+	if !m.ContentDefinition.Equals(other.ContentDefinition) { return false }
+	if !compareSlices(m.Term, other.Term) { return false }
+	if !compareSlices(m.SupportingInfo, other.SupportingInfo) { return false }
+	if !compareSlices(m.RelevantHistory, other.RelevantHistory) { return false }
+	if !compareSlices(m.Signer, other.Signer) { return false }
+	if !compareSlices(m.Friendly, other.Friendly) { return false }
+	if !compareSlices(m.Legal, other.Legal) { return false }
+	if !compareSlices(m.Rule, other.Rule) { return false }
+	if !m.LegallyBindingAttachment.Equals(other.LegallyBindingAttachment) { return false }
+	if !m.LegallyBindingReference.Equals(other.LegallyBindingReference) { return false }
+	return true
+}
+
 // ContractContentDefinition
 // Precusory content developed with a focus and intent of supporting the formation a Contract instance, which may be associated with and transformable into a Contract.
 type ContractContentDefinition struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// Precusory content structure and use, i.e., a boilerplate, template, application for a contract such as an insurance policy or benefits under a program, e.g., workers compensation.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// subType
-	// Detailed Precusory content type.
-	SubType CodeableConcept `json:"subType,omitempty"`
-	// publisher
-	// The  individual or organization that published the Contract precursor content.
-	Publisher Reference `json:"publisher,omitempty"`
-	// publicationDate
-	// The date (and optionally time) when the contract was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the contract changes.
-	PublicationDate FhirDateTime `json:"publicationDate,omitempty"`
-	// publicationStatus
-	// amended | appended | cancelled | disputed | entered-in-error | executable | executed | negotiable | offered | policy | rejected | renewed | revoked | resolved | terminated.
-	PublicationStatus ContractResourcePublicationStatusCodes `json:"publicationStatus,omitempty"`
-	// copyright
-	// A copyright statement relating to Contract precursor content. Copyright statements are generally legal restrictions on the use and publishing of the Contract precursor content.
-	Copyright FhirMarkdown `json:"copyright,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	SubType *CodeableConcept `json:"subtype,omitempty"`
+	Publisher *Reference `json:"publisher,omitempty"`
+	PublicationDate *FhirDateTime `json:"publicationdate,omitempty"`
+	PublicationStatus *ContractResourcePublicationStatusCodes `json:"publicationstatus,omitempty"`
+	Copyright *FhirMarkdown `json:"copyright,omitempty"`
 }
 
 // NewContractContentDefinition creates a new ContractContentDefinition instance
-func NewContractContentDefinition(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ CodeableConcept,
-	subType CodeableConcept,
-	publisher Reference,
-	publicationDate FhirDateTime,
-	publicationStatus ContractResourcePublicationStatusCodes,
-	copyright FhirMarkdown,
-) *ContractContentDefinition {
-	return &ContractContentDefinition{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		SubType: subType,
-		Publisher: publisher,
-		PublicationDate: publicationDate,
-		PublicationStatus: publicationStatus,
-		Copyright: copyright,
-	}
+func NewContractContentDefinition() *ContractContentDefinition {
+	return &ContractContentDefinition{}
 }
+
 // FromJSON populates ContractContentDefinition from JSON data
 func (m *ContractContentDefinition) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -536,151 +199,65 @@ func (m *ContractContentDefinition) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ContractContentDefinition
-func (m *ContractContentDefinition) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *CodeableConcept,
-	subType *CodeableConcept,
-	publisher *Reference,
-	publicationDate *FhirDateTime,
-	publicationStatus *ContractResourcePublicationStatusCodes,
-	copyright *FhirMarkdown,
-) *ContractContentDefinition {
+// Clone creates a deep copy of ContractContentDefinition
+func (m *ContractContentDefinition) Clone() *ContractContentDefinition {
+	if m == nil { return nil }
 	return &ContractContentDefinition{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		SubType: func() CodeableConcept {
-			if subType != nil { return *subType }
-			return m.SubType
-		}(),
-		Publisher: func() Reference {
-			if publisher != nil { return *publisher }
-			return m.Publisher
-		}(),
-		PublicationDate: func() FhirDateTime {
-			if publicationDate != nil { return *publicationDate }
-			return m.PublicationDate
-		}(),
-		PublicationStatus: func() ContractResourcePublicationStatusCodes {
-			if publicationStatus != nil { return *publicationStatus }
-			return m.PublicationStatus
-		}(),
-		Copyright: func() FhirMarkdown {
-			if copyright != nil { return *copyright }
-			return m.Copyright
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		SubType: m.SubType.Clone(),
+		Publisher: m.Publisher.Clone(),
+		PublicationDate: m.PublicationDate.Clone(),
+		PublicationStatus: m.PublicationStatus.Clone(),
+		Copyright: m.Copyright.Clone(),
 	}
 }
+
+// Equals checks for equality with another ContractContentDefinition instance
+func (m *ContractContentDefinition) Equals(other *ContractContentDefinition) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.SubType.Equals(other.SubType) { return false }
+	if !m.Publisher.Equals(other.Publisher) { return false }
+	if !m.PublicationDate.Equals(other.PublicationDate) { return false }
+	if !m.PublicationStatus.Equals(other.PublicationStatus) { return false }
+	if !m.Copyright.Equals(other.Copyright) { return false }
+	return true
+}
+
 // ContractTerm
 // One or more Contract Provisions, which may be related and conveyed as a group, and may contain nested groups.
 type ContractTerm struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// Unique identifier for this particular Contract Provision.
-	Identifier Identifier `json:"identifier,omitempty"`
-	// issued
-	// When this Contract Provision was issued.
-	Issued FhirDateTime `json:"issued,omitempty"`
-	// applies
-	// Relevant time or time-period when this Contract Provision is applicable.
-	Applies Period `json:"applies,omitempty"`
-	// topicCodeableConcept
-	// The entity that the term applies to.
-	TopicCodeableConcept CodeableConcept `json:"topicCodeableConcept,omitempty"`
-	// topicReference
-	// The entity that the term applies to.
-	TopicReference Reference `json:"topicReference,omitempty"`
-	// type
-	// A legal clause or condition contained within a contract that requires one or both parties to perform a particular requirement by some specified time or prevents one or both parties from performing a particular requirement by some specified time.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// subType
-	// A specialized legal clause or condition based on overarching contract type.
-	SubType CodeableConcept `json:"subType,omitempty"`
-	// text
-	// Statement of a provision in a policy or a contract.
-	Text FhirString `json:"text,omitempty"`
-	// securityLabel
-	// Security labels that protect the handling of information about the term and its elements, which may be specifically identified..
-	SecurityLabel []ContractSecurityLabel `json:"securityLabel,omitempty"`
-	// offer
-	// The matter of concern in the context of this provision of the agrement.
-	Offer ContractOffer `json:"offer,omitempty"`
-	// asset
-	// Contract Term Asset List.
-	Asset []ContractAsset `json:"asset,omitempty"`
-	// action
-	// An actor taking a role in an activity for which it can be assigned some degree of responsibility for the activity taking place.
-	Action []ContractAction `json:"action,omitempty"`
-	// group
-	// Nested group of Contract Provisions.
-	Group []ContractTerm `json:"group,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier *Identifier `json:"identifier,omitempty"`
+	Issued *FhirDateTime `json:"issued,omitempty"`
+	Applies *Period `json:"applies,omitempty"`
+	TopicCodeableConcept *CodeableConcept `json:"topiccodeableconcept,omitempty"`
+	TopicReference *Reference `json:"topicreference,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	SubType *CodeableConcept `json:"subtype,omitempty"`
+	Text *FhirString `json:"text,omitempty"`
+	SecurityLabel []*ContractSecurityLabel `json:"securitylabel,omitempty"`
+	Offer *ContractOffer `json:"offer,omitempty"`
+	Asset []*ContractAsset `json:"asset,omitempty"`
+	Action []*ContractAction `json:"action,omitempty"`
+	Group []*ContractTerm `json:"group,omitempty"`
 }
 
 // NewContractTerm creates a new ContractTerm instance
-func NewContractTerm(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier Identifier,
-	issued FhirDateTime,
-	applies Period,
-	topicCodeableConcept CodeableConcept,
-	topicReference Reference,
-	type_ CodeableConcept,
-	subType CodeableConcept,
-	text FhirString,
-	securityLabel []ContractSecurityLabel,
-	offer ContractOffer,
-	asset []ContractAsset,
-	action []ContractAction,
-	group []ContractTerm,
-) *ContractTerm {
-	return &ContractTerm{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Issued: issued,
-		Applies: applies,
-		TopicCodeableConcept: topicCodeableConcept,
-		TopicReference: topicReference,
-		Type_: type_,
-		SubType: subType,
-		Text: text,
-		SecurityLabel: securityLabel,
-		Offer: offer,
-		Asset: asset,
-		Action: action,
-		Group: group,
-	}
+func NewContractTerm() *ContractTerm {
+	return &ContractTerm{}
 }
+
 // FromJSON populates ContractTerm from JSON data
 func (m *ContractTerm) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -691,141 +268,70 @@ func (m *ContractTerm) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ContractTerm
-func (m *ContractTerm) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *Identifier,
-	issued *FhirDateTime,
-	applies *Period,
-	topicCodeableConcept *CodeableConcept,
-	topicReference *Reference,
-	type_ *CodeableConcept,
-	subType *CodeableConcept,
-	text *FhirString,
-	securityLabel *[]ContractSecurityLabel,
-	offer *ContractOffer,
-	asset *[]ContractAsset,
-	action *[]ContractAction,
-	group *[]ContractTerm,
-) *ContractTerm {
+// Clone creates a deep copy of ContractTerm
+func (m *ContractTerm) Clone() *ContractTerm {
+	if m == nil { return nil }
 	return &ContractTerm{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Issued: func() FhirDateTime {
-			if issued != nil { return *issued }
-			return m.Issued
-		}(),
-		Applies: func() Period {
-			if applies != nil { return *applies }
-			return m.Applies
-		}(),
-		TopicCodeableConcept: func() CodeableConcept {
-			if topicCodeableConcept != nil { return *topicCodeableConcept }
-			return m.TopicCodeableConcept
-		}(),
-		TopicReference: func() Reference {
-			if topicReference != nil { return *topicReference }
-			return m.TopicReference
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		SubType: func() CodeableConcept {
-			if subType != nil { return *subType }
-			return m.SubType
-		}(),
-		Text: func() FhirString {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		SecurityLabel: func() []ContractSecurityLabel {
-			if securityLabel != nil { return *securityLabel }
-			return m.SecurityLabel
-		}(),
-		Offer: func() ContractOffer {
-			if offer != nil { return *offer }
-			return m.Offer
-		}(),
-		Asset: func() []ContractAsset {
-			if asset != nil { return *asset }
-			return m.Asset
-		}(),
-		Action: func() []ContractAction {
-			if action != nil { return *action }
-			return m.Action
-		}(),
-		Group: func() []ContractTerm {
-			if group != nil { return *group }
-			return m.Group
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: m.Identifier.Clone(),
+		Issued: m.Issued.Clone(),
+		Applies: m.Applies.Clone(),
+		TopicCodeableConcept: m.TopicCodeableConcept.Clone(),
+		TopicReference: m.TopicReference.Clone(),
+		Type: m.Type.Clone(),
+		SubType: m.SubType.Clone(),
+		Text: m.Text.Clone(),
+		SecurityLabel: cloneSlices(m.SecurityLabel),
+		Offer: m.Offer.Clone(),
+		Asset: cloneSlices(m.Asset),
+		Action: cloneSlices(m.Action),
+		Group: cloneSlices(m.Group),
 	}
 }
+
+// Equals checks for equality with another ContractTerm instance
+func (m *ContractTerm) Equals(other *ContractTerm) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Identifier.Equals(other.Identifier) { return false }
+	if !m.Issued.Equals(other.Issued) { return false }
+	if !m.Applies.Equals(other.Applies) { return false }
+	if !m.TopicCodeableConcept.Equals(other.TopicCodeableConcept) { return false }
+	if !m.TopicReference.Equals(other.TopicReference) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.SubType.Equals(other.SubType) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.SecurityLabel, other.SecurityLabel) { return false }
+	if !m.Offer.Equals(other.Offer) { return false }
+	if !compareSlices(m.Asset, other.Asset) { return false }
+	if !compareSlices(m.Action, other.Action) { return false }
+	if !compareSlices(m.Group, other.Group) { return false }
+	return true
+}
+
 // ContractSecurityLabel
 // Security labels that protect the handling of information about the term and its elements, which may be specifically identified..
 type ContractSecurityLabel struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// number
-	// Number used to link this term or term element to the applicable Security Label.
-	Number []FhirUnsignedInt `json:"number,omitempty"`
-	// classification
-	// Security label privacy tag that species the level of confidentiality protection required for this term and/or term elements.
-	Classification Coding `json:"classification,omitempty"`
-	// category
-	// Security label privacy tag that species the applicable privacy and security policies governing this term and/or term elements.
-	Category []Coding `json:"category,omitempty"`
-	// control
-	// Security label privacy tag that species the manner in which term and/or term elements are to be protected.
-	Control []Coding `json:"control,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Number []*FhirUnsignedInt `json:"number,omitempty"`
+	Classification *Coding `json:"classification,omitempty"`
+	Category []*Coding `json:"category,omitempty"`
+	Control []*Coding `json:"control,omitempty"`
 }
 
 // NewContractSecurityLabel creates a new ContractSecurityLabel instance
-func NewContractSecurityLabel(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	number []FhirUnsignedInt,
-	classification Coding,
-	category []Coding,
-	control []Coding,
-) *ContractSecurityLabel {
-	return &ContractSecurityLabel{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Number: number,
-		Classification: classification,
-		Category: category,
-		Control: control,
-	}
+func NewContractSecurityLabel() *ContractSecurityLabel {
+	return &ContractSecurityLabel{}
 }
+
 // FromJSON populates ContractSecurityLabel from JSON data
 func (m *ContractSecurityLabel) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -836,126 +342,58 @@ func (m *ContractSecurityLabel) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ContractSecurityLabel
-func (m *ContractSecurityLabel) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	number *[]FhirUnsignedInt,
-	classification *Coding,
-	category *[]Coding,
-	control *[]Coding,
-) *ContractSecurityLabel {
+// Clone creates a deep copy of ContractSecurityLabel
+func (m *ContractSecurityLabel) Clone() *ContractSecurityLabel {
+	if m == nil { return nil }
 	return &ContractSecurityLabel{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Number: func() []FhirUnsignedInt {
-			if number != nil { return *number }
-			return m.Number
-		}(),
-		Classification: func() Coding {
-			if classification != nil { return *classification }
-			return m.Classification
-		}(),
-		Category: func() []Coding {
-			if category != nil { return *category }
-			return m.Category
-		}(),
-		Control: func() []Coding {
-			if control != nil { return *control }
-			return m.Control
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Number: cloneSlices(m.Number),
+		Classification: m.Classification.Clone(),
+		Category: cloneSlices(m.Category),
+		Control: cloneSlices(m.Control),
 	}
 }
+
+// Equals checks for equality with another ContractSecurityLabel instance
+func (m *ContractSecurityLabel) Equals(other *ContractSecurityLabel) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Number, other.Number) { return false }
+	if !m.Classification.Equals(other.Classification) { return false }
+	if !compareSlices(m.Category, other.Category) { return false }
+	if !compareSlices(m.Control, other.Control) { return false }
+	return true
+}
+
 // ContractOffer
 // The matter of concern in the context of this provision of the agrement.
 type ContractOffer struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// Unique identifier for this particular Contract Provision.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// party
-	// Offer Recipient.
-	Party []ContractParty `json:"party,omitempty"`
-	// topic
-	// The owner of an asset has the residual control rights over the asset: the right to decide all usages of the asset in any way not inconsistent with a prior contract, custom, or law (Hart, 1995, p. 30).
-	Topic Reference `json:"topic,omitempty"`
-	// type
-	// Type of Contract Provision such as specific requirements, purposes for actions, obligations, prohibitions, e.g. life time maximum benefit.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// decision
-	// Type of choice made by accepting party with respect to an offer made by an offeror/ grantee.
-	Decision CodeableConcept `json:"decision,omitempty"`
-	// decisionMode
-	// How the decision about a Contract was conveyed.
-	DecisionMode []CodeableConcept `json:"decisionMode,omitempty"`
-	// answer
-	// Response to offer text.
-	Answer []ContractAnswer `json:"answer,omitempty"`
-	// text
-	// Human readable form of this Contract Offer.
-	Text FhirString `json:"text,omitempty"`
-	// linkId
-	// The id of the clause or question text of the offer in the referenced questionnaire/response.
-	LinkId []FhirString `json:"linkId,omitempty"`
-	// securityLabelNumber
-	// Security labels that protects the offer.
-	SecurityLabelNumber []FhirUnsignedInt `json:"securityLabelNumber,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Party []*ContractParty `json:"party,omitempty"`
+	Topic *Reference `json:"topic,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Decision *CodeableConcept `json:"decision,omitempty"`
+	DecisionMode []*CodeableConcept `json:"decisionmode,omitempty"`
+	Answer []*ContractAnswer `json:"answer,omitempty"`
+	Text *FhirString `json:"text,omitempty"`
+	LinkId []*FhirString `json:"linkid,omitempty"`
+	SecurityLabelNumber []*FhirUnsignedInt `json:"securitylabelnumber,omitempty"`
 }
 
 // NewContractOffer creates a new ContractOffer instance
-func NewContractOffer(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	party []ContractParty,
-	topic Reference,
-	type_ CodeableConcept,
-	decision CodeableConcept,
-	decisionMode []CodeableConcept,
-	answer []ContractAnswer,
-	text FhirString,
-	linkId []FhirString,
-	securityLabelNumber []FhirUnsignedInt,
-) *ContractOffer {
-	return &ContractOffer{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Party: party,
-		Topic: topic,
-		Type_: type_,
-		Decision: decision,
-		DecisionMode: decisionMode,
-		Answer: answer,
-		Text: text,
-		LinkId: linkId,
-		SecurityLabelNumber: securityLabelNumber,
-	}
+func NewContractOffer() *ContractOffer {
+	return &ContractOffer{}
 }
+
 // FromJSON populates ContractOffer from JSON data
 func (m *ContractOffer) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -966,116 +404,62 @@ func (m *ContractOffer) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ContractOffer
-func (m *ContractOffer) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	party *[]ContractParty,
-	topic *Reference,
-	type_ *CodeableConcept,
-	decision *CodeableConcept,
-	decisionMode *[]CodeableConcept,
-	answer *[]ContractAnswer,
-	text *FhirString,
-	linkId *[]FhirString,
-	securityLabelNumber *[]FhirUnsignedInt,
-) *ContractOffer {
+// Clone creates a deep copy of ContractOffer
+func (m *ContractOffer) Clone() *ContractOffer {
+	if m == nil { return nil }
 	return &ContractOffer{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Party: func() []ContractParty {
-			if party != nil { return *party }
-			return m.Party
-		}(),
-		Topic: func() Reference {
-			if topic != nil { return *topic }
-			return m.Topic
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Decision: func() CodeableConcept {
-			if decision != nil { return *decision }
-			return m.Decision
-		}(),
-		DecisionMode: func() []CodeableConcept {
-			if decisionMode != nil { return *decisionMode }
-			return m.DecisionMode
-		}(),
-		Answer: func() []ContractAnswer {
-			if answer != nil { return *answer }
-			return m.Answer
-		}(),
-		Text: func() FhirString {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		LinkId: func() []FhirString {
-			if linkId != nil { return *linkId }
-			return m.LinkId
-		}(),
-		SecurityLabelNumber: func() []FhirUnsignedInt {
-			if securityLabelNumber != nil { return *securityLabelNumber }
-			return m.SecurityLabelNumber
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		Party: cloneSlices(m.Party),
+		Topic: m.Topic.Clone(),
+		Type: m.Type.Clone(),
+		Decision: m.Decision.Clone(),
+		DecisionMode: cloneSlices(m.DecisionMode),
+		Answer: cloneSlices(m.Answer),
+		Text: m.Text.Clone(),
+		LinkId: cloneSlices(m.LinkId),
+		SecurityLabelNumber: cloneSlices(m.SecurityLabelNumber),
 	}
 }
+
+// Equals checks for equality with another ContractOffer instance
+func (m *ContractOffer) Equals(other *ContractOffer) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !compareSlices(m.Party, other.Party) { return false }
+	if !m.Topic.Equals(other.Topic) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Decision.Equals(other.Decision) { return false }
+	if !compareSlices(m.DecisionMode, other.DecisionMode) { return false }
+	if !compareSlices(m.Answer, other.Answer) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.LinkId, other.LinkId) { return false }
+	if !compareSlices(m.SecurityLabelNumber, other.SecurityLabelNumber) { return false }
+	return true
+}
+
 // ContractParty
 // Offer Recipient.
 type ContractParty struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// reference
-	// Participant in the offer.
-	Reference []Reference `json:"reference,omitempty"`
-	// role
-	// How the party participates in the offer.
-	Role CodeableConcept `json:"role,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Reference []*Reference `json:"reference,omitempty"`
+	Role *CodeableConcept `json:"role,omitempty"`
 }
 
 // NewContractParty creates a new ContractParty instance
-func NewContractParty(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	reference []Reference,
-	role CodeableConcept,
-) *ContractParty {
-	return &ContractParty{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Reference: reference,
-		Role: role,
-	}
+func NewContractParty() *ContractParty {
+	return &ContractParty{}
 }
+
 // FromJSON populates ContractParty from JSON data
 func (m *ContractParty) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1086,126 +470,56 @@ func (m *ContractParty) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ContractParty
-func (m *ContractParty) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	reference *[]Reference,
-	role *CodeableConcept,
-) *ContractParty {
+// Clone creates a deep copy of ContractParty
+func (m *ContractParty) Clone() *ContractParty {
+	if m == nil { return nil }
 	return &ContractParty{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Reference: func() []Reference {
-			if reference != nil { return *reference }
-			return m.Reference
-		}(),
-		Role: func() CodeableConcept {
-			if role != nil { return *role }
-			return m.Role
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Reference: cloneSlices(m.Reference),
+		Role: m.Role.Clone(),
 	}
 }
+
+// Equals checks for equality with another ContractParty instance
+func (m *ContractParty) Equals(other *ContractParty) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Reference, other.Reference) { return false }
+	if !m.Role.Equals(other.Role) { return false }
+	return true
+}
+
 // ContractAnswer
 // Response to offer text.
 type ContractAnswer struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// valueBoolean
-	// Response to an offer clause or question text,  which enables selection of values to be agreed to, e.g., the period of participation, the date of occupancy of a rental, warrently duration, or whether biospecimen may be used for further research.
-	ValueBoolean FhirBoolean `json:"valueBoolean,omitempty"`
-	// valueDecimal
-	// Response to an offer clause or question text,  which enables selection of values to be agreed to, e.g., the period of participation, the date of occupancy of a rental, warrently duration, or whether biospecimen may be used for further research.
-	ValueDecimal FhirDecimal `json:"valueDecimal,omitempty"`
-	// valueInteger
-	// Response to an offer clause or question text,  which enables selection of values to be agreed to, e.g., the period of participation, the date of occupancy of a rental, warrently duration, or whether biospecimen may be used for further research.
-	ValueInteger FhirInteger `json:"valueInteger,omitempty"`
-	// valueDate
-	// Response to an offer clause or question text,  which enables selection of values to be agreed to, e.g., the period of participation, the date of occupancy of a rental, warrently duration, or whether biospecimen may be used for further research.
-	ValueDate FhirDate `json:"valueDate,omitempty"`
-	// valueDateTime
-	// Response to an offer clause or question text,  which enables selection of values to be agreed to, e.g., the period of participation, the date of occupancy of a rental, warrently duration, or whether biospecimen may be used for further research.
-	ValueDateTime FhirDateTime `json:"valueDateTime,omitempty"`
-	// valueTime
-	// Response to an offer clause or question text,  which enables selection of values to be agreed to, e.g., the period of participation, the date of occupancy of a rental, warrently duration, or whether biospecimen may be used for further research.
-	ValueTime FhirTime `json:"valueTime,omitempty"`
-	// valueString
-	// Response to an offer clause or question text,  which enables selection of values to be agreed to, e.g., the period of participation, the date of occupancy of a rental, warrently duration, or whether biospecimen may be used for further research.
-	ValueString FhirString `json:"valueString,omitempty"`
-	// valueUri
-	// Response to an offer clause or question text,  which enables selection of values to be agreed to, e.g., the period of participation, the date of occupancy of a rental, warrently duration, or whether biospecimen may be used for further research.
-	ValueUri FhirUri `json:"valueUri,omitempty"`
-	// valueAttachment
-	// Response to an offer clause or question text,  which enables selection of values to be agreed to, e.g., the period of participation, the date of occupancy of a rental, warrently duration, or whether biospecimen may be used for further research.
-	ValueAttachment Attachment `json:"valueAttachment,omitempty"`
-	// valueCoding
-	// Response to an offer clause or question text,  which enables selection of values to be agreed to, e.g., the period of participation, the date of occupancy of a rental, warrently duration, or whether biospecimen may be used for further research.
-	ValueCoding Coding `json:"valueCoding,omitempty"`
-	// valueQuantity
-	// Response to an offer clause or question text,  which enables selection of values to be agreed to, e.g., the period of participation, the date of occupancy of a rental, warrently duration, or whether biospecimen may be used for further research.
-	ValueQuantity Quantity `json:"valueQuantity,omitempty"`
-	// valueReference
-	// Response to an offer clause or question text,  which enables selection of values to be agreed to, e.g., the period of participation, the date of occupancy of a rental, warrently duration, or whether biospecimen may be used for further research.
-	ValueReference Reference `json:"valueReference,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
+	ValueDecimal *FhirDecimal `json:"valuedecimal,omitempty"`
+	ValueInteger *FhirInteger `json:"valueinteger,omitempty"`
+	ValueDate *FhirDate `json:"valuedate,omitempty"`
+	ValueDateTime *FhirDateTime `json:"valuedatetime,omitempty"`
+	ValueTime *FhirTime `json:"valuetime,omitempty"`
+	ValueString *FhirString `json:"valuestring,omitempty"`
+	ValueUri *FhirUri `json:"valueuri,omitempty"`
+	ValueAttachment *Attachment `json:"valueattachment,omitempty"`
+	ValueCoding *Coding `json:"valuecoding,omitempty"`
+	ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+	ValueReference *Reference `json:"valuereference,omitempty"`
 }
 
 // NewContractAnswer creates a new ContractAnswer instance
-func NewContractAnswer(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	valueBoolean FhirBoolean,
-	valueDecimal FhirDecimal,
-	valueInteger FhirInteger,
-	valueDate FhirDate,
-	valueDateTime FhirDateTime,
-	valueTime FhirTime,
-	valueString FhirString,
-	valueUri FhirUri,
-	valueAttachment Attachment,
-	valueCoding Coding,
-	valueQuantity Quantity,
-	valueReference Reference,
-) *ContractAnswer {
-	return &ContractAnswer{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		ValueBoolean: valueBoolean,
-		ValueDecimal: valueDecimal,
-		ValueInteger: valueInteger,
-		ValueDate: valueDate,
-		ValueDateTime: valueDateTime,
-		ValueTime: valueTime,
-		ValueString: valueString,
-		ValueUri: valueUri,
-		ValueAttachment: valueAttachment,
-		ValueCoding: valueCoding,
-		ValueQuantity: valueQuantity,
-		ValueReference: valueReference,
-	}
+func NewContractAnswer() *ContractAnswer {
+	return &ContractAnswer{}
 }
+
 // FromJSON populates ContractAnswer from JSON data
 func (m *ContractAnswer) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1216,191 +530,79 @@ func (m *ContractAnswer) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ContractAnswer
-func (m *ContractAnswer) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	valueBoolean *FhirBoolean,
-	valueDecimal *FhirDecimal,
-	valueInteger *FhirInteger,
-	valueDate *FhirDate,
-	valueDateTime *FhirDateTime,
-	valueTime *FhirTime,
-	valueString *FhirString,
-	valueUri *FhirUri,
-	valueAttachment *Attachment,
-	valueCoding *Coding,
-	valueQuantity *Quantity,
-	valueReference *Reference,
-) *ContractAnswer {
+// Clone creates a deep copy of ContractAnswer
+func (m *ContractAnswer) Clone() *ContractAnswer {
+	if m == nil { return nil }
 	return &ContractAnswer{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		ValueBoolean: func() FhirBoolean {
-			if valueBoolean != nil { return *valueBoolean }
-			return m.ValueBoolean
-		}(),
-		ValueDecimal: func() FhirDecimal {
-			if valueDecimal != nil { return *valueDecimal }
-			return m.ValueDecimal
-		}(),
-		ValueInteger: func() FhirInteger {
-			if valueInteger != nil { return *valueInteger }
-			return m.ValueInteger
-		}(),
-		ValueDate: func() FhirDate {
-			if valueDate != nil { return *valueDate }
-			return m.ValueDate
-		}(),
-		ValueDateTime: func() FhirDateTime {
-			if valueDateTime != nil { return *valueDateTime }
-			return m.ValueDateTime
-		}(),
-		ValueTime: func() FhirTime {
-			if valueTime != nil { return *valueTime }
-			return m.ValueTime
-		}(),
-		ValueString: func() FhirString {
-			if valueString != nil { return *valueString }
-			return m.ValueString
-		}(),
-		ValueUri: func() FhirUri {
-			if valueUri != nil { return *valueUri }
-			return m.ValueUri
-		}(),
-		ValueAttachment: func() Attachment {
-			if valueAttachment != nil { return *valueAttachment }
-			return m.ValueAttachment
-		}(),
-		ValueCoding: func() Coding {
-			if valueCoding != nil { return *valueCoding }
-			return m.ValueCoding
-		}(),
-		ValueQuantity: func() Quantity {
-			if valueQuantity != nil { return *valueQuantity }
-			return m.ValueQuantity
-		}(),
-		ValueReference: func() Reference {
-			if valueReference != nil { return *valueReference }
-			return m.ValueReference
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		ValueBoolean: m.ValueBoolean.Clone(),
+		ValueDecimal: m.ValueDecimal.Clone(),
+		ValueInteger: m.ValueInteger.Clone(),
+		ValueDate: m.ValueDate.Clone(),
+		ValueDateTime: m.ValueDateTime.Clone(),
+		ValueTime: m.ValueTime.Clone(),
+		ValueString: m.ValueString.Clone(),
+		ValueUri: m.ValueUri.Clone(),
+		ValueAttachment: m.ValueAttachment.Clone(),
+		ValueCoding: m.ValueCoding.Clone(),
+		ValueQuantity: m.ValueQuantity.Clone(),
+		ValueReference: m.ValueReference.Clone(),
 	}
 }
+
+// Equals checks for equality with another ContractAnswer instance
+func (m *ContractAnswer) Equals(other *ContractAnswer) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.ValueBoolean.Equals(other.ValueBoolean) { return false }
+	if !m.ValueDecimal.Equals(other.ValueDecimal) { return false }
+	if !m.ValueInteger.Equals(other.ValueInteger) { return false }
+	if !m.ValueDate.Equals(other.ValueDate) { return false }
+	if !m.ValueDateTime.Equals(other.ValueDateTime) { return false }
+	if !m.ValueTime.Equals(other.ValueTime) { return false }
+	if !m.ValueString.Equals(other.ValueString) { return false }
+	if !m.ValueUri.Equals(other.ValueUri) { return false }
+	if !m.ValueAttachment.Equals(other.ValueAttachment) { return false }
+	if !m.ValueCoding.Equals(other.ValueCoding) { return false }
+	if !m.ValueQuantity.Equals(other.ValueQuantity) { return false }
+	if !m.ValueReference.Equals(other.ValueReference) { return false }
+	return true
+}
+
 // ContractAsset
 // Contract Term Asset List.
 type ContractAsset struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// scope
-	// Differentiates the kind of the asset .
-	Scope CodeableConcept `json:"scope,omitempty"`
-	// type
-	// Target entity type about which the term may be concerned.
-	Type_ []CodeableConcept `json:"type,omitempty"`
-	// typeReference
-	// Associated entities.
-	TypeReference []Reference `json:"typeReference,omitempty"`
-	// subtype
-	// May be a subtype or part of an offered asset.
-	Subtype []CodeableConcept `json:"subtype,omitempty"`
-	// relationship
-	// Specifies the applicability of the term to an asset resource instance, and instances it refers to orinstances that refer to it, and/or are owned by the offeree.
-	Relationship Coding `json:"relationship,omitempty"`
-	// context
-	// Circumstance of the asset.
-	Context []ContractContext `json:"context,omitempty"`
-	// condition
-	// Description of the quality and completeness of the asset that imay be a factor in its valuation.
-	Condition FhirString `json:"condition,omitempty"`
-	// periodType
-	// Type of Asset availability for use or ownership.
-	PeriodType []CodeableConcept `json:"periodType,omitempty"`
-	// period
-	// Asset relevant contractual time period.
-	Period []Period `json:"period,omitempty"`
-	// usePeriod
-	// Time period of asset use.
-	UsePeriod []Period `json:"usePeriod,omitempty"`
-	// text
-	// Clause or question text (Prose Object) concerning the asset in a linked form, such as a QuestionnaireResponse used in the formation of the contract.
-	Text FhirString `json:"text,omitempty"`
-	// linkId
-	// Id [identifier??] of the clause or question text about the asset in the referenced form or QuestionnaireResponse.
-	LinkId []FhirString `json:"linkId,omitempty"`
-	// answer
-	// Response to assets.
-	Answer []ContractAnswer `json:"answer,omitempty"`
-	// securityLabelNumber
-	// Security labels that protects the asset.
-	SecurityLabelNumber []FhirUnsignedInt `json:"securityLabelNumber,omitempty"`
-	// valuedItem
-	// Contract Valued Item List.
-	ValuedItem []ContractValuedItem `json:"valuedItem,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Scope *CodeableConcept `json:"scope,omitempty"`
+	Type []*CodeableConcept `json:"type,omitempty"`
+	TypeReference []*Reference `json:"typereference,omitempty"`
+	Subtype []*CodeableConcept `json:"subtype,omitempty"`
+	Relationship *Coding `json:"relationship,omitempty"`
+	Context []*ContractContext `json:"context,omitempty"`
+	Condition *FhirString `json:"condition,omitempty"`
+	PeriodType []*CodeableConcept `json:"periodtype,omitempty"`
+	Period []*Period `json:"period,omitempty"`
+	UsePeriod []*Period `json:"useperiod,omitempty"`
+	Text *FhirString `json:"text,omitempty"`
+	LinkId []*FhirString `json:"linkid,omitempty"`
+	Answer []*ContractAnswer `json:"answer,omitempty"`
+	SecurityLabelNumber []*FhirUnsignedInt `json:"securitylabelnumber,omitempty"`
+	ValuedItem []*ContractValuedItem `json:"valueditem,omitempty"`
 }
 
 // NewContractAsset creates a new ContractAsset instance
-func NewContractAsset(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	scope CodeableConcept,
-	type_ []CodeableConcept,
-	typeReference []Reference,
-	subtype []CodeableConcept,
-	relationship Coding,
-	context []ContractContext,
-	condition FhirString,
-	periodType []CodeableConcept,
-	period []Period,
-	usePeriod []Period,
-	text FhirString,
-	linkId []FhirString,
-	answer []ContractAnswer,
-	securityLabelNumber []FhirUnsignedInt,
-	valuedItem []ContractValuedItem,
-) *ContractAsset {
-	return &ContractAsset{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Scope: scope,
-		Type_: type_,
-		TypeReference: typeReference,
-		Subtype: subtype,
-		Relationship: relationship,
-		Context: context,
-		Condition: condition,
-		PeriodType: periodType,
-		Period: period,
-		UsePeriod: usePeriod,
-		Text: text,
-		LinkId: linkId,
-		Answer: answer,
-		SecurityLabelNumber: securityLabelNumber,
-		ValuedItem: valuedItem,
-	}
+func NewContractAsset() *ContractAsset {
+	return &ContractAsset{}
 }
+
 // FromJSON populates ContractAsset from JSON data
 func (m *ContractAsset) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1411,146 +613,73 @@ func (m *ContractAsset) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ContractAsset
-func (m *ContractAsset) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	scope *CodeableConcept,
-	type_ *[]CodeableConcept,
-	typeReference *[]Reference,
-	subtype *[]CodeableConcept,
-	relationship *Coding,
-	context *[]ContractContext,
-	condition *FhirString,
-	periodType *[]CodeableConcept,
-	period *[]Period,
-	usePeriod *[]Period,
-	text *FhirString,
-	linkId *[]FhirString,
-	answer *[]ContractAnswer,
-	securityLabelNumber *[]FhirUnsignedInt,
-	valuedItem *[]ContractValuedItem,
-) *ContractAsset {
+// Clone creates a deep copy of ContractAsset
+func (m *ContractAsset) Clone() *ContractAsset {
+	if m == nil { return nil }
 	return &ContractAsset{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Scope: func() CodeableConcept {
-			if scope != nil { return *scope }
-			return m.Scope
-		}(),
-		Type_: func() []CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		TypeReference: func() []Reference {
-			if typeReference != nil { return *typeReference }
-			return m.TypeReference
-		}(),
-		Subtype: func() []CodeableConcept {
-			if subtype != nil { return *subtype }
-			return m.Subtype
-		}(),
-		Relationship: func() Coding {
-			if relationship != nil { return *relationship }
-			return m.Relationship
-		}(),
-		Context: func() []ContractContext {
-			if context != nil { return *context }
-			return m.Context
-		}(),
-		Condition: func() FhirString {
-			if condition != nil { return *condition }
-			return m.Condition
-		}(),
-		PeriodType: func() []CodeableConcept {
-			if periodType != nil { return *periodType }
-			return m.PeriodType
-		}(),
-		Period: func() []Period {
-			if period != nil { return *period }
-			return m.Period
-		}(),
-		UsePeriod: func() []Period {
-			if usePeriod != nil { return *usePeriod }
-			return m.UsePeriod
-		}(),
-		Text: func() FhirString {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		LinkId: func() []FhirString {
-			if linkId != nil { return *linkId }
-			return m.LinkId
-		}(),
-		Answer: func() []ContractAnswer {
-			if answer != nil { return *answer }
-			return m.Answer
-		}(),
-		SecurityLabelNumber: func() []FhirUnsignedInt {
-			if securityLabelNumber != nil { return *securityLabelNumber }
-			return m.SecurityLabelNumber
-		}(),
-		ValuedItem: func() []ContractValuedItem {
-			if valuedItem != nil { return *valuedItem }
-			return m.ValuedItem
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Scope: m.Scope.Clone(),
+		Type: cloneSlices(m.Type),
+		TypeReference: cloneSlices(m.TypeReference),
+		Subtype: cloneSlices(m.Subtype),
+		Relationship: m.Relationship.Clone(),
+		Context: cloneSlices(m.Context),
+		Condition: m.Condition.Clone(),
+		PeriodType: cloneSlices(m.PeriodType),
+		Period: cloneSlices(m.Period),
+		UsePeriod: cloneSlices(m.UsePeriod),
+		Text: m.Text.Clone(),
+		LinkId: cloneSlices(m.LinkId),
+		Answer: cloneSlices(m.Answer),
+		SecurityLabelNumber: cloneSlices(m.SecurityLabelNumber),
+		ValuedItem: cloneSlices(m.ValuedItem),
 	}
 }
+
+// Equals checks for equality with another ContractAsset instance
+func (m *ContractAsset) Equals(other *ContractAsset) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Scope.Equals(other.Scope) { return false }
+	if !compareSlices(m.Type, other.Type) { return false }
+	if !compareSlices(m.TypeReference, other.TypeReference) { return false }
+	if !compareSlices(m.Subtype, other.Subtype) { return false }
+	if !m.Relationship.Equals(other.Relationship) { return false }
+	if !compareSlices(m.Context, other.Context) { return false }
+	if !m.Condition.Equals(other.Condition) { return false }
+	if !compareSlices(m.PeriodType, other.PeriodType) { return false }
+	if !compareSlices(m.Period, other.Period) { return false }
+	if !compareSlices(m.UsePeriod, other.UsePeriod) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.LinkId, other.LinkId) { return false }
+	if !compareSlices(m.Answer, other.Answer) { return false }
+	if !compareSlices(m.SecurityLabelNumber, other.SecurityLabelNumber) { return false }
+	if !compareSlices(m.ValuedItem, other.ValuedItem) { return false }
+	return true
+}
+
 // ContractContext
 // Circumstance of the asset.
 type ContractContext struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// reference
-	// Asset context reference may include the creator, custodian, or owning Person or Organization (e.g., bank, repository),  location held, e.g., building,  jurisdiction.
-	Reference Reference `json:"reference,omitempty"`
-	// code
-	// Coded representation of the context generally or of the Referenced entity, such as the asset holder type or location.
-	Code []CodeableConcept `json:"code,omitempty"`
-	// text
-	// Context description.
-	Text FhirString `json:"text,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Reference *Reference `json:"reference,omitempty"`
+	Code []*CodeableConcept `json:"code,omitempty"`
+	Text *FhirString `json:"text,omitempty"`
 }
 
 // NewContractContext creates a new ContractContext instance
-func NewContractContext(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	reference Reference,
-	code []CodeableConcept,
-	text FhirString,
-) *ContractContext {
-	return &ContractContext{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Reference: reference,
-		Code: code,
-		Text: text,
-	}
+func NewContractContext() *ContractContext {
+	return &ContractContext{}
 }
+
 // FromJSON populates ContractContext from JSON data
 func (m *ContractContext) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1561,146 +690,61 @@ func (m *ContractContext) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ContractContext
-func (m *ContractContext) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	reference *Reference,
-	code *[]CodeableConcept,
-	text *FhirString,
-) *ContractContext {
+// Clone creates a deep copy of ContractContext
+func (m *ContractContext) Clone() *ContractContext {
+	if m == nil { return nil }
 	return &ContractContext{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Reference: func() Reference {
-			if reference != nil { return *reference }
-			return m.Reference
-		}(),
-		Code: func() []CodeableConcept {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Text: func() FhirString {
-			if text != nil { return *text }
-			return m.Text
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Reference: m.Reference.Clone(),
+		Code: cloneSlices(m.Code),
+		Text: m.Text.Clone(),
 	}
 }
+
+// Equals checks for equality with another ContractContext instance
+func (m *ContractContext) Equals(other *ContractContext) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Reference.Equals(other.Reference) { return false }
+	if !compareSlices(m.Code, other.Code) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	return true
+}
+
 // ContractValuedItem
 // Contract Valued Item List.
 type ContractValuedItem struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// entityCodeableConcept
-	// Specific type of Contract Valued Item that may be priced.
-	EntityCodeableConcept CodeableConcept `json:"entityCodeableConcept,omitempty"`
-	// entityReference
-	// Specific type of Contract Valued Item that may be priced.
-	EntityReference Reference `json:"entityReference,omitempty"`
-	// identifier
-	// Identifies a Contract Valued Item instance.
-	Identifier Identifier `json:"identifier,omitempty"`
-	// effectiveTime
-	// Indicates the time during which this Contract ValuedItem information is effective.
-	EffectiveTime FhirDateTime `json:"effectiveTime,omitempty"`
-	// quantity
-	// Specifies the units by which the Contract Valued Item is measured or counted, and quantifies the countable or measurable Contract Valued Item instances.
-	Quantity Quantity `json:"quantity,omitempty"`
-	// unitPrice
-	// A Contract Valued Item unit valuation measure.
-	UnitPrice Money `json:"unitPrice,omitempty"`
-	// factor
-	// A real number that represents a multiplier used in determining the overall value of the Contract Valued Item delivered. The concept of a Factor allows for a discount or surcharge multiplier to be applied to a monetary amount.
-	Factor FhirDecimal `json:"factor,omitempty"`
-	// points
-	// An amount that expresses the weighting (based on difficulty, cost and/or resource intensiveness) associated with the Contract Valued Item delivered. The concept of Points allows for assignment of point values for a Contract Valued Item, such that a monetary amount can be assigned to each point.
-	Points FhirDecimal `json:"points,omitempty"`
-	// net
-	// Expresses the product of the Contract Valued Item unitQuantity and the unitPriceAmt. For example, the formula: unit Quantity * unit Price (Cost per Point) * factor Number  * points = net Amount. Quantity, factor and points are assumed to be 1 if not supplied.
-	Net Money `json:"net,omitempty"`
-	// payment
-	// Terms of valuation.
-	Payment FhirString `json:"payment,omitempty"`
-	// paymentDate
-	// When payment is due.
-	PaymentDate FhirDateTime `json:"paymentDate,omitempty"`
-	// responsible
-	// Who will make payment.
-	Responsible Reference `json:"responsible,omitempty"`
-	// recipient
-	// Who will receive payment.
-	Recipient Reference `json:"recipient,omitempty"`
-	// linkId
-	// Id  of the clause or question text related to the context of this valuedItem in the referenced form or QuestionnaireResponse.
-	LinkId []FhirString `json:"linkId,omitempty"`
-	// securityLabelNumber
-	// A set of security labels that define which terms are controlled by this condition.
-	SecurityLabelNumber []FhirUnsignedInt `json:"securityLabelNumber,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	EntityCodeableConcept *CodeableConcept `json:"entitycodeableconcept,omitempty"`
+	EntityReference *Reference `json:"entityreference,omitempty"`
+	Identifier *Identifier `json:"identifier,omitempty"`
+	EffectiveTime *FhirDateTime `json:"effectivetime,omitempty"`
+	Quantity *Quantity `json:"quantity,omitempty"`
+	UnitPrice *Money `json:"unitprice,omitempty"`
+	Factor *FhirDecimal `json:"factor,omitempty"`
+	Points *FhirDecimal `json:"points,omitempty"`
+	Net *Money `json:"net,omitempty"`
+	Payment *FhirString `json:"payment,omitempty"`
+	PaymentDate *FhirDateTime `json:"paymentdate,omitempty"`
+	Responsible *Reference `json:"responsible,omitempty"`
+	Recipient *Reference `json:"recipient,omitempty"`
+	LinkId []*FhirString `json:"linkid,omitempty"`
+	SecurityLabelNumber []*FhirUnsignedInt `json:"securitylabelnumber,omitempty"`
 }
 
 // NewContractValuedItem creates a new ContractValuedItem instance
-func NewContractValuedItem(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	entityCodeableConcept CodeableConcept,
-	entityReference Reference,
-	identifier Identifier,
-	effectiveTime FhirDateTime,
-	quantity Quantity,
-	unitPrice Money,
-	factor FhirDecimal,
-	points FhirDecimal,
-	net Money,
-	payment FhirString,
-	paymentDate FhirDateTime,
-	responsible Reference,
-	recipient Reference,
-	linkId []FhirString,
-	securityLabelNumber []FhirUnsignedInt,
-) *ContractValuedItem {
-	return &ContractValuedItem{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		EntityCodeableConcept: entityCodeableConcept,
-		EntityReference: entityReference,
-		Identifier: identifier,
-		EffectiveTime: effectiveTime,
-		Quantity: quantity,
-		UnitPrice: unitPrice,
-		Factor: factor,
-		Points: points,
-		Net: net,
-		Payment: payment,
-		PaymentDate: paymentDate,
-		Responsible: responsible,
-		Recipient: recipient,
-		LinkId: linkId,
-		SecurityLabelNumber: securityLabelNumber,
-	}
+func NewContractValuedItem() *ContractValuedItem {
+	return &ContractValuedItem{}
 }
+
 // FromJSON populates ContractValuedItem from JSON data
 func (m *ContractValuedItem) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1711,246 +755,93 @@ func (m *ContractValuedItem) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ContractValuedItem
-func (m *ContractValuedItem) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	entityCodeableConcept *CodeableConcept,
-	entityReference *Reference,
-	identifier *Identifier,
-	effectiveTime *FhirDateTime,
-	quantity *Quantity,
-	unitPrice *Money,
-	factor *FhirDecimal,
-	points *FhirDecimal,
-	net *Money,
-	payment *FhirString,
-	paymentDate *FhirDateTime,
-	responsible *Reference,
-	recipient *Reference,
-	linkId *[]FhirString,
-	securityLabelNumber *[]FhirUnsignedInt,
-) *ContractValuedItem {
+// Clone creates a deep copy of ContractValuedItem
+func (m *ContractValuedItem) Clone() *ContractValuedItem {
+	if m == nil { return nil }
 	return &ContractValuedItem{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		EntityCodeableConcept: func() CodeableConcept {
-			if entityCodeableConcept != nil { return *entityCodeableConcept }
-			return m.EntityCodeableConcept
-		}(),
-		EntityReference: func() Reference {
-			if entityReference != nil { return *entityReference }
-			return m.EntityReference
-		}(),
-		Identifier: func() Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		EffectiveTime: func() FhirDateTime {
-			if effectiveTime != nil { return *effectiveTime }
-			return m.EffectiveTime
-		}(),
-		Quantity: func() Quantity {
-			if quantity != nil { return *quantity }
-			return m.Quantity
-		}(),
-		UnitPrice: func() Money {
-			if unitPrice != nil { return *unitPrice }
-			return m.UnitPrice
-		}(),
-		Factor: func() FhirDecimal {
-			if factor != nil { return *factor }
-			return m.Factor
-		}(),
-		Points: func() FhirDecimal {
-			if points != nil { return *points }
-			return m.Points
-		}(),
-		Net: func() Money {
-			if net != nil { return *net }
-			return m.Net
-		}(),
-		Payment: func() FhirString {
-			if payment != nil { return *payment }
-			return m.Payment
-		}(),
-		PaymentDate: func() FhirDateTime {
-			if paymentDate != nil { return *paymentDate }
-			return m.PaymentDate
-		}(),
-		Responsible: func() Reference {
-			if responsible != nil { return *responsible }
-			return m.Responsible
-		}(),
-		Recipient: func() Reference {
-			if recipient != nil { return *recipient }
-			return m.Recipient
-		}(),
-		LinkId: func() []FhirString {
-			if linkId != nil { return *linkId }
-			return m.LinkId
-		}(),
-		SecurityLabelNumber: func() []FhirUnsignedInt {
-			if securityLabelNumber != nil { return *securityLabelNumber }
-			return m.SecurityLabelNumber
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		EntityCodeableConcept: m.EntityCodeableConcept.Clone(),
+		EntityReference: m.EntityReference.Clone(),
+		Identifier: m.Identifier.Clone(),
+		EffectiveTime: m.EffectiveTime.Clone(),
+		Quantity: m.Quantity.Clone(),
+		UnitPrice: m.UnitPrice.Clone(),
+		Factor: m.Factor.Clone(),
+		Points: m.Points.Clone(),
+		Net: m.Net.Clone(),
+		Payment: m.Payment.Clone(),
+		PaymentDate: m.PaymentDate.Clone(),
+		Responsible: m.Responsible.Clone(),
+		Recipient: m.Recipient.Clone(),
+		LinkId: cloneSlices(m.LinkId),
+		SecurityLabelNumber: cloneSlices(m.SecurityLabelNumber),
 	}
 }
+
+// Equals checks for equality with another ContractValuedItem instance
+func (m *ContractValuedItem) Equals(other *ContractValuedItem) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.EntityCodeableConcept.Equals(other.EntityCodeableConcept) { return false }
+	if !m.EntityReference.Equals(other.EntityReference) { return false }
+	if !m.Identifier.Equals(other.Identifier) { return false }
+	if !m.EffectiveTime.Equals(other.EffectiveTime) { return false }
+	if !m.Quantity.Equals(other.Quantity) { return false }
+	if !m.UnitPrice.Equals(other.UnitPrice) { return false }
+	if !m.Factor.Equals(other.Factor) { return false }
+	if !m.Points.Equals(other.Points) { return false }
+	if !m.Net.Equals(other.Net) { return false }
+	if !m.Payment.Equals(other.Payment) { return false }
+	if !m.PaymentDate.Equals(other.PaymentDate) { return false }
+	if !m.Responsible.Equals(other.Responsible) { return false }
+	if !m.Recipient.Equals(other.Recipient) { return false }
+	if !compareSlices(m.LinkId, other.LinkId) { return false }
+	if !compareSlices(m.SecurityLabelNumber, other.SecurityLabelNumber) { return false }
+	return true
+}
+
 // ContractAction
 // An actor taking a role in an activity for which it can be assigned some degree of responsibility for the activity taking place.
 type ContractAction struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// doNotPerform
-	// True if the term prohibits the  action.
-	DoNotPerform FhirBoolean `json:"doNotPerform,omitempty"`
-	// type
-	// Activity or service obligation to be done or not done, performed or not performed, effectuated or not by this Contract term.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// subject
-	// Entity of the action.
-	Subject []ContractSubject `json:"subject,omitempty"`
-	// intent
-	// Reason or purpose for the action stipulated by this Contract Provision.
-	Intent CodeableConcept `json:"intent,omitempty"`
-	// linkId
-	// Id [identifier??] of the clause or question text related to this action in the referenced form or QuestionnaireResponse.
-	LinkId []FhirString `json:"linkId,omitempty"`
-	// status
-	// Current state of the term action.
-	Status CodeableConcept `json:"status,omitempty"`
-	// context
-	// Encounter or Episode with primary association to specified term activity.
-	Context Reference `json:"context,omitempty"`
-	// contextLinkId
-	// Id [identifier??] of the clause or question text related to the requester of this action in the referenced form or QuestionnaireResponse.
-	ContextLinkId []FhirString `json:"contextLinkId,omitempty"`
-	// occurrenceDateTime
-	// When action happens.
-	OccurrenceDateTime FhirDateTime `json:"occurrenceDateTime,omitempty"`
-	// occurrencePeriod
-	// When action happens.
-	OccurrencePeriod Period `json:"occurrencePeriod,omitempty"`
-	// occurrenceTiming
-	// When action happens.
-	OccurrenceTiming Timing `json:"occurrenceTiming,omitempty"`
-	// requester
-	// Who or what initiated the action and has responsibility for its activation.
-	Requester []Reference `json:"requester,omitempty"`
-	// requesterLinkId
-	// Id [identifier??] of the clause or question text related to the requester of this action in the referenced form or QuestionnaireResponse.
-	RequesterLinkId []FhirString `json:"requesterLinkId,omitempty"`
-	// performerType
-	// The type of individual that is desired or required to perform or not perform the action.
-	PerformerType []CodeableConcept `json:"performerType,omitempty"`
-	// performerRole
-	// The type of role or competency of an individual desired or required to perform or not perform the action.
-	PerformerRole CodeableConcept `json:"performerRole,omitempty"`
-	// performer
-	// Indicates who or what is being asked to perform (or not perform) the ction.
-	Performer Reference `json:"performer,omitempty"`
-	// performerLinkId
-	// Id [identifier??] of the clause or question text related to the reason type or reference of this  action in the referenced form or QuestionnaireResponse.
-	PerformerLinkId []FhirString `json:"performerLinkId,omitempty"`
-	// reasonCode
-	// Rationale for the action to be performed or not performed. Describes why the action is permitted or prohibited.
-	ReasonCode []CodeableConcept `json:"reasonCode,omitempty"`
-	// reasonReference
-	// Indicates another resource whose existence justifies permitting or not permitting this action.
-	ReasonReference []Reference `json:"reasonReference,omitempty"`
-	// reason
-	// Describes why the action is to be performed or not performed in textual form.
-	Reason []FhirString `json:"reason,omitempty"`
-	// reasonLinkId
-	// Id [identifier??] of the clause or question text related to the reason type or reference of this  action in the referenced form or QuestionnaireResponse.
-	ReasonLinkId []FhirString `json:"reasonLinkId,omitempty"`
-	// note
-	// Comments made about the term action made by the requester, performer, subject or other participants.
-	Note []Annotation `json:"note,omitempty"`
-	// securityLabelNumber
-	// Security labels that protects the action.
-	SecurityLabelNumber []FhirUnsignedInt `json:"securityLabelNumber,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	DoNotPerform *FhirBoolean `json:"donotperform,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Subject []*ContractSubject `json:"subject,omitempty"`
+	Intent *CodeableConcept `json:"intent,omitempty"`
+	LinkId []*FhirString `json:"linkid,omitempty"`
+	Status *CodeableConcept `json:"status,omitempty"`
+	Context *Reference `json:"context,omitempty"`
+	ContextLinkId []*FhirString `json:"contextlinkid,omitempty"`
+	OccurrenceDateTime *FhirDateTime `json:"occurrencedatetime,omitempty"`
+	OccurrencePeriod *Period `json:"occurrenceperiod,omitempty"`
+	OccurrenceTiming *Timing `json:"occurrencetiming,omitempty"`
+	Requester []*Reference `json:"requester,omitempty"`
+	RequesterLinkId []*FhirString `json:"requesterlinkid,omitempty"`
+	PerformerType []*CodeableConcept `json:"performertype,omitempty"`
+	PerformerRole *CodeableConcept `json:"performerrole,omitempty"`
+	Performer *Reference `json:"performer,omitempty"`
+	PerformerLinkId []*FhirString `json:"performerlinkid,omitempty"`
+	ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+	ReasonReference []*Reference `json:"reasonreference,omitempty"`
+	Reason []*FhirString `json:"reason,omitempty"`
+	ReasonLinkId []*FhirString `json:"reasonlinkid,omitempty"`
+	Note []*Annotation `json:"note,omitempty"`
+	SecurityLabelNumber []*FhirUnsignedInt `json:"securitylabelnumber,omitempty"`
 }
 
 // NewContractAction creates a new ContractAction instance
-func NewContractAction(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	doNotPerform FhirBoolean,
-	type_ CodeableConcept,
-	subject []ContractSubject,
-	intent CodeableConcept,
-	linkId []FhirString,
-	status CodeableConcept,
-	context Reference,
-	contextLinkId []FhirString,
-	occurrenceDateTime FhirDateTime,
-	occurrencePeriod Period,
-	occurrenceTiming Timing,
-	requester []Reference,
-	requesterLinkId []FhirString,
-	performerType []CodeableConcept,
-	performerRole CodeableConcept,
-	performer Reference,
-	performerLinkId []FhirString,
-	reasonCode []CodeableConcept,
-	reasonReference []Reference,
-	reason []FhirString,
-	reasonLinkId []FhirString,
-	note []Annotation,
-	securityLabelNumber []FhirUnsignedInt,
-) *ContractAction {
-	return &ContractAction{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		DoNotPerform: doNotPerform,
-		Type_: type_,
-		Subject: subject,
-		Intent: intent,
-		LinkId: linkId,
-		Status: status,
-		Context: context,
-		ContextLinkId: contextLinkId,
-		OccurrenceDateTime: occurrenceDateTime,
-		OccurrencePeriod: occurrencePeriod,
-		OccurrenceTiming: occurrenceTiming,
-		Requester: requester,
-		RequesterLinkId: requesterLinkId,
-		PerformerType: performerType,
-		PerformerRole: performerRole,
-		Performer: performer,
-		PerformerLinkId: performerLinkId,
-		ReasonCode: reasonCode,
-		ReasonReference: reasonReference,
-		Reason: reason,
-		ReasonLinkId: reasonLinkId,
-		Note: note,
-		SecurityLabelNumber: securityLabelNumber,
-	}
+func NewContractAction() *ContractAction {
+	return &ContractAction{}
 }
+
 // FromJSON populates ContractAction from JSON data
 func (m *ContractAction) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1961,181 +852,88 @@ func (m *ContractAction) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ContractAction
-func (m *ContractAction) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	doNotPerform *FhirBoolean,
-	type_ *CodeableConcept,
-	subject *[]ContractSubject,
-	intent *CodeableConcept,
-	linkId *[]FhirString,
-	status *CodeableConcept,
-	context *Reference,
-	contextLinkId *[]FhirString,
-	occurrenceDateTime *FhirDateTime,
-	occurrencePeriod *Period,
-	occurrenceTiming *Timing,
-	requester *[]Reference,
-	requesterLinkId *[]FhirString,
-	performerType *[]CodeableConcept,
-	performerRole *CodeableConcept,
-	performer *Reference,
-	performerLinkId *[]FhirString,
-	reasonCode *[]CodeableConcept,
-	reasonReference *[]Reference,
-	reason *[]FhirString,
-	reasonLinkId *[]FhirString,
-	note *[]Annotation,
-	securityLabelNumber *[]FhirUnsignedInt,
-) *ContractAction {
+// Clone creates a deep copy of ContractAction
+func (m *ContractAction) Clone() *ContractAction {
+	if m == nil { return nil }
 	return &ContractAction{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		DoNotPerform: func() FhirBoolean {
-			if doNotPerform != nil { return *doNotPerform }
-			return m.DoNotPerform
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Subject: func() []ContractSubject {
-			if subject != nil { return *subject }
-			return m.Subject
-		}(),
-		Intent: func() CodeableConcept {
-			if intent != nil { return *intent }
-			return m.Intent
-		}(),
-		LinkId: func() []FhirString {
-			if linkId != nil { return *linkId }
-			return m.LinkId
-		}(),
-		Status: func() CodeableConcept {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Context: func() Reference {
-			if context != nil { return *context }
-			return m.Context
-		}(),
-		ContextLinkId: func() []FhirString {
-			if contextLinkId != nil { return *contextLinkId }
-			return m.ContextLinkId
-		}(),
-		OccurrenceDateTime: func() FhirDateTime {
-			if occurrenceDateTime != nil { return *occurrenceDateTime }
-			return m.OccurrenceDateTime
-		}(),
-		OccurrencePeriod: func() Period {
-			if occurrencePeriod != nil { return *occurrencePeriod }
-			return m.OccurrencePeriod
-		}(),
-		OccurrenceTiming: func() Timing {
-			if occurrenceTiming != nil { return *occurrenceTiming }
-			return m.OccurrenceTiming
-		}(),
-		Requester: func() []Reference {
-			if requester != nil { return *requester }
-			return m.Requester
-		}(),
-		RequesterLinkId: func() []FhirString {
-			if requesterLinkId != nil { return *requesterLinkId }
-			return m.RequesterLinkId
-		}(),
-		PerformerType: func() []CodeableConcept {
-			if performerType != nil { return *performerType }
-			return m.PerformerType
-		}(),
-		PerformerRole: func() CodeableConcept {
-			if performerRole != nil { return *performerRole }
-			return m.PerformerRole
-		}(),
-		Performer: func() Reference {
-			if performer != nil { return *performer }
-			return m.Performer
-		}(),
-		PerformerLinkId: func() []FhirString {
-			if performerLinkId != nil { return *performerLinkId }
-			return m.PerformerLinkId
-		}(),
-		ReasonCode: func() []CodeableConcept {
-			if reasonCode != nil { return *reasonCode }
-			return m.ReasonCode
-		}(),
-		ReasonReference: func() []Reference {
-			if reasonReference != nil { return *reasonReference }
-			return m.ReasonReference
-		}(),
-		Reason: func() []FhirString {
-			if reason != nil { return *reason }
-			return m.Reason
-		}(),
-		ReasonLinkId: func() []FhirString {
-			if reasonLinkId != nil { return *reasonLinkId }
-			return m.ReasonLinkId
-		}(),
-		Note: func() []Annotation {
-			if note != nil { return *note }
-			return m.Note
-		}(),
-		SecurityLabelNumber: func() []FhirUnsignedInt {
-			if securityLabelNumber != nil { return *securityLabelNumber }
-			return m.SecurityLabelNumber
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		DoNotPerform: m.DoNotPerform.Clone(),
+		Type: m.Type.Clone(),
+		Subject: cloneSlices(m.Subject),
+		Intent: m.Intent.Clone(),
+		LinkId: cloneSlices(m.LinkId),
+		Status: m.Status.Clone(),
+		Context: m.Context.Clone(),
+		ContextLinkId: cloneSlices(m.ContextLinkId),
+		OccurrenceDateTime: m.OccurrenceDateTime.Clone(),
+		OccurrencePeriod: m.OccurrencePeriod.Clone(),
+		OccurrenceTiming: m.OccurrenceTiming.Clone(),
+		Requester: cloneSlices(m.Requester),
+		RequesterLinkId: cloneSlices(m.RequesterLinkId),
+		PerformerType: cloneSlices(m.PerformerType),
+		PerformerRole: m.PerformerRole.Clone(),
+		Performer: m.Performer.Clone(),
+		PerformerLinkId: cloneSlices(m.PerformerLinkId),
+		ReasonCode: cloneSlices(m.ReasonCode),
+		ReasonReference: cloneSlices(m.ReasonReference),
+		Reason: cloneSlices(m.Reason),
+		ReasonLinkId: cloneSlices(m.ReasonLinkId),
+		Note: cloneSlices(m.Note),
+		SecurityLabelNumber: cloneSlices(m.SecurityLabelNumber),
 	}
 }
+
+// Equals checks for equality with another ContractAction instance
+func (m *ContractAction) Equals(other *ContractAction) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.DoNotPerform.Equals(other.DoNotPerform) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !compareSlices(m.Subject, other.Subject) { return false }
+	if !m.Intent.Equals(other.Intent) { return false }
+	if !compareSlices(m.LinkId, other.LinkId) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Context.Equals(other.Context) { return false }
+	if !compareSlices(m.ContextLinkId, other.ContextLinkId) { return false }
+	if !m.OccurrenceDateTime.Equals(other.OccurrenceDateTime) { return false }
+	if !m.OccurrencePeriod.Equals(other.OccurrencePeriod) { return false }
+	if !m.OccurrenceTiming.Equals(other.OccurrenceTiming) { return false }
+	if !compareSlices(m.Requester, other.Requester) { return false }
+	if !compareSlices(m.RequesterLinkId, other.RequesterLinkId) { return false }
+	if !compareSlices(m.PerformerType, other.PerformerType) { return false }
+	if !m.PerformerRole.Equals(other.PerformerRole) { return false }
+	if !m.Performer.Equals(other.Performer) { return false }
+	if !compareSlices(m.PerformerLinkId, other.PerformerLinkId) { return false }
+	if !compareSlices(m.ReasonCode, other.ReasonCode) { return false }
+	if !compareSlices(m.ReasonReference, other.ReasonReference) { return false }
+	if !compareSlices(m.Reason, other.Reason) { return false }
+	if !compareSlices(m.ReasonLinkId, other.ReasonLinkId) { return false }
+	if !compareSlices(m.Note, other.Note) { return false }
+	if !compareSlices(m.SecurityLabelNumber, other.SecurityLabelNumber) { return false }
+	return true
+}
+
 // ContractSubject
 // Entity of the action.
 type ContractSubject struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// reference
-	// The entity the action is performed or not performed on or for.
-	Reference []Reference `json:"reference,omitempty"`
-	// role
-	// Role type of agent assigned roles in this Contract.
-	Role CodeableConcept `json:"role,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Reference []*Reference `json:"reference,omitempty"`
+	Role *CodeableConcept `json:"role,omitempty"`
 }
 
 // NewContractSubject creates a new ContractSubject instance
-func NewContractSubject(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	reference []Reference,
-	role CodeableConcept,
-) *ContractSubject {
-	return &ContractSubject{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Reference: reference,
-		Role: role,
-	}
+func NewContractSubject() *ContractSubject {
+	return &ContractSubject{}
 }
+
 // FromJSON populates ContractSubject from JSON data
 func (m *ContractSubject) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -2146,81 +944,47 @@ func (m *ContractSubject) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ContractSubject
-func (m *ContractSubject) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	reference *[]Reference,
-	role *CodeableConcept,
-) *ContractSubject {
+// Clone creates a deep copy of ContractSubject
+func (m *ContractSubject) Clone() *ContractSubject {
+	if m == nil { return nil }
 	return &ContractSubject{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Reference: func() []Reference {
-			if reference != nil { return *reference }
-			return m.Reference
-		}(),
-		Role: func() CodeableConcept {
-			if role != nil { return *role }
-			return m.Role
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Reference: cloneSlices(m.Reference),
+		Role: m.Role.Clone(),
 	}
 }
+
+// Equals checks for equality with another ContractSubject instance
+func (m *ContractSubject) Equals(other *ContractSubject) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Reference, other.Reference) { return false }
+	if !m.Role.Equals(other.Role) { return false }
+	return true
+}
+
 // ContractSigner
 // Parties with legal standing in the Contract, including the principal parties, the grantor(s) and grantee(s), which are any person or organization bound by the contract, and any ancillary parties, which facilitate the execution of the contract such as a notary or witness.
 type ContractSigner struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// Role of this Contract signer, e.g. notary, grantee.
-	Type_ Coding `json:"type,omitempty"`
-	// party
-	// Party which is a signator to this Contract.
-	Party Reference `json:"party,omitempty"`
-	// signature
-	// Legally binding Contract DSIG signature contents in Base64.
-	Signature []Signature `json:"signature,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *Coding `json:"type,omitempty"`
+	Party *Reference `json:"party,omitempty"`
+	Signature []*Signature `json:"signature,omitempty"`
 }
 
 // NewContractSigner creates a new ContractSigner instance
-func NewContractSigner(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ Coding,
-	party Reference,
-	signature []Signature,
-) *ContractSigner {
-	return &ContractSigner{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Party: party,
-		Signature: signature,
-	}
+func NewContractSigner() *ContractSigner {
+	return &ContractSigner{}
 }
+
 // FromJSON populates ContractSigner from JSON data
 func (m *ContractSigner) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -2231,81 +995,48 @@ func (m *ContractSigner) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ContractSigner
-func (m *ContractSigner) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *Coding,
-	party *Reference,
-	signature *[]Signature,
-) *ContractSigner {
+// Clone creates a deep copy of ContractSigner
+func (m *ContractSigner) Clone() *ContractSigner {
+	if m == nil { return nil }
 	return &ContractSigner{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() Coding {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Party: func() Reference {
-			if party != nil { return *party }
-			return m.Party
-		}(),
-		Signature: func() []Signature {
-			if signature != nil { return *signature }
-			return m.Signature
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Party: m.Party.Clone(),
+		Signature: cloneSlices(m.Signature),
 	}
 }
+
+// Equals checks for equality with another ContractSigner instance
+func (m *ContractSigner) Equals(other *ContractSigner) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Party.Equals(other.Party) { return false }
+	if !compareSlices(m.Signature, other.Signature) { return false }
+	return true
+}
+
 // ContractFriendly
 // The "patient friendly language" versionof the Contract in whole or in parts. "Patient friendly language" means the representation of the Contract and Contract Provisions in a manner that is readily accessible and understandable by a layperson in accordance with best practices for communication styles that ensure that those agreeing to or signing the Contract understand the roles, actions, obligations, responsibilities, and implication of the agreement.
 type ContractFriendly struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// contentAttachment
-	// Human readable rendering of this Contract in a format and representation intended to enhance comprehension and ensure understandability.
-	ContentAttachment Attachment `json:"contentAttachment,omitempty"`
-	// contentReference
-	// Human readable rendering of this Contract in a format and representation intended to enhance comprehension and ensure understandability.
-	ContentReference Reference `json:"contentReference,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	ContentAttachment *Attachment `json:"contentattachment,omitempty"`
+	ContentReference *Reference `json:"contentreference,omitempty"`
 }
 
 // NewContractFriendly creates a new ContractFriendly instance
-func NewContractFriendly(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	contentAttachment Attachment,
-	contentReference Reference,
-) *ContractFriendly {
-	return &ContractFriendly{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		ContentAttachment: contentAttachment,
-		ContentReference: contentReference,
-	}
+func NewContractFriendly() *ContractFriendly {
+	return &ContractFriendly{}
 }
+
 // FromJSON populates ContractFriendly from JSON data
 func (m *ContractFriendly) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -2316,76 +1047,46 @@ func (m *ContractFriendly) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ContractFriendly
-func (m *ContractFriendly) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	contentAttachment *Attachment,
-	contentReference *Reference,
-) *ContractFriendly {
+// Clone creates a deep copy of ContractFriendly
+func (m *ContractFriendly) Clone() *ContractFriendly {
+	if m == nil { return nil }
 	return &ContractFriendly{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		ContentAttachment: func() Attachment {
-			if contentAttachment != nil { return *contentAttachment }
-			return m.ContentAttachment
-		}(),
-		ContentReference: func() Reference {
-			if contentReference != nil { return *contentReference }
-			return m.ContentReference
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		ContentAttachment: m.ContentAttachment.Clone(),
+		ContentReference: m.ContentReference.Clone(),
 	}
 }
+
+// Equals checks for equality with another ContractFriendly instance
+func (m *ContractFriendly) Equals(other *ContractFriendly) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.ContentAttachment.Equals(other.ContentAttachment) { return false }
+	if !m.ContentReference.Equals(other.ContentReference) { return false }
+	return true
+}
+
 // ContractLegal
 // List of Legal expressions or representations of this Contract.
 type ContractLegal struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// contentAttachment
-	// Contract legal text in human renderable form.
-	ContentAttachment Attachment `json:"contentAttachment,omitempty"`
-	// contentReference
-	// Contract legal text in human renderable form.
-	ContentReference Reference `json:"contentReference,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	ContentAttachment *Attachment `json:"contentattachment,omitempty"`
+	ContentReference *Reference `json:"contentreference,omitempty"`
 }
 
 // NewContractLegal creates a new ContractLegal instance
-func NewContractLegal(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	contentAttachment Attachment,
-	contentReference Reference,
-) *ContractLegal {
-	return &ContractLegal{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		ContentAttachment: contentAttachment,
-		ContentReference: contentReference,
-	}
+func NewContractLegal() *ContractLegal {
+	return &ContractLegal{}
 }
+
 // FromJSON populates ContractLegal from JSON data
 func (m *ContractLegal) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -2396,76 +1097,46 @@ func (m *ContractLegal) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ContractLegal
-func (m *ContractLegal) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	contentAttachment *Attachment,
-	contentReference *Reference,
-) *ContractLegal {
+// Clone creates a deep copy of ContractLegal
+func (m *ContractLegal) Clone() *ContractLegal {
+	if m == nil { return nil }
 	return &ContractLegal{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		ContentAttachment: func() Attachment {
-			if contentAttachment != nil { return *contentAttachment }
-			return m.ContentAttachment
-		}(),
-		ContentReference: func() Reference {
-			if contentReference != nil { return *contentReference }
-			return m.ContentReference
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		ContentAttachment: m.ContentAttachment.Clone(),
+		ContentReference: m.ContentReference.Clone(),
 	}
 }
+
+// Equals checks for equality with another ContractLegal instance
+func (m *ContractLegal) Equals(other *ContractLegal) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.ContentAttachment.Equals(other.ContentAttachment) { return false }
+	if !m.ContentReference.Equals(other.ContentReference) { return false }
+	return true
+}
+
 // ContractRule
 // List of Computable Policy Rule Language Representations of this Contract.
 type ContractRule struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// contentAttachment
-	// Computable Contract conveyed using a policy rule language (e.g. XACML, DKAL, SecPal).
-	ContentAttachment Attachment `json:"contentAttachment,omitempty"`
-	// contentReference
-	// Computable Contract conveyed using a policy rule language (e.g. XACML, DKAL, SecPal).
-	ContentReference Reference `json:"contentReference,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	ContentAttachment *Attachment `json:"contentattachment,omitempty"`
+	ContentReference *Reference `json:"contentreference,omitempty"`
 }
 
 // NewContractRule creates a new ContractRule instance
-func NewContractRule(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	contentAttachment Attachment,
-	contentReference Reference,
-) *ContractRule {
-	return &ContractRule{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		ContentAttachment: contentAttachment,
-		ContentReference: contentReference,
-	}
+func NewContractRule() *ContractRule {
+	return &ContractRule{}
 }
+
 // FromJSON populates ContractRule from JSON data
 func (m *ContractRule) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -2476,34 +1147,27 @@ func (m *ContractRule) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ContractRule
-func (m *ContractRule) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	contentAttachment *Attachment,
-	contentReference *Reference,
-) *ContractRule {
+// Clone creates a deep copy of ContractRule
+func (m *ContractRule) Clone() *ContractRule {
+	if m == nil { return nil }
 	return &ContractRule{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		ContentAttachment: func() Attachment {
-			if contentAttachment != nil { return *contentAttachment }
-			return m.ContentAttachment
-		}(),
-		ContentReference: func() Reference {
-			if contentReference != nil { return *contentReference }
-			return m.ContentReference
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		ContentAttachment: m.ContentAttachment.Clone(),
+		ContentReference: m.ContentReference.Clone(),
 	}
 }
+
+// Equals checks for equality with another ContractRule instance
+func (m *ContractRule) Equals(other *ContractRule) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.ContentAttachment.Equals(other.ContentAttachment) { return false }
+	if !m.ContentReference.Equals(other.ContentReference) { return false }
+	return true
+}
+

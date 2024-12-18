@@ -3,159 +3,46 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // DiagnosticReport
 // The findings and interpretation of diagnostic  tests performed on patients, groups of patients, devices, and locations, and/or specimens derived from these. The report includes clinical context such as requesting and provider information, and some mix of atomic results, images, textual and coded interpretations, and formatted representation of diagnostic reports.
 type DiagnosticReport struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// Identifiers assigned to this report by the performer or other systems.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// basedOn
-	// Details concerning a service requested.
-	BasedOn []Reference `json:"basedOn,omitempty"`
-	// status
-	// The status of the diagnostic report.
-	Status DiagnosticReportStatus `json:"status,omitempty"`
-	// category
-	// A code that classifies the clinical discipline, department or diagnostic service that created the report (e.g. cardiology, biochemistry, hematology, MRI). This is used for searching, sorting and display purposes.
-	Category []CodeableConcept `json:"category,omitempty"`
-	// code
-	// A code or name that describes this diagnostic report.
-	Code CodeableConcept `json:"code,omitempty"`
-	// subject
-	// The subject of the report. Usually, but not always, this is a patient. However, diagnostic services also perform analyses on specimens collected from a variety of other sources.
-	Subject Reference `json:"subject,omitempty"`
-	// encounter
-	// The healthcare event  (e.g. a patient and healthcare provider interaction) which this DiagnosticReport is about.
-	Encounter Reference `json:"encounter,omitempty"`
-	// effectiveDateTime
-	// The time or time-period the observed values are related to. When the subject of the report is a patient, this is usually either the time of the procedure or of specimen collection(s), but very often the source of the date/time is not known, only the date/time itself.
-	EffectiveDateTime FhirDateTime `json:"effectiveDateTime,omitempty"`
-	// effectivePeriod
-	// The time or time-period the observed values are related to. When the subject of the report is a patient, this is usually either the time of the procedure or of specimen collection(s), but very often the source of the date/time is not known, only the date/time itself.
-	EffectivePeriod Period `json:"effectivePeriod,omitempty"`
-	// issued
-	// The date and time that this version of the report was made available to providers, typically after the report was reviewed and verified.
-	Issued FhirInstant `json:"issued,omitempty"`
-	// performer
-	// The diagnostic service that is responsible for issuing the report.
-	Performer []Reference `json:"performer,omitempty"`
-	// resultsInterpreter
-	// The practitioner or organization that is responsible for the report's conclusions and interpretations.
-	ResultsInterpreter []Reference `json:"resultsInterpreter,omitempty"`
-	// specimen
-	// Details about the specimens on which this diagnostic report is based.
-	Specimen []Reference `json:"specimen,omitempty"`
-	// result
-	// [Observations](observation.html)  that are part of this diagnostic report.
-	Result []Reference `json:"result,omitempty"`
-	// imagingStudy
-	// One or more links to full details of any imaging performed during the diagnostic investigation. Typically, this is imaging performed by DICOM enabled modalities, but this is not required. A fully enabled PACS viewer can use this information to provide views of the source images.
-	ImagingStudy []Reference `json:"imagingStudy,omitempty"`
-	// media
-	// A list of key images associated with this report. The images are generally created during the diagnostic process, and may be directly of the patient, or of treated specimens (i.e. slides of interest).
-	Media []DiagnosticReportMedia `json:"media,omitempty"`
-	// conclusion
-	// Concise and clinically contextualized summary conclusion (interpretation/impression) of the diagnostic report.
-	Conclusion FhirString `json:"conclusion,omitempty"`
-	// conclusionCode
-	// One or more codes that represent the summary conclusion (interpretation/impression) of the diagnostic report.
-	ConclusionCode []CodeableConcept `json:"conclusionCode,omitempty"`
-	// presentedForm
-	// Rich text representation of the entire result as issued by the diagnostic service. Multiple formats are allowed but they SHALL be semantically equivalent.
-	PresentedForm []Attachment `json:"presentedForm,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	BasedOn []*Reference `json:"basedon,omitempty"`
+	Status *DiagnosticReportStatus `json:"status,omitempty"`
+	Category []*CodeableConcept `json:"category,omitempty"`
+	Code *CodeableConcept `json:"code,omitempty"`
+	Subject *Reference `json:"subject,omitempty"`
+	Encounter *Reference `json:"encounter,omitempty"`
+	EffectiveDateTime *FhirDateTime `json:"effectivedatetime,omitempty"`
+	EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+	Issued *FhirInstant `json:"issued,omitempty"`
+	Performer []*Reference `json:"performer,omitempty"`
+	ResultsInterpreter []*Reference `json:"resultsinterpreter,omitempty"`
+	Specimen []*Reference `json:"specimen,omitempty"`
+	Result []*Reference `json:"result,omitempty"`
+	ImagingStudy []*Reference `json:"imagingstudy,omitempty"`
+	Media []*DiagnosticReportMedia `json:"media,omitempty"`
+	Conclusion *FhirString `json:"conclusion,omitempty"`
+	ConclusionCode []*CodeableConcept `json:"conclusioncode,omitempty"`
+	PresentedForm []*Attachment `json:"presentedform,omitempty"`
 }
 
 // NewDiagnosticReport creates a new DiagnosticReport instance
-func NewDiagnosticReport(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	basedOn []Reference,
-	status DiagnosticReportStatus,
-	category []CodeableConcept,
-	code CodeableConcept,
-	subject Reference,
-	encounter Reference,
-	effectiveDateTime FhirDateTime,
-	effectivePeriod Period,
-	issued FhirInstant,
-	performer []Reference,
-	resultsInterpreter []Reference,
-	specimen []Reference,
-	result []Reference,
-	imagingStudy []Reference,
-	media []DiagnosticReportMedia,
-	conclusion FhirString,
-	conclusionCode []CodeableConcept,
-	presentedForm []Attachment,
-) *DiagnosticReport {
-	return &DiagnosticReport{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		BasedOn: basedOn,
-		Status: status,
-		Category: category,
-		Code: code,
-		Subject: subject,
-		Encounter: encounter,
-		EffectiveDateTime: effectiveDateTime,
-		EffectivePeriod: effectivePeriod,
-		Issued: issued,
-		Performer: performer,
-		ResultsInterpreter: resultsInterpreter,
-		Specimen: specimen,
-		Result: result,
-		ImagingStudy: imagingStudy,
-		Media: media,
-		Conclusion: conclusion,
-		ConclusionCode: conclusionCode,
-		PresentedForm: presentedForm,
-	}
+func NewDiagnosticReport() *DiagnosticReport {
+	return &DiagnosticReport{}
 }
+
 // FromJSON populates DiagnosticReport from JSON data
 func (m *DiagnosticReport) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -166,186 +53,90 @@ func (m *DiagnosticReport) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of DiagnosticReport
-func (m *DiagnosticReport) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	basedOn *[]Reference,
-	status *DiagnosticReportStatus,
-	category *[]CodeableConcept,
-	code *CodeableConcept,
-	subject *Reference,
-	encounter *Reference,
-	effectiveDateTime *FhirDateTime,
-	effectivePeriod *Period,
-	issued *FhirInstant,
-	performer *[]Reference,
-	resultsInterpreter *[]Reference,
-	specimen *[]Reference,
-	result *[]Reference,
-	imagingStudy *[]Reference,
-	media *[]DiagnosticReportMedia,
-	conclusion *FhirString,
-	conclusionCode *[]CodeableConcept,
-	presentedForm *[]Attachment,
-) *DiagnosticReport {
+// Clone creates a deep copy of DiagnosticReport
+func (m *DiagnosticReport) Clone() *DiagnosticReport {
+	if m == nil { return nil }
 	return &DiagnosticReport{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		BasedOn: func() []Reference {
-			if basedOn != nil { return *basedOn }
-			return m.BasedOn
-		}(),
-		Status: func() DiagnosticReportStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Category: func() []CodeableConcept {
-			if category != nil { return *category }
-			return m.Category
-		}(),
-		Code: func() CodeableConcept {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Subject: func() Reference {
-			if subject != nil { return *subject }
-			return m.Subject
-		}(),
-		Encounter: func() Reference {
-			if encounter != nil { return *encounter }
-			return m.Encounter
-		}(),
-		EffectiveDateTime: func() FhirDateTime {
-			if effectiveDateTime != nil { return *effectiveDateTime }
-			return m.EffectiveDateTime
-		}(),
-		EffectivePeriod: func() Period {
-			if effectivePeriod != nil { return *effectivePeriod }
-			return m.EffectivePeriod
-		}(),
-		Issued: func() FhirInstant {
-			if issued != nil { return *issued }
-			return m.Issued
-		}(),
-		Performer: func() []Reference {
-			if performer != nil { return *performer }
-			return m.Performer
-		}(),
-		ResultsInterpreter: func() []Reference {
-			if resultsInterpreter != nil { return *resultsInterpreter }
-			return m.ResultsInterpreter
-		}(),
-		Specimen: func() []Reference {
-			if specimen != nil { return *specimen }
-			return m.Specimen
-		}(),
-		Result: func() []Reference {
-			if result != nil { return *result }
-			return m.Result
-		}(),
-		ImagingStudy: func() []Reference {
-			if imagingStudy != nil { return *imagingStudy }
-			return m.ImagingStudy
-		}(),
-		Media: func() []DiagnosticReportMedia {
-			if media != nil { return *media }
-			return m.Media
-		}(),
-		Conclusion: func() FhirString {
-			if conclusion != nil { return *conclusion }
-			return m.Conclusion
-		}(),
-		ConclusionCode: func() []CodeableConcept {
-			if conclusionCode != nil { return *conclusionCode }
-			return m.ConclusionCode
-		}(),
-		PresentedForm: func() []Attachment {
-			if presentedForm != nil { return *presentedForm }
-			return m.PresentedForm
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		BasedOn: cloneSlices(m.BasedOn),
+		Status: m.Status.Clone(),
+		Category: cloneSlices(m.Category),
+		Code: m.Code.Clone(),
+		Subject: m.Subject.Clone(),
+		Encounter: m.Encounter.Clone(),
+		EffectiveDateTime: m.EffectiveDateTime.Clone(),
+		EffectivePeriod: m.EffectivePeriod.Clone(),
+		Issued: m.Issued.Clone(),
+		Performer: cloneSlices(m.Performer),
+		ResultsInterpreter: cloneSlices(m.ResultsInterpreter),
+		Specimen: cloneSlices(m.Specimen),
+		Result: cloneSlices(m.Result),
+		ImagingStudy: cloneSlices(m.ImagingStudy),
+		Media: cloneSlices(m.Media),
+		Conclusion: m.Conclusion.Clone(),
+		ConclusionCode: cloneSlices(m.ConclusionCode),
+		PresentedForm: cloneSlices(m.PresentedForm),
 	}
 }
+
+// Equals checks for equality with another DiagnosticReport instance
+func (m *DiagnosticReport) Equals(other *DiagnosticReport) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !compareSlices(m.BasedOn, other.BasedOn) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !compareSlices(m.Category, other.Category) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Subject.Equals(other.Subject) { return false }
+	if !m.Encounter.Equals(other.Encounter) { return false }
+	if !m.EffectiveDateTime.Equals(other.EffectiveDateTime) { return false }
+	if !m.EffectivePeriod.Equals(other.EffectivePeriod) { return false }
+	if !m.Issued.Equals(other.Issued) { return false }
+	if !compareSlices(m.Performer, other.Performer) { return false }
+	if !compareSlices(m.ResultsInterpreter, other.ResultsInterpreter) { return false }
+	if !compareSlices(m.Specimen, other.Specimen) { return false }
+	if !compareSlices(m.Result, other.Result) { return false }
+	if !compareSlices(m.ImagingStudy, other.ImagingStudy) { return false }
+	if !compareSlices(m.Media, other.Media) { return false }
+	if !m.Conclusion.Equals(other.Conclusion) { return false }
+	if !compareSlices(m.ConclusionCode, other.ConclusionCode) { return false }
+	if !compareSlices(m.PresentedForm, other.PresentedForm) { return false }
+	return true
+}
+
 // DiagnosticReportMedia
 // A list of key images associated with this report. The images are generally created during the diagnostic process, and may be directly of the patient, or of treated specimens (i.e. slides of interest).
 type DiagnosticReportMedia struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// comment
-	// A comment about the image. Typically, this is used to provide an explanation for why the image is included, or to draw the viewer's attention to important features.
-	Comment FhirString `json:"comment,omitempty"`
-	// link
-	// Reference to the image source.
-	Link Reference `json:"link,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Comment *FhirString `json:"comment,omitempty"`
+	Link *Reference `json:"link,omitempty"`
 }
 
 // NewDiagnosticReportMedia creates a new DiagnosticReportMedia instance
-func NewDiagnosticReportMedia(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	comment FhirString,
-	link Reference,
-) *DiagnosticReportMedia {
-	return &DiagnosticReportMedia{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Comment: comment,
-		Link: link,
-	}
+func NewDiagnosticReportMedia() *DiagnosticReportMedia {
+	return &DiagnosticReportMedia{}
 }
+
 // FromJSON populates DiagnosticReportMedia from JSON data
 func (m *DiagnosticReportMedia) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -356,34 +147,27 @@ func (m *DiagnosticReportMedia) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of DiagnosticReportMedia
-func (m *DiagnosticReportMedia) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	comment *FhirString,
-	link *Reference,
-) *DiagnosticReportMedia {
+// Clone creates a deep copy of DiagnosticReportMedia
+func (m *DiagnosticReportMedia) Clone() *DiagnosticReportMedia {
+	if m == nil { return nil }
 	return &DiagnosticReportMedia{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Comment: func() FhirString {
-			if comment != nil { return *comment }
-			return m.Comment
-		}(),
-		Link: func() Reference {
-			if link != nil { return *link }
-			return m.Link
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Comment: m.Comment.Clone(),
+		Link: m.Link.Clone(),
 	}
 }
+
+// Equals checks for equality with another DiagnosticReportMedia instance
+func (m *DiagnosticReportMedia) Equals(other *DiagnosticReportMedia) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Comment.Equals(other.Comment) { return false }
+	if !m.Link.Equals(other.Link) { return false }
+	return true
+}
+

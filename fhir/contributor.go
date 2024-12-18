@@ -3,47 +3,24 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // Contributor
 // A contributor to the content of a knowledge asset, including authors, editors, reviewers, and endorsers.
 type Contributor struct {
 	DataType
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// type
-	// The type of contributor.
-	Type_ ContributorType `json:"type,omitempty"`
-	// name
-	// The name of the individual or organization responsible for the contribution.
-	Name FhirString `json:"name,omitempty"`
-	// contact
-	// Contact details to assist a user in finding and communicating with the contributor.
-	Contact []ContactDetail `json:"contact,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	Type *ContributorType `json:"type,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Contact []*ContactDetail `json:"contact,omitempty"`
 }
 
 // NewContributor creates a new Contributor instance
-func NewContributor(
-	id FhirString,
-	extension_ []FhirExtension,
-	type_ ContributorType,
-	name FhirString,
-	contact []ContactDetail,
-) *Contributor {
-	return &Contributor{
-		Id: id,
-		Extension_: extension_,
-		Type_: type_,
-		Name: name,
-		Contact: contact,
-	}
+func NewContributor() *Contributor {
+	return &Contributor{}
 }
+
 // FromJSON populates Contributor from JSON data
 func (m *Contributor) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -54,34 +31,27 @@ func (m *Contributor) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of Contributor
-func (m *Contributor) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	type_ *ContributorType,
-	name *FhirString,
-	contact *[]ContactDetail,
-) *Contributor {
+// Clone creates a deep copy of Contributor
+func (m *Contributor) Clone() *Contributor {
+	if m == nil { return nil }
 	return &Contributor{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		Type_: func() ContributorType {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Contact: func() []ContactDetail {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		Type: m.Type.Clone(),
+		Name: m.Name.Clone(),
+		Contact: cloneSlices(m.Contact),
 	}
 }
+
+// Equals checks for equality with another Contributor instance
+func (m *Contributor) Equals(other *Contributor) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !compareSlices(m.Contact, other.Contact) { return false }
+	return true
+}
+

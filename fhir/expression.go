@@ -3,57 +3,26 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // FhirExpression
 // A expression that is evaluated in a specified context and returns a value. The context of use of the expression must specify the context in which the expression is evaluated, and how the result of the expression is used.
 type FhirExpression struct {
 	DataType
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// description
-	// A brief, natural language description of the condition that effectively communicates the intended semantics.
-	Description FhirString `json:"description,omitempty"`
-	// name
-	// A short name assigned to the expression to allow for multiple reuse of the expression in the context where it is defined.
-	Name FhirId `json:"name,omitempty"`
-	// language
-	// The media type of the language for the expression.
-	Language ExpressionLanguage `json:"language,omitempty"`
-	// expression
-	// An expression in the specified language that returns a value.
-	Expression FhirString `json:"expression,omitempty"`
-	// reference
-	// A URI that defines where the expression is found.
-	Reference FhirUri `json:"reference,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Name *FhirId `json:"name,omitempty"`
+	Language *ExpressionLanguage `json:"language,omitempty"`
+	Expression *FhirString `json:"expression,omitempty"`
+	Reference *FhirUri `json:"reference,omitempty"`
 }
 
 // NewFhirExpression creates a new FhirExpression instance
-func NewFhirExpression(
-	id FhirString,
-	extension_ []FhirExtension,
-	description FhirString,
-	name FhirId,
-	language ExpressionLanguage,
-	expression FhirString,
-	reference FhirUri,
-) *FhirExpression {
-	return &FhirExpression{
-		Id: id,
-		Extension_: extension_,
-		Description: description,
-		Name: name,
-		Language: language,
-		Expression: expression,
-		Reference: reference,
-	}
+func NewFhirExpression() *FhirExpression {
+	return &FhirExpression{}
 }
+
 // FromJSON populates FhirExpression from JSON data
 func (m *FhirExpression) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -64,44 +33,31 @@ func (m *FhirExpression) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of FhirExpression
-func (m *FhirExpression) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	description *FhirString,
-	name *FhirId,
-	language *ExpressionLanguage,
-	expression *FhirString,
-	reference *FhirUri,
-) *FhirExpression {
+// Clone creates a deep copy of FhirExpression
+func (m *FhirExpression) Clone() *FhirExpression {
+	if m == nil { return nil }
 	return &FhirExpression{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Name: func() FhirId {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Language: func() ExpressionLanguage {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Expression: func() FhirString {
-			if expression != nil { return *expression }
-			return m.Expression
-		}(),
-		Reference: func() FhirUri {
-			if reference != nil { return *reference }
-			return m.Reference
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		Description: m.Description.Clone(),
+		Name: m.Name.Clone(),
+		Language: m.Language.Clone(),
+		Expression: m.Expression.Clone(),
+		Reference: m.Reference.Clone(),
 	}
 }
+
+// Equals checks for equality with another FhirExpression instance
+func (m *FhirExpression) Equals(other *FhirExpression) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Expression.Equals(other.Expression) { return false }
+	if !m.Reference.Equals(other.Reference) { return false }
+	return true
+}
+

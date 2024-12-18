@@ -3,67 +3,28 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // SampledData
 // A series of measurements taken by a device, with upper and lower limits. There may be more than one dimension in the data.
 type SampledData struct {
 	DataType
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// origin
-	// The base quantity that a measured value of zero represents. In addition, this provides the units of the entire measurement series.
-	Origin Quantity `json:"origin,omitempty"`
-	// period
-	// The length of time between sampling times, measured in milliseconds.
-	Period FhirDecimal `json:"period,omitempty"`
-	// factor
-	// A correction factor that is applied to the sampled data points before they are added to the origin.
-	Factor FhirDecimal `json:"factor,omitempty"`
-	// lowerLimit
-	// The lower limit of detection of the measured points. This is needed if any of the data points have the value "L" (lower than detection limit).
-	LowerLimit FhirDecimal `json:"lowerLimit,omitempty"`
-	// upperLimit
-	// The upper limit of detection of the measured points. This is needed if any of the data points have the value "U" (higher than detection limit).
-	UpperLimit FhirDecimal `json:"upperLimit,omitempty"`
-	// dimensions
-	// The number of sample points at each time point. If this value is greater than one, then the dimensions will be interlaced - all the sample points for a point in time will be recorded at once.
-	Dimensions FhirPositiveInt `json:"dimensions,omitempty"`
-	// data
-	// A series of data points which are decimal values separated by a single space (character u20). The special values "E" (error), "L" (below detection limit) and "U" (above detection limit) can also be used in place of a decimal value.
-	Data FhirString `json:"data,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	Origin *Quantity `json:"origin,omitempty"`
+	Period *FhirDecimal `json:"period,omitempty"`
+	Factor *FhirDecimal `json:"factor,omitempty"`
+	LowerLimit *FhirDecimal `json:"lowerlimit,omitempty"`
+	UpperLimit *FhirDecimal `json:"upperlimit,omitempty"`
+	Dimensions *FhirPositiveInt `json:"dimensions,omitempty"`
+	Data *FhirString `json:"data,omitempty"`
 }
 
 // NewSampledData creates a new SampledData instance
-func NewSampledData(
-	id FhirString,
-	extension_ []FhirExtension,
-	origin Quantity,
-	period FhirDecimal,
-	factor FhirDecimal,
-	lowerLimit FhirDecimal,
-	upperLimit FhirDecimal,
-	dimensions FhirPositiveInt,
-	data FhirString,
-) *SampledData {
-	return &SampledData{
-		Id: id,
-		Extension_: extension_,
-		Origin: origin,
-		Period: period,
-		Factor: factor,
-		LowerLimit: lowerLimit,
-		UpperLimit: upperLimit,
-		Dimensions: dimensions,
-		Data: data,
-	}
+func NewSampledData() *SampledData {
+	return &SampledData{}
 }
+
 // FromJSON populates SampledData from JSON data
 func (m *SampledData) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -74,54 +35,35 @@ func (m *SampledData) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of SampledData
-func (m *SampledData) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	origin *Quantity,
-	period *FhirDecimal,
-	factor *FhirDecimal,
-	lowerLimit *FhirDecimal,
-	upperLimit *FhirDecimal,
-	dimensions *FhirPositiveInt,
-	data *FhirString,
-) *SampledData {
+// Clone creates a deep copy of SampledData
+func (m *SampledData) Clone() *SampledData {
+	if m == nil { return nil }
 	return &SampledData{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		Origin: func() Quantity {
-			if origin != nil { return *origin }
-			return m.Origin
-		}(),
-		Period: func() FhirDecimal {
-			if period != nil { return *period }
-			return m.Period
-		}(),
-		Factor: func() FhirDecimal {
-			if factor != nil { return *factor }
-			return m.Factor
-		}(),
-		LowerLimit: func() FhirDecimal {
-			if lowerLimit != nil { return *lowerLimit }
-			return m.LowerLimit
-		}(),
-		UpperLimit: func() FhirDecimal {
-			if upperLimit != nil { return *upperLimit }
-			return m.UpperLimit
-		}(),
-		Dimensions: func() FhirPositiveInt {
-			if dimensions != nil { return *dimensions }
-			return m.Dimensions
-		}(),
-		Data: func() FhirString {
-			if data != nil { return *data }
-			return m.Data
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		Origin: m.Origin.Clone(),
+		Period: m.Period.Clone(),
+		Factor: m.Factor.Clone(),
+		LowerLimit: m.LowerLimit.Clone(),
+		UpperLimit: m.UpperLimit.Clone(),
+		Dimensions: m.Dimensions.Clone(),
+		Data: m.Data.Clone(),
 	}
 }
+
+// Equals checks for equality with another SampledData instance
+func (m *SampledData) Equals(other *SampledData) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !m.Origin.Equals(other.Origin) { return false }
+	if !m.Period.Equals(other.Period) { return false }
+	if !m.Factor.Equals(other.Factor) { return false }
+	if !m.LowerLimit.Equals(other.LowerLimit) { return false }
+	if !m.UpperLimit.Equals(other.UpperLimit) { return false }
+	if !m.Dimensions.Equals(other.Dimensions) { return false }
+	if !m.Data.Equals(other.Data) { return false }
+	return true
+}
+

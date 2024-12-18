@@ -3,114 +3,37 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // DeviceMetric
 // Describes a measurement, calculation or setting capability of a medical device.
 type DeviceMetric struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// Unique instance identifiers assigned to a device by the device or gateway software, manufacturers, other organizations or owners. For example: handle ID.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// type
-	// Describes the type of the metric. For example: Heart Rate, PEEP Setting, etc.
-	Type_ CodeableConcept `json:"type,omitempty"`
-	// unit
-	// Describes the unit that an observed value determined for this metric will have. For example: Percent, Seconds, etc.
-	Unit CodeableConcept `json:"unit,omitempty"`
-	// source
-	// Describes the link to the  Device that this DeviceMetric belongs to and that contains administrative device information such as manufacturer, serial number, etc.
-	Source Reference `json:"source,omitempty"`
-	// parent
-	// Describes the link to the  Device that this DeviceMetric belongs to and that provide information about the location of this DeviceMetric in the containment structure of the parent Device. An example would be a Device that represents a Channel. This reference can be used by a client application to distinguish DeviceMetrics that have the same type, but should be interpreted based on their containment location.
-	Parent Reference `json:"parent,omitempty"`
-	// operationalStatus
-	// Indicates current operational state of the device. For example: On, Off, Standby, etc.
-	OperationalStatus DeviceMetricOperationalStatus `json:"operationalStatus,omitempty"`
-	// color
-	// Describes the color representation for the metric. This is often used to aid clinicians to track and identify parameter types by color. In practice, consider a Patient Monitor that has ECG/HR and Pleth for example; the parameters are displayed in different characteristic colors, such as HR-blue, BP-green, and PR and SpO2- magenta.
-	Color DeviceMetricColor `json:"color,omitempty"`
-	// category
-	// Indicates the category of the observation generation process. A DeviceMetric can be for example a setting, measurement, or calculation.
-	Category DeviceMetricCategory `json:"category,omitempty"`
-	// measurementPeriod
-	// Describes the measurement repetition time. This is not necessarily the same as the update period. The measurement repetition time can range from milliseconds up to hours. An example for a measurement repetition time in the range of milliseconds is the sampling rate of an ECG. An example for a measurement repetition time in the range of hours is a NIBP that is triggered automatically every hour. The update period may be different than the measurement repetition time, if the device does not update the published observed value with the same frequency as it was measured.
-	MeasurementPeriod Timing `json:"measurementPeriod,omitempty"`
-	// calibration
-	// Describes the calibrations that have been performed or that are required to be performed.
-	Calibration []DeviceMetricCalibration `json:"calibration,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Type *CodeableConcept `json:"type,omitempty"`
+	Unit *CodeableConcept `json:"unit,omitempty"`
+	Source *Reference `json:"source,omitempty"`
+	Parent *Reference `json:"parent,omitempty"`
+	OperationalStatus *DeviceMetricOperationalStatus `json:"operationalstatus,omitempty"`
+	Color *DeviceMetricColor `json:"color,omitempty"`
+	Category *DeviceMetricCategory `json:"category,omitempty"`
+	MeasurementPeriod *Timing `json:"measurementperiod,omitempty"`
+	Calibration []*DeviceMetricCalibration `json:"calibration,omitempty"`
 }
 
 // NewDeviceMetric creates a new DeviceMetric instance
-func NewDeviceMetric(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	type_ CodeableConcept,
-	unit CodeableConcept,
-	source Reference,
-	parent Reference,
-	operationalStatus DeviceMetricOperationalStatus,
-	color DeviceMetricColor,
-	category DeviceMetricCategory,
-	measurementPeriod Timing,
-	calibration []DeviceMetricCalibration,
-) *DeviceMetric {
-	return &DeviceMetric{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Type_: type_,
-		Unit: unit,
-		Source: source,
-		Parent: parent,
-		OperationalStatus: operationalStatus,
-		Color: color,
-		Category: category,
-		MeasurementPeriod: measurementPeriod,
-		Calibration: calibration,
-	}
+func NewDeviceMetric() *DeviceMetric {
+	return &DeviceMetric{}
 }
+
 // FromJSON populates DeviceMetric from JSON data
 func (m *DeviceMetric) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -121,146 +44,73 @@ func (m *DeviceMetric) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of DeviceMetric
-func (m *DeviceMetric) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	type_ *CodeableConcept,
-	unit *CodeableConcept,
-	source *Reference,
-	parent *Reference,
-	operationalStatus *DeviceMetricOperationalStatus,
-	color *DeviceMetricColor,
-	category *DeviceMetricCategory,
-	measurementPeriod *Timing,
-	calibration *[]DeviceMetricCalibration,
-) *DeviceMetric {
+// Clone creates a deep copy of DeviceMetric
+func (m *DeviceMetric) Clone() *DeviceMetric {
+	if m == nil { return nil }
 	return &DeviceMetric{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Type_: func() CodeableConcept {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Unit: func() CodeableConcept {
-			if unit != nil { return *unit }
-			return m.Unit
-		}(),
-		Source: func() Reference {
-			if source != nil { return *source }
-			return m.Source
-		}(),
-		Parent: func() Reference {
-			if parent != nil { return *parent }
-			return m.Parent
-		}(),
-		OperationalStatus: func() DeviceMetricOperationalStatus {
-			if operationalStatus != nil { return *operationalStatus }
-			return m.OperationalStatus
-		}(),
-		Color: func() DeviceMetricColor {
-			if color != nil { return *color }
-			return m.Color
-		}(),
-		Category: func() DeviceMetricCategory {
-			if category != nil { return *category }
-			return m.Category
-		}(),
-		MeasurementPeriod: func() Timing {
-			if measurementPeriod != nil { return *measurementPeriod }
-			return m.MeasurementPeriod
-		}(),
-		Calibration: func() []DeviceMetricCalibration {
-			if calibration != nil { return *calibration }
-			return m.Calibration
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		Type: m.Type.Clone(),
+		Unit: m.Unit.Clone(),
+		Source: m.Source.Clone(),
+		Parent: m.Parent.Clone(),
+		OperationalStatus: m.OperationalStatus.Clone(),
+		Color: m.Color.Clone(),
+		Category: m.Category.Clone(),
+		MeasurementPeriod: m.MeasurementPeriod.Clone(),
+		Calibration: cloneSlices(m.Calibration),
 	}
 }
+
+// Equals checks for equality with another DeviceMetric instance
+func (m *DeviceMetric) Equals(other *DeviceMetric) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Unit.Equals(other.Unit) { return false }
+	if !m.Source.Equals(other.Source) { return false }
+	if !m.Parent.Equals(other.Parent) { return false }
+	if !m.OperationalStatus.Equals(other.OperationalStatus) { return false }
+	if !m.Color.Equals(other.Color) { return false }
+	if !m.Category.Equals(other.Category) { return false }
+	if !m.MeasurementPeriod.Equals(other.MeasurementPeriod) { return false }
+	if !compareSlices(m.Calibration, other.Calibration) { return false }
+	return true
+}
+
 // DeviceMetricCalibration
 // Describes the calibrations that have been performed or that are required to be performed.
 type DeviceMetricCalibration struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// Describes the type of the calibration method.
-	Type_ DeviceMetricCalibrationType `json:"type,omitempty"`
-	// state
-	// Describes the state of the calibration.
-	State DeviceMetricCalibrationState `json:"state,omitempty"`
-	// time
-	// Describes the time last calibration has been performed.
-	Time FhirInstant `json:"time,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *DeviceMetricCalibrationType `json:"type,omitempty"`
+	State *DeviceMetricCalibrationState `json:"state,omitempty"`
+	Time *FhirInstant `json:"time,omitempty"`
 }
 
 // NewDeviceMetricCalibration creates a new DeviceMetricCalibration instance
-func NewDeviceMetricCalibration(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ DeviceMetricCalibrationType,
-	state DeviceMetricCalibrationState,
-	time FhirInstant,
-) *DeviceMetricCalibration {
-	return &DeviceMetricCalibration{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		State: state,
-		Time: time,
-	}
+func NewDeviceMetricCalibration() *DeviceMetricCalibration {
+	return &DeviceMetricCalibration{}
 }
+
 // FromJSON populates DeviceMetricCalibration from JSON data
 func (m *DeviceMetricCalibration) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -271,39 +121,29 @@ func (m *DeviceMetricCalibration) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of DeviceMetricCalibration
-func (m *DeviceMetricCalibration) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *DeviceMetricCalibrationType,
-	state *DeviceMetricCalibrationState,
-	time *FhirInstant,
-) *DeviceMetricCalibration {
+// Clone creates a deep copy of DeviceMetricCalibration
+func (m *DeviceMetricCalibration) Clone() *DeviceMetricCalibration {
+	if m == nil { return nil }
 	return &DeviceMetricCalibration{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() DeviceMetricCalibrationType {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		State: func() DeviceMetricCalibrationState {
-			if state != nil { return *state }
-			return m.State
-		}(),
-		Time: func() FhirInstant {
-			if time != nil { return *time }
-			return m.Time
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		State: m.State.Clone(),
+		Time: m.Time.Clone(),
 	}
 }
+
+// Equals checks for equality with another DeviceMetricCalibration instance
+func (m *DeviceMetricCalibration) Equals(other *DeviceMetricCalibration) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.State.Equals(other.State) { return false }
+	if !m.Time.Equals(other.Time) { return false }
+	return true
+}
+

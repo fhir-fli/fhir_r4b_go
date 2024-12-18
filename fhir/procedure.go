@@ -3,224 +3,59 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // Procedure
 // An action that is or was performed on or for a patient. This can be a physical intervention like an operation, or less invasive like long term services, counseling, or hypnotherapy.
 type Procedure struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// Business identifiers assigned to this procedure by the performer or other systems which remain constant as the resource is updated and is propagated from server to server.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// instantiatesCanonical
-	// The URL pointing to a FHIR-defined protocol, guideline, order set or other definition that is adhered to in whole or in part by this Procedure.
-	InstantiatesCanonical []FhirCanonical `json:"instantiatesCanonical,omitempty"`
-	// instantiatesUri
-	// The URL pointing to an externally maintained protocol, guideline, order set or other definition that is adhered to in whole or in part by this Procedure.
-	InstantiatesUri []FhirUri `json:"instantiatesUri,omitempty"`
-	// basedOn
-	// A reference to a resource that contains details of the request for this procedure.
-	BasedOn []Reference `json:"basedOn,omitempty"`
-	// partOf
-	// A larger event of which this particular procedure is a component or step.
-	PartOf []Reference `json:"partOf,omitempty"`
-	// status
-	// A code specifying the state of the procedure. Generally, this will be the in-progress or completed state.
-	Status EventStatus `json:"status,omitempty"`
-	// statusReason
-	// Captures the reason for the current state of the procedure.
-	StatusReason CodeableConcept `json:"statusReason,omitempty"`
-	// category
-	// A code that classifies the procedure for searching, sorting and display purposes (e.g. "Surgical Procedure").
-	Category CodeableConcept `json:"category,omitempty"`
-	// code
-	// The specific procedure that is performed. Use text if the exact nature of the procedure cannot be coded (e.g. "Laparoscopic Appendectomy").
-	Code CodeableConcept `json:"code,omitempty"`
-	// subject
-	// The person, animal or group on which the procedure was performed.
-	Subject Reference `json:"subject,omitempty"`
-	// encounter
-	// The Encounter during which this Procedure was created or performed or to which the creation of this record is tightly associated.
-	Encounter Reference `json:"encounter,omitempty"`
-	// performedDateTime
-	// Estimated or actual date, date-time, period, or age when the procedure was performed.  Allows a period to support complex procedures that span more than one date, and also allows for the length of the procedure to be captured.
-	PerformedDateTime FhirDateTime `json:"performedDateTime,omitempty"`
-	// performedPeriod
-	// Estimated or actual date, date-time, period, or age when the procedure was performed.  Allows a period to support complex procedures that span more than one date, and also allows for the length of the procedure to be captured.
-	PerformedPeriod Period `json:"performedPeriod,omitempty"`
-	// performedString
-	// Estimated or actual date, date-time, period, or age when the procedure was performed.  Allows a period to support complex procedures that span more than one date, and also allows for the length of the procedure to be captured.
-	PerformedString FhirString `json:"performedString,omitempty"`
-	// performedAge
-	// Estimated or actual date, date-time, period, or age when the procedure was performed.  Allows a period to support complex procedures that span more than one date, and also allows for the length of the procedure to be captured.
-	PerformedAge Age `json:"performedAge,omitempty"`
-	// performedRange
-	// Estimated or actual date, date-time, period, or age when the procedure was performed.  Allows a period to support complex procedures that span more than one date, and also allows for the length of the procedure to be captured.
-	PerformedRange Range `json:"performedRange,omitempty"`
-	// recorder
-	// Individual who recorded the record and takes responsibility for its content.
-	Recorder Reference `json:"recorder,omitempty"`
-	// asserter
-	// Individual who is making the procedure statement.
-	Asserter Reference `json:"asserter,omitempty"`
-	// performer
-	// Limited to "real" people rather than equipment.
-	Performer []ProcedurePerformer `json:"performer,omitempty"`
-	// location
-	// The location where the procedure actually happened.  E.g. a newborn at home, a tracheostomy at a restaurant.
-	Location Reference `json:"location,omitempty"`
-	// reasonCode
-	// The coded reason why the procedure was performed. This may be a coded entity of some type, or may simply be present as text.
-	ReasonCode []CodeableConcept `json:"reasonCode,omitempty"`
-	// reasonReference
-	// The justification of why the procedure was performed.
-	ReasonReference []Reference `json:"reasonReference,omitempty"`
-	// bodySite
-	// Detailed and structured anatomical location information. Multiple locations are allowed - e.g. multiple punch biopsies of a lesion.
-	BodySite []CodeableConcept `json:"bodySite,omitempty"`
-	// outcome
-	// The outcome of the procedure - did it resolve the reasons for the procedure being performed?
-	Outcome CodeableConcept `json:"outcome,omitempty"`
-	// report
-	// This could be a histology result, pathology report, surgical report, etc.
-	Report []Reference `json:"report,omitempty"`
-	// complication
-	// Any complications that occurred during the procedure, or in the immediate post-performance period. These are generally tracked separately from the notes, which will typically describe the procedure itself rather than any 'post procedure' issues.
-	Complication []CodeableConcept `json:"complication,omitempty"`
-	// complicationDetail
-	// Any complications that occurred during the procedure, or in the immediate post-performance period.
-	ComplicationDetail []Reference `json:"complicationDetail,omitempty"`
-	// followUp
-	// If the procedure required specific follow up - e.g. removal of sutures. The follow up may be represented as a simple note or could potentially be more complex, in which case the CarePlan resource can be used.
-	FollowUp []CodeableConcept `json:"followUp,omitempty"`
-	// note
-	// Any other notes and comments about the procedure.
-	Note []Annotation `json:"note,omitempty"`
-	// focalDevice
-	// A device that is implanted, removed or otherwise manipulated (calibration, battery replacement, fitting a prosthesis, attaching a wound-vac, etc.) as a focal portion of the Procedure.
-	FocalDevice []ProcedureFocalDevice `json:"focalDevice,omitempty"`
-	// usedReference
-	// Identifies medications, devices and any other substance used as part of the procedure.
-	UsedReference []Reference `json:"usedReference,omitempty"`
-	// usedCode
-	// Identifies coded items that were used as part of the procedure.
-	UsedCode []CodeableConcept `json:"usedCode,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	InstantiatesCanonical []*FhirCanonical `json:"instantiatescanonical,omitempty"`
+	InstantiatesUri []*FhirUri `json:"instantiatesuri,omitempty"`
+	BasedOn []*Reference `json:"basedon,omitempty"`
+	PartOf []*Reference `json:"partof,omitempty"`
+	Status *EventStatus `json:"status,omitempty"`
+	StatusReason *CodeableConcept `json:"statusreason,omitempty"`
+	Category *CodeableConcept `json:"category,omitempty"`
+	Code *CodeableConcept `json:"code,omitempty"`
+	Subject *Reference `json:"subject,omitempty"`
+	Encounter *Reference `json:"encounter,omitempty"`
+	PerformedDateTime *FhirDateTime `json:"performeddatetime,omitempty"`
+	PerformedPeriod *Period `json:"performedperiod,omitempty"`
+	PerformedString *FhirString `json:"performedstring,omitempty"`
+	PerformedAge *Age `json:"performedage,omitempty"`
+	PerformedRange *Range `json:"performedrange,omitempty"`
+	Recorder *Reference `json:"recorder,omitempty"`
+	Asserter *Reference `json:"asserter,omitempty"`
+	Performer []*ProcedurePerformer `json:"performer,omitempty"`
+	Location *Reference `json:"location,omitempty"`
+	ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+	ReasonReference []*Reference `json:"reasonreference,omitempty"`
+	BodySite []*CodeableConcept `json:"bodysite,omitempty"`
+	Outcome *CodeableConcept `json:"outcome,omitempty"`
+	Report []*Reference `json:"report,omitempty"`
+	Complication []*CodeableConcept `json:"complication,omitempty"`
+	ComplicationDetail []*Reference `json:"complicationdetail,omitempty"`
+	FollowUp []*CodeableConcept `json:"followup,omitempty"`
+	Note []*Annotation `json:"note,omitempty"`
+	FocalDevice []*ProcedureFocalDevice `json:"focaldevice,omitempty"`
+	UsedReference []*Reference `json:"usedreference,omitempty"`
+	UsedCode []*CodeableConcept `json:"usedcode,omitempty"`
 }
 
 // NewProcedure creates a new Procedure instance
-func NewProcedure(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	instantiatesCanonical []FhirCanonical,
-	instantiatesUri []FhirUri,
-	basedOn []Reference,
-	partOf []Reference,
-	status EventStatus,
-	statusReason CodeableConcept,
-	category CodeableConcept,
-	code CodeableConcept,
-	subject Reference,
-	encounter Reference,
-	performedDateTime FhirDateTime,
-	performedPeriod Period,
-	performedString FhirString,
-	performedAge Age,
-	performedRange Range,
-	recorder Reference,
-	asserter Reference,
-	performer []ProcedurePerformer,
-	location Reference,
-	reasonCode []CodeableConcept,
-	reasonReference []Reference,
-	bodySite []CodeableConcept,
-	outcome CodeableConcept,
-	report []Reference,
-	complication []CodeableConcept,
-	complicationDetail []Reference,
-	followUp []CodeableConcept,
-	note []Annotation,
-	focalDevice []ProcedureFocalDevice,
-	usedReference []Reference,
-	usedCode []CodeableConcept,
-) *Procedure {
-	return &Procedure{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		InstantiatesCanonical: instantiatesCanonical,
-		InstantiatesUri: instantiatesUri,
-		BasedOn: basedOn,
-		PartOf: partOf,
-		Status: status,
-		StatusReason: statusReason,
-		Category: category,
-		Code: code,
-		Subject: subject,
-		Encounter: encounter,
-		PerformedDateTime: performedDateTime,
-		PerformedPeriod: performedPeriod,
-		PerformedString: performedString,
-		PerformedAge: performedAge,
-		PerformedRange: performedRange,
-		Recorder: recorder,
-		Asserter: asserter,
-		Performer: performer,
-		Location: location,
-		ReasonCode: reasonCode,
-		ReasonReference: reasonReference,
-		BodySite: bodySite,
-		Outcome: outcome,
-		Report: report,
-		Complication: complication,
-		ComplicationDetail: complicationDetail,
-		FollowUp: followUp,
-		Note: note,
-		FocalDevice: focalDevice,
-		UsedReference: usedReference,
-		UsedCode: usedCode,
-	}
+func NewProcedure() *Procedure {
+	return &Procedure{}
 }
+
 // FromJSON populates Procedure from JSON data
 func (m *Procedure) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -231,256 +66,117 @@ func (m *Procedure) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of Procedure
-func (m *Procedure) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	instantiatesCanonical *[]FhirCanonical,
-	instantiatesUri *[]FhirUri,
-	basedOn *[]Reference,
-	partOf *[]Reference,
-	status *EventStatus,
-	statusReason *CodeableConcept,
-	category *CodeableConcept,
-	code *CodeableConcept,
-	subject *Reference,
-	encounter *Reference,
-	performedDateTime *FhirDateTime,
-	performedPeriod *Period,
-	performedString *FhirString,
-	performedAge *Age,
-	performedRange *Range,
-	recorder *Reference,
-	asserter *Reference,
-	performer *[]ProcedurePerformer,
-	location *Reference,
-	reasonCode *[]CodeableConcept,
-	reasonReference *[]Reference,
-	bodySite *[]CodeableConcept,
-	outcome *CodeableConcept,
-	report *[]Reference,
-	complication *[]CodeableConcept,
-	complicationDetail *[]Reference,
-	followUp *[]CodeableConcept,
-	note *[]Annotation,
-	focalDevice *[]ProcedureFocalDevice,
-	usedReference *[]Reference,
-	usedCode *[]CodeableConcept,
-) *Procedure {
+// Clone creates a deep copy of Procedure
+func (m *Procedure) Clone() *Procedure {
+	if m == nil { return nil }
 	return &Procedure{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		InstantiatesCanonical: func() []FhirCanonical {
-			if instantiatesCanonical != nil { return *instantiatesCanonical }
-			return m.InstantiatesCanonical
-		}(),
-		InstantiatesUri: func() []FhirUri {
-			if instantiatesUri != nil { return *instantiatesUri }
-			return m.InstantiatesUri
-		}(),
-		BasedOn: func() []Reference {
-			if basedOn != nil { return *basedOn }
-			return m.BasedOn
-		}(),
-		PartOf: func() []Reference {
-			if partOf != nil { return *partOf }
-			return m.PartOf
-		}(),
-		Status: func() EventStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		StatusReason: func() CodeableConcept {
-			if statusReason != nil { return *statusReason }
-			return m.StatusReason
-		}(),
-		Category: func() CodeableConcept {
-			if category != nil { return *category }
-			return m.Category
-		}(),
-		Code: func() CodeableConcept {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Subject: func() Reference {
-			if subject != nil { return *subject }
-			return m.Subject
-		}(),
-		Encounter: func() Reference {
-			if encounter != nil { return *encounter }
-			return m.Encounter
-		}(),
-		PerformedDateTime: func() FhirDateTime {
-			if performedDateTime != nil { return *performedDateTime }
-			return m.PerformedDateTime
-		}(),
-		PerformedPeriod: func() Period {
-			if performedPeriod != nil { return *performedPeriod }
-			return m.PerformedPeriod
-		}(),
-		PerformedString: func() FhirString {
-			if performedString != nil { return *performedString }
-			return m.PerformedString
-		}(),
-		PerformedAge: func() Age {
-			if performedAge != nil { return *performedAge }
-			return m.PerformedAge
-		}(),
-		PerformedRange: func() Range {
-			if performedRange != nil { return *performedRange }
-			return m.PerformedRange
-		}(),
-		Recorder: func() Reference {
-			if recorder != nil { return *recorder }
-			return m.Recorder
-		}(),
-		Asserter: func() Reference {
-			if asserter != nil { return *asserter }
-			return m.Asserter
-		}(),
-		Performer: func() []ProcedurePerformer {
-			if performer != nil { return *performer }
-			return m.Performer
-		}(),
-		Location: func() Reference {
-			if location != nil { return *location }
-			return m.Location
-		}(),
-		ReasonCode: func() []CodeableConcept {
-			if reasonCode != nil { return *reasonCode }
-			return m.ReasonCode
-		}(),
-		ReasonReference: func() []Reference {
-			if reasonReference != nil { return *reasonReference }
-			return m.ReasonReference
-		}(),
-		BodySite: func() []CodeableConcept {
-			if bodySite != nil { return *bodySite }
-			return m.BodySite
-		}(),
-		Outcome: func() CodeableConcept {
-			if outcome != nil { return *outcome }
-			return m.Outcome
-		}(),
-		Report: func() []Reference {
-			if report != nil { return *report }
-			return m.Report
-		}(),
-		Complication: func() []CodeableConcept {
-			if complication != nil { return *complication }
-			return m.Complication
-		}(),
-		ComplicationDetail: func() []Reference {
-			if complicationDetail != nil { return *complicationDetail }
-			return m.ComplicationDetail
-		}(),
-		FollowUp: func() []CodeableConcept {
-			if followUp != nil { return *followUp }
-			return m.FollowUp
-		}(),
-		Note: func() []Annotation {
-			if note != nil { return *note }
-			return m.Note
-		}(),
-		FocalDevice: func() []ProcedureFocalDevice {
-			if focalDevice != nil { return *focalDevice }
-			return m.FocalDevice
-		}(),
-		UsedReference: func() []Reference {
-			if usedReference != nil { return *usedReference }
-			return m.UsedReference
-		}(),
-		UsedCode: func() []CodeableConcept {
-			if usedCode != nil { return *usedCode }
-			return m.UsedCode
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		InstantiatesCanonical: cloneSlices(m.InstantiatesCanonical),
+		InstantiatesUri: cloneSlices(m.InstantiatesUri),
+		BasedOn: cloneSlices(m.BasedOn),
+		PartOf: cloneSlices(m.PartOf),
+		Status: m.Status.Clone(),
+		StatusReason: m.StatusReason.Clone(),
+		Category: m.Category.Clone(),
+		Code: m.Code.Clone(),
+		Subject: m.Subject.Clone(),
+		Encounter: m.Encounter.Clone(),
+		PerformedDateTime: m.PerformedDateTime.Clone(),
+		PerformedPeriod: m.PerformedPeriod.Clone(),
+		PerformedString: m.PerformedString.Clone(),
+		PerformedAge: m.PerformedAge.Clone(),
+		PerformedRange: m.PerformedRange.Clone(),
+		Recorder: m.Recorder.Clone(),
+		Asserter: m.Asserter.Clone(),
+		Performer: cloneSlices(m.Performer),
+		Location: m.Location.Clone(),
+		ReasonCode: cloneSlices(m.ReasonCode),
+		ReasonReference: cloneSlices(m.ReasonReference),
+		BodySite: cloneSlices(m.BodySite),
+		Outcome: m.Outcome.Clone(),
+		Report: cloneSlices(m.Report),
+		Complication: cloneSlices(m.Complication),
+		ComplicationDetail: cloneSlices(m.ComplicationDetail),
+		FollowUp: cloneSlices(m.FollowUp),
+		Note: cloneSlices(m.Note),
+		FocalDevice: cloneSlices(m.FocalDevice),
+		UsedReference: cloneSlices(m.UsedReference),
+		UsedCode: cloneSlices(m.UsedCode),
 	}
 }
+
+// Equals checks for equality with another Procedure instance
+func (m *Procedure) Equals(other *Procedure) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !compareSlices(m.InstantiatesCanonical, other.InstantiatesCanonical) { return false }
+	if !compareSlices(m.InstantiatesUri, other.InstantiatesUri) { return false }
+	if !compareSlices(m.BasedOn, other.BasedOn) { return false }
+	if !compareSlices(m.PartOf, other.PartOf) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.StatusReason.Equals(other.StatusReason) { return false }
+	if !m.Category.Equals(other.Category) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Subject.Equals(other.Subject) { return false }
+	if !m.Encounter.Equals(other.Encounter) { return false }
+	if !m.PerformedDateTime.Equals(other.PerformedDateTime) { return false }
+	if !m.PerformedPeriod.Equals(other.PerformedPeriod) { return false }
+	if !m.PerformedString.Equals(other.PerformedString) { return false }
+	if !m.PerformedAge.Equals(other.PerformedAge) { return false }
+	if !m.PerformedRange.Equals(other.PerformedRange) { return false }
+	if !m.Recorder.Equals(other.Recorder) { return false }
+	if !m.Asserter.Equals(other.Asserter) { return false }
+	if !compareSlices(m.Performer, other.Performer) { return false }
+	if !m.Location.Equals(other.Location) { return false }
+	if !compareSlices(m.ReasonCode, other.ReasonCode) { return false }
+	if !compareSlices(m.ReasonReference, other.ReasonReference) { return false }
+	if !compareSlices(m.BodySite, other.BodySite) { return false }
+	if !m.Outcome.Equals(other.Outcome) { return false }
+	if !compareSlices(m.Report, other.Report) { return false }
+	if !compareSlices(m.Complication, other.Complication) { return false }
+	if !compareSlices(m.ComplicationDetail, other.ComplicationDetail) { return false }
+	if !compareSlices(m.FollowUp, other.FollowUp) { return false }
+	if !compareSlices(m.Note, other.Note) { return false }
+	if !compareSlices(m.FocalDevice, other.FocalDevice) { return false }
+	if !compareSlices(m.UsedReference, other.UsedReference) { return false }
+	if !compareSlices(m.UsedCode, other.UsedCode) { return false }
+	return true
+}
+
 // ProcedurePerformer
 // Limited to "real" people rather than equipment.
 type ProcedurePerformer struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// function
-	// Distinguishes the type of involvement of the performer in the procedure. For example, surgeon, anaesthetist, endoscopist.
-	Function_ CodeableConcept `json:"function,omitempty"`
-	// actor
-	// The practitioner who was involved in the procedure.
-	Actor Reference `json:"actor,omitempty"`
-	// onBehalfOf
-	// The organization the device or practitioner was acting on behalf of.
-	OnBehalfOf Reference `json:"onBehalfOf,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Function_ *CodeableConcept `json:"function,omitempty"`
+	Actor *Reference `json:"actor,omitempty"`
+	OnBehalfOf *Reference `json:"onbehalfof,omitempty"`
 }
 
 // NewProcedurePerformer creates a new ProcedurePerformer instance
-func NewProcedurePerformer(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	function_ CodeableConcept,
-	actor Reference,
-	onBehalfOf Reference,
-) *ProcedurePerformer {
-	return &ProcedurePerformer{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Function_: function_,
-		Actor: actor,
-		OnBehalfOf: onBehalfOf,
-	}
+func NewProcedurePerformer() *ProcedurePerformer {
+	return &ProcedurePerformer{}
 }
+
 // FromJSON populates ProcedurePerformer from JSON data
 func (m *ProcedurePerformer) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -491,81 +187,48 @@ func (m *ProcedurePerformer) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ProcedurePerformer
-func (m *ProcedurePerformer) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	function_ *CodeableConcept,
-	actor *Reference,
-	onBehalfOf *Reference,
-) *ProcedurePerformer {
+// Clone creates a deep copy of ProcedurePerformer
+func (m *ProcedurePerformer) Clone() *ProcedurePerformer {
+	if m == nil { return nil }
 	return &ProcedurePerformer{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Function_: func() CodeableConcept {
-			if function_ != nil { return *function_ }
-			return m.Function_
-		}(),
-		Actor: func() Reference {
-			if actor != nil { return *actor }
-			return m.Actor
-		}(),
-		OnBehalfOf: func() Reference {
-			if onBehalfOf != nil { return *onBehalfOf }
-			return m.OnBehalfOf
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Function_: m.Function_.Clone(),
+		Actor: m.Actor.Clone(),
+		OnBehalfOf: m.OnBehalfOf.Clone(),
 	}
 }
+
+// Equals checks for equality with another ProcedurePerformer instance
+func (m *ProcedurePerformer) Equals(other *ProcedurePerformer) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Function_.Equals(other.Function_) { return false }
+	if !m.Actor.Equals(other.Actor) { return false }
+	if !m.OnBehalfOf.Equals(other.OnBehalfOf) { return false }
+	return true
+}
+
 // ProcedureFocalDevice
 // A device that is implanted, removed or otherwise manipulated (calibration, battery replacement, fitting a prosthesis, attaching a wound-vac, etc.) as a focal portion of the Procedure.
 type ProcedureFocalDevice struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// action
-	// The kind of change that happened to the device during the procedure.
-	Action CodeableConcept `json:"action,omitempty"`
-	// manipulated
-	// The device that was manipulated (changed) during the procedure.
-	Manipulated Reference `json:"manipulated,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Action *CodeableConcept `json:"action,omitempty"`
+	Manipulated *Reference `json:"manipulated,omitempty"`
 }
 
 // NewProcedureFocalDevice creates a new ProcedureFocalDevice instance
-func NewProcedureFocalDevice(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	action CodeableConcept,
-	manipulated Reference,
-) *ProcedureFocalDevice {
-	return &ProcedureFocalDevice{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Action: action,
-		Manipulated: manipulated,
-	}
+func NewProcedureFocalDevice() *ProcedureFocalDevice {
+	return &ProcedureFocalDevice{}
 }
+
 // FromJSON populates ProcedureFocalDevice from JSON data
 func (m *ProcedureFocalDevice) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -576,34 +239,27 @@ func (m *ProcedureFocalDevice) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ProcedureFocalDevice
-func (m *ProcedureFocalDevice) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	action *CodeableConcept,
-	manipulated *Reference,
-) *ProcedureFocalDevice {
+// Clone creates a deep copy of ProcedureFocalDevice
+func (m *ProcedureFocalDevice) Clone() *ProcedureFocalDevice {
+	if m == nil { return nil }
 	return &ProcedureFocalDevice{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Action: func() CodeableConcept {
-			if action != nil { return *action }
-			return m.Action
-		}(),
-		Manipulated: func() Reference {
-			if manipulated != nil { return *manipulated }
-			return m.Manipulated
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Action: m.Action.Clone(),
+		Manipulated: m.Manipulated.Clone(),
 	}
 }
+
+// Equals checks for equality with another ProcedureFocalDevice instance
+func (m *ProcedureFocalDevice) Equals(other *ProcedureFocalDevice) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Action.Equals(other.Action) { return false }
+	if !m.Manipulated.Equals(other.Manipulated) { return false }
+	return true
+}
+

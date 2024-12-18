@@ -3,139 +3,42 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // CoverageEligibilityRequest
 // The CoverageEligibilityRequest provides patient and insurance coverage information to an insurer for them to respond, in the form of an CoverageEligibilityResponse, with information regarding whether the stated coverage is valid and in-force and optionally to provide the insurance details of the policy.
 type CoverageEligibilityRequest struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// A unique identifier assigned to this coverage eligiblity request.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// status
-	// The status of the resource instance.
-	Status FinancialResourceStatusCodes `json:"status,omitempty"`
-	// priority
-	// When the requestor expects the processor to complete processing.
-	Priority CodeableConcept `json:"priority,omitempty"`
-	// purpose
-	// Code to specify whether requesting: prior authorization requirements for some service categories or billing codes; benefits for coverages specified or discovered; discovery and return of coverages for the patient; and/or validation that the specified coverage is in-force at the date/period specified or 'now' if not specified.
-	Purpose []EligibilityRequestPurpose `json:"purpose,omitempty"`
-	// patient
-	// The party who is the beneficiary of the supplied coverage and for whom eligibility is sought.
-	Patient Reference `json:"patient,omitempty"`
-	// servicedDate
-	// The date or dates when the enclosed suite of services were performed or completed.
-	ServicedDate FhirDate `json:"servicedDate,omitempty"`
-	// servicedPeriod
-	// The date or dates when the enclosed suite of services were performed or completed.
-	ServicedPeriod Period `json:"servicedPeriod,omitempty"`
-	// created
-	// The date when this resource was created.
-	Created FhirDateTime `json:"created,omitempty"`
-	// enterer
-	// Person who created the request.
-	Enterer Reference `json:"enterer,omitempty"`
-	// provider
-	// The provider which is responsible for the request.
-	Provider Reference `json:"provider,omitempty"`
-	// insurer
-	// The Insurer who issued the coverage in question and is the recipient of the request.
-	Insurer Reference `json:"insurer,omitempty"`
-	// facility
-	// Facility where the services are intended to be provided.
-	Facility Reference `json:"facility,omitempty"`
-	// supportingInfo
-	// Additional information codes regarding exceptions, special considerations, the condition, situation, prior or concurrent issues.
-	SupportingInfo []CoverageEligibilityRequestSupportingInfo `json:"supportingInfo,omitempty"`
-	// insurance
-	// Financial instruments for reimbursement for the health care products and services.
-	Insurance []CoverageEligibilityRequestInsurance `json:"insurance,omitempty"`
-	// item
-	// Service categories or billable services for which benefit details and/or an authorization prior to service delivery may be required by the payor.
-	Item []CoverageEligibilityRequestItem `json:"item,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Status *FinancialResourceStatusCodes `json:"status,omitempty"`
+	Priority *CodeableConcept `json:"priority,omitempty"`
+	Purpose []*EligibilityRequestPurpose `json:"purpose,omitempty"`
+	Patient *Reference `json:"patient,omitempty"`
+	ServicedDate *FhirDate `json:"serviceddate,omitempty"`
+	ServicedPeriod *Period `json:"servicedperiod,omitempty"`
+	Created *FhirDateTime `json:"created,omitempty"`
+	Enterer *Reference `json:"enterer,omitempty"`
+	Provider *Reference `json:"provider,omitempty"`
+	Insurer *Reference `json:"insurer,omitempty"`
+	Facility *Reference `json:"facility,omitempty"`
+	SupportingInfo []*CoverageEligibilityRequestSupportingInfo `json:"supportinginfo,omitempty"`
+	Insurance []*CoverageEligibilityRequestInsurance `json:"insurance,omitempty"`
+	Item []*CoverageEligibilityRequestItem `json:"item,omitempty"`
 }
 
 // NewCoverageEligibilityRequest creates a new CoverageEligibilityRequest instance
-func NewCoverageEligibilityRequest(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	status FinancialResourceStatusCodes,
-	priority CodeableConcept,
-	purpose []EligibilityRequestPurpose,
-	patient Reference,
-	servicedDate FhirDate,
-	servicedPeriod Period,
-	created FhirDateTime,
-	enterer Reference,
-	provider Reference,
-	insurer Reference,
-	facility Reference,
-	supportingInfo []CoverageEligibilityRequestSupportingInfo,
-	insurance []CoverageEligibilityRequestInsurance,
-	item []CoverageEligibilityRequestItem,
-) *CoverageEligibilityRequest {
-	return &CoverageEligibilityRequest{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Status: status,
-		Priority: priority,
-		Purpose: purpose,
-		Patient: patient,
-		ServicedDate: servicedDate,
-		ServicedPeriod: servicedPeriod,
-		Created: created,
-		Enterer: enterer,
-		Provider: provider,
-		Insurer: insurer,
-		Facility: facility,
-		SupportingInfo: supportingInfo,
-		Insurance: insurance,
-		Item: item,
-	}
+func NewCoverageEligibilityRequest() *CoverageEligibilityRequest {
+	return &CoverageEligibilityRequest{}
 }
+
 // FromJSON populates CoverageEligibilityRequest from JSON data
 func (m *CoverageEligibilityRequest) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -146,171 +49,83 @@ func (m *CoverageEligibilityRequest) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CoverageEligibilityRequest
-func (m *CoverageEligibilityRequest) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	status *FinancialResourceStatusCodes,
-	priority *CodeableConcept,
-	purpose *[]EligibilityRequestPurpose,
-	patient *Reference,
-	servicedDate *FhirDate,
-	servicedPeriod *Period,
-	created *FhirDateTime,
-	enterer *Reference,
-	provider *Reference,
-	insurer *Reference,
-	facility *Reference,
-	supportingInfo *[]CoverageEligibilityRequestSupportingInfo,
-	insurance *[]CoverageEligibilityRequestInsurance,
-	item *[]CoverageEligibilityRequestItem,
-) *CoverageEligibilityRequest {
+// Clone creates a deep copy of CoverageEligibilityRequest
+func (m *CoverageEligibilityRequest) Clone() *CoverageEligibilityRequest {
+	if m == nil { return nil }
 	return &CoverageEligibilityRequest{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Status: func() FinancialResourceStatusCodes {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Priority: func() CodeableConcept {
-			if priority != nil { return *priority }
-			return m.Priority
-		}(),
-		Purpose: func() []EligibilityRequestPurpose {
-			if purpose != nil { return *purpose }
-			return m.Purpose
-		}(),
-		Patient: func() Reference {
-			if patient != nil { return *patient }
-			return m.Patient
-		}(),
-		ServicedDate: func() FhirDate {
-			if servicedDate != nil { return *servicedDate }
-			return m.ServicedDate
-		}(),
-		ServicedPeriod: func() Period {
-			if servicedPeriod != nil { return *servicedPeriod }
-			return m.ServicedPeriod
-		}(),
-		Created: func() FhirDateTime {
-			if created != nil { return *created }
-			return m.Created
-		}(),
-		Enterer: func() Reference {
-			if enterer != nil { return *enterer }
-			return m.Enterer
-		}(),
-		Provider: func() Reference {
-			if provider != nil { return *provider }
-			return m.Provider
-		}(),
-		Insurer: func() Reference {
-			if insurer != nil { return *insurer }
-			return m.Insurer
-		}(),
-		Facility: func() Reference {
-			if facility != nil { return *facility }
-			return m.Facility
-		}(),
-		SupportingInfo: func() []CoverageEligibilityRequestSupportingInfo {
-			if supportingInfo != nil { return *supportingInfo }
-			return m.SupportingInfo
-		}(),
-		Insurance: func() []CoverageEligibilityRequestInsurance {
-			if insurance != nil { return *insurance }
-			return m.Insurance
-		}(),
-		Item: func() []CoverageEligibilityRequestItem {
-			if item != nil { return *item }
-			return m.Item
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		Status: m.Status.Clone(),
+		Priority: m.Priority.Clone(),
+		Purpose: cloneSlices(m.Purpose),
+		Patient: m.Patient.Clone(),
+		ServicedDate: m.ServicedDate.Clone(),
+		ServicedPeriod: m.ServicedPeriod.Clone(),
+		Created: m.Created.Clone(),
+		Enterer: m.Enterer.Clone(),
+		Provider: m.Provider.Clone(),
+		Insurer: m.Insurer.Clone(),
+		Facility: m.Facility.Clone(),
+		SupportingInfo: cloneSlices(m.SupportingInfo),
+		Insurance: cloneSlices(m.Insurance),
+		Item: cloneSlices(m.Item),
 	}
 }
+
+// Equals checks for equality with another CoverageEligibilityRequest instance
+func (m *CoverageEligibilityRequest) Equals(other *CoverageEligibilityRequest) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Priority.Equals(other.Priority) { return false }
+	if !compareSlices(m.Purpose, other.Purpose) { return false }
+	if !m.Patient.Equals(other.Patient) { return false }
+	if !m.ServicedDate.Equals(other.ServicedDate) { return false }
+	if !m.ServicedPeriod.Equals(other.ServicedPeriod) { return false }
+	if !m.Created.Equals(other.Created) { return false }
+	if !m.Enterer.Equals(other.Enterer) { return false }
+	if !m.Provider.Equals(other.Provider) { return false }
+	if !m.Insurer.Equals(other.Insurer) { return false }
+	if !m.Facility.Equals(other.Facility) { return false }
+	if !compareSlices(m.SupportingInfo, other.SupportingInfo) { return false }
+	if !compareSlices(m.Insurance, other.Insurance) { return false }
+	if !compareSlices(m.Item, other.Item) { return false }
+	return true
+}
+
 // CoverageEligibilityRequestSupportingInfo
 // Additional information codes regarding exceptions, special considerations, the condition, situation, prior or concurrent issues.
 type CoverageEligibilityRequestSupportingInfo struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// sequence
-	// A number to uniquely identify supporting information entries.
-	Sequence FhirPositiveInt `json:"sequence,omitempty"`
-	// information
-	// Additional data or information such as resources, documents, images etc. including references to the data or the actual inclusion of the data.
-	Information Reference `json:"information,omitempty"`
-	// appliesToAll
-	// The supporting materials are applicable for all detail items, product/servce categories and specific billing codes.
-	AppliesToAll FhirBoolean `json:"appliesToAll,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Sequence *FhirPositiveInt `json:"sequence,omitempty"`
+	Information *Reference `json:"information,omitempty"`
+	AppliesToAll *FhirBoolean `json:"appliestoall,omitempty"`
 }
 
 // NewCoverageEligibilityRequestSupportingInfo creates a new CoverageEligibilityRequestSupportingInfo instance
-func NewCoverageEligibilityRequestSupportingInfo(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	sequence FhirPositiveInt,
-	information Reference,
-	appliesToAll FhirBoolean,
-) *CoverageEligibilityRequestSupportingInfo {
-	return &CoverageEligibilityRequestSupportingInfo{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Sequence: sequence,
-		Information: information,
-		AppliesToAll: appliesToAll,
-	}
+func NewCoverageEligibilityRequestSupportingInfo() *CoverageEligibilityRequestSupportingInfo {
+	return &CoverageEligibilityRequestSupportingInfo{}
 }
+
 // FromJSON populates CoverageEligibilityRequestSupportingInfo from JSON data
 func (m *CoverageEligibilityRequestSupportingInfo) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -321,86 +136,49 @@ func (m *CoverageEligibilityRequestSupportingInfo) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CoverageEligibilityRequestSupportingInfo
-func (m *CoverageEligibilityRequestSupportingInfo) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	sequence *FhirPositiveInt,
-	information *Reference,
-	appliesToAll *FhirBoolean,
-) *CoverageEligibilityRequestSupportingInfo {
+// Clone creates a deep copy of CoverageEligibilityRequestSupportingInfo
+func (m *CoverageEligibilityRequestSupportingInfo) Clone() *CoverageEligibilityRequestSupportingInfo {
+	if m == nil { return nil }
 	return &CoverageEligibilityRequestSupportingInfo{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Sequence: func() FhirPositiveInt {
-			if sequence != nil { return *sequence }
-			return m.Sequence
-		}(),
-		Information: func() Reference {
-			if information != nil { return *information }
-			return m.Information
-		}(),
-		AppliesToAll: func() FhirBoolean {
-			if appliesToAll != nil { return *appliesToAll }
-			return m.AppliesToAll
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Sequence: m.Sequence.Clone(),
+		Information: m.Information.Clone(),
+		AppliesToAll: m.AppliesToAll.Clone(),
 	}
 }
+
+// Equals checks for equality with another CoverageEligibilityRequestSupportingInfo instance
+func (m *CoverageEligibilityRequestSupportingInfo) Equals(other *CoverageEligibilityRequestSupportingInfo) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Sequence.Equals(other.Sequence) { return false }
+	if !m.Information.Equals(other.Information) { return false }
+	if !m.AppliesToAll.Equals(other.AppliesToAll) { return false }
+	return true
+}
+
 // CoverageEligibilityRequestInsurance
 // Financial instruments for reimbursement for the health care products and services.
 type CoverageEligibilityRequestInsurance struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// focal
-	// A flag to indicate that this Coverage is to be used for evaluation of this request when set to true.
-	Focal FhirBoolean `json:"focal,omitempty"`
-	// coverage
-	// Reference to the insurance card level information contained in the Coverage resource. The coverage issuing insurer will use these details to locate the patient's actual coverage within the insurer's information system.
-	Coverage Reference `json:"coverage,omitempty"`
-	// businessArrangement
-	// A business agreement number established between the provider and the insurer for special business processing purposes.
-	BusinessArrangement FhirString `json:"businessArrangement,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Focal *FhirBoolean `json:"focal,omitempty"`
+	Coverage *Reference `json:"coverage,omitempty"`
+	BusinessArrangement *FhirString `json:"businessarrangement,omitempty"`
 }
 
 // NewCoverageEligibilityRequestInsurance creates a new CoverageEligibilityRequestInsurance instance
-func NewCoverageEligibilityRequestInsurance(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	focal FhirBoolean,
-	coverage Reference,
-	businessArrangement FhirString,
-) *CoverageEligibilityRequestInsurance {
-	return &CoverageEligibilityRequestInsurance{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Focal: focal,
-		Coverage: coverage,
-		BusinessArrangement: businessArrangement,
-	}
+func NewCoverageEligibilityRequestInsurance() *CoverageEligibilityRequestInsurance {
+	return &CoverageEligibilityRequestInsurance{}
 }
+
 // FromJSON populates CoverageEligibilityRequestInsurance from JSON data
 func (m *CoverageEligibilityRequestInsurance) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -411,121 +189,56 @@ func (m *CoverageEligibilityRequestInsurance) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CoverageEligibilityRequestInsurance
-func (m *CoverageEligibilityRequestInsurance) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	focal *FhirBoolean,
-	coverage *Reference,
-	businessArrangement *FhirString,
-) *CoverageEligibilityRequestInsurance {
+// Clone creates a deep copy of CoverageEligibilityRequestInsurance
+func (m *CoverageEligibilityRequestInsurance) Clone() *CoverageEligibilityRequestInsurance {
+	if m == nil { return nil }
 	return &CoverageEligibilityRequestInsurance{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Focal: func() FhirBoolean {
-			if focal != nil { return *focal }
-			return m.Focal
-		}(),
-		Coverage: func() Reference {
-			if coverage != nil { return *coverage }
-			return m.Coverage
-		}(),
-		BusinessArrangement: func() FhirString {
-			if businessArrangement != nil { return *businessArrangement }
-			return m.BusinessArrangement
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Focal: m.Focal.Clone(),
+		Coverage: m.Coverage.Clone(),
+		BusinessArrangement: m.BusinessArrangement.Clone(),
 	}
 }
+
+// Equals checks for equality with another CoverageEligibilityRequestInsurance instance
+func (m *CoverageEligibilityRequestInsurance) Equals(other *CoverageEligibilityRequestInsurance) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Focal.Equals(other.Focal) { return false }
+	if !m.Coverage.Equals(other.Coverage) { return false }
+	if !m.BusinessArrangement.Equals(other.BusinessArrangement) { return false }
+	return true
+}
+
 // CoverageEligibilityRequestItem
 // Service categories or billable services for which benefit details and/or an authorization prior to service delivery may be required by the payor.
 type CoverageEligibilityRequestItem struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// supportingInfoSequence
-	// Exceptions, special conditions and supporting information applicable for this service or product line.
-	SupportingInfoSequence []FhirPositiveInt `json:"supportingInfoSequence,omitempty"`
-	// category
-	// Code to identify the general type of benefits under which products and services are provided.
-	Category CodeableConcept `json:"category,omitempty"`
-	// productOrService
-	// This contains the product, service, drug or other billing code for the item.
-	ProductOrService CodeableConcept `json:"productOrService,omitempty"`
-	// modifier
-	// Item typification or modifiers codes to convey additional context for the product or service.
-	Modifier []CodeableConcept `json:"modifier,omitempty"`
-	// provider
-	// The practitioner who is responsible for the product or service to be rendered to the patient.
-	Provider Reference `json:"provider,omitempty"`
-	// quantity
-	// The number of repetitions of a service or product.
-	Quantity Quantity `json:"quantity,omitempty"`
-	// unitPrice
-	// The amount charged to the patient by the provider for a single unit.
-	UnitPrice Money `json:"unitPrice,omitempty"`
-	// facility
-	// Facility where the services will be provided.
-	Facility Reference `json:"facility,omitempty"`
-	// diagnosis
-	// Patient diagnosis for which care is sought.
-	Diagnosis []CoverageEligibilityRequestDiagnosis `json:"diagnosis,omitempty"`
-	// detail
-	// The plan/proposal/order describing the proposed service in detail.
-	Detail []Reference `json:"detail,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	SupportingInfoSequence []*FhirPositiveInt `json:"supportinginfosequence,omitempty"`
+	Category *CodeableConcept `json:"category,omitempty"`
+	ProductOrService *CodeableConcept `json:"productorservice,omitempty"`
+	Modifier []*CodeableConcept `json:"modifier,omitempty"`
+	Provider *Reference `json:"provider,omitempty"`
+	Quantity *Quantity `json:"quantity,omitempty"`
+	UnitPrice *Money `json:"unitprice,omitempty"`
+	Facility *Reference `json:"facility,omitempty"`
+	Diagnosis []*CoverageEligibilityRequestDiagnosis `json:"diagnosis,omitempty"`
+	Detail []*Reference `json:"detail,omitempty"`
 }
 
 // NewCoverageEligibilityRequestItem creates a new CoverageEligibilityRequestItem instance
-func NewCoverageEligibilityRequestItem(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	supportingInfoSequence []FhirPositiveInt,
-	category CodeableConcept,
-	productOrService CodeableConcept,
-	modifier []CodeableConcept,
-	provider Reference,
-	quantity Quantity,
-	unitPrice Money,
-	facility Reference,
-	diagnosis []CoverageEligibilityRequestDiagnosis,
-	detail []Reference,
-) *CoverageEligibilityRequestItem {
-	return &CoverageEligibilityRequestItem{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		SupportingInfoSequence: supportingInfoSequence,
-		Category: category,
-		ProductOrService: productOrService,
-		Modifier: modifier,
-		Provider: provider,
-		Quantity: quantity,
-		UnitPrice: unitPrice,
-		Facility: facility,
-		Diagnosis: diagnosis,
-		Detail: detail,
-	}
+func NewCoverageEligibilityRequestItem() *CoverageEligibilityRequestItem {
+	return &CoverageEligibilityRequestItem{}
 }
+
 // FromJSON populates CoverageEligibilityRequestItem from JSON data
 func (m *CoverageEligibilityRequestItem) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -536,116 +249,62 @@ func (m *CoverageEligibilityRequestItem) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CoverageEligibilityRequestItem
-func (m *CoverageEligibilityRequestItem) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	supportingInfoSequence *[]FhirPositiveInt,
-	category *CodeableConcept,
-	productOrService *CodeableConcept,
-	modifier *[]CodeableConcept,
-	provider *Reference,
-	quantity *Quantity,
-	unitPrice *Money,
-	facility *Reference,
-	diagnosis *[]CoverageEligibilityRequestDiagnosis,
-	detail *[]Reference,
-) *CoverageEligibilityRequestItem {
+// Clone creates a deep copy of CoverageEligibilityRequestItem
+func (m *CoverageEligibilityRequestItem) Clone() *CoverageEligibilityRequestItem {
+	if m == nil { return nil }
 	return &CoverageEligibilityRequestItem{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		SupportingInfoSequence: func() []FhirPositiveInt {
-			if supportingInfoSequence != nil { return *supportingInfoSequence }
-			return m.SupportingInfoSequence
-		}(),
-		Category: func() CodeableConcept {
-			if category != nil { return *category }
-			return m.Category
-		}(),
-		ProductOrService: func() CodeableConcept {
-			if productOrService != nil { return *productOrService }
-			return m.ProductOrService
-		}(),
-		Modifier: func() []CodeableConcept {
-			if modifier != nil { return *modifier }
-			return m.Modifier
-		}(),
-		Provider: func() Reference {
-			if provider != nil { return *provider }
-			return m.Provider
-		}(),
-		Quantity: func() Quantity {
-			if quantity != nil { return *quantity }
-			return m.Quantity
-		}(),
-		UnitPrice: func() Money {
-			if unitPrice != nil { return *unitPrice }
-			return m.UnitPrice
-		}(),
-		Facility: func() Reference {
-			if facility != nil { return *facility }
-			return m.Facility
-		}(),
-		Diagnosis: func() []CoverageEligibilityRequestDiagnosis {
-			if diagnosis != nil { return *diagnosis }
-			return m.Diagnosis
-		}(),
-		Detail: func() []Reference {
-			if detail != nil { return *detail }
-			return m.Detail
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		SupportingInfoSequence: cloneSlices(m.SupportingInfoSequence),
+		Category: m.Category.Clone(),
+		ProductOrService: m.ProductOrService.Clone(),
+		Modifier: cloneSlices(m.Modifier),
+		Provider: m.Provider.Clone(),
+		Quantity: m.Quantity.Clone(),
+		UnitPrice: m.UnitPrice.Clone(),
+		Facility: m.Facility.Clone(),
+		Diagnosis: cloneSlices(m.Diagnosis),
+		Detail: cloneSlices(m.Detail),
 	}
 }
+
+// Equals checks for equality with another CoverageEligibilityRequestItem instance
+func (m *CoverageEligibilityRequestItem) Equals(other *CoverageEligibilityRequestItem) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.SupportingInfoSequence, other.SupportingInfoSequence) { return false }
+	if !m.Category.Equals(other.Category) { return false }
+	if !m.ProductOrService.Equals(other.ProductOrService) { return false }
+	if !compareSlices(m.Modifier, other.Modifier) { return false }
+	if !m.Provider.Equals(other.Provider) { return false }
+	if !m.Quantity.Equals(other.Quantity) { return false }
+	if !m.UnitPrice.Equals(other.UnitPrice) { return false }
+	if !m.Facility.Equals(other.Facility) { return false }
+	if !compareSlices(m.Diagnosis, other.Diagnosis) { return false }
+	if !compareSlices(m.Detail, other.Detail) { return false }
+	return true
+}
+
 // CoverageEligibilityRequestDiagnosis
 // Patient diagnosis for which care is sought.
 type CoverageEligibilityRequestDiagnosis struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// diagnosisCodeableConcept
-	// The nature of illness or problem in a coded form or as a reference to an external defined Condition.
-	DiagnosisCodeableConcept CodeableConcept `json:"diagnosisCodeableConcept,omitempty"`
-	// diagnosisReference
-	// The nature of illness or problem in a coded form or as a reference to an external defined Condition.
-	DiagnosisReference Reference `json:"diagnosisReference,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	DiagnosisCodeableConcept *CodeableConcept `json:"diagnosiscodeableconcept,omitempty"`
+	DiagnosisReference *Reference `json:"diagnosisreference,omitempty"`
 }
 
 // NewCoverageEligibilityRequestDiagnosis creates a new CoverageEligibilityRequestDiagnosis instance
-func NewCoverageEligibilityRequestDiagnosis(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	diagnosisCodeableConcept CodeableConcept,
-	diagnosisReference Reference,
-) *CoverageEligibilityRequestDiagnosis {
-	return &CoverageEligibilityRequestDiagnosis{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		DiagnosisCodeableConcept: diagnosisCodeableConcept,
-		DiagnosisReference: diagnosisReference,
-	}
+func NewCoverageEligibilityRequestDiagnosis() *CoverageEligibilityRequestDiagnosis {
+	return &CoverageEligibilityRequestDiagnosis{}
 }
+
 // FromJSON populates CoverageEligibilityRequestDiagnosis from JSON data
 func (m *CoverageEligibilityRequestDiagnosis) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -656,34 +315,27 @@ func (m *CoverageEligibilityRequestDiagnosis) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CoverageEligibilityRequestDiagnosis
-func (m *CoverageEligibilityRequestDiagnosis) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	diagnosisCodeableConcept *CodeableConcept,
-	diagnosisReference *Reference,
-) *CoverageEligibilityRequestDiagnosis {
+// Clone creates a deep copy of CoverageEligibilityRequestDiagnosis
+func (m *CoverageEligibilityRequestDiagnosis) Clone() *CoverageEligibilityRequestDiagnosis {
+	if m == nil { return nil }
 	return &CoverageEligibilityRequestDiagnosis{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		DiagnosisCodeableConcept: func() CodeableConcept {
-			if diagnosisCodeableConcept != nil { return *diagnosisCodeableConcept }
-			return m.DiagnosisCodeableConcept
-		}(),
-		DiagnosisReference: func() Reference {
-			if diagnosisReference != nil { return *diagnosisReference }
-			return m.DiagnosisReference
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		DiagnosisCodeableConcept: m.DiagnosisCodeableConcept.Clone(),
+		DiagnosisReference: m.DiagnosisReference.Clone(),
 	}
 }
+
+// Equals checks for equality with another CoverageEligibilityRequestDiagnosis instance
+func (m *CoverageEligibilityRequestDiagnosis) Equals(other *CoverageEligibilityRequestDiagnosis) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.DiagnosisCodeableConcept.Equals(other.DiagnosisCodeableConcept) { return false }
+	if !m.DiagnosisReference.Equals(other.DiagnosisReference) { return false }
+	return true
+}
+

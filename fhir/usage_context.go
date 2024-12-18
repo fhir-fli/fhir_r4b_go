@@ -3,57 +3,26 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // UsageContext
 // Specifies clinical/business/etc. metadata that can be used to retrieve, index and/or categorize an artifact. This metadata can either be specific to the applicable population (e.g., age category, DRG) or the specific context of care (e.g., venue, care setting, provider of care).
 type UsageContext struct {
 	DataType
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// code
-	// A code that identifies the type of context being specified by this usage context.
-	Code Coding `json:"code,omitempty"`
-	// valueCodeableConcept
-	// A value that defines the context specified in this context of use. The interpretation of the value is defined by the code.
-	ValueCodeableConcept CodeableConcept `json:"valueCodeableConcept,omitempty"`
-	// valueQuantity
-	// A value that defines the context specified in this context of use. The interpretation of the value is defined by the code.
-	ValueQuantity Quantity `json:"valueQuantity,omitempty"`
-	// valueRange
-	// A value that defines the context specified in this context of use. The interpretation of the value is defined by the code.
-	ValueRange Range `json:"valueRange,omitempty"`
-	// valueReference
-	// A value that defines the context specified in this context of use. The interpretation of the value is defined by the code.
-	ValueReference Reference `json:"valueReference,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	Code *Coding `json:"code,omitempty"`
+	ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+	ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+	ValueRange *Range `json:"valuerange,omitempty"`
+	ValueReference *Reference `json:"valuereference,omitempty"`
 }
 
 // NewUsageContext creates a new UsageContext instance
-func NewUsageContext(
-	id FhirString,
-	extension_ []FhirExtension,
-	code Coding,
-	valueCodeableConcept CodeableConcept,
-	valueQuantity Quantity,
-	valueRange Range,
-	valueReference Reference,
-) *UsageContext {
-	return &UsageContext{
-		Id: id,
-		Extension_: extension_,
-		Code: code,
-		ValueCodeableConcept: valueCodeableConcept,
-		ValueQuantity: valueQuantity,
-		ValueRange: valueRange,
-		ValueReference: valueReference,
-	}
+func NewUsageContext() *UsageContext {
+	return &UsageContext{}
 }
+
 // FromJSON populates UsageContext from JSON data
 func (m *UsageContext) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -64,44 +33,31 @@ func (m *UsageContext) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of UsageContext
-func (m *UsageContext) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	code *Coding,
-	valueCodeableConcept *CodeableConcept,
-	valueQuantity *Quantity,
-	valueRange *Range,
-	valueReference *Reference,
-) *UsageContext {
+// Clone creates a deep copy of UsageContext
+func (m *UsageContext) Clone() *UsageContext {
+	if m == nil { return nil }
 	return &UsageContext{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		Code: func() Coding {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		ValueCodeableConcept: func() CodeableConcept {
-			if valueCodeableConcept != nil { return *valueCodeableConcept }
-			return m.ValueCodeableConcept
-		}(),
-		ValueQuantity: func() Quantity {
-			if valueQuantity != nil { return *valueQuantity }
-			return m.ValueQuantity
-		}(),
-		ValueRange: func() Range {
-			if valueRange != nil { return *valueRange }
-			return m.ValueRange
-		}(),
-		ValueReference: func() Reference {
-			if valueReference != nil { return *valueReference }
-			return m.ValueReference
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		Code: m.Code.Clone(),
+		ValueCodeableConcept: m.ValueCodeableConcept.Clone(),
+		ValueQuantity: m.ValueQuantity.Clone(),
+		ValueRange: m.ValueRange.Clone(),
+		ValueReference: m.ValueReference.Clone(),
 	}
 }
+
+// Equals checks for equality with another UsageContext instance
+func (m *UsageContext) Equals(other *UsageContext) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.ValueCodeableConcept.Equals(other.ValueCodeableConcept) { return false }
+	if !m.ValueQuantity.Equals(other.ValueQuantity) { return false }
+	if !m.ValueRange.Equals(other.ValueRange) { return false }
+	if !m.ValueReference.Equals(other.ValueReference) { return false }
+	return true
+}
+

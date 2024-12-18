@@ -3,194 +3,53 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // CapabilityStatement
 // A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server for a particular version of FHIR that may be used as a statement of actual server functionality or a statement of required or desired server implementation.
 type CapabilityStatement struct {
 	CanonicalResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// url
-	// An absolute URI that is used to identify this capability statement when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this capability statement is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the capability statement is stored on different servers.
-	Url FhirUri `json:"url,omitempty"`
-	// version
-	// The identifier that is used to identify this version of the capability statement when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the capability statement author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.
-	Version FhirString `json:"version,omitempty"`
-	// name
-	// A natural language name identifying the capability statement. This name should be usable as an identifier for the module by machine processing applications such as code generation.
-	Name FhirString `json:"name,omitempty"`
-	// title
-	// A short, descriptive, user-friendly title for the capability statement.
-	Title FhirString `json:"title,omitempty"`
-	// status
-	// The status of this capability statement. Enables tracking the life-cycle of the content.
-	Status PublicationStatus `json:"status,omitempty"`
-	// experimental
-	// A Boolean value to indicate that this capability statement is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.
-	Experimental FhirBoolean `json:"experimental,omitempty"`
-	// date
-	// The date  (and optionally time) when the capability statement was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the capability statement changes.
-	Date FhirDateTime `json:"date,omitempty"`
-	// publisher
-	// The name of the organization or individual that published the capability statement.
-	Publisher FhirString `json:"publisher,omitempty"`
-	// contact
-	// Contact details to assist a user in finding and communicating with the publisher.
-	Contact []ContactDetail `json:"contact,omitempty"`
-	// description
-	// A free text natural language description of the capability statement from a consumer's perspective. Typically, this is used when the capability statement describes a desired rather than an actual solution, for example as a formal expression of requirements as part of an RFP.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// useContext
-	// The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate capability statement instances.
-	UseContext []UsageContext `json:"useContext,omitempty"`
-	// jurisdiction
-	// A legal or geographic region in which the capability statement is intended to be used.
-	Jurisdiction []CodeableConcept `json:"jurisdiction,omitempty"`
-	// purpose
-	// Explanation of why this capability statement is needed and why it has been designed as it has.
-	Purpose FhirMarkdown `json:"purpose,omitempty"`
-	// copyright
-	// A copyright statement relating to the capability statement and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the capability statement.
-	Copyright FhirMarkdown `json:"copyright,omitempty"`
-	// kind
-	// The way that this statement is intended to be used, to describe an actual running instance of software, a particular product (kind, not instance of software) or a class of implementation (e.g. a desired purchase).
-	Kind CapabilityStatementKind `json:"kind,omitempty"`
-	// instantiates
-	// Reference to a canonical URL of another CapabilityStatement that this software implements. This capability statement is a published API description that corresponds to a business service. The server may actually implement a subset of the capability statement it claims to implement, so the capability statement must specify the full capability details.
-	Instantiates []FhirCanonical `json:"instantiates,omitempty"`
-	// imports
-	// Reference to a canonical URL of another CapabilityStatement that this software adds to. The capability statement automatically includes everything in the other statement, and it is not duplicated, though the server may repeat the same resources, interactions and operations to add additional details to them.
-	Imports []FhirCanonical `json:"imports,omitempty"`
-	// software
-	// Software that is covered by this capability statement.  It is used when the capability statement describes the capabilities of a particular software version, independent of an installation.
-	Software CapabilityStatementSoftware `json:"software,omitempty"`
-	// implementation
-	// Identifies a specific implementation instance that is described by the capability statement - i.e. a particular installation, rather than the capabilities of a software program.
-	Implementation CapabilityStatementImplementation `json:"implementation,omitempty"`
-	// fhirVersion
-	// The version of the FHIR specification that this CapabilityStatement describes (which SHALL be the same as the FHIR version of the CapabilityStatement itself). There is no default value.
-	FhirVersion FHIRVersion `json:"fhirVersion,omitempty"`
-	// format
-	// A list of the formats supported by this implementation using their content types.
-	Format []FhirCode `json:"format,omitempty"`
-	// patchFormat
-	// A list of the patch formats supported by this implementation using their content types.
-	PatchFormat []FhirCode `json:"patchFormat,omitempty"`
-	// implementationGuide
-	// A list of implementation guides that the server does (or should) support in their entirety.
-	ImplementationGuide []FhirCanonical `json:"implementationGuide,omitempty"`
-	// rest
-	// A definition of the restful capabilities of the solution, if any.
-	Rest []CapabilityStatementRest `json:"rest,omitempty"`
-	// messaging
-	// A description of the messaging capabilities of the solution.
-	Messaging []CapabilityStatementMessaging `json:"messaging,omitempty"`
-	// document
-	// A document definition.
-	Document []CapabilityStatementDocument `json:"document,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Url *FhirUri `json:"url,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Title *FhirString `json:"title,omitempty"`
+	Status *PublicationStatus `json:"status,omitempty"`
+	Experimental *FhirBoolean `json:"experimental,omitempty"`
+	Date *FhirDateTime `json:"date,omitempty"`
+	Publisher *FhirString `json:"publisher,omitempty"`
+	Contact []*ContactDetail `json:"contact,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	UseContext []*UsageContext `json:"usecontext,omitempty"`
+	Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+	Purpose *FhirMarkdown `json:"purpose,omitempty"`
+	Copyright *FhirMarkdown `json:"copyright,omitempty"`
+	Kind *CapabilityStatementKind `json:"kind,omitempty"`
+	Instantiates []*FhirCanonical `json:"instantiates,omitempty"`
+	Imports []*FhirCanonical `json:"imports,omitempty"`
+	Software *CapabilityStatementSoftware `json:"software,omitempty"`
+	Implementation *CapabilityStatementImplementation `json:"implementation,omitempty"`
+	FhirVersion *FHIRVersion `json:"fhirversion,omitempty"`
+	Format []*FhirCode `json:"format,omitempty"`
+	PatchFormat []*FhirCode `json:"patchformat,omitempty"`
+	ImplementationGuide []*FhirCanonical `json:"implementationguide,omitempty"`
+	Rest []*CapabilityStatementRest `json:"rest,omitempty"`
+	Messaging []*CapabilityStatementMessaging `json:"messaging,omitempty"`
+	Document []*CapabilityStatementDocument `json:"document,omitempty"`
 }
 
 // NewCapabilityStatement creates a new CapabilityStatement instance
-func NewCapabilityStatement(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	url FhirUri,
-	version FhirString,
-	name FhirString,
-	title FhirString,
-	status PublicationStatus,
-	experimental FhirBoolean,
-	date FhirDateTime,
-	publisher FhirString,
-	contact []ContactDetail,
-	description FhirMarkdown,
-	useContext []UsageContext,
-	jurisdiction []CodeableConcept,
-	purpose FhirMarkdown,
-	copyright FhirMarkdown,
-	kind CapabilityStatementKind,
-	instantiates []FhirCanonical,
-	imports []FhirCanonical,
-	software CapabilityStatementSoftware,
-	implementation CapabilityStatementImplementation,
-	fhirVersion FHIRVersion,
-	format []FhirCode,
-	patchFormat []FhirCode,
-	implementationGuide []FhirCanonical,
-	rest []CapabilityStatementRest,
-	messaging []CapabilityStatementMessaging,
-	document []CapabilityStatementDocument,
-) *CapabilityStatement {
-	return &CapabilityStatement{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Url: url,
-		Version: version,
-		Name: name,
-		Title: title,
-		Status: status,
-		Experimental: experimental,
-		Date: date,
-		Publisher: publisher,
-		Contact: contact,
-		Description: description,
-		UseContext: useContext,
-		Jurisdiction: jurisdiction,
-		Purpose: purpose,
-		Copyright: copyright,
-		Kind: kind,
-		Instantiates: instantiates,
-		Imports: imports,
-		Software: software,
-		Implementation: implementation,
-		FhirVersion: fhirVersion,
-		Format: format,
-		PatchFormat: patchFormat,
-		ImplementationGuide: implementationGuide,
-		Rest: rest,
-		Messaging: messaging,
-		Document: document,
-	}
+func NewCapabilityStatement() *CapabilityStatement {
+	return &CapabilityStatement{}
 }
+
 // FromJSON populates CapabilityStatement from JSON data
 func (m *CapabilityStatement) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -201,226 +60,105 @@ func (m *CapabilityStatement) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CapabilityStatement
-func (m *CapabilityStatement) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	url *FhirUri,
-	version *FhirString,
-	name *FhirString,
-	title *FhirString,
-	status *PublicationStatus,
-	experimental *FhirBoolean,
-	date *FhirDateTime,
-	publisher *FhirString,
-	contact *[]ContactDetail,
-	description *FhirMarkdown,
-	useContext *[]UsageContext,
-	jurisdiction *[]CodeableConcept,
-	purpose *FhirMarkdown,
-	copyright *FhirMarkdown,
-	kind *CapabilityStatementKind,
-	instantiates *[]FhirCanonical,
-	imports *[]FhirCanonical,
-	software *CapabilityStatementSoftware,
-	implementation *CapabilityStatementImplementation,
-	fhirVersion *FHIRVersion,
-	format *[]FhirCode,
-	patchFormat *[]FhirCode,
-	implementationGuide *[]FhirCanonical,
-	rest *[]CapabilityStatementRest,
-	messaging *[]CapabilityStatementMessaging,
-	document *[]CapabilityStatementDocument,
-) *CapabilityStatement {
+// Clone creates a deep copy of CapabilityStatement
+func (m *CapabilityStatement) Clone() *CapabilityStatement {
+	if m == nil { return nil }
 	return &CapabilityStatement{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Url: func() FhirUri {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Title: func() FhirString {
-			if title != nil { return *title }
-			return m.Title
-		}(),
-		Status: func() PublicationStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Experimental: func() FhirBoolean {
-			if experimental != nil { return *experimental }
-			return m.Experimental
-		}(),
-		Date: func() FhirDateTime {
-			if date != nil { return *date }
-			return m.Date
-		}(),
-		Publisher: func() FhirString {
-			if publisher != nil { return *publisher }
-			return m.Publisher
-		}(),
-		Contact: func() []ContactDetail {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		UseContext: func() []UsageContext {
-			if useContext != nil { return *useContext }
-			return m.UseContext
-		}(),
-		Jurisdiction: func() []CodeableConcept {
-			if jurisdiction != nil { return *jurisdiction }
-			return m.Jurisdiction
-		}(),
-		Purpose: func() FhirMarkdown {
-			if purpose != nil { return *purpose }
-			return m.Purpose
-		}(),
-		Copyright: func() FhirMarkdown {
-			if copyright != nil { return *copyright }
-			return m.Copyright
-		}(),
-		Kind: func() CapabilityStatementKind {
-			if kind != nil { return *kind }
-			return m.Kind
-		}(),
-		Instantiates: func() []FhirCanonical {
-			if instantiates != nil { return *instantiates }
-			return m.Instantiates
-		}(),
-		Imports: func() []FhirCanonical {
-			if imports != nil { return *imports }
-			return m.Imports
-		}(),
-		Software: func() CapabilityStatementSoftware {
-			if software != nil { return *software }
-			return m.Software
-		}(),
-		Implementation: func() CapabilityStatementImplementation {
-			if implementation != nil { return *implementation }
-			return m.Implementation
-		}(),
-		FhirVersion: func() FHIRVersion {
-			if fhirVersion != nil { return *fhirVersion }
-			return m.FhirVersion
-		}(),
-		Format: func() []FhirCode {
-			if format != nil { return *format }
-			return m.Format
-		}(),
-		PatchFormat: func() []FhirCode {
-			if patchFormat != nil { return *patchFormat }
-			return m.PatchFormat
-		}(),
-		ImplementationGuide: func() []FhirCanonical {
-			if implementationGuide != nil { return *implementationGuide }
-			return m.ImplementationGuide
-		}(),
-		Rest: func() []CapabilityStatementRest {
-			if rest != nil { return *rest }
-			return m.Rest
-		}(),
-		Messaging: func() []CapabilityStatementMessaging {
-			if messaging != nil { return *messaging }
-			return m.Messaging
-		}(),
-		Document: func() []CapabilityStatementDocument {
-			if document != nil { return *document }
-			return m.Document
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Url: m.Url.Clone(),
+		Version: m.Version.Clone(),
+		Name: m.Name.Clone(),
+		Title: m.Title.Clone(),
+		Status: m.Status.Clone(),
+		Experimental: m.Experimental.Clone(),
+		Date: m.Date.Clone(),
+		Publisher: m.Publisher.Clone(),
+		Contact: cloneSlices(m.Contact),
+		Description: m.Description.Clone(),
+		UseContext: cloneSlices(m.UseContext),
+		Jurisdiction: cloneSlices(m.Jurisdiction),
+		Purpose: m.Purpose.Clone(),
+		Copyright: m.Copyright.Clone(),
+		Kind: m.Kind.Clone(),
+		Instantiates: cloneSlices(m.Instantiates),
+		Imports: cloneSlices(m.Imports),
+		Software: m.Software.Clone(),
+		Implementation: m.Implementation.Clone(),
+		FhirVersion: m.FhirVersion.Clone(),
+		Format: cloneSlices(m.Format),
+		PatchFormat: cloneSlices(m.PatchFormat),
+		ImplementationGuide: cloneSlices(m.ImplementationGuide),
+		Rest: cloneSlices(m.Rest),
+		Messaging: cloneSlices(m.Messaging),
+		Document: cloneSlices(m.Document),
 	}
 }
+
+// Equals checks for equality with another CapabilityStatement instance
+func (m *CapabilityStatement) Equals(other *CapabilityStatement) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Title.Equals(other.Title) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Experimental.Equals(other.Experimental) { return false }
+	if !m.Date.Equals(other.Date) { return false }
+	if !m.Publisher.Equals(other.Publisher) { return false }
+	if !compareSlices(m.Contact, other.Contact) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.UseContext, other.UseContext) { return false }
+	if !compareSlices(m.Jurisdiction, other.Jurisdiction) { return false }
+	if !m.Purpose.Equals(other.Purpose) { return false }
+	if !m.Copyright.Equals(other.Copyright) { return false }
+	if !m.Kind.Equals(other.Kind) { return false }
+	if !compareSlices(m.Instantiates, other.Instantiates) { return false }
+	if !compareSlices(m.Imports, other.Imports) { return false }
+	if !m.Software.Equals(other.Software) { return false }
+	if !m.Implementation.Equals(other.Implementation) { return false }
+	if !m.FhirVersion.Equals(other.FhirVersion) { return false }
+	if !compareSlices(m.Format, other.Format) { return false }
+	if !compareSlices(m.PatchFormat, other.PatchFormat) { return false }
+	if !compareSlices(m.ImplementationGuide, other.ImplementationGuide) { return false }
+	if !compareSlices(m.Rest, other.Rest) { return false }
+	if !compareSlices(m.Messaging, other.Messaging) { return false }
+	if !compareSlices(m.Document, other.Document) { return false }
+	return true
+}
+
 // CapabilityStatementSoftware
 // Software that is covered by this capability statement.  It is used when the capability statement describes the capabilities of a particular software version, independent of an installation.
 type CapabilityStatementSoftware struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// name
-	// Name the software is known by.
-	Name FhirString `json:"name,omitempty"`
-	// version
-	// The version identifier for the software covered by this statement.
-	Version FhirString `json:"version,omitempty"`
-	// releaseDate
-	// Date this version of the software was released.
-	ReleaseDate FhirDateTime `json:"releaseDate,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
+	ReleaseDate *FhirDateTime `json:"releasedate,omitempty"`
 }
 
 // NewCapabilityStatementSoftware creates a new CapabilityStatementSoftware instance
-func NewCapabilityStatementSoftware(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	name FhirString,
-	version FhirString,
-	releaseDate FhirDateTime,
-) *CapabilityStatementSoftware {
-	return &CapabilityStatementSoftware{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Name: name,
-		Version: version,
-		ReleaseDate: releaseDate,
-	}
+func NewCapabilityStatementSoftware() *CapabilityStatementSoftware {
+	return &CapabilityStatementSoftware{}
 }
+
 // FromJSON populates CapabilityStatementSoftware from JSON data
 func (m *CapabilityStatementSoftware) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -431,86 +169,49 @@ func (m *CapabilityStatementSoftware) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CapabilityStatementSoftware
-func (m *CapabilityStatementSoftware) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	name *FhirString,
-	version *FhirString,
-	releaseDate *FhirDateTime,
-) *CapabilityStatementSoftware {
+// Clone creates a deep copy of CapabilityStatementSoftware
+func (m *CapabilityStatementSoftware) Clone() *CapabilityStatementSoftware {
+	if m == nil { return nil }
 	return &CapabilityStatementSoftware{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		ReleaseDate: func() FhirDateTime {
-			if releaseDate != nil { return *releaseDate }
-			return m.ReleaseDate
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Name: m.Name.Clone(),
+		Version: m.Version.Clone(),
+		ReleaseDate: m.ReleaseDate.Clone(),
 	}
 }
+
+// Equals checks for equality with another CapabilityStatementSoftware instance
+func (m *CapabilityStatementSoftware) Equals(other *CapabilityStatementSoftware) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !m.ReleaseDate.Equals(other.ReleaseDate) { return false }
+	return true
+}
+
 // CapabilityStatementImplementation
 // Identifies a specific implementation instance that is described by the capability statement - i.e. a particular installation, rather than the capabilities of a software program.
 type CapabilityStatementImplementation struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// description
-	// Information about the specific installation that this capability statement relates to.
-	Description FhirString `json:"description,omitempty"`
-	// url
-	// An absolute base URL for the implementation.  This forms the base for REST interfaces as well as the mailbox and document interfaces.
-	Url FhirUrl `json:"url,omitempty"`
-	// custodian
-	// The organization responsible for the management of the instance and oversight of the data on the server at the specified URL.
-	Custodian Reference `json:"custodian,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Url *FhirUrl `json:"url,omitempty"`
+	Custodian *Reference `json:"custodian,omitempty"`
 }
 
 // NewCapabilityStatementImplementation creates a new CapabilityStatementImplementation instance
-func NewCapabilityStatementImplementation(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	description FhirString,
-	url FhirUrl,
-	custodian Reference,
-) *CapabilityStatementImplementation {
-	return &CapabilityStatementImplementation{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Description: description,
-		Url: url,
-		Custodian: custodian,
-	}
+func NewCapabilityStatementImplementation() *CapabilityStatementImplementation {
+	return &CapabilityStatementImplementation{}
 }
+
 // FromJSON populates CapabilityStatementImplementation from JSON data
 func (m *CapabilityStatementImplementation) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -521,111 +222,54 @@ func (m *CapabilityStatementImplementation) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CapabilityStatementImplementation
-func (m *CapabilityStatementImplementation) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	description *FhirString,
-	url *FhirUrl,
-	custodian *Reference,
-) *CapabilityStatementImplementation {
+// Clone creates a deep copy of CapabilityStatementImplementation
+func (m *CapabilityStatementImplementation) Clone() *CapabilityStatementImplementation {
+	if m == nil { return nil }
 	return &CapabilityStatementImplementation{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Url: func() FhirUrl {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		Custodian: func() Reference {
-			if custodian != nil { return *custodian }
-			return m.Custodian
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Description: m.Description.Clone(),
+		Url: m.Url.Clone(),
+		Custodian: m.Custodian.Clone(),
 	}
 }
+
+// Equals checks for equality with another CapabilityStatementImplementation instance
+func (m *CapabilityStatementImplementation) Equals(other *CapabilityStatementImplementation) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !m.Custodian.Equals(other.Custodian) { return false }
+	return true
+}
+
 // CapabilityStatementRest
 // A definition of the restful capabilities of the solution, if any.
 type CapabilityStatementRest struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// mode
-	// Identifies whether this portion of the statement is describing the ability to initiate or receive restful operations.
-	Mode RestfulCapabilityMode `json:"mode,omitempty"`
-	// documentation
-	// Information about the system's restful capabilities that apply across all applications, such as security.
-	Documentation FhirMarkdown `json:"documentation,omitempty"`
-	// security
-	// Information about security implementation from an interface perspective - what a client needs to know.
-	Security CapabilityStatementSecurity `json:"security,omitempty"`
-	// resource
-	// A specification of the restful capabilities of the solution for a specific resource type.
-	Resource []CapabilityStatementResource `json:"resource,omitempty"`
-	// interaction
-	// A specification of restful operations supported by the system.
-	Interaction []CapabilityStatementInteraction `json:"interaction,omitempty"`
-	// searchParam
-	// Search parameters that are supported for searching all resources for implementations to support and/or make use of - either references to ones defined in the specification, or additional ones defined for/by the implementation.
-	SearchParam []CapabilityStatementSearchParam `json:"searchParam,omitempty"`
-	// operation
-	// Definition of an operation or a named query together with its parameters and their meaning and type.
-	Operation []CapabilityStatementOperation `json:"operation,omitempty"`
-	// compartment
-	// An absolute URI which is a reference to the definition of a compartment that the system supports. The reference is to a CompartmentDefinition resource by its canonical URL .
-	Compartment []FhirCanonical `json:"compartment,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Mode *RestfulCapabilityMode `json:"mode,omitempty"`
+	Documentation *FhirMarkdown `json:"documentation,omitempty"`
+	Security *CapabilityStatementSecurity `json:"security,omitempty"`
+	Resource []*CapabilityStatementResource `json:"resource,omitempty"`
+	Interaction []*CapabilityStatementInteraction `json:"interaction,omitempty"`
+	SearchParam []*CapabilityStatementSearchParam `json:"searchparam,omitempty"`
+	Operation []*CapabilityStatementOperation `json:"operation,omitempty"`
+	Compartment []*FhirCanonical `json:"compartment,omitempty"`
 }
 
 // NewCapabilityStatementRest creates a new CapabilityStatementRest instance
-func NewCapabilityStatementRest(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	mode RestfulCapabilityMode,
-	documentation FhirMarkdown,
-	security CapabilityStatementSecurity,
-	resource []CapabilityStatementResource,
-	interaction []CapabilityStatementInteraction,
-	searchParam []CapabilityStatementSearchParam,
-	operation []CapabilityStatementOperation,
-	compartment []FhirCanonical,
-) *CapabilityStatementRest {
-	return &CapabilityStatementRest{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Mode: mode,
-		Documentation: documentation,
-		Security: security,
-		Resource: resource,
-		Interaction: interaction,
-		SearchParam: searchParam,
-		Operation: operation,
-		Compartment: compartment,
-	}
+func NewCapabilityStatementRest() *CapabilityStatementRest {
+	return &CapabilityStatementRest{}
 }
+
 // FromJSON populates CapabilityStatementRest from JSON data
 func (m *CapabilityStatementRest) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -636,111 +280,59 @@ func (m *CapabilityStatementRest) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CapabilityStatementRest
-func (m *CapabilityStatementRest) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	mode *RestfulCapabilityMode,
-	documentation *FhirMarkdown,
-	security *CapabilityStatementSecurity,
-	resource *[]CapabilityStatementResource,
-	interaction *[]CapabilityStatementInteraction,
-	searchParam *[]CapabilityStatementSearchParam,
-	operation *[]CapabilityStatementOperation,
-	compartment *[]FhirCanonical,
-) *CapabilityStatementRest {
+// Clone creates a deep copy of CapabilityStatementRest
+func (m *CapabilityStatementRest) Clone() *CapabilityStatementRest {
+	if m == nil { return nil }
 	return &CapabilityStatementRest{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Mode: func() RestfulCapabilityMode {
-			if mode != nil { return *mode }
-			return m.Mode
-		}(),
-		Documentation: func() FhirMarkdown {
-			if documentation != nil { return *documentation }
-			return m.Documentation
-		}(),
-		Security: func() CapabilityStatementSecurity {
-			if security != nil { return *security }
-			return m.Security
-		}(),
-		Resource: func() []CapabilityStatementResource {
-			if resource != nil { return *resource }
-			return m.Resource
-		}(),
-		Interaction: func() []CapabilityStatementInteraction {
-			if interaction != nil { return *interaction }
-			return m.Interaction
-		}(),
-		SearchParam: func() []CapabilityStatementSearchParam {
-			if searchParam != nil { return *searchParam }
-			return m.SearchParam
-		}(),
-		Operation: func() []CapabilityStatementOperation {
-			if operation != nil { return *operation }
-			return m.Operation
-		}(),
-		Compartment: func() []FhirCanonical {
-			if compartment != nil { return *compartment }
-			return m.Compartment
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Mode: m.Mode.Clone(),
+		Documentation: m.Documentation.Clone(),
+		Security: m.Security.Clone(),
+		Resource: cloneSlices(m.Resource),
+		Interaction: cloneSlices(m.Interaction),
+		SearchParam: cloneSlices(m.SearchParam),
+		Operation: cloneSlices(m.Operation),
+		Compartment: cloneSlices(m.Compartment),
 	}
 }
+
+// Equals checks for equality with another CapabilityStatementRest instance
+func (m *CapabilityStatementRest) Equals(other *CapabilityStatementRest) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Mode.Equals(other.Mode) { return false }
+	if !m.Documentation.Equals(other.Documentation) { return false }
+	if !m.Security.Equals(other.Security) { return false }
+	if !compareSlices(m.Resource, other.Resource) { return false }
+	if !compareSlices(m.Interaction, other.Interaction) { return false }
+	if !compareSlices(m.SearchParam, other.SearchParam) { return false }
+	if !compareSlices(m.Operation, other.Operation) { return false }
+	if !compareSlices(m.Compartment, other.Compartment) { return false }
+	return true
+}
+
 // CapabilityStatementSecurity
 // Information about security implementation from an interface perspective - what a client needs to know.
 type CapabilityStatementSecurity struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// cors
-	// Server adds CORS headers when responding to requests - this enables Javascript applications to use the server.
-	Cors FhirBoolean `json:"cors,omitempty"`
-	// service
-	// Types of security services that are supported/required by the system.
-	Service []CodeableConcept `json:"service,omitempty"`
-	// description
-	// General description of how security works.
-	Description FhirMarkdown `json:"description,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Cors *FhirBoolean `json:"cors,omitempty"`
+	Service []*CodeableConcept `json:"service,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
 }
 
 // NewCapabilityStatementSecurity creates a new CapabilityStatementSecurity instance
-func NewCapabilityStatementSecurity(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	cors FhirBoolean,
-	service []CodeableConcept,
-	description FhirMarkdown,
-) *CapabilityStatementSecurity {
-	return &CapabilityStatementSecurity{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Cors: cors,
-		Service: service,
-		Description: description,
-	}
+func NewCapabilityStatementSecurity() *CapabilityStatementSecurity {
+	return &CapabilityStatementSecurity{}
 }
+
 // FromJSON populates CapabilityStatementSecurity from JSON data
 func (m *CapabilityStatementSecurity) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -751,156 +343,63 @@ func (m *CapabilityStatementSecurity) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CapabilityStatementSecurity
-func (m *CapabilityStatementSecurity) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	cors *FhirBoolean,
-	service *[]CodeableConcept,
-	description *FhirMarkdown,
-) *CapabilityStatementSecurity {
+// Clone creates a deep copy of CapabilityStatementSecurity
+func (m *CapabilityStatementSecurity) Clone() *CapabilityStatementSecurity {
+	if m == nil { return nil }
 	return &CapabilityStatementSecurity{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Cors: func() FhirBoolean {
-			if cors != nil { return *cors }
-			return m.Cors
-		}(),
-		Service: func() []CodeableConcept {
-			if service != nil { return *service }
-			return m.Service
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Cors: m.Cors.Clone(),
+		Service: cloneSlices(m.Service),
+		Description: m.Description.Clone(),
 	}
 }
+
+// Equals checks for equality with another CapabilityStatementSecurity instance
+func (m *CapabilityStatementSecurity) Equals(other *CapabilityStatementSecurity) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Cors.Equals(other.Cors) { return false }
+	if !compareSlices(m.Service, other.Service) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	return true
+}
+
 // CapabilityStatementResource
 // A specification of the restful capabilities of the solution for a specific resource type.
 type CapabilityStatementResource struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// A type of resource exposed via the restful interface.
-	Type_ FhirCode `json:"type,omitempty"`
-	// profile
-	// A specification of the profile that describes the solution's overall support for the resource, including any constraints on cardinality, bindings, lengths or other limitations. See further discussion in [Using Profiles](profiling.html#profile-uses).
-	Profile FhirCanonical `json:"profile,omitempty"`
-	// supportedProfile
-	// A list of profiles that represent different use cases supported by the system. For a server, "supported by the system" means the system hosts/produces a set of resources that are conformant to a particular profile, and allows clients that use its services to search using this profile and to find appropriate data. For a client, it means the system will search by this profile and process data according to the guidance implicit in the profile. See further discussion in [Using Profiles](profiling.html#profile-uses).
-	SupportedProfile []FhirCanonical `json:"supportedProfile,omitempty"`
-	// documentation
-	// Additional information about the resource type used by the system.
-	Documentation FhirMarkdown `json:"documentation,omitempty"`
-	// interaction
-	// Identifies a restful operation supported by the solution.
-	Interaction []CapabilityStatementInteraction `json:"interaction,omitempty"`
-	// versioning
-	// This field is set to no-version to specify that the system does not support (server) or use (client) versioning for this resource type. If this has some other value, the server must at least correctly track and populate the versionId meta-property on resources. If the value is 'versioned-update', then the server supports all the versioning features, including using e-tags for version integrity in the API.
-	Versioning ResourceVersionPolicy `json:"versioning,omitempty"`
-	// readHistory
-	// A flag for whether the server is able to return past versions as part of the vRead operation.
-	ReadHistory FhirBoolean `json:"readHistory,omitempty"`
-	// updateCreate
-	// A flag to indicate that the server allows or needs to allow the client to create new identities on the server (that is, the client PUTs to a location where there is no existing resource). Allowing this operation means that the server allows the client to create new identities on the server.
-	UpdateCreate FhirBoolean `json:"updateCreate,omitempty"`
-	// conditionalCreate
-	// A flag that indicates that the server supports conditional create.
-	ConditionalCreate FhirBoolean `json:"conditionalCreate,omitempty"`
-	// conditionalRead
-	// A code that indicates how the server supports conditional read.
-	ConditionalRead ConditionalReadStatus `json:"conditionalRead,omitempty"`
-	// conditionalUpdate
-	// A flag that indicates that the server supports conditional update.
-	ConditionalUpdate FhirBoolean `json:"conditionalUpdate,omitempty"`
-	// conditionalDelete
-	// A code that indicates how the server supports conditional delete.
-	ConditionalDelete ConditionalDeleteStatus `json:"conditionalDelete,omitempty"`
-	// referencePolicy
-	// A set of flags that defines how references are supported.
-	ReferencePolicy []ReferenceHandlingPolicy `json:"referencePolicy,omitempty"`
-	// searchInclude
-	// A list of _include values supported by the server.
-	SearchInclude []FhirString `json:"searchInclude,omitempty"`
-	// searchRevInclude
-	// A list of _revinclude (reverse include) values supported by the server.
-	SearchRevInclude []FhirString `json:"searchRevInclude,omitempty"`
-	// searchParam
-	// Search parameters for implementations to support and/or make use of - either references to ones defined in the specification, or additional ones defined for/by the implementation.
-	SearchParam []CapabilityStatementSearchParam `json:"searchParam,omitempty"`
-	// operation
-	// Definition of an operation or a named query together with its parameters and their meaning and type. Consult the definition of the operation for details about how to invoke the operation, and the parameters.
-	Operation []CapabilityStatementOperation `json:"operation,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *FhirCode `json:"type,omitempty"`
+	Profile *FhirCanonical `json:"profile,omitempty"`
+	SupportedProfile []*FhirCanonical `json:"supportedprofile,omitempty"`
+	Documentation *FhirMarkdown `json:"documentation,omitempty"`
+	Interaction []*CapabilityStatementInteraction `json:"interaction,omitempty"`
+	Versioning *ResourceVersionPolicy `json:"versioning,omitempty"`
+	ReadHistory *FhirBoolean `json:"readhistory,omitempty"`
+	UpdateCreate *FhirBoolean `json:"updatecreate,omitempty"`
+	ConditionalCreate *FhirBoolean `json:"conditionalcreate,omitempty"`
+	ConditionalRead *ConditionalReadStatus `json:"conditionalread,omitempty"`
+	ConditionalUpdate *FhirBoolean `json:"conditionalupdate,omitempty"`
+	ConditionalDelete *ConditionalDeleteStatus `json:"conditionaldelete,omitempty"`
+	ReferencePolicy []*ReferenceHandlingPolicy `json:"referencepolicy,omitempty"`
+	SearchInclude []*FhirString `json:"searchinclude,omitempty"`
+	SearchRevInclude []*FhirString `json:"searchrevinclude,omitempty"`
+	SearchParam []*CapabilityStatementSearchParam `json:"searchparam,omitempty"`
+	Operation []*CapabilityStatementOperation `json:"operation,omitempty"`
 }
 
 // NewCapabilityStatementResource creates a new CapabilityStatementResource instance
-func NewCapabilityStatementResource(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ FhirCode,
-	profile FhirCanonical,
-	supportedProfile []FhirCanonical,
-	documentation FhirMarkdown,
-	interaction []CapabilityStatementInteraction,
-	versioning ResourceVersionPolicy,
-	readHistory FhirBoolean,
-	updateCreate FhirBoolean,
-	conditionalCreate FhirBoolean,
-	conditionalRead ConditionalReadStatus,
-	conditionalUpdate FhirBoolean,
-	conditionalDelete ConditionalDeleteStatus,
-	referencePolicy []ReferenceHandlingPolicy,
-	searchInclude []FhirString,
-	searchRevInclude []FhirString,
-	searchParam []CapabilityStatementSearchParam,
-	operation []CapabilityStatementOperation,
-) *CapabilityStatementResource {
-	return &CapabilityStatementResource{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Profile: profile,
-		SupportedProfile: supportedProfile,
-		Documentation: documentation,
-		Interaction: interaction,
-		Versioning: versioning,
-		ReadHistory: readHistory,
-		UpdateCreate: updateCreate,
-		ConditionalCreate: conditionalCreate,
-		ConditionalRead: conditionalRead,
-		ConditionalUpdate: conditionalUpdate,
-		ConditionalDelete: conditionalDelete,
-		ReferencePolicy: referencePolicy,
-		SearchInclude: searchInclude,
-		SearchRevInclude: searchRevInclude,
-		SearchParam: searchParam,
-		Operation: operation,
-	}
+func NewCapabilityStatementResource() *CapabilityStatementResource {
+	return &CapabilityStatementResource{}
 }
+
 // FromJSON populates CapabilityStatementResource from JSON data
 func (m *CapabilityStatementResource) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -911,151 +410,76 @@ func (m *CapabilityStatementResource) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CapabilityStatementResource
-func (m *CapabilityStatementResource) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *FhirCode,
-	profile *FhirCanonical,
-	supportedProfile *[]FhirCanonical,
-	documentation *FhirMarkdown,
-	interaction *[]CapabilityStatementInteraction,
-	versioning *ResourceVersionPolicy,
-	readHistory *FhirBoolean,
-	updateCreate *FhirBoolean,
-	conditionalCreate *FhirBoolean,
-	conditionalRead *ConditionalReadStatus,
-	conditionalUpdate *FhirBoolean,
-	conditionalDelete *ConditionalDeleteStatus,
-	referencePolicy *[]ReferenceHandlingPolicy,
-	searchInclude *[]FhirString,
-	searchRevInclude *[]FhirString,
-	searchParam *[]CapabilityStatementSearchParam,
-	operation *[]CapabilityStatementOperation,
-) *CapabilityStatementResource {
+// Clone creates a deep copy of CapabilityStatementResource
+func (m *CapabilityStatementResource) Clone() *CapabilityStatementResource {
+	if m == nil { return nil }
 	return &CapabilityStatementResource{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() FhirCode {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Profile: func() FhirCanonical {
-			if profile != nil { return *profile }
-			return m.Profile
-		}(),
-		SupportedProfile: func() []FhirCanonical {
-			if supportedProfile != nil { return *supportedProfile }
-			return m.SupportedProfile
-		}(),
-		Documentation: func() FhirMarkdown {
-			if documentation != nil { return *documentation }
-			return m.Documentation
-		}(),
-		Interaction: func() []CapabilityStatementInteraction {
-			if interaction != nil { return *interaction }
-			return m.Interaction
-		}(),
-		Versioning: func() ResourceVersionPolicy {
-			if versioning != nil { return *versioning }
-			return m.Versioning
-		}(),
-		ReadHistory: func() FhirBoolean {
-			if readHistory != nil { return *readHistory }
-			return m.ReadHistory
-		}(),
-		UpdateCreate: func() FhirBoolean {
-			if updateCreate != nil { return *updateCreate }
-			return m.UpdateCreate
-		}(),
-		ConditionalCreate: func() FhirBoolean {
-			if conditionalCreate != nil { return *conditionalCreate }
-			return m.ConditionalCreate
-		}(),
-		ConditionalRead: func() ConditionalReadStatus {
-			if conditionalRead != nil { return *conditionalRead }
-			return m.ConditionalRead
-		}(),
-		ConditionalUpdate: func() FhirBoolean {
-			if conditionalUpdate != nil { return *conditionalUpdate }
-			return m.ConditionalUpdate
-		}(),
-		ConditionalDelete: func() ConditionalDeleteStatus {
-			if conditionalDelete != nil { return *conditionalDelete }
-			return m.ConditionalDelete
-		}(),
-		ReferencePolicy: func() []ReferenceHandlingPolicy {
-			if referencePolicy != nil { return *referencePolicy }
-			return m.ReferencePolicy
-		}(),
-		SearchInclude: func() []FhirString {
-			if searchInclude != nil { return *searchInclude }
-			return m.SearchInclude
-		}(),
-		SearchRevInclude: func() []FhirString {
-			if searchRevInclude != nil { return *searchRevInclude }
-			return m.SearchRevInclude
-		}(),
-		SearchParam: func() []CapabilityStatementSearchParam {
-			if searchParam != nil { return *searchParam }
-			return m.SearchParam
-		}(),
-		Operation: func() []CapabilityStatementOperation {
-			if operation != nil { return *operation }
-			return m.Operation
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Profile: m.Profile.Clone(),
+		SupportedProfile: cloneSlices(m.SupportedProfile),
+		Documentation: m.Documentation.Clone(),
+		Interaction: cloneSlices(m.Interaction),
+		Versioning: m.Versioning.Clone(),
+		ReadHistory: m.ReadHistory.Clone(),
+		UpdateCreate: m.UpdateCreate.Clone(),
+		ConditionalCreate: m.ConditionalCreate.Clone(),
+		ConditionalRead: m.ConditionalRead.Clone(),
+		ConditionalUpdate: m.ConditionalUpdate.Clone(),
+		ConditionalDelete: m.ConditionalDelete.Clone(),
+		ReferencePolicy: cloneSlices(m.ReferencePolicy),
+		SearchInclude: cloneSlices(m.SearchInclude),
+		SearchRevInclude: cloneSlices(m.SearchRevInclude),
+		SearchParam: cloneSlices(m.SearchParam),
+		Operation: cloneSlices(m.Operation),
 	}
 }
+
+// Equals checks for equality with another CapabilityStatementResource instance
+func (m *CapabilityStatementResource) Equals(other *CapabilityStatementResource) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Profile.Equals(other.Profile) { return false }
+	if !compareSlices(m.SupportedProfile, other.SupportedProfile) { return false }
+	if !m.Documentation.Equals(other.Documentation) { return false }
+	if !compareSlices(m.Interaction, other.Interaction) { return false }
+	if !m.Versioning.Equals(other.Versioning) { return false }
+	if !m.ReadHistory.Equals(other.ReadHistory) { return false }
+	if !m.UpdateCreate.Equals(other.UpdateCreate) { return false }
+	if !m.ConditionalCreate.Equals(other.ConditionalCreate) { return false }
+	if !m.ConditionalRead.Equals(other.ConditionalRead) { return false }
+	if !m.ConditionalUpdate.Equals(other.ConditionalUpdate) { return false }
+	if !m.ConditionalDelete.Equals(other.ConditionalDelete) { return false }
+	if !compareSlices(m.ReferencePolicy, other.ReferencePolicy) { return false }
+	if !compareSlices(m.SearchInclude, other.SearchInclude) { return false }
+	if !compareSlices(m.SearchRevInclude, other.SearchRevInclude) { return false }
+	if !compareSlices(m.SearchParam, other.SearchParam) { return false }
+	if !compareSlices(m.Operation, other.Operation) { return false }
+	return true
+}
+
 // CapabilityStatementInteraction
 // Identifies a restful operation supported by the solution.
 type CapabilityStatementInteraction struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// Coded identifier of the operation, supported by the system resource.
-	Code TypeRestfulInteraction `json:"code,omitempty"`
-	// documentation
-	// Guidance specific to the implementation of this operation, such as 'delete is a logical delete' or 'updates are only allowed with version id' or 'creates permitted from pre-authorized certificates only'.
-	Documentation FhirMarkdown `json:"documentation,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *TypeRestfulInteraction `json:"code,omitempty"`
+	Documentation *FhirMarkdown `json:"documentation,omitempty"`
 }
 
 // NewCapabilityStatementInteraction creates a new CapabilityStatementInteraction instance
-func NewCapabilityStatementInteraction(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code TypeRestfulInteraction,
-	documentation FhirMarkdown,
-) *CapabilityStatementInteraction {
-	return &CapabilityStatementInteraction{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		Documentation: documentation,
-	}
+func NewCapabilityStatementInteraction() *CapabilityStatementInteraction {
+	return &CapabilityStatementInteraction{}
 }
+
 // FromJSON populates CapabilityStatementInteraction from JSON data
 func (m *CapabilityStatementInteraction) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1066,86 +490,48 @@ func (m *CapabilityStatementInteraction) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CapabilityStatementInteraction
-func (m *CapabilityStatementInteraction) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *TypeRestfulInteraction,
-	documentation *FhirMarkdown,
-) *CapabilityStatementInteraction {
+// Clone creates a deep copy of CapabilityStatementInteraction
+func (m *CapabilityStatementInteraction) Clone() *CapabilityStatementInteraction {
+	if m == nil { return nil }
 	return &CapabilityStatementInteraction{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() TypeRestfulInteraction {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Documentation: func() FhirMarkdown {
-			if documentation != nil { return *documentation }
-			return m.Documentation
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		Documentation: m.Documentation.Clone(),
 	}
 }
+
+// Equals checks for equality with another CapabilityStatementInteraction instance
+func (m *CapabilityStatementInteraction) Equals(other *CapabilityStatementInteraction) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Documentation.Equals(other.Documentation) { return false }
+	return true
+}
+
 // CapabilityStatementSearchParam
 // Search parameters for implementations to support and/or make use of - either references to ones defined in the specification, or additional ones defined for/by the implementation.
 type CapabilityStatementSearchParam struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// name
-	// The name of the search parameter used in the interface.
-	Name FhirString `json:"name,omitempty"`
-	// definition
-	// An absolute URI that is a formal reference to where this parameter was first defined, so that a client can be confident of the meaning of the search parameter (a reference to [SearchParameter.url](searchparameter-definitions.html#SearchParameter.url)). This element SHALL be populated if the search parameter refers to a SearchParameter defined by the FHIR core specification or externally defined IGs.
-	Definition FhirCanonical `json:"definition,omitempty"`
-	// type
-	// The type of value a search parameter refers to, and how the content is interpreted.
-	Type_ SearchParamType `json:"type,omitempty"`
-	// documentation
-	// This allows documentation of any distinct behaviors about how the search parameter is used.  For example, text matching algorithms.
-	Documentation FhirMarkdown `json:"documentation,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Definition *FhirCanonical `json:"definition,omitempty"`
+	Type *SearchParamType `json:"type,omitempty"`
+	Documentation *FhirMarkdown `json:"documentation,omitempty"`
 }
 
 // NewCapabilityStatementSearchParam creates a new CapabilityStatementSearchParam instance
-func NewCapabilityStatementSearchParam(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	name FhirString,
-	definition FhirCanonical,
-	type_ SearchParamType,
-	documentation FhirMarkdown,
-) *CapabilityStatementSearchParam {
-	return &CapabilityStatementSearchParam{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Name: name,
-		Definition: definition,
-		Type_: type_,
-		Documentation: documentation,
-	}
+func NewCapabilityStatementSearchParam() *CapabilityStatementSearchParam {
+	return &CapabilityStatementSearchParam{}
 }
+
 // FromJSON populates CapabilityStatementSearchParam from JSON data
 func (m *CapabilityStatementSearchParam) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1156,91 +542,51 @@ func (m *CapabilityStatementSearchParam) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CapabilityStatementSearchParam
-func (m *CapabilityStatementSearchParam) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	name *FhirString,
-	definition *FhirCanonical,
-	type_ *SearchParamType,
-	documentation *FhirMarkdown,
-) *CapabilityStatementSearchParam {
+// Clone creates a deep copy of CapabilityStatementSearchParam
+func (m *CapabilityStatementSearchParam) Clone() *CapabilityStatementSearchParam {
+	if m == nil { return nil }
 	return &CapabilityStatementSearchParam{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Definition: func() FhirCanonical {
-			if definition != nil { return *definition }
-			return m.Definition
-		}(),
-		Type_: func() SearchParamType {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Documentation: func() FhirMarkdown {
-			if documentation != nil { return *documentation }
-			return m.Documentation
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Name: m.Name.Clone(),
+		Definition: m.Definition.Clone(),
+		Type: m.Type.Clone(),
+		Documentation: m.Documentation.Clone(),
 	}
 }
+
+// Equals checks for equality with another CapabilityStatementSearchParam instance
+func (m *CapabilityStatementSearchParam) Equals(other *CapabilityStatementSearchParam) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Definition.Equals(other.Definition) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Documentation.Equals(other.Documentation) { return false }
+	return true
+}
+
 // CapabilityStatementOperation
 // Definition of an operation or a named query together with its parameters and their meaning and type. Consult the definition of the operation for details about how to invoke the operation, and the parameters.
 type CapabilityStatementOperation struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// name
-	// The name of the operation or query. For an operation, this is the name  prefixed with $ and used in the URL. For a query, this is the name used in the _query parameter when the query is called.
-	Name FhirString `json:"name,omitempty"`
-	// definition
-	// Where the formal definition can be found. If a server references the base definition of an Operation (i.e. from the specification itself such as ```http://hl7.org/fhir/OperationDefinition/ValueSet-expand```), that means it supports the full capabilities of the operation - e.g. both GET and POST invocation.  If it only supports a subset, it must define its own custom [OperationDefinition](operationdefinition.html#) with a 'base' of the original OperationDefinition.  The custom definition would describe the specific subset of functionality supported.
-	Definition FhirCanonical `json:"definition,omitempty"`
-	// documentation
-	// Documentation that describes anything special about the operation behavior, possibly detailing different behavior for system, type and instance-level invocation of the operation.
-	Documentation FhirMarkdown `json:"documentation,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Definition *FhirCanonical `json:"definition,omitempty"`
+	Documentation *FhirMarkdown `json:"documentation,omitempty"`
 }
 
 // NewCapabilityStatementOperation creates a new CapabilityStatementOperation instance
-func NewCapabilityStatementOperation(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	name FhirString,
-	definition FhirCanonical,
-	documentation FhirMarkdown,
-) *CapabilityStatementOperation {
-	return &CapabilityStatementOperation{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Name: name,
-		Definition: definition,
-		Documentation: documentation,
-	}
+func NewCapabilityStatementOperation() *CapabilityStatementOperation {
+	return &CapabilityStatementOperation{}
 }
+
 // FromJSON populates CapabilityStatementOperation from JSON data
 func (m *CapabilityStatementOperation) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1251,81 +597,48 @@ func (m *CapabilityStatementOperation) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CapabilityStatementOperation
-func (m *CapabilityStatementOperation) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	name *FhirString,
-	definition *FhirCanonical,
-	documentation *FhirMarkdown,
-) *CapabilityStatementOperation {
+// Clone creates a deep copy of CapabilityStatementOperation
+func (m *CapabilityStatementOperation) Clone() *CapabilityStatementOperation {
+	if m == nil { return nil }
 	return &CapabilityStatementOperation{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Definition: func() FhirCanonical {
-			if definition != nil { return *definition }
-			return m.Definition
-		}(),
-		Documentation: func() FhirMarkdown {
-			if documentation != nil { return *documentation }
-			return m.Documentation
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Name: m.Name.Clone(),
+		Definition: m.Definition.Clone(),
+		Documentation: m.Documentation.Clone(),
 	}
 }
+
+// Equals checks for equality with another CapabilityStatementOperation instance
+func (m *CapabilityStatementOperation) Equals(other *CapabilityStatementOperation) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Definition.Equals(other.Definition) { return false }
+	if !m.Documentation.Equals(other.Documentation) { return false }
+	return true
+}
+
 // CapabilityStatementInteraction1
 // A specification of restful operations supported by the system.
 type CapabilityStatementInteraction1 struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// A coded identifier of the operation, supported by the system.
-	Code SystemRestfulInteraction `json:"code,omitempty"`
-	// documentation
-	// Guidance specific to the implementation of this operation, such as limitations on the kind of transactions allowed, or information about system wide search is implemented.
-	Documentation FhirMarkdown `json:"documentation,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *SystemRestfulInteraction `json:"code,omitempty"`
+	Documentation *FhirMarkdown `json:"documentation,omitempty"`
 }
 
 // NewCapabilityStatementInteraction1 creates a new CapabilityStatementInteraction1 instance
-func NewCapabilityStatementInteraction1(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code SystemRestfulInteraction,
-	documentation FhirMarkdown,
-) *CapabilityStatementInteraction1 {
-	return &CapabilityStatementInteraction1{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		Documentation: documentation,
-	}
+func NewCapabilityStatementInteraction1() *CapabilityStatementInteraction1 {
+	return &CapabilityStatementInteraction1{}
 }
+
 // FromJSON populates CapabilityStatementInteraction1 from JSON data
 func (m *CapabilityStatementInteraction1) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1336,86 +649,48 @@ func (m *CapabilityStatementInteraction1) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CapabilityStatementInteraction1
-func (m *CapabilityStatementInteraction1) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *SystemRestfulInteraction,
-	documentation *FhirMarkdown,
-) *CapabilityStatementInteraction1 {
+// Clone creates a deep copy of CapabilityStatementInteraction1
+func (m *CapabilityStatementInteraction1) Clone() *CapabilityStatementInteraction1 {
+	if m == nil { return nil }
 	return &CapabilityStatementInteraction1{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() SystemRestfulInteraction {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Documentation: func() FhirMarkdown {
-			if documentation != nil { return *documentation }
-			return m.Documentation
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		Documentation: m.Documentation.Clone(),
 	}
 }
+
+// Equals checks for equality with another CapabilityStatementInteraction1 instance
+func (m *CapabilityStatementInteraction1) Equals(other *CapabilityStatementInteraction1) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Documentation.Equals(other.Documentation) { return false }
+	return true
+}
+
 // CapabilityStatementMessaging
 // A description of the messaging capabilities of the solution.
 type CapabilityStatementMessaging struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// endpoint
-	// An endpoint (network accessible address) to which messages and/or replies are to be sent.
-	Endpoint []CapabilityStatementEndpoint `json:"endpoint,omitempty"`
-	// reliableCache
-	// Length if the receiver's reliable messaging cache in minutes (if a receiver) or how long the cache length on the receiver should be (if a sender).
-	ReliableCache FhirUnsignedInt `json:"reliableCache,omitempty"`
-	// documentation
-	// Documentation about the system's messaging capabilities for this endpoint not otherwise documented by the capability statement.  For example, the process for becoming an authorized messaging exchange partner.
-	Documentation FhirMarkdown `json:"documentation,omitempty"`
-	// supportedMessage
-	// References to message definitions for messages this system can send or receive.
-	SupportedMessage []CapabilityStatementSupportedMessage `json:"supportedMessage,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Endpoint []*CapabilityStatementEndpoint `json:"endpoint,omitempty"`
+	ReliableCache *FhirUnsignedInt `json:"reliablecache,omitempty"`
+	Documentation *FhirMarkdown `json:"documentation,omitempty"`
+	SupportedMessage []*CapabilityStatementSupportedMessage `json:"supportedmessage,omitempty"`
 }
 
 // NewCapabilityStatementMessaging creates a new CapabilityStatementMessaging instance
-func NewCapabilityStatementMessaging(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	endpoint []CapabilityStatementEndpoint,
-	reliableCache FhirUnsignedInt,
-	documentation FhirMarkdown,
-	supportedMessage []CapabilityStatementSupportedMessage,
-) *CapabilityStatementMessaging {
-	return &CapabilityStatementMessaging{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Endpoint: endpoint,
-		ReliableCache: reliableCache,
-		Documentation: documentation,
-		SupportedMessage: supportedMessage,
-	}
+func NewCapabilityStatementMessaging() *CapabilityStatementMessaging {
+	return &CapabilityStatementMessaging{}
 }
+
 // FromJSON populates CapabilityStatementMessaging from JSON data
 func (m *CapabilityStatementMessaging) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1426,86 +701,50 @@ func (m *CapabilityStatementMessaging) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CapabilityStatementMessaging
-func (m *CapabilityStatementMessaging) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	endpoint *[]CapabilityStatementEndpoint,
-	reliableCache *FhirUnsignedInt,
-	documentation *FhirMarkdown,
-	supportedMessage *[]CapabilityStatementSupportedMessage,
-) *CapabilityStatementMessaging {
+// Clone creates a deep copy of CapabilityStatementMessaging
+func (m *CapabilityStatementMessaging) Clone() *CapabilityStatementMessaging {
+	if m == nil { return nil }
 	return &CapabilityStatementMessaging{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Endpoint: func() []CapabilityStatementEndpoint {
-			if endpoint != nil { return *endpoint }
-			return m.Endpoint
-		}(),
-		ReliableCache: func() FhirUnsignedInt {
-			if reliableCache != nil { return *reliableCache }
-			return m.ReliableCache
-		}(),
-		Documentation: func() FhirMarkdown {
-			if documentation != nil { return *documentation }
-			return m.Documentation
-		}(),
-		SupportedMessage: func() []CapabilityStatementSupportedMessage {
-			if supportedMessage != nil { return *supportedMessage }
-			return m.SupportedMessage
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Endpoint: cloneSlices(m.Endpoint),
+		ReliableCache: m.ReliableCache.Clone(),
+		Documentation: m.Documentation.Clone(),
+		SupportedMessage: cloneSlices(m.SupportedMessage),
 	}
 }
+
+// Equals checks for equality with another CapabilityStatementMessaging instance
+func (m *CapabilityStatementMessaging) Equals(other *CapabilityStatementMessaging) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Endpoint, other.Endpoint) { return false }
+	if !m.ReliableCache.Equals(other.ReliableCache) { return false }
+	if !m.Documentation.Equals(other.Documentation) { return false }
+	if !compareSlices(m.SupportedMessage, other.SupportedMessage) { return false }
+	return true
+}
+
 // CapabilityStatementEndpoint
 // An endpoint (network accessible address) to which messages and/or replies are to be sent.
 type CapabilityStatementEndpoint struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// protocol
-	// A list of the messaging transport protocol(s) identifiers, supported by this endpoint.
-	Protocol Coding `json:"protocol,omitempty"`
-	// address
-	// The network address of the endpoint. For solutions that do not use network addresses for routing, it can be just an identifier.
-	Address FhirUrl `json:"address,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Protocol *Coding `json:"protocol,omitempty"`
+	Address *FhirUrl `json:"address,omitempty"`
 }
 
 // NewCapabilityStatementEndpoint creates a new CapabilityStatementEndpoint instance
-func NewCapabilityStatementEndpoint(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	protocol Coding,
-	address FhirUrl,
-) *CapabilityStatementEndpoint {
-	return &CapabilityStatementEndpoint{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Protocol: protocol,
-		Address: address,
-	}
+func NewCapabilityStatementEndpoint() *CapabilityStatementEndpoint {
+	return &CapabilityStatementEndpoint{}
 }
+
 // FromJSON populates CapabilityStatementEndpoint from JSON data
 func (m *CapabilityStatementEndpoint) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1516,76 +755,46 @@ func (m *CapabilityStatementEndpoint) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CapabilityStatementEndpoint
-func (m *CapabilityStatementEndpoint) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	protocol *Coding,
-	address *FhirUrl,
-) *CapabilityStatementEndpoint {
+// Clone creates a deep copy of CapabilityStatementEndpoint
+func (m *CapabilityStatementEndpoint) Clone() *CapabilityStatementEndpoint {
+	if m == nil { return nil }
 	return &CapabilityStatementEndpoint{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Protocol: func() Coding {
-			if protocol != nil { return *protocol }
-			return m.Protocol
-		}(),
-		Address: func() FhirUrl {
-			if address != nil { return *address }
-			return m.Address
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Protocol: m.Protocol.Clone(),
+		Address: m.Address.Clone(),
 	}
 }
+
+// Equals checks for equality with another CapabilityStatementEndpoint instance
+func (m *CapabilityStatementEndpoint) Equals(other *CapabilityStatementEndpoint) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Protocol.Equals(other.Protocol) { return false }
+	if !m.Address.Equals(other.Address) { return false }
+	return true
+}
+
 // CapabilityStatementSupportedMessage
 // References to message definitions for messages this system can send or receive.
 type CapabilityStatementSupportedMessage struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// mode
-	// The mode of this event declaration - whether application is sender or receiver.
-	Mode EventCapabilityMode `json:"mode,omitempty"`
-	// definition
-	// Points to a message definition that identifies the messaging event, message structure, allowed responses, etc.
-	Definition FhirCanonical `json:"definition,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Mode *EventCapabilityMode `json:"mode,omitempty"`
+	Definition *FhirCanonical `json:"definition,omitempty"`
 }
 
 // NewCapabilityStatementSupportedMessage creates a new CapabilityStatementSupportedMessage instance
-func NewCapabilityStatementSupportedMessage(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	mode EventCapabilityMode,
-	definition FhirCanonical,
-) *CapabilityStatementSupportedMessage {
-	return &CapabilityStatementSupportedMessage{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Mode: mode,
-		Definition: definition,
-	}
+func NewCapabilityStatementSupportedMessage() *CapabilityStatementSupportedMessage {
+	return &CapabilityStatementSupportedMessage{}
 }
+
 // FromJSON populates CapabilityStatementSupportedMessage from JSON data
 func (m *CapabilityStatementSupportedMessage) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1596,81 +805,47 @@ func (m *CapabilityStatementSupportedMessage) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CapabilityStatementSupportedMessage
-func (m *CapabilityStatementSupportedMessage) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	mode *EventCapabilityMode,
-	definition *FhirCanonical,
-) *CapabilityStatementSupportedMessage {
+// Clone creates a deep copy of CapabilityStatementSupportedMessage
+func (m *CapabilityStatementSupportedMessage) Clone() *CapabilityStatementSupportedMessage {
+	if m == nil { return nil }
 	return &CapabilityStatementSupportedMessage{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Mode: func() EventCapabilityMode {
-			if mode != nil { return *mode }
-			return m.Mode
-		}(),
-		Definition: func() FhirCanonical {
-			if definition != nil { return *definition }
-			return m.Definition
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Mode: m.Mode.Clone(),
+		Definition: m.Definition.Clone(),
 	}
 }
+
+// Equals checks for equality with another CapabilityStatementSupportedMessage instance
+func (m *CapabilityStatementSupportedMessage) Equals(other *CapabilityStatementSupportedMessage) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Mode.Equals(other.Mode) { return false }
+	if !m.Definition.Equals(other.Definition) { return false }
+	return true
+}
+
 // CapabilityStatementDocument
 // A document definition.
 type CapabilityStatementDocument struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// mode
-	// Mode of this document declaration - whether an application is a producer or consumer.
-	Mode DocumentMode `json:"mode,omitempty"`
-	// documentation
-	// A description of how the application supports or uses the specified document profile.  For example, when documents are created, what action is taken with consumed documents, etc.
-	Documentation FhirMarkdown `json:"documentation,omitempty"`
-	// profile
-	// A profile on the document Bundle that constrains which resources are present, and their contents.
-	Profile FhirCanonical `json:"profile,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Mode *DocumentMode `json:"mode,omitempty"`
+	Documentation *FhirMarkdown `json:"documentation,omitempty"`
+	Profile *FhirCanonical `json:"profile,omitempty"`
 }
 
 // NewCapabilityStatementDocument creates a new CapabilityStatementDocument instance
-func NewCapabilityStatementDocument(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	mode DocumentMode,
-	documentation FhirMarkdown,
-	profile FhirCanonical,
-) *CapabilityStatementDocument {
-	return &CapabilityStatementDocument{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Mode: mode,
-		Documentation: documentation,
-		Profile: profile,
-	}
+func NewCapabilityStatementDocument() *CapabilityStatementDocument {
+	return &CapabilityStatementDocument{}
 }
+
 // FromJSON populates CapabilityStatementDocument from JSON data
 func (m *CapabilityStatementDocument) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1681,39 +856,29 @@ func (m *CapabilityStatementDocument) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CapabilityStatementDocument
-func (m *CapabilityStatementDocument) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	mode *DocumentMode,
-	documentation *FhirMarkdown,
-	profile *FhirCanonical,
-) *CapabilityStatementDocument {
+// Clone creates a deep copy of CapabilityStatementDocument
+func (m *CapabilityStatementDocument) Clone() *CapabilityStatementDocument {
+	if m == nil { return nil }
 	return &CapabilityStatementDocument{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Mode: func() DocumentMode {
-			if mode != nil { return *mode }
-			return m.Mode
-		}(),
-		Documentation: func() FhirMarkdown {
-			if documentation != nil { return *documentation }
-			return m.Documentation
-		}(),
-		Profile: func() FhirCanonical {
-			if profile != nil { return *profile }
-			return m.Profile
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Mode: m.Mode.Clone(),
+		Documentation: m.Documentation.Clone(),
+		Profile: m.Profile.Clone(),
 	}
 }
+
+// Equals checks for equality with another CapabilityStatementDocument instance
+func (m *CapabilityStatementDocument) Equals(other *CapabilityStatementDocument) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Mode.Equals(other.Mode) { return false }
+	if !m.Documentation.Equals(other.Documentation) { return false }
+	if !m.Profile.Equals(other.Profile) { return false }
+	return true
+}
+

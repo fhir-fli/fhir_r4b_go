@@ -3,154 +3,45 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // ValueSet
 // A ValueSet resource instance specifies a set of codes drawn from one or more code systems, intended for use in a particular context. Value sets link between [CodeSystem](codesystem.html) definitions and their use in [coded elements](terminologies.html).
 type ValueSet struct {
 	CanonicalResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// url
-	// An absolute URI that is used to identify this value set when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this value set is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the value set is stored on different servers.
-	Url FhirUri `json:"url,omitempty"`
-	// identifier
-	// A formal identifier that is used to identify this value set when it is represented in other formats, or referenced in a specification, model, design or an instance.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// version
-	// The identifier that is used to identify this version of the value set when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the value set author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.
-	Version FhirString `json:"version,omitempty"`
-	// name
-	// A natural language name identifying the value set. This name should be usable as an identifier for the module by machine processing applications such as code generation.
-	Name FhirString `json:"name,omitempty"`
-	// title
-	// A short, descriptive, user-friendly title for the value set.
-	Title FhirString `json:"title,omitempty"`
-	// status
-	// The status of this value set. Enables tracking the life-cycle of the content. The status of the value set applies to the value set definition (ValueSet.compose) and the associated ValueSet metadata. Expansions do not have a state.
-	Status PublicationStatus `json:"status,omitempty"`
-	// experimental
-	// A Boolean value to indicate that this value set is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.
-	Experimental FhirBoolean `json:"experimental,omitempty"`
-	// date
-	// The date (and optionally time) when the value set was created or revised (e.g. the 'content logical definition').
-	Date FhirDateTime `json:"date,omitempty"`
-	// publisher
-	// The name of the organization or individual that published the value set.
-	Publisher FhirString `json:"publisher,omitempty"`
-	// contact
-	// Contact details to assist a user in finding and communicating with the publisher.
-	Contact []ContactDetail `json:"contact,omitempty"`
-	// description
-	// A free text natural language description of the value set from a consumer's perspective. The textual description specifies the span of meanings for concepts to be included within the Value Set Expansion, and also may specify the intended use and limitations of the Value Set.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// useContext
-	// The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate value set instances.
-	UseContext []UsageContext `json:"useContext,omitempty"`
-	// jurisdiction
-	// A legal or geographic region in which the value set is intended to be used.
-	Jurisdiction []CodeableConcept `json:"jurisdiction,omitempty"`
-	// immutable
-	// If this is set to 'true', then no new versions of the content logical definition can be created.  Note: Other metadata might still change.
-	Immutable FhirBoolean `json:"immutable,omitempty"`
-	// purpose
-	// Explanation of why this value set is needed and why it has been designed as it has.
-	Purpose FhirMarkdown `json:"purpose,omitempty"`
-	// copyright
-	// A copyright statement relating to the value set and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the value set.
-	Copyright FhirMarkdown `json:"copyright,omitempty"`
-	// compose
-	// A set of criteria that define the contents of the value set by including or excluding codes selected from the specified code system(s) that the value set draws from. This is also known as the Content Logical Definition (CLD).
-	Compose ValueSetCompose `json:"compose,omitempty"`
-	// expansion
-	// A value set can also be "expanded", where the value set is turned into a simple collection of enumerated codes. This element holds the expansion, if it has been performed.
-	Expansion ValueSetExpansion `json:"expansion,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Url *FhirUri `json:"url,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Title *FhirString `json:"title,omitempty"`
+	Status *PublicationStatus `json:"status,omitempty"`
+	Experimental *FhirBoolean `json:"experimental,omitempty"`
+	Date *FhirDateTime `json:"date,omitempty"`
+	Publisher *FhirString `json:"publisher,omitempty"`
+	Contact []*ContactDetail `json:"contact,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	UseContext []*UsageContext `json:"usecontext,omitempty"`
+	Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+	Immutable *FhirBoolean `json:"immutable,omitempty"`
+	Purpose *FhirMarkdown `json:"purpose,omitempty"`
+	Copyright *FhirMarkdown `json:"copyright,omitempty"`
+	Compose *ValueSetCompose `json:"compose,omitempty"`
+	Expansion *ValueSetExpansion `json:"expansion,omitempty"`
 }
 
 // NewValueSet creates a new ValueSet instance
-func NewValueSet(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	url FhirUri,
-	identifier []Identifier,
-	version FhirString,
-	name FhirString,
-	title FhirString,
-	status PublicationStatus,
-	experimental FhirBoolean,
-	date FhirDateTime,
-	publisher FhirString,
-	contact []ContactDetail,
-	description FhirMarkdown,
-	useContext []UsageContext,
-	jurisdiction []CodeableConcept,
-	immutable FhirBoolean,
-	purpose FhirMarkdown,
-	copyright FhirMarkdown,
-	compose ValueSetCompose,
-	expansion ValueSetExpansion,
-) *ValueSet {
-	return &ValueSet{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Url: url,
-		Identifier: identifier,
-		Version: version,
-		Name: name,
-		Title: title,
-		Status: status,
-		Experimental: experimental,
-		Date: date,
-		Publisher: publisher,
-		Contact: contact,
-		Description: description,
-		UseContext: useContext,
-		Jurisdiction: jurisdiction,
-		Immutable: immutable,
-		Purpose: purpose,
-		Copyright: copyright,
-		Compose: compose,
-		Expansion: expansion,
-	}
+func NewValueSet() *ValueSet {
+	return &ValueSet{}
 }
+
 // FromJSON populates ValueSet from JSON data
 func (m *ValueSet) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -161,191 +52,90 @@ func (m *ValueSet) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ValueSet
-func (m *ValueSet) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	url *FhirUri,
-	identifier *[]Identifier,
-	version *FhirString,
-	name *FhirString,
-	title *FhirString,
-	status *PublicationStatus,
-	experimental *FhirBoolean,
-	date *FhirDateTime,
-	publisher *FhirString,
-	contact *[]ContactDetail,
-	description *FhirMarkdown,
-	useContext *[]UsageContext,
-	jurisdiction *[]CodeableConcept,
-	immutable *FhirBoolean,
-	purpose *FhirMarkdown,
-	copyright *FhirMarkdown,
-	compose *ValueSetCompose,
-	expansion *ValueSetExpansion,
-) *ValueSet {
+// Clone creates a deep copy of ValueSet
+func (m *ValueSet) Clone() *ValueSet {
+	if m == nil { return nil }
 	return &ValueSet{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Url: func() FhirUri {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Title: func() FhirString {
-			if title != nil { return *title }
-			return m.Title
-		}(),
-		Status: func() PublicationStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Experimental: func() FhirBoolean {
-			if experimental != nil { return *experimental }
-			return m.Experimental
-		}(),
-		Date: func() FhirDateTime {
-			if date != nil { return *date }
-			return m.Date
-		}(),
-		Publisher: func() FhirString {
-			if publisher != nil { return *publisher }
-			return m.Publisher
-		}(),
-		Contact: func() []ContactDetail {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		UseContext: func() []UsageContext {
-			if useContext != nil { return *useContext }
-			return m.UseContext
-		}(),
-		Jurisdiction: func() []CodeableConcept {
-			if jurisdiction != nil { return *jurisdiction }
-			return m.Jurisdiction
-		}(),
-		Immutable: func() FhirBoolean {
-			if immutable != nil { return *immutable }
-			return m.Immutable
-		}(),
-		Purpose: func() FhirMarkdown {
-			if purpose != nil { return *purpose }
-			return m.Purpose
-		}(),
-		Copyright: func() FhirMarkdown {
-			if copyright != nil { return *copyright }
-			return m.Copyright
-		}(),
-		Compose: func() ValueSetCompose {
-			if compose != nil { return *compose }
-			return m.Compose
-		}(),
-		Expansion: func() ValueSetExpansion {
-			if expansion != nil { return *expansion }
-			return m.Expansion
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Url: m.Url.Clone(),
+		Identifier: cloneSlices(m.Identifier),
+		Version: m.Version.Clone(),
+		Name: m.Name.Clone(),
+		Title: m.Title.Clone(),
+		Status: m.Status.Clone(),
+		Experimental: m.Experimental.Clone(),
+		Date: m.Date.Clone(),
+		Publisher: m.Publisher.Clone(),
+		Contact: cloneSlices(m.Contact),
+		Description: m.Description.Clone(),
+		UseContext: cloneSlices(m.UseContext),
+		Jurisdiction: cloneSlices(m.Jurisdiction),
+		Immutable: m.Immutable.Clone(),
+		Purpose: m.Purpose.Clone(),
+		Copyright: m.Copyright.Clone(),
+		Compose: m.Compose.Clone(),
+		Expansion: m.Expansion.Clone(),
 	}
 }
+
+// Equals checks for equality with another ValueSet instance
+func (m *ValueSet) Equals(other *ValueSet) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Title.Equals(other.Title) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Experimental.Equals(other.Experimental) { return false }
+	if !m.Date.Equals(other.Date) { return false }
+	if !m.Publisher.Equals(other.Publisher) { return false }
+	if !compareSlices(m.Contact, other.Contact) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.UseContext, other.UseContext) { return false }
+	if !compareSlices(m.Jurisdiction, other.Jurisdiction) { return false }
+	if !m.Immutable.Equals(other.Immutable) { return false }
+	if !m.Purpose.Equals(other.Purpose) { return false }
+	if !m.Copyright.Equals(other.Copyright) { return false }
+	if !m.Compose.Equals(other.Compose) { return false }
+	if !m.Expansion.Equals(other.Expansion) { return false }
+	return true
+}
+
 // ValueSetCompose
 // A set of criteria that define the contents of the value set by including or excluding codes selected from the specified code system(s) that the value set draws from. This is also known as the Content Logical Definition (CLD).
 type ValueSetCompose struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// lockedDate
-	// The Locked Date is  the effective date that is used to determine the version of all referenced Code Systems and Value Set Definitions included in the compose that are not already tied to a specific version.
-	LockedDate FhirDate `json:"lockedDate,omitempty"`
-	// inactive
-	// Whether inactive codes - codes that are not approved for current use - are in the value set. If inactive = true, inactive codes are to be included in the expansion, if inactive = false, the inactive codes will not be included in the expansion. If absent, the behavior is determined by the implementation, or by the applicable $expand parameters (but generally, inactive codes would be expected to be included).
-	Inactive FhirBoolean `json:"inactive,omitempty"`
-	// include
-	// Include one or more codes from a code system or other value set(s).
-	Include []ValueSetInclude `json:"include,omitempty"`
-	// exclude
-	// Exclude one or more codes from the value set based on code system filters and/or other value sets.
-	Exclude []ValueSetInclude `json:"exclude,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	LockedDate *FhirDate `json:"lockeddate,omitempty"`
+	Inactive *FhirBoolean `json:"inactive,omitempty"`
+	Include []*ValueSetInclude `json:"include,omitempty"`
+	Exclude []*ValueSetInclude `json:"exclude,omitempty"`
 }
 
 // NewValueSetCompose creates a new ValueSetCompose instance
-func NewValueSetCompose(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	lockedDate FhirDate,
-	inactive FhirBoolean,
-	include []ValueSetInclude,
-	exclude []ValueSetInclude,
-) *ValueSetCompose {
-	return &ValueSetCompose{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		LockedDate: lockedDate,
-		Inactive: inactive,
-		Include: include,
-		Exclude: exclude,
-	}
+func NewValueSetCompose() *ValueSetCompose {
+	return &ValueSetCompose{}
 }
+
 // FromJSON populates ValueSetCompose from JSON data
 func (m *ValueSetCompose) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -356,101 +146,53 @@ func (m *ValueSetCompose) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ValueSetCompose
-func (m *ValueSetCompose) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	lockedDate *FhirDate,
-	inactive *FhirBoolean,
-	include *[]ValueSetInclude,
-	exclude *[]ValueSetInclude,
-) *ValueSetCompose {
+// Clone creates a deep copy of ValueSetCompose
+func (m *ValueSetCompose) Clone() *ValueSetCompose {
+	if m == nil { return nil }
 	return &ValueSetCompose{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		LockedDate: func() FhirDate {
-			if lockedDate != nil { return *lockedDate }
-			return m.LockedDate
-		}(),
-		Inactive: func() FhirBoolean {
-			if inactive != nil { return *inactive }
-			return m.Inactive
-		}(),
-		Include: func() []ValueSetInclude {
-			if include != nil { return *include }
-			return m.Include
-		}(),
-		Exclude: func() []ValueSetInclude {
-			if exclude != nil { return *exclude }
-			return m.Exclude
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		LockedDate: m.LockedDate.Clone(),
+		Inactive: m.Inactive.Clone(),
+		Include: cloneSlices(m.Include),
+		Exclude: cloneSlices(m.Exclude),
 	}
 }
+
+// Equals checks for equality with another ValueSetCompose instance
+func (m *ValueSetCompose) Equals(other *ValueSetCompose) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.LockedDate.Equals(other.LockedDate) { return false }
+	if !m.Inactive.Equals(other.Inactive) { return false }
+	if !compareSlices(m.Include, other.Include) { return false }
+	if !compareSlices(m.Exclude, other.Exclude) { return false }
+	return true
+}
+
 // ValueSetInclude
 // Include one or more codes from a code system or other value set(s).
 type ValueSetInclude struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// system
-	// An absolute URI which is the code system from which the selected codes come from.
-	System FhirUri `json:"system,omitempty"`
-	// version
-	// The version of the code system that the codes are selected from, or the special version '*' for all versions.
-	Version FhirString `json:"version,omitempty"`
-	// concept
-	// Specifies a concept to be included or excluded.
-	Concept []ValueSetConcept `json:"concept,omitempty"`
-	// filter
-	// Select concepts by specify a matching criterion based on the properties (including relationships) defined by the system, or on filters defined by the system. If multiple filters are specified, they SHALL all be true.
-	Filter []ValueSetFilter `json:"filter,omitempty"`
-	// valueSet
-	// Selects the concepts found in this value set (based on its value set definition). This is an absolute URI that is a reference to ValueSet.url.  If multiple value sets are specified this includes the union of the contents of all of the referenced value sets.
-	ValueSet []FhirCanonical `json:"valueSet,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	System *FhirUri `json:"system,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
+	Concept []*ValueSetConcept `json:"concept,omitempty"`
+	Filter []*ValueSetFilter `json:"filter,omitempty"`
+	ValueSet []*FhirCanonical `json:"valueset,omitempty"`
 }
 
 // NewValueSetInclude creates a new ValueSetInclude instance
-func NewValueSetInclude(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	system FhirUri,
-	version FhirString,
-	concept []ValueSetConcept,
-	filter []ValueSetFilter,
-	valueSet []FhirCanonical,
-) *ValueSetInclude {
-	return &ValueSetInclude{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		System: system,
-		Version: version,
-		Concept: concept,
-		Filter: filter,
-		ValueSet: valueSet,
-	}
+func NewValueSetInclude() *ValueSetInclude {
+	return &ValueSetInclude{}
 }
+
 // FromJSON populates ValueSetInclude from JSON data
 func (m *ValueSetInclude) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -461,96 +203,53 @@ func (m *ValueSetInclude) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ValueSetInclude
-func (m *ValueSetInclude) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	system *FhirUri,
-	version *FhirString,
-	concept *[]ValueSetConcept,
-	filter *[]ValueSetFilter,
-	valueSet *[]FhirCanonical,
-) *ValueSetInclude {
+// Clone creates a deep copy of ValueSetInclude
+func (m *ValueSetInclude) Clone() *ValueSetInclude {
+	if m == nil { return nil }
 	return &ValueSetInclude{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		System: func() FhirUri {
-			if system != nil { return *system }
-			return m.System
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Concept: func() []ValueSetConcept {
-			if concept != nil { return *concept }
-			return m.Concept
-		}(),
-		Filter: func() []ValueSetFilter {
-			if filter != nil { return *filter }
-			return m.Filter
-		}(),
-		ValueSet: func() []FhirCanonical {
-			if valueSet != nil { return *valueSet }
-			return m.ValueSet
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		System: m.System.Clone(),
+		Version: m.Version.Clone(),
+		Concept: cloneSlices(m.Concept),
+		Filter: cloneSlices(m.Filter),
+		ValueSet: cloneSlices(m.ValueSet),
 	}
 }
+
+// Equals checks for equality with another ValueSetInclude instance
+func (m *ValueSetInclude) Equals(other *ValueSetInclude) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.System.Equals(other.System) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !compareSlices(m.Concept, other.Concept) { return false }
+	if !compareSlices(m.Filter, other.Filter) { return false }
+	if !compareSlices(m.ValueSet, other.ValueSet) { return false }
+	return true
+}
+
 // ValueSetConcept
 // Specifies a concept to be included or excluded.
 type ValueSetConcept struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// Specifies a code for the concept to be included or excluded.
-	Code FhirCode `json:"code,omitempty"`
-	// display
-	// The text to display to the user for this concept in the context of this valueset. If no display is provided, then applications using the value set use the display specified for the code by the system.
-	Display FhirString `json:"display,omitempty"`
-	// designation
-	// Additional representations for this concept when used in this value set - other languages, aliases, specialized purposes, used for particular purposes, etc.
-	Designation []ValueSetDesignation `json:"designation,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *FhirCode `json:"code,omitempty"`
+	Display *FhirString `json:"display,omitempty"`
+	Designation []*ValueSetDesignation `json:"designation,omitempty"`
 }
 
 // NewValueSetConcept creates a new ValueSetConcept instance
-func NewValueSetConcept(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code FhirCode,
-	display FhirString,
-	designation []ValueSetDesignation,
-) *ValueSetConcept {
-	return &ValueSetConcept{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		Display: display,
-		Designation: designation,
-	}
+func NewValueSetConcept() *ValueSetConcept {
+	return &ValueSetConcept{}
 }
+
 // FromJSON populates ValueSetConcept from JSON data
 func (m *ValueSetConcept) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -561,86 +260,49 @@ func (m *ValueSetConcept) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ValueSetConcept
-func (m *ValueSetConcept) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *FhirCode,
-	display *FhirString,
-	designation *[]ValueSetDesignation,
-) *ValueSetConcept {
+// Clone creates a deep copy of ValueSetConcept
+func (m *ValueSetConcept) Clone() *ValueSetConcept {
+	if m == nil { return nil }
 	return &ValueSetConcept{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() FhirCode {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Display: func() FhirString {
-			if display != nil { return *display }
-			return m.Display
-		}(),
-		Designation: func() []ValueSetDesignation {
-			if designation != nil { return *designation }
-			return m.Designation
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		Display: m.Display.Clone(),
+		Designation: cloneSlices(m.Designation),
 	}
 }
+
+// Equals checks for equality with another ValueSetConcept instance
+func (m *ValueSetConcept) Equals(other *ValueSetConcept) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Display.Equals(other.Display) { return false }
+	if !compareSlices(m.Designation, other.Designation) { return false }
+	return true
+}
+
 // ValueSetDesignation
 // Additional representations for this concept when used in this value set - other languages, aliases, specialized purposes, used for particular purposes, etc.
 type ValueSetDesignation struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// language
-	// The language this designation is defined for.
-	Language CommonLanguages `json:"language,omitempty"`
-	// use
-	// A code that represents types of uses of designations.
-	Use Coding `json:"use,omitempty"`
-	// value
-	// The text value for this designation.
-	Value FhirString `json:"value,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Use *Coding `json:"use,omitempty"`
+	Value *FhirString `json:"value,omitempty"`
 }
 
 // NewValueSetDesignation creates a new ValueSetDesignation instance
-func NewValueSetDesignation(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	language CommonLanguages,
-	use Coding,
-	value FhirString,
-) *ValueSetDesignation {
-	return &ValueSetDesignation{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Language: language,
-		Use: use,
-		Value: value,
-	}
+func NewValueSetDesignation() *ValueSetDesignation {
+	return &ValueSetDesignation{}
 }
+
 // FromJSON populates ValueSetDesignation from JSON data
 func (m *ValueSetDesignation) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -651,86 +313,49 @@ func (m *ValueSetDesignation) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ValueSetDesignation
-func (m *ValueSetDesignation) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	language *CommonLanguages,
-	use *Coding,
-	value *FhirString,
-) *ValueSetDesignation {
+// Clone creates a deep copy of ValueSetDesignation
+func (m *ValueSetDesignation) Clone() *ValueSetDesignation {
+	if m == nil { return nil }
 	return &ValueSetDesignation{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Use: func() Coding {
-			if use != nil { return *use }
-			return m.Use
-		}(),
-		Value: func() FhirString {
-			if value != nil { return *value }
-			return m.Value
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Language: m.Language.Clone(),
+		Use: m.Use.Clone(),
+		Value: m.Value.Clone(),
 	}
 }
+
+// Equals checks for equality with another ValueSetDesignation instance
+func (m *ValueSetDesignation) Equals(other *ValueSetDesignation) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Use.Equals(other.Use) { return false }
+	if !m.Value.Equals(other.Value) { return false }
+	return true
+}
+
 // ValueSetFilter
 // Select concepts by specify a matching criterion based on the properties (including relationships) defined by the system, or on filters defined by the system. If multiple filters are specified, they SHALL all be true.
 type ValueSetFilter struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// property
-	// A code that identifies a property or a filter defined in the code system.
-	Property FhirCode `json:"property,omitempty"`
-	// op
-	// The kind of operation to perform as a part of the filter criteria.
-	Op FilterOperator `json:"op,omitempty"`
-	// value
-	// The match value may be either a code defined by the system, or a string value, which is a regex match on the literal string of the property value  (if the filter represents a property defined in CodeSystem) or of the system filter value (if the filter represents a filter defined in CodeSystem) when the operation is 'regex', or one of the values (true and false), when the operation is 'exists'.
-	Value FhirString `json:"value,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Property *FhirCode `json:"property,omitempty"`
+	Op *FilterOperator `json:"op,omitempty"`
+	Value *FhirString `json:"value,omitempty"`
 }
 
 // NewValueSetFilter creates a new ValueSetFilter instance
-func NewValueSetFilter(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	property FhirCode,
-	op FilterOperator,
-	value FhirString,
-) *ValueSetFilter {
-	return &ValueSetFilter{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Property: property,
-		Op: op,
-		Value: value,
-	}
+func NewValueSetFilter() *ValueSetFilter {
+	return &ValueSetFilter{}
 }
+
 // FromJSON populates ValueSetFilter from JSON data
 func (m *ValueSetFilter) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -741,101 +366,52 @@ func (m *ValueSetFilter) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ValueSetFilter
-func (m *ValueSetFilter) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	property *FhirCode,
-	op *FilterOperator,
-	value *FhirString,
-) *ValueSetFilter {
+// Clone creates a deep copy of ValueSetFilter
+func (m *ValueSetFilter) Clone() *ValueSetFilter {
+	if m == nil { return nil }
 	return &ValueSetFilter{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Property: func() FhirCode {
-			if property != nil { return *property }
-			return m.Property
-		}(),
-		Op: func() FilterOperator {
-			if op != nil { return *op }
-			return m.Op
-		}(),
-		Value: func() FhirString {
-			if value != nil { return *value }
-			return m.Value
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Property: m.Property.Clone(),
+		Op: m.Op.Clone(),
+		Value: m.Value.Clone(),
 	}
 }
+
+// Equals checks for equality with another ValueSetFilter instance
+func (m *ValueSetFilter) Equals(other *ValueSetFilter) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Property.Equals(other.Property) { return false }
+	if !m.Op.Equals(other.Op) { return false }
+	if !m.Value.Equals(other.Value) { return false }
+	return true
+}
+
 // ValueSetExpansion
 // A value set can also be "expanded", where the value set is turned into a simple collection of enumerated codes. This element holds the expansion, if it has been performed.
 type ValueSetExpansion struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// An identifier that uniquely identifies this expansion of the valueset, based on a unique combination of the provided parameters, the system default parameters, and the underlying system code system versions etc. Systems may re-use the same identifier as long as those factors remain the same, and the expansion is the same, but are not required to do so. This is a business identifier.
-	Identifier FhirUri `json:"identifier,omitempty"`
-	// timestamp
-	// The time at which the expansion was produced by the expanding system.
-	Timestamp FhirDateTime `json:"timestamp,omitempty"`
-	// total
-	// The total number of concepts in the expansion. If the number of concept nodes in this resource is less than the stated number, then the server can return more using the offset parameter.
-	Total FhirInteger `json:"total,omitempty"`
-	// offset
-	// If paging is being used, the offset at which this resource starts.  I.e. this resource is a partial view into the expansion. If paging is not being used, this element SHALL NOT be present.
-	Offset FhirInteger `json:"offset,omitempty"`
-	// parameter
-	// A parameter that controlled the expansion process. These parameters may be used by users of expanded value sets to check whether the expansion is suitable for a particular purpose, or to pick the correct expansion.
-	Parameter []ValueSetParameter `json:"parameter,omitempty"`
-	// contains
-	// The codes that are contained in the value set expansion.
-	Contains []ValueSetContains `json:"contains,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier *FhirUri `json:"identifier,omitempty"`
+	Timestamp *FhirDateTime `json:"timestamp,omitempty"`
+	Total *FhirInteger `json:"total,omitempty"`
+	Offset *FhirInteger `json:"offset,omitempty"`
+	Parameter []*ValueSetParameter `json:"parameter,omitempty"`
+	Contains []*ValueSetContains `json:"contains,omitempty"`
 }
 
 // NewValueSetExpansion creates a new ValueSetExpansion instance
-func NewValueSetExpansion(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier FhirUri,
-	timestamp FhirDateTime,
-	total FhirInteger,
-	offset FhirInteger,
-	parameter []ValueSetParameter,
-	contains []ValueSetContains,
-) *ValueSetExpansion {
-	return &ValueSetExpansion{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Timestamp: timestamp,
-		Total: total,
-		Offset: offset,
-		Parameter: parameter,
-		Contains: contains,
-	}
+func NewValueSetExpansion() *ValueSetExpansion {
+	return &ValueSetExpansion{}
 }
+
 // FromJSON populates ValueSetExpansion from JSON data
 func (m *ValueSetExpansion) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -846,126 +422,60 @@ func (m *ValueSetExpansion) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ValueSetExpansion
-func (m *ValueSetExpansion) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *FhirUri,
-	timestamp *FhirDateTime,
-	total *FhirInteger,
-	offset *FhirInteger,
-	parameter *[]ValueSetParameter,
-	contains *[]ValueSetContains,
-) *ValueSetExpansion {
+// Clone creates a deep copy of ValueSetExpansion
+func (m *ValueSetExpansion) Clone() *ValueSetExpansion {
+	if m == nil { return nil }
 	return &ValueSetExpansion{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() FhirUri {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Timestamp: func() FhirDateTime {
-			if timestamp != nil { return *timestamp }
-			return m.Timestamp
-		}(),
-		Total: func() FhirInteger {
-			if total != nil { return *total }
-			return m.Total
-		}(),
-		Offset: func() FhirInteger {
-			if offset != nil { return *offset }
-			return m.Offset
-		}(),
-		Parameter: func() []ValueSetParameter {
-			if parameter != nil { return *parameter }
-			return m.Parameter
-		}(),
-		Contains: func() []ValueSetContains {
-			if contains != nil { return *contains }
-			return m.Contains
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: m.Identifier.Clone(),
+		Timestamp: m.Timestamp.Clone(),
+		Total: m.Total.Clone(),
+		Offset: m.Offset.Clone(),
+		Parameter: cloneSlices(m.Parameter),
+		Contains: cloneSlices(m.Contains),
 	}
 }
+
+// Equals checks for equality with another ValueSetExpansion instance
+func (m *ValueSetExpansion) Equals(other *ValueSetExpansion) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Identifier.Equals(other.Identifier) { return false }
+	if !m.Timestamp.Equals(other.Timestamp) { return false }
+	if !m.Total.Equals(other.Total) { return false }
+	if !m.Offset.Equals(other.Offset) { return false }
+	if !compareSlices(m.Parameter, other.Parameter) { return false }
+	if !compareSlices(m.Contains, other.Contains) { return false }
+	return true
+}
+
 // ValueSetParameter
 // A parameter that controlled the expansion process. These parameters may be used by users of expanded value sets to check whether the expansion is suitable for a particular purpose, or to pick the correct expansion.
 type ValueSetParameter struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// name
-	// Name of the input parameter to the $expand operation; may be a server-assigned name for additional default or other server-supplied parameters used to control the expansion process.
-	Name FhirString `json:"name,omitempty"`
-	// valueString
-	// The value of the parameter.
-	ValueString FhirString `json:"valueString,omitempty"`
-	// valueBoolean
-	// The value of the parameter.
-	ValueBoolean FhirBoolean `json:"valueBoolean,omitempty"`
-	// valueInteger
-	// The value of the parameter.
-	ValueInteger FhirInteger `json:"valueInteger,omitempty"`
-	// valueDecimal
-	// The value of the parameter.
-	ValueDecimal FhirDecimal `json:"valueDecimal,omitempty"`
-	// valueUri
-	// The value of the parameter.
-	ValueUri FhirUri `json:"valueUri,omitempty"`
-	// valueCode
-	// The value of the parameter.
-	ValueCode FhirCode `json:"valueCode,omitempty"`
-	// valueDateTime
-	// The value of the parameter.
-	ValueDateTime FhirDateTime `json:"valueDateTime,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	ValueString *FhirString `json:"valuestring,omitempty"`
+	ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
+	ValueInteger *FhirInteger `json:"valueinteger,omitempty"`
+	ValueDecimal *FhirDecimal `json:"valuedecimal,omitempty"`
+	ValueUri *FhirUri `json:"valueuri,omitempty"`
+	ValueCode *FhirCode `json:"valuecode,omitempty"`
+	ValueDateTime *FhirDateTime `json:"valuedatetime,omitempty"`
 }
 
 // NewValueSetParameter creates a new ValueSetParameter instance
-func NewValueSetParameter(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	name FhirString,
-	valueString FhirString,
-	valueBoolean FhirBoolean,
-	valueInteger FhirInteger,
-	valueDecimal FhirDecimal,
-	valueUri FhirUri,
-	valueCode FhirCode,
-	valueDateTime FhirDateTime,
-) *ValueSetParameter {
-	return &ValueSetParameter{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Name: name,
-		ValueString: valueString,
-		ValueBoolean: valueBoolean,
-		ValueInteger: valueInteger,
-		ValueDecimal: valueDecimal,
-		ValueUri: valueUri,
-		ValueCode: valueCode,
-		ValueDateTime: valueDateTime,
-	}
+func NewValueSetParameter() *ValueSetParameter {
+	return &ValueSetParameter{}
 }
+
 // FromJSON populates ValueSetParameter from JSON data
 func (m *ValueSetParameter) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -976,136 +486,64 @@ func (m *ValueSetParameter) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ValueSetParameter
-func (m *ValueSetParameter) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	name *FhirString,
-	valueString *FhirString,
-	valueBoolean *FhirBoolean,
-	valueInteger *FhirInteger,
-	valueDecimal *FhirDecimal,
-	valueUri *FhirUri,
-	valueCode *FhirCode,
-	valueDateTime *FhirDateTime,
-) *ValueSetParameter {
+// Clone creates a deep copy of ValueSetParameter
+func (m *ValueSetParameter) Clone() *ValueSetParameter {
+	if m == nil { return nil }
 	return &ValueSetParameter{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		ValueString: func() FhirString {
-			if valueString != nil { return *valueString }
-			return m.ValueString
-		}(),
-		ValueBoolean: func() FhirBoolean {
-			if valueBoolean != nil { return *valueBoolean }
-			return m.ValueBoolean
-		}(),
-		ValueInteger: func() FhirInteger {
-			if valueInteger != nil { return *valueInteger }
-			return m.ValueInteger
-		}(),
-		ValueDecimal: func() FhirDecimal {
-			if valueDecimal != nil { return *valueDecimal }
-			return m.ValueDecimal
-		}(),
-		ValueUri: func() FhirUri {
-			if valueUri != nil { return *valueUri }
-			return m.ValueUri
-		}(),
-		ValueCode: func() FhirCode {
-			if valueCode != nil { return *valueCode }
-			return m.ValueCode
-		}(),
-		ValueDateTime: func() FhirDateTime {
-			if valueDateTime != nil { return *valueDateTime }
-			return m.ValueDateTime
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Name: m.Name.Clone(),
+		ValueString: m.ValueString.Clone(),
+		ValueBoolean: m.ValueBoolean.Clone(),
+		ValueInteger: m.ValueInteger.Clone(),
+		ValueDecimal: m.ValueDecimal.Clone(),
+		ValueUri: m.ValueUri.Clone(),
+		ValueCode: m.ValueCode.Clone(),
+		ValueDateTime: m.ValueDateTime.Clone(),
 	}
 }
+
+// Equals checks for equality with another ValueSetParameter instance
+func (m *ValueSetParameter) Equals(other *ValueSetParameter) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.ValueString.Equals(other.ValueString) { return false }
+	if !m.ValueBoolean.Equals(other.ValueBoolean) { return false }
+	if !m.ValueInteger.Equals(other.ValueInteger) { return false }
+	if !m.ValueDecimal.Equals(other.ValueDecimal) { return false }
+	if !m.ValueUri.Equals(other.ValueUri) { return false }
+	if !m.ValueCode.Equals(other.ValueCode) { return false }
+	if !m.ValueDateTime.Equals(other.ValueDateTime) { return false }
+	return true
+}
+
 // ValueSetContains
 // The codes that are contained in the value set expansion.
 type ValueSetContains struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// system
-	// An absolute URI which is the code system in which the code for this item in the expansion is defined.
-	System FhirUri `json:"system,omitempty"`
-	// abstract
-	// If true, this entry is included in the expansion for navigational purposes, and the user cannot select the code directly as a proper value.
-	Abstract_ FhirBoolean `json:"abstract,omitempty"`
-	// inactive
-	// If the concept is inactive in the code system that defines it. Inactive codes are those that are no longer to be used, but are maintained by the code system for understanding legacy data. It might not be known or specified whether an concept is inactive (and it may depend on the context of use).
-	Inactive FhirBoolean `json:"inactive,omitempty"`
-	// version
-	// The version of the code system from this code was taken. Note that a well-maintained code system does not need the version reported, because the meaning of codes is consistent across versions. However this cannot consistently be assured, and when the meaning is not guaranteed to be consistent, the version SHOULD be exchanged.
-	Version FhirString `json:"version,omitempty"`
-	// code
-	// The code for this item in the expansion hierarchy. If this code is missing the entry in the hierarchy is a place holder (abstract) and does not represent a valid code in the value set.
-	Code FhirCode `json:"code,omitempty"`
-	// display
-	// The recommended display for this item in the expansion.
-	Display FhirString `json:"display,omitempty"`
-	// designation
-	// Additional representations for this item - other languages, aliases, specialized purposes, used for particular purposes, etc. These are relevant when the conditions of the expansion do not fix to a single correct representation.
-	Designation []ValueSetDesignation `json:"designation,omitempty"`
-	// contains
-	// Other codes and entries contained under this entry in the hierarchy.
-	Contains []ValueSetContains `json:"contains,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	System *FhirUri `json:"system,omitempty"`
+	Abstract_ *FhirBoolean `json:"abstract,omitempty"`
+	Inactive *FhirBoolean `json:"inactive,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
+	Code *FhirCode `json:"code,omitempty"`
+	Display *FhirString `json:"display,omitempty"`
+	Designation []*ValueSetDesignation `json:"designation,omitempty"`
+	Contains []*ValueSetContains `json:"contains,omitempty"`
 }
 
 // NewValueSetContains creates a new ValueSetContains instance
-func NewValueSetContains(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	system FhirUri,
-	abstract_ FhirBoolean,
-	inactive FhirBoolean,
-	version FhirString,
-	code FhirCode,
-	display FhirString,
-	designation []ValueSetDesignation,
-	contains []ValueSetContains,
-) *ValueSetContains {
-	return &ValueSetContains{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		System: system,
-		Abstract_: abstract_,
-		Inactive: inactive,
-		Version: version,
-		Code: code,
-		Display: display,
-		Designation: designation,
-		Contains: contains,
-	}
+func NewValueSetContains() *ValueSetContains {
+	return &ValueSetContains{}
 }
+
 // FromJSON populates ValueSetContains from JSON data
 func (m *ValueSetContains) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1116,64 +554,39 @@ func (m *ValueSetContains) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ValueSetContains
-func (m *ValueSetContains) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	system *FhirUri,
-	abstract_ *FhirBoolean,
-	inactive *FhirBoolean,
-	version *FhirString,
-	code *FhirCode,
-	display *FhirString,
-	designation *[]ValueSetDesignation,
-	contains *[]ValueSetContains,
-) *ValueSetContains {
+// Clone creates a deep copy of ValueSetContains
+func (m *ValueSetContains) Clone() *ValueSetContains {
+	if m == nil { return nil }
 	return &ValueSetContains{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		System: func() FhirUri {
-			if system != nil { return *system }
-			return m.System
-		}(),
-		Abstract_: func() FhirBoolean {
-			if abstract_ != nil { return *abstract_ }
-			return m.Abstract_
-		}(),
-		Inactive: func() FhirBoolean {
-			if inactive != nil { return *inactive }
-			return m.Inactive
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Code: func() FhirCode {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Display: func() FhirString {
-			if display != nil { return *display }
-			return m.Display
-		}(),
-		Designation: func() []ValueSetDesignation {
-			if designation != nil { return *designation }
-			return m.Designation
-		}(),
-		Contains: func() []ValueSetContains {
-			if contains != nil { return *contains }
-			return m.Contains
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		System: m.System.Clone(),
+		Abstract_: m.Abstract_.Clone(),
+		Inactive: m.Inactive.Clone(),
+		Version: m.Version.Clone(),
+		Code: m.Code.Clone(),
+		Display: m.Display.Clone(),
+		Designation: cloneSlices(m.Designation),
+		Contains: cloneSlices(m.Contains),
 	}
 }
+
+// Equals checks for equality with another ValueSetContains instance
+func (m *ValueSetContains) Equals(other *ValueSetContains) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.System.Equals(other.System) { return false }
+	if !m.Abstract_.Equals(other.Abstract_) { return false }
+	if !m.Inactive.Equals(other.Inactive) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Display.Equals(other.Display) { return false }
+	if !compareSlices(m.Designation, other.Designation) { return false }
+	if !compareSlices(m.Contains, other.Contains) { return false }
+	return true
+}
+

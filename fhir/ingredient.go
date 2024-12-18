@@ -3,104 +3,35 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // Ingredient
 // An ingredient of a manufactured item or pharmaceutical product.
 type Ingredient struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// The identifier(s) of this Ingredient that are assigned by business processes and/or used to refer to it when a direct URL reference to the resource itself is not appropriate.
-	Identifier Identifier `json:"identifier,omitempty"`
-	// status
-	// The status of this ingredient. Enables tracking the life-cycle of the content.
-	Status PublicationStatus `json:"status,omitempty"`
-	// for
-	// The product which this ingredient is a constituent part of.
-	For_ []Reference `json:"for,omitempty"`
-	// role
-	// A classification of the ingredient identifying its purpose within the product, e.g. active, inactive.
-	Role CodeableConcept `json:"role,omitempty"`
-	// function
-	// A classification of the ingredient identifying its precise purpose(s) in the drug product. This extends the Ingredient.role to add more detail. Example: antioxidant, alkalizing agent.
-	Function_ []CodeableConcept `json:"function,omitempty"`
-	// allergenicIndicator
-	// If the ingredient is a known or suspected allergen. Note that this is a property of the substance, so if a reference to a SubstanceDefinition is used to decribe that (rather than just a code), the allergen information should go there, not here.
-	AllergenicIndicator FhirBoolean `json:"allergenicIndicator,omitempty"`
-	// manufacturer
-	// The organization(s) that manufacture this ingredient. Can be used to indicate:         1) Organizations we are aware of that manufacture this ingredient         2) Specific Manufacturer(s) currently being used         3) Set of organisations allowed to manufacture this ingredient for this product         Users must be clear on the application of context relevant to their use case.
-	Manufacturer []IngredientManufacturer `json:"manufacturer,omitempty"`
-	// substance
-	// The substance that comprises this ingredient.
-	Substance IngredientSubstance `json:"substance,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier *Identifier `json:"identifier,omitempty"`
+	Status *PublicationStatus `json:"status,omitempty"`
+	For_ []*Reference `json:"for,omitempty"`
+	Role *CodeableConcept `json:"role,omitempty"`
+	Function_ []*CodeableConcept `json:"function,omitempty"`
+	AllergenicIndicator *FhirBoolean `json:"allergenicindicator,omitempty"`
+	Manufacturer []*IngredientManufacturer `json:"manufacturer,omitempty"`
+	Substance *IngredientSubstance `json:"substance,omitempty"`
 }
 
 // NewIngredient creates a new Ingredient instance
-func NewIngredient(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier Identifier,
-	status PublicationStatus,
-	for_ []Reference,
-	role CodeableConcept,
-	function_ []CodeableConcept,
-	allergenicIndicator FhirBoolean,
-	manufacturer []IngredientManufacturer,
-	substance IngredientSubstance,
-) *Ingredient {
-	return &Ingredient{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Status: status,
-		For_: for_,
-		Role: role,
-		Function_: function_,
-		AllergenicIndicator: allergenicIndicator,
-		Manufacturer: manufacturer,
-		Substance: substance,
-	}
+func NewIngredient() *Ingredient {
+	return &Ingredient{}
 }
+
 // FromJSON populates Ingredient from JSON data
 func (m *Ingredient) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -111,131 +42,68 @@ func (m *Ingredient) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of Ingredient
-func (m *Ingredient) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *Identifier,
-	status *PublicationStatus,
-	for_ *[]Reference,
-	role *CodeableConcept,
-	function_ *[]CodeableConcept,
-	allergenicIndicator *FhirBoolean,
-	manufacturer *[]IngredientManufacturer,
-	substance *IngredientSubstance,
-) *Ingredient {
+// Clone creates a deep copy of Ingredient
+func (m *Ingredient) Clone() *Ingredient {
+	if m == nil { return nil }
 	return &Ingredient{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Status: func() PublicationStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		For_: func() []Reference {
-			if for_ != nil { return *for_ }
-			return m.For_
-		}(),
-		Role: func() CodeableConcept {
-			if role != nil { return *role }
-			return m.Role
-		}(),
-		Function_: func() []CodeableConcept {
-			if function_ != nil { return *function_ }
-			return m.Function_
-		}(),
-		AllergenicIndicator: func() FhirBoolean {
-			if allergenicIndicator != nil { return *allergenicIndicator }
-			return m.AllergenicIndicator
-		}(),
-		Manufacturer: func() []IngredientManufacturer {
-			if manufacturer != nil { return *manufacturer }
-			return m.Manufacturer
-		}(),
-		Substance: func() IngredientSubstance {
-			if substance != nil { return *substance }
-			return m.Substance
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: m.Identifier.Clone(),
+		Status: m.Status.Clone(),
+		For_: cloneSlices(m.For_),
+		Role: m.Role.Clone(),
+		Function_: cloneSlices(m.Function_),
+		AllergenicIndicator: m.AllergenicIndicator.Clone(),
+		Manufacturer: cloneSlices(m.Manufacturer),
+		Substance: m.Substance.Clone(),
 	}
 }
+
+// Equals checks for equality with another Ingredient instance
+func (m *Ingredient) Equals(other *Ingredient) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Identifier.Equals(other.Identifier) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !compareSlices(m.For_, other.For_) { return false }
+	if !m.Role.Equals(other.Role) { return false }
+	if !compareSlices(m.Function_, other.Function_) { return false }
+	if !m.AllergenicIndicator.Equals(other.AllergenicIndicator) { return false }
+	if !compareSlices(m.Manufacturer, other.Manufacturer) { return false }
+	if !m.Substance.Equals(other.Substance) { return false }
+	return true
+}
+
 // IngredientManufacturer
 // The organization(s) that manufacture this ingredient. Can be used to indicate:         1) Organizations we are aware of that manufacture this ingredient         2) Specific Manufacturer(s) currently being used         3) Set of organisations allowed to manufacture this ingredient for this product         Users must be clear on the application of context relevant to their use case.
 type IngredientManufacturer struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// role
-	// The way in which this manufacturer is associated with the ingredient. For example whether it is a possible one (others allowed), or an exclusive authorized one for this ingredient. Note that this is not the manufacturing process role.
-	Role IngredientManufacturerRole `json:"role,omitempty"`
-	// manufacturer
-	// An organization that manufactures this ingredient.
-	Manufacturer Reference `json:"manufacturer,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Role *IngredientManufacturerRole `json:"role,omitempty"`
+	Manufacturer *Reference `json:"manufacturer,omitempty"`
 }
 
 // NewIngredientManufacturer creates a new IngredientManufacturer instance
-func NewIngredientManufacturer(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	role IngredientManufacturerRole,
-	manufacturer Reference,
-) *IngredientManufacturer {
-	return &IngredientManufacturer{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Role: role,
-		Manufacturer: manufacturer,
-	}
+func NewIngredientManufacturer() *IngredientManufacturer {
+	return &IngredientManufacturer{}
 }
+
 // FromJSON populates IngredientManufacturer from JSON data
 func (m *IngredientManufacturer) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -246,76 +114,46 @@ func (m *IngredientManufacturer) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of IngredientManufacturer
-func (m *IngredientManufacturer) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	role *IngredientManufacturerRole,
-	manufacturer *Reference,
-) *IngredientManufacturer {
+// Clone creates a deep copy of IngredientManufacturer
+func (m *IngredientManufacturer) Clone() *IngredientManufacturer {
+	if m == nil { return nil }
 	return &IngredientManufacturer{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Role: func() IngredientManufacturerRole {
-			if role != nil { return *role }
-			return m.Role
-		}(),
-		Manufacturer: func() Reference {
-			if manufacturer != nil { return *manufacturer }
-			return m.Manufacturer
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Role: m.Role.Clone(),
+		Manufacturer: m.Manufacturer.Clone(),
 	}
 }
+
+// Equals checks for equality with another IngredientManufacturer instance
+func (m *IngredientManufacturer) Equals(other *IngredientManufacturer) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Role.Equals(other.Role) { return false }
+	if !m.Manufacturer.Equals(other.Manufacturer) { return false }
+	return true
+}
+
 // IngredientSubstance
 // The substance that comprises this ingredient.
 type IngredientSubstance struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// A code or full resource that represents the ingredient's substance.
-	Code CodeableReference `json:"code,omitempty"`
-	// strength
-	// The quantity of substance in the unit of presentation, or in the volume (or mass) of the single pharmaceutical product or manufactured item. The allowed repetitions do not represent different strengths, but are different representations - mathematically equivalent - of a single strength.
-	Strength []IngredientStrength `json:"strength,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *CodeableReference `json:"code,omitempty"`
+	Strength []*IngredientStrength `json:"strength,omitempty"`
 }
 
 // NewIngredientSubstance creates a new IngredientSubstance instance
-func NewIngredientSubstance(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code CodeableReference,
-	strength []IngredientStrength,
-) *IngredientSubstance {
-	return &IngredientSubstance{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		Strength: strength,
-	}
+func NewIngredientSubstance() *IngredientSubstance {
+	return &IngredientSubstance{}
 }
+
 // FromJSON populates IngredientSubstance from JSON data
 func (m *IngredientSubstance) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -326,111 +164,53 @@ func (m *IngredientSubstance) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of IngredientSubstance
-func (m *IngredientSubstance) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *CodeableReference,
-	strength *[]IngredientStrength,
-) *IngredientSubstance {
+// Clone creates a deep copy of IngredientSubstance
+func (m *IngredientSubstance) Clone() *IngredientSubstance {
+	if m == nil { return nil }
 	return &IngredientSubstance{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() CodeableReference {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Strength: func() []IngredientStrength {
-			if strength != nil { return *strength }
-			return m.Strength
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		Strength: cloneSlices(m.Strength),
 	}
 }
+
+// Equals checks for equality with another IngredientSubstance instance
+func (m *IngredientSubstance) Equals(other *IngredientSubstance) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !compareSlices(m.Strength, other.Strength) { return false }
+	return true
+}
+
 // IngredientStrength
 // The quantity of substance in the unit of presentation, or in the volume (or mass) of the single pharmaceutical product or manufactured item. The allowed repetitions do not represent different strengths, but are different representations - mathematically equivalent - of a single strength.
 type IngredientStrength struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// presentationRatio
-	// The quantity of substance in the unit of presentation, or in the volume (or mass) of the single pharmaceutical product or manufactured item. Unit of presentation refers to the quantity that the item occurs in e.g. a strength per tablet size, perhaps 'per 20mg' (the size of the tablet). It is not generally normalized as a unitary unit, which would be 'per mg').
-	PresentationRatio Ratio `json:"presentationRatio,omitempty"`
-	// presentationRatioRange
-	// The quantity of substance in the unit of presentation, or in the volume (or mass) of the single pharmaceutical product or manufactured item. Unit of presentation refers to the quantity that the item occurs in e.g. a strength per tablet size, perhaps 'per 20mg' (the size of the tablet). It is not generally normalized as a unitary unit, which would be 'per mg').
-	PresentationRatioRange RatioRange `json:"presentationRatioRange,omitempty"`
-	// textPresentation
-	// A textual represention of either the whole of the presentation strength or a part of it - with the rest being in Strength.presentation as a ratio.
-	TextPresentation FhirString `json:"textPresentation,omitempty"`
-	// concentrationRatio
-	// The strength per unitary volume (or mass).
-	ConcentrationRatio Ratio `json:"concentrationRatio,omitempty"`
-	// concentrationRatioRange
-	// The strength per unitary volume (or mass).
-	ConcentrationRatioRange RatioRange `json:"concentrationRatioRange,omitempty"`
-	// textConcentration
-	// A textual represention of either the whole of the concentration strength or a part of it - with the rest being in Strength.concentration as a ratio.
-	TextConcentration FhirString `json:"textConcentration,omitempty"`
-	// measurementPoint
-	// For when strength is measured at a particular point or distance. There are products where strength is measured at a particular point. For example, the strength of the ingredient in some inhalers is measured at a particular position relative to the point of aerosolization.
-	MeasurementPoint FhirString `json:"measurementPoint,omitempty"`
-	// country
-	// The country or countries for which the strength range applies.
-	Country []CodeableConcept `json:"country,omitempty"`
-	// referenceStrength
-	// Strength expressed in terms of a reference substance. For when the ingredient strength is additionally expressed as equivalent to the strength of some other closely related substance (e.g. salt vs. base). Reference strength represents the strength (quantitative composition) of the active moiety of the active substance. There are situations when the active substance and active moiety are different, therefore both a strength and a reference strength are needed.
-	ReferenceStrength []IngredientReferenceStrength `json:"referenceStrength,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	PresentationRatio *Ratio `json:"presentationratio,omitempty"`
+	PresentationRatioRange *RatioRange `json:"presentationratiorange,omitempty"`
+	TextPresentation *FhirString `json:"textpresentation,omitempty"`
+	ConcentrationRatio *Ratio `json:"concentrationratio,omitempty"`
+	ConcentrationRatioRange *RatioRange `json:"concentrationratiorange,omitempty"`
+	TextConcentration *FhirString `json:"textconcentration,omitempty"`
+	MeasurementPoint *FhirString `json:"measurementpoint,omitempty"`
+	Country []*CodeableConcept `json:"country,omitempty"`
+	ReferenceStrength []*IngredientReferenceStrength `json:"referencestrength,omitempty"`
 }
 
 // NewIngredientStrength creates a new IngredientStrength instance
-func NewIngredientStrength(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	presentationRatio Ratio,
-	presentationRatioRange RatioRange,
-	textPresentation FhirString,
-	concentrationRatio Ratio,
-	concentrationRatioRange RatioRange,
-	textConcentration FhirString,
-	measurementPoint FhirString,
-	country []CodeableConcept,
-	referenceStrength []IngredientReferenceStrength,
-) *IngredientStrength {
-	return &IngredientStrength{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		PresentationRatio: presentationRatio,
-		PresentationRatioRange: presentationRatioRange,
-		TextPresentation: textPresentation,
-		ConcentrationRatio: concentrationRatio,
-		ConcentrationRatioRange: concentrationRatioRange,
-		TextConcentration: textConcentration,
-		MeasurementPoint: measurementPoint,
-		Country: country,
-		ReferenceStrength: referenceStrength,
-	}
+func NewIngredientStrength() *IngredientStrength {
+	return &IngredientStrength{}
 }
+
 // FromJSON populates IngredientStrength from JSON data
 func (m *IngredientStrength) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -441,126 +221,63 @@ func (m *IngredientStrength) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of IngredientStrength
-func (m *IngredientStrength) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	presentationRatio *Ratio,
-	presentationRatioRange *RatioRange,
-	textPresentation *FhirString,
-	concentrationRatio *Ratio,
-	concentrationRatioRange *RatioRange,
-	textConcentration *FhirString,
-	measurementPoint *FhirString,
-	country *[]CodeableConcept,
-	referenceStrength *[]IngredientReferenceStrength,
-) *IngredientStrength {
+// Clone creates a deep copy of IngredientStrength
+func (m *IngredientStrength) Clone() *IngredientStrength {
+	if m == nil { return nil }
 	return &IngredientStrength{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		PresentationRatio: func() Ratio {
-			if presentationRatio != nil { return *presentationRatio }
-			return m.PresentationRatio
-		}(),
-		PresentationRatioRange: func() RatioRange {
-			if presentationRatioRange != nil { return *presentationRatioRange }
-			return m.PresentationRatioRange
-		}(),
-		TextPresentation: func() FhirString {
-			if textPresentation != nil { return *textPresentation }
-			return m.TextPresentation
-		}(),
-		ConcentrationRatio: func() Ratio {
-			if concentrationRatio != nil { return *concentrationRatio }
-			return m.ConcentrationRatio
-		}(),
-		ConcentrationRatioRange: func() RatioRange {
-			if concentrationRatioRange != nil { return *concentrationRatioRange }
-			return m.ConcentrationRatioRange
-		}(),
-		TextConcentration: func() FhirString {
-			if textConcentration != nil { return *textConcentration }
-			return m.TextConcentration
-		}(),
-		MeasurementPoint: func() FhirString {
-			if measurementPoint != nil { return *measurementPoint }
-			return m.MeasurementPoint
-		}(),
-		Country: func() []CodeableConcept {
-			if country != nil { return *country }
-			return m.Country
-		}(),
-		ReferenceStrength: func() []IngredientReferenceStrength {
-			if referenceStrength != nil { return *referenceStrength }
-			return m.ReferenceStrength
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		PresentationRatio: m.PresentationRatio.Clone(),
+		PresentationRatioRange: m.PresentationRatioRange.Clone(),
+		TextPresentation: m.TextPresentation.Clone(),
+		ConcentrationRatio: m.ConcentrationRatio.Clone(),
+		ConcentrationRatioRange: m.ConcentrationRatioRange.Clone(),
+		TextConcentration: m.TextConcentration.Clone(),
+		MeasurementPoint: m.MeasurementPoint.Clone(),
+		Country: cloneSlices(m.Country),
+		ReferenceStrength: cloneSlices(m.ReferenceStrength),
 	}
 }
+
+// Equals checks for equality with another IngredientStrength instance
+func (m *IngredientStrength) Equals(other *IngredientStrength) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.PresentationRatio.Equals(other.PresentationRatio) { return false }
+	if !m.PresentationRatioRange.Equals(other.PresentationRatioRange) { return false }
+	if !m.TextPresentation.Equals(other.TextPresentation) { return false }
+	if !m.ConcentrationRatio.Equals(other.ConcentrationRatio) { return false }
+	if !m.ConcentrationRatioRange.Equals(other.ConcentrationRatioRange) { return false }
+	if !m.TextConcentration.Equals(other.TextConcentration) { return false }
+	if !m.MeasurementPoint.Equals(other.MeasurementPoint) { return false }
+	if !compareSlices(m.Country, other.Country) { return false }
+	if !compareSlices(m.ReferenceStrength, other.ReferenceStrength) { return false }
+	return true
+}
+
 // IngredientReferenceStrength
 // Strength expressed in terms of a reference substance. For when the ingredient strength is additionally expressed as equivalent to the strength of some other closely related substance (e.g. salt vs. base). Reference strength represents the strength (quantitative composition) of the active moiety of the active substance. There are situations when the active substance and active moiety are different, therefore both a strength and a reference strength are needed.
 type IngredientReferenceStrength struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// substance
-	// Relevant reference substance.
-	Substance CodeableReference `json:"substance,omitempty"`
-	// strengthRatio
-	// Strength expressed in terms of a reference substance.
-	StrengthRatio Ratio `json:"strengthRatio,omitempty"`
-	// strengthRatioRange
-	// Strength expressed in terms of a reference substance.
-	StrengthRatioRange RatioRange `json:"strengthRatioRange,omitempty"`
-	// measurementPoint
-	// For when strength is measured at a particular point or distance.
-	MeasurementPoint FhirString `json:"measurementPoint,omitempty"`
-	// country
-	// The country or countries for which the strength range applies.
-	Country []CodeableConcept `json:"country,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Substance *CodeableReference `json:"substance,omitempty"`
+	StrengthRatio *Ratio `json:"strengthratio,omitempty"`
+	StrengthRatioRange *RatioRange `json:"strengthratiorange,omitempty"`
+	MeasurementPoint *FhirString `json:"measurementpoint,omitempty"`
+	Country []*CodeableConcept `json:"country,omitempty"`
 }
 
 // NewIngredientReferenceStrength creates a new IngredientReferenceStrength instance
-func NewIngredientReferenceStrength(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	substance CodeableReference,
-	strengthRatio Ratio,
-	strengthRatioRange RatioRange,
-	measurementPoint FhirString,
-	country []CodeableConcept,
-) *IngredientReferenceStrength {
-	return &IngredientReferenceStrength{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Substance: substance,
-		StrengthRatio: strengthRatio,
-		StrengthRatioRange: strengthRatioRange,
-		MeasurementPoint: measurementPoint,
-		Country: country,
-	}
+func NewIngredientReferenceStrength() *IngredientReferenceStrength {
+	return &IngredientReferenceStrength{}
 }
+
 // FromJSON populates IngredientReferenceStrength from JSON data
 func (m *IngredientReferenceStrength) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -571,49 +288,33 @@ func (m *IngredientReferenceStrength) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of IngredientReferenceStrength
-func (m *IngredientReferenceStrength) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	substance *CodeableReference,
-	strengthRatio *Ratio,
-	strengthRatioRange *RatioRange,
-	measurementPoint *FhirString,
-	country *[]CodeableConcept,
-) *IngredientReferenceStrength {
+// Clone creates a deep copy of IngredientReferenceStrength
+func (m *IngredientReferenceStrength) Clone() *IngredientReferenceStrength {
+	if m == nil { return nil }
 	return &IngredientReferenceStrength{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Substance: func() CodeableReference {
-			if substance != nil { return *substance }
-			return m.Substance
-		}(),
-		StrengthRatio: func() Ratio {
-			if strengthRatio != nil { return *strengthRatio }
-			return m.StrengthRatio
-		}(),
-		StrengthRatioRange: func() RatioRange {
-			if strengthRatioRange != nil { return *strengthRatioRange }
-			return m.StrengthRatioRange
-		}(),
-		MeasurementPoint: func() FhirString {
-			if measurementPoint != nil { return *measurementPoint }
-			return m.MeasurementPoint
-		}(),
-		Country: func() []CodeableConcept {
-			if country != nil { return *country }
-			return m.Country
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Substance: m.Substance.Clone(),
+		StrengthRatio: m.StrengthRatio.Clone(),
+		StrengthRatioRange: m.StrengthRatioRange.Clone(),
+		MeasurementPoint: m.MeasurementPoint.Clone(),
+		Country: cloneSlices(m.Country),
 	}
 }
+
+// Equals checks for equality with another IngredientReferenceStrength instance
+func (m *IngredientReferenceStrength) Equals(other *IngredientReferenceStrength) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Substance.Equals(other.Substance) { return false }
+	if !m.StrengthRatio.Equals(other.StrengthRatio) { return false }
+	if !m.StrengthRatioRange.Equals(other.StrengthRatioRange) { return false }
+	if !m.MeasurementPoint.Equals(other.MeasurementPoint) { return false }
+	if !compareSlices(m.Country, other.Country) { return false }
+	return true
+}
+

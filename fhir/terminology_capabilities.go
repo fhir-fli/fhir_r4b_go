@@ -3,184 +3,51 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // TerminologyCapabilities
 // A TerminologyCapabilities resource documents a set of capabilities (behaviors) of a FHIR Terminology Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation.
 type TerminologyCapabilities struct {
 	CanonicalResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// url
-	// An absolute URI that is used to identify this terminology capabilities when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this terminology capabilities is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the terminology capabilities is stored on different servers.
-	Url FhirUri `json:"url,omitempty"`
-	// version
-	// The identifier that is used to identify this version of the terminology capabilities when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the terminology capabilities author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.
-	Version FhirString `json:"version,omitempty"`
-	// name
-	// A natural language name identifying the terminology capabilities. This name should be usable as an identifier for the module by machine processing applications such as code generation.
-	Name FhirString `json:"name,omitempty"`
-	// title
-	// A short, descriptive, user-friendly title for the terminology capabilities.
-	Title FhirString `json:"title,omitempty"`
-	// status
-	// The status of this terminology capabilities. Enables tracking the life-cycle of the content.
-	Status PublicationStatus `json:"status,omitempty"`
-	// experimental
-	// A Boolean value to indicate that this terminology capabilities is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.
-	Experimental FhirBoolean `json:"experimental,omitempty"`
-	// date
-	// The date  (and optionally time) when the terminology capabilities was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the terminology capabilities changes.
-	Date FhirDateTime `json:"date,omitempty"`
-	// publisher
-	// The name of the organization or individual that published the terminology capabilities.
-	Publisher FhirString `json:"publisher,omitempty"`
-	// contact
-	// Contact details to assist a user in finding and communicating with the publisher.
-	Contact []ContactDetail `json:"contact,omitempty"`
-	// description
-	// A free text natural language description of the terminology capabilities from a consumer's perspective. Typically, this is used when the capability statement describes a desired rather than an actual solution, for example as a formal expression of requirements as part of an RFP.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// useContext
-	// The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate terminology capabilities instances.
-	UseContext []UsageContext `json:"useContext,omitempty"`
-	// jurisdiction
-	// A legal or geographic region in which the terminology capabilities is intended to be used.
-	Jurisdiction []CodeableConcept `json:"jurisdiction,omitempty"`
-	// purpose
-	// Explanation of why this terminology capabilities is needed and why it has been designed as it has.
-	Purpose FhirMarkdown `json:"purpose,omitempty"`
-	// copyright
-	// A copyright statement relating to the terminology capabilities and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the terminology capabilities.
-	Copyright FhirMarkdown `json:"copyright,omitempty"`
-	// kind
-	// The way that this statement is intended to be used, to describe an actual running instance of software, a particular product (kind, not instance of software) or a class of implementation (e.g. a desired purchase).
-	Kind CapabilityStatementKind `json:"kind,omitempty"`
-	// software
-	// Software that is covered by this terminology capability statement.  It is used when the statement describes the capabilities of a particular software version, independent of an installation.
-	Software TerminologyCapabilitiesSoftware `json:"software,omitempty"`
-	// implementation
-	// Identifies a specific implementation instance that is described by the terminology capability statement - i.e. a particular installation, rather than the capabilities of a software program.
-	Implementation TerminologyCapabilitiesImplementation `json:"implementation,omitempty"`
-	// lockedDate
-	// Whether the server supports lockedDate.
-	LockedDate FhirBoolean `json:"lockedDate,omitempty"`
-	// codeSystem
-	// Identifies a code system that is supported by the server. If there is a no code system URL, then this declares the general assumptions a client can make about support for any CodeSystem resource.
-	CodeSystem []TerminologyCapabilitiesCodeSystem `json:"codeSystem,omitempty"`
-	// expansion
-	// Information about the [ValueSet/$expand](valueset-operation-expand.html) operation.
-	Expansion TerminologyCapabilitiesExpansion `json:"expansion,omitempty"`
-	// codeSearch
-	// The degree to which the server supports the code search parameter on ValueSet, if it is supported.
-	CodeSearch CodeSearchSupport `json:"codeSearch,omitempty"`
-	// validateCode
-	// Information about the [ValueSet/$validate-code](valueset-operation-validate-code.html) operation.
-	ValidateCode TerminologyCapabilitiesValidateCode `json:"validateCode,omitempty"`
-	// translation
-	// Information about the [ConceptMap/$translate](conceptmap-operation-translate.html) operation.
-	Translation TerminologyCapabilitiesTranslation `json:"translation,omitempty"`
-	// closure
-	// Whether the $closure operation is supported.
-	Closure TerminologyCapabilitiesClosure `json:"closure,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Url *FhirUri `json:"url,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Title *FhirString `json:"title,omitempty"`
+	Status *PublicationStatus `json:"status,omitempty"`
+	Experimental *FhirBoolean `json:"experimental,omitempty"`
+	Date *FhirDateTime `json:"date,omitempty"`
+	Publisher *FhirString `json:"publisher,omitempty"`
+	Contact []*ContactDetail `json:"contact,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	UseContext []*UsageContext `json:"usecontext,omitempty"`
+	Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+	Purpose *FhirMarkdown `json:"purpose,omitempty"`
+	Copyright *FhirMarkdown `json:"copyright,omitempty"`
+	Kind *CapabilityStatementKind `json:"kind,omitempty"`
+	Software *TerminologyCapabilitiesSoftware `json:"software,omitempty"`
+	Implementation *TerminologyCapabilitiesImplementation `json:"implementation,omitempty"`
+	LockedDate *FhirBoolean `json:"lockeddate,omitempty"`
+	CodeSystem []*TerminologyCapabilitiesCodeSystem `json:"codesystem,omitempty"`
+	Expansion *TerminologyCapabilitiesExpansion `json:"expansion,omitempty"`
+	CodeSearch *CodeSearchSupport `json:"codesearch,omitempty"`
+	ValidateCode *TerminologyCapabilitiesValidateCode `json:"validatecode,omitempty"`
+	Translation *TerminologyCapabilitiesTranslation `json:"translation,omitempty"`
+	Closure *TerminologyCapabilitiesClosure `json:"closure,omitempty"`
 }
 
 // NewTerminologyCapabilities creates a new TerminologyCapabilities instance
-func NewTerminologyCapabilities(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	url FhirUri,
-	version FhirString,
-	name FhirString,
-	title FhirString,
-	status PublicationStatus,
-	experimental FhirBoolean,
-	date FhirDateTime,
-	publisher FhirString,
-	contact []ContactDetail,
-	description FhirMarkdown,
-	useContext []UsageContext,
-	jurisdiction []CodeableConcept,
-	purpose FhirMarkdown,
-	copyright FhirMarkdown,
-	kind CapabilityStatementKind,
-	software TerminologyCapabilitiesSoftware,
-	implementation TerminologyCapabilitiesImplementation,
-	lockedDate FhirBoolean,
-	codeSystem []TerminologyCapabilitiesCodeSystem,
-	expansion TerminologyCapabilitiesExpansion,
-	codeSearch CodeSearchSupport,
-	validateCode TerminologyCapabilitiesValidateCode,
-	translation TerminologyCapabilitiesTranslation,
-	closure TerminologyCapabilitiesClosure,
-) *TerminologyCapabilities {
-	return &TerminologyCapabilities{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Url: url,
-		Version: version,
-		Name: name,
-		Title: title,
-		Status: status,
-		Experimental: experimental,
-		Date: date,
-		Publisher: publisher,
-		Contact: contact,
-		Description: description,
-		UseContext: useContext,
-		Jurisdiction: jurisdiction,
-		Purpose: purpose,
-		Copyright: copyright,
-		Kind: kind,
-		Software: software,
-		Implementation: implementation,
-		LockedDate: lockedDate,
-		CodeSystem: codeSystem,
-		Expansion: expansion,
-		CodeSearch: codeSearch,
-		ValidateCode: validateCode,
-		Translation: translation,
-		Closure: closure,
-	}
+func NewTerminologyCapabilities() *TerminologyCapabilities {
+	return &TerminologyCapabilities{}
 }
+
 // FromJSON populates TerminologyCapabilities from JSON data
 func (m *TerminologyCapabilities) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -191,211 +58,100 @@ func (m *TerminologyCapabilities) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TerminologyCapabilities
-func (m *TerminologyCapabilities) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	url *FhirUri,
-	version *FhirString,
-	name *FhirString,
-	title *FhirString,
-	status *PublicationStatus,
-	experimental *FhirBoolean,
-	date *FhirDateTime,
-	publisher *FhirString,
-	contact *[]ContactDetail,
-	description *FhirMarkdown,
-	useContext *[]UsageContext,
-	jurisdiction *[]CodeableConcept,
-	purpose *FhirMarkdown,
-	copyright *FhirMarkdown,
-	kind *CapabilityStatementKind,
-	software *TerminologyCapabilitiesSoftware,
-	implementation *TerminologyCapabilitiesImplementation,
-	lockedDate *FhirBoolean,
-	codeSystem *[]TerminologyCapabilitiesCodeSystem,
-	expansion *TerminologyCapabilitiesExpansion,
-	codeSearch *CodeSearchSupport,
-	validateCode *TerminologyCapabilitiesValidateCode,
-	translation *TerminologyCapabilitiesTranslation,
-	closure *TerminologyCapabilitiesClosure,
-) *TerminologyCapabilities {
+// Clone creates a deep copy of TerminologyCapabilities
+func (m *TerminologyCapabilities) Clone() *TerminologyCapabilities {
+	if m == nil { return nil }
 	return &TerminologyCapabilities{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Url: func() FhirUri {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Title: func() FhirString {
-			if title != nil { return *title }
-			return m.Title
-		}(),
-		Status: func() PublicationStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Experimental: func() FhirBoolean {
-			if experimental != nil { return *experimental }
-			return m.Experimental
-		}(),
-		Date: func() FhirDateTime {
-			if date != nil { return *date }
-			return m.Date
-		}(),
-		Publisher: func() FhirString {
-			if publisher != nil { return *publisher }
-			return m.Publisher
-		}(),
-		Contact: func() []ContactDetail {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		UseContext: func() []UsageContext {
-			if useContext != nil { return *useContext }
-			return m.UseContext
-		}(),
-		Jurisdiction: func() []CodeableConcept {
-			if jurisdiction != nil { return *jurisdiction }
-			return m.Jurisdiction
-		}(),
-		Purpose: func() FhirMarkdown {
-			if purpose != nil { return *purpose }
-			return m.Purpose
-		}(),
-		Copyright: func() FhirMarkdown {
-			if copyright != nil { return *copyright }
-			return m.Copyright
-		}(),
-		Kind: func() CapabilityStatementKind {
-			if kind != nil { return *kind }
-			return m.Kind
-		}(),
-		Software: func() TerminologyCapabilitiesSoftware {
-			if software != nil { return *software }
-			return m.Software
-		}(),
-		Implementation: func() TerminologyCapabilitiesImplementation {
-			if implementation != nil { return *implementation }
-			return m.Implementation
-		}(),
-		LockedDate: func() FhirBoolean {
-			if lockedDate != nil { return *lockedDate }
-			return m.LockedDate
-		}(),
-		CodeSystem: func() []TerminologyCapabilitiesCodeSystem {
-			if codeSystem != nil { return *codeSystem }
-			return m.CodeSystem
-		}(),
-		Expansion: func() TerminologyCapabilitiesExpansion {
-			if expansion != nil { return *expansion }
-			return m.Expansion
-		}(),
-		CodeSearch: func() CodeSearchSupport {
-			if codeSearch != nil { return *codeSearch }
-			return m.CodeSearch
-		}(),
-		ValidateCode: func() TerminologyCapabilitiesValidateCode {
-			if validateCode != nil { return *validateCode }
-			return m.ValidateCode
-		}(),
-		Translation: func() TerminologyCapabilitiesTranslation {
-			if translation != nil { return *translation }
-			return m.Translation
-		}(),
-		Closure: func() TerminologyCapabilitiesClosure {
-			if closure != nil { return *closure }
-			return m.Closure
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Url: m.Url.Clone(),
+		Version: m.Version.Clone(),
+		Name: m.Name.Clone(),
+		Title: m.Title.Clone(),
+		Status: m.Status.Clone(),
+		Experimental: m.Experimental.Clone(),
+		Date: m.Date.Clone(),
+		Publisher: m.Publisher.Clone(),
+		Contact: cloneSlices(m.Contact),
+		Description: m.Description.Clone(),
+		UseContext: cloneSlices(m.UseContext),
+		Jurisdiction: cloneSlices(m.Jurisdiction),
+		Purpose: m.Purpose.Clone(),
+		Copyright: m.Copyright.Clone(),
+		Kind: m.Kind.Clone(),
+		Software: m.Software.Clone(),
+		Implementation: m.Implementation.Clone(),
+		LockedDate: m.LockedDate.Clone(),
+		CodeSystem: cloneSlices(m.CodeSystem),
+		Expansion: m.Expansion.Clone(),
+		CodeSearch: m.CodeSearch.Clone(),
+		ValidateCode: m.ValidateCode.Clone(),
+		Translation: m.Translation.Clone(),
+		Closure: m.Closure.Clone(),
 	}
 }
+
+// Equals checks for equality with another TerminologyCapabilities instance
+func (m *TerminologyCapabilities) Equals(other *TerminologyCapabilities) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Title.Equals(other.Title) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Experimental.Equals(other.Experimental) { return false }
+	if !m.Date.Equals(other.Date) { return false }
+	if !m.Publisher.Equals(other.Publisher) { return false }
+	if !compareSlices(m.Contact, other.Contact) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.UseContext, other.UseContext) { return false }
+	if !compareSlices(m.Jurisdiction, other.Jurisdiction) { return false }
+	if !m.Purpose.Equals(other.Purpose) { return false }
+	if !m.Copyright.Equals(other.Copyright) { return false }
+	if !m.Kind.Equals(other.Kind) { return false }
+	if !m.Software.Equals(other.Software) { return false }
+	if !m.Implementation.Equals(other.Implementation) { return false }
+	if !m.LockedDate.Equals(other.LockedDate) { return false }
+	if !compareSlices(m.CodeSystem, other.CodeSystem) { return false }
+	if !m.Expansion.Equals(other.Expansion) { return false }
+	if !m.CodeSearch.Equals(other.CodeSearch) { return false }
+	if !m.ValidateCode.Equals(other.ValidateCode) { return false }
+	if !m.Translation.Equals(other.Translation) { return false }
+	if !m.Closure.Equals(other.Closure) { return false }
+	return true
+}
+
 // TerminologyCapabilitiesSoftware
 // Software that is covered by this terminology capability statement.  It is used when the statement describes the capabilities of a particular software version, independent of an installation.
 type TerminologyCapabilitiesSoftware struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// name
-	// Name the software is known by.
-	Name FhirString `json:"name,omitempty"`
-	// version
-	// The version identifier for the software covered by this statement.
-	Version FhirString `json:"version,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
 }
 
 // NewTerminologyCapabilitiesSoftware creates a new TerminologyCapabilitiesSoftware instance
-func NewTerminologyCapabilitiesSoftware(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	name FhirString,
-	version FhirString,
-) *TerminologyCapabilitiesSoftware {
-	return &TerminologyCapabilitiesSoftware{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Name: name,
-		Version: version,
-	}
+func NewTerminologyCapabilitiesSoftware() *TerminologyCapabilitiesSoftware {
+	return &TerminologyCapabilitiesSoftware{}
 }
+
 // FromJSON populates TerminologyCapabilitiesSoftware from JSON data
 func (m *TerminologyCapabilitiesSoftware) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -406,76 +162,46 @@ func (m *TerminologyCapabilitiesSoftware) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TerminologyCapabilitiesSoftware
-func (m *TerminologyCapabilitiesSoftware) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	name *FhirString,
-	version *FhirString,
-) *TerminologyCapabilitiesSoftware {
+// Clone creates a deep copy of TerminologyCapabilitiesSoftware
+func (m *TerminologyCapabilitiesSoftware) Clone() *TerminologyCapabilitiesSoftware {
+	if m == nil { return nil }
 	return &TerminologyCapabilitiesSoftware{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Name: m.Name.Clone(),
+		Version: m.Version.Clone(),
 	}
 }
+
+// Equals checks for equality with another TerminologyCapabilitiesSoftware instance
+func (m *TerminologyCapabilitiesSoftware) Equals(other *TerminologyCapabilitiesSoftware) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	return true
+}
+
 // TerminologyCapabilitiesImplementation
 // Identifies a specific implementation instance that is described by the terminology capability statement - i.e. a particular installation, rather than the capabilities of a software program.
 type TerminologyCapabilitiesImplementation struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// description
-	// Information about the specific installation that this terminology capability statement relates to.
-	Description FhirString `json:"description,omitempty"`
-	// url
-	// An absolute base URL for the implementation.
-	Url FhirUrl `json:"url,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Url *FhirUrl `json:"url,omitempty"`
 }
 
 // NewTerminologyCapabilitiesImplementation creates a new TerminologyCapabilitiesImplementation instance
-func NewTerminologyCapabilitiesImplementation(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	description FhirString,
-	url FhirUrl,
-) *TerminologyCapabilitiesImplementation {
-	return &TerminologyCapabilitiesImplementation{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Description: description,
-		Url: url,
-	}
+func NewTerminologyCapabilitiesImplementation() *TerminologyCapabilitiesImplementation {
+	return &TerminologyCapabilitiesImplementation{}
 }
+
 // FromJSON populates TerminologyCapabilitiesImplementation from JSON data
 func (m *TerminologyCapabilitiesImplementation) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -486,81 +212,47 @@ func (m *TerminologyCapabilitiesImplementation) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TerminologyCapabilitiesImplementation
-func (m *TerminologyCapabilitiesImplementation) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	description *FhirString,
-	url *FhirUrl,
-) *TerminologyCapabilitiesImplementation {
+// Clone creates a deep copy of TerminologyCapabilitiesImplementation
+func (m *TerminologyCapabilitiesImplementation) Clone() *TerminologyCapabilitiesImplementation {
+	if m == nil { return nil }
 	return &TerminologyCapabilitiesImplementation{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Url: func() FhirUrl {
-			if url != nil { return *url }
-			return m.Url
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Description: m.Description.Clone(),
+		Url: m.Url.Clone(),
 	}
 }
+
+// Equals checks for equality with another TerminologyCapabilitiesImplementation instance
+func (m *TerminologyCapabilitiesImplementation) Equals(other *TerminologyCapabilitiesImplementation) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	return true
+}
+
 // TerminologyCapabilitiesCodeSystem
 // Identifies a code system that is supported by the server. If there is a no code system URL, then this declares the general assumptions a client can make about support for any CodeSystem resource.
 type TerminologyCapabilitiesCodeSystem struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// uri
-	// URI for the Code System.
-	Uri FhirCanonical `json:"uri,omitempty"`
-	// version
-	// For the code system, a list of versions that are supported by the server.
-	Version []TerminologyCapabilitiesVersion `json:"version,omitempty"`
-	// subsumption
-	// True if subsumption is supported for this version of the code system.
-	Subsumption FhirBoolean `json:"subsumption,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Uri *FhirCanonical `json:"uri,omitempty"`
+	Version []*TerminologyCapabilitiesVersion `json:"version,omitempty"`
+	Subsumption *FhirBoolean `json:"subsumption,omitempty"`
 }
 
 // NewTerminologyCapabilitiesCodeSystem creates a new TerminologyCapabilitiesCodeSystem instance
-func NewTerminologyCapabilitiesCodeSystem(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	uri FhirCanonical,
-	version []TerminologyCapabilitiesVersion,
-	subsumption FhirBoolean,
-) *TerminologyCapabilitiesCodeSystem {
-	return &TerminologyCapabilitiesCodeSystem{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Uri: uri,
-		Version: version,
-		Subsumption: subsumption,
-	}
+func NewTerminologyCapabilitiesCodeSystem() *TerminologyCapabilitiesCodeSystem {
+	return &TerminologyCapabilitiesCodeSystem{}
 }
+
 // FromJSON populates TerminologyCapabilitiesCodeSystem from JSON data
 func (m *TerminologyCapabilitiesCodeSystem) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -571,101 +263,52 @@ func (m *TerminologyCapabilitiesCodeSystem) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TerminologyCapabilitiesCodeSystem
-func (m *TerminologyCapabilitiesCodeSystem) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	uri *FhirCanonical,
-	version *[]TerminologyCapabilitiesVersion,
-	subsumption *FhirBoolean,
-) *TerminologyCapabilitiesCodeSystem {
+// Clone creates a deep copy of TerminologyCapabilitiesCodeSystem
+func (m *TerminologyCapabilitiesCodeSystem) Clone() *TerminologyCapabilitiesCodeSystem {
+	if m == nil { return nil }
 	return &TerminologyCapabilitiesCodeSystem{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Uri: func() FhirCanonical {
-			if uri != nil { return *uri }
-			return m.Uri
-		}(),
-		Version: func() []TerminologyCapabilitiesVersion {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Subsumption: func() FhirBoolean {
-			if subsumption != nil { return *subsumption }
-			return m.Subsumption
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Uri: m.Uri.Clone(),
+		Version: cloneSlices(m.Version),
+		Subsumption: m.Subsumption.Clone(),
 	}
 }
+
+// Equals checks for equality with another TerminologyCapabilitiesCodeSystem instance
+func (m *TerminologyCapabilitiesCodeSystem) Equals(other *TerminologyCapabilitiesCodeSystem) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Uri.Equals(other.Uri) { return false }
+	if !compareSlices(m.Version, other.Version) { return false }
+	if !m.Subsumption.Equals(other.Subsumption) { return false }
+	return true
+}
+
 // TerminologyCapabilitiesVersion
 // For the code system, a list of versions that are supported by the server.
 type TerminologyCapabilitiesVersion struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// For version-less code systems, there should be a single version with no identifier.
-	Code FhirString `json:"code,omitempty"`
-	// isDefault
-	// If this is the default version for this code system.
-	IsDefault FhirBoolean `json:"isDefault,omitempty"`
-	// compositional
-	// If the compositional grammar defined by the code system is supported.
-	Compositional FhirBoolean `json:"compositional,omitempty"`
-	// language
-	// Language Displays supported.
-	Language []FhirCode `json:"language,omitempty"`
-	// filter
-	// Filter Properties supported.
-	Filter []TerminologyCapabilitiesFilter `json:"filter,omitempty"`
-	// property
-	// Properties supported for $lookup.
-	Property []FhirCode `json:"property,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *FhirString `json:"code,omitempty"`
+	IsDefault *FhirBoolean `json:"isdefault,omitempty"`
+	Compositional *FhirBoolean `json:"compositional,omitempty"`
+	Language []*FhirCode `json:"language,omitempty"`
+	Filter []*TerminologyCapabilitiesFilter `json:"filter,omitempty"`
+	Property []*FhirCode `json:"property,omitempty"`
 }
 
 // NewTerminologyCapabilitiesVersion creates a new TerminologyCapabilitiesVersion instance
-func NewTerminologyCapabilitiesVersion(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code FhirString,
-	isDefault FhirBoolean,
-	compositional FhirBoolean,
-	language []FhirCode,
-	filter []TerminologyCapabilitiesFilter,
-	property []FhirCode,
-) *TerminologyCapabilitiesVersion {
-	return &TerminologyCapabilitiesVersion{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		IsDefault: isDefault,
-		Compositional: compositional,
-		Language: language,
-		Filter: filter,
-		Property: property,
-	}
+func NewTerminologyCapabilitiesVersion() *TerminologyCapabilitiesVersion {
+	return &TerminologyCapabilitiesVersion{}
 }
+
 // FromJSON populates TerminologyCapabilitiesVersion from JSON data
 func (m *TerminologyCapabilitiesVersion) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -676,96 +319,54 @@ func (m *TerminologyCapabilitiesVersion) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TerminologyCapabilitiesVersion
-func (m *TerminologyCapabilitiesVersion) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *FhirString,
-	isDefault *FhirBoolean,
-	compositional *FhirBoolean,
-	language *[]FhirCode,
-	filter *[]TerminologyCapabilitiesFilter,
-	property *[]FhirCode,
-) *TerminologyCapabilitiesVersion {
+// Clone creates a deep copy of TerminologyCapabilitiesVersion
+func (m *TerminologyCapabilitiesVersion) Clone() *TerminologyCapabilitiesVersion {
+	if m == nil { return nil }
 	return &TerminologyCapabilitiesVersion{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() FhirString {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		IsDefault: func() FhirBoolean {
-			if isDefault != nil { return *isDefault }
-			return m.IsDefault
-		}(),
-		Compositional: func() FhirBoolean {
-			if compositional != nil { return *compositional }
-			return m.Compositional
-		}(),
-		Language: func() []FhirCode {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Filter: func() []TerminologyCapabilitiesFilter {
-			if filter != nil { return *filter }
-			return m.Filter
-		}(),
-		Property: func() []FhirCode {
-			if property != nil { return *property }
-			return m.Property
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		IsDefault: m.IsDefault.Clone(),
+		Compositional: m.Compositional.Clone(),
+		Language: cloneSlices(m.Language),
+		Filter: cloneSlices(m.Filter),
+		Property: cloneSlices(m.Property),
 	}
 }
+
+// Equals checks for equality with another TerminologyCapabilitiesVersion instance
+func (m *TerminologyCapabilitiesVersion) Equals(other *TerminologyCapabilitiesVersion) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.IsDefault.Equals(other.IsDefault) { return false }
+	if !m.Compositional.Equals(other.Compositional) { return false }
+	if !compareSlices(m.Language, other.Language) { return false }
+	if !compareSlices(m.Filter, other.Filter) { return false }
+	if !compareSlices(m.Property, other.Property) { return false }
+	return true
+}
+
 // TerminologyCapabilitiesFilter
 // Filter Properties supported.
 type TerminologyCapabilitiesFilter struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// code
-	// Code of the property supported.
-	Code FhirCode `json:"code,omitempty"`
-	// op
-	// Operations supported for the property.
-	Op []FhirCode `json:"op,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Code *FhirCode `json:"code,omitempty"`
+	Op []*FhirCode `json:"op,omitempty"`
 }
 
 // NewTerminologyCapabilitiesFilter creates a new TerminologyCapabilitiesFilter instance
-func NewTerminologyCapabilitiesFilter(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	code FhirCode,
-	op []FhirCode,
-) *TerminologyCapabilitiesFilter {
-	return &TerminologyCapabilitiesFilter{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Code: code,
-		Op: op,
-	}
+func NewTerminologyCapabilitiesFilter() *TerminologyCapabilitiesFilter {
+	return &TerminologyCapabilitiesFilter{}
 }
+
 // FromJSON populates TerminologyCapabilitiesFilter from JSON data
 func (m *TerminologyCapabilitiesFilter) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -776,91 +377,49 @@ func (m *TerminologyCapabilitiesFilter) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TerminologyCapabilitiesFilter
-func (m *TerminologyCapabilitiesFilter) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	code *FhirCode,
-	op *[]FhirCode,
-) *TerminologyCapabilitiesFilter {
+// Clone creates a deep copy of TerminologyCapabilitiesFilter
+func (m *TerminologyCapabilitiesFilter) Clone() *TerminologyCapabilitiesFilter {
+	if m == nil { return nil }
 	return &TerminologyCapabilitiesFilter{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Code: func() FhirCode {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Op: func() []FhirCode {
-			if op != nil { return *op }
-			return m.Op
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Code: m.Code.Clone(),
+		Op: cloneSlices(m.Op),
 	}
 }
+
+// Equals checks for equality with another TerminologyCapabilitiesFilter instance
+func (m *TerminologyCapabilitiesFilter) Equals(other *TerminologyCapabilitiesFilter) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !compareSlices(m.Op, other.Op) { return false }
+	return true
+}
+
 // TerminologyCapabilitiesExpansion
 // Information about the [ValueSet/$expand](valueset-operation-expand.html) operation.
 type TerminologyCapabilitiesExpansion struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// hierarchical
-	// Whether the server can return nested value sets.
-	Hierarchical FhirBoolean `json:"hierarchical,omitempty"`
-	// paging
-	// Whether the server supports paging on expansion.
-	Paging FhirBoolean `json:"paging,omitempty"`
-	// incomplete
-	// Allow request for incomplete expansions?
-	Incomplete FhirBoolean `json:"incomplete,omitempty"`
-	// parameter
-	// Supported expansion parameter.
-	Parameter []TerminologyCapabilitiesParameter `json:"parameter,omitempty"`
-	// textFilter
-	// Documentation about text searching works.
-	TextFilter FhirMarkdown `json:"textFilter,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Hierarchical *FhirBoolean `json:"hierarchical,omitempty"`
+	Paging *FhirBoolean `json:"paging,omitempty"`
+	Incomplete *FhirBoolean `json:"incomplete,omitempty"`
+	Parameter []*TerminologyCapabilitiesParameter `json:"parameter,omitempty"`
+	TextFilter *FhirMarkdown `json:"textfilter,omitempty"`
 }
 
 // NewTerminologyCapabilitiesExpansion creates a new TerminologyCapabilitiesExpansion instance
-func NewTerminologyCapabilitiesExpansion(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	hierarchical FhirBoolean,
-	paging FhirBoolean,
-	incomplete FhirBoolean,
-	parameter []TerminologyCapabilitiesParameter,
-	textFilter FhirMarkdown,
-) *TerminologyCapabilitiesExpansion {
-	return &TerminologyCapabilitiesExpansion{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Hierarchical: hierarchical,
-		Paging: paging,
-		Incomplete: incomplete,
-		Parameter: parameter,
-		TextFilter: textFilter,
-	}
+func NewTerminologyCapabilitiesExpansion() *TerminologyCapabilitiesExpansion {
+	return &TerminologyCapabilitiesExpansion{}
 }
+
 // FromJSON populates TerminologyCapabilitiesExpansion from JSON data
 func (m *TerminologyCapabilitiesExpansion) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -871,91 +430,52 @@ func (m *TerminologyCapabilitiesExpansion) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TerminologyCapabilitiesExpansion
-func (m *TerminologyCapabilitiesExpansion) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	hierarchical *FhirBoolean,
-	paging *FhirBoolean,
-	incomplete *FhirBoolean,
-	parameter *[]TerminologyCapabilitiesParameter,
-	textFilter *FhirMarkdown,
-) *TerminologyCapabilitiesExpansion {
+// Clone creates a deep copy of TerminologyCapabilitiesExpansion
+func (m *TerminologyCapabilitiesExpansion) Clone() *TerminologyCapabilitiesExpansion {
+	if m == nil { return nil }
 	return &TerminologyCapabilitiesExpansion{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Hierarchical: func() FhirBoolean {
-			if hierarchical != nil { return *hierarchical }
-			return m.Hierarchical
-		}(),
-		Paging: func() FhirBoolean {
-			if paging != nil { return *paging }
-			return m.Paging
-		}(),
-		Incomplete: func() FhirBoolean {
-			if incomplete != nil { return *incomplete }
-			return m.Incomplete
-		}(),
-		Parameter: func() []TerminologyCapabilitiesParameter {
-			if parameter != nil { return *parameter }
-			return m.Parameter
-		}(),
-		TextFilter: func() FhirMarkdown {
-			if textFilter != nil { return *textFilter }
-			return m.TextFilter
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Hierarchical: m.Hierarchical.Clone(),
+		Paging: m.Paging.Clone(),
+		Incomplete: m.Incomplete.Clone(),
+		Parameter: cloneSlices(m.Parameter),
+		TextFilter: m.TextFilter.Clone(),
 	}
 }
+
+// Equals checks for equality with another TerminologyCapabilitiesExpansion instance
+func (m *TerminologyCapabilitiesExpansion) Equals(other *TerminologyCapabilitiesExpansion) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Hierarchical.Equals(other.Hierarchical) { return false }
+	if !m.Paging.Equals(other.Paging) { return false }
+	if !m.Incomplete.Equals(other.Incomplete) { return false }
+	if !compareSlices(m.Parameter, other.Parameter) { return false }
+	if !m.TextFilter.Equals(other.TextFilter) { return false }
+	return true
+}
+
 // TerminologyCapabilitiesParameter
 // Supported expansion parameter.
 type TerminologyCapabilitiesParameter struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// name
-	// Expansion Parameter name.
-	Name FhirCode `json:"name,omitempty"`
-	// documentation
-	// Description of support for parameter.
-	Documentation FhirString `json:"documentation,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Name *FhirCode `json:"name,omitempty"`
+	Documentation *FhirString `json:"documentation,omitempty"`
 }
 
 // NewTerminologyCapabilitiesParameter creates a new TerminologyCapabilitiesParameter instance
-func NewTerminologyCapabilitiesParameter(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	name FhirCode,
-	documentation FhirString,
-) *TerminologyCapabilitiesParameter {
-	return &TerminologyCapabilitiesParameter{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Name: name,
-		Documentation: documentation,
-	}
+func NewTerminologyCapabilitiesParameter() *TerminologyCapabilitiesParameter {
+	return &TerminologyCapabilitiesParameter{}
 }
+
 // FromJSON populates TerminologyCapabilitiesParameter from JSON data
 func (m *TerminologyCapabilitiesParameter) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -966,71 +486,45 @@ func (m *TerminologyCapabilitiesParameter) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TerminologyCapabilitiesParameter
-func (m *TerminologyCapabilitiesParameter) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	name *FhirCode,
-	documentation *FhirString,
-) *TerminologyCapabilitiesParameter {
+// Clone creates a deep copy of TerminologyCapabilitiesParameter
+func (m *TerminologyCapabilitiesParameter) Clone() *TerminologyCapabilitiesParameter {
+	if m == nil { return nil }
 	return &TerminologyCapabilitiesParameter{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Name: func() FhirCode {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Documentation: func() FhirString {
-			if documentation != nil { return *documentation }
-			return m.Documentation
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Name: m.Name.Clone(),
+		Documentation: m.Documentation.Clone(),
 	}
 }
+
+// Equals checks for equality with another TerminologyCapabilitiesParameter instance
+func (m *TerminologyCapabilitiesParameter) Equals(other *TerminologyCapabilitiesParameter) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Documentation.Equals(other.Documentation) { return false }
+	return true
+}
+
 // TerminologyCapabilitiesValidateCode
 // Information about the [ValueSet/$validate-code](valueset-operation-validate-code.html) operation.
 type TerminologyCapabilitiesValidateCode struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// translations
-	// Whether translations are validated.
-	Translations FhirBoolean `json:"translations,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Translations *FhirBoolean `json:"translations,omitempty"`
 }
 
 // NewTerminologyCapabilitiesValidateCode creates a new TerminologyCapabilitiesValidateCode instance
-func NewTerminologyCapabilitiesValidateCode(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	translations FhirBoolean,
-) *TerminologyCapabilitiesValidateCode {
-	return &TerminologyCapabilitiesValidateCode{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Translations: translations,
-	}
+func NewTerminologyCapabilitiesValidateCode() *TerminologyCapabilitiesValidateCode {
+	return &TerminologyCapabilitiesValidateCode{}
 }
+
 // FromJSON populates TerminologyCapabilitiesValidateCode from JSON data
 func (m *TerminologyCapabilitiesValidateCode) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1041,66 +535,43 @@ func (m *TerminologyCapabilitiesValidateCode) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TerminologyCapabilitiesValidateCode
-func (m *TerminologyCapabilitiesValidateCode) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	translations *FhirBoolean,
-) *TerminologyCapabilitiesValidateCode {
+// Clone creates a deep copy of TerminologyCapabilitiesValidateCode
+func (m *TerminologyCapabilitiesValidateCode) Clone() *TerminologyCapabilitiesValidateCode {
+	if m == nil { return nil }
 	return &TerminologyCapabilitiesValidateCode{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Translations: func() FhirBoolean {
-			if translations != nil { return *translations }
-			return m.Translations
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Translations: m.Translations.Clone(),
 	}
 }
+
+// Equals checks for equality with another TerminologyCapabilitiesValidateCode instance
+func (m *TerminologyCapabilitiesValidateCode) Equals(other *TerminologyCapabilitiesValidateCode) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Translations.Equals(other.Translations) { return false }
+	return true
+}
+
 // TerminologyCapabilitiesTranslation
 // Information about the [ConceptMap/$translate](conceptmap-operation-translate.html) operation.
 type TerminologyCapabilitiesTranslation struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// needsMap
-	// Whether the client must identify the map.
-	NeedsMap FhirBoolean `json:"needsMap,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	NeedsMap *FhirBoolean `json:"needsmap,omitempty"`
 }
 
 // NewTerminologyCapabilitiesTranslation creates a new TerminologyCapabilitiesTranslation instance
-func NewTerminologyCapabilitiesTranslation(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	needsMap FhirBoolean,
-) *TerminologyCapabilitiesTranslation {
-	return &TerminologyCapabilitiesTranslation{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		NeedsMap: needsMap,
-	}
+func NewTerminologyCapabilitiesTranslation() *TerminologyCapabilitiesTranslation {
+	return &TerminologyCapabilitiesTranslation{}
 }
+
 // FromJSON populates TerminologyCapabilitiesTranslation from JSON data
 func (m *TerminologyCapabilitiesTranslation) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1111,66 +582,43 @@ func (m *TerminologyCapabilitiesTranslation) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TerminologyCapabilitiesTranslation
-func (m *TerminologyCapabilitiesTranslation) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	needsMap *FhirBoolean,
-) *TerminologyCapabilitiesTranslation {
+// Clone creates a deep copy of TerminologyCapabilitiesTranslation
+func (m *TerminologyCapabilitiesTranslation) Clone() *TerminologyCapabilitiesTranslation {
+	if m == nil { return nil }
 	return &TerminologyCapabilitiesTranslation{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		NeedsMap: func() FhirBoolean {
-			if needsMap != nil { return *needsMap }
-			return m.NeedsMap
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		NeedsMap: m.NeedsMap.Clone(),
 	}
 }
+
+// Equals checks for equality with another TerminologyCapabilitiesTranslation instance
+func (m *TerminologyCapabilitiesTranslation) Equals(other *TerminologyCapabilitiesTranslation) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.NeedsMap.Equals(other.NeedsMap) { return false }
+	return true
+}
+
 // TerminologyCapabilitiesClosure
 // Whether the $closure operation is supported.
 type TerminologyCapabilitiesClosure struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// translation
-	// If cross-system closure is supported.
-	Translation FhirBoolean `json:"translation,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Translation *FhirBoolean `json:"translation,omitempty"`
 }
 
 // NewTerminologyCapabilitiesClosure creates a new TerminologyCapabilitiesClosure instance
-func NewTerminologyCapabilitiesClosure(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	translation FhirBoolean,
-) *TerminologyCapabilitiesClosure {
-	return &TerminologyCapabilitiesClosure{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Translation: translation,
-	}
+func NewTerminologyCapabilitiesClosure() *TerminologyCapabilitiesClosure {
+	return &TerminologyCapabilitiesClosure{}
 }
+
 // FromJSON populates TerminologyCapabilitiesClosure from JSON data
 func (m *TerminologyCapabilitiesClosure) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1181,29 +629,25 @@ func (m *TerminologyCapabilitiesClosure) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TerminologyCapabilitiesClosure
-func (m *TerminologyCapabilitiesClosure) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	translation *FhirBoolean,
-) *TerminologyCapabilitiesClosure {
+// Clone creates a deep copy of TerminologyCapabilitiesClosure
+func (m *TerminologyCapabilitiesClosure) Clone() *TerminologyCapabilitiesClosure {
+	if m == nil { return nil }
 	return &TerminologyCapabilitiesClosure{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Translation: func() FhirBoolean {
-			if translation != nil { return *translation }
-			return m.Translation
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Translation: m.Translation.Clone(),
 	}
 }
+
+// Equals checks for equality with another TerminologyCapabilitiesClosure instance
+func (m *TerminologyCapabilitiesClosure) Equals(other *TerminologyCapabilitiesClosure) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Translation.Equals(other.Translation) { return false }
+	return true
+}
+

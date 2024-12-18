@@ -3,57 +3,26 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // Coding
 // A reference to a code defined by a terminology system.
 type Coding struct {
 	DataType
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// system
-	// The identification of the code system that defines the meaning of the symbol in the code.
-	System FhirUri `json:"system,omitempty"`
-	// version
-	// The version of the code system which was used when choosing this code. Note that a well-maintained code system does not need the version reported, because the meaning of codes is consistent across versions. However this cannot consistently be assured, and when the meaning is not guaranteed to be consistent, the version SHOULD be exchanged.
-	Version FhirString `json:"version,omitempty"`
-	// code
-	// A symbol in syntax defined by the system. The symbol may be a predefined code or an expression in a syntax defined by the coding system (e.g. post-coordination).
-	Code FhirCode `json:"code,omitempty"`
-	// display
-	// A representation of the meaning of the code in the system, following the rules of the system.
-	Display FhirString `json:"display,omitempty"`
-	// userSelected
-	// Indicates that this coding was chosen by a user directly - e.g. off a pick list of available items (codes or displays).
-	UserSelected FhirBoolean `json:"userSelected,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	System *FhirUri `json:"system,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
+	Code *FhirCode `json:"code,omitempty"`
+	Display *FhirString `json:"display,omitempty"`
+	UserSelected *FhirBoolean `json:"userselected,omitempty"`
 }
 
 // NewCoding creates a new Coding instance
-func NewCoding(
-	id FhirString,
-	extension_ []FhirExtension,
-	system FhirUri,
-	version FhirString,
-	code FhirCode,
-	display FhirString,
-	userSelected FhirBoolean,
-) *Coding {
-	return &Coding{
-		Id: id,
-		Extension_: extension_,
-		System: system,
-		Version: version,
-		Code: code,
-		Display: display,
-		UserSelected: userSelected,
-	}
+func NewCoding() *Coding {
+	return &Coding{}
 }
+
 // FromJSON populates Coding from JSON data
 func (m *Coding) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -64,44 +33,31 @@ func (m *Coding) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of Coding
-func (m *Coding) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	system *FhirUri,
-	version *FhirString,
-	code *FhirCode,
-	display *FhirString,
-	userSelected *FhirBoolean,
-) *Coding {
+// Clone creates a deep copy of Coding
+func (m *Coding) Clone() *Coding {
+	if m == nil { return nil }
 	return &Coding{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		System: func() FhirUri {
-			if system != nil { return *system }
-			return m.System
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Code: func() FhirCode {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Display: func() FhirString {
-			if display != nil { return *display }
-			return m.Display
-		}(),
-		UserSelected: func() FhirBoolean {
-			if userSelected != nil { return *userSelected }
-			return m.UserSelected
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		System: m.System.Clone(),
+		Version: m.Version.Clone(),
+		Code: m.Code.Clone(),
+		Display: m.Display.Clone(),
+		UserSelected: m.UserSelected.Clone(),
 	}
 }
+
+// Equals checks for equality with another Coding instance
+func (m *Coding) Equals(other *Coding) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !m.System.Equals(other.System) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Display.Equals(other.Display) { return false }
+	if !m.UserSelected.Equals(other.UserSelected) { return false }
+	return true
+}
+

@@ -1,7 +1,6 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
 	"errors"
 	"reflect"
 )
@@ -91,34 +90,4 @@ func equalElements(a, b *Element) bool {
 		return false
 	}
 	return a.EqualsDeep(b)
-}
-
-// Helper: Parse an element from a list safely.
-func parseElement(elements []interface{}, index int) *Element {
-	if elements == nil || index < 0 || index >= len(elements) || elements[index] == nil {
-		// Return nil if the list is nil, index is out of bounds, or the element is nil
-		return nil
-	}
-
-	// Assert the element is a map[string]interface{}
-	if elMap, ok := elements[index].(map[string]interface{}); ok {
-		// Convert the map to JSON bytes
-		jsonBytes, err := json.Marshal(elMap)
-		if err != nil {
-			// Return nil if marshalling fails
-			return nil
-		}
-
-		// Parse JSON bytes into an Element
-		element, err := FromJSON(jsonBytes)
-		if err != nil {
-			// Return nil if parsing fails
-			return nil
-		}
-
-		return element
-	}
-
-	// Return nil if type assertion fails
-	return nil
 }

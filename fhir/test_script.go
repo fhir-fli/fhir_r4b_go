@@ -3,184 +3,51 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // TestScript
 // A structured set of tests against a FHIR server or client implementation to determine compliance against the FHIR specification.
 type TestScript struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// url
-	// An absolute URI that is used to identify this test script when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this test script is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the test script is stored on different servers.
-	Url FhirUri `json:"url,omitempty"`
-	// identifier
-	// A formal identifier that is used to identify this test script when it is represented in other formats, or referenced in a specification, model, design or an instance.
-	Identifier Identifier `json:"identifier,omitempty"`
-	// version
-	// The identifier that is used to identify this version of the test script when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the test script author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.
-	Version FhirString `json:"version,omitempty"`
-	// name
-	// A natural language name identifying the test script. This name should be usable as an identifier for the module by machine processing applications such as code generation.
-	Name FhirString `json:"name,omitempty"`
-	// title
-	// A short, descriptive, user-friendly title for the test script.
-	Title FhirString `json:"title,omitempty"`
-	// status
-	// The status of this test script. Enables tracking the life-cycle of the content.
-	Status PublicationStatus `json:"status,omitempty"`
-	// experimental
-	// A Boolean value to indicate that this test script is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.
-	Experimental FhirBoolean `json:"experimental,omitempty"`
-	// date
-	// The date  (and optionally time) when the test script was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the test script changes.
-	Date FhirDateTime `json:"date,omitempty"`
-	// publisher
-	// The name of the organization or individual that published the test script.
-	Publisher FhirString `json:"publisher,omitempty"`
-	// contact
-	// Contact details to assist a user in finding and communicating with the publisher.
-	Contact []ContactDetail `json:"contact,omitempty"`
-	// description
-	// A free text natural language description of the test script from a consumer's perspective.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// useContext
-	// The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate test script instances.
-	UseContext []UsageContext `json:"useContext,omitempty"`
-	// jurisdiction
-	// A legal or geographic region in which the test script is intended to be used.
-	Jurisdiction []CodeableConcept `json:"jurisdiction,omitempty"`
-	// purpose
-	// Explanation of why this test script is needed and why it has been designed as it has.
-	Purpose FhirMarkdown `json:"purpose,omitempty"`
-	// copyright
-	// A copyright statement relating to the test script and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the test script.
-	Copyright FhirMarkdown `json:"copyright,omitempty"`
-	// origin
-	// An abstract server used in operations within this test script in the origin element.
-	Origin []TestScriptOrigin `json:"origin,omitempty"`
-	// destination
-	// An abstract server used in operations within this test script in the destination element.
-	Destination []TestScriptDestination `json:"destination,omitempty"`
-	// metadata
-	// The required capability must exist and are assumed to function correctly on the FHIR server being tested.
-	Metadata TestScriptMetadata `json:"metadata,omitempty"`
-	// fixture
-	// Fixture in the test script - by reference (uri). All fixtures are required for the test script to execute.
-	Fixture []TestScriptFixture `json:"fixture,omitempty"`
-	// profile
-	// Reference to the profile to be used for validation.
-	Profile []Reference `json:"profile,omitempty"`
-	// variable
-	// Variable is set based either on element value in response body or on header field value in the response headers.
-	Variable []TestScriptVariable `json:"variable,omitempty"`
-	// setup
-	// A series of required setup operations before tests are executed.
-	Setup TestScriptSetup `json:"setup,omitempty"`
-	// test
-	// A test in this script.
-	Test []TestScriptTest `json:"test,omitempty"`
-	// teardown
-	// A series of operations required to clean up after all the tests are executed (successfully or otherwise).
-	Teardown TestScriptTeardown `json:"teardown,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Url *FhirUri `json:"url,omitempty"`
+	Identifier *Identifier `json:"identifier,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Title *FhirString `json:"title,omitempty"`
+	Status *PublicationStatus `json:"status,omitempty"`
+	Experimental *FhirBoolean `json:"experimental,omitempty"`
+	Date *FhirDateTime `json:"date,omitempty"`
+	Publisher *FhirString `json:"publisher,omitempty"`
+	Contact []*ContactDetail `json:"contact,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	UseContext []*UsageContext `json:"usecontext,omitempty"`
+	Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+	Purpose *FhirMarkdown `json:"purpose,omitempty"`
+	Copyright *FhirMarkdown `json:"copyright,omitempty"`
+	Origin []*TestScriptOrigin `json:"origin,omitempty"`
+	Destination []*TestScriptDestination `json:"destination,omitempty"`
+	Metadata *TestScriptMetadata `json:"metadata,omitempty"`
+	Fixture []*TestScriptFixture `json:"fixture,omitempty"`
+	Profile []*Reference `json:"profile,omitempty"`
+	Variable []*TestScriptVariable `json:"variable,omitempty"`
+	Setup *TestScriptSetup `json:"setup,omitempty"`
+	Test []*TestScriptTest `json:"test,omitempty"`
+	Teardown *TestScriptTeardown `json:"teardown,omitempty"`
 }
 
 // NewTestScript creates a new TestScript instance
-func NewTestScript(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	url FhirUri,
-	identifier Identifier,
-	version FhirString,
-	name FhirString,
-	title FhirString,
-	status PublicationStatus,
-	experimental FhirBoolean,
-	date FhirDateTime,
-	publisher FhirString,
-	contact []ContactDetail,
-	description FhirMarkdown,
-	useContext []UsageContext,
-	jurisdiction []CodeableConcept,
-	purpose FhirMarkdown,
-	copyright FhirMarkdown,
-	origin []TestScriptOrigin,
-	destination []TestScriptDestination,
-	metadata TestScriptMetadata,
-	fixture []TestScriptFixture,
-	profile []Reference,
-	variable []TestScriptVariable,
-	setup TestScriptSetup,
-	test []TestScriptTest,
-	teardown TestScriptTeardown,
-) *TestScript {
-	return &TestScript{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Url: url,
-		Identifier: identifier,
-		Version: version,
-		Name: name,
-		Title: title,
-		Status: status,
-		Experimental: experimental,
-		Date: date,
-		Publisher: publisher,
-		Contact: contact,
-		Description: description,
-		UseContext: useContext,
-		Jurisdiction: jurisdiction,
-		Purpose: purpose,
-		Copyright: copyright,
-		Origin: origin,
-		Destination: destination,
-		Metadata: metadata,
-		Fixture: fixture,
-		Profile: profile,
-		Variable: variable,
-		Setup: setup,
-		Test: test,
-		Teardown: teardown,
-	}
+func NewTestScript() *TestScript {
+	return &TestScript{}
 }
+
 // FromJSON populates TestScript from JSON data
 func (m *TestScript) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -191,211 +58,100 @@ func (m *TestScript) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TestScript
-func (m *TestScript) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	url *FhirUri,
-	identifier *Identifier,
-	version *FhirString,
-	name *FhirString,
-	title *FhirString,
-	status *PublicationStatus,
-	experimental *FhirBoolean,
-	date *FhirDateTime,
-	publisher *FhirString,
-	contact *[]ContactDetail,
-	description *FhirMarkdown,
-	useContext *[]UsageContext,
-	jurisdiction *[]CodeableConcept,
-	purpose *FhirMarkdown,
-	copyright *FhirMarkdown,
-	origin *[]TestScriptOrigin,
-	destination *[]TestScriptDestination,
-	metadata *TestScriptMetadata,
-	fixture *[]TestScriptFixture,
-	profile *[]Reference,
-	variable *[]TestScriptVariable,
-	setup *TestScriptSetup,
-	test *[]TestScriptTest,
-	teardown *TestScriptTeardown,
-) *TestScript {
+// Clone creates a deep copy of TestScript
+func (m *TestScript) Clone() *TestScript {
+	if m == nil { return nil }
 	return &TestScript{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Url: func() FhirUri {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		Identifier: func() Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Title: func() FhirString {
-			if title != nil { return *title }
-			return m.Title
-		}(),
-		Status: func() PublicationStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Experimental: func() FhirBoolean {
-			if experimental != nil { return *experimental }
-			return m.Experimental
-		}(),
-		Date: func() FhirDateTime {
-			if date != nil { return *date }
-			return m.Date
-		}(),
-		Publisher: func() FhirString {
-			if publisher != nil { return *publisher }
-			return m.Publisher
-		}(),
-		Contact: func() []ContactDetail {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		UseContext: func() []UsageContext {
-			if useContext != nil { return *useContext }
-			return m.UseContext
-		}(),
-		Jurisdiction: func() []CodeableConcept {
-			if jurisdiction != nil { return *jurisdiction }
-			return m.Jurisdiction
-		}(),
-		Purpose: func() FhirMarkdown {
-			if purpose != nil { return *purpose }
-			return m.Purpose
-		}(),
-		Copyright: func() FhirMarkdown {
-			if copyright != nil { return *copyright }
-			return m.Copyright
-		}(),
-		Origin: func() []TestScriptOrigin {
-			if origin != nil { return *origin }
-			return m.Origin
-		}(),
-		Destination: func() []TestScriptDestination {
-			if destination != nil { return *destination }
-			return m.Destination
-		}(),
-		Metadata: func() TestScriptMetadata {
-			if metadata != nil { return *metadata }
-			return m.Metadata
-		}(),
-		Fixture: func() []TestScriptFixture {
-			if fixture != nil { return *fixture }
-			return m.Fixture
-		}(),
-		Profile: func() []Reference {
-			if profile != nil { return *profile }
-			return m.Profile
-		}(),
-		Variable: func() []TestScriptVariable {
-			if variable != nil { return *variable }
-			return m.Variable
-		}(),
-		Setup: func() TestScriptSetup {
-			if setup != nil { return *setup }
-			return m.Setup
-		}(),
-		Test: func() []TestScriptTest {
-			if test != nil { return *test }
-			return m.Test
-		}(),
-		Teardown: func() TestScriptTeardown {
-			if teardown != nil { return *teardown }
-			return m.Teardown
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Url: m.Url.Clone(),
+		Identifier: m.Identifier.Clone(),
+		Version: m.Version.Clone(),
+		Name: m.Name.Clone(),
+		Title: m.Title.Clone(),
+		Status: m.Status.Clone(),
+		Experimental: m.Experimental.Clone(),
+		Date: m.Date.Clone(),
+		Publisher: m.Publisher.Clone(),
+		Contact: cloneSlices(m.Contact),
+		Description: m.Description.Clone(),
+		UseContext: cloneSlices(m.UseContext),
+		Jurisdiction: cloneSlices(m.Jurisdiction),
+		Purpose: m.Purpose.Clone(),
+		Copyright: m.Copyright.Clone(),
+		Origin: cloneSlices(m.Origin),
+		Destination: cloneSlices(m.Destination),
+		Metadata: m.Metadata.Clone(),
+		Fixture: cloneSlices(m.Fixture),
+		Profile: cloneSlices(m.Profile),
+		Variable: cloneSlices(m.Variable),
+		Setup: m.Setup.Clone(),
+		Test: cloneSlices(m.Test),
+		Teardown: m.Teardown.Clone(),
 	}
 }
+
+// Equals checks for equality with another TestScript instance
+func (m *TestScript) Equals(other *TestScript) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !m.Identifier.Equals(other.Identifier) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Title.Equals(other.Title) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Experimental.Equals(other.Experimental) { return false }
+	if !m.Date.Equals(other.Date) { return false }
+	if !m.Publisher.Equals(other.Publisher) { return false }
+	if !compareSlices(m.Contact, other.Contact) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.UseContext, other.UseContext) { return false }
+	if !compareSlices(m.Jurisdiction, other.Jurisdiction) { return false }
+	if !m.Purpose.Equals(other.Purpose) { return false }
+	if !m.Copyright.Equals(other.Copyright) { return false }
+	if !compareSlices(m.Origin, other.Origin) { return false }
+	if !compareSlices(m.Destination, other.Destination) { return false }
+	if !m.Metadata.Equals(other.Metadata) { return false }
+	if !compareSlices(m.Fixture, other.Fixture) { return false }
+	if !compareSlices(m.Profile, other.Profile) { return false }
+	if !compareSlices(m.Variable, other.Variable) { return false }
+	if !m.Setup.Equals(other.Setup) { return false }
+	if !compareSlices(m.Test, other.Test) { return false }
+	if !m.Teardown.Equals(other.Teardown) { return false }
+	return true
+}
+
 // TestScriptOrigin
 // An abstract server used in operations within this test script in the origin element.
 type TestScriptOrigin struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// index
-	// Abstract name given to an origin server in this test script.  The name is provided as a number starting at 1.
-	Index FhirInteger `json:"index,omitempty"`
-	// profile
-	// The type of origin profile the test system supports.
-	Profile Coding `json:"profile,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Index *FhirInteger `json:"index,omitempty"`
+	Profile *Coding `json:"profile,omitempty"`
 }
 
 // NewTestScriptOrigin creates a new TestScriptOrigin instance
-func NewTestScriptOrigin(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	index FhirInteger,
-	profile Coding,
-) *TestScriptOrigin {
-	return &TestScriptOrigin{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Index: index,
-		Profile: profile,
-	}
+func NewTestScriptOrigin() *TestScriptOrigin {
+	return &TestScriptOrigin{}
 }
+
 // FromJSON populates TestScriptOrigin from JSON data
 func (m *TestScriptOrigin) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -406,76 +162,46 @@ func (m *TestScriptOrigin) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TestScriptOrigin
-func (m *TestScriptOrigin) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	index *FhirInteger,
-	profile *Coding,
-) *TestScriptOrigin {
+// Clone creates a deep copy of TestScriptOrigin
+func (m *TestScriptOrigin) Clone() *TestScriptOrigin {
+	if m == nil { return nil }
 	return &TestScriptOrigin{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Index: func() FhirInteger {
-			if index != nil { return *index }
-			return m.Index
-		}(),
-		Profile: func() Coding {
-			if profile != nil { return *profile }
-			return m.Profile
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Index: m.Index.Clone(),
+		Profile: m.Profile.Clone(),
 	}
 }
+
+// Equals checks for equality with another TestScriptOrigin instance
+func (m *TestScriptOrigin) Equals(other *TestScriptOrigin) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Index.Equals(other.Index) { return false }
+	if !m.Profile.Equals(other.Profile) { return false }
+	return true
+}
+
 // TestScriptDestination
 // An abstract server used in operations within this test script in the destination element.
 type TestScriptDestination struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// index
-	// Abstract name given to a destination server in this test script.  The name is provided as a number starting at 1.
-	Index FhirInteger `json:"index,omitempty"`
-	// profile
-	// The type of destination profile the test system supports.
-	Profile Coding `json:"profile,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Index *FhirInteger `json:"index,omitempty"`
+	Profile *Coding `json:"profile,omitempty"`
 }
 
 // NewTestScriptDestination creates a new TestScriptDestination instance
-func NewTestScriptDestination(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	index FhirInteger,
-	profile Coding,
-) *TestScriptDestination {
-	return &TestScriptDestination{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Index: index,
-		Profile: profile,
-	}
+func NewTestScriptDestination() *TestScriptDestination {
+	return &TestScriptDestination{}
 }
+
 // FromJSON populates TestScriptDestination from JSON data
 func (m *TestScriptDestination) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -486,76 +212,46 @@ func (m *TestScriptDestination) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TestScriptDestination
-func (m *TestScriptDestination) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	index *FhirInteger,
-	profile *Coding,
-) *TestScriptDestination {
+// Clone creates a deep copy of TestScriptDestination
+func (m *TestScriptDestination) Clone() *TestScriptDestination {
+	if m == nil { return nil }
 	return &TestScriptDestination{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Index: func() FhirInteger {
-			if index != nil { return *index }
-			return m.Index
-		}(),
-		Profile: func() Coding {
-			if profile != nil { return *profile }
-			return m.Profile
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Index: m.Index.Clone(),
+		Profile: m.Profile.Clone(),
 	}
 }
+
+// Equals checks for equality with another TestScriptDestination instance
+func (m *TestScriptDestination) Equals(other *TestScriptDestination) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Index.Equals(other.Index) { return false }
+	if !m.Profile.Equals(other.Profile) { return false }
+	return true
+}
+
 // TestScriptMetadata
 // The required capability must exist and are assumed to function correctly on the FHIR server being tested.
 type TestScriptMetadata struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// link
-	// A link to the FHIR specification that this test is covering.
-	Link []TestScriptLink `json:"link,omitempty"`
-	// capability
-	// Capabilities that must exist and are assumed to function correctly on the FHIR server being tested.
-	Capability []TestScriptCapability `json:"capability,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Link []*TestScriptLink `json:"link,omitempty"`
+	Capability []*TestScriptCapability `json:"capability,omitempty"`
 }
 
 // NewTestScriptMetadata creates a new TestScriptMetadata instance
-func NewTestScriptMetadata(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	link []TestScriptLink,
-	capability []TestScriptCapability,
-) *TestScriptMetadata {
-	return &TestScriptMetadata{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Link: link,
-		Capability: capability,
-	}
+func NewTestScriptMetadata() *TestScriptMetadata {
+	return &TestScriptMetadata{}
 }
+
 // FromJSON populates TestScriptMetadata from JSON data
 func (m *TestScriptMetadata) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -566,76 +262,46 @@ func (m *TestScriptMetadata) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TestScriptMetadata
-func (m *TestScriptMetadata) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	link *[]TestScriptLink,
-	capability *[]TestScriptCapability,
-) *TestScriptMetadata {
+// Clone creates a deep copy of TestScriptMetadata
+func (m *TestScriptMetadata) Clone() *TestScriptMetadata {
+	if m == nil { return nil }
 	return &TestScriptMetadata{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Link: func() []TestScriptLink {
-			if link != nil { return *link }
-			return m.Link
-		}(),
-		Capability: func() []TestScriptCapability {
-			if capability != nil { return *capability }
-			return m.Capability
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Link: cloneSlices(m.Link),
+		Capability: cloneSlices(m.Capability),
 	}
 }
+
+// Equals checks for equality with another TestScriptMetadata instance
+func (m *TestScriptMetadata) Equals(other *TestScriptMetadata) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Link, other.Link) { return false }
+	if !compareSlices(m.Capability, other.Capability) { return false }
+	return true
+}
+
 // TestScriptLink
 // A link to the FHIR specification that this test is covering.
 type TestScriptLink struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// url
-	// URL to a particular requirement or feature within the FHIR specification.
-	Url FhirUri `json:"url,omitempty"`
-	// description
-	// Short description of the link.
-	Description FhirString `json:"description,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Url *FhirUri `json:"url,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
 }
 
 // NewTestScriptLink creates a new TestScriptLink instance
-func NewTestScriptLink(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	url FhirUri,
-	description FhirString,
-) *TestScriptLink {
-	return &TestScriptLink{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Url: url,
-		Description: description,
-	}
+func NewTestScriptLink() *TestScriptLink {
+	return &TestScriptLink{}
 }
+
 // FromJSON populates TestScriptLink from JSON data
 func (m *TestScriptLink) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -646,101 +312,51 @@ func (m *TestScriptLink) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TestScriptLink
-func (m *TestScriptLink) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	url *FhirUri,
-	description *FhirString,
-) *TestScriptLink {
+// Clone creates a deep copy of TestScriptLink
+func (m *TestScriptLink) Clone() *TestScriptLink {
+	if m == nil { return nil }
 	return &TestScriptLink{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Url: func() FhirUri {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Url: m.Url.Clone(),
+		Description: m.Description.Clone(),
 	}
 }
+
+// Equals checks for equality with another TestScriptLink instance
+func (m *TestScriptLink) Equals(other *TestScriptLink) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	return true
+}
+
 // TestScriptCapability
 // Capabilities that must exist and are assumed to function correctly on the FHIR server being tested.
 type TestScriptCapability struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// required
-	// Whether or not the test execution will require the given capabilities of the server in order for this test script to execute.
-	Required_ FhirBoolean `json:"required,omitempty"`
-	// validated
-	// Whether or not the test execution will validate the given capabilities of the server in order for this test script to execute.
-	Validated FhirBoolean `json:"validated,omitempty"`
-	// description
-	// Description of the capabilities that this test script is requiring the server to support.
-	Description FhirString `json:"description,omitempty"`
-	// origin
-	// Which origin server these requirements apply to.
-	Origin []FhirInteger `json:"origin,omitempty"`
-	// destination
-	// Which server these requirements apply to.
-	Destination FhirInteger `json:"destination,omitempty"`
-	// link
-	// Links to the FHIR specification that describes this interaction and the resources involved in more detail.
-	Link []FhirUri `json:"link,omitempty"`
-	// capabilities
-	// Minimum capabilities required of server for test script to execute successfully.   If server does not meet at a minimum the referenced capability statement, then all tests in this script are skipped.
-	Capabilities FhirCanonical `json:"capabilities,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Required_ *FhirBoolean `json:"required,omitempty"`
+	Validated *FhirBoolean `json:"validated,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Origin []*FhirInteger `json:"origin,omitempty"`
+	Destination *FhirInteger `json:"destination,omitempty"`
+	Link []*FhirUri `json:"link,omitempty"`
+	Capabilities *FhirCanonical `json:"capabilities,omitempty"`
 }
 
 // NewTestScriptCapability creates a new TestScriptCapability instance
-func NewTestScriptCapability(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	required_ FhirBoolean,
-	validated FhirBoolean,
-	description FhirString,
-	origin []FhirInteger,
-	destination FhirInteger,
-	link []FhirUri,
-	capabilities FhirCanonical,
-) *TestScriptCapability {
-	return &TestScriptCapability{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Required_: required_,
-		Validated: validated,
-		Description: description,
-		Origin: origin,
-		Destination: destination,
-		Link: link,
-		Capabilities: capabilities,
-	}
+func NewTestScriptCapability() *TestScriptCapability {
+	return &TestScriptCapability{}
 }
+
 // FromJSON populates TestScriptCapability from JSON data
 func (m *TestScriptCapability) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -751,106 +367,57 @@ func (m *TestScriptCapability) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TestScriptCapability
-func (m *TestScriptCapability) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	required_ *FhirBoolean,
-	validated *FhirBoolean,
-	description *FhirString,
-	origin *[]FhirInteger,
-	destination *FhirInteger,
-	link *[]FhirUri,
-	capabilities *FhirCanonical,
-) *TestScriptCapability {
+// Clone creates a deep copy of TestScriptCapability
+func (m *TestScriptCapability) Clone() *TestScriptCapability {
+	if m == nil { return nil }
 	return &TestScriptCapability{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Required_: func() FhirBoolean {
-			if required_ != nil { return *required_ }
-			return m.Required_
-		}(),
-		Validated: func() FhirBoolean {
-			if validated != nil { return *validated }
-			return m.Validated
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Origin: func() []FhirInteger {
-			if origin != nil { return *origin }
-			return m.Origin
-		}(),
-		Destination: func() FhirInteger {
-			if destination != nil { return *destination }
-			return m.Destination
-		}(),
-		Link: func() []FhirUri {
-			if link != nil { return *link }
-			return m.Link
-		}(),
-		Capabilities: func() FhirCanonical {
-			if capabilities != nil { return *capabilities }
-			return m.Capabilities
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Required_: m.Required_.Clone(),
+		Validated: m.Validated.Clone(),
+		Description: m.Description.Clone(),
+		Origin: cloneSlices(m.Origin),
+		Destination: m.Destination.Clone(),
+		Link: cloneSlices(m.Link),
+		Capabilities: m.Capabilities.Clone(),
 	}
 }
+
+// Equals checks for equality with another TestScriptCapability instance
+func (m *TestScriptCapability) Equals(other *TestScriptCapability) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Required_.Equals(other.Required_) { return false }
+	if !m.Validated.Equals(other.Validated) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.Origin, other.Origin) { return false }
+	if !m.Destination.Equals(other.Destination) { return false }
+	if !compareSlices(m.Link, other.Link) { return false }
+	if !m.Capabilities.Equals(other.Capabilities) { return false }
+	return true
+}
+
 // TestScriptFixture
 // Fixture in the test script - by reference (uri). All fixtures are required for the test script to execute.
 type TestScriptFixture struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// autocreate
-	// Whether or not to implicitly create the fixture during setup. If true, the fixture is automatically created on each server being tested during setup, therefore no create operation is required for this fixture in the TestScript.setup section.
-	Autocreate FhirBoolean `json:"autocreate,omitempty"`
-	// autodelete
-	// Whether or not to implicitly delete the fixture during teardown. If true, the fixture is automatically deleted on each server being tested during teardown, therefore no delete operation is required for this fixture in the TestScript.teardown section.
-	Autodelete FhirBoolean `json:"autodelete,omitempty"`
-	// resource
-	// Reference to the resource (containing the contents of the resource needed for operations).
-	Resource Reference `json:"resource,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Autocreate *FhirBoolean `json:"autocreate,omitempty"`
+	Autodelete *FhirBoolean `json:"autodelete,omitempty"`
+	Resource *Reference `json:"resource,omitempty"`
 }
 
 // NewTestScriptFixture creates a new TestScriptFixture instance
-func NewTestScriptFixture(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	autocreate FhirBoolean,
-	autodelete FhirBoolean,
-	resource Reference,
-) *TestScriptFixture {
-	return &TestScriptFixture{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Autocreate: autocreate,
-		Autodelete: autodelete,
-		Resource: resource,
-	}
+func NewTestScriptFixture() *TestScriptFixture {
+	return &TestScriptFixture{}
 }
+
 // FromJSON populates TestScriptFixture from JSON data
 func (m *TestScriptFixture) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -861,111 +428,54 @@ func (m *TestScriptFixture) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TestScriptFixture
-func (m *TestScriptFixture) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	autocreate *FhirBoolean,
-	autodelete *FhirBoolean,
-	resource *Reference,
-) *TestScriptFixture {
+// Clone creates a deep copy of TestScriptFixture
+func (m *TestScriptFixture) Clone() *TestScriptFixture {
+	if m == nil { return nil }
 	return &TestScriptFixture{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Autocreate: func() FhirBoolean {
-			if autocreate != nil { return *autocreate }
-			return m.Autocreate
-		}(),
-		Autodelete: func() FhirBoolean {
-			if autodelete != nil { return *autodelete }
-			return m.Autodelete
-		}(),
-		Resource: func() Reference {
-			if resource != nil { return *resource }
-			return m.Resource
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Autocreate: m.Autocreate.Clone(),
+		Autodelete: m.Autodelete.Clone(),
+		Resource: m.Resource.Clone(),
 	}
 }
+
+// Equals checks for equality with another TestScriptFixture instance
+func (m *TestScriptFixture) Equals(other *TestScriptFixture) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Autocreate.Equals(other.Autocreate) { return false }
+	if !m.Autodelete.Equals(other.Autodelete) { return false }
+	if !m.Resource.Equals(other.Resource) { return false }
+	return true
+}
+
 // TestScriptVariable
 // Variable is set based either on element value in response body or on header field value in the response headers.
 type TestScriptVariable struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// name
-	// Descriptive name for this variable.
-	Name FhirString `json:"name,omitempty"`
-	// defaultValue
-	// A default, hard-coded, or user-defined value for this variable.
-	DefaultValue FhirString `json:"defaultValue,omitempty"`
-	// description
-	// A free text natural language description of the variable and its purpose.
-	Description FhirString `json:"description,omitempty"`
-	// expression
-	// The FHIRPath expression to evaluate against the fixture body. When variables are defined, only one of either expression, headerField or path must be specified.
-	Expression FhirString `json:"expression,omitempty"`
-	// headerField
-	// Will be used to grab the HTTP header field value from the headers that sourceId is pointing to.
-	HeaderField FhirString `json:"headerField,omitempty"`
-	// hint
-	// Displayable text string with hint help information to the user when entering a default value.
-	Hint FhirString `json:"hint,omitempty"`
-	// path
-	// XPath or JSONPath to evaluate against the fixture body.  When variables are defined, only one of either expression, headerField or path must be specified.
-	Path FhirString `json:"path,omitempty"`
-	// sourceId
-	// Fixture to evaluate the XPath/JSONPath expression or the headerField  against within this variable.
-	SourceId FhirId `json:"sourceId,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	DefaultValue *FhirString `json:"defaultvalue,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Expression *FhirString `json:"expression,omitempty"`
+	HeaderField *FhirString `json:"headerfield,omitempty"`
+	Hint *FhirString `json:"hint,omitempty"`
+	Path *FhirString `json:"path,omitempty"`
+	SourceId *FhirId `json:"sourceid,omitempty"`
 }
 
 // NewTestScriptVariable creates a new TestScriptVariable instance
-func NewTestScriptVariable(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	name FhirString,
-	defaultValue FhirString,
-	description FhirString,
-	expression FhirString,
-	headerField FhirString,
-	hint FhirString,
-	path FhirString,
-	sourceId FhirId,
-) *TestScriptVariable {
-	return &TestScriptVariable{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Name: name,
-		DefaultValue: defaultValue,
-		Description: description,
-		Expression: expression,
-		HeaderField: headerField,
-		Hint: hint,
-		Path: path,
-		SourceId: sourceId,
-	}
+func NewTestScriptVariable() *TestScriptVariable {
+	return &TestScriptVariable{}
 }
+
 // FromJSON populates TestScriptVariable from JSON data
 func (m *TestScriptVariable) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -976,101 +486,57 @@ func (m *TestScriptVariable) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TestScriptVariable
-func (m *TestScriptVariable) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	name *FhirString,
-	defaultValue *FhirString,
-	description *FhirString,
-	expression *FhirString,
-	headerField *FhirString,
-	hint *FhirString,
-	path *FhirString,
-	sourceId *FhirId,
-) *TestScriptVariable {
+// Clone creates a deep copy of TestScriptVariable
+func (m *TestScriptVariable) Clone() *TestScriptVariable {
+	if m == nil { return nil }
 	return &TestScriptVariable{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		DefaultValue: func() FhirString {
-			if defaultValue != nil { return *defaultValue }
-			return m.DefaultValue
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Expression: func() FhirString {
-			if expression != nil { return *expression }
-			return m.Expression
-		}(),
-		HeaderField: func() FhirString {
-			if headerField != nil { return *headerField }
-			return m.HeaderField
-		}(),
-		Hint: func() FhirString {
-			if hint != nil { return *hint }
-			return m.Hint
-		}(),
-		Path: func() FhirString {
-			if path != nil { return *path }
-			return m.Path
-		}(),
-		SourceId: func() FhirId {
-			if sourceId != nil { return *sourceId }
-			return m.SourceId
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Name: m.Name.Clone(),
+		DefaultValue: m.DefaultValue.Clone(),
+		Description: m.Description.Clone(),
+		Expression: m.Expression.Clone(),
+		HeaderField: m.HeaderField.Clone(),
+		Hint: m.Hint.Clone(),
+		Path: m.Path.Clone(),
+		SourceId: m.SourceId.Clone(),
 	}
 }
+
+// Equals checks for equality with another TestScriptVariable instance
+func (m *TestScriptVariable) Equals(other *TestScriptVariable) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.DefaultValue.Equals(other.DefaultValue) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.Expression.Equals(other.Expression) { return false }
+	if !m.HeaderField.Equals(other.HeaderField) { return false }
+	if !m.Hint.Equals(other.Hint) { return false }
+	if !m.Path.Equals(other.Path) { return false }
+	if !m.SourceId.Equals(other.SourceId) { return false }
+	return true
+}
+
 // TestScriptSetup
 // A series of required setup operations before tests are executed.
 type TestScriptSetup struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// action
-	// Action would contain either an operation or an assertion.
-	Action []TestScriptAction `json:"action,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Action []*TestScriptAction `json:"action,omitempty"`
 }
 
 // NewTestScriptSetup creates a new TestScriptSetup instance
-func NewTestScriptSetup(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	action []TestScriptAction,
-) *TestScriptSetup {
-	return &TestScriptSetup{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Action: action,
-	}
+func NewTestScriptSetup() *TestScriptSetup {
+	return &TestScriptSetup{}
 }
+
 // FromJSON populates TestScriptSetup from JSON data
 func (m *TestScriptSetup) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1081,71 +547,44 @@ func (m *TestScriptSetup) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TestScriptSetup
-func (m *TestScriptSetup) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	action *[]TestScriptAction,
-) *TestScriptSetup {
+// Clone creates a deep copy of TestScriptSetup
+func (m *TestScriptSetup) Clone() *TestScriptSetup {
+	if m == nil { return nil }
 	return &TestScriptSetup{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Action: func() []TestScriptAction {
-			if action != nil { return *action }
-			return m.Action
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Action: cloneSlices(m.Action),
 	}
 }
+
+// Equals checks for equality with another TestScriptSetup instance
+func (m *TestScriptSetup) Equals(other *TestScriptSetup) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Action, other.Action) { return false }
+	return true
+}
+
 // TestScriptAction
 // Action would contain either an operation or an assertion.
 type TestScriptAction struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// operation
-	// The operation to perform.
-	Operation TestScriptOperation `json:"operation,omitempty"`
-	// assert
-	// Evaluates the results of previous operations to determine if the server under test behaves appropriately.
-	Assert_ TestScriptAssert `json:"assert,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Operation *TestScriptOperation `json:"operation,omitempty"`
+	Assert_ *TestScriptAssert `json:"assert,omitempty"`
 }
 
 // NewTestScriptAction creates a new TestScriptAction instance
-func NewTestScriptAction(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	operation TestScriptOperation,
-	assert_ TestScriptAssert,
-) *TestScriptAction {
-	return &TestScriptAction{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Operation: operation,
-		Assert_: assert_,
-	}
+func NewTestScriptAction() *TestScriptAction {
+	return &TestScriptAction{}
 }
+
 // FromJSON populates TestScriptAction from JSON data
 func (m *TestScriptAction) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1156,151 +595,61 @@ func (m *TestScriptAction) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TestScriptAction
-func (m *TestScriptAction) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	operation *TestScriptOperation,
-	assert_ *TestScriptAssert,
-) *TestScriptAction {
+// Clone creates a deep copy of TestScriptAction
+func (m *TestScriptAction) Clone() *TestScriptAction {
+	if m == nil { return nil }
 	return &TestScriptAction{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Operation: func() TestScriptOperation {
-			if operation != nil { return *operation }
-			return m.Operation
-		}(),
-		Assert_: func() TestScriptAssert {
-			if assert_ != nil { return *assert_ }
-			return m.Assert_
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Operation: m.Operation.Clone(),
+		Assert_: m.Assert_.Clone(),
 	}
 }
+
+// Equals checks for equality with another TestScriptAction instance
+func (m *TestScriptAction) Equals(other *TestScriptAction) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Operation.Equals(other.Operation) { return false }
+	if !m.Assert_.Equals(other.Assert_) { return false }
+	return true
+}
+
 // TestScriptOperation
 // The operation to perform.
 type TestScriptOperation struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// Server interaction or operation type.
-	Type_ Coding `json:"type,omitempty"`
-	// resource
-	// The type of the resource.  See http://build.fhir.org/resourcelist.html.
-	Resource FhirCode `json:"resource,omitempty"`
-	// label
-	// The label would be used for tracking/logging purposes by test engines.
-	Label FhirString `json:"label,omitempty"`
-	// description
-	// The description would be used by test engines for tracking and reporting purposes.
-	Description FhirString `json:"description,omitempty"`
-	// accept
-	// The mime-type to use for RESTful operation in the 'Accept' header.
-	Accept FhirCode `json:"accept,omitempty"`
-	// contentType
-	// The mime-type to use for RESTful operation in the 'Content-Type' header.
-	ContentType FhirCode `json:"contentType,omitempty"`
-	// destination
-	// The server where the request message is destined for.  Must be one of the server numbers listed in TestScript.destination section.
-	Destination FhirInteger `json:"destination,omitempty"`
-	// encodeRequestUrl
-	// Whether or not to implicitly send the request url in encoded format. The default is true to match the standard RESTful client behavior. Set to false when communicating with a server that does not support encoded url paths.
-	EncodeRequestUrl FhirBoolean `json:"encodeRequestUrl,omitempty"`
-	// method
-	// The HTTP method the test engine MUST use for this operation regardless of any other operation details.
-	Method TestScriptRequestMethodCode `json:"method,omitempty"`
-	// origin
-	// The server where the request message originates from.  Must be one of the server numbers listed in TestScript.origin section.
-	Origin FhirInteger `json:"origin,omitempty"`
-	// params
-	// Path plus parameters after [type].  Used to set parts of the request URL explicitly.
-	Params FhirString `json:"params,omitempty"`
-	// requestHeader
-	// Header elements would be used to set HTTP headers.
-	RequestHeader []TestScriptRequestHeader `json:"requestHeader,omitempty"`
-	// requestId
-	// The fixture id (maybe new) to map to the request.
-	RequestId FhirId `json:"requestId,omitempty"`
-	// responseId
-	// The fixture id (maybe new) to map to the response.
-	ResponseId FhirId `json:"responseId,omitempty"`
-	// sourceId
-	// The id of the fixture used as the body of a PUT or POST request.
-	SourceId FhirId `json:"sourceId,omitempty"`
-	// targetId
-	// Id of fixture used for extracting the [id],  [type], and [vid] for GET requests.
-	TargetId FhirId `json:"targetId,omitempty"`
-	// url
-	// Complete request URL.
-	Url FhirString `json:"url,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *Coding `json:"type,omitempty"`
+	Resource *FhirCode `json:"resource,omitempty"`
+	Label *FhirString `json:"label,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Accept *FhirCode `json:"accept,omitempty"`
+	ContentType *FhirCode `json:"contenttype,omitempty"`
+	Destination *FhirInteger `json:"destination,omitempty"`
+	EncodeRequestUrl *FhirBoolean `json:"encoderequesturl,omitempty"`
+	Method *TestScriptRequestMethodCode `json:"method,omitempty"`
+	Origin *FhirInteger `json:"origin,omitempty"`
+	Params *FhirString `json:"params,omitempty"`
+	RequestHeader []*TestScriptRequestHeader `json:"requestheader,omitempty"`
+	RequestId *FhirId `json:"requestid,omitempty"`
+	ResponseId *FhirId `json:"responseid,omitempty"`
+	SourceId *FhirId `json:"sourceid,omitempty"`
+	TargetId *FhirId `json:"targetid,omitempty"`
+	Url *FhirString `json:"url,omitempty"`
 }
 
 // NewTestScriptOperation creates a new TestScriptOperation instance
-func NewTestScriptOperation(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ Coding,
-	resource FhirCode,
-	label FhirString,
-	description FhirString,
-	accept FhirCode,
-	contentType FhirCode,
-	destination FhirInteger,
-	encodeRequestUrl FhirBoolean,
-	method TestScriptRequestMethodCode,
-	origin FhirInteger,
-	params FhirString,
-	requestHeader []TestScriptRequestHeader,
-	requestId FhirId,
-	responseId FhirId,
-	sourceId FhirId,
-	targetId FhirId,
-	url FhirString,
-) *TestScriptOperation {
-	return &TestScriptOperation{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Resource: resource,
-		Label: label,
-		Description: description,
-		Accept: accept,
-		ContentType: contentType,
-		Destination: destination,
-		EncodeRequestUrl: encodeRequestUrl,
-		Method: method,
-		Origin: origin,
-		Params: params,
-		RequestHeader: requestHeader,
-		RequestId: requestId,
-		ResponseId: responseId,
-		SourceId: sourceId,
-		TargetId: targetId,
-		Url: url,
-	}
+func NewTestScriptOperation() *TestScriptOperation {
+	return &TestScriptOperation{}
 }
+
 // FromJSON populates TestScriptOperation from JSON data
 func (m *TestScriptOperation) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1311,151 +660,76 @@ func (m *TestScriptOperation) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TestScriptOperation
-func (m *TestScriptOperation) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *Coding,
-	resource *FhirCode,
-	label *FhirString,
-	description *FhirString,
-	accept *FhirCode,
-	contentType *FhirCode,
-	destination *FhirInteger,
-	encodeRequestUrl *FhirBoolean,
-	method *TestScriptRequestMethodCode,
-	origin *FhirInteger,
-	params *FhirString,
-	requestHeader *[]TestScriptRequestHeader,
-	requestId *FhirId,
-	responseId *FhirId,
-	sourceId *FhirId,
-	targetId *FhirId,
-	url *FhirString,
-) *TestScriptOperation {
+// Clone creates a deep copy of TestScriptOperation
+func (m *TestScriptOperation) Clone() *TestScriptOperation {
+	if m == nil { return nil }
 	return &TestScriptOperation{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() Coding {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Resource: func() FhirCode {
-			if resource != nil { return *resource }
-			return m.Resource
-		}(),
-		Label: func() FhirString {
-			if label != nil { return *label }
-			return m.Label
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Accept: func() FhirCode {
-			if accept != nil { return *accept }
-			return m.Accept
-		}(),
-		ContentType: func() FhirCode {
-			if contentType != nil { return *contentType }
-			return m.ContentType
-		}(),
-		Destination: func() FhirInteger {
-			if destination != nil { return *destination }
-			return m.Destination
-		}(),
-		EncodeRequestUrl: func() FhirBoolean {
-			if encodeRequestUrl != nil { return *encodeRequestUrl }
-			return m.EncodeRequestUrl
-		}(),
-		Method: func() TestScriptRequestMethodCode {
-			if method != nil { return *method }
-			return m.Method
-		}(),
-		Origin: func() FhirInteger {
-			if origin != nil { return *origin }
-			return m.Origin
-		}(),
-		Params: func() FhirString {
-			if params != nil { return *params }
-			return m.Params
-		}(),
-		RequestHeader: func() []TestScriptRequestHeader {
-			if requestHeader != nil { return *requestHeader }
-			return m.RequestHeader
-		}(),
-		RequestId: func() FhirId {
-			if requestId != nil { return *requestId }
-			return m.RequestId
-		}(),
-		ResponseId: func() FhirId {
-			if responseId != nil { return *responseId }
-			return m.ResponseId
-		}(),
-		SourceId: func() FhirId {
-			if sourceId != nil { return *sourceId }
-			return m.SourceId
-		}(),
-		TargetId: func() FhirId {
-			if targetId != nil { return *targetId }
-			return m.TargetId
-		}(),
-		Url: func() FhirString {
-			if url != nil { return *url }
-			return m.Url
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Resource: m.Resource.Clone(),
+		Label: m.Label.Clone(),
+		Description: m.Description.Clone(),
+		Accept: m.Accept.Clone(),
+		ContentType: m.ContentType.Clone(),
+		Destination: m.Destination.Clone(),
+		EncodeRequestUrl: m.EncodeRequestUrl.Clone(),
+		Method: m.Method.Clone(),
+		Origin: m.Origin.Clone(),
+		Params: m.Params.Clone(),
+		RequestHeader: cloneSlices(m.RequestHeader),
+		RequestId: m.RequestId.Clone(),
+		ResponseId: m.ResponseId.Clone(),
+		SourceId: m.SourceId.Clone(),
+		TargetId: m.TargetId.Clone(),
+		Url: m.Url.Clone(),
 	}
 }
+
+// Equals checks for equality with another TestScriptOperation instance
+func (m *TestScriptOperation) Equals(other *TestScriptOperation) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Resource.Equals(other.Resource) { return false }
+	if !m.Label.Equals(other.Label) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.Accept.Equals(other.Accept) { return false }
+	if !m.ContentType.Equals(other.ContentType) { return false }
+	if !m.Destination.Equals(other.Destination) { return false }
+	if !m.EncodeRequestUrl.Equals(other.EncodeRequestUrl) { return false }
+	if !m.Method.Equals(other.Method) { return false }
+	if !m.Origin.Equals(other.Origin) { return false }
+	if !m.Params.Equals(other.Params) { return false }
+	if !compareSlices(m.RequestHeader, other.RequestHeader) { return false }
+	if !m.RequestId.Equals(other.RequestId) { return false }
+	if !m.ResponseId.Equals(other.ResponseId) { return false }
+	if !m.SourceId.Equals(other.SourceId) { return false }
+	if !m.TargetId.Equals(other.TargetId) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	return true
+}
+
 // TestScriptRequestHeader
 // Header elements would be used to set HTTP headers.
 type TestScriptRequestHeader struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// field
-	// The HTTP header field e.g. "Accept".
-	Field FhirString `json:"field,omitempty"`
-	// value
-	// The value of the header e.g. "application/fhir+xml".
-	Value FhirString `json:"value,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Field *FhirString `json:"field,omitempty"`
+	Value *FhirString `json:"value,omitempty"`
 }
 
 // NewTestScriptRequestHeader creates a new TestScriptRequestHeader instance
-func NewTestScriptRequestHeader(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	field FhirString,
-	value FhirString,
-) *TestScriptRequestHeader {
-	return &TestScriptRequestHeader{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Field: field,
-		Value: value,
-	}
+func NewTestScriptRequestHeader() *TestScriptRequestHeader {
+	return &TestScriptRequestHeader{}
 }
+
 // FromJSON populates TestScriptRequestHeader from JSON data
 func (m *TestScriptRequestHeader) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1466,176 +740,66 @@ func (m *TestScriptRequestHeader) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TestScriptRequestHeader
-func (m *TestScriptRequestHeader) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	field *FhirString,
-	value *FhirString,
-) *TestScriptRequestHeader {
+// Clone creates a deep copy of TestScriptRequestHeader
+func (m *TestScriptRequestHeader) Clone() *TestScriptRequestHeader {
+	if m == nil { return nil }
 	return &TestScriptRequestHeader{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Field: func() FhirString {
-			if field != nil { return *field }
-			return m.Field
-		}(),
-		Value: func() FhirString {
-			if value != nil { return *value }
-			return m.Value
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Field: m.Field.Clone(),
+		Value: m.Value.Clone(),
 	}
 }
+
+// Equals checks for equality with another TestScriptRequestHeader instance
+func (m *TestScriptRequestHeader) Equals(other *TestScriptRequestHeader) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Field.Equals(other.Field) { return false }
+	if !m.Value.Equals(other.Value) { return false }
+	return true
+}
+
 // TestScriptAssert
 // Evaluates the results of previous operations to determine if the server under test behaves appropriately.
 type TestScriptAssert struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// label
-	// The label would be used for tracking/logging purposes by test engines.
-	Label FhirString `json:"label,omitempty"`
-	// description
-	// The description would be used by test engines for tracking and reporting purposes.
-	Description FhirString `json:"description,omitempty"`
-	// direction
-	// The direction to use for the assertion.
-	Direction AssertionDirectionType `json:"direction,omitempty"`
-	// compareToSourceId
-	// Id of the source fixture used as the contents to be evaluated by either the "source/expression" or "sourceId/path" definition.
-	CompareToSourceId FhirString `json:"compareToSourceId,omitempty"`
-	// compareToSourceExpression
-	// The FHIRPath expression to evaluate against the source fixture. When compareToSourceId is defined, either compareToSourceExpression or compareToSourcePath must be defined, but not both.
-	CompareToSourceExpression FhirString `json:"compareToSourceExpression,omitempty"`
-	// compareToSourcePath
-	// XPath or JSONPath expression to evaluate against the source fixture. When compareToSourceId is defined, either compareToSourceExpression or compareToSourcePath must be defined, but not both.
-	CompareToSourcePath FhirString `json:"compareToSourcePath,omitempty"`
-	// contentType
-	// The mime-type contents to compare against the request or response message 'Content-Type' header.
-	ContentType FhirCode `json:"contentType,omitempty"`
-	// expression
-	// The FHIRPath expression to be evaluated against the request or response message contents - HTTP headers and payload.
-	Expression FhirString `json:"expression,omitempty"`
-	// headerField
-	// The HTTP header field name e.g. 'Location'.
-	HeaderField FhirString `json:"headerField,omitempty"`
-	// minimumId
-	// The ID of a fixture.  Asserts that the response contains at a minimum the fixture specified by minimumId.
-	MinimumId FhirString `json:"minimumId,omitempty"`
-	// navigationLinks
-	// Whether or not the test execution performs validation on the bundle navigation links.
-	NavigationLinks FhirBoolean `json:"navigationLinks,omitempty"`
-	// operator
-	// The operator type defines the conditional behavior of the assert. If not defined, the default is equals.
-	Operator_ AssertionOperatorType `json:"operator,omitempty"`
-	// path
-	// The XPath or JSONPath expression to be evaluated against the fixture representing the response received from server.
-	Path FhirString `json:"path,omitempty"`
-	// requestMethod
-	// The request method or HTTP operation code to compare against that used by the client system under test.
-	RequestMethod TestScriptRequestMethodCode `json:"requestMethod,omitempty"`
-	// requestURL
-	// The value to use in a comparison against the request URL path string.
-	RequestURL FhirString `json:"requestURL,omitempty"`
-	// resource
-	// The type of the resource.  See http://build.fhir.org/resourcelist.html.
-	Resource FhirCode `json:"resource,omitempty"`
-	// response
-	// okay | created | noContent | notModified | bad | forbidden | notFound | methodNotAllowed | conflict | gone | preconditionFailed | unprocessable.
-	Response AssertionResponseTypes `json:"response,omitempty"`
-	// responseCode
-	// The value of the HTTP response code to be tested.
-	ResponseCode FhirString `json:"responseCode,omitempty"`
-	// sourceId
-	// Fixture to evaluate the XPath/JSONPath expression or the headerField  against.
-	SourceId FhirId `json:"sourceId,omitempty"`
-	// validateProfileId
-	// The ID of the Profile to validate against.
-	ValidateProfileId FhirId `json:"validateProfileId,omitempty"`
-	// value
-	// The value to compare to.
-	Value FhirString `json:"value,omitempty"`
-	// warningOnly
-	// Whether or not the test execution will produce a warning only on error for this assert.
-	WarningOnly FhirBoolean `json:"warningOnly,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Label *FhirString `json:"label,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Direction *AssertionDirectionType `json:"direction,omitempty"`
+	CompareToSourceId *FhirString `json:"comparetosourceid,omitempty"`
+	CompareToSourceExpression *FhirString `json:"comparetosourceexpression,omitempty"`
+	CompareToSourcePath *FhirString `json:"comparetosourcepath,omitempty"`
+	ContentType *FhirCode `json:"contenttype,omitempty"`
+	Expression *FhirString `json:"expression,omitempty"`
+	HeaderField *FhirString `json:"headerfield,omitempty"`
+	MinimumId *FhirString `json:"minimumid,omitempty"`
+	NavigationLinks *FhirBoolean `json:"navigationlinks,omitempty"`
+	Operator_ *AssertionOperatorType `json:"operator,omitempty"`
+	Path *FhirString `json:"path,omitempty"`
+	RequestMethod *TestScriptRequestMethodCode `json:"requestmethod,omitempty"`
+	RequestURL *FhirString `json:"requesturl,omitempty"`
+	Resource *FhirCode `json:"resource,omitempty"`
+	Response *AssertionResponseTypes `json:"response,omitempty"`
+	ResponseCode *FhirString `json:"responsecode,omitempty"`
+	SourceId *FhirId `json:"sourceid,omitempty"`
+	ValidateProfileId *FhirId `json:"validateprofileid,omitempty"`
+	Value *FhirString `json:"value,omitempty"`
+	WarningOnly *FhirBoolean `json:"warningonly,omitempty"`
 }
 
 // NewTestScriptAssert creates a new TestScriptAssert instance
-func NewTestScriptAssert(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	label FhirString,
-	description FhirString,
-	direction AssertionDirectionType,
-	compareToSourceId FhirString,
-	compareToSourceExpression FhirString,
-	compareToSourcePath FhirString,
-	contentType FhirCode,
-	expression FhirString,
-	headerField FhirString,
-	minimumId FhirString,
-	navigationLinks FhirBoolean,
-	operator_ AssertionOperatorType,
-	path FhirString,
-	requestMethod TestScriptRequestMethodCode,
-	requestURL FhirString,
-	resource FhirCode,
-	response AssertionResponseTypes,
-	responseCode FhirString,
-	sourceId FhirId,
-	validateProfileId FhirId,
-	value FhirString,
-	warningOnly FhirBoolean,
-) *TestScriptAssert {
-	return &TestScriptAssert{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Label: label,
-		Description: description,
-		Direction: direction,
-		CompareToSourceId: compareToSourceId,
-		CompareToSourceExpression: compareToSourceExpression,
-		CompareToSourcePath: compareToSourcePath,
-		ContentType: contentType,
-		Expression: expression,
-		HeaderField: headerField,
-		MinimumId: minimumId,
-		NavigationLinks: navigationLinks,
-		Operator_: operator_,
-		Path: path,
-		RequestMethod: requestMethod,
-		RequestURL: requestURL,
-		Resource: resource,
-		Response: response,
-		ResponseCode: responseCode,
-		SourceId: sourceId,
-		ValidateProfileId: validateProfileId,
-		Value: value,
-		WarningOnly: warningOnly,
-	}
+func NewTestScriptAssert() *TestScriptAssert {
+	return &TestScriptAssert{}
 }
+
 // FromJSON populates TestScriptAssert from JSON data
 func (m *TestScriptAssert) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1646,181 +810,87 @@ func (m *TestScriptAssert) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TestScriptAssert
-func (m *TestScriptAssert) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	label *FhirString,
-	description *FhirString,
-	direction *AssertionDirectionType,
-	compareToSourceId *FhirString,
-	compareToSourceExpression *FhirString,
-	compareToSourcePath *FhirString,
-	contentType *FhirCode,
-	expression *FhirString,
-	headerField *FhirString,
-	minimumId *FhirString,
-	navigationLinks *FhirBoolean,
-	operator_ *AssertionOperatorType,
-	path *FhirString,
-	requestMethod *TestScriptRequestMethodCode,
-	requestURL *FhirString,
-	resource *FhirCode,
-	response *AssertionResponseTypes,
-	responseCode *FhirString,
-	sourceId *FhirId,
-	validateProfileId *FhirId,
-	value *FhirString,
-	warningOnly *FhirBoolean,
-) *TestScriptAssert {
+// Clone creates a deep copy of TestScriptAssert
+func (m *TestScriptAssert) Clone() *TestScriptAssert {
+	if m == nil { return nil }
 	return &TestScriptAssert{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Label: func() FhirString {
-			if label != nil { return *label }
-			return m.Label
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Direction: func() AssertionDirectionType {
-			if direction != nil { return *direction }
-			return m.Direction
-		}(),
-		CompareToSourceId: func() FhirString {
-			if compareToSourceId != nil { return *compareToSourceId }
-			return m.CompareToSourceId
-		}(),
-		CompareToSourceExpression: func() FhirString {
-			if compareToSourceExpression != nil { return *compareToSourceExpression }
-			return m.CompareToSourceExpression
-		}(),
-		CompareToSourcePath: func() FhirString {
-			if compareToSourcePath != nil { return *compareToSourcePath }
-			return m.CompareToSourcePath
-		}(),
-		ContentType: func() FhirCode {
-			if contentType != nil { return *contentType }
-			return m.ContentType
-		}(),
-		Expression: func() FhirString {
-			if expression != nil { return *expression }
-			return m.Expression
-		}(),
-		HeaderField: func() FhirString {
-			if headerField != nil { return *headerField }
-			return m.HeaderField
-		}(),
-		MinimumId: func() FhirString {
-			if minimumId != nil { return *minimumId }
-			return m.MinimumId
-		}(),
-		NavigationLinks: func() FhirBoolean {
-			if navigationLinks != nil { return *navigationLinks }
-			return m.NavigationLinks
-		}(),
-		Operator_: func() AssertionOperatorType {
-			if operator_ != nil { return *operator_ }
-			return m.Operator_
-		}(),
-		Path: func() FhirString {
-			if path != nil { return *path }
-			return m.Path
-		}(),
-		RequestMethod: func() TestScriptRequestMethodCode {
-			if requestMethod != nil { return *requestMethod }
-			return m.RequestMethod
-		}(),
-		RequestURL: func() FhirString {
-			if requestURL != nil { return *requestURL }
-			return m.RequestURL
-		}(),
-		Resource: func() FhirCode {
-			if resource != nil { return *resource }
-			return m.Resource
-		}(),
-		Response: func() AssertionResponseTypes {
-			if response != nil { return *response }
-			return m.Response
-		}(),
-		ResponseCode: func() FhirString {
-			if responseCode != nil { return *responseCode }
-			return m.ResponseCode
-		}(),
-		SourceId: func() FhirId {
-			if sourceId != nil { return *sourceId }
-			return m.SourceId
-		}(),
-		ValidateProfileId: func() FhirId {
-			if validateProfileId != nil { return *validateProfileId }
-			return m.ValidateProfileId
-		}(),
-		Value: func() FhirString {
-			if value != nil { return *value }
-			return m.Value
-		}(),
-		WarningOnly: func() FhirBoolean {
-			if warningOnly != nil { return *warningOnly }
-			return m.WarningOnly
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Label: m.Label.Clone(),
+		Description: m.Description.Clone(),
+		Direction: m.Direction.Clone(),
+		CompareToSourceId: m.CompareToSourceId.Clone(),
+		CompareToSourceExpression: m.CompareToSourceExpression.Clone(),
+		CompareToSourcePath: m.CompareToSourcePath.Clone(),
+		ContentType: m.ContentType.Clone(),
+		Expression: m.Expression.Clone(),
+		HeaderField: m.HeaderField.Clone(),
+		MinimumId: m.MinimumId.Clone(),
+		NavigationLinks: m.NavigationLinks.Clone(),
+		Operator_: m.Operator_.Clone(),
+		Path: m.Path.Clone(),
+		RequestMethod: m.RequestMethod.Clone(),
+		RequestURL: m.RequestURL.Clone(),
+		Resource: m.Resource.Clone(),
+		Response: m.Response.Clone(),
+		ResponseCode: m.ResponseCode.Clone(),
+		SourceId: m.SourceId.Clone(),
+		ValidateProfileId: m.ValidateProfileId.Clone(),
+		Value: m.Value.Clone(),
+		WarningOnly: m.WarningOnly.Clone(),
 	}
 }
+
+// Equals checks for equality with another TestScriptAssert instance
+func (m *TestScriptAssert) Equals(other *TestScriptAssert) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Label.Equals(other.Label) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.Direction.Equals(other.Direction) { return false }
+	if !m.CompareToSourceId.Equals(other.CompareToSourceId) { return false }
+	if !m.CompareToSourceExpression.Equals(other.CompareToSourceExpression) { return false }
+	if !m.CompareToSourcePath.Equals(other.CompareToSourcePath) { return false }
+	if !m.ContentType.Equals(other.ContentType) { return false }
+	if !m.Expression.Equals(other.Expression) { return false }
+	if !m.HeaderField.Equals(other.HeaderField) { return false }
+	if !m.MinimumId.Equals(other.MinimumId) { return false }
+	if !m.NavigationLinks.Equals(other.NavigationLinks) { return false }
+	if !m.Operator_.Equals(other.Operator_) { return false }
+	if !m.Path.Equals(other.Path) { return false }
+	if !m.RequestMethod.Equals(other.RequestMethod) { return false }
+	if !m.RequestURL.Equals(other.RequestURL) { return false }
+	if !m.Resource.Equals(other.Resource) { return false }
+	if !m.Response.Equals(other.Response) { return false }
+	if !m.ResponseCode.Equals(other.ResponseCode) { return false }
+	if !m.SourceId.Equals(other.SourceId) { return false }
+	if !m.ValidateProfileId.Equals(other.ValidateProfileId) { return false }
+	if !m.Value.Equals(other.Value) { return false }
+	if !m.WarningOnly.Equals(other.WarningOnly) { return false }
+	return true
+}
+
 // TestScriptTest
 // A test in this script.
 type TestScriptTest struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// name
-	// The name of this test used for tracking/logging purposes by test engines.
-	Name FhirString `json:"name,omitempty"`
-	// description
-	// A short description of the test used by test engines for tracking and reporting purposes.
-	Description FhirString `json:"description,omitempty"`
-	// action
-	// Action would contain either an operation or an assertion.
-	Action []TestScriptAction `json:"action,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Action []*TestScriptAction `json:"action,omitempty"`
 }
 
 // NewTestScriptTest creates a new TestScriptTest instance
-func NewTestScriptTest(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	name FhirString,
-	description FhirString,
-	action []TestScriptAction,
-) *TestScriptTest {
-	return &TestScriptTest{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Name: name,
-		Description: description,
-		Action: action,
-	}
+func NewTestScriptTest() *TestScriptTest {
+	return &TestScriptTest{}
 }
+
 // FromJSON populates TestScriptTest from JSON data
 func (m *TestScriptTest) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1831,81 +901,48 @@ func (m *TestScriptTest) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TestScriptTest
-func (m *TestScriptTest) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	name *FhirString,
-	description *FhirString,
-	action *[]TestScriptAction,
-) *TestScriptTest {
+// Clone creates a deep copy of TestScriptTest
+func (m *TestScriptTest) Clone() *TestScriptTest {
+	if m == nil { return nil }
 	return &TestScriptTest{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Action: func() []TestScriptAction {
-			if action != nil { return *action }
-			return m.Action
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Name: m.Name.Clone(),
+		Description: m.Description.Clone(),
+		Action: cloneSlices(m.Action),
 	}
 }
+
+// Equals checks for equality with another TestScriptTest instance
+func (m *TestScriptTest) Equals(other *TestScriptTest) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.Action, other.Action) { return false }
+	return true
+}
+
 // TestScriptAction1
 // Action would contain either an operation or an assertion.
 type TestScriptAction1 struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// operation
-	// An operation would involve a REST request to a server.
-	Operation TestScriptOperation `json:"operation,omitempty"`
-	// assert
-	// Evaluates the results of previous operations to determine if the server under test behaves appropriately.
-	Assert_ TestScriptAssert `json:"assert,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Operation *TestScriptOperation `json:"operation,omitempty"`
+	Assert_ *TestScriptAssert `json:"assert,omitempty"`
 }
 
 // NewTestScriptAction1 creates a new TestScriptAction1 instance
-func NewTestScriptAction1(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	operation TestScriptOperation,
-	assert_ TestScriptAssert,
-) *TestScriptAction1 {
-	return &TestScriptAction1{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Operation: operation,
-		Assert_: assert_,
-	}
+func NewTestScriptAction1() *TestScriptAction1 {
+	return &TestScriptAction1{}
 }
+
 // FromJSON populates TestScriptAction1 from JSON data
 func (m *TestScriptAction1) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1916,71 +953,45 @@ func (m *TestScriptAction1) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TestScriptAction1
-func (m *TestScriptAction1) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	operation *TestScriptOperation,
-	assert_ *TestScriptAssert,
-) *TestScriptAction1 {
+// Clone creates a deep copy of TestScriptAction1
+func (m *TestScriptAction1) Clone() *TestScriptAction1 {
+	if m == nil { return nil }
 	return &TestScriptAction1{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Operation: func() TestScriptOperation {
-			if operation != nil { return *operation }
-			return m.Operation
-		}(),
-		Assert_: func() TestScriptAssert {
-			if assert_ != nil { return *assert_ }
-			return m.Assert_
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Operation: m.Operation.Clone(),
+		Assert_: m.Assert_.Clone(),
 	}
 }
+
+// Equals checks for equality with another TestScriptAction1 instance
+func (m *TestScriptAction1) Equals(other *TestScriptAction1) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Operation.Equals(other.Operation) { return false }
+	if !m.Assert_.Equals(other.Assert_) { return false }
+	return true
+}
+
 // TestScriptTeardown
 // A series of operations required to clean up after all the tests are executed (successfully or otherwise).
 type TestScriptTeardown struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// action
-	// The teardown action will only contain an operation.
-	Action []TestScriptAction `json:"action,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Action []*TestScriptAction `json:"action,omitempty"`
 }
 
 // NewTestScriptTeardown creates a new TestScriptTeardown instance
-func NewTestScriptTeardown(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	action []TestScriptAction,
-) *TestScriptTeardown {
-	return &TestScriptTeardown{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Action: action,
-	}
+func NewTestScriptTeardown() *TestScriptTeardown {
+	return &TestScriptTeardown{}
 }
+
 // FromJSON populates TestScriptTeardown from JSON data
 func (m *TestScriptTeardown) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1991,66 +1002,43 @@ func (m *TestScriptTeardown) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TestScriptTeardown
-func (m *TestScriptTeardown) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	action *[]TestScriptAction,
-) *TestScriptTeardown {
+// Clone creates a deep copy of TestScriptTeardown
+func (m *TestScriptTeardown) Clone() *TestScriptTeardown {
+	if m == nil { return nil }
 	return &TestScriptTeardown{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Action: func() []TestScriptAction {
-			if action != nil { return *action }
-			return m.Action
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Action: cloneSlices(m.Action),
 	}
 }
+
+// Equals checks for equality with another TestScriptTeardown instance
+func (m *TestScriptTeardown) Equals(other *TestScriptTeardown) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Action, other.Action) { return false }
+	return true
+}
+
 // TestScriptAction2
 // The teardown action will only contain an operation.
 type TestScriptAction2 struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// operation
-	// An operation would involve a REST request to a server.
-	Operation TestScriptOperation `json:"operation,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Operation *TestScriptOperation `json:"operation,omitempty"`
 }
 
 // NewTestScriptAction2 creates a new TestScriptAction2 instance
-func NewTestScriptAction2(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	operation TestScriptOperation,
-) *TestScriptAction2 {
-	return &TestScriptAction2{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Operation: operation,
-	}
+func NewTestScriptAction2() *TestScriptAction2 {
+	return &TestScriptAction2{}
 }
+
 // FromJSON populates TestScriptAction2 from JSON data
 func (m *TestScriptAction2) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -2061,29 +1049,25 @@ func (m *TestScriptAction2) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of TestScriptAction2
-func (m *TestScriptAction2) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	operation *TestScriptOperation,
-) *TestScriptAction2 {
+// Clone creates a deep copy of TestScriptAction2
+func (m *TestScriptAction2) Clone() *TestScriptAction2 {
+	if m == nil { return nil }
 	return &TestScriptAction2{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Operation: func() TestScriptOperation {
-			if operation != nil { return *operation }
-			return m.Operation
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Operation: m.Operation.Clone(),
 	}
 }
+
+// Equals checks for equality with another TestScriptAction2 instance
+func (m *TestScriptAction2) Equals(other *TestScriptAction2) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Operation.Equals(other.Operation) { return false }
+	return true
+}
+

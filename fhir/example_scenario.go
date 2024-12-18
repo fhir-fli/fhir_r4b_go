@@ -3,149 +3,44 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // ExampleScenario
 // Example of workflow instance.
 type ExampleScenario struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// url
-	// An absolute URI that is used to identify this example scenario when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this example scenario is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the example scenario is stored on different servers.
-	Url FhirUri `json:"url,omitempty"`
-	// identifier
-	// A formal identifier that is used to identify this example scenario when it is represented in other formats, or referenced in a specification, model, design or an instance.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// version
-	// The identifier that is used to identify this version of the example scenario when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the example scenario author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.
-	Version FhirString `json:"version,omitempty"`
-	// name
-	// A natural language name identifying the example scenario. This name should be usable as an identifier for the module by machine processing applications such as code generation.
-	Name FhirString `json:"name,omitempty"`
-	// status
-	// The status of this example scenario. Enables tracking the life-cycle of the content.
-	Status PublicationStatus `json:"status,omitempty"`
-	// experimental
-	// A Boolean value to indicate that this example scenario is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.
-	Experimental FhirBoolean `json:"experimental,omitempty"`
-	// date
-	// The date  (and optionally time) when the example scenario was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the example scenario changes. (e.g. the 'content logical definition').
-	Date FhirDateTime `json:"date,omitempty"`
-	// publisher
-	// The name of the organization or individual that published the example scenario.
-	Publisher FhirString `json:"publisher,omitempty"`
-	// contact
-	// Contact details to assist a user in finding and communicating with the publisher.
-	Contact []ContactDetail `json:"contact,omitempty"`
-	// useContext
-	// The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate example scenario instances.
-	UseContext []UsageContext `json:"useContext,omitempty"`
-	// jurisdiction
-	// A legal or geographic region in which the example scenario is intended to be used.
-	Jurisdiction []CodeableConcept `json:"jurisdiction,omitempty"`
-	// copyright
-	// A copyright statement relating to the example scenario and/or its contents. Copyright statements are generally legal restrictions on the use and publishing of the example scenario.
-	Copyright FhirMarkdown `json:"copyright,omitempty"`
-	// purpose
-	// What the example scenario resource is created for. This should not be used to show the business purpose of the scenario itself, but the purpose of documenting a scenario.
-	Purpose FhirMarkdown `json:"purpose,omitempty"`
-	// actor
-	// Actor participating in the resource.
-	Actor []ExampleScenarioActor `json:"actor,omitempty"`
-	// instance
-	// Each resource and each version that is present in the workflow.
-	Instance []ExampleScenarioInstance `json:"instance,omitempty"`
-	// process
-	// Each major process - a group of operations.
-	Process []ExampleScenarioProcess `json:"process,omitempty"`
-	// workflow
-	// Another nested workflow.
-	Workflow []FhirCanonical `json:"workflow,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Url *FhirUri `json:"url,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Status *PublicationStatus `json:"status,omitempty"`
+	Experimental *FhirBoolean `json:"experimental,omitempty"`
+	Date *FhirDateTime `json:"date,omitempty"`
+	Publisher *FhirString `json:"publisher,omitempty"`
+	Contact []*ContactDetail `json:"contact,omitempty"`
+	UseContext []*UsageContext `json:"usecontext,omitempty"`
+	Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+	Copyright *FhirMarkdown `json:"copyright,omitempty"`
+	Purpose *FhirMarkdown `json:"purpose,omitempty"`
+	Actor []*ExampleScenarioActor `json:"actor,omitempty"`
+	Instance []*ExampleScenarioInstance `json:"instance,omitempty"`
+	Process []*ExampleScenarioProcess `json:"process,omitempty"`
+	Workflow []*FhirCanonical `json:"workflow,omitempty"`
 }
 
 // NewExampleScenario creates a new ExampleScenario instance
-func NewExampleScenario(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	url FhirUri,
-	identifier []Identifier,
-	version FhirString,
-	name FhirString,
-	status PublicationStatus,
-	experimental FhirBoolean,
-	date FhirDateTime,
-	publisher FhirString,
-	contact []ContactDetail,
-	useContext []UsageContext,
-	jurisdiction []CodeableConcept,
-	copyright FhirMarkdown,
-	purpose FhirMarkdown,
-	actor []ExampleScenarioActor,
-	instance []ExampleScenarioInstance,
-	process []ExampleScenarioProcess,
-	workflow []FhirCanonical,
-) *ExampleScenario {
-	return &ExampleScenario{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Url: url,
-		Identifier: identifier,
-		Version: version,
-		Name: name,
-		Status: status,
-		Experimental: experimental,
-		Date: date,
-		Publisher: publisher,
-		Contact: contact,
-		UseContext: useContext,
-		Jurisdiction: jurisdiction,
-		Copyright: copyright,
-		Purpose: purpose,
-		Actor: actor,
-		Instance: instance,
-		Process: process,
-		Workflow: workflow,
-	}
+func NewExampleScenario() *ExampleScenario {
+	return &ExampleScenario{}
 }
+
 // FromJSON populates ExampleScenario from JSON data
 func (m *ExampleScenario) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -156,186 +51,88 @@ func (m *ExampleScenario) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ExampleScenario
-func (m *ExampleScenario) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	url *FhirUri,
-	identifier *[]Identifier,
-	version *FhirString,
-	name *FhirString,
-	status *PublicationStatus,
-	experimental *FhirBoolean,
-	date *FhirDateTime,
-	publisher *FhirString,
-	contact *[]ContactDetail,
-	useContext *[]UsageContext,
-	jurisdiction *[]CodeableConcept,
-	copyright *FhirMarkdown,
-	purpose *FhirMarkdown,
-	actor *[]ExampleScenarioActor,
-	instance *[]ExampleScenarioInstance,
-	process *[]ExampleScenarioProcess,
-	workflow *[]FhirCanonical,
-) *ExampleScenario {
+// Clone creates a deep copy of ExampleScenario
+func (m *ExampleScenario) Clone() *ExampleScenario {
+	if m == nil { return nil }
 	return &ExampleScenario{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Url: func() FhirUri {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Status: func() PublicationStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Experimental: func() FhirBoolean {
-			if experimental != nil { return *experimental }
-			return m.Experimental
-		}(),
-		Date: func() FhirDateTime {
-			if date != nil { return *date }
-			return m.Date
-		}(),
-		Publisher: func() FhirString {
-			if publisher != nil { return *publisher }
-			return m.Publisher
-		}(),
-		Contact: func() []ContactDetail {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
-		UseContext: func() []UsageContext {
-			if useContext != nil { return *useContext }
-			return m.UseContext
-		}(),
-		Jurisdiction: func() []CodeableConcept {
-			if jurisdiction != nil { return *jurisdiction }
-			return m.Jurisdiction
-		}(),
-		Copyright: func() FhirMarkdown {
-			if copyright != nil { return *copyright }
-			return m.Copyright
-		}(),
-		Purpose: func() FhirMarkdown {
-			if purpose != nil { return *purpose }
-			return m.Purpose
-		}(),
-		Actor: func() []ExampleScenarioActor {
-			if actor != nil { return *actor }
-			return m.Actor
-		}(),
-		Instance: func() []ExampleScenarioInstance {
-			if instance != nil { return *instance }
-			return m.Instance
-		}(),
-		Process: func() []ExampleScenarioProcess {
-			if process != nil { return *process }
-			return m.Process
-		}(),
-		Workflow: func() []FhirCanonical {
-			if workflow != nil { return *workflow }
-			return m.Workflow
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Url: m.Url.Clone(),
+		Identifier: cloneSlices(m.Identifier),
+		Version: m.Version.Clone(),
+		Name: m.Name.Clone(),
+		Status: m.Status.Clone(),
+		Experimental: m.Experimental.Clone(),
+		Date: m.Date.Clone(),
+		Publisher: m.Publisher.Clone(),
+		Contact: cloneSlices(m.Contact),
+		UseContext: cloneSlices(m.UseContext),
+		Jurisdiction: cloneSlices(m.Jurisdiction),
+		Copyright: m.Copyright.Clone(),
+		Purpose: m.Purpose.Clone(),
+		Actor: cloneSlices(m.Actor),
+		Instance: cloneSlices(m.Instance),
+		Process: cloneSlices(m.Process),
+		Workflow: cloneSlices(m.Workflow),
 	}
 }
+
+// Equals checks for equality with another ExampleScenario instance
+func (m *ExampleScenario) Equals(other *ExampleScenario) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Experimental.Equals(other.Experimental) { return false }
+	if !m.Date.Equals(other.Date) { return false }
+	if !m.Publisher.Equals(other.Publisher) { return false }
+	if !compareSlices(m.Contact, other.Contact) { return false }
+	if !compareSlices(m.UseContext, other.UseContext) { return false }
+	if !compareSlices(m.Jurisdiction, other.Jurisdiction) { return false }
+	if !m.Copyright.Equals(other.Copyright) { return false }
+	if !m.Purpose.Equals(other.Purpose) { return false }
+	if !compareSlices(m.Actor, other.Actor) { return false }
+	if !compareSlices(m.Instance, other.Instance) { return false }
+	if !compareSlices(m.Process, other.Process) { return false }
+	if !compareSlices(m.Workflow, other.Workflow) { return false }
+	return true
+}
+
 // ExampleScenarioActor
 // Actor participating in the resource.
 type ExampleScenarioActor struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// actorId
-	// ID or acronym of actor.
-	ActorId FhirString `json:"actorId,omitempty"`
-	// type
-	// The type of actor - person or system.
-	Type_ ExampleScenarioActorType `json:"type,omitempty"`
-	// name
-	// The name of the actor as shown in the page.
-	Name FhirString `json:"name,omitempty"`
-	// description
-	// The description of the actor.
-	Description FhirMarkdown `json:"description,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	ActorId *FhirString `json:"actorid,omitempty"`
+	Type *ExampleScenarioActorType `json:"type,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
 }
 
 // NewExampleScenarioActor creates a new ExampleScenarioActor instance
-func NewExampleScenarioActor(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	actorId FhirString,
-	type_ ExampleScenarioActorType,
-	name FhirString,
-	description FhirMarkdown,
-) *ExampleScenarioActor {
-	return &ExampleScenarioActor{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		ActorId: actorId,
-		Type_: type_,
-		Name: name,
-		Description: description,
-	}
+func NewExampleScenarioActor() *ExampleScenarioActor {
+	return &ExampleScenarioActor{}
 }
+
 // FromJSON populates ExampleScenarioActor from JSON data
 func (m *ExampleScenarioActor) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -346,106 +143,54 @@ func (m *ExampleScenarioActor) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ExampleScenarioActor
-func (m *ExampleScenarioActor) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	actorId *FhirString,
-	type_ *ExampleScenarioActorType,
-	name *FhirString,
-	description *FhirMarkdown,
-) *ExampleScenarioActor {
+// Clone creates a deep copy of ExampleScenarioActor
+func (m *ExampleScenarioActor) Clone() *ExampleScenarioActor {
+	if m == nil { return nil }
 	return &ExampleScenarioActor{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		ActorId: func() FhirString {
-			if actorId != nil { return *actorId }
-			return m.ActorId
-		}(),
-		Type_: func() ExampleScenarioActorType {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		ActorId: m.ActorId.Clone(),
+		Type: m.Type.Clone(),
+		Name: m.Name.Clone(),
+		Description: m.Description.Clone(),
 	}
 }
+
+// Equals checks for equality with another ExampleScenarioActor instance
+func (m *ExampleScenarioActor) Equals(other *ExampleScenarioActor) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.ActorId.Equals(other.ActorId) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	return true
+}
+
 // ExampleScenarioInstance
 // Each resource and each version that is present in the workflow.
 type ExampleScenarioInstance struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// resourceId
-	// The id of the resource for referencing.
-	ResourceId FhirString `json:"resourceId,omitempty"`
-	// resourceType
-	// The type of the resource.
-	ResourceType FhirCode `json:"resourceType,omitempty"`
-	// name
-	// A short name for the resource instance.
-	Name FhirString `json:"name,omitempty"`
-	// description
-	// Human-friendly description of the resource instance.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// version
-	// A specific version of the resource.
-	Version []ExampleScenarioVersion `json:"version,omitempty"`
-	// containedInstance
-	// Resources contained in the instance (e.g. the observations contained in a bundle).
-	ContainedInstance []ExampleScenarioContainedInstance `json:"containedInstance,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	ResourceId *FhirString `json:"resourceid,omitempty"`
+	ResourceType *FhirCode `json:"resourcetype,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	Version []*ExampleScenarioVersion `json:"version,omitempty"`
+	ContainedInstance []*ExampleScenarioContainedInstance `json:"containedinstance,omitempty"`
 }
 
 // NewExampleScenarioInstance creates a new ExampleScenarioInstance instance
-func NewExampleScenarioInstance(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	resourceId FhirString,
-	resourceType FhirCode,
-	name FhirString,
-	description FhirMarkdown,
-	version []ExampleScenarioVersion,
-	containedInstance []ExampleScenarioContainedInstance,
-) *ExampleScenarioInstance {
-	return &ExampleScenarioInstance{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		ResourceId: resourceId,
-		ResourceType: resourceType,
-		Name: name,
-		Description: description,
-		Version: version,
-		ContainedInstance: containedInstance,
-	}
+func NewExampleScenarioInstance() *ExampleScenarioInstance {
+	return &ExampleScenarioInstance{}
 }
+
 // FromJSON populates ExampleScenarioInstance from JSON data
 func (m *ExampleScenarioInstance) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -456,96 +201,54 @@ func (m *ExampleScenarioInstance) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ExampleScenarioInstance
-func (m *ExampleScenarioInstance) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	resourceId *FhirString,
-	resourceType *FhirCode,
-	name *FhirString,
-	description *FhirMarkdown,
-	version *[]ExampleScenarioVersion,
-	containedInstance *[]ExampleScenarioContainedInstance,
-) *ExampleScenarioInstance {
+// Clone creates a deep copy of ExampleScenarioInstance
+func (m *ExampleScenarioInstance) Clone() *ExampleScenarioInstance {
+	if m == nil { return nil }
 	return &ExampleScenarioInstance{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		ResourceId: func() FhirString {
-			if resourceId != nil { return *resourceId }
-			return m.ResourceId
-		}(),
-		ResourceType: func() FhirCode {
-			if resourceType != nil { return *resourceType }
-			return m.ResourceType
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Version: func() []ExampleScenarioVersion {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		ContainedInstance: func() []ExampleScenarioContainedInstance {
-			if containedInstance != nil { return *containedInstance }
-			return m.ContainedInstance
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		ResourceId: m.ResourceId.Clone(),
+		ResourceType: m.ResourceType.Clone(),
+		Name: m.Name.Clone(),
+		Description: m.Description.Clone(),
+		Version: cloneSlices(m.Version),
+		ContainedInstance: cloneSlices(m.ContainedInstance),
 	}
 }
+
+// Equals checks for equality with another ExampleScenarioInstance instance
+func (m *ExampleScenarioInstance) Equals(other *ExampleScenarioInstance) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.ResourceId.Equals(other.ResourceId) { return false }
+	if !m.ResourceType.Equals(other.ResourceType) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.Version, other.Version) { return false }
+	if !compareSlices(m.ContainedInstance, other.ContainedInstance) { return false }
+	return true
+}
+
 // ExampleScenarioVersion
 // A specific version of the resource.
 type ExampleScenarioVersion struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// versionId
-	// The identifier of a specific version of a resource.
-	VersionId FhirString `json:"versionId,omitempty"`
-	// description
-	// The description of the resource version.
-	Description FhirMarkdown `json:"description,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	VersionId *FhirString `json:"versionid,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
 }
 
 // NewExampleScenarioVersion creates a new ExampleScenarioVersion instance
-func NewExampleScenarioVersion(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	versionId FhirString,
-	description FhirMarkdown,
-) *ExampleScenarioVersion {
-	return &ExampleScenarioVersion{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		VersionId: versionId,
-		Description: description,
-	}
+func NewExampleScenarioVersion() *ExampleScenarioVersion {
+	return &ExampleScenarioVersion{}
 }
+
 // FromJSON populates ExampleScenarioVersion from JSON data
 func (m *ExampleScenarioVersion) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -556,76 +259,46 @@ func (m *ExampleScenarioVersion) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ExampleScenarioVersion
-func (m *ExampleScenarioVersion) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	versionId *FhirString,
-	description *FhirMarkdown,
-) *ExampleScenarioVersion {
+// Clone creates a deep copy of ExampleScenarioVersion
+func (m *ExampleScenarioVersion) Clone() *ExampleScenarioVersion {
+	if m == nil { return nil }
 	return &ExampleScenarioVersion{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		VersionId: func() FhirString {
-			if versionId != nil { return *versionId }
-			return m.VersionId
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		VersionId: m.VersionId.Clone(),
+		Description: m.Description.Clone(),
 	}
 }
+
+// Equals checks for equality with another ExampleScenarioVersion instance
+func (m *ExampleScenarioVersion) Equals(other *ExampleScenarioVersion) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.VersionId.Equals(other.VersionId) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	return true
+}
+
 // ExampleScenarioContainedInstance
 // Resources contained in the instance (e.g. the observations contained in a bundle).
 type ExampleScenarioContainedInstance struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// resourceId
-	// Each resource contained in the instance.
-	ResourceId FhirString `json:"resourceId,omitempty"`
-	// versionId
-	// A specific version of a resource contained in the instance.
-	VersionId FhirString `json:"versionId,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	ResourceId *FhirString `json:"resourceid,omitempty"`
+	VersionId *FhirString `json:"versionid,omitempty"`
 }
 
 // NewExampleScenarioContainedInstance creates a new ExampleScenarioContainedInstance instance
-func NewExampleScenarioContainedInstance(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	resourceId FhirString,
-	versionId FhirString,
-) *ExampleScenarioContainedInstance {
-	return &ExampleScenarioContainedInstance{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		ResourceId: resourceId,
-		VersionId: versionId,
-	}
+func NewExampleScenarioContainedInstance() *ExampleScenarioContainedInstance {
+	return &ExampleScenarioContainedInstance{}
 }
+
 // FromJSON populates ExampleScenarioContainedInstance from JSON data
 func (m *ExampleScenarioContainedInstance) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -636,91 +309,49 @@ func (m *ExampleScenarioContainedInstance) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ExampleScenarioContainedInstance
-func (m *ExampleScenarioContainedInstance) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	resourceId *FhirString,
-	versionId *FhirString,
-) *ExampleScenarioContainedInstance {
+// Clone creates a deep copy of ExampleScenarioContainedInstance
+func (m *ExampleScenarioContainedInstance) Clone() *ExampleScenarioContainedInstance {
+	if m == nil { return nil }
 	return &ExampleScenarioContainedInstance{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		ResourceId: func() FhirString {
-			if resourceId != nil { return *resourceId }
-			return m.ResourceId
-		}(),
-		VersionId: func() FhirString {
-			if versionId != nil { return *versionId }
-			return m.VersionId
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		ResourceId: m.ResourceId.Clone(),
+		VersionId: m.VersionId.Clone(),
 	}
 }
+
+// Equals checks for equality with another ExampleScenarioContainedInstance instance
+func (m *ExampleScenarioContainedInstance) Equals(other *ExampleScenarioContainedInstance) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.ResourceId.Equals(other.ResourceId) { return false }
+	if !m.VersionId.Equals(other.VersionId) { return false }
+	return true
+}
+
 // ExampleScenarioProcess
 // Each major process - a group of operations.
 type ExampleScenarioProcess struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// title
-	// The diagram title of the group of operations.
-	Title FhirString `json:"title,omitempty"`
-	// description
-	// A longer description of the group of operations.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// preConditions
-	// Description of initial status before the process starts.
-	PreConditions FhirMarkdown `json:"preConditions,omitempty"`
-	// postConditions
-	// Description of final status after the process ends.
-	PostConditions FhirMarkdown `json:"postConditions,omitempty"`
-	// step
-	// Each step of the process.
-	Step []ExampleScenarioStep `json:"step,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Title *FhirString `json:"title,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	PreConditions *FhirMarkdown `json:"preconditions,omitempty"`
+	PostConditions *FhirMarkdown `json:"postconditions,omitempty"`
+	Step []*ExampleScenarioStep `json:"step,omitempty"`
 }
 
 // NewExampleScenarioProcess creates a new ExampleScenarioProcess instance
-func NewExampleScenarioProcess(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	title FhirString,
-	description FhirMarkdown,
-	preConditions FhirMarkdown,
-	postConditions FhirMarkdown,
-	step []ExampleScenarioStep,
-) *ExampleScenarioProcess {
-	return &ExampleScenarioProcess{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Title: title,
-		Description: description,
-		PreConditions: preConditions,
-		PostConditions: postConditions,
-		Step: step,
-	}
+func NewExampleScenarioProcess() *ExampleScenarioProcess {
+	return &ExampleScenarioProcess{}
 }
+
 // FromJSON populates ExampleScenarioProcess from JSON data
 func (m *ExampleScenarioProcess) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -731,101 +362,54 @@ func (m *ExampleScenarioProcess) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ExampleScenarioProcess
-func (m *ExampleScenarioProcess) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	title *FhirString,
-	description *FhirMarkdown,
-	preConditions *FhirMarkdown,
-	postConditions *FhirMarkdown,
-	step *[]ExampleScenarioStep,
-) *ExampleScenarioProcess {
+// Clone creates a deep copy of ExampleScenarioProcess
+func (m *ExampleScenarioProcess) Clone() *ExampleScenarioProcess {
+	if m == nil { return nil }
 	return &ExampleScenarioProcess{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Title: func() FhirString {
-			if title != nil { return *title }
-			return m.Title
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		PreConditions: func() FhirMarkdown {
-			if preConditions != nil { return *preConditions }
-			return m.PreConditions
-		}(),
-		PostConditions: func() FhirMarkdown {
-			if postConditions != nil { return *postConditions }
-			return m.PostConditions
-		}(),
-		Step: func() []ExampleScenarioStep {
-			if step != nil { return *step }
-			return m.Step
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Title: m.Title.Clone(),
+		Description: m.Description.Clone(),
+		PreConditions: m.PreConditions.Clone(),
+		PostConditions: m.PostConditions.Clone(),
+		Step: cloneSlices(m.Step),
 	}
 }
+
+// Equals checks for equality with another ExampleScenarioProcess instance
+func (m *ExampleScenarioProcess) Equals(other *ExampleScenarioProcess) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Title.Equals(other.Title) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.PreConditions.Equals(other.PreConditions) { return false }
+	if !m.PostConditions.Equals(other.PostConditions) { return false }
+	if !compareSlices(m.Step, other.Step) { return false }
+	return true
+}
+
 // ExampleScenarioStep
 // Each step of the process.
 type ExampleScenarioStep struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// process
-	// Nested process.
-	Process []ExampleScenarioProcess `json:"process,omitempty"`
-	// pause
-	// If there is a pause in the flow.
-	Pause FhirBoolean `json:"pause,omitempty"`
-	// operation
-	// Each interaction or action.
-	Operation ExampleScenarioOperation `json:"operation,omitempty"`
-	// alternative
-	// Indicates an alternative step that can be taken instead of the operations on the base step in exceptional/atypical circumstances.
-	Alternative []ExampleScenarioAlternative `json:"alternative,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Process []*ExampleScenarioProcess `json:"process,omitempty"`
+	Pause *FhirBoolean `json:"pause,omitempty"`
+	Operation *ExampleScenarioOperation `json:"operation,omitempty"`
+	Alternative []*ExampleScenarioAlternative `json:"alternative,omitempty"`
 }
 
 // NewExampleScenarioStep creates a new ExampleScenarioStep instance
-func NewExampleScenarioStep(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	process []ExampleScenarioProcess,
-	pause FhirBoolean,
-	operation ExampleScenarioOperation,
-	alternative []ExampleScenarioAlternative,
-) *ExampleScenarioStep {
-	return &ExampleScenarioStep{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Process: process,
-		Pause: pause,
-		Operation: operation,
-		Alternative: alternative,
-	}
+func NewExampleScenarioStep() *ExampleScenarioStep {
+	return &ExampleScenarioStep{}
 }
+
 // FromJSON populates ExampleScenarioStep from JSON data
 func (m *ExampleScenarioStep) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -836,126 +420,58 @@ func (m *ExampleScenarioStep) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ExampleScenarioStep
-func (m *ExampleScenarioStep) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	process *[]ExampleScenarioProcess,
-	pause *FhirBoolean,
-	operation *ExampleScenarioOperation,
-	alternative *[]ExampleScenarioAlternative,
-) *ExampleScenarioStep {
+// Clone creates a deep copy of ExampleScenarioStep
+func (m *ExampleScenarioStep) Clone() *ExampleScenarioStep {
+	if m == nil { return nil }
 	return &ExampleScenarioStep{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Process: func() []ExampleScenarioProcess {
-			if process != nil { return *process }
-			return m.Process
-		}(),
-		Pause: func() FhirBoolean {
-			if pause != nil { return *pause }
-			return m.Pause
-		}(),
-		Operation: func() ExampleScenarioOperation {
-			if operation != nil { return *operation }
-			return m.Operation
-		}(),
-		Alternative: func() []ExampleScenarioAlternative {
-			if alternative != nil { return *alternative }
-			return m.Alternative
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Process: cloneSlices(m.Process),
+		Pause: m.Pause.Clone(),
+		Operation: m.Operation.Clone(),
+		Alternative: cloneSlices(m.Alternative),
 	}
 }
+
+// Equals checks for equality with another ExampleScenarioStep instance
+func (m *ExampleScenarioStep) Equals(other *ExampleScenarioStep) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Process, other.Process) { return false }
+	if !m.Pause.Equals(other.Pause) { return false }
+	if !m.Operation.Equals(other.Operation) { return false }
+	if !compareSlices(m.Alternative, other.Alternative) { return false }
+	return true
+}
+
 // ExampleScenarioOperation
 // Each interaction or action.
 type ExampleScenarioOperation struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// number
-	// The sequential number of the interaction, e.g. 1.2.5.
-	Number FhirString `json:"number,omitempty"`
-	// type
-	// The type of operation - CRUD.
-	Type_ FhirString `json:"type,omitempty"`
-	// name
-	// The human-friendly name of the interaction.
-	Name FhirString `json:"name,omitempty"`
-	// initiator
-	// Who starts the transaction.
-	Initiator FhirString `json:"initiator,omitempty"`
-	// receiver
-	// Who receives the transaction.
-	Receiver FhirString `json:"receiver,omitempty"`
-	// description
-	// A comment to be inserted in the diagram.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// initiatorActive
-	// Whether the initiator is deactivated right after the transaction.
-	InitiatorActive FhirBoolean `json:"initiatorActive,omitempty"`
-	// receiverActive
-	// Whether the receiver is deactivated right after the transaction.
-	ReceiverActive FhirBoolean `json:"receiverActive,omitempty"`
-	// request
-	// Each resource instance used by the initiator.
-	Request ExampleScenarioContainedInstance `json:"request,omitempty"`
-	// response
-	// Each resource instance used by the responder.
-	Response ExampleScenarioContainedInstance `json:"response,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Number *FhirString `json:"number,omitempty"`
+	Type *FhirString `json:"type,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Initiator *FhirString `json:"initiator,omitempty"`
+	Receiver *FhirString `json:"receiver,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	InitiatorActive *FhirBoolean `json:"initiatoractive,omitempty"`
+	ReceiverActive *FhirBoolean `json:"receiveractive,omitempty"`
+	Request *ExampleScenarioContainedInstance `json:"request,omitempty"`
+	Response *ExampleScenarioContainedInstance `json:"response,omitempty"`
 }
 
 // NewExampleScenarioOperation creates a new ExampleScenarioOperation instance
-func NewExampleScenarioOperation(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	number FhirString,
-	type_ FhirString,
-	name FhirString,
-	initiator FhirString,
-	receiver FhirString,
-	description FhirMarkdown,
-	initiatorActive FhirBoolean,
-	receiverActive FhirBoolean,
-	request ExampleScenarioContainedInstance,
-	response ExampleScenarioContainedInstance,
-) *ExampleScenarioOperation {
-	return &ExampleScenarioOperation{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Number: number,
-		Type_: type_,
-		Name: name,
-		Initiator: initiator,
-		Receiver: receiver,
-		Description: description,
-		InitiatorActive: initiatorActive,
-		ReceiverActive: receiverActive,
-		Request: request,
-		Response: response,
-	}
+func NewExampleScenarioOperation() *ExampleScenarioOperation {
+	return &ExampleScenarioOperation{}
 }
+
 // FromJSON populates ExampleScenarioOperation from JSON data
 func (m *ExampleScenarioOperation) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -966,121 +482,63 @@ func (m *ExampleScenarioOperation) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ExampleScenarioOperation
-func (m *ExampleScenarioOperation) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	number *FhirString,
-	type_ *FhirString,
-	name *FhirString,
-	initiator *FhirString,
-	receiver *FhirString,
-	description *FhirMarkdown,
-	initiatorActive *FhirBoolean,
-	receiverActive *FhirBoolean,
-	request *ExampleScenarioContainedInstance,
-	response *ExampleScenarioContainedInstance,
-) *ExampleScenarioOperation {
+// Clone creates a deep copy of ExampleScenarioOperation
+func (m *ExampleScenarioOperation) Clone() *ExampleScenarioOperation {
+	if m == nil { return nil }
 	return &ExampleScenarioOperation{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Number: func() FhirString {
-			if number != nil { return *number }
-			return m.Number
-		}(),
-		Type_: func() FhirString {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Initiator: func() FhirString {
-			if initiator != nil { return *initiator }
-			return m.Initiator
-		}(),
-		Receiver: func() FhirString {
-			if receiver != nil { return *receiver }
-			return m.Receiver
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		InitiatorActive: func() FhirBoolean {
-			if initiatorActive != nil { return *initiatorActive }
-			return m.InitiatorActive
-		}(),
-		ReceiverActive: func() FhirBoolean {
-			if receiverActive != nil { return *receiverActive }
-			return m.ReceiverActive
-		}(),
-		Request: func() ExampleScenarioContainedInstance {
-			if request != nil { return *request }
-			return m.Request
-		}(),
-		Response: func() ExampleScenarioContainedInstance {
-			if response != nil { return *response }
-			return m.Response
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Number: m.Number.Clone(),
+		Type: m.Type.Clone(),
+		Name: m.Name.Clone(),
+		Initiator: m.Initiator.Clone(),
+		Receiver: m.Receiver.Clone(),
+		Description: m.Description.Clone(),
+		InitiatorActive: m.InitiatorActive.Clone(),
+		ReceiverActive: m.ReceiverActive.Clone(),
+		Request: m.Request.Clone(),
+		Response: m.Response.Clone(),
 	}
 }
+
+// Equals checks for equality with another ExampleScenarioOperation instance
+func (m *ExampleScenarioOperation) Equals(other *ExampleScenarioOperation) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Number.Equals(other.Number) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Initiator.Equals(other.Initiator) { return false }
+	if !m.Receiver.Equals(other.Receiver) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.InitiatorActive.Equals(other.InitiatorActive) { return false }
+	if !m.ReceiverActive.Equals(other.ReceiverActive) { return false }
+	if !m.Request.Equals(other.Request) { return false }
+	if !m.Response.Equals(other.Response) { return false }
+	return true
+}
+
 // ExampleScenarioAlternative
 // Indicates an alternative step that can be taken instead of the operations on the base step in exceptional/atypical circumstances.
 type ExampleScenarioAlternative struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// title
-	// The label to display for the alternative that gives a sense of the circumstance in which the alternative should be invoked.
-	Title FhirString `json:"title,omitempty"`
-	// description
-	// A human-readable description of the alternative explaining when the alternative should occur rather than the base step.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// step
-	// What happens in each alternative option.
-	Step []ExampleScenarioStep `json:"step,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Title *FhirString `json:"title,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	Step []*ExampleScenarioStep `json:"step,omitempty"`
 }
 
 // NewExampleScenarioAlternative creates a new ExampleScenarioAlternative instance
-func NewExampleScenarioAlternative(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	title FhirString,
-	description FhirMarkdown,
-	step []ExampleScenarioStep,
-) *ExampleScenarioAlternative {
-	return &ExampleScenarioAlternative{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Title: title,
-		Description: description,
-		Step: step,
-	}
+func NewExampleScenarioAlternative() *ExampleScenarioAlternative {
+	return &ExampleScenarioAlternative{}
 }
+
 // FromJSON populates ExampleScenarioAlternative from JSON data
 func (m *ExampleScenarioAlternative) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -1091,39 +549,29 @@ func (m *ExampleScenarioAlternative) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ExampleScenarioAlternative
-func (m *ExampleScenarioAlternative) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	title *FhirString,
-	description *FhirMarkdown,
-	step *[]ExampleScenarioStep,
-) *ExampleScenarioAlternative {
+// Clone creates a deep copy of ExampleScenarioAlternative
+func (m *ExampleScenarioAlternative) Clone() *ExampleScenarioAlternative {
+	if m == nil { return nil }
 	return &ExampleScenarioAlternative{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Title: func() FhirString {
-			if title != nil { return *title }
-			return m.Title
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Step: func() []ExampleScenarioStep {
-			if step != nil { return *step }
-			return m.Step
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Title: m.Title.Clone(),
+		Description: m.Description.Clone(),
+		Step: cloneSlices(m.Step),
 	}
 }
+
+// Equals checks for equality with another ExampleScenarioAlternative instance
+func (m *ExampleScenarioAlternative) Equals(other *ExampleScenarioAlternative) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Title.Equals(other.Title) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.Step, other.Step) { return false }
+	return true
+}
+

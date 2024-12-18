@@ -3,139 +3,42 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // ImmunizationEvaluation
 // Describes a comparison of an immunization event against published recommendations to determine if the administration is "valid" in relation to those  recommendations.
 type ImmunizationEvaluation struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// A unique identifier assigned to this immunization evaluation record.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// status
-	// Indicates the current status of the evaluation of the vaccination administration event.
-	Status ImmunizationEvaluationStatusCodes `json:"status,omitempty"`
-	// patient
-	// The individual for whom the evaluation is being done.
-	Patient Reference `json:"patient,omitempty"`
-	// date
-	// The date the evaluation of the vaccine administration event was performed.
-	Date FhirDateTime `json:"date,omitempty"`
-	// authority
-	// Indicates the authority who published the protocol (e.g. ACIP).
-	Authority Reference `json:"authority,omitempty"`
-	// targetDisease
-	// The vaccine preventable disease the dose is being evaluated against.
-	TargetDisease CodeableConcept `json:"targetDisease,omitempty"`
-	// immunizationEvent
-	// The vaccine administration event being evaluated.
-	ImmunizationEvent Reference `json:"immunizationEvent,omitempty"`
-	// doseStatus
-	// Indicates if the dose is valid or not valid with respect to the published recommendations.
-	DoseStatus CodeableConcept `json:"doseStatus,omitempty"`
-	// doseStatusReason
-	// Provides an explanation as to why the vaccine administration event is valid or not relative to the published recommendations.
-	DoseStatusReason []CodeableConcept `json:"doseStatusReason,omitempty"`
-	// description
-	// Additional information about the evaluation.
-	Description FhirString `json:"description,omitempty"`
-	// series
-	// One possible path to achieve presumed immunity against a disease - within the context of an authority.
-	Series FhirString `json:"series,omitempty"`
-	// doseNumberPositiveInt
-	// Nominal position in a series.
-	DoseNumberPositiveInt FhirPositiveInt `json:"doseNumberPositiveInt,omitempty"`
-	// doseNumberString
-	// Nominal position in a series.
-	DoseNumberString FhirString `json:"doseNumberString,omitempty"`
-	// seriesDosesPositiveInt
-	// The recommended number of doses to achieve immunity.
-	SeriesDosesPositiveInt FhirPositiveInt `json:"seriesDosesPositiveInt,omitempty"`
-	// seriesDosesString
-	// The recommended number of doses to achieve immunity.
-	SeriesDosesString FhirString `json:"seriesDosesString,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Status *ImmunizationEvaluationStatusCodes `json:"status,omitempty"`
+	Patient *Reference `json:"patient,omitempty"`
+	Date *FhirDateTime `json:"date,omitempty"`
+	Authority *Reference `json:"authority,omitempty"`
+	TargetDisease *CodeableConcept `json:"targetdisease,omitempty"`
+	ImmunizationEvent *Reference `json:"immunizationevent,omitempty"`
+	DoseStatus *CodeableConcept `json:"dosestatus,omitempty"`
+	DoseStatusReason []*CodeableConcept `json:"dosestatusreason,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Series *FhirString `json:"series,omitempty"`
+	DoseNumberPositiveInt *FhirPositiveInt `json:"dosenumberpositiveint,omitempty"`
+	DoseNumberString *FhirString `json:"dosenumberstring,omitempty"`
+	SeriesDosesPositiveInt *FhirPositiveInt `json:"seriesdosespositiveint,omitempty"`
+	SeriesDosesString *FhirString `json:"seriesdosesstring,omitempty"`
 }
 
 // NewImmunizationEvaluation creates a new ImmunizationEvaluation instance
-func NewImmunizationEvaluation(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	status ImmunizationEvaluationStatusCodes,
-	patient Reference,
-	date FhirDateTime,
-	authority Reference,
-	targetDisease CodeableConcept,
-	immunizationEvent Reference,
-	doseStatus CodeableConcept,
-	doseStatusReason []CodeableConcept,
-	description FhirString,
-	series FhirString,
-	doseNumberPositiveInt FhirPositiveInt,
-	doseNumberString FhirString,
-	seriesDosesPositiveInt FhirPositiveInt,
-	seriesDosesString FhirString,
-) *ImmunizationEvaluation {
-	return &ImmunizationEvaluation{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Status: status,
-		Patient: patient,
-		Date: date,
-		Authority: authority,
-		TargetDisease: targetDisease,
-		ImmunizationEvent: immunizationEvent,
-		DoseStatus: doseStatus,
-		DoseStatusReason: doseStatusReason,
-		Description: description,
-		Series: series,
-		DoseNumberPositiveInt: doseNumberPositiveInt,
-		DoseNumberString: doseNumberString,
-		SeriesDosesPositiveInt: seriesDosesPositiveInt,
-		SeriesDosesString: seriesDosesString,
-	}
+func NewImmunizationEvaluation() *ImmunizationEvaluation {
+	return &ImmunizationEvaluation{}
 }
+
 // FromJSON populates ImmunizationEvaluation from JSON data
 func (m *ImmunizationEvaluation) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -146,124 +49,63 @@ func (m *ImmunizationEvaluation) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ImmunizationEvaluation
-func (m *ImmunizationEvaluation) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	status *ImmunizationEvaluationStatusCodes,
-	patient *Reference,
-	date *FhirDateTime,
-	authority *Reference,
-	targetDisease *CodeableConcept,
-	immunizationEvent *Reference,
-	doseStatus *CodeableConcept,
-	doseStatusReason *[]CodeableConcept,
-	description *FhirString,
-	series *FhirString,
-	doseNumberPositiveInt *FhirPositiveInt,
-	doseNumberString *FhirString,
-	seriesDosesPositiveInt *FhirPositiveInt,
-	seriesDosesString *FhirString,
-) *ImmunizationEvaluation {
+// Clone creates a deep copy of ImmunizationEvaluation
+func (m *ImmunizationEvaluation) Clone() *ImmunizationEvaluation {
+	if m == nil { return nil }
 	return &ImmunizationEvaluation{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Status: func() ImmunizationEvaluationStatusCodes {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Patient: func() Reference {
-			if patient != nil { return *patient }
-			return m.Patient
-		}(),
-		Date: func() FhirDateTime {
-			if date != nil { return *date }
-			return m.Date
-		}(),
-		Authority: func() Reference {
-			if authority != nil { return *authority }
-			return m.Authority
-		}(),
-		TargetDisease: func() CodeableConcept {
-			if targetDisease != nil { return *targetDisease }
-			return m.TargetDisease
-		}(),
-		ImmunizationEvent: func() Reference {
-			if immunizationEvent != nil { return *immunizationEvent }
-			return m.ImmunizationEvent
-		}(),
-		DoseStatus: func() CodeableConcept {
-			if doseStatus != nil { return *doseStatus }
-			return m.DoseStatus
-		}(),
-		DoseStatusReason: func() []CodeableConcept {
-			if doseStatusReason != nil { return *doseStatusReason }
-			return m.DoseStatusReason
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Series: func() FhirString {
-			if series != nil { return *series }
-			return m.Series
-		}(),
-		DoseNumberPositiveInt: func() FhirPositiveInt {
-			if doseNumberPositiveInt != nil { return *doseNumberPositiveInt }
-			return m.DoseNumberPositiveInt
-		}(),
-		DoseNumberString: func() FhirString {
-			if doseNumberString != nil { return *doseNumberString }
-			return m.DoseNumberString
-		}(),
-		SeriesDosesPositiveInt: func() FhirPositiveInt {
-			if seriesDosesPositiveInt != nil { return *seriesDosesPositiveInt }
-			return m.SeriesDosesPositiveInt
-		}(),
-		SeriesDosesString: func() FhirString {
-			if seriesDosesString != nil { return *seriesDosesString }
-			return m.SeriesDosesString
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		Status: m.Status.Clone(),
+		Patient: m.Patient.Clone(),
+		Date: m.Date.Clone(),
+		Authority: m.Authority.Clone(),
+		TargetDisease: m.TargetDisease.Clone(),
+		ImmunizationEvent: m.ImmunizationEvent.Clone(),
+		DoseStatus: m.DoseStatus.Clone(),
+		DoseStatusReason: cloneSlices(m.DoseStatusReason),
+		Description: m.Description.Clone(),
+		Series: m.Series.Clone(),
+		DoseNumberPositiveInt: m.DoseNumberPositiveInt.Clone(),
+		DoseNumberString: m.DoseNumberString.Clone(),
+		SeriesDosesPositiveInt: m.SeriesDosesPositiveInt.Clone(),
+		SeriesDosesString: m.SeriesDosesString.Clone(),
 	}
 }
+
+// Equals checks for equality with another ImmunizationEvaluation instance
+func (m *ImmunizationEvaluation) Equals(other *ImmunizationEvaluation) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Patient.Equals(other.Patient) { return false }
+	if !m.Date.Equals(other.Date) { return false }
+	if !m.Authority.Equals(other.Authority) { return false }
+	if !m.TargetDisease.Equals(other.TargetDisease) { return false }
+	if !m.ImmunizationEvent.Equals(other.ImmunizationEvent) { return false }
+	if !m.DoseStatus.Equals(other.DoseStatus) { return false }
+	if !compareSlices(m.DoseStatusReason, other.DoseStatusReason) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.Series.Equals(other.Series) { return false }
+	if !m.DoseNumberPositiveInt.Equals(other.DoseNumberPositiveInt) { return false }
+	if !m.DoseNumberString.Equals(other.DoseNumberString) { return false }
+	if !m.SeriesDosesPositiveInt.Equals(other.SeriesDosesPositiveInt) { return false }
+	if !m.SeriesDosesString.Equals(other.SeriesDosesString) { return false }
+	return true
+}
+

@@ -3,149 +3,44 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // Goal
 // Describes the intended objective(s) for a patient, group or organization care, for example, weight loss, restoring an activity of daily living, obtaining herd immunity via immunization, meeting a process improvement objective, etc.
 type Goal struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// Business identifiers assigned to this goal by the performer or other systems which remain constant as the resource is updated and propagates from server to server.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// lifecycleStatus
-	// The state of the goal throughout its lifecycle.
-	LifecycleStatus GoalLifecycleStatus `json:"lifecycleStatus,omitempty"`
-	// achievementStatus
-	// Describes the progression, or lack thereof, towards the goal against the target.
-	AchievementStatus CodeableConcept `json:"achievementStatus,omitempty"`
-	// category
-	// Indicates a category the goal falls within.
-	Category []CodeableConcept `json:"category,omitempty"`
-	// priority
-	// Identifies the mutually agreed level of importance associated with reaching/sustaining the goal.
-	Priority CodeableConcept `json:"priority,omitempty"`
-	// description
-	// Human-readable and/or coded description of a specific desired objective of care, such as "control blood pressure" or "negotiate an obstacle course" or "dance with child at wedding".
-	Description CodeableConcept `json:"description,omitempty"`
-	// subject
-	// Identifies the patient, group or organization for whom the goal is being established.
-	Subject Reference `json:"subject,omitempty"`
-	// startDate
-	// The date or event after which the goal should begin being pursued.
-	StartDate GoalStartEvent `json:"startDate,omitempty"`
-	// startCodeableConcept
-	// The date or event after which the goal should begin being pursued.
-	StartCodeableConcept CodeableConcept `json:"startCodeableConcept,omitempty"`
-	// target
-	// Indicates what should be done by when.
-	Target []GoalTarget `json:"target,omitempty"`
-	// statusDate
-	// Identifies when the current status.  I.e. When initially created, when achieved, when cancelled, etc.
-	StatusDate FhirDate `json:"statusDate,omitempty"`
-	// statusReason
-	// Captures the reason for the current status.
-	StatusReason FhirString `json:"statusReason,omitempty"`
-	// expressedBy
-	// Indicates whose goal this is - patient goal, practitioner goal, etc.
-	ExpressedBy Reference `json:"expressedBy,omitempty"`
-	// addresses
-	// The identified conditions and other health record elements that are intended to be addressed by the goal.
-	Addresses []Reference `json:"addresses,omitempty"`
-	// note
-	// Any comments related to the goal.
-	Note []Annotation `json:"note,omitempty"`
-	// outcomeCode
-	// Identifies the change (or lack of change) at the point when the status of the goal is assessed.
-	OutcomeCode []CodeableConcept `json:"outcomeCode,omitempty"`
-	// outcomeReference
-	// Details of what's changed (or not changed).
-	OutcomeReference []Reference `json:"outcomeReference,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	LifecycleStatus *GoalLifecycleStatus `json:"lifecyclestatus,omitempty"`
+	AchievementStatus *CodeableConcept `json:"achievementstatus,omitempty"`
+	Category []*CodeableConcept `json:"category,omitempty"`
+	Priority *CodeableConcept `json:"priority,omitempty"`
+	Description *CodeableConcept `json:"description,omitempty"`
+	Subject *Reference `json:"subject,omitempty"`
+	StartDate *GoalStartEvent `json:"startdate,omitempty"`
+	StartCodeableConcept *CodeableConcept `json:"startcodeableconcept,omitempty"`
+	Target []*GoalTarget `json:"target,omitempty"`
+	StatusDate *FhirDate `json:"statusdate,omitempty"`
+	StatusReason *FhirString `json:"statusreason,omitempty"`
+	ExpressedBy *Reference `json:"expressedby,omitempty"`
+	Addresses []*Reference `json:"addresses,omitempty"`
+	Note []*Annotation `json:"note,omitempty"`
+	OutcomeCode []*CodeableConcept `json:"outcomecode,omitempty"`
+	OutcomeReference []*Reference `json:"outcomereference,omitempty"`
 }
 
 // NewGoal creates a new Goal instance
-func NewGoal(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	lifecycleStatus GoalLifecycleStatus,
-	achievementStatus CodeableConcept,
-	category []CodeableConcept,
-	priority CodeableConcept,
-	description CodeableConcept,
-	subject Reference,
-	startDate GoalStartEvent,
-	startCodeableConcept CodeableConcept,
-	target []GoalTarget,
-	statusDate FhirDate,
-	statusReason FhirString,
-	expressedBy Reference,
-	addresses []Reference,
-	note []Annotation,
-	outcomeCode []CodeableConcept,
-	outcomeReference []Reference,
-) *Goal {
-	return &Goal{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		LifecycleStatus: lifecycleStatus,
-		AchievementStatus: achievementStatus,
-		Category: category,
-		Priority: priority,
-		Description: description,
-		Subject: subject,
-		StartDate: startDate,
-		StartCodeableConcept: startCodeableConcept,
-		Target: target,
-		StatusDate: statusDate,
-		StatusReason: statusReason,
-		ExpressedBy: expressedBy,
-		Addresses: addresses,
-		Note: note,
-		OutcomeCode: outcomeCode,
-		OutcomeReference: outcomeReference,
-	}
+func NewGoal() *Goal {
+	return &Goal{}
 }
+
 // FromJSON populates Goal from JSON data
 func (m *Goal) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -156,216 +51,94 @@ func (m *Goal) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of Goal
-func (m *Goal) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	lifecycleStatus *GoalLifecycleStatus,
-	achievementStatus *CodeableConcept,
-	category *[]CodeableConcept,
-	priority *CodeableConcept,
-	description *CodeableConcept,
-	subject *Reference,
-	startDate *GoalStartEvent,
-	startCodeableConcept *CodeableConcept,
-	target *[]GoalTarget,
-	statusDate *FhirDate,
-	statusReason *FhirString,
-	expressedBy *Reference,
-	addresses *[]Reference,
-	note *[]Annotation,
-	outcomeCode *[]CodeableConcept,
-	outcomeReference *[]Reference,
-) *Goal {
+// Clone creates a deep copy of Goal
+func (m *Goal) Clone() *Goal {
+	if m == nil { return nil }
 	return &Goal{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		LifecycleStatus: func() GoalLifecycleStatus {
-			if lifecycleStatus != nil { return *lifecycleStatus }
-			return m.LifecycleStatus
-		}(),
-		AchievementStatus: func() CodeableConcept {
-			if achievementStatus != nil { return *achievementStatus }
-			return m.AchievementStatus
-		}(),
-		Category: func() []CodeableConcept {
-			if category != nil { return *category }
-			return m.Category
-		}(),
-		Priority: func() CodeableConcept {
-			if priority != nil { return *priority }
-			return m.Priority
-		}(),
-		Description: func() CodeableConcept {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Subject: func() Reference {
-			if subject != nil { return *subject }
-			return m.Subject
-		}(),
-		StartDate: func() GoalStartEvent {
-			if startDate != nil { return *startDate }
-			return m.StartDate
-		}(),
-		StartCodeableConcept: func() CodeableConcept {
-			if startCodeableConcept != nil { return *startCodeableConcept }
-			return m.StartCodeableConcept
-		}(),
-		Target: func() []GoalTarget {
-			if target != nil { return *target }
-			return m.Target
-		}(),
-		StatusDate: func() FhirDate {
-			if statusDate != nil { return *statusDate }
-			return m.StatusDate
-		}(),
-		StatusReason: func() FhirString {
-			if statusReason != nil { return *statusReason }
-			return m.StatusReason
-		}(),
-		ExpressedBy: func() Reference {
-			if expressedBy != nil { return *expressedBy }
-			return m.ExpressedBy
-		}(),
-		Addresses: func() []Reference {
-			if addresses != nil { return *addresses }
-			return m.Addresses
-		}(),
-		Note: func() []Annotation {
-			if note != nil { return *note }
-			return m.Note
-		}(),
-		OutcomeCode: func() []CodeableConcept {
-			if outcomeCode != nil { return *outcomeCode }
-			return m.OutcomeCode
-		}(),
-		OutcomeReference: func() []Reference {
-			if outcomeReference != nil { return *outcomeReference }
-			return m.OutcomeReference
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		LifecycleStatus: m.LifecycleStatus.Clone(),
+		AchievementStatus: m.AchievementStatus.Clone(),
+		Category: cloneSlices(m.Category),
+		Priority: m.Priority.Clone(),
+		Description: m.Description.Clone(),
+		Subject: m.Subject.Clone(),
+		StartDate: m.StartDate.Clone(),
+		StartCodeableConcept: m.StartCodeableConcept.Clone(),
+		Target: cloneSlices(m.Target),
+		StatusDate: m.StatusDate.Clone(),
+		StatusReason: m.StatusReason.Clone(),
+		ExpressedBy: m.ExpressedBy.Clone(),
+		Addresses: cloneSlices(m.Addresses),
+		Note: cloneSlices(m.Note),
+		OutcomeCode: cloneSlices(m.OutcomeCode),
+		OutcomeReference: cloneSlices(m.OutcomeReference),
 	}
 }
+
+// Equals checks for equality with another Goal instance
+func (m *Goal) Equals(other *Goal) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.LifecycleStatus.Equals(other.LifecycleStatus) { return false }
+	if !m.AchievementStatus.Equals(other.AchievementStatus) { return false }
+	if !compareSlices(m.Category, other.Category) { return false }
+	if !m.Priority.Equals(other.Priority) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !m.Subject.Equals(other.Subject) { return false }
+	if !m.StartDate.Equals(other.StartDate) { return false }
+	if !m.StartCodeableConcept.Equals(other.StartCodeableConcept) { return false }
+	if !compareSlices(m.Target, other.Target) { return false }
+	if !m.StatusDate.Equals(other.StatusDate) { return false }
+	if !m.StatusReason.Equals(other.StatusReason) { return false }
+	if !m.ExpressedBy.Equals(other.ExpressedBy) { return false }
+	if !compareSlices(m.Addresses, other.Addresses) { return false }
+	if !compareSlices(m.Note, other.Note) { return false }
+	if !compareSlices(m.OutcomeCode, other.OutcomeCode) { return false }
+	if !compareSlices(m.OutcomeReference, other.OutcomeReference) { return false }
+	return true
+}
+
 // GoalTarget
 // Indicates what should be done by when.
 type GoalTarget struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// measure
-	// The parameter whose value is being tracked, e.g. body weight, blood pressure, or hemoglobin A1c level.
-	Measure CodeableConcept `json:"measure,omitempty"`
-	// detailQuantity
-	// The target value of the focus to be achieved to signify the fulfillment of the goal, e.g. 150 pounds, 7.0%. Either the high or low or both values of the range can be specified. When a low value is missing, it indicates that the goal is achieved at any focus value at or below the high value. Similarly, if the high value is missing, it indicates that the goal is achieved at any focus value at or above the low value.
-	DetailQuantity Quantity `json:"detailQuantity,omitempty"`
-	// detailRange
-	// The target value of the focus to be achieved to signify the fulfillment of the goal, e.g. 150 pounds, 7.0%. Either the high or low or both values of the range can be specified. When a low value is missing, it indicates that the goal is achieved at any focus value at or below the high value. Similarly, if the high value is missing, it indicates that the goal is achieved at any focus value at or above the low value.
-	DetailRange Range `json:"detailRange,omitempty"`
-	// detailCodeableConcept
-	// The target value of the focus to be achieved to signify the fulfillment of the goal, e.g. 150 pounds, 7.0%. Either the high or low or both values of the range can be specified. When a low value is missing, it indicates that the goal is achieved at any focus value at or below the high value. Similarly, if the high value is missing, it indicates that the goal is achieved at any focus value at or above the low value.
-	DetailCodeableConcept CodeableConcept `json:"detailCodeableConcept,omitempty"`
-	// detailString
-	// The target value of the focus to be achieved to signify the fulfillment of the goal, e.g. 150 pounds, 7.0%. Either the high or low or both values of the range can be specified. When a low value is missing, it indicates that the goal is achieved at any focus value at or below the high value. Similarly, if the high value is missing, it indicates that the goal is achieved at any focus value at or above the low value.
-	DetailString FhirString `json:"detailString,omitempty"`
-	// detailBoolean
-	// The target value of the focus to be achieved to signify the fulfillment of the goal, e.g. 150 pounds, 7.0%. Either the high or low or both values of the range can be specified. When a low value is missing, it indicates that the goal is achieved at any focus value at or below the high value. Similarly, if the high value is missing, it indicates that the goal is achieved at any focus value at or above the low value.
-	DetailBoolean FhirBoolean `json:"detailBoolean,omitempty"`
-	// detailInteger
-	// The target value of the focus to be achieved to signify the fulfillment of the goal, e.g. 150 pounds, 7.0%. Either the high or low or both values of the range can be specified. When a low value is missing, it indicates that the goal is achieved at any focus value at or below the high value. Similarly, if the high value is missing, it indicates that the goal is achieved at any focus value at or above the low value.
-	DetailInteger FhirInteger `json:"detailInteger,omitempty"`
-	// detailRatio
-	// The target value of the focus to be achieved to signify the fulfillment of the goal, e.g. 150 pounds, 7.0%. Either the high or low or both values of the range can be specified. When a low value is missing, it indicates that the goal is achieved at any focus value at or below the high value. Similarly, if the high value is missing, it indicates that the goal is achieved at any focus value at or above the low value.
-	DetailRatio Ratio `json:"detailRatio,omitempty"`
-	// dueDate
-	// Indicates either the date or the duration after start by which the goal should be met.
-	DueDate FhirDate `json:"dueDate,omitempty"`
-	// dueDuration
-	// Indicates either the date or the duration after start by which the goal should be met.
-	DueDuration FhirDuration `json:"dueDuration,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Measure *CodeableConcept `json:"measure,omitempty"`
+	DetailQuantity *Quantity `json:"detailquantity,omitempty"`
+	DetailRange *Range `json:"detailrange,omitempty"`
+	DetailCodeableConcept *CodeableConcept `json:"detailcodeableconcept,omitempty"`
+	DetailString *FhirString `json:"detailstring,omitempty"`
+	DetailBoolean *FhirBoolean `json:"detailboolean,omitempty"`
+	DetailInteger *FhirInteger `json:"detailinteger,omitempty"`
+	DetailRatio *Ratio `json:"detailratio,omitempty"`
+	DueDate *FhirDate `json:"duedate,omitempty"`
+	DueDuration *FhirDuration `json:"dueduration,omitempty"`
 }
 
 // NewGoalTarget creates a new GoalTarget instance
-func NewGoalTarget(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	measure CodeableConcept,
-	detailQuantity Quantity,
-	detailRange Range,
-	detailCodeableConcept CodeableConcept,
-	detailString FhirString,
-	detailBoolean FhirBoolean,
-	detailInteger FhirInteger,
-	detailRatio Ratio,
-	dueDate FhirDate,
-	dueDuration FhirDuration,
-) *GoalTarget {
-	return &GoalTarget{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Measure: measure,
-		DetailQuantity: detailQuantity,
-		DetailRange: detailRange,
-		DetailCodeableConcept: detailCodeableConcept,
-		DetailString: detailString,
-		DetailBoolean: detailBoolean,
-		DetailInteger: detailInteger,
-		DetailRatio: detailRatio,
-		DueDate: dueDate,
-		DueDuration: dueDuration,
-	}
+func NewGoalTarget() *GoalTarget {
+	return &GoalTarget{}
 }
+
 // FromJSON populates GoalTarget from JSON data
 func (m *GoalTarget) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -376,74 +149,43 @@ func (m *GoalTarget) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of GoalTarget
-func (m *GoalTarget) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	measure *CodeableConcept,
-	detailQuantity *Quantity,
-	detailRange *Range,
-	detailCodeableConcept *CodeableConcept,
-	detailString *FhirString,
-	detailBoolean *FhirBoolean,
-	detailInteger *FhirInteger,
-	detailRatio *Ratio,
-	dueDate *FhirDate,
-	dueDuration *FhirDuration,
-) *GoalTarget {
+// Clone creates a deep copy of GoalTarget
+func (m *GoalTarget) Clone() *GoalTarget {
+	if m == nil { return nil }
 	return &GoalTarget{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Measure: func() CodeableConcept {
-			if measure != nil { return *measure }
-			return m.Measure
-		}(),
-		DetailQuantity: func() Quantity {
-			if detailQuantity != nil { return *detailQuantity }
-			return m.DetailQuantity
-		}(),
-		DetailRange: func() Range {
-			if detailRange != nil { return *detailRange }
-			return m.DetailRange
-		}(),
-		DetailCodeableConcept: func() CodeableConcept {
-			if detailCodeableConcept != nil { return *detailCodeableConcept }
-			return m.DetailCodeableConcept
-		}(),
-		DetailString: func() FhirString {
-			if detailString != nil { return *detailString }
-			return m.DetailString
-		}(),
-		DetailBoolean: func() FhirBoolean {
-			if detailBoolean != nil { return *detailBoolean }
-			return m.DetailBoolean
-		}(),
-		DetailInteger: func() FhirInteger {
-			if detailInteger != nil { return *detailInteger }
-			return m.DetailInteger
-		}(),
-		DetailRatio: func() Ratio {
-			if detailRatio != nil { return *detailRatio }
-			return m.DetailRatio
-		}(),
-		DueDate: func() FhirDate {
-			if dueDate != nil { return *dueDate }
-			return m.DueDate
-		}(),
-		DueDuration: func() FhirDuration {
-			if dueDuration != nil { return *dueDuration }
-			return m.DueDuration
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Measure: m.Measure.Clone(),
+		DetailQuantity: m.DetailQuantity.Clone(),
+		DetailRange: m.DetailRange.Clone(),
+		DetailCodeableConcept: m.DetailCodeableConcept.Clone(),
+		DetailString: m.DetailString.Clone(),
+		DetailBoolean: m.DetailBoolean.Clone(),
+		DetailInteger: m.DetailInteger.Clone(),
+		DetailRatio: m.DetailRatio.Clone(),
+		DueDate: m.DueDate.Clone(),
+		DueDuration: m.DueDuration.Clone(),
 	}
 }
+
+// Equals checks for equality with another GoalTarget instance
+func (m *GoalTarget) Equals(other *GoalTarget) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Measure.Equals(other.Measure) { return false }
+	if !m.DetailQuantity.Equals(other.DetailQuantity) { return false }
+	if !m.DetailRange.Equals(other.DetailRange) { return false }
+	if !m.DetailCodeableConcept.Equals(other.DetailCodeableConcept) { return false }
+	if !m.DetailString.Equals(other.DetailString) { return false }
+	if !m.DetailBoolean.Equals(other.DetailBoolean) { return false }
+	if !m.DetailInteger.Equals(other.DetailInteger) { return false }
+	if !m.DetailRatio.Equals(other.DetailRatio) { return false }
+	if !m.DueDate.Equals(other.DueDate) { return false }
+	if !m.DueDuration.Equals(other.DueDuration) { return false }
+	return true
+}
+

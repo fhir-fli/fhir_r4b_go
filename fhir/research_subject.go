@@ -3,104 +3,35 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // ResearchSubject
 // A physical entity which is the primary unit of operational and/or administrative interest in a study.
 type ResearchSubject struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// Identifiers assigned to this research subject for a study.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// status
-	// The current state of the subject.
-	Status ResearchSubjectStatus `json:"status,omitempty"`
-	// period
-	// The dates the subject began and ended their participation in the study.
-	Period Period `json:"period,omitempty"`
-	// study
-	// Reference to the study the subject is participating in.
-	Study Reference `json:"study,omitempty"`
-	// individual
-	// The record of the person or animal who is involved in the study.
-	Individual Reference `json:"individual,omitempty"`
-	// assignedArm
-	// The name of the arm in the study the subject is expected to follow as part of this study.
-	AssignedArm FhirString `json:"assignedArm,omitempty"`
-	// actualArm
-	// The name of the arm in the study the subject actually followed as part of this study.
-	ActualArm FhirString `json:"actualArm,omitempty"`
-	// consent
-	// A record of the patient's informed agreement to participate in the study.
-	Consent Reference `json:"consent,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	Status *ResearchSubjectStatus `json:"status,omitempty"`
+	Period *Period `json:"period,omitempty"`
+	Study *Reference `json:"study,omitempty"`
+	Individual *Reference `json:"individual,omitempty"`
+	AssignedArm *FhirString `json:"assignedarm,omitempty"`
+	ActualArm *FhirString `json:"actualarm,omitempty"`
+	Consent *Reference `json:"consent,omitempty"`
 }
 
 // NewResearchSubject creates a new ResearchSubject instance
-func NewResearchSubject(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	status ResearchSubjectStatus,
-	period Period,
-	study Reference,
-	individual Reference,
-	assignedArm FhirString,
-	actualArm FhirString,
-	consent Reference,
-) *ResearchSubject {
-	return &ResearchSubject{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		Status: status,
-		Period: period,
-		Study: study,
-		Individual: individual,
-		AssignedArm: assignedArm,
-		ActualArm: actualArm,
-		Consent: consent,
-	}
+func NewResearchSubject() *ResearchSubject {
+	return &ResearchSubject{}
 }
+
 // FromJSON populates ResearchSubject from JSON data
 func (m *ResearchSubject) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -111,89 +42,49 @@ func (m *ResearchSubject) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of ResearchSubject
-func (m *ResearchSubject) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	status *ResearchSubjectStatus,
-	period *Period,
-	study *Reference,
-	individual *Reference,
-	assignedArm *FhirString,
-	actualArm *FhirString,
-	consent *Reference,
-) *ResearchSubject {
+// Clone creates a deep copy of ResearchSubject
+func (m *ResearchSubject) Clone() *ResearchSubject {
+	if m == nil { return nil }
 	return &ResearchSubject{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		Status: func() ResearchSubjectStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Period: func() Period {
-			if period != nil { return *period }
-			return m.Period
-		}(),
-		Study: func() Reference {
-			if study != nil { return *study }
-			return m.Study
-		}(),
-		Individual: func() Reference {
-			if individual != nil { return *individual }
-			return m.Individual
-		}(),
-		AssignedArm: func() FhirString {
-			if assignedArm != nil { return *assignedArm }
-			return m.AssignedArm
-		}(),
-		ActualArm: func() FhirString {
-			if actualArm != nil { return *actualArm }
-			return m.ActualArm
-		}(),
-		Consent: func() Reference {
-			if consent != nil { return *consent }
-			return m.Consent
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		Status: m.Status.Clone(),
+		Period: m.Period.Clone(),
+		Study: m.Study.Clone(),
+		Individual: m.Individual.Clone(),
+		AssignedArm: m.AssignedArm.Clone(),
+		ActualArm: m.ActualArm.Clone(),
+		Consent: m.Consent.Clone(),
 	}
 }
+
+// Equals checks for equality with another ResearchSubject instance
+func (m *ResearchSubject) Equals(other *ResearchSubject) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Period.Equals(other.Period) { return false }
+	if !m.Study.Equals(other.Study) { return false }
+	if !m.Individual.Equals(other.Individual) { return false }
+	if !m.AssignedArm.Equals(other.AssignedArm) { return false }
+	if !m.ActualArm.Equals(other.ActualArm) { return false }
+	if !m.Consent.Equals(other.Consent) { return false }
+	return true
+}
+

@@ -3,179 +3,50 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // CommunicationRequest
 // A request to convey information; e.g. the CDS system proposes that an alert be sent to a responsible provider, the CDS system proposes that the public health agency be notified about a reportable condition.
 type CommunicationRequest struct {
 	DomainResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// identifier
-	// Business identifiers assigned to this communication request by the performer or other systems which remain constant as the resource is updated and propagates from server to server.
-	Identifier []Identifier `json:"identifier,omitempty"`
-	// basedOn
-	// A plan or proposal that is fulfilled in whole or in part by this request.
-	BasedOn []Reference `json:"basedOn,omitempty"`
-	// replaces
-	// Completed or terminated request(s) whose function is taken by this new request.
-	Replaces []Reference `json:"replaces,omitempty"`
-	// groupIdentifier
-	// A shared identifier common to all requests that were authorized more or less simultaneously by a single author, representing the identifier of the requisition, prescription or similar form.
-	GroupIdentifier Identifier `json:"groupIdentifier,omitempty"`
-	// status
-	// The status of the proposal or order.
-	Status RequestStatus `json:"status,omitempty"`
-	// statusReason
-	// Captures the reason for the current state of the CommunicationRequest.
-	StatusReason CodeableConcept `json:"statusReason,omitempty"`
-	// category
-	// The type of message to be sent such as alert, notification, reminder, instruction, etc.
-	Category []CodeableConcept `json:"category,omitempty"`
-	// priority
-	// Characterizes how quickly the proposed act must be initiated. Includes concepts such as stat, urgent, routine.
-	Priority RequestPriority `json:"priority,omitempty"`
-	// doNotPerform
-	// If true indicates that the CommunicationRequest is asking for the specified action to *not* occur.
-	DoNotPerform FhirBoolean `json:"doNotPerform,omitempty"`
-	// medium
-	// A channel that was used for this communication (e.g. email, fax).
-	Medium []CodeableConcept `json:"medium,omitempty"`
-	// subject
-	// The patient or group that is the focus of this communication request.
-	Subject Reference `json:"subject,omitempty"`
-	// about
-	// Other resources that pertain to this communication request and to which this communication request should be associated.
-	About []Reference `json:"about,omitempty"`
-	// encounter
-	// The Encounter during which this CommunicationRequest was created or to which the creation of this record is tightly associated.
-	Encounter Reference `json:"encounter,omitempty"`
-	// payload
-	// Text, attachment(s), or resource(s) to be communicated to the recipient.
-	Payload []CommunicationRequestPayload `json:"payload,omitempty"`
-	// occurrenceDateTime
-	// The time when this communication is to occur.
-	OccurrenceDateTime FhirDateTime `json:"occurrenceDateTime,omitempty"`
-	// occurrencePeriod
-	// The time when this communication is to occur.
-	OccurrencePeriod Period `json:"occurrencePeriod,omitempty"`
-	// authoredOn
-	// For draft requests, indicates the date of initial creation.  For requests with other statuses, indicates the date of activation.
-	AuthoredOn FhirDateTime `json:"authoredOn,omitempty"`
-	// requester
-	// The device, individual, or organization who initiated the request and has responsibility for its activation.
-	Requester Reference `json:"requester,omitempty"`
-	// recipient
-	// The entity (e.g. person, organization, clinical information system, device, group, or care team) which is the intended target of the communication.
-	Recipient []Reference `json:"recipient,omitempty"`
-	// sender
-	// The entity (e.g. person, organization, clinical information system, or device) which is to be the source of the communication.
-	Sender Reference `json:"sender,omitempty"`
-	// reasonCode
-	// Describes why the request is being made in coded or textual form.
-	ReasonCode []CodeableConcept `json:"reasonCode,omitempty"`
-	// reasonReference
-	// Indicates another resource whose existence justifies this request.
-	ReasonReference []Reference `json:"reasonReference,omitempty"`
-	// note
-	// Comments made about the request by the requester, sender, recipient, subject or other participants.
-	Note []Annotation `json:"note,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Identifier []*Identifier `json:"identifier,omitempty"`
+	BasedOn []*Reference `json:"basedon,omitempty"`
+	Replaces []*Reference `json:"replaces,omitempty"`
+	GroupIdentifier *Identifier `json:"groupidentifier,omitempty"`
+	Status *RequestStatus `json:"status,omitempty"`
+	StatusReason *CodeableConcept `json:"statusreason,omitempty"`
+	Category []*CodeableConcept `json:"category,omitempty"`
+	Priority *RequestPriority `json:"priority,omitempty"`
+	DoNotPerform *FhirBoolean `json:"donotperform,omitempty"`
+	Medium []*CodeableConcept `json:"medium,omitempty"`
+	Subject *Reference `json:"subject,omitempty"`
+	About []*Reference `json:"about,omitempty"`
+	Encounter *Reference `json:"encounter,omitempty"`
+	Payload []*CommunicationRequestPayload `json:"payload,omitempty"`
+	OccurrenceDateTime *FhirDateTime `json:"occurrencedatetime,omitempty"`
+	OccurrencePeriod *Period `json:"occurrenceperiod,omitempty"`
+	AuthoredOn *FhirDateTime `json:"authoredon,omitempty"`
+	Requester *Reference `json:"requester,omitempty"`
+	Recipient []*Reference `json:"recipient,omitempty"`
+	Sender *Reference `json:"sender,omitempty"`
+	ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+	ReasonReference []*Reference `json:"reasonreference,omitempty"`
+	Note []*Annotation `json:"note,omitempty"`
 }
 
 // NewCommunicationRequest creates a new CommunicationRequest instance
-func NewCommunicationRequest(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	identifier []Identifier,
-	basedOn []Reference,
-	replaces []Reference,
-	groupIdentifier Identifier,
-	status RequestStatus,
-	statusReason CodeableConcept,
-	category []CodeableConcept,
-	priority RequestPriority,
-	doNotPerform FhirBoolean,
-	medium []CodeableConcept,
-	subject Reference,
-	about []Reference,
-	encounter Reference,
-	payload []CommunicationRequestPayload,
-	occurrenceDateTime FhirDateTime,
-	occurrencePeriod Period,
-	authoredOn FhirDateTime,
-	requester Reference,
-	recipient []Reference,
-	sender Reference,
-	reasonCode []CodeableConcept,
-	reasonReference []Reference,
-	note []Annotation,
-) *CommunicationRequest {
-	return &CommunicationRequest{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Identifier: identifier,
-		BasedOn: basedOn,
-		Replaces: replaces,
-		GroupIdentifier: groupIdentifier,
-		Status: status,
-		StatusReason: statusReason,
-		Category: category,
-		Priority: priority,
-		DoNotPerform: doNotPerform,
-		Medium: medium,
-		Subject: subject,
-		About: about,
-		Encounter: encounter,
-		Payload: payload,
-		OccurrenceDateTime: occurrenceDateTime,
-		OccurrencePeriod: occurrencePeriod,
-		AuthoredOn: authoredOn,
-		Requester: requester,
-		Recipient: recipient,
-		Sender: sender,
-		ReasonCode: reasonCode,
-		ReasonReference: reasonReference,
-		Note: note,
-	}
+func NewCommunicationRequest() *CommunicationRequest {
+	return &CommunicationRequest{}
 }
+
 // FromJSON populates CommunicationRequest from JSON data
 func (m *CommunicationRequest) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -186,211 +57,99 @@ func (m *CommunicationRequest) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CommunicationRequest
-func (m *CommunicationRequest) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	identifier *[]Identifier,
-	basedOn *[]Reference,
-	replaces *[]Reference,
-	groupIdentifier *Identifier,
-	status *RequestStatus,
-	statusReason *CodeableConcept,
-	category *[]CodeableConcept,
-	priority *RequestPriority,
-	doNotPerform *FhirBoolean,
-	medium *[]CodeableConcept,
-	subject *Reference,
-	about *[]Reference,
-	encounter *Reference,
-	payload *[]CommunicationRequestPayload,
-	occurrenceDateTime *FhirDateTime,
-	occurrencePeriod *Period,
-	authoredOn *FhirDateTime,
-	requester *Reference,
-	recipient *[]Reference,
-	sender *Reference,
-	reasonCode *[]CodeableConcept,
-	reasonReference *[]Reference,
-	note *[]Annotation,
-) *CommunicationRequest {
+// Clone creates a deep copy of CommunicationRequest
+func (m *CommunicationRequest) Clone() *CommunicationRequest {
+	if m == nil { return nil }
 	return &CommunicationRequest{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Identifier: func() []Identifier {
-			if identifier != nil { return *identifier }
-			return m.Identifier
-		}(),
-		BasedOn: func() []Reference {
-			if basedOn != nil { return *basedOn }
-			return m.BasedOn
-		}(),
-		Replaces: func() []Reference {
-			if replaces != nil { return *replaces }
-			return m.Replaces
-		}(),
-		GroupIdentifier: func() Identifier {
-			if groupIdentifier != nil { return *groupIdentifier }
-			return m.GroupIdentifier
-		}(),
-		Status: func() RequestStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		StatusReason: func() CodeableConcept {
-			if statusReason != nil { return *statusReason }
-			return m.StatusReason
-		}(),
-		Category: func() []CodeableConcept {
-			if category != nil { return *category }
-			return m.Category
-		}(),
-		Priority: func() RequestPriority {
-			if priority != nil { return *priority }
-			return m.Priority
-		}(),
-		DoNotPerform: func() FhirBoolean {
-			if doNotPerform != nil { return *doNotPerform }
-			return m.DoNotPerform
-		}(),
-		Medium: func() []CodeableConcept {
-			if medium != nil { return *medium }
-			return m.Medium
-		}(),
-		Subject: func() Reference {
-			if subject != nil { return *subject }
-			return m.Subject
-		}(),
-		About: func() []Reference {
-			if about != nil { return *about }
-			return m.About
-		}(),
-		Encounter: func() Reference {
-			if encounter != nil { return *encounter }
-			return m.Encounter
-		}(),
-		Payload: func() []CommunicationRequestPayload {
-			if payload != nil { return *payload }
-			return m.Payload
-		}(),
-		OccurrenceDateTime: func() FhirDateTime {
-			if occurrenceDateTime != nil { return *occurrenceDateTime }
-			return m.OccurrenceDateTime
-		}(),
-		OccurrencePeriod: func() Period {
-			if occurrencePeriod != nil { return *occurrencePeriod }
-			return m.OccurrencePeriod
-		}(),
-		AuthoredOn: func() FhirDateTime {
-			if authoredOn != nil { return *authoredOn }
-			return m.AuthoredOn
-		}(),
-		Requester: func() Reference {
-			if requester != nil { return *requester }
-			return m.Requester
-		}(),
-		Recipient: func() []Reference {
-			if recipient != nil { return *recipient }
-			return m.Recipient
-		}(),
-		Sender: func() Reference {
-			if sender != nil { return *sender }
-			return m.Sender
-		}(),
-		ReasonCode: func() []CodeableConcept {
-			if reasonCode != nil { return *reasonCode }
-			return m.ReasonCode
-		}(),
-		ReasonReference: func() []Reference {
-			if reasonReference != nil { return *reasonReference }
-			return m.ReasonReference
-		}(),
-		Note: func() []Annotation {
-			if note != nil { return *note }
-			return m.Note
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Identifier: cloneSlices(m.Identifier),
+		BasedOn: cloneSlices(m.BasedOn),
+		Replaces: cloneSlices(m.Replaces),
+		GroupIdentifier: m.GroupIdentifier.Clone(),
+		Status: m.Status.Clone(),
+		StatusReason: m.StatusReason.Clone(),
+		Category: cloneSlices(m.Category),
+		Priority: m.Priority.Clone(),
+		DoNotPerform: m.DoNotPerform.Clone(),
+		Medium: cloneSlices(m.Medium),
+		Subject: m.Subject.Clone(),
+		About: cloneSlices(m.About),
+		Encounter: m.Encounter.Clone(),
+		Payload: cloneSlices(m.Payload),
+		OccurrenceDateTime: m.OccurrenceDateTime.Clone(),
+		OccurrencePeriod: m.OccurrencePeriod.Clone(),
+		AuthoredOn: m.AuthoredOn.Clone(),
+		Requester: m.Requester.Clone(),
+		Recipient: cloneSlices(m.Recipient),
+		Sender: m.Sender.Clone(),
+		ReasonCode: cloneSlices(m.ReasonCode),
+		ReasonReference: cloneSlices(m.ReasonReference),
+		Note: cloneSlices(m.Note),
 	}
 }
+
+// Equals checks for equality with another CommunicationRequest instance
+func (m *CommunicationRequest) Equals(other *CommunicationRequest) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !compareSlices(m.Identifier, other.Identifier) { return false }
+	if !compareSlices(m.BasedOn, other.BasedOn) { return false }
+	if !compareSlices(m.Replaces, other.Replaces) { return false }
+	if !m.GroupIdentifier.Equals(other.GroupIdentifier) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.StatusReason.Equals(other.StatusReason) { return false }
+	if !compareSlices(m.Category, other.Category) { return false }
+	if !m.Priority.Equals(other.Priority) { return false }
+	if !m.DoNotPerform.Equals(other.DoNotPerform) { return false }
+	if !compareSlices(m.Medium, other.Medium) { return false }
+	if !m.Subject.Equals(other.Subject) { return false }
+	if !compareSlices(m.About, other.About) { return false }
+	if !m.Encounter.Equals(other.Encounter) { return false }
+	if !compareSlices(m.Payload, other.Payload) { return false }
+	if !m.OccurrenceDateTime.Equals(other.OccurrenceDateTime) { return false }
+	if !m.OccurrencePeriod.Equals(other.OccurrencePeriod) { return false }
+	if !m.AuthoredOn.Equals(other.AuthoredOn) { return false }
+	if !m.Requester.Equals(other.Requester) { return false }
+	if !compareSlices(m.Recipient, other.Recipient) { return false }
+	if !m.Sender.Equals(other.Sender) { return false }
+	if !compareSlices(m.ReasonCode, other.ReasonCode) { return false }
+	if !compareSlices(m.ReasonReference, other.ReasonReference) { return false }
+	if !compareSlices(m.Note, other.Note) { return false }
+	return true
+}
+
 // CommunicationRequestPayload
 // Text, attachment(s), or resource(s) to be communicated to the recipient.
 type CommunicationRequestPayload struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// contentString
-	// The communicated content (or for multi-part communications, one portion of the communication).
-	ContentString FhirString `json:"contentString,omitempty"`
-	// contentAttachment
-	// The communicated content (or for multi-part communications, one portion of the communication).
-	ContentAttachment Attachment `json:"contentAttachment,omitempty"`
-	// contentReference
-	// The communicated content (or for multi-part communications, one portion of the communication).
-	ContentReference Reference `json:"contentReference,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	ContentString *FhirString `json:"contentstring,omitempty"`
+	ContentAttachment *Attachment `json:"contentattachment,omitempty"`
+	ContentReference *Reference `json:"contentreference,omitempty"`
 }
 
 // NewCommunicationRequestPayload creates a new CommunicationRequestPayload instance
-func NewCommunicationRequestPayload(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	contentString FhirString,
-	contentAttachment Attachment,
-	contentReference Reference,
-) *CommunicationRequestPayload {
-	return &CommunicationRequestPayload{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		ContentString: contentString,
-		ContentAttachment: contentAttachment,
-		ContentReference: contentReference,
-	}
+func NewCommunicationRequestPayload() *CommunicationRequestPayload {
+	return &CommunicationRequestPayload{}
 }
+
 // FromJSON populates CommunicationRequestPayload from JSON data
 func (m *CommunicationRequestPayload) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -401,39 +160,29 @@ func (m *CommunicationRequestPayload) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of CommunicationRequestPayload
-func (m *CommunicationRequestPayload) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	contentString *FhirString,
-	contentAttachment *Attachment,
-	contentReference *Reference,
-) *CommunicationRequestPayload {
+// Clone creates a deep copy of CommunicationRequestPayload
+func (m *CommunicationRequestPayload) Clone() *CommunicationRequestPayload {
+	if m == nil { return nil }
 	return &CommunicationRequestPayload{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		ContentString: func() FhirString {
-			if contentString != nil { return *contentString }
-			return m.ContentString
-		}(),
-		ContentAttachment: func() Attachment {
-			if contentAttachment != nil { return *contentAttachment }
-			return m.ContentAttachment
-		}(),
-		ContentReference: func() Reference {
-			if contentReference != nil { return *contentReference }
-			return m.ContentReference
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		ContentString: m.ContentString.Clone(),
+		ContentAttachment: m.ContentAttachment.Clone(),
+		ContentReference: m.ContentReference.Clone(),
 	}
 }
+
+// Equals checks for equality with another CommunicationRequestPayload instance
+func (m *CommunicationRequestPayload) Equals(other *CommunicationRequestPayload) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.ContentString.Equals(other.ContentString) { return false }
+	if !m.ContentAttachment.Equals(other.ContentAttachment) { return false }
+	if !m.ContentReference.Equals(other.ContentReference) { return false }
+	return true
+}
+

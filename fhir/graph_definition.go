@@ -3,139 +3,42 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
-
-)
+	"encoding/json")
 
 // GraphDefinition
 // A formal computable definition of a graph of resources - that is, a coherent set of resources that form a graph by following references. The Graph Definition resource defines a set and makes rules about the set.
 type GraphDefinition struct {
 	CanonicalResource
-	// id
-	// The logical id of the resource, as used in the URL for the resource. Once assigned, this value never changes.
-	Id FhirString `json:"id,omitempty"`
-	// meta
-	// The metadata about the resource. This is content that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
-	Meta FhirMeta `json:"meta,omitempty"`
-	// implicitRules
-	// A reference to a set of rules that were followed when the resource was constructed, and which must be understood when processing the content. Often, this is a reference to an implementation guide that defines the special rules along with other profiles etc.
-	ImplicitRules FhirUri `json:"implicitRules,omitempty"`
-	// language
-	// The base language in which the resource is written.
-	Language CommonLanguages `json:"language,omitempty"`
-	// text
-	// A human-readable narrative that contains a summary of the resource and can be used to represent the content of the resource to a human. The narrative need not encode all the structured data, but is required to contain sufficient detail to make it "clinically safe" for a human to just read the narrative. Resource definitions may define what content should be represented in the narrative to ensure clinical safety.
-	Text Narrative `json:"text,omitempty"`
-	// contained
-	// These resources do not have an independent existence apart from the resource that contains them - they cannot be identified independently, and nor can they have their own independent transaction scope.
-	Contained []Resource `json:"contained,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the resource. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the resource and that modifies the understanding of the element that contains it and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer is allowed to define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// url
-	// An absolute URI that is used to identify this graph definition when it is referenced in a specification, model, design or an instance; also called its canonical identifier. This SHOULD be globally unique and SHOULD be a literal address at which at which an authoritative instance of this graph definition is (or will be) published. This URL can be the target of a canonical reference. It SHALL remain the same when the graph definition is stored on different servers.
-	Url FhirUri `json:"url,omitempty"`
-	// version
-	// The identifier that is used to identify this version of the graph definition when it is referenced in a specification, model, design or instance. This is an arbitrary value managed by the graph definition author and is not expected to be globally unique. For example, it might be a timestamp (e.g. yyyymmdd) if a managed version is not available. There is also no expectation that versions can be placed in a lexicographical sequence.
-	Version FhirString `json:"version,omitempty"`
-	// name
-	// A natural language name identifying the graph definition. This name should be usable as an identifier for the module by machine processing applications such as code generation.
-	Name FhirString `json:"name,omitempty"`
-	// status
-	// The status of this graph definition. Enables tracking the life-cycle of the content.
-	Status PublicationStatus `json:"status,omitempty"`
-	// experimental
-	// A Boolean value to indicate that this graph definition is authored for testing purposes (or education/evaluation/marketing) and is not intended to be used for genuine usage.
-	Experimental FhirBoolean `json:"experimental,omitempty"`
-	// date
-	// The date  (and optionally time) when the graph definition was published. The date must change when the business version changes and it must change if the status code changes. In addition, it should change when the substantive content of the graph definition changes.
-	Date FhirDateTime `json:"date,omitempty"`
-	// publisher
-	// The name of the organization or individual that published the graph definition.
-	Publisher FhirString `json:"publisher,omitempty"`
-	// contact
-	// Contact details to assist a user in finding and communicating with the publisher.
-	Contact []ContactDetail `json:"contact,omitempty"`
-	// description
-	// A free text natural language description of the graph definition from a consumer's perspective.
-	Description FhirMarkdown `json:"description,omitempty"`
-	// useContext
-	// The content was developed with a focus and intent of supporting the contexts that are listed. These contexts may be general categories (gender, age, ...) or may be references to specific programs (insurance plans, studies, ...) and may be used to assist with indexing and searching for appropriate graph definition instances.
-	UseContext []UsageContext `json:"useContext,omitempty"`
-	// jurisdiction
-	// A legal or geographic region in which the graph definition is intended to be used.
-	Jurisdiction []CodeableConcept `json:"jurisdiction,omitempty"`
-	// purpose
-	// Explanation of why this graph definition is needed and why it has been designed as it has.
-	Purpose FhirMarkdown `json:"purpose,omitempty"`
-	// start
-	// The type of FHIR resource at which instances of this graph start.
-	Start FhirCode `json:"start,omitempty"`
-	// profile
-	// The profile that describes the use of the base resource.
-	Profile FhirCanonical `json:"profile,omitempty"`
-	// link
-	// Links this graph makes rules about.
-	Link []GraphDefinitionLink `json:"link,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Meta *FhirMeta `json:"meta,omitempty"`
+	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+	Language *CommonLanguages `json:"language,omitempty"`
+	Text *Narrative `json:"text,omitempty"`
+	Contained []*Resource `json:"contained,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Url *FhirUri `json:"url,omitempty"`
+	Version *FhirString `json:"version,omitempty"`
+	Name *FhirString `json:"name,omitempty"`
+	Status *PublicationStatus `json:"status,omitempty"`
+	Experimental *FhirBoolean `json:"experimental,omitempty"`
+	Date *FhirDateTime `json:"date,omitempty"`
+	Publisher *FhirString `json:"publisher,omitempty"`
+	Contact []*ContactDetail `json:"contact,omitempty"`
+	Description *FhirMarkdown `json:"description,omitempty"`
+	UseContext []*UsageContext `json:"usecontext,omitempty"`
+	Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+	Purpose *FhirMarkdown `json:"purpose,omitempty"`
+	Start *FhirCode `json:"start,omitempty"`
+	Profile *FhirCanonical `json:"profile,omitempty"`
+	Link []*GraphDefinitionLink `json:"link,omitempty"`
 }
 
 // NewGraphDefinition creates a new GraphDefinition instance
-func NewGraphDefinition(
-	id FhirString,
-	meta FhirMeta,
-	implicitRules FhirUri,
-	language CommonLanguages,
-	text Narrative,
-	contained []Resource,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	url FhirUri,
-	version FhirString,
-	name FhirString,
-	status PublicationStatus,
-	experimental FhirBoolean,
-	date FhirDateTime,
-	publisher FhirString,
-	contact []ContactDetail,
-	description FhirMarkdown,
-	useContext []UsageContext,
-	jurisdiction []CodeableConcept,
-	purpose FhirMarkdown,
-	start FhirCode,
-	profile FhirCanonical,
-	link []GraphDefinitionLink,
-) *GraphDefinition {
-	return &GraphDefinition{
-		Id: id,
-		Meta: meta,
-		ImplicitRules: implicitRules,
-		Language: language,
-		Text: text,
-		Contained: contained,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Url: url,
-		Version: version,
-		Name: name,
-		Status: status,
-		Experimental: experimental,
-		Date: date,
-		Publisher: publisher,
-		Contact: contact,
-		Description: description,
-		UseContext: useContext,
-		Jurisdiction: jurisdiction,
-		Purpose: purpose,
-		Start: start,
-		Profile: profile,
-		Link: link,
-	}
+func NewGraphDefinition() *GraphDefinition {
+	return &GraphDefinition{}
 }
+
 // FromJSON populates GraphDefinition from JSON data
 func (m *GraphDefinition) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -146,186 +49,86 @@ func (m *GraphDefinition) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of GraphDefinition
-func (m *GraphDefinition) CopyWith(
-	id *FhirString,
-	meta *FhirMeta,
-	implicitRules *FhirUri,
-	language *CommonLanguages,
-	text *Narrative,
-	contained *[]Resource,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	url *FhirUri,
-	version *FhirString,
-	name *FhirString,
-	status *PublicationStatus,
-	experimental *FhirBoolean,
-	date *FhirDateTime,
-	publisher *FhirString,
-	contact *[]ContactDetail,
-	description *FhirMarkdown,
-	useContext *[]UsageContext,
-	jurisdiction *[]CodeableConcept,
-	purpose *FhirMarkdown,
-	start *FhirCode,
-	profile *FhirCanonical,
-	link *[]GraphDefinitionLink,
-) *GraphDefinition {
+// Clone creates a deep copy of GraphDefinition
+func (m *GraphDefinition) Clone() *GraphDefinition {
+	if m == nil { return nil }
 	return &GraphDefinition{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Meta: func() FhirMeta {
-			if meta != nil { return *meta }
-			return m.Meta
-		}(),
-		ImplicitRules: func() FhirUri {
-			if implicitRules != nil { return *implicitRules }
-			return m.ImplicitRules
-		}(),
-		Language: func() CommonLanguages {
-			if language != nil { return *language }
-			return m.Language
-		}(),
-		Text: func() Narrative {
-			if text != nil { return *text }
-			return m.Text
-		}(),
-		Contained: func() []Resource {
-			if contained != nil { return *contained }
-			return m.Contained
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Url: func() FhirUri {
-			if url != nil { return *url }
-			return m.Url
-		}(),
-		Version: func() FhirString {
-			if version != nil { return *version }
-			return m.Version
-		}(),
-		Name: func() FhirString {
-			if name != nil { return *name }
-			return m.Name
-		}(),
-		Status: func() PublicationStatus {
-			if status != nil { return *status }
-			return m.Status
-		}(),
-		Experimental: func() FhirBoolean {
-			if experimental != nil { return *experimental }
-			return m.Experimental
-		}(),
-		Date: func() FhirDateTime {
-			if date != nil { return *date }
-			return m.Date
-		}(),
-		Publisher: func() FhirString {
-			if publisher != nil { return *publisher }
-			return m.Publisher
-		}(),
-		Contact: func() []ContactDetail {
-			if contact != nil { return *contact }
-			return m.Contact
-		}(),
-		Description: func() FhirMarkdown {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		UseContext: func() []UsageContext {
-			if useContext != nil { return *useContext }
-			return m.UseContext
-		}(),
-		Jurisdiction: func() []CodeableConcept {
-			if jurisdiction != nil { return *jurisdiction }
-			return m.Jurisdiction
-		}(),
-		Purpose: func() FhirMarkdown {
-			if purpose != nil { return *purpose }
-			return m.Purpose
-		}(),
-		Start: func() FhirCode {
-			if start != nil { return *start }
-			return m.Start
-		}(),
-		Profile: func() FhirCanonical {
-			if profile != nil { return *profile }
-			return m.Profile
-		}(),
-		Link: func() []GraphDefinitionLink {
-			if link != nil { return *link }
-			return m.Link
-		}(),
+		Id: m.Id.Clone(),
+		Meta: m.Meta.Clone(),
+		ImplicitRules: m.ImplicitRules.Clone(),
+		Language: m.Language.Clone(),
+		Text: m.Text.Clone(),
+		Contained: cloneSlices(m.Contained),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Url: m.Url.Clone(),
+		Version: m.Version.Clone(),
+		Name: m.Name.Clone(),
+		Status: m.Status.Clone(),
+		Experimental: m.Experimental.Clone(),
+		Date: m.Date.Clone(),
+		Publisher: m.Publisher.Clone(),
+		Contact: cloneSlices(m.Contact),
+		Description: m.Description.Clone(),
+		UseContext: cloneSlices(m.UseContext),
+		Jurisdiction: cloneSlices(m.Jurisdiction),
+		Purpose: m.Purpose.Clone(),
+		Start: m.Start.Clone(),
+		Profile: m.Profile.Clone(),
+		Link: cloneSlices(m.Link),
 	}
 }
+
+// Equals checks for equality with another GraphDefinition instance
+func (m *GraphDefinition) Equals(other *GraphDefinition) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !m.Meta.Equals(other.Meta) { return false }
+	if !m.ImplicitRules.Equals(other.ImplicitRules) { return false }
+	if !m.Language.Equals(other.Language) { return false }
+	if !m.Text.Equals(other.Text) { return false }
+	if !compareSlices(m.Contained, other.Contained) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Url.Equals(other.Url) { return false }
+	if !m.Version.Equals(other.Version) { return false }
+	if !m.Name.Equals(other.Name) { return false }
+	if !m.Status.Equals(other.Status) { return false }
+	if !m.Experimental.Equals(other.Experimental) { return false }
+	if !m.Date.Equals(other.Date) { return false }
+	if !m.Publisher.Equals(other.Publisher) { return false }
+	if !compareSlices(m.Contact, other.Contact) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.UseContext, other.UseContext) { return false }
+	if !compareSlices(m.Jurisdiction, other.Jurisdiction) { return false }
+	if !m.Purpose.Equals(other.Purpose) { return false }
+	if !m.Start.Equals(other.Start) { return false }
+	if !m.Profile.Equals(other.Profile) { return false }
+	if !compareSlices(m.Link, other.Link) { return false }
+	return true
+}
+
 // GraphDefinitionLink
 // Links this graph makes rules about.
 type GraphDefinitionLink struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// path
-	// A FHIR expression that identifies one of FHIR References to other resources.
-	Path FhirString `json:"path,omitempty"`
-	// sliceName
-	// Which slice (if profiled).
-	SliceName FhirString `json:"sliceName,omitempty"`
-	// min
-	// Minimum occurrences for this link.
-	Min FhirInteger `json:"min,omitempty"`
-	// max
-	// Maximum occurrences for this link.
-	Max FhirString `json:"max,omitempty"`
-	// description
-	// Information about why this link is of interest in this graph definition.
-	Description FhirString `json:"description,omitempty"`
-	// target
-	// Potential target for the link.
-	Target []GraphDefinitionTarget `json:"target,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Path *FhirString `json:"path,omitempty"`
+	SliceName *FhirString `json:"slicename,omitempty"`
+	Min *FhirInteger `json:"min,omitempty"`
+	Max *FhirString `json:"max,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
+	Target []*GraphDefinitionTarget `json:"target,omitempty"`
 }
 
 // NewGraphDefinitionLink creates a new GraphDefinitionLink instance
-func NewGraphDefinitionLink(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	path FhirString,
-	sliceName FhirString,
-	min FhirInteger,
-	max FhirString,
-	description FhirString,
-	target []GraphDefinitionTarget,
-) *GraphDefinitionLink {
-	return &GraphDefinitionLink{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Path: path,
-		SliceName: sliceName,
-		Min: min,
-		Max: max,
-		Description: description,
-		Target: target,
-	}
+func NewGraphDefinitionLink() *GraphDefinitionLink {
+	return &GraphDefinitionLink{}
 }
+
 // FromJSON populates GraphDefinitionLink from JSON data
 func (m *GraphDefinitionLink) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -336,111 +139,57 @@ func (m *GraphDefinitionLink) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of GraphDefinitionLink
-func (m *GraphDefinitionLink) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	path *FhirString,
-	sliceName *FhirString,
-	min *FhirInteger,
-	max *FhirString,
-	description *FhirString,
-	target *[]GraphDefinitionTarget,
-) *GraphDefinitionLink {
+// Clone creates a deep copy of GraphDefinitionLink
+func (m *GraphDefinitionLink) Clone() *GraphDefinitionLink {
+	if m == nil { return nil }
 	return &GraphDefinitionLink{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Path: func() FhirString {
-			if path != nil { return *path }
-			return m.Path
-		}(),
-		SliceName: func() FhirString {
-			if sliceName != nil { return *sliceName }
-			return m.SliceName
-		}(),
-		Min: func() FhirInteger {
-			if min != nil { return *min }
-			return m.Min
-		}(),
-		Max: func() FhirString {
-			if max != nil { return *max }
-			return m.Max
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
-		Target: func() []GraphDefinitionTarget {
-			if target != nil { return *target }
-			return m.Target
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Path: m.Path.Clone(),
+		SliceName: m.SliceName.Clone(),
+		Min: m.Min.Clone(),
+		Max: m.Max.Clone(),
+		Description: m.Description.Clone(),
+		Target: cloneSlices(m.Target),
 	}
 }
+
+// Equals checks for equality with another GraphDefinitionLink instance
+func (m *GraphDefinitionLink) Equals(other *GraphDefinitionLink) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Path.Equals(other.Path) { return false }
+	if !m.SliceName.Equals(other.SliceName) { return false }
+	if !m.Min.Equals(other.Min) { return false }
+	if !m.Max.Equals(other.Max) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	if !compareSlices(m.Target, other.Target) { return false }
+	return true
+}
+
 // GraphDefinitionTarget
 // Potential target for the link.
 type GraphDefinitionTarget struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// type
-	// Type of resource this link refers to.
-	Type_ FhirCode `json:"type,omitempty"`
-	// params
-	// A set of parameters to look up.
-	Params FhirString `json:"params,omitempty"`
-	// profile
-	// Profile for the target resource.
-	Profile FhirCanonical `json:"profile,omitempty"`
-	// compartment
-	// Compartment Consistency Rules.
-	Compartment []GraphDefinitionCompartment `json:"compartment,omitempty"`
-	// link
-	// Additional links from target resource.
-	Link []GraphDefinitionLink `json:"link,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Type *FhirCode `json:"type,omitempty"`
+	Params *FhirString `json:"params,omitempty"`
+	Profile *FhirCanonical `json:"profile,omitempty"`
+	Compartment []*GraphDefinitionCompartment `json:"compartment,omitempty"`
+	Link []*GraphDefinitionLink `json:"link,omitempty"`
 }
 
 // NewGraphDefinitionTarget creates a new GraphDefinitionTarget instance
-func NewGraphDefinitionTarget(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	type_ FhirCode,
-	params FhirString,
-	profile FhirCanonical,
-	compartment []GraphDefinitionCompartment,
-	link []GraphDefinitionLink,
-) *GraphDefinitionTarget {
-	return &GraphDefinitionTarget{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Type_: type_,
-		Params: params,
-		Profile: profile,
-		Compartment: compartment,
-		Link: link,
-	}
+func NewGraphDefinitionTarget() *GraphDefinitionTarget {
+	return &GraphDefinitionTarget{}
 }
+
 // FromJSON populates GraphDefinitionTarget from JSON data
 func (m *GraphDefinitionTarget) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -451,106 +200,55 @@ func (m *GraphDefinitionTarget) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of GraphDefinitionTarget
-func (m *GraphDefinitionTarget) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	type_ *FhirCode,
-	params *FhirString,
-	profile *FhirCanonical,
-	compartment *[]GraphDefinitionCompartment,
-	link *[]GraphDefinitionLink,
-) *GraphDefinitionTarget {
+// Clone creates a deep copy of GraphDefinitionTarget
+func (m *GraphDefinitionTarget) Clone() *GraphDefinitionTarget {
+	if m == nil { return nil }
 	return &GraphDefinitionTarget{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Type_: func() FhirCode {
-			if type_ != nil { return *type_ }
-			return m.Type_
-		}(),
-		Params: func() FhirString {
-			if params != nil { return *params }
-			return m.Params
-		}(),
-		Profile: func() FhirCanonical {
-			if profile != nil { return *profile }
-			return m.Profile
-		}(),
-		Compartment: func() []GraphDefinitionCompartment {
-			if compartment != nil { return *compartment }
-			return m.Compartment
-		}(),
-		Link: func() []GraphDefinitionLink {
-			if link != nil { return *link }
-			return m.Link
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Type: m.Type.Clone(),
+		Params: m.Params.Clone(),
+		Profile: m.Profile.Clone(),
+		Compartment: cloneSlices(m.Compartment),
+		Link: cloneSlices(m.Link),
 	}
 }
+
+// Equals checks for equality with another GraphDefinitionTarget instance
+func (m *GraphDefinitionTarget) Equals(other *GraphDefinitionTarget) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Type.Equals(other.Type) { return false }
+	if !m.Params.Equals(other.Params) { return false }
+	if !m.Profile.Equals(other.Profile) { return false }
+	if !compareSlices(m.Compartment, other.Compartment) { return false }
+	if !compareSlices(m.Link, other.Link) { return false }
+	return true
+}
+
 // GraphDefinitionCompartment
 // Compartment Consistency Rules.
 type GraphDefinitionCompartment struct {
 	BackboneElement
-	// id
-	// Unique id for the element within a resource (for internal references). This may be any string value that does not contain spaces.
-	Id FhirString `json:"id,omitempty"`
-	// extension
-	// May be used to represent additional information that is not part of the basic definition of the element. To make the use of extensions safe and manageable, there is a strict set of governance  applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension.
-	Extension_ []FhirExtension `json:"extension,omitempty"`
-	// modifierExtension
-	// May be used to represent additional information that is not part of the basic definition of the element and that modifies the understanding of the element in which it is contained and/or the understanding of the containing element's descendants. Usually modifier elements provide negation or qualification. To make the use of extensions safe and manageable, there is a strict set of governance applied to the definition and use of extensions. Though any implementer can define an extension, there is a set of requirements that SHALL be met as part of the definition of the extension. Applications processing a resource are required to check for modifier extensions.
-// 
-// Modifier extensions SHALL NOT change the meaning of any elements on Resource or DomainResource (including cannot change the meaning of modifierExtension itself).
-	ModifierExtension []FhirExtension `json:"modifierExtension,omitempty"`
-	// use
-	// Defines how the compartment rule is used - whether it it is used to test whether resources are subject to the rule, or whether it is a rule that must be followed.
-	Use GraphCompartmentUse `json:"use,omitempty"`
-	// code
-	// Identifies the compartment.
-	Code CompartmentType `json:"code,omitempty"`
-	// rule
-	// identical | matching | different | no-rule | custom.
-	Rule GraphCompartmentRule `json:"rule,omitempty"`
-	// expression
-	// Custom rule, as a FHIRPath expression.
-	Expression FhirString `json:"expression,omitempty"`
-	// description
-	// Documentation for FHIRPath expression.
-	Description FhirString `json:"description,omitempty"`
+	Id *FhirString `json:"id,omitempty"`
+	Extension_ []*FhirExtension `json:"extension,omitempty"`
+	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+	Use *GraphCompartmentUse `json:"use,omitempty"`
+	Code *CompartmentType `json:"code,omitempty"`
+	Rule *GraphCompartmentRule `json:"rule,omitempty"`
+	Expression *FhirString `json:"expression,omitempty"`
+	Description *FhirString `json:"description,omitempty"`
 }
 
 // NewGraphDefinitionCompartment creates a new GraphDefinitionCompartment instance
-func NewGraphDefinitionCompartment(
-	id FhirString,
-	extension_ []FhirExtension,
-	modifierExtension []FhirExtension,
-	use GraphCompartmentUse,
-	code CompartmentType,
-	rule GraphCompartmentRule,
-	expression FhirString,
-	description FhirString,
-) *GraphDefinitionCompartment {
-	return &GraphDefinitionCompartment{
-		Id: id,
-		Extension_: extension_,
-		ModifierExtension: modifierExtension,
-		Use: use,
-		Code: code,
-		Rule: rule,
-		Expression: expression,
-		Description: description,
-	}
+func NewGraphDefinitionCompartment() *GraphDefinitionCompartment {
+	return &GraphDefinitionCompartment{}
 }
+
 // FromJSON populates GraphDefinitionCompartment from JSON data
 func (m *GraphDefinitionCompartment) FromJSON(data []byte) error {
 	return json.Unmarshal(data, m)
@@ -561,49 +259,33 @@ func (m *GraphDefinitionCompartment) ToJSON() ([]byte, error) {
 	return json.Marshal(m)
 }
 
-// CopyWith creates a modified copy of GraphDefinitionCompartment
-func (m *GraphDefinitionCompartment) CopyWith(
-	id *FhirString,
-	extension_ *[]FhirExtension,
-	modifierExtension *[]FhirExtension,
-	use *GraphCompartmentUse,
-	code *CompartmentType,
-	rule *GraphCompartmentRule,
-	expression *FhirString,
-	description *FhirString,
-) *GraphDefinitionCompartment {
+// Clone creates a deep copy of GraphDefinitionCompartment
+func (m *GraphDefinitionCompartment) Clone() *GraphDefinitionCompartment {
+	if m == nil { return nil }
 	return &GraphDefinitionCompartment{
-		Id: func() FhirString {
-			if id != nil { return *id }
-			return m.Id
-		}(),
-		Extension_: func() []FhirExtension {
-			if extension_ != nil { return *extension_ }
-			return m.Extension_
-		}(),
-		ModifierExtension: func() []FhirExtension {
-			if modifierExtension != nil { return *modifierExtension }
-			return m.ModifierExtension
-		}(),
-		Use: func() GraphCompartmentUse {
-			if use != nil { return *use }
-			return m.Use
-		}(),
-		Code: func() CompartmentType {
-			if code != nil { return *code }
-			return m.Code
-		}(),
-		Rule: func() GraphCompartmentRule {
-			if rule != nil { return *rule }
-			return m.Rule
-		}(),
-		Expression: func() FhirString {
-			if expression != nil { return *expression }
-			return m.Expression
-		}(),
-		Description: func() FhirString {
-			if description != nil { return *description }
-			return m.Description
-		}(),
+		Id: m.Id.Clone(),
+		Extension_: cloneSlices(m.Extension_),
+		ModifierExtension: cloneSlices(m.ModifierExtension),
+		Use: m.Use.Clone(),
+		Code: m.Code.Clone(),
+		Rule: m.Rule.Clone(),
+		Expression: m.Expression.Clone(),
+		Description: m.Description.Clone(),
 	}
 }
+
+// Equals checks for equality with another GraphDefinitionCompartment instance
+func (m *GraphDefinitionCompartment) Equals(other *GraphDefinitionCompartment) bool {
+	if m == nil && other == nil { return true }
+	if m == nil || other == nil { return false }
+	if !m.Id.Equals(other.Id) { return false }
+	if !compareSlices(m.Extension_, other.Extension_) { return false }
+	if !compareSlices(m.ModifierExtension, other.ModifierExtension) { return false }
+	if !m.Use.Equals(other.Use) { return false }
+	if !m.Code.Equals(other.Code) { return false }
+	if !m.Rule.Equals(other.Rule) { return false }
+	if !m.Expression.Equals(other.Expression) { return false }
+	if !m.Description.Equals(other.Description) { return false }
+	return true
+}
+
