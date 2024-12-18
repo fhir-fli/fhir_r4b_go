@@ -31,6 +31,16 @@ func NewFhirInstantFromTime(t time.Time) FhirInstant {
 	}
 }
 
+// NewFhirDateFromString parses a date string into FhirDate.
+func NewFhirInstantString(input string) (*FhirInstant, error) {
+	base, err := FhirDateTimeBaseFromString(input)
+	if err != nil {
+		return nil, err
+	}
+	return &FhirInstant{FhirDateTimeBase: *base}, nil
+}
+
+
 // MarshalJSON serializes FhirInstant.
 func (f FhirInstant) MarshalJSON() ([]byte, error) {
 	return json.Marshal(map[string]string{"value": f.ToString()})

@@ -4,16 +4,20 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"net/url"
+	"time"
+
+	"github.com/google/uuid"
 )
 
 // Resource represents the base definition for all FHIR resources.
 type Resource struct {
 	FhirBase
-	ResourceType   ResourceType `json:"resourceType,omitempty"`
-	ID             *FhirString  `json:"id,omitempty"`
-	Meta           *FhirMeta    `json:"meta,omitempty"`
-	ImplicitRules  *FhirUri     `json:"implicitRules,omitempty"`
-	Language       *CommonLanguages `json:"language,omitempty"`
+	ResourceType  ResourceType     `json:"resourceType,omitempty"`
+	ID            *FhirString      `json:"id,omitempty"`
+	Meta          *FhirMeta        `json:"meta,omitempty"`
+	ImplicitRules *FhirUri         `json:"implicitRules,omitempty"`
+	Language      *CommonLanguages `json:"language,omitempty"`
 }
 
 // NewResource creates a new Resource instance.
@@ -53,9 +57,12 @@ func (r *Resource) Path() string {
 
 // ThisReference returns a Reference referring to the current Resource.
 func (r *Resource) ThisReference() *Reference {
+	baseURL := fmt.Sprintf("http://hl7.org/fhir/%s", r.ResourceType)
+	parsedURL, _ := url.Parse(baseURL) // Assume valid URL, handle errors appropriately in practice
+
 	return &Reference{
-		Reference: &FhirString{Value: r.Path()},
-		Type:      &FhirUri{Value: string(r.ResourceType)},
+		Reference: FhirString{Value: r.Path()},
+		Type_:     FhirUri{Value: parsedURL},
 	}
 }
 
@@ -67,9 +74,9 @@ func (r *Resource) NewIDIfNoID() *Resource {
 	return r
 }
 
-// NewID returns the Resource with a new generated ID.
+// NewID generates a unique ID for the Resource dynamically.
 func (r *Resource) NewID() *Resource {
-	newID := GenerateNewID() // Function to generate new ID
+	newID := GenerateNewID()
 	rCopy := *r
 	rCopy.ID = &FhirString{Value: newID}
 	return &rCopy
@@ -77,7 +84,7 @@ func (r *Resource) NewID() *Resource {
 
 // UpdateVersion updates the meta field, increments the version, and modifies lastUpdated.
 func (r *Resource) UpdateVersion(oldMeta *FhirMeta, versionIDAsTime bool) *Resource {
-	newMeta := UpdateMeta(r.Meta, oldMeta, versionIDAsTime) // Reuse a helper function
+	newMeta := UpdateMeta(r.Meta, oldMeta, versionIDAsTime)
 	rCopy := *r
 	rCopy.Meta = newMeta
 	return &rCopy
@@ -99,23 +106,54 @@ func (r *Resource) CopyWith(
 	}
 }
 
-// GenerateNewID generates a new unique ID for the resource.
+// GenerateNewID generates a new unique ID for the Resource.
 func GenerateNewID() string {
-	// Implement UUID generation logic or any unique ID generator here
-	return "new-id-placeholder"
+	return uuid.New().String()
 }
 
-// UpdateMeta updates the meta data for version and lastUpdated.
+// UpdateMeta updates the metadata for a FHIR resource, including version and lastUpdated fields.
 func UpdateMeta(currentMeta, oldMeta *FhirMeta, versionIDAsTime bool) *FhirMeta {
-	// Logic to update meta version, increment, and add lastUpdated timestamp
+	// Create a new meta instance, copying values from the old meta if it exists
 	newMeta := &FhirMeta{}
 	if oldMeta != nil {
-		newMeta = *oldMeta
+		*newMeta = *oldMeta // Deep copy of oldMeta
 	}
-	// Mock example, replace with logic for version and timestamps
-	newMeta.VersionID = "new-version"
-	newMeta.LastUpdated = "2024-06-17T00:00:00Z"
+
+	// Set the VersionId field
+	if versionIDAsTime {
+		newMeta.VersionId = FhirId{Value: strPtr(time.Now().Format(time.RFC3339))}
+	} else {
+		newMeta.VersionId = FhirId{Value: strPtr(incrementVersion(getStringPointerValue(oldMeta.VersionId.Value, "1")))}
+	}
+
+	// Set the LastUpdated field using the current timestamp
+	now := time.Now()
+	newMeta.LastUpdated = FhirInstant{
+		FhirDateTimeBase: NewFhirDateTimeBase(
+			intPtr(now.Year()), now.Location() == time.UTC,
+			intPtr(int(now.Month())), intPtr(now.Day()),
+			intPtr(now.Hour()), intPtr(now.Minute()),
+			intPtr(now.Second()), intPtr(now.Nanosecond()/1e6),
+			nil, nil, // No microseconds or additional time zone provided
+		),
+	}
+
 	return newMeta
+}
+
+// Helper function to retrieve a string value from a pointer, returning a default if nil.
+func getStringPointerValue(ptr *string, defaultValue string) string {
+	if ptr != nil {
+		return *ptr
+	}
+	return defaultValue
+}
+
+// Helper function to increment a numeric version string.
+func incrementVersion(version string) string {
+	var versionNum int
+	fmt.Sscanf(version, "%d", &versionNum)
+	return fmt.Sprintf("%d", versionNum+1)
 }
 
 // ResourceFromJSON acts as a factory to construct a Resource from JSON data.
@@ -127,9 +165,7 @@ func ResourceFromJSON(data []byte) (*Resource, error) {
 	return &res, nil
 }
 
-func ifNotNilSlice[T any](newSlice, oldSlice []T) []T {
-	if newSlice != nil {
-		return newSlice
-	}
-	return oldSlice
+// Helper for converting a string to a pointer
+func strPtr(s string) *string {
+	return &s
 }

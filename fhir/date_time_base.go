@@ -171,7 +171,7 @@ func intPtr(v int) *int {
 	return &v
 }
 
-func FromString(input string) (*FhirDateTimeBase, error) {
+func FhirDateTimeBaseFromString(input string) (*FhirDateTimeBase, error) {
 	t, err := time.Parse(time.RFC3339Nano, input)
 	if err != nil {
 		return nil, fmt.Errorf("invalid FHIR dateTime format: %v", err)

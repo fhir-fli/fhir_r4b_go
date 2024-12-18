@@ -576,7 +576,7 @@ func (m *FhirExtension) CopyWith(
 	}
 }
 
-// Clone creates a deep copy of the FhirExtension instance.
+// Clone creates a deep copy of FhirExtension.
 func (fe *FhirExtension) Clone() *FhirExtension {
 	if fe == nil {
 		return nil
@@ -587,65 +587,143 @@ func (fe *FhirExtension) Clone() *FhirExtension {
 	if fe.Extension_ != nil {
 		extensionCopy = make([]FhirExtension, len(fe.Extension_))
 		for i, ext := range fe.Extension_ {
-			extensionCopy[i] = *ext.Clone() // Recursively clone each FhirExtension
+			extensionCopy[i] = *ext.Clone()
 		}
 	}
 
 	return &FhirExtension{
-		Id:                 fe.Id,                 // Primitive type, can be copied directly
-		Extension_:         extensionCopy,         // Deep copied slice
-		Url:                fe.Url,                // Primitive type, can be copied directly
-		ValueBase64Binary:  fe.ValueBase64Binary,  // Primitive type, can be copied directly
-		ValueBoolean:       fe.ValueBoolean,       // Primitive type, can be copied directly
-		ValueCanonical:     fe.ValueCanonical,     // Primitive type, can be copied directly
-		ValueCode:          fe.ValueCode,          // Primitive type, can be copied directly
-		ValueDate:          fe.ValueDate,          // Primitive type, can be copied directly
-		ValueDateTime:      fe.ValueDateTime,      // Primitive type, can be copied directly
-		ValueDecimal:       fe.ValueDecimal,       // Primitive type, can be copied directly
-		ValueId:            fe.ValueId,            // Primitive type, can be copied directly
-		ValueInstant:       fe.ValueInstant,       // Primitive type, can be copied directly
-		ValueInteger:       fe.ValueInteger,       // Primitive type, can be copied directly
-		ValueMarkdown:      fe.ValueMarkdown,      // Primitive type, can be copied directly
-		ValueOid:           fe.ValueOid,           // Primitive type, can be copied directly
-		ValuePositiveInt:   fe.ValuePositiveInt,   // Primitive type, can be copied directly
-		ValueString:        fe.ValueString,        // Primitive type, can be copied directly
-		ValueTime:          fe.ValueTime,          // Primitive type, can be copied directly
-		ValueUnsignedInt:   fe.ValueUnsignedInt,   // Primitive type, can be copied directly
-		ValueUri:           fe.ValueUri,           // Primitive type, can be copied directly
-		ValueUrl:           fe.ValueUrl,           // Primitive type, can be copied directly
-		ValueUuid:          fe.ValueUuid,          // Primitive type, can be copied directly
-		ValueAddress:       fe.ValueAddress,       // Composite type, assumed to have its own clone logic
-		ValueAge:           fe.ValueAge,           // Composite type, assumed to have its own clone logic
-		ValueAnnotation:    fe.ValueAnnotation,    // Composite type, assumed to have its own clone logic
-		ValueAttachment:    fe.ValueAttachment,    // Composite type, assumed to have its own clone logic
-		ValueCodeableConcept: fe.ValueCodeableConcept, // Composite type, assumed to have its own clone logic
-		ValueCodeableReference: fe.ValueCodeableReference, // Composite type, assumed to have its own clone logic
-		ValueCoding:        fe.ValueCoding,        // Composite type, assumed to have its own clone logic
-		ValueContactPoint:  fe.ValueContactPoint,  // Composite type, assumed to have its own clone logic
-		ValueCount:         fe.ValueCount,         // Composite type, assumed to have its own clone logic
-		ValueDistance:      fe.ValueDistance,      // Composite type, assumed to have its own clone logic
-		ValueDuration:      fe.ValueDuration,      // Composite type, assumed to have its own clone logic
-		ValueHumanName:     fe.ValueHumanName,     // Composite type, assumed to have its own clone logic
-		ValueIdentifier:    fe.ValueIdentifier,    // Composite type, assumed to have its own clone logic
-		ValueMoney:         fe.ValueMoney,         // Composite type, assumed to have its own clone logic
-		ValuePeriod:        fe.ValuePeriod,        // Composite type, assumed to have its own clone logic
-		ValueQuantity:      fe.ValueQuantity,      // Composite type, assumed to have its own clone logic
-		ValueRange:         fe.ValueRange,         // Composite type, assumed to have its own clone logic
-		ValueRatio:         fe.ValueRatio,         // Composite type, assumed to have its own clone logic
-		ValueRatioRange:    fe.ValueRatioRange,    // Composite type, assumed to have its own clone logic
-		ValueReference:     fe.ValueReference,     // Composite type, assumed to have its own clone logic
-		ValueSampledData:   fe.ValueSampledData,   // Composite type, assumed to have its own clone logic
-		ValueSignature:     fe.ValueSignature,     // Composite type, assumed to have its own clone logic
-		ValueTiming:        fe.ValueTiming,        // Composite type, assumed to have its own clone logic
-		ValueContactDetail: fe.ValueContactDetail, // Composite type, assumed to have its own clone logic
-		ValueContributor:   fe.ValueContributor,   // Composite type, assumed to have its own clone logic
-		ValueDataRequirement: fe.ValueDataRequirement, // Composite type, assumed to have its own clone logic
-		ValueExpression:    fe.ValueExpression,    // Composite type, assumed to have its own clone logic
-		ValueParameterDefinition: fe.ValueParameterDefinition, // Composite type, assumed to have its own clone logic
-		ValueRelatedArtifact: fe.ValueRelatedArtifact, // Composite type, assumed to have its own clone logic
-		ValueTriggerDefinition: fe.ValueTriggerDefinition, // Composite type, assumed to have its own clone logic
-		ValueUsageContext:  fe.ValueUsageContext,  // Composite type, assumed to have its own clone logic
-		ValueDosage:        fe.ValueDosage,        // Composite type, assumed to have its own clone logic
+		Id:                 fe.Id,                // Primitive type, can be copied directly
+		Extension_:         extensionCopy,        // Deep copy of the slice
+		Url:                fe.Url,               // Primitive type, can be copied directly
+		ValueBase64Binary:  fe.ValueBase64Binary, // Primitive type, can be copied directly
+		ValueBoolean:       fe.ValueBoolean,      // Primitive type, can be copied directly
+		ValueCanonical:     fe.ValueCanonical,    // Primitive type, can be copied directly
+		ValueCode:          fe.ValueCode,         // Primitive type, can be copied directly
+		ValueDate:          fe.ValueDate,         // Primitive type, can be copied directly
+		ValueDateTime:      fe.ValueDateTime,     // Primitive type, can be copied directly
+		ValueDecimal:       fe.ValueDecimal,      // Primitive type, can be copied directly
+		ValueId:            fe.ValueId,           // Primitive type, can be copied directly
+		ValueInstant:       fe.ValueInstant,      // Primitive type, can be copied directly
+		ValueInteger:       fe.ValueInteger,      // Primitive type, can be copied directly
+		ValueMarkdown:      fe.ValueMarkdown,     // Primitive type, can be copied directly
+		ValueOid:           fe.ValueOid,          // Primitive type, can be copied directly
+		ValuePositiveInt:   fe.ValuePositiveInt,  // Primitive type, can be copied directly
+		ValueString:        fe.ValueString,       // Primitive type, can be copied directly
+		ValueTime:          fe.ValueTime,         // Primitive type, can be copied directly
+		ValueUnsignedInt:   fe.ValueUnsignedInt,  // Primitive type, can be copied directly
+		ValueUri:           fe.ValueUri,          // Primitive type, can be copied directly
+		ValueUrl:           fe.ValueUrl,          // Primitive type, can be copied directly
+		ValueUuid:          fe.ValueUuid,         // Primitive type, can be copied directly
+		ValueAddress:       fe.ValueAddress,      // Composite type, assumed to have its own Clone method
+		ValueAge:           fe.ValueAge,          // Composite type, assumed to have its own Clone method
+		ValueAnnotation:    fe.ValueAnnotation,   // Composite type, assumed to have its own Clone method
+		ValueAttachment:    fe.ValueAttachment,   // Composite type, assumed to have its own Clone method
+		ValueCodeableConcept: fe.ValueCodeableConcept, // Composite type, assumed to have its own Clone method
+		ValueCodeableReference: fe.ValueCodeableReference, // Composite type, assumed to have its own Clone method
+		ValueCoding:        fe.ValueCoding,       // Composite type, assumed to have its own Clone method
+		ValueContactPoint:  fe.ValueContactPoint, // Composite type, assumed to have its own Clone method
+		ValueCount:         fe.ValueCount,        // Composite type, assumed to have its own Clone method
+		ValueDistance:      fe.ValueDistance,     // Composite type, assumed to have its own Clone method
+		ValueDuration:      fe.ValueDuration,     // Composite type, assumed to have its own Clone method
+		ValueHumanName:     fe.ValueHumanName,    // Composite type, assumed to have its own Clone method
+		ValueIdentifier:    fe.ValueIdentifier,   // Composite type, assumed to have its own Clone method
+		ValueMoney:         fe.ValueMoney,        // Composite type, assumed to have its own Clone method
+		ValuePeriod:        fe.ValuePeriod,       // Composite type, assumed to have its own Clone method
+		ValueQuantity:      fe.ValueQuantity,     // Composite type, assumed to have its own Clone method
+		ValueRange:         fe.ValueRange,        // Composite type, assumed to have its own Clone method
+		ValueRatio:         fe.ValueRatio,        // Composite type, assumed to have its own Clone method
+		ValueRatioRange:    fe.ValueRatioRange,   // Composite type, assumed to have its own Clone method
+		ValueReference:     fe.ValueReference,    // Composite type, assumed to have its own Clone method
+		ValueSampledData:   fe.ValueSampledData,  // Composite type, assumed to have its own Clone method
+		ValueSignature:     fe.ValueSignature,    // Composite type, assumed to have its own Clone method
+		ValueTiming:        fe.ValueTiming,       // Composite type, assumed to have its own Clone method
+		ValueContactDetail: fe.ValueContactDetail, // Composite type, assumed to have its own Clone method
+		ValueContributor:   fe.ValueContributor,  // Composite type, assumed to have its own Clone method
+		ValueDataRequirement: fe.ValueDataRequirement, // Composite type, assumed to have its own Clone method
+		ValueExpression:    fe.ValueExpression,   // Composite type, assumed to have its own Clone method
+		ValueParameterDefinition: fe.ValueParameterDefinition, // Composite type, assumed to have its own Clone method
+		ValueRelatedArtifact: fe.ValueRelatedArtifact, // Composite type, assumed to have its own Clone method
+		ValueTriggerDefinition: fe.ValueTriggerDefinition, // Composite type, assumed to have its own Clone method
+		ValueUsageContext:  fe.ValueUsageContext, // Composite type, assumed to have its own Clone method
+		ValueDosage:        fe.ValueDosage,       // Composite type, assumed to have its own Clone method
 	}
 }
 
+// EqualsDeep compares two FhirExtension instances for deep equality.
+func (fe *FhirExtension) EqualsDeep(other *FhirExtension) bool {
+	if other == nil {
+		return false
+	}
+
+	// Compare primitive fields
+	if fe.Id != other.Id || fe.Url != other.Url {
+		return false
+	}
+
+	// Compare extensions slice
+	if len(fe.Extension_) != len(other.Extension_) {
+		return false
+	}
+	for i := range fe.Extension_ {
+		if !fe.Extension_[i].EqualsDeep(&other.Extension_[i]) {
+			return false
+		}
+	}
+
+	// Compare non-primitive fields using their own equality methods
+	if !fe.ValueAddress.EqualsDeep(other.ValueAddress) ||
+		!fe.ValueAge.EqualsDeep(other.ValueAge) ||
+		!fe.ValueAnnotation.EqualsDeep(other.ValueAnnotation) ||
+		!fe.ValueAttachment.EqualsDeep(other.ValueAttachment) ||
+		!fe.ValueCodeableConcept.EqualsDeep(other.ValueCodeableConcept) ||
+		!fe.ValueCodeableReference.EqualsDeep(other.ValueCodeableReference) ||
+		!fe.ValueCoding.EqualsDeep(other.ValueCoding) ||
+		!fe.ValueContactPoint.EqualsDeep(other.ValueContactPoint) ||
+		!fe.ValueCount.EqualsDeep(other.ValueCount) ||
+		!fe.ValueDistance.EqualsDeep(other.ValueDistance) ||
+		!fe.ValueDuration.EqualsDeep(other.ValueDuration) ||
+		!fe.ValueHumanName.EqualsDeep(other.ValueHumanName) ||
+		!fe.ValueIdentifier.EqualsDeep(other.ValueIdentifier) ||
+		!fe.ValueMoney.EqualsDeep(other.ValueMoney) ||
+		!fe.ValuePeriod.EqualsDeep(other.ValuePeriod) ||
+		!fe.ValueQuantity.EqualsDeep(other.ValueQuantity) ||
+		!fe.ValueRange.EqualsDeep(other.ValueRange) ||
+		!fe.ValueRatio.EqualsDeep(other.ValueRatio) ||
+		!fe.ValueRatioRange.EqualsDeep(other.ValueRatioRange) ||
+		!fe.ValueReference.EqualsDeep(other.ValueReference) ||
+		!fe.ValueSampledData.EqualsDeep(other.ValueSampledData) ||
+		!fe.ValueSignature.EqualsDeep(other.ValueSignature) ||
+		!fe.ValueTiming.EqualsDeep(other.ValueTiming) ||
+		!fe.ValueContactDetail.EqualsDeep(other.ValueContactDetail) ||
+		!fe.ValueContributor.EqualsDeep(other.ValueContributor) ||
+		!fe.ValueDataRequirement.EqualsDeep(other.ValueDataRequirement) ||
+		!fe.ValueExpression.EqualsDeep(other.ValueExpression) ||
+		!fe.ValueParameterDefinition.EqualsDeep(other.ValueParameterDefinition) ||
+		!fe.ValueRelatedArtifact.EqualsDeep(other.ValueRelatedArtifact) ||
+		!fe.ValueTriggerDefinition.EqualsDeep(other.ValueTriggerDefinition) ||
+		!fe.ValueUsageContext.EqualsDeep(other.ValueUsageContext) ||
+		!fe.ValueDosage.EqualsDeep(other.ValueDosage) {
+		return false
+	}
+
+	// Compare remaining primitive fields
+	return fe.ValueBase64Binary == other.ValueBase64Binary &&
+		fe.ValueBoolean == other.ValueBoolean &&
+		fe.ValueCanonical == other.ValueCanonical &&
+		fe.ValueCode == other.ValueCode &&
+		fe.ValueDate == other.ValueDate &&
+		fe.ValueDateTime == other.ValueDateTime &&
+		fe.ValueDecimal == other.ValueDecimal &&
+		fe.ValueId == other.ValueId &&
+		fe.ValueInstant == other.ValueInstant &&
+		fe.ValueInteger == other.ValueInteger &&
+		fe.ValueMarkdown == other.ValueMarkdown &&
+		fe.ValueOid == other.ValueOid &&
+		fe.ValuePositiveInt == other.ValuePositiveInt &&
+		fe.ValueString == other.ValueString &&
+		fe.ValueTime == other.ValueTime &&
+		fe.ValueUnsignedInt == other.ValueUnsignedInt &&
+		fe.ValueUri == other.ValueUri &&
+		fe.ValueUrl == other.ValueUrl &&
+		fe.ValueUuid == other.ValueUuid
+}

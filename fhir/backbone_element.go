@@ -23,7 +23,7 @@ func NewBackboneElement(
 	}
 }
 
-// FromJSON populates a BackboneElement from JSON data.
+// BackboneElementFromJSON creates a BackboneElement instance from JSON.
 func BackboneElementFromJSON(input []byte) (*BackboneElement, error) {
 	var be BackboneElement
 	if err := json.Unmarshal(input, &be); err != nil {
@@ -42,11 +42,12 @@ func (be *BackboneElement) HasModifierExtension() bool {
 	return len(be.ModifierExtension) > 0
 }
 
-// GetModifierExtensionFirstRep returns the first modifier extension or a default.
+// GetModifierExtensionFirstRep returns the first modifier extension or a default value.
 func (be *BackboneElement) GetModifierExtensionFirstRep() *FhirExtension {
 	if len(be.ModifierExtension) == 0 {
-		return &FhirExtension{Url: FhirString{Value: "fhirfli.dev",
-			Element: nil}}
+		return &FhirExtension{
+			Url: FhirString{Value: "fhirfli.dev"},
+		}
 	}
 	return be.ModifierExtension[0]
 }
@@ -84,10 +85,12 @@ func (be *BackboneElement) EqualsDeep(other *BackboneElement) bool {
 		return false
 	}
 
+	// Compare the base DataType fields
 	if !be.DataType.EqualsDeep(&other.DataType) {
 		return false
 	}
 
+	// Compare ModifierExtension using CompareExtension
 	return CompareExtension(be.ModifierExtension, other.ModifierExtension)
 }
 
@@ -102,25 +105,21 @@ func (be *BackboneElement) CopyWith(
 	extensions []*FhirExtension,
 	modifierExtension []*FhirExtension,
 ) *BackboneElement {
-	newID := id
-	if newID == nil {
-		newID = be.ID
+	// Use existing values if new ones aren't provided
+	if id == nil {
+		id = be.ID
+	}
+	if extensions == nil {
+		extensions = be.Extension
+	}
+	if modifierExtension == nil {
+		modifierExtension = be.ModifierExtension
 	}
 
-	newExtension := extensions
-	if newExtension == nil {
-		newExtension = be.Extension
-	}
-
-	newModifierExtension := modifierExtension
-	if newModifierExtension == nil {
-		newModifierExtension = be.ModifierExtension
-	}
-
-	return NewBackboneElement(newID, newExtension, newModifierExtension, be.DisallowExtension)
+	return NewBackboneElement(id, extensions, modifierExtension, be.DisallowExtension)
 }
 
-// FromYAML converts YAML input to a BackboneElement instance.
+// BackboneElementFromYAML converts YAML input to a BackboneElement instance.
 func BackboneElementFromYAML(yamlData interface{}) (*BackboneElement, error) {
 	jsonData, err := convertYAMLToJSON(yamlData)
 	if err != nil {

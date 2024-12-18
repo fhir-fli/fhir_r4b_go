@@ -8,9 +8,9 @@ import (
 // Element represents the base definition for all FHIR elements.
 type Element struct {
 	FhirBase
-	ID                *string
-	Extension         []*FhirExtension
-	DisallowExtension bool
+	ID                *string          `json:"id,omitempty"`
+	Extension         []*FhirExtension `json:"extension,omitempty"`
+	DisallowExtension bool             `json:"disallowExtension,omitempty"`
 }
 
 // NewElement creates a new Element instance.
@@ -22,74 +22,14 @@ func NewElement(id *string, extensions []*FhirExtension, disallowExtension bool)
 	}
 }
 
-// FromJSON creates an Element from JSON input.
-func FromJSON(input []byte) (*Element, error) {
-	var data map[string]interface{}
-	if err := json.Unmarshal(input, &data); err != nil {
-		return nil, err
-	}
-
-	// Extract ID
-	var id *string
-	if val, ok := data["id"].(string); ok {
-		id = &val
-	}
-
-	// Extract Extension
-	var extensions []*FhirExtension
-	if extData, ok := data["extension"].([]interface{}); ok {
-		for _, e := range extData {
-			if extMap, ok := e.(map[string]interface{}); ok {
-				// Marshal the map back into JSON
-				extBytes, err := json.Marshal(extMap)
-				if err != nil {
-					return nil, err
-				}
-
-				// Unmarshal into a FhirExtension
-				var extension FhirExtension
-				if err := extension.FromJSON(extBytes); err != nil {
-					return nil, err
-				}
-
-				extensions = append(extensions, &extension)
-			}
-		}
-	}
-
-	return NewElement(id, extensions, false), nil
+// FromJSON populates an Element from JSON data.
+func (e *Element) FromJSON(data []byte) error {
+	return json.Unmarshal(data, e)
 }
 
-// ToJSON converts Element to its JSON representation.
+// ToJSON converts an Element to its JSON representation.
 func (e *Element) ToJSON() ([]byte, error) {
-	data := map[string]interface{}{}
-
-	if e.ID != nil {
-		data["id"] = *e.ID
-	}
-
-	if len(e.Extension) > 0 {
-		exts := []interface{}{}
-		for _, ext := range e.Extension {
-			// Call ext.ToJSON and handle the error
-			extJSON, err := ext.ToJSON()
-			if err != nil {
-				return nil, err // Return error if ToJSON fails
-			}
-
-			// Unmarshal extJSON to an interface{} for compatibility
-			var extData interface{}
-			if err := json.Unmarshal(extJSON, &extData); err != nil {
-				return nil, err // Handle unmarshalling error
-			}
-
-			exts = append(exts, extData)
-		}
-		data["extension"] = exts
-	}
-
-	// Marshal the entire Element to JSON
-	return json.Marshal(data)
+	return json.Marshal(e)
 }
 
 // HasID checks if the element has an ID.
@@ -106,7 +46,7 @@ func (e *Element) HasExtension() bool {
 func (e *Element) GetExtensionByURL(url string) []*FhirExtension {
 	var result []*FhirExtension
 	for _, ext := range e.Extension {
-		if ext.Url.Value == url {
+		if ext != nil && ext.Url.Value == url {
 			result = append(result, ext)
 		}
 	}
@@ -122,7 +62,7 @@ func (e *Element) AddExtension(ext *FhirExtension) {
 func (e *Element) RemoveExtensionByURL(url string) {
 	var filtered []*FhirExtension
 	for _, ext := range e.Extension {
-		if ext.Url.Value != url {
+		if ext != nil && ext.Url.Value != url {
 			filtered = append(filtered, ext)
 		}
 	}
@@ -131,59 +71,31 @@ func (e *Element) RemoveExtensionByURL(url string) {
 
 // Copy creates a deep copy of the Element.
 func (e *Element) Copy() *Element {
-	extensionsCopy := []*FhirExtension{}
-	for _, ext := range e.Extension {
-		extensionsCopy = append(extensionsCopy, ext.Clone())
-	}
-
-	return &Element{
-		ID:                e.ID,
-		Extension:         extensionsCopy,
-		DisallowExtension: e.DisallowExtension,
-	}
+	return e.Clone()
 }
 
-// EqualsDeep performs a deep equality check.
+// EqualsDeep performs a deep equality check with another Element.
 func (e *Element) EqualsDeep(other *Element) bool {
 	if other == nil {
 		return false
 	}
-
 	if !reflect.DeepEqual(e.ID, other.ID) {
 		return false
 	}
-
-	return CompareExtension(e.Extension, other.Extension)
+	return compareFhirExtensions(e.Extension, other.Extension)
 }
 
-// Helper: CompareExtension checks deep equality of extensions.
-func CompareExtension(ext1, ext2 []*FhirExtension) bool {
-	if len(ext1) != len(ext2) {
-		return false
-	}
-
-	for i := range ext1 {
-		if !ext1[i].EqualsDeep(ext2[i]) { // Now works correctly with updated EqualsDeep
-			return false
-		}
-	}
-	return true
-}
-
-// Clone creates a deep copy of the Element instance.
+// Clone creates a deep copy of the Element.
 func (e *Element) Clone() *Element {
 	if e == nil {
 		return nil
 	}
 
 	// Deep copy the Extensions slice
-	var extensionsCopy []*FhirExtension
-	if e.Extension != nil {
-		extensionsCopy = make([]*FhirExtension, len(e.Extension))
-		for i, ext := range e.Extension {
-			if ext != nil {
-				extensionsCopy[i] = ext.Clone() // Use FhirExtension's Copy method
-			}
+	extensionsCopy := make([]*FhirExtension, len(e.Extension))
+	for i, ext := range e.Extension {
+		if ext != nil {
+			extensionsCopy[i] = ext.Clone()
 		}
 	}
 
@@ -194,10 +106,30 @@ func (e *Element) Clone() *Element {
 		idCopy = &idVal
 	}
 
-	// Return the cloned Element instance
 	return &Element{
 		ID:                idCopy,
 		Extension:         extensionsCopy,
 		DisallowExtension: e.DisallowExtension,
 	}
+}
+
+// compareFhirExtensions compares two slices of FhirExtension for deep equality.
+func compareFhirExtensions(ext1, ext2 []*FhirExtension) bool {
+	if len(ext1) != len(ext2) {
+		return false
+	}
+	for i := range ext1 {
+		if !compareOptionalExtensions(ext1[i], ext2[i]) {
+			return false
+		}
+	}
+	return true
+}
+
+// compareOptionalExtensions compares two FhirExtension pointers safely.
+func compareOptionalExtensions(ext1, ext2 *FhirExtension) bool {
+	if ext1 == nil || ext2 == nil {
+		return ext1 == ext2 // Both must be nil to be equal
+	}
+	return ext1.EqualsDeep(ext2)
 }

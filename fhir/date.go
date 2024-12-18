@@ -16,7 +16,7 @@ func NewFhirDateFromComponents(year int, month, day *int, isUTC bool) FhirDate {
 
 // NewFhirDateFromString parses a date string into FhirDate.
 func NewFhirDateFromString(input string) (*FhirDate, error) {
-	base, err := FromString(input)
+	base, err := FhirDateTimeBaseFromString(input)
 	if err != nil {
 		return nil, err
 	}

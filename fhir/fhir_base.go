@@ -2,23 +2,17 @@ package fhir_r4b_go
 
 import (
 	"encoding/json"
+	"errors"
+	"fmt"
 	"reflect"
 )
 
 // FhirBase is the base type for all FHIR elements in Go.
 type FhirBase struct {
-	UserData          map[string]interface{}
-	FormatCommentsPre []string
-	FormatCommentsPost []string
-	Annotations       []interface{}
-}
-
-// FhirType defines behavior shared by all FHIR types.
-type FhirType interface {
-	ToJSON() (map[string]interface{}, error)
-	Clone() FhirType
-	Equals(other FhirType) bool
-	String() string
+	UserData           map[string]interface{} `json:"userData,omitempty"`
+	FormatCommentsPre  []string               `json:"formatCommentsPre,omitempty"`
+	FormatCommentsPost []string               `json:"formatCommentsPost,omitempty"`
+	Annotations        []interface{}          `json:"annotations,omitempty"`
 }
 
 // NewFhirBase creates a new FhirBase instance.
@@ -28,31 +22,12 @@ func NewFhirBase() *FhirBase {
 	}
 }
 
-// FhirType returns the type of the FHIR element.
-func (fb *FhirBase) FhirType() string {
-	return "FhirBase"
-}
-
-// IsPrimitive checks if the element is primitive.
-func (fb *FhirBase) IsPrimitive() bool {
-	return false
-}
-
-// HasPrimitiveValue checks if a primitive value exists.
-func (fb *FhirBase) HasPrimitiveValue() bool {
-	return fb.IsPrimitive()
-}
-
-// PrimitiveValue retrieves the primitive value.
-func (fb *FhirBase) PrimitiveValue() *string {
-	return nil
-}
-
 // IsEmpty checks if the object is empty.
 func (fb *FhirBase) IsEmpty() bool {
 	return len(fb.UserData) == 0 &&
 		len(fb.FormatCommentsPre) == 0 &&
-		len(fb.FormatCommentsPost) == 0
+		len(fb.FormatCommentsPost) == 0 &&
+		len(fb.Annotations) == 0
 }
 
 // HasUserData checks if user data exists for a given key.
@@ -62,8 +37,9 @@ func (fb *FhirBase) HasUserData(key string) bool {
 }
 
 // GetUserData retrieves user data for a given key.
-func (fb *FhirBase) GetUserData(key string) interface{} {
-	return fb.UserData[key]
+func (fb *FhirBase) GetUserData(key string) (interface{}, bool) {
+	val, exists := fb.UserData[key]
+	return val, exists
 }
 
 // SetUserData sets user data for a given key.
@@ -81,35 +57,15 @@ func (fb *FhirBase) AddAnnotation(annotation interface{}) {
 	fb.Annotations = append(fb.Annotations, annotation)
 }
 
-// RemoveAnnotations removes annotations of a specific type.
-func (fb *FhirBase) RemoveAnnotations(targetType reflect.Type) {
+// RemoveAnnotations removes annotations of a specific type (by string key).
+func (fb *FhirBase) RemoveAnnotations(targetType string) {
 	var updatedAnnotations []interface{}
 	for _, annotation := range fb.Annotations {
-		if reflect.TypeOf(annotation) != targetType {
+		if fmt.Sprintf("%T", annotation) != targetType {
 			updatedAnnotations = append(updatedAnnotations, annotation)
 		}
 	}
 	fb.Annotations = updatedAnnotations
-}
-
-// GetUserString retrieves user data as a string.
-func (fb *FhirBase) GetUserString(key string) string {
-	if val, exists := fb.UserData[key]; exists {
-		if str, ok := val.(string); ok {
-			return str
-		}
-	}
-	return ""
-}
-
-// GetUserInt retrieves user data as an integer.
-func (fb *FhirBase) GetUserInt(key string) int {
-	if val, exists := fb.UserData[key]; exists {
-		if i, ok := val.(int); ok {
-			return i
-		}
-	}
-	return 0
 }
 
 // HasFormatComment checks if format comments exist.
@@ -117,12 +73,29 @@ func (fb *FhirBase) HasFormatComment() bool {
 	return len(fb.FormatCommentsPre) > 0 || len(fb.FormatCommentsPost) > 0
 }
 
-// EqualsDeep checks deep equality with another FhirBase.
 func (fb *FhirBase) EqualsDeep(other *FhirBase) bool {
 	if other == nil {
 		return false
 	}
-	return reflect.DeepEqual(fb, other)
+
+	if !reflect.DeepEqual(fb.UserData, other.UserData) {
+		return false
+	}
+
+	// Handle slices with compareSlices
+	if !compareSlices(fb.FormatCommentsPre, other.FormatCommentsPre) {
+		return false
+	}
+
+	if !compareSlices(fb.FormatCommentsPost, other.FormatCommentsPost) {
+		return false
+	}
+
+	if !compareSlices(fb.Annotations, other.Annotations) {
+		return false
+	}
+
+	return true
 }
 
 // CompareDeep compares two FhirBase objects for equality.
@@ -161,12 +134,43 @@ func CompareDeepLists(list1, list2 []*FhirBase, allowNull bool) bool {
 }
 
 // ToJSON converts FhirBase to a JSON representation.
-func (fb *FhirBase) ToJSON() (string, error) {
-	jsonData, err := json.Marshal(fb)
-	if err != nil {
-		return "", err
+func (fb *FhirBase) ToJSON() ([]byte, error) {
+	return json.Marshal(fb)
+}
+
+// MarshalJSON provides custom JSON serialization.
+func (fb *FhirBase) MarshalJSON() ([]byte, error) {
+	return json.Marshal(struct {
+		UserData           map[string]interface{} `json:"userData,omitempty"`
+		FormatCommentsPre  []string               `json:"formatCommentsPre,omitempty"`
+		FormatCommentsPost []string               `json:"formatCommentsPost,omitempty"`
+		Annotations        []interface{}          `json:"annotations,omitempty"`
+	}{
+		UserData:           fb.UserData,
+		FormatCommentsPre:  fb.FormatCommentsPre,
+		FormatCommentsPost: fb.FormatCommentsPost,
+		Annotations:        fb.Annotations,
+	})
+}
+
+// UnmarshalJSON provides custom JSON deserialization.
+func (fb *FhirBase) UnmarshalJSON(data []byte) error {
+	temp := struct {
+		UserData           map[string]interface{} `json:"userData,omitempty"`
+		FormatCommentsPre  []string               `json:"formatCommentsPre,omitempty"`
+		FormatCommentsPost []string               `json:"formatCommentsPost,omitempty"`
+		Annotations        []interface{}          `json:"annotations,omitempty"`
+	}{}
+
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
 	}
-	return string(jsonData), nil
+
+	fb.UserData = temp.UserData
+	fb.FormatCommentsPre = temp.FormatCommentsPre
+	fb.FormatCommentsPost = temp.FormatCommentsPost
+	fb.Annotations = temp.Annotations
+	return nil
 }
 
 // Clone creates a deep copy of FhirBase.
@@ -176,5 +180,67 @@ func (fb *FhirBase) Clone() *FhirBase {
 	for k, v := range fb.UserData {
 		clone.UserData[k] = v
 	}
+	clone.FormatCommentsPre = append([]string{}, fb.FormatCommentsPre...)
+	clone.FormatCommentsPost = append([]string{}, fb.FormatCommentsPost...)
+	clone.Annotations = append([]interface{}{}, fb.Annotations...)
 	return &clone
+}
+
+// Helper: compareMaps compares two maps.
+func compareMaps(m1, m2 map[string]interface{}) bool {
+	if len(m1) != len(m2) {
+		return false
+	}
+	for k, v := range m1 {
+		if m2[k] != v {
+			return false
+		}
+	}
+	return true
+}
+
+func compareSlices(slice1, slice2 interface{}) bool {
+	v1 := reflect.ValueOf(slice1)
+	v2 := reflect.ValueOf(slice2)
+
+	if v1.Kind() != reflect.Slice || v2.Kind() != reflect.Slice {
+		return false
+	}
+
+	if v1.Len() != v2.Len() {
+		return false
+	}
+
+	for i := 0; i < v1.Len(); i++ {
+		if !reflect.DeepEqual(v1.Index(i).Interface(), v2.Index(i).Interface()) {
+			return false
+		}
+	}
+
+	return true
+}
+
+// Helper for safely returning the non-nil value.
+func ifNotNil[T any](newValue, oldValue *T) *T {
+	if newValue != nil {
+		return newValue
+	}
+	return oldValue
+}
+
+// Helper: convertYAMLToJSON converts YAML data to JSON format.
+func convertYAMLToJSON(yamlData interface{}) ([]byte, error) {
+	switch v := yamlData.(type) {
+	case string:
+		// Convert simple YAML string
+		return json.Marshal(v)
+	case map[string]interface{}:
+		// Convert complex YAML structure
+		return json.Marshal(v)
+	case []interface{}:
+		// Handle YAML lists
+		return json.Marshal(v)
+	default:
+		return nil, errors.New("invalid YAML input: unsupported type")
+	}
 }

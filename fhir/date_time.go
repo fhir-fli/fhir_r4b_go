@@ -19,7 +19,7 @@ func NewFhirDateTimeFromComponents(year int, month, day, hour, minute, second, m
 
 // NewFhirDateTimeFromString parses a FHIR-compliant dateTime string.
 func NewFhirDateTimeFromString(input string) (*FhirDateTime, error) {
-	base, err := FromString(input)
+	base, err := FhirDateTimeBaseFromString(input)
 	if err != nil {
 		return nil, err
 	}

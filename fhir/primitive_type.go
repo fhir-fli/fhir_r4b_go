@@ -3,6 +3,7 @@ package fhir_r4b_go
 import (
 	"encoding/json"
 	"errors"
+	"reflect"
 )
 
 // PrimitiveType represents the base for all FHIR primitive types.
@@ -69,7 +70,7 @@ func equalValues[T any](a, b *T) bool {
 	if a == nil || b == nil {
 		return false
 	}
-	return *a == *b
+	return reflect.DeepEqual(a, b)
 }
 
 // Helper: Deep copy for values.
@@ -89,7 +90,7 @@ func equalElements(a, b *Element) bool {
 	if a == nil || b == nil {
 		return false
 	}
-	return a.Equals(b)
+	return a.EqualsDeep(b)
 }
 
 // Helper: Parse an element from a list safely.
@@ -120,12 +121,4 @@ func parseElement(elements []interface{}, index int) *Element {
 
 	// Return nil if type assertion fails
 	return nil
-}
-
-// Helper: Generic function to replace nil values.
-func ifNotNil[T any](newVal, oldVal *T) *T {
-	if newVal != nil {
-		return newVal
-	}
-	return oldVal
 }
