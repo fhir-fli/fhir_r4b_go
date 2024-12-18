@@ -6,8 +6,8 @@ import (
 
 // FhirBoolean represents the FHIR primitive type `boolean`.
 type FhirBoolean struct {
-	Value   *bool    `json:"value,omitempty"`  // The boolean value
-	Element *Element `json:"_value,omitempty"` // Additional metadata (FHIR element)
+	Value   *bool   `json:"-"`           // The boolean value
+	Element *Element `json:",inline"`    // Metadata (FHIR element)
 }
 
 // NewFhirBoolean creates a new FhirBoolean instance.
@@ -18,14 +18,54 @@ func NewFhirBoolean(value bool, element *Element) *FhirBoolean {
 	}
 }
 
-// FromJSON initializes a FhirBoolean from JSON input.
-func (fb *FhirBoolean) FromJSON(data []byte) error {
-	return json.Unmarshal(data, fb)
+// UnmarshalJSON initializes a FhirBoolean from JSON input.
+func (fb *FhirBoolean) UnmarshalJSON(data []byte) error {
+	var raw map[string]json.RawMessage
+	if err := json.Unmarshal(data, &raw); err != nil {
+		return err
+	}
+
+	// Extract value if present
+	if rawValue, exists := raw["value"]; exists {
+		var value bool
+		if err := json.Unmarshal(rawValue, &value); err != nil {
+			return err
+		}
+		fb.Value = &value
+	}
+
+	// Extract element metadata if present
+	if rawElement, exists := raw["_value"]; exists {
+		fb.Element = &Element{}
+		if err := json.Unmarshal(rawElement, fb.Element); err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
 
-// ToJSON converts the FhirBoolean to JSON.
-func (fb *FhirBoolean) ToJSON() ([]byte, error) {
-	return json.Marshal(fb)
+// MarshalJSON converts the FhirBoolean to JSON.
+func (fb *FhirBoolean) MarshalJSON() ([]byte, error) {
+	raw := make(map[string]interface{})
+
+	if fb.Value != nil {
+		raw["value"] = fb.Value
+	}
+
+	if fb.Element != nil {
+		elementJSON, err := json.Marshal(fb.Element)
+		if err != nil {
+			return nil, err
+		}
+		var elementMap map[string]interface{}
+		if err := json.Unmarshal(elementJSON, &elementMap); err != nil {
+			return nil, err
+		}
+		raw["_value"] = elementMap
+	}
+
+	return json.Marshal(raw)
 }
 
 // Clone creates a deep copy of the FhirBoolean.

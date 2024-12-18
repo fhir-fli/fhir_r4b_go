@@ -6,84 +6,106 @@ import (
 	"net/url"
 )
 
-// FhirUri represents a validated URI in FHIR resources.
+// FhirUri represents the FHIR primitive type `canonical`.
 type FhirUri struct {
-	Value   *url.URL  `json:"value,omitempty"`
-	Element *Element  `json:"_value,omitempty"`
+	Value   *url.URL `json:"-"`          // The URL value
+	Element *Element `json:",inline"`    // Metadata (FHIR element)
 }
 
-// NewFhirUri creates a new FhirUri instance with validation.
+// NewFhirUri creates a new FhirUri with validation.
 func NewFhirUri(input string, element *Element) (*FhirUri, error) {
-	parsedURL, err := url.Parse(input)
-	if err != nil || parsedURL.Scheme == "" {
-		return nil, errors.New("invalid URI: " + input)
+	parsed, err := url.Parse(input)
+	if err != nil || parsed.Scheme == "" || parsed.Host == "" {
+		return nil, errors.New("invalid canonical URL")
 	}
-	return &FhirUri{Value: parsedURL, Element: element}, nil
+	return &FhirUri{
+		Value:   parsed,
+		Element: element,
+	}, nil
 }
 
-// MarshalJSON serializes FhirUri into JSON.
-func (f *FhirUri) MarshalJSON() ([]byte, error) {
-	data := map[string]interface{}{}
-	if f.Value != nil {
-		data["value"] = f.Value.String()
-	}
-	if f.Element != nil {
-		data["_value"] = f.Element
-	}
-	return json.Marshal(data)
-}
-
-// UnmarshalJSON deserializes JSON into FhirUri.
-func (f *FhirUri) UnmarshalJSON(data []byte) error {
-	temp := struct {
-		Value   string   `json:"value"`
-		Element *Element `json:"_value"`
-	}{}
-
-	if err := json.Unmarshal(data, &temp); err != nil {
+// UnmarshalJSON initializes a FhirUri from JSON input.
+func (fc *FhirUri) UnmarshalJSON(data []byte) error {
+	var raw map[string]json.RawMessage
+	if err := json.Unmarshal(data, &raw); err != nil {
 		return err
 	}
 
-	parsedURL, err := url.Parse(temp.Value)
-	if err != nil {
-		return errors.New("invalid URI: " + temp.Value)
+	// Extract value
+	if rawValue, exists := raw["value"]; exists {
+		var value string
+		if err := json.Unmarshal(rawValue, &value); err != nil {
+			return err
+		}
+		parsed, err := url.Parse(value)
+		if err != nil || parsed.Scheme == "" || parsed.Host == "" {
+			return errors.New("invalid canonical URL")
+		}
+		fc.Value = parsed
 	}
 
-	f.Value = parsedURL
-	f.Element = temp.Element
+	// Extract metadata
+	if rawElement, exists := raw["_value"]; exists {
+		fc.Element = &Element{}
+		if err := json.Unmarshal(rawElement, fc.Element); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
-// Clone creates a deep copy of FhirUri.
-func (f *FhirUri) Clone() *FhirUri {
-	if f == nil {
+// MarshalJSON converts the FhirUri to JSON.
+func (fc *FhirUri) MarshalJSON() ([]byte, error) {
+	raw := make(map[string]interface{})
+
+	if fc.Value != nil {
+		raw["value"] = fc.Value.String()
+	}
+	if fc.Element != nil {
+		elementJSON, err := json.Marshal(fc.Element)
+		if err != nil {
+			return nil, err
+		}
+		var elementMap map[string]interface{}
+		if err := json.Unmarshal(elementJSON, &elementMap); err != nil {
+			return nil, err
+		}
+		raw["_value"] = elementMap
+	}
+
+	return json.Marshal(raw)
+}
+
+// Clone creates a deep copy of the FhirUri.
+func (fc *FhirUri) Clone() *FhirUri {
+	if fc == nil {
 		return nil
 	}
-	var elementCopy *Element
-	if f.Element != nil {
-		elementCopy = f.Element.Clone()
+	clone := &FhirUri{}
+	if fc.Value != nil {
+		val := *fc.Value
+		clone.Value = &val
 	}
-	return &FhirUri{
-		Value:   f.Value, // URLs are immutable; cloning is not required
-		Element: elementCopy,
+	if fc.Element != nil {
+		clone.Element = fc.Element.Clone()
 	}
+	return clone
 }
 
-// Equals checks equality between two FhirUri instances.
-func (f *FhirUri) Equals(other *FhirUri) bool {
-	if f == nil && other == nil {
+// Equals checks for equality between two FhirUri instances.
+func (fc *FhirUri) Equals(other *FhirUri) bool {
+	if fc == nil && other == nil {
 		return true
 	}
-	if f == nil || other == nil {
+	if fc == nil || other == nil {
 		return false
 	}
-	return f.String() == other.String() && f.Element.Equals(other.Element)
-}
-
-// String returns the URI as a string.
-func (f *FhirUri) String() string {
-	if f.Value != nil {
-		return f.Value.String()
+	if (fc.Value == nil && other.Value != nil) || (fc.Value != nil && other.Value == nil) {
+		return false
 	}
-	return ""
+	if fc.Value != nil && *fc.Value != *other.Value {
+		return false
+	}
+	return fc.Element.Equals(other.Element)
 }

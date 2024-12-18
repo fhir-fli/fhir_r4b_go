@@ -47,15 +47,12 @@ func (f *FhirOid) UnmarshalJSON(data []byte) error {
 		Value   string   `json:"value"`
 		Element *Element `json:"_value"`
 	}{}
-
 	if err := json.Unmarshal(data, &temp); err != nil {
 		return err
 	}
-
 	if err := validateOid(temp.Value); err != nil {
 		return err
 	}
-
 	f.Value = temp.Value
 	f.Element = temp.Element
 	return nil
@@ -66,37 +63,25 @@ func (f *FhirOid) String() string {
 	return f.Value
 }
 
-// Equal checks equality between two FhirOid instances.
+// Equals checks equality between two FhirOid instances.
 func (f *FhirOid) Equals(other *FhirOid) bool {
+	if f == nil && other == nil {
+		return true
+	}
+	if f == nil || other == nil {
+		return false
+	}
 	return f.Value == other.Value && f.Element.Equals(other.Element)
 }
 
 // Clone creates a deep copy of the FhirOid instance.
 func (f *FhirOid) Clone() *FhirOid {
-	var elementCopy *Element
-	if f.Element != nil {
-		elementCopy = f.Element.Clone()
+	if f == nil {
+		return nil
 	}
 	return &FhirOid{
 		Value:   f.Value,
-		Element: elementCopy,
+		Element: f.Element.Clone(),
 	}
 }
 
-// FromJSONList converts a list of JSON values into a slice of FhirOid.
-func FromJSONListFhirOid(values []json.RawMessage) ([]*FhirOid, error) {
-	var oids []*FhirOid
-	for _, v := range values {
-		var oid FhirOid
-		if err := json.Unmarshal(v, &oid); err != nil {
-			return nil, err
-		}
-		oids = append(oids, &oid)
-	}
-	return oids, nil
-}
-
-// ToJSONList serializes a slice of FhirOid into JSON.
-func ToJSONList(oids []*FhirOid) ([]byte, error) {
-	return json.Marshal(oids)
-}

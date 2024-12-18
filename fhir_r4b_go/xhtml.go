@@ -53,41 +53,6 @@ func isAllowedElement(name string) bool {
 	return allowedElements[name]
 }
 
-// validateElement recursively validates an element's attributes and children.
-func validateElement(element *xmlquery.Node, isRoot bool) error {
-	for _, attr := range element.Attr {
-		if !isAllowedAttribute(attr.Name.Local, isRoot) {
-			return errors.New("invalid attribute in element " + element.Data)
-		}
-	}
-
-	// Recursively validate child elements.
-	for child := element.FirstChild; child != nil; child = child.NextSibling {
-		if child.Type == xmlquery.ElementNode {
-			if !isAllowedElement(child.Data) {
-				return errors.New("invalid child element: " + child.Data)
-			}
-			if err := validateElement(child, false); err != nil {
-				return err
-			}
-		}
-	}
-
-	return nil
-}
-
-// isAllowedAttribute validates attributes for a given element.
-func isAllowedAttribute(attrName string, isRoot bool) bool {
-	allowedAttributes := map[string]bool{
-		"style": true, "class": true, "src": true, "href": true, "name": true,
-		"alt": true, "title": true, "colspan": true, "rowspan": true, "width": true,
-		"height": true, "align": true, "valign": true, "border": true, "span": true,
-	}
-
-	// Allow xmlns attribute for the root element.
-	return (isRoot && attrName == "xmlns") || allowedAttributes[attrName]
-}
-
 // MarshalJSON serializes FhirXhtml into JSON.
 func (f *FhirXhtml) MarshalJSON() ([]byte, error) {
 	data := map[string]interface{}{}
@@ -125,13 +90,9 @@ func (f *FhirXhtml) Clone() *FhirXhtml {
 	if f == nil {
 		return nil
 	}
-	var elementCopy *Element
-	if f.Element != nil {
-		elementCopy = f.Element.Clone()
-	}
 	return &FhirXhtml{
 		Value:   f.Value,
-		Element: elementCopy,
+		Element: f.Element.Clone(),
 	}
 }
 
@@ -145,3 +106,40 @@ func (f *FhirXhtml) Equals(other *FhirXhtml) bool {
 	}
 	return f.Value == other.Value && f.Element.Equals(other.Element)
 }
+
+
+// validateElement recursively validates an element's attributes and children.
+func validateElement(element *xmlquery.Node, isRoot bool) error {
+	for _, attr := range element.Attr {
+		if !isAllowedAttribute(attr.Name.Local, isRoot) {
+			return errors.New("invalid attribute in element " + element.Data)
+		}
+	}
+
+	// Recursively validate child elements.
+	for child := element.FirstChild; child != nil; child = child.NextSibling {
+		if child.Type == xmlquery.ElementNode {
+			if !isAllowedElement(child.Data) {
+				return errors.New("invalid child element: " + child.Data)
+			}
+			if err := validateElement(child, false); err != nil {
+				return err
+			}
+		}
+	}
+
+	return nil
+}
+
+// isAllowedAttribute validates attributes for a given element.
+func isAllowedAttribute(attrName string, isRoot bool) bool {
+	allowedAttributes := map[string]bool{
+		"style": true, "class": true, "src": true, "href": true, "name": true,
+		"alt": true, "title": true, "colspan": true, "rowspan": true, "width": true,
+		"height": true, "align": true, "valign": true, "border": true, "span": true,
+	}
+
+	// Allow xmlns attribute for the root element.
+	return (isRoot && attrName == "xmlns") || allowedAttributes[attrName]
+}
+

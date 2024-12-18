@@ -8,8 +8,8 @@ import (
 
 // FhirCode represents the FHIR primitive type `code`.
 type FhirCode struct {
-	Value   *string  `json:"value,omitempty"`  // The actual code value
-	Element *Element `json:"_value,omitempty"` // Additional metadata (FHIR element)
+	Value   *string  `json:"-"`          // The actual code value
+	Element *Element `json:",inline"`    // Metadata (FHIR element)
 }
 
 // NewFhirCode creates a new FhirCode with validation.
@@ -23,14 +23,65 @@ func NewFhirCode(input string, element *Element) (*FhirCode, error) {
 	}, nil
 }
 
-// FromJSON initializes a FhirCode from JSON input.
-func (fc *FhirCode) FromJSON(data []byte) error {
-	return json.Unmarshal(data, fc)
+// UnmarshalJSON initializes a FhirCode from JSON input.
+func (fc *FhirCode) UnmarshalJSON(data []byte) error {
+	var raw map[string]json.RawMessage
+	if err := json.Unmarshal(data, &raw); err != nil {
+		return err
+	}
+
+	// Extract value
+	if rawValue, exists := raw["value"]; exists {
+		var value string
+		if err := json.Unmarshal(rawValue, &value); err != nil {
+			return err
+		}
+		if err := validateFhirCode(value); err != nil {
+			return err
+		}
+		fc.Value = &value
+	}
+
+	// Extract metadata
+	if rawElement, exists := raw["_value"]; exists {
+		fc.Element = &Element{}
+		if err := json.Unmarshal(rawElement, fc.Element); err != nil {
+			return err
+		}
+	}
+
+	return nil
 }
 
-// ToJSON serializes the FhirCode to JSON.
-func (fc *FhirCode) ToJSON() ([]byte, error) {
-	return json.Marshal(fc)
+// MarshalJSON converts the FhirCode to JSON.
+func (fc *FhirCode) MarshalJSON() ([]byte, error) {
+	raw := make(map[string]interface{})
+
+	if fc.Value != nil {
+		raw["value"] = *fc.Value
+	}
+	if fc.Element != nil {
+		elementJSON, err := json.Marshal(fc.Element)
+		if err != nil {
+			return nil, err
+		}
+		var elementMap map[string]interface{}
+		if err := json.Unmarshal(elementJSON, &elementMap); err != nil {
+			return nil, err
+		}
+		raw["_value"] = elementMap
+	}
+
+	return json.Marshal(raw)
+}
+
+// validateFhirCode checks if the input string matches the FHIR `code` format.
+func validateFhirCode(input string) error {
+	regex := regexp.MustCompile(`^[^\s]+(\s[^\s]+)*$`)
+	if regex.MatchString(input) {
+		return nil
+	}
+	return errors.New("invalid FHIR Code: does not match required format")
 }
 
 // Clone creates a deep copy of the FhirCode.
@@ -38,10 +89,15 @@ func (fc *FhirCode) Clone() *FhirCode {
 	if fc == nil {
 		return nil
 	}
-	return &FhirCode{
-		Value:   fc.Value,
-		Element: fc.Element.Clone(),
+	clone := &FhirCode{}
+	if fc.Value != nil {
+		val := *fc.Value
+		clone.Value = &val
 	}
+	if fc.Element != nil {
+		clone.Element = fc.Element.Clone()
+	}
+	return clone
 }
 
 // Equals checks for equality between two FhirCode instances.
@@ -52,14 +108,11 @@ func (fc *FhirCode) Equals(other *FhirCode) bool {
 	if fc == nil || other == nil {
 		return false
 	}
-	return fc.Value == other.Value && fc.Element.Equals(other.Element)
-}
-
-// Helper: validateFhirCode checks if the input string matches the FHIR `code` format.
-func validateFhirCode(input string) error {
-	regex := regexp.MustCompile(`^[^\s]+(\s[^\s]+)*$`)
-	if regex.MatchString(input) {
-		return nil
+	if (fc.Value == nil && other.Value != nil) || (fc.Value != nil && other.Value == nil) {
+		return false
 	}
-	return errors.New("invalid FHIR Code: does not match required format")
+	if fc.Value != nil && *fc.Value != *other.Value {
+		return false
+	}
+	return fc.Element.Equals(other.Element)
 }

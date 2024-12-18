@@ -27,6 +27,24 @@ func (f *FhirInstant) MarshalJSON() ([]byte, error) {
 	return json.Marshal(map[string]string{"value": f.ToString()})
 }
 
+// UnmarshalJSON deserializes JSON into FhirInstant.
+func (f *FhirInstant) UnmarshalJSON(data []byte) error {
+	var input map[string]string
+	if err := json.Unmarshal(data, &input); err != nil {
+		return err
+	}
+	value, ok := input["value"]
+	if !ok {
+		return nil
+	}
+	parsed, err := NewFhirDateTimeFromString(value)
+	if err != nil {
+		return err
+	}
+	*f = FhirInstant{FhirDateTimeBase: *parsed.FhirDateTimeBase.Clone()}
+	return nil
+}
+
 // Clone creates a deep copy of FhirInstant.
 func (f *FhirInstant) Clone() *FhirInstant {
 	if f == nil {

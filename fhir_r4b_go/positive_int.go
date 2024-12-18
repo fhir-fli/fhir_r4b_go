@@ -7,13 +7,50 @@ import (
 
 // FhirPositiveInt represents the FHIR 'integer' type.
 type FhirPositiveInt struct {
-	Value   int64    `json:"value,omitempty"`
-	Element *Element `json:"_value,omitempty"`
+	Value   *int64   `json:"-"`          // The actual value
+	Element *Element `json:",inline"`    // Metadata (FHIR element)
 }
 
 // NewFhirPositiveInt creates a new validated FhirPositiveInt.
 func NewFhirPositiveInt(value int64, element *Element) *FhirPositiveInt {
-	return &FhirPositiveInt{Value: value, Element: element}
+	return &FhirPositiveInt{Value: &value, Element: element}
+}
+
+// UnmarshalJSON deserializes JSON into FhirPositiveInt.
+func (fi *FhirPositiveInt) UnmarshalJSON(data []byte) error {
+	var raw map[string]json.RawMessage
+	if err := json.Unmarshal(data, &raw); err != nil {
+		return err
+	}
+
+	if rawValue, exists := raw["value"]; exists {
+		var value int64
+		if err := json.Unmarshal(rawValue, &value); err != nil {
+			return err
+		}
+		fi.Value = &value
+	}
+
+	if rawElement, exists := raw["_value"]; exists {
+		fi.Element = &Element{}
+		if err := json.Unmarshal(rawElement, fi.Element); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalJSON serializes FhirPositiveInt to JSON.
+func (fi *FhirPositiveInt) MarshalJSON() ([]byte, error) {
+	raw := map[string]interface{}{}
+	if fi.Value != nil {
+		raw["value"] = *fi.Value
+	}
+	if fi.Element != nil {
+		raw["_value"] = fi.Element
+	}
+	return json.Marshal(raw)
 }
 
 // Clone creates a deep copy of FhirPositiveInt.
@@ -22,7 +59,7 @@ func (fi *FhirPositiveInt) Clone() *FhirPositiveInt {
 		return nil
 	}
 	return &FhirPositiveInt{
-		Value:   fi.Value,
+		Value:   int64PtrIfNotNil(fi.Value),
 		Element: fi.Element.Clone(),
 	}
 }
@@ -36,33 +73,6 @@ func (fi *FhirPositiveInt) Equals(other *FhirPositiveInt) bool {
 		return false
 	}
 	return fi.Value == other.Value && fi.Element.Equals(other.Element)
-}
-
-// MarshalJSON serializes FhirPositiveInt to JSON.
-func (fi *FhirPositiveInt) MarshalJSON() ([]byte, error) {
-	data := map[string]interface{}{
-		"value": fi.Value,
-	}
-	if fi.Element != nil {
-		data["_value"] = fi.Element
-	}
-	return json.Marshal(data)
-}
-
-// UnmarshalJSON deserializes JSON into FhirPositiveInt.
-func (fi *FhirPositiveInt) UnmarshalJSON(data []byte) error {
-	temp := struct {
-		Value   int64    `json:"value"`
-		Element *Element `json:"_value"`
-	}{}
-
-	if err := json.Unmarshal(data, &temp); err != nil {
-		return err
-	}
-
-	fi.Value = temp.Value
-	fi.Element = temp.Element
-	return nil
 }
 
 // String returns the string representation of FhirPositiveInt.

@@ -56,6 +56,60 @@ func padZero(value *int, length int) string {
 	return fmt.Sprintf("%0*d", length, *value)
 }
 
+// MarshalJSON serializes FhirTime to JSON.
+func (f *FhirTime) MarshalJSON() ([]byte, error) {
+	data := map[string]interface{}{}
+	if f.Value != "" {
+		data["value"] = f.Value
+	}
+	if f.Element != nil {
+		data["_value"] = f.Element
+	}
+	return json.Marshal(data)
+}
+
+// UnmarshalJSON deserializes JSON into FhirTime.
+func (f *FhirTime) UnmarshalJSON(data []byte) error {
+	temp := struct {
+		Value   string   `json:"value"`
+		Element *Element `json:"_value"`
+	}{}
+
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+
+	if !validateFhirTime(temp.Value) {
+		return fmt.Errorf("invalid FHIR time format: %s", temp.Value)
+	}
+
+	f.Value = temp.Value
+	f.Element = temp.Element
+	return nil
+}
+
+// Clone creates a deep copy of FhirTime.
+func (f *FhirTime) Clone() *FhirTime {
+	if f == nil {
+		return nil
+	}
+	return &FhirTime{
+		Value:   f.Value,
+		Element: f.Element.Clone(),
+	}
+}
+
+// Equals checks equality between two FhirTime instances.
+func (f *FhirTime) Equals(other *FhirTime) bool {
+	if f == nil && other == nil {
+		return true
+	}
+	if f == nil || other == nil {
+		return false
+	}
+	return f.Value == other.Value && f.Element.Equals(other.Element)
+}
+
 // Hour returns the hour part of the FhirTime.
 func (f *FhirTime) Hour() *int {
 	return parseTimePart(f.Value, 0)
@@ -146,38 +200,6 @@ func (f *FhirTime) toTime() time.Time {
 	return time.Date(0, 1, 1, hour, minute, second, millisecond*1e6, time.UTC)
 }
 
-// MarshalJSON serializes FhirTime to JSON.
-func (f *FhirTime) MarshalJSON() ([]byte, error) {
-	data := map[string]interface{}{}
-	if f.Value != "" {
-		data["value"] = f.Value
-	}
-	if f.Element != nil {
-		data["_value"] = f.Element
-	}
-	return json.Marshal(data)
-}
-
-// UnmarshalJSON deserializes JSON into FhirTime.
-func (f *FhirTime) UnmarshalJSON(data []byte) error {
-	temp := struct {
-		Value   string   `json:"value"`
-		Element *Element `json:"_value"`
-	}{}
-
-	if err := json.Unmarshal(data, &temp); err != nil {
-		return err
-	}
-
-	if !validateFhirTime(temp.Value) {
-		return fmt.Errorf("invalid FHIR time format: %s", temp.Value)
-	}
-
-	f.Value = temp.Value
-	f.Element = temp.Element
-	return nil
-}
-
 // CompareTo compares two FhirTime objects.
 func (f *FhirTime) CompareTo(other *FhirTime) int {
 	if f.Value > other.Value {
@@ -186,28 +208,6 @@ func (f *FhirTime) CompareTo(other *FhirTime) int {
 		return -1
 	}
 	return 0
-}
-
-// Clone creates a deep copy of FhirTime.
-func (f *FhirTime) Clone() *FhirTime {
-	if f == nil {
-		return nil
-	}
-	return &FhirTime{
-		Value:   f.Value,
-		Element: f.Element.Clone(),
-	}
-}
-
-// Equal checks equality between two FhirTime instances.
-func (f *FhirTime) Equals(other *FhirTime) bool {
-	if f == nil && other == nil {
-		return true
-	}
-	if f == nil || other == nil {
-		return false
-	}
-	return f.Value == other.Value && f.Element.Equals(other.Element)
 }
 
 // String returns the FhirTime as a string.

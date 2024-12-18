@@ -6,77 +6,106 @@ import (
 	"net/url"
 )
 
-// FhirUrl represents a validated URL in the FHIR standard.
+// FhirUrl represents the FHIR primitive type `canonical`.
 type FhirUrl struct {
-	Value   *url.URL  `json:"value,omitempty"`
-	Element *Element  `json:"_value,omitempty"`
+	Value   *url.URL `json:"-"`          // The URL value
+	Element *Element `json:",inline"`    // Metadata (FHIR element)
 }
 
-// NewFhirUrl creates a new FhirUrl instance with validation.
+// NewFhirUrl creates a new FhirUrl with validation.
 func NewFhirUrl(input string, element *Element) (*FhirUrl, error) {
-	parsedURL, err := url.Parse(input)
-	if err != nil || parsedURL.Scheme == "" {
-		return nil, errors.New("invalid FhirUrl: " + input)
+	parsed, err := url.Parse(input)
+	if err != nil || parsed.Scheme == "" || parsed.Host == "" {
+		return nil, errors.New("invalid canonical URL")
 	}
-	return &FhirUrl{Value: parsedURL, Element: element}, nil
+	return &FhirUrl{
+		Value:   parsed,
+		Element: element,
+	}, nil
 }
 
-// MarshalJSON serializes FhirUrl to JSON.
-func (f *FhirUrl) MarshalJSON() ([]byte, error) {
-	data := map[string]interface{}{}
-	if f.Value != nil {
-		data["value"] = f.Value.String()
-	}
-	if f.Element != nil {
-		data["_value"] = f.Element
-	}
-	return json.Marshal(data)
-}
-
-// UnmarshalJSON deserializes JSON into FhirUrl.
-func (f *FhirUrl) UnmarshalJSON(data []byte) error {
-	temp := struct {
-		Value   string   `json:"value"`
-		Element *Element `json:"_value"`
-	}{}
-
-	if err := json.Unmarshal(data, &temp); err != nil {
+// UnmarshalJSON initializes a FhirUrl from JSON input.
+func (fc *FhirUrl) UnmarshalJSON(data []byte) error {
+	var raw map[string]json.RawMessage
+	if err := json.Unmarshal(data, &raw); err != nil {
 		return err
 	}
 
-	parsedURL, err := url.Parse(temp.Value)
-	if err != nil {
-		return errors.New("invalid FhirUrl value")
+	// Extract value
+	if rawValue, exists := raw["value"]; exists {
+		var value string
+		if err := json.Unmarshal(rawValue, &value); err != nil {
+			return err
+		}
+		parsed, err := url.Parse(value)
+		if err != nil || parsed.Scheme == "" || parsed.Host == "" {
+			return errors.New("invalid canonical URL")
+		}
+		fc.Value = parsed
 	}
 
-	f.Value = parsedURL
-	f.Element = temp.Element
+	// Extract metadata
+	if rawElement, exists := raw["_value"]; exists {
+		fc.Element = &Element{}
+		if err := json.Unmarshal(rawElement, fc.Element); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
-// Clone creates a deep copy of FhirUrl.
-func (f *FhirUrl) Clone() *FhirUrl {
-	if f == nil {
+// MarshalJSON converts the FhirUrl to JSON.
+func (fc *FhirUrl) MarshalJSON() ([]byte, error) {
+	raw := make(map[string]interface{})
+
+	if fc.Value != nil {
+		raw["value"] = fc.Value.String()
+	}
+	if fc.Element != nil {
+		elementJSON, err := json.Marshal(fc.Element)
+		if err != nil {
+			return nil, err
+		}
+		var elementMap map[string]interface{}
+		if err := json.Unmarshal(elementJSON, &elementMap); err != nil {
+			return nil, err
+		}
+		raw["_value"] = elementMap
+	}
+
+	return json.Marshal(raw)
+}
+
+// Clone creates a deep copy of the FhirUrl.
+func (fc *FhirUrl) Clone() *FhirUrl {
+	if fc == nil {
 		return nil
 	}
-	var elementCopy *Element
-	if f.Element != nil {
-		elementCopy = f.Element.Clone()
+	clone := &FhirUrl{}
+	if fc.Value != nil {
+		val := *fc.Value
+		clone.Value = &val
 	}
-	return &FhirUrl{
-		Value:   f.Value,
-		Element: elementCopy,
+	if fc.Element != nil {
+		clone.Element = fc.Element.Clone()
 	}
+	return clone
 }
 
-// Equals checks equality between two FhirUrl instances.
-func (f *FhirUrl) Equals(other *FhirUrl) bool {
-	if f == nil && other == nil {
+// Equals checks for equality between two FhirUrl instances.
+func (fc *FhirUrl) Equals(other *FhirUrl) bool {
+	if fc == nil && other == nil {
 		return true
 	}
-	if f == nil || other == nil {
+	if fc == nil || other == nil {
 		return false
 	}
-	return f.Value.String() == other.Value.String() && f.Element.Equals(other.Element)
+	if (fc.Value == nil && other.Value != nil) || (fc.Value != nil && other.Value == nil) {
+		return false
+	}
+	if fc.Value != nil && *fc.Value != *other.Value {
+		return false
+	}
+	return fc.Element.Equals(other.Element)
 }
-

@@ -9,8 +9,8 @@ import (
 
 // FhirDecimal represents the FHIR 'decimal' type.
 type FhirDecimal struct {
-	Value   *float64 `json:"value,omitempty"`
-	Element *Element `json:"_value,omitempty"`
+	Value   *float64 `json:"-"`          // The actual value
+	Element *Element `json:",inline"`    // Metadata (FHIR element)
 }
 
 // NewFhirDecimal creates a new validated FhirDecimal.
@@ -20,6 +20,69 @@ func NewFhirDecimal(input interface{}, element *Element) (*FhirDecimal, error) {
 		return nil, err
 	}
 	return &FhirDecimal{Value: val, Element: element}, nil
+}
+
+// UnmarshalJSON deserializes JSON into FhirDecimal.
+func (fd *FhirDecimal) UnmarshalJSON(data []byte) error {
+	var raw map[string]json.RawMessage
+	if err := json.Unmarshal(data, &raw); err != nil {
+		return err
+	}
+
+	if rawValue, exists := raw["value"]; exists {
+		var value string
+		if err := json.Unmarshal(rawValue, &value); err != nil {
+			return err
+		}
+		parsed, err := parseDecimal(value)
+		if err != nil {
+			return err
+		}
+		fd.Value = parsed
+	}
+
+	if rawElement, exists := raw["_value"]; exists {
+		fd.Element = &Element{}
+		if err := json.Unmarshal(rawElement, fd.Element); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+// MarshalJSON serializes FhirDecimal to JSON.
+func (fd *FhirDecimal) MarshalJSON() ([]byte, error) {
+	raw := map[string]interface{}{}
+	if fd.Value != nil {
+		raw["value"] = strconv.FormatFloat(*fd.Value, 'f', -1, 64)
+	}
+	if fd.Element != nil {
+		raw["_value"] = fd.Element
+	}
+	return json.Marshal(raw)
+}
+
+// Clone creates a deep copy of FhirDecimal.
+func (fd *FhirDecimal) Clone() *FhirDecimal {
+	if fd == nil {
+		return nil
+	}
+	return &FhirDecimal{
+		Value:   floatPtrIfNotNil(fd.Value),
+		Element: fd.Element.Clone(),
+	}
+}
+
+// Equals checks for equality between two FhirDecimal instances.
+func (fd *FhirDecimal) Equals(other *FhirDecimal) bool {
+	if fd == nil && other == nil {
+		return true
+	}
+	if fd == nil || other == nil {
+		return false
+	}
+	return floatEquals(fd.Value, other.Value) && fd.Element.Equals(other.Element)
 }
 
 // parseDecimal parses input into a valid decimal value.
@@ -118,28 +181,6 @@ func (fd *FhirDecimal) Divide(other *FhirDecimal) (*FhirDecimal, error) {
 	}
 	result := *fd.Value / *other.Value
 	return NewFhirDecimal(result, fd.Element.Clone())
-}
-
-// Clone creates a deep copy of FhirDecimal.
-func (fd *FhirDecimal) Clone() *FhirDecimal {
-	if fd == nil {
-		return nil
-	}
-	return &FhirDecimal{
-		Value:   floatPtrIfNotNil(fd.Value),
-		Element: fd.Element.Clone(),
-	}
-}
-
-// Equal checks for equality between two FhirDecimal instances.
-func (fd *FhirDecimal) Equals(other *FhirDecimal) bool {
-	if fd == nil && other == nil {
-		return true
-	}
-	if fd == nil || other == nil {
-		return false
-	}
-	return floatEquals(fd.Value, other.Value) && fd.Element.Equals(other.Element)
 }
 
 // String provides a string representation of the FhirDecimal.

@@ -38,11 +38,9 @@ func (f *FhirString) UnmarshalJSON(data []byte) error {
 		Value   string   `json:"value"`
 		Element *Element `json:"_value"`
 	}{}
-
 	if err := json.Unmarshal(data, &temp); err != nil {
 		return err
 	}
-
 	f.Value = temp.Value
 	f.Element = temp.Element
 	return nil
@@ -55,23 +53,24 @@ func (f *FhirString) String() string {
 
 // Clone creates a deep copy of FhirString.
 func (f *FhirString) Clone() *FhirString {
-	var elementCopy *Element
-	if f.Element != nil {
-		elementCopy = f.Element.Clone()
+	if f == nil {
+		return nil
 	}
 	return &FhirString{
 		Value:   f.Value,
-		Element: elementCopy,
+		Element: f.Element.Clone(),
 	}
 }
 
 // Equals checks equality between two FhirString instances.
-func (f *FhirString) Equals(other Equalable) bool {
-	otherFhirString, ok := other.(*FhirString)
-	if !ok {
+func (f *FhirString) Equals(other *FhirString) bool {
+	if f == nil && other == nil {
+		return true
+	}
+	if f == nil || other == nil {
 		return false
 	}
-	return f.Value == otherFhirString.Value && f.Element.Equals(otherFhirString.Element)
+	return f.Value == other.Value && f.Element.Equals(other.Element)
 }
 
 // Utility methods for FhirString.
@@ -90,3 +89,4 @@ func (f *FhirString) Trim() string {
 func (f *FhirString) Concat(other string) string {
 	return f.Value + other
 }
+

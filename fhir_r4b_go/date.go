@@ -30,6 +30,24 @@ func (f *FhirDate) MarshalJSON() ([]byte, error) {
 	return json.Marshal(map[string]string{"value": f.ToString()})
 }
 
+// UnmarshalJSON deserializes JSON into FhirDate.
+func (f *FhirDate) UnmarshalJSON(data []byte) error {
+	var input map[string]string
+	if err := json.Unmarshal(data, &input); err != nil {
+		return err
+	}
+	value, ok := input["value"]
+	if !ok {
+		return nil
+	}
+	parsed, err := NewFhirDateFromString(value)
+	if err != nil {
+		return err
+	}
+	*f = *parsed
+	return nil
+}
+
 // Clone creates a deep copy of FhirDate.
 func (f *FhirDate) Clone() *FhirDate {
 	if f == nil {

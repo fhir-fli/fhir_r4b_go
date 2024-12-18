@@ -9,8 +9,8 @@ import (
 
 // FhirUuid represents a validated UUID in the FHIR standard.
 type FhirUuid struct {
-	Value   uuid.UUID `json:"value,omitempty"`
-	Element *Element  `json:"_value,omitempty"`
+	Value   *uuid.UUID `json:"value,omitempty"`
+	Element *Element   `json:"_value,omitempty"`
 }
 
 // NewFhirUuid creates a new FhirUuid instance with validation.
@@ -19,18 +19,21 @@ func NewFhirUuid(input string, element *Element) (*FhirUuid, error) {
 	if err != nil {
 		return nil, errors.New("invalid FhirUuid: " + input)
 	}
-	return &FhirUuid{Value: parsedUUID, Element: element}, nil
+	return &FhirUuid{Value: &parsedUUID, Element: element}, nil
 }
 
 // GenerateFhirUuidV4 generates a new version 4 UUID.
 func GenerateFhirUuidV4(element *Element) *FhirUuid {
-	return &FhirUuid{Value: uuid.New(), Element: element}
+	newUUID := uuid.New()
+	return &FhirUuid{Value: &newUUID, Element: element}
 }
 
 // MarshalJSON serializes FhirUuid to JSON.
 func (f *FhirUuid) MarshalJSON() ([]byte, error) {
 	data := map[string]interface{}{}
-	data["value"] = f.Value.String()
+	if f.Value != nil {
+		data["value"] = f.Value.String()
+	}
 	if f.Element != nil {
 		data["_value"] = f.Element
 	}
@@ -48,12 +51,14 @@ func (f *FhirUuid) UnmarshalJSON(data []byte) error {
 		return err
 	}
 
-	parsedUUID, err := uuid.Parse(temp.Value)
-	if err != nil {
-		return errors.New("invalid FhirUuid value")
+	if temp.Value != "" {
+		parsedUUID, err := uuid.Parse(temp.Value)
+		if err != nil {
+			return errors.New("invalid FhirUuid value")
+		}
+		f.Value = &parsedUUID
 	}
 
-	f.Value = parsedUUID
 	f.Element = temp.Element
 	return nil
 }
@@ -67,8 +72,13 @@ func (f *FhirUuid) Clone() *FhirUuid {
 	if f.Element != nil {
 		elementCopy = f.Element.Clone()
 	}
+	var uuidCopy *uuid.UUID
+	if f.Value != nil {
+		uuidValue := *f.Value
+		uuidCopy = &uuidValue
+	}
 	return &FhirUuid{
-		Value:   f.Value,
+		Value:   uuidCopy,
 		Element: elementCopy,
 	}
 }
@@ -81,5 +91,11 @@ func (f *FhirUuid) Equals(other *FhirUuid) bool {
 	if f == nil || other == nil {
 		return false
 	}
-	return f.Value == other.Value && f.Element.Equals(other.Element)
+	if (f.Value == nil && other.Value != nil) || (f.Value != nil && other.Value == nil) {
+		return false
+	}
+	if f.Value != nil && other.Value != nil && *f.Value != *other.Value {
+		return false
+	}
+	return f.Element.Equals(other.Element)
 }

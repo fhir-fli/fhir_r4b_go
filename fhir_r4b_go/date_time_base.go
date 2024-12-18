@@ -228,24 +228,3 @@ func FhirDateTimeBaseFromString(input string) (*FhirDateTimeBase, error) {
 	}, nil
 }
 
-// Helper functions for creating pointers.
-func intPtr(v int) *int       { return &v }
-func intPtrIfNotNil(v *int) *int {
-	if v == nil {
-		return nil
-	}
-	return intPtr(*v)
-}
-
-func strPtrIfNotNil(v *string) *string {
-	if v == nil {
-		return nil
-	}
-	return strPtr(*v)
-}
-
-func floatPtr(v float64) *float64 { return &v }
-func strPtr(v string) *string     { return &v }
-func timePtr(t time.Time) *time.Time {
-	return &t
-}

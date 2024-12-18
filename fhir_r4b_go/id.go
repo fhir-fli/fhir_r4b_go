@@ -8,7 +8,7 @@ import (
 
 // FhirId represents the FHIR primitive type 'id'
 type FhirId struct {
-	Value   *string `json:"value,omitempty"`   // ID value
+	Value   *string  `json:"value,omitempty"`  // ID value
 	Element *Element `json:"_value,omitempty"` // Optional metadata element
 }
 
@@ -29,14 +29,24 @@ func validateFhirId(input string) error {
 	return nil
 }
 
-// FromJSON creates FhirId from JSON
 func (fi *FhirId) FromJSON(data []byte) error {
-	return json.Unmarshal(data, fi)
+	temp := struct {
+		Value   *string  `json:"value"`
+		Element *Element `json:"_value"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	if temp.Value != nil && validateFhirId(*temp.Value) != nil {
+		return errors.New("invalid FhirId in JSON")
+	}
+	fi.Value = temp.Value
+	fi.Element = temp.Element
+	return nil
 }
 
-// ToJSON converts FhirId to JSON map
-func (fi *FhirId) ToJSON() (map[string]interface{}, error) {
-	result := make(map[string]interface{})
+func (fi *FhirId) ToJSON() ([]byte, error) {
+	result := map[string]interface{}{}
 	if fi.Value != nil {
 		result["value"] = *fi.Value
 	}
@@ -47,7 +57,7 @@ func (fi *FhirId) ToJSON() (map[string]interface{}, error) {
 		}
 		result["_value"] = elementJSON
 	}
-	return result, nil
+	return json.Marshal(result)
 }
 
 // Equals compares two FhirId instances
@@ -64,12 +74,17 @@ func (fi *FhirId) Equals(other *FhirId) bool {
 	return false
 }
 
-// Clone creates a deep copy of FhirId
 func (fi *FhirId) Clone() *FhirId {
 	if fi == nil {
 		return nil
 	}
-	clonedElement := fi.Element.Clone()
-	clonedValue := *fi.Value
-	return &FhirId{Value: &clonedValue, Element: clonedElement}
+	var clonedValue *string
+	if fi.Value != nil {
+		val := *fi.Value
+		clonedValue = &val
+	}
+	return &FhirId{
+		Value:   clonedValue,
+		Element: fi.Element.Clone(),
+	}
 }
