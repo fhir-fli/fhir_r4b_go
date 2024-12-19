@@ -37,8 +37,8 @@ func NewBiologicallyDerivedProduct() *BiologicallyDerivedProduct {
 	return &BiologicallyDerivedProduct{}
 }
 
-// FromJSON populates BiologicallyDerivedProduct from JSON data.
-func (m *BiologicallyDerivedProduct) FromJSON(data []byte) error {
+// UnmarshalJSON populates BiologicallyDerivedProduct from JSON data.
+func (m *BiologicallyDerivedProduct) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -85,8 +85,8 @@ func (m *BiologicallyDerivedProduct) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts BiologicallyDerivedProduct to JSON data.
-func (m *BiologicallyDerivedProduct) ToJSON() ([]byte, error) {
+// MarshalJSON converts BiologicallyDerivedProduct to JSON data.
+func (m *BiologicallyDerivedProduct) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -114,14 +114,14 @@ func (m *BiologicallyDerivedProduct) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -137,7 +137,7 @@ func (m *BiologicallyDerivedProduct) ToJSON() ([]byte, error) {
 	if m.Quantity != nil && m.Quantity.Value != nil {
 		output.Quantity = m.Quantity.Value
 		if m.Quantity.Element != nil {
-			output.QuantityElement = toMapOrNil(m.Quantity.Element.ToJSON())
+			output.QuantityElement = toMapOrNil(m.Quantity.Element.MarshalJSON())
 		}
 	}
 	output.Parent = m.Parent
@@ -218,8 +218,8 @@ func NewBiologicallyDerivedProductCollection() *BiologicallyDerivedProductCollec
 	return &BiologicallyDerivedProductCollection{}
 }
 
-// FromJSON populates BiologicallyDerivedProductCollection from JSON data.
-func (m *BiologicallyDerivedProductCollection) FromJSON(data []byte) error {
+// UnmarshalJSON populates BiologicallyDerivedProductCollection from JSON data.
+func (m *BiologicallyDerivedProductCollection) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -242,8 +242,8 @@ func (m *BiologicallyDerivedProductCollection) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts BiologicallyDerivedProductCollection to JSON data.
-func (m *BiologicallyDerivedProductCollection) ToJSON() ([]byte, error) {
+// MarshalJSON converts BiologicallyDerivedProductCollection to JSON data.
+func (m *BiologicallyDerivedProductCollection) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -258,7 +258,7 @@ func (m *BiologicallyDerivedProductCollection) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -268,7 +268,7 @@ func (m *BiologicallyDerivedProductCollection) ToJSON() ([]byte, error) {
 	if m.CollectedDateTime != nil && m.CollectedDateTime.Value != nil {
 		output.CollectedDateTime = m.CollectedDateTime.Value
 		if m.CollectedDateTime.Element != nil {
-			output.CollectedDateTimeElement = toMapOrNil(m.CollectedDateTime.Element.ToJSON())
+			output.CollectedDateTimeElement = toMapOrNil(m.CollectedDateTime.Element.MarshalJSON())
 		}
 	}
 	output.CollectedPeriod = m.CollectedPeriod
@@ -322,8 +322,8 @@ func NewBiologicallyDerivedProductProcessing() *BiologicallyDerivedProductProces
 	return &BiologicallyDerivedProductProcessing{}
 }
 
-// FromJSON populates BiologicallyDerivedProductProcessing from JSON data.
-func (m *BiologicallyDerivedProductProcessing) FromJSON(data []byte) error {
+// UnmarshalJSON populates BiologicallyDerivedProductProcessing from JSON data.
+func (m *BiologicallyDerivedProductProcessing) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -348,8 +348,8 @@ func (m *BiologicallyDerivedProductProcessing) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts BiologicallyDerivedProductProcessing to JSON data.
-func (m *BiologicallyDerivedProductProcessing) ToJSON() ([]byte, error) {
+// MarshalJSON converts BiologicallyDerivedProductProcessing to JSON data.
+func (m *BiologicallyDerivedProductProcessing) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -366,7 +366,7 @@ func (m *BiologicallyDerivedProductProcessing) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -374,7 +374,7 @@ func (m *BiologicallyDerivedProductProcessing) ToJSON() ([]byte, error) {
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.Procedure = m.Procedure
@@ -382,7 +382,7 @@ func (m *BiologicallyDerivedProductProcessing) ToJSON() ([]byte, error) {
 	if m.TimeDateTime != nil && m.TimeDateTime.Value != nil {
 		output.TimeDateTime = m.TimeDateTime.Value
 		if m.TimeDateTime.Element != nil {
-			output.TimeDateTimeElement = toMapOrNil(m.TimeDateTime.Element.ToJSON())
+			output.TimeDateTimeElement = toMapOrNil(m.TimeDateTime.Element.MarshalJSON())
 		}
 	}
 	output.TimePeriod = m.TimePeriod
@@ -436,8 +436,8 @@ func NewBiologicallyDerivedProductManipulation() *BiologicallyDerivedProductMani
 	return &BiologicallyDerivedProductManipulation{}
 }
 
-// FromJSON populates BiologicallyDerivedProductManipulation from JSON data.
-func (m *BiologicallyDerivedProductManipulation) FromJSON(data []byte) error {
+// UnmarshalJSON populates BiologicallyDerivedProductManipulation from JSON data.
+func (m *BiologicallyDerivedProductManipulation) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -458,8 +458,8 @@ func (m *BiologicallyDerivedProductManipulation) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts BiologicallyDerivedProductManipulation to JSON data.
-func (m *BiologicallyDerivedProductManipulation) ToJSON() ([]byte, error) {
+// MarshalJSON converts BiologicallyDerivedProductManipulation to JSON data.
+func (m *BiologicallyDerivedProductManipulation) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -474,7 +474,7 @@ func (m *BiologicallyDerivedProductManipulation) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -482,13 +482,13 @@ func (m *BiologicallyDerivedProductManipulation) ToJSON() ([]byte, error) {
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	if m.TimeDateTime != nil && m.TimeDateTime.Value != nil {
 		output.TimeDateTime = m.TimeDateTime.Value
 		if m.TimeDateTime.Element != nil {
-			output.TimeDateTimeElement = toMapOrNil(m.TimeDateTime.Element.ToJSON())
+			output.TimeDateTimeElement = toMapOrNil(m.TimeDateTime.Element.MarshalJSON())
 		}
 	}
 	output.TimePeriod = m.TimePeriod
@@ -539,8 +539,8 @@ func NewBiologicallyDerivedProductStorage() *BiologicallyDerivedProductStorage {
 	return &BiologicallyDerivedProductStorage{}
 }
 
-// FromJSON populates BiologicallyDerivedProductStorage from JSON data.
-func (m *BiologicallyDerivedProductStorage) FromJSON(data []byte) error {
+// UnmarshalJSON populates BiologicallyDerivedProductStorage from JSON data.
+func (m *BiologicallyDerivedProductStorage) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -563,8 +563,8 @@ func (m *BiologicallyDerivedProductStorage) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts BiologicallyDerivedProductStorage to JSON data.
-func (m *BiologicallyDerivedProductStorage) ToJSON() ([]byte, error) {
+// MarshalJSON converts BiologicallyDerivedProductStorage to JSON data.
+func (m *BiologicallyDerivedProductStorage) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -580,7 +580,7 @@ func (m *BiologicallyDerivedProductStorage) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -588,13 +588,13 @@ func (m *BiologicallyDerivedProductStorage) ToJSON() ([]byte, error) {
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	if m.Temperature != nil && m.Temperature.Value != nil {
 		output.Temperature = m.Temperature.Value
 		if m.Temperature.Element != nil {
-			output.TemperatureElement = toMapOrNil(m.Temperature.Element.ToJSON())
+			output.TemperatureElement = toMapOrNil(m.Temperature.Element.MarshalJSON())
 		}
 	}
 	output.Scale = m.Scale

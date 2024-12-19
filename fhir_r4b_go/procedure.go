@@ -58,8 +58,8 @@ func NewProcedure() *Procedure {
 	return &Procedure{}
 }
 
-// FromJSON populates Procedure from JSON data.
-func (m *Procedure) FromJSON(data []byte) error {
+// UnmarshalJSON populates Procedure from JSON data.
+func (m *Procedure) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -166,8 +166,8 @@ func (m *Procedure) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Procedure to JSON data.
-func (m *Procedure) ToJSON() ([]byte, error) {
+// MarshalJSON converts Procedure to JSON data.
+func (m *Procedure) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -219,14 +219,14 @@ func (m *Procedure) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -243,7 +243,7 @@ func (m *Procedure) ToJSON() ([]byte, error) {
 				output.InstantiatesCanonical[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.InstantiatesCanonicalElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.InstantiatesCanonicalElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -255,7 +255,7 @@ func (m *Procedure) ToJSON() ([]byte, error) {
 				output.InstantiatesUri[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.InstantiatesUriElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.InstantiatesUriElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -270,14 +270,14 @@ func (m *Procedure) ToJSON() ([]byte, error) {
 	if m.PerformedDateTime != nil && m.PerformedDateTime.Value != nil {
 		output.PerformedDateTime = m.PerformedDateTime.Value
 		if m.PerformedDateTime.Element != nil {
-			output.PerformedDateTimeElement = toMapOrNil(m.PerformedDateTime.Element.ToJSON())
+			output.PerformedDateTimeElement = toMapOrNil(m.PerformedDateTime.Element.MarshalJSON())
 		}
 	}
 	output.PerformedPeriod = m.PerformedPeriod
 	if m.PerformedString != nil && m.PerformedString.Value != nil {
 		output.PerformedString = m.PerformedString.Value
 		if m.PerformedString.Element != nil {
-			output.PerformedStringElement = toMapOrNil(m.PerformedString.Element.ToJSON())
+			output.PerformedStringElement = toMapOrNil(m.PerformedString.Element.MarshalJSON())
 		}
 	}
 	output.PerformedAge = m.PerformedAge
@@ -412,8 +412,8 @@ func NewProcedurePerformer() *ProcedurePerformer {
 	return &ProcedurePerformer{}
 }
 
-// FromJSON populates ProcedurePerformer from JSON data.
-func (m *ProcedurePerformer) FromJSON(data []byte) error {
+// UnmarshalJSON populates ProcedurePerformer from JSON data.
+func (m *ProcedurePerformer) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -434,8 +434,8 @@ func (m *ProcedurePerformer) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ProcedurePerformer to JSON data.
-func (m *ProcedurePerformer) ToJSON() ([]byte, error) {
+// MarshalJSON converts ProcedurePerformer to JSON data.
+func (m *ProcedurePerformer) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -448,7 +448,7 @@ func (m *ProcedurePerformer) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -501,8 +501,8 @@ func NewProcedureFocalDevice() *ProcedureFocalDevice {
 	return &ProcedureFocalDevice{}
 }
 
-// FromJSON populates ProcedureFocalDevice from JSON data.
-func (m *ProcedureFocalDevice) FromJSON(data []byte) error {
+// UnmarshalJSON populates ProcedureFocalDevice from JSON data.
+func (m *ProcedureFocalDevice) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -521,8 +521,8 @@ func (m *ProcedureFocalDevice) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ProcedureFocalDevice to JSON data.
-func (m *ProcedureFocalDevice) ToJSON() ([]byte, error) {
+// MarshalJSON converts ProcedureFocalDevice to JSON data.
+func (m *ProcedureFocalDevice) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -534,7 +534,7 @@ func (m *ProcedureFocalDevice) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_

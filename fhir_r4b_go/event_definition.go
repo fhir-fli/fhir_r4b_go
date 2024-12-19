@@ -54,8 +54,8 @@ func NewEventDefinition() *EventDefinition {
 	return &EventDefinition{}
 }
 
-// FromJSON populates EventDefinition from JSON data.
-func (m *EventDefinition) FromJSON(data []byte) error {
+// UnmarshalJSON populates EventDefinition from JSON data.
+func (m *EventDefinition) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -138,8 +138,8 @@ func (m *EventDefinition) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts EventDefinition to JSON data.
-func (m *EventDefinition) ToJSON() ([]byte, error) {
+// MarshalJSON converts EventDefinition to JSON data.
+func (m *EventDefinition) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -198,14 +198,14 @@ func (m *EventDefinition) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -216,39 +216,39 @@ func (m *EventDefinition) ToJSON() ([]byte, error) {
 	if m.Url != nil && m.Url.Value != nil {
 		output.Url = m.Url.Value
 		if m.Url.Element != nil {
-			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+			output.UrlElement = toMapOrNil(m.Url.Element.MarshalJSON())
 		}
 	}
 	output.Identifier = m.Identifier
 	if m.Version != nil && m.Version.Value != nil {
 		output.Version = m.Version.Value
 		if m.Version.Element != nil {
-			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+			output.VersionElement = toMapOrNil(m.Version.Element.MarshalJSON())
 		}
 	}
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	if m.Title != nil && m.Title.Value != nil {
 		output.Title = m.Title.Value
 		if m.Title.Element != nil {
-			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+			output.TitleElement = toMapOrNil(m.Title.Element.MarshalJSON())
 		}
 	}
 	if m.Subtitle != nil && m.Subtitle.Value != nil {
 		output.Subtitle = m.Subtitle.Value
 		if m.Subtitle.Element != nil {
-			output.SubtitleElement = toMapOrNil(m.Subtitle.Element.ToJSON())
+			output.SubtitleElement = toMapOrNil(m.Subtitle.Element.MarshalJSON())
 		}
 	}
 	output.Status = m.Status
 	if m.Experimental != nil && m.Experimental.Value != nil {
 		output.Experimental = m.Experimental.Value
 		if m.Experimental.Element != nil {
-			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.MarshalJSON())
 		}
 	}
 	output.SubjectCodeableConcept = m.SubjectCodeableConcept
@@ -256,20 +256,20 @@ func (m *EventDefinition) ToJSON() ([]byte, error) {
 	if m.Date != nil && m.Date.Value != nil {
 		output.Date = m.Date.Value
 		if m.Date.Element != nil {
-			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+			output.DateElement = toMapOrNil(m.Date.Element.MarshalJSON())
 		}
 	}
 	if m.Publisher != nil && m.Publisher.Value != nil {
 		output.Publisher = m.Publisher.Value
 		if m.Publisher.Element != nil {
-			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.MarshalJSON())
 		}
 	}
 	output.Contact = m.Contact
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.UseContext = m.UseContext
@@ -277,31 +277,31 @@ func (m *EventDefinition) ToJSON() ([]byte, error) {
 	if m.Purpose != nil && m.Purpose.Value != nil {
 		output.Purpose = m.Purpose.Value
 		if m.Purpose.Element != nil {
-			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.MarshalJSON())
 		}
 	}
 	if m.Usage != nil && m.Usage.Value != nil {
 		output.Usage = m.Usage.Value
 		if m.Usage.Element != nil {
-			output.UsageElement = toMapOrNil(m.Usage.Element.ToJSON())
+			output.UsageElement = toMapOrNil(m.Usage.Element.MarshalJSON())
 		}
 	}
 	if m.Copyright != nil && m.Copyright.Value != nil {
 		output.Copyright = m.Copyright.Value
 		if m.Copyright.Element != nil {
-			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.MarshalJSON())
 		}
 	}
 	if m.ApprovalDate != nil && m.ApprovalDate.Value != nil {
 		output.ApprovalDate = m.ApprovalDate.Value
 		if m.ApprovalDate.Element != nil {
-			output.ApprovalDateElement = toMapOrNil(m.ApprovalDate.Element.ToJSON())
+			output.ApprovalDateElement = toMapOrNil(m.ApprovalDate.Element.MarshalJSON())
 		}
 	}
 	if m.LastReviewDate != nil && m.LastReviewDate.Value != nil {
 		output.LastReviewDate = m.LastReviewDate.Value
 		if m.LastReviewDate.Element != nil {
-			output.LastReviewDateElement = toMapOrNil(m.LastReviewDate.Element.ToJSON())
+			output.LastReviewDateElement = toMapOrNil(m.LastReviewDate.Element.MarshalJSON())
 		}
 	}
 	output.EffectivePeriod = m.EffectivePeriod

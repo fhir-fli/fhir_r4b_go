@@ -25,8 +25,8 @@ func NewMarketingStatus() *MarketingStatus {
 	return &MarketingStatus{}
 }
 
-// FromJSON populates MarketingStatus from JSON data.
-func (m *MarketingStatus) FromJSON(data []byte) error {
+// UnmarshalJSON populates MarketingStatus from JSON data.
+func (m *MarketingStatus) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -51,8 +51,8 @@ func (m *MarketingStatus) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MarketingStatus to JSON data.
-func (m *MarketingStatus) ToJSON() ([]byte, error) {
+// MarshalJSON converts MarketingStatus to JSON data.
+func (m *MarketingStatus) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -68,7 +68,7 @@ func (m *MarketingStatus) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -80,7 +80,7 @@ func (m *MarketingStatus) ToJSON() ([]byte, error) {
 	if m.RestoreDate != nil && m.RestoreDate.Value != nil {
 		output.RestoreDate = m.RestoreDate.Value
 		if m.RestoreDate.Element != nil {
-			output.RestoreDateElement = toMapOrNil(m.RestoreDate.Element.ToJSON())
+			output.RestoreDateElement = toMapOrNil(m.RestoreDate.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

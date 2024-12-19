@@ -37,8 +37,8 @@ func NewProvenance() *Provenance {
 	return &Provenance{}
 }
 
-// FromJSON populates Provenance from JSON data.
-func (m *Provenance) FromJSON(data []byte) error {
+// UnmarshalJSON populates Provenance from JSON data.
+func (m *Provenance) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -94,8 +94,8 @@ func (m *Provenance) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Provenance to JSON data.
-func (m *Provenance) ToJSON() ([]byte, error) {
+// MarshalJSON converts Provenance to JSON data.
+func (m *Provenance) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -125,14 +125,14 @@ func (m *Provenance) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -145,13 +145,13 @@ func (m *Provenance) ToJSON() ([]byte, error) {
 	if m.OccurredDateTime != nil && m.OccurredDateTime.Value != nil {
 		output.OccurredDateTime = m.OccurredDateTime.Value
 		if m.OccurredDateTime.Element != nil {
-			output.OccurredDateTimeElement = toMapOrNil(m.OccurredDateTime.Element.ToJSON())
+			output.OccurredDateTimeElement = toMapOrNil(m.OccurredDateTime.Element.MarshalJSON())
 		}
 	}
 	if m.Recorded != nil && m.Recorded.Value != nil {
 		output.Recorded = m.Recorded.Value
 		if m.Recorded.Element != nil {
-			output.RecordedElement = toMapOrNil(m.Recorded.Element.ToJSON())
+			output.RecordedElement = toMapOrNil(m.Recorded.Element.MarshalJSON())
 		}
 	}
 	if len(m.Policy) > 0 {
@@ -162,7 +162,7 @@ func (m *Provenance) ToJSON() ([]byte, error) {
 				output.Policy[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.PolicyElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.PolicyElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -245,8 +245,8 @@ func NewProvenanceAgent() *ProvenanceAgent {
 	return &ProvenanceAgent{}
 }
 
-// FromJSON populates ProvenanceAgent from JSON data.
-func (m *ProvenanceAgent) FromJSON(data []byte) error {
+// UnmarshalJSON populates ProvenanceAgent from JSON data.
+func (m *ProvenanceAgent) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -269,8 +269,8 @@ func (m *ProvenanceAgent) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ProvenanceAgent to JSON data.
-func (m *ProvenanceAgent) ToJSON() ([]byte, error) {
+// MarshalJSON converts ProvenanceAgent to JSON data.
+func (m *ProvenanceAgent) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -284,7 +284,7 @@ func (m *ProvenanceAgent) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -341,8 +341,8 @@ func NewProvenanceEntity() *ProvenanceEntity {
 	return &ProvenanceEntity{}
 }
 
-// FromJSON populates ProvenanceEntity from JSON data.
-func (m *ProvenanceEntity) FromJSON(data []byte) error {
+// UnmarshalJSON populates ProvenanceEntity from JSON data.
+func (m *ProvenanceEntity) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -363,8 +363,8 @@ func (m *ProvenanceEntity) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ProvenanceEntity to JSON data.
-func (m *ProvenanceEntity) ToJSON() ([]byte, error) {
+// MarshalJSON converts ProvenanceEntity to JSON data.
+func (m *ProvenanceEntity) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -377,7 +377,7 @@ func (m *ProvenanceEntity) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_

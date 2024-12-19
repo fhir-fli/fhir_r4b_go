@@ -46,8 +46,8 @@ func NewImplementationGuide() *ImplementationGuide {
 	return &ImplementationGuide{}
 }
 
-// FromJSON populates ImplementationGuide from JSON data.
-func (m *ImplementationGuide) FromJSON(data []byte) error {
+// UnmarshalJSON populates ImplementationGuide from JSON data.
+func (m *ImplementationGuide) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -112,8 +112,8 @@ func (m *ImplementationGuide) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ImplementationGuide to JSON data.
-func (m *ImplementationGuide) ToJSON() ([]byte, error) {
+// MarshalJSON converts ImplementationGuide to JSON data.
+func (m *ImplementationGuide) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -159,14 +159,14 @@ func (m *ImplementationGuide) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -177,51 +177,51 @@ func (m *ImplementationGuide) ToJSON() ([]byte, error) {
 	if m.Url != nil && m.Url.Value != nil {
 		output.Url = m.Url.Value
 		if m.Url.Element != nil {
-			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+			output.UrlElement = toMapOrNil(m.Url.Element.MarshalJSON())
 		}
 	}
 	if m.Version != nil && m.Version.Value != nil {
 		output.Version = m.Version.Value
 		if m.Version.Element != nil {
-			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+			output.VersionElement = toMapOrNil(m.Version.Element.MarshalJSON())
 		}
 	}
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	if m.Title != nil && m.Title.Value != nil {
 		output.Title = m.Title.Value
 		if m.Title.Element != nil {
-			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+			output.TitleElement = toMapOrNil(m.Title.Element.MarshalJSON())
 		}
 	}
 	output.Status = m.Status
 	if m.Experimental != nil && m.Experimental.Value != nil {
 		output.Experimental = m.Experimental.Value
 		if m.Experimental.Element != nil {
-			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.MarshalJSON())
 		}
 	}
 	if m.Date != nil && m.Date.Value != nil {
 		output.Date = m.Date.Value
 		if m.Date.Element != nil {
-			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+			output.DateElement = toMapOrNil(m.Date.Element.MarshalJSON())
 		}
 	}
 	if m.Publisher != nil && m.Publisher.Value != nil {
 		output.Publisher = m.Publisher.Value
 		if m.Publisher.Element != nil {
-			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.MarshalJSON())
 		}
 	}
 	output.Contact = m.Contact
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.UseContext = m.UseContext
@@ -229,13 +229,13 @@ func (m *ImplementationGuide) ToJSON() ([]byte, error) {
 	if m.Copyright != nil && m.Copyright.Value != nil {
 		output.Copyright = m.Copyright.Value
 		if m.Copyright.Element != nil {
-			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.MarshalJSON())
 		}
 	}
 	if m.PackageId != nil && m.PackageId.Value != nil {
 		output.PackageId = m.PackageId.Value
 		if m.PackageId.Element != nil {
-			output.PackageIdElement = toMapOrNil(m.PackageId.Element.ToJSON())
+			output.PackageIdElement = toMapOrNil(m.PackageId.Element.MarshalJSON())
 		}
 	}
 	output.License = m.License
@@ -334,8 +334,8 @@ func NewImplementationGuideDependsOn() *ImplementationGuideDependsOn {
 	return &ImplementationGuideDependsOn{}
 }
 
-// FromJSON populates ImplementationGuideDependsOn from JSON data.
-func (m *ImplementationGuideDependsOn) FromJSON(data []byte) error {
+// UnmarshalJSON populates ImplementationGuideDependsOn from JSON data.
+func (m *ImplementationGuideDependsOn) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -356,8 +356,8 @@ func (m *ImplementationGuideDependsOn) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ImplementationGuideDependsOn to JSON data.
-func (m *ImplementationGuideDependsOn) ToJSON() ([]byte, error) {
+// MarshalJSON converts ImplementationGuideDependsOn to JSON data.
+func (m *ImplementationGuideDependsOn) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -373,7 +373,7 @@ func (m *ImplementationGuideDependsOn) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -381,19 +381,19 @@ func (m *ImplementationGuideDependsOn) ToJSON() ([]byte, error) {
 	if m.Uri != nil && m.Uri.Value != nil {
 		output.Uri = m.Uri.Value
 		if m.Uri.Element != nil {
-			output.UriElement = toMapOrNil(m.Uri.Element.ToJSON())
+			output.UriElement = toMapOrNil(m.Uri.Element.MarshalJSON())
 		}
 	}
 	if m.PackageId != nil && m.PackageId.Value != nil {
 		output.PackageId = m.PackageId.Value
 		if m.PackageId.Element != nil {
-			output.PackageIdElement = toMapOrNil(m.PackageId.Element.ToJSON())
+			output.PackageIdElement = toMapOrNil(m.PackageId.Element.MarshalJSON())
 		}
 	}
 	if m.Version != nil && m.Version.Value != nil {
 		output.Version = m.Version.Value
 		if m.Version.Element != nil {
-			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+			output.VersionElement = toMapOrNil(m.Version.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -441,8 +441,8 @@ func NewImplementationGuideGlobal() *ImplementationGuideGlobal {
 	return &ImplementationGuideGlobal{}
 }
 
-// FromJSON populates ImplementationGuideGlobal from JSON data.
-func (m *ImplementationGuideGlobal) FromJSON(data []byte) error {
+// UnmarshalJSON populates ImplementationGuideGlobal from JSON data.
+func (m *ImplementationGuideGlobal) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -461,8 +461,8 @@ func (m *ImplementationGuideGlobal) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ImplementationGuideGlobal to JSON data.
-func (m *ImplementationGuideGlobal) ToJSON() ([]byte, error) {
+// MarshalJSON converts ImplementationGuideGlobal to JSON data.
+func (m *ImplementationGuideGlobal) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -476,7 +476,7 @@ func (m *ImplementationGuideGlobal) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -484,13 +484,13 @@ func (m *ImplementationGuideGlobal) ToJSON() ([]byte, error) {
 	if m.Type != nil && m.Type.Value != nil {
 		output.Type = m.Type.Value
 		if m.Type.Element != nil {
-			output.TypeElement = toMapOrNil(m.Type.Element.ToJSON())
+			output.TypeElement = toMapOrNil(m.Type.Element.MarshalJSON())
 		}
 	}
 	if m.Profile != nil && m.Profile.Value != nil {
 		output.Profile = m.Profile.Value
 		if m.Profile.Element != nil {
-			output.ProfileElement = toMapOrNil(m.Profile.Element.ToJSON())
+			output.ProfileElement = toMapOrNil(m.Profile.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -539,8 +539,8 @@ func NewImplementationGuideDefinition() *ImplementationGuideDefinition {
 	return &ImplementationGuideDefinition{}
 }
 
-// FromJSON populates ImplementationGuideDefinition from JSON data.
-func (m *ImplementationGuideDefinition) FromJSON(data []byte) error {
+// UnmarshalJSON populates ImplementationGuideDefinition from JSON data.
+func (m *ImplementationGuideDefinition) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -565,8 +565,8 @@ func (m *ImplementationGuideDefinition) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ImplementationGuideDefinition to JSON data.
-func (m *ImplementationGuideDefinition) ToJSON() ([]byte, error) {
+// MarshalJSON converts ImplementationGuideDefinition to JSON data.
+func (m *ImplementationGuideDefinition) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -581,7 +581,7 @@ func (m *ImplementationGuideDefinition) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -640,8 +640,8 @@ func NewImplementationGuideGrouping() *ImplementationGuideGrouping {
 	return &ImplementationGuideGrouping{}
 }
 
-// FromJSON populates ImplementationGuideGrouping from JSON data.
-func (m *ImplementationGuideGrouping) FromJSON(data []byte) error {
+// UnmarshalJSON populates ImplementationGuideGrouping from JSON data.
+func (m *ImplementationGuideGrouping) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -660,8 +660,8 @@ func (m *ImplementationGuideGrouping) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ImplementationGuideGrouping to JSON data.
-func (m *ImplementationGuideGrouping) ToJSON() ([]byte, error) {
+// MarshalJSON converts ImplementationGuideGrouping to JSON data.
+func (m *ImplementationGuideGrouping) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -675,7 +675,7 @@ func (m *ImplementationGuideGrouping) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -683,13 +683,13 @@ func (m *ImplementationGuideGrouping) ToJSON() ([]byte, error) {
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -740,8 +740,8 @@ func NewImplementationGuideResource() *ImplementationGuideResource {
 	return &ImplementationGuideResource{}
 }
 
-// FromJSON populates ImplementationGuideResource from JSON data.
-func (m *ImplementationGuideResource) FromJSON(data []byte) error {
+// UnmarshalJSON populates ImplementationGuideResource from JSON data.
+func (m *ImplementationGuideResource) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -770,8 +770,8 @@ func (m *ImplementationGuideResource) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ImplementationGuideResource to JSON data.
-func (m *ImplementationGuideResource) ToJSON() ([]byte, error) {
+// MarshalJSON converts ImplementationGuideResource to JSON data.
+func (m *ImplementationGuideResource) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -793,7 +793,7 @@ func (m *ImplementationGuideResource) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -803,31 +803,31 @@ func (m *ImplementationGuideResource) ToJSON() ([]byte, error) {
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	if m.ExampleBoolean != nil && m.ExampleBoolean.Value != nil {
 		output.ExampleBoolean = m.ExampleBoolean.Value
 		if m.ExampleBoolean.Element != nil {
-			output.ExampleBooleanElement = toMapOrNil(m.ExampleBoolean.Element.ToJSON())
+			output.ExampleBooleanElement = toMapOrNil(m.ExampleBoolean.Element.MarshalJSON())
 		}
 	}
 	if m.ExampleCanonical != nil && m.ExampleCanonical.Value != nil {
 		output.ExampleCanonical = m.ExampleCanonical.Value
 		if m.ExampleCanonical.Element != nil {
-			output.ExampleCanonicalElement = toMapOrNil(m.ExampleCanonical.Element.ToJSON())
+			output.ExampleCanonicalElement = toMapOrNil(m.ExampleCanonical.Element.MarshalJSON())
 		}
 	}
 	if m.GroupingId != nil && m.GroupingId.Value != nil {
 		output.GroupingId = m.GroupingId.Value
 		if m.GroupingId.Element != nil {
-			output.GroupingIdElement = toMapOrNil(m.GroupingId.Element.ToJSON())
+			output.GroupingIdElement = toMapOrNil(m.GroupingId.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -886,8 +886,8 @@ func NewImplementationGuidePage() *ImplementationGuidePage {
 	return &ImplementationGuidePage{}
 }
 
-// FromJSON populates ImplementationGuidePage from JSON data.
-func (m *ImplementationGuidePage) FromJSON(data []byte) error {
+// UnmarshalJSON populates ImplementationGuidePage from JSON data.
+func (m *ImplementationGuidePage) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -912,8 +912,8 @@ func (m *ImplementationGuidePage) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ImplementationGuidePage to JSON data.
-func (m *ImplementationGuidePage) ToJSON() ([]byte, error) {
+// MarshalJSON converts ImplementationGuidePage to JSON data.
+func (m *ImplementationGuidePage) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -930,7 +930,7 @@ func (m *ImplementationGuidePage) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -938,14 +938,14 @@ func (m *ImplementationGuidePage) ToJSON() ([]byte, error) {
 	if m.NameUrl != nil && m.NameUrl.Value != nil {
 		output.NameUrl = m.NameUrl.Value
 		if m.NameUrl.Element != nil {
-			output.NameUrlElement = toMapOrNil(m.NameUrl.Element.ToJSON())
+			output.NameUrlElement = toMapOrNil(m.NameUrl.Element.MarshalJSON())
 		}
 	}
 	output.NameReference = m.NameReference
 	if m.Title != nil && m.Title.Value != nil {
 		output.Title = m.Title.Value
 		if m.Title.Element != nil {
-			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+			output.TitleElement = toMapOrNil(m.Title.Element.MarshalJSON())
 		}
 	}
 	output.Generation = m.Generation
@@ -999,8 +999,8 @@ func NewImplementationGuideParameter() *ImplementationGuideParameter {
 	return &ImplementationGuideParameter{}
 }
 
-// FromJSON populates ImplementationGuideParameter from JSON data.
-func (m *ImplementationGuideParameter) FromJSON(data []byte) error {
+// UnmarshalJSON populates ImplementationGuideParameter from JSON data.
+func (m *ImplementationGuideParameter) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1019,8 +1019,8 @@ func (m *ImplementationGuideParameter) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ImplementationGuideParameter to JSON data.
-func (m *ImplementationGuideParameter) ToJSON() ([]byte, error) {
+// MarshalJSON converts ImplementationGuideParameter to JSON data.
+func (m *ImplementationGuideParameter) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1033,7 +1033,7 @@ func (m *ImplementationGuideParameter) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1042,7 +1042,7 @@ func (m *ImplementationGuideParameter) ToJSON() ([]byte, error) {
 	if m.Value != nil && m.Value.Value != nil {
 		output.Value = m.Value.Value
 		if m.Value.Element != nil {
-			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+			output.ValueElement = toMapOrNil(m.Value.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -1089,8 +1089,8 @@ func NewImplementationGuideTemplate() *ImplementationGuideTemplate {
 	return &ImplementationGuideTemplate{}
 }
 
-// FromJSON populates ImplementationGuideTemplate from JSON data.
-func (m *ImplementationGuideTemplate) FromJSON(data []byte) error {
+// UnmarshalJSON populates ImplementationGuideTemplate from JSON data.
+func (m *ImplementationGuideTemplate) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1111,8 +1111,8 @@ func (m *ImplementationGuideTemplate) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ImplementationGuideTemplate to JSON data.
-func (m *ImplementationGuideTemplate) ToJSON() ([]byte, error) {
+// MarshalJSON converts ImplementationGuideTemplate to JSON data.
+func (m *ImplementationGuideTemplate) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1128,7 +1128,7 @@ func (m *ImplementationGuideTemplate) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1136,19 +1136,19 @@ func (m *ImplementationGuideTemplate) ToJSON() ([]byte, error) {
 	if m.Code != nil && m.Code.Value != nil {
 		output.Code = m.Code.Value
 		if m.Code.Element != nil {
-			output.CodeElement = toMapOrNil(m.Code.Element.ToJSON())
+			output.CodeElement = toMapOrNil(m.Code.Element.MarshalJSON())
 		}
 	}
 	if m.Source != nil && m.Source.Value != nil {
 		output.Source = m.Source.Value
 		if m.Source.Element != nil {
-			output.SourceElement = toMapOrNil(m.Source.Element.ToJSON())
+			output.SourceElement = toMapOrNil(m.Source.Element.MarshalJSON())
 		}
 	}
 	if m.Scope != nil && m.Scope.Value != nil {
 		output.Scope = m.Scope.Value
 		if m.Scope.Element != nil {
-			output.ScopeElement = toMapOrNil(m.Scope.Element.ToJSON())
+			output.ScopeElement = toMapOrNil(m.Scope.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -1199,8 +1199,8 @@ func NewImplementationGuideManifest() *ImplementationGuideManifest {
 	return &ImplementationGuideManifest{}
 }
 
-// FromJSON populates ImplementationGuideManifest from JSON data.
-func (m *ImplementationGuideManifest) FromJSON(data []byte) error {
+// UnmarshalJSON populates ImplementationGuideManifest from JSON data.
+func (m *ImplementationGuideManifest) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1243,8 +1243,8 @@ func (m *ImplementationGuideManifest) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ImplementationGuideManifest to JSON data.
-func (m *ImplementationGuideManifest) ToJSON() ([]byte, error) {
+// MarshalJSON converts ImplementationGuideManifest to JSON data.
+func (m *ImplementationGuideManifest) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1262,7 +1262,7 @@ func (m *ImplementationGuideManifest) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1270,7 +1270,7 @@ func (m *ImplementationGuideManifest) ToJSON() ([]byte, error) {
 	if m.Rendering != nil && m.Rendering.Value != nil {
 		output.Rendering = m.Rendering.Value
 		if m.Rendering.Element != nil {
-			output.RenderingElement = toMapOrNil(m.Rendering.Element.ToJSON())
+			output.RenderingElement = toMapOrNil(m.Rendering.Element.MarshalJSON())
 		}
 	}
 	output.Resource = m.Resource
@@ -1283,7 +1283,7 @@ func (m *ImplementationGuideManifest) ToJSON() ([]byte, error) {
 				output.Image[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.ImageElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.ImageElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -1295,7 +1295,7 @@ func (m *ImplementationGuideManifest) ToJSON() ([]byte, error) {
 				output.Other[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.OtherElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.OtherElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -1350,8 +1350,8 @@ func NewImplementationGuideResource1() *ImplementationGuideResource1 {
 	return &ImplementationGuideResource1{}
 }
 
-// FromJSON populates ImplementationGuideResource1 from JSON data.
-func (m *ImplementationGuideResource1) FromJSON(data []byte) error {
+// UnmarshalJSON populates ImplementationGuideResource1 from JSON data.
+func (m *ImplementationGuideResource1) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1374,8 +1374,8 @@ func (m *ImplementationGuideResource1) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ImplementationGuideResource1 to JSON data.
-func (m *ImplementationGuideResource1) ToJSON() ([]byte, error) {
+// MarshalJSON converts ImplementationGuideResource1 to JSON data.
+func (m *ImplementationGuideResource1) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1392,7 +1392,7 @@ func (m *ImplementationGuideResource1) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1401,19 +1401,19 @@ func (m *ImplementationGuideResource1) ToJSON() ([]byte, error) {
 	if m.ExampleBoolean != nil && m.ExampleBoolean.Value != nil {
 		output.ExampleBoolean = m.ExampleBoolean.Value
 		if m.ExampleBoolean.Element != nil {
-			output.ExampleBooleanElement = toMapOrNil(m.ExampleBoolean.Element.ToJSON())
+			output.ExampleBooleanElement = toMapOrNil(m.ExampleBoolean.Element.MarshalJSON())
 		}
 	}
 	if m.ExampleCanonical != nil && m.ExampleCanonical.Value != nil {
 		output.ExampleCanonical = m.ExampleCanonical.Value
 		if m.ExampleCanonical.Element != nil {
-			output.ExampleCanonicalElement = toMapOrNil(m.ExampleCanonical.Element.ToJSON())
+			output.ExampleCanonicalElement = toMapOrNil(m.ExampleCanonical.Element.MarshalJSON())
 		}
 	}
 	if m.RelativePath != nil && m.RelativePath.Value != nil {
 		output.RelativePath = m.RelativePath.Value
 		if m.RelativePath.Element != nil {
-			output.RelativePathElement = toMapOrNil(m.RelativePath.Element.ToJSON())
+			output.RelativePathElement = toMapOrNil(m.RelativePath.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -1464,8 +1464,8 @@ func NewImplementationGuidePage1() *ImplementationGuidePage1 {
 	return &ImplementationGuidePage1{}
 }
 
-// FromJSON populates ImplementationGuidePage1 from JSON data.
-func (m *ImplementationGuidePage1) FromJSON(data []byte) error {
+// UnmarshalJSON populates ImplementationGuidePage1 from JSON data.
+func (m *ImplementationGuidePage1) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1495,8 +1495,8 @@ func (m *ImplementationGuidePage1) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ImplementationGuidePage1 to JSON data.
-func (m *ImplementationGuidePage1) ToJSON() ([]byte, error) {
+// MarshalJSON converts ImplementationGuidePage1 to JSON data.
+func (m *ImplementationGuidePage1) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1512,7 +1512,7 @@ func (m *ImplementationGuidePage1) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1520,13 +1520,13 @@ func (m *ImplementationGuidePage1) ToJSON() ([]byte, error) {
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	if m.Title != nil && m.Title.Value != nil {
 		output.Title = m.Title.Value
 		if m.Title.Element != nil {
-			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+			output.TitleElement = toMapOrNil(m.Title.Element.MarshalJSON())
 		}
 	}
 	if len(m.Anchor) > 0 {
@@ -1537,7 +1537,7 @@ func (m *ImplementationGuidePage1) ToJSON() ([]byte, error) {
 				output.Anchor[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.AnchorElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.AnchorElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}

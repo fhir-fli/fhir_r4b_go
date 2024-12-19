@@ -33,8 +33,8 @@ func NewBodyStructure() *BodyStructure {
 	return &BodyStructure{}
 }
 
-// FromJSON populates BodyStructure from JSON data.
-func (m *BodyStructure) FromJSON(data []byte) error {
+// UnmarshalJSON populates BodyStructure from JSON data.
+func (m *BodyStructure) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -75,8 +75,8 @@ func (m *BodyStructure) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts BodyStructure to JSON data.
-func (m *BodyStructure) ToJSON() ([]byte, error) {
+// MarshalJSON converts BodyStructure to JSON data.
+func (m *BodyStructure) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -102,14 +102,14 @@ func (m *BodyStructure) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -121,7 +121,7 @@ func (m *BodyStructure) ToJSON() ([]byte, error) {
 	if m.Active != nil && m.Active.Value != nil {
 		output.Active = m.Active.Value
 		if m.Active.Element != nil {
-			output.ActiveElement = toMapOrNil(m.Active.Element.ToJSON())
+			output.ActiveElement = toMapOrNil(m.Active.Element.MarshalJSON())
 		}
 	}
 	output.Morphology = m.Morphology
@@ -130,7 +130,7 @@ func (m *BodyStructure) ToJSON() ([]byte, error) {
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.Image = m.Image

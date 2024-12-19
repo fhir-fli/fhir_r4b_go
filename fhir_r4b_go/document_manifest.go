@@ -37,8 +37,8 @@ func NewDocumentManifest() *DocumentManifest {
 	return &DocumentManifest{}
 }
 
-// FromJSON populates DocumentManifest from JSON data.
-func (m *DocumentManifest) FromJSON(data []byte) error {
+// UnmarshalJSON populates DocumentManifest from JSON data.
+func (m *DocumentManifest) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -87,8 +87,8 @@ func (m *DocumentManifest) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts DocumentManifest to JSON data.
-func (m *DocumentManifest) ToJSON() ([]byte, error) {
+// MarshalJSON converts DocumentManifest to JSON data.
+func (m *DocumentManifest) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -119,14 +119,14 @@ func (m *DocumentManifest) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -142,7 +142,7 @@ func (m *DocumentManifest) ToJSON() ([]byte, error) {
 	if m.Created != nil && m.Created.Value != nil {
 		output.Created = m.Created.Value
 		if m.Created.Element != nil {
-			output.CreatedElement = toMapOrNil(m.Created.Element.ToJSON())
+			output.CreatedElement = toMapOrNil(m.Created.Element.MarshalJSON())
 		}
 	}
 	output.Author = m.Author
@@ -150,13 +150,13 @@ func (m *DocumentManifest) ToJSON() ([]byte, error) {
 	if m.Source != nil && m.Source.Value != nil {
 		output.Source = m.Source.Value
 		if m.Source.Element != nil {
-			output.SourceElement = toMapOrNil(m.Source.Element.ToJSON())
+			output.SourceElement = toMapOrNil(m.Source.Element.MarshalJSON())
 		}
 	}
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.Content = m.Content
@@ -234,8 +234,8 @@ func NewDocumentManifestRelated() *DocumentManifestRelated {
 	return &DocumentManifestRelated{}
 }
 
-// FromJSON populates DocumentManifestRelated from JSON data.
-func (m *DocumentManifestRelated) FromJSON(data []byte) error {
+// UnmarshalJSON populates DocumentManifestRelated from JSON data.
+func (m *DocumentManifestRelated) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -254,8 +254,8 @@ func (m *DocumentManifestRelated) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts DocumentManifestRelated to JSON data.
-func (m *DocumentManifestRelated) ToJSON() ([]byte, error) {
+// MarshalJSON converts DocumentManifestRelated to JSON data.
+func (m *DocumentManifestRelated) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -267,7 +267,7 @@ func (m *DocumentManifestRelated) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_

@@ -50,8 +50,8 @@ func NewCondition() *Condition {
 	return &Condition{}
 }
 
-// FromJSON populates Condition from JSON data.
-func (m *Condition) FromJSON(data []byte) error {
+// UnmarshalJSON populates Condition from JSON data.
+func (m *Condition) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -126,8 +126,8 @@ func (m *Condition) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Condition to JSON data.
-func (m *Condition) ToJSON() ([]byte, error) {
+// MarshalJSON converts Condition to JSON data.
+func (m *Condition) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -173,14 +173,14 @@ func (m *Condition) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -200,7 +200,7 @@ func (m *Condition) ToJSON() ([]byte, error) {
 	if m.OnsetDateTime != nil && m.OnsetDateTime.Value != nil {
 		output.OnsetDateTime = m.OnsetDateTime.Value
 		if m.OnsetDateTime.Element != nil {
-			output.OnsetDateTimeElement = toMapOrNil(m.OnsetDateTime.Element.ToJSON())
+			output.OnsetDateTimeElement = toMapOrNil(m.OnsetDateTime.Element.MarshalJSON())
 		}
 	}
 	output.OnsetAge = m.OnsetAge
@@ -209,13 +209,13 @@ func (m *Condition) ToJSON() ([]byte, error) {
 	if m.OnsetString != nil && m.OnsetString.Value != nil {
 		output.OnsetString = m.OnsetString.Value
 		if m.OnsetString.Element != nil {
-			output.OnsetStringElement = toMapOrNil(m.OnsetString.Element.ToJSON())
+			output.OnsetStringElement = toMapOrNil(m.OnsetString.Element.MarshalJSON())
 		}
 	}
 	if m.AbatementDateTime != nil && m.AbatementDateTime.Value != nil {
 		output.AbatementDateTime = m.AbatementDateTime.Value
 		if m.AbatementDateTime.Element != nil {
-			output.AbatementDateTimeElement = toMapOrNil(m.AbatementDateTime.Element.ToJSON())
+			output.AbatementDateTimeElement = toMapOrNil(m.AbatementDateTime.Element.MarshalJSON())
 		}
 	}
 	output.AbatementAge = m.AbatementAge
@@ -224,13 +224,13 @@ func (m *Condition) ToJSON() ([]byte, error) {
 	if m.AbatementString != nil && m.AbatementString.Value != nil {
 		output.AbatementString = m.AbatementString.Value
 		if m.AbatementString.Element != nil {
-			output.AbatementStringElement = toMapOrNil(m.AbatementString.Element.ToJSON())
+			output.AbatementStringElement = toMapOrNil(m.AbatementString.Element.MarshalJSON())
 		}
 	}
 	if m.RecordedDate != nil && m.RecordedDate.Value != nil {
 		output.RecordedDate = m.RecordedDate.Value
 		if m.RecordedDate.Element != nil {
-			output.RecordedDateElement = toMapOrNil(m.RecordedDate.Element.ToJSON())
+			output.RecordedDateElement = toMapOrNil(m.RecordedDate.Element.MarshalJSON())
 		}
 	}
 	output.Recorder = m.Recorder
@@ -338,8 +338,8 @@ func NewConditionStage() *ConditionStage {
 	return &ConditionStage{}
 }
 
-// FromJSON populates ConditionStage from JSON data.
-func (m *ConditionStage) FromJSON(data []byte) error {
+// UnmarshalJSON populates ConditionStage from JSON data.
+func (m *ConditionStage) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -360,8 +360,8 @@ func (m *ConditionStage) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ConditionStage to JSON data.
-func (m *ConditionStage) ToJSON() ([]byte, error) {
+// MarshalJSON converts ConditionStage to JSON data.
+func (m *ConditionStage) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -374,7 +374,7 @@ func (m *ConditionStage) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -427,8 +427,8 @@ func NewConditionEvidence() *ConditionEvidence {
 	return &ConditionEvidence{}
 }
 
-// FromJSON populates ConditionEvidence from JSON data.
-func (m *ConditionEvidence) FromJSON(data []byte) error {
+// UnmarshalJSON populates ConditionEvidence from JSON data.
+func (m *ConditionEvidence) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -447,8 +447,8 @@ func (m *ConditionEvidence) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ConditionEvidence to JSON data.
-func (m *ConditionEvidence) ToJSON() ([]byte, error) {
+// MarshalJSON converts ConditionEvidence to JSON data.
+func (m *ConditionEvidence) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -460,7 +460,7 @@ func (m *ConditionEvidence) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_

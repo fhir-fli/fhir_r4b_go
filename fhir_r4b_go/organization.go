@@ -36,8 +36,8 @@ func NewOrganization() *Organization {
 	return &Organization{}
 }
 
-// FromJSON populates Organization from JSON data.
-func (m *Organization) FromJSON(data []byte) error {
+// UnmarshalJSON populates Organization from JSON data.
+func (m *Organization) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -91,8 +91,8 @@ func (m *Organization) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Organization to JSON data.
-func (m *Organization) ToJSON() ([]byte, error) {
+// MarshalJSON converts Organization to JSON data.
+func (m *Organization) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -121,14 +121,14 @@ func (m *Organization) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -140,14 +140,14 @@ func (m *Organization) ToJSON() ([]byte, error) {
 	if m.Active != nil && m.Active.Value != nil {
 		output.Active = m.Active.Value
 		if m.Active.Element != nil {
-			output.ActiveElement = toMapOrNil(m.Active.Element.ToJSON())
+			output.ActiveElement = toMapOrNil(m.Active.Element.MarshalJSON())
 		}
 	}
 	output.Type = m.Type
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	if len(m.Alias) > 0 {
@@ -158,7 +158,7 @@ func (m *Organization) ToJSON() ([]byte, error) {
 				output.Alias[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.AliasElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.AliasElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -238,8 +238,8 @@ func NewOrganizationContact() *OrganizationContact {
 	return &OrganizationContact{}
 }
 
-// FromJSON populates OrganizationContact from JSON data.
-func (m *OrganizationContact) FromJSON(data []byte) error {
+// UnmarshalJSON populates OrganizationContact from JSON data.
+func (m *OrganizationContact) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -262,8 +262,8 @@ func (m *OrganizationContact) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts OrganizationContact to JSON data.
-func (m *OrganizationContact) ToJSON() ([]byte, error) {
+// MarshalJSON converts OrganizationContact to JSON data.
+func (m *OrganizationContact) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -277,7 +277,7 @@ func (m *OrganizationContact) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_

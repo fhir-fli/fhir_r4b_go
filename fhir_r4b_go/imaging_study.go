@@ -45,8 +45,8 @@ func NewImagingStudy() *ImagingStudy {
 	return &ImagingStudy{}
 }
 
-// FromJSON populates ImagingStudy from JSON data.
-func (m *ImagingStudy) FromJSON(data []byte) error {
+// UnmarshalJSON populates ImagingStudy from JSON data.
+func (m *ImagingStudy) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -111,8 +111,8 @@ func (m *ImagingStudy) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ImagingStudy to JSON data.
-func (m *ImagingStudy) ToJSON() ([]byte, error) {
+// MarshalJSON converts ImagingStudy to JSON data.
+func (m *ImagingStudy) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -152,14 +152,14 @@ func (m *ImagingStudy) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -175,7 +175,7 @@ func (m *ImagingStudy) ToJSON() ([]byte, error) {
 	if m.Started != nil && m.Started.Value != nil {
 		output.Started = m.Started.Value
 		if m.Started.Element != nil {
-			output.StartedElement = toMapOrNil(m.Started.Element.ToJSON())
+			output.StartedElement = toMapOrNil(m.Started.Element.MarshalJSON())
 		}
 	}
 	output.BasedOn = m.BasedOn
@@ -185,13 +185,13 @@ func (m *ImagingStudy) ToJSON() ([]byte, error) {
 	if m.NumberOfSeries != nil && m.NumberOfSeries.Value != nil {
 		output.NumberOfSeries = m.NumberOfSeries.Value
 		if m.NumberOfSeries.Element != nil {
-			output.NumberOfSeriesElement = toMapOrNil(m.NumberOfSeries.Element.ToJSON())
+			output.NumberOfSeriesElement = toMapOrNil(m.NumberOfSeries.Element.MarshalJSON())
 		}
 	}
 	if m.NumberOfInstances != nil && m.NumberOfInstances.Value != nil {
 		output.NumberOfInstances = m.NumberOfInstances.Value
 		if m.NumberOfInstances.Element != nil {
-			output.NumberOfInstancesElement = toMapOrNil(m.NumberOfInstances.Element.ToJSON())
+			output.NumberOfInstancesElement = toMapOrNil(m.NumberOfInstances.Element.MarshalJSON())
 		}
 	}
 	output.ProcedureReference = m.ProcedureReference
@@ -203,7 +203,7 @@ func (m *ImagingStudy) ToJSON() ([]byte, error) {
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.Series = m.Series
@@ -306,8 +306,8 @@ func NewImagingStudySeries() *ImagingStudySeries {
 	return &ImagingStudySeries{}
 }
 
-// FromJSON populates ImagingStudySeries from JSON data.
-func (m *ImagingStudySeries) FromJSON(data []byte) error {
+// UnmarshalJSON populates ImagingStudySeries from JSON data.
+func (m *ImagingStudySeries) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -346,8 +346,8 @@ func (m *ImagingStudySeries) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ImagingStudySeries to JSON data.
-func (m *ImagingStudySeries) ToJSON() ([]byte, error) {
+// MarshalJSON converts ImagingStudySeries to JSON data.
+func (m *ImagingStudySeries) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -374,7 +374,7 @@ func (m *ImagingStudySeries) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -382,26 +382,26 @@ func (m *ImagingStudySeries) ToJSON() ([]byte, error) {
 	if m.Uid != nil && m.Uid.Value != nil {
 		output.Uid = m.Uid.Value
 		if m.Uid.Element != nil {
-			output.UidElement = toMapOrNil(m.Uid.Element.ToJSON())
+			output.UidElement = toMapOrNil(m.Uid.Element.MarshalJSON())
 		}
 	}
 	if m.Number != nil && m.Number.Value != nil {
 		output.Number = m.Number.Value
 		if m.Number.Element != nil {
-			output.NumberElement = toMapOrNil(m.Number.Element.ToJSON())
+			output.NumberElement = toMapOrNil(m.Number.Element.MarshalJSON())
 		}
 	}
 	output.Modality = m.Modality
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	if m.NumberOfInstances != nil && m.NumberOfInstances.Value != nil {
 		output.NumberOfInstances = m.NumberOfInstances.Value
 		if m.NumberOfInstances.Element != nil {
-			output.NumberOfInstancesElement = toMapOrNil(m.NumberOfInstances.Element.ToJSON())
+			output.NumberOfInstancesElement = toMapOrNil(m.NumberOfInstances.Element.MarshalJSON())
 		}
 	}
 	output.Endpoint = m.Endpoint
@@ -411,7 +411,7 @@ func (m *ImagingStudySeries) ToJSON() ([]byte, error) {
 	if m.Started != nil && m.Started.Value != nil {
 		output.Started = m.Started.Value
 		if m.Started.Element != nil {
-			output.StartedElement = toMapOrNil(m.Started.Element.ToJSON())
+			output.StartedElement = toMapOrNil(m.Started.Element.MarshalJSON())
 		}
 	}
 	output.Performer = m.Performer
@@ -479,8 +479,8 @@ func NewImagingStudyPerformer() *ImagingStudyPerformer {
 	return &ImagingStudyPerformer{}
 }
 
-// FromJSON populates ImagingStudyPerformer from JSON data.
-func (m *ImagingStudyPerformer) FromJSON(data []byte) error {
+// UnmarshalJSON populates ImagingStudyPerformer from JSON data.
+func (m *ImagingStudyPerformer) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -499,8 +499,8 @@ func (m *ImagingStudyPerformer) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ImagingStudyPerformer to JSON data.
-func (m *ImagingStudyPerformer) ToJSON() ([]byte, error) {
+// MarshalJSON converts ImagingStudyPerformer to JSON data.
+func (m *ImagingStudyPerformer) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -512,7 +512,7 @@ func (m *ImagingStudyPerformer) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -564,8 +564,8 @@ func NewImagingStudyInstance() *ImagingStudyInstance {
 	return &ImagingStudyInstance{}
 }
 
-// FromJSON populates ImagingStudyInstance from JSON data.
-func (m *ImagingStudyInstance) FromJSON(data []byte) error {
+// UnmarshalJSON populates ImagingStudyInstance from JSON data.
+func (m *ImagingStudyInstance) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -588,8 +588,8 @@ func (m *ImagingStudyInstance) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ImagingStudyInstance to JSON data.
-func (m *ImagingStudyInstance) ToJSON() ([]byte, error) {
+// MarshalJSON converts ImagingStudyInstance to JSON data.
+func (m *ImagingStudyInstance) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -606,7 +606,7 @@ func (m *ImagingStudyInstance) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -614,20 +614,20 @@ func (m *ImagingStudyInstance) ToJSON() ([]byte, error) {
 	if m.Uid != nil && m.Uid.Value != nil {
 		output.Uid = m.Uid.Value
 		if m.Uid.Element != nil {
-			output.UidElement = toMapOrNil(m.Uid.Element.ToJSON())
+			output.UidElement = toMapOrNil(m.Uid.Element.MarshalJSON())
 		}
 	}
 	output.SopClass = m.SopClass
 	if m.Number != nil && m.Number.Value != nil {
 		output.Number = m.Number.Value
 		if m.Number.Element != nil {
-			output.NumberElement = toMapOrNil(m.Number.Element.ToJSON())
+			output.NumberElement = toMapOrNil(m.Number.Element.MarshalJSON())
 		}
 	}
 	if m.Title != nil && m.Title.Value != nil {
 		output.Title = m.Title.Value
 		if m.Title.Element != nil {
-			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+			output.TitleElement = toMapOrNil(m.Title.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

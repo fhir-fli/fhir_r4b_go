@@ -41,8 +41,8 @@ func NewDocumentReference() *DocumentReference {
 	return &DocumentReference{}
 }
 
-// FromJSON populates DocumentReference from JSON data.
-func (m *DocumentReference) FromJSON(data []byte) error {
+// UnmarshalJSON populates DocumentReference from JSON data.
+func (m *DocumentReference) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -99,8 +99,8 @@ func (m *DocumentReference) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts DocumentReference to JSON data.
-func (m *DocumentReference) ToJSON() ([]byte, error) {
+// MarshalJSON converts DocumentReference to JSON data.
+func (m *DocumentReference) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -134,14 +134,14 @@ func (m *DocumentReference) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -159,7 +159,7 @@ func (m *DocumentReference) ToJSON() ([]byte, error) {
 	if m.Date != nil && m.Date.Value != nil {
 		output.Date = m.Date.Value
 		if m.Date.Element != nil {
-			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+			output.DateElement = toMapOrNil(m.Date.Element.MarshalJSON())
 		}
 	}
 	output.Author = m.Author
@@ -169,7 +169,7 @@ func (m *DocumentReference) ToJSON() ([]byte, error) {
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.SecurityLabel = m.SecurityLabel
@@ -256,8 +256,8 @@ func NewDocumentReferenceRelatesTo() *DocumentReferenceRelatesTo {
 	return &DocumentReferenceRelatesTo{}
 }
 
-// FromJSON populates DocumentReferenceRelatesTo from JSON data.
-func (m *DocumentReferenceRelatesTo) FromJSON(data []byte) error {
+// UnmarshalJSON populates DocumentReferenceRelatesTo from JSON data.
+func (m *DocumentReferenceRelatesTo) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -276,8 +276,8 @@ func (m *DocumentReferenceRelatesTo) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts DocumentReferenceRelatesTo to JSON data.
-func (m *DocumentReferenceRelatesTo) ToJSON() ([]byte, error) {
+// MarshalJSON converts DocumentReferenceRelatesTo to JSON data.
+func (m *DocumentReferenceRelatesTo) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -289,7 +289,7 @@ func (m *DocumentReferenceRelatesTo) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -339,8 +339,8 @@ func NewDocumentReferenceContent() *DocumentReferenceContent {
 	return &DocumentReferenceContent{}
 }
 
-// FromJSON populates DocumentReferenceContent from JSON data.
-func (m *DocumentReferenceContent) FromJSON(data []byte) error {
+// UnmarshalJSON populates DocumentReferenceContent from JSON data.
+func (m *DocumentReferenceContent) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -359,8 +359,8 @@ func (m *DocumentReferenceContent) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts DocumentReferenceContent to JSON data.
-func (m *DocumentReferenceContent) ToJSON() ([]byte, error) {
+// MarshalJSON converts DocumentReferenceContent to JSON data.
+func (m *DocumentReferenceContent) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -372,7 +372,7 @@ func (m *DocumentReferenceContent) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -427,8 +427,8 @@ func NewDocumentReferenceContext() *DocumentReferenceContext {
 	return &DocumentReferenceContext{}
 }
 
-// FromJSON populates DocumentReferenceContext from JSON data.
-func (m *DocumentReferenceContext) FromJSON(data []byte) error {
+// UnmarshalJSON populates DocumentReferenceContext from JSON data.
+func (m *DocumentReferenceContext) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -457,8 +457,8 @@ func (m *DocumentReferenceContext) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts DocumentReferenceContext to JSON data.
-func (m *DocumentReferenceContext) ToJSON() ([]byte, error) {
+// MarshalJSON converts DocumentReferenceContext to JSON data.
+func (m *DocumentReferenceContext) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -475,7 +475,7 @@ func (m *DocumentReferenceContext) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_

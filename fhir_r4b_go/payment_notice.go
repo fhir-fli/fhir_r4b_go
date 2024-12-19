@@ -37,8 +37,8 @@ func NewPaymentNotice() *PaymentNotice {
 	return &PaymentNotice{}
 }
 
-// FromJSON populates PaymentNotice from JSON data.
-func (m *PaymentNotice) FromJSON(data []byte) error {
+// UnmarshalJSON populates PaymentNotice from JSON data.
+func (m *PaymentNotice) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -87,8 +87,8 @@ func (m *PaymentNotice) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts PaymentNotice to JSON data.
-func (m *PaymentNotice) ToJSON() ([]byte, error) {
+// MarshalJSON converts PaymentNotice to JSON data.
+func (m *PaymentNotice) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -118,14 +118,14 @@ func (m *PaymentNotice) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -140,7 +140,7 @@ func (m *PaymentNotice) ToJSON() ([]byte, error) {
 	if m.Created != nil && m.Created.Value != nil {
 		output.Created = m.Created.Value
 		if m.Created.Element != nil {
-			output.CreatedElement = toMapOrNil(m.Created.Element.ToJSON())
+			output.CreatedElement = toMapOrNil(m.Created.Element.MarshalJSON())
 		}
 	}
 	output.Provider = m.Provider
@@ -148,7 +148,7 @@ func (m *PaymentNotice) ToJSON() ([]byte, error) {
 	if m.PaymentDate != nil && m.PaymentDate.Value != nil {
 		output.PaymentDate = m.PaymentDate.Value
 		if m.PaymentDate.Element != nil {
-			output.PaymentDateElement = toMapOrNil(m.PaymentDate.Element.ToJSON())
+			output.PaymentDateElement = toMapOrNil(m.PaymentDate.Element.MarshalJSON())
 		}
 	}
 	output.Payee = m.Payee

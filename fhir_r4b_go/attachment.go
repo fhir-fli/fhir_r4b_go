@@ -27,8 +27,8 @@ func NewAttachment() *Attachment {
 	return &Attachment{}
 }
 
-// FromJSON populates Attachment from JSON data.
-func (m *Attachment) FromJSON(data []byte) error {
+// UnmarshalJSON populates Attachment from JSON data.
+func (m *Attachment) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -57,8 +57,8 @@ func (m *Attachment) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Attachment to JSON data.
-func (m *Attachment) ToJSON() ([]byte, error) {
+// MarshalJSON converts Attachment to JSON data.
+func (m *Attachment) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -82,51 +82,51 @@ func (m *Attachment) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
 	if m.ContentType != nil && m.ContentType.Value != nil {
 		output.ContentType = m.ContentType.Value
 		if m.ContentType.Element != nil {
-			output.ContentTypeElement = toMapOrNil(m.ContentType.Element.ToJSON())
+			output.ContentTypeElement = toMapOrNil(m.ContentType.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
 	if m.Data != nil && m.Data.Value != nil {
 		output.Data = m.Data.Value
 		if m.Data.Element != nil {
-			output.DataElement = toMapOrNil(m.Data.Element.ToJSON())
+			output.DataElement = toMapOrNil(m.Data.Element.MarshalJSON())
 		}
 	}
 	if m.Url != nil && m.Url.Value != nil {
 		output.Url = m.Url.Value
 		if m.Url.Element != nil {
-			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+			output.UrlElement = toMapOrNil(m.Url.Element.MarshalJSON())
 		}
 	}
 	if m.Size != nil && m.Size.Value != nil {
 		output.Size = m.Size.Value
 		if m.Size.Element != nil {
-			output.SizeElement = toMapOrNil(m.Size.Element.ToJSON())
+			output.SizeElement = toMapOrNil(m.Size.Element.MarshalJSON())
 		}
 	}
 	if m.Hash != nil && m.Hash.Value != nil {
 		output.Hash = m.Hash.Value
 		if m.Hash.Element != nil {
-			output.HashElement = toMapOrNil(m.Hash.Element.ToJSON())
+			output.HashElement = toMapOrNil(m.Hash.Element.MarshalJSON())
 		}
 	}
 	if m.Title != nil && m.Title.Value != nil {
 		output.Title = m.Title.Value
 		if m.Title.Element != nil {
-			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+			output.TitleElement = toMapOrNil(m.Title.Element.MarshalJSON())
 		}
 	}
 	if m.Creation != nil && m.Creation.Value != nil {
 		output.Creation = m.Creation.Value
 		if m.Creation.Element != nil {
-			output.CreationElement = toMapOrNil(m.Creation.Element.ToJSON())
+			output.CreationElement = toMapOrNil(m.Creation.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

@@ -33,8 +33,8 @@ func NewSchedule() *Schedule {
 	return &Schedule{}
 }
 
-// FromJSON populates Schedule from JSON data.
-func (m *Schedule) FromJSON(data []byte) error {
+// UnmarshalJSON populates Schedule from JSON data.
+func (m *Schedule) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -75,8 +75,8 @@ func (m *Schedule) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Schedule to JSON data.
-func (m *Schedule) ToJSON() ([]byte, error) {
+// MarshalJSON converts Schedule to JSON data.
+func (m *Schedule) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -102,14 +102,14 @@ func (m *Schedule) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -121,7 +121,7 @@ func (m *Schedule) ToJSON() ([]byte, error) {
 	if m.Active != nil && m.Active.Value != nil {
 		output.Active = m.Active.Value
 		if m.Active.Element != nil {
-			output.ActiveElement = toMapOrNil(m.Active.Element.ToJSON())
+			output.ActiveElement = toMapOrNil(m.Active.Element.MarshalJSON())
 		}
 	}
 	output.ServiceCategory = m.ServiceCategory
@@ -132,7 +132,7 @@ func (m *Schedule) ToJSON() ([]byte, error) {
 	if m.Comment != nil && m.Comment.Value != nil {
 		output.Comment = m.Comment.Value
 		if m.Comment.Element != nil {
-			output.CommentElement = toMapOrNil(m.Comment.Element.ToJSON())
+			output.CommentElement = toMapOrNil(m.Comment.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

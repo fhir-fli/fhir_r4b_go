@@ -37,8 +37,8 @@ func NewFhirEndpoint() *FhirEndpoint {
 	return &FhirEndpoint{}
 }
 
-// FromJSON populates FhirEndpoint from JSON data.
-func (m *FhirEndpoint) FromJSON(data []byte) error {
+// UnmarshalJSON populates FhirEndpoint from JSON data.
+func (m *FhirEndpoint) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -103,8 +103,8 @@ func (m *FhirEndpoint) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts FhirEndpoint to JSON data.
-func (m *FhirEndpoint) ToJSON() ([]byte, error) {
+// MarshalJSON converts FhirEndpoint to JSON data.
+func (m *FhirEndpoint) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -135,14 +135,14 @@ func (m *FhirEndpoint) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -156,7 +156,7 @@ func (m *FhirEndpoint) ToJSON() ([]byte, error) {
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	output.ManagingOrganization = m.ManagingOrganization
@@ -171,14 +171,14 @@ func (m *FhirEndpoint) ToJSON() ([]byte, error) {
 				output.PayloadMimeType[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.PayloadMimeTypeElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.PayloadMimeTypeElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
 	if m.Address != nil && m.Address.Value != nil {
 		output.Address = m.Address.Value
 		if m.Address.Element != nil {
-			output.AddressElement = toMapOrNil(m.Address.Element.ToJSON())
+			output.AddressElement = toMapOrNil(m.Address.Element.MarshalJSON())
 		}
 	}
 	if len(m.Header) > 0 {
@@ -189,7 +189,7 @@ func (m *FhirEndpoint) ToJSON() ([]byte, error) {
 				output.Header[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.HeaderElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.HeaderElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}

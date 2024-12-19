@@ -37,8 +37,8 @@ func NewEpisodeOfCare() *EpisodeOfCare {
 	return &EpisodeOfCare{}
 }
 
-// FromJSON populates EpisodeOfCare from JSON data.
-func (m *EpisodeOfCare) FromJSON(data []byte) error {
+// UnmarshalJSON populates EpisodeOfCare from JSON data.
+func (m *EpisodeOfCare) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -87,8 +87,8 @@ func (m *EpisodeOfCare) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts EpisodeOfCare to JSON data.
-func (m *EpisodeOfCare) ToJSON() ([]byte, error) {
+// MarshalJSON converts EpisodeOfCare to JSON data.
+func (m *EpisodeOfCare) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -116,14 +116,14 @@ func (m *EpisodeOfCare) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -216,8 +216,8 @@ func NewEpisodeOfCareStatusHistory() *EpisodeOfCareStatusHistory {
 	return &EpisodeOfCareStatusHistory{}
 }
 
-// FromJSON populates EpisodeOfCareStatusHistory from JSON data.
-func (m *EpisodeOfCareStatusHistory) FromJSON(data []byte) error {
+// UnmarshalJSON populates EpisodeOfCareStatusHistory from JSON data.
+func (m *EpisodeOfCareStatusHistory) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -236,8 +236,8 @@ func (m *EpisodeOfCareStatusHistory) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts EpisodeOfCareStatusHistory to JSON data.
-func (m *EpisodeOfCareStatusHistory) ToJSON() ([]byte, error) {
+// MarshalJSON converts EpisodeOfCareStatusHistory to JSON data.
+func (m *EpisodeOfCareStatusHistory) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -249,7 +249,7 @@ func (m *EpisodeOfCareStatusHistory) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -300,8 +300,8 @@ func NewEpisodeOfCareDiagnosis() *EpisodeOfCareDiagnosis {
 	return &EpisodeOfCareDiagnosis{}
 }
 
-// FromJSON populates EpisodeOfCareDiagnosis from JSON data.
-func (m *EpisodeOfCareDiagnosis) FromJSON(data []byte) error {
+// UnmarshalJSON populates EpisodeOfCareDiagnosis from JSON data.
+func (m *EpisodeOfCareDiagnosis) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -322,8 +322,8 @@ func (m *EpisodeOfCareDiagnosis) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts EpisodeOfCareDiagnosis to JSON data.
-func (m *EpisodeOfCareDiagnosis) ToJSON() ([]byte, error) {
+// MarshalJSON converts EpisodeOfCareDiagnosis to JSON data.
+func (m *EpisodeOfCareDiagnosis) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -337,7 +337,7 @@ func (m *EpisodeOfCareDiagnosis) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -347,7 +347,7 @@ func (m *EpisodeOfCareDiagnosis) ToJSON() ([]byte, error) {
 	if m.Rank != nil && m.Rank.Value != nil {
 		output.Rank = m.Rank.Value
 		if m.Rank.Element != nil {
-			output.RankElement = toMapOrNil(m.Rank.Element.ToJSON())
+			output.RankElement = toMapOrNil(m.Rank.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

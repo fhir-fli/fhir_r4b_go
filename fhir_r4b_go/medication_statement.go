@@ -46,8 +46,8 @@ func NewMedicationStatement() *MedicationStatement {
 	return &MedicationStatement{}
 }
 
-// FromJSON populates MedicationStatement from JSON data.
-func (m *MedicationStatement) FromJSON(data []byte) error {
+// UnmarshalJSON populates MedicationStatement from JSON data.
+func (m *MedicationStatement) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -110,8 +110,8 @@ func (m *MedicationStatement) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MedicationStatement to JSON data.
-func (m *MedicationStatement) ToJSON() ([]byte, error) {
+// MarshalJSON converts MedicationStatement to JSON data.
+func (m *MedicationStatement) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -148,14 +148,14 @@ func (m *MedicationStatement) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -176,14 +176,14 @@ func (m *MedicationStatement) ToJSON() ([]byte, error) {
 	if m.EffectiveDateTime != nil && m.EffectiveDateTime.Value != nil {
 		output.EffectiveDateTime = m.EffectiveDateTime.Value
 		if m.EffectiveDateTime.Element != nil {
-			output.EffectiveDateTimeElement = toMapOrNil(m.EffectiveDateTime.Element.ToJSON())
+			output.EffectiveDateTimeElement = toMapOrNil(m.EffectiveDateTime.Element.MarshalJSON())
 		}
 	}
 	output.EffectivePeriod = m.EffectivePeriod
 	if m.DateAsserted != nil && m.DateAsserted.Value != nil {
 		output.DateAsserted = m.DateAsserted.Value
 		if m.DateAsserted.Element != nil {
-			output.DateAssertedElement = toMapOrNil(m.DateAsserted.Element.ToJSON())
+			output.DateAssertedElement = toMapOrNil(m.DateAsserted.Element.MarshalJSON())
 		}
 	}
 	output.InformationSource = m.InformationSource

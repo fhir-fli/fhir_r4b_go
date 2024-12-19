@@ -61,8 +61,8 @@ func NewContract() *Contract {
 	return &Contract{}
 }
 
-// FromJSON populates Contract from JSON data.
-func (m *Contract) FromJSON(data []byte) error {
+// UnmarshalJSON populates Contract from JSON data.
+func (m *Contract) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -166,8 +166,8 @@ func (m *Contract) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Contract to JSON data.
-func (m *Contract) ToJSON() ([]byte, error) {
+// MarshalJSON converts Contract to JSON data.
+func (m *Contract) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -226,14 +226,14 @@ func (m *Contract) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -245,13 +245,13 @@ func (m *Contract) ToJSON() ([]byte, error) {
 	if m.Url != nil && m.Url.Value != nil {
 		output.Url = m.Url.Value
 		if m.Url.Element != nil {
-			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+			output.UrlElement = toMapOrNil(m.Url.Element.MarshalJSON())
 		}
 	}
 	if m.Version != nil && m.Version.Value != nil {
 		output.Version = m.Version.Value
 		if m.Version.Element != nil {
-			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+			output.VersionElement = toMapOrNil(m.Version.Element.MarshalJSON())
 		}
 	}
 	output.Status = m.Status
@@ -260,14 +260,14 @@ func (m *Contract) ToJSON() ([]byte, error) {
 	if m.InstantiatesUri != nil && m.InstantiatesUri.Value != nil {
 		output.InstantiatesUri = m.InstantiatesUri.Value
 		if m.InstantiatesUri.Element != nil {
-			output.InstantiatesUriElement = toMapOrNil(m.InstantiatesUri.Element.ToJSON())
+			output.InstantiatesUriElement = toMapOrNil(m.InstantiatesUri.Element.MarshalJSON())
 		}
 	}
 	output.ContentDerivative = m.ContentDerivative
 	if m.Issued != nil && m.Issued.Value != nil {
 		output.Issued = m.Issued.Value
 		if m.Issued.Element != nil {
-			output.IssuedElement = toMapOrNil(m.Issued.Element.ToJSON())
+			output.IssuedElement = toMapOrNil(m.Issued.Element.MarshalJSON())
 		}
 	}
 	output.Applies = m.Applies
@@ -279,19 +279,19 @@ func (m *Contract) ToJSON() ([]byte, error) {
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	if m.Title != nil && m.Title.Value != nil {
 		output.Title = m.Title.Value
 		if m.Title.Element != nil {
-			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+			output.TitleElement = toMapOrNil(m.Title.Element.MarshalJSON())
 		}
 	}
 	if m.Subtitle != nil && m.Subtitle.Value != nil {
 		output.Subtitle = m.Subtitle.Value
 		if m.Subtitle.Element != nil {
-			output.SubtitleElement = toMapOrNil(m.Subtitle.Element.ToJSON())
+			output.SubtitleElement = toMapOrNil(m.Subtitle.Element.MarshalJSON())
 		}
 	}
 	if len(m.Alias) > 0 {
@@ -302,7 +302,7 @@ func (m *Contract) ToJSON() ([]byte, error) {
 				output.Alias[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.AliasElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.AliasElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -445,8 +445,8 @@ func NewContractContentDefinition() *ContractContentDefinition {
 	return &ContractContentDefinition{}
 }
 
-// FromJSON populates ContractContentDefinition from JSON data.
-func (m *ContractContentDefinition) FromJSON(data []byte) error {
+// UnmarshalJSON populates ContractContentDefinition from JSON data.
+func (m *ContractContentDefinition) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -473,8 +473,8 @@ func (m *ContractContentDefinition) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ContractContentDefinition to JSON data.
-func (m *ContractContentDefinition) ToJSON() ([]byte, error) {
+// MarshalJSON converts ContractContentDefinition to JSON data.
+func (m *ContractContentDefinition) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -492,7 +492,7 @@ func (m *ContractContentDefinition) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -503,14 +503,14 @@ func (m *ContractContentDefinition) ToJSON() ([]byte, error) {
 	if m.PublicationDate != nil && m.PublicationDate.Value != nil {
 		output.PublicationDate = m.PublicationDate.Value
 		if m.PublicationDate.Element != nil {
-			output.PublicationDateElement = toMapOrNil(m.PublicationDate.Element.ToJSON())
+			output.PublicationDateElement = toMapOrNil(m.PublicationDate.Element.MarshalJSON())
 		}
 	}
 	output.PublicationStatus = m.PublicationStatus
 	if m.Copyright != nil && m.Copyright.Value != nil {
 		output.Copyright = m.Copyright.Value
 		if m.Copyright.Element != nil {
-			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -575,8 +575,8 @@ func NewContractTerm() *ContractTerm {
 	return &ContractTerm{}
 }
 
-// FromJSON populates ContractTerm from JSON data.
-func (m *ContractTerm) FromJSON(data []byte) error {
+// UnmarshalJSON populates ContractTerm from JSON data.
+func (m *ContractTerm) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -617,8 +617,8 @@ func (m *ContractTerm) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ContractTerm to JSON data.
-func (m *ContractTerm) ToJSON() ([]byte, error) {
+// MarshalJSON converts ContractTerm to JSON data.
+func (m *ContractTerm) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -643,7 +643,7 @@ func (m *ContractTerm) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -652,7 +652,7 @@ func (m *ContractTerm) ToJSON() ([]byte, error) {
 	if m.Issued != nil && m.Issued.Value != nil {
 		output.Issued = m.Issued.Value
 		if m.Issued.Element != nil {
-			output.IssuedElement = toMapOrNil(m.Issued.Element.ToJSON())
+			output.IssuedElement = toMapOrNil(m.Issued.Element.MarshalJSON())
 		}
 	}
 	output.Applies = m.Applies
@@ -663,7 +663,7 @@ func (m *ContractTerm) ToJSON() ([]byte, error) {
 	if m.Text != nil && m.Text.Value != nil {
 		output.Text = m.Text.Value
 		if m.Text.Element != nil {
-			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+			output.TextElement = toMapOrNil(m.Text.Element.MarshalJSON())
 		}
 	}
 	output.SecurityLabel = m.SecurityLabel
@@ -738,8 +738,8 @@ func NewContractSecurityLabel() *ContractSecurityLabel {
 	return &ContractSecurityLabel{}
 }
 
-// FromJSON populates ContractSecurityLabel from JSON data.
-func (m *ContractSecurityLabel) FromJSON(data []byte) error {
+// UnmarshalJSON populates ContractSecurityLabel from JSON data.
+func (m *ContractSecurityLabel) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -771,8 +771,8 @@ func (m *ContractSecurityLabel) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ContractSecurityLabel to JSON data.
-func (m *ContractSecurityLabel) ToJSON() ([]byte, error) {
+// MarshalJSON converts ContractSecurityLabel to JSON data.
+func (m *ContractSecurityLabel) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -787,7 +787,7 @@ func (m *ContractSecurityLabel) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -800,7 +800,7 @@ func (m *ContractSecurityLabel) ToJSON() ([]byte, error) {
 				output.Number[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.NumberElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.NumberElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -862,8 +862,8 @@ func NewContractOffer() *ContractOffer {
 	return &ContractOffer{}
 }
 
-// FromJSON populates ContractOffer from JSON data.
-func (m *ContractOffer) FromJSON(data []byte) error {
+// UnmarshalJSON populates ContractOffer from JSON data.
+func (m *ContractOffer) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -916,8 +916,8 @@ func (m *ContractOffer) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ContractOffer to JSON data.
-func (m *ContractOffer) ToJSON() ([]byte, error) {
+// MarshalJSON converts ContractOffer to JSON data.
+func (m *ContractOffer) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -940,7 +940,7 @@ func (m *ContractOffer) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -955,7 +955,7 @@ func (m *ContractOffer) ToJSON() ([]byte, error) {
 	if m.Text != nil && m.Text.Value != nil {
 		output.Text = m.Text.Value
 		if m.Text.Element != nil {
-			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+			output.TextElement = toMapOrNil(m.Text.Element.MarshalJSON())
 		}
 	}
 	if len(m.LinkId) > 0 {
@@ -966,7 +966,7 @@ func (m *ContractOffer) ToJSON() ([]byte, error) {
 				output.LinkId[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.LinkIdElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.LinkIdElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -978,7 +978,7 @@ func (m *ContractOffer) ToJSON() ([]byte, error) {
 				output.SecurityLabelNumber[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.SecurityLabelNumberElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.SecurityLabelNumberElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -1041,8 +1041,8 @@ func NewContractParty() *ContractParty {
 	return &ContractParty{}
 }
 
-// FromJSON populates ContractParty from JSON data.
-func (m *ContractParty) FromJSON(data []byte) error {
+// UnmarshalJSON populates ContractParty from JSON data.
+func (m *ContractParty) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1061,8 +1061,8 @@ func (m *ContractParty) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ContractParty to JSON data.
-func (m *ContractParty) ToJSON() ([]byte, error) {
+// MarshalJSON converts ContractParty to JSON data.
+func (m *ContractParty) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1074,7 +1074,7 @@ func (m *ContractParty) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1134,8 +1134,8 @@ func NewContractAnswer() *ContractAnswer {
 	return &ContractAnswer{}
 }
 
-// FromJSON populates ContractAnswer from JSON data.
-func (m *ContractAnswer) FromJSON(data []byte) error {
+// UnmarshalJSON populates ContractAnswer from JSON data.
+func (m *ContractAnswer) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1174,8 +1174,8 @@ func (m *ContractAnswer) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ContractAnswer to JSON data.
-func (m *ContractAnswer) ToJSON() ([]byte, error) {
+// MarshalJSON converts ContractAnswer to JSON data.
+func (m *ContractAnswer) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1205,7 +1205,7 @@ func (m *ContractAnswer) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1213,49 +1213,49 @@ func (m *ContractAnswer) ToJSON() ([]byte, error) {
 	if m.ValueBoolean != nil && m.ValueBoolean.Value != nil {
 		output.ValueBoolean = m.ValueBoolean.Value
 		if m.ValueBoolean.Element != nil {
-			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.ToJSON())
+			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.MarshalJSON())
 		}
 	}
 	if m.ValueDecimal != nil && m.ValueDecimal.Value != nil {
 		output.ValueDecimal = m.ValueDecimal.Value
 		if m.ValueDecimal.Element != nil {
-			output.ValueDecimalElement = toMapOrNil(m.ValueDecimal.Element.ToJSON())
+			output.ValueDecimalElement = toMapOrNil(m.ValueDecimal.Element.MarshalJSON())
 		}
 	}
 	if m.ValueInteger != nil && m.ValueInteger.Value != nil {
 		output.ValueInteger = m.ValueInteger.Value
 		if m.ValueInteger.Element != nil {
-			output.ValueIntegerElement = toMapOrNil(m.ValueInteger.Element.ToJSON())
+			output.ValueIntegerElement = toMapOrNil(m.ValueInteger.Element.MarshalJSON())
 		}
 	}
 	if m.ValueDate != nil && m.ValueDate.Value != nil {
 		output.ValueDate = m.ValueDate.Value
 		if m.ValueDate.Element != nil {
-			output.ValueDateElement = toMapOrNil(m.ValueDate.Element.ToJSON())
+			output.ValueDateElement = toMapOrNil(m.ValueDate.Element.MarshalJSON())
 		}
 	}
 	if m.ValueDateTime != nil && m.ValueDateTime.Value != nil {
 		output.ValueDateTime = m.ValueDateTime.Value
 		if m.ValueDateTime.Element != nil {
-			output.ValueDateTimeElement = toMapOrNil(m.ValueDateTime.Element.ToJSON())
+			output.ValueDateTimeElement = toMapOrNil(m.ValueDateTime.Element.MarshalJSON())
 		}
 	}
 	if m.ValueTime != nil && m.ValueTime.Value != nil {
 		output.ValueTime = m.ValueTime.Value
 		if m.ValueTime.Element != nil {
-			output.ValueTimeElement = toMapOrNil(m.ValueTime.Element.ToJSON())
+			output.ValueTimeElement = toMapOrNil(m.ValueTime.Element.MarshalJSON())
 		}
 	}
 	if m.ValueString != nil && m.ValueString.Value != nil {
 		output.ValueString = m.ValueString.Value
 		if m.ValueString.Element != nil {
-			output.ValueStringElement = toMapOrNil(m.ValueString.Element.ToJSON())
+			output.ValueStringElement = toMapOrNil(m.ValueString.Element.MarshalJSON())
 		}
 	}
 	if m.ValueUri != nil && m.ValueUri.Value != nil {
 		output.ValueUri = m.ValueUri.Value
 		if m.ValueUri.Element != nil {
-			output.ValueUriElement = toMapOrNil(m.ValueUri.Element.ToJSON())
+			output.ValueUriElement = toMapOrNil(m.ValueUri.Element.MarshalJSON())
 		}
 	}
 	output.ValueAttachment = m.ValueAttachment
@@ -1338,8 +1338,8 @@ func NewContractAsset() *ContractAsset {
 	return &ContractAsset{}
 }
 
-// FromJSON populates ContractAsset from JSON data.
-func (m *ContractAsset) FromJSON(data []byte) error {
+// UnmarshalJSON populates ContractAsset from JSON data.
+func (m *ContractAsset) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1402,8 +1402,8 @@ func (m *ContractAsset) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ContractAsset to JSON data.
-func (m *ContractAsset) ToJSON() ([]byte, error) {
+// MarshalJSON converts ContractAsset to JSON data.
+func (m *ContractAsset) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1432,7 +1432,7 @@ func (m *ContractAsset) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1446,7 +1446,7 @@ func (m *ContractAsset) ToJSON() ([]byte, error) {
 	if m.Condition != nil && m.Condition.Value != nil {
 		output.Condition = m.Condition.Value
 		if m.Condition.Element != nil {
-			output.ConditionElement = toMapOrNil(m.Condition.Element.ToJSON())
+			output.ConditionElement = toMapOrNil(m.Condition.Element.MarshalJSON())
 		}
 	}
 	output.PeriodType = m.PeriodType
@@ -1455,7 +1455,7 @@ func (m *ContractAsset) ToJSON() ([]byte, error) {
 	if m.Text != nil && m.Text.Value != nil {
 		output.Text = m.Text.Value
 		if m.Text.Element != nil {
-			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+			output.TextElement = toMapOrNil(m.Text.Element.MarshalJSON())
 		}
 	}
 	if len(m.LinkId) > 0 {
@@ -1466,7 +1466,7 @@ func (m *ContractAsset) ToJSON() ([]byte, error) {
 				output.LinkId[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.LinkIdElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.LinkIdElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -1479,7 +1479,7 @@ func (m *ContractAsset) ToJSON() ([]byte, error) {
 				output.SecurityLabelNumber[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.SecurityLabelNumberElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.SecurityLabelNumberElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -1554,8 +1554,8 @@ func NewContractContext() *ContractContext {
 	return &ContractContext{}
 }
 
-// FromJSON populates ContractContext from JSON data.
-func (m *ContractContext) FromJSON(data []byte) error {
+// UnmarshalJSON populates ContractContext from JSON data.
+func (m *ContractContext) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1576,8 +1576,8 @@ func (m *ContractContext) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ContractContext to JSON data.
-func (m *ContractContext) ToJSON() ([]byte, error) {
+// MarshalJSON converts ContractContext to JSON data.
+func (m *ContractContext) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1591,7 +1591,7 @@ func (m *ContractContext) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1601,7 +1601,7 @@ func (m *ContractContext) ToJSON() ([]byte, error) {
 	if m.Text != nil && m.Text.Value != nil {
 		output.Text = m.Text.Value
 		if m.Text.Element != nil {
-			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+			output.TextElement = toMapOrNil(m.Text.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -1662,8 +1662,8 @@ func NewContractValuedItem() *ContractValuedItem {
 	return &ContractValuedItem{}
 }
 
-// FromJSON populates ContractValuedItem from JSON data.
-func (m *ContractValuedItem) FromJSON(data []byte) error {
+// UnmarshalJSON populates ContractValuedItem from JSON data.
+func (m *ContractValuedItem) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1726,8 +1726,8 @@ func (m *ContractValuedItem) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ContractValuedItem to JSON data.
-func (m *ContractValuedItem) ToJSON() ([]byte, error) {
+// MarshalJSON converts ContractValuedItem to JSON data.
+func (m *ContractValuedItem) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1759,7 +1759,7 @@ func (m *ContractValuedItem) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1770,7 +1770,7 @@ func (m *ContractValuedItem) ToJSON() ([]byte, error) {
 	if m.EffectiveTime != nil && m.EffectiveTime.Value != nil {
 		output.EffectiveTime = m.EffectiveTime.Value
 		if m.EffectiveTime.Element != nil {
-			output.EffectiveTimeElement = toMapOrNil(m.EffectiveTime.Element.ToJSON())
+			output.EffectiveTimeElement = toMapOrNil(m.EffectiveTime.Element.MarshalJSON())
 		}
 	}
 	output.Quantity = m.Quantity
@@ -1778,26 +1778,26 @@ func (m *ContractValuedItem) ToJSON() ([]byte, error) {
 	if m.Factor != nil && m.Factor.Value != nil {
 		output.Factor = m.Factor.Value
 		if m.Factor.Element != nil {
-			output.FactorElement = toMapOrNil(m.Factor.Element.ToJSON())
+			output.FactorElement = toMapOrNil(m.Factor.Element.MarshalJSON())
 		}
 	}
 	if m.Points != nil && m.Points.Value != nil {
 		output.Points = m.Points.Value
 		if m.Points.Element != nil {
-			output.PointsElement = toMapOrNil(m.Points.Element.ToJSON())
+			output.PointsElement = toMapOrNil(m.Points.Element.MarshalJSON())
 		}
 	}
 	output.Net = m.Net
 	if m.Payment != nil && m.Payment.Value != nil {
 		output.Payment = m.Payment.Value
 		if m.Payment.Element != nil {
-			output.PaymentElement = toMapOrNil(m.Payment.Element.ToJSON())
+			output.PaymentElement = toMapOrNil(m.Payment.Element.MarshalJSON())
 		}
 	}
 	if m.PaymentDate != nil && m.PaymentDate.Value != nil {
 		output.PaymentDate = m.PaymentDate.Value
 		if m.PaymentDate.Element != nil {
-			output.PaymentDateElement = toMapOrNil(m.PaymentDate.Element.ToJSON())
+			output.PaymentDateElement = toMapOrNil(m.PaymentDate.Element.MarshalJSON())
 		}
 	}
 	output.Responsible = m.Responsible
@@ -1810,7 +1810,7 @@ func (m *ContractValuedItem) ToJSON() ([]byte, error) {
 				output.LinkId[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.LinkIdElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.LinkIdElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -1822,7 +1822,7 @@ func (m *ContractValuedItem) ToJSON() ([]byte, error) {
 				output.SecurityLabelNumber[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.SecurityLabelNumberElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.SecurityLabelNumberElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -1916,8 +1916,8 @@ func NewContractAction() *ContractAction {
 	return &ContractAction{}
 }
 
-// FromJSON populates ContractAction from JSON data.
-func (m *ContractAction) FromJSON(data []byte) error {
+// UnmarshalJSON populates ContractAction from JSON data.
+func (m *ContractAction) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -2041,8 +2041,8 @@ func (m *ContractAction) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ContractAction to JSON data.
-func (m *ContractAction) ToJSON() ([]byte, error) {
+// MarshalJSON converts ContractAction to JSON data.
+func (m *ContractAction) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -2084,7 +2084,7 @@ func (m *ContractAction) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -2092,7 +2092,7 @@ func (m *ContractAction) ToJSON() ([]byte, error) {
 	if m.DoNotPerform != nil && m.DoNotPerform.Value != nil {
 		output.DoNotPerform = m.DoNotPerform.Value
 		if m.DoNotPerform.Element != nil {
-			output.DoNotPerformElement = toMapOrNil(m.DoNotPerform.Element.ToJSON())
+			output.DoNotPerformElement = toMapOrNil(m.DoNotPerform.Element.MarshalJSON())
 		}
 	}
 	output.Type = m.Type
@@ -2106,7 +2106,7 @@ func (m *ContractAction) ToJSON() ([]byte, error) {
 				output.LinkId[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.LinkIdElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.LinkIdElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -2120,14 +2120,14 @@ func (m *ContractAction) ToJSON() ([]byte, error) {
 				output.ContextLinkId[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.ContextLinkIdElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.ContextLinkIdElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
 	if m.OccurrenceDateTime != nil && m.OccurrenceDateTime.Value != nil {
 		output.OccurrenceDateTime = m.OccurrenceDateTime.Value
 		if m.OccurrenceDateTime.Element != nil {
-			output.OccurrenceDateTimeElement = toMapOrNil(m.OccurrenceDateTime.Element.ToJSON())
+			output.OccurrenceDateTimeElement = toMapOrNil(m.OccurrenceDateTime.Element.MarshalJSON())
 		}
 	}
 	output.OccurrencePeriod = m.OccurrencePeriod
@@ -2141,7 +2141,7 @@ func (m *ContractAction) ToJSON() ([]byte, error) {
 				output.RequesterLinkId[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.RequesterLinkIdElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.RequesterLinkIdElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -2156,7 +2156,7 @@ func (m *ContractAction) ToJSON() ([]byte, error) {
 				output.PerformerLinkId[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.PerformerLinkIdElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.PerformerLinkIdElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -2170,7 +2170,7 @@ func (m *ContractAction) ToJSON() ([]byte, error) {
 				output.Reason[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.ReasonElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.ReasonElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -2182,7 +2182,7 @@ func (m *ContractAction) ToJSON() ([]byte, error) {
 				output.ReasonLinkId[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.ReasonLinkIdElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.ReasonLinkIdElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -2195,7 +2195,7 @@ func (m *ContractAction) ToJSON() ([]byte, error) {
 				output.SecurityLabelNumber[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.SecurityLabelNumberElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.SecurityLabelNumberElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -2284,8 +2284,8 @@ func NewContractSubject() *ContractSubject {
 	return &ContractSubject{}
 }
 
-// FromJSON populates ContractSubject from JSON data.
-func (m *ContractSubject) FromJSON(data []byte) error {
+// UnmarshalJSON populates ContractSubject from JSON data.
+func (m *ContractSubject) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -2304,8 +2304,8 @@ func (m *ContractSubject) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ContractSubject to JSON data.
-func (m *ContractSubject) ToJSON() ([]byte, error) {
+// MarshalJSON converts ContractSubject to JSON data.
+func (m *ContractSubject) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -2317,7 +2317,7 @@ func (m *ContractSubject) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -2368,8 +2368,8 @@ func NewContractSigner() *ContractSigner {
 	return &ContractSigner{}
 }
 
-// FromJSON populates ContractSigner from JSON data.
-func (m *ContractSigner) FromJSON(data []byte) error {
+// UnmarshalJSON populates ContractSigner from JSON data.
+func (m *ContractSigner) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -2390,8 +2390,8 @@ func (m *ContractSigner) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ContractSigner to JSON data.
-func (m *ContractSigner) ToJSON() ([]byte, error) {
+// MarshalJSON converts ContractSigner to JSON data.
+func (m *ContractSigner) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -2404,7 +2404,7 @@ func (m *ContractSigner) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -2457,8 +2457,8 @@ func NewContractFriendly() *ContractFriendly {
 	return &ContractFriendly{}
 }
 
-// FromJSON populates ContractFriendly from JSON data.
-func (m *ContractFriendly) FromJSON(data []byte) error {
+// UnmarshalJSON populates ContractFriendly from JSON data.
+func (m *ContractFriendly) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -2477,8 +2477,8 @@ func (m *ContractFriendly) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ContractFriendly to JSON data.
-func (m *ContractFriendly) ToJSON() ([]byte, error) {
+// MarshalJSON converts ContractFriendly to JSON data.
+func (m *ContractFriendly) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -2490,7 +2490,7 @@ func (m *ContractFriendly) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -2540,8 +2540,8 @@ func NewContractLegal() *ContractLegal {
 	return &ContractLegal{}
 }
 
-// FromJSON populates ContractLegal from JSON data.
-func (m *ContractLegal) FromJSON(data []byte) error {
+// UnmarshalJSON populates ContractLegal from JSON data.
+func (m *ContractLegal) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -2560,8 +2560,8 @@ func (m *ContractLegal) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ContractLegal to JSON data.
-func (m *ContractLegal) ToJSON() ([]byte, error) {
+// MarshalJSON converts ContractLegal to JSON data.
+func (m *ContractLegal) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -2573,7 +2573,7 @@ func (m *ContractLegal) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -2623,8 +2623,8 @@ func NewContractRule() *ContractRule {
 	return &ContractRule{}
 }
 
-// FromJSON populates ContractRule from JSON data.
-func (m *ContractRule) FromJSON(data []byte) error {
+// UnmarshalJSON populates ContractRule from JSON data.
+func (m *ContractRule) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -2643,8 +2643,8 @@ func (m *ContractRule) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ContractRule to JSON data.
-func (m *ContractRule) ToJSON() ([]byte, error) {
+// MarshalJSON converts ContractRule to JSON data.
+func (m *ContractRule) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -2656,7 +2656,7 @@ func (m *ContractRule) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_

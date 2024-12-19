@@ -24,8 +24,8 @@ func NewContactPoint() *ContactPoint {
 	return &ContactPoint{}
 }
 
-// FromJSON populates ContactPoint from JSON data.
-func (m *ContactPoint) FromJSON(data []byte) error {
+// UnmarshalJSON populates ContactPoint from JSON data.
+func (m *ContactPoint) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -48,8 +48,8 @@ func (m *ContactPoint) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ContactPoint to JSON data.
-func (m *ContactPoint) ToJSON() ([]byte, error) {
+// MarshalJSON converts ContactPoint to JSON data.
+func (m *ContactPoint) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -65,7 +65,7 @@ func (m *ContactPoint) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -73,14 +73,14 @@ func (m *ContactPoint) ToJSON() ([]byte, error) {
 	if m.Value != nil && m.Value.Value != nil {
 		output.Value = m.Value.Value
 		if m.Value.Element != nil {
-			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+			output.ValueElement = toMapOrNil(m.Value.Element.MarshalJSON())
 		}
 	}
 	output.Use = m.Use
 	if m.Rank != nil && m.Rank.Value != nil {
 		output.Rank = m.Rank.Value
 		if m.Rank.Element != nil {
-			output.RankElement = toMapOrNil(m.Rank.Element.ToJSON())
+			output.RankElement = toMapOrNil(m.Rank.Element.MarshalJSON())
 		}
 	}
 	output.Period = m.Period

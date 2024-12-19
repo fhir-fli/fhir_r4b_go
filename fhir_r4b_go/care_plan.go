@@ -49,8 +49,8 @@ func NewCarePlan() *CarePlan {
 	return &CarePlan{}
 }
 
-// FromJSON populates CarePlan from JSON data.
-func (m *CarePlan) FromJSON(data []byte) error {
+// UnmarshalJSON populates CarePlan from JSON data.
+func (m *CarePlan) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -139,8 +139,8 @@ func (m *CarePlan) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CarePlan to JSON data.
-func (m *CarePlan) ToJSON() ([]byte, error) {
+// MarshalJSON converts CarePlan to JSON data.
+func (m *CarePlan) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -184,14 +184,14 @@ func (m *CarePlan) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -208,7 +208,7 @@ func (m *CarePlan) ToJSON() ([]byte, error) {
 				output.InstantiatesCanonical[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.InstantiatesCanonicalElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.InstantiatesCanonicalElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -220,7 +220,7 @@ func (m *CarePlan) ToJSON() ([]byte, error) {
 				output.InstantiatesUri[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.InstantiatesUriElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.InstantiatesUriElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -233,13 +233,13 @@ func (m *CarePlan) ToJSON() ([]byte, error) {
 	if m.Title != nil && m.Title.Value != nil {
 		output.Title = m.Title.Value
 		if m.Title.Element != nil {
-			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+			output.TitleElement = toMapOrNil(m.Title.Element.MarshalJSON())
 		}
 	}
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.Subject = m.Subject
@@ -248,7 +248,7 @@ func (m *CarePlan) ToJSON() ([]byte, error) {
 	if m.Created != nil && m.Created.Value != nil {
 		output.Created = m.Created.Value
 		if m.Created.Element != nil {
-			output.CreatedElement = toMapOrNil(m.Created.Element.ToJSON())
+			output.CreatedElement = toMapOrNil(m.Created.Element.MarshalJSON())
 		}
 	}
 	output.Author = m.Author
@@ -357,8 +357,8 @@ func NewCarePlanActivity() *CarePlanActivity {
 	return &CarePlanActivity{}
 }
 
-// FromJSON populates CarePlanActivity from JSON data.
-func (m *CarePlanActivity) FromJSON(data []byte) error {
+// UnmarshalJSON populates CarePlanActivity from JSON data.
+func (m *CarePlanActivity) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -383,8 +383,8 @@ func (m *CarePlanActivity) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CarePlanActivity to JSON data.
-func (m *CarePlanActivity) ToJSON() ([]byte, error) {
+// MarshalJSON converts CarePlanActivity to JSON data.
+func (m *CarePlanActivity) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -399,7 +399,7 @@ func (m *CarePlanActivity) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -476,8 +476,8 @@ func NewCarePlanDetail() *CarePlanDetail {
 	return &CarePlanDetail{}
 }
 
-// FromJSON populates CarePlanDetail from JSON data.
-func (m *CarePlanDetail) FromJSON(data []byte) error {
+// UnmarshalJSON populates CarePlanDetail from JSON data.
+func (m *CarePlanDetail) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -550,8 +550,8 @@ func (m *CarePlanDetail) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CarePlanDetail to JSON data.
-func (m *CarePlanDetail) ToJSON() ([]byte, error) {
+// MarshalJSON converts CarePlanDetail to JSON data.
+func (m *CarePlanDetail) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -586,7 +586,7 @@ func (m *CarePlanDetail) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -600,7 +600,7 @@ func (m *CarePlanDetail) ToJSON() ([]byte, error) {
 				output.InstantiatesCanonical[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.InstantiatesCanonicalElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.InstantiatesCanonicalElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -612,7 +612,7 @@ func (m *CarePlanDetail) ToJSON() ([]byte, error) {
 				output.InstantiatesUri[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.InstantiatesUriElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.InstantiatesUriElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -625,7 +625,7 @@ func (m *CarePlanDetail) ToJSON() ([]byte, error) {
 	if m.DoNotPerform != nil && m.DoNotPerform.Value != nil {
 		output.DoNotPerform = m.DoNotPerform.Value
 		if m.DoNotPerform.Element != nil {
-			output.DoNotPerformElement = toMapOrNil(m.DoNotPerform.Element.ToJSON())
+			output.DoNotPerformElement = toMapOrNil(m.DoNotPerform.Element.MarshalJSON())
 		}
 	}
 	output.ScheduledTiming = m.ScheduledTiming
@@ -633,7 +633,7 @@ func (m *CarePlanDetail) ToJSON() ([]byte, error) {
 	if m.ScheduledString != nil && m.ScheduledString.Value != nil {
 		output.ScheduledString = m.ScheduledString.Value
 		if m.ScheduledString.Element != nil {
-			output.ScheduledStringElement = toMapOrNil(m.ScheduledString.Element.ToJSON())
+			output.ScheduledStringElement = toMapOrNil(m.ScheduledString.Element.MarshalJSON())
 		}
 	}
 	output.Location = m.Location
@@ -645,7 +645,7 @@ func (m *CarePlanDetail) ToJSON() ([]byte, error) {
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

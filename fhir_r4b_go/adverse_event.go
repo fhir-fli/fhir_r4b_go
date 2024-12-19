@@ -45,8 +45,8 @@ func NewAdverseEvent() *AdverseEvent {
 	return &AdverseEvent{}
 }
 
-// FromJSON populates AdverseEvent from JSON data.
-func (m *AdverseEvent) FromJSON(data []byte) error {
+// UnmarshalJSON populates AdverseEvent from JSON data.
+func (m *AdverseEvent) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -111,8 +111,8 @@ func (m *AdverseEvent) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts AdverseEvent to JSON data.
-func (m *AdverseEvent) ToJSON() ([]byte, error) {
+// MarshalJSON converts AdverseEvent to JSON data.
+func (m *AdverseEvent) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -151,14 +151,14 @@ func (m *AdverseEvent) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -175,19 +175,19 @@ func (m *AdverseEvent) ToJSON() ([]byte, error) {
 	if m.Date != nil && m.Date.Value != nil {
 		output.Date = m.Date.Value
 		if m.Date.Element != nil {
-			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+			output.DateElement = toMapOrNil(m.Date.Element.MarshalJSON())
 		}
 	}
 	if m.Detected != nil && m.Detected.Value != nil {
 		output.Detected = m.Detected.Value
 		if m.Detected.Element != nil {
-			output.DetectedElement = toMapOrNil(m.Detected.Element.ToJSON())
+			output.DetectedElement = toMapOrNil(m.Detected.Element.MarshalJSON())
 		}
 	}
 	if m.RecordedDate != nil && m.RecordedDate.Value != nil {
 		output.RecordedDate = m.RecordedDate.Value
 		if m.RecordedDate.Element != nil {
-			output.RecordedDateElement = toMapOrNil(m.RecordedDate.Element.ToJSON())
+			output.RecordedDateElement = toMapOrNil(m.RecordedDate.Element.MarshalJSON())
 		}
 	}
 	output.ResultingCondition = m.ResultingCondition
@@ -290,8 +290,8 @@ func NewAdverseEventSuspectEntity() *AdverseEventSuspectEntity {
 	return &AdverseEventSuspectEntity{}
 }
 
-// FromJSON populates AdverseEventSuspectEntity from JSON data.
-func (m *AdverseEventSuspectEntity) FromJSON(data []byte) error {
+// UnmarshalJSON populates AdverseEventSuspectEntity from JSON data.
+func (m *AdverseEventSuspectEntity) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -310,8 +310,8 @@ func (m *AdverseEventSuspectEntity) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts AdverseEventSuspectEntity to JSON data.
-func (m *AdverseEventSuspectEntity) ToJSON() ([]byte, error) {
+// MarshalJSON converts AdverseEventSuspectEntity to JSON data.
+func (m *AdverseEventSuspectEntity) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -323,7 +323,7 @@ func (m *AdverseEventSuspectEntity) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -375,8 +375,8 @@ func NewAdverseEventCausality() *AdverseEventCausality {
 	return &AdverseEventCausality{}
 }
 
-// FromJSON populates AdverseEventCausality from JSON data.
-func (m *AdverseEventCausality) FromJSON(data []byte) error {
+// UnmarshalJSON populates AdverseEventCausality from JSON data.
+func (m *AdverseEventCausality) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -399,8 +399,8 @@ func (m *AdverseEventCausality) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts AdverseEventCausality to JSON data.
-func (m *AdverseEventCausality) ToJSON() ([]byte, error) {
+// MarshalJSON converts AdverseEventCausality to JSON data.
+func (m *AdverseEventCausality) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -415,7 +415,7 @@ func (m *AdverseEventCausality) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -424,7 +424,7 @@ func (m *AdverseEventCausality) ToJSON() ([]byte, error) {
 	if m.ProductRelatedness != nil && m.ProductRelatedness.Value != nil {
 		output.ProductRelatedness = m.ProductRelatedness.Value
 		if m.ProductRelatedness.Element != nil {
-			output.ProductRelatednessElement = toMapOrNil(m.ProductRelatedness.Element.ToJSON())
+			output.ProductRelatednessElement = toMapOrNil(m.ProductRelatedness.Element.MarshalJSON())
 		}
 	}
 	output.Author = m.Author

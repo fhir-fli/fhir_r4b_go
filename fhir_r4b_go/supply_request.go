@@ -43,8 +43,8 @@ func NewSupplyRequest() *SupplyRequest {
 	return &SupplyRequest{}
 }
 
-// FromJSON populates SupplyRequest from JSON data.
-func (m *SupplyRequest) FromJSON(data []byte) error {
+// UnmarshalJSON populates SupplyRequest from JSON data.
+func (m *SupplyRequest) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -105,8 +105,8 @@ func (m *SupplyRequest) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts SupplyRequest to JSON data.
-func (m *SupplyRequest) ToJSON() ([]byte, error) {
+// MarshalJSON converts SupplyRequest to JSON data.
+func (m *SupplyRequest) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -142,14 +142,14 @@ func (m *SupplyRequest) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -168,7 +168,7 @@ func (m *SupplyRequest) ToJSON() ([]byte, error) {
 	if m.OccurrenceDateTime != nil && m.OccurrenceDateTime.Value != nil {
 		output.OccurrenceDateTime = m.OccurrenceDateTime.Value
 		if m.OccurrenceDateTime.Element != nil {
-			output.OccurrenceDateTimeElement = toMapOrNil(m.OccurrenceDateTime.Element.ToJSON())
+			output.OccurrenceDateTimeElement = toMapOrNil(m.OccurrenceDateTime.Element.MarshalJSON())
 		}
 	}
 	output.OccurrencePeriod = m.OccurrencePeriod
@@ -176,7 +176,7 @@ func (m *SupplyRequest) ToJSON() ([]byte, error) {
 	if m.AuthoredOn != nil && m.AuthoredOn.Value != nil {
 		output.AuthoredOn = m.AuthoredOn.Value
 		if m.AuthoredOn.Element != nil {
-			output.AuthoredOnElement = toMapOrNil(m.AuthoredOn.Element.ToJSON())
+			output.AuthoredOnElement = toMapOrNil(m.AuthoredOn.Element.MarshalJSON())
 		}
 	}
 	output.Requester = m.Requester
@@ -273,8 +273,8 @@ func NewSupplyRequestParameter() *SupplyRequestParameter {
 	return &SupplyRequestParameter{}
 }
 
-// FromJSON populates SupplyRequestParameter from JSON data.
-func (m *SupplyRequestParameter) FromJSON(data []byte) error {
+// UnmarshalJSON populates SupplyRequestParameter from JSON data.
+func (m *SupplyRequestParameter) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -299,8 +299,8 @@ func (m *SupplyRequestParameter) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts SupplyRequestParameter to JSON data.
-func (m *SupplyRequestParameter) ToJSON() ([]byte, error) {
+// MarshalJSON converts SupplyRequestParameter to JSON data.
+func (m *SupplyRequestParameter) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -316,7 +316,7 @@ func (m *SupplyRequestParameter) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -328,7 +328,7 @@ func (m *SupplyRequestParameter) ToJSON() ([]byte, error) {
 	if m.ValueBoolean != nil && m.ValueBoolean.Value != nil {
 		output.ValueBoolean = m.ValueBoolean.Value
 		if m.ValueBoolean.Element != nil {
-			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.ToJSON())
+			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

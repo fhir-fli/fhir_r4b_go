@@ -39,8 +39,8 @@ func NewPractitionerRole() *PractitionerRole {
 	return &PractitionerRole{}
 }
 
-// FromJSON populates PractitionerRole from JSON data.
-func (m *PractitionerRole) FromJSON(data []byte) error {
+// UnmarshalJSON populates PractitionerRole from JSON data.
+func (m *PractitionerRole) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -93,8 +93,8 @@ func (m *PractitionerRole) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts PractitionerRole to JSON data.
-func (m *PractitionerRole) ToJSON() ([]byte, error) {
+// MarshalJSON converts PractitionerRole to JSON data.
+func (m *PractitionerRole) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -126,14 +126,14 @@ func (m *PractitionerRole) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -145,7 +145,7 @@ func (m *PractitionerRole) ToJSON() ([]byte, error) {
 	if m.Active != nil && m.Active.Value != nil {
 		output.Active = m.Active.Value
 		if m.Active.Element != nil {
-			output.ActiveElement = toMapOrNil(m.Active.Element.ToJSON())
+			output.ActiveElement = toMapOrNil(m.Active.Element.MarshalJSON())
 		}
 	}
 	output.Period = m.Period
@@ -161,7 +161,7 @@ func (m *PractitionerRole) ToJSON() ([]byte, error) {
 	if m.AvailabilityExceptions != nil && m.AvailabilityExceptions.Value != nil {
 		output.AvailabilityExceptions = m.AvailabilityExceptions.Value
 		if m.AvailabilityExceptions.Element != nil {
-			output.AvailabilityExceptionsElement = toMapOrNil(m.AvailabilityExceptions.Element.ToJSON())
+			output.AvailabilityExceptionsElement = toMapOrNil(m.AvailabilityExceptions.Element.MarshalJSON())
 		}
 	}
 	output.Endpoint = m.Endpoint
@@ -244,8 +244,8 @@ func NewPractitionerRoleAvailableTime() *PractitionerRoleAvailableTime {
 	return &PractitionerRoleAvailableTime{}
 }
 
-// FromJSON populates PractitionerRoleAvailableTime from JSON data.
-func (m *PractitionerRoleAvailableTime) FromJSON(data []byte) error {
+// UnmarshalJSON populates PractitionerRoleAvailableTime from JSON data.
+func (m *PractitionerRoleAvailableTime) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -268,8 +268,8 @@ func (m *PractitionerRoleAvailableTime) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts PractitionerRoleAvailableTime to JSON data.
-func (m *PractitionerRoleAvailableTime) ToJSON() ([]byte, error) {
+// MarshalJSON converts PractitionerRoleAvailableTime to JSON data.
+func (m *PractitionerRoleAvailableTime) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -286,7 +286,7 @@ func (m *PractitionerRoleAvailableTime) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -295,19 +295,19 @@ func (m *PractitionerRoleAvailableTime) ToJSON() ([]byte, error) {
 	if m.AllDay != nil && m.AllDay.Value != nil {
 		output.AllDay = m.AllDay.Value
 		if m.AllDay.Element != nil {
-			output.AllDayElement = toMapOrNil(m.AllDay.Element.ToJSON())
+			output.AllDayElement = toMapOrNil(m.AllDay.Element.MarshalJSON())
 		}
 	}
 	if m.AvailableStartTime != nil && m.AvailableStartTime.Value != nil {
 		output.AvailableStartTime = m.AvailableStartTime.Value
 		if m.AvailableStartTime.Element != nil {
-			output.AvailableStartTimeElement = toMapOrNil(m.AvailableStartTime.Element.ToJSON())
+			output.AvailableStartTimeElement = toMapOrNil(m.AvailableStartTime.Element.MarshalJSON())
 		}
 	}
 	if m.AvailableEndTime != nil && m.AvailableEndTime.Value != nil {
 		output.AvailableEndTime = m.AvailableEndTime.Value
 		if m.AvailableEndTime.Element != nil {
-			output.AvailableEndTimeElement = toMapOrNil(m.AvailableEndTime.Element.ToJSON())
+			output.AvailableEndTimeElement = toMapOrNil(m.AvailableEndTime.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -357,8 +357,8 @@ func NewPractitionerRoleNotAvailable() *PractitionerRoleNotAvailable {
 	return &PractitionerRoleNotAvailable{}
 }
 
-// FromJSON populates PractitionerRoleNotAvailable from JSON data.
-func (m *PractitionerRoleNotAvailable) FromJSON(data []byte) error {
+// UnmarshalJSON populates PractitionerRoleNotAvailable from JSON data.
+func (m *PractitionerRoleNotAvailable) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -377,8 +377,8 @@ func (m *PractitionerRoleNotAvailable) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts PractitionerRoleNotAvailable to JSON data.
-func (m *PractitionerRoleNotAvailable) ToJSON() ([]byte, error) {
+// MarshalJSON converts PractitionerRoleNotAvailable to JSON data.
+func (m *PractitionerRoleNotAvailable) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -391,7 +391,7 @@ func (m *PractitionerRoleNotAvailable) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -399,7 +399,7 @@ func (m *PractitionerRoleNotAvailable) ToJSON() ([]byte, error) {
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.During = m.During

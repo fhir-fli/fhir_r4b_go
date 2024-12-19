@@ -25,8 +25,8 @@ func NewIdentifier() *Identifier {
 	return &Identifier{}
 }
 
-// FromJSON populates Identifier from JSON data.
-func (m *Identifier) FromJSON(data []byte) error {
+// UnmarshalJSON populates Identifier from JSON data.
+func (m *Identifier) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -51,8 +51,8 @@ func (m *Identifier) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Identifier to JSON data.
-func (m *Identifier) ToJSON() ([]byte, error) {
+// MarshalJSON converts Identifier to JSON data.
+func (m *Identifier) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -69,7 +69,7 @@ func (m *Identifier) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -78,13 +78,13 @@ func (m *Identifier) ToJSON() ([]byte, error) {
 	if m.System != nil && m.System.Value != nil {
 		output.System = m.System.Value
 		if m.System.Element != nil {
-			output.SystemElement = toMapOrNil(m.System.Element.ToJSON())
+			output.SystemElement = toMapOrNil(m.System.Element.MarshalJSON())
 		}
 	}
 	if m.Value != nil && m.Value.Value != nil {
 		output.Value = m.Value.Value
 		if m.Value.Element != nil {
-			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+			output.ValueElement = toMapOrNil(m.Value.Element.MarshalJSON())
 		}
 	}
 	output.Period = m.Period

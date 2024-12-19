@@ -64,8 +64,8 @@ func NewServiceRequest() *ServiceRequest {
 	return &ServiceRequest{}
 }
 
-// FromJSON populates ServiceRequest from JSON data.
-func (m *ServiceRequest) FromJSON(data []byte) error {
+// UnmarshalJSON populates ServiceRequest from JSON data.
+func (m *ServiceRequest) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -184,8 +184,8 @@ func (m *ServiceRequest) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ServiceRequest to JSON data.
-func (m *ServiceRequest) ToJSON() ([]byte, error) {
+// MarshalJSON converts ServiceRequest to JSON data.
+func (m *ServiceRequest) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -246,14 +246,14 @@ func (m *ServiceRequest) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -270,7 +270,7 @@ func (m *ServiceRequest) ToJSON() ([]byte, error) {
 				output.InstantiatesCanonical[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.InstantiatesCanonicalElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.InstantiatesCanonicalElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -282,7 +282,7 @@ func (m *ServiceRequest) ToJSON() ([]byte, error) {
 				output.InstantiatesUri[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.InstantiatesUriElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.InstantiatesUriElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -296,7 +296,7 @@ func (m *ServiceRequest) ToJSON() ([]byte, error) {
 	if m.DoNotPerform != nil && m.DoNotPerform.Value != nil {
 		output.DoNotPerform = m.DoNotPerform.Value
 		if m.DoNotPerform.Element != nil {
-			output.DoNotPerformElement = toMapOrNil(m.DoNotPerform.Element.ToJSON())
+			output.DoNotPerformElement = toMapOrNil(m.DoNotPerform.Element.MarshalJSON())
 		}
 	}
 	output.Code = m.Code
@@ -309,7 +309,7 @@ func (m *ServiceRequest) ToJSON() ([]byte, error) {
 	if m.OccurrenceDateTime != nil && m.OccurrenceDateTime.Value != nil {
 		output.OccurrenceDateTime = m.OccurrenceDateTime.Value
 		if m.OccurrenceDateTime.Element != nil {
-			output.OccurrenceDateTimeElement = toMapOrNil(m.OccurrenceDateTime.Element.ToJSON())
+			output.OccurrenceDateTimeElement = toMapOrNil(m.OccurrenceDateTime.Element.MarshalJSON())
 		}
 	}
 	output.OccurrencePeriod = m.OccurrencePeriod
@@ -317,14 +317,14 @@ func (m *ServiceRequest) ToJSON() ([]byte, error) {
 	if m.AsNeededBoolean != nil && m.AsNeededBoolean.Value != nil {
 		output.AsNeededBoolean = m.AsNeededBoolean.Value
 		if m.AsNeededBoolean.Element != nil {
-			output.AsNeededBooleanElement = toMapOrNil(m.AsNeededBoolean.Element.ToJSON())
+			output.AsNeededBooleanElement = toMapOrNil(m.AsNeededBoolean.Element.MarshalJSON())
 		}
 	}
 	output.AsNeededCodeableConcept = m.AsNeededCodeableConcept
 	if m.AuthoredOn != nil && m.AuthoredOn.Value != nil {
 		output.AuthoredOn = m.AuthoredOn.Value
 		if m.AuthoredOn.Element != nil {
-			output.AuthoredOnElement = toMapOrNil(m.AuthoredOn.Element.ToJSON())
+			output.AuthoredOnElement = toMapOrNil(m.AuthoredOn.Element.MarshalJSON())
 		}
 	}
 	output.Requester = m.Requester
@@ -342,7 +342,7 @@ func (m *ServiceRequest) ToJSON() ([]byte, error) {
 	if m.PatientInstruction != nil && m.PatientInstruction.Value != nil {
 		output.PatientInstruction = m.PatientInstruction.Value
 		if m.PatientInstruction.Element != nil {
-			output.PatientInstructionElement = toMapOrNil(m.PatientInstruction.Element.ToJSON())
+			output.PatientInstructionElement = toMapOrNil(m.PatientInstruction.Element.MarshalJSON())
 		}
 	}
 	output.RelevantHistory = m.RelevantHistory

@@ -32,8 +32,8 @@ func NewManufacturedItemDefinition() *ManufacturedItemDefinition {
 	return &ManufacturedItemDefinition{}
 }
 
-// FromJSON populates ManufacturedItemDefinition from JSON data.
-func (m *ManufacturedItemDefinition) FromJSON(data []byte) error {
+// UnmarshalJSON populates ManufacturedItemDefinition from JSON data.
+func (m *ManufacturedItemDefinition) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -72,8 +72,8 @@ func (m *ManufacturedItemDefinition) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ManufacturedItemDefinition to JSON data.
-func (m *ManufacturedItemDefinition) ToJSON() ([]byte, error) {
+// MarshalJSON converts ManufacturedItemDefinition to JSON data.
+func (m *ManufacturedItemDefinition) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -96,14 +96,14 @@ func (m *ManufacturedItemDefinition) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -185,8 +185,8 @@ func NewManufacturedItemDefinitionProperty() *ManufacturedItemDefinitionProperty
 	return &ManufacturedItemDefinitionProperty{}
 }
 
-// FromJSON populates ManufacturedItemDefinitionProperty from JSON data.
-func (m *ManufacturedItemDefinitionProperty) FromJSON(data []byte) error {
+// UnmarshalJSON populates ManufacturedItemDefinitionProperty from JSON data.
+func (m *ManufacturedItemDefinitionProperty) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -213,8 +213,8 @@ func (m *ManufacturedItemDefinitionProperty) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ManufacturedItemDefinitionProperty to JSON data.
-func (m *ManufacturedItemDefinitionProperty) ToJSON() ([]byte, error) {
+// MarshalJSON converts ManufacturedItemDefinitionProperty to JSON data.
+func (m *ManufacturedItemDefinitionProperty) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -232,7 +232,7 @@ func (m *ManufacturedItemDefinitionProperty) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -243,13 +243,13 @@ func (m *ManufacturedItemDefinitionProperty) ToJSON() ([]byte, error) {
 	if m.ValueDate != nil && m.ValueDate.Value != nil {
 		output.ValueDate = m.ValueDate.Value
 		if m.ValueDate.Element != nil {
-			output.ValueDateElement = toMapOrNil(m.ValueDate.Element.ToJSON())
+			output.ValueDateElement = toMapOrNil(m.ValueDate.Element.MarshalJSON())
 		}
 	}
 	if m.ValueBoolean != nil && m.ValueBoolean.Value != nil {
 		output.ValueBoolean = m.ValueBoolean.Value
 		if m.ValueBoolean.Element != nil {
-			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.ToJSON())
+			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.MarshalJSON())
 		}
 	}
 	output.ValueAttachment = m.ValueAttachment

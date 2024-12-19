@@ -31,8 +31,8 @@ func NewSpecimenDefinition() *SpecimenDefinition {
 	return &SpecimenDefinition{}
 }
 
-// FromJSON populates SpecimenDefinition from JSON data.
-func (m *SpecimenDefinition) FromJSON(data []byte) error {
+// UnmarshalJSON populates SpecimenDefinition from JSON data.
+func (m *SpecimenDefinition) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -69,8 +69,8 @@ func (m *SpecimenDefinition) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts SpecimenDefinition to JSON data.
-func (m *SpecimenDefinition) ToJSON() ([]byte, error) {
+// MarshalJSON converts SpecimenDefinition to JSON data.
+func (m *SpecimenDefinition) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -93,14 +93,14 @@ func (m *SpecimenDefinition) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -114,7 +114,7 @@ func (m *SpecimenDefinition) ToJSON() ([]byte, error) {
 	if m.TimeAspect != nil && m.TimeAspect.Value != nil {
 		output.TimeAspect = m.TimeAspect.Value
 		if m.TimeAspect.Element != nil {
-			output.TimeAspectElement = toMapOrNil(m.TimeAspect.Element.ToJSON())
+			output.TimeAspectElement = toMapOrNil(m.TimeAspect.Element.MarshalJSON())
 		}
 	}
 	output.Collection = m.Collection
@@ -186,8 +186,8 @@ func NewSpecimenDefinitionTypeTested() *SpecimenDefinitionTypeTested {
 	return &SpecimenDefinitionTypeTested{}
 }
 
-// FromJSON populates SpecimenDefinitionTypeTested from JSON data.
-func (m *SpecimenDefinitionTypeTested) FromJSON(data []byte) error {
+// UnmarshalJSON populates SpecimenDefinitionTypeTested from JSON data.
+func (m *SpecimenDefinitionTypeTested) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -218,8 +218,8 @@ func (m *SpecimenDefinitionTypeTested) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts SpecimenDefinitionTypeTested to JSON data.
-func (m *SpecimenDefinitionTypeTested) ToJSON() ([]byte, error) {
+// MarshalJSON converts SpecimenDefinitionTypeTested to JSON data.
+func (m *SpecimenDefinitionTypeTested) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -239,7 +239,7 @@ func (m *SpecimenDefinitionTypeTested) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -247,7 +247,7 @@ func (m *SpecimenDefinitionTypeTested) ToJSON() ([]byte, error) {
 	if m.IsDerived != nil && m.IsDerived.Value != nil {
 		output.IsDerived = m.IsDerived.Value
 		if m.IsDerived.Element != nil {
-			output.IsDerivedElement = toMapOrNil(m.IsDerived.Element.ToJSON())
+			output.IsDerivedElement = toMapOrNil(m.IsDerived.Element.MarshalJSON())
 		}
 	}
 	output.Type = m.Type
@@ -256,7 +256,7 @@ func (m *SpecimenDefinitionTypeTested) ToJSON() ([]byte, error) {
 	if m.Requirement != nil && m.Requirement.Value != nil {
 		output.Requirement = m.Requirement.Value
 		if m.Requirement.Element != nil {
-			output.RequirementElement = toMapOrNil(m.Requirement.Element.ToJSON())
+			output.RequirementElement = toMapOrNil(m.Requirement.Element.MarshalJSON())
 		}
 	}
 	output.RetentionTime = m.RetentionTime
@@ -324,8 +324,8 @@ func NewSpecimenDefinitionContainer() *SpecimenDefinitionContainer {
 	return &SpecimenDefinitionContainer{}
 }
 
-// FromJSON populates SpecimenDefinitionContainer from JSON data.
-func (m *SpecimenDefinitionContainer) FromJSON(data []byte) error {
+// UnmarshalJSON populates SpecimenDefinitionContainer from JSON data.
+func (m *SpecimenDefinitionContainer) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -358,8 +358,8 @@ func (m *SpecimenDefinitionContainer) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts SpecimenDefinitionContainer to JSON data.
-func (m *SpecimenDefinitionContainer) ToJSON() ([]byte, error) {
+// MarshalJSON converts SpecimenDefinitionContainer to JSON data.
+func (m *SpecimenDefinitionContainer) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -381,7 +381,7 @@ func (m *SpecimenDefinitionContainer) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -392,7 +392,7 @@ func (m *SpecimenDefinitionContainer) ToJSON() ([]byte, error) {
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.Capacity = m.Capacity
@@ -400,14 +400,14 @@ func (m *SpecimenDefinitionContainer) ToJSON() ([]byte, error) {
 	if m.MinimumVolumeString != nil && m.MinimumVolumeString.Value != nil {
 		output.MinimumVolumeString = m.MinimumVolumeString.Value
 		if m.MinimumVolumeString.Element != nil {
-			output.MinimumVolumeStringElement = toMapOrNil(m.MinimumVolumeString.Element.ToJSON())
+			output.MinimumVolumeStringElement = toMapOrNil(m.MinimumVolumeString.Element.MarshalJSON())
 		}
 	}
 	output.Additive = m.Additive
 	if m.Preparation != nil && m.Preparation.Value != nil {
 		output.Preparation = m.Preparation.Value
 		if m.Preparation.Element != nil {
-			output.PreparationElement = toMapOrNil(m.Preparation.Element.ToJSON())
+			output.PreparationElement = toMapOrNil(m.Preparation.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -467,8 +467,8 @@ func NewSpecimenDefinitionAdditive() *SpecimenDefinitionAdditive {
 	return &SpecimenDefinitionAdditive{}
 }
 
-// FromJSON populates SpecimenDefinitionAdditive from JSON data.
-func (m *SpecimenDefinitionAdditive) FromJSON(data []byte) error {
+// UnmarshalJSON populates SpecimenDefinitionAdditive from JSON data.
+func (m *SpecimenDefinitionAdditive) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -487,8 +487,8 @@ func (m *SpecimenDefinitionAdditive) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts SpecimenDefinitionAdditive to JSON data.
-func (m *SpecimenDefinitionAdditive) ToJSON() ([]byte, error) {
+// MarshalJSON converts SpecimenDefinitionAdditive to JSON data.
+func (m *SpecimenDefinitionAdditive) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -500,7 +500,7 @@ func (m *SpecimenDefinitionAdditive) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -552,8 +552,8 @@ func NewSpecimenDefinitionHandling() *SpecimenDefinitionHandling {
 	return &SpecimenDefinitionHandling{}
 }
 
-// FromJSON populates SpecimenDefinitionHandling from JSON data.
-func (m *SpecimenDefinitionHandling) FromJSON(data []byte) error {
+// UnmarshalJSON populates SpecimenDefinitionHandling from JSON data.
+func (m *SpecimenDefinitionHandling) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -576,8 +576,8 @@ func (m *SpecimenDefinitionHandling) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts SpecimenDefinitionHandling to JSON data.
-func (m *SpecimenDefinitionHandling) ToJSON() ([]byte, error) {
+// MarshalJSON converts SpecimenDefinitionHandling to JSON data.
+func (m *SpecimenDefinitionHandling) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -592,7 +592,7 @@ func (m *SpecimenDefinitionHandling) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -603,7 +603,7 @@ func (m *SpecimenDefinitionHandling) ToJSON() ([]byte, error) {
 	if m.Instruction != nil && m.Instruction.Value != nil {
 		output.Instruction = m.Instruction.Value
 		if m.Instruction.Element != nil {
-			output.InstructionElement = toMapOrNil(m.Instruction.Element.ToJSON())
+			output.InstructionElement = toMapOrNil(m.Instruction.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

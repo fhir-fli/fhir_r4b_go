@@ -24,8 +24,8 @@ func NewTiming() *Timing {
 	return &Timing{}
 }
 
-// FromJSON populates Timing from JSON data.
-func (m *Timing) FromJSON(data []byte) error {
+// UnmarshalJSON populates Timing from JSON data.
+func (m *Timing) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -55,8 +55,8 @@ func (m *Timing) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Timing to JSON data.
-func (m *Timing) ToJSON() ([]byte, error) {
+// MarshalJSON converts Timing to JSON data.
+func (m *Timing) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -70,7 +70,7 @@ func (m *Timing) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -83,7 +83,7 @@ func (m *Timing) ToJSON() ([]byte, error) {
 				output.Event[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.EventElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.EventElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -148,8 +148,8 @@ func NewTimingRepeat() *TimingRepeat {
 	return &TimingRepeat{}
 }
 
-// FromJSON populates TimingRepeat from JSON data.
-func (m *TimingRepeat) FromJSON(data []byte) error {
+// UnmarshalJSON populates TimingRepeat from JSON data.
+func (m *TimingRepeat) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -205,8 +205,8 @@ func (m *TimingRepeat) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts TimingRepeat to JSON data.
-func (m *TimingRepeat) ToJSON() ([]byte, error) {
+// MarshalJSON converts TimingRepeat to JSON data.
+func (m *TimingRepeat) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -242,7 +242,7 @@ func (m *TimingRepeat) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -252,50 +252,50 @@ func (m *TimingRepeat) ToJSON() ([]byte, error) {
 	if m.Count != nil && m.Count.Value != nil {
 		output.Count = m.Count.Value
 		if m.Count.Element != nil {
-			output.CountElement = toMapOrNil(m.Count.Element.ToJSON())
+			output.CountElement = toMapOrNil(m.Count.Element.MarshalJSON())
 		}
 	}
 	if m.CountMax != nil && m.CountMax.Value != nil {
 		output.CountMax = m.CountMax.Value
 		if m.CountMax.Element != nil {
-			output.CountMaxElement = toMapOrNil(m.CountMax.Element.ToJSON())
+			output.CountMaxElement = toMapOrNil(m.CountMax.Element.MarshalJSON())
 		}
 	}
 	if m.Duration != nil && m.Duration.Value != nil {
 		output.Duration = m.Duration.Value
 		if m.Duration.Element != nil {
-			output.DurationElement = toMapOrNil(m.Duration.Element.ToJSON())
+			output.DurationElement = toMapOrNil(m.Duration.Element.MarshalJSON())
 		}
 	}
 	if m.DurationMax != nil && m.DurationMax.Value != nil {
 		output.DurationMax = m.DurationMax.Value
 		if m.DurationMax.Element != nil {
-			output.DurationMaxElement = toMapOrNil(m.DurationMax.Element.ToJSON())
+			output.DurationMaxElement = toMapOrNil(m.DurationMax.Element.MarshalJSON())
 		}
 	}
 	output.DurationUnit = m.DurationUnit
 	if m.Frequency != nil && m.Frequency.Value != nil {
 		output.Frequency = m.Frequency.Value
 		if m.Frequency.Element != nil {
-			output.FrequencyElement = toMapOrNil(m.Frequency.Element.ToJSON())
+			output.FrequencyElement = toMapOrNil(m.Frequency.Element.MarshalJSON())
 		}
 	}
 	if m.FrequencyMax != nil && m.FrequencyMax.Value != nil {
 		output.FrequencyMax = m.FrequencyMax.Value
 		if m.FrequencyMax.Element != nil {
-			output.FrequencyMaxElement = toMapOrNil(m.FrequencyMax.Element.ToJSON())
+			output.FrequencyMaxElement = toMapOrNil(m.FrequencyMax.Element.MarshalJSON())
 		}
 	}
 	if m.Period != nil && m.Period.Value != nil {
 		output.Period = m.Period.Value
 		if m.Period.Element != nil {
-			output.PeriodElement = toMapOrNil(m.Period.Element.ToJSON())
+			output.PeriodElement = toMapOrNil(m.Period.Element.MarshalJSON())
 		}
 	}
 	if m.PeriodMax != nil && m.PeriodMax.Value != nil {
 		output.PeriodMax = m.PeriodMax.Value
 		if m.PeriodMax.Element != nil {
-			output.PeriodMaxElement = toMapOrNil(m.PeriodMax.Element.ToJSON())
+			output.PeriodMaxElement = toMapOrNil(m.PeriodMax.Element.MarshalJSON())
 		}
 	}
 	output.PeriodUnit = m.PeriodUnit
@@ -308,7 +308,7 @@ func (m *TimingRepeat) ToJSON() ([]byte, error) {
 				output.TimeOfDay[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.TimeOfDayElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.TimeOfDayElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -316,7 +316,7 @@ func (m *TimingRepeat) ToJSON() ([]byte, error) {
 	if m.Offset != nil && m.Offset.Value != nil {
 		output.Offset = m.Offset.Value
 		if m.Offset.Element != nil {
-			output.OffsetElement = toMapOrNil(m.Offset.Element.ToJSON())
+			output.OffsetElement = toMapOrNil(m.Offset.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

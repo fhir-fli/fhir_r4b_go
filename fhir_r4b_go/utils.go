@@ -104,8 +104,8 @@ func ifNotNil[T any](newValue, oldValue *T) *T {
 	return oldValue
 }
 
-// Helper: convertYAMLToJSON converts YAML data to JSON format.
-func convertYAMLToJSON(yamlData interface{}) ([]byte, error) {
+// Helper: convertYAMLMarshalJSON converts YAML data to JSON format.
+func convertYAMLMarshalJSON(yamlData interface{}) ([]byte, error) {
 	switch v := yamlData.(type) {
 	case string:
 		return json.Marshal(v)

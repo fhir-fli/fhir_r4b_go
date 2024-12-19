@@ -26,8 +26,8 @@ func NewSignature() *Signature {
 	return &Signature{}
 }
 
-// FromJSON populates Signature from JSON data.
-func (m *Signature) FromJSON(data []byte) error {
+// UnmarshalJSON populates Signature from JSON data.
+func (m *Signature) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -54,8 +54,8 @@ func (m *Signature) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Signature to JSON data.
-func (m *Signature) ToJSON() ([]byte, error) {
+// MarshalJSON converts Signature to JSON data.
+func (m *Signature) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -75,7 +75,7 @@ func (m *Signature) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -83,7 +83,7 @@ func (m *Signature) ToJSON() ([]byte, error) {
 	if m.When != nil && m.When.Value != nil {
 		output.When = m.When.Value
 		if m.When.Element != nil {
-			output.WhenElement = toMapOrNil(m.When.Element.ToJSON())
+			output.WhenElement = toMapOrNil(m.When.Element.MarshalJSON())
 		}
 	}
 	output.Who = m.Who
@@ -91,19 +91,19 @@ func (m *Signature) ToJSON() ([]byte, error) {
 	if m.TargetFormat != nil && m.TargetFormat.Value != nil {
 		output.TargetFormat = m.TargetFormat.Value
 		if m.TargetFormat.Element != nil {
-			output.TargetFormatElement = toMapOrNil(m.TargetFormat.Element.ToJSON())
+			output.TargetFormatElement = toMapOrNil(m.TargetFormat.Element.MarshalJSON())
 		}
 	}
 	if m.SigFormat != nil && m.SigFormat.Value != nil {
 		output.SigFormat = m.SigFormat.Value
 		if m.SigFormat.Element != nil {
-			output.SigFormatElement = toMapOrNil(m.SigFormat.Element.ToJSON())
+			output.SigFormatElement = toMapOrNil(m.SigFormat.Element.MarshalJSON())
 		}
 	}
 	if m.Data != nil && m.Data.Value != nil {
 		output.Data = m.Data.Value
 		if m.Data.Element != nil {
-			output.DataElement = toMapOrNil(m.Data.Element.ToJSON())
+			output.DataElement = toMapOrNil(m.Data.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

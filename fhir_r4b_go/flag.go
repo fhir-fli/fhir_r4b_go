@@ -33,8 +33,8 @@ func NewFlag() *Flag {
 	return &Flag{}
 }
 
-// FromJSON populates Flag from JSON data.
-func (m *Flag) FromJSON(data []byte) error {
+// UnmarshalJSON populates Flag from JSON data.
+func (m *Flag) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -75,8 +75,8 @@ func (m *Flag) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Flag to JSON data.
-func (m *Flag) ToJSON() ([]byte, error) {
+// MarshalJSON converts Flag to JSON data.
+func (m *Flag) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -100,14 +100,14 @@ func (m *Flag) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language

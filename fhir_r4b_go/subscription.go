@@ -33,8 +33,8 @@ func NewSubscription() *Subscription {
 	return &Subscription{}
 }
 
-// FromJSON populates Subscription from JSON data.
-func (m *Subscription) FromJSON(data []byte) error {
+// UnmarshalJSON populates Subscription from JSON data.
+func (m *Subscription) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -73,8 +73,8 @@ func (m *Subscription) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Subscription to JSON data.
-func (m *Subscription) ToJSON() ([]byte, error) {
+// MarshalJSON converts Subscription to JSON data.
+func (m *Subscription) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -101,14 +101,14 @@ func (m *Subscription) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -121,25 +121,25 @@ func (m *Subscription) ToJSON() ([]byte, error) {
 	if m.End != nil && m.End.Value != nil {
 		output.End = m.End.Value
 		if m.End.Element != nil {
-			output.EndElement = toMapOrNil(m.End.Element.ToJSON())
+			output.EndElement = toMapOrNil(m.End.Element.MarshalJSON())
 		}
 	}
 	if m.Reason != nil && m.Reason.Value != nil {
 		output.Reason = m.Reason.Value
 		if m.Reason.Element != nil {
-			output.ReasonElement = toMapOrNil(m.Reason.Element.ToJSON())
+			output.ReasonElement = toMapOrNil(m.Reason.Element.MarshalJSON())
 		}
 	}
 	if m.Criteria != nil && m.Criteria.Value != nil {
 		output.Criteria = m.Criteria.Value
 		if m.Criteria.Element != nil {
-			output.CriteriaElement = toMapOrNil(m.Criteria.Element.ToJSON())
+			output.CriteriaElement = toMapOrNil(m.Criteria.Element.MarshalJSON())
 		}
 	}
 	if m.Error != nil && m.Error.Value != nil {
 		output.Error = m.Error.Value
 		if m.Error.Element != nil {
-			output.ErrorElement = toMapOrNil(m.Error.Element.ToJSON())
+			output.ErrorElement = toMapOrNil(m.Error.Element.MarshalJSON())
 		}
 	}
 	output.Channel = m.Channel
@@ -208,8 +208,8 @@ func NewSubscriptionChannel() *SubscriptionChannel {
 	return &SubscriptionChannel{}
 }
 
-// FromJSON populates SubscriptionChannel from JSON data.
-func (m *SubscriptionChannel) FromJSON(data []byte) error {
+// UnmarshalJSON populates SubscriptionChannel from JSON data.
+func (m *SubscriptionChannel) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -241,8 +241,8 @@ func (m *SubscriptionChannel) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts SubscriptionChannel to JSON data.
-func (m *SubscriptionChannel) ToJSON() ([]byte, error) {
+// MarshalJSON converts SubscriptionChannel to JSON data.
+func (m *SubscriptionChannel) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -259,7 +259,7 @@ func (m *SubscriptionChannel) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -268,13 +268,13 @@ func (m *SubscriptionChannel) ToJSON() ([]byte, error) {
 	if m.Endpoint != nil && m.Endpoint.Value != nil {
 		output.Endpoint = m.Endpoint.Value
 		if m.Endpoint.Element != nil {
-			output.EndpointElement = toMapOrNil(m.Endpoint.Element.ToJSON())
+			output.EndpointElement = toMapOrNil(m.Endpoint.Element.MarshalJSON())
 		}
 	}
 	if m.Payload != nil && m.Payload.Value != nil {
 		output.Payload = m.Payload.Value
 		if m.Payload.Element != nil {
-			output.PayloadElement = toMapOrNil(m.Payload.Element.ToJSON())
+			output.PayloadElement = toMapOrNil(m.Payload.Element.MarshalJSON())
 		}
 	}
 	if len(m.Header) > 0 {
@@ -285,7 +285,7 @@ func (m *SubscriptionChannel) ToJSON() ([]byte, error) {
 				output.Header[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.HeaderElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.HeaderElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}

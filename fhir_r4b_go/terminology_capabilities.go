@@ -50,8 +50,8 @@ func NewTerminologyCapabilities() *TerminologyCapabilities {
 	return &TerminologyCapabilities{}
 }
 
-// FromJSON populates TerminologyCapabilities from JSON data.
-func (m *TerminologyCapabilities) FromJSON(data []byte) error {
+// UnmarshalJSON populates TerminologyCapabilities from JSON data.
+func (m *TerminologyCapabilities) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -124,8 +124,8 @@ func (m *TerminologyCapabilities) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts TerminologyCapabilities to JSON data.
-func (m *TerminologyCapabilities) ToJSON() ([]byte, error) {
+// MarshalJSON converts TerminologyCapabilities to JSON data.
+func (m *TerminologyCapabilities) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -176,14 +176,14 @@ func (m *TerminologyCapabilities) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -194,51 +194,51 @@ func (m *TerminologyCapabilities) ToJSON() ([]byte, error) {
 	if m.Url != nil && m.Url.Value != nil {
 		output.Url = m.Url.Value
 		if m.Url.Element != nil {
-			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+			output.UrlElement = toMapOrNil(m.Url.Element.MarshalJSON())
 		}
 	}
 	if m.Version != nil && m.Version.Value != nil {
 		output.Version = m.Version.Value
 		if m.Version.Element != nil {
-			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+			output.VersionElement = toMapOrNil(m.Version.Element.MarshalJSON())
 		}
 	}
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	if m.Title != nil && m.Title.Value != nil {
 		output.Title = m.Title.Value
 		if m.Title.Element != nil {
-			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+			output.TitleElement = toMapOrNil(m.Title.Element.MarshalJSON())
 		}
 	}
 	output.Status = m.Status
 	if m.Experimental != nil && m.Experimental.Value != nil {
 		output.Experimental = m.Experimental.Value
 		if m.Experimental.Element != nil {
-			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.MarshalJSON())
 		}
 	}
 	if m.Date != nil && m.Date.Value != nil {
 		output.Date = m.Date.Value
 		if m.Date.Element != nil {
-			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+			output.DateElement = toMapOrNil(m.Date.Element.MarshalJSON())
 		}
 	}
 	if m.Publisher != nil && m.Publisher.Value != nil {
 		output.Publisher = m.Publisher.Value
 		if m.Publisher.Element != nil {
-			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.MarshalJSON())
 		}
 	}
 	output.Contact = m.Contact
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.UseContext = m.UseContext
@@ -246,13 +246,13 @@ func (m *TerminologyCapabilities) ToJSON() ([]byte, error) {
 	if m.Purpose != nil && m.Purpose.Value != nil {
 		output.Purpose = m.Purpose.Value
 		if m.Purpose.Element != nil {
-			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.MarshalJSON())
 		}
 	}
 	if m.Copyright != nil && m.Copyright.Value != nil {
 		output.Copyright = m.Copyright.Value
 		if m.Copyright.Element != nil {
-			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.MarshalJSON())
 		}
 	}
 	output.Kind = m.Kind
@@ -261,7 +261,7 @@ func (m *TerminologyCapabilities) ToJSON() ([]byte, error) {
 	if m.LockedDate != nil && m.LockedDate.Value != nil {
 		output.LockedDate = m.LockedDate.Value
 		if m.LockedDate.Element != nil {
-			output.LockedDateElement = toMapOrNil(m.LockedDate.Element.ToJSON())
+			output.LockedDateElement = toMapOrNil(m.LockedDate.Element.MarshalJSON())
 		}
 	}
 	output.CodeSystem = m.CodeSystem
@@ -367,8 +367,8 @@ func NewTerminologyCapabilitiesSoftware() *TerminologyCapabilitiesSoftware {
 	return &TerminologyCapabilitiesSoftware{}
 }
 
-// FromJSON populates TerminologyCapabilitiesSoftware from JSON data.
-func (m *TerminologyCapabilitiesSoftware) FromJSON(data []byte) error {
+// UnmarshalJSON populates TerminologyCapabilitiesSoftware from JSON data.
+func (m *TerminologyCapabilitiesSoftware) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -387,8 +387,8 @@ func (m *TerminologyCapabilitiesSoftware) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts TerminologyCapabilitiesSoftware to JSON data.
-func (m *TerminologyCapabilitiesSoftware) ToJSON() ([]byte, error) {
+// MarshalJSON converts TerminologyCapabilitiesSoftware to JSON data.
+func (m *TerminologyCapabilitiesSoftware) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -402,7 +402,7 @@ func (m *TerminologyCapabilitiesSoftware) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -410,13 +410,13 @@ func (m *TerminologyCapabilitiesSoftware) ToJSON() ([]byte, error) {
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	if m.Version != nil && m.Version.Value != nil {
 		output.Version = m.Version.Value
 		if m.Version.Element != nil {
-			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+			output.VersionElement = toMapOrNil(m.Version.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -462,8 +462,8 @@ func NewTerminologyCapabilitiesImplementation() *TerminologyCapabilitiesImplemen
 	return &TerminologyCapabilitiesImplementation{}
 }
 
-// FromJSON populates TerminologyCapabilitiesImplementation from JSON data.
-func (m *TerminologyCapabilitiesImplementation) FromJSON(data []byte) error {
+// UnmarshalJSON populates TerminologyCapabilitiesImplementation from JSON data.
+func (m *TerminologyCapabilitiesImplementation) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -482,8 +482,8 @@ func (m *TerminologyCapabilitiesImplementation) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts TerminologyCapabilitiesImplementation to JSON data.
-func (m *TerminologyCapabilitiesImplementation) ToJSON() ([]byte, error) {
+// MarshalJSON converts TerminologyCapabilitiesImplementation to JSON data.
+func (m *TerminologyCapabilitiesImplementation) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -497,7 +497,7 @@ func (m *TerminologyCapabilitiesImplementation) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -505,13 +505,13 @@ func (m *TerminologyCapabilitiesImplementation) ToJSON() ([]byte, error) {
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	if m.Url != nil && m.Url.Value != nil {
 		output.Url = m.Url.Value
 		if m.Url.Element != nil {
-			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+			output.UrlElement = toMapOrNil(m.Url.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -558,8 +558,8 @@ func NewTerminologyCapabilitiesCodeSystem() *TerminologyCapabilitiesCodeSystem {
 	return &TerminologyCapabilitiesCodeSystem{}
 }
 
-// FromJSON populates TerminologyCapabilitiesCodeSystem from JSON data.
-func (m *TerminologyCapabilitiesCodeSystem) FromJSON(data []byte) error {
+// UnmarshalJSON populates TerminologyCapabilitiesCodeSystem from JSON data.
+func (m *TerminologyCapabilitiesCodeSystem) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -580,8 +580,8 @@ func (m *TerminologyCapabilitiesCodeSystem) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts TerminologyCapabilitiesCodeSystem to JSON data.
-func (m *TerminologyCapabilitiesCodeSystem) ToJSON() ([]byte, error) {
+// MarshalJSON converts TerminologyCapabilitiesCodeSystem to JSON data.
+func (m *TerminologyCapabilitiesCodeSystem) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -596,7 +596,7 @@ func (m *TerminologyCapabilitiesCodeSystem) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -604,14 +604,14 @@ func (m *TerminologyCapabilitiesCodeSystem) ToJSON() ([]byte, error) {
 	if m.Uri != nil && m.Uri.Value != nil {
 		output.Uri = m.Uri.Value
 		if m.Uri.Element != nil {
-			output.UriElement = toMapOrNil(m.Uri.Element.ToJSON())
+			output.UriElement = toMapOrNil(m.Uri.Element.MarshalJSON())
 		}
 	}
 	output.Version = m.Version
 	if m.Subsumption != nil && m.Subsumption.Value != nil {
 		output.Subsumption = m.Subsumption.Value
 		if m.Subsumption.Element != nil {
-			output.SubsumptionElement = toMapOrNil(m.Subsumption.Element.ToJSON())
+			output.SubsumptionElement = toMapOrNil(m.Subsumption.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -663,8 +663,8 @@ func NewTerminologyCapabilitiesVersion() *TerminologyCapabilitiesVersion {
 	return &TerminologyCapabilitiesVersion{}
 }
 
-// FromJSON populates TerminologyCapabilitiesVersion from JSON data.
-func (m *TerminologyCapabilitiesVersion) FromJSON(data []byte) error {
+// UnmarshalJSON populates TerminologyCapabilitiesVersion from JSON data.
+func (m *TerminologyCapabilitiesVersion) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -709,8 +709,8 @@ func (m *TerminologyCapabilitiesVersion) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts TerminologyCapabilitiesVersion to JSON data.
-func (m *TerminologyCapabilitiesVersion) ToJSON() ([]byte, error) {
+// MarshalJSON converts TerminologyCapabilitiesVersion to JSON data.
+func (m *TerminologyCapabilitiesVersion) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -731,7 +731,7 @@ func (m *TerminologyCapabilitiesVersion) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -739,19 +739,19 @@ func (m *TerminologyCapabilitiesVersion) ToJSON() ([]byte, error) {
 	if m.Code != nil && m.Code.Value != nil {
 		output.Code = m.Code.Value
 		if m.Code.Element != nil {
-			output.CodeElement = toMapOrNil(m.Code.Element.ToJSON())
+			output.CodeElement = toMapOrNil(m.Code.Element.MarshalJSON())
 		}
 	}
 	if m.IsDefault != nil && m.IsDefault.Value != nil {
 		output.IsDefault = m.IsDefault.Value
 		if m.IsDefault.Element != nil {
-			output.IsDefaultElement = toMapOrNil(m.IsDefault.Element.ToJSON())
+			output.IsDefaultElement = toMapOrNil(m.IsDefault.Element.MarshalJSON())
 		}
 	}
 	if m.Compositional != nil && m.Compositional.Value != nil {
 		output.Compositional = m.Compositional.Value
 		if m.Compositional.Element != nil {
-			output.CompositionalElement = toMapOrNil(m.Compositional.Element.ToJSON())
+			output.CompositionalElement = toMapOrNil(m.Compositional.Element.MarshalJSON())
 		}
 	}
 	if len(m.Language) > 0 {
@@ -762,7 +762,7 @@ func (m *TerminologyCapabilitiesVersion) ToJSON() ([]byte, error) {
 				output.Language[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.LanguageElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.LanguageElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -775,7 +775,7 @@ func (m *TerminologyCapabilitiesVersion) ToJSON() ([]byte, error) {
 				output.Property[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.PropertyElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.PropertyElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -830,8 +830,8 @@ func NewTerminologyCapabilitiesFilter() *TerminologyCapabilitiesFilter {
 	return &TerminologyCapabilitiesFilter{}
 }
 
-// FromJSON populates TerminologyCapabilitiesFilter from JSON data.
-func (m *TerminologyCapabilitiesFilter) FromJSON(data []byte) error {
+// UnmarshalJSON populates TerminologyCapabilitiesFilter from JSON data.
+func (m *TerminologyCapabilitiesFilter) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -859,8 +859,8 @@ func (m *TerminologyCapabilitiesFilter) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts TerminologyCapabilitiesFilter to JSON data.
-func (m *TerminologyCapabilitiesFilter) ToJSON() ([]byte, error) {
+// MarshalJSON converts TerminologyCapabilitiesFilter to JSON data.
+func (m *TerminologyCapabilitiesFilter) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -874,7 +874,7 @@ func (m *TerminologyCapabilitiesFilter) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -882,7 +882,7 @@ func (m *TerminologyCapabilitiesFilter) ToJSON() ([]byte, error) {
 	if m.Code != nil && m.Code.Value != nil {
 		output.Code = m.Code.Value
 		if m.Code.Element != nil {
-			output.CodeElement = toMapOrNil(m.Code.Element.ToJSON())
+			output.CodeElement = toMapOrNil(m.Code.Element.MarshalJSON())
 		}
 	}
 	if len(m.Op) > 0 {
@@ -893,7 +893,7 @@ func (m *TerminologyCapabilitiesFilter) ToJSON() ([]byte, error) {
 				output.Op[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.OpElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.OpElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -943,8 +943,8 @@ func NewTerminologyCapabilitiesExpansion() *TerminologyCapabilitiesExpansion {
 	return &TerminologyCapabilitiesExpansion{}
 }
 
-// FromJSON populates TerminologyCapabilitiesExpansion from JSON data.
-func (m *TerminologyCapabilitiesExpansion) FromJSON(data []byte) error {
+// UnmarshalJSON populates TerminologyCapabilitiesExpansion from JSON data.
+func (m *TerminologyCapabilitiesExpansion) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -969,8 +969,8 @@ func (m *TerminologyCapabilitiesExpansion) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts TerminologyCapabilitiesExpansion to JSON data.
-func (m *TerminologyCapabilitiesExpansion) ToJSON() ([]byte, error) {
+// MarshalJSON converts TerminologyCapabilitiesExpansion to JSON data.
+func (m *TerminologyCapabilitiesExpansion) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -989,7 +989,7 @@ func (m *TerminologyCapabilitiesExpansion) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -997,26 +997,26 @@ func (m *TerminologyCapabilitiesExpansion) ToJSON() ([]byte, error) {
 	if m.Hierarchical != nil && m.Hierarchical.Value != nil {
 		output.Hierarchical = m.Hierarchical.Value
 		if m.Hierarchical.Element != nil {
-			output.HierarchicalElement = toMapOrNil(m.Hierarchical.Element.ToJSON())
+			output.HierarchicalElement = toMapOrNil(m.Hierarchical.Element.MarshalJSON())
 		}
 	}
 	if m.Paging != nil && m.Paging.Value != nil {
 		output.Paging = m.Paging.Value
 		if m.Paging.Element != nil {
-			output.PagingElement = toMapOrNil(m.Paging.Element.ToJSON())
+			output.PagingElement = toMapOrNil(m.Paging.Element.MarshalJSON())
 		}
 	}
 	if m.Incomplete != nil && m.Incomplete.Value != nil {
 		output.Incomplete = m.Incomplete.Value
 		if m.Incomplete.Element != nil {
-			output.IncompleteElement = toMapOrNil(m.Incomplete.Element.ToJSON())
+			output.IncompleteElement = toMapOrNil(m.Incomplete.Element.MarshalJSON())
 		}
 	}
 	output.Parameter = m.Parameter
 	if m.TextFilter != nil && m.TextFilter.Value != nil {
 		output.TextFilter = m.TextFilter.Value
 		if m.TextFilter.Element != nil {
-			output.TextFilterElement = toMapOrNil(m.TextFilter.Element.ToJSON())
+			output.TextFilterElement = toMapOrNil(m.TextFilter.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -1068,8 +1068,8 @@ func NewTerminologyCapabilitiesParameter() *TerminologyCapabilitiesParameter {
 	return &TerminologyCapabilitiesParameter{}
 }
 
-// FromJSON populates TerminologyCapabilitiesParameter from JSON data.
-func (m *TerminologyCapabilitiesParameter) FromJSON(data []byte) error {
+// UnmarshalJSON populates TerminologyCapabilitiesParameter from JSON data.
+func (m *TerminologyCapabilitiesParameter) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1088,8 +1088,8 @@ func (m *TerminologyCapabilitiesParameter) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts TerminologyCapabilitiesParameter to JSON data.
-func (m *TerminologyCapabilitiesParameter) ToJSON() ([]byte, error) {
+// MarshalJSON converts TerminologyCapabilitiesParameter to JSON data.
+func (m *TerminologyCapabilitiesParameter) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1103,7 +1103,7 @@ func (m *TerminologyCapabilitiesParameter) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1111,13 +1111,13 @@ func (m *TerminologyCapabilitiesParameter) ToJSON() ([]byte, error) {
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	if m.Documentation != nil && m.Documentation.Value != nil {
 		output.Documentation = m.Documentation.Value
 		if m.Documentation.Element != nil {
-			output.DocumentationElement = toMapOrNil(m.Documentation.Element.ToJSON())
+			output.DocumentationElement = toMapOrNil(m.Documentation.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -1162,8 +1162,8 @@ func NewTerminologyCapabilitiesValidateCode() *TerminologyCapabilitiesValidateCo
 	return &TerminologyCapabilitiesValidateCode{}
 }
 
-// FromJSON populates TerminologyCapabilitiesValidateCode from JSON data.
-func (m *TerminologyCapabilitiesValidateCode) FromJSON(data []byte) error {
+// UnmarshalJSON populates TerminologyCapabilitiesValidateCode from JSON data.
+func (m *TerminologyCapabilitiesValidateCode) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1180,8 +1180,8 @@ func (m *TerminologyCapabilitiesValidateCode) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts TerminologyCapabilitiesValidateCode to JSON data.
-func (m *TerminologyCapabilitiesValidateCode) ToJSON() ([]byte, error) {
+// MarshalJSON converts TerminologyCapabilitiesValidateCode to JSON data.
+func (m *TerminologyCapabilitiesValidateCode) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1193,7 +1193,7 @@ func (m *TerminologyCapabilitiesValidateCode) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1201,7 +1201,7 @@ func (m *TerminologyCapabilitiesValidateCode) ToJSON() ([]byte, error) {
 	if m.Translations != nil && m.Translations.Value != nil {
 		output.Translations = m.Translations.Value
 		if m.Translations.Element != nil {
-			output.TranslationsElement = toMapOrNil(m.Translations.Element.ToJSON())
+			output.TranslationsElement = toMapOrNil(m.Translations.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -1244,8 +1244,8 @@ func NewTerminologyCapabilitiesTranslation() *TerminologyCapabilitiesTranslation
 	return &TerminologyCapabilitiesTranslation{}
 }
 
-// FromJSON populates TerminologyCapabilitiesTranslation from JSON data.
-func (m *TerminologyCapabilitiesTranslation) FromJSON(data []byte) error {
+// UnmarshalJSON populates TerminologyCapabilitiesTranslation from JSON data.
+func (m *TerminologyCapabilitiesTranslation) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1262,8 +1262,8 @@ func (m *TerminologyCapabilitiesTranslation) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts TerminologyCapabilitiesTranslation to JSON data.
-func (m *TerminologyCapabilitiesTranslation) ToJSON() ([]byte, error) {
+// MarshalJSON converts TerminologyCapabilitiesTranslation to JSON data.
+func (m *TerminologyCapabilitiesTranslation) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1275,7 +1275,7 @@ func (m *TerminologyCapabilitiesTranslation) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1283,7 +1283,7 @@ func (m *TerminologyCapabilitiesTranslation) ToJSON() ([]byte, error) {
 	if m.NeedsMap != nil && m.NeedsMap.Value != nil {
 		output.NeedsMap = m.NeedsMap.Value
 		if m.NeedsMap.Element != nil {
-			output.NeedsMapElement = toMapOrNil(m.NeedsMap.Element.ToJSON())
+			output.NeedsMapElement = toMapOrNil(m.NeedsMap.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -1326,8 +1326,8 @@ func NewTerminologyCapabilitiesClosure() *TerminologyCapabilitiesClosure {
 	return &TerminologyCapabilitiesClosure{}
 }
 
-// FromJSON populates TerminologyCapabilitiesClosure from JSON data.
-func (m *TerminologyCapabilitiesClosure) FromJSON(data []byte) error {
+// UnmarshalJSON populates TerminologyCapabilitiesClosure from JSON data.
+func (m *TerminologyCapabilitiesClosure) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1344,8 +1344,8 @@ func (m *TerminologyCapabilitiesClosure) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts TerminologyCapabilitiesClosure to JSON data.
-func (m *TerminologyCapabilitiesClosure) ToJSON() ([]byte, error) {
+// MarshalJSON converts TerminologyCapabilitiesClosure to JSON data.
+func (m *TerminologyCapabilitiesClosure) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1357,7 +1357,7 @@ func (m *TerminologyCapabilitiesClosure) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1365,7 +1365,7 @@ func (m *TerminologyCapabilitiesClosure) ToJSON() ([]byte, error) {
 	if m.Translation != nil && m.Translation.Value != nil {
 		output.Translation = m.Translation.Value
 		if m.Translation.Element != nil {
-			output.TranslationElement = toMapOrNil(m.Translation.Element.ToJSON())
+			output.TranslationElement = toMapOrNil(m.Translation.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

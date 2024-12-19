@@ -21,8 +21,8 @@ func NewMoney() *Money {
 	return &Money{}
 }
 
-// FromJSON populates Money from JSON data.
-func (m *Money) FromJSON(data []byte) error {
+// UnmarshalJSON populates Money from JSON data.
+func (m *Money) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -39,8 +39,8 @@ func (m *Money) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Money to JSON data.
-func (m *Money) ToJSON() ([]byte, error) {
+// MarshalJSON converts Money to JSON data.
+func (m *Money) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -53,20 +53,20 @@ func (m *Money) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
 	if m.Value != nil && m.Value.Value != nil {
 		output.Value = m.Value.Value
 		if m.Value.Element != nil {
-			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+			output.ValueElement = toMapOrNil(m.Value.Element.MarshalJSON())
 		}
 	}
 	if m.Currency != nil && m.Currency.Value != nil {
 		output.Currency = m.Currency.Value
 		if m.Currency.Element != nil {
-			output.CurrencyElement = toMapOrNil(m.Currency.Element.ToJSON())
+			output.CurrencyElement = toMapOrNil(m.Currency.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

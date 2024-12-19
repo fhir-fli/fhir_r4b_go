@@ -33,8 +33,8 @@ func NewEnrollmentResponse() *EnrollmentResponse {
 	return &EnrollmentResponse{}
 }
 
-// FromJSON populates EnrollmentResponse from JSON data.
-func (m *EnrollmentResponse) FromJSON(data []byte) error {
+// UnmarshalJSON populates EnrollmentResponse from JSON data.
+func (m *EnrollmentResponse) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -75,8 +75,8 @@ func (m *EnrollmentResponse) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts EnrollmentResponse to JSON data.
-func (m *EnrollmentResponse) ToJSON() ([]byte, error) {
+// MarshalJSON converts EnrollmentResponse to JSON data.
+func (m *EnrollmentResponse) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -102,14 +102,14 @@ func (m *EnrollmentResponse) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -124,13 +124,13 @@ func (m *EnrollmentResponse) ToJSON() ([]byte, error) {
 	if m.Disposition != nil && m.Disposition.Value != nil {
 		output.Disposition = m.Disposition.Value
 		if m.Disposition.Element != nil {
-			output.DispositionElement = toMapOrNil(m.Disposition.Element.ToJSON())
+			output.DispositionElement = toMapOrNil(m.Disposition.Element.MarshalJSON())
 		}
 	}
 	if m.Created != nil && m.Created.Value != nil {
 		output.Created = m.Created.Value
 		if m.Created.Element != nil {
-			output.CreatedElement = toMapOrNil(m.Created.Element.ToJSON())
+			output.CreatedElement = toMapOrNil(m.Created.Element.MarshalJSON())
 		}
 	}
 	output.Organization = m.Organization

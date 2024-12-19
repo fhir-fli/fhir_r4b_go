@@ -56,8 +56,8 @@ func NewTask() *Task {
 	return &Task{}
 }
 
-// FromJSON populates Task from JSON data.
-func (m *Task) FromJSON(data []byte) error {
+// UnmarshalJSON populates Task from JSON data.
+func (m *Task) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -144,8 +144,8 @@ func (m *Task) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Task to JSON data.
-func (m *Task) ToJSON() ([]byte, error) {
+// MarshalJSON converts Task to JSON data.
+func (m *Task) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -197,14 +197,14 @@ func (m *Task) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -216,13 +216,13 @@ func (m *Task) ToJSON() ([]byte, error) {
 	if m.InstantiatesCanonical != nil && m.InstantiatesCanonical.Value != nil {
 		output.InstantiatesCanonical = m.InstantiatesCanonical.Value
 		if m.InstantiatesCanonical.Element != nil {
-			output.InstantiatesCanonicalElement = toMapOrNil(m.InstantiatesCanonical.Element.ToJSON())
+			output.InstantiatesCanonicalElement = toMapOrNil(m.InstantiatesCanonical.Element.MarshalJSON())
 		}
 	}
 	if m.InstantiatesUri != nil && m.InstantiatesUri.Value != nil {
 		output.InstantiatesUri = m.InstantiatesUri.Value
 		if m.InstantiatesUri.Element != nil {
-			output.InstantiatesUriElement = toMapOrNil(m.InstantiatesUri.Element.ToJSON())
+			output.InstantiatesUriElement = toMapOrNil(m.InstantiatesUri.Element.MarshalJSON())
 		}
 	}
 	output.BasedOn = m.BasedOn
@@ -237,7 +237,7 @@ func (m *Task) ToJSON() ([]byte, error) {
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.Focus = m.Focus
@@ -247,13 +247,13 @@ func (m *Task) ToJSON() ([]byte, error) {
 	if m.AuthoredOn != nil && m.AuthoredOn.Value != nil {
 		output.AuthoredOn = m.AuthoredOn.Value
 		if m.AuthoredOn.Element != nil {
-			output.AuthoredOnElement = toMapOrNil(m.AuthoredOn.Element.ToJSON())
+			output.AuthoredOnElement = toMapOrNil(m.AuthoredOn.Element.MarshalJSON())
 		}
 	}
 	if m.LastModified != nil && m.LastModified.Value != nil {
 		output.LastModified = m.LastModified.Value
 		if m.LastModified.Element != nil {
-			output.LastModifiedElement = toMapOrNil(m.LastModified.Element.ToJSON())
+			output.LastModifiedElement = toMapOrNil(m.LastModified.Element.MarshalJSON())
 		}
 	}
 	output.Requester = m.Requester
@@ -380,8 +380,8 @@ func NewTaskRestriction() *TaskRestriction {
 	return &TaskRestriction{}
 }
 
-// FromJSON populates TaskRestriction from JSON data.
-func (m *TaskRestriction) FromJSON(data []byte) error {
+// UnmarshalJSON populates TaskRestriction from JSON data.
+func (m *TaskRestriction) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -402,8 +402,8 @@ func (m *TaskRestriction) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts TaskRestriction to JSON data.
-func (m *TaskRestriction) ToJSON() ([]byte, error) {
+// MarshalJSON converts TaskRestriction to JSON data.
+func (m *TaskRestriction) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -417,7 +417,7 @@ func (m *TaskRestriction) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -425,7 +425,7 @@ func (m *TaskRestriction) ToJSON() ([]byte, error) {
 	if m.Repetitions != nil && m.Repetitions.Value != nil {
 		output.Repetitions = m.Repetitions.Value
 		if m.Repetitions.Element != nil {
-			output.RepetitionsElement = toMapOrNil(m.Repetitions.Element.ToJSON())
+			output.RepetitionsElement = toMapOrNil(m.Repetitions.Element.MarshalJSON())
 		}
 	}
 	output.Period = m.Period
@@ -524,8 +524,8 @@ func NewTaskInput() *TaskInput {
 	return &TaskInput{}
 }
 
-// FromJSON populates TaskInput from JSON data.
-func (m *TaskInput) FromJSON(data []byte) error {
+// UnmarshalJSON populates TaskInput from JSON data.
+func (m *TaskInput) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -642,8 +642,8 @@ func (m *TaskInput) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts TaskInput to JSON data.
-func (m *TaskInput) ToJSON() ([]byte, error) {
+// MarshalJSON converts TaskInput to JSON data.
+func (m *TaskInput) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -723,7 +723,7 @@ func (m *TaskInput) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -732,115 +732,115 @@ func (m *TaskInput) ToJSON() ([]byte, error) {
 	if m.ValueBase64Binary != nil && m.ValueBase64Binary.Value != nil {
 		output.ValueBase64Binary = m.ValueBase64Binary.Value
 		if m.ValueBase64Binary.Element != nil {
-			output.ValueBase64BinaryElement = toMapOrNil(m.ValueBase64Binary.Element.ToJSON())
+			output.ValueBase64BinaryElement = toMapOrNil(m.ValueBase64Binary.Element.MarshalJSON())
 		}
 	}
 	if m.ValueBoolean != nil && m.ValueBoolean.Value != nil {
 		output.ValueBoolean = m.ValueBoolean.Value
 		if m.ValueBoolean.Element != nil {
-			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.ToJSON())
+			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.MarshalJSON())
 		}
 	}
 	if m.ValueCanonical != nil && m.ValueCanonical.Value != nil {
 		output.ValueCanonical = m.ValueCanonical.Value
 		if m.ValueCanonical.Element != nil {
-			output.ValueCanonicalElement = toMapOrNil(m.ValueCanonical.Element.ToJSON())
+			output.ValueCanonicalElement = toMapOrNil(m.ValueCanonical.Element.MarshalJSON())
 		}
 	}
 	if m.ValueCode != nil && m.ValueCode.Value != nil {
 		output.ValueCode = m.ValueCode.Value
 		if m.ValueCode.Element != nil {
-			output.ValueCodeElement = toMapOrNil(m.ValueCode.Element.ToJSON())
+			output.ValueCodeElement = toMapOrNil(m.ValueCode.Element.MarshalJSON())
 		}
 	}
 	if m.ValueDate != nil && m.ValueDate.Value != nil {
 		output.ValueDate = m.ValueDate.Value
 		if m.ValueDate.Element != nil {
-			output.ValueDateElement = toMapOrNil(m.ValueDate.Element.ToJSON())
+			output.ValueDateElement = toMapOrNil(m.ValueDate.Element.MarshalJSON())
 		}
 	}
 	if m.ValueDateTime != nil && m.ValueDateTime.Value != nil {
 		output.ValueDateTime = m.ValueDateTime.Value
 		if m.ValueDateTime.Element != nil {
-			output.ValueDateTimeElement = toMapOrNil(m.ValueDateTime.Element.ToJSON())
+			output.ValueDateTimeElement = toMapOrNil(m.ValueDateTime.Element.MarshalJSON())
 		}
 	}
 	if m.ValueDecimal != nil && m.ValueDecimal.Value != nil {
 		output.ValueDecimal = m.ValueDecimal.Value
 		if m.ValueDecimal.Element != nil {
-			output.ValueDecimalElement = toMapOrNil(m.ValueDecimal.Element.ToJSON())
+			output.ValueDecimalElement = toMapOrNil(m.ValueDecimal.Element.MarshalJSON())
 		}
 	}
 	if m.ValueId != nil && m.ValueId.Value != nil {
 		output.ValueId = m.ValueId.Value
 		if m.ValueId.Element != nil {
-			output.ValueIdElement = toMapOrNil(m.ValueId.Element.ToJSON())
+			output.ValueIdElement = toMapOrNil(m.ValueId.Element.MarshalJSON())
 		}
 	}
 	if m.ValueInstant != nil && m.ValueInstant.Value != nil {
 		output.ValueInstant = m.ValueInstant.Value
 		if m.ValueInstant.Element != nil {
-			output.ValueInstantElement = toMapOrNil(m.ValueInstant.Element.ToJSON())
+			output.ValueInstantElement = toMapOrNil(m.ValueInstant.Element.MarshalJSON())
 		}
 	}
 	if m.ValueInteger != nil && m.ValueInteger.Value != nil {
 		output.ValueInteger = m.ValueInteger.Value
 		if m.ValueInteger.Element != nil {
-			output.ValueIntegerElement = toMapOrNil(m.ValueInteger.Element.ToJSON())
+			output.ValueIntegerElement = toMapOrNil(m.ValueInteger.Element.MarshalJSON())
 		}
 	}
 	if m.ValueMarkdown != nil && m.ValueMarkdown.Value != nil {
 		output.ValueMarkdown = m.ValueMarkdown.Value
 		if m.ValueMarkdown.Element != nil {
-			output.ValueMarkdownElement = toMapOrNil(m.ValueMarkdown.Element.ToJSON())
+			output.ValueMarkdownElement = toMapOrNil(m.ValueMarkdown.Element.MarshalJSON())
 		}
 	}
 	if m.ValueOid != nil && m.ValueOid.Value != nil {
 		output.ValueOid = m.ValueOid.Value
 		if m.ValueOid.Element != nil {
-			output.ValueOidElement = toMapOrNil(m.ValueOid.Element.ToJSON())
+			output.ValueOidElement = toMapOrNil(m.ValueOid.Element.MarshalJSON())
 		}
 	}
 	if m.ValuePositiveInt != nil && m.ValuePositiveInt.Value != nil {
 		output.ValuePositiveInt = m.ValuePositiveInt.Value
 		if m.ValuePositiveInt.Element != nil {
-			output.ValuePositiveIntElement = toMapOrNil(m.ValuePositiveInt.Element.ToJSON())
+			output.ValuePositiveIntElement = toMapOrNil(m.ValuePositiveInt.Element.MarshalJSON())
 		}
 	}
 	if m.ValueString != nil && m.ValueString.Value != nil {
 		output.ValueString = m.ValueString.Value
 		if m.ValueString.Element != nil {
-			output.ValueStringElement = toMapOrNil(m.ValueString.Element.ToJSON())
+			output.ValueStringElement = toMapOrNil(m.ValueString.Element.MarshalJSON())
 		}
 	}
 	if m.ValueTime != nil && m.ValueTime.Value != nil {
 		output.ValueTime = m.ValueTime.Value
 		if m.ValueTime.Element != nil {
-			output.ValueTimeElement = toMapOrNil(m.ValueTime.Element.ToJSON())
+			output.ValueTimeElement = toMapOrNil(m.ValueTime.Element.MarshalJSON())
 		}
 	}
 	if m.ValueUnsignedInt != nil && m.ValueUnsignedInt.Value != nil {
 		output.ValueUnsignedInt = m.ValueUnsignedInt.Value
 		if m.ValueUnsignedInt.Element != nil {
-			output.ValueUnsignedIntElement = toMapOrNil(m.ValueUnsignedInt.Element.ToJSON())
+			output.ValueUnsignedIntElement = toMapOrNil(m.ValueUnsignedInt.Element.MarshalJSON())
 		}
 	}
 	if m.ValueUri != nil && m.ValueUri.Value != nil {
 		output.ValueUri = m.ValueUri.Value
 		if m.ValueUri.Element != nil {
-			output.ValueUriElement = toMapOrNil(m.ValueUri.Element.ToJSON())
+			output.ValueUriElement = toMapOrNil(m.ValueUri.Element.MarshalJSON())
 		}
 	}
 	if m.ValueUrl != nil && m.ValueUrl.Value != nil {
 		output.ValueUrl = m.ValueUrl.Value
 		if m.ValueUrl.Element != nil {
-			output.ValueUrlElement = toMapOrNil(m.ValueUrl.Element.ToJSON())
+			output.ValueUrlElement = toMapOrNil(m.ValueUrl.Element.MarshalJSON())
 		}
 	}
 	if m.ValueUuid != nil && m.ValueUuid.Value != nil {
 		output.ValueUuid = m.ValueUuid.Value
 		if m.ValueUuid.Element != nil {
-			output.ValueUuidElement = toMapOrNil(m.ValueUuid.Element.ToJSON())
+			output.ValueUuidElement = toMapOrNil(m.ValueUuid.Element.MarshalJSON())
 		}
 	}
 	output.ValueAddress = m.ValueAddress
@@ -1064,8 +1064,8 @@ func NewTaskOutput() *TaskOutput {
 	return &TaskOutput{}
 }
 
-// FromJSON populates TaskOutput from JSON data.
-func (m *TaskOutput) FromJSON(data []byte) error {
+// UnmarshalJSON populates TaskOutput from JSON data.
+func (m *TaskOutput) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1182,8 +1182,8 @@ func (m *TaskOutput) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts TaskOutput to JSON data.
-func (m *TaskOutput) ToJSON() ([]byte, error) {
+// MarshalJSON converts TaskOutput to JSON data.
+func (m *TaskOutput) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1263,7 +1263,7 @@ func (m *TaskOutput) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1272,115 +1272,115 @@ func (m *TaskOutput) ToJSON() ([]byte, error) {
 	if m.ValueBase64Binary != nil && m.ValueBase64Binary.Value != nil {
 		output.ValueBase64Binary = m.ValueBase64Binary.Value
 		if m.ValueBase64Binary.Element != nil {
-			output.ValueBase64BinaryElement = toMapOrNil(m.ValueBase64Binary.Element.ToJSON())
+			output.ValueBase64BinaryElement = toMapOrNil(m.ValueBase64Binary.Element.MarshalJSON())
 		}
 	}
 	if m.ValueBoolean != nil && m.ValueBoolean.Value != nil {
 		output.ValueBoolean = m.ValueBoolean.Value
 		if m.ValueBoolean.Element != nil {
-			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.ToJSON())
+			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.MarshalJSON())
 		}
 	}
 	if m.ValueCanonical != nil && m.ValueCanonical.Value != nil {
 		output.ValueCanonical = m.ValueCanonical.Value
 		if m.ValueCanonical.Element != nil {
-			output.ValueCanonicalElement = toMapOrNil(m.ValueCanonical.Element.ToJSON())
+			output.ValueCanonicalElement = toMapOrNil(m.ValueCanonical.Element.MarshalJSON())
 		}
 	}
 	if m.ValueCode != nil && m.ValueCode.Value != nil {
 		output.ValueCode = m.ValueCode.Value
 		if m.ValueCode.Element != nil {
-			output.ValueCodeElement = toMapOrNil(m.ValueCode.Element.ToJSON())
+			output.ValueCodeElement = toMapOrNil(m.ValueCode.Element.MarshalJSON())
 		}
 	}
 	if m.ValueDate != nil && m.ValueDate.Value != nil {
 		output.ValueDate = m.ValueDate.Value
 		if m.ValueDate.Element != nil {
-			output.ValueDateElement = toMapOrNil(m.ValueDate.Element.ToJSON())
+			output.ValueDateElement = toMapOrNil(m.ValueDate.Element.MarshalJSON())
 		}
 	}
 	if m.ValueDateTime != nil && m.ValueDateTime.Value != nil {
 		output.ValueDateTime = m.ValueDateTime.Value
 		if m.ValueDateTime.Element != nil {
-			output.ValueDateTimeElement = toMapOrNil(m.ValueDateTime.Element.ToJSON())
+			output.ValueDateTimeElement = toMapOrNil(m.ValueDateTime.Element.MarshalJSON())
 		}
 	}
 	if m.ValueDecimal != nil && m.ValueDecimal.Value != nil {
 		output.ValueDecimal = m.ValueDecimal.Value
 		if m.ValueDecimal.Element != nil {
-			output.ValueDecimalElement = toMapOrNil(m.ValueDecimal.Element.ToJSON())
+			output.ValueDecimalElement = toMapOrNil(m.ValueDecimal.Element.MarshalJSON())
 		}
 	}
 	if m.ValueId != nil && m.ValueId.Value != nil {
 		output.ValueId = m.ValueId.Value
 		if m.ValueId.Element != nil {
-			output.ValueIdElement = toMapOrNil(m.ValueId.Element.ToJSON())
+			output.ValueIdElement = toMapOrNil(m.ValueId.Element.MarshalJSON())
 		}
 	}
 	if m.ValueInstant != nil && m.ValueInstant.Value != nil {
 		output.ValueInstant = m.ValueInstant.Value
 		if m.ValueInstant.Element != nil {
-			output.ValueInstantElement = toMapOrNil(m.ValueInstant.Element.ToJSON())
+			output.ValueInstantElement = toMapOrNil(m.ValueInstant.Element.MarshalJSON())
 		}
 	}
 	if m.ValueInteger != nil && m.ValueInteger.Value != nil {
 		output.ValueInteger = m.ValueInteger.Value
 		if m.ValueInteger.Element != nil {
-			output.ValueIntegerElement = toMapOrNil(m.ValueInteger.Element.ToJSON())
+			output.ValueIntegerElement = toMapOrNil(m.ValueInteger.Element.MarshalJSON())
 		}
 	}
 	if m.ValueMarkdown != nil && m.ValueMarkdown.Value != nil {
 		output.ValueMarkdown = m.ValueMarkdown.Value
 		if m.ValueMarkdown.Element != nil {
-			output.ValueMarkdownElement = toMapOrNil(m.ValueMarkdown.Element.ToJSON())
+			output.ValueMarkdownElement = toMapOrNil(m.ValueMarkdown.Element.MarshalJSON())
 		}
 	}
 	if m.ValueOid != nil && m.ValueOid.Value != nil {
 		output.ValueOid = m.ValueOid.Value
 		if m.ValueOid.Element != nil {
-			output.ValueOidElement = toMapOrNil(m.ValueOid.Element.ToJSON())
+			output.ValueOidElement = toMapOrNil(m.ValueOid.Element.MarshalJSON())
 		}
 	}
 	if m.ValuePositiveInt != nil && m.ValuePositiveInt.Value != nil {
 		output.ValuePositiveInt = m.ValuePositiveInt.Value
 		if m.ValuePositiveInt.Element != nil {
-			output.ValuePositiveIntElement = toMapOrNil(m.ValuePositiveInt.Element.ToJSON())
+			output.ValuePositiveIntElement = toMapOrNil(m.ValuePositiveInt.Element.MarshalJSON())
 		}
 	}
 	if m.ValueString != nil && m.ValueString.Value != nil {
 		output.ValueString = m.ValueString.Value
 		if m.ValueString.Element != nil {
-			output.ValueStringElement = toMapOrNil(m.ValueString.Element.ToJSON())
+			output.ValueStringElement = toMapOrNil(m.ValueString.Element.MarshalJSON())
 		}
 	}
 	if m.ValueTime != nil && m.ValueTime.Value != nil {
 		output.ValueTime = m.ValueTime.Value
 		if m.ValueTime.Element != nil {
-			output.ValueTimeElement = toMapOrNil(m.ValueTime.Element.ToJSON())
+			output.ValueTimeElement = toMapOrNil(m.ValueTime.Element.MarshalJSON())
 		}
 	}
 	if m.ValueUnsignedInt != nil && m.ValueUnsignedInt.Value != nil {
 		output.ValueUnsignedInt = m.ValueUnsignedInt.Value
 		if m.ValueUnsignedInt.Element != nil {
-			output.ValueUnsignedIntElement = toMapOrNil(m.ValueUnsignedInt.Element.ToJSON())
+			output.ValueUnsignedIntElement = toMapOrNil(m.ValueUnsignedInt.Element.MarshalJSON())
 		}
 	}
 	if m.ValueUri != nil && m.ValueUri.Value != nil {
 		output.ValueUri = m.ValueUri.Value
 		if m.ValueUri.Element != nil {
-			output.ValueUriElement = toMapOrNil(m.ValueUri.Element.ToJSON())
+			output.ValueUriElement = toMapOrNil(m.ValueUri.Element.MarshalJSON())
 		}
 	}
 	if m.ValueUrl != nil && m.ValueUrl.Value != nil {
 		output.ValueUrl = m.ValueUrl.Value
 		if m.ValueUrl.Element != nil {
-			output.ValueUrlElement = toMapOrNil(m.ValueUrl.Element.ToJSON())
+			output.ValueUrlElement = toMapOrNil(m.ValueUrl.Element.MarshalJSON())
 		}
 	}
 	if m.ValueUuid != nil && m.ValueUuid.Value != nil {
 		output.ValueUuid = m.ValueUuid.Value
 		if m.ValueUuid.Element != nil {
-			output.ValueUuidElement = toMapOrNil(m.ValueUuid.Element.ToJSON())
+			output.ValueUuidElement = toMapOrNil(m.ValueUuid.Element.MarshalJSON())
 		}
 	}
 	output.ValueAddress = m.ValueAddress

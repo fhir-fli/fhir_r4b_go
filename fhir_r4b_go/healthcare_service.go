@@ -49,8 +49,8 @@ func NewHealthcareService() *HealthcareService {
 	return &HealthcareService{}
 }
 
-// FromJSON populates HealthcareService from JSON data.
-func (m *HealthcareService) FromJSON(data []byte) error {
+// UnmarshalJSON populates HealthcareService from JSON data.
+func (m *HealthcareService) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -123,8 +123,8 @@ func (m *HealthcareService) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts HealthcareService to JSON data.
-func (m *HealthcareService) ToJSON() ([]byte, error) {
+// MarshalJSON converts HealthcareService to JSON data.
+func (m *HealthcareService) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -170,14 +170,14 @@ func (m *HealthcareService) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -189,7 +189,7 @@ func (m *HealthcareService) ToJSON() ([]byte, error) {
 	if m.Active != nil && m.Active.Value != nil {
 		output.Active = m.Active.Value
 		if m.Active.Element != nil {
-			output.ActiveElement = toMapOrNil(m.Active.Element.ToJSON())
+			output.ActiveElement = toMapOrNil(m.Active.Element.MarshalJSON())
 		}
 	}
 	output.ProvidedBy = m.ProvidedBy
@@ -200,19 +200,19 @@ func (m *HealthcareService) ToJSON() ([]byte, error) {
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	if m.Comment != nil && m.Comment.Value != nil {
 		output.Comment = m.Comment.Value
 		if m.Comment.Element != nil {
-			output.CommentElement = toMapOrNil(m.Comment.Element.ToJSON())
+			output.CommentElement = toMapOrNil(m.Comment.Element.MarshalJSON())
 		}
 	}
 	if m.ExtraDetails != nil && m.ExtraDetails.Value != nil {
 		output.ExtraDetails = m.ExtraDetails.Value
 		if m.ExtraDetails.Element != nil {
-			output.ExtraDetailsElement = toMapOrNil(m.ExtraDetails.Element.ToJSON())
+			output.ExtraDetailsElement = toMapOrNil(m.ExtraDetails.Element.MarshalJSON())
 		}
 	}
 	output.Photo = m.Photo
@@ -227,7 +227,7 @@ func (m *HealthcareService) ToJSON() ([]byte, error) {
 	if m.AppointmentRequired != nil && m.AppointmentRequired.Value != nil {
 		output.AppointmentRequired = m.AppointmentRequired.Value
 		if m.AppointmentRequired.Element != nil {
-			output.AppointmentRequiredElement = toMapOrNil(m.AppointmentRequired.Element.ToJSON())
+			output.AppointmentRequiredElement = toMapOrNil(m.AppointmentRequired.Element.MarshalJSON())
 		}
 	}
 	output.AvailableTime = m.AvailableTime
@@ -235,7 +235,7 @@ func (m *HealthcareService) ToJSON() ([]byte, error) {
 	if m.AvailabilityExceptions != nil && m.AvailabilityExceptions.Value != nil {
 		output.AvailabilityExceptions = m.AvailabilityExceptions.Value
 		if m.AvailabilityExceptions.Element != nil {
-			output.AvailabilityExceptionsElement = toMapOrNil(m.AvailabilityExceptions.Element.ToJSON())
+			output.AvailabilityExceptionsElement = toMapOrNil(m.AvailabilityExceptions.Element.MarshalJSON())
 		}
 	}
 	output.Endpoint = m.Endpoint
@@ -336,8 +336,8 @@ func NewHealthcareServiceEligibility() *HealthcareServiceEligibility {
 	return &HealthcareServiceEligibility{}
 }
 
-// FromJSON populates HealthcareServiceEligibility from JSON data.
-func (m *HealthcareServiceEligibility) FromJSON(data []byte) error {
+// UnmarshalJSON populates HealthcareServiceEligibility from JSON data.
+func (m *HealthcareServiceEligibility) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -356,8 +356,8 @@ func (m *HealthcareServiceEligibility) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts HealthcareServiceEligibility to JSON data.
-func (m *HealthcareServiceEligibility) ToJSON() ([]byte, error) {
+// MarshalJSON converts HealthcareServiceEligibility to JSON data.
+func (m *HealthcareServiceEligibility) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -370,7 +370,7 @@ func (m *HealthcareServiceEligibility) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -379,7 +379,7 @@ func (m *HealthcareServiceEligibility) ToJSON() ([]byte, error) {
 	if m.Comment != nil && m.Comment.Value != nil {
 		output.Comment = m.Comment.Value
 		if m.Comment.Element != nil {
-			output.CommentElement = toMapOrNil(m.Comment.Element.ToJSON())
+			output.CommentElement = toMapOrNil(m.Comment.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -427,8 +427,8 @@ func NewHealthcareServiceAvailableTime() *HealthcareServiceAvailableTime {
 	return &HealthcareServiceAvailableTime{}
 }
 
-// FromJSON populates HealthcareServiceAvailableTime from JSON data.
-func (m *HealthcareServiceAvailableTime) FromJSON(data []byte) error {
+// UnmarshalJSON populates HealthcareServiceAvailableTime from JSON data.
+func (m *HealthcareServiceAvailableTime) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -451,8 +451,8 @@ func (m *HealthcareServiceAvailableTime) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts HealthcareServiceAvailableTime to JSON data.
-func (m *HealthcareServiceAvailableTime) ToJSON() ([]byte, error) {
+// MarshalJSON converts HealthcareServiceAvailableTime to JSON data.
+func (m *HealthcareServiceAvailableTime) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -469,7 +469,7 @@ func (m *HealthcareServiceAvailableTime) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -478,19 +478,19 @@ func (m *HealthcareServiceAvailableTime) ToJSON() ([]byte, error) {
 	if m.AllDay != nil && m.AllDay.Value != nil {
 		output.AllDay = m.AllDay.Value
 		if m.AllDay.Element != nil {
-			output.AllDayElement = toMapOrNil(m.AllDay.Element.ToJSON())
+			output.AllDayElement = toMapOrNil(m.AllDay.Element.MarshalJSON())
 		}
 	}
 	if m.AvailableStartTime != nil && m.AvailableStartTime.Value != nil {
 		output.AvailableStartTime = m.AvailableStartTime.Value
 		if m.AvailableStartTime.Element != nil {
-			output.AvailableStartTimeElement = toMapOrNil(m.AvailableStartTime.Element.ToJSON())
+			output.AvailableStartTimeElement = toMapOrNil(m.AvailableStartTime.Element.MarshalJSON())
 		}
 	}
 	if m.AvailableEndTime != nil && m.AvailableEndTime.Value != nil {
 		output.AvailableEndTime = m.AvailableEndTime.Value
 		if m.AvailableEndTime.Element != nil {
-			output.AvailableEndTimeElement = toMapOrNil(m.AvailableEndTime.Element.ToJSON())
+			output.AvailableEndTimeElement = toMapOrNil(m.AvailableEndTime.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -540,8 +540,8 @@ func NewHealthcareServiceNotAvailable() *HealthcareServiceNotAvailable {
 	return &HealthcareServiceNotAvailable{}
 }
 
-// FromJSON populates HealthcareServiceNotAvailable from JSON data.
-func (m *HealthcareServiceNotAvailable) FromJSON(data []byte) error {
+// UnmarshalJSON populates HealthcareServiceNotAvailable from JSON data.
+func (m *HealthcareServiceNotAvailable) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -560,8 +560,8 @@ func (m *HealthcareServiceNotAvailable) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts HealthcareServiceNotAvailable to JSON data.
-func (m *HealthcareServiceNotAvailable) ToJSON() ([]byte, error) {
+// MarshalJSON converts HealthcareServiceNotAvailable to JSON data.
+func (m *HealthcareServiceNotAvailable) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -574,7 +574,7 @@ func (m *HealthcareServiceNotAvailable) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -582,7 +582,7 @@ func (m *HealthcareServiceNotAvailable) ToJSON() ([]byte, error) {
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.During = m.During

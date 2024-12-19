@@ -127,43 +127,6 @@ func isValidDecimalString(input string) bool {
 	return strings.Contains(input, ".")
 }
 
-// ToJSON serializes FhirDecimal to JSON.
-func (fd *FhirDecimal) ToJSON() ([]byte, error) {
-	data := map[string]interface{}{}
-	if fd.Value != nil {
-		data["value"] = strconv.FormatFloat(*fd.Value, 'f', -1, 64)
-	}
-	if fd.Element != nil {
-		elementJSON, err := fd.Element.ToJSON()
-		if err != nil {
-			return nil, err
-		}
-		data["_value"] = elementJSON
-	}
-	return json.Marshal(data)
-}
-
-// FromJSON initializes a FhirDecimal from JSON input.
-func (fd *FhirDecimal) FromJSON(data []byte) error {
-	temp := struct {
-		Value   string   `json:"value"`
-		Element *Element `json:"_value"`
-	}{}
-
-	if err := json.Unmarshal(data, &temp); err != nil {
-		return err
-	}
-
-	parsed, err := parseDecimal(temp.Value)
-	if err != nil {
-		return err
-	}
-
-	fd.Value = parsed
-	fd.Element = temp.Element
-	return nil
-}
-
 // Add performs addition with another FhirDecimal.
 func (fd *FhirDecimal) Add(other *FhirDecimal) (*FhirDecimal, error) {
 	if fd.Value == nil || other.Value == nil {

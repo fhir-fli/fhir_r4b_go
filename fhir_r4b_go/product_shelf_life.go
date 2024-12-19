@@ -24,8 +24,8 @@ func NewProductShelfLife() *ProductShelfLife {
 	return &ProductShelfLife{}
 }
 
-// FromJSON populates ProductShelfLife from JSON data.
-func (m *ProductShelfLife) FromJSON(data []byte) error {
+// UnmarshalJSON populates ProductShelfLife from JSON data.
+func (m *ProductShelfLife) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -48,8 +48,8 @@ func (m *ProductShelfLife) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ProductShelfLife to JSON data.
-func (m *ProductShelfLife) ToJSON() ([]byte, error) {
+// MarshalJSON converts ProductShelfLife to JSON data.
+func (m *ProductShelfLife) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -63,7 +63,7 @@ func (m *ProductShelfLife) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_

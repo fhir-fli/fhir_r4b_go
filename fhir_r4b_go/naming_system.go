@@ -38,8 +38,8 @@ func NewNamingSystem() *NamingSystem {
 	return &NamingSystem{}
 }
 
-// FromJSON populates NamingSystem from JSON data.
-func (m *NamingSystem) FromJSON(data []byte) error {
+// UnmarshalJSON populates NamingSystem from JSON data.
+func (m *NamingSystem) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -90,8 +90,8 @@ func (m *NamingSystem) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts NamingSystem to JSON data.
-func (m *NamingSystem) ToJSON() ([]byte, error) {
+// MarshalJSON converts NamingSystem to JSON data.
+func (m *NamingSystem) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -126,14 +126,14 @@ func (m *NamingSystem) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -144,7 +144,7 @@ func (m *NamingSystem) ToJSON() ([]byte, error) {
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	output.Status = m.Status
@@ -152,27 +152,27 @@ func (m *NamingSystem) ToJSON() ([]byte, error) {
 	if m.Date != nil && m.Date.Value != nil {
 		output.Date = m.Date.Value
 		if m.Date.Element != nil {
-			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+			output.DateElement = toMapOrNil(m.Date.Element.MarshalJSON())
 		}
 	}
 	if m.Publisher != nil && m.Publisher.Value != nil {
 		output.Publisher = m.Publisher.Value
 		if m.Publisher.Element != nil {
-			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.MarshalJSON())
 		}
 	}
 	output.Contact = m.Contact
 	if m.Responsible != nil && m.Responsible.Value != nil {
 		output.Responsible = m.Responsible.Value
 		if m.Responsible.Element != nil {
-			output.ResponsibleElement = toMapOrNil(m.Responsible.Element.ToJSON())
+			output.ResponsibleElement = toMapOrNil(m.Responsible.Element.MarshalJSON())
 		}
 	}
 	output.Type = m.Type
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.UseContext = m.UseContext
@@ -180,7 +180,7 @@ func (m *NamingSystem) ToJSON() ([]byte, error) {
 	if m.Usage != nil && m.Usage.Value != nil {
 		output.Usage = m.Usage.Value
 		if m.Usage.Element != nil {
-			output.UsageElement = toMapOrNil(m.Usage.Element.ToJSON())
+			output.UsageElement = toMapOrNil(m.Usage.Element.MarshalJSON())
 		}
 	}
 	output.UniqueId = m.UniqueId
@@ -262,8 +262,8 @@ func NewNamingSystemUniqueId() *NamingSystemUniqueId {
 	return &NamingSystemUniqueId{}
 }
 
-// FromJSON populates NamingSystemUniqueId from JSON data.
-func (m *NamingSystemUniqueId) FromJSON(data []byte) error {
+// UnmarshalJSON populates NamingSystemUniqueId from JSON data.
+func (m *NamingSystemUniqueId) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -288,8 +288,8 @@ func (m *NamingSystemUniqueId) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts NamingSystemUniqueId to JSON data.
-func (m *NamingSystemUniqueId) ToJSON() ([]byte, error) {
+// MarshalJSON converts NamingSystemUniqueId to JSON data.
+func (m *NamingSystemUniqueId) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -307,7 +307,7 @@ func (m *NamingSystemUniqueId) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -316,19 +316,19 @@ func (m *NamingSystemUniqueId) ToJSON() ([]byte, error) {
 	if m.Value != nil && m.Value.Value != nil {
 		output.Value = m.Value.Value
 		if m.Value.Element != nil {
-			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+			output.ValueElement = toMapOrNil(m.Value.Element.MarshalJSON())
 		}
 	}
 	if m.Preferred != nil && m.Preferred.Value != nil {
 		output.Preferred = m.Preferred.Value
 		if m.Preferred.Element != nil {
-			output.PreferredElement = toMapOrNil(m.Preferred.Element.ToJSON())
+			output.PreferredElement = toMapOrNil(m.Preferred.Element.MarshalJSON())
 		}
 	}
 	if m.Comment != nil && m.Comment.Value != nil {
 		output.Comment = m.Comment.Value
 		if m.Comment.Element != nil {
-			output.CommentElement = toMapOrNil(m.Comment.Element.ToJSON())
+			output.CommentElement = toMapOrNil(m.Comment.Element.MarshalJSON())
 		}
 	}
 	output.Period = m.Period

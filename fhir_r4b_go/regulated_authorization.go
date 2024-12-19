@@ -39,8 +39,8 @@ func NewRegulatedAuthorization() *RegulatedAuthorization {
 	return &RegulatedAuthorization{}
 }
 
-// FromJSON populates RegulatedAuthorization from JSON data.
-func (m *RegulatedAuthorization) FromJSON(data []byte) error {
+// UnmarshalJSON populates RegulatedAuthorization from JSON data.
+func (m *RegulatedAuthorization) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -93,8 +93,8 @@ func (m *RegulatedAuthorization) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts RegulatedAuthorization to JSON data.
-func (m *RegulatedAuthorization) ToJSON() ([]byte, error) {
+// MarshalJSON converts RegulatedAuthorization to JSON data.
+func (m *RegulatedAuthorization) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -126,14 +126,14 @@ func (m *RegulatedAuthorization) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -147,7 +147,7 @@ func (m *RegulatedAuthorization) ToJSON() ([]byte, error) {
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.Region = m.Region
@@ -155,7 +155,7 @@ func (m *RegulatedAuthorization) ToJSON() ([]byte, error) {
 	if m.StatusDate != nil && m.StatusDate.Value != nil {
 		output.StatusDate = m.StatusDate.Value
 		if m.StatusDate.Element != nil {
-			output.StatusDateElement = toMapOrNil(m.StatusDate.Element.ToJSON())
+			output.StatusDateElement = toMapOrNil(m.StatusDate.Element.MarshalJSON())
 		}
 	}
 	output.ValidityPeriod = m.ValidityPeriod
@@ -246,8 +246,8 @@ func NewRegulatedAuthorizationCase() *RegulatedAuthorizationCase {
 	return &RegulatedAuthorizationCase{}
 }
 
-// FromJSON populates RegulatedAuthorizationCase from JSON data.
-func (m *RegulatedAuthorizationCase) FromJSON(data []byte) error {
+// UnmarshalJSON populates RegulatedAuthorizationCase from JSON data.
+func (m *RegulatedAuthorizationCase) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -274,8 +274,8 @@ func (m *RegulatedAuthorizationCase) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts RegulatedAuthorizationCase to JSON data.
-func (m *RegulatedAuthorizationCase) ToJSON() ([]byte, error) {
+// MarshalJSON converts RegulatedAuthorizationCase to JSON data.
+func (m *RegulatedAuthorizationCase) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -292,7 +292,7 @@ func (m *RegulatedAuthorizationCase) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -304,7 +304,7 @@ func (m *RegulatedAuthorizationCase) ToJSON() ([]byte, error) {
 	if m.DateDateTime != nil && m.DateDateTime.Value != nil {
 		output.DateDateTime = m.DateDateTime.Value
 		if m.DateDateTime.Element != nil {
-			output.DateDateTimeElement = toMapOrNil(m.DateDateTime.Element.ToJSON())
+			output.DateDateTimeElement = toMapOrNil(m.DateDateTime.Element.MarshalJSON())
 		}
 	}
 	output.Application = m.Application

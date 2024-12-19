@@ -40,8 +40,8 @@ func NewPaymentReconciliation() *PaymentReconciliation {
 	return &PaymentReconciliation{}
 }
 
-// FromJSON populates PaymentReconciliation from JSON data.
-func (m *PaymentReconciliation) FromJSON(data []byte) error {
+// UnmarshalJSON populates PaymentReconciliation from JSON data.
+func (m *PaymentReconciliation) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -96,8 +96,8 @@ func (m *PaymentReconciliation) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts PaymentReconciliation to JSON data.
-func (m *PaymentReconciliation) ToJSON() ([]byte, error) {
+// MarshalJSON converts PaymentReconciliation to JSON data.
+func (m *PaymentReconciliation) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -131,14 +131,14 @@ func (m *PaymentReconciliation) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -152,7 +152,7 @@ func (m *PaymentReconciliation) ToJSON() ([]byte, error) {
 	if m.Created != nil && m.Created.Value != nil {
 		output.Created = m.Created.Value
 		if m.Created.Element != nil {
-			output.CreatedElement = toMapOrNil(m.Created.Element.ToJSON())
+			output.CreatedElement = toMapOrNil(m.Created.Element.MarshalJSON())
 		}
 	}
 	output.PaymentIssuer = m.PaymentIssuer
@@ -162,13 +162,13 @@ func (m *PaymentReconciliation) ToJSON() ([]byte, error) {
 	if m.Disposition != nil && m.Disposition.Value != nil {
 		output.Disposition = m.Disposition.Value
 		if m.Disposition.Element != nil {
-			output.DispositionElement = toMapOrNil(m.Disposition.Element.ToJSON())
+			output.DispositionElement = toMapOrNil(m.Disposition.Element.MarshalJSON())
 		}
 	}
 	if m.PaymentDate != nil && m.PaymentDate.Value != nil {
 		output.PaymentDate = m.PaymentDate.Value
 		if m.PaymentDate.Element != nil {
-			output.PaymentDateElement = toMapOrNil(m.PaymentDate.Element.ToJSON())
+			output.PaymentDateElement = toMapOrNil(m.PaymentDate.Element.MarshalJSON())
 		}
 	}
 	output.PaymentAmount = m.PaymentAmount
@@ -263,8 +263,8 @@ func NewPaymentReconciliationDetail() *PaymentReconciliationDetail {
 	return &PaymentReconciliationDetail{}
 }
 
-// FromJSON populates PaymentReconciliationDetail from JSON data.
-func (m *PaymentReconciliationDetail) FromJSON(data []byte) error {
+// UnmarshalJSON populates PaymentReconciliationDetail from JSON data.
+func (m *PaymentReconciliationDetail) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -299,8 +299,8 @@ func (m *PaymentReconciliationDetail) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts PaymentReconciliationDetail to JSON data.
-func (m *PaymentReconciliationDetail) ToJSON() ([]byte, error) {
+// MarshalJSON converts PaymentReconciliationDetail to JSON data.
+func (m *PaymentReconciliationDetail) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -321,7 +321,7 @@ func (m *PaymentReconciliationDetail) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -335,7 +335,7 @@ func (m *PaymentReconciliationDetail) ToJSON() ([]byte, error) {
 	if m.Date != nil && m.Date.Value != nil {
 		output.Date = m.Date.Value
 		if m.Date.Element != nil {
-			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+			output.DateElement = toMapOrNil(m.Date.Element.MarshalJSON())
 		}
 	}
 	output.Responsible = m.Responsible
@@ -400,8 +400,8 @@ func NewPaymentReconciliationProcessNote() *PaymentReconciliationProcessNote {
 	return &PaymentReconciliationProcessNote{}
 }
 
-// FromJSON populates PaymentReconciliationProcessNote from JSON data.
-func (m *PaymentReconciliationProcessNote) FromJSON(data []byte) error {
+// UnmarshalJSON populates PaymentReconciliationProcessNote from JSON data.
+func (m *PaymentReconciliationProcessNote) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -420,8 +420,8 @@ func (m *PaymentReconciliationProcessNote) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts PaymentReconciliationProcessNote to JSON data.
-func (m *PaymentReconciliationProcessNote) ToJSON() ([]byte, error) {
+// MarshalJSON converts PaymentReconciliationProcessNote to JSON data.
+func (m *PaymentReconciliationProcessNote) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -434,7 +434,7 @@ func (m *PaymentReconciliationProcessNote) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -443,7 +443,7 @@ func (m *PaymentReconciliationProcessNote) ToJSON() ([]byte, error) {
 	if m.Text != nil && m.Text.Value != nil {
 		output.Text = m.Text.Value
 		if m.Text.Element != nil {
-			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+			output.TextElement = toMapOrNil(m.Text.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

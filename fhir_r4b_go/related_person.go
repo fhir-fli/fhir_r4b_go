@@ -37,8 +37,8 @@ func NewRelatedPerson() *RelatedPerson {
 	return &RelatedPerson{}
 }
 
-// FromJSON populates RelatedPerson from JSON data.
-func (m *RelatedPerson) FromJSON(data []byte) error {
+// UnmarshalJSON populates RelatedPerson from JSON data.
+func (m *RelatedPerson) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -87,8 +87,8 @@ func (m *RelatedPerson) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts RelatedPerson to JSON data.
-func (m *RelatedPerson) ToJSON() ([]byte, error) {
+// MarshalJSON converts RelatedPerson to JSON data.
+func (m *RelatedPerson) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -118,14 +118,14 @@ func (m *RelatedPerson) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -137,7 +137,7 @@ func (m *RelatedPerson) ToJSON() ([]byte, error) {
 	if m.Active != nil && m.Active.Value != nil {
 		output.Active = m.Active.Value
 		if m.Active.Element != nil {
-			output.ActiveElement = toMapOrNil(m.Active.Element.ToJSON())
+			output.ActiveElement = toMapOrNil(m.Active.Element.MarshalJSON())
 		}
 	}
 	output.Patient = m.Patient
@@ -148,7 +148,7 @@ func (m *RelatedPerson) ToJSON() ([]byte, error) {
 	if m.BirthDate != nil && m.BirthDate.Value != nil {
 		output.BirthDate = m.BirthDate.Value
 		if m.BirthDate.Element != nil {
-			output.BirthDateElement = toMapOrNil(m.BirthDate.Element.ToJSON())
+			output.BirthDateElement = toMapOrNil(m.BirthDate.Element.MarshalJSON())
 		}
 	}
 	output.Address = m.Address
@@ -228,8 +228,8 @@ func NewRelatedPersonCommunication() *RelatedPersonCommunication {
 	return &RelatedPersonCommunication{}
 }
 
-// FromJSON populates RelatedPersonCommunication from JSON data.
-func (m *RelatedPersonCommunication) FromJSON(data []byte) error {
+// UnmarshalJSON populates RelatedPersonCommunication from JSON data.
+func (m *RelatedPersonCommunication) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -248,8 +248,8 @@ func (m *RelatedPersonCommunication) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts RelatedPersonCommunication to JSON data.
-func (m *RelatedPersonCommunication) ToJSON() ([]byte, error) {
+// MarshalJSON converts RelatedPersonCommunication to JSON data.
+func (m *RelatedPersonCommunication) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -262,7 +262,7 @@ func (m *RelatedPersonCommunication) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -271,7 +271,7 @@ func (m *RelatedPersonCommunication) ToJSON() ([]byte, error) {
 	if m.Preferred != nil && m.Preferred.Value != nil {
 		output.Preferred = m.Preferred.Value
 		if m.Preferred.Element != nil {
-			output.PreferredElement = toMapOrNil(m.Preferred.Element.ToJSON())
+			output.PreferredElement = toMapOrNil(m.Preferred.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

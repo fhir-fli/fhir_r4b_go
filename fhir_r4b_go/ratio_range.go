@@ -22,8 +22,8 @@ func NewRatioRange() *RatioRange {
 	return &RatioRange{}
 }
 
-// FromJSON populates RatioRange from JSON data.
-func (m *RatioRange) FromJSON(data []byte) error {
+// UnmarshalJSON populates RatioRange from JSON data.
+func (m *RatioRange) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -42,8 +42,8 @@ func (m *RatioRange) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts RatioRange to JSON data.
-func (m *RatioRange) ToJSON() ([]byte, error) {
+// MarshalJSON converts RatioRange to JSON data.
+func (m *RatioRange) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -55,7 +55,7 @@ func (m *RatioRange) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_

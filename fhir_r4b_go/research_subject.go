@@ -33,8 +33,8 @@ func NewResearchSubject() *ResearchSubject {
 	return &ResearchSubject{}
 }
 
-// FromJSON populates ResearchSubject from JSON data.
-func (m *ResearchSubject) FromJSON(data []byte) error {
+// UnmarshalJSON populates ResearchSubject from JSON data.
+func (m *ResearchSubject) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -75,8 +75,8 @@ func (m *ResearchSubject) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ResearchSubject to JSON data.
-func (m *ResearchSubject) ToJSON() ([]byte, error) {
+// MarshalJSON converts ResearchSubject to JSON data.
+func (m *ResearchSubject) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -102,14 +102,14 @@ func (m *ResearchSubject) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -125,13 +125,13 @@ func (m *ResearchSubject) ToJSON() ([]byte, error) {
 	if m.AssignedArm != nil && m.AssignedArm.Value != nil {
 		output.AssignedArm = m.AssignedArm.Value
 		if m.AssignedArm.Element != nil {
-			output.AssignedArmElement = toMapOrNil(m.AssignedArm.Element.ToJSON())
+			output.AssignedArmElement = toMapOrNil(m.AssignedArm.Element.MarshalJSON())
 		}
 	}
 	if m.ActualArm != nil && m.ActualArm.Value != nil {
 		output.ActualArm = m.ActualArm.Value
 		if m.ActualArm.Element != nil {
-			output.ActualArmElement = toMapOrNil(m.ActualArm.Element.ToJSON())
+			output.ActualArmElement = toMapOrNil(m.ActualArm.Element.MarshalJSON())
 		}
 	}
 	output.Consent = m.Consent

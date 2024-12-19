@@ -24,8 +24,8 @@ func NewFhirExpression() *FhirExpression {
 	return &FhirExpression{}
 }
 
-// FromJSON populates FhirExpression from JSON data.
-func (m *FhirExpression) FromJSON(data []byte) error {
+// UnmarshalJSON populates FhirExpression from JSON data.
+func (m *FhirExpression) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -48,8 +48,8 @@ func (m *FhirExpression) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts FhirExpression to JSON data.
-func (m *FhirExpression) ToJSON() ([]byte, error) {
+// MarshalJSON converts FhirExpression to JSON data.
+func (m *FhirExpression) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -67,33 +67,33 @@ func (m *FhirExpression) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
 	if m.Expression != nil && m.Expression.Value != nil {
 		output.Expression = m.Expression.Value
 		if m.Expression.Element != nil {
-			output.ExpressionElement = toMapOrNil(m.Expression.Element.ToJSON())
+			output.ExpressionElement = toMapOrNil(m.Expression.Element.MarshalJSON())
 		}
 	}
 	if m.Reference != nil && m.Reference.Value != nil {
 		output.Reference = m.Reference.Value
 		if m.Reference.Element != nil {
-			output.ReferenceElement = toMapOrNil(m.Reference.Element.ToJSON())
+			output.ReferenceElement = toMapOrNil(m.Reference.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

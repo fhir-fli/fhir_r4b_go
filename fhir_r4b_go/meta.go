@@ -26,8 +26,8 @@ func NewFhirMeta() *FhirMeta {
 	return &FhirMeta{}
 }
 
-// FromJSON populates FhirMeta from JSON data.
-func (m *FhirMeta) FromJSON(data []byte) error {
+// UnmarshalJSON populates FhirMeta from JSON data.
+func (m *FhirMeta) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -61,8 +61,8 @@ func (m *FhirMeta) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts FhirMeta to JSON data.
-func (m *FhirMeta) ToJSON() ([]byte, error) {
+// MarshalJSON converts FhirMeta to JSON data.
+func (m *FhirMeta) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -81,26 +81,26 @@ func (m *FhirMeta) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
 	if m.VersionId != nil && m.VersionId.Value != nil {
 		output.VersionId = m.VersionId.Value
 		if m.VersionId.Element != nil {
-			output.VersionIdElement = toMapOrNil(m.VersionId.Element.ToJSON())
+			output.VersionIdElement = toMapOrNil(m.VersionId.Element.MarshalJSON())
 		}
 	}
 	if m.LastUpdated != nil && m.LastUpdated.Value != nil {
 		output.LastUpdated = m.LastUpdated.Value
 		if m.LastUpdated.Element != nil {
-			output.LastUpdatedElement = toMapOrNil(m.LastUpdated.Element.ToJSON())
+			output.LastUpdatedElement = toMapOrNil(m.LastUpdated.Element.MarshalJSON())
 		}
 	}
 	if m.Source != nil && m.Source.Value != nil {
 		output.Source = m.Source.Value
 		if m.Source.Element != nil {
-			output.SourceElement = toMapOrNil(m.Source.Element.ToJSON())
+			output.SourceElement = toMapOrNil(m.Source.Element.MarshalJSON())
 		}
 	}
 	if len(m.Profile) > 0 {
@@ -111,7 +111,7 @@ func (m *FhirMeta) ToJSON() ([]byte, error) {
 				output.Profile[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.ProfileElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.ProfileElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}

@@ -28,8 +28,8 @@ func NewLinkage() *Linkage {
 	return &Linkage{}
 }
 
-// FromJSON populates Linkage from JSON data.
-func (m *Linkage) FromJSON(data []byte) error {
+// UnmarshalJSON populates Linkage from JSON data.
+func (m *Linkage) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -60,8 +60,8 @@ func (m *Linkage) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Linkage to JSON data.
-func (m *Linkage) ToJSON() ([]byte, error) {
+// MarshalJSON converts Linkage to JSON data.
+func (m *Linkage) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -81,14 +81,14 @@ func (m *Linkage) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -99,7 +99,7 @@ func (m *Linkage) ToJSON() ([]byte, error) {
 	if m.Active != nil && m.Active.Value != nil {
 		output.Active = m.Active.Value
 		if m.Active.Element != nil {
-			output.ActiveElement = toMapOrNil(m.Active.Element.ToJSON())
+			output.ActiveElement = toMapOrNil(m.Active.Element.MarshalJSON())
 		}
 	}
 	output.Author = m.Author
@@ -159,8 +159,8 @@ func NewLinkageItem() *LinkageItem {
 	return &LinkageItem{}
 }
 
-// FromJSON populates LinkageItem from JSON data.
-func (m *LinkageItem) FromJSON(data []byte) error {
+// UnmarshalJSON populates LinkageItem from JSON data.
+func (m *LinkageItem) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -179,8 +179,8 @@ func (m *LinkageItem) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts LinkageItem to JSON data.
-func (m *LinkageItem) ToJSON() ([]byte, error) {
+// MarshalJSON converts LinkageItem to JSON data.
+func (m *LinkageItem) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -192,7 +192,7 @@ func (m *LinkageItem) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_

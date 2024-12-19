@@ -1,6 +1,7 @@
 package fhir_r4b_go
 
 import (
+	"encoding/json"
 	"errors"
 	"reflect"
 )
@@ -19,20 +20,20 @@ func NewPrimitiveType[T any](value *T, element *Element) (*PrimitiveType[T], err
 	return &PrimitiveType[T]{Value: value, Element: element}, nil
 }
 
-// ToJSON serializes the PrimitiveType to JSON.
-func (pt *PrimitiveType[T]) ToJSON() (map[string]interface{}, error) {
+// MarshalJSON serializes the PrimitiveType to JSON.
+func (pt *PrimitiveType[T]) MarshalJSON() ([]byte, error) {
 	jsonData := make(map[string]interface{})
 	if pt.Value != nil {
 		jsonData["value"] = pt.Value
 	}
 	if pt.Element != nil {
-		elementJSON, err := pt.Element.ToJSON()
+		elementJSON, err := pt.Element.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}
-		jsonData["_value"] = elementJSON
+		jsonData["_value"] = json.RawMessage(elementJSON)
 	}
-	return jsonData, nil
+	return json.Marshal(jsonData)
 }
 
 // Equals checks equality with another PrimitiveType.

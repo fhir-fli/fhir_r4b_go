@@ -25,8 +25,8 @@ func NewPopulation() *Population {
 	return &Population{}
 }
 
-// FromJSON populates Population from JSON data.
-func (m *Population) FromJSON(data []byte) error {
+// UnmarshalJSON populates Population from JSON data.
+func (m *Population) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -51,8 +51,8 @@ func (m *Population) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Population to JSON data.
-func (m *Population) ToJSON() ([]byte, error) {
+// MarshalJSON converts Population to JSON data.
+func (m *Population) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -67,7 +67,7 @@ func (m *Population) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_

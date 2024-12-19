@@ -45,8 +45,8 @@ func NewConceptMap() *ConceptMap {
 	return &ConceptMap{}
 }
 
-// FromJSON populates ConceptMap from JSON data.
-func (m *ConceptMap) FromJSON(data []byte) error {
+// UnmarshalJSON populates ConceptMap from JSON data.
+func (m *ConceptMap) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -111,8 +111,8 @@ func (m *ConceptMap) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ConceptMap to JSON data.
-func (m *ConceptMap) ToJSON() ([]byte, error) {
+// MarshalJSON converts ConceptMap to JSON data.
+func (m *ConceptMap) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -162,14 +162,14 @@ func (m *ConceptMap) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -180,52 +180,52 @@ func (m *ConceptMap) ToJSON() ([]byte, error) {
 	if m.Url != nil && m.Url.Value != nil {
 		output.Url = m.Url.Value
 		if m.Url.Element != nil {
-			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+			output.UrlElement = toMapOrNil(m.Url.Element.MarshalJSON())
 		}
 	}
 	output.Identifier = m.Identifier
 	if m.Version != nil && m.Version.Value != nil {
 		output.Version = m.Version.Value
 		if m.Version.Element != nil {
-			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+			output.VersionElement = toMapOrNil(m.Version.Element.MarshalJSON())
 		}
 	}
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	if m.Title != nil && m.Title.Value != nil {
 		output.Title = m.Title.Value
 		if m.Title.Element != nil {
-			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+			output.TitleElement = toMapOrNil(m.Title.Element.MarshalJSON())
 		}
 	}
 	output.Status = m.Status
 	if m.Experimental != nil && m.Experimental.Value != nil {
 		output.Experimental = m.Experimental.Value
 		if m.Experimental.Element != nil {
-			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.MarshalJSON())
 		}
 	}
 	if m.Date != nil && m.Date.Value != nil {
 		output.Date = m.Date.Value
 		if m.Date.Element != nil {
-			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+			output.DateElement = toMapOrNil(m.Date.Element.MarshalJSON())
 		}
 	}
 	if m.Publisher != nil && m.Publisher.Value != nil {
 		output.Publisher = m.Publisher.Value
 		if m.Publisher.Element != nil {
-			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.MarshalJSON())
 		}
 	}
 	output.Contact = m.Contact
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.UseContext = m.UseContext
@@ -233,37 +233,37 @@ func (m *ConceptMap) ToJSON() ([]byte, error) {
 	if m.Purpose != nil && m.Purpose.Value != nil {
 		output.Purpose = m.Purpose.Value
 		if m.Purpose.Element != nil {
-			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.MarshalJSON())
 		}
 	}
 	if m.Copyright != nil && m.Copyright.Value != nil {
 		output.Copyright = m.Copyright.Value
 		if m.Copyright.Element != nil {
-			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.MarshalJSON())
 		}
 	}
 	if m.SourceUri != nil && m.SourceUri.Value != nil {
 		output.SourceUri = m.SourceUri.Value
 		if m.SourceUri.Element != nil {
-			output.SourceUriElement = toMapOrNil(m.SourceUri.Element.ToJSON())
+			output.SourceUriElement = toMapOrNil(m.SourceUri.Element.MarshalJSON())
 		}
 	}
 	if m.SourceCanonical != nil && m.SourceCanonical.Value != nil {
 		output.SourceCanonical = m.SourceCanonical.Value
 		if m.SourceCanonical.Element != nil {
-			output.SourceCanonicalElement = toMapOrNil(m.SourceCanonical.Element.ToJSON())
+			output.SourceCanonicalElement = toMapOrNil(m.SourceCanonical.Element.MarshalJSON())
 		}
 	}
 	if m.TargetUri != nil && m.TargetUri.Value != nil {
 		output.TargetUri = m.TargetUri.Value
 		if m.TargetUri.Element != nil {
-			output.TargetUriElement = toMapOrNil(m.TargetUri.Element.ToJSON())
+			output.TargetUriElement = toMapOrNil(m.TargetUri.Element.MarshalJSON())
 		}
 	}
 	if m.TargetCanonical != nil && m.TargetCanonical.Value != nil {
 		output.TargetCanonical = m.TargetCanonical.Value
 		if m.TargetCanonical.Element != nil {
-			output.TargetCanonicalElement = toMapOrNil(m.TargetCanonical.Element.ToJSON())
+			output.TargetCanonicalElement = toMapOrNil(m.TargetCanonical.Element.MarshalJSON())
 		}
 	}
 	output.Group = m.Group
@@ -360,8 +360,8 @@ func NewConceptMapGroup() *ConceptMapGroup {
 	return &ConceptMapGroup{}
 }
 
-// FromJSON populates ConceptMapGroup from JSON data.
-func (m *ConceptMapGroup) FromJSON(data []byte) error {
+// UnmarshalJSON populates ConceptMapGroup from JSON data.
+func (m *ConceptMapGroup) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -388,8 +388,8 @@ func (m *ConceptMapGroup) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ConceptMapGroup to JSON data.
-func (m *ConceptMapGroup) ToJSON() ([]byte, error) {
+// MarshalJSON converts ConceptMapGroup to JSON data.
+func (m *ConceptMapGroup) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -409,7 +409,7 @@ func (m *ConceptMapGroup) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -417,25 +417,25 @@ func (m *ConceptMapGroup) ToJSON() ([]byte, error) {
 	if m.Source != nil && m.Source.Value != nil {
 		output.Source = m.Source.Value
 		if m.Source.Element != nil {
-			output.SourceElement = toMapOrNil(m.Source.Element.ToJSON())
+			output.SourceElement = toMapOrNil(m.Source.Element.MarshalJSON())
 		}
 	}
 	if m.SourceVersion != nil && m.SourceVersion.Value != nil {
 		output.SourceVersion = m.SourceVersion.Value
 		if m.SourceVersion.Element != nil {
-			output.SourceVersionElement = toMapOrNil(m.SourceVersion.Element.ToJSON())
+			output.SourceVersionElement = toMapOrNil(m.SourceVersion.Element.MarshalJSON())
 		}
 	}
 	if m.Target != nil && m.Target.Value != nil {
 		output.Target = m.Target.Value
 		if m.Target.Element != nil {
-			output.TargetElement = toMapOrNil(m.Target.Element.ToJSON())
+			output.TargetElement = toMapOrNil(m.Target.Element.MarshalJSON())
 		}
 	}
 	if m.TargetVersion != nil && m.TargetVersion.Value != nil {
 		output.TargetVersion = m.TargetVersion.Value
 		if m.TargetVersion.Element != nil {
-			output.TargetVersionElement = toMapOrNil(m.TargetVersion.Element.ToJSON())
+			output.TargetVersionElement = toMapOrNil(m.TargetVersion.Element.MarshalJSON())
 		}
 	}
 	output.Element = m.Element
@@ -492,8 +492,8 @@ func NewConceptMapElement() *ConceptMapElement {
 	return &ConceptMapElement{}
 }
 
-// FromJSON populates ConceptMapElement from JSON data.
-func (m *ConceptMapElement) FromJSON(data []byte) error {
+// UnmarshalJSON populates ConceptMapElement from JSON data.
+func (m *ConceptMapElement) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -514,8 +514,8 @@ func (m *ConceptMapElement) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ConceptMapElement to JSON data.
-func (m *ConceptMapElement) ToJSON() ([]byte, error) {
+// MarshalJSON converts ConceptMapElement to JSON data.
+func (m *ConceptMapElement) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -530,7 +530,7 @@ func (m *ConceptMapElement) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -538,13 +538,13 @@ func (m *ConceptMapElement) ToJSON() ([]byte, error) {
 	if m.Code != nil && m.Code.Value != nil {
 		output.Code = m.Code.Value
 		if m.Code.Element != nil {
-			output.CodeElement = toMapOrNil(m.Code.Element.ToJSON())
+			output.CodeElement = toMapOrNil(m.Code.Element.MarshalJSON())
 		}
 	}
 	if m.Display != nil && m.Display.Value != nil {
 		output.Display = m.Display.Value
 		if m.Display.Element != nil {
-			output.DisplayElement = toMapOrNil(m.Display.Element.ToJSON())
+			output.DisplayElement = toMapOrNil(m.Display.Element.MarshalJSON())
 		}
 	}
 	output.Target = m.Target
@@ -597,8 +597,8 @@ func NewConceptMapTarget() *ConceptMapTarget {
 	return &ConceptMapTarget{}
 }
 
-// FromJSON populates ConceptMapTarget from JSON data.
-func (m *ConceptMapTarget) FromJSON(data []byte) error {
+// UnmarshalJSON populates ConceptMapTarget from JSON data.
+func (m *ConceptMapTarget) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -625,8 +625,8 @@ func (m *ConceptMapTarget) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ConceptMapTarget to JSON data.
-func (m *ConceptMapTarget) ToJSON() ([]byte, error) {
+// MarshalJSON converts ConceptMapTarget to JSON data.
+func (m *ConceptMapTarget) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -645,7 +645,7 @@ func (m *ConceptMapTarget) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -653,20 +653,20 @@ func (m *ConceptMapTarget) ToJSON() ([]byte, error) {
 	if m.Code != nil && m.Code.Value != nil {
 		output.Code = m.Code.Value
 		if m.Code.Element != nil {
-			output.CodeElement = toMapOrNil(m.Code.Element.ToJSON())
+			output.CodeElement = toMapOrNil(m.Code.Element.MarshalJSON())
 		}
 	}
 	if m.Display != nil && m.Display.Value != nil {
 		output.Display = m.Display.Value
 		if m.Display.Element != nil {
-			output.DisplayElement = toMapOrNil(m.Display.Element.ToJSON())
+			output.DisplayElement = toMapOrNil(m.Display.Element.MarshalJSON())
 		}
 	}
 	output.Equivalence = m.Equivalence
 	if m.Comment != nil && m.Comment.Value != nil {
 		output.Comment = m.Comment.Value
 		if m.Comment.Element != nil {
-			output.CommentElement = toMapOrNil(m.Comment.Element.ToJSON())
+			output.CommentElement = toMapOrNil(m.Comment.Element.MarshalJSON())
 		}
 	}
 	output.DependsOn = m.DependsOn
@@ -724,8 +724,8 @@ func NewConceptMapDependsOn() *ConceptMapDependsOn {
 	return &ConceptMapDependsOn{}
 }
 
-// FromJSON populates ConceptMapDependsOn from JSON data.
-func (m *ConceptMapDependsOn) FromJSON(data []byte) error {
+// UnmarshalJSON populates ConceptMapDependsOn from JSON data.
+func (m *ConceptMapDependsOn) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -748,8 +748,8 @@ func (m *ConceptMapDependsOn) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ConceptMapDependsOn to JSON data.
-func (m *ConceptMapDependsOn) ToJSON() ([]byte, error) {
+// MarshalJSON converts ConceptMapDependsOn to JSON data.
+func (m *ConceptMapDependsOn) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -767,7 +767,7 @@ func (m *ConceptMapDependsOn) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -775,25 +775,25 @@ func (m *ConceptMapDependsOn) ToJSON() ([]byte, error) {
 	if m.Property != nil && m.Property.Value != nil {
 		output.Property = m.Property.Value
 		if m.Property.Element != nil {
-			output.PropertyElement = toMapOrNil(m.Property.Element.ToJSON())
+			output.PropertyElement = toMapOrNil(m.Property.Element.MarshalJSON())
 		}
 	}
 	if m.System != nil && m.System.Value != nil {
 		output.System = m.System.Value
 		if m.System.Element != nil {
-			output.SystemElement = toMapOrNil(m.System.Element.ToJSON())
+			output.SystemElement = toMapOrNil(m.System.Element.MarshalJSON())
 		}
 	}
 	if m.Value != nil && m.Value.Value != nil {
 		output.Value = m.Value.Value
 		if m.Value.Element != nil {
-			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+			output.ValueElement = toMapOrNil(m.Value.Element.MarshalJSON())
 		}
 	}
 	if m.Display != nil && m.Display.Value != nil {
 		output.Display = m.Display.Value
 		if m.Display.Element != nil {
-			output.DisplayElement = toMapOrNil(m.Display.Element.ToJSON())
+			output.DisplayElement = toMapOrNil(m.Display.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -845,8 +845,8 @@ func NewConceptMapUnmapped() *ConceptMapUnmapped {
 	return &ConceptMapUnmapped{}
 }
 
-// FromJSON populates ConceptMapUnmapped from JSON data.
-func (m *ConceptMapUnmapped) FromJSON(data []byte) error {
+// UnmarshalJSON populates ConceptMapUnmapped from JSON data.
+func (m *ConceptMapUnmapped) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -869,8 +869,8 @@ func (m *ConceptMapUnmapped) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ConceptMapUnmapped to JSON data.
-func (m *ConceptMapUnmapped) ToJSON() ([]byte, error) {
+// MarshalJSON converts ConceptMapUnmapped to JSON data.
+func (m *ConceptMapUnmapped) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -887,7 +887,7 @@ func (m *ConceptMapUnmapped) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -896,19 +896,19 @@ func (m *ConceptMapUnmapped) ToJSON() ([]byte, error) {
 	if m.Code != nil && m.Code.Value != nil {
 		output.Code = m.Code.Value
 		if m.Code.Element != nil {
-			output.CodeElement = toMapOrNil(m.Code.Element.ToJSON())
+			output.CodeElement = toMapOrNil(m.Code.Element.MarshalJSON())
 		}
 	}
 	if m.Display != nil && m.Display.Value != nil {
 		output.Display = m.Display.Value
 		if m.Display.Element != nil {
-			output.DisplayElement = toMapOrNil(m.Display.Element.ToJSON())
+			output.DisplayElement = toMapOrNil(m.Display.Element.MarshalJSON())
 		}
 	}
 	if m.Url != nil && m.Url.Value != nil {
 		output.Url = m.Url.Value
 		if m.Url.Element != nil {
-			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+			output.UrlElement = toMapOrNil(m.Url.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

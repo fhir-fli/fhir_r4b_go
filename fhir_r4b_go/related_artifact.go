@@ -26,8 +26,8 @@ func NewRelatedArtifact() *RelatedArtifact {
 	return &RelatedArtifact{}
 }
 
-// FromJSON populates RelatedArtifact from JSON data.
-func (m *RelatedArtifact) FromJSON(data []byte) error {
+// UnmarshalJSON populates RelatedArtifact from JSON data.
+func (m *RelatedArtifact) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -54,8 +54,8 @@ func (m *RelatedArtifact) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts RelatedArtifact to JSON data.
-func (m *RelatedArtifact) ToJSON() ([]byte, error) {
+// MarshalJSON converts RelatedArtifact to JSON data.
+func (m *RelatedArtifact) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -76,7 +76,7 @@ func (m *RelatedArtifact) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -84,32 +84,32 @@ func (m *RelatedArtifact) ToJSON() ([]byte, error) {
 	if m.Label != nil && m.Label.Value != nil {
 		output.Label = m.Label.Value
 		if m.Label.Element != nil {
-			output.LabelElement = toMapOrNil(m.Label.Element.ToJSON())
+			output.LabelElement = toMapOrNil(m.Label.Element.MarshalJSON())
 		}
 	}
 	if m.Display != nil && m.Display.Value != nil {
 		output.Display = m.Display.Value
 		if m.Display.Element != nil {
-			output.DisplayElement = toMapOrNil(m.Display.Element.ToJSON())
+			output.DisplayElement = toMapOrNil(m.Display.Element.MarshalJSON())
 		}
 	}
 	if m.Citation != nil && m.Citation.Value != nil {
 		output.Citation = m.Citation.Value
 		if m.Citation.Element != nil {
-			output.CitationElement = toMapOrNil(m.Citation.Element.ToJSON())
+			output.CitationElement = toMapOrNil(m.Citation.Element.MarshalJSON())
 		}
 	}
 	if m.Url != nil && m.Url.Value != nil {
 		output.Url = m.Url.Value
 		if m.Url.Element != nil {
-			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+			output.UrlElement = toMapOrNil(m.Url.Element.MarshalJSON())
 		}
 	}
 	output.Document = m.Document
 	if m.Resource != nil && m.Resource.Value != nil {
 		output.Resource = m.Resource.Value
 		if m.Resource.Element != nil {
-			output.ResourceElement = toMapOrNil(m.Resource.Element.ToJSON())
+			output.ResourceElement = toMapOrNil(m.Resource.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

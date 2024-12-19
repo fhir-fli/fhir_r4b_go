@@ -37,8 +37,8 @@ func NewOrganizationAffiliation() *OrganizationAffiliation {
 	return &OrganizationAffiliation{}
 }
 
-// FromJSON populates OrganizationAffiliation from JSON data.
-func (m *OrganizationAffiliation) FromJSON(data []byte) error {
+// UnmarshalJSON populates OrganizationAffiliation from JSON data.
+func (m *OrganizationAffiliation) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -87,8 +87,8 @@ func (m *OrganizationAffiliation) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts OrganizationAffiliation to JSON data.
-func (m *OrganizationAffiliation) ToJSON() ([]byte, error) {
+// MarshalJSON converts OrganizationAffiliation to JSON data.
+func (m *OrganizationAffiliation) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -117,14 +117,14 @@ func (m *OrganizationAffiliation) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -136,7 +136,7 @@ func (m *OrganizationAffiliation) ToJSON() ([]byte, error) {
 	if m.Active != nil && m.Active.Value != nil {
 		output.Active = m.Active.Value
 		if m.Active.Element != nil {
-			output.ActiveElement = toMapOrNil(m.Active.Element.ToJSON())
+			output.ActiveElement = toMapOrNil(m.Active.Element.MarshalJSON())
 		}
 	}
 	output.Period = m.Period

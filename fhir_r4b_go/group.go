@@ -35,8 +35,8 @@ func NewFhirGroup() *FhirGroup {
 	return &FhirGroup{}
 }
 
-// FromJSON populates FhirGroup from JSON data.
-func (m *FhirGroup) FromJSON(data []byte) error {
+// UnmarshalJSON populates FhirGroup from JSON data.
+func (m *FhirGroup) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -81,8 +81,8 @@ func (m *FhirGroup) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts FhirGroup to JSON data.
-func (m *FhirGroup) ToJSON() ([]byte, error) {
+// MarshalJSON converts FhirGroup to JSON data.
+func (m *FhirGroup) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -112,14 +112,14 @@ func (m *FhirGroup) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -131,27 +131,27 @@ func (m *FhirGroup) ToJSON() ([]byte, error) {
 	if m.Active != nil && m.Active.Value != nil {
 		output.Active = m.Active.Value
 		if m.Active.Element != nil {
-			output.ActiveElement = toMapOrNil(m.Active.Element.ToJSON())
+			output.ActiveElement = toMapOrNil(m.Active.Element.MarshalJSON())
 		}
 	}
 	output.Type = m.Type
 	if m.Actual != nil && m.Actual.Value != nil {
 		output.Actual = m.Actual.Value
 		if m.Actual.Element != nil {
-			output.ActualElement = toMapOrNil(m.Actual.Element.ToJSON())
+			output.ActualElement = toMapOrNil(m.Actual.Element.MarshalJSON())
 		}
 	}
 	output.Code = m.Code
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	if m.Quantity != nil && m.Quantity.Value != nil {
 		output.Quantity = m.Quantity.Value
 		if m.Quantity.Element != nil {
-			output.QuantityElement = toMapOrNil(m.Quantity.Element.ToJSON())
+			output.QuantityElement = toMapOrNil(m.Quantity.Element.MarshalJSON())
 		}
 	}
 	output.ManagingEntity = m.ManagingEntity
@@ -232,8 +232,8 @@ func NewGroupCharacteristic() *GroupCharacteristic {
 	return &GroupCharacteristic{}
 }
 
-// FromJSON populates GroupCharacteristic from JSON data.
-func (m *GroupCharacteristic) FromJSON(data []byte) error {
+// UnmarshalJSON populates GroupCharacteristic from JSON data.
+func (m *GroupCharacteristic) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -264,8 +264,8 @@ func (m *GroupCharacteristic) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts GroupCharacteristic to JSON data.
-func (m *GroupCharacteristic) ToJSON() ([]byte, error) {
+// MarshalJSON converts GroupCharacteristic to JSON data.
+func (m *GroupCharacteristic) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -285,7 +285,7 @@ func (m *GroupCharacteristic) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -295,7 +295,7 @@ func (m *GroupCharacteristic) ToJSON() ([]byte, error) {
 	if m.ValueBoolean != nil && m.ValueBoolean.Value != nil {
 		output.ValueBoolean = m.ValueBoolean.Value
 		if m.ValueBoolean.Element != nil {
-			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.ToJSON())
+			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.MarshalJSON())
 		}
 	}
 	output.ValueQuantity = m.ValueQuantity
@@ -304,7 +304,7 @@ func (m *GroupCharacteristic) ToJSON() ([]byte, error) {
 	if m.Exclude != nil && m.Exclude.Value != nil {
 		output.Exclude = m.Exclude.Value
 		if m.Exclude.Element != nil {
-			output.ExcludeElement = toMapOrNil(m.Exclude.Element.ToJSON())
+			output.ExcludeElement = toMapOrNil(m.Exclude.Element.MarshalJSON())
 		}
 	}
 	output.Period = m.Period
@@ -364,8 +364,8 @@ func NewGroupMember() *GroupMember {
 	return &GroupMember{}
 }
 
-// FromJSON populates GroupMember from JSON data.
-func (m *GroupMember) FromJSON(data []byte) error {
+// UnmarshalJSON populates GroupMember from JSON data.
+func (m *GroupMember) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -386,8 +386,8 @@ func (m *GroupMember) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts GroupMember to JSON data.
-func (m *GroupMember) ToJSON() ([]byte, error) {
+// MarshalJSON converts GroupMember to JSON data.
+func (m *GroupMember) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -401,7 +401,7 @@ func (m *GroupMember) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -411,7 +411,7 @@ func (m *GroupMember) ToJSON() ([]byte, error) {
 	if m.Inactive != nil && m.Inactive.Value != nil {
 		output.Inactive = m.Inactive.Value
 		if m.Inactive.Element != nil {
-			output.InactiveElement = toMapOrNil(m.Inactive.Element.ToJSON())
+			output.InactiveElement = toMapOrNil(m.Inactive.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

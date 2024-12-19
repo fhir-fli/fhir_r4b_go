@@ -48,8 +48,8 @@ func NewSubscriptionTopic() *SubscriptionTopic {
 	return &SubscriptionTopic{}
 }
 
-// FromJSON populates SubscriptionTopic from JSON data.
-func (m *SubscriptionTopic) FromJSON(data []byte) error {
+// UnmarshalJSON populates SubscriptionTopic from JSON data.
+func (m *SubscriptionTopic) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -127,8 +127,8 @@ func (m *SubscriptionTopic) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts SubscriptionTopic to JSON data.
-func (m *SubscriptionTopic) ToJSON() ([]byte, error) {
+// MarshalJSON converts SubscriptionTopic to JSON data.
+func (m *SubscriptionTopic) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -178,14 +178,14 @@ func (m *SubscriptionTopic) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -196,20 +196,20 @@ func (m *SubscriptionTopic) ToJSON() ([]byte, error) {
 	if m.Url != nil && m.Url.Value != nil {
 		output.Url = m.Url.Value
 		if m.Url.Element != nil {
-			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+			output.UrlElement = toMapOrNil(m.Url.Element.MarshalJSON())
 		}
 	}
 	output.Identifier = m.Identifier
 	if m.Version != nil && m.Version.Value != nil {
 		output.Version = m.Version.Value
 		if m.Version.Element != nil {
-			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+			output.VersionElement = toMapOrNil(m.Version.Element.MarshalJSON())
 		}
 	}
 	if m.Title != nil && m.Title.Value != nil {
 		output.Title = m.Title.Value
 		if m.Title.Element != nil {
-			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+			output.TitleElement = toMapOrNil(m.Title.Element.MarshalJSON())
 		}
 	}
 	if len(m.DerivedFrom) > 0 {
@@ -220,7 +220,7 @@ func (m *SubscriptionTopic) ToJSON() ([]byte, error) {
 				output.DerivedFrom[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.DerivedFromElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.DerivedFromElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -228,26 +228,26 @@ func (m *SubscriptionTopic) ToJSON() ([]byte, error) {
 	if m.Experimental != nil && m.Experimental.Value != nil {
 		output.Experimental = m.Experimental.Value
 		if m.Experimental.Element != nil {
-			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.MarshalJSON())
 		}
 	}
 	if m.Date != nil && m.Date.Value != nil {
 		output.Date = m.Date.Value
 		if m.Date.Element != nil {
-			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+			output.DateElement = toMapOrNil(m.Date.Element.MarshalJSON())
 		}
 	}
 	if m.Publisher != nil && m.Publisher.Value != nil {
 		output.Publisher = m.Publisher.Value
 		if m.Publisher.Element != nil {
-			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.MarshalJSON())
 		}
 	}
 	output.Contact = m.Contact
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.UseContext = m.UseContext
@@ -255,25 +255,25 @@ func (m *SubscriptionTopic) ToJSON() ([]byte, error) {
 	if m.Purpose != nil && m.Purpose.Value != nil {
 		output.Purpose = m.Purpose.Value
 		if m.Purpose.Element != nil {
-			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.MarshalJSON())
 		}
 	}
 	if m.Copyright != nil && m.Copyright.Value != nil {
 		output.Copyright = m.Copyright.Value
 		if m.Copyright.Element != nil {
-			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.MarshalJSON())
 		}
 	}
 	if m.ApprovalDate != nil && m.ApprovalDate.Value != nil {
 		output.ApprovalDate = m.ApprovalDate.Value
 		if m.ApprovalDate.Element != nil {
-			output.ApprovalDateElement = toMapOrNil(m.ApprovalDate.Element.ToJSON())
+			output.ApprovalDateElement = toMapOrNil(m.ApprovalDate.Element.MarshalJSON())
 		}
 	}
 	if m.LastReviewDate != nil && m.LastReviewDate.Value != nil {
 		output.LastReviewDate = m.LastReviewDate.Value
 		if m.LastReviewDate.Element != nil {
-			output.LastReviewDateElement = toMapOrNil(m.LastReviewDate.Element.ToJSON())
+			output.LastReviewDateElement = toMapOrNil(m.LastReviewDate.Element.MarshalJSON())
 		}
 	}
 	output.EffectivePeriod = m.EffectivePeriod
@@ -377,8 +377,8 @@ func NewSubscriptionTopicResourceTrigger() *SubscriptionTopicResourceTrigger {
 	return &SubscriptionTopicResourceTrigger{}
 }
 
-// FromJSON populates SubscriptionTopicResourceTrigger from JSON data.
-func (m *SubscriptionTopicResourceTrigger) FromJSON(data []byte) error {
+// UnmarshalJSON populates SubscriptionTopicResourceTrigger from JSON data.
+func (m *SubscriptionTopicResourceTrigger) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -403,8 +403,8 @@ func (m *SubscriptionTopicResourceTrigger) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts SubscriptionTopicResourceTrigger to JSON data.
-func (m *SubscriptionTopicResourceTrigger) ToJSON() ([]byte, error) {
+// MarshalJSON converts SubscriptionTopicResourceTrigger to JSON data.
+func (m *SubscriptionTopicResourceTrigger) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -422,7 +422,7 @@ func (m *SubscriptionTopicResourceTrigger) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -430,13 +430,13 @@ func (m *SubscriptionTopicResourceTrigger) ToJSON() ([]byte, error) {
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	if m.Resource != nil && m.Resource.Value != nil {
 		output.Resource = m.Resource.Value
 		if m.Resource.Element != nil {
-			output.ResourceElement = toMapOrNil(m.Resource.Element.ToJSON())
+			output.ResourceElement = toMapOrNil(m.Resource.Element.MarshalJSON())
 		}
 	}
 	output.SupportedInteraction = m.SupportedInteraction
@@ -444,7 +444,7 @@ func (m *SubscriptionTopicResourceTrigger) ToJSON() ([]byte, error) {
 	if m.FhirPathCriteria != nil && m.FhirPathCriteria.Value != nil {
 		output.FhirPathCriteria = m.FhirPathCriteria.Value
 		if m.FhirPathCriteria.Element != nil {
-			output.FhirPathCriteriaElement = toMapOrNil(m.FhirPathCriteria.Element.ToJSON())
+			output.FhirPathCriteriaElement = toMapOrNil(m.FhirPathCriteria.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -499,8 +499,8 @@ func NewSubscriptionTopicQueryCriteria() *SubscriptionTopicQueryCriteria {
 	return &SubscriptionTopicQueryCriteria{}
 }
 
-// FromJSON populates SubscriptionTopicQueryCriteria from JSON data.
-func (m *SubscriptionTopicQueryCriteria) FromJSON(data []byte) error {
+// UnmarshalJSON populates SubscriptionTopicQueryCriteria from JSON data.
+func (m *SubscriptionTopicQueryCriteria) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -525,8 +525,8 @@ func (m *SubscriptionTopicQueryCriteria) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts SubscriptionTopicQueryCriteria to JSON data.
-func (m *SubscriptionTopicQueryCriteria) ToJSON() ([]byte, error) {
+// MarshalJSON converts SubscriptionTopicQueryCriteria to JSON data.
+func (m *SubscriptionTopicQueryCriteria) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -544,7 +544,7 @@ func (m *SubscriptionTopicQueryCriteria) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -552,21 +552,21 @@ func (m *SubscriptionTopicQueryCriteria) ToJSON() ([]byte, error) {
 	if m.Previous != nil && m.Previous.Value != nil {
 		output.Previous = m.Previous.Value
 		if m.Previous.Element != nil {
-			output.PreviousElement = toMapOrNil(m.Previous.Element.ToJSON())
+			output.PreviousElement = toMapOrNil(m.Previous.Element.MarshalJSON())
 		}
 	}
 	output.ResultForCreate = m.ResultForCreate
 	if m.Current != nil && m.Current.Value != nil {
 		output.Current = m.Current.Value
 		if m.Current.Element != nil {
-			output.CurrentElement = toMapOrNil(m.Current.Element.ToJSON())
+			output.CurrentElement = toMapOrNil(m.Current.Element.MarshalJSON())
 		}
 	}
 	output.ResultForDelete = m.ResultForDelete
 	if m.RequireBoth != nil && m.RequireBoth.Value != nil {
 		output.RequireBoth = m.RequireBoth.Value
 		if m.RequireBoth.Element != nil {
-			output.RequireBothElement = toMapOrNil(m.RequireBoth.Element.ToJSON())
+			output.RequireBothElement = toMapOrNil(m.RequireBoth.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -619,8 +619,8 @@ func NewSubscriptionTopicEventTrigger() *SubscriptionTopicEventTrigger {
 	return &SubscriptionTopicEventTrigger{}
 }
 
-// FromJSON populates SubscriptionTopicEventTrigger from JSON data.
-func (m *SubscriptionTopicEventTrigger) FromJSON(data []byte) error {
+// UnmarshalJSON populates SubscriptionTopicEventTrigger from JSON data.
+func (m *SubscriptionTopicEventTrigger) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -641,8 +641,8 @@ func (m *SubscriptionTopicEventTrigger) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts SubscriptionTopicEventTrigger to JSON data.
-func (m *SubscriptionTopicEventTrigger) ToJSON() ([]byte, error) {
+// MarshalJSON converts SubscriptionTopicEventTrigger to JSON data.
+func (m *SubscriptionTopicEventTrigger) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -657,7 +657,7 @@ func (m *SubscriptionTopicEventTrigger) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -665,14 +665,14 @@ func (m *SubscriptionTopicEventTrigger) ToJSON() ([]byte, error) {
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.Event = m.Event
 	if m.Resource != nil && m.Resource.Value != nil {
 		output.Resource = m.Resource.Value
 		if m.Resource.Element != nil {
-			output.ResourceElement = toMapOrNil(m.Resource.Element.ToJSON())
+			output.ResourceElement = toMapOrNil(m.Resource.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -723,8 +723,8 @@ func NewSubscriptionTopicCanFilterBy() *SubscriptionTopicCanFilterBy {
 	return &SubscriptionTopicCanFilterBy{}
 }
 
-// FromJSON populates SubscriptionTopicCanFilterBy from JSON data.
-func (m *SubscriptionTopicCanFilterBy) FromJSON(data []byte) error {
+// UnmarshalJSON populates SubscriptionTopicCanFilterBy from JSON data.
+func (m *SubscriptionTopicCanFilterBy) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -749,8 +749,8 @@ func (m *SubscriptionTopicCanFilterBy) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts SubscriptionTopicCanFilterBy to JSON data.
-func (m *SubscriptionTopicCanFilterBy) ToJSON() ([]byte, error) {
+// MarshalJSON converts SubscriptionTopicCanFilterBy to JSON data.
+func (m *SubscriptionTopicCanFilterBy) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -769,7 +769,7 @@ func (m *SubscriptionTopicCanFilterBy) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -777,25 +777,25 @@ func (m *SubscriptionTopicCanFilterBy) ToJSON() ([]byte, error) {
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	if m.Resource != nil && m.Resource.Value != nil {
 		output.Resource = m.Resource.Value
 		if m.Resource.Element != nil {
-			output.ResourceElement = toMapOrNil(m.Resource.Element.ToJSON())
+			output.ResourceElement = toMapOrNil(m.Resource.Element.MarshalJSON())
 		}
 	}
 	if m.FilterParameter != nil && m.FilterParameter.Value != nil {
 		output.FilterParameter = m.FilterParameter.Value
 		if m.FilterParameter.Element != nil {
-			output.FilterParameterElement = toMapOrNil(m.FilterParameter.Element.ToJSON())
+			output.FilterParameterElement = toMapOrNil(m.FilterParameter.Element.MarshalJSON())
 		}
 	}
 	if m.FilterDefinition != nil && m.FilterDefinition.Value != nil {
 		output.FilterDefinition = m.FilterDefinition.Value
 		if m.FilterDefinition.Element != nil {
-			output.FilterDefinitionElement = toMapOrNil(m.FilterDefinition.Element.ToJSON())
+			output.FilterDefinitionElement = toMapOrNil(m.FilterDefinition.Element.MarshalJSON())
 		}
 	}
 	output.Modifier = m.Modifier
@@ -849,8 +849,8 @@ func NewSubscriptionTopicNotificationShape() *SubscriptionTopicNotificationShape
 	return &SubscriptionTopicNotificationShape{}
 }
 
-// FromJSON populates SubscriptionTopicNotificationShape from JSON data.
-func (m *SubscriptionTopicNotificationShape) FromJSON(data []byte) error {
+// UnmarshalJSON populates SubscriptionTopicNotificationShape from JSON data.
+func (m *SubscriptionTopicNotificationShape) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -889,8 +889,8 @@ func (m *SubscriptionTopicNotificationShape) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts SubscriptionTopicNotificationShape to JSON data.
-func (m *SubscriptionTopicNotificationShape) ToJSON() ([]byte, error) {
+// MarshalJSON converts SubscriptionTopicNotificationShape to JSON data.
+func (m *SubscriptionTopicNotificationShape) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -906,7 +906,7 @@ func (m *SubscriptionTopicNotificationShape) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -914,7 +914,7 @@ func (m *SubscriptionTopicNotificationShape) ToJSON() ([]byte, error) {
 	if m.Resource != nil && m.Resource.Value != nil {
 		output.Resource = m.Resource.Value
 		if m.Resource.Element != nil {
-			output.ResourceElement = toMapOrNil(m.Resource.Element.ToJSON())
+			output.ResourceElement = toMapOrNil(m.Resource.Element.MarshalJSON())
 		}
 	}
 	if len(m.Include) > 0 {
@@ -925,7 +925,7 @@ func (m *SubscriptionTopicNotificationShape) ToJSON() ([]byte, error) {
 				output.Include[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.IncludeElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.IncludeElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -937,7 +937,7 @@ func (m *SubscriptionTopicNotificationShape) ToJSON() ([]byte, error) {
 				output.RevInclude[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.RevIncludeElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.RevIncludeElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}

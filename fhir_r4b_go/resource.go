@@ -63,8 +63,8 @@ func (r *Resource) Clone() *Resource {
 	}
 }
 
-// ToJSON converts a Resource to JSON data.
-func (r *Resource) ToJSON() ([]byte, error) {
+// MarshalJSON converts a Resource to JSON data.
+func (r *Resource) MarshalJSON() ([]byte, error) {
 	return json.Marshal(r)
 }
 

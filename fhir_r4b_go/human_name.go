@@ -27,8 +27,8 @@ func NewHumanName() *HumanName {
 	return &HumanName{}
 }
 
-// FromJSON populates HumanName from JSON data.
-func (m *HumanName) FromJSON(data []byte) error {
+// UnmarshalJSON populates HumanName from JSON data.
+func (m *HumanName) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -82,8 +82,8 @@ func (m *HumanName) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts HumanName to JSON data.
-func (m *HumanName) ToJSON() ([]byte, error) {
+// MarshalJSON converts HumanName to JSON data.
+func (m *HumanName) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -104,7 +104,7 @@ func (m *HumanName) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -112,13 +112,13 @@ func (m *HumanName) ToJSON() ([]byte, error) {
 	if m.Text != nil && m.Text.Value != nil {
 		output.Text = m.Text.Value
 		if m.Text.Element != nil {
-			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+			output.TextElement = toMapOrNil(m.Text.Element.MarshalJSON())
 		}
 	}
 	if m.Family != nil && m.Family.Value != nil {
 		output.Family = m.Family.Value
 		if m.Family.Element != nil {
-			output.FamilyElement = toMapOrNil(m.Family.Element.ToJSON())
+			output.FamilyElement = toMapOrNil(m.Family.Element.MarshalJSON())
 		}
 	}
 	if len(m.Given) > 0 {
@@ -129,7 +129,7 @@ func (m *HumanName) ToJSON() ([]byte, error) {
 				output.Given[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.GivenElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.GivenElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -141,7 +141,7 @@ func (m *HumanName) ToJSON() ([]byte, error) {
 				output.Prefix[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.PrefixElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.PrefixElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -153,7 +153,7 @@ func (m *HumanName) ToJSON() ([]byte, error) {
 				output.Suffix[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.SuffixElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.SuffixElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}

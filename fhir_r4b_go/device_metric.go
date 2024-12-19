@@ -35,8 +35,8 @@ func NewDeviceMetric() *DeviceMetric {
 	return &DeviceMetric{}
 }
 
-// FromJSON populates DeviceMetric from JSON data.
-func (m *DeviceMetric) FromJSON(data []byte) error {
+// UnmarshalJSON populates DeviceMetric from JSON data.
+func (m *DeviceMetric) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -81,8 +81,8 @@ func (m *DeviceMetric) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts DeviceMetric to JSON data.
-func (m *DeviceMetric) ToJSON() ([]byte, error) {
+// MarshalJSON converts DeviceMetric to JSON data.
+func (m *DeviceMetric) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -108,14 +108,14 @@ func (m *DeviceMetric) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -203,8 +203,8 @@ func NewDeviceMetricCalibration() *DeviceMetricCalibration {
 	return &DeviceMetricCalibration{}
 }
 
-// FromJSON populates DeviceMetricCalibration from JSON data.
-func (m *DeviceMetricCalibration) FromJSON(data []byte) error {
+// UnmarshalJSON populates DeviceMetricCalibration from JSON data.
+func (m *DeviceMetricCalibration) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -225,8 +225,8 @@ func (m *DeviceMetricCalibration) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts DeviceMetricCalibration to JSON data.
-func (m *DeviceMetricCalibration) ToJSON() ([]byte, error) {
+// MarshalJSON converts DeviceMetricCalibration to JSON data.
+func (m *DeviceMetricCalibration) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -240,7 +240,7 @@ func (m *DeviceMetricCalibration) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -250,7 +250,7 @@ func (m *DeviceMetricCalibration) ToJSON() ([]byte, error) {
 	if m.Time != nil && m.Time.Value != nil {
 		output.Time = m.Time.Value
 		if m.Time.Element != nil {
-			output.TimeElement = toMapOrNil(m.Time.Element.ToJSON())
+			output.TimeElement = toMapOrNil(m.Time.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

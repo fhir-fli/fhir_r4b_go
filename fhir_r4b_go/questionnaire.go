@@ -48,8 +48,8 @@ func NewQuestionnaire() *Questionnaire {
 	return &Questionnaire{}
 }
 
-// FromJSON populates Questionnaire from JSON data.
-func (m *Questionnaire) FromJSON(data []byte) error {
+// UnmarshalJSON populates Questionnaire from JSON data.
+func (m *Questionnaire) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -136,8 +136,8 @@ func (m *Questionnaire) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Questionnaire to JSON data.
-func (m *Questionnaire) ToJSON() ([]byte, error) {
+// MarshalJSON converts Questionnaire to JSON data.
+func (m *Questionnaire) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -189,14 +189,14 @@ func (m *Questionnaire) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -207,26 +207,26 @@ func (m *Questionnaire) ToJSON() ([]byte, error) {
 	if m.Url != nil && m.Url.Value != nil {
 		output.Url = m.Url.Value
 		if m.Url.Element != nil {
-			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+			output.UrlElement = toMapOrNil(m.Url.Element.MarshalJSON())
 		}
 	}
 	output.Identifier = m.Identifier
 	if m.Version != nil && m.Version.Value != nil {
 		output.Version = m.Version.Value
 		if m.Version.Element != nil {
-			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+			output.VersionElement = toMapOrNil(m.Version.Element.MarshalJSON())
 		}
 	}
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	if m.Title != nil && m.Title.Value != nil {
 		output.Title = m.Title.Value
 		if m.Title.Element != nil {
-			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+			output.TitleElement = toMapOrNil(m.Title.Element.MarshalJSON())
 		}
 	}
 	if len(m.DerivedFrom) > 0 {
@@ -237,7 +237,7 @@ func (m *Questionnaire) ToJSON() ([]byte, error) {
 				output.DerivedFrom[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.DerivedFromElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.DerivedFromElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -245,7 +245,7 @@ func (m *Questionnaire) ToJSON() ([]byte, error) {
 	if m.Experimental != nil && m.Experimental.Value != nil {
 		output.Experimental = m.Experimental.Value
 		if m.Experimental.Element != nil {
-			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.MarshalJSON())
 		}
 	}
 	if len(m.SubjectType) > 0 {
@@ -256,27 +256,27 @@ func (m *Questionnaire) ToJSON() ([]byte, error) {
 				output.SubjectType[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.SubjectTypeElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.SubjectTypeElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
 	if m.Date != nil && m.Date.Value != nil {
 		output.Date = m.Date.Value
 		if m.Date.Element != nil {
-			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+			output.DateElement = toMapOrNil(m.Date.Element.MarshalJSON())
 		}
 	}
 	if m.Publisher != nil && m.Publisher.Value != nil {
 		output.Publisher = m.Publisher.Value
 		if m.Publisher.Element != nil {
-			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.MarshalJSON())
 		}
 	}
 	output.Contact = m.Contact
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.UseContext = m.UseContext
@@ -284,25 +284,25 @@ func (m *Questionnaire) ToJSON() ([]byte, error) {
 	if m.Purpose != nil && m.Purpose.Value != nil {
 		output.Purpose = m.Purpose.Value
 		if m.Purpose.Element != nil {
-			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.MarshalJSON())
 		}
 	}
 	if m.Copyright != nil && m.Copyright.Value != nil {
 		output.Copyright = m.Copyright.Value
 		if m.Copyright.Element != nil {
-			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.MarshalJSON())
 		}
 	}
 	if m.ApprovalDate != nil && m.ApprovalDate.Value != nil {
 		output.ApprovalDate = m.ApprovalDate.Value
 		if m.ApprovalDate.Element != nil {
-			output.ApprovalDateElement = toMapOrNil(m.ApprovalDate.Element.ToJSON())
+			output.ApprovalDateElement = toMapOrNil(m.ApprovalDate.Element.MarshalJSON())
 		}
 	}
 	if m.LastReviewDate != nil && m.LastReviewDate.Value != nil {
 		output.LastReviewDate = m.LastReviewDate.Value
 		if m.LastReviewDate.Element != nil {
-			output.LastReviewDateElement = toMapOrNil(m.LastReviewDate.Element.ToJSON())
+			output.LastReviewDateElement = toMapOrNil(m.LastReviewDate.Element.MarshalJSON())
 		}
 	}
 	output.EffectivePeriod = m.EffectivePeriod
@@ -415,8 +415,8 @@ func NewQuestionnaireItem() *QuestionnaireItem {
 	return &QuestionnaireItem{}
 }
 
-// FromJSON populates QuestionnaireItem from JSON data.
-func (m *QuestionnaireItem) FromJSON(data []byte) error {
+// UnmarshalJSON populates QuestionnaireItem from JSON data.
+func (m *QuestionnaireItem) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -463,8 +463,8 @@ func (m *QuestionnaireItem) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts QuestionnaireItem to JSON data.
-func (m *QuestionnaireItem) ToJSON() ([]byte, error) {
+// MarshalJSON converts QuestionnaireItem to JSON data.
+func (m *QuestionnaireItem) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -499,7 +499,7 @@ func (m *QuestionnaireItem) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -507,26 +507,26 @@ func (m *QuestionnaireItem) ToJSON() ([]byte, error) {
 	if m.LinkId != nil && m.LinkId.Value != nil {
 		output.LinkId = m.LinkId.Value
 		if m.LinkId.Element != nil {
-			output.LinkIdElement = toMapOrNil(m.LinkId.Element.ToJSON())
+			output.LinkIdElement = toMapOrNil(m.LinkId.Element.MarshalJSON())
 		}
 	}
 	if m.Definition != nil && m.Definition.Value != nil {
 		output.Definition = m.Definition.Value
 		if m.Definition.Element != nil {
-			output.DefinitionElement = toMapOrNil(m.Definition.Element.ToJSON())
+			output.DefinitionElement = toMapOrNil(m.Definition.Element.MarshalJSON())
 		}
 	}
 	output.Code = m.Code
 	if m.Prefix != nil && m.Prefix.Value != nil {
 		output.Prefix = m.Prefix.Value
 		if m.Prefix.Element != nil {
-			output.PrefixElement = toMapOrNil(m.Prefix.Element.ToJSON())
+			output.PrefixElement = toMapOrNil(m.Prefix.Element.MarshalJSON())
 		}
 	}
 	if m.Text != nil && m.Text.Value != nil {
 		output.Text = m.Text.Value
 		if m.Text.Element != nil {
-			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+			output.TextElement = toMapOrNil(m.Text.Element.MarshalJSON())
 		}
 	}
 	output.Type = m.Type
@@ -535,31 +535,31 @@ func (m *QuestionnaireItem) ToJSON() ([]byte, error) {
 	if m.Required_ != nil && m.Required_.Value != nil {
 		output.Required_ = m.Required_.Value
 		if m.Required_.Element != nil {
-			output.Required_Element = toMapOrNil(m.Required_.Element.ToJSON())
+			output.Required_Element = toMapOrNil(m.Required_.Element.MarshalJSON())
 		}
 	}
 	if m.Repeats != nil && m.Repeats.Value != nil {
 		output.Repeats = m.Repeats.Value
 		if m.Repeats.Element != nil {
-			output.RepeatsElement = toMapOrNil(m.Repeats.Element.ToJSON())
+			output.RepeatsElement = toMapOrNil(m.Repeats.Element.MarshalJSON())
 		}
 	}
 	if m.ReadOnly != nil && m.ReadOnly.Value != nil {
 		output.ReadOnly = m.ReadOnly.Value
 		if m.ReadOnly.Element != nil {
-			output.ReadOnlyElement = toMapOrNil(m.ReadOnly.Element.ToJSON())
+			output.ReadOnlyElement = toMapOrNil(m.ReadOnly.Element.MarshalJSON())
 		}
 	}
 	if m.MaxLength != nil && m.MaxLength.Value != nil {
 		output.MaxLength = m.MaxLength.Value
 		if m.MaxLength.Element != nil {
-			output.MaxLengthElement = toMapOrNil(m.MaxLength.Element.ToJSON())
+			output.MaxLengthElement = toMapOrNil(m.MaxLength.Element.MarshalJSON())
 		}
 	}
 	if m.AnswerValueSet != nil && m.AnswerValueSet.Value != nil {
 		output.AnswerValueSet = m.AnswerValueSet.Value
 		if m.AnswerValueSet.Element != nil {
-			output.AnswerValueSetElement = toMapOrNil(m.AnswerValueSet.Element.ToJSON())
+			output.AnswerValueSetElement = toMapOrNil(m.AnswerValueSet.Element.MarshalJSON())
 		}
 	}
 	output.AnswerOption = m.AnswerOption
@@ -646,8 +646,8 @@ func NewQuestionnaireEnableWhen() *QuestionnaireEnableWhen {
 	return &QuestionnaireEnableWhen{}
 }
 
-// FromJSON populates QuestionnaireEnableWhen from JSON data.
-func (m *QuestionnaireEnableWhen) FromJSON(data []byte) error {
+// UnmarshalJSON populates QuestionnaireEnableWhen from JSON data.
+func (m *QuestionnaireEnableWhen) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -686,8 +686,8 @@ func (m *QuestionnaireEnableWhen) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts QuestionnaireEnableWhen to JSON data.
-func (m *QuestionnaireEnableWhen) ToJSON() ([]byte, error) {
+// MarshalJSON converts QuestionnaireEnableWhen to JSON data.
+func (m *QuestionnaireEnableWhen) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -717,7 +717,7 @@ func (m *QuestionnaireEnableWhen) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -725,50 +725,50 @@ func (m *QuestionnaireEnableWhen) ToJSON() ([]byte, error) {
 	if m.Question != nil && m.Question.Value != nil {
 		output.Question = m.Question.Value
 		if m.Question.Element != nil {
-			output.QuestionElement = toMapOrNil(m.Question.Element.ToJSON())
+			output.QuestionElement = toMapOrNil(m.Question.Element.MarshalJSON())
 		}
 	}
 	output.Operator_ = m.Operator_
 	if m.AnswerBoolean != nil && m.AnswerBoolean.Value != nil {
 		output.AnswerBoolean = m.AnswerBoolean.Value
 		if m.AnswerBoolean.Element != nil {
-			output.AnswerBooleanElement = toMapOrNil(m.AnswerBoolean.Element.ToJSON())
+			output.AnswerBooleanElement = toMapOrNil(m.AnswerBoolean.Element.MarshalJSON())
 		}
 	}
 	if m.AnswerDecimal != nil && m.AnswerDecimal.Value != nil {
 		output.AnswerDecimal = m.AnswerDecimal.Value
 		if m.AnswerDecimal.Element != nil {
-			output.AnswerDecimalElement = toMapOrNil(m.AnswerDecimal.Element.ToJSON())
+			output.AnswerDecimalElement = toMapOrNil(m.AnswerDecimal.Element.MarshalJSON())
 		}
 	}
 	if m.AnswerInteger != nil && m.AnswerInteger.Value != nil {
 		output.AnswerInteger = m.AnswerInteger.Value
 		if m.AnswerInteger.Element != nil {
-			output.AnswerIntegerElement = toMapOrNil(m.AnswerInteger.Element.ToJSON())
+			output.AnswerIntegerElement = toMapOrNil(m.AnswerInteger.Element.MarshalJSON())
 		}
 	}
 	if m.AnswerDate != nil && m.AnswerDate.Value != nil {
 		output.AnswerDate = m.AnswerDate.Value
 		if m.AnswerDate.Element != nil {
-			output.AnswerDateElement = toMapOrNil(m.AnswerDate.Element.ToJSON())
+			output.AnswerDateElement = toMapOrNil(m.AnswerDate.Element.MarshalJSON())
 		}
 	}
 	if m.AnswerDateTime != nil && m.AnswerDateTime.Value != nil {
 		output.AnswerDateTime = m.AnswerDateTime.Value
 		if m.AnswerDateTime.Element != nil {
-			output.AnswerDateTimeElement = toMapOrNil(m.AnswerDateTime.Element.ToJSON())
+			output.AnswerDateTimeElement = toMapOrNil(m.AnswerDateTime.Element.MarshalJSON())
 		}
 	}
 	if m.AnswerTime != nil && m.AnswerTime.Value != nil {
 		output.AnswerTime = m.AnswerTime.Value
 		if m.AnswerTime.Element != nil {
-			output.AnswerTimeElement = toMapOrNil(m.AnswerTime.Element.ToJSON())
+			output.AnswerTimeElement = toMapOrNil(m.AnswerTime.Element.MarshalJSON())
 		}
 	}
 	if m.AnswerString != nil && m.AnswerString.Value != nil {
 		output.AnswerString = m.AnswerString.Value
 		if m.AnswerString.Element != nil {
-			output.AnswerStringElement = toMapOrNil(m.AnswerString.Element.ToJSON())
+			output.AnswerStringElement = toMapOrNil(m.AnswerString.Element.MarshalJSON())
 		}
 	}
 	output.AnswerCoding = m.AnswerCoding
@@ -842,8 +842,8 @@ func NewQuestionnaireAnswerOption() *QuestionnaireAnswerOption {
 	return &QuestionnaireAnswerOption{}
 }
 
-// FromJSON populates QuestionnaireAnswerOption from JSON data.
-func (m *QuestionnaireAnswerOption) FromJSON(data []byte) error {
+// UnmarshalJSON populates QuestionnaireAnswerOption from JSON data.
+func (m *QuestionnaireAnswerOption) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -872,8 +872,8 @@ func (m *QuestionnaireAnswerOption) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts QuestionnaireAnswerOption to JSON data.
-func (m *QuestionnaireAnswerOption) ToJSON() ([]byte, error) {
+// MarshalJSON converts QuestionnaireAnswerOption to JSON data.
+func (m *QuestionnaireAnswerOption) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -895,7 +895,7 @@ func (m *QuestionnaireAnswerOption) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -903,25 +903,25 @@ func (m *QuestionnaireAnswerOption) ToJSON() ([]byte, error) {
 	if m.ValueInteger != nil && m.ValueInteger.Value != nil {
 		output.ValueInteger = m.ValueInteger.Value
 		if m.ValueInteger.Element != nil {
-			output.ValueIntegerElement = toMapOrNil(m.ValueInteger.Element.ToJSON())
+			output.ValueIntegerElement = toMapOrNil(m.ValueInteger.Element.MarshalJSON())
 		}
 	}
 	if m.ValueDate != nil && m.ValueDate.Value != nil {
 		output.ValueDate = m.ValueDate.Value
 		if m.ValueDate.Element != nil {
-			output.ValueDateElement = toMapOrNil(m.ValueDate.Element.ToJSON())
+			output.ValueDateElement = toMapOrNil(m.ValueDate.Element.MarshalJSON())
 		}
 	}
 	if m.ValueTime != nil && m.ValueTime.Value != nil {
 		output.ValueTime = m.ValueTime.Value
 		if m.ValueTime.Element != nil {
-			output.ValueTimeElement = toMapOrNil(m.ValueTime.Element.ToJSON())
+			output.ValueTimeElement = toMapOrNil(m.ValueTime.Element.MarshalJSON())
 		}
 	}
 	if m.ValueString != nil && m.ValueString.Value != nil {
 		output.ValueString = m.ValueString.Value
 		if m.ValueString.Element != nil {
-			output.ValueStringElement = toMapOrNil(m.ValueString.Element.ToJSON())
+			output.ValueStringElement = toMapOrNil(m.ValueString.Element.MarshalJSON())
 		}
 	}
 	output.ValueCoding = m.ValueCoding
@@ -929,7 +929,7 @@ func (m *QuestionnaireAnswerOption) ToJSON() ([]byte, error) {
 	if m.InitialSelected != nil && m.InitialSelected.Value != nil {
 		output.InitialSelected = m.InitialSelected.Value
 		if m.InitialSelected.Element != nil {
-			output.InitialSelectedElement = toMapOrNil(m.InitialSelected.Element.ToJSON())
+			output.InitialSelectedElement = toMapOrNil(m.InitialSelected.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -995,8 +995,8 @@ func NewQuestionnaireInitial() *QuestionnaireInitial {
 	return &QuestionnaireInitial{}
 }
 
-// FromJSON populates QuestionnaireInitial from JSON data.
-func (m *QuestionnaireInitial) FromJSON(data []byte) error {
+// UnmarshalJSON populates QuestionnaireInitial from JSON data.
+func (m *QuestionnaireInitial) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1035,8 +1035,8 @@ func (m *QuestionnaireInitial) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts QuestionnaireInitial to JSON data.
-func (m *QuestionnaireInitial) ToJSON() ([]byte, error) {
+// MarshalJSON converts QuestionnaireInitial to JSON data.
+func (m *QuestionnaireInitial) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1066,7 +1066,7 @@ func (m *QuestionnaireInitial) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1074,49 +1074,49 @@ func (m *QuestionnaireInitial) ToJSON() ([]byte, error) {
 	if m.ValueBoolean != nil && m.ValueBoolean.Value != nil {
 		output.ValueBoolean = m.ValueBoolean.Value
 		if m.ValueBoolean.Element != nil {
-			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.ToJSON())
+			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.MarshalJSON())
 		}
 	}
 	if m.ValueDecimal != nil && m.ValueDecimal.Value != nil {
 		output.ValueDecimal = m.ValueDecimal.Value
 		if m.ValueDecimal.Element != nil {
-			output.ValueDecimalElement = toMapOrNil(m.ValueDecimal.Element.ToJSON())
+			output.ValueDecimalElement = toMapOrNil(m.ValueDecimal.Element.MarshalJSON())
 		}
 	}
 	if m.ValueInteger != nil && m.ValueInteger.Value != nil {
 		output.ValueInteger = m.ValueInteger.Value
 		if m.ValueInteger.Element != nil {
-			output.ValueIntegerElement = toMapOrNil(m.ValueInteger.Element.ToJSON())
+			output.ValueIntegerElement = toMapOrNil(m.ValueInteger.Element.MarshalJSON())
 		}
 	}
 	if m.ValueDate != nil && m.ValueDate.Value != nil {
 		output.ValueDate = m.ValueDate.Value
 		if m.ValueDate.Element != nil {
-			output.ValueDateElement = toMapOrNil(m.ValueDate.Element.ToJSON())
+			output.ValueDateElement = toMapOrNil(m.ValueDate.Element.MarshalJSON())
 		}
 	}
 	if m.ValueDateTime != nil && m.ValueDateTime.Value != nil {
 		output.ValueDateTime = m.ValueDateTime.Value
 		if m.ValueDateTime.Element != nil {
-			output.ValueDateTimeElement = toMapOrNil(m.ValueDateTime.Element.ToJSON())
+			output.ValueDateTimeElement = toMapOrNil(m.ValueDateTime.Element.MarshalJSON())
 		}
 	}
 	if m.ValueTime != nil && m.ValueTime.Value != nil {
 		output.ValueTime = m.ValueTime.Value
 		if m.ValueTime.Element != nil {
-			output.ValueTimeElement = toMapOrNil(m.ValueTime.Element.ToJSON())
+			output.ValueTimeElement = toMapOrNil(m.ValueTime.Element.MarshalJSON())
 		}
 	}
 	if m.ValueString != nil && m.ValueString.Value != nil {
 		output.ValueString = m.ValueString.Value
 		if m.ValueString.Element != nil {
-			output.ValueStringElement = toMapOrNil(m.ValueString.Element.ToJSON())
+			output.ValueStringElement = toMapOrNil(m.ValueString.Element.MarshalJSON())
 		}
 	}
 	if m.ValueUri != nil && m.ValueUri.Value != nil {
 		output.ValueUri = m.ValueUri.Value
 		if m.ValueUri.Element != nil {
-			output.ValueUriElement = toMapOrNil(m.ValueUri.Element.ToJSON())
+			output.ValueUriElement = toMapOrNil(m.ValueUri.Element.MarshalJSON())
 		}
 	}
 	output.ValueAttachment = m.ValueAttachment

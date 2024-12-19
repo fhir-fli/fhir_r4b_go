@@ -35,8 +35,8 @@ func NewAdministrableProductDefinition() *AdministrableProductDefinition {
 	return &AdministrableProductDefinition{}
 }
 
-// FromJSON populates AdministrableProductDefinition from JSON data.
-func (m *AdministrableProductDefinition) FromJSON(data []byte) error {
+// UnmarshalJSON populates AdministrableProductDefinition from JSON data.
+func (m *AdministrableProductDefinition) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -81,8 +81,8 @@ func (m *AdministrableProductDefinition) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts AdministrableProductDefinition to JSON data.
-func (m *AdministrableProductDefinition) ToJSON() ([]byte, error) {
+// MarshalJSON converts AdministrableProductDefinition to JSON data.
+func (m *AdministrableProductDefinition) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -108,14 +108,14 @@ func (m *AdministrableProductDefinition) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -207,8 +207,8 @@ func NewAdministrableProductDefinitionProperty() *AdministrableProductDefinition
 	return &AdministrableProductDefinitionProperty{}
 }
 
-// FromJSON populates AdministrableProductDefinitionProperty from JSON data.
-func (m *AdministrableProductDefinitionProperty) FromJSON(data []byte) error {
+// UnmarshalJSON populates AdministrableProductDefinitionProperty from JSON data.
+func (m *AdministrableProductDefinitionProperty) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -237,8 +237,8 @@ func (m *AdministrableProductDefinitionProperty) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts AdministrableProductDefinitionProperty to JSON data.
-func (m *AdministrableProductDefinitionProperty) ToJSON() ([]byte, error) {
+// MarshalJSON converts AdministrableProductDefinitionProperty to JSON data.
+func (m *AdministrableProductDefinitionProperty) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -257,7 +257,7 @@ func (m *AdministrableProductDefinitionProperty) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -268,13 +268,13 @@ func (m *AdministrableProductDefinitionProperty) ToJSON() ([]byte, error) {
 	if m.ValueDate != nil && m.ValueDate.Value != nil {
 		output.ValueDate = m.ValueDate.Value
 		if m.ValueDate.Element != nil {
-			output.ValueDateElement = toMapOrNil(m.ValueDate.Element.ToJSON())
+			output.ValueDateElement = toMapOrNil(m.ValueDate.Element.MarshalJSON())
 		}
 	}
 	if m.ValueBoolean != nil && m.ValueBoolean.Value != nil {
 		output.ValueBoolean = m.ValueBoolean.Value
 		if m.ValueBoolean.Element != nil {
-			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.ToJSON())
+			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.MarshalJSON())
 		}
 	}
 	output.ValueAttachment = m.ValueAttachment
@@ -337,8 +337,8 @@ func NewAdministrableProductDefinitionRouteOfAdministration() *AdministrableProd
 	return &AdministrableProductDefinitionRouteOfAdministration{}
 }
 
-// FromJSON populates AdministrableProductDefinitionRouteOfAdministration from JSON data.
-func (m *AdministrableProductDefinitionRouteOfAdministration) FromJSON(data []byte) error {
+// UnmarshalJSON populates AdministrableProductDefinitionRouteOfAdministration from JSON data.
+func (m *AdministrableProductDefinitionRouteOfAdministration) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -367,8 +367,8 @@ func (m *AdministrableProductDefinitionRouteOfAdministration) FromJSON(data []by
 	return nil
 }
 
-// ToJSON converts AdministrableProductDefinitionRouteOfAdministration to JSON data.
-func (m *AdministrableProductDefinitionRouteOfAdministration) ToJSON() ([]byte, error) {
+// MarshalJSON converts AdministrableProductDefinitionRouteOfAdministration to JSON data.
+func (m *AdministrableProductDefinitionRouteOfAdministration) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -385,7 +385,7 @@ func (m *AdministrableProductDefinitionRouteOfAdministration) ToJSON() ([]byte, 
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -450,8 +450,8 @@ func NewAdministrableProductDefinitionTargetSpecies() *AdministrableProductDefin
 	return &AdministrableProductDefinitionTargetSpecies{}
 }
 
-// FromJSON populates AdministrableProductDefinitionTargetSpecies from JSON data.
-func (m *AdministrableProductDefinitionTargetSpecies) FromJSON(data []byte) error {
+// UnmarshalJSON populates AdministrableProductDefinitionTargetSpecies from JSON data.
+func (m *AdministrableProductDefinitionTargetSpecies) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -470,8 +470,8 @@ func (m *AdministrableProductDefinitionTargetSpecies) FromJSON(data []byte) erro
 	return nil
 }
 
-// ToJSON converts AdministrableProductDefinitionTargetSpecies to JSON data.
-func (m *AdministrableProductDefinitionTargetSpecies) ToJSON() ([]byte, error) {
+// MarshalJSON converts AdministrableProductDefinitionTargetSpecies to JSON data.
+func (m *AdministrableProductDefinitionTargetSpecies) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -483,7 +483,7 @@ func (m *AdministrableProductDefinitionTargetSpecies) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -534,8 +534,8 @@ func NewAdministrableProductDefinitionWithdrawalPeriod() *AdministrableProductDe
 	return &AdministrableProductDefinitionWithdrawalPeriod{}
 }
 
-// FromJSON populates AdministrableProductDefinitionWithdrawalPeriod from JSON data.
-func (m *AdministrableProductDefinitionWithdrawalPeriod) FromJSON(data []byte) error {
+// UnmarshalJSON populates AdministrableProductDefinitionWithdrawalPeriod from JSON data.
+func (m *AdministrableProductDefinitionWithdrawalPeriod) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -556,8 +556,8 @@ func (m *AdministrableProductDefinitionWithdrawalPeriod) FromJSON(data []byte) e
 	return nil
 }
 
-// ToJSON converts AdministrableProductDefinitionWithdrawalPeriod to JSON data.
-func (m *AdministrableProductDefinitionWithdrawalPeriod) ToJSON() ([]byte, error) {
+// MarshalJSON converts AdministrableProductDefinitionWithdrawalPeriod to JSON data.
+func (m *AdministrableProductDefinitionWithdrawalPeriod) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -571,7 +571,7 @@ func (m *AdministrableProductDefinitionWithdrawalPeriod) ToJSON() ([]byte, error
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -581,7 +581,7 @@ func (m *AdministrableProductDefinitionWithdrawalPeriod) ToJSON() ([]byte, error
 	if m.SupportingInformation != nil && m.SupportingInformation.Value != nil {
 		output.SupportingInformation = m.SupportingInformation.Value
 		if m.SupportingInformation.Element != nil {
-			output.SupportingInformationElement = toMapOrNil(m.SupportingInformation.Element.ToJSON())
+			output.SupportingInformationElement = toMapOrNil(m.SupportingInformation.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

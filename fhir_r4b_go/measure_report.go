@@ -36,8 +36,8 @@ func NewMeasureReport() *MeasureReport {
 	return &MeasureReport{}
 }
 
-// FromJSON populates MeasureReport from JSON data.
-func (m *MeasureReport) FromJSON(data []byte) error {
+// UnmarshalJSON populates MeasureReport from JSON data.
+func (m *MeasureReport) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -84,8 +84,8 @@ func (m *MeasureReport) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MeasureReport to JSON data.
-func (m *MeasureReport) ToJSON() ([]byte, error) {
+// MarshalJSON converts MeasureReport to JSON data.
+func (m *MeasureReport) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -114,14 +114,14 @@ func (m *MeasureReport) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -135,14 +135,14 @@ func (m *MeasureReport) ToJSON() ([]byte, error) {
 	if m.Measure != nil && m.Measure.Value != nil {
 		output.Measure = m.Measure.Value
 		if m.Measure.Element != nil {
-			output.MeasureElement = toMapOrNil(m.Measure.Element.ToJSON())
+			output.MeasureElement = toMapOrNil(m.Measure.Element.MarshalJSON())
 		}
 	}
 	output.Subject = m.Subject
 	if m.Date != nil && m.Date.Value != nil {
 		output.Date = m.Date.Value
 		if m.Date.Element != nil {
-			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+			output.DateElement = toMapOrNil(m.Date.Element.MarshalJSON())
 		}
 	}
 	output.Reporter = m.Reporter
@@ -223,8 +223,8 @@ func NewMeasureReportGroup() *MeasureReportGroup {
 	return &MeasureReportGroup{}
 }
 
-// FromJSON populates MeasureReportGroup from JSON data.
-func (m *MeasureReportGroup) FromJSON(data []byte) error {
+// UnmarshalJSON populates MeasureReportGroup from JSON data.
+func (m *MeasureReportGroup) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -247,8 +247,8 @@ func (m *MeasureReportGroup) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MeasureReportGroup to JSON data.
-func (m *MeasureReportGroup) ToJSON() ([]byte, error) {
+// MarshalJSON converts MeasureReportGroup to JSON data.
+func (m *MeasureReportGroup) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -262,7 +262,7 @@ func (m *MeasureReportGroup) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -319,8 +319,8 @@ func NewMeasureReportPopulation() *MeasureReportPopulation {
 	return &MeasureReportPopulation{}
 }
 
-// FromJSON populates MeasureReportPopulation from JSON data.
-func (m *MeasureReportPopulation) FromJSON(data []byte) error {
+// UnmarshalJSON populates MeasureReportPopulation from JSON data.
+func (m *MeasureReportPopulation) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -341,8 +341,8 @@ func (m *MeasureReportPopulation) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MeasureReportPopulation to JSON data.
-func (m *MeasureReportPopulation) ToJSON() ([]byte, error) {
+// MarshalJSON converts MeasureReportPopulation to JSON data.
+func (m *MeasureReportPopulation) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -356,7 +356,7 @@ func (m *MeasureReportPopulation) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -365,7 +365,7 @@ func (m *MeasureReportPopulation) ToJSON() ([]byte, error) {
 	if m.Count != nil && m.Count.Value != nil {
 		output.Count = m.Count.Value
 		if m.Count.Element != nil {
-			output.CountElement = toMapOrNil(m.Count.Element.ToJSON())
+			output.CountElement = toMapOrNil(m.Count.Element.MarshalJSON())
 		}
 	}
 	output.SubjectResults = m.SubjectResults
@@ -414,8 +414,8 @@ func NewMeasureReportStratifier() *MeasureReportStratifier {
 	return &MeasureReportStratifier{}
 }
 
-// FromJSON populates MeasureReportStratifier from JSON data.
-func (m *MeasureReportStratifier) FromJSON(data []byte) error {
+// UnmarshalJSON populates MeasureReportStratifier from JSON data.
+func (m *MeasureReportStratifier) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -434,8 +434,8 @@ func (m *MeasureReportStratifier) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MeasureReportStratifier to JSON data.
-func (m *MeasureReportStratifier) ToJSON() ([]byte, error) {
+// MarshalJSON converts MeasureReportStratifier to JSON data.
+func (m *MeasureReportStratifier) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -447,7 +447,7 @@ func (m *MeasureReportStratifier) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -499,8 +499,8 @@ func NewMeasureReportStratum() *MeasureReportStratum {
 	return &MeasureReportStratum{}
 }
 
-// FromJSON populates MeasureReportStratum from JSON data.
-func (m *MeasureReportStratum) FromJSON(data []byte) error {
+// UnmarshalJSON populates MeasureReportStratum from JSON data.
+func (m *MeasureReportStratum) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -523,8 +523,8 @@ func (m *MeasureReportStratum) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MeasureReportStratum to JSON data.
-func (m *MeasureReportStratum) ToJSON() ([]byte, error) {
+// MarshalJSON converts MeasureReportStratum to JSON data.
+func (m *MeasureReportStratum) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -538,7 +538,7 @@ func (m *MeasureReportStratum) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -594,8 +594,8 @@ func NewMeasureReportComponent() *MeasureReportComponent {
 	return &MeasureReportComponent{}
 }
 
-// FromJSON populates MeasureReportComponent from JSON data.
-func (m *MeasureReportComponent) FromJSON(data []byte) error {
+// UnmarshalJSON populates MeasureReportComponent from JSON data.
+func (m *MeasureReportComponent) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -614,8 +614,8 @@ func (m *MeasureReportComponent) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MeasureReportComponent to JSON data.
-func (m *MeasureReportComponent) ToJSON() ([]byte, error) {
+// MarshalJSON converts MeasureReportComponent to JSON data.
+func (m *MeasureReportComponent) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -627,7 +627,7 @@ func (m *MeasureReportComponent) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -678,8 +678,8 @@ func NewMeasureReportPopulation1() *MeasureReportPopulation1 {
 	return &MeasureReportPopulation1{}
 }
 
-// FromJSON populates MeasureReportPopulation1 from JSON data.
-func (m *MeasureReportPopulation1) FromJSON(data []byte) error {
+// UnmarshalJSON populates MeasureReportPopulation1 from JSON data.
+func (m *MeasureReportPopulation1) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -700,8 +700,8 @@ func (m *MeasureReportPopulation1) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MeasureReportPopulation1 to JSON data.
-func (m *MeasureReportPopulation1) ToJSON() ([]byte, error) {
+// MarshalJSON converts MeasureReportPopulation1 to JSON data.
+func (m *MeasureReportPopulation1) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -715,7 +715,7 @@ func (m *MeasureReportPopulation1) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -724,7 +724,7 @@ func (m *MeasureReportPopulation1) ToJSON() ([]byte, error) {
 	if m.Count != nil && m.Count.Value != nil {
 		output.Count = m.Count.Value
 		if m.Count.Element != nil {
-			output.CountElement = toMapOrNil(m.Count.Element.ToJSON())
+			output.CountElement = toMapOrNil(m.Count.Element.MarshalJSON())
 		}
 	}
 	output.SubjectResults = m.SubjectResults

@@ -49,8 +49,8 @@ func NewEvidenceVariable() *EvidenceVariable {
 	return &EvidenceVariable{}
 }
 
-// FromJSON populates EvidenceVariable from JSON data.
-func (m *EvidenceVariable) FromJSON(data []byte) error {
+// UnmarshalJSON populates EvidenceVariable from JSON data.
+func (m *EvidenceVariable) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -123,8 +123,8 @@ func (m *EvidenceVariable) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts EvidenceVariable to JSON data.
-func (m *EvidenceVariable) ToJSON() ([]byte, error) {
+// MarshalJSON converts EvidenceVariable to JSON data.
+func (m *EvidenceVariable) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -174,14 +174,14 @@ func (m *EvidenceVariable) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -192,51 +192,51 @@ func (m *EvidenceVariable) ToJSON() ([]byte, error) {
 	if m.Url != nil && m.Url.Value != nil {
 		output.Url = m.Url.Value
 		if m.Url.Element != nil {
-			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+			output.UrlElement = toMapOrNil(m.Url.Element.MarshalJSON())
 		}
 	}
 	output.Identifier = m.Identifier
 	if m.Version != nil && m.Version.Value != nil {
 		output.Version = m.Version.Value
 		if m.Version.Element != nil {
-			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+			output.VersionElement = toMapOrNil(m.Version.Element.MarshalJSON())
 		}
 	}
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	if m.Title != nil && m.Title.Value != nil {
 		output.Title = m.Title.Value
 		if m.Title.Element != nil {
-			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+			output.TitleElement = toMapOrNil(m.Title.Element.MarshalJSON())
 		}
 	}
 	if m.ShortTitle != nil && m.ShortTitle.Value != nil {
 		output.ShortTitle = m.ShortTitle.Value
 		if m.ShortTitle.Element != nil {
-			output.ShortTitleElement = toMapOrNil(m.ShortTitle.Element.ToJSON())
+			output.ShortTitleElement = toMapOrNil(m.ShortTitle.Element.MarshalJSON())
 		}
 	}
 	if m.Subtitle != nil && m.Subtitle.Value != nil {
 		output.Subtitle = m.Subtitle.Value
 		if m.Subtitle.Element != nil {
-			output.SubtitleElement = toMapOrNil(m.Subtitle.Element.ToJSON())
+			output.SubtitleElement = toMapOrNil(m.Subtitle.Element.MarshalJSON())
 		}
 	}
 	output.Status = m.Status
 	if m.Date != nil && m.Date.Value != nil {
 		output.Date = m.Date.Value
 		if m.Date.Element != nil {
-			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+			output.DateElement = toMapOrNil(m.Date.Element.MarshalJSON())
 		}
 	}
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.Note = m.Note
@@ -244,7 +244,7 @@ func (m *EvidenceVariable) ToJSON() ([]byte, error) {
 	if m.Publisher != nil && m.Publisher.Value != nil {
 		output.Publisher = m.Publisher.Value
 		if m.Publisher.Element != nil {
-			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.MarshalJSON())
 		}
 	}
 	output.Contact = m.Contact
@@ -256,7 +256,7 @@ func (m *EvidenceVariable) ToJSON() ([]byte, error) {
 	if m.Actual != nil && m.Actual.Value != nil {
 		output.Actual = m.Actual.Value
 		if m.Actual.Element != nil {
-			output.ActualElement = toMapOrNil(m.Actual.Element.ToJSON())
+			output.ActualElement = toMapOrNil(m.Actual.Element.MarshalJSON())
 		}
 	}
 	output.CharacteristicCombination = m.CharacteristicCombination
@@ -368,8 +368,8 @@ func NewEvidenceVariableCharacteristic() *EvidenceVariableCharacteristic {
 	return &EvidenceVariableCharacteristic{}
 }
 
-// FromJSON populates EvidenceVariableCharacteristic from JSON data.
-func (m *EvidenceVariableCharacteristic) FromJSON(data []byte) error {
+// UnmarshalJSON populates EvidenceVariableCharacteristic from JSON data.
+func (m *EvidenceVariableCharacteristic) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -404,8 +404,8 @@ func (m *EvidenceVariableCharacteristic) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts EvidenceVariableCharacteristic to JSON data.
-func (m *EvidenceVariableCharacteristic) ToJSON() ([]byte, error) {
+// MarshalJSON converts EvidenceVariableCharacteristic to JSON data.
+func (m *EvidenceVariableCharacteristic) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -428,7 +428,7 @@ func (m *EvidenceVariableCharacteristic) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -436,14 +436,14 @@ func (m *EvidenceVariableCharacteristic) ToJSON() ([]byte, error) {
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.DefinitionReference = m.DefinitionReference
 	if m.DefinitionCanonical != nil && m.DefinitionCanonical.Value != nil {
 		output.DefinitionCanonical = m.DefinitionCanonical.Value
 		if m.DefinitionCanonical.Element != nil {
-			output.DefinitionCanonicalElement = toMapOrNil(m.DefinitionCanonical.Element.ToJSON())
+			output.DefinitionCanonicalElement = toMapOrNil(m.DefinitionCanonical.Element.MarshalJSON())
 		}
 	}
 	output.DefinitionCodeableConcept = m.DefinitionCodeableConcept
@@ -453,7 +453,7 @@ func (m *EvidenceVariableCharacteristic) ToJSON() ([]byte, error) {
 	if m.Exclude != nil && m.Exclude.Value != nil {
 		output.Exclude = m.Exclude.Value
 		if m.Exclude.Element != nil {
-			output.ExcludeElement = toMapOrNil(m.Exclude.Element.ToJSON())
+			output.ExcludeElement = toMapOrNil(m.Exclude.Element.MarshalJSON())
 		}
 	}
 	output.TimeFromStart = m.TimeFromStart
@@ -519,8 +519,8 @@ func NewEvidenceVariableTimeFromStart() *EvidenceVariableTimeFromStart {
 	return &EvidenceVariableTimeFromStart{}
 }
 
-// FromJSON populates EvidenceVariableTimeFromStart from JSON data.
-func (m *EvidenceVariableTimeFromStart) FromJSON(data []byte) error {
+// UnmarshalJSON populates EvidenceVariableTimeFromStart from JSON data.
+func (m *EvidenceVariableTimeFromStart) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -543,8 +543,8 @@ func (m *EvidenceVariableTimeFromStart) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts EvidenceVariableTimeFromStart to JSON data.
-func (m *EvidenceVariableTimeFromStart) ToJSON() ([]byte, error) {
+// MarshalJSON converts EvidenceVariableTimeFromStart to JSON data.
+func (m *EvidenceVariableTimeFromStart) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -559,7 +559,7 @@ func (m *EvidenceVariableTimeFromStart) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -567,7 +567,7 @@ func (m *EvidenceVariableTimeFromStart) ToJSON() ([]byte, error) {
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.Quantity = m.Quantity
@@ -622,8 +622,8 @@ func NewEvidenceVariableCategory() *EvidenceVariableCategory {
 	return &EvidenceVariableCategory{}
 }
 
-// FromJSON populates EvidenceVariableCategory from JSON data.
-func (m *EvidenceVariableCategory) FromJSON(data []byte) error {
+// UnmarshalJSON populates EvidenceVariableCategory from JSON data.
+func (m *EvidenceVariableCategory) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -646,8 +646,8 @@ func (m *EvidenceVariableCategory) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts EvidenceVariableCategory to JSON data.
-func (m *EvidenceVariableCategory) ToJSON() ([]byte, error) {
+// MarshalJSON converts EvidenceVariableCategory to JSON data.
+func (m *EvidenceVariableCategory) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -662,7 +662,7 @@ func (m *EvidenceVariableCategory) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -670,7 +670,7 @@ func (m *EvidenceVariableCategory) ToJSON() ([]byte, error) {
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	output.ValueCodeableConcept = m.ValueCodeableConcept

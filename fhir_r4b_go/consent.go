@@ -39,8 +39,8 @@ func NewConsent() *Consent {
 	return &Consent{}
 }
 
-// FromJSON populates Consent from JSON data.
-func (m *Consent) FromJSON(data []byte) error {
+// UnmarshalJSON populates Consent from JSON data.
+func (m *Consent) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -93,8 +93,8 @@ func (m *Consent) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Consent to JSON data.
-func (m *Consent) ToJSON() ([]byte, error) {
+// MarshalJSON converts Consent to JSON data.
+func (m *Consent) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -125,14 +125,14 @@ func (m *Consent) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -148,7 +148,7 @@ func (m *Consent) ToJSON() ([]byte, error) {
 	if m.DateTime != nil && m.DateTime.Value != nil {
 		output.DateTime = m.DateTime.Value
 		if m.DateTime.Element != nil {
-			output.DateTimeElement = toMapOrNil(m.DateTime.Element.ToJSON())
+			output.DateTimeElement = toMapOrNil(m.DateTime.Element.MarshalJSON())
 		}
 	}
 	output.Performer = m.Performer
@@ -236,8 +236,8 @@ func NewConsentPolicy() *ConsentPolicy {
 	return &ConsentPolicy{}
 }
 
-// FromJSON populates ConsentPolicy from JSON data.
-func (m *ConsentPolicy) FromJSON(data []byte) error {
+// UnmarshalJSON populates ConsentPolicy from JSON data.
+func (m *ConsentPolicy) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -256,8 +256,8 @@ func (m *ConsentPolicy) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ConsentPolicy to JSON data.
-func (m *ConsentPolicy) ToJSON() ([]byte, error) {
+// MarshalJSON converts ConsentPolicy to JSON data.
+func (m *ConsentPolicy) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -271,7 +271,7 @@ func (m *ConsentPolicy) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -279,13 +279,13 @@ func (m *ConsentPolicy) ToJSON() ([]byte, error) {
 	if m.Authority != nil && m.Authority.Value != nil {
 		output.Authority = m.Authority.Value
 		if m.Authority.Element != nil {
-			output.AuthorityElement = toMapOrNil(m.Authority.Element.ToJSON())
+			output.AuthorityElement = toMapOrNil(m.Authority.Element.MarshalJSON())
 		}
 	}
 	if m.Uri != nil && m.Uri.Value != nil {
 		output.Uri = m.Uri.Value
 		if m.Uri.Element != nil {
-			output.UriElement = toMapOrNil(m.Uri.Element.ToJSON())
+			output.UriElement = toMapOrNil(m.Uri.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -332,8 +332,8 @@ func NewConsentVerification() *ConsentVerification {
 	return &ConsentVerification{}
 }
 
-// FromJSON populates ConsentVerification from JSON data.
-func (m *ConsentVerification) FromJSON(data []byte) error {
+// UnmarshalJSON populates ConsentVerification from JSON data.
+func (m *ConsentVerification) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -354,8 +354,8 @@ func (m *ConsentVerification) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ConsentVerification to JSON data.
-func (m *ConsentVerification) ToJSON() ([]byte, error) {
+// MarshalJSON converts ConsentVerification to JSON data.
+func (m *ConsentVerification) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -370,7 +370,7 @@ func (m *ConsentVerification) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -378,14 +378,14 @@ func (m *ConsentVerification) ToJSON() ([]byte, error) {
 	if m.Verified != nil && m.Verified.Value != nil {
 		output.Verified = m.Verified.Value
 		if m.Verified.Element != nil {
-			output.VerifiedElement = toMapOrNil(m.Verified.Element.ToJSON())
+			output.VerifiedElement = toMapOrNil(m.Verified.Element.MarshalJSON())
 		}
 	}
 	output.VerifiedWith = m.VerifiedWith
 	if m.VerificationDate != nil && m.VerificationDate.Value != nil {
 		output.VerificationDate = m.VerificationDate.Value
 		if m.VerificationDate.Element != nil {
-			output.VerificationDateElement = toMapOrNil(m.VerificationDate.Element.ToJSON())
+			output.VerificationDateElement = toMapOrNil(m.VerificationDate.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -442,8 +442,8 @@ func NewConsentProvision() *ConsentProvision {
 	return &ConsentProvision{}
 }
 
-// FromJSON populates ConsentProvision from JSON data.
-func (m *ConsentProvision) FromJSON(data []byte) error {
+// UnmarshalJSON populates ConsentProvision from JSON data.
+func (m *ConsentProvision) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -480,8 +480,8 @@ func (m *ConsentProvision) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ConsentProvision to JSON data.
-func (m *ConsentProvision) ToJSON() ([]byte, error) {
+// MarshalJSON converts ConsentProvision to JSON data.
+func (m *ConsentProvision) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -502,7 +502,7 @@ func (m *ConsentProvision) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -579,8 +579,8 @@ func NewConsentActor() *ConsentActor {
 	return &ConsentActor{}
 }
 
-// FromJSON populates ConsentActor from JSON data.
-func (m *ConsentActor) FromJSON(data []byte) error {
+// UnmarshalJSON populates ConsentActor from JSON data.
+func (m *ConsentActor) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -599,8 +599,8 @@ func (m *ConsentActor) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ConsentActor to JSON data.
-func (m *ConsentActor) ToJSON() ([]byte, error) {
+// MarshalJSON converts ConsentActor to JSON data.
+func (m *ConsentActor) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -612,7 +612,7 @@ func (m *ConsentActor) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -662,8 +662,8 @@ func NewConsentData() *ConsentData {
 	return &ConsentData{}
 }
 
-// FromJSON populates ConsentData from JSON data.
-func (m *ConsentData) FromJSON(data []byte) error {
+// UnmarshalJSON populates ConsentData from JSON data.
+func (m *ConsentData) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -682,8 +682,8 @@ func (m *ConsentData) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ConsentData to JSON data.
-func (m *ConsentData) ToJSON() ([]byte, error) {
+// MarshalJSON converts ConsentData to JSON data.
+func (m *ConsentData) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -695,7 +695,7 @@ func (m *ConsentData) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_

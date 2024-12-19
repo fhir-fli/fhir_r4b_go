@@ -21,8 +21,8 @@ func NewRange() *Range {
 	return &Range{}
 }
 
-// FromJSON populates Range from JSON data.
-func (m *Range) FromJSON(data []byte) error {
+// UnmarshalJSON populates Range from JSON data.
+func (m *Range) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -39,8 +39,8 @@ func (m *Range) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Range to JSON data.
-func (m *Range) ToJSON() ([]byte, error) {
+// MarshalJSON converts Range to JSON data.
+func (m *Range) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -51,7 +51,7 @@ func (m *Range) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_

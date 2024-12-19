@@ -52,7 +52,7 @@ func (bt *BackboneType) Clone() *BackboneType {
 	}
 }
 
-// ToJSON converts the BackboneType to its JSON representation.
-func (bt *BackboneType) ToJSON() ([]byte, error) {
+// MarshalJSON converts the BackboneType to its JSON representation.
+func (bt *BackboneType) MarshalJSON() ([]byte, error) {
 	return json.Marshal(bt)
 }

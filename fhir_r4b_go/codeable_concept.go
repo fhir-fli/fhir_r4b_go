@@ -21,8 +21,8 @@ func NewCodeableConcept() *CodeableConcept {
 	return &CodeableConcept{}
 }
 
-// FromJSON populates CodeableConcept from JSON data.
-func (m *CodeableConcept) FromJSON(data []byte) error {
+// UnmarshalJSON populates CodeableConcept from JSON data.
+func (m *CodeableConcept) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -39,8 +39,8 @@ func (m *CodeableConcept) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CodeableConcept to JSON data.
-func (m *CodeableConcept) ToJSON() ([]byte, error) {
+// MarshalJSON converts CodeableConcept to JSON data.
+func (m *CodeableConcept) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -52,7 +52,7 @@ func (m *CodeableConcept) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -60,7 +60,7 @@ func (m *CodeableConcept) ToJSON() ([]byte, error) {
 	if m.Text != nil && m.Text.Value != nil {
 		output.Text = m.Text.Value
 		if m.Text.Element != nil {
-			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+			output.TextElement = toMapOrNil(m.Text.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

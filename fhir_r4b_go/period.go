@@ -21,8 +21,8 @@ func NewPeriod() *Period {
 	return &Period{}
 }
 
-// FromJSON populates Period from JSON data.
-func (m *Period) FromJSON(data []byte) error {
+// UnmarshalJSON populates Period from JSON data.
+func (m *Period) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -39,8 +39,8 @@ func (m *Period) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Period to JSON data.
-func (m *Period) ToJSON() ([]byte, error) {
+// MarshalJSON converts Period to JSON data.
+func (m *Period) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -53,20 +53,20 @@ func (m *Period) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
 	if m.Start != nil && m.Start.Value != nil {
 		output.Start = m.Start.Value
 		if m.Start.Element != nil {
-			output.StartElement = toMapOrNil(m.Start.Element.ToJSON())
+			output.StartElement = toMapOrNil(m.Start.Element.MarshalJSON())
 		}
 	}
 	if m.End != nil && m.End.Value != nil {
 		output.End = m.End.Value
 		if m.End.Element != nil {
-			output.EndElement = toMapOrNil(m.End.Element.ToJSON())
+			output.EndElement = toMapOrNil(m.End.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

@@ -48,8 +48,8 @@ func NewMedia() *Media {
 	return &Media{}
 }
 
-// FromJSON populates Media from JSON data.
-func (m *Media) FromJSON(data []byte) error {
+// UnmarshalJSON populates Media from JSON data.
+func (m *Media) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -120,8 +120,8 @@ func (m *Media) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Media to JSON data.
-func (m *Media) ToJSON() ([]byte, error) {
+// MarshalJSON converts Media to JSON data.
+func (m *Media) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -167,14 +167,14 @@ func (m *Media) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -194,14 +194,14 @@ func (m *Media) ToJSON() ([]byte, error) {
 	if m.CreatedDateTime != nil && m.CreatedDateTime.Value != nil {
 		output.CreatedDateTime = m.CreatedDateTime.Value
 		if m.CreatedDateTime.Element != nil {
-			output.CreatedDateTimeElement = toMapOrNil(m.CreatedDateTime.Element.ToJSON())
+			output.CreatedDateTimeElement = toMapOrNil(m.CreatedDateTime.Element.MarshalJSON())
 		}
 	}
 	output.CreatedPeriod = m.CreatedPeriod
 	if m.Issued != nil && m.Issued.Value != nil {
 		output.Issued = m.Issued.Value
 		if m.Issued.Element != nil {
-			output.IssuedElement = toMapOrNil(m.Issued.Element.ToJSON())
+			output.IssuedElement = toMapOrNil(m.Issued.Element.MarshalJSON())
 		}
 	}
 	output.Operator_ = m.Operator_
@@ -210,32 +210,32 @@ func (m *Media) ToJSON() ([]byte, error) {
 	if m.DeviceName != nil && m.DeviceName.Value != nil {
 		output.DeviceName = m.DeviceName.Value
 		if m.DeviceName.Element != nil {
-			output.DeviceNameElement = toMapOrNil(m.DeviceName.Element.ToJSON())
+			output.DeviceNameElement = toMapOrNil(m.DeviceName.Element.MarshalJSON())
 		}
 	}
 	output.Device = m.Device
 	if m.Height != nil && m.Height.Value != nil {
 		output.Height = m.Height.Value
 		if m.Height.Element != nil {
-			output.HeightElement = toMapOrNil(m.Height.Element.ToJSON())
+			output.HeightElement = toMapOrNil(m.Height.Element.MarshalJSON())
 		}
 	}
 	if m.Width != nil && m.Width.Value != nil {
 		output.Width = m.Width.Value
 		if m.Width.Element != nil {
-			output.WidthElement = toMapOrNil(m.Width.Element.ToJSON())
+			output.WidthElement = toMapOrNil(m.Width.Element.MarshalJSON())
 		}
 	}
 	if m.Frames != nil && m.Frames.Value != nil {
 		output.Frames = m.Frames.Value
 		if m.Frames.Element != nil {
-			output.FramesElement = toMapOrNil(m.Frames.Element.ToJSON())
+			output.FramesElement = toMapOrNil(m.Frames.Element.MarshalJSON())
 		}
 	}
 	if m.Duration != nil && m.Duration.Value != nil {
 		output.Duration = m.Duration.Value
 		if m.Duration.Element != nil {
-			output.DurationElement = toMapOrNil(m.Duration.Element.ToJSON())
+			output.DurationElement = toMapOrNil(m.Duration.Element.MarshalJSON())
 		}
 	}
 	output.Content = m.Content

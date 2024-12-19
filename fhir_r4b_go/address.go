@@ -30,8 +30,8 @@ func NewAddress() *Address {
 	return &Address{}
 }
 
-// FromJSON populates Address from JSON data.
-func (m *Address) FromJSON(data []byte) error {
+// UnmarshalJSON populates Address from JSON data.
+func (m *Address) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -73,8 +73,8 @@ func (m *Address) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Address to JSON data.
-func (m *Address) ToJSON() ([]byte, error) {
+// MarshalJSON converts Address to JSON data.
+func (m *Address) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -100,7 +100,7 @@ func (m *Address) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -109,7 +109,7 @@ func (m *Address) ToJSON() ([]byte, error) {
 	if m.Text != nil && m.Text.Value != nil {
 		output.Text = m.Text.Value
 		if m.Text.Element != nil {
-			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+			output.TextElement = toMapOrNil(m.Text.Element.MarshalJSON())
 		}
 	}
 	if len(m.Line) > 0 {
@@ -120,38 +120,38 @@ func (m *Address) ToJSON() ([]byte, error) {
 				output.Line[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.LineElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.LineElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
 	if m.City != nil && m.City.Value != nil {
 		output.City = m.City.Value
 		if m.City.Element != nil {
-			output.CityElement = toMapOrNil(m.City.Element.ToJSON())
+			output.CityElement = toMapOrNil(m.City.Element.MarshalJSON())
 		}
 	}
 	if m.District != nil && m.District.Value != nil {
 		output.District = m.District.Value
 		if m.District.Element != nil {
-			output.DistrictElement = toMapOrNil(m.District.Element.ToJSON())
+			output.DistrictElement = toMapOrNil(m.District.Element.MarshalJSON())
 		}
 	}
 	if m.State != nil && m.State.Value != nil {
 		output.State = m.State.Value
 		if m.State.Element != nil {
-			output.StateElement = toMapOrNil(m.State.Element.ToJSON())
+			output.StateElement = toMapOrNil(m.State.Element.MarshalJSON())
 		}
 	}
 	if m.PostalCode != nil && m.PostalCode.Value != nil {
 		output.PostalCode = m.PostalCode.Value
 		if m.PostalCode.Element != nil {
-			output.PostalCodeElement = toMapOrNil(m.PostalCode.Element.ToJSON())
+			output.PostalCodeElement = toMapOrNil(m.PostalCode.Element.MarshalJSON())
 		}
 	}
 	if m.Country != nil && m.Country.Value != nil {
 		output.Country = m.Country.Value
 		if m.Country.Element != nil {
-			output.CountryElement = toMapOrNil(m.Country.Element.ToJSON())
+			output.CountryElement = toMapOrNil(m.Country.Element.MarshalJSON())
 		}
 	}
 	output.Period = m.Period

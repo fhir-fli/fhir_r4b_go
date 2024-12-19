@@ -32,8 +32,8 @@ func NewProdCharacteristic() *ProdCharacteristic {
 	return &ProdCharacteristic{}
 }
 
-// FromJSON populates ProdCharacteristic from JSON data.
-func (m *ProdCharacteristic) FromJSON(data []byte) error {
+// UnmarshalJSON populates ProdCharacteristic from JSON data.
+func (m *ProdCharacteristic) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -88,8 +88,8 @@ func (m *ProdCharacteristic) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ProdCharacteristic to JSON data.
-func (m *ProdCharacteristic) ToJSON() ([]byte, error) {
+// MarshalJSON converts ProdCharacteristic to JSON data.
+func (m *ProdCharacteristic) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -113,7 +113,7 @@ func (m *ProdCharacteristic) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -127,7 +127,7 @@ func (m *ProdCharacteristic) ToJSON() ([]byte, error) {
 	if m.Shape != nil && m.Shape.Value != nil {
 		output.Shape = m.Shape.Value
 		if m.Shape.Element != nil {
-			output.ShapeElement = toMapOrNil(m.Shape.Element.ToJSON())
+			output.ShapeElement = toMapOrNil(m.Shape.Element.MarshalJSON())
 		}
 	}
 	if len(m.Color) > 0 {
@@ -138,7 +138,7 @@ func (m *ProdCharacteristic) ToJSON() ([]byte, error) {
 				output.Color[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.ColorElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.ColorElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -150,7 +150,7 @@ func (m *ProdCharacteristic) ToJSON() ([]byte, error) {
 				output.Imprint[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.ImprintElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.ImprintElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}

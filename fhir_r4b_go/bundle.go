@@ -28,8 +28,8 @@ func NewBundle() *Bundle {
 	return &Bundle{}
 }
 
-// FromJSON populates Bundle from JSON data.
-func (m *Bundle) FromJSON(data []byte) error {
+// UnmarshalJSON populates Bundle from JSON data.
+func (m *Bundle) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -60,8 +60,8 @@ func (m *Bundle) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Bundle to JSON data.
-func (m *Bundle) ToJSON() ([]byte, error) {
+// MarshalJSON converts Bundle to JSON data.
+func (m *Bundle) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -82,14 +82,14 @@ func (m *Bundle) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -98,13 +98,13 @@ func (m *Bundle) ToJSON() ([]byte, error) {
 	if m.Timestamp != nil && m.Timestamp.Value != nil {
 		output.Timestamp = m.Timestamp.Value
 		if m.Timestamp.Element != nil {
-			output.TimestampElement = toMapOrNil(m.Timestamp.Element.ToJSON())
+			output.TimestampElement = toMapOrNil(m.Timestamp.Element.MarshalJSON())
 		}
 	}
 	if m.Total != nil && m.Total.Value != nil {
 		output.Total = m.Total.Value
 		if m.Total.Element != nil {
-			output.TotalElement = toMapOrNil(m.Total.Element.ToJSON())
+			output.TotalElement = toMapOrNil(m.Total.Element.MarshalJSON())
 		}
 	}
 	output.Link = m.Link
@@ -165,8 +165,8 @@ func NewBundleLink() *BundleLink {
 	return &BundleLink{}
 }
 
-// FromJSON populates BundleLink from JSON data.
-func (m *BundleLink) FromJSON(data []byte) error {
+// UnmarshalJSON populates BundleLink from JSON data.
+func (m *BundleLink) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -185,8 +185,8 @@ func (m *BundleLink) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts BundleLink to JSON data.
-func (m *BundleLink) ToJSON() ([]byte, error) {
+// MarshalJSON converts BundleLink to JSON data.
+func (m *BundleLink) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -200,7 +200,7 @@ func (m *BundleLink) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -208,13 +208,13 @@ func (m *BundleLink) ToJSON() ([]byte, error) {
 	if m.Relation != nil && m.Relation.Value != nil {
 		output.Relation = m.Relation.Value
 		if m.Relation.Element != nil {
-			output.RelationElement = toMapOrNil(m.Relation.Element.ToJSON())
+			output.RelationElement = toMapOrNil(m.Relation.Element.MarshalJSON())
 		}
 	}
 	if m.Url != nil && m.Url.Value != nil {
 		output.Url = m.Url.Value
 		if m.Url.Element != nil {
-			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+			output.UrlElement = toMapOrNil(m.Url.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -264,8 +264,8 @@ func NewBundleEntry() *BundleEntry {
 	return &BundleEntry{}
 }
 
-// FromJSON populates BundleEntry from JSON data.
-func (m *BundleEntry) FromJSON(data []byte) error {
+// UnmarshalJSON populates BundleEntry from JSON data.
+func (m *BundleEntry) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -292,8 +292,8 @@ func (m *BundleEntry) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts BundleEntry to JSON data.
-func (m *BundleEntry) ToJSON() ([]byte, error) {
+// MarshalJSON converts BundleEntry to JSON data.
+func (m *BundleEntry) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -310,7 +310,7 @@ func (m *BundleEntry) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -319,7 +319,7 @@ func (m *BundleEntry) ToJSON() ([]byte, error) {
 	if m.FullUrl != nil && m.FullUrl.Value != nil {
 		output.FullUrl = m.FullUrl.Value
 		if m.FullUrl.Element != nil {
-			output.FullUrlElement = toMapOrNil(m.FullUrl.Element.ToJSON())
+			output.FullUrlElement = toMapOrNil(m.FullUrl.Element.MarshalJSON())
 		}
 	}
 	output.Resource = m.Resource
@@ -377,8 +377,8 @@ func NewBundleSearch() *BundleSearch {
 	return &BundleSearch{}
 }
 
-// FromJSON populates BundleSearch from JSON data.
-func (m *BundleSearch) FromJSON(data []byte) error {
+// UnmarshalJSON populates BundleSearch from JSON data.
+func (m *BundleSearch) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -397,8 +397,8 @@ func (m *BundleSearch) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts BundleSearch to JSON data.
-func (m *BundleSearch) ToJSON() ([]byte, error) {
+// MarshalJSON converts BundleSearch to JSON data.
+func (m *BundleSearch) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -411,7 +411,7 @@ func (m *BundleSearch) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -420,7 +420,7 @@ func (m *BundleSearch) ToJSON() ([]byte, error) {
 	if m.Score != nil && m.Score.Value != nil {
 		output.Score = m.Score.Value
 		if m.Score.Element != nil {
-			output.ScoreElement = toMapOrNil(m.Score.Element.ToJSON())
+			output.ScoreElement = toMapOrNil(m.Score.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -470,8 +470,8 @@ func NewBundleRequest() *BundleRequest {
 	return &BundleRequest{}
 }
 
-// FromJSON populates BundleRequest from JSON data.
-func (m *BundleRequest) FromJSON(data []byte) error {
+// UnmarshalJSON populates BundleRequest from JSON data.
+func (m *BundleRequest) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -498,8 +498,8 @@ func (m *BundleRequest) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts BundleRequest to JSON data.
-func (m *BundleRequest) ToJSON() ([]byte, error) {
+// MarshalJSON converts BundleRequest to JSON data.
+func (m *BundleRequest) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -520,7 +520,7 @@ func (m *BundleRequest) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -529,31 +529,31 @@ func (m *BundleRequest) ToJSON() ([]byte, error) {
 	if m.Url != nil && m.Url.Value != nil {
 		output.Url = m.Url.Value
 		if m.Url.Element != nil {
-			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+			output.UrlElement = toMapOrNil(m.Url.Element.MarshalJSON())
 		}
 	}
 	if m.IfNoneMatch != nil && m.IfNoneMatch.Value != nil {
 		output.IfNoneMatch = m.IfNoneMatch.Value
 		if m.IfNoneMatch.Element != nil {
-			output.IfNoneMatchElement = toMapOrNil(m.IfNoneMatch.Element.ToJSON())
+			output.IfNoneMatchElement = toMapOrNil(m.IfNoneMatch.Element.MarshalJSON())
 		}
 	}
 	if m.IfModifiedSince != nil && m.IfModifiedSince.Value != nil {
 		output.IfModifiedSince = m.IfModifiedSince.Value
 		if m.IfModifiedSince.Element != nil {
-			output.IfModifiedSinceElement = toMapOrNil(m.IfModifiedSince.Element.ToJSON())
+			output.IfModifiedSinceElement = toMapOrNil(m.IfModifiedSince.Element.MarshalJSON())
 		}
 	}
 	if m.IfMatch != nil && m.IfMatch.Value != nil {
 		output.IfMatch = m.IfMatch.Value
 		if m.IfMatch.Element != nil {
-			output.IfMatchElement = toMapOrNil(m.IfMatch.Element.ToJSON())
+			output.IfMatchElement = toMapOrNil(m.IfMatch.Element.MarshalJSON())
 		}
 	}
 	if m.IfNoneExist != nil && m.IfNoneExist.Value != nil {
 		output.IfNoneExist = m.IfNoneExist.Value
 		if m.IfNoneExist.Element != nil {
-			output.IfNoneExistElement = toMapOrNil(m.IfNoneExist.Element.ToJSON())
+			output.IfNoneExistElement = toMapOrNil(m.IfNoneExist.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -610,8 +610,8 @@ func NewBundleResponse() *BundleResponse {
 	return &BundleResponse{}
 }
 
-// FromJSON populates BundleResponse from JSON data.
-func (m *BundleResponse) FromJSON(data []byte) error {
+// UnmarshalJSON populates BundleResponse from JSON data.
+func (m *BundleResponse) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -636,8 +636,8 @@ func (m *BundleResponse) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts BundleResponse to JSON data.
-func (m *BundleResponse) ToJSON() ([]byte, error) {
+// MarshalJSON converts BundleResponse to JSON data.
+func (m *BundleResponse) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -656,7 +656,7 @@ func (m *BundleResponse) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -664,25 +664,25 @@ func (m *BundleResponse) ToJSON() ([]byte, error) {
 	if m.Status != nil && m.Status.Value != nil {
 		output.Status = m.Status.Value
 		if m.Status.Element != nil {
-			output.StatusElement = toMapOrNil(m.Status.Element.ToJSON())
+			output.StatusElement = toMapOrNil(m.Status.Element.MarshalJSON())
 		}
 	}
 	if m.Location != nil && m.Location.Value != nil {
 		output.Location = m.Location.Value
 		if m.Location.Element != nil {
-			output.LocationElement = toMapOrNil(m.Location.Element.ToJSON())
+			output.LocationElement = toMapOrNil(m.Location.Element.MarshalJSON())
 		}
 	}
 	if m.Etag != nil && m.Etag.Value != nil {
 		output.Etag = m.Etag.Value
 		if m.Etag.Element != nil {
-			output.EtagElement = toMapOrNil(m.Etag.Element.ToJSON())
+			output.EtagElement = toMapOrNil(m.Etag.Element.MarshalJSON())
 		}
 	}
 	if m.LastModified != nil && m.LastModified.Value != nil {
 		output.LastModified = m.LastModified.Value
 		if m.LastModified.Element != nil {
-			output.LastModifiedElement = toMapOrNil(m.LastModified.Element.ToJSON())
+			output.LastModifiedElement = toMapOrNil(m.LastModified.Element.MarshalJSON())
 		}
 	}
 	output.Outcome = m.Outcome

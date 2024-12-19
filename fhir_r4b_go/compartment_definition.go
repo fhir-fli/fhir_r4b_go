@@ -40,8 +40,8 @@ func NewCompartmentDefinition() *CompartmentDefinition {
 	return &CompartmentDefinition{}
 }
 
-// FromJSON populates CompartmentDefinition from JSON data.
-func (m *CompartmentDefinition) FromJSON(data []byte) error {
+// UnmarshalJSON populates CompartmentDefinition from JSON data.
+func (m *CompartmentDefinition) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -94,8 +94,8 @@ func (m *CompartmentDefinition) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CompartmentDefinition to JSON data.
-func (m *CompartmentDefinition) ToJSON() ([]byte, error) {
+// MarshalJSON converts CompartmentDefinition to JSON data.
+func (m *CompartmentDefinition) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -134,14 +134,14 @@ func (m *CompartmentDefinition) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -152,59 +152,59 @@ func (m *CompartmentDefinition) ToJSON() ([]byte, error) {
 	if m.Url != nil && m.Url.Value != nil {
 		output.Url = m.Url.Value
 		if m.Url.Element != nil {
-			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+			output.UrlElement = toMapOrNil(m.Url.Element.MarshalJSON())
 		}
 	}
 	if m.Version != nil && m.Version.Value != nil {
 		output.Version = m.Version.Value
 		if m.Version.Element != nil {
-			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+			output.VersionElement = toMapOrNil(m.Version.Element.MarshalJSON())
 		}
 	}
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	output.Status = m.Status
 	if m.Experimental != nil && m.Experimental.Value != nil {
 		output.Experimental = m.Experimental.Value
 		if m.Experimental.Element != nil {
-			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.MarshalJSON())
 		}
 	}
 	if m.Date != nil && m.Date.Value != nil {
 		output.Date = m.Date.Value
 		if m.Date.Element != nil {
-			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+			output.DateElement = toMapOrNil(m.Date.Element.MarshalJSON())
 		}
 	}
 	if m.Publisher != nil && m.Publisher.Value != nil {
 		output.Publisher = m.Publisher.Value
 		if m.Publisher.Element != nil {
-			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.MarshalJSON())
 		}
 	}
 	output.Contact = m.Contact
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.UseContext = m.UseContext
 	if m.Purpose != nil && m.Purpose.Value != nil {
 		output.Purpose = m.Purpose.Value
 		if m.Purpose.Element != nil {
-			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.MarshalJSON())
 		}
 	}
 	output.Code = m.Code
 	if m.Search != nil && m.Search.Value != nil {
 		output.Search = m.Search.Value
 		if m.Search.Element != nil {
-			output.SearchElement = toMapOrNil(m.Search.Element.ToJSON())
+			output.SearchElement = toMapOrNil(m.Search.Element.MarshalJSON())
 		}
 	}
 	output.Resource = m.Resource
@@ -286,8 +286,8 @@ func NewCompartmentDefinitionResource() *CompartmentDefinitionResource {
 	return &CompartmentDefinitionResource{}
 }
 
-// FromJSON populates CompartmentDefinitionResource from JSON data.
-func (m *CompartmentDefinitionResource) FromJSON(data []byte) error {
+// UnmarshalJSON populates CompartmentDefinitionResource from JSON data.
+func (m *CompartmentDefinitionResource) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -317,8 +317,8 @@ func (m *CompartmentDefinitionResource) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CompartmentDefinitionResource to JSON data.
-func (m *CompartmentDefinitionResource) ToJSON() ([]byte, error) {
+// MarshalJSON converts CompartmentDefinitionResource to JSON data.
+func (m *CompartmentDefinitionResource) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -334,7 +334,7 @@ func (m *CompartmentDefinitionResource) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -342,7 +342,7 @@ func (m *CompartmentDefinitionResource) ToJSON() ([]byte, error) {
 	if m.Code != nil && m.Code.Value != nil {
 		output.Code = m.Code.Value
 		if m.Code.Element != nil {
-			output.CodeElement = toMapOrNil(m.Code.Element.ToJSON())
+			output.CodeElement = toMapOrNil(m.Code.Element.MarshalJSON())
 		}
 	}
 	if len(m.Param) > 0 {
@@ -353,14 +353,14 @@ func (m *CompartmentDefinitionResource) ToJSON() ([]byte, error) {
 				output.Param[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.ParamElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.ParamElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
 	if m.Documentation != nil && m.Documentation.Value != nil {
 		output.Documentation = m.Documentation.Value
 		if m.Documentation.Element != nil {
-			output.DocumentationElement = toMapOrNil(m.Documentation.Element.ToJSON())
+			output.DocumentationElement = toMapOrNil(m.Documentation.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

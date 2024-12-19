@@ -36,8 +36,8 @@ func NewClinicalUseDefinition() *ClinicalUseDefinition {
 	return &ClinicalUseDefinition{}
 }
 
-// FromJSON populates ClinicalUseDefinition from JSON data.
-func (m *ClinicalUseDefinition) FromJSON(data []byte) error {
+// UnmarshalJSON populates ClinicalUseDefinition from JSON data.
+func (m *ClinicalUseDefinition) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -84,8 +84,8 @@ func (m *ClinicalUseDefinition) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ClinicalUseDefinition to JSON data.
-func (m *ClinicalUseDefinition) ToJSON() ([]byte, error) {
+// MarshalJSON converts ClinicalUseDefinition to JSON data.
+func (m *ClinicalUseDefinition) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -112,14 +112,14 @@ func (m *ClinicalUseDefinition) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -212,8 +212,8 @@ func NewClinicalUseDefinitionContraindication() *ClinicalUseDefinitionContraindi
 	return &ClinicalUseDefinitionContraindication{}
 }
 
-// FromJSON populates ClinicalUseDefinitionContraindication from JSON data.
-func (m *ClinicalUseDefinitionContraindication) FromJSON(data []byte) error {
+// UnmarshalJSON populates ClinicalUseDefinitionContraindication from JSON data.
+func (m *ClinicalUseDefinitionContraindication) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -238,8 +238,8 @@ func (m *ClinicalUseDefinitionContraindication) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ClinicalUseDefinitionContraindication to JSON data.
-func (m *ClinicalUseDefinitionContraindication) ToJSON() ([]byte, error) {
+// MarshalJSON converts ClinicalUseDefinitionContraindication to JSON data.
+func (m *ClinicalUseDefinitionContraindication) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -254,7 +254,7 @@ func (m *ClinicalUseDefinitionContraindication) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -313,8 +313,8 @@ func NewClinicalUseDefinitionOtherTherapy() *ClinicalUseDefinitionOtherTherapy {
 	return &ClinicalUseDefinitionOtherTherapy{}
 }
 
-// FromJSON populates ClinicalUseDefinitionOtherTherapy from JSON data.
-func (m *ClinicalUseDefinitionOtherTherapy) FromJSON(data []byte) error {
+// UnmarshalJSON populates ClinicalUseDefinitionOtherTherapy from JSON data.
+func (m *ClinicalUseDefinitionOtherTherapy) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -333,8 +333,8 @@ func (m *ClinicalUseDefinitionOtherTherapy) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ClinicalUseDefinitionOtherTherapy to JSON data.
-func (m *ClinicalUseDefinitionOtherTherapy) ToJSON() ([]byte, error) {
+// MarshalJSON converts ClinicalUseDefinitionOtherTherapy to JSON data.
+func (m *ClinicalUseDefinitionOtherTherapy) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -346,7 +346,7 @@ func (m *ClinicalUseDefinitionOtherTherapy) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -402,8 +402,8 @@ func NewClinicalUseDefinitionIndication() *ClinicalUseDefinitionIndication {
 	return &ClinicalUseDefinitionIndication{}
 }
 
-// FromJSON populates ClinicalUseDefinitionIndication from JSON data.
-func (m *ClinicalUseDefinitionIndication) FromJSON(data []byte) error {
+// UnmarshalJSON populates ClinicalUseDefinitionIndication from JSON data.
+func (m *ClinicalUseDefinitionIndication) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -434,8 +434,8 @@ func (m *ClinicalUseDefinitionIndication) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ClinicalUseDefinitionIndication to JSON data.
-func (m *ClinicalUseDefinitionIndication) ToJSON() ([]byte, error) {
+// MarshalJSON converts ClinicalUseDefinitionIndication to JSON data.
+func (m *ClinicalUseDefinitionIndication) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -454,7 +454,7 @@ func (m *ClinicalUseDefinitionIndication) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -467,7 +467,7 @@ func (m *ClinicalUseDefinitionIndication) ToJSON() ([]byte, error) {
 	if m.DurationString != nil && m.DurationString.Value != nil {
 		output.DurationString = m.DurationString.Value
 		if m.DurationString.Element != nil {
-			output.DurationStringElement = toMapOrNil(m.DurationString.Element.ToJSON())
+			output.DurationStringElement = toMapOrNil(m.DurationString.Element.MarshalJSON())
 		}
 	}
 	output.UndesirableEffect = m.UndesirableEffect
@@ -530,8 +530,8 @@ func NewClinicalUseDefinitionInteraction() *ClinicalUseDefinitionInteraction {
 	return &ClinicalUseDefinitionInteraction{}
 }
 
-// FromJSON populates ClinicalUseDefinitionInteraction from JSON data.
-func (m *ClinicalUseDefinitionInteraction) FromJSON(data []byte) error {
+// UnmarshalJSON populates ClinicalUseDefinitionInteraction from JSON data.
+func (m *ClinicalUseDefinitionInteraction) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -556,8 +556,8 @@ func (m *ClinicalUseDefinitionInteraction) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ClinicalUseDefinitionInteraction to JSON data.
-func (m *ClinicalUseDefinitionInteraction) ToJSON() ([]byte, error) {
+// MarshalJSON converts ClinicalUseDefinitionInteraction to JSON data.
+func (m *ClinicalUseDefinitionInteraction) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -572,7 +572,7 @@ func (m *ClinicalUseDefinitionInteraction) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -631,8 +631,8 @@ func NewClinicalUseDefinitionInteractant() *ClinicalUseDefinitionInteractant {
 	return &ClinicalUseDefinitionInteractant{}
 }
 
-// FromJSON populates ClinicalUseDefinitionInteractant from JSON data.
-func (m *ClinicalUseDefinitionInteractant) FromJSON(data []byte) error {
+// UnmarshalJSON populates ClinicalUseDefinitionInteractant from JSON data.
+func (m *ClinicalUseDefinitionInteractant) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -651,8 +651,8 @@ func (m *ClinicalUseDefinitionInteractant) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ClinicalUseDefinitionInteractant to JSON data.
-func (m *ClinicalUseDefinitionInteractant) ToJSON() ([]byte, error) {
+// MarshalJSON converts ClinicalUseDefinitionInteractant to JSON data.
+func (m *ClinicalUseDefinitionInteractant) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -664,7 +664,7 @@ func (m *ClinicalUseDefinitionInteractant) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -715,8 +715,8 @@ func NewClinicalUseDefinitionUndesirableEffect() *ClinicalUseDefinitionUndesirab
 	return &ClinicalUseDefinitionUndesirableEffect{}
 }
 
-// FromJSON populates ClinicalUseDefinitionUndesirableEffect from JSON data.
-func (m *ClinicalUseDefinitionUndesirableEffect) FromJSON(data []byte) error {
+// UnmarshalJSON populates ClinicalUseDefinitionUndesirableEffect from JSON data.
+func (m *ClinicalUseDefinitionUndesirableEffect) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -737,8 +737,8 @@ func (m *ClinicalUseDefinitionUndesirableEffect) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ClinicalUseDefinitionUndesirableEffect to JSON data.
-func (m *ClinicalUseDefinitionUndesirableEffect) ToJSON() ([]byte, error) {
+// MarshalJSON converts ClinicalUseDefinitionUndesirableEffect to JSON data.
+func (m *ClinicalUseDefinitionUndesirableEffect) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -751,7 +751,7 @@ func (m *ClinicalUseDefinitionUndesirableEffect) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -804,8 +804,8 @@ func NewClinicalUseDefinitionWarning() *ClinicalUseDefinitionWarning {
 	return &ClinicalUseDefinitionWarning{}
 }
 
-// FromJSON populates ClinicalUseDefinitionWarning from JSON data.
-func (m *ClinicalUseDefinitionWarning) FromJSON(data []byte) error {
+// UnmarshalJSON populates ClinicalUseDefinitionWarning from JSON data.
+func (m *ClinicalUseDefinitionWarning) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -824,8 +824,8 @@ func (m *ClinicalUseDefinitionWarning) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ClinicalUseDefinitionWarning to JSON data.
-func (m *ClinicalUseDefinitionWarning) ToJSON() ([]byte, error) {
+// MarshalJSON converts ClinicalUseDefinitionWarning to JSON data.
+func (m *ClinicalUseDefinitionWarning) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -838,7 +838,7 @@ func (m *ClinicalUseDefinitionWarning) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -846,7 +846,7 @@ func (m *ClinicalUseDefinitionWarning) ToJSON() ([]byte, error) {
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.Code = m.Code

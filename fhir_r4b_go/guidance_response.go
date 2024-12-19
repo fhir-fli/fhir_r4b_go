@@ -42,8 +42,8 @@ func NewGuidanceResponse() *GuidanceResponse {
 	return &GuidanceResponse{}
 }
 
-// FromJSON populates GuidanceResponse from JSON data.
-func (m *GuidanceResponse) FromJSON(data []byte) error {
+// UnmarshalJSON populates GuidanceResponse from JSON data.
+func (m *GuidanceResponse) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -102,8 +102,8 @@ func (m *GuidanceResponse) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts GuidanceResponse to JSON data.
-func (m *GuidanceResponse) ToJSON() ([]byte, error) {
+// MarshalJSON converts GuidanceResponse to JSON data.
+func (m *GuidanceResponse) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -139,14 +139,14 @@ func (m *GuidanceResponse) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -159,13 +159,13 @@ func (m *GuidanceResponse) ToJSON() ([]byte, error) {
 	if m.ModuleUri != nil && m.ModuleUri.Value != nil {
 		output.ModuleUri = m.ModuleUri.Value
 		if m.ModuleUri.Element != nil {
-			output.ModuleUriElement = toMapOrNil(m.ModuleUri.Element.ToJSON())
+			output.ModuleUriElement = toMapOrNil(m.ModuleUri.Element.MarshalJSON())
 		}
 	}
 	if m.ModuleCanonical != nil && m.ModuleCanonical.Value != nil {
 		output.ModuleCanonical = m.ModuleCanonical.Value
 		if m.ModuleCanonical.Element != nil {
-			output.ModuleCanonicalElement = toMapOrNil(m.ModuleCanonical.Element.ToJSON())
+			output.ModuleCanonicalElement = toMapOrNil(m.ModuleCanonical.Element.MarshalJSON())
 		}
 	}
 	output.ModuleCodeableConcept = m.ModuleCodeableConcept
@@ -175,7 +175,7 @@ func (m *GuidanceResponse) ToJSON() ([]byte, error) {
 	if m.OccurrenceDateTime != nil && m.OccurrenceDateTime.Value != nil {
 		output.OccurrenceDateTime = m.OccurrenceDateTime.Value
 		if m.OccurrenceDateTime.Element != nil {
-			output.OccurrenceDateTimeElement = toMapOrNil(m.OccurrenceDateTime.Element.ToJSON())
+			output.OccurrenceDateTimeElement = toMapOrNil(m.OccurrenceDateTime.Element.MarshalJSON())
 		}
 	}
 	output.Performer = m.Performer

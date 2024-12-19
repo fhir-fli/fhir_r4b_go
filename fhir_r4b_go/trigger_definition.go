@@ -27,8 +27,8 @@ func NewTriggerDefinition() *TriggerDefinition {
 	return &TriggerDefinition{}
 }
 
-// FromJSON populates TriggerDefinition from JSON data.
-func (m *TriggerDefinition) FromJSON(data []byte) error {
+// UnmarshalJSON populates TriggerDefinition from JSON data.
+func (m *TriggerDefinition) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -57,8 +57,8 @@ func (m *TriggerDefinition) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts TriggerDefinition to JSON data.
-func (m *TriggerDefinition) ToJSON() ([]byte, error) {
+// MarshalJSON converts TriggerDefinition to JSON data.
+func (m *TriggerDefinition) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -78,7 +78,7 @@ func (m *TriggerDefinition) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -86,7 +86,7 @@ func (m *TriggerDefinition) ToJSON() ([]byte, error) {
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	output.TimingTiming = m.TimingTiming
@@ -94,13 +94,13 @@ func (m *TriggerDefinition) ToJSON() ([]byte, error) {
 	if m.TimingDate != nil && m.TimingDate.Value != nil {
 		output.TimingDate = m.TimingDate.Value
 		if m.TimingDate.Element != nil {
-			output.TimingDateElement = toMapOrNil(m.TimingDate.Element.ToJSON())
+			output.TimingDateElement = toMapOrNil(m.TimingDate.Element.MarshalJSON())
 		}
 	}
 	if m.TimingDateTime != nil && m.TimingDateTime.Value != nil {
 		output.TimingDateTime = m.TimingDateTime.Value
 		if m.TimingDateTime.Element != nil {
-			output.TimingDateTimeElement = toMapOrNil(m.TimingDateTime.Element.ToJSON())
+			output.TimingDateTimeElement = toMapOrNil(m.TimingDateTime.Element.MarshalJSON())
 		}
 	}
 	output.Data = m.Data

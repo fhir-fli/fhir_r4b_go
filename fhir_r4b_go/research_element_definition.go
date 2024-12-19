@@ -60,8 +60,8 @@ func NewResearchElementDefinition() *ResearchElementDefinition {
 	return &ResearchElementDefinition{}
 }
 
-// FromJSON populates ResearchElementDefinition from JSON data.
-func (m *ResearchElementDefinition) FromJSON(data []byte) error {
+// UnmarshalJSON populates ResearchElementDefinition from JSON data.
+func (m *ResearchElementDefinition) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -172,8 +172,8 @@ func (m *ResearchElementDefinition) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ResearchElementDefinition to JSON data.
-func (m *ResearchElementDefinition) ToJSON() ([]byte, error) {
+// MarshalJSON converts ResearchElementDefinition to JSON data.
+func (m *ResearchElementDefinition) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -240,14 +240,14 @@ func (m *ResearchElementDefinition) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -258,45 +258,45 @@ func (m *ResearchElementDefinition) ToJSON() ([]byte, error) {
 	if m.Url != nil && m.Url.Value != nil {
 		output.Url = m.Url.Value
 		if m.Url.Element != nil {
-			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+			output.UrlElement = toMapOrNil(m.Url.Element.MarshalJSON())
 		}
 	}
 	output.Identifier = m.Identifier
 	if m.Version != nil && m.Version.Value != nil {
 		output.Version = m.Version.Value
 		if m.Version.Element != nil {
-			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+			output.VersionElement = toMapOrNil(m.Version.Element.MarshalJSON())
 		}
 	}
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	if m.Title != nil && m.Title.Value != nil {
 		output.Title = m.Title.Value
 		if m.Title.Element != nil {
-			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+			output.TitleElement = toMapOrNil(m.Title.Element.MarshalJSON())
 		}
 	}
 	if m.ShortTitle != nil && m.ShortTitle.Value != nil {
 		output.ShortTitle = m.ShortTitle.Value
 		if m.ShortTitle.Element != nil {
-			output.ShortTitleElement = toMapOrNil(m.ShortTitle.Element.ToJSON())
+			output.ShortTitleElement = toMapOrNil(m.ShortTitle.Element.MarshalJSON())
 		}
 	}
 	if m.Subtitle != nil && m.Subtitle.Value != nil {
 		output.Subtitle = m.Subtitle.Value
 		if m.Subtitle.Element != nil {
-			output.SubtitleElement = toMapOrNil(m.Subtitle.Element.ToJSON())
+			output.SubtitleElement = toMapOrNil(m.Subtitle.Element.MarshalJSON())
 		}
 	}
 	output.Status = m.Status
 	if m.Experimental != nil && m.Experimental.Value != nil {
 		output.Experimental = m.Experimental.Value
 		if m.Experimental.Element != nil {
-			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.MarshalJSON())
 		}
 	}
 	output.SubjectCodeableConcept = m.SubjectCodeableConcept
@@ -304,20 +304,20 @@ func (m *ResearchElementDefinition) ToJSON() ([]byte, error) {
 	if m.Date != nil && m.Date.Value != nil {
 		output.Date = m.Date.Value
 		if m.Date.Element != nil {
-			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+			output.DateElement = toMapOrNil(m.Date.Element.MarshalJSON())
 		}
 	}
 	if m.Publisher != nil && m.Publisher.Value != nil {
 		output.Publisher = m.Publisher.Value
 		if m.Publisher.Element != nil {
-			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.MarshalJSON())
 		}
 	}
 	output.Contact = m.Contact
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	if len(m.Comment) > 0 {
@@ -328,7 +328,7 @@ func (m *ResearchElementDefinition) ToJSON() ([]byte, error) {
 				output.Comment[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.CommentElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.CommentElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -337,31 +337,31 @@ func (m *ResearchElementDefinition) ToJSON() ([]byte, error) {
 	if m.Purpose != nil && m.Purpose.Value != nil {
 		output.Purpose = m.Purpose.Value
 		if m.Purpose.Element != nil {
-			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.MarshalJSON())
 		}
 	}
 	if m.Usage != nil && m.Usage.Value != nil {
 		output.Usage = m.Usage.Value
 		if m.Usage.Element != nil {
-			output.UsageElement = toMapOrNil(m.Usage.Element.ToJSON())
+			output.UsageElement = toMapOrNil(m.Usage.Element.MarshalJSON())
 		}
 	}
 	if m.Copyright != nil && m.Copyright.Value != nil {
 		output.Copyright = m.Copyright.Value
 		if m.Copyright.Element != nil {
-			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.MarshalJSON())
 		}
 	}
 	if m.ApprovalDate != nil && m.ApprovalDate.Value != nil {
 		output.ApprovalDate = m.ApprovalDate.Value
 		if m.ApprovalDate.Element != nil {
-			output.ApprovalDateElement = toMapOrNil(m.ApprovalDate.Element.ToJSON())
+			output.ApprovalDateElement = toMapOrNil(m.ApprovalDate.Element.MarshalJSON())
 		}
 	}
 	if m.LastReviewDate != nil && m.LastReviewDate.Value != nil {
 		output.LastReviewDate = m.LastReviewDate.Value
 		if m.LastReviewDate.Element != nil {
-			output.LastReviewDateElement = toMapOrNil(m.LastReviewDate.Element.ToJSON())
+			output.LastReviewDateElement = toMapOrNil(m.LastReviewDate.Element.MarshalJSON())
 		}
 	}
 	output.EffectivePeriod = m.EffectivePeriod
@@ -379,7 +379,7 @@ func (m *ResearchElementDefinition) ToJSON() ([]byte, error) {
 				output.Library_[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.Library_Element[i] = toMapOrNil(item.Element.ToJSON())
+				output.Library_Element[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -522,8 +522,8 @@ func NewResearchElementDefinitionCharacteristic() *ResearchElementDefinitionChar
 	return &ResearchElementDefinitionCharacteristic{}
 }
 
-// FromJSON populates ResearchElementDefinitionCharacteristic from JSON data.
-func (m *ResearchElementDefinitionCharacteristic) FromJSON(data []byte) error {
+// UnmarshalJSON populates ResearchElementDefinitionCharacteristic from JSON data.
+func (m *ResearchElementDefinitionCharacteristic) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -580,8 +580,8 @@ func (m *ResearchElementDefinitionCharacteristic) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ResearchElementDefinitionCharacteristic to JSON data.
-func (m *ResearchElementDefinitionCharacteristic) ToJSON() ([]byte, error) {
+// MarshalJSON converts ResearchElementDefinitionCharacteristic to JSON data.
+func (m *ResearchElementDefinitionCharacteristic) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -618,7 +618,7 @@ func (m *ResearchElementDefinitionCharacteristic) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -627,7 +627,7 @@ func (m *ResearchElementDefinitionCharacteristic) ToJSON() ([]byte, error) {
 	if m.DefinitionCanonical != nil && m.DefinitionCanonical.Value != nil {
 		output.DefinitionCanonical = m.DefinitionCanonical.Value
 		if m.DefinitionCanonical.Element != nil {
-			output.DefinitionCanonicalElement = toMapOrNil(m.DefinitionCanonical.Element.ToJSON())
+			output.DefinitionCanonicalElement = toMapOrNil(m.DefinitionCanonical.Element.MarshalJSON())
 		}
 	}
 	output.DefinitionExpression = m.DefinitionExpression
@@ -636,20 +636,20 @@ func (m *ResearchElementDefinitionCharacteristic) ToJSON() ([]byte, error) {
 	if m.Exclude != nil && m.Exclude.Value != nil {
 		output.Exclude = m.Exclude.Value
 		if m.Exclude.Element != nil {
-			output.ExcludeElement = toMapOrNil(m.Exclude.Element.ToJSON())
+			output.ExcludeElement = toMapOrNil(m.Exclude.Element.MarshalJSON())
 		}
 	}
 	output.UnitOfMeasure = m.UnitOfMeasure
 	if m.StudyEffectiveDescription != nil && m.StudyEffectiveDescription.Value != nil {
 		output.StudyEffectiveDescription = m.StudyEffectiveDescription.Value
 		if m.StudyEffectiveDescription.Element != nil {
-			output.StudyEffectiveDescriptionElement = toMapOrNil(m.StudyEffectiveDescription.Element.ToJSON())
+			output.StudyEffectiveDescriptionElement = toMapOrNil(m.StudyEffectiveDescription.Element.MarshalJSON())
 		}
 	}
 	if m.StudyEffectiveDateTime != nil && m.StudyEffectiveDateTime.Value != nil {
 		output.StudyEffectiveDateTime = m.StudyEffectiveDateTime.Value
 		if m.StudyEffectiveDateTime.Element != nil {
-			output.StudyEffectiveDateTimeElement = toMapOrNil(m.StudyEffectiveDateTime.Element.ToJSON())
+			output.StudyEffectiveDateTimeElement = toMapOrNil(m.StudyEffectiveDateTime.Element.MarshalJSON())
 		}
 	}
 	output.StudyEffectivePeriod = m.StudyEffectivePeriod
@@ -660,13 +660,13 @@ func (m *ResearchElementDefinitionCharacteristic) ToJSON() ([]byte, error) {
 	if m.ParticipantEffectiveDescription != nil && m.ParticipantEffectiveDescription.Value != nil {
 		output.ParticipantEffectiveDescription = m.ParticipantEffectiveDescription.Value
 		if m.ParticipantEffectiveDescription.Element != nil {
-			output.ParticipantEffectiveDescriptionElement = toMapOrNil(m.ParticipantEffectiveDescription.Element.ToJSON())
+			output.ParticipantEffectiveDescriptionElement = toMapOrNil(m.ParticipantEffectiveDescription.Element.MarshalJSON())
 		}
 	}
 	if m.ParticipantEffectiveDateTime != nil && m.ParticipantEffectiveDateTime.Value != nil {
 		output.ParticipantEffectiveDateTime = m.ParticipantEffectiveDateTime.Value
 		if m.ParticipantEffectiveDateTime.Element != nil {
-			output.ParticipantEffectiveDateTimeElement = toMapOrNil(m.ParticipantEffectiveDateTime.Element.ToJSON())
+			output.ParticipantEffectiveDateTimeElement = toMapOrNil(m.ParticipantEffectiveDateTime.Element.MarshalJSON())
 		}
 	}
 	output.ParticipantEffectivePeriod = m.ParticipantEffectivePeriod

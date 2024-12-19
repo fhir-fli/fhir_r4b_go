@@ -42,8 +42,8 @@ func NewGoal() *Goal {
 	return &Goal{}
 }
 
-// FromJSON populates Goal from JSON data.
-func (m *Goal) FromJSON(data []byte) error {
+// UnmarshalJSON populates Goal from JSON data.
+func (m *Goal) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -102,8 +102,8 @@ func (m *Goal) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Goal to JSON data.
-func (m *Goal) ToJSON() ([]byte, error) {
+// MarshalJSON converts Goal to JSON data.
+func (m *Goal) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -138,14 +138,14 @@ func (m *Goal) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -166,13 +166,13 @@ func (m *Goal) ToJSON() ([]byte, error) {
 	if m.StatusDate != nil && m.StatusDate.Value != nil {
 		output.StatusDate = m.StatusDate.Value
 		if m.StatusDate.Element != nil {
-			output.StatusDateElement = toMapOrNil(m.StatusDate.Element.ToJSON())
+			output.StatusDateElement = toMapOrNil(m.StatusDate.Element.MarshalJSON())
 		}
 	}
 	if m.StatusReason != nil && m.StatusReason.Value != nil {
 		output.StatusReason = m.StatusReason.Value
 		if m.StatusReason.Element != nil {
-			output.StatusReasonElement = toMapOrNil(m.StatusReason.Element.ToJSON())
+			output.StatusReasonElement = toMapOrNil(m.StatusReason.Element.MarshalJSON())
 		}
 	}
 	output.ExpressedBy = m.ExpressedBy
@@ -271,8 +271,8 @@ func NewGoalTarget() *GoalTarget {
 	return &GoalTarget{}
 }
 
-// FromJSON populates GoalTarget from JSON data.
-func (m *GoalTarget) FromJSON(data []byte) error {
+// UnmarshalJSON populates GoalTarget from JSON data.
+func (m *GoalTarget) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -307,8 +307,8 @@ func (m *GoalTarget) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts GoalTarget to JSON data.
-func (m *GoalTarget) ToJSON() ([]byte, error) {
+// MarshalJSON converts GoalTarget to JSON data.
+func (m *GoalTarget) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -332,7 +332,7 @@ func (m *GoalTarget) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -344,26 +344,26 @@ func (m *GoalTarget) ToJSON() ([]byte, error) {
 	if m.DetailString != nil && m.DetailString.Value != nil {
 		output.DetailString = m.DetailString.Value
 		if m.DetailString.Element != nil {
-			output.DetailStringElement = toMapOrNil(m.DetailString.Element.ToJSON())
+			output.DetailStringElement = toMapOrNil(m.DetailString.Element.MarshalJSON())
 		}
 	}
 	if m.DetailBoolean != nil && m.DetailBoolean.Value != nil {
 		output.DetailBoolean = m.DetailBoolean.Value
 		if m.DetailBoolean.Element != nil {
-			output.DetailBooleanElement = toMapOrNil(m.DetailBoolean.Element.ToJSON())
+			output.DetailBooleanElement = toMapOrNil(m.DetailBoolean.Element.MarshalJSON())
 		}
 	}
 	if m.DetailInteger != nil && m.DetailInteger.Value != nil {
 		output.DetailInteger = m.DetailInteger.Value
 		if m.DetailInteger.Element != nil {
-			output.DetailIntegerElement = toMapOrNil(m.DetailInteger.Element.ToJSON())
+			output.DetailIntegerElement = toMapOrNil(m.DetailInteger.Element.MarshalJSON())
 		}
 	}
 	output.DetailRatio = m.DetailRatio
 	if m.DueDate != nil && m.DueDate.Value != nil {
 		output.DueDate = m.DueDate.Value
 		if m.DueDate.Element != nil {
-			output.DueDateElement = toMapOrNil(m.DueDate.Element.ToJSON())
+			output.DueDateElement = toMapOrNil(m.DueDate.Element.MarshalJSON())
 		}
 	}
 	output.DueDuration = m.DueDuration

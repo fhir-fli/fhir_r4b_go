@@ -39,8 +39,8 @@ func NewPackagedProductDefinition() *PackagedProductDefinition {
 	return &PackagedProductDefinition{}
 }
 
-// FromJSON populates PackagedProductDefinition from JSON data.
-func (m *PackagedProductDefinition) FromJSON(data []byte) error {
+// UnmarshalJSON populates PackagedProductDefinition from JSON data.
+func (m *PackagedProductDefinition) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -93,8 +93,8 @@ func (m *PackagedProductDefinition) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts PackagedProductDefinition to JSON data.
-func (m *PackagedProductDefinition) ToJSON() ([]byte, error) {
+// MarshalJSON converts PackagedProductDefinition to JSON data.
+func (m *PackagedProductDefinition) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -128,14 +128,14 @@ func (m *PackagedProductDefinition) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -147,7 +147,7 @@ func (m *PackagedProductDefinition) ToJSON() ([]byte, error) {
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	output.Type = m.Type
@@ -156,14 +156,14 @@ func (m *PackagedProductDefinition) ToJSON() ([]byte, error) {
 	if m.StatusDate != nil && m.StatusDate.Value != nil {
 		output.StatusDate = m.StatusDate.Value
 		if m.StatusDate.Element != nil {
-			output.StatusDateElement = toMapOrNil(m.StatusDate.Element.ToJSON())
+			output.StatusDateElement = toMapOrNil(m.StatusDate.Element.MarshalJSON())
 		}
 	}
 	output.ContainedItemQuantity = m.ContainedItemQuantity
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.LegalStatusOfSupply = m.LegalStatusOfSupply
@@ -172,7 +172,7 @@ func (m *PackagedProductDefinition) ToJSON() ([]byte, error) {
 	if m.CopackagedIndicator != nil && m.CopackagedIndicator.Value != nil {
 		output.CopackagedIndicator = m.CopackagedIndicator.Value
 		if m.CopackagedIndicator.Element != nil {
-			output.CopackagedIndicatorElement = toMapOrNil(m.CopackagedIndicator.Element.ToJSON())
+			output.CopackagedIndicatorElement = toMapOrNil(m.CopackagedIndicator.Element.MarshalJSON())
 		}
 	}
 	output.Manufacturer = m.Manufacturer
@@ -254,8 +254,8 @@ func NewPackagedProductDefinitionLegalStatusOfSupply() *PackagedProductDefinitio
 	return &PackagedProductDefinitionLegalStatusOfSupply{}
 }
 
-// FromJSON populates PackagedProductDefinitionLegalStatusOfSupply from JSON data.
-func (m *PackagedProductDefinitionLegalStatusOfSupply) FromJSON(data []byte) error {
+// UnmarshalJSON populates PackagedProductDefinitionLegalStatusOfSupply from JSON data.
+func (m *PackagedProductDefinitionLegalStatusOfSupply) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -274,8 +274,8 @@ func (m *PackagedProductDefinitionLegalStatusOfSupply) FromJSON(data []byte) err
 	return nil
 }
 
-// ToJSON converts PackagedProductDefinitionLegalStatusOfSupply to JSON data.
-func (m *PackagedProductDefinitionLegalStatusOfSupply) ToJSON() ([]byte, error) {
+// MarshalJSON converts PackagedProductDefinitionLegalStatusOfSupply to JSON data.
+func (m *PackagedProductDefinitionLegalStatusOfSupply) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -287,7 +287,7 @@ func (m *PackagedProductDefinitionLegalStatusOfSupply) ToJSON() ([]byte, error) 
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -345,8 +345,8 @@ func NewPackagedProductDefinitionPackage() *PackagedProductDefinitionPackage {
 	return &PackagedProductDefinitionPackage{}
 }
 
-// FromJSON populates PackagedProductDefinitionPackage from JSON data.
-func (m *PackagedProductDefinitionPackage) FromJSON(data []byte) error {
+// UnmarshalJSON populates PackagedProductDefinitionPackage from JSON data.
+func (m *PackagedProductDefinitionPackage) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -381,8 +381,8 @@ func (m *PackagedProductDefinitionPackage) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts PackagedProductDefinitionPackage to JSON data.
-func (m *PackagedProductDefinitionPackage) ToJSON() ([]byte, error) {
+// MarshalJSON converts PackagedProductDefinitionPackage to JSON data.
+func (m *PackagedProductDefinitionPackage) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -403,7 +403,7 @@ func (m *PackagedProductDefinitionPackage) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -413,7 +413,7 @@ func (m *PackagedProductDefinitionPackage) ToJSON() ([]byte, error) {
 	if m.Quantity != nil && m.Quantity.Value != nil {
 		output.Quantity = m.Quantity.Value
 		if m.Quantity.Element != nil {
-			output.QuantityElement = toMapOrNil(m.Quantity.Element.ToJSON())
+			output.QuantityElement = toMapOrNil(m.Quantity.Element.MarshalJSON())
 		}
 	}
 	output.Material = m.Material
@@ -484,8 +484,8 @@ func NewPackagedProductDefinitionShelfLifeStorage() *PackagedProductDefinitionSh
 	return &PackagedProductDefinitionShelfLifeStorage{}
 }
 
-// FromJSON populates PackagedProductDefinitionShelfLifeStorage from JSON data.
-func (m *PackagedProductDefinitionShelfLifeStorage) FromJSON(data []byte) error {
+// UnmarshalJSON populates PackagedProductDefinitionShelfLifeStorage from JSON data.
+func (m *PackagedProductDefinitionShelfLifeStorage) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -508,8 +508,8 @@ func (m *PackagedProductDefinitionShelfLifeStorage) FromJSON(data []byte) error 
 	return nil
 }
 
-// ToJSON converts PackagedProductDefinitionShelfLifeStorage to JSON data.
-func (m *PackagedProductDefinitionShelfLifeStorage) ToJSON() ([]byte, error) {
+// MarshalJSON converts PackagedProductDefinitionShelfLifeStorage to JSON data.
+func (m *PackagedProductDefinitionShelfLifeStorage) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -524,7 +524,7 @@ func (m *PackagedProductDefinitionShelfLifeStorage) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -534,7 +534,7 @@ func (m *PackagedProductDefinitionShelfLifeStorage) ToJSON() ([]byte, error) {
 	if m.PeriodString != nil && m.PeriodString.Value != nil {
 		output.PeriodString = m.PeriodString.Value
 		if m.PeriodString.Element != nil {
-			output.PeriodStringElement = toMapOrNil(m.PeriodString.Element.ToJSON())
+			output.PeriodStringElement = toMapOrNil(m.PeriodString.Element.MarshalJSON())
 		}
 	}
 	output.SpecialPrecautionsForStorage = m.SpecialPrecautionsForStorage
@@ -589,8 +589,8 @@ func NewPackagedProductDefinitionProperty() *PackagedProductDefinitionProperty {
 	return &PackagedProductDefinitionProperty{}
 }
 
-// FromJSON populates PackagedProductDefinitionProperty from JSON data.
-func (m *PackagedProductDefinitionProperty) FromJSON(data []byte) error {
+// UnmarshalJSON populates PackagedProductDefinitionProperty from JSON data.
+func (m *PackagedProductDefinitionProperty) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -617,8 +617,8 @@ func (m *PackagedProductDefinitionProperty) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts PackagedProductDefinitionProperty to JSON data.
-func (m *PackagedProductDefinitionProperty) ToJSON() ([]byte, error) {
+// MarshalJSON converts PackagedProductDefinitionProperty to JSON data.
+func (m *PackagedProductDefinitionProperty) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -636,7 +636,7 @@ func (m *PackagedProductDefinitionProperty) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -647,13 +647,13 @@ func (m *PackagedProductDefinitionProperty) ToJSON() ([]byte, error) {
 	if m.ValueDate != nil && m.ValueDate.Value != nil {
 		output.ValueDate = m.ValueDate.Value
 		if m.ValueDate.Element != nil {
-			output.ValueDateElement = toMapOrNil(m.ValueDate.Element.ToJSON())
+			output.ValueDateElement = toMapOrNil(m.ValueDate.Element.MarshalJSON())
 		}
 	}
 	if m.ValueBoolean != nil && m.ValueBoolean.Value != nil {
 		output.ValueBoolean = m.ValueBoolean.Value
 		if m.ValueBoolean.Element != nil {
-			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.ToJSON())
+			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.MarshalJSON())
 		}
 	}
 	output.ValueAttachment = m.ValueAttachment
@@ -708,8 +708,8 @@ func NewPackagedProductDefinitionContainedItem() *PackagedProductDefinitionConta
 	return &PackagedProductDefinitionContainedItem{}
 }
 
-// FromJSON populates PackagedProductDefinitionContainedItem from JSON data.
-func (m *PackagedProductDefinitionContainedItem) FromJSON(data []byte) error {
+// UnmarshalJSON populates PackagedProductDefinitionContainedItem from JSON data.
+func (m *PackagedProductDefinitionContainedItem) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -728,8 +728,8 @@ func (m *PackagedProductDefinitionContainedItem) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts PackagedProductDefinitionContainedItem to JSON data.
-func (m *PackagedProductDefinitionContainedItem) ToJSON() ([]byte, error) {
+// MarshalJSON converts PackagedProductDefinitionContainedItem to JSON data.
+func (m *PackagedProductDefinitionContainedItem) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -741,7 +741,7 @@ func (m *PackagedProductDefinitionContainedItem) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_

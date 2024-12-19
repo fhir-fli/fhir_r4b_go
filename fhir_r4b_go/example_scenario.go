@@ -43,8 +43,8 @@ func NewExampleScenario() *ExampleScenario {
 	return &ExampleScenario{}
 }
 
-// FromJSON populates ExampleScenario from JSON data.
-func (m *ExampleScenario) FromJSON(data []byte) error {
+// UnmarshalJSON populates ExampleScenario from JSON data.
+func (m *ExampleScenario) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -112,8 +112,8 @@ func (m *ExampleScenario) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ExampleScenario to JSON data.
-func (m *ExampleScenario) ToJSON() ([]byte, error) {
+// MarshalJSON converts ExampleScenario to JSON data.
+func (m *ExampleScenario) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -155,14 +155,14 @@ func (m *ExampleScenario) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -173,39 +173,39 @@ func (m *ExampleScenario) ToJSON() ([]byte, error) {
 	if m.Url != nil && m.Url.Value != nil {
 		output.Url = m.Url.Value
 		if m.Url.Element != nil {
-			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+			output.UrlElement = toMapOrNil(m.Url.Element.MarshalJSON())
 		}
 	}
 	output.Identifier = m.Identifier
 	if m.Version != nil && m.Version.Value != nil {
 		output.Version = m.Version.Value
 		if m.Version.Element != nil {
-			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+			output.VersionElement = toMapOrNil(m.Version.Element.MarshalJSON())
 		}
 	}
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	output.Status = m.Status
 	if m.Experimental != nil && m.Experimental.Value != nil {
 		output.Experimental = m.Experimental.Value
 		if m.Experimental.Element != nil {
-			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.MarshalJSON())
 		}
 	}
 	if m.Date != nil && m.Date.Value != nil {
 		output.Date = m.Date.Value
 		if m.Date.Element != nil {
-			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+			output.DateElement = toMapOrNil(m.Date.Element.MarshalJSON())
 		}
 	}
 	if m.Publisher != nil && m.Publisher.Value != nil {
 		output.Publisher = m.Publisher.Value
 		if m.Publisher.Element != nil {
-			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.MarshalJSON())
 		}
 	}
 	output.Contact = m.Contact
@@ -214,13 +214,13 @@ func (m *ExampleScenario) ToJSON() ([]byte, error) {
 	if m.Copyright != nil && m.Copyright.Value != nil {
 		output.Copyright = m.Copyright.Value
 		if m.Copyright.Element != nil {
-			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.MarshalJSON())
 		}
 	}
 	if m.Purpose != nil && m.Purpose.Value != nil {
 		output.Purpose = m.Purpose.Value
 		if m.Purpose.Element != nil {
-			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.MarshalJSON())
 		}
 	}
 	output.Actor = m.Actor
@@ -234,7 +234,7 @@ func (m *ExampleScenario) ToJSON() ([]byte, error) {
 				output.Workflow[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.WorkflowElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.WorkflowElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -323,8 +323,8 @@ func NewExampleScenarioActor() *ExampleScenarioActor {
 	return &ExampleScenarioActor{}
 }
 
-// FromJSON populates ExampleScenarioActor from JSON data.
-func (m *ExampleScenarioActor) FromJSON(data []byte) error {
+// UnmarshalJSON populates ExampleScenarioActor from JSON data.
+func (m *ExampleScenarioActor) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -347,8 +347,8 @@ func (m *ExampleScenarioActor) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ExampleScenarioActor to JSON data.
-func (m *ExampleScenarioActor) ToJSON() ([]byte, error) {
+// MarshalJSON converts ExampleScenarioActor to JSON data.
+func (m *ExampleScenarioActor) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -365,7 +365,7 @@ func (m *ExampleScenarioActor) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -373,20 +373,20 @@ func (m *ExampleScenarioActor) ToJSON() ([]byte, error) {
 	if m.ActorId != nil && m.ActorId.Value != nil {
 		output.ActorId = m.ActorId.Value
 		if m.ActorId.Element != nil {
-			output.ActorIdElement = toMapOrNil(m.ActorId.Element.ToJSON())
+			output.ActorIdElement = toMapOrNil(m.ActorId.Element.MarshalJSON())
 		}
 	}
 	output.Type = m.Type
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -440,8 +440,8 @@ func NewExampleScenarioInstance() *ExampleScenarioInstance {
 	return &ExampleScenarioInstance{}
 }
 
-// FromJSON populates ExampleScenarioInstance from JSON data.
-func (m *ExampleScenarioInstance) FromJSON(data []byte) error {
+// UnmarshalJSON populates ExampleScenarioInstance from JSON data.
+func (m *ExampleScenarioInstance) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -468,8 +468,8 @@ func (m *ExampleScenarioInstance) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ExampleScenarioInstance to JSON data.
-func (m *ExampleScenarioInstance) ToJSON() ([]byte, error) {
+// MarshalJSON converts ExampleScenarioInstance to JSON data.
+func (m *ExampleScenarioInstance) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -489,7 +489,7 @@ func (m *ExampleScenarioInstance) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -497,25 +497,25 @@ func (m *ExampleScenarioInstance) ToJSON() ([]byte, error) {
 	if m.ResourceId != nil && m.ResourceId.Value != nil {
 		output.ResourceId = m.ResourceId.Value
 		if m.ResourceId.Element != nil {
-			output.ResourceIdElement = toMapOrNil(m.ResourceId.Element.ToJSON())
+			output.ResourceIdElement = toMapOrNil(m.ResourceId.Element.MarshalJSON())
 		}
 	}
 	if m.ResourceType != nil && m.ResourceType.Value != nil {
 		output.ResourceType = m.ResourceType.Value
 		if m.ResourceType.Element != nil {
-			output.ResourceTypeElement = toMapOrNil(m.ResourceType.Element.ToJSON())
+			output.ResourceTypeElement = toMapOrNil(m.ResourceType.Element.MarshalJSON())
 		}
 	}
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.Version = m.Version
@@ -571,8 +571,8 @@ func NewExampleScenarioVersion() *ExampleScenarioVersion {
 	return &ExampleScenarioVersion{}
 }
 
-// FromJSON populates ExampleScenarioVersion from JSON data.
-func (m *ExampleScenarioVersion) FromJSON(data []byte) error {
+// UnmarshalJSON populates ExampleScenarioVersion from JSON data.
+func (m *ExampleScenarioVersion) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -591,8 +591,8 @@ func (m *ExampleScenarioVersion) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ExampleScenarioVersion to JSON data.
-func (m *ExampleScenarioVersion) ToJSON() ([]byte, error) {
+// MarshalJSON converts ExampleScenarioVersion to JSON data.
+func (m *ExampleScenarioVersion) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -606,7 +606,7 @@ func (m *ExampleScenarioVersion) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -614,13 +614,13 @@ func (m *ExampleScenarioVersion) ToJSON() ([]byte, error) {
 	if m.VersionId != nil && m.VersionId.Value != nil {
 		output.VersionId = m.VersionId.Value
 		if m.VersionId.Element != nil {
-			output.VersionIdElement = toMapOrNil(m.VersionId.Element.ToJSON())
+			output.VersionIdElement = toMapOrNil(m.VersionId.Element.MarshalJSON())
 		}
 	}
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -666,8 +666,8 @@ func NewExampleScenarioContainedInstance() *ExampleScenarioContainedInstance {
 	return &ExampleScenarioContainedInstance{}
 }
 
-// FromJSON populates ExampleScenarioContainedInstance from JSON data.
-func (m *ExampleScenarioContainedInstance) FromJSON(data []byte) error {
+// UnmarshalJSON populates ExampleScenarioContainedInstance from JSON data.
+func (m *ExampleScenarioContainedInstance) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -686,8 +686,8 @@ func (m *ExampleScenarioContainedInstance) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ExampleScenarioContainedInstance to JSON data.
-func (m *ExampleScenarioContainedInstance) ToJSON() ([]byte, error) {
+// MarshalJSON converts ExampleScenarioContainedInstance to JSON data.
+func (m *ExampleScenarioContainedInstance) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -701,7 +701,7 @@ func (m *ExampleScenarioContainedInstance) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -709,13 +709,13 @@ func (m *ExampleScenarioContainedInstance) ToJSON() ([]byte, error) {
 	if m.ResourceId != nil && m.ResourceId.Value != nil {
 		output.ResourceId = m.ResourceId.Value
 		if m.ResourceId.Element != nil {
-			output.ResourceIdElement = toMapOrNil(m.ResourceId.Element.ToJSON())
+			output.ResourceIdElement = toMapOrNil(m.ResourceId.Element.MarshalJSON())
 		}
 	}
 	if m.VersionId != nil && m.VersionId.Value != nil {
 		output.VersionId = m.VersionId.Value
 		if m.VersionId.Element != nil {
-			output.VersionIdElement = toMapOrNil(m.VersionId.Element.ToJSON())
+			output.VersionIdElement = toMapOrNil(m.VersionId.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -764,8 +764,8 @@ func NewExampleScenarioProcess() *ExampleScenarioProcess {
 	return &ExampleScenarioProcess{}
 }
 
-// FromJSON populates ExampleScenarioProcess from JSON data.
-func (m *ExampleScenarioProcess) FromJSON(data []byte) error {
+// UnmarshalJSON populates ExampleScenarioProcess from JSON data.
+func (m *ExampleScenarioProcess) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -790,8 +790,8 @@ func (m *ExampleScenarioProcess) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ExampleScenarioProcess to JSON data.
-func (m *ExampleScenarioProcess) ToJSON() ([]byte, error) {
+// MarshalJSON converts ExampleScenarioProcess to JSON data.
+func (m *ExampleScenarioProcess) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -810,7 +810,7 @@ func (m *ExampleScenarioProcess) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -818,25 +818,25 @@ func (m *ExampleScenarioProcess) ToJSON() ([]byte, error) {
 	if m.Title != nil && m.Title.Value != nil {
 		output.Title = m.Title.Value
 		if m.Title.Element != nil {
-			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+			output.TitleElement = toMapOrNil(m.Title.Element.MarshalJSON())
 		}
 	}
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	if m.PreConditions != nil && m.PreConditions.Value != nil {
 		output.PreConditions = m.PreConditions.Value
 		if m.PreConditions.Element != nil {
-			output.PreConditionsElement = toMapOrNil(m.PreConditions.Element.ToJSON())
+			output.PreConditionsElement = toMapOrNil(m.PreConditions.Element.MarshalJSON())
 		}
 	}
 	if m.PostConditions != nil && m.PostConditions.Value != nil {
 		output.PostConditions = m.PostConditions.Value
 		if m.PostConditions.Element != nil {
-			output.PostConditionsElement = toMapOrNil(m.PostConditions.Element.ToJSON())
+			output.PostConditionsElement = toMapOrNil(m.PostConditions.Element.MarshalJSON())
 		}
 	}
 	output.Step = m.Step
@@ -891,8 +891,8 @@ func NewExampleScenarioStep() *ExampleScenarioStep {
 	return &ExampleScenarioStep{}
 }
 
-// FromJSON populates ExampleScenarioStep from JSON data.
-func (m *ExampleScenarioStep) FromJSON(data []byte) error {
+// UnmarshalJSON populates ExampleScenarioStep from JSON data.
+func (m *ExampleScenarioStep) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -915,8 +915,8 @@ func (m *ExampleScenarioStep) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ExampleScenarioStep to JSON data.
-func (m *ExampleScenarioStep) ToJSON() ([]byte, error) {
+// MarshalJSON converts ExampleScenarioStep to JSON data.
+func (m *ExampleScenarioStep) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -931,7 +931,7 @@ func (m *ExampleScenarioStep) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -940,7 +940,7 @@ func (m *ExampleScenarioStep) ToJSON() ([]byte, error) {
 	if m.Pause != nil && m.Pause.Value != nil {
 		output.Pause = m.Pause.Value
 		if m.Pause.Element != nil {
-			output.PauseElement = toMapOrNil(m.Pause.Element.ToJSON())
+			output.PauseElement = toMapOrNil(m.Pause.Element.MarshalJSON())
 		}
 	}
 	output.Operation = m.Operation
@@ -1000,8 +1000,8 @@ func NewExampleScenarioOperation() *ExampleScenarioOperation {
 	return &ExampleScenarioOperation{}
 }
 
-// FromJSON populates ExampleScenarioOperation from JSON data.
-func (m *ExampleScenarioOperation) FromJSON(data []byte) error {
+// UnmarshalJSON populates ExampleScenarioOperation from JSON data.
+func (m *ExampleScenarioOperation) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1036,8 +1036,8 @@ func (m *ExampleScenarioOperation) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ExampleScenarioOperation to JSON data.
-func (m *ExampleScenarioOperation) ToJSON() ([]byte, error) {
+// MarshalJSON converts ExampleScenarioOperation to JSON data.
+func (m *ExampleScenarioOperation) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1065,7 +1065,7 @@ func (m *ExampleScenarioOperation) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1073,49 +1073,49 @@ func (m *ExampleScenarioOperation) ToJSON() ([]byte, error) {
 	if m.Number != nil && m.Number.Value != nil {
 		output.Number = m.Number.Value
 		if m.Number.Element != nil {
-			output.NumberElement = toMapOrNil(m.Number.Element.ToJSON())
+			output.NumberElement = toMapOrNil(m.Number.Element.MarshalJSON())
 		}
 	}
 	if m.Type != nil && m.Type.Value != nil {
 		output.Type = m.Type.Value
 		if m.Type.Element != nil {
-			output.TypeElement = toMapOrNil(m.Type.Element.ToJSON())
+			output.TypeElement = toMapOrNil(m.Type.Element.MarshalJSON())
 		}
 	}
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	if m.Initiator != nil && m.Initiator.Value != nil {
 		output.Initiator = m.Initiator.Value
 		if m.Initiator.Element != nil {
-			output.InitiatorElement = toMapOrNil(m.Initiator.Element.ToJSON())
+			output.InitiatorElement = toMapOrNil(m.Initiator.Element.MarshalJSON())
 		}
 	}
 	if m.Receiver != nil && m.Receiver.Value != nil {
 		output.Receiver = m.Receiver.Value
 		if m.Receiver.Element != nil {
-			output.ReceiverElement = toMapOrNil(m.Receiver.Element.ToJSON())
+			output.ReceiverElement = toMapOrNil(m.Receiver.Element.MarshalJSON())
 		}
 	}
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	if m.InitiatorActive != nil && m.InitiatorActive.Value != nil {
 		output.InitiatorActive = m.InitiatorActive.Value
 		if m.InitiatorActive.Element != nil {
-			output.InitiatorActiveElement = toMapOrNil(m.InitiatorActive.Element.ToJSON())
+			output.InitiatorActiveElement = toMapOrNil(m.InitiatorActive.Element.MarshalJSON())
 		}
 	}
 	if m.ReceiverActive != nil && m.ReceiverActive.Value != nil {
 		output.ReceiverActive = m.ReceiverActive.Value
 		if m.ReceiverActive.Element != nil {
-			output.ReceiverActiveElement = toMapOrNil(m.ReceiverActive.Element.ToJSON())
+			output.ReceiverActiveElement = toMapOrNil(m.ReceiverActive.Element.MarshalJSON())
 		}
 	}
 	output.Request = m.Request
@@ -1180,8 +1180,8 @@ func NewExampleScenarioAlternative() *ExampleScenarioAlternative {
 	return &ExampleScenarioAlternative{}
 }
 
-// FromJSON populates ExampleScenarioAlternative from JSON data.
-func (m *ExampleScenarioAlternative) FromJSON(data []byte) error {
+// UnmarshalJSON populates ExampleScenarioAlternative from JSON data.
+func (m *ExampleScenarioAlternative) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1202,8 +1202,8 @@ func (m *ExampleScenarioAlternative) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ExampleScenarioAlternative to JSON data.
-func (m *ExampleScenarioAlternative) ToJSON() ([]byte, error) {
+// MarshalJSON converts ExampleScenarioAlternative to JSON data.
+func (m *ExampleScenarioAlternative) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1218,7 +1218,7 @@ func (m *ExampleScenarioAlternative) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1226,13 +1226,13 @@ func (m *ExampleScenarioAlternative) ToJSON() ([]byte, error) {
 	if m.Title != nil && m.Title.Value != nil {
 		output.Title = m.Title.Value
 		if m.Title.Element != nil {
-			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+			output.TitleElement = toMapOrNil(m.Title.Element.MarshalJSON())
 		}
 	}
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.Step = m.Step

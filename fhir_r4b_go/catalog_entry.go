@@ -38,8 +38,8 @@ func NewCatalogEntry() *CatalogEntry {
 	return &CatalogEntry{}
 }
 
-// FromJSON populates CatalogEntry from JSON data.
-func (m *CatalogEntry) FromJSON(data []byte) error {
+// UnmarshalJSON populates CatalogEntry from JSON data.
+func (m *CatalogEntry) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -90,8 +90,8 @@ func (m *CatalogEntry) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CatalogEntry to JSON data.
-func (m *CatalogEntry) ToJSON() ([]byte, error) {
+// MarshalJSON converts CatalogEntry to JSON data.
+func (m *CatalogEntry) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -123,14 +123,14 @@ func (m *CatalogEntry) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -143,7 +143,7 @@ func (m *CatalogEntry) ToJSON() ([]byte, error) {
 	if m.Orderable != nil && m.Orderable.Value != nil {
 		output.Orderable = m.Orderable.Value
 		if m.Orderable.Element != nil {
-			output.OrderableElement = toMapOrNil(m.Orderable.Element.ToJSON())
+			output.OrderableElement = toMapOrNil(m.Orderable.Element.MarshalJSON())
 		}
 	}
 	output.ReferencedItem = m.ReferencedItem
@@ -154,13 +154,13 @@ func (m *CatalogEntry) ToJSON() ([]byte, error) {
 	if m.ValidTo != nil && m.ValidTo.Value != nil {
 		output.ValidTo = m.ValidTo.Value
 		if m.ValidTo.Element != nil {
-			output.ValidToElement = toMapOrNil(m.ValidTo.Element.ToJSON())
+			output.ValidToElement = toMapOrNil(m.ValidTo.Element.MarshalJSON())
 		}
 	}
 	if m.LastUpdated != nil && m.LastUpdated.Value != nil {
 		output.LastUpdated = m.LastUpdated.Value
 		if m.LastUpdated.Element != nil {
-			output.LastUpdatedElement = toMapOrNil(m.LastUpdated.Element.ToJSON())
+			output.LastUpdatedElement = toMapOrNil(m.LastUpdated.Element.MarshalJSON())
 		}
 	}
 	output.AdditionalCharacteristic = m.AdditionalCharacteristic
@@ -241,8 +241,8 @@ func NewCatalogEntryRelatedEntry() *CatalogEntryRelatedEntry {
 	return &CatalogEntryRelatedEntry{}
 }
 
-// FromJSON populates CatalogEntryRelatedEntry from JSON data.
-func (m *CatalogEntryRelatedEntry) FromJSON(data []byte) error {
+// UnmarshalJSON populates CatalogEntryRelatedEntry from JSON data.
+func (m *CatalogEntryRelatedEntry) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -261,8 +261,8 @@ func (m *CatalogEntryRelatedEntry) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CatalogEntryRelatedEntry to JSON data.
-func (m *CatalogEntryRelatedEntry) ToJSON() ([]byte, error) {
+// MarshalJSON converts CatalogEntryRelatedEntry to JSON data.
+func (m *CatalogEntryRelatedEntry) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -274,7 +274,7 @@ func (m *CatalogEntryRelatedEntry) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_

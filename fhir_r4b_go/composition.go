@@ -40,8 +40,8 @@ func NewComposition() *Composition {
 	return &Composition{}
 }
 
-// FromJSON populates Composition from JSON data.
-func (m *Composition) FromJSON(data []byte) error {
+// UnmarshalJSON populates Composition from JSON data.
+func (m *Composition) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -96,8 +96,8 @@ func (m *Composition) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Composition to JSON data.
-func (m *Composition) ToJSON() ([]byte, error) {
+// MarshalJSON converts Composition to JSON data.
+func (m *Composition) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -131,14 +131,14 @@ func (m *Composition) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -155,20 +155,20 @@ func (m *Composition) ToJSON() ([]byte, error) {
 	if m.Date != nil && m.Date.Value != nil {
 		output.Date = m.Date.Value
 		if m.Date.Element != nil {
-			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+			output.DateElement = toMapOrNil(m.Date.Element.MarshalJSON())
 		}
 	}
 	output.Author = m.Author
 	if m.Title != nil && m.Title.Value != nil {
 		output.Title = m.Title.Value
 		if m.Title.Element != nil {
-			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+			output.TitleElement = toMapOrNil(m.Title.Element.MarshalJSON())
 		}
 	}
 	if m.Confidentiality != nil && m.Confidentiality.Value != nil {
 		output.Confidentiality = m.Confidentiality.Value
 		if m.Confidentiality.Element != nil {
-			output.ConfidentialityElement = toMapOrNil(m.Confidentiality.Element.ToJSON())
+			output.ConfidentialityElement = toMapOrNil(m.Confidentiality.Element.MarshalJSON())
 		}
 	}
 	output.Attester = m.Attester
@@ -256,8 +256,8 @@ func NewCompositionAttester() *CompositionAttester {
 	return &CompositionAttester{}
 }
 
-// FromJSON populates CompositionAttester from JSON data.
-func (m *CompositionAttester) FromJSON(data []byte) error {
+// UnmarshalJSON populates CompositionAttester from JSON data.
+func (m *CompositionAttester) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -278,8 +278,8 @@ func (m *CompositionAttester) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CompositionAttester to JSON data.
-func (m *CompositionAttester) ToJSON() ([]byte, error) {
+// MarshalJSON converts CompositionAttester to JSON data.
+func (m *CompositionAttester) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -293,7 +293,7 @@ func (m *CompositionAttester) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -302,7 +302,7 @@ func (m *CompositionAttester) ToJSON() ([]byte, error) {
 	if m.Time != nil && m.Time.Value != nil {
 		output.Time = m.Time.Value
 		if m.Time.Element != nil {
-			output.TimeElement = toMapOrNil(m.Time.Element.ToJSON())
+			output.TimeElement = toMapOrNil(m.Time.Element.MarshalJSON())
 		}
 	}
 	output.Party = m.Party
@@ -352,8 +352,8 @@ func NewCompositionRelatesTo() *CompositionRelatesTo {
 	return &CompositionRelatesTo{}
 }
 
-// FromJSON populates CompositionRelatesTo from JSON data.
-func (m *CompositionRelatesTo) FromJSON(data []byte) error {
+// UnmarshalJSON populates CompositionRelatesTo from JSON data.
+func (m *CompositionRelatesTo) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -374,8 +374,8 @@ func (m *CompositionRelatesTo) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CompositionRelatesTo to JSON data.
-func (m *CompositionRelatesTo) ToJSON() ([]byte, error) {
+// MarshalJSON converts CompositionRelatesTo to JSON data.
+func (m *CompositionRelatesTo) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -388,7 +388,7 @@ func (m *CompositionRelatesTo) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -442,8 +442,8 @@ func NewCompositionEvent() *CompositionEvent {
 	return &CompositionEvent{}
 }
 
-// FromJSON populates CompositionEvent from JSON data.
-func (m *CompositionEvent) FromJSON(data []byte) error {
+// UnmarshalJSON populates CompositionEvent from JSON data.
+func (m *CompositionEvent) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -464,8 +464,8 @@ func (m *CompositionEvent) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CompositionEvent to JSON data.
-func (m *CompositionEvent) ToJSON() ([]byte, error) {
+// MarshalJSON converts CompositionEvent to JSON data.
+func (m *CompositionEvent) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -478,7 +478,7 @@ func (m *CompositionEvent) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -539,8 +539,8 @@ func NewCompositionSection() *CompositionSection {
 	return &CompositionSection{}
 }
 
-// FromJSON populates CompositionSection from JSON data.
-func (m *CompositionSection) FromJSON(data []byte) error {
+// UnmarshalJSON populates CompositionSection from JSON data.
+func (m *CompositionSection) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -575,8 +575,8 @@ func (m *CompositionSection) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CompositionSection to JSON data.
-func (m *CompositionSection) ToJSON() ([]byte, error) {
+// MarshalJSON converts CompositionSection to JSON data.
+func (m *CompositionSection) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -597,7 +597,7 @@ func (m *CompositionSection) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -605,7 +605,7 @@ func (m *CompositionSection) ToJSON() ([]byte, error) {
 	if m.Title != nil && m.Title.Value != nil {
 		output.Title = m.Title.Value
 		if m.Title.Element != nil {
-			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+			output.TitleElement = toMapOrNil(m.Title.Element.MarshalJSON())
 		}
 	}
 	output.Code = m.Code

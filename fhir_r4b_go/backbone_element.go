@@ -52,7 +52,7 @@ func (be *BackboneElement) Clone() *BackboneElement {
 	}
 }
 
-// ToJSON converts the BackboneElement to JSON.
-func (be *BackboneElement) ToJSON() ([]byte, error) {
+// MarshalJSON converts the BackboneElement to JSON.
+func (be *BackboneElement) MarshalJSON() ([]byte, error) {
 	return json.Marshal(be)
 }

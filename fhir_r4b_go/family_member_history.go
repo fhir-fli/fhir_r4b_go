@@ -52,8 +52,8 @@ func NewFamilyMemberHistory() *FamilyMemberHistory {
 	return &FamilyMemberHistory{}
 }
 
-// FromJSON populates FamilyMemberHistory from JSON data.
-func (m *FamilyMemberHistory) FromJSON(data []byte) error {
+// UnmarshalJSON populates FamilyMemberHistory from JSON data.
+func (m *FamilyMemberHistory) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -148,8 +148,8 @@ func (m *FamilyMemberHistory) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts FamilyMemberHistory to JSON data.
-func (m *FamilyMemberHistory) ToJSON() ([]byte, error) {
+// MarshalJSON converts FamilyMemberHistory to JSON data.
+func (m *FamilyMemberHistory) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -202,14 +202,14 @@ func (m *FamilyMemberHistory) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -226,7 +226,7 @@ func (m *FamilyMemberHistory) ToJSON() ([]byte, error) {
 				output.InstantiatesCanonical[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.InstantiatesCanonicalElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.InstantiatesCanonicalElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -238,7 +238,7 @@ func (m *FamilyMemberHistory) ToJSON() ([]byte, error) {
 				output.InstantiatesUri[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.InstantiatesUriElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.InstantiatesUriElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -248,13 +248,13 @@ func (m *FamilyMemberHistory) ToJSON() ([]byte, error) {
 	if m.Date != nil && m.Date.Value != nil {
 		output.Date = m.Date.Value
 		if m.Date.Element != nil {
-			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+			output.DateElement = toMapOrNil(m.Date.Element.MarshalJSON())
 		}
 	}
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	output.Relationship = m.Relationship
@@ -263,13 +263,13 @@ func (m *FamilyMemberHistory) ToJSON() ([]byte, error) {
 	if m.BornDate != nil && m.BornDate.Value != nil {
 		output.BornDate = m.BornDate.Value
 		if m.BornDate.Element != nil {
-			output.BornDateElement = toMapOrNil(m.BornDate.Element.ToJSON())
+			output.BornDateElement = toMapOrNil(m.BornDate.Element.MarshalJSON())
 		}
 	}
 	if m.BornString != nil && m.BornString.Value != nil {
 		output.BornString = m.BornString.Value
 		if m.BornString.Element != nil {
-			output.BornStringElement = toMapOrNil(m.BornString.Element.ToJSON())
+			output.BornStringElement = toMapOrNil(m.BornString.Element.MarshalJSON())
 		}
 	}
 	output.AgeAge = m.AgeAge
@@ -277,19 +277,19 @@ func (m *FamilyMemberHistory) ToJSON() ([]byte, error) {
 	if m.AgeString != nil && m.AgeString.Value != nil {
 		output.AgeString = m.AgeString.Value
 		if m.AgeString.Element != nil {
-			output.AgeStringElement = toMapOrNil(m.AgeString.Element.ToJSON())
+			output.AgeStringElement = toMapOrNil(m.AgeString.Element.MarshalJSON())
 		}
 	}
 	if m.EstimatedAge != nil && m.EstimatedAge.Value != nil {
 		output.EstimatedAge = m.EstimatedAge.Value
 		if m.EstimatedAge.Element != nil {
-			output.EstimatedAgeElement = toMapOrNil(m.EstimatedAge.Element.ToJSON())
+			output.EstimatedAgeElement = toMapOrNil(m.EstimatedAge.Element.MarshalJSON())
 		}
 	}
 	if m.DeceasedBoolean != nil && m.DeceasedBoolean.Value != nil {
 		output.DeceasedBoolean = m.DeceasedBoolean.Value
 		if m.DeceasedBoolean.Element != nil {
-			output.DeceasedBooleanElement = toMapOrNil(m.DeceasedBoolean.Element.ToJSON())
+			output.DeceasedBooleanElement = toMapOrNil(m.DeceasedBoolean.Element.MarshalJSON())
 		}
 	}
 	output.DeceasedAge = m.DeceasedAge
@@ -297,13 +297,13 @@ func (m *FamilyMemberHistory) ToJSON() ([]byte, error) {
 	if m.DeceasedDate != nil && m.DeceasedDate.Value != nil {
 		output.DeceasedDate = m.DeceasedDate.Value
 		if m.DeceasedDate.Element != nil {
-			output.DeceasedDateElement = toMapOrNil(m.DeceasedDate.Element.ToJSON())
+			output.DeceasedDateElement = toMapOrNil(m.DeceasedDate.Element.MarshalJSON())
 		}
 	}
 	if m.DeceasedString != nil && m.DeceasedString.Value != nil {
 		output.DeceasedString = m.DeceasedString.Value
 		if m.DeceasedString.Element != nil {
-			output.DeceasedStringElement = toMapOrNil(m.DeceasedString.Element.ToJSON())
+			output.DeceasedStringElement = toMapOrNil(m.DeceasedString.Element.MarshalJSON())
 		}
 	}
 	output.ReasonCode = m.ReasonCode
@@ -417,8 +417,8 @@ func NewFamilyMemberHistoryCondition() *FamilyMemberHistoryCondition {
 	return &FamilyMemberHistoryCondition{}
 }
 
-// FromJSON populates FamilyMemberHistoryCondition from JSON data.
-func (m *FamilyMemberHistoryCondition) FromJSON(data []byte) error {
+// UnmarshalJSON populates FamilyMemberHistoryCondition from JSON data.
+func (m *FamilyMemberHistoryCondition) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -449,8 +449,8 @@ func (m *FamilyMemberHistoryCondition) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts FamilyMemberHistoryCondition to JSON data.
-func (m *FamilyMemberHistoryCondition) ToJSON() ([]byte, error) {
+// MarshalJSON converts FamilyMemberHistoryCondition to JSON data.
+func (m *FamilyMemberHistoryCondition) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -470,7 +470,7 @@ func (m *FamilyMemberHistoryCondition) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -480,7 +480,7 @@ func (m *FamilyMemberHistoryCondition) ToJSON() ([]byte, error) {
 	if m.ContributedToDeath != nil && m.ContributedToDeath.Value != nil {
 		output.ContributedToDeath = m.ContributedToDeath.Value
 		if m.ContributedToDeath.Element != nil {
-			output.ContributedToDeathElement = toMapOrNil(m.ContributedToDeath.Element.ToJSON())
+			output.ContributedToDeathElement = toMapOrNil(m.ContributedToDeath.Element.MarshalJSON())
 		}
 	}
 	output.OnsetAge = m.OnsetAge
@@ -489,7 +489,7 @@ func (m *FamilyMemberHistoryCondition) ToJSON() ([]byte, error) {
 	if m.OnsetString != nil && m.OnsetString.Value != nil {
 		output.OnsetString = m.OnsetString.Value
 		if m.OnsetString.Element != nil {
-			output.OnsetStringElement = toMapOrNil(m.OnsetString.Element.ToJSON())
+			output.OnsetStringElement = toMapOrNil(m.OnsetString.Element.MarshalJSON())
 		}
 	}
 	output.Note = m.Note

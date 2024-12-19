@@ -38,8 +38,8 @@ func NewSupplyDelivery() *SupplyDelivery {
 	return &SupplyDelivery{}
 }
 
-// FromJSON populates SupplyDelivery from JSON data.
-func (m *SupplyDelivery) FromJSON(data []byte) error {
+// UnmarshalJSON populates SupplyDelivery from JSON data.
+func (m *SupplyDelivery) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -90,8 +90,8 @@ func (m *SupplyDelivery) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts SupplyDelivery to JSON data.
-func (m *SupplyDelivery) ToJSON() ([]byte, error) {
+// MarshalJSON converts SupplyDelivery to JSON data.
+func (m *SupplyDelivery) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -121,14 +121,14 @@ func (m *SupplyDelivery) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -146,7 +146,7 @@ func (m *SupplyDelivery) ToJSON() ([]byte, error) {
 	if m.OccurrenceDateTime != nil && m.OccurrenceDateTime.Value != nil {
 		output.OccurrenceDateTime = m.OccurrenceDateTime.Value
 		if m.OccurrenceDateTime.Element != nil {
-			output.OccurrenceDateTimeElement = toMapOrNil(m.OccurrenceDateTime.Element.ToJSON())
+			output.OccurrenceDateTimeElement = toMapOrNil(m.OccurrenceDateTime.Element.MarshalJSON())
 		}
 	}
 	output.OccurrencePeriod = m.OccurrencePeriod
@@ -230,8 +230,8 @@ func NewSupplyDeliverySuppliedItem() *SupplyDeliverySuppliedItem {
 	return &SupplyDeliverySuppliedItem{}
 }
 
-// FromJSON populates SupplyDeliverySuppliedItem from JSON data.
-func (m *SupplyDeliverySuppliedItem) FromJSON(data []byte) error {
+// UnmarshalJSON populates SupplyDeliverySuppliedItem from JSON data.
+func (m *SupplyDeliverySuppliedItem) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -252,8 +252,8 @@ func (m *SupplyDeliverySuppliedItem) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts SupplyDeliverySuppliedItem to JSON data.
-func (m *SupplyDeliverySuppliedItem) ToJSON() ([]byte, error) {
+// MarshalJSON converts SupplyDeliverySuppliedItem to JSON data.
+func (m *SupplyDeliverySuppliedItem) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -266,7 +266,7 @@ func (m *SupplyDeliverySuppliedItem) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_

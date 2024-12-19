@@ -40,8 +40,8 @@ func NewImmunizationEvaluation() *ImmunizationEvaluation {
 	return &ImmunizationEvaluation{}
 }
 
-// FromJSON populates ImmunizationEvaluation from JSON data.
-func (m *ImmunizationEvaluation) FromJSON(data []byte) error {
+// UnmarshalJSON populates ImmunizationEvaluation from JSON data.
+func (m *ImmunizationEvaluation) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -96,8 +96,8 @@ func (m *ImmunizationEvaluation) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ImmunizationEvaluation to JSON data.
-func (m *ImmunizationEvaluation) ToJSON() ([]byte, error) {
+// MarshalJSON converts ImmunizationEvaluation to JSON data.
+func (m *ImmunizationEvaluation) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -135,14 +135,14 @@ func (m *ImmunizationEvaluation) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -156,7 +156,7 @@ func (m *ImmunizationEvaluation) ToJSON() ([]byte, error) {
 	if m.Date != nil && m.Date.Value != nil {
 		output.Date = m.Date.Value
 		if m.Date.Element != nil {
-			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+			output.DateElement = toMapOrNil(m.Date.Element.MarshalJSON())
 		}
 	}
 	output.Authority = m.Authority
@@ -167,37 +167,37 @@ func (m *ImmunizationEvaluation) ToJSON() ([]byte, error) {
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	if m.Series != nil && m.Series.Value != nil {
 		output.Series = m.Series.Value
 		if m.Series.Element != nil {
-			output.SeriesElement = toMapOrNil(m.Series.Element.ToJSON())
+			output.SeriesElement = toMapOrNil(m.Series.Element.MarshalJSON())
 		}
 	}
 	if m.DoseNumberPositiveInt != nil && m.DoseNumberPositiveInt.Value != nil {
 		output.DoseNumberPositiveInt = m.DoseNumberPositiveInt.Value
 		if m.DoseNumberPositiveInt.Element != nil {
-			output.DoseNumberPositiveIntElement = toMapOrNil(m.DoseNumberPositiveInt.Element.ToJSON())
+			output.DoseNumberPositiveIntElement = toMapOrNil(m.DoseNumberPositiveInt.Element.MarshalJSON())
 		}
 	}
 	if m.DoseNumberString != nil && m.DoseNumberString.Value != nil {
 		output.DoseNumberString = m.DoseNumberString.Value
 		if m.DoseNumberString.Element != nil {
-			output.DoseNumberStringElement = toMapOrNil(m.DoseNumberString.Element.ToJSON())
+			output.DoseNumberStringElement = toMapOrNil(m.DoseNumberString.Element.MarshalJSON())
 		}
 	}
 	if m.SeriesDosesPositiveInt != nil && m.SeriesDosesPositiveInt.Value != nil {
 		output.SeriesDosesPositiveInt = m.SeriesDosesPositiveInt.Value
 		if m.SeriesDosesPositiveInt.Element != nil {
-			output.SeriesDosesPositiveIntElement = toMapOrNil(m.SeriesDosesPositiveInt.Element.ToJSON())
+			output.SeriesDosesPositiveIntElement = toMapOrNil(m.SeriesDosesPositiveInt.Element.MarshalJSON())
 		}
 	}
 	if m.SeriesDosesString != nil && m.SeriesDosesString.Value != nil {
 		output.SeriesDosesString = m.SeriesDosesString.Value
 		if m.SeriesDosesString.Element != nil {
-			output.SeriesDosesStringElement = toMapOrNil(m.SeriesDosesString.Element.ToJSON())
+			output.SeriesDosesStringElement = toMapOrNil(m.SeriesDosesString.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

@@ -39,7 +39,7 @@ func (dt *DataType) Clone() *DataType {
 	}
 }
 
-// ToJSON converts the DataType to its JSON representation.
-func (dt *DataType) ToJSON() ([]byte, error) {
+// MarshalJSON converts the DataType to its JSON representation.
+func (dt *DataType) MarshalJSON() ([]byte, error) {
 	return json.Marshal(dt)
 }

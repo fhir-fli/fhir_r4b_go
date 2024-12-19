@@ -40,8 +40,8 @@ func NewVerificationResult() *VerificationResult {
 	return &VerificationResult{}
 }
 
-// FromJSON populates VerificationResult from JSON data.
-func (m *VerificationResult) FromJSON(data []byte) error {
+// UnmarshalJSON populates VerificationResult from JSON data.
+func (m *VerificationResult) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -103,8 +103,8 @@ func (m *VerificationResult) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts VerificationResult to JSON data.
-func (m *VerificationResult) ToJSON() ([]byte, error) {
+// MarshalJSON converts VerificationResult to JSON data.
+func (m *VerificationResult) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -138,14 +138,14 @@ func (m *VerificationResult) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -162,7 +162,7 @@ func (m *VerificationResult) ToJSON() ([]byte, error) {
 				output.TargetLocation[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.TargetLocationElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.TargetLocationElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -171,7 +171,7 @@ func (m *VerificationResult) ToJSON() ([]byte, error) {
 	if m.StatusDate != nil && m.StatusDate.Value != nil {
 		output.StatusDate = m.StatusDate.Value
 		if m.StatusDate.Element != nil {
-			output.StatusDateElement = toMapOrNil(m.StatusDate.Element.ToJSON())
+			output.StatusDateElement = toMapOrNil(m.StatusDate.Element.MarshalJSON())
 		}
 	}
 	output.ValidationType = m.ValidationType
@@ -180,13 +180,13 @@ func (m *VerificationResult) ToJSON() ([]byte, error) {
 	if m.LastPerformed != nil && m.LastPerformed.Value != nil {
 		output.LastPerformed = m.LastPerformed.Value
 		if m.LastPerformed.Element != nil {
-			output.LastPerformedElement = toMapOrNil(m.LastPerformed.Element.ToJSON())
+			output.LastPerformedElement = toMapOrNil(m.LastPerformed.Element.MarshalJSON())
 		}
 	}
 	if m.NextScheduled != nil && m.NextScheduled.Value != nil {
 		output.NextScheduled = m.NextScheduled.Value
 		if m.NextScheduled.Element != nil {
-			output.NextScheduledElement = toMapOrNil(m.NextScheduled.Element.ToJSON())
+			output.NextScheduledElement = toMapOrNil(m.NextScheduled.Element.MarshalJSON())
 		}
 	}
 	output.FailureAction = m.FailureAction
@@ -275,8 +275,8 @@ func NewVerificationResultPrimarySource() *VerificationResultPrimarySource {
 	return &VerificationResultPrimarySource{}
 }
 
-// FromJSON populates VerificationResultPrimarySource from JSON data.
-func (m *VerificationResultPrimarySource) FromJSON(data []byte) error {
+// UnmarshalJSON populates VerificationResultPrimarySource from JSON data.
+func (m *VerificationResultPrimarySource) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -305,8 +305,8 @@ func (m *VerificationResultPrimarySource) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts VerificationResultPrimarySource to JSON data.
-func (m *VerificationResultPrimarySource) ToJSON() ([]byte, error) {
+// MarshalJSON converts VerificationResultPrimarySource to JSON data.
+func (m *VerificationResultPrimarySource) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -324,7 +324,7 @@ func (m *VerificationResultPrimarySource) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -336,7 +336,7 @@ func (m *VerificationResultPrimarySource) ToJSON() ([]byte, error) {
 	if m.ValidationDate != nil && m.ValidationDate.Value != nil {
 		output.ValidationDate = m.ValidationDate.Value
 		if m.ValidationDate.Element != nil {
-			output.ValidationDateElement = toMapOrNil(m.ValidationDate.Element.ToJSON())
+			output.ValidationDateElement = toMapOrNil(m.ValidationDate.Element.MarshalJSON())
 		}
 	}
 	output.CanPushUpdates = m.CanPushUpdates
@@ -400,8 +400,8 @@ func NewVerificationResultAttestation() *VerificationResultAttestation {
 	return &VerificationResultAttestation{}
 }
 
-// FromJSON populates VerificationResultAttestation from JSON data.
-func (m *VerificationResultAttestation) FromJSON(data []byte) error {
+// UnmarshalJSON populates VerificationResultAttestation from JSON data.
+func (m *VerificationResultAttestation) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -432,8 +432,8 @@ func (m *VerificationResultAttestation) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts VerificationResultAttestation to JSON data.
-func (m *VerificationResultAttestation) ToJSON() ([]byte, error) {
+// MarshalJSON converts VerificationResultAttestation to JSON data.
+func (m *VerificationResultAttestation) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -454,7 +454,7 @@ func (m *VerificationResultAttestation) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -465,19 +465,19 @@ func (m *VerificationResultAttestation) ToJSON() ([]byte, error) {
 	if m.Date != nil && m.Date.Value != nil {
 		output.Date = m.Date.Value
 		if m.Date.Element != nil {
-			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+			output.DateElement = toMapOrNil(m.Date.Element.MarshalJSON())
 		}
 	}
 	if m.SourceIdentityCertificate != nil && m.SourceIdentityCertificate.Value != nil {
 		output.SourceIdentityCertificate = m.SourceIdentityCertificate.Value
 		if m.SourceIdentityCertificate.Element != nil {
-			output.SourceIdentityCertificateElement = toMapOrNil(m.SourceIdentityCertificate.Element.ToJSON())
+			output.SourceIdentityCertificateElement = toMapOrNil(m.SourceIdentityCertificate.Element.MarshalJSON())
 		}
 	}
 	if m.ProxyIdentityCertificate != nil && m.ProxyIdentityCertificate.Value != nil {
 		output.ProxyIdentityCertificate = m.ProxyIdentityCertificate.Value
 		if m.ProxyIdentityCertificate.Element != nil {
-			output.ProxyIdentityCertificateElement = toMapOrNil(m.ProxyIdentityCertificate.Element.ToJSON())
+			output.ProxyIdentityCertificateElement = toMapOrNil(m.ProxyIdentityCertificate.Element.MarshalJSON())
 		}
 	}
 	output.ProxySignature = m.ProxySignature
@@ -538,8 +538,8 @@ func NewVerificationResultValidator() *VerificationResultValidator {
 	return &VerificationResultValidator{}
 }
 
-// FromJSON populates VerificationResultValidator from JSON data.
-func (m *VerificationResultValidator) FromJSON(data []byte) error {
+// UnmarshalJSON populates VerificationResultValidator from JSON data.
+func (m *VerificationResultValidator) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -560,8 +560,8 @@ func (m *VerificationResultValidator) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts VerificationResultValidator to JSON data.
-func (m *VerificationResultValidator) ToJSON() ([]byte, error) {
+// MarshalJSON converts VerificationResultValidator to JSON data.
+func (m *VerificationResultValidator) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -575,7 +575,7 @@ func (m *VerificationResultValidator) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -584,7 +584,7 @@ func (m *VerificationResultValidator) ToJSON() ([]byte, error) {
 	if m.IdentityCertificate != nil && m.IdentityCertificate.Value != nil {
 		output.IdentityCertificate = m.IdentityCertificate.Value
 		if m.IdentityCertificate.Element != nil {
-			output.IdentityCertificateElement = toMapOrNil(m.IdentityCertificate.Element.ToJSON())
+			output.IdentityCertificateElement = toMapOrNil(m.IdentityCertificate.Element.MarshalJSON())
 		}
 	}
 	output.AttestationSignature = m.AttestationSignature

@@ -47,8 +47,8 @@ func NewClinicalImpression() *ClinicalImpression {
 	return &ClinicalImpression{}
 }
 
-// FromJSON populates ClinicalImpression from JSON data.
-func (m *ClinicalImpression) FromJSON(data []byte) error {
+// UnmarshalJSON populates ClinicalImpression from JSON data.
+func (m *ClinicalImpression) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -124,8 +124,8 @@ func (m *ClinicalImpression) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ClinicalImpression to JSON data.
-func (m *ClinicalImpression) ToJSON() ([]byte, error) {
+// MarshalJSON converts ClinicalImpression to JSON data.
+func (m *ClinicalImpression) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -167,14 +167,14 @@ func (m *ClinicalImpression) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -189,7 +189,7 @@ func (m *ClinicalImpression) ToJSON() ([]byte, error) {
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.Subject = m.Subject
@@ -197,14 +197,14 @@ func (m *ClinicalImpression) ToJSON() ([]byte, error) {
 	if m.EffectiveDateTime != nil && m.EffectiveDateTime.Value != nil {
 		output.EffectiveDateTime = m.EffectiveDateTime.Value
 		if m.EffectiveDateTime.Element != nil {
-			output.EffectiveDateTimeElement = toMapOrNil(m.EffectiveDateTime.Element.ToJSON())
+			output.EffectiveDateTimeElement = toMapOrNil(m.EffectiveDateTime.Element.MarshalJSON())
 		}
 	}
 	output.EffectivePeriod = m.EffectivePeriod
 	if m.Date != nil && m.Date.Value != nil {
 		output.Date = m.Date.Value
 		if m.Date.Element != nil {
-			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+			output.DateElement = toMapOrNil(m.Date.Element.MarshalJSON())
 		}
 	}
 	output.Assessor = m.Assessor
@@ -219,14 +219,14 @@ func (m *ClinicalImpression) ToJSON() ([]byte, error) {
 				output.Protocol[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.ProtocolElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.ProtocolElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
 	if m.Summary != nil && m.Summary.Value != nil {
 		output.Summary = m.Summary.Value
 		if m.Summary.Element != nil {
-			output.SummaryElement = toMapOrNil(m.Summary.Element.ToJSON())
+			output.SummaryElement = toMapOrNil(m.Summary.Element.MarshalJSON())
 		}
 	}
 	output.Finding = m.Finding
@@ -325,8 +325,8 @@ func NewClinicalImpressionInvestigation() *ClinicalImpressionInvestigation {
 	return &ClinicalImpressionInvestigation{}
 }
 
-// FromJSON populates ClinicalImpressionInvestigation from JSON data.
-func (m *ClinicalImpressionInvestigation) FromJSON(data []byte) error {
+// UnmarshalJSON populates ClinicalImpressionInvestigation from JSON data.
+func (m *ClinicalImpressionInvestigation) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -345,8 +345,8 @@ func (m *ClinicalImpressionInvestigation) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ClinicalImpressionInvestigation to JSON data.
-func (m *ClinicalImpressionInvestigation) ToJSON() ([]byte, error) {
+// MarshalJSON converts ClinicalImpressionInvestigation to JSON data.
+func (m *ClinicalImpressionInvestigation) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -358,7 +358,7 @@ func (m *ClinicalImpressionInvestigation) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -409,8 +409,8 @@ func NewClinicalImpressionFinding() *ClinicalImpressionFinding {
 	return &ClinicalImpressionFinding{}
 }
 
-// FromJSON populates ClinicalImpressionFinding from JSON data.
-func (m *ClinicalImpressionFinding) FromJSON(data []byte) error {
+// UnmarshalJSON populates ClinicalImpressionFinding from JSON data.
+func (m *ClinicalImpressionFinding) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -431,8 +431,8 @@ func (m *ClinicalImpressionFinding) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ClinicalImpressionFinding to JSON data.
-func (m *ClinicalImpressionFinding) ToJSON() ([]byte, error) {
+// MarshalJSON converts ClinicalImpressionFinding to JSON data.
+func (m *ClinicalImpressionFinding) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -446,7 +446,7 @@ func (m *ClinicalImpressionFinding) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -456,7 +456,7 @@ func (m *ClinicalImpressionFinding) ToJSON() ([]byte, error) {
 	if m.Basis != nil && m.Basis.Value != nil {
 		output.Basis = m.Basis.Value
 		if m.Basis.Element != nil {
-			output.BasisElement = toMapOrNil(m.Basis.Element.ToJSON())
+			output.BasisElement = toMapOrNil(m.Basis.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

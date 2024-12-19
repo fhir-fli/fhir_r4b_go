@@ -42,8 +42,8 @@ func NewMolecularSequence() *MolecularSequence {
 	return &MolecularSequence{}
 }
 
-// FromJSON populates MolecularSequence from JSON data.
-func (m *MolecularSequence) FromJSON(data []byte) error {
+// UnmarshalJSON populates MolecularSequence from JSON data.
+func (m *MolecularSequence) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -100,8 +100,8 @@ func (m *MolecularSequence) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MolecularSequence to JSON data.
-func (m *MolecularSequence) ToJSON() ([]byte, error) {
+// MarshalJSON converts MolecularSequence to JSON data.
+func (m *MolecularSequence) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -136,14 +136,14 @@ func (m *MolecularSequence) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -156,7 +156,7 @@ func (m *MolecularSequence) ToJSON() ([]byte, error) {
 	if m.CoordinateSystem != nil && m.CoordinateSystem.Value != nil {
 		output.CoordinateSystem = m.CoordinateSystem.Value
 		if m.CoordinateSystem.Element != nil {
-			output.CoordinateSystemElement = toMapOrNil(m.CoordinateSystem.Element.ToJSON())
+			output.CoordinateSystemElement = toMapOrNil(m.CoordinateSystem.Element.MarshalJSON())
 		}
 	}
 	output.Patient = m.Patient
@@ -169,14 +169,14 @@ func (m *MolecularSequence) ToJSON() ([]byte, error) {
 	if m.ObservedSeq != nil && m.ObservedSeq.Value != nil {
 		output.ObservedSeq = m.ObservedSeq.Value
 		if m.ObservedSeq.Element != nil {
-			output.ObservedSeqElement = toMapOrNil(m.ObservedSeq.Element.ToJSON())
+			output.ObservedSeqElement = toMapOrNil(m.ObservedSeq.Element.MarshalJSON())
 		}
 	}
 	output.Quality = m.Quality
 	if m.ReadCoverage != nil && m.ReadCoverage.Value != nil {
 		output.ReadCoverage = m.ReadCoverage.Value
 		if m.ReadCoverage.Element != nil {
-			output.ReadCoverageElement = toMapOrNil(m.ReadCoverage.Element.ToJSON())
+			output.ReadCoverageElement = toMapOrNil(m.ReadCoverage.Element.MarshalJSON())
 		}
 	}
 	output.Repository = m.Repository
@@ -270,8 +270,8 @@ func NewMolecularSequenceReferenceSeq() *MolecularSequenceReferenceSeq {
 	return &MolecularSequenceReferenceSeq{}
 }
 
-// FromJSON populates MolecularSequenceReferenceSeq from JSON data.
-func (m *MolecularSequenceReferenceSeq) FromJSON(data []byte) error {
+// UnmarshalJSON populates MolecularSequenceReferenceSeq from JSON data.
+func (m *MolecularSequenceReferenceSeq) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -304,8 +304,8 @@ func (m *MolecularSequenceReferenceSeq) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MolecularSequenceReferenceSeq to JSON data.
-func (m *MolecularSequenceReferenceSeq) ToJSON() ([]byte, error) {
+// MarshalJSON converts MolecularSequenceReferenceSeq to JSON data.
+func (m *MolecularSequenceReferenceSeq) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -328,7 +328,7 @@ func (m *MolecularSequenceReferenceSeq) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -337,7 +337,7 @@ func (m *MolecularSequenceReferenceSeq) ToJSON() ([]byte, error) {
 	if m.GenomeBuild != nil && m.GenomeBuild.Value != nil {
 		output.GenomeBuild = m.GenomeBuild.Value
 		if m.GenomeBuild.Element != nil {
-			output.GenomeBuildElement = toMapOrNil(m.GenomeBuild.Element.ToJSON())
+			output.GenomeBuildElement = toMapOrNil(m.GenomeBuild.Element.MarshalJSON())
 		}
 	}
 	output.Orientation = m.Orientation
@@ -346,20 +346,20 @@ func (m *MolecularSequenceReferenceSeq) ToJSON() ([]byte, error) {
 	if m.ReferenceSeqString != nil && m.ReferenceSeqString.Value != nil {
 		output.ReferenceSeqString = m.ReferenceSeqString.Value
 		if m.ReferenceSeqString.Element != nil {
-			output.ReferenceSeqStringElement = toMapOrNil(m.ReferenceSeqString.Element.ToJSON())
+			output.ReferenceSeqStringElement = toMapOrNil(m.ReferenceSeqString.Element.MarshalJSON())
 		}
 	}
 	output.Strand = m.Strand
 	if m.WindowStart != nil && m.WindowStart.Value != nil {
 		output.WindowStart = m.WindowStart.Value
 		if m.WindowStart.Element != nil {
-			output.WindowStartElement = toMapOrNil(m.WindowStart.Element.ToJSON())
+			output.WindowStartElement = toMapOrNil(m.WindowStart.Element.MarshalJSON())
 		}
 	}
 	if m.WindowEnd != nil && m.WindowEnd.Value != nil {
 		output.WindowEnd = m.WindowEnd.Value
 		if m.WindowEnd.Element != nil {
-			output.WindowEndElement = toMapOrNil(m.WindowEnd.Element.ToJSON())
+			output.WindowEndElement = toMapOrNil(m.WindowEnd.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -423,8 +423,8 @@ func NewMolecularSequenceVariant() *MolecularSequenceVariant {
 	return &MolecularSequenceVariant{}
 }
 
-// FromJSON populates MolecularSequenceVariant from JSON data.
-func (m *MolecularSequenceVariant) FromJSON(data []byte) error {
+// UnmarshalJSON populates MolecularSequenceVariant from JSON data.
+func (m *MolecularSequenceVariant) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -451,8 +451,8 @@ func (m *MolecularSequenceVariant) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MolecularSequenceVariant to JSON data.
-func (m *MolecularSequenceVariant) ToJSON() ([]byte, error) {
+// MarshalJSON converts MolecularSequenceVariant to JSON data.
+func (m *MolecularSequenceVariant) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -473,7 +473,7 @@ func (m *MolecularSequenceVariant) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -481,31 +481,31 @@ func (m *MolecularSequenceVariant) ToJSON() ([]byte, error) {
 	if m.Start != nil && m.Start.Value != nil {
 		output.Start = m.Start.Value
 		if m.Start.Element != nil {
-			output.StartElement = toMapOrNil(m.Start.Element.ToJSON())
+			output.StartElement = toMapOrNil(m.Start.Element.MarshalJSON())
 		}
 	}
 	if m.End != nil && m.End.Value != nil {
 		output.End = m.End.Value
 		if m.End.Element != nil {
-			output.EndElement = toMapOrNil(m.End.Element.ToJSON())
+			output.EndElement = toMapOrNil(m.End.Element.MarshalJSON())
 		}
 	}
 	if m.ObservedAllele != nil && m.ObservedAllele.Value != nil {
 		output.ObservedAllele = m.ObservedAllele.Value
 		if m.ObservedAllele.Element != nil {
-			output.ObservedAlleleElement = toMapOrNil(m.ObservedAllele.Element.ToJSON())
+			output.ObservedAlleleElement = toMapOrNil(m.ObservedAllele.Element.MarshalJSON())
 		}
 	}
 	if m.ReferenceAllele != nil && m.ReferenceAllele.Value != nil {
 		output.ReferenceAllele = m.ReferenceAllele.Value
 		if m.ReferenceAllele.Element != nil {
-			output.ReferenceAlleleElement = toMapOrNil(m.ReferenceAllele.Element.ToJSON())
+			output.ReferenceAlleleElement = toMapOrNil(m.ReferenceAllele.Element.MarshalJSON())
 		}
 	}
 	if m.Cigar != nil && m.Cigar.Value != nil {
 		output.Cigar = m.Cigar.Value
 		if m.Cigar.Element != nil {
-			output.CigarElement = toMapOrNil(m.Cigar.Element.ToJSON())
+			output.CigarElement = toMapOrNil(m.Cigar.Element.MarshalJSON())
 		}
 	}
 	output.VariantPointer = m.VariantPointer
@@ -573,8 +573,8 @@ func NewMolecularSequenceQuality() *MolecularSequenceQuality {
 	return &MolecularSequenceQuality{}
 }
 
-// FromJSON populates MolecularSequenceQuality from JSON data.
-func (m *MolecularSequenceQuality) FromJSON(data []byte) error {
+// UnmarshalJSON populates MolecularSequenceQuality from JSON data.
+func (m *MolecularSequenceQuality) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -619,8 +619,8 @@ func (m *MolecularSequenceQuality) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MolecularSequenceQuality to JSON data.
-func (m *MolecularSequenceQuality) ToJSON() ([]byte, error) {
+// MarshalJSON converts MolecularSequenceQuality to JSON data.
+func (m *MolecularSequenceQuality) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -655,7 +655,7 @@ func (m *MolecularSequenceQuality) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -665,13 +665,13 @@ func (m *MolecularSequenceQuality) ToJSON() ([]byte, error) {
 	if m.Start != nil && m.Start.Value != nil {
 		output.Start = m.Start.Value
 		if m.Start.Element != nil {
-			output.StartElement = toMapOrNil(m.Start.Element.ToJSON())
+			output.StartElement = toMapOrNil(m.Start.Element.MarshalJSON())
 		}
 	}
 	if m.End != nil && m.End.Value != nil {
 		output.End = m.End.Value
 		if m.End.Element != nil {
-			output.EndElement = toMapOrNil(m.End.Element.ToJSON())
+			output.EndElement = toMapOrNil(m.End.Element.MarshalJSON())
 		}
 	}
 	output.Score = m.Score
@@ -679,49 +679,49 @@ func (m *MolecularSequenceQuality) ToJSON() ([]byte, error) {
 	if m.TruthTP != nil && m.TruthTP.Value != nil {
 		output.TruthTP = m.TruthTP.Value
 		if m.TruthTP.Element != nil {
-			output.TruthTPElement = toMapOrNil(m.TruthTP.Element.ToJSON())
+			output.TruthTPElement = toMapOrNil(m.TruthTP.Element.MarshalJSON())
 		}
 	}
 	if m.QueryTP != nil && m.QueryTP.Value != nil {
 		output.QueryTP = m.QueryTP.Value
 		if m.QueryTP.Element != nil {
-			output.QueryTPElement = toMapOrNil(m.QueryTP.Element.ToJSON())
+			output.QueryTPElement = toMapOrNil(m.QueryTP.Element.MarshalJSON())
 		}
 	}
 	if m.TruthFN != nil && m.TruthFN.Value != nil {
 		output.TruthFN = m.TruthFN.Value
 		if m.TruthFN.Element != nil {
-			output.TruthFNElement = toMapOrNil(m.TruthFN.Element.ToJSON())
+			output.TruthFNElement = toMapOrNil(m.TruthFN.Element.MarshalJSON())
 		}
 	}
 	if m.QueryFP != nil && m.QueryFP.Value != nil {
 		output.QueryFP = m.QueryFP.Value
 		if m.QueryFP.Element != nil {
-			output.QueryFPElement = toMapOrNil(m.QueryFP.Element.ToJSON())
+			output.QueryFPElement = toMapOrNil(m.QueryFP.Element.MarshalJSON())
 		}
 	}
 	if m.GtFP != nil && m.GtFP.Value != nil {
 		output.GtFP = m.GtFP.Value
 		if m.GtFP.Element != nil {
-			output.GtFPElement = toMapOrNil(m.GtFP.Element.ToJSON())
+			output.GtFPElement = toMapOrNil(m.GtFP.Element.MarshalJSON())
 		}
 	}
 	if m.Precision != nil && m.Precision.Value != nil {
 		output.Precision = m.Precision.Value
 		if m.Precision.Element != nil {
-			output.PrecisionElement = toMapOrNil(m.Precision.Element.ToJSON())
+			output.PrecisionElement = toMapOrNil(m.Precision.Element.MarshalJSON())
 		}
 	}
 	if m.Recall != nil && m.Recall.Value != nil {
 		output.Recall = m.Recall.Value
 		if m.Recall.Element != nil {
-			output.RecallElement = toMapOrNil(m.Recall.Element.ToJSON())
+			output.RecallElement = toMapOrNil(m.Recall.Element.MarshalJSON())
 		}
 	}
 	if m.FScore != nil && m.FScore.Value != nil {
 		output.FScore = m.FScore.Value
 		if m.FScore.Element != nil {
-			output.FScoreElement = toMapOrNil(m.FScore.Element.ToJSON())
+			output.FScoreElement = toMapOrNil(m.FScore.Element.MarshalJSON())
 		}
 	}
 	output.Roc = m.Roc
@@ -799,8 +799,8 @@ func NewMolecularSequenceRoc() *MolecularSequenceRoc {
 	return &MolecularSequenceRoc{}
 }
 
-// FromJSON populates MolecularSequenceRoc from JSON data.
-func (m *MolecularSequenceRoc) FromJSON(data []byte) error {
+// UnmarshalJSON populates MolecularSequenceRoc from JSON data.
+func (m *MolecularSequenceRoc) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -892,8 +892,8 @@ func (m *MolecularSequenceRoc) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MolecularSequenceRoc to JSON data.
-func (m *MolecularSequenceRoc) ToJSON() ([]byte, error) {
+// MarshalJSON converts MolecularSequenceRoc to JSON data.
+func (m *MolecularSequenceRoc) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -917,7 +917,7 @@ func (m *MolecularSequenceRoc) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -930,7 +930,7 @@ func (m *MolecularSequenceRoc) ToJSON() ([]byte, error) {
 				output.Score[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.ScoreElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.ScoreElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -942,7 +942,7 @@ func (m *MolecularSequenceRoc) ToJSON() ([]byte, error) {
 				output.NumTP[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.NumTPElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.NumTPElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -954,7 +954,7 @@ func (m *MolecularSequenceRoc) ToJSON() ([]byte, error) {
 				output.NumFP[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.NumFPElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.NumFPElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -966,7 +966,7 @@ func (m *MolecularSequenceRoc) ToJSON() ([]byte, error) {
 				output.NumFN[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.NumFNElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.NumFNElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -978,7 +978,7 @@ func (m *MolecularSequenceRoc) ToJSON() ([]byte, error) {
 				output.Precision[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.PrecisionElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.PrecisionElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -990,7 +990,7 @@ func (m *MolecularSequenceRoc) ToJSON() ([]byte, error) {
 				output.Sensitivity[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.SensitivityElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.SensitivityElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -1002,7 +1002,7 @@ func (m *MolecularSequenceRoc) ToJSON() ([]byte, error) {
 				output.FMeasure[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.FMeasureElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.FMeasureElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -1063,8 +1063,8 @@ func NewMolecularSequenceRepository() *MolecularSequenceRepository {
 	return &MolecularSequenceRepository{}
 }
 
-// FromJSON populates MolecularSequenceRepository from JSON data.
-func (m *MolecularSequenceRepository) FromJSON(data []byte) error {
+// UnmarshalJSON populates MolecularSequenceRepository from JSON data.
+func (m *MolecularSequenceRepository) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1091,8 +1091,8 @@ func (m *MolecularSequenceRepository) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MolecularSequenceRepository to JSON data.
-func (m *MolecularSequenceRepository) ToJSON() ([]byte, error) {
+// MarshalJSON converts MolecularSequenceRepository to JSON data.
+func (m *MolecularSequenceRepository) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1113,7 +1113,7 @@ func (m *MolecularSequenceRepository) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1122,31 +1122,31 @@ func (m *MolecularSequenceRepository) ToJSON() ([]byte, error) {
 	if m.Url != nil && m.Url.Value != nil {
 		output.Url = m.Url.Value
 		if m.Url.Element != nil {
-			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+			output.UrlElement = toMapOrNil(m.Url.Element.MarshalJSON())
 		}
 	}
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	if m.DatasetId != nil && m.DatasetId.Value != nil {
 		output.DatasetId = m.DatasetId.Value
 		if m.DatasetId.Element != nil {
-			output.DatasetIdElement = toMapOrNil(m.DatasetId.Element.ToJSON())
+			output.DatasetIdElement = toMapOrNil(m.DatasetId.Element.MarshalJSON())
 		}
 	}
 	if m.VariantsetId != nil && m.VariantsetId.Value != nil {
 		output.VariantsetId = m.VariantsetId.Value
 		if m.VariantsetId.Element != nil {
-			output.VariantsetIdElement = toMapOrNil(m.VariantsetId.Element.ToJSON())
+			output.VariantsetIdElement = toMapOrNil(m.VariantsetId.Element.MarshalJSON())
 		}
 	}
 	if m.ReadsetId != nil && m.ReadsetId.Value != nil {
 		output.ReadsetId = m.ReadsetId.Value
 		if m.ReadsetId.Element != nil {
-			output.ReadsetIdElement = toMapOrNil(m.ReadsetId.Element.ToJSON())
+			output.ReadsetIdElement = toMapOrNil(m.ReadsetId.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -1203,8 +1203,8 @@ func NewMolecularSequenceStructureVariant() *MolecularSequenceStructureVariant {
 	return &MolecularSequenceStructureVariant{}
 }
 
-// FromJSON populates MolecularSequenceStructureVariant from JSON data.
-func (m *MolecularSequenceStructureVariant) FromJSON(data []byte) error {
+// UnmarshalJSON populates MolecularSequenceStructureVariant from JSON data.
+func (m *MolecularSequenceStructureVariant) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1229,8 +1229,8 @@ func (m *MolecularSequenceStructureVariant) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MolecularSequenceStructureVariant to JSON data.
-func (m *MolecularSequenceStructureVariant) ToJSON() ([]byte, error) {
+// MarshalJSON converts MolecularSequenceStructureVariant to JSON data.
+func (m *MolecularSequenceStructureVariant) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1247,7 +1247,7 @@ func (m *MolecularSequenceStructureVariant) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1256,13 +1256,13 @@ func (m *MolecularSequenceStructureVariant) ToJSON() ([]byte, error) {
 	if m.Exact != nil && m.Exact.Value != nil {
 		output.Exact = m.Exact.Value
 		if m.Exact.Element != nil {
-			output.ExactElement = toMapOrNil(m.Exact.Element.ToJSON())
+			output.ExactElement = toMapOrNil(m.Exact.Element.MarshalJSON())
 		}
 	}
 	if m.Length != nil && m.Length.Value != nil {
 		output.Length = m.Length.Value
 		if m.Length.Element != nil {
-			output.LengthElement = toMapOrNil(m.Length.Element.ToJSON())
+			output.LengthElement = toMapOrNil(m.Length.Element.MarshalJSON())
 		}
 	}
 	output.Outer = m.Outer
@@ -1316,8 +1316,8 @@ func NewMolecularSequenceOuter() *MolecularSequenceOuter {
 	return &MolecularSequenceOuter{}
 }
 
-// FromJSON populates MolecularSequenceOuter from JSON data.
-func (m *MolecularSequenceOuter) FromJSON(data []byte) error {
+// UnmarshalJSON populates MolecularSequenceOuter from JSON data.
+func (m *MolecularSequenceOuter) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1336,8 +1336,8 @@ func (m *MolecularSequenceOuter) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MolecularSequenceOuter to JSON data.
-func (m *MolecularSequenceOuter) ToJSON() ([]byte, error) {
+// MarshalJSON converts MolecularSequenceOuter to JSON data.
+func (m *MolecularSequenceOuter) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1351,7 +1351,7 @@ func (m *MolecularSequenceOuter) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1359,13 +1359,13 @@ func (m *MolecularSequenceOuter) ToJSON() ([]byte, error) {
 	if m.Start != nil && m.Start.Value != nil {
 		output.Start = m.Start.Value
 		if m.Start.Element != nil {
-			output.StartElement = toMapOrNil(m.Start.Element.ToJSON())
+			output.StartElement = toMapOrNil(m.Start.Element.MarshalJSON())
 		}
 	}
 	if m.End != nil && m.End.Value != nil {
 		output.End = m.End.Value
 		if m.End.Element != nil {
-			output.EndElement = toMapOrNil(m.End.Element.ToJSON())
+			output.EndElement = toMapOrNil(m.End.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -1411,8 +1411,8 @@ func NewMolecularSequenceInner() *MolecularSequenceInner {
 	return &MolecularSequenceInner{}
 }
 
-// FromJSON populates MolecularSequenceInner from JSON data.
-func (m *MolecularSequenceInner) FromJSON(data []byte) error {
+// UnmarshalJSON populates MolecularSequenceInner from JSON data.
+func (m *MolecularSequenceInner) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1431,8 +1431,8 @@ func (m *MolecularSequenceInner) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MolecularSequenceInner to JSON data.
-func (m *MolecularSequenceInner) ToJSON() ([]byte, error) {
+// MarshalJSON converts MolecularSequenceInner to JSON data.
+func (m *MolecularSequenceInner) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1446,7 +1446,7 @@ func (m *MolecularSequenceInner) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1454,13 +1454,13 @@ func (m *MolecularSequenceInner) ToJSON() ([]byte, error) {
 	if m.Start != nil && m.Start.Value != nil {
 		output.Start = m.Start.Value
 		if m.Start.Element != nil {
-			output.StartElement = toMapOrNil(m.Start.Element.ToJSON())
+			output.StartElement = toMapOrNil(m.Start.Element.MarshalJSON())
 		}
 	}
 	if m.End != nil && m.End.Value != nil {
 		output.End = m.End.Value
 		if m.End.Element != nil {
-			output.EndElement = toMapOrNil(m.End.Element.ToJSON())
+			output.EndElement = toMapOrNil(m.End.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

@@ -33,8 +33,8 @@ func NewVisionPrescription() *VisionPrescription {
 	return &VisionPrescription{}
 }
 
-// FromJSON populates VisionPrescription from JSON data.
-func (m *VisionPrescription) FromJSON(data []byte) error {
+// UnmarshalJSON populates VisionPrescription from JSON data.
+func (m *VisionPrescription) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -75,8 +75,8 @@ func (m *VisionPrescription) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts VisionPrescription to JSON data.
-func (m *VisionPrescription) ToJSON() ([]byte, error) {
+// MarshalJSON converts VisionPrescription to JSON data.
+func (m *VisionPrescription) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -102,14 +102,14 @@ func (m *VisionPrescription) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -122,7 +122,7 @@ func (m *VisionPrescription) ToJSON() ([]byte, error) {
 	if m.Created != nil && m.Created.Value != nil {
 		output.Created = m.Created.Value
 		if m.Created.Element != nil {
-			output.CreatedElement = toMapOrNil(m.Created.Element.ToJSON())
+			output.CreatedElement = toMapOrNil(m.Created.Element.MarshalJSON())
 		}
 	}
 	output.Patient = m.Patient
@@ -130,7 +130,7 @@ func (m *VisionPrescription) ToJSON() ([]byte, error) {
 	if m.DateWritten != nil && m.DateWritten.Value != nil {
 		output.DateWritten = m.DateWritten.Value
 		if m.DateWritten.Element != nil {
-			output.DateWrittenElement = toMapOrNil(m.DateWritten.Element.ToJSON())
+			output.DateWrittenElement = toMapOrNil(m.DateWritten.Element.MarshalJSON())
 		}
 	}
 	output.Prescriber = m.Prescriber
@@ -212,8 +212,8 @@ func NewVisionPrescriptionLensSpecification() *VisionPrescriptionLensSpecificati
 	return &VisionPrescriptionLensSpecification{}
 }
 
-// FromJSON populates VisionPrescriptionLensSpecification from JSON data.
-func (m *VisionPrescriptionLensSpecification) FromJSON(data []byte) error {
+// UnmarshalJSON populates VisionPrescriptionLensSpecification from JSON data.
+func (m *VisionPrescriptionLensSpecification) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -256,8 +256,8 @@ func (m *VisionPrescriptionLensSpecification) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts VisionPrescriptionLensSpecification to JSON data.
-func (m *VisionPrescriptionLensSpecification) ToJSON() ([]byte, error) {
+// MarshalJSON converts VisionPrescriptionLensSpecification to JSON data.
+func (m *VisionPrescriptionLensSpecification) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -290,7 +290,7 @@ func (m *VisionPrescriptionLensSpecification) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -300,57 +300,57 @@ func (m *VisionPrescriptionLensSpecification) ToJSON() ([]byte, error) {
 	if m.Sphere != nil && m.Sphere.Value != nil {
 		output.Sphere = m.Sphere.Value
 		if m.Sphere.Element != nil {
-			output.SphereElement = toMapOrNil(m.Sphere.Element.ToJSON())
+			output.SphereElement = toMapOrNil(m.Sphere.Element.MarshalJSON())
 		}
 	}
 	if m.Cylinder != nil && m.Cylinder.Value != nil {
 		output.Cylinder = m.Cylinder.Value
 		if m.Cylinder.Element != nil {
-			output.CylinderElement = toMapOrNil(m.Cylinder.Element.ToJSON())
+			output.CylinderElement = toMapOrNil(m.Cylinder.Element.MarshalJSON())
 		}
 	}
 	if m.Axis != nil && m.Axis.Value != nil {
 		output.Axis = m.Axis.Value
 		if m.Axis.Element != nil {
-			output.AxisElement = toMapOrNil(m.Axis.Element.ToJSON())
+			output.AxisElement = toMapOrNil(m.Axis.Element.MarshalJSON())
 		}
 	}
 	output.Prism = m.Prism
 	if m.Add != nil && m.Add.Value != nil {
 		output.Add = m.Add.Value
 		if m.Add.Element != nil {
-			output.AddElement = toMapOrNil(m.Add.Element.ToJSON())
+			output.AddElement = toMapOrNil(m.Add.Element.MarshalJSON())
 		}
 	}
 	if m.Power != nil && m.Power.Value != nil {
 		output.Power = m.Power.Value
 		if m.Power.Element != nil {
-			output.PowerElement = toMapOrNil(m.Power.Element.ToJSON())
+			output.PowerElement = toMapOrNil(m.Power.Element.MarshalJSON())
 		}
 	}
 	if m.BackCurve != nil && m.BackCurve.Value != nil {
 		output.BackCurve = m.BackCurve.Value
 		if m.BackCurve.Element != nil {
-			output.BackCurveElement = toMapOrNil(m.BackCurve.Element.ToJSON())
+			output.BackCurveElement = toMapOrNil(m.BackCurve.Element.MarshalJSON())
 		}
 	}
 	if m.Diameter != nil && m.Diameter.Value != nil {
 		output.Diameter = m.Diameter.Value
 		if m.Diameter.Element != nil {
-			output.DiameterElement = toMapOrNil(m.Diameter.Element.ToJSON())
+			output.DiameterElement = toMapOrNil(m.Diameter.Element.MarshalJSON())
 		}
 	}
 	output.Duration = m.Duration
 	if m.Color != nil && m.Color.Value != nil {
 		output.Color = m.Color.Value
 		if m.Color.Element != nil {
-			output.ColorElement = toMapOrNil(m.Color.Element.ToJSON())
+			output.ColorElement = toMapOrNil(m.Color.Element.MarshalJSON())
 		}
 	}
 	if m.Brand != nil && m.Brand.Value != nil {
 		output.Brand = m.Brand.Value
 		if m.Brand.Element != nil {
-			output.BrandElement = toMapOrNil(m.Brand.Element.ToJSON())
+			output.BrandElement = toMapOrNil(m.Brand.Element.MarshalJSON())
 		}
 	}
 	output.Note = m.Note
@@ -421,8 +421,8 @@ func NewVisionPrescriptionPrism() *VisionPrescriptionPrism {
 	return &VisionPrescriptionPrism{}
 }
 
-// FromJSON populates VisionPrescriptionPrism from JSON data.
-func (m *VisionPrescriptionPrism) FromJSON(data []byte) error {
+// UnmarshalJSON populates VisionPrescriptionPrism from JSON data.
+func (m *VisionPrescriptionPrism) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -441,8 +441,8 @@ func (m *VisionPrescriptionPrism) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts VisionPrescriptionPrism to JSON data.
-func (m *VisionPrescriptionPrism) ToJSON() ([]byte, error) {
+// MarshalJSON converts VisionPrescriptionPrism to JSON data.
+func (m *VisionPrescriptionPrism) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -455,7 +455,7 @@ func (m *VisionPrescriptionPrism) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -463,7 +463,7 @@ func (m *VisionPrescriptionPrism) ToJSON() ([]byte, error) {
 	if m.Amount != nil && m.Amount.Value != nil {
 		output.Amount = m.Amount.Value
 		if m.Amount.Element != nil {
-			output.AmountElement = toMapOrNil(m.Amount.Element.ToJSON())
+			output.AmountElement = toMapOrNil(m.Amount.Element.MarshalJSON())
 		}
 	}
 	output.Base = m.Base

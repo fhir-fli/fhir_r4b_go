@@ -32,8 +32,8 @@ func NewSubstance() *Substance {
 	return &Substance{}
 }
 
-// FromJSON populates Substance from JSON data.
-func (m *Substance) FromJSON(data []byte) error {
+// UnmarshalJSON populates Substance from JSON data.
+func (m *Substance) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -72,8 +72,8 @@ func (m *Substance) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Substance to JSON data.
-func (m *Substance) ToJSON() ([]byte, error) {
+// MarshalJSON converts Substance to JSON data.
+func (m *Substance) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -97,14 +97,14 @@ func (m *Substance) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -119,7 +119,7 @@ func (m *Substance) ToJSON() ([]byte, error) {
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.Instance = m.Instance
@@ -188,8 +188,8 @@ func NewSubstanceInstance() *SubstanceInstance {
 	return &SubstanceInstance{}
 }
 
-// FromJSON populates SubstanceInstance from JSON data.
-func (m *SubstanceInstance) FromJSON(data []byte) error {
+// UnmarshalJSON populates SubstanceInstance from JSON data.
+func (m *SubstanceInstance) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -210,8 +210,8 @@ func (m *SubstanceInstance) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts SubstanceInstance to JSON data.
-func (m *SubstanceInstance) ToJSON() ([]byte, error) {
+// MarshalJSON converts SubstanceInstance to JSON data.
+func (m *SubstanceInstance) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -225,7 +225,7 @@ func (m *SubstanceInstance) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -234,7 +234,7 @@ func (m *SubstanceInstance) ToJSON() ([]byte, error) {
 	if m.Expiry != nil && m.Expiry.Value != nil {
 		output.Expiry = m.Expiry.Value
 		if m.Expiry.Element != nil {
-			output.ExpiryElement = toMapOrNil(m.Expiry.Element.ToJSON())
+			output.ExpiryElement = toMapOrNil(m.Expiry.Element.MarshalJSON())
 		}
 	}
 	output.Quantity = m.Quantity
@@ -284,8 +284,8 @@ func NewSubstanceIngredient() *SubstanceIngredient {
 	return &SubstanceIngredient{}
 }
 
-// FromJSON populates SubstanceIngredient from JSON data.
-func (m *SubstanceIngredient) FromJSON(data []byte) error {
+// UnmarshalJSON populates SubstanceIngredient from JSON data.
+func (m *SubstanceIngredient) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -306,8 +306,8 @@ func (m *SubstanceIngredient) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts SubstanceIngredient to JSON data.
-func (m *SubstanceIngredient) ToJSON() ([]byte, error) {
+// MarshalJSON converts SubstanceIngredient to JSON data.
+func (m *SubstanceIngredient) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -320,7 +320,7 @@ func (m *SubstanceIngredient) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_

@@ -24,8 +24,8 @@ func NewDistance() *Distance {
 	return &Distance{}
 }
 
-// FromJSON populates Distance from JSON data.
-func (m *Distance) FromJSON(data []byte) error {
+// UnmarshalJSON populates Distance from JSON data.
+func (m *Distance) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -48,8 +48,8 @@ func (m *Distance) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Distance to JSON data.
-func (m *Distance) ToJSON() ([]byte, error) {
+// MarshalJSON converts Distance to JSON data.
+func (m *Distance) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -67,33 +67,33 @@ func (m *Distance) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
 	if m.Value != nil && m.Value.Value != nil {
 		output.Value = m.Value.Value
 		if m.Value.Element != nil {
-			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+			output.ValueElement = toMapOrNil(m.Value.Element.MarshalJSON())
 		}
 	}
 	output.Comparator = m.Comparator
 	if m.Unit != nil && m.Unit.Value != nil {
 		output.Unit = m.Unit.Value
 		if m.Unit.Element != nil {
-			output.UnitElement = toMapOrNil(m.Unit.Element.ToJSON())
+			output.UnitElement = toMapOrNil(m.Unit.Element.MarshalJSON())
 		}
 	}
 	if m.System != nil && m.System.Value != nil {
 		output.System = m.System.Value
 		if m.System.Element != nil {
-			output.SystemElement = toMapOrNil(m.System.Element.ToJSON())
+			output.SystemElement = toMapOrNil(m.System.Element.MarshalJSON())
 		}
 	}
 	if m.Code != nil && m.Code.Value != nil {
 		output.Code = m.Code.Value
 		if m.Code.Element != nil {
-			output.CodeElement = toMapOrNil(m.Code.Element.ToJSON())
+			output.CodeElement = toMapOrNil(m.Code.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

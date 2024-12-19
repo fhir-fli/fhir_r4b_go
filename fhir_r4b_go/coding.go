@@ -24,8 +24,8 @@ func NewCoding() *Coding {
 	return &Coding{}
 }
 
-// FromJSON populates Coding from JSON data.
-func (m *Coding) FromJSON(data []byte) error {
+// UnmarshalJSON populates Coding from JSON data.
+func (m *Coding) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -48,8 +48,8 @@ func (m *Coding) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Coding to JSON data.
-func (m *Coding) ToJSON() ([]byte, error) {
+// MarshalJSON converts Coding to JSON data.
+func (m *Coding) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -68,38 +68,38 @@ func (m *Coding) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
 	if m.System != nil && m.System.Value != nil {
 		output.System = m.System.Value
 		if m.System.Element != nil {
-			output.SystemElement = toMapOrNil(m.System.Element.ToJSON())
+			output.SystemElement = toMapOrNil(m.System.Element.MarshalJSON())
 		}
 	}
 	if m.Version != nil && m.Version.Value != nil {
 		output.Version = m.Version.Value
 		if m.Version.Element != nil {
-			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+			output.VersionElement = toMapOrNil(m.Version.Element.MarshalJSON())
 		}
 	}
 	if m.Code != nil && m.Code.Value != nil {
 		output.Code = m.Code.Value
 		if m.Code.Element != nil {
-			output.CodeElement = toMapOrNil(m.Code.Element.ToJSON())
+			output.CodeElement = toMapOrNil(m.Code.Element.MarshalJSON())
 		}
 	}
 	if m.Display != nil && m.Display.Value != nil {
 		output.Display = m.Display.Value
 		if m.Display.Element != nil {
-			output.DisplayElement = toMapOrNil(m.Display.Element.ToJSON())
+			output.DisplayElement = toMapOrNil(m.Display.Element.MarshalJSON())
 		}
 	}
 	if m.UserSelected != nil && m.UserSelected.Value != nil {
 		output.UserSelected = m.UserSelected.Value
 		if m.UserSelected.Element != nil {
-			output.UserSelectedElement = toMapOrNil(m.UserSelected.Element.ToJSON())
+			output.UserSelectedElement = toMapOrNil(m.UserSelected.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

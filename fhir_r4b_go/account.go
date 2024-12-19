@@ -36,8 +36,8 @@ func NewAccount() *Account {
 	return &Account{}
 }
 
-// FromJSON populates Account from JSON data.
-func (m *Account) FromJSON(data []byte) error {
+// UnmarshalJSON populates Account from JSON data.
+func (m *Account) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -84,8 +84,8 @@ func (m *Account) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Account to JSON data.
-func (m *Account) ToJSON() ([]byte, error) {
+// MarshalJSON converts Account to JSON data.
+func (m *Account) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -114,14 +114,14 @@ func (m *Account) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -135,7 +135,7 @@ func (m *Account) ToJSON() ([]byte, error) {
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	output.Subject = m.Subject
@@ -145,7 +145,7 @@ func (m *Account) ToJSON() ([]byte, error) {
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.Guarantor = m.Guarantor
@@ -221,8 +221,8 @@ func NewAccountCoverage() *AccountCoverage {
 	return &AccountCoverage{}
 }
 
-// FromJSON populates AccountCoverage from JSON data.
-func (m *AccountCoverage) FromJSON(data []byte) error {
+// UnmarshalJSON populates AccountCoverage from JSON data.
+func (m *AccountCoverage) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -241,8 +241,8 @@ func (m *AccountCoverage) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts AccountCoverage to JSON data.
-func (m *AccountCoverage) ToJSON() ([]byte, error) {
+// MarshalJSON converts AccountCoverage to JSON data.
+func (m *AccountCoverage) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -255,7 +255,7 @@ func (m *AccountCoverage) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -264,7 +264,7 @@ func (m *AccountCoverage) ToJSON() ([]byte, error) {
 	if m.Priority != nil && m.Priority.Value != nil {
 		output.Priority = m.Priority.Value
 		if m.Priority.Element != nil {
-			output.PriorityElement = toMapOrNil(m.Priority.Element.ToJSON())
+			output.PriorityElement = toMapOrNil(m.Priority.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -311,8 +311,8 @@ func NewAccountGuarantor() *AccountGuarantor {
 	return &AccountGuarantor{}
 }
 
-// FromJSON populates AccountGuarantor from JSON data.
-func (m *AccountGuarantor) FromJSON(data []byte) error {
+// UnmarshalJSON populates AccountGuarantor from JSON data.
+func (m *AccountGuarantor) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -333,8 +333,8 @@ func (m *AccountGuarantor) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts AccountGuarantor to JSON data.
-func (m *AccountGuarantor) ToJSON() ([]byte, error) {
+// MarshalJSON converts AccountGuarantor to JSON data.
+func (m *AccountGuarantor) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -348,7 +348,7 @@ func (m *AccountGuarantor) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -357,7 +357,7 @@ func (m *AccountGuarantor) ToJSON() ([]byte, error) {
 	if m.OnHold != nil && m.OnHold.Value != nil {
 		output.OnHold = m.OnHold.Value
 		if m.OnHold.Element != nil {
-			output.OnHoldElement = toMapOrNil(m.OnHold.Element.ToJSON())
+			output.OnHoldElement = toMapOrNil(m.OnHold.Element.MarshalJSON())
 		}
 	}
 	output.Period = m.Period

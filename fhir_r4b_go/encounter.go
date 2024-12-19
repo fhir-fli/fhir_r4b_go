@@ -48,8 +48,8 @@ func NewEncounter() *Encounter {
 	return &Encounter{}
 }
 
-// FromJSON populates Encounter from JSON data.
-func (m *Encounter) FromJSON(data []byte) error {
+// UnmarshalJSON populates Encounter from JSON data.
+func (m *Encounter) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -120,8 +120,8 @@ func (m *Encounter) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Encounter to JSON data.
-func (m *Encounter) ToJSON() ([]byte, error) {
+// MarshalJSON converts Encounter to JSON data.
+func (m *Encounter) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -160,14 +160,14 @@ func (m *Encounter) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -293,8 +293,8 @@ func NewEncounterStatusHistory() *EncounterStatusHistory {
 	return &EncounterStatusHistory{}
 }
 
-// FromJSON populates EncounterStatusHistory from JSON data.
-func (m *EncounterStatusHistory) FromJSON(data []byte) error {
+// UnmarshalJSON populates EncounterStatusHistory from JSON data.
+func (m *EncounterStatusHistory) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -313,8 +313,8 @@ func (m *EncounterStatusHistory) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts EncounterStatusHistory to JSON data.
-func (m *EncounterStatusHistory) ToJSON() ([]byte, error) {
+// MarshalJSON converts EncounterStatusHistory to JSON data.
+func (m *EncounterStatusHistory) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -326,7 +326,7 @@ func (m *EncounterStatusHistory) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -376,8 +376,8 @@ func NewEncounterClassHistory() *EncounterClassHistory {
 	return &EncounterClassHistory{}
 }
 
-// FromJSON populates EncounterClassHistory from JSON data.
-func (m *EncounterClassHistory) FromJSON(data []byte) error {
+// UnmarshalJSON populates EncounterClassHistory from JSON data.
+func (m *EncounterClassHistory) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -396,8 +396,8 @@ func (m *EncounterClassHistory) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts EncounterClassHistory to JSON data.
-func (m *EncounterClassHistory) ToJSON() ([]byte, error) {
+// MarshalJSON converts EncounterClassHistory to JSON data.
+func (m *EncounterClassHistory) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -409,7 +409,7 @@ func (m *EncounterClassHistory) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -460,8 +460,8 @@ func NewEncounterParticipant() *EncounterParticipant {
 	return &EncounterParticipant{}
 }
 
-// FromJSON populates EncounterParticipant from JSON data.
-func (m *EncounterParticipant) FromJSON(data []byte) error {
+// UnmarshalJSON populates EncounterParticipant from JSON data.
+func (m *EncounterParticipant) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -482,8 +482,8 @@ func (m *EncounterParticipant) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts EncounterParticipant to JSON data.
-func (m *EncounterParticipant) ToJSON() ([]byte, error) {
+// MarshalJSON converts EncounterParticipant to JSON data.
+func (m *EncounterParticipant) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -496,7 +496,7 @@ func (m *EncounterParticipant) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -550,8 +550,8 @@ func NewEncounterDiagnosis() *EncounterDiagnosis {
 	return &EncounterDiagnosis{}
 }
 
-// FromJSON populates EncounterDiagnosis from JSON data.
-func (m *EncounterDiagnosis) FromJSON(data []byte) error {
+// UnmarshalJSON populates EncounterDiagnosis from JSON data.
+func (m *EncounterDiagnosis) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -572,8 +572,8 @@ func (m *EncounterDiagnosis) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts EncounterDiagnosis to JSON data.
-func (m *EncounterDiagnosis) ToJSON() ([]byte, error) {
+// MarshalJSON converts EncounterDiagnosis to JSON data.
+func (m *EncounterDiagnosis) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -587,7 +587,7 @@ func (m *EncounterDiagnosis) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -597,7 +597,7 @@ func (m *EncounterDiagnosis) ToJSON() ([]byte, error) {
 	if m.Rank != nil && m.Rank.Value != nil {
 		output.Rank = m.Rank.Value
 		if m.Rank.Element != nil {
-			output.RankElement = toMapOrNil(m.Rank.Element.ToJSON())
+			output.RankElement = toMapOrNil(m.Rank.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -652,8 +652,8 @@ func NewEncounterHospitalization() *EncounterHospitalization {
 	return &EncounterHospitalization{}
 }
 
-// FromJSON populates EncounterHospitalization from JSON data.
-func (m *EncounterHospitalization) FromJSON(data []byte) error {
+// UnmarshalJSON populates EncounterHospitalization from JSON data.
+func (m *EncounterHospitalization) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -686,8 +686,8 @@ func (m *EncounterHospitalization) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts EncounterHospitalization to JSON data.
-func (m *EncounterHospitalization) ToJSON() ([]byte, error) {
+// MarshalJSON converts EncounterHospitalization to JSON data.
+func (m *EncounterHospitalization) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -706,7 +706,7 @@ func (m *EncounterHospitalization) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -779,8 +779,8 @@ func NewEncounterLocation() *EncounterLocation {
 	return &EncounterLocation{}
 }
 
-// FromJSON populates EncounterLocation from JSON data.
-func (m *EncounterLocation) FromJSON(data []byte) error {
+// UnmarshalJSON populates EncounterLocation from JSON data.
+func (m *EncounterLocation) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -803,8 +803,8 @@ func (m *EncounterLocation) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts EncounterLocation to JSON data.
-func (m *EncounterLocation) ToJSON() ([]byte, error) {
+// MarshalJSON converts EncounterLocation to JSON data.
+func (m *EncounterLocation) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -818,7 +818,7 @@ func (m *EncounterLocation) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_

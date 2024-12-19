@@ -49,8 +49,8 @@ func NewDeviceDefinition() *DeviceDefinition {
 	return &DeviceDefinition{}
 }
 
-// FromJSON populates DeviceDefinition from JSON data.
-func (m *DeviceDefinition) FromJSON(data []byte) error {
+// UnmarshalJSON populates DeviceDefinition from JSON data.
+func (m *DeviceDefinition) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -130,8 +130,8 @@ func (m *DeviceDefinition) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts DeviceDefinition to JSON data.
-func (m *DeviceDefinition) ToJSON() ([]byte, error) {
+// MarshalJSON converts DeviceDefinition to JSON data.
+func (m *DeviceDefinition) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -175,14 +175,14 @@ func (m *DeviceDefinition) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -195,7 +195,7 @@ func (m *DeviceDefinition) ToJSON() ([]byte, error) {
 	if m.ManufacturerString != nil && m.ManufacturerString.Value != nil {
 		output.ManufacturerString = m.ManufacturerString.Value
 		if m.ManufacturerString.Element != nil {
-			output.ManufacturerStringElement = toMapOrNil(m.ManufacturerString.Element.ToJSON())
+			output.ManufacturerStringElement = toMapOrNil(m.ManufacturerString.Element.MarshalJSON())
 		}
 	}
 	output.ManufacturerReference = m.ManufacturerReference
@@ -203,7 +203,7 @@ func (m *DeviceDefinition) ToJSON() ([]byte, error) {
 	if m.ModelNumber != nil && m.ModelNumber.Value != nil {
 		output.ModelNumber = m.ModelNumber.Value
 		if m.ModelNumber.Element != nil {
-			output.ModelNumberElement = toMapOrNil(m.ModelNumber.Element.ToJSON())
+			output.ModelNumberElement = toMapOrNil(m.ModelNumber.Element.MarshalJSON())
 		}
 	}
 	output.Type = m.Type
@@ -216,7 +216,7 @@ func (m *DeviceDefinition) ToJSON() ([]byte, error) {
 				output.Version[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.VersionElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.VersionElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -231,13 +231,13 @@ func (m *DeviceDefinition) ToJSON() ([]byte, error) {
 	if m.Url != nil && m.Url.Value != nil {
 		output.Url = m.Url.Value
 		if m.Url.Element != nil {
-			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+			output.UrlElement = toMapOrNil(m.Url.Element.MarshalJSON())
 		}
 	}
 	if m.OnlineInformation != nil && m.OnlineInformation.Value != nil {
 		output.OnlineInformation = m.OnlineInformation.Value
 		if m.OnlineInformation.Element != nil {
-			output.OnlineInformationElement = toMapOrNil(m.OnlineInformation.Element.ToJSON())
+			output.OnlineInformationElement = toMapOrNil(m.OnlineInformation.Element.MarshalJSON())
 		}
 	}
 	output.Note = m.Note
@@ -340,8 +340,8 @@ func NewDeviceDefinitionUdiDeviceIdentifier() *DeviceDefinitionUdiDeviceIdentifi
 	return &DeviceDefinitionUdiDeviceIdentifier{}
 }
 
-// FromJSON populates DeviceDefinitionUdiDeviceIdentifier from JSON data.
-func (m *DeviceDefinitionUdiDeviceIdentifier) FromJSON(data []byte) error {
+// UnmarshalJSON populates DeviceDefinitionUdiDeviceIdentifier from JSON data.
+func (m *DeviceDefinitionUdiDeviceIdentifier) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -362,8 +362,8 @@ func (m *DeviceDefinitionUdiDeviceIdentifier) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts DeviceDefinitionUdiDeviceIdentifier to JSON data.
-func (m *DeviceDefinitionUdiDeviceIdentifier) ToJSON() ([]byte, error) {
+// MarshalJSON converts DeviceDefinitionUdiDeviceIdentifier to JSON data.
+func (m *DeviceDefinitionUdiDeviceIdentifier) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -379,7 +379,7 @@ func (m *DeviceDefinitionUdiDeviceIdentifier) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -387,19 +387,19 @@ func (m *DeviceDefinitionUdiDeviceIdentifier) ToJSON() ([]byte, error) {
 	if m.DeviceIdentifier != nil && m.DeviceIdentifier.Value != nil {
 		output.DeviceIdentifier = m.DeviceIdentifier.Value
 		if m.DeviceIdentifier.Element != nil {
-			output.DeviceIdentifierElement = toMapOrNil(m.DeviceIdentifier.Element.ToJSON())
+			output.DeviceIdentifierElement = toMapOrNil(m.DeviceIdentifier.Element.MarshalJSON())
 		}
 	}
 	if m.Issuer != nil && m.Issuer.Value != nil {
 		output.Issuer = m.Issuer.Value
 		if m.Issuer.Element != nil {
-			output.IssuerElement = toMapOrNil(m.Issuer.Element.ToJSON())
+			output.IssuerElement = toMapOrNil(m.Issuer.Element.MarshalJSON())
 		}
 	}
 	if m.Jurisdiction != nil && m.Jurisdiction.Value != nil {
 		output.Jurisdiction = m.Jurisdiction.Value
 		if m.Jurisdiction.Element != nil {
-			output.JurisdictionElement = toMapOrNil(m.Jurisdiction.Element.ToJSON())
+			output.JurisdictionElement = toMapOrNil(m.Jurisdiction.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -447,8 +447,8 @@ func NewDeviceDefinitionDeviceName() *DeviceDefinitionDeviceName {
 	return &DeviceDefinitionDeviceName{}
 }
 
-// FromJSON populates DeviceDefinitionDeviceName from JSON data.
-func (m *DeviceDefinitionDeviceName) FromJSON(data []byte) error {
+// UnmarshalJSON populates DeviceDefinitionDeviceName from JSON data.
+func (m *DeviceDefinitionDeviceName) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -467,8 +467,8 @@ func (m *DeviceDefinitionDeviceName) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts DeviceDefinitionDeviceName to JSON data.
-func (m *DeviceDefinitionDeviceName) ToJSON() ([]byte, error) {
+// MarshalJSON converts DeviceDefinitionDeviceName to JSON data.
+func (m *DeviceDefinitionDeviceName) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -481,7 +481,7 @@ func (m *DeviceDefinitionDeviceName) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -489,7 +489,7 @@ func (m *DeviceDefinitionDeviceName) ToJSON() ([]byte, error) {
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	output.Type = m.Type
@@ -536,8 +536,8 @@ func NewDeviceDefinitionSpecialization() *DeviceDefinitionSpecialization {
 	return &DeviceDefinitionSpecialization{}
 }
 
-// FromJSON populates DeviceDefinitionSpecialization from JSON data.
-func (m *DeviceDefinitionSpecialization) FromJSON(data []byte) error {
+// UnmarshalJSON populates DeviceDefinitionSpecialization from JSON data.
+func (m *DeviceDefinitionSpecialization) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -556,8 +556,8 @@ func (m *DeviceDefinitionSpecialization) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts DeviceDefinitionSpecialization to JSON data.
-func (m *DeviceDefinitionSpecialization) ToJSON() ([]byte, error) {
+// MarshalJSON converts DeviceDefinitionSpecialization to JSON data.
+func (m *DeviceDefinitionSpecialization) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -571,7 +571,7 @@ func (m *DeviceDefinitionSpecialization) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -579,13 +579,13 @@ func (m *DeviceDefinitionSpecialization) ToJSON() ([]byte, error) {
 	if m.SystemType != nil && m.SystemType.Value != nil {
 		output.SystemType = m.SystemType.Value
 		if m.SystemType.Element != nil {
-			output.SystemTypeElement = toMapOrNil(m.SystemType.Element.ToJSON())
+			output.SystemTypeElement = toMapOrNil(m.SystemType.Element.MarshalJSON())
 		}
 	}
 	if m.Version != nil && m.Version.Value != nil {
 		output.Version = m.Version.Value
 		if m.Version.Element != nil {
-			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+			output.VersionElement = toMapOrNil(m.Version.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -631,8 +631,8 @@ func NewDeviceDefinitionCapability() *DeviceDefinitionCapability {
 	return &DeviceDefinitionCapability{}
 }
 
-// FromJSON populates DeviceDefinitionCapability from JSON data.
-func (m *DeviceDefinitionCapability) FromJSON(data []byte) error {
+// UnmarshalJSON populates DeviceDefinitionCapability from JSON data.
+func (m *DeviceDefinitionCapability) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -651,8 +651,8 @@ func (m *DeviceDefinitionCapability) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts DeviceDefinitionCapability to JSON data.
-func (m *DeviceDefinitionCapability) ToJSON() ([]byte, error) {
+// MarshalJSON converts DeviceDefinitionCapability to JSON data.
+func (m *DeviceDefinitionCapability) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -664,7 +664,7 @@ func (m *DeviceDefinitionCapability) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -715,8 +715,8 @@ func NewDeviceDefinitionProperty() *DeviceDefinitionProperty {
 	return &DeviceDefinitionProperty{}
 }
 
-// FromJSON populates DeviceDefinitionProperty from JSON data.
-func (m *DeviceDefinitionProperty) FromJSON(data []byte) error {
+// UnmarshalJSON populates DeviceDefinitionProperty from JSON data.
+func (m *DeviceDefinitionProperty) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -737,8 +737,8 @@ func (m *DeviceDefinitionProperty) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts DeviceDefinitionProperty to JSON data.
-func (m *DeviceDefinitionProperty) ToJSON() ([]byte, error) {
+// MarshalJSON converts DeviceDefinitionProperty to JSON data.
+func (m *DeviceDefinitionProperty) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -751,7 +751,7 @@ func (m *DeviceDefinitionProperty) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -805,8 +805,8 @@ func NewDeviceDefinitionMaterial() *DeviceDefinitionMaterial {
 	return &DeviceDefinitionMaterial{}
 }
 
-// FromJSON populates DeviceDefinitionMaterial from JSON data.
-func (m *DeviceDefinitionMaterial) FromJSON(data []byte) error {
+// UnmarshalJSON populates DeviceDefinitionMaterial from JSON data.
+func (m *DeviceDefinitionMaterial) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -827,8 +827,8 @@ func (m *DeviceDefinitionMaterial) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts DeviceDefinitionMaterial to JSON data.
-func (m *DeviceDefinitionMaterial) ToJSON() ([]byte, error) {
+// MarshalJSON converts DeviceDefinitionMaterial to JSON data.
+func (m *DeviceDefinitionMaterial) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -843,7 +843,7 @@ func (m *DeviceDefinitionMaterial) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -852,13 +852,13 @@ func (m *DeviceDefinitionMaterial) ToJSON() ([]byte, error) {
 	if m.Alternate != nil && m.Alternate.Value != nil {
 		output.Alternate = m.Alternate.Value
 		if m.Alternate.Element != nil {
-			output.AlternateElement = toMapOrNil(m.Alternate.Element.ToJSON())
+			output.AlternateElement = toMapOrNil(m.Alternate.Element.MarshalJSON())
 		}
 	}
 	if m.AllergenicIndicator != nil && m.AllergenicIndicator.Value != nil {
 		output.AllergenicIndicator = m.AllergenicIndicator.Value
 		if m.AllergenicIndicator.Element != nil {
-			output.AllergenicIndicatorElement = toMapOrNil(m.AllergenicIndicator.Element.ToJSON())
+			output.AllergenicIndicatorElement = toMapOrNil(m.AllergenicIndicator.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

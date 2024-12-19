@@ -53,8 +53,8 @@ func NewMedicinalProductDefinition() *MedicinalProductDefinition {
 	return &MedicinalProductDefinition{}
 }
 
-// FromJSON populates MedicinalProductDefinition from JSON data.
-func (m *MedicinalProductDefinition) FromJSON(data []byte) error {
+// UnmarshalJSON populates MedicinalProductDefinition from JSON data.
+func (m *MedicinalProductDefinition) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -135,8 +135,8 @@ func (m *MedicinalProductDefinition) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MedicinalProductDefinition to JSON data.
-func (m *MedicinalProductDefinition) ToJSON() ([]byte, error) {
+// MarshalJSON converts MedicinalProductDefinition to JSON data.
+func (m *MedicinalProductDefinition) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -184,14 +184,14 @@ func (m *MedicinalProductDefinition) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -205,20 +205,20 @@ func (m *MedicinalProductDefinition) ToJSON() ([]byte, error) {
 	if m.Version != nil && m.Version.Value != nil {
 		output.Version = m.Version.Value
 		if m.Version.Element != nil {
-			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+			output.VersionElement = toMapOrNil(m.Version.Element.MarshalJSON())
 		}
 	}
 	output.Status = m.Status
 	if m.StatusDate != nil && m.StatusDate.Value != nil {
 		output.StatusDate = m.StatusDate.Value
 		if m.StatusDate.Element != nil {
-			output.StatusDateElement = toMapOrNil(m.StatusDate.Element.ToJSON())
+			output.StatusDateElement = toMapOrNil(m.StatusDate.Element.MarshalJSON())
 		}
 	}
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.CombinedPharmaceuticalDoseForm = m.CombinedPharmaceuticalDoseForm
@@ -226,7 +226,7 @@ func (m *MedicinalProductDefinition) ToJSON() ([]byte, error) {
 	if m.Indication != nil && m.Indication.Value != nil {
 		output.Indication = m.Indication.Value
 		if m.Indication.Element != nil {
-			output.IndicationElement = toMapOrNil(m.Indication.Element.ToJSON())
+			output.IndicationElement = toMapOrNil(m.Indication.Element.MarshalJSON())
 		}
 	}
 	output.LegalStatusOfSupply = m.LegalStatusOfSupply
@@ -352,8 +352,8 @@ func NewMedicinalProductDefinitionContact() *MedicinalProductDefinitionContact {
 	return &MedicinalProductDefinitionContact{}
 }
 
-// FromJSON populates MedicinalProductDefinitionContact from JSON data.
-func (m *MedicinalProductDefinitionContact) FromJSON(data []byte) error {
+// UnmarshalJSON populates MedicinalProductDefinitionContact from JSON data.
+func (m *MedicinalProductDefinitionContact) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -372,8 +372,8 @@ func (m *MedicinalProductDefinitionContact) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MedicinalProductDefinitionContact to JSON data.
-func (m *MedicinalProductDefinitionContact) ToJSON() ([]byte, error) {
+// MarshalJSON converts MedicinalProductDefinitionContact to JSON data.
+func (m *MedicinalProductDefinitionContact) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -385,7 +385,7 @@ func (m *MedicinalProductDefinitionContact) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -437,8 +437,8 @@ func NewMedicinalProductDefinitionName() *MedicinalProductDefinitionName {
 	return &MedicinalProductDefinitionName{}
 }
 
-// FromJSON populates MedicinalProductDefinitionName from JSON data.
-func (m *MedicinalProductDefinitionName) FromJSON(data []byte) error {
+// UnmarshalJSON populates MedicinalProductDefinitionName from JSON data.
+func (m *MedicinalProductDefinitionName) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -461,8 +461,8 @@ func (m *MedicinalProductDefinitionName) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MedicinalProductDefinitionName to JSON data.
-func (m *MedicinalProductDefinitionName) ToJSON() ([]byte, error) {
+// MarshalJSON converts MedicinalProductDefinitionName to JSON data.
+func (m *MedicinalProductDefinitionName) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -477,7 +477,7 @@ func (m *MedicinalProductDefinitionName) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -485,7 +485,7 @@ func (m *MedicinalProductDefinitionName) ToJSON() ([]byte, error) {
 	if m.ProductName != nil && m.ProductName.Value != nil {
 		output.ProductName = m.ProductName.Value
 		if m.ProductName.Element != nil {
-			output.ProductNameElement = toMapOrNil(m.ProductName.Element.ToJSON())
+			output.ProductNameElement = toMapOrNil(m.ProductName.Element.MarshalJSON())
 		}
 	}
 	output.Type = m.Type
@@ -538,8 +538,8 @@ func NewMedicinalProductDefinitionNamePart() *MedicinalProductDefinitionNamePart
 	return &MedicinalProductDefinitionNamePart{}
 }
 
-// FromJSON populates MedicinalProductDefinitionNamePart from JSON data.
-func (m *MedicinalProductDefinitionNamePart) FromJSON(data []byte) error {
+// UnmarshalJSON populates MedicinalProductDefinitionNamePart from JSON data.
+func (m *MedicinalProductDefinitionNamePart) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -558,8 +558,8 @@ func (m *MedicinalProductDefinitionNamePart) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MedicinalProductDefinitionNamePart to JSON data.
-func (m *MedicinalProductDefinitionNamePart) ToJSON() ([]byte, error) {
+// MarshalJSON converts MedicinalProductDefinitionNamePart to JSON data.
+func (m *MedicinalProductDefinitionNamePart) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -572,7 +572,7 @@ func (m *MedicinalProductDefinitionNamePart) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -580,7 +580,7 @@ func (m *MedicinalProductDefinitionNamePart) ToJSON() ([]byte, error) {
 	if m.Part_ != nil && m.Part_.Value != nil {
 		output.Part_ = m.Part_.Value
 		if m.Part_.Element != nil {
-			output.Part_Element = toMapOrNil(m.Part_.Element.ToJSON())
+			output.Part_Element = toMapOrNil(m.Part_.Element.MarshalJSON())
 		}
 	}
 	output.Type = m.Type
@@ -628,8 +628,8 @@ func NewMedicinalProductDefinitionCountryLanguage() *MedicinalProductDefinitionC
 	return &MedicinalProductDefinitionCountryLanguage{}
 }
 
-// FromJSON populates MedicinalProductDefinitionCountryLanguage from JSON data.
-func (m *MedicinalProductDefinitionCountryLanguage) FromJSON(data []byte) error {
+// UnmarshalJSON populates MedicinalProductDefinitionCountryLanguage from JSON data.
+func (m *MedicinalProductDefinitionCountryLanguage) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -650,8 +650,8 @@ func (m *MedicinalProductDefinitionCountryLanguage) FromJSON(data []byte) error 
 	return nil
 }
 
-// ToJSON converts MedicinalProductDefinitionCountryLanguage to JSON data.
-func (m *MedicinalProductDefinitionCountryLanguage) ToJSON() ([]byte, error) {
+// MarshalJSON converts MedicinalProductDefinitionCountryLanguage to JSON data.
+func (m *MedicinalProductDefinitionCountryLanguage) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -664,7 +664,7 @@ func (m *MedicinalProductDefinitionCountryLanguage) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -717,8 +717,8 @@ func NewMedicinalProductDefinitionCrossReference() *MedicinalProductDefinitionCr
 	return &MedicinalProductDefinitionCrossReference{}
 }
 
-// FromJSON populates MedicinalProductDefinitionCrossReference from JSON data.
-func (m *MedicinalProductDefinitionCrossReference) FromJSON(data []byte) error {
+// UnmarshalJSON populates MedicinalProductDefinitionCrossReference from JSON data.
+func (m *MedicinalProductDefinitionCrossReference) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -737,8 +737,8 @@ func (m *MedicinalProductDefinitionCrossReference) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MedicinalProductDefinitionCrossReference to JSON data.
-func (m *MedicinalProductDefinitionCrossReference) ToJSON() ([]byte, error) {
+// MarshalJSON converts MedicinalProductDefinitionCrossReference to JSON data.
+func (m *MedicinalProductDefinitionCrossReference) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -750,7 +750,7 @@ func (m *MedicinalProductDefinitionCrossReference) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -802,8 +802,8 @@ func NewMedicinalProductDefinitionOperation() *MedicinalProductDefinitionOperati
 	return &MedicinalProductDefinitionOperation{}
 }
 
-// FromJSON populates MedicinalProductDefinitionOperation from JSON data.
-func (m *MedicinalProductDefinitionOperation) FromJSON(data []byte) error {
+// UnmarshalJSON populates MedicinalProductDefinitionOperation from JSON data.
+func (m *MedicinalProductDefinitionOperation) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -826,8 +826,8 @@ func (m *MedicinalProductDefinitionOperation) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MedicinalProductDefinitionOperation to JSON data.
-func (m *MedicinalProductDefinitionOperation) ToJSON() ([]byte, error) {
+// MarshalJSON converts MedicinalProductDefinitionOperation to JSON data.
+func (m *MedicinalProductDefinitionOperation) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -841,7 +841,7 @@ func (m *MedicinalProductDefinitionOperation) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -901,8 +901,8 @@ func NewMedicinalProductDefinitionCharacteristic() *MedicinalProductDefinitionCh
 	return &MedicinalProductDefinitionCharacteristic{}
 }
 
-// FromJSON populates MedicinalProductDefinitionCharacteristic from JSON data.
-func (m *MedicinalProductDefinitionCharacteristic) FromJSON(data []byte) error {
+// UnmarshalJSON populates MedicinalProductDefinitionCharacteristic from JSON data.
+func (m *MedicinalProductDefinitionCharacteristic) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -929,8 +929,8 @@ func (m *MedicinalProductDefinitionCharacteristic) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MedicinalProductDefinitionCharacteristic to JSON data.
-func (m *MedicinalProductDefinitionCharacteristic) ToJSON() ([]byte, error) {
+// MarshalJSON converts MedicinalProductDefinitionCharacteristic to JSON data.
+func (m *MedicinalProductDefinitionCharacteristic) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -948,7 +948,7 @@ func (m *MedicinalProductDefinitionCharacteristic) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -959,13 +959,13 @@ func (m *MedicinalProductDefinitionCharacteristic) ToJSON() ([]byte, error) {
 	if m.ValueDate != nil && m.ValueDate.Value != nil {
 		output.ValueDate = m.ValueDate.Value
 		if m.ValueDate.Element != nil {
-			output.ValueDateElement = toMapOrNil(m.ValueDate.Element.ToJSON())
+			output.ValueDateElement = toMapOrNil(m.ValueDate.Element.MarshalJSON())
 		}
 	}
 	if m.ValueBoolean != nil && m.ValueBoolean.Value != nil {
 		output.ValueBoolean = m.ValueBoolean.Value
 		if m.ValueBoolean.Element != nil {
-			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.ToJSON())
+			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.MarshalJSON())
 		}
 	}
 	output.ValueAttachment = m.ValueAttachment

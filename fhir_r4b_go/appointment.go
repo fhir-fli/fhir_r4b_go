@@ -47,8 +47,8 @@ func NewAppointment() *Appointment {
 	return &Appointment{}
 }
 
-// FromJSON populates Appointment from JSON data.
-func (m *Appointment) FromJSON(data []byte) error {
+// UnmarshalJSON populates Appointment from JSON data.
+func (m *Appointment) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -117,8 +117,8 @@ func (m *Appointment) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Appointment to JSON data.
-func (m *Appointment) ToJSON() ([]byte, error) {
+// MarshalJSON converts Appointment to JSON data.
+func (m *Appointment) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -164,14 +164,14 @@ func (m *Appointment) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -191,51 +191,51 @@ func (m *Appointment) ToJSON() ([]byte, error) {
 	if m.Priority != nil && m.Priority.Value != nil {
 		output.Priority = m.Priority.Value
 		if m.Priority.Element != nil {
-			output.PriorityElement = toMapOrNil(m.Priority.Element.ToJSON())
+			output.PriorityElement = toMapOrNil(m.Priority.Element.MarshalJSON())
 		}
 	}
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.SupportingInformation = m.SupportingInformation
 	if m.Start != nil && m.Start.Value != nil {
 		output.Start = m.Start.Value
 		if m.Start.Element != nil {
-			output.StartElement = toMapOrNil(m.Start.Element.ToJSON())
+			output.StartElement = toMapOrNil(m.Start.Element.MarshalJSON())
 		}
 	}
 	if m.End != nil && m.End.Value != nil {
 		output.End = m.End.Value
 		if m.End.Element != nil {
-			output.EndElement = toMapOrNil(m.End.Element.ToJSON())
+			output.EndElement = toMapOrNil(m.End.Element.MarshalJSON())
 		}
 	}
 	if m.MinutesDuration != nil && m.MinutesDuration.Value != nil {
 		output.MinutesDuration = m.MinutesDuration.Value
 		if m.MinutesDuration.Element != nil {
-			output.MinutesDurationElement = toMapOrNil(m.MinutesDuration.Element.ToJSON())
+			output.MinutesDurationElement = toMapOrNil(m.MinutesDuration.Element.MarshalJSON())
 		}
 	}
 	output.Slot = m.Slot
 	if m.Created != nil && m.Created.Value != nil {
 		output.Created = m.Created.Value
 		if m.Created.Element != nil {
-			output.CreatedElement = toMapOrNil(m.Created.Element.ToJSON())
+			output.CreatedElement = toMapOrNil(m.Created.Element.MarshalJSON())
 		}
 	}
 	if m.Comment != nil && m.Comment.Value != nil {
 		output.Comment = m.Comment.Value
 		if m.Comment.Element != nil {
-			output.CommentElement = toMapOrNil(m.Comment.Element.ToJSON())
+			output.CommentElement = toMapOrNil(m.Comment.Element.MarshalJSON())
 		}
 	}
 	if m.PatientInstruction != nil && m.PatientInstruction.Value != nil {
 		output.PatientInstruction = m.PatientInstruction.Value
 		if m.PatientInstruction.Element != nil {
-			output.PatientInstructionElement = toMapOrNil(m.PatientInstruction.Element.ToJSON())
+			output.PatientInstructionElement = toMapOrNil(m.PatientInstruction.Element.MarshalJSON())
 		}
 	}
 	output.BasedOn = m.BasedOn
@@ -337,8 +337,8 @@ func NewAppointmentParticipant() *AppointmentParticipant {
 	return &AppointmentParticipant{}
 }
 
-// FromJSON populates AppointmentParticipant from JSON data.
-func (m *AppointmentParticipant) FromJSON(data []byte) error {
+// UnmarshalJSON populates AppointmentParticipant from JSON data.
+func (m *AppointmentParticipant) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -363,8 +363,8 @@ func (m *AppointmentParticipant) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts AppointmentParticipant to JSON data.
-func (m *AppointmentParticipant) ToJSON() ([]byte, error) {
+// MarshalJSON converts AppointmentParticipant to JSON data.
+func (m *AppointmentParticipant) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -379,7 +379,7 @@ func (m *AppointmentParticipant) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_

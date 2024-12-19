@@ -37,8 +37,8 @@ func NewAuditEvent() *AuditEvent {
 	return &AuditEvent{}
 }
 
-// FromJSON populates AuditEvent from JSON data.
-func (m *AuditEvent) FromJSON(data []byte) error {
+// UnmarshalJSON populates AuditEvent from JSON data.
+func (m *AuditEvent) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -85,8 +85,8 @@ func (m *AuditEvent) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts AuditEvent to JSON data.
-func (m *AuditEvent) ToJSON() ([]byte, error) {
+// MarshalJSON converts AuditEvent to JSON data.
+func (m *AuditEvent) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -115,14 +115,14 @@ func (m *AuditEvent) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -137,14 +137,14 @@ func (m *AuditEvent) ToJSON() ([]byte, error) {
 	if m.Recorded != nil && m.Recorded.Value != nil {
 		output.Recorded = m.Recorded.Value
 		if m.Recorded.Element != nil {
-			output.RecordedElement = toMapOrNil(m.Recorded.Element.ToJSON())
+			output.RecordedElement = toMapOrNil(m.Recorded.Element.MarshalJSON())
 		}
 	}
 	output.Outcome = m.Outcome
 	if m.OutcomeDesc != nil && m.OutcomeDesc.Value != nil {
 		output.OutcomeDesc = m.OutcomeDesc.Value
 		if m.OutcomeDesc.Element != nil {
-			output.OutcomeDescElement = toMapOrNil(m.OutcomeDesc.Element.ToJSON())
+			output.OutcomeDescElement = toMapOrNil(m.OutcomeDesc.Element.MarshalJSON())
 		}
 	}
 	output.PurposeOfEvent = m.PurposeOfEvent
@@ -231,8 +231,8 @@ func NewAuditEventAgent() *AuditEventAgent {
 	return &AuditEventAgent{}
 }
 
-// FromJSON populates AuditEventAgent from JSON data.
-func (m *AuditEventAgent) FromJSON(data []byte) error {
+// UnmarshalJSON populates AuditEventAgent from JSON data.
+func (m *AuditEventAgent) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -278,8 +278,8 @@ func (m *AuditEventAgent) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts AuditEventAgent to JSON data.
-func (m *AuditEventAgent) ToJSON() ([]byte, error) {
+// MarshalJSON converts AuditEventAgent to JSON data.
+func (m *AuditEventAgent) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -304,7 +304,7 @@ func (m *AuditEventAgent) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -315,19 +315,19 @@ func (m *AuditEventAgent) ToJSON() ([]byte, error) {
 	if m.AltId != nil && m.AltId.Value != nil {
 		output.AltId = m.AltId.Value
 		if m.AltId.Element != nil {
-			output.AltIdElement = toMapOrNil(m.AltId.Element.ToJSON())
+			output.AltIdElement = toMapOrNil(m.AltId.Element.MarshalJSON())
 		}
 	}
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	if m.Requestor != nil && m.Requestor.Value != nil {
 		output.Requestor = m.Requestor.Value
 		if m.Requestor.Element != nil {
-			output.RequestorElement = toMapOrNil(m.Requestor.Element.ToJSON())
+			output.RequestorElement = toMapOrNil(m.Requestor.Element.MarshalJSON())
 		}
 	}
 	output.Location = m.Location
@@ -339,7 +339,7 @@ func (m *AuditEventAgent) ToJSON() ([]byte, error) {
 				output.Policy[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.PolicyElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.PolicyElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -407,8 +407,8 @@ func NewAuditEventNetwork() *AuditEventNetwork {
 	return &AuditEventNetwork{}
 }
 
-// FromJSON populates AuditEventNetwork from JSON data.
-func (m *AuditEventNetwork) FromJSON(data []byte) error {
+// UnmarshalJSON populates AuditEventNetwork from JSON data.
+func (m *AuditEventNetwork) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -427,8 +427,8 @@ func (m *AuditEventNetwork) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts AuditEventNetwork to JSON data.
-func (m *AuditEventNetwork) ToJSON() ([]byte, error) {
+// MarshalJSON converts AuditEventNetwork to JSON data.
+func (m *AuditEventNetwork) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -441,7 +441,7 @@ func (m *AuditEventNetwork) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -449,7 +449,7 @@ func (m *AuditEventNetwork) ToJSON() ([]byte, error) {
 	if m.Address != nil && m.Address.Value != nil {
 		output.Address = m.Address.Value
 		if m.Address.Element != nil {
-			output.AddressElement = toMapOrNil(m.Address.Element.ToJSON())
+			output.AddressElement = toMapOrNil(m.Address.Element.MarshalJSON())
 		}
 	}
 	output.Type = m.Type
@@ -497,8 +497,8 @@ func NewAuditEventSource() *AuditEventSource {
 	return &AuditEventSource{}
 }
 
-// FromJSON populates AuditEventSource from JSON data.
-func (m *AuditEventSource) FromJSON(data []byte) error {
+// UnmarshalJSON populates AuditEventSource from JSON data.
+func (m *AuditEventSource) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -519,8 +519,8 @@ func (m *AuditEventSource) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts AuditEventSource to JSON data.
-func (m *AuditEventSource) ToJSON() ([]byte, error) {
+// MarshalJSON converts AuditEventSource to JSON data.
+func (m *AuditEventSource) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -534,7 +534,7 @@ func (m *AuditEventSource) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -542,7 +542,7 @@ func (m *AuditEventSource) ToJSON() ([]byte, error) {
 	if m.Site != nil && m.Site.Value != nil {
 		output.Site = m.Site.Value
 		if m.Site.Element != nil {
-			output.SiteElement = toMapOrNil(m.Site.Element.ToJSON())
+			output.SiteElement = toMapOrNil(m.Site.Element.MarshalJSON())
 		}
 	}
 	output.Observer = m.Observer
@@ -599,8 +599,8 @@ func NewAuditEventEntity() *AuditEventEntity {
 	return &AuditEventEntity{}
 }
 
-// FromJSON populates AuditEventEntity from JSON data.
-func (m *AuditEventEntity) FromJSON(data []byte) error {
+// UnmarshalJSON populates AuditEventEntity from JSON data.
+func (m *AuditEventEntity) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -633,8 +633,8 @@ func (m *AuditEventEntity) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts AuditEventEntity to JSON data.
-func (m *AuditEventEntity) ToJSON() ([]byte, error) {
+// MarshalJSON converts AuditEventEntity to JSON data.
+func (m *AuditEventEntity) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -656,7 +656,7 @@ func (m *AuditEventEntity) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -669,19 +669,19 @@ func (m *AuditEventEntity) ToJSON() ([]byte, error) {
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	if m.Query != nil && m.Query.Value != nil {
 		output.Query = m.Query.Value
 		if m.Query.Element != nil {
-			output.QueryElement = toMapOrNil(m.Query.Element.ToJSON())
+			output.QueryElement = toMapOrNil(m.Query.Element.MarshalJSON())
 		}
 	}
 	output.Detail = m.Detail
@@ -743,8 +743,8 @@ func NewAuditEventDetail() *AuditEventDetail {
 	return &AuditEventDetail{}
 }
 
-// FromJSON populates AuditEventDetail from JSON data.
-func (m *AuditEventDetail) FromJSON(data []byte) error {
+// UnmarshalJSON populates AuditEventDetail from JSON data.
+func (m *AuditEventDetail) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -765,8 +765,8 @@ func (m *AuditEventDetail) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts AuditEventDetail to JSON data.
-func (m *AuditEventDetail) ToJSON() ([]byte, error) {
+// MarshalJSON converts AuditEventDetail to JSON data.
+func (m *AuditEventDetail) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -782,7 +782,7 @@ func (m *AuditEventDetail) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -790,19 +790,19 @@ func (m *AuditEventDetail) ToJSON() ([]byte, error) {
 	if m.Type != nil && m.Type.Value != nil {
 		output.Type = m.Type.Value
 		if m.Type.Element != nil {
-			output.TypeElement = toMapOrNil(m.Type.Element.ToJSON())
+			output.TypeElement = toMapOrNil(m.Type.Element.MarshalJSON())
 		}
 	}
 	if m.ValueString != nil && m.ValueString.Value != nil {
 		output.ValueString = m.ValueString.Value
 		if m.ValueString.Element != nil {
-			output.ValueStringElement = toMapOrNil(m.ValueString.Element.ToJSON())
+			output.ValueStringElement = toMapOrNil(m.ValueString.Element.MarshalJSON())
 		}
 	}
 	if m.ValueBase64Binary != nil && m.ValueBase64Binary.Value != nil {
 		output.ValueBase64Binary = m.ValueBase64Binary.Value
 		if m.ValueBase64Binary.Element != nil {
-			output.ValueBase64BinaryElement = toMapOrNil(m.ValueBase64Binary.Element.ToJSON())
+			output.ValueBase64BinaryElement = toMapOrNil(m.ValueBase64Binary.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

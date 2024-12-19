@@ -40,8 +40,8 @@ func NewGraphDefinition() *GraphDefinition {
 	return &GraphDefinition{}
 }
 
-// FromJSON populates GraphDefinition from JSON data.
-func (m *GraphDefinition) FromJSON(data []byte) error {
+// UnmarshalJSON populates GraphDefinition from JSON data.
+func (m *GraphDefinition) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -96,8 +96,8 @@ func (m *GraphDefinition) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts GraphDefinition to JSON data.
-func (m *GraphDefinition) ToJSON() ([]byte, error) {
+// MarshalJSON converts GraphDefinition to JSON data.
+func (m *GraphDefinition) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -138,14 +138,14 @@ func (m *GraphDefinition) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -156,45 +156,45 @@ func (m *GraphDefinition) ToJSON() ([]byte, error) {
 	if m.Url != nil && m.Url.Value != nil {
 		output.Url = m.Url.Value
 		if m.Url.Element != nil {
-			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+			output.UrlElement = toMapOrNil(m.Url.Element.MarshalJSON())
 		}
 	}
 	if m.Version != nil && m.Version.Value != nil {
 		output.Version = m.Version.Value
 		if m.Version.Element != nil {
-			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+			output.VersionElement = toMapOrNil(m.Version.Element.MarshalJSON())
 		}
 	}
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	output.Status = m.Status
 	if m.Experimental != nil && m.Experimental.Value != nil {
 		output.Experimental = m.Experimental.Value
 		if m.Experimental.Element != nil {
-			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.MarshalJSON())
 		}
 	}
 	if m.Date != nil && m.Date.Value != nil {
 		output.Date = m.Date.Value
 		if m.Date.Element != nil {
-			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+			output.DateElement = toMapOrNil(m.Date.Element.MarshalJSON())
 		}
 	}
 	if m.Publisher != nil && m.Publisher.Value != nil {
 		output.Publisher = m.Publisher.Value
 		if m.Publisher.Element != nil {
-			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.MarshalJSON())
 		}
 	}
 	output.Contact = m.Contact
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.UseContext = m.UseContext
@@ -202,19 +202,19 @@ func (m *GraphDefinition) ToJSON() ([]byte, error) {
 	if m.Purpose != nil && m.Purpose.Value != nil {
 		output.Purpose = m.Purpose.Value
 		if m.Purpose.Element != nil {
-			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.MarshalJSON())
 		}
 	}
 	if m.Start != nil && m.Start.Value != nil {
 		output.Start = m.Start.Value
 		if m.Start.Element != nil {
-			output.StartElement = toMapOrNil(m.Start.Element.ToJSON())
+			output.StartElement = toMapOrNil(m.Start.Element.MarshalJSON())
 		}
 	}
 	if m.Profile != nil && m.Profile.Value != nil {
 		output.Profile = m.Profile.Value
 		if m.Profile.Element != nil {
-			output.ProfileElement = toMapOrNil(m.Profile.Element.ToJSON())
+			output.ProfileElement = toMapOrNil(m.Profile.Element.MarshalJSON())
 		}
 	}
 	output.Link = m.Link
@@ -301,8 +301,8 @@ func NewGraphDefinitionLink() *GraphDefinitionLink {
 	return &GraphDefinitionLink{}
 }
 
-// FromJSON populates GraphDefinitionLink from JSON data.
-func (m *GraphDefinitionLink) FromJSON(data []byte) error {
+// UnmarshalJSON populates GraphDefinitionLink from JSON data.
+func (m *GraphDefinitionLink) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -329,8 +329,8 @@ func (m *GraphDefinitionLink) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts GraphDefinitionLink to JSON data.
-func (m *GraphDefinitionLink) ToJSON() ([]byte, error) {
+// MarshalJSON converts GraphDefinitionLink to JSON data.
+func (m *GraphDefinitionLink) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -351,7 +351,7 @@ func (m *GraphDefinitionLink) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -359,31 +359,31 @@ func (m *GraphDefinitionLink) ToJSON() ([]byte, error) {
 	if m.Path != nil && m.Path.Value != nil {
 		output.Path = m.Path.Value
 		if m.Path.Element != nil {
-			output.PathElement = toMapOrNil(m.Path.Element.ToJSON())
+			output.PathElement = toMapOrNil(m.Path.Element.MarshalJSON())
 		}
 	}
 	if m.SliceName != nil && m.SliceName.Value != nil {
 		output.SliceName = m.SliceName.Value
 		if m.SliceName.Element != nil {
-			output.SliceNameElement = toMapOrNil(m.SliceName.Element.ToJSON())
+			output.SliceNameElement = toMapOrNil(m.SliceName.Element.MarshalJSON())
 		}
 	}
 	if m.Min != nil && m.Min.Value != nil {
 		output.Min = m.Min.Value
 		if m.Min.Element != nil {
-			output.MinElement = toMapOrNil(m.Min.Element.ToJSON())
+			output.MinElement = toMapOrNil(m.Min.Element.MarshalJSON())
 		}
 	}
 	if m.Max != nil && m.Max.Value != nil {
 		output.Max = m.Max.Value
 		if m.Max.Element != nil {
-			output.MaxElement = toMapOrNil(m.Max.Element.ToJSON())
+			output.MaxElement = toMapOrNil(m.Max.Element.MarshalJSON())
 		}
 	}
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.Target = m.Target
@@ -441,8 +441,8 @@ func NewGraphDefinitionTarget() *GraphDefinitionTarget {
 	return &GraphDefinitionTarget{}
 }
 
-// FromJSON populates GraphDefinitionTarget from JSON data.
-func (m *GraphDefinitionTarget) FromJSON(data []byte) error {
+// UnmarshalJSON populates GraphDefinitionTarget from JSON data.
+func (m *GraphDefinitionTarget) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -467,8 +467,8 @@ func (m *GraphDefinitionTarget) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts GraphDefinitionTarget to JSON data.
-func (m *GraphDefinitionTarget) ToJSON() ([]byte, error) {
+// MarshalJSON converts GraphDefinitionTarget to JSON data.
+func (m *GraphDefinitionTarget) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -486,7 +486,7 @@ func (m *GraphDefinitionTarget) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -494,19 +494,19 @@ func (m *GraphDefinitionTarget) ToJSON() ([]byte, error) {
 	if m.Type != nil && m.Type.Value != nil {
 		output.Type = m.Type.Value
 		if m.Type.Element != nil {
-			output.TypeElement = toMapOrNil(m.Type.Element.ToJSON())
+			output.TypeElement = toMapOrNil(m.Type.Element.MarshalJSON())
 		}
 	}
 	if m.Params != nil && m.Params.Value != nil {
 		output.Params = m.Params.Value
 		if m.Params.Element != nil {
-			output.ParamsElement = toMapOrNil(m.Params.Element.ToJSON())
+			output.ParamsElement = toMapOrNil(m.Params.Element.MarshalJSON())
 		}
 	}
 	if m.Profile != nil && m.Profile.Value != nil {
 		output.Profile = m.Profile.Value
 		if m.Profile.Element != nil {
-			output.ProfileElement = toMapOrNil(m.Profile.Element.ToJSON())
+			output.ProfileElement = toMapOrNil(m.Profile.Element.MarshalJSON())
 		}
 	}
 	output.Compartment = m.Compartment
@@ -563,8 +563,8 @@ func NewGraphDefinitionCompartment() *GraphDefinitionCompartment {
 	return &GraphDefinitionCompartment{}
 }
 
-// FromJSON populates GraphDefinitionCompartment from JSON data.
-func (m *GraphDefinitionCompartment) FromJSON(data []byte) error {
+// UnmarshalJSON populates GraphDefinitionCompartment from JSON data.
+func (m *GraphDefinitionCompartment) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -589,8 +589,8 @@ func (m *GraphDefinitionCompartment) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts GraphDefinitionCompartment to JSON data.
-func (m *GraphDefinitionCompartment) ToJSON() ([]byte, error) {
+// MarshalJSON converts GraphDefinitionCompartment to JSON data.
+func (m *GraphDefinitionCompartment) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -607,7 +607,7 @@ func (m *GraphDefinitionCompartment) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -618,13 +618,13 @@ func (m *GraphDefinitionCompartment) ToJSON() ([]byte, error) {
 	if m.Expression != nil && m.Expression.Value != nil {
 		output.Expression = m.Expression.Value
 		if m.Expression.Element != nil {
-			output.ExpressionElement = toMapOrNil(m.Expression.Element.ToJSON())
+			output.ExpressionElement = toMapOrNil(m.Expression.Element.MarshalJSON())
 		}
 	}
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

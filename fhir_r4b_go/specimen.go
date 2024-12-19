@@ -38,8 +38,8 @@ func NewSpecimen() *Specimen {
 	return &Specimen{}
 }
 
-// FromJSON populates Specimen from JSON data.
-func (m *Specimen) FromJSON(data []byte) error {
+// UnmarshalJSON populates Specimen from JSON data.
+func (m *Specimen) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -90,8 +90,8 @@ func (m *Specimen) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Specimen to JSON data.
-func (m *Specimen) ToJSON() ([]byte, error) {
+// MarshalJSON converts Specimen to JSON data.
+func (m *Specimen) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -121,14 +121,14 @@ func (m *Specimen) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -144,7 +144,7 @@ func (m *Specimen) ToJSON() ([]byte, error) {
 	if m.ReceivedTime != nil && m.ReceivedTime.Value != nil {
 		output.ReceivedTime = m.ReceivedTime.Value
 		if m.ReceivedTime.Element != nil {
-			output.ReceivedTimeElement = toMapOrNil(m.ReceivedTime.Element.ToJSON())
+			output.ReceivedTimeElement = toMapOrNil(m.ReceivedTime.Element.MarshalJSON())
 		}
 	}
 	output.Parent = m.Parent
@@ -236,8 +236,8 @@ func NewSpecimenCollection() *SpecimenCollection {
 	return &SpecimenCollection{}
 }
 
-// FromJSON populates SpecimenCollection from JSON data.
-func (m *SpecimenCollection) FromJSON(data []byte) error {
+// UnmarshalJSON populates SpecimenCollection from JSON data.
+func (m *SpecimenCollection) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -270,8 +270,8 @@ func (m *SpecimenCollection) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts SpecimenCollection to JSON data.
-func (m *SpecimenCollection) ToJSON() ([]byte, error) {
+// MarshalJSON converts SpecimenCollection to JSON data.
+func (m *SpecimenCollection) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -291,7 +291,7 @@ func (m *SpecimenCollection) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -300,7 +300,7 @@ func (m *SpecimenCollection) ToJSON() ([]byte, error) {
 	if m.CollectedDateTime != nil && m.CollectedDateTime.Value != nil {
 		output.CollectedDateTime = m.CollectedDateTime.Value
 		if m.CollectedDateTime.Element != nil {
-			output.CollectedDateTimeElement = toMapOrNil(m.CollectedDateTime.Element.ToJSON())
+			output.CollectedDateTimeElement = toMapOrNil(m.CollectedDateTime.Element.MarshalJSON())
 		}
 	}
 	output.CollectedPeriod = m.CollectedPeriod
@@ -370,8 +370,8 @@ func NewSpecimenProcessing() *SpecimenProcessing {
 	return &SpecimenProcessing{}
 }
 
-// FromJSON populates SpecimenProcessing from JSON data.
-func (m *SpecimenProcessing) FromJSON(data []byte) error {
+// UnmarshalJSON populates SpecimenProcessing from JSON data.
+func (m *SpecimenProcessing) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -396,8 +396,8 @@ func (m *SpecimenProcessing) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts SpecimenProcessing to JSON data.
-func (m *SpecimenProcessing) ToJSON() ([]byte, error) {
+// MarshalJSON converts SpecimenProcessing to JSON data.
+func (m *SpecimenProcessing) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -414,7 +414,7 @@ func (m *SpecimenProcessing) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -422,7 +422,7 @@ func (m *SpecimenProcessing) ToJSON() ([]byte, error) {
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.Procedure = m.Procedure
@@ -430,7 +430,7 @@ func (m *SpecimenProcessing) ToJSON() ([]byte, error) {
 	if m.TimeDateTime != nil && m.TimeDateTime.Value != nil {
 		output.TimeDateTime = m.TimeDateTime.Value
 		if m.TimeDateTime.Element != nil {
-			output.TimeDateTimeElement = toMapOrNil(m.TimeDateTime.Element.ToJSON())
+			output.TimeDateTimeElement = toMapOrNil(m.TimeDateTime.Element.MarshalJSON())
 		}
 	}
 	output.TimePeriod = m.TimePeriod
@@ -488,8 +488,8 @@ func NewSpecimenContainer() *SpecimenContainer {
 	return &SpecimenContainer{}
 }
 
-// FromJSON populates SpecimenContainer from JSON data.
-func (m *SpecimenContainer) FromJSON(data []byte) error {
+// UnmarshalJSON populates SpecimenContainer from JSON data.
+func (m *SpecimenContainer) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -518,8 +518,8 @@ func (m *SpecimenContainer) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts SpecimenContainer to JSON data.
-func (m *SpecimenContainer) ToJSON() ([]byte, error) {
+// MarshalJSON converts SpecimenContainer to JSON data.
+func (m *SpecimenContainer) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -537,7 +537,7 @@ func (m *SpecimenContainer) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -546,7 +546,7 @@ func (m *SpecimenContainer) ToJSON() ([]byte, error) {
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.Type = m.Type

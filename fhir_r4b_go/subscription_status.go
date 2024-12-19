@@ -32,8 +32,8 @@ func NewSubscriptionStatus() *SubscriptionStatus {
 	return &SubscriptionStatus{}
 }
 
-// FromJSON populates SubscriptionStatus from JSON data.
-func (m *SubscriptionStatus) FromJSON(data []byte) error {
+// UnmarshalJSON populates SubscriptionStatus from JSON data.
+func (m *SubscriptionStatus) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -72,8 +72,8 @@ func (m *SubscriptionStatus) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts SubscriptionStatus to JSON data.
-func (m *SubscriptionStatus) ToJSON() ([]byte, error) {
+// MarshalJSON converts SubscriptionStatus to JSON data.
+func (m *SubscriptionStatus) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -98,14 +98,14 @@ func (m *SubscriptionStatus) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -118,7 +118,7 @@ func (m *SubscriptionStatus) ToJSON() ([]byte, error) {
 	if m.EventsSinceSubscriptionStart != nil && m.EventsSinceSubscriptionStart.Value != nil {
 		output.EventsSinceSubscriptionStart = m.EventsSinceSubscriptionStart.Value
 		if m.EventsSinceSubscriptionStart.Element != nil {
-			output.EventsSinceSubscriptionStartElement = toMapOrNil(m.EventsSinceSubscriptionStart.Element.ToJSON())
+			output.EventsSinceSubscriptionStartElement = toMapOrNil(m.EventsSinceSubscriptionStart.Element.MarshalJSON())
 		}
 	}
 	output.NotificationEvent = m.NotificationEvent
@@ -126,7 +126,7 @@ func (m *SubscriptionStatus) ToJSON() ([]byte, error) {
 	if m.Topic != nil && m.Topic.Value != nil {
 		output.Topic = m.Topic.Value
 		if m.Topic.Element != nil {
-			output.TopicElement = toMapOrNil(m.Topic.Element.ToJSON())
+			output.TopicElement = toMapOrNil(m.Topic.Element.MarshalJSON())
 		}
 	}
 	output.Error = m.Error
@@ -195,8 +195,8 @@ func NewSubscriptionStatusNotificationEvent() *SubscriptionStatusNotificationEve
 	return &SubscriptionStatusNotificationEvent{}
 }
 
-// FromJSON populates SubscriptionStatusNotificationEvent from JSON data.
-func (m *SubscriptionStatusNotificationEvent) FromJSON(data []byte) error {
+// UnmarshalJSON populates SubscriptionStatusNotificationEvent from JSON data.
+func (m *SubscriptionStatusNotificationEvent) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -219,8 +219,8 @@ func (m *SubscriptionStatusNotificationEvent) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts SubscriptionStatusNotificationEvent to JSON data.
-func (m *SubscriptionStatusNotificationEvent) ToJSON() ([]byte, error) {
+// MarshalJSON converts SubscriptionStatusNotificationEvent to JSON data.
+func (m *SubscriptionStatusNotificationEvent) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -236,7 +236,7 @@ func (m *SubscriptionStatusNotificationEvent) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -244,13 +244,13 @@ func (m *SubscriptionStatusNotificationEvent) ToJSON() ([]byte, error) {
 	if m.EventNumber != nil && m.EventNumber.Value != nil {
 		output.EventNumber = m.EventNumber.Value
 		if m.EventNumber.Element != nil {
-			output.EventNumberElement = toMapOrNil(m.EventNumber.Element.ToJSON())
+			output.EventNumberElement = toMapOrNil(m.EventNumber.Element.MarshalJSON())
 		}
 	}
 	if m.Timestamp != nil && m.Timestamp.Value != nil {
 		output.Timestamp = m.Timestamp.Value
 		if m.Timestamp.Element != nil {
-			output.TimestampElement = toMapOrNil(m.Timestamp.Element.ToJSON())
+			output.TimestampElement = toMapOrNil(m.Timestamp.Element.MarshalJSON())
 		}
 	}
 	output.Focus = m.Focus

@@ -22,8 +22,8 @@ func NewContributor() *Contributor {
 	return &Contributor{}
 }
 
-// FromJSON populates Contributor from JSON data.
-func (m *Contributor) FromJSON(data []byte) error {
+// UnmarshalJSON populates Contributor from JSON data.
+func (m *Contributor) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -42,8 +42,8 @@ func (m *Contributor) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Contributor to JSON data.
-func (m *Contributor) ToJSON() ([]byte, error) {
+// MarshalJSON converts Contributor to JSON data.
+func (m *Contributor) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -56,7 +56,7 @@ func (m *Contributor) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -64,7 +64,7 @@ func (m *Contributor) ToJSON() ([]byte, error) {
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	output.Contact = m.Contact

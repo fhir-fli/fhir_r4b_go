@@ -38,8 +38,8 @@ func NewObservationDefinition() *ObservationDefinition {
 	return &ObservationDefinition{}
 }
 
-// FromJSON populates ObservationDefinition from JSON data.
-func (m *ObservationDefinition) FromJSON(data []byte) error {
+// UnmarshalJSON populates ObservationDefinition from JSON data.
+func (m *ObservationDefinition) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -90,8 +90,8 @@ func (m *ObservationDefinition) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ObservationDefinition to JSON data.
-func (m *ObservationDefinition) ToJSON() ([]byte, error) {
+// MarshalJSON converts ObservationDefinition to JSON data.
+func (m *ObservationDefinition) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -122,14 +122,14 @@ func (m *ObservationDefinition) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -144,14 +144,14 @@ func (m *ObservationDefinition) ToJSON() ([]byte, error) {
 	if m.MultipleResultsAllowed != nil && m.MultipleResultsAllowed.Value != nil {
 		output.MultipleResultsAllowed = m.MultipleResultsAllowed.Value
 		if m.MultipleResultsAllowed.Element != nil {
-			output.MultipleResultsAllowedElement = toMapOrNil(m.MultipleResultsAllowed.Element.ToJSON())
+			output.MultipleResultsAllowedElement = toMapOrNil(m.MultipleResultsAllowed.Element.MarshalJSON())
 		}
 	}
 	output.Method = m.Method
 	if m.PreferredReportName != nil && m.PreferredReportName.Value != nil {
 		output.PreferredReportName = m.PreferredReportName.Value
 		if m.PreferredReportName.Element != nil {
-			output.PreferredReportNameElement = toMapOrNil(m.PreferredReportName.Element.ToJSON())
+			output.PreferredReportNameElement = toMapOrNil(m.PreferredReportName.Element.MarshalJSON())
 		}
 	}
 	output.QuantitativeDetails = m.QuantitativeDetails
@@ -237,8 +237,8 @@ func NewObservationDefinitionQuantitativeDetails() *ObservationDefinitionQuantit
 	return &ObservationDefinitionQuantitativeDetails{}
 }
 
-// FromJSON populates ObservationDefinitionQuantitativeDetails from JSON data.
-func (m *ObservationDefinitionQuantitativeDetails) FromJSON(data []byte) error {
+// UnmarshalJSON populates ObservationDefinitionQuantitativeDetails from JSON data.
+func (m *ObservationDefinitionQuantitativeDetails) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -261,8 +261,8 @@ func (m *ObservationDefinitionQuantitativeDetails) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ObservationDefinitionQuantitativeDetails to JSON data.
-func (m *ObservationDefinitionQuantitativeDetails) ToJSON() ([]byte, error) {
+// MarshalJSON converts ObservationDefinitionQuantitativeDetails to JSON data.
+func (m *ObservationDefinitionQuantitativeDetails) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -278,7 +278,7 @@ func (m *ObservationDefinitionQuantitativeDetails) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -288,13 +288,13 @@ func (m *ObservationDefinitionQuantitativeDetails) ToJSON() ([]byte, error) {
 	if m.ConversionFactor != nil && m.ConversionFactor.Value != nil {
 		output.ConversionFactor = m.ConversionFactor.Value
 		if m.ConversionFactor.Element != nil {
-			output.ConversionFactorElement = toMapOrNil(m.ConversionFactor.Element.ToJSON())
+			output.ConversionFactorElement = toMapOrNil(m.ConversionFactor.Element.MarshalJSON())
 		}
 	}
 	if m.DecimalPrecision != nil && m.DecimalPrecision.Value != nil {
 		output.DecimalPrecision = m.DecimalPrecision.Value
 		if m.DecimalPrecision.Element != nil {
-			output.DecimalPrecisionElement = toMapOrNil(m.DecimalPrecision.Element.ToJSON())
+			output.DecimalPrecisionElement = toMapOrNil(m.DecimalPrecision.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -350,8 +350,8 @@ func NewObservationDefinitionQualifiedInterval() *ObservationDefinitionQualified
 	return &ObservationDefinitionQualifiedInterval{}
 }
 
-// FromJSON populates ObservationDefinitionQualifiedInterval from JSON data.
-func (m *ObservationDefinitionQualifiedInterval) FromJSON(data []byte) error {
+// UnmarshalJSON populates ObservationDefinitionQualifiedInterval from JSON data.
+func (m *ObservationDefinitionQualifiedInterval) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -382,8 +382,8 @@ func (m *ObservationDefinitionQualifiedInterval) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ObservationDefinitionQualifiedInterval to JSON data.
-func (m *ObservationDefinitionQualifiedInterval) ToJSON() ([]byte, error) {
+// MarshalJSON converts ObservationDefinitionQualifiedInterval to JSON data.
+func (m *ObservationDefinitionQualifiedInterval) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -402,7 +402,7 @@ func (m *ObservationDefinitionQualifiedInterval) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -417,7 +417,7 @@ func (m *ObservationDefinitionQualifiedInterval) ToJSON() ([]byte, error) {
 	if m.Condition != nil && m.Condition.Value != nil {
 		output.Condition = m.Condition.Value
 		if m.Condition.Element != nil {
-			output.ConditionElement = toMapOrNil(m.Condition.Element.ToJSON())
+			output.ConditionElement = toMapOrNil(m.Condition.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

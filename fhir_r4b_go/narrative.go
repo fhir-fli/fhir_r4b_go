@@ -21,8 +21,8 @@ func NewNarrative() *Narrative {
 	return &Narrative{}
 }
 
-// FromJSON populates Narrative from JSON data.
-func (m *Narrative) FromJSON(data []byte) error {
+// UnmarshalJSON populates Narrative from JSON data.
+func (m *Narrative) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -39,8 +39,8 @@ func (m *Narrative) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Narrative to JSON data.
-func (m *Narrative) ToJSON() ([]byte, error) {
+// MarshalJSON converts Narrative to JSON data.
+func (m *Narrative) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -52,7 +52,7 @@ func (m *Narrative) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -60,7 +60,7 @@ func (m *Narrative) ToJSON() ([]byte, error) {
 	if m.Div != nil && m.Div.Value != nil {
 		output.Div = m.Div.Value
 		if m.Div.Element != nil {
-			output.DivElement = toMapOrNil(m.Div.Element.ToJSON())
+			output.DivElement = toMapOrNil(m.Div.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

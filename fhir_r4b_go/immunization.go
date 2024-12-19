@@ -54,8 +54,8 @@ func NewImmunization() *Immunization {
 	return &Immunization{}
 }
 
-// FromJSON populates Immunization from JSON data.
-func (m *Immunization) FromJSON(data []byte) error {
+// UnmarshalJSON populates Immunization from JSON data.
+func (m *Immunization) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -138,8 +138,8 @@ func (m *Immunization) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Immunization to JSON data.
-func (m *Immunization) ToJSON() ([]byte, error) {
+// MarshalJSON converts Immunization to JSON data.
+func (m *Immunization) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -191,14 +191,14 @@ func (m *Immunization) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -215,25 +215,25 @@ func (m *Immunization) ToJSON() ([]byte, error) {
 	if m.OccurrenceDateTime != nil && m.OccurrenceDateTime.Value != nil {
 		output.OccurrenceDateTime = m.OccurrenceDateTime.Value
 		if m.OccurrenceDateTime.Element != nil {
-			output.OccurrenceDateTimeElement = toMapOrNil(m.OccurrenceDateTime.Element.ToJSON())
+			output.OccurrenceDateTimeElement = toMapOrNil(m.OccurrenceDateTime.Element.MarshalJSON())
 		}
 	}
 	if m.OccurrenceString != nil && m.OccurrenceString.Value != nil {
 		output.OccurrenceString = m.OccurrenceString.Value
 		if m.OccurrenceString.Element != nil {
-			output.OccurrenceStringElement = toMapOrNil(m.OccurrenceString.Element.ToJSON())
+			output.OccurrenceStringElement = toMapOrNil(m.OccurrenceString.Element.MarshalJSON())
 		}
 	}
 	if m.Recorded != nil && m.Recorded.Value != nil {
 		output.Recorded = m.Recorded.Value
 		if m.Recorded.Element != nil {
-			output.RecordedElement = toMapOrNil(m.Recorded.Element.ToJSON())
+			output.RecordedElement = toMapOrNil(m.Recorded.Element.MarshalJSON())
 		}
 	}
 	if m.PrimarySource != nil && m.PrimarySource.Value != nil {
 		output.PrimarySource = m.PrimarySource.Value
 		if m.PrimarySource.Element != nil {
-			output.PrimarySourceElement = toMapOrNil(m.PrimarySource.Element.ToJSON())
+			output.PrimarySourceElement = toMapOrNil(m.PrimarySource.Element.MarshalJSON())
 		}
 	}
 	output.ReportOrigin = m.ReportOrigin
@@ -242,13 +242,13 @@ func (m *Immunization) ToJSON() ([]byte, error) {
 	if m.LotNumber != nil && m.LotNumber.Value != nil {
 		output.LotNumber = m.LotNumber.Value
 		if m.LotNumber.Element != nil {
-			output.LotNumberElement = toMapOrNil(m.LotNumber.Element.ToJSON())
+			output.LotNumberElement = toMapOrNil(m.LotNumber.Element.MarshalJSON())
 		}
 	}
 	if m.ExpirationDate != nil && m.ExpirationDate.Value != nil {
 		output.ExpirationDate = m.ExpirationDate.Value
 		if m.ExpirationDate.Element != nil {
-			output.ExpirationDateElement = toMapOrNil(m.ExpirationDate.Element.ToJSON())
+			output.ExpirationDateElement = toMapOrNil(m.ExpirationDate.Element.MarshalJSON())
 		}
 	}
 	output.Site = m.Site
@@ -261,7 +261,7 @@ func (m *Immunization) ToJSON() ([]byte, error) {
 	if m.IsSubpotent != nil && m.IsSubpotent.Value != nil {
 		output.IsSubpotent = m.IsSubpotent.Value
 		if m.IsSubpotent.Element != nil {
-			output.IsSubpotentElement = toMapOrNil(m.IsSubpotent.Element.ToJSON())
+			output.IsSubpotentElement = toMapOrNil(m.IsSubpotent.Element.MarshalJSON())
 		}
 	}
 	output.SubpotentReason = m.SubpotentReason
@@ -377,8 +377,8 @@ func NewImmunizationPerformer() *ImmunizationPerformer {
 	return &ImmunizationPerformer{}
 }
 
-// FromJSON populates ImmunizationPerformer from JSON data.
-func (m *ImmunizationPerformer) FromJSON(data []byte) error {
+// UnmarshalJSON populates ImmunizationPerformer from JSON data.
+func (m *ImmunizationPerformer) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -397,8 +397,8 @@ func (m *ImmunizationPerformer) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ImmunizationPerformer to JSON data.
-func (m *ImmunizationPerformer) ToJSON() ([]byte, error) {
+// MarshalJSON converts ImmunizationPerformer to JSON data.
+func (m *ImmunizationPerformer) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -410,7 +410,7 @@ func (m *ImmunizationPerformer) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -462,8 +462,8 @@ func NewImmunizationEducation() *ImmunizationEducation {
 	return &ImmunizationEducation{}
 }
 
-// FromJSON populates ImmunizationEducation from JSON data.
-func (m *ImmunizationEducation) FromJSON(data []byte) error {
+// UnmarshalJSON populates ImmunizationEducation from JSON data.
+func (m *ImmunizationEducation) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -486,8 +486,8 @@ func (m *ImmunizationEducation) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ImmunizationEducation to JSON data.
-func (m *ImmunizationEducation) ToJSON() ([]byte, error) {
+// MarshalJSON converts ImmunizationEducation to JSON data.
+func (m *ImmunizationEducation) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -505,7 +505,7 @@ func (m *ImmunizationEducation) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -513,25 +513,25 @@ func (m *ImmunizationEducation) ToJSON() ([]byte, error) {
 	if m.DocumentType != nil && m.DocumentType.Value != nil {
 		output.DocumentType = m.DocumentType.Value
 		if m.DocumentType.Element != nil {
-			output.DocumentTypeElement = toMapOrNil(m.DocumentType.Element.ToJSON())
+			output.DocumentTypeElement = toMapOrNil(m.DocumentType.Element.MarshalJSON())
 		}
 	}
 	if m.Reference != nil && m.Reference.Value != nil {
 		output.Reference = m.Reference.Value
 		if m.Reference.Element != nil {
-			output.ReferenceElement = toMapOrNil(m.Reference.Element.ToJSON())
+			output.ReferenceElement = toMapOrNil(m.Reference.Element.MarshalJSON())
 		}
 	}
 	if m.PublicationDate != nil && m.PublicationDate.Value != nil {
 		output.PublicationDate = m.PublicationDate.Value
 		if m.PublicationDate.Element != nil {
-			output.PublicationDateElement = toMapOrNil(m.PublicationDate.Element.ToJSON())
+			output.PublicationDateElement = toMapOrNil(m.PublicationDate.Element.MarshalJSON())
 		}
 	}
 	if m.PresentationDate != nil && m.PresentationDate.Value != nil {
 		output.PresentationDate = m.PresentationDate.Value
 		if m.PresentationDate.Element != nil {
-			output.PresentationDateElement = toMapOrNil(m.PresentationDate.Element.ToJSON())
+			output.PresentationDateElement = toMapOrNil(m.PresentationDate.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -582,8 +582,8 @@ func NewImmunizationReaction() *ImmunizationReaction {
 	return &ImmunizationReaction{}
 }
 
-// FromJSON populates ImmunizationReaction from JSON data.
-func (m *ImmunizationReaction) FromJSON(data []byte) error {
+// UnmarshalJSON populates ImmunizationReaction from JSON data.
+func (m *ImmunizationReaction) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -604,8 +604,8 @@ func (m *ImmunizationReaction) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ImmunizationReaction to JSON data.
-func (m *ImmunizationReaction) ToJSON() ([]byte, error) {
+// MarshalJSON converts ImmunizationReaction to JSON data.
+func (m *ImmunizationReaction) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -620,7 +620,7 @@ func (m *ImmunizationReaction) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -628,14 +628,14 @@ func (m *ImmunizationReaction) ToJSON() ([]byte, error) {
 	if m.Date != nil && m.Date.Value != nil {
 		output.Date = m.Date.Value
 		if m.Date.Element != nil {
-			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+			output.DateElement = toMapOrNil(m.Date.Element.MarshalJSON())
 		}
 	}
 	output.Detail = m.Detail
 	if m.Reported != nil && m.Reported.Value != nil {
 		output.Reported = m.Reported.Value
 		if m.Reported.Element != nil {
-			output.ReportedElement = toMapOrNil(m.Reported.Element.ToJSON())
+			output.ReportedElement = toMapOrNil(m.Reported.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -688,8 +688,8 @@ func NewImmunizationProtocolApplied() *ImmunizationProtocolApplied {
 	return &ImmunizationProtocolApplied{}
 }
 
-// FromJSON populates ImmunizationProtocolApplied from JSON data.
-func (m *ImmunizationProtocolApplied) FromJSON(data []byte) error {
+// UnmarshalJSON populates ImmunizationProtocolApplied from JSON data.
+func (m *ImmunizationProtocolApplied) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -718,8 +718,8 @@ func (m *ImmunizationProtocolApplied) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ImmunizationProtocolApplied to JSON data.
-func (m *ImmunizationProtocolApplied) ToJSON() ([]byte, error) {
+// MarshalJSON converts ImmunizationProtocolApplied to JSON data.
+func (m *ImmunizationProtocolApplied) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -741,7 +741,7 @@ func (m *ImmunizationProtocolApplied) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -749,7 +749,7 @@ func (m *ImmunizationProtocolApplied) ToJSON() ([]byte, error) {
 	if m.Series != nil && m.Series.Value != nil {
 		output.Series = m.Series.Value
 		if m.Series.Element != nil {
-			output.SeriesElement = toMapOrNil(m.Series.Element.ToJSON())
+			output.SeriesElement = toMapOrNil(m.Series.Element.MarshalJSON())
 		}
 	}
 	output.Authority = m.Authority
@@ -757,25 +757,25 @@ func (m *ImmunizationProtocolApplied) ToJSON() ([]byte, error) {
 	if m.DoseNumberPositiveInt != nil && m.DoseNumberPositiveInt.Value != nil {
 		output.DoseNumberPositiveInt = m.DoseNumberPositiveInt.Value
 		if m.DoseNumberPositiveInt.Element != nil {
-			output.DoseNumberPositiveIntElement = toMapOrNil(m.DoseNumberPositiveInt.Element.ToJSON())
+			output.DoseNumberPositiveIntElement = toMapOrNil(m.DoseNumberPositiveInt.Element.MarshalJSON())
 		}
 	}
 	if m.DoseNumberString != nil && m.DoseNumberString.Value != nil {
 		output.DoseNumberString = m.DoseNumberString.Value
 		if m.DoseNumberString.Element != nil {
-			output.DoseNumberStringElement = toMapOrNil(m.DoseNumberString.Element.ToJSON())
+			output.DoseNumberStringElement = toMapOrNil(m.DoseNumberString.Element.MarshalJSON())
 		}
 	}
 	if m.SeriesDosesPositiveInt != nil && m.SeriesDosesPositiveInt.Value != nil {
 		output.SeriesDosesPositiveInt = m.SeriesDosesPositiveInt.Value
 		if m.SeriesDosesPositiveInt.Element != nil {
-			output.SeriesDosesPositiveIntElement = toMapOrNil(m.SeriesDosesPositiveInt.Element.ToJSON())
+			output.SeriesDosesPositiveIntElement = toMapOrNil(m.SeriesDosesPositiveInt.Element.MarshalJSON())
 		}
 	}
 	if m.SeriesDosesString != nil && m.SeriesDosesString.Value != nil {
 		output.SeriesDosesString = m.SeriesDosesString.Value
 		if m.SeriesDosesString.Element != nil {
-			output.SeriesDosesStringElement = toMapOrNil(m.SeriesDosesString.Element.ToJSON())
+			output.SeriesDosesStringElement = toMapOrNil(m.SeriesDosesString.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

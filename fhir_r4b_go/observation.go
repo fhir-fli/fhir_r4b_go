@@ -62,8 +62,8 @@ func NewObservation() *Observation {
 	return &Observation{}
 }
 
-// FromJSON populates Observation from JSON data.
-func (m *Observation) FromJSON(data []byte) error {
+// UnmarshalJSON populates Observation from JSON data.
+func (m *Observation) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -162,8 +162,8 @@ func (m *Observation) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Observation to JSON data.
-func (m *Observation) ToJSON() ([]byte, error) {
+// MarshalJSON converts Observation to JSON data.
+func (m *Observation) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -224,14 +224,14 @@ func (m *Observation) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -251,7 +251,7 @@ func (m *Observation) ToJSON() ([]byte, error) {
 	if m.EffectiveDateTime != nil && m.EffectiveDateTime.Value != nil {
 		output.EffectiveDateTime = m.EffectiveDateTime.Value
 		if m.EffectiveDateTime.Element != nil {
-			output.EffectiveDateTimeElement = toMapOrNil(m.EffectiveDateTime.Element.ToJSON())
+			output.EffectiveDateTimeElement = toMapOrNil(m.EffectiveDateTime.Element.MarshalJSON())
 		}
 	}
 	output.EffectivePeriod = m.EffectivePeriod
@@ -259,13 +259,13 @@ func (m *Observation) ToJSON() ([]byte, error) {
 	if m.EffectiveInstant != nil && m.EffectiveInstant.Value != nil {
 		output.EffectiveInstant = m.EffectiveInstant.Value
 		if m.EffectiveInstant.Element != nil {
-			output.EffectiveInstantElement = toMapOrNil(m.EffectiveInstant.Element.ToJSON())
+			output.EffectiveInstantElement = toMapOrNil(m.EffectiveInstant.Element.MarshalJSON())
 		}
 	}
 	if m.Issued != nil && m.Issued.Value != nil {
 		output.Issued = m.Issued.Value
 		if m.Issued.Element != nil {
-			output.IssuedElement = toMapOrNil(m.Issued.Element.ToJSON())
+			output.IssuedElement = toMapOrNil(m.Issued.Element.MarshalJSON())
 		}
 	}
 	output.Performer = m.Performer
@@ -274,19 +274,19 @@ func (m *Observation) ToJSON() ([]byte, error) {
 	if m.ValueString != nil && m.ValueString.Value != nil {
 		output.ValueString = m.ValueString.Value
 		if m.ValueString.Element != nil {
-			output.ValueStringElement = toMapOrNil(m.ValueString.Element.ToJSON())
+			output.ValueStringElement = toMapOrNil(m.ValueString.Element.MarshalJSON())
 		}
 	}
 	if m.ValueBoolean != nil && m.ValueBoolean.Value != nil {
 		output.ValueBoolean = m.ValueBoolean.Value
 		if m.ValueBoolean.Element != nil {
-			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.ToJSON())
+			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.MarshalJSON())
 		}
 	}
 	if m.ValueInteger != nil && m.ValueInteger.Value != nil {
 		output.ValueInteger = m.ValueInteger.Value
 		if m.ValueInteger.Element != nil {
-			output.ValueIntegerElement = toMapOrNil(m.ValueInteger.Element.ToJSON())
+			output.ValueIntegerElement = toMapOrNil(m.ValueInteger.Element.MarshalJSON())
 		}
 	}
 	output.ValueRange = m.ValueRange
@@ -295,13 +295,13 @@ func (m *Observation) ToJSON() ([]byte, error) {
 	if m.ValueTime != nil && m.ValueTime.Value != nil {
 		output.ValueTime = m.ValueTime.Value
 		if m.ValueTime.Element != nil {
-			output.ValueTimeElement = toMapOrNil(m.ValueTime.Element.ToJSON())
+			output.ValueTimeElement = toMapOrNil(m.ValueTime.Element.MarshalJSON())
 		}
 	}
 	if m.ValueDateTime != nil && m.ValueDateTime.Value != nil {
 		output.ValueDateTime = m.ValueDateTime.Value
 		if m.ValueDateTime.Element != nil {
-			output.ValueDateTimeElement = toMapOrNil(m.ValueDateTime.Element.ToJSON())
+			output.ValueDateTimeElement = toMapOrNil(m.ValueDateTime.Element.MarshalJSON())
 		}
 	}
 	output.ValuePeriod = m.ValuePeriod
@@ -443,8 +443,8 @@ func NewObservationReferenceRange() *ObservationReferenceRange {
 	return &ObservationReferenceRange{}
 }
 
-// FromJSON populates ObservationReferenceRange from JSON data.
-func (m *ObservationReferenceRange) FromJSON(data []byte) error {
+// UnmarshalJSON populates ObservationReferenceRange from JSON data.
+func (m *ObservationReferenceRange) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -471,8 +471,8 @@ func (m *ObservationReferenceRange) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ObservationReferenceRange to JSON data.
-func (m *ObservationReferenceRange) ToJSON() ([]byte, error) {
+// MarshalJSON converts ObservationReferenceRange to JSON data.
+func (m *ObservationReferenceRange) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -489,7 +489,7 @@ func (m *ObservationReferenceRange) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -502,7 +502,7 @@ func (m *ObservationReferenceRange) ToJSON() ([]byte, error) {
 	if m.Text != nil && m.Text.Value != nil {
 		output.Text = m.Text.Value
 		if m.Text.Element != nil {
-			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+			output.TextElement = toMapOrNil(m.Text.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -569,8 +569,8 @@ func NewObservationComponent() *ObservationComponent {
 	return &ObservationComponent{}
 }
 
-// FromJSON populates ObservationComponent from JSON data.
-func (m *ObservationComponent) FromJSON(data []byte) error {
+// UnmarshalJSON populates ObservationComponent from JSON data.
+func (m *ObservationComponent) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -615,8 +615,8 @@ func (m *ObservationComponent) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ObservationComponent to JSON data.
-func (m *ObservationComponent) ToJSON() ([]byte, error) {
+// MarshalJSON converts ObservationComponent to JSON data.
+func (m *ObservationComponent) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -646,7 +646,7 @@ func (m *ObservationComponent) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -657,19 +657,19 @@ func (m *ObservationComponent) ToJSON() ([]byte, error) {
 	if m.ValueString != nil && m.ValueString.Value != nil {
 		output.ValueString = m.ValueString.Value
 		if m.ValueString.Element != nil {
-			output.ValueStringElement = toMapOrNil(m.ValueString.Element.ToJSON())
+			output.ValueStringElement = toMapOrNil(m.ValueString.Element.MarshalJSON())
 		}
 	}
 	if m.ValueBoolean != nil && m.ValueBoolean.Value != nil {
 		output.ValueBoolean = m.ValueBoolean.Value
 		if m.ValueBoolean.Element != nil {
-			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.ToJSON())
+			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.MarshalJSON())
 		}
 	}
 	if m.ValueInteger != nil && m.ValueInteger.Value != nil {
 		output.ValueInteger = m.ValueInteger.Value
 		if m.ValueInteger.Element != nil {
-			output.ValueIntegerElement = toMapOrNil(m.ValueInteger.Element.ToJSON())
+			output.ValueIntegerElement = toMapOrNil(m.ValueInteger.Element.MarshalJSON())
 		}
 	}
 	output.ValueRange = m.ValueRange
@@ -678,13 +678,13 @@ func (m *ObservationComponent) ToJSON() ([]byte, error) {
 	if m.ValueTime != nil && m.ValueTime.Value != nil {
 		output.ValueTime = m.ValueTime.Value
 		if m.ValueTime.Element != nil {
-			output.ValueTimeElement = toMapOrNil(m.ValueTime.Element.ToJSON())
+			output.ValueTimeElement = toMapOrNil(m.ValueTime.Element.MarshalJSON())
 		}
 	}
 	if m.ValueDateTime != nil && m.ValueDateTime.Value != nil {
 		output.ValueDateTime = m.ValueDateTime.Value
 		if m.ValueDateTime.Element != nil {
-			output.ValueDateTimeElement = toMapOrNil(m.ValueDateTime.Element.ToJSON())
+			output.ValueDateTimeElement = toMapOrNil(m.ValueDateTime.Element.MarshalJSON())
 		}
 	}
 	output.ValuePeriod = m.ValuePeriod

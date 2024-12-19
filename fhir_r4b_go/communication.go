@@ -49,8 +49,8 @@ func NewCommunication() *Communication {
 	return &Communication{}
 }
 
-// FromJSON populates Communication from JSON data.
-func (m *Communication) FromJSON(data []byte) error {
+// UnmarshalJSON populates Communication from JSON data.
+func (m *Communication) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -139,8 +139,8 @@ func (m *Communication) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Communication to JSON data.
-func (m *Communication) ToJSON() ([]byte, error) {
+// MarshalJSON converts Communication to JSON data.
+func (m *Communication) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -183,14 +183,14 @@ func (m *Communication) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -207,7 +207,7 @@ func (m *Communication) ToJSON() ([]byte, error) {
 				output.InstantiatesCanonical[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.InstantiatesCanonicalElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.InstantiatesCanonicalElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -219,7 +219,7 @@ func (m *Communication) ToJSON() ([]byte, error) {
 				output.InstantiatesUri[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.InstantiatesUriElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.InstantiatesUriElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -238,13 +238,13 @@ func (m *Communication) ToJSON() ([]byte, error) {
 	if m.Sent != nil && m.Sent.Value != nil {
 		output.Sent = m.Sent.Value
 		if m.Sent.Element != nil {
-			output.SentElement = toMapOrNil(m.Sent.Element.ToJSON())
+			output.SentElement = toMapOrNil(m.Sent.Element.MarshalJSON())
 		}
 	}
 	if m.Received != nil && m.Received.Value != nil {
 		output.Received = m.Received.Value
 		if m.Received.Element != nil {
-			output.ReceivedElement = toMapOrNil(m.Received.Element.ToJSON())
+			output.ReceivedElement = toMapOrNil(m.Received.Element.MarshalJSON())
 		}
 	}
 	output.Recipient = m.Recipient
@@ -349,8 +349,8 @@ func NewCommunicationPayload() *CommunicationPayload {
 	return &CommunicationPayload{}
 }
 
-// FromJSON populates CommunicationPayload from JSON data.
-func (m *CommunicationPayload) FromJSON(data []byte) error {
+// UnmarshalJSON populates CommunicationPayload from JSON data.
+func (m *CommunicationPayload) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -371,8 +371,8 @@ func (m *CommunicationPayload) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CommunicationPayload to JSON data.
-func (m *CommunicationPayload) ToJSON() ([]byte, error) {
+// MarshalJSON converts CommunicationPayload to JSON data.
+func (m *CommunicationPayload) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -386,7 +386,7 @@ func (m *CommunicationPayload) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -394,7 +394,7 @@ func (m *CommunicationPayload) ToJSON() ([]byte, error) {
 	if m.ContentString != nil && m.ContentString.Value != nil {
 		output.ContentString = m.ContentString.Value
 		if m.ContentString.Element != nil {
-			output.ContentStringElement = toMapOrNil(m.ContentString.Element.ToJSON())
+			output.ContentStringElement = toMapOrNil(m.ContentString.Element.MarshalJSON())
 		}
 	}
 	output.ContentAttachment = m.ContentAttachment

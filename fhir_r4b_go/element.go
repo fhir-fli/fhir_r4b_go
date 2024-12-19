@@ -21,13 +21,13 @@ func NewElement(id *string, extensions []*FhirExtension, disallowExtension bool)
 	}
 }
 
-// FromJSON populates an Element from JSON data.
-func (e *Element) FromJSON(data []byte) error {
+// UnmarshalJSON populates an Element from JSON data.
+func (e *Element) UnmarshalJSON(data []byte) error {
 	return json.Unmarshal(data, e)
 }
 
-// ToJSON converts an Element to its JSON representation.
-func (e *Element) ToJSON() ([]byte, error) {
+// MarshalJSON converts an Element to its JSON representation.
+func (e *Element) MarshalJSON() ([]byte, error) {
 	return json.Marshal(e)
 }
 
@@ -118,7 +118,7 @@ func (e *Element) RemoveExtensionByURL(url string) {
 
 // String returns a string representation of the Element.
 func (e *Element) String() string {
-	data, err := e.ToJSON()
+	data, err := e.MarshalJSON()
 	if err != nil {
 		return "<invalid Element>"
 	}

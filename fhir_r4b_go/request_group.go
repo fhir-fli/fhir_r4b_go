@@ -44,8 +44,8 @@ func NewRequestGroup() *RequestGroup {
 	return &RequestGroup{}
 }
 
-// FromJSON populates RequestGroup from JSON data.
-func (m *RequestGroup) FromJSON(data []byte) error {
+// UnmarshalJSON populates RequestGroup from JSON data.
+func (m *RequestGroup) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -124,8 +124,8 @@ func (m *RequestGroup) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts RequestGroup to JSON data.
-func (m *RequestGroup) ToJSON() ([]byte, error) {
+// MarshalJSON converts RequestGroup to JSON data.
+func (m *RequestGroup) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -162,14 +162,14 @@ func (m *RequestGroup) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -186,7 +186,7 @@ func (m *RequestGroup) ToJSON() ([]byte, error) {
 				output.InstantiatesCanonical[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.InstantiatesCanonicalElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.InstantiatesCanonicalElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -198,7 +198,7 @@ func (m *RequestGroup) ToJSON() ([]byte, error) {
 				output.InstantiatesUri[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.InstantiatesUriElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.InstantiatesUriElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -214,7 +214,7 @@ func (m *RequestGroup) ToJSON() ([]byte, error) {
 	if m.AuthoredOn != nil && m.AuthoredOn.Value != nil {
 		output.AuthoredOn = m.AuthoredOn.Value
 		if m.AuthoredOn.Element != nil {
-			output.AuthoredOnElement = toMapOrNil(m.AuthoredOn.Element.ToJSON())
+			output.AuthoredOnElement = toMapOrNil(m.AuthoredOn.Element.MarshalJSON())
 		}
 	}
 	output.Author = m.Author
@@ -329,8 +329,8 @@ func NewRequestGroupAction() *RequestGroupAction {
 	return &RequestGroupAction{}
 }
 
-// FromJSON populates RequestGroupAction from JSON data.
-func (m *RequestGroupAction) FromJSON(data []byte) error {
+// UnmarshalJSON populates RequestGroupAction from JSON data.
+func (m *RequestGroupAction) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -393,8 +393,8 @@ func (m *RequestGroupAction) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts RequestGroupAction to JSON data.
-func (m *RequestGroupAction) ToJSON() ([]byte, error) {
+// MarshalJSON converts RequestGroupAction to JSON data.
+func (m *RequestGroupAction) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -433,7 +433,7 @@ func (m *RequestGroupAction) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -441,25 +441,25 @@ func (m *RequestGroupAction) ToJSON() ([]byte, error) {
 	if m.Prefix != nil && m.Prefix.Value != nil {
 		output.Prefix = m.Prefix.Value
 		if m.Prefix.Element != nil {
-			output.PrefixElement = toMapOrNil(m.Prefix.Element.ToJSON())
+			output.PrefixElement = toMapOrNil(m.Prefix.Element.MarshalJSON())
 		}
 	}
 	if m.Title != nil && m.Title.Value != nil {
 		output.Title = m.Title.Value
 		if m.Title.Element != nil {
-			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+			output.TitleElement = toMapOrNil(m.Title.Element.MarshalJSON())
 		}
 	}
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	if m.TextEquivalent != nil && m.TextEquivalent.Value != nil {
 		output.TextEquivalent = m.TextEquivalent.Value
 		if m.TextEquivalent.Element != nil {
-			output.TextEquivalentElement = toMapOrNil(m.TextEquivalent.Element.ToJSON())
+			output.TextEquivalentElement = toMapOrNil(m.TextEquivalent.Element.MarshalJSON())
 		}
 	}
 	output.Priority = m.Priority
@@ -470,7 +470,7 @@ func (m *RequestGroupAction) ToJSON() ([]byte, error) {
 	if m.TimingDateTime != nil && m.TimingDateTime.Value != nil {
 		output.TimingDateTime = m.TimingDateTime.Value
 		if m.TimingDateTime.Element != nil {
-			output.TimingDateTimeElement = toMapOrNil(m.TimingDateTime.Element.ToJSON())
+			output.TimingDateTimeElement = toMapOrNil(m.TimingDateTime.Element.MarshalJSON())
 		}
 	}
 	output.TimingAge = m.TimingAge
@@ -574,8 +574,8 @@ func NewRequestGroupCondition() *RequestGroupCondition {
 	return &RequestGroupCondition{}
 }
 
-// FromJSON populates RequestGroupCondition from JSON data.
-func (m *RequestGroupCondition) FromJSON(data []byte) error {
+// UnmarshalJSON populates RequestGroupCondition from JSON data.
+func (m *RequestGroupCondition) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -594,8 +594,8 @@ func (m *RequestGroupCondition) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts RequestGroupCondition to JSON data.
-func (m *RequestGroupCondition) ToJSON() ([]byte, error) {
+// MarshalJSON converts RequestGroupCondition to JSON data.
+func (m *RequestGroupCondition) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -607,7 +607,7 @@ func (m *RequestGroupCondition) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -659,8 +659,8 @@ func NewRequestGroupRelatedAction() *RequestGroupRelatedAction {
 	return &RequestGroupRelatedAction{}
 }
 
-// FromJSON populates RequestGroupRelatedAction from JSON data.
-func (m *RequestGroupRelatedAction) FromJSON(data []byte) error {
+// UnmarshalJSON populates RequestGroupRelatedAction from JSON data.
+func (m *RequestGroupRelatedAction) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -683,8 +683,8 @@ func (m *RequestGroupRelatedAction) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts RequestGroupRelatedAction to JSON data.
-func (m *RequestGroupRelatedAction) ToJSON() ([]byte, error) {
+// MarshalJSON converts RequestGroupRelatedAction to JSON data.
+func (m *RequestGroupRelatedAction) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -699,7 +699,7 @@ func (m *RequestGroupRelatedAction) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -707,7 +707,7 @@ func (m *RequestGroupRelatedAction) ToJSON() ([]byte, error) {
 	if m.ActionId != nil && m.ActionId.Value != nil {
 		output.ActionId = m.ActionId.Value
 		if m.ActionId.Element != nil {
-			output.ActionIdElement = toMapOrNil(m.ActionId.Element.ToJSON())
+			output.ActionIdElement = toMapOrNil(m.ActionId.Element.MarshalJSON())
 		}
 	}
 	output.Relationship = m.Relationship

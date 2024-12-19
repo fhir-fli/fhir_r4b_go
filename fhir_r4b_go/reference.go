@@ -23,8 +23,8 @@ func NewReference() *Reference {
 	return &Reference{}
 }
 
-// FromJSON populates Reference from JSON data.
-func (m *Reference) FromJSON(data []byte) error {
+// UnmarshalJSON populates Reference from JSON data.
+func (m *Reference) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -45,8 +45,8 @@ func (m *Reference) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Reference to JSON data.
-func (m *Reference) ToJSON() ([]byte, error) {
+// MarshalJSON converts Reference to JSON data.
+func (m *Reference) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -62,27 +62,27 @@ func (m *Reference) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
 	if m.Reference != nil && m.Reference.Value != nil {
 		output.Reference = m.Reference.Value
 		if m.Reference.Element != nil {
-			output.ReferenceElement = toMapOrNil(m.Reference.Element.ToJSON())
+			output.ReferenceElement = toMapOrNil(m.Reference.Element.MarshalJSON())
 		}
 	}
 	if m.Type != nil && m.Type.Value != nil {
 		output.Type = m.Type.Value
 		if m.Type.Element != nil {
-			output.TypeElement = toMapOrNil(m.Type.Element.ToJSON())
+			output.TypeElement = toMapOrNil(m.Type.Element.MarshalJSON())
 		}
 	}
 	output.Identifier = m.Identifier
 	if m.Display != nil && m.Display.Value != nil {
 		output.Display = m.Display.Value
 		if m.Display.Element != nil {
-			output.DisplayElement = toMapOrNil(m.Display.Element.ToJSON())
+			output.DisplayElement = toMapOrNil(m.Display.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

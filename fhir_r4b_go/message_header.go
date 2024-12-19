@@ -37,8 +37,8 @@ func NewMessageHeader() *MessageHeader {
 	return &MessageHeader{}
 }
 
-// FromJSON populates MessageHeader from JSON data.
-func (m *MessageHeader) FromJSON(data []byte) error {
+// UnmarshalJSON populates MessageHeader from JSON data.
+func (m *MessageHeader) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -87,8 +87,8 @@ func (m *MessageHeader) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MessageHeader to JSON data.
-func (m *MessageHeader) ToJSON() ([]byte, error) {
+// MarshalJSON converts MessageHeader to JSON data.
+func (m *MessageHeader) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -118,14 +118,14 @@ func (m *MessageHeader) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -137,7 +137,7 @@ func (m *MessageHeader) ToJSON() ([]byte, error) {
 	if m.EventUri != nil && m.EventUri.Value != nil {
 		output.EventUri = m.EventUri.Value
 		if m.EventUri.Element != nil {
-			output.EventUriElement = toMapOrNil(m.EventUri.Element.ToJSON())
+			output.EventUriElement = toMapOrNil(m.EventUri.Element.MarshalJSON())
 		}
 	}
 	output.Destination = m.Destination
@@ -152,7 +152,7 @@ func (m *MessageHeader) ToJSON() ([]byte, error) {
 	if m.Definition != nil && m.Definition.Value != nil {
 		output.Definition = m.Definition.Value
 		if m.Definition.Element != nil {
-			output.DefinitionElement = toMapOrNil(m.Definition.Element.ToJSON())
+			output.DefinitionElement = toMapOrNil(m.Definition.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -230,8 +230,8 @@ func NewMessageHeaderDestination() *MessageHeaderDestination {
 	return &MessageHeaderDestination{}
 }
 
-// FromJSON populates MessageHeaderDestination from JSON data.
-func (m *MessageHeaderDestination) FromJSON(data []byte) error {
+// UnmarshalJSON populates MessageHeaderDestination from JSON data.
+func (m *MessageHeaderDestination) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -254,8 +254,8 @@ func (m *MessageHeaderDestination) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MessageHeaderDestination to JSON data.
-func (m *MessageHeaderDestination) ToJSON() ([]byte, error) {
+// MarshalJSON converts MessageHeaderDestination to JSON data.
+func (m *MessageHeaderDestination) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -271,7 +271,7 @@ func (m *MessageHeaderDestination) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -279,14 +279,14 @@ func (m *MessageHeaderDestination) ToJSON() ([]byte, error) {
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	output.Target = m.Target
 	if m.Endpoint != nil && m.Endpoint.Value != nil {
 		output.Endpoint = m.Endpoint.Value
 		if m.Endpoint.Element != nil {
-			output.EndpointElement = toMapOrNil(m.Endpoint.Element.ToJSON())
+			output.EndpointElement = toMapOrNil(m.Endpoint.Element.MarshalJSON())
 		}
 	}
 	output.Receiver = m.Receiver
@@ -340,8 +340,8 @@ func NewMessageHeaderSource() *MessageHeaderSource {
 	return &MessageHeaderSource{}
 }
 
-// FromJSON populates MessageHeaderSource from JSON data.
-func (m *MessageHeaderSource) FromJSON(data []byte) error {
+// UnmarshalJSON populates MessageHeaderSource from JSON data.
+func (m *MessageHeaderSource) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -366,8 +366,8 @@ func (m *MessageHeaderSource) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MessageHeaderSource to JSON data.
-func (m *MessageHeaderSource) ToJSON() ([]byte, error) {
+// MarshalJSON converts MessageHeaderSource to JSON data.
+func (m *MessageHeaderSource) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -386,7 +386,7 @@ func (m *MessageHeaderSource) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -394,26 +394,26 @@ func (m *MessageHeaderSource) ToJSON() ([]byte, error) {
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	if m.Software != nil && m.Software.Value != nil {
 		output.Software = m.Software.Value
 		if m.Software.Element != nil {
-			output.SoftwareElement = toMapOrNil(m.Software.Element.ToJSON())
+			output.SoftwareElement = toMapOrNil(m.Software.Element.MarshalJSON())
 		}
 	}
 	if m.Version != nil && m.Version.Value != nil {
 		output.Version = m.Version.Value
 		if m.Version.Element != nil {
-			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+			output.VersionElement = toMapOrNil(m.Version.Element.MarshalJSON())
 		}
 	}
 	output.Contact = m.Contact
 	if m.Endpoint != nil && m.Endpoint.Value != nil {
 		output.Endpoint = m.Endpoint.Value
 		if m.Endpoint.Element != nil {
-			output.EndpointElement = toMapOrNil(m.Endpoint.Element.ToJSON())
+			output.EndpointElement = toMapOrNil(m.Endpoint.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -466,8 +466,8 @@ func NewMessageHeaderResponse() *MessageHeaderResponse {
 	return &MessageHeaderResponse{}
 }
 
-// FromJSON populates MessageHeaderResponse from JSON data.
-func (m *MessageHeaderResponse) FromJSON(data []byte) error {
+// UnmarshalJSON populates MessageHeaderResponse from JSON data.
+func (m *MessageHeaderResponse) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -488,8 +488,8 @@ func (m *MessageHeaderResponse) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts MessageHeaderResponse to JSON data.
-func (m *MessageHeaderResponse) ToJSON() ([]byte, error) {
+// MarshalJSON converts MessageHeaderResponse to JSON data.
+func (m *MessageHeaderResponse) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -503,7 +503,7 @@ func (m *MessageHeaderResponse) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -511,7 +511,7 @@ func (m *MessageHeaderResponse) ToJSON() ([]byte, error) {
 	if m.Identifier != nil && m.Identifier.Value != nil {
 		output.Identifier = m.Identifier.Value
 		if m.Identifier.Element != nil {
-			output.IdentifierElement = toMapOrNil(m.Identifier.Element.ToJSON())
+			output.IdentifierElement = toMapOrNil(m.Identifier.Element.MarshalJSON())
 		}
 	}
 	output.Code = m.Code

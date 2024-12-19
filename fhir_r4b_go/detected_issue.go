@@ -38,8 +38,8 @@ func NewDetectedIssue() *DetectedIssue {
 	return &DetectedIssue{}
 }
 
-// FromJSON populates DetectedIssue from JSON data.
-func (m *DetectedIssue) FromJSON(data []byte) error {
+// UnmarshalJSON populates DetectedIssue from JSON data.
+func (m *DetectedIssue) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -90,8 +90,8 @@ func (m *DetectedIssue) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts DetectedIssue to JSON data.
-func (m *DetectedIssue) ToJSON() ([]byte, error) {
+// MarshalJSON converts DetectedIssue to JSON data.
+func (m *DetectedIssue) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -123,14 +123,14 @@ func (m *DetectedIssue) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -146,7 +146,7 @@ func (m *DetectedIssue) ToJSON() ([]byte, error) {
 	if m.IdentifiedDateTime != nil && m.IdentifiedDateTime.Value != nil {
 		output.IdentifiedDateTime = m.IdentifiedDateTime.Value
 		if m.IdentifiedDateTime.Element != nil {
-			output.IdentifiedDateTimeElement = toMapOrNil(m.IdentifiedDateTime.Element.ToJSON())
+			output.IdentifiedDateTimeElement = toMapOrNil(m.IdentifiedDateTime.Element.MarshalJSON())
 		}
 	}
 	output.IdentifiedPeriod = m.IdentifiedPeriod
@@ -156,13 +156,13 @@ func (m *DetectedIssue) ToJSON() ([]byte, error) {
 	if m.Detail != nil && m.Detail.Value != nil {
 		output.Detail = m.Detail.Value
 		if m.Detail.Element != nil {
-			output.DetailElement = toMapOrNil(m.Detail.Element.ToJSON())
+			output.DetailElement = toMapOrNil(m.Detail.Element.MarshalJSON())
 		}
 	}
 	if m.Reference != nil && m.Reference.Value != nil {
 		output.Reference = m.Reference.Value
 		if m.Reference.Element != nil {
-			output.ReferenceElement = toMapOrNil(m.Reference.Element.ToJSON())
+			output.ReferenceElement = toMapOrNil(m.Reference.Element.MarshalJSON())
 		}
 	}
 	output.Mitigation = m.Mitigation
@@ -241,8 +241,8 @@ func NewDetectedIssueEvidence() *DetectedIssueEvidence {
 	return &DetectedIssueEvidence{}
 }
 
-// FromJSON populates DetectedIssueEvidence from JSON data.
-func (m *DetectedIssueEvidence) FromJSON(data []byte) error {
+// UnmarshalJSON populates DetectedIssueEvidence from JSON data.
+func (m *DetectedIssueEvidence) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -261,8 +261,8 @@ func (m *DetectedIssueEvidence) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts DetectedIssueEvidence to JSON data.
-func (m *DetectedIssueEvidence) ToJSON() ([]byte, error) {
+// MarshalJSON converts DetectedIssueEvidence to JSON data.
+func (m *DetectedIssueEvidence) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -274,7 +274,7 @@ func (m *DetectedIssueEvidence) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -325,8 +325,8 @@ func NewDetectedIssueMitigation() *DetectedIssueMitigation {
 	return &DetectedIssueMitigation{}
 }
 
-// FromJSON populates DetectedIssueMitigation from JSON data.
-func (m *DetectedIssueMitigation) FromJSON(data []byte) error {
+// UnmarshalJSON populates DetectedIssueMitigation from JSON data.
+func (m *DetectedIssueMitigation) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -347,8 +347,8 @@ func (m *DetectedIssueMitigation) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts DetectedIssueMitigation to JSON data.
-func (m *DetectedIssueMitigation) ToJSON() ([]byte, error) {
+// MarshalJSON converts DetectedIssueMitigation to JSON data.
+func (m *DetectedIssueMitigation) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -362,7 +362,7 @@ func (m *DetectedIssueMitigation) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -371,7 +371,7 @@ func (m *DetectedIssueMitigation) ToJSON() ([]byte, error) {
 	if m.Date != nil && m.Date.Value != nil {
 		output.Date = m.Date.Value
 		if m.Date.Element != nil {
-			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+			output.DateElement = toMapOrNil(m.Date.Element.MarshalJSON())
 		}
 	}
 	output.Author = m.Author

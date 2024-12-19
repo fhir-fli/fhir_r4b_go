@@ -29,8 +29,8 @@ func NewDataRequirement() *DataRequirement {
 	return &DataRequirement{}
 }
 
-// FromJSON populates DataRequirement from JSON data.
-func (m *DataRequirement) FromJSON(data []byte) error {
+// UnmarshalJSON populates DataRequirement from JSON data.
+func (m *DataRequirement) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -79,8 +79,8 @@ func (m *DataRequirement) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts DataRequirement to JSON data.
-func (m *DataRequirement) ToJSON() ([]byte, error) {
+// MarshalJSON converts DataRequirement to JSON data.
+func (m *DataRequirement) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -101,7 +101,7 @@ func (m *DataRequirement) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -114,7 +114,7 @@ func (m *DataRequirement) ToJSON() ([]byte, error) {
 				output.Profile[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.ProfileElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.ProfileElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -128,7 +128,7 @@ func (m *DataRequirement) ToJSON() ([]byte, error) {
 				output.MustSupport[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.MustSupportElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.MustSupportElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -137,7 +137,7 @@ func (m *DataRequirement) ToJSON() ([]byte, error) {
 	if m.Limit != nil && m.Limit.Value != nil {
 		output.Limit = m.Limit.Value
 		if m.Limit.Element != nil {
-			output.LimitElement = toMapOrNil(m.Limit.Element.ToJSON())
+			output.LimitElement = toMapOrNil(m.Limit.Element.MarshalJSON())
 		}
 	}
 	output.Sort = m.Sort
@@ -197,8 +197,8 @@ func NewDataRequirementCodeFilter() *DataRequirementCodeFilter {
 	return &DataRequirementCodeFilter{}
 }
 
-// FromJSON populates DataRequirementCodeFilter from JSON data.
-func (m *DataRequirementCodeFilter) FromJSON(data []byte) error {
+// UnmarshalJSON populates DataRequirementCodeFilter from JSON data.
+func (m *DataRequirementCodeFilter) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -219,8 +219,8 @@ func (m *DataRequirementCodeFilter) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts DataRequirementCodeFilter to JSON data.
-func (m *DataRequirementCodeFilter) ToJSON() ([]byte, error) {
+// MarshalJSON converts DataRequirementCodeFilter to JSON data.
+func (m *DataRequirementCodeFilter) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -236,26 +236,26 @@ func (m *DataRequirementCodeFilter) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
 	if m.Path != nil && m.Path.Value != nil {
 		output.Path = m.Path.Value
 		if m.Path.Element != nil {
-			output.PathElement = toMapOrNil(m.Path.Element.ToJSON())
+			output.PathElement = toMapOrNil(m.Path.Element.MarshalJSON())
 		}
 	}
 	if m.SearchParam != nil && m.SearchParam.Value != nil {
 		output.SearchParam = m.SearchParam.Value
 		if m.SearchParam.Element != nil {
-			output.SearchParamElement = toMapOrNil(m.SearchParam.Element.ToJSON())
+			output.SearchParamElement = toMapOrNil(m.SearchParam.Element.MarshalJSON())
 		}
 	}
 	if m.ValueSet != nil && m.ValueSet.Value != nil {
 		output.ValueSet = m.ValueSet.Value
 		if m.ValueSet.Element != nil {
-			output.ValueSetElement = toMapOrNil(m.ValueSet.Element.ToJSON())
+			output.ValueSetElement = toMapOrNil(m.ValueSet.Element.MarshalJSON())
 		}
 	}
 	output.Code = m.Code
@@ -306,8 +306,8 @@ func NewDataRequirementDateFilter() *DataRequirementDateFilter {
 	return &DataRequirementDateFilter{}
 }
 
-// FromJSON populates DataRequirementDateFilter from JSON data.
-func (m *DataRequirementDateFilter) FromJSON(data []byte) error {
+// UnmarshalJSON populates DataRequirementDateFilter from JSON data.
+func (m *DataRequirementDateFilter) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -330,8 +330,8 @@ func (m *DataRequirementDateFilter) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts DataRequirementDateFilter to JSON data.
-func (m *DataRequirementDateFilter) ToJSON() ([]byte, error) {
+// MarshalJSON converts DataRequirementDateFilter to JSON data.
+func (m *DataRequirementDateFilter) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -348,26 +348,26 @@ func (m *DataRequirementDateFilter) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
 	if m.Path != nil && m.Path.Value != nil {
 		output.Path = m.Path.Value
 		if m.Path.Element != nil {
-			output.PathElement = toMapOrNil(m.Path.Element.ToJSON())
+			output.PathElement = toMapOrNil(m.Path.Element.MarshalJSON())
 		}
 	}
 	if m.SearchParam != nil && m.SearchParam.Value != nil {
 		output.SearchParam = m.SearchParam.Value
 		if m.SearchParam.Element != nil {
-			output.SearchParamElement = toMapOrNil(m.SearchParam.Element.ToJSON())
+			output.SearchParamElement = toMapOrNil(m.SearchParam.Element.MarshalJSON())
 		}
 	}
 	if m.ValueDateTime != nil && m.ValueDateTime.Value != nil {
 		output.ValueDateTime = m.ValueDateTime.Value
 		if m.ValueDateTime.Element != nil {
-			output.ValueDateTimeElement = toMapOrNil(m.ValueDateTime.Element.ToJSON())
+			output.ValueDateTimeElement = toMapOrNil(m.ValueDateTime.Element.MarshalJSON())
 		}
 	}
 	output.ValuePeriod = m.ValuePeriod
@@ -418,8 +418,8 @@ func NewDataRequirementSort() *DataRequirementSort {
 	return &DataRequirementSort{}
 }
 
-// FromJSON populates DataRequirementSort from JSON data.
-func (m *DataRequirementSort) FromJSON(data []byte) error {
+// UnmarshalJSON populates DataRequirementSort from JSON data.
+func (m *DataRequirementSort) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -436,8 +436,8 @@ func (m *DataRequirementSort) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts DataRequirementSort to JSON data.
-func (m *DataRequirementSort) ToJSON() ([]byte, error) {
+// MarshalJSON converts DataRequirementSort to JSON data.
+func (m *DataRequirementSort) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -449,14 +449,14 @@ func (m *DataRequirementSort) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
 	if m.Path != nil && m.Path.Value != nil {
 		output.Path = m.Path.Value
 		if m.Path.Element != nil {
-			output.PathElement = toMapOrNil(m.Path.Element.ToJSON())
+			output.PathElement = toMapOrNil(m.Path.Element.MarshalJSON())
 		}
 	}
 	output.Direction = m.Direction

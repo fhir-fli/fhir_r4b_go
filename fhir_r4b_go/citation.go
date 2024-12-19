@@ -54,8 +54,8 @@ func NewCitation() *Citation {
 	return &Citation{}
 }
 
-// FromJSON populates Citation from JSON data.
-func (m *Citation) FromJSON(data []byte) error {
+// UnmarshalJSON populates Citation from JSON data.
+func (m *Citation) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -138,8 +138,8 @@ func (m *Citation) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Citation to JSON data.
-func (m *Citation) ToJSON() ([]byte, error) {
+// MarshalJSON converts Citation to JSON data.
+func (m *Citation) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -196,14 +196,14 @@ func (m *Citation) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -214,52 +214,52 @@ func (m *Citation) ToJSON() ([]byte, error) {
 	if m.Url != nil && m.Url.Value != nil {
 		output.Url = m.Url.Value
 		if m.Url.Element != nil {
-			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+			output.UrlElement = toMapOrNil(m.Url.Element.MarshalJSON())
 		}
 	}
 	output.Identifier = m.Identifier
 	if m.Version != nil && m.Version.Value != nil {
 		output.Version = m.Version.Value
 		if m.Version.Element != nil {
-			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+			output.VersionElement = toMapOrNil(m.Version.Element.MarshalJSON())
 		}
 	}
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	if m.Title != nil && m.Title.Value != nil {
 		output.Title = m.Title.Value
 		if m.Title.Element != nil {
-			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+			output.TitleElement = toMapOrNil(m.Title.Element.MarshalJSON())
 		}
 	}
 	output.Status = m.Status
 	if m.Experimental != nil && m.Experimental.Value != nil {
 		output.Experimental = m.Experimental.Value
 		if m.Experimental.Element != nil {
-			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.MarshalJSON())
 		}
 	}
 	if m.Date != nil && m.Date.Value != nil {
 		output.Date = m.Date.Value
 		if m.Date.Element != nil {
-			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+			output.DateElement = toMapOrNil(m.Date.Element.MarshalJSON())
 		}
 	}
 	if m.Publisher != nil && m.Publisher.Value != nil {
 		output.Publisher = m.Publisher.Value
 		if m.Publisher.Element != nil {
-			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.MarshalJSON())
 		}
 	}
 	output.Contact = m.Contact
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.UseContext = m.UseContext
@@ -267,25 +267,25 @@ func (m *Citation) ToJSON() ([]byte, error) {
 	if m.Purpose != nil && m.Purpose.Value != nil {
 		output.Purpose = m.Purpose.Value
 		if m.Purpose.Element != nil {
-			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.MarshalJSON())
 		}
 	}
 	if m.Copyright != nil && m.Copyright.Value != nil {
 		output.Copyright = m.Copyright.Value
 		if m.Copyright.Element != nil {
-			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.MarshalJSON())
 		}
 	}
 	if m.ApprovalDate != nil && m.ApprovalDate.Value != nil {
 		output.ApprovalDate = m.ApprovalDate.Value
 		if m.ApprovalDate.Element != nil {
-			output.ApprovalDateElement = toMapOrNil(m.ApprovalDate.Element.ToJSON())
+			output.ApprovalDateElement = toMapOrNil(m.ApprovalDate.Element.MarshalJSON())
 		}
 	}
 	if m.LastReviewDate != nil && m.LastReviewDate.Value != nil {
 		output.LastReviewDate = m.LastReviewDate.Value
 		if m.LastReviewDate.Element != nil {
-			output.LastReviewDateElement = toMapOrNil(m.LastReviewDate.Element.ToJSON())
+			output.LastReviewDateElement = toMapOrNil(m.LastReviewDate.Element.MarshalJSON())
 		}
 	}
 	output.EffectivePeriod = m.EffectivePeriod
@@ -407,8 +407,8 @@ func NewCitationSummary() *CitationSummary {
 	return &CitationSummary{}
 }
 
-// FromJSON populates CitationSummary from JSON data.
-func (m *CitationSummary) FromJSON(data []byte) error {
+// UnmarshalJSON populates CitationSummary from JSON data.
+func (m *CitationSummary) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -427,8 +427,8 @@ func (m *CitationSummary) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CitationSummary to JSON data.
-func (m *CitationSummary) ToJSON() ([]byte, error) {
+// MarshalJSON converts CitationSummary to JSON data.
+func (m *CitationSummary) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -441,7 +441,7 @@ func (m *CitationSummary) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -450,7 +450,7 @@ func (m *CitationSummary) ToJSON() ([]byte, error) {
 	if m.Text != nil && m.Text.Value != nil {
 		output.Text = m.Text.Value
 		if m.Text.Element != nil {
-			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+			output.TextElement = toMapOrNil(m.Text.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -496,8 +496,8 @@ func NewCitationClassification() *CitationClassification {
 	return &CitationClassification{}
 }
 
-// FromJSON populates CitationClassification from JSON data.
-func (m *CitationClassification) FromJSON(data []byte) error {
+// UnmarshalJSON populates CitationClassification from JSON data.
+func (m *CitationClassification) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -516,8 +516,8 @@ func (m *CitationClassification) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CitationClassification to JSON data.
-func (m *CitationClassification) ToJSON() ([]byte, error) {
+// MarshalJSON converts CitationClassification to JSON data.
+func (m *CitationClassification) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -529,7 +529,7 @@ func (m *CitationClassification) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -580,8 +580,8 @@ func NewCitationStatusDate() *CitationStatusDate {
 	return &CitationStatusDate{}
 }
 
-// FromJSON populates CitationStatusDate from JSON data.
-func (m *CitationStatusDate) FromJSON(data []byte) error {
+// UnmarshalJSON populates CitationStatusDate from JSON data.
+func (m *CitationStatusDate) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -602,8 +602,8 @@ func (m *CitationStatusDate) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CitationStatusDate to JSON data.
-func (m *CitationStatusDate) ToJSON() ([]byte, error) {
+// MarshalJSON converts CitationStatusDate to JSON data.
+func (m *CitationStatusDate) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -617,7 +617,7 @@ func (m *CitationStatusDate) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -626,7 +626,7 @@ func (m *CitationStatusDate) ToJSON() ([]byte, error) {
 	if m.Actual != nil && m.Actual.Value != nil {
 		output.Actual = m.Actual.Value
 		if m.Actual.Element != nil {
-			output.ActualElement = toMapOrNil(m.Actual.Element.ToJSON())
+			output.ActualElement = toMapOrNil(m.Actual.Element.MarshalJSON())
 		}
 	}
 	output.Period = m.Period
@@ -679,8 +679,8 @@ func NewCitationRelatesTo() *CitationRelatesTo {
 	return &CitationRelatesTo{}
 }
 
-// FromJSON populates CitationRelatesTo from JSON data.
-func (m *CitationRelatesTo) FromJSON(data []byte) error {
+// UnmarshalJSON populates CitationRelatesTo from JSON data.
+func (m *CitationRelatesTo) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -707,8 +707,8 @@ func (m *CitationRelatesTo) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CitationRelatesTo to JSON data.
-func (m *CitationRelatesTo) ToJSON() ([]byte, error) {
+// MarshalJSON converts CitationRelatesTo to JSON data.
+func (m *CitationRelatesTo) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -725,7 +725,7 @@ func (m *CitationRelatesTo) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -735,7 +735,7 @@ func (m *CitationRelatesTo) ToJSON() ([]byte, error) {
 	if m.TargetUri != nil && m.TargetUri.Value != nil {
 		output.TargetUri = m.TargetUri.Value
 		if m.TargetUri.Element != nil {
-			output.TargetUriElement = toMapOrNil(m.TargetUri.Element.ToJSON())
+			output.TargetUriElement = toMapOrNil(m.TargetUri.Element.MarshalJSON())
 		}
 	}
 	output.TargetIdentifier = m.TargetIdentifier
@@ -805,8 +805,8 @@ func NewCitationCitedArtifact() *CitationCitedArtifact {
 	return &CitationCitedArtifact{}
 }
 
-// FromJSON populates CitationCitedArtifact from JSON data.
-func (m *CitationCitedArtifact) FromJSON(data []byte) error {
+// UnmarshalJSON populates CitationCitedArtifact from JSON data.
+func (m *CitationCitedArtifact) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -851,8 +851,8 @@ func (m *CitationCitedArtifact) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CitationCitedArtifact to JSON data.
-func (m *CitationCitedArtifact) ToJSON() ([]byte, error) {
+// MarshalJSON converts CitationCitedArtifact to JSON data.
+func (m *CitationCitedArtifact) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -878,7 +878,7 @@ func (m *CitationCitedArtifact) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -888,7 +888,7 @@ func (m *CitationCitedArtifact) ToJSON() ([]byte, error) {
 	if m.DateAccessed != nil && m.DateAccessed.Value != nil {
 		output.DateAccessed = m.DateAccessed.Value
 		if m.DateAccessed.Element != nil {
-			output.DateAccessedElement = toMapOrNil(m.DateAccessed.Element.ToJSON())
+			output.DateAccessedElement = toMapOrNil(m.DateAccessed.Element.MarshalJSON())
 		}
 	}
 	output.Version = m.Version
@@ -972,8 +972,8 @@ func NewCitationVersion() *CitationVersion {
 	return &CitationVersion{}
 }
 
-// FromJSON populates CitationVersion from JSON data.
-func (m *CitationVersion) FromJSON(data []byte) error {
+// UnmarshalJSON populates CitationVersion from JSON data.
+func (m *CitationVersion) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -992,8 +992,8 @@ func (m *CitationVersion) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CitationVersion to JSON data.
-func (m *CitationVersion) ToJSON() ([]byte, error) {
+// MarshalJSON converts CitationVersion to JSON data.
+func (m *CitationVersion) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1006,7 +1006,7 @@ func (m *CitationVersion) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1014,7 +1014,7 @@ func (m *CitationVersion) ToJSON() ([]byte, error) {
 	if m.Value != nil && m.Value.Value != nil {
 		output.Value = m.Value.Value
 		if m.Value.Element != nil {
-			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+			output.ValueElement = toMapOrNil(m.Value.Element.MarshalJSON())
 		}
 	}
 	output.BaseCitation = m.BaseCitation
@@ -1062,8 +1062,8 @@ func NewCitationStatusDate1() *CitationStatusDate1 {
 	return &CitationStatusDate1{}
 }
 
-// FromJSON populates CitationStatusDate1 from JSON data.
-func (m *CitationStatusDate1) FromJSON(data []byte) error {
+// UnmarshalJSON populates CitationStatusDate1 from JSON data.
+func (m *CitationStatusDate1) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1084,8 +1084,8 @@ func (m *CitationStatusDate1) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CitationStatusDate1 to JSON data.
-func (m *CitationStatusDate1) ToJSON() ([]byte, error) {
+// MarshalJSON converts CitationStatusDate1 to JSON data.
+func (m *CitationStatusDate1) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1099,7 +1099,7 @@ func (m *CitationStatusDate1) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1108,7 +1108,7 @@ func (m *CitationStatusDate1) ToJSON() ([]byte, error) {
 	if m.Actual != nil && m.Actual.Value != nil {
 		output.Actual = m.Actual.Value
 		if m.Actual.Element != nil {
-			output.ActualElement = toMapOrNil(m.Actual.Element.ToJSON())
+			output.ActualElement = toMapOrNil(m.Actual.Element.MarshalJSON())
 		}
 	}
 	output.Period = m.Period
@@ -1158,8 +1158,8 @@ func NewCitationTitle() *CitationTitle {
 	return &CitationTitle{}
 }
 
-// FromJSON populates CitationTitle from JSON data.
-func (m *CitationTitle) FromJSON(data []byte) error {
+// UnmarshalJSON populates CitationTitle from JSON data.
+func (m *CitationTitle) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1180,8 +1180,8 @@ func (m *CitationTitle) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CitationTitle to JSON data.
-func (m *CitationTitle) ToJSON() ([]byte, error) {
+// MarshalJSON converts CitationTitle to JSON data.
+func (m *CitationTitle) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1195,7 +1195,7 @@ func (m *CitationTitle) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1205,7 +1205,7 @@ func (m *CitationTitle) ToJSON() ([]byte, error) {
 	if m.Text != nil && m.Text.Value != nil {
 		output.Text = m.Text.Value
 		if m.Text.Element != nil {
-			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+			output.TextElement = toMapOrNil(m.Text.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -1255,8 +1255,8 @@ func NewCitationAbstract() *CitationAbstract {
 	return &CitationAbstract{}
 }
 
-// FromJSON populates CitationAbstract from JSON data.
-func (m *CitationAbstract) FromJSON(data []byte) error {
+// UnmarshalJSON populates CitationAbstract from JSON data.
+func (m *CitationAbstract) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1279,8 +1279,8 @@ func (m *CitationAbstract) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CitationAbstract to JSON data.
-func (m *CitationAbstract) ToJSON() ([]byte, error) {
+// MarshalJSON converts CitationAbstract to JSON data.
+func (m *CitationAbstract) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1296,7 +1296,7 @@ func (m *CitationAbstract) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1306,13 +1306,13 @@ func (m *CitationAbstract) ToJSON() ([]byte, error) {
 	if m.Text != nil && m.Text.Value != nil {
 		output.Text = m.Text.Value
 		if m.Text.Element != nil {
-			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+			output.TextElement = toMapOrNil(m.Text.Element.MarshalJSON())
 		}
 	}
 	if m.Copyright != nil && m.Copyright.Value != nil {
 		output.Copyright = m.Copyright.Value
 		if m.Copyright.Element != nil {
-			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -1363,8 +1363,8 @@ func NewCitationPart() *CitationPart {
 	return &CitationPart{}
 }
 
-// FromJSON populates CitationPart from JSON data.
-func (m *CitationPart) FromJSON(data []byte) error {
+// UnmarshalJSON populates CitationPart from JSON data.
+func (m *CitationPart) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1385,8 +1385,8 @@ func (m *CitationPart) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CitationPart to JSON data.
-func (m *CitationPart) ToJSON() ([]byte, error) {
+// MarshalJSON converts CitationPart to JSON data.
+func (m *CitationPart) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1400,7 +1400,7 @@ func (m *CitationPart) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1409,7 +1409,7 @@ func (m *CitationPart) ToJSON() ([]byte, error) {
 	if m.Value != nil && m.Value.Value != nil {
 		output.Value = m.Value.Value
 		if m.Value.Element != nil {
-			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+			output.ValueElement = toMapOrNil(m.Value.Element.MarshalJSON())
 		}
 	}
 	output.BaseCitation = m.BaseCitation
@@ -1462,8 +1462,8 @@ func NewCitationRelatesTo1() *CitationRelatesTo1 {
 	return &CitationRelatesTo1{}
 }
 
-// FromJSON populates CitationRelatesTo1 from JSON data.
-func (m *CitationRelatesTo1) FromJSON(data []byte) error {
+// UnmarshalJSON populates CitationRelatesTo1 from JSON data.
+func (m *CitationRelatesTo1) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1490,8 +1490,8 @@ func (m *CitationRelatesTo1) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CitationRelatesTo1 to JSON data.
-func (m *CitationRelatesTo1) ToJSON() ([]byte, error) {
+// MarshalJSON converts CitationRelatesTo1 to JSON data.
+func (m *CitationRelatesTo1) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1508,7 +1508,7 @@ func (m *CitationRelatesTo1) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1518,7 +1518,7 @@ func (m *CitationRelatesTo1) ToJSON() ([]byte, error) {
 	if m.TargetUri != nil && m.TargetUri.Value != nil {
 		output.TargetUri = m.TargetUri.Value
 		if m.TargetUri.Element != nil {
-			output.TargetUriElement = toMapOrNil(m.TargetUri.Element.ToJSON())
+			output.TargetUriElement = toMapOrNil(m.TargetUri.Element.MarshalJSON())
 		}
 	}
 	output.TargetIdentifier = m.TargetIdentifier
@@ -1584,8 +1584,8 @@ func NewCitationPublicationForm() *CitationPublicationForm {
 	return &CitationPublicationForm{}
 }
 
-// FromJSON populates CitationPublicationForm from JSON data.
-func (m *CitationPublicationForm) FromJSON(data []byte) error {
+// UnmarshalJSON populates CitationPublicationForm from JSON data.
+func (m *CitationPublicationForm) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1622,8 +1622,8 @@ func (m *CitationPublicationForm) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CitationPublicationForm to JSON data.
-func (m *CitationPublicationForm) ToJSON() ([]byte, error) {
+// MarshalJSON converts CitationPublicationForm to JSON data.
+func (m *CitationPublicationForm) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1652,7 +1652,7 @@ func (m *CitationPublicationForm) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1662,50 +1662,50 @@ func (m *CitationPublicationForm) ToJSON() ([]byte, error) {
 	if m.ArticleDate != nil && m.ArticleDate.Value != nil {
 		output.ArticleDate = m.ArticleDate.Value
 		if m.ArticleDate.Element != nil {
-			output.ArticleDateElement = toMapOrNil(m.ArticleDate.Element.ToJSON())
+			output.ArticleDateElement = toMapOrNil(m.ArticleDate.Element.MarshalJSON())
 		}
 	}
 	if m.LastRevisionDate != nil && m.LastRevisionDate.Value != nil {
 		output.LastRevisionDate = m.LastRevisionDate.Value
 		if m.LastRevisionDate.Element != nil {
-			output.LastRevisionDateElement = toMapOrNil(m.LastRevisionDate.Element.ToJSON())
+			output.LastRevisionDateElement = toMapOrNil(m.LastRevisionDate.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
 	if m.AccessionNumber != nil && m.AccessionNumber.Value != nil {
 		output.AccessionNumber = m.AccessionNumber.Value
 		if m.AccessionNumber.Element != nil {
-			output.AccessionNumberElement = toMapOrNil(m.AccessionNumber.Element.ToJSON())
+			output.AccessionNumberElement = toMapOrNil(m.AccessionNumber.Element.MarshalJSON())
 		}
 	}
 	if m.PageString != nil && m.PageString.Value != nil {
 		output.PageString = m.PageString.Value
 		if m.PageString.Element != nil {
-			output.PageStringElement = toMapOrNil(m.PageString.Element.ToJSON())
+			output.PageStringElement = toMapOrNil(m.PageString.Element.MarshalJSON())
 		}
 	}
 	if m.FirstPage != nil && m.FirstPage.Value != nil {
 		output.FirstPage = m.FirstPage.Value
 		if m.FirstPage.Element != nil {
-			output.FirstPageElement = toMapOrNil(m.FirstPage.Element.ToJSON())
+			output.FirstPageElement = toMapOrNil(m.FirstPage.Element.MarshalJSON())
 		}
 	}
 	if m.LastPage != nil && m.LastPage.Value != nil {
 		output.LastPage = m.LastPage.Value
 		if m.LastPage.Element != nil {
-			output.LastPageElement = toMapOrNil(m.LastPage.Element.ToJSON())
+			output.LastPageElement = toMapOrNil(m.LastPage.Element.MarshalJSON())
 		}
 	}
 	if m.PageCount != nil && m.PageCount.Value != nil {
 		output.PageCount = m.PageCount.Value
 		if m.PageCount.Element != nil {
-			output.PageCountElement = toMapOrNil(m.PageCount.Element.ToJSON())
+			output.PageCountElement = toMapOrNil(m.PageCount.Element.MarshalJSON())
 		}
 	}
 	if m.Copyright != nil && m.Copyright.Value != nil {
 		output.Copyright = m.Copyright.Value
 		if m.Copyright.Element != nil {
-			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -1772,8 +1772,8 @@ func NewCitationPublishedIn() *CitationPublishedIn {
 	return &CitationPublishedIn{}
 }
 
-// FromJSON populates CitationPublishedIn from JSON data.
-func (m *CitationPublishedIn) FromJSON(data []byte) error {
+// UnmarshalJSON populates CitationPublishedIn from JSON data.
+func (m *CitationPublishedIn) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1798,8 +1798,8 @@ func (m *CitationPublishedIn) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CitationPublishedIn to JSON data.
-func (m *CitationPublishedIn) ToJSON() ([]byte, error) {
+// MarshalJSON converts CitationPublishedIn to JSON data.
+func (m *CitationPublishedIn) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1816,7 +1816,7 @@ func (m *CitationPublishedIn) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1826,14 +1826,14 @@ func (m *CitationPublishedIn) ToJSON() ([]byte, error) {
 	if m.Title != nil && m.Title.Value != nil {
 		output.Title = m.Title.Value
 		if m.Title.Element != nil {
-			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+			output.TitleElement = toMapOrNil(m.Title.Element.MarshalJSON())
 		}
 	}
 	output.Publisher = m.Publisher
 	if m.PublisherLocation != nil && m.PublisherLocation.Value != nil {
 		output.PublisherLocation = m.PublisherLocation.Value
 		if m.PublisherLocation.Element != nil {
-			output.PublisherLocationElement = toMapOrNil(m.PublisherLocation.Element.ToJSON())
+			output.PublisherLocationElement = toMapOrNil(m.PublisherLocation.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -1887,8 +1887,8 @@ func NewCitationPeriodicRelease() *CitationPeriodicRelease {
 	return &CitationPeriodicRelease{}
 }
 
-// FromJSON populates CitationPeriodicRelease from JSON data.
-func (m *CitationPeriodicRelease) FromJSON(data []byte) error {
+// UnmarshalJSON populates CitationPeriodicRelease from JSON data.
+func (m *CitationPeriodicRelease) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1911,8 +1911,8 @@ func (m *CitationPeriodicRelease) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CitationPeriodicRelease to JSON data.
-func (m *CitationPeriodicRelease) ToJSON() ([]byte, error) {
+// MarshalJSON converts CitationPeriodicRelease to JSON data.
+func (m *CitationPeriodicRelease) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1928,7 +1928,7 @@ func (m *CitationPeriodicRelease) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1937,13 +1937,13 @@ func (m *CitationPeriodicRelease) ToJSON() ([]byte, error) {
 	if m.Volume != nil && m.Volume.Value != nil {
 		output.Volume = m.Volume.Value
 		if m.Volume.Element != nil {
-			output.VolumeElement = toMapOrNil(m.Volume.Element.ToJSON())
+			output.VolumeElement = toMapOrNil(m.Volume.Element.MarshalJSON())
 		}
 	}
 	if m.Issue != nil && m.Issue.Value != nil {
 		output.Issue = m.Issue.Value
 		if m.Issue.Element != nil {
-			output.IssueElement = toMapOrNil(m.Issue.Element.ToJSON())
+			output.IssueElement = toMapOrNil(m.Issue.Element.MarshalJSON())
 		}
 	}
 	output.DateOfPublication = m.DateOfPublication
@@ -1998,8 +1998,8 @@ func NewCitationDateOfPublication() *CitationDateOfPublication {
 	return &CitationDateOfPublication{}
 }
 
-// FromJSON populates CitationDateOfPublication from JSON data.
-func (m *CitationDateOfPublication) FromJSON(data []byte) error {
+// UnmarshalJSON populates CitationDateOfPublication from JSON data.
+func (m *CitationDateOfPublication) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -2026,8 +2026,8 @@ func (m *CitationDateOfPublication) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CitationDateOfPublication to JSON data.
-func (m *CitationDateOfPublication) ToJSON() ([]byte, error) {
+// MarshalJSON converts CitationDateOfPublication to JSON data.
+func (m *CitationDateOfPublication) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -2049,7 +2049,7 @@ func (m *CitationDateOfPublication) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -2057,37 +2057,37 @@ func (m *CitationDateOfPublication) ToJSON() ([]byte, error) {
 	if m.Date != nil && m.Date.Value != nil {
 		output.Date = m.Date.Value
 		if m.Date.Element != nil {
-			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+			output.DateElement = toMapOrNil(m.Date.Element.MarshalJSON())
 		}
 	}
 	if m.Year != nil && m.Year.Value != nil {
 		output.Year = m.Year.Value
 		if m.Year.Element != nil {
-			output.YearElement = toMapOrNil(m.Year.Element.ToJSON())
+			output.YearElement = toMapOrNil(m.Year.Element.MarshalJSON())
 		}
 	}
 	if m.Month != nil && m.Month.Value != nil {
 		output.Month = m.Month.Value
 		if m.Month.Element != nil {
-			output.MonthElement = toMapOrNil(m.Month.Element.ToJSON())
+			output.MonthElement = toMapOrNil(m.Month.Element.MarshalJSON())
 		}
 	}
 	if m.Day != nil && m.Day.Value != nil {
 		output.Day = m.Day.Value
 		if m.Day.Element != nil {
-			output.DayElement = toMapOrNil(m.Day.Element.ToJSON())
+			output.DayElement = toMapOrNil(m.Day.Element.MarshalJSON())
 		}
 	}
 	if m.Season != nil && m.Season.Value != nil {
 		output.Season = m.Season.Value
 		if m.Season.Element != nil {
-			output.SeasonElement = toMapOrNil(m.Season.Element.ToJSON())
+			output.SeasonElement = toMapOrNil(m.Season.Element.MarshalJSON())
 		}
 	}
 	if m.Text != nil && m.Text.Value != nil {
 		output.Text = m.Text.Value
 		if m.Text.Element != nil {
-			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+			output.TextElement = toMapOrNil(m.Text.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -2141,8 +2141,8 @@ func NewCitationWebLocation() *CitationWebLocation {
 	return &CitationWebLocation{}
 }
 
-// FromJSON populates CitationWebLocation from JSON data.
-func (m *CitationWebLocation) FromJSON(data []byte) error {
+// UnmarshalJSON populates CitationWebLocation from JSON data.
+func (m *CitationWebLocation) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -2161,8 +2161,8 @@ func (m *CitationWebLocation) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CitationWebLocation to JSON data.
-func (m *CitationWebLocation) ToJSON() ([]byte, error) {
+// MarshalJSON converts CitationWebLocation to JSON data.
+func (m *CitationWebLocation) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -2175,7 +2175,7 @@ func (m *CitationWebLocation) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -2184,7 +2184,7 @@ func (m *CitationWebLocation) ToJSON() ([]byte, error) {
 	if m.Url != nil && m.Url.Value != nil {
 		output.Url = m.Url.Value
 		if m.Url.Element != nil {
-			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+			output.UrlElement = toMapOrNil(m.Url.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -2231,8 +2231,8 @@ func NewCitationClassification1() *CitationClassification1 {
 	return &CitationClassification1{}
 }
 
-// FromJSON populates CitationClassification1 from JSON data.
-func (m *CitationClassification1) FromJSON(data []byte) error {
+// UnmarshalJSON populates CitationClassification1 from JSON data.
+func (m *CitationClassification1) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -2253,8 +2253,8 @@ func (m *CitationClassification1) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CitationClassification1 to JSON data.
-func (m *CitationClassification1) ToJSON() ([]byte, error) {
+// MarshalJSON converts CitationClassification1 to JSON data.
+func (m *CitationClassification1) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -2267,7 +2267,7 @@ func (m *CitationClassification1) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -2323,8 +2323,8 @@ func NewCitationWhoClassified() *CitationWhoClassified {
 	return &CitationWhoClassified{}
 }
 
-// FromJSON populates CitationWhoClassified from JSON data.
-func (m *CitationWhoClassified) FromJSON(data []byte) error {
+// UnmarshalJSON populates CitationWhoClassified from JSON data.
+func (m *CitationWhoClassified) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -2349,8 +2349,8 @@ func (m *CitationWhoClassified) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CitationWhoClassified to JSON data.
-func (m *CitationWhoClassified) ToJSON() ([]byte, error) {
+// MarshalJSON converts CitationWhoClassified to JSON data.
+func (m *CitationWhoClassified) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -2367,7 +2367,7 @@ func (m *CitationWhoClassified) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -2378,13 +2378,13 @@ func (m *CitationWhoClassified) ToJSON() ([]byte, error) {
 	if m.ClassifierCopyright != nil && m.ClassifierCopyright.Value != nil {
 		output.ClassifierCopyright = m.ClassifierCopyright.Value
 		if m.ClassifierCopyright.Element != nil {
-			output.ClassifierCopyrightElement = toMapOrNil(m.ClassifierCopyright.Element.ToJSON())
+			output.ClassifierCopyrightElement = toMapOrNil(m.ClassifierCopyright.Element.MarshalJSON())
 		}
 	}
 	if m.FreeToShare != nil && m.FreeToShare.Value != nil {
 		output.FreeToShare = m.FreeToShare.Value
 		if m.FreeToShare.Element != nil {
-			output.FreeToShareElement = toMapOrNil(m.FreeToShare.Element.ToJSON())
+			output.FreeToShareElement = toMapOrNil(m.FreeToShare.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -2437,8 +2437,8 @@ func NewCitationContributorship() *CitationContributorship {
 	return &CitationContributorship{}
 }
 
-// FromJSON populates CitationContributorship from JSON data.
-func (m *CitationContributorship) FromJSON(data []byte) error {
+// UnmarshalJSON populates CitationContributorship from JSON data.
+func (m *CitationContributorship) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -2459,8 +2459,8 @@ func (m *CitationContributorship) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CitationContributorship to JSON data.
-func (m *CitationContributorship) ToJSON() ([]byte, error) {
+// MarshalJSON converts CitationContributorship to JSON data.
+func (m *CitationContributorship) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -2474,7 +2474,7 @@ func (m *CitationContributorship) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -2482,7 +2482,7 @@ func (m *CitationContributorship) ToJSON() ([]byte, error) {
 	if m.Complete != nil && m.Complete.Value != nil {
 		output.Complete = m.Complete.Value
 		if m.Complete.Element != nil {
-			output.CompleteElement = toMapOrNil(m.Complete.Element.ToJSON())
+			output.CompleteElement = toMapOrNil(m.Complete.Element.MarshalJSON())
 		}
 	}
 	output.Entry = m.Entry
@@ -2542,8 +2542,8 @@ func NewCitationEntry() *CitationEntry {
 	return &CitationEntry{}
 }
 
-// FromJSON populates CitationEntry from JSON data.
-func (m *CitationEntry) FromJSON(data []byte) error {
+// UnmarshalJSON populates CitationEntry from JSON data.
+func (m *CitationEntry) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -2582,8 +2582,8 @@ func (m *CitationEntry) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CitationEntry to JSON data.
-func (m *CitationEntry) ToJSON() ([]byte, error) {
+// MarshalJSON converts CitationEntry to JSON data.
+func (m *CitationEntry) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -2609,7 +2609,7 @@ func (m *CitationEntry) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -2618,13 +2618,13 @@ func (m *CitationEntry) ToJSON() ([]byte, error) {
 	if m.Initials != nil && m.Initials.Value != nil {
 		output.Initials = m.Initials.Value
 		if m.Initials.Element != nil {
-			output.InitialsElement = toMapOrNil(m.Initials.Element.ToJSON())
+			output.InitialsElement = toMapOrNil(m.Initials.Element.MarshalJSON())
 		}
 	}
 	if m.CollectiveName != nil && m.CollectiveName.Value != nil {
 		output.CollectiveName = m.CollectiveName.Value
 		if m.CollectiveName.Element != nil {
-			output.CollectiveNameElement = toMapOrNil(m.CollectiveName.Element.ToJSON())
+			output.CollectiveNameElement = toMapOrNil(m.CollectiveName.Element.MarshalJSON())
 		}
 	}
 	output.Identifier = m.Identifier
@@ -2637,13 +2637,13 @@ func (m *CitationEntry) ToJSON() ([]byte, error) {
 	if m.CorrespondingContact != nil && m.CorrespondingContact.Value != nil {
 		output.CorrespondingContact = m.CorrespondingContact.Value
 		if m.CorrespondingContact.Element != nil {
-			output.CorrespondingContactElement = toMapOrNil(m.CorrespondingContact.Element.ToJSON())
+			output.CorrespondingContactElement = toMapOrNil(m.CorrespondingContact.Element.MarshalJSON())
 		}
 	}
 	if m.ListOrder != nil && m.ListOrder.Value != nil {
 		output.ListOrder = m.ListOrder.Value
 		if m.ListOrder.Element != nil {
-			output.ListOrderElement = toMapOrNil(m.ListOrder.Element.ToJSON())
+			output.ListOrderElement = toMapOrNil(m.ListOrder.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -2710,8 +2710,8 @@ func NewCitationAffiliationInfo() *CitationAffiliationInfo {
 	return &CitationAffiliationInfo{}
 }
 
-// FromJSON populates CitationAffiliationInfo from JSON data.
-func (m *CitationAffiliationInfo) FromJSON(data []byte) error {
+// UnmarshalJSON populates CitationAffiliationInfo from JSON data.
+func (m *CitationAffiliationInfo) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -2732,8 +2732,8 @@ func (m *CitationAffiliationInfo) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CitationAffiliationInfo to JSON data.
-func (m *CitationAffiliationInfo) ToJSON() ([]byte, error) {
+// MarshalJSON converts CitationAffiliationInfo to JSON data.
+func (m *CitationAffiliationInfo) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -2748,7 +2748,7 @@ func (m *CitationAffiliationInfo) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -2756,13 +2756,13 @@ func (m *CitationAffiliationInfo) ToJSON() ([]byte, error) {
 	if m.Affiliation != nil && m.Affiliation.Value != nil {
 		output.Affiliation = m.Affiliation.Value
 		if m.Affiliation.Element != nil {
-			output.AffiliationElement = toMapOrNil(m.Affiliation.Element.ToJSON())
+			output.AffiliationElement = toMapOrNil(m.Affiliation.Element.MarshalJSON())
 		}
 	}
 	if m.Role != nil && m.Role.Value != nil {
 		output.Role = m.Role.Value
 		if m.Role.Element != nil {
-			output.RoleElement = toMapOrNil(m.Role.Element.ToJSON())
+			output.RoleElement = toMapOrNil(m.Role.Element.MarshalJSON())
 		}
 	}
 	output.Identifier = m.Identifier
@@ -2811,8 +2811,8 @@ func NewCitationContributionInstance() *CitationContributionInstance {
 	return &CitationContributionInstance{}
 }
 
-// FromJSON populates CitationContributionInstance from JSON data.
-func (m *CitationContributionInstance) FromJSON(data []byte) error {
+// UnmarshalJSON populates CitationContributionInstance from JSON data.
+func (m *CitationContributionInstance) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -2831,8 +2831,8 @@ func (m *CitationContributionInstance) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CitationContributionInstance to JSON data.
-func (m *CitationContributionInstance) ToJSON() ([]byte, error) {
+// MarshalJSON converts CitationContributionInstance to JSON data.
+func (m *CitationContributionInstance) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -2845,7 +2845,7 @@ func (m *CitationContributionInstance) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -2854,7 +2854,7 @@ func (m *CitationContributionInstance) ToJSON() ([]byte, error) {
 	if m.Time != nil && m.Time.Value != nil {
 		output.Time = m.Time.Value
 		if m.Time.Element != nil {
-			output.TimeElement = toMapOrNil(m.Time.Element.ToJSON())
+			output.TimeElement = toMapOrNil(m.Time.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -2902,8 +2902,8 @@ func NewCitationSummary1() *CitationSummary1 {
 	return &CitationSummary1{}
 }
 
-// FromJSON populates CitationSummary1 from JSON data.
-func (m *CitationSummary1) FromJSON(data []byte) error {
+// UnmarshalJSON populates CitationSummary1 from JSON data.
+func (m *CitationSummary1) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -2926,8 +2926,8 @@ func (m *CitationSummary1) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CitationSummary1 to JSON data.
-func (m *CitationSummary1) ToJSON() ([]byte, error) {
+// MarshalJSON converts CitationSummary1 to JSON data.
+func (m *CitationSummary1) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -2942,7 +2942,7 @@ func (m *CitationSummary1) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -2953,7 +2953,7 @@ func (m *CitationSummary1) ToJSON() ([]byte, error) {
 	if m.Value != nil && m.Value.Value != nil {
 		output.Value = m.Value.Value
 		if m.Value.Element != nil {
-			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+			output.ValueElement = toMapOrNil(m.Value.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

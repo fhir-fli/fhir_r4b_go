@@ -55,7 +55,7 @@ func NewFhirIdFromMap(data map[string]interface{}) (*FhirId, error) {
 	return fhirId, nil
 }
 
-func (fi *FhirId) FromJSON(data []byte) error {
+func (fi *FhirId) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Value   *string  `json:"value"`
 		Element *Element `json:"_value"`
@@ -71,13 +71,13 @@ func (fi *FhirId) FromJSON(data []byte) error {
 	return nil
 }
 
-func (fi *FhirId) ToJSON() ([]byte, error) {
+func (fi *FhirId) MarshalJSON() ([]byte, error) {
 	result := map[string]interface{}{}
 	if fi.Value != nil {
 		result["value"] = *fi.Value
 	}
 	if fi.Element != nil {
-		elementJSON, err := fi.Element.ToJSON()
+		elementJSON, err := fi.Element.MarshalJSON()
 		if err != nil {
 			return nil, err
 		}

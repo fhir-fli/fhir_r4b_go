@@ -40,8 +40,8 @@ func NewDeviceUseStatement() *DeviceUseStatement {
 	return &DeviceUseStatement{}
 }
 
-// FromJSON populates DeviceUseStatement from JSON data.
-func (m *DeviceUseStatement) FromJSON(data []byte) error {
+// UnmarshalJSON populates DeviceUseStatement from JSON data.
+func (m *DeviceUseStatement) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -96,8 +96,8 @@ func (m *DeviceUseStatement) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts DeviceUseStatement to JSON data.
-func (m *DeviceUseStatement) ToJSON() ([]byte, error) {
+// MarshalJSON converts DeviceUseStatement to JSON data.
+func (m *DeviceUseStatement) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -130,14 +130,14 @@ func (m *DeviceUseStatement) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -155,13 +155,13 @@ func (m *DeviceUseStatement) ToJSON() ([]byte, error) {
 	if m.TimingDateTime != nil && m.TimingDateTime.Value != nil {
 		output.TimingDateTime = m.TimingDateTime.Value
 		if m.TimingDateTime.Element != nil {
-			output.TimingDateTimeElement = toMapOrNil(m.TimingDateTime.Element.ToJSON())
+			output.TimingDateTimeElement = toMapOrNil(m.TimingDateTime.Element.MarshalJSON())
 		}
 	}
 	if m.RecordedOn != nil && m.RecordedOn.Value != nil {
 		output.RecordedOn = m.RecordedOn.Value
 		if m.RecordedOn.Element != nil {
-			output.RecordedOnElement = toMapOrNil(m.RecordedOn.Element.ToJSON())
+			output.RecordedOnElement = toMapOrNil(m.RecordedOn.Element.MarshalJSON())
 		}
 	}
 	output.Source = m.Source

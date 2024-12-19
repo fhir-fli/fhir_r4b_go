@@ -43,8 +43,8 @@ func NewRiskAssessment() *RiskAssessment {
 	return &RiskAssessment{}
 }
 
-// FromJSON populates RiskAssessment from JSON data.
-func (m *RiskAssessment) FromJSON(data []byte) error {
+// UnmarshalJSON populates RiskAssessment from JSON data.
+func (m *RiskAssessment) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -105,8 +105,8 @@ func (m *RiskAssessment) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts RiskAssessment to JSON data.
-func (m *RiskAssessment) ToJSON() ([]byte, error) {
+// MarshalJSON converts RiskAssessment to JSON data.
+func (m *RiskAssessment) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -142,14 +142,14 @@ func (m *RiskAssessment) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -168,7 +168,7 @@ func (m *RiskAssessment) ToJSON() ([]byte, error) {
 	if m.OccurrenceDateTime != nil && m.OccurrenceDateTime.Value != nil {
 		output.OccurrenceDateTime = m.OccurrenceDateTime.Value
 		if m.OccurrenceDateTime.Element != nil {
-			output.OccurrenceDateTimeElement = toMapOrNil(m.OccurrenceDateTime.Element.ToJSON())
+			output.OccurrenceDateTimeElement = toMapOrNil(m.OccurrenceDateTime.Element.MarshalJSON())
 		}
 	}
 	output.OccurrencePeriod = m.OccurrencePeriod
@@ -181,7 +181,7 @@ func (m *RiskAssessment) ToJSON() ([]byte, error) {
 	if m.Mitigation != nil && m.Mitigation.Value != nil {
 		output.Mitigation = m.Mitigation.Value
 		if m.Mitigation.Element != nil {
-			output.MitigationElement = toMapOrNil(m.Mitigation.Element.ToJSON())
+			output.MitigationElement = toMapOrNil(m.Mitigation.Element.MarshalJSON())
 		}
 	}
 	output.Note = m.Note
@@ -276,8 +276,8 @@ func NewRiskAssessmentPrediction() *RiskAssessmentPrediction {
 	return &RiskAssessmentPrediction{}
 }
 
-// FromJSON populates RiskAssessmentPrediction from JSON data.
-func (m *RiskAssessmentPrediction) FromJSON(data []byte) error {
+// UnmarshalJSON populates RiskAssessmentPrediction from JSON data.
+func (m *RiskAssessmentPrediction) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -308,8 +308,8 @@ func (m *RiskAssessmentPrediction) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts RiskAssessmentPrediction to JSON data.
-func (m *RiskAssessmentPrediction) ToJSON() ([]byte, error) {
+// MarshalJSON converts RiskAssessmentPrediction to JSON data.
+func (m *RiskAssessmentPrediction) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -330,7 +330,7 @@ func (m *RiskAssessmentPrediction) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -339,7 +339,7 @@ func (m *RiskAssessmentPrediction) ToJSON() ([]byte, error) {
 	if m.ProbabilityDecimal != nil && m.ProbabilityDecimal.Value != nil {
 		output.ProbabilityDecimal = m.ProbabilityDecimal.Value
 		if m.ProbabilityDecimal.Element != nil {
-			output.ProbabilityDecimalElement = toMapOrNil(m.ProbabilityDecimal.Element.ToJSON())
+			output.ProbabilityDecimalElement = toMapOrNil(m.ProbabilityDecimal.Element.MarshalJSON())
 		}
 	}
 	output.ProbabilityRange = m.ProbabilityRange
@@ -347,7 +347,7 @@ func (m *RiskAssessmentPrediction) ToJSON() ([]byte, error) {
 	if m.RelativeRisk != nil && m.RelativeRisk.Value != nil {
 		output.RelativeRisk = m.RelativeRisk.Value
 		if m.RelativeRisk.Element != nil {
-			output.RelativeRiskElement = toMapOrNil(m.RelativeRisk.Element.ToJSON())
+			output.RelativeRiskElement = toMapOrNil(m.RelativeRisk.Element.MarshalJSON())
 		}
 	}
 	output.WhenPeriod = m.WhenPeriod
@@ -355,7 +355,7 @@ func (m *RiskAssessmentPrediction) ToJSON() ([]byte, error) {
 	if m.Rationale != nil && m.Rationale.Value != nil {
 		output.Rationale = m.Rationale.Value
 		if m.Rationale.Element != nil {
-			output.RationaleElement = toMapOrNil(m.Rationale.Element.ToJSON())
+			output.RationaleElement = toMapOrNil(m.Rationale.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

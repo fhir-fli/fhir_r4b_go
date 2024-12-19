@@ -41,8 +41,8 @@ func NewInvoice() *Invoice {
 	return &Invoice{}
 }
 
-// FromJSON populates Invoice from JSON data.
-func (m *Invoice) FromJSON(data []byte) error {
+// UnmarshalJSON populates Invoice from JSON data.
+func (m *Invoice) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -99,8 +99,8 @@ func (m *Invoice) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Invoice to JSON data.
-func (m *Invoice) ToJSON() ([]byte, error) {
+// MarshalJSON converts Invoice to JSON data.
+func (m *Invoice) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -135,14 +135,14 @@ func (m *Invoice) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -155,7 +155,7 @@ func (m *Invoice) ToJSON() ([]byte, error) {
 	if m.CancelledReason != nil && m.CancelledReason.Value != nil {
 		output.CancelledReason = m.CancelledReason.Value
 		if m.CancelledReason.Element != nil {
-			output.CancelledReasonElement = toMapOrNil(m.CancelledReason.Element.ToJSON())
+			output.CancelledReasonElement = toMapOrNil(m.CancelledReason.Element.MarshalJSON())
 		}
 	}
 	output.Type = m.Type
@@ -164,7 +164,7 @@ func (m *Invoice) ToJSON() ([]byte, error) {
 	if m.Date != nil && m.Date.Value != nil {
 		output.Date = m.Date.Value
 		if m.Date.Element != nil {
-			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+			output.DateElement = toMapOrNil(m.Date.Element.MarshalJSON())
 		}
 	}
 	output.Participant = m.Participant
@@ -177,7 +177,7 @@ func (m *Invoice) ToJSON() ([]byte, error) {
 	if m.PaymentTerms != nil && m.PaymentTerms.Value != nil {
 		output.PaymentTerms = m.PaymentTerms.Value
 		if m.PaymentTerms.Element != nil {
-			output.PaymentTermsElement = toMapOrNil(m.PaymentTerms.Element.ToJSON())
+			output.PaymentTermsElement = toMapOrNil(m.PaymentTerms.Element.MarshalJSON())
 		}
 	}
 	output.Note = m.Note
@@ -262,8 +262,8 @@ func NewInvoiceParticipant() *InvoiceParticipant {
 	return &InvoiceParticipant{}
 }
 
-// FromJSON populates InvoiceParticipant from JSON data.
-func (m *InvoiceParticipant) FromJSON(data []byte) error {
+// UnmarshalJSON populates InvoiceParticipant from JSON data.
+func (m *InvoiceParticipant) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -282,8 +282,8 @@ func (m *InvoiceParticipant) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts InvoiceParticipant to JSON data.
-func (m *InvoiceParticipant) ToJSON() ([]byte, error) {
+// MarshalJSON converts InvoiceParticipant to JSON data.
+func (m *InvoiceParticipant) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -295,7 +295,7 @@ func (m *InvoiceParticipant) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -347,8 +347,8 @@ func NewInvoiceLineItem() *InvoiceLineItem {
 	return &InvoiceLineItem{}
 }
 
-// FromJSON populates InvoiceLineItem from JSON data.
-func (m *InvoiceLineItem) FromJSON(data []byte) error {
+// UnmarshalJSON populates InvoiceLineItem from JSON data.
+func (m *InvoiceLineItem) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -371,8 +371,8 @@ func (m *InvoiceLineItem) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts InvoiceLineItem to JSON data.
-func (m *InvoiceLineItem) ToJSON() ([]byte, error) {
+// MarshalJSON converts InvoiceLineItem to JSON data.
+func (m *InvoiceLineItem) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -387,7 +387,7 @@ func (m *InvoiceLineItem) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -395,7 +395,7 @@ func (m *InvoiceLineItem) ToJSON() ([]byte, error) {
 	if m.Sequence != nil && m.Sequence.Value != nil {
 		output.Sequence = m.Sequence.Value
 		if m.Sequence.Element != nil {
-			output.SequenceElement = toMapOrNil(m.Sequence.Element.ToJSON())
+			output.SequenceElement = toMapOrNil(m.Sequence.Element.MarshalJSON())
 		}
 	}
 	output.ChargeItemReference = m.ChargeItemReference
@@ -450,8 +450,8 @@ func NewInvoicePriceComponent() *InvoicePriceComponent {
 	return &InvoicePriceComponent{}
 }
 
-// FromJSON populates InvoicePriceComponent from JSON data.
-func (m *InvoicePriceComponent) FromJSON(data []byte) error {
+// UnmarshalJSON populates InvoicePriceComponent from JSON data.
+func (m *InvoicePriceComponent) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -474,8 +474,8 @@ func (m *InvoicePriceComponent) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts InvoicePriceComponent to JSON data.
-func (m *InvoicePriceComponent) ToJSON() ([]byte, error) {
+// MarshalJSON converts InvoicePriceComponent to JSON data.
+func (m *InvoicePriceComponent) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -490,7 +490,7 @@ func (m *InvoicePriceComponent) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -500,7 +500,7 @@ func (m *InvoicePriceComponent) ToJSON() ([]byte, error) {
 	if m.Factor != nil && m.Factor.Value != nil {
 		output.Factor = m.Factor.Value
 		if m.Factor.Element != nil {
-			output.FactorElement = toMapOrNil(m.Factor.Element.ToJSON())
+			output.FactorElement = toMapOrNil(m.Factor.Element.MarshalJSON())
 		}
 	}
 	output.Amount = m.Amount

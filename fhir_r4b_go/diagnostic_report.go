@@ -44,8 +44,8 @@ func NewDiagnosticReport() *DiagnosticReport {
 	return &DiagnosticReport{}
 }
 
-// FromJSON populates DiagnosticReport from JSON data.
-func (m *DiagnosticReport) FromJSON(data []byte) error {
+// UnmarshalJSON populates DiagnosticReport from JSON data.
+func (m *DiagnosticReport) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -108,8 +108,8 @@ func (m *DiagnosticReport) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts DiagnosticReport to JSON data.
-func (m *DiagnosticReport) ToJSON() ([]byte, error) {
+// MarshalJSON converts DiagnosticReport to JSON data.
+func (m *DiagnosticReport) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -147,14 +147,14 @@ func (m *DiagnosticReport) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -172,14 +172,14 @@ func (m *DiagnosticReport) ToJSON() ([]byte, error) {
 	if m.EffectiveDateTime != nil && m.EffectiveDateTime.Value != nil {
 		output.EffectiveDateTime = m.EffectiveDateTime.Value
 		if m.EffectiveDateTime.Element != nil {
-			output.EffectiveDateTimeElement = toMapOrNil(m.EffectiveDateTime.Element.ToJSON())
+			output.EffectiveDateTimeElement = toMapOrNil(m.EffectiveDateTime.Element.MarshalJSON())
 		}
 	}
 	output.EffectivePeriod = m.EffectivePeriod
 	if m.Issued != nil && m.Issued.Value != nil {
 		output.Issued = m.Issued.Value
 		if m.Issued.Element != nil {
-			output.IssuedElement = toMapOrNil(m.Issued.Element.ToJSON())
+			output.IssuedElement = toMapOrNil(m.Issued.Element.MarshalJSON())
 		}
 	}
 	output.Performer = m.Performer
@@ -191,7 +191,7 @@ func (m *DiagnosticReport) ToJSON() ([]byte, error) {
 	if m.Conclusion != nil && m.Conclusion.Value != nil {
 		output.Conclusion = m.Conclusion.Value
 		if m.Conclusion.Element != nil {
-			output.ConclusionElement = toMapOrNil(m.Conclusion.Element.ToJSON())
+			output.ConclusionElement = toMapOrNil(m.Conclusion.Element.MarshalJSON())
 		}
 	}
 	output.ConclusionCode = m.ConclusionCode
@@ -283,8 +283,8 @@ func NewDiagnosticReportMedia() *DiagnosticReportMedia {
 	return &DiagnosticReportMedia{}
 }
 
-// FromJSON populates DiagnosticReportMedia from JSON data.
-func (m *DiagnosticReportMedia) FromJSON(data []byte) error {
+// UnmarshalJSON populates DiagnosticReportMedia from JSON data.
+func (m *DiagnosticReportMedia) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -303,8 +303,8 @@ func (m *DiagnosticReportMedia) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts DiagnosticReportMedia to JSON data.
-func (m *DiagnosticReportMedia) ToJSON() ([]byte, error) {
+// MarshalJSON converts DiagnosticReportMedia to JSON data.
+func (m *DiagnosticReportMedia) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -317,7 +317,7 @@ func (m *DiagnosticReportMedia) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -325,7 +325,7 @@ func (m *DiagnosticReportMedia) ToJSON() ([]byte, error) {
 	if m.Comment != nil && m.Comment.Value != nil {
 		output.Comment = m.Comment.Value
 		if m.Comment.Element != nil {
-			output.CommentElement = toMapOrNil(m.Comment.Element.ToJSON())
+			output.CommentElement = toMapOrNil(m.Comment.Element.MarshalJSON())
 		}
 	}
 	output.Link = m.Link

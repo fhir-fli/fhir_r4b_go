@@ -26,8 +26,8 @@ func NewSampledData() *SampledData {
 	return &SampledData{}
 }
 
-// FromJSON populates SampledData from JSON data.
-func (m *SampledData) FromJSON(data []byte) error {
+// UnmarshalJSON populates SampledData from JSON data.
+func (m *SampledData) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -54,8 +54,8 @@ func (m *SampledData) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts SampledData to JSON data.
-func (m *SampledData) ToJSON() ([]byte, error) {
+// MarshalJSON converts SampledData to JSON data.
+func (m *SampledData) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -77,7 +77,7 @@ func (m *SampledData) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -85,37 +85,37 @@ func (m *SampledData) ToJSON() ([]byte, error) {
 	if m.Period != nil && m.Period.Value != nil {
 		output.Period = m.Period.Value
 		if m.Period.Element != nil {
-			output.PeriodElement = toMapOrNil(m.Period.Element.ToJSON())
+			output.PeriodElement = toMapOrNil(m.Period.Element.MarshalJSON())
 		}
 	}
 	if m.Factor != nil && m.Factor.Value != nil {
 		output.Factor = m.Factor.Value
 		if m.Factor.Element != nil {
-			output.FactorElement = toMapOrNil(m.Factor.Element.ToJSON())
+			output.FactorElement = toMapOrNil(m.Factor.Element.MarshalJSON())
 		}
 	}
 	if m.LowerLimit != nil && m.LowerLimit.Value != nil {
 		output.LowerLimit = m.LowerLimit.Value
 		if m.LowerLimit.Element != nil {
-			output.LowerLimitElement = toMapOrNil(m.LowerLimit.Element.ToJSON())
+			output.LowerLimitElement = toMapOrNil(m.LowerLimit.Element.MarshalJSON())
 		}
 	}
 	if m.UpperLimit != nil && m.UpperLimit.Value != nil {
 		output.UpperLimit = m.UpperLimit.Value
 		if m.UpperLimit.Element != nil {
-			output.UpperLimitElement = toMapOrNil(m.UpperLimit.Element.ToJSON())
+			output.UpperLimitElement = toMapOrNil(m.UpperLimit.Element.MarshalJSON())
 		}
 	}
 	if m.Dimensions != nil && m.Dimensions.Value != nil {
 		output.Dimensions = m.Dimensions.Value
 		if m.Dimensions.Element != nil {
-			output.DimensionsElement = toMapOrNil(m.Dimensions.Element.ToJSON())
+			output.DimensionsElement = toMapOrNil(m.Dimensions.Element.MarshalJSON())
 		}
 	}
 	if m.Data != nil && m.Data.Value != nil {
 		output.Data = m.Data.Value
 		if m.Data.Element != nil {
-			output.DataElement = toMapOrNil(m.Data.Element.ToJSON())
+			output.DataElement = toMapOrNil(m.Data.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

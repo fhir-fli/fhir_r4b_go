@@ -55,8 +55,8 @@ func NewChargeItem() *ChargeItem {
 	return &ChargeItem{}
 }
 
-// FromJSON populates ChargeItem from JSON data.
-func (m *ChargeItem) FromJSON(data []byte) error {
+// UnmarshalJSON populates ChargeItem from JSON data.
+func (m *ChargeItem) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -157,8 +157,8 @@ func (m *ChargeItem) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ChargeItem to JSON data.
-func (m *ChargeItem) ToJSON() ([]byte, error) {
+// MarshalJSON converts ChargeItem to JSON data.
+func (m *ChargeItem) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -209,14 +209,14 @@ func (m *ChargeItem) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -233,7 +233,7 @@ func (m *ChargeItem) ToJSON() ([]byte, error) {
 				output.DefinitionUri[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.DefinitionUriElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.DefinitionUriElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -245,7 +245,7 @@ func (m *ChargeItem) ToJSON() ([]byte, error) {
 				output.DefinitionCanonical[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.DefinitionCanonicalElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.DefinitionCanonicalElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -257,7 +257,7 @@ func (m *ChargeItem) ToJSON() ([]byte, error) {
 	if m.OccurrenceDateTime != nil && m.OccurrenceDateTime.Value != nil {
 		output.OccurrenceDateTime = m.OccurrenceDateTime.Value
 		if m.OccurrenceDateTime.Element != nil {
-			output.OccurrenceDateTimeElement = toMapOrNil(m.OccurrenceDateTime.Element.ToJSON())
+			output.OccurrenceDateTimeElement = toMapOrNil(m.OccurrenceDateTime.Element.MarshalJSON())
 		}
 	}
 	output.OccurrencePeriod = m.OccurrencePeriod
@@ -271,21 +271,21 @@ func (m *ChargeItem) ToJSON() ([]byte, error) {
 	if m.FactorOverride != nil && m.FactorOverride.Value != nil {
 		output.FactorOverride = m.FactorOverride.Value
 		if m.FactorOverride.Element != nil {
-			output.FactorOverrideElement = toMapOrNil(m.FactorOverride.Element.ToJSON())
+			output.FactorOverrideElement = toMapOrNil(m.FactorOverride.Element.MarshalJSON())
 		}
 	}
 	output.PriceOverride = m.PriceOverride
 	if m.OverrideReason != nil && m.OverrideReason.Value != nil {
 		output.OverrideReason = m.OverrideReason.Value
 		if m.OverrideReason.Element != nil {
-			output.OverrideReasonElement = toMapOrNil(m.OverrideReason.Element.ToJSON())
+			output.OverrideReasonElement = toMapOrNil(m.OverrideReason.Element.MarshalJSON())
 		}
 	}
 	output.Enterer = m.Enterer
 	if m.EnteredDate != nil && m.EnteredDate.Value != nil {
 		output.EnteredDate = m.EnteredDate.Value
 		if m.EnteredDate.Element != nil {
-			output.EnteredDateElement = toMapOrNil(m.EnteredDate.Element.ToJSON())
+			output.EnteredDateElement = toMapOrNil(m.EnteredDate.Element.MarshalJSON())
 		}
 	}
 	output.Reason = m.Reason
@@ -402,8 +402,8 @@ func NewChargeItemPerformer() *ChargeItemPerformer {
 	return &ChargeItemPerformer{}
 }
 
-// FromJSON populates ChargeItemPerformer from JSON data.
-func (m *ChargeItemPerformer) FromJSON(data []byte) error {
+// UnmarshalJSON populates ChargeItemPerformer from JSON data.
+func (m *ChargeItemPerformer) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -422,8 +422,8 @@ func (m *ChargeItemPerformer) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ChargeItemPerformer to JSON data.
-func (m *ChargeItemPerformer) ToJSON() ([]byte, error) {
+// MarshalJSON converts ChargeItemPerformer to JSON data.
+func (m *ChargeItemPerformer) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -435,7 +435,7 @@ func (m *ChargeItemPerformer) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_

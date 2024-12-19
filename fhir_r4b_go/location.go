@@ -43,8 +43,8 @@ func NewLocation() *Location {
 	return &Location{}
 }
 
-// FromJSON populates Location from JSON data.
-func (m *Location) FromJSON(data []byte) error {
+// UnmarshalJSON populates Location from JSON data.
+func (m *Location) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -112,8 +112,8 @@ func (m *Location) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Location to JSON data.
-func (m *Location) ToJSON() ([]byte, error) {
+// MarshalJSON converts Location to JSON data.
+func (m *Location) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -150,14 +150,14 @@ func (m *Location) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -171,7 +171,7 @@ func (m *Location) ToJSON() ([]byte, error) {
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	if len(m.Alias) > 0 {
@@ -182,14 +182,14 @@ func (m *Location) ToJSON() ([]byte, error) {
 				output.Alias[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.AliasElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.AliasElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.Mode = m.Mode
@@ -204,7 +204,7 @@ func (m *Location) ToJSON() ([]byte, error) {
 	if m.AvailabilityExceptions != nil && m.AvailabilityExceptions.Value != nil {
 		output.AvailabilityExceptions = m.AvailabilityExceptions.Value
 		if m.AvailabilityExceptions.Element != nil {
-			output.AvailabilityExceptionsElement = toMapOrNil(m.AvailabilityExceptions.Element.ToJSON())
+			output.AvailabilityExceptionsElement = toMapOrNil(m.AvailabilityExceptions.Element.MarshalJSON())
 		}
 	}
 	output.Endpoint = m.Endpoint
@@ -292,8 +292,8 @@ func NewLocationPosition() *LocationPosition {
 	return &LocationPosition{}
 }
 
-// FromJSON populates LocationPosition from JSON data.
-func (m *LocationPosition) FromJSON(data []byte) error {
+// UnmarshalJSON populates LocationPosition from JSON data.
+func (m *LocationPosition) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -314,8 +314,8 @@ func (m *LocationPosition) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts LocationPosition to JSON data.
-func (m *LocationPosition) ToJSON() ([]byte, error) {
+// MarshalJSON converts LocationPosition to JSON data.
+func (m *LocationPosition) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -331,7 +331,7 @@ func (m *LocationPosition) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -339,19 +339,19 @@ func (m *LocationPosition) ToJSON() ([]byte, error) {
 	if m.Longitude != nil && m.Longitude.Value != nil {
 		output.Longitude = m.Longitude.Value
 		if m.Longitude.Element != nil {
-			output.LongitudeElement = toMapOrNil(m.Longitude.Element.ToJSON())
+			output.LongitudeElement = toMapOrNil(m.Longitude.Element.MarshalJSON())
 		}
 	}
 	if m.Latitude != nil && m.Latitude.Value != nil {
 		output.Latitude = m.Latitude.Value
 		if m.Latitude.Element != nil {
-			output.LatitudeElement = toMapOrNil(m.Latitude.Element.ToJSON())
+			output.LatitudeElement = toMapOrNil(m.Latitude.Element.MarshalJSON())
 		}
 	}
 	if m.Altitude != nil && m.Altitude.Value != nil {
 		output.Altitude = m.Altitude.Value
 		if m.Altitude.Element != nil {
-			output.AltitudeElement = toMapOrNil(m.Altitude.Element.ToJSON())
+			output.AltitudeElement = toMapOrNil(m.Altitude.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -401,8 +401,8 @@ func NewLocationHoursOfOperation() *LocationHoursOfOperation {
 	return &LocationHoursOfOperation{}
 }
 
-// FromJSON populates LocationHoursOfOperation from JSON data.
-func (m *LocationHoursOfOperation) FromJSON(data []byte) error {
+// UnmarshalJSON populates LocationHoursOfOperation from JSON data.
+func (m *LocationHoursOfOperation) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -425,8 +425,8 @@ func (m *LocationHoursOfOperation) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts LocationHoursOfOperation to JSON data.
-func (m *LocationHoursOfOperation) ToJSON() ([]byte, error) {
+// MarshalJSON converts LocationHoursOfOperation to JSON data.
+func (m *LocationHoursOfOperation) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -443,7 +443,7 @@ func (m *LocationHoursOfOperation) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -452,19 +452,19 @@ func (m *LocationHoursOfOperation) ToJSON() ([]byte, error) {
 	if m.AllDay != nil && m.AllDay.Value != nil {
 		output.AllDay = m.AllDay.Value
 		if m.AllDay.Element != nil {
-			output.AllDayElement = toMapOrNil(m.AllDay.Element.ToJSON())
+			output.AllDayElement = toMapOrNil(m.AllDay.Element.MarshalJSON())
 		}
 	}
 	if m.OpeningTime != nil && m.OpeningTime.Value != nil {
 		output.OpeningTime = m.OpeningTime.Value
 		if m.OpeningTime.Element != nil {
-			output.OpeningTimeElement = toMapOrNil(m.OpeningTime.Element.ToJSON())
+			output.OpeningTimeElement = toMapOrNil(m.OpeningTime.Element.MarshalJSON())
 		}
 	}
 	if m.ClosingTime != nil && m.ClosingTime.Value != nil {
 		output.ClosingTime = m.ClosingTime.Value
 		if m.ClosingTime.Element != nil {
-			output.ClosingTimeElement = toMapOrNil(m.ClosingTime.Element.ToJSON())
+			output.ClosingTimeElement = toMapOrNil(m.ClosingTime.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

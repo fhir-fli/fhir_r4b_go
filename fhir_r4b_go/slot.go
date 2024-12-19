@@ -36,8 +36,8 @@ func NewSlot() *Slot {
 	return &Slot{}
 }
 
-// FromJSON populates Slot from JSON data.
-func (m *Slot) FromJSON(data []byte) error {
+// UnmarshalJSON populates Slot from JSON data.
+func (m *Slot) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -84,8 +84,8 @@ func (m *Slot) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Slot to JSON data.
-func (m *Slot) ToJSON() ([]byte, error) {
+// MarshalJSON converts Slot to JSON data.
+func (m *Slot) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -116,14 +116,14 @@ func (m *Slot) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -141,25 +141,25 @@ func (m *Slot) ToJSON() ([]byte, error) {
 	if m.Start != nil && m.Start.Value != nil {
 		output.Start = m.Start.Value
 		if m.Start.Element != nil {
-			output.StartElement = toMapOrNil(m.Start.Element.ToJSON())
+			output.StartElement = toMapOrNil(m.Start.Element.MarshalJSON())
 		}
 	}
 	if m.End != nil && m.End.Value != nil {
 		output.End = m.End.Value
 		if m.End.Element != nil {
-			output.EndElement = toMapOrNil(m.End.Element.ToJSON())
+			output.EndElement = toMapOrNil(m.End.Element.MarshalJSON())
 		}
 	}
 	if m.Overbooked != nil && m.Overbooked.Value != nil {
 		output.Overbooked = m.Overbooked.Value
 		if m.Overbooked.Element != nil {
-			output.OverbookedElement = toMapOrNil(m.Overbooked.Element.ToJSON())
+			output.OverbookedElement = toMapOrNil(m.Overbooked.Element.MarshalJSON())
 		}
 	}
 	if m.Comment != nil && m.Comment.Value != nil {
 		output.Comment = m.Comment.Value
 		if m.Comment.Element != nil {
-			output.CommentElement = toMapOrNil(m.Comment.Element.ToJSON())
+			output.CommentElement = toMapOrNil(m.Comment.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

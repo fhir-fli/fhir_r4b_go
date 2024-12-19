@@ -40,8 +40,8 @@ func NewInsurancePlan() *InsurancePlan {
 	return &InsurancePlan{}
 }
 
-// FromJSON populates InsurancePlan from JSON data.
-func (m *InsurancePlan) FromJSON(data []byte) error {
+// UnmarshalJSON populates InsurancePlan from JSON data.
+func (m *InsurancePlan) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -103,8 +103,8 @@ func (m *InsurancePlan) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts InsurancePlan to JSON data.
-func (m *InsurancePlan) ToJSON() ([]byte, error) {
+// MarshalJSON converts InsurancePlan to JSON data.
+func (m *InsurancePlan) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -136,14 +136,14 @@ func (m *InsurancePlan) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -157,7 +157,7 @@ func (m *InsurancePlan) ToJSON() ([]byte, error) {
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	if len(m.Alias) > 0 {
@@ -168,7 +168,7 @@ func (m *InsurancePlan) ToJSON() ([]byte, error) {
 				output.Alias[i] = item.Value
 			}
 			if item != nil && item.Element != nil {
-				output.AliasElement[i] = toMapOrNil(item.Element.ToJSON())
+				output.AliasElement[i] = toMapOrNil(item.Element.MarshalJSON())
 			}
 		}
 	}
@@ -260,8 +260,8 @@ func NewInsurancePlanContact() *InsurancePlanContact {
 	return &InsurancePlanContact{}
 }
 
-// FromJSON populates InsurancePlanContact from JSON data.
-func (m *InsurancePlanContact) FromJSON(data []byte) error {
+// UnmarshalJSON populates InsurancePlanContact from JSON data.
+func (m *InsurancePlanContact) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -284,8 +284,8 @@ func (m *InsurancePlanContact) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts InsurancePlanContact to JSON data.
-func (m *InsurancePlanContact) ToJSON() ([]byte, error) {
+// MarshalJSON converts InsurancePlanContact to JSON data.
+func (m *InsurancePlanContact) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -299,7 +299,7 @@ func (m *InsurancePlanContact) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -356,8 +356,8 @@ func NewInsurancePlanCoverage() *InsurancePlanCoverage {
 	return &InsurancePlanCoverage{}
 }
 
-// FromJSON populates InsurancePlanCoverage from JSON data.
-func (m *InsurancePlanCoverage) FromJSON(data []byte) error {
+// UnmarshalJSON populates InsurancePlanCoverage from JSON data.
+func (m *InsurancePlanCoverage) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -378,8 +378,8 @@ func (m *InsurancePlanCoverage) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts InsurancePlanCoverage to JSON data.
-func (m *InsurancePlanCoverage) ToJSON() ([]byte, error) {
+// MarshalJSON converts InsurancePlanCoverage to JSON data.
+func (m *InsurancePlanCoverage) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -392,7 +392,7 @@ func (m *InsurancePlanCoverage) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -446,8 +446,8 @@ func NewInsurancePlanBenefit() *InsurancePlanBenefit {
 	return &InsurancePlanBenefit{}
 }
 
-// FromJSON populates InsurancePlanBenefit from JSON data.
-func (m *InsurancePlanBenefit) FromJSON(data []byte) error {
+// UnmarshalJSON populates InsurancePlanBenefit from JSON data.
+func (m *InsurancePlanBenefit) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -468,8 +468,8 @@ func (m *InsurancePlanBenefit) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts InsurancePlanBenefit to JSON data.
-func (m *InsurancePlanBenefit) ToJSON() ([]byte, error) {
+// MarshalJSON converts InsurancePlanBenefit to JSON data.
+func (m *InsurancePlanBenefit) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -483,7 +483,7 @@ func (m *InsurancePlanBenefit) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -492,7 +492,7 @@ func (m *InsurancePlanBenefit) ToJSON() ([]byte, error) {
 	if m.Requirement != nil && m.Requirement.Value != nil {
 		output.Requirement = m.Requirement.Value
 		if m.Requirement.Element != nil {
-			output.RequirementElement = toMapOrNil(m.Requirement.Element.ToJSON())
+			output.RequirementElement = toMapOrNil(m.Requirement.Element.MarshalJSON())
 		}
 	}
 	output.Limit = m.Limit
@@ -541,8 +541,8 @@ func NewInsurancePlanLimit() *InsurancePlanLimit {
 	return &InsurancePlanLimit{}
 }
 
-// FromJSON populates InsurancePlanLimit from JSON data.
-func (m *InsurancePlanLimit) FromJSON(data []byte) error {
+// UnmarshalJSON populates InsurancePlanLimit from JSON data.
+func (m *InsurancePlanLimit) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -561,8 +561,8 @@ func (m *InsurancePlanLimit) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts InsurancePlanLimit to JSON data.
-func (m *InsurancePlanLimit) ToJSON() ([]byte, error) {
+// MarshalJSON converts InsurancePlanLimit to JSON data.
+func (m *InsurancePlanLimit) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -574,7 +574,7 @@ func (m *InsurancePlanLimit) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -628,8 +628,8 @@ func NewInsurancePlanPlan() *InsurancePlanPlan {
 	return &InsurancePlanPlan{}
 }
 
-// FromJSON populates InsurancePlanPlan from JSON data.
-func (m *InsurancePlanPlan) FromJSON(data []byte) error {
+// UnmarshalJSON populates InsurancePlanPlan from JSON data.
+func (m *InsurancePlanPlan) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -656,8 +656,8 @@ func (m *InsurancePlanPlan) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts InsurancePlanPlan to JSON data.
-func (m *InsurancePlanPlan) ToJSON() ([]byte, error) {
+// MarshalJSON converts InsurancePlanPlan to JSON data.
+func (m *InsurancePlanPlan) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -673,7 +673,7 @@ func (m *InsurancePlanPlan) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -737,8 +737,8 @@ func NewInsurancePlanGeneralCost() *InsurancePlanGeneralCost {
 	return &InsurancePlanGeneralCost{}
 }
 
-// FromJSON populates InsurancePlanGeneralCost from JSON data.
-func (m *InsurancePlanGeneralCost) FromJSON(data []byte) error {
+// UnmarshalJSON populates InsurancePlanGeneralCost from JSON data.
+func (m *InsurancePlanGeneralCost) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -761,8 +761,8 @@ func (m *InsurancePlanGeneralCost) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts InsurancePlanGeneralCost to JSON data.
-func (m *InsurancePlanGeneralCost) ToJSON() ([]byte, error) {
+// MarshalJSON converts InsurancePlanGeneralCost to JSON data.
+func (m *InsurancePlanGeneralCost) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -778,7 +778,7 @@ func (m *InsurancePlanGeneralCost) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -787,14 +787,14 @@ func (m *InsurancePlanGeneralCost) ToJSON() ([]byte, error) {
 	if m.GroupSize != nil && m.GroupSize.Value != nil {
 		output.GroupSize = m.GroupSize.Value
 		if m.GroupSize.Element != nil {
-			output.GroupSizeElement = toMapOrNil(m.GroupSize.Element.ToJSON())
+			output.GroupSizeElement = toMapOrNil(m.GroupSize.Element.MarshalJSON())
 		}
 	}
 	output.Cost = m.Cost
 	if m.Comment != nil && m.Comment.Value != nil {
 		output.Comment = m.Comment.Value
 		if m.Comment.Element != nil {
-			output.CommentElement = toMapOrNil(m.Comment.Element.ToJSON())
+			output.CommentElement = toMapOrNil(m.Comment.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -844,8 +844,8 @@ func NewInsurancePlanSpecificCost() *InsurancePlanSpecificCost {
 	return &InsurancePlanSpecificCost{}
 }
 
-// FromJSON populates InsurancePlanSpecificCost from JSON data.
-func (m *InsurancePlanSpecificCost) FromJSON(data []byte) error {
+// UnmarshalJSON populates InsurancePlanSpecificCost from JSON data.
+func (m *InsurancePlanSpecificCost) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -864,8 +864,8 @@ func (m *InsurancePlanSpecificCost) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts InsurancePlanSpecificCost to JSON data.
-func (m *InsurancePlanSpecificCost) ToJSON() ([]byte, error) {
+// MarshalJSON converts InsurancePlanSpecificCost to JSON data.
+func (m *InsurancePlanSpecificCost) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -877,7 +877,7 @@ func (m *InsurancePlanSpecificCost) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -927,8 +927,8 @@ func NewInsurancePlanBenefit1() *InsurancePlanBenefit1 {
 	return &InsurancePlanBenefit1{}
 }
 
-// FromJSON populates InsurancePlanBenefit1 from JSON data.
-func (m *InsurancePlanBenefit1) FromJSON(data []byte) error {
+// UnmarshalJSON populates InsurancePlanBenefit1 from JSON data.
+func (m *InsurancePlanBenefit1) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -947,8 +947,8 @@ func (m *InsurancePlanBenefit1) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts InsurancePlanBenefit1 to JSON data.
-func (m *InsurancePlanBenefit1) ToJSON() ([]byte, error) {
+// MarshalJSON converts InsurancePlanBenefit1 to JSON data.
+func (m *InsurancePlanBenefit1) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -960,7 +960,7 @@ func (m *InsurancePlanBenefit1) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -1012,8 +1012,8 @@ func NewInsurancePlanCost() *InsurancePlanCost {
 	return &InsurancePlanCost{}
 }
 
-// FromJSON populates InsurancePlanCost from JSON data.
-func (m *InsurancePlanCost) FromJSON(data []byte) error {
+// UnmarshalJSON populates InsurancePlanCost from JSON data.
+func (m *InsurancePlanCost) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -1036,8 +1036,8 @@ func (m *InsurancePlanCost) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts InsurancePlanCost to JSON data.
-func (m *InsurancePlanCost) ToJSON() ([]byte, error) {
+// MarshalJSON converts InsurancePlanCost to JSON data.
+func (m *InsurancePlanCost) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -1051,7 +1051,7 @@ func (m *InsurancePlanCost) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_

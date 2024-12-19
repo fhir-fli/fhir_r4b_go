@@ -24,8 +24,8 @@ func NewBinary() *Binary {
 	return &Binary{}
 }
 
-// FromJSON populates Binary from JSON data.
-func (m *Binary) FromJSON(data []byte) error {
+// UnmarshalJSON populates Binary from JSON data.
+func (m *Binary) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -48,8 +48,8 @@ func (m *Binary) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Binary to JSON data.
-func (m *Binary) ToJSON() ([]byte, error) {
+// MarshalJSON converts Binary to JSON data.
+func (m *Binary) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -66,28 +66,28 @@ func (m *Binary) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
 	if m.ContentType != nil && m.ContentType.Value != nil {
 		output.ContentType = m.ContentType.Value
 		if m.ContentType.Element != nil {
-			output.ContentTypeElement = toMapOrNil(m.ContentType.Element.ToJSON())
+			output.ContentTypeElement = toMapOrNil(m.ContentType.Element.MarshalJSON())
 		}
 	}
 	output.SecurityContext = m.SecurityContext
 	if m.Data != nil && m.Data.Value != nil {
 		output.Data = m.Data.Value
 		if m.Data.Element != nil {
-			output.DataElement = toMapOrNil(m.Data.Element.ToJSON())
+			output.DataElement = toMapOrNil(m.Data.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)

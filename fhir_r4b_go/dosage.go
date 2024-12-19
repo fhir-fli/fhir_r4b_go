@@ -34,8 +34,8 @@ func NewDosage() *Dosage {
 	return &Dosage{}
 }
 
-// FromJSON populates Dosage from JSON data.
-func (m *Dosage) FromJSON(data []byte) error {
+// UnmarshalJSON populates Dosage from JSON data.
+func (m *Dosage) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -78,8 +78,8 @@ func (m *Dosage) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts Dosage to JSON data.
-func (m *Dosage) ToJSON() ([]byte, error) {
+// MarshalJSON converts Dosage to JSON data.
+func (m *Dosage) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -107,7 +107,7 @@ func (m *Dosage) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -115,27 +115,27 @@ func (m *Dosage) ToJSON() ([]byte, error) {
 	if m.Sequence != nil && m.Sequence.Value != nil {
 		output.Sequence = m.Sequence.Value
 		if m.Sequence.Element != nil {
-			output.SequenceElement = toMapOrNil(m.Sequence.Element.ToJSON())
+			output.SequenceElement = toMapOrNil(m.Sequence.Element.MarshalJSON())
 		}
 	}
 	if m.Text != nil && m.Text.Value != nil {
 		output.Text = m.Text.Value
 		if m.Text.Element != nil {
-			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+			output.TextElement = toMapOrNil(m.Text.Element.MarshalJSON())
 		}
 	}
 	output.AdditionalInstruction = m.AdditionalInstruction
 	if m.PatientInstruction != nil && m.PatientInstruction.Value != nil {
 		output.PatientInstruction = m.PatientInstruction.Value
 		if m.PatientInstruction.Element != nil {
-			output.PatientInstructionElement = toMapOrNil(m.PatientInstruction.Element.ToJSON())
+			output.PatientInstructionElement = toMapOrNil(m.PatientInstruction.Element.MarshalJSON())
 		}
 	}
 	output.Timing = m.Timing
 	if m.AsNeededBoolean != nil && m.AsNeededBoolean.Value != nil {
 		output.AsNeededBoolean = m.AsNeededBoolean.Value
 		if m.AsNeededBoolean.Element != nil {
-			output.AsNeededBooleanElement = toMapOrNil(m.AsNeededBoolean.Element.ToJSON())
+			output.AsNeededBooleanElement = toMapOrNil(m.AsNeededBoolean.Element.MarshalJSON())
 		}
 	}
 	output.AsNeededCodeableConcept = m.AsNeededCodeableConcept
@@ -216,8 +216,8 @@ func NewDosageDoseAndRate() *DosageDoseAndRate {
 	return &DosageDoseAndRate{}
 }
 
-// FromJSON populates DosageDoseAndRate from JSON data.
-func (m *DosageDoseAndRate) FromJSON(data []byte) error {
+// UnmarshalJSON populates DosageDoseAndRate from JSON data.
+func (m *DosageDoseAndRate) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -242,8 +242,8 @@ func (m *DosageDoseAndRate) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts DosageDoseAndRate to JSON data.
-func (m *DosageDoseAndRate) ToJSON() ([]byte, error) {
+// MarshalJSON converts DosageDoseAndRate to JSON data.
+func (m *DosageDoseAndRate) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -258,7 +258,7 @@ func (m *DosageDoseAndRate) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_

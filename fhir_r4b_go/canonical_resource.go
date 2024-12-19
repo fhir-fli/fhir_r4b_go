@@ -105,12 +105,12 @@ func (c *CanonicalResource) Equals(other Equalable) bool {
 		compareSlices(c.Jurisdiction, otherCanonicalResource.Jurisdiction)
 }
 
-// ToJSON converts the CanonicalResource to JSON.
-func (c *CanonicalResource) ToJSON() ([]byte, error) {
+// MarshalJSON converts the CanonicalResource to JSON.
+func (c *CanonicalResource) MarshalJSON() ([]byte, error) {
 	return json.Marshal(c)
 }
 
-// FromJSON populates the CanonicalResource from JSON data.
-func (c *CanonicalResource) FromJSON(data []byte) error {
+// UnmarshalJSON populates the CanonicalResource from JSON data.
+func (c *CanonicalResource) UnmarshalJSON(data []byte) error {
 	return json.Unmarshal(data, c)
 }

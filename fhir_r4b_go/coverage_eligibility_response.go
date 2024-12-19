@@ -41,8 +41,8 @@ func NewCoverageEligibilityResponse() *CoverageEligibilityResponse {
 	return &CoverageEligibilityResponse{}
 }
 
-// FromJSON populates CoverageEligibilityResponse from JSON data.
-func (m *CoverageEligibilityResponse) FromJSON(data []byte) error {
+// UnmarshalJSON populates CoverageEligibilityResponse from JSON data.
+func (m *CoverageEligibilityResponse) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -99,8 +99,8 @@ func (m *CoverageEligibilityResponse) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CoverageEligibilityResponse to JSON data.
-func (m *CoverageEligibilityResponse) ToJSON() ([]byte, error) {
+// MarshalJSON converts CoverageEligibilityResponse to JSON data.
+func (m *CoverageEligibilityResponse) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -136,14 +136,14 @@ func (m *CoverageEligibilityResponse) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -158,14 +158,14 @@ func (m *CoverageEligibilityResponse) ToJSON() ([]byte, error) {
 	if m.ServicedDate != nil && m.ServicedDate.Value != nil {
 		output.ServicedDate = m.ServicedDate.Value
 		if m.ServicedDate.Element != nil {
-			output.ServicedDateElement = toMapOrNil(m.ServicedDate.Element.ToJSON())
+			output.ServicedDateElement = toMapOrNil(m.ServicedDate.Element.MarshalJSON())
 		}
 	}
 	output.ServicedPeriod = m.ServicedPeriod
 	if m.Created != nil && m.Created.Value != nil {
 		output.Created = m.Created.Value
 		if m.Created.Element != nil {
-			output.CreatedElement = toMapOrNil(m.Created.Element.ToJSON())
+			output.CreatedElement = toMapOrNil(m.Created.Element.MarshalJSON())
 		}
 	}
 	output.Requestor = m.Requestor
@@ -174,7 +174,7 @@ func (m *CoverageEligibilityResponse) ToJSON() ([]byte, error) {
 	if m.Disposition != nil && m.Disposition.Value != nil {
 		output.Disposition = m.Disposition.Value
 		if m.Disposition.Element != nil {
-			output.DispositionElement = toMapOrNil(m.Disposition.Element.ToJSON())
+			output.DispositionElement = toMapOrNil(m.Disposition.Element.MarshalJSON())
 		}
 	}
 	output.Insurer = m.Insurer
@@ -182,7 +182,7 @@ func (m *CoverageEligibilityResponse) ToJSON() ([]byte, error) {
 	if m.PreAuthRef != nil && m.PreAuthRef.Value != nil {
 		output.PreAuthRef = m.PreAuthRef.Value
 		if m.PreAuthRef.Element != nil {
-			output.PreAuthRefElement = toMapOrNil(m.PreAuthRef.Element.ToJSON())
+			output.PreAuthRefElement = toMapOrNil(m.PreAuthRef.Element.MarshalJSON())
 		}
 	}
 	output.Form = m.Form
@@ -270,8 +270,8 @@ func NewCoverageEligibilityResponseInsurance() *CoverageEligibilityResponseInsur
 	return &CoverageEligibilityResponseInsurance{}
 }
 
-// FromJSON populates CoverageEligibilityResponseInsurance from JSON data.
-func (m *CoverageEligibilityResponseInsurance) FromJSON(data []byte) error {
+// UnmarshalJSON populates CoverageEligibilityResponseInsurance from JSON data.
+func (m *CoverageEligibilityResponseInsurance) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -294,8 +294,8 @@ func (m *CoverageEligibilityResponseInsurance) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CoverageEligibilityResponseInsurance to JSON data.
-func (m *CoverageEligibilityResponseInsurance) ToJSON() ([]byte, error) {
+// MarshalJSON converts CoverageEligibilityResponseInsurance to JSON data.
+func (m *CoverageEligibilityResponseInsurance) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -310,7 +310,7 @@ func (m *CoverageEligibilityResponseInsurance) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -319,7 +319,7 @@ func (m *CoverageEligibilityResponseInsurance) ToJSON() ([]byte, error) {
 	if m.Inforce != nil && m.Inforce.Value != nil {
 		output.Inforce = m.Inforce.Value
 		if m.Inforce.Element != nil {
-			output.InforceElement = toMapOrNil(m.Inforce.Element.ToJSON())
+			output.InforceElement = toMapOrNil(m.Inforce.Element.MarshalJSON())
 		}
 	}
 	output.BenefitPeriod = m.BenefitPeriod
@@ -383,8 +383,8 @@ func NewCoverageEligibilityResponseItem() *CoverageEligibilityResponseItem {
 	return &CoverageEligibilityResponseItem{}
 }
 
-// FromJSON populates CoverageEligibilityResponseItem from JSON data.
-func (m *CoverageEligibilityResponseItem) FromJSON(data []byte) error {
+// UnmarshalJSON populates CoverageEligibilityResponseItem from JSON data.
+func (m *CoverageEligibilityResponseItem) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -427,8 +427,8 @@ func (m *CoverageEligibilityResponseItem) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CoverageEligibilityResponseItem to JSON data.
-func (m *CoverageEligibilityResponseItem) ToJSON() ([]byte, error) {
+// MarshalJSON converts CoverageEligibilityResponseItem to JSON data.
+func (m *CoverageEligibilityResponseItem) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -457,7 +457,7 @@ func (m *CoverageEligibilityResponseItem) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -469,19 +469,19 @@ func (m *CoverageEligibilityResponseItem) ToJSON() ([]byte, error) {
 	if m.Excluded != nil && m.Excluded.Value != nil {
 		output.Excluded = m.Excluded.Value
 		if m.Excluded.Element != nil {
-			output.ExcludedElement = toMapOrNil(m.Excluded.Element.ToJSON())
+			output.ExcludedElement = toMapOrNil(m.Excluded.Element.MarshalJSON())
 		}
 	}
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.Network = m.Network
@@ -491,14 +491,14 @@ func (m *CoverageEligibilityResponseItem) ToJSON() ([]byte, error) {
 	if m.AuthorizationRequired != nil && m.AuthorizationRequired.Value != nil {
 		output.AuthorizationRequired = m.AuthorizationRequired.Value
 		if m.AuthorizationRequired.Element != nil {
-			output.AuthorizationRequiredElement = toMapOrNil(m.AuthorizationRequired.Element.ToJSON())
+			output.AuthorizationRequiredElement = toMapOrNil(m.AuthorizationRequired.Element.MarshalJSON())
 		}
 	}
 	output.AuthorizationSupporting = m.AuthorizationSupporting
 	if m.AuthorizationUrl != nil && m.AuthorizationUrl.Value != nil {
 		output.AuthorizationUrl = m.AuthorizationUrl.Value
 		if m.AuthorizationUrl.Element != nil {
-			output.AuthorizationUrlElement = toMapOrNil(m.AuthorizationUrl.Element.ToJSON())
+			output.AuthorizationUrlElement = toMapOrNil(m.AuthorizationUrl.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -573,8 +573,8 @@ func NewCoverageEligibilityResponseBenefit() *CoverageEligibilityResponseBenefit
 	return &CoverageEligibilityResponseBenefit{}
 }
 
-// FromJSON populates CoverageEligibilityResponseBenefit from JSON data.
-func (m *CoverageEligibilityResponseBenefit) FromJSON(data []byte) error {
+// UnmarshalJSON populates CoverageEligibilityResponseBenefit from JSON data.
+func (m *CoverageEligibilityResponseBenefit) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -603,8 +603,8 @@ func (m *CoverageEligibilityResponseBenefit) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CoverageEligibilityResponseBenefit to JSON data.
-func (m *CoverageEligibilityResponseBenefit) ToJSON() ([]byte, error) {
+// MarshalJSON converts CoverageEligibilityResponseBenefit to JSON data.
+func (m *CoverageEligibilityResponseBenefit) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -625,7 +625,7 @@ func (m *CoverageEligibilityResponseBenefit) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -634,26 +634,26 @@ func (m *CoverageEligibilityResponseBenefit) ToJSON() ([]byte, error) {
 	if m.AllowedUnsignedInt != nil && m.AllowedUnsignedInt.Value != nil {
 		output.AllowedUnsignedInt = m.AllowedUnsignedInt.Value
 		if m.AllowedUnsignedInt.Element != nil {
-			output.AllowedUnsignedIntElement = toMapOrNil(m.AllowedUnsignedInt.Element.ToJSON())
+			output.AllowedUnsignedIntElement = toMapOrNil(m.AllowedUnsignedInt.Element.MarshalJSON())
 		}
 	}
 	if m.AllowedString != nil && m.AllowedString.Value != nil {
 		output.AllowedString = m.AllowedString.Value
 		if m.AllowedString.Element != nil {
-			output.AllowedStringElement = toMapOrNil(m.AllowedString.Element.ToJSON())
+			output.AllowedStringElement = toMapOrNil(m.AllowedString.Element.MarshalJSON())
 		}
 	}
 	output.AllowedMoney = m.AllowedMoney
 	if m.UsedUnsignedInt != nil && m.UsedUnsignedInt.Value != nil {
 		output.UsedUnsignedInt = m.UsedUnsignedInt.Value
 		if m.UsedUnsignedInt.Element != nil {
-			output.UsedUnsignedIntElement = toMapOrNil(m.UsedUnsignedInt.Element.ToJSON())
+			output.UsedUnsignedIntElement = toMapOrNil(m.UsedUnsignedInt.Element.MarshalJSON())
 		}
 	}
 	if m.UsedString != nil && m.UsedString.Value != nil {
 		output.UsedString = m.UsedString.Value
 		if m.UsedString.Element != nil {
-			output.UsedStringElement = toMapOrNil(m.UsedString.Element.ToJSON())
+			output.UsedStringElement = toMapOrNil(m.UsedString.Element.MarshalJSON())
 		}
 	}
 	output.UsedMoney = m.UsedMoney
@@ -709,8 +709,8 @@ func NewCoverageEligibilityResponseError() *CoverageEligibilityResponseError {
 	return &CoverageEligibilityResponseError{}
 }
 
-// FromJSON populates CoverageEligibilityResponseError from JSON data.
-func (m *CoverageEligibilityResponseError) FromJSON(data []byte) error {
+// UnmarshalJSON populates CoverageEligibilityResponseError from JSON data.
+func (m *CoverageEligibilityResponseError) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -727,8 +727,8 @@ func (m *CoverageEligibilityResponseError) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts CoverageEligibilityResponseError to JSON data.
-func (m *CoverageEligibilityResponseError) ToJSON() ([]byte, error) {
+// MarshalJSON converts CoverageEligibilityResponseError to JSON data.
+func (m *CoverageEligibilityResponseError) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -739,7 +739,7 @@ func (m *CoverageEligibilityResponseError) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_

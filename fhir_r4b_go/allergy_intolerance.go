@@ -45,8 +45,8 @@ func NewAllergyIntolerance() *AllergyIntolerance {
 	return &AllergyIntolerance{}
 }
 
-// FromJSON populates AllergyIntolerance from JSON data.
-func (m *AllergyIntolerance) FromJSON(data []byte) error {
+// UnmarshalJSON populates AllergyIntolerance from JSON data.
+func (m *AllergyIntolerance) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -111,8 +111,8 @@ func (m *AllergyIntolerance) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts AllergyIntolerance to JSON data.
-func (m *AllergyIntolerance) ToJSON() ([]byte, error) {
+// MarshalJSON converts AllergyIntolerance to JSON data.
+func (m *AllergyIntolerance) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -152,14 +152,14 @@ func (m *AllergyIntolerance) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -179,7 +179,7 @@ func (m *AllergyIntolerance) ToJSON() ([]byte, error) {
 	if m.OnsetDateTime != nil && m.OnsetDateTime.Value != nil {
 		output.OnsetDateTime = m.OnsetDateTime.Value
 		if m.OnsetDateTime.Element != nil {
-			output.OnsetDateTimeElement = toMapOrNil(m.OnsetDateTime.Element.ToJSON())
+			output.OnsetDateTimeElement = toMapOrNil(m.OnsetDateTime.Element.MarshalJSON())
 		}
 	}
 	output.OnsetAge = m.OnsetAge
@@ -188,13 +188,13 @@ func (m *AllergyIntolerance) ToJSON() ([]byte, error) {
 	if m.OnsetString != nil && m.OnsetString.Value != nil {
 		output.OnsetString = m.OnsetString.Value
 		if m.OnsetString.Element != nil {
-			output.OnsetStringElement = toMapOrNil(m.OnsetString.Element.ToJSON())
+			output.OnsetStringElement = toMapOrNil(m.OnsetString.Element.MarshalJSON())
 		}
 	}
 	if m.RecordedDate != nil && m.RecordedDate.Value != nil {
 		output.RecordedDate = m.RecordedDate.Value
 		if m.RecordedDate.Element != nil {
-			output.RecordedDateElement = toMapOrNil(m.RecordedDate.Element.ToJSON())
+			output.RecordedDateElement = toMapOrNil(m.RecordedDate.Element.MarshalJSON())
 		}
 	}
 	output.Recorder = m.Recorder
@@ -202,7 +202,7 @@ func (m *AllergyIntolerance) ToJSON() ([]byte, error) {
 	if m.LastOccurrence != nil && m.LastOccurrence.Value != nil {
 		output.LastOccurrence = m.LastOccurrence.Value
 		if m.LastOccurrence.Element != nil {
-			output.LastOccurrenceElement = toMapOrNil(m.LastOccurrence.Element.ToJSON())
+			output.LastOccurrenceElement = toMapOrNil(m.LastOccurrence.Element.MarshalJSON())
 		}
 	}
 	output.Note = m.Note
@@ -301,8 +301,8 @@ func NewAllergyIntoleranceReaction() *AllergyIntoleranceReaction {
 	return &AllergyIntoleranceReaction{}
 }
 
-// FromJSON populates AllergyIntoleranceReaction from JSON data.
-func (m *AllergyIntoleranceReaction) FromJSON(data []byte) error {
+// UnmarshalJSON populates AllergyIntoleranceReaction from JSON data.
+func (m *AllergyIntoleranceReaction) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -331,8 +331,8 @@ func (m *AllergyIntoleranceReaction) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts AllergyIntoleranceReaction to JSON data.
-func (m *AllergyIntoleranceReaction) ToJSON() ([]byte, error) {
+// MarshalJSON converts AllergyIntoleranceReaction to JSON data.
+func (m *AllergyIntoleranceReaction) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -351,7 +351,7 @@ func (m *AllergyIntoleranceReaction) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -361,13 +361,13 @@ func (m *AllergyIntoleranceReaction) ToJSON() ([]byte, error) {
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	if m.Onset != nil && m.Onset.Value != nil {
 		output.Onset = m.Onset.Value
 		if m.Onset.Element != nil {
-			output.OnsetElement = toMapOrNil(m.Onset.Element.ToJSON())
+			output.OnsetElement = toMapOrNil(m.Onset.Element.MarshalJSON())
 		}
 	}
 	output.Severity = m.Severity

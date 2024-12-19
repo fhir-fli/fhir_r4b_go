@@ -67,7 +67,7 @@ func (d *DomainResource) Clone() *DomainResource {
 	}
 }
 
-// ToJSON converts the DomainResource to JSON.
-func (d *DomainResource) ToJSON() ([]byte, error) {
+// MarshalJSON converts the DomainResource to JSON.
+func (d *DomainResource) MarshalJSON() ([]byte, error) {
 	return json.Marshal(d)
 }

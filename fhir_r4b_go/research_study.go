@@ -49,8 +49,8 @@ func NewResearchStudy() *ResearchStudy {
 	return &ResearchStudy{}
 }
 
-// FromJSON populates ResearchStudy from JSON data.
-func (m *ResearchStudy) FromJSON(data []byte) error {
+// UnmarshalJSON populates ResearchStudy from JSON data.
+func (m *ResearchStudy) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Meta *FhirMeta `json:"meta,omitempty"`
@@ -123,8 +123,8 @@ func (m *ResearchStudy) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ResearchStudy to JSON data.
-func (m *ResearchStudy) ToJSON() ([]byte, error) {
+// MarshalJSON converts ResearchStudy to JSON data.
+func (m *ResearchStudy) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -166,14 +166,14 @@ func (m *ResearchStudy) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Meta = m.Meta
 	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
 		output.ImplicitRules = m.ImplicitRules.Value
 		if m.ImplicitRules.Element != nil {
-			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.MarshalJSON())
 		}
 	}
 	output.Language = m.Language
@@ -185,7 +185,7 @@ func (m *ResearchStudy) ToJSON() ([]byte, error) {
 	if m.Title != nil && m.Title.Value != nil {
 		output.Title = m.Title.Value
 		if m.Title.Element != nil {
-			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+			output.TitleElement = toMapOrNil(m.Title.Element.MarshalJSON())
 		}
 	}
 	output.Protocol = m.Protocol
@@ -203,7 +203,7 @@ func (m *ResearchStudy) ToJSON() ([]byte, error) {
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	output.Enrollment = m.Enrollment
@@ -313,8 +313,8 @@ func NewResearchStudyArm() *ResearchStudyArm {
 	return &ResearchStudyArm{}
 }
 
-// FromJSON populates ResearchStudyArm from JSON data.
-func (m *ResearchStudyArm) FromJSON(data []byte) error {
+// UnmarshalJSON populates ResearchStudyArm from JSON data.
+func (m *ResearchStudyArm) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -335,8 +335,8 @@ func (m *ResearchStudyArm) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ResearchStudyArm to JSON data.
-func (m *ResearchStudyArm) ToJSON() ([]byte, error) {
+// MarshalJSON converts ResearchStudyArm to JSON data.
+func (m *ResearchStudyArm) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -351,7 +351,7 @@ func (m *ResearchStudyArm) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -359,14 +359,14 @@ func (m *ResearchStudyArm) ToJSON() ([]byte, error) {
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	output.Type = m.Type
 	if m.Description != nil && m.Description.Value != nil {
 		output.Description = m.Description.Value
 		if m.Description.Element != nil {
-			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+			output.DescriptionElement = toMapOrNil(m.Description.Element.MarshalJSON())
 		}
 	}
 	return json.Marshal(output)
@@ -414,8 +414,8 @@ func NewResearchStudyObjective() *ResearchStudyObjective {
 	return &ResearchStudyObjective{}
 }
 
-// FromJSON populates ResearchStudyObjective from JSON data.
-func (m *ResearchStudyObjective) FromJSON(data []byte) error {
+// UnmarshalJSON populates ResearchStudyObjective from JSON data.
+func (m *ResearchStudyObjective) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Id *FhirString `json:"id,omitempty"`
 		Extension_ []*FhirExtension `json:"extension,omitempty"`
@@ -434,8 +434,8 @@ func (m *ResearchStudyObjective) FromJSON(data []byte) error {
 	return nil
 }
 
-// ToJSON converts ResearchStudyObjective to JSON data.
-func (m *ResearchStudyObjective) ToJSON() ([]byte, error) {
+// MarshalJSON converts ResearchStudyObjective to JSON data.
+func (m *ResearchStudyObjective) MarshalJSON() ([]byte, error) {
 	output := struct {
 		Id interface{} `json:"id,omitempty"`
 		IdElement map[string]interface{} `json:"_id,omitempty"`
@@ -448,7 +448,7 @@ func (m *ResearchStudyObjective) ToJSON() ([]byte, error) {
 	if m.Id != nil && m.Id.Value != nil {
 		output.Id = m.Id.Value
 		if m.Id.Element != nil {
-			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+			output.IdElement = toMapOrNil(m.Id.Element.MarshalJSON())
 		}
 	}
 	output.Extension_ = m.Extension_
@@ -456,7 +456,7 @@ func (m *ResearchStudyObjective) ToJSON() ([]byte, error) {
 	if m.Name != nil && m.Name.Value != nil {
 		output.Name = m.Name.Value
 		if m.Name.Element != nil {
-			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+			output.NameElement = toMapOrNil(m.Name.Element.MarshalJSON())
 		}
 	}
 	output.Type = m.Type
