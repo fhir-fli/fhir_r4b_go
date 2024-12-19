@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // OperationOutcome
 // A collection of error, warning, or information messages that result from a system action.
 type OperationOutcome struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -20,22 +22,77 @@ type OperationOutcome struct {
 	Issue []*OperationOutcomeIssue `json:"issue,omitempty"`
 }
 
-// NewOperationOutcome creates a new OperationOutcome instance
+// NewOperationOutcome creates a new OperationOutcome instance.
 func NewOperationOutcome() *OperationOutcome {
 	return &OperationOutcome{}
 }
 
-// FromJSON populates OperationOutcome from JSON data
+// FromJSON populates OperationOutcome from JSON data.
 func (m *OperationOutcome) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Issue []*OperationOutcomeIssue `json:"issue,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Issue = temp.Issue
+	return nil
 }
 
-// ToJSON converts OperationOutcome to JSON data
+// ToJSON converts OperationOutcome to JSON data.
 func (m *OperationOutcome) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Issue []*OperationOutcomeIssue `json:"issue,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Issue = m.Issue
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of OperationOutcome
+// Clone creates a deep copy of OperationOutcome.
 func (m *OperationOutcome) Clone() *OperationOutcome {
 	if m == nil { return nil }
 	return &OperationOutcome{
@@ -51,7 +108,7 @@ func (m *OperationOutcome) Clone() *OperationOutcome {
 	}
 }
 
-// Equals checks for equality with another OperationOutcome instance
+// Equals checks equality between two OperationOutcome instances.
 func (m *OperationOutcome) Equals(other *OperationOutcome) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -70,7 +127,7 @@ func (m *OperationOutcome) Equals(other *OperationOutcome) bool {
 // OperationOutcomeIssue
 // An error, warning, or information message that results from a system action.
 type OperationOutcomeIssue struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -82,22 +139,119 @@ type OperationOutcomeIssue struct {
 	Expression []*FhirString `json:"expression,omitempty"`
 }
 
-// NewOperationOutcomeIssue creates a new OperationOutcomeIssue instance
+// NewOperationOutcomeIssue creates a new OperationOutcomeIssue instance.
 func NewOperationOutcomeIssue() *OperationOutcomeIssue {
 	return &OperationOutcomeIssue{}
 }
 
-// FromJSON populates OperationOutcomeIssue from JSON data
+// FromJSON populates OperationOutcomeIssue from JSON data.
 func (m *OperationOutcomeIssue) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Severity *IssueSeverity `json:"severity,omitempty"`
+		Code *IssueType `json:"code,omitempty"`
+		Details *CodeableConcept `json:"details,omitempty"`
+		Diagnostics *FhirString `json:"diagnostics,omitempty"`
+		Location []interface{} `json:"location,omitempty"`
+		Expression []interface{} `json:"expression,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Severity = temp.Severity
+	m.Code = temp.Code
+	m.Details = temp.Details
+	m.Diagnostics = temp.Diagnostics
+	if len(temp.Location) > 0 {
+		m.Location = make([]*FhirString, len(temp.Location))
+		for i := range temp.Location {
+			itemMap, ok := temp.Location[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Location[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Location[%d]: %v", i, err) }
+			m.Location[i] = primitive
+		}
+	}
+	if len(temp.Expression) > 0 {
+		m.Expression = make([]*FhirString, len(temp.Expression))
+		for i := range temp.Expression {
+			itemMap, ok := temp.Expression[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Expression[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Expression[%d]: %v", i, err) }
+			m.Expression[i] = primitive
+		}
+	}
+	return nil
 }
 
-// ToJSON converts OperationOutcomeIssue to JSON data
+// ToJSON converts OperationOutcomeIssue to JSON data.
 func (m *OperationOutcomeIssue) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Severity *IssueSeverity `json:"severity,omitempty"`
+		Code *IssueType `json:"code,omitempty"`
+		Details *CodeableConcept `json:"details,omitempty"`
+		Diagnostics interface{} `json:"diagnostics,omitempty"`
+		DiagnosticsElement map[string]interface{} `json:"_diagnostics,omitempty"`
+		Location []interface{} `json:"location,omitempty"`
+		LocationElement []map[string]interface{} `json:"_location,omitempty"`
+		Expression []interface{} `json:"expression,omitempty"`
+		ExpressionElement []map[string]interface{} `json:"_expression,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Severity = m.Severity
+	output.Code = m.Code
+	output.Details = m.Details
+	if m.Diagnostics != nil && m.Diagnostics.Value != nil {
+		output.Diagnostics = m.Diagnostics.Value
+		if m.Diagnostics.Element != nil {
+			output.DiagnosticsElement = toMapOrNil(m.Diagnostics.Element.ToJSON())
+		}
+	}
+	if len(m.Location) > 0 {
+		output.Location = make([]interface{}, len(m.Location))
+		output.LocationElement = make([]map[string]interface{}, len(m.Location))
+		for i, item := range m.Location {
+			if item != nil && item.Value != nil {
+				output.Location[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.LocationElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.Expression) > 0 {
+		output.Expression = make([]interface{}, len(m.Expression))
+		output.ExpressionElement = make([]map[string]interface{}, len(m.Expression))
+		for i, item := range m.Expression {
+			if item != nil && item.Value != nil {
+				output.Expression[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.ExpressionElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of OperationOutcomeIssue
+// Clone creates a deep copy of OperationOutcomeIssue.
 func (m *OperationOutcomeIssue) Clone() *OperationOutcomeIssue {
 	if m == nil { return nil }
 	return &OperationOutcomeIssue{
@@ -113,7 +267,7 @@ func (m *OperationOutcomeIssue) Clone() *OperationOutcomeIssue {
 	}
 }
 
-// Equals checks for equality with another OperationOutcomeIssue instance
+// Equals checks equality between two OperationOutcomeIssue instances.
 func (m *OperationOutcomeIssue) Equals(other *OperationOutcomeIssue) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

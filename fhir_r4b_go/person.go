@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Person
 // Demographics and administrative information about a person independent of a specific health-related context.
 type Person struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -29,22 +30,125 @@ type Person struct {
 	Link []*PersonLink `json:"link,omitempty"`
 }
 
-// NewPerson creates a new Person instance
+// NewPerson creates a new Person instance.
 func NewPerson() *Person {
 	return &Person{}
 }
 
-// FromJSON populates Person from JSON data
+// FromJSON populates Person from JSON data.
 func (m *Person) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Name []*HumanName `json:"name,omitempty"`
+		Telecom []*ContactPoint `json:"telecom,omitempty"`
+		Gender *AdministrativeGender `json:"gender,omitempty"`
+		BirthDate *FhirDate `json:"birthdate,omitempty"`
+		Address []*Address `json:"address,omitempty"`
+		Photo *Attachment `json:"photo,omitempty"`
+		ManagingOrganization *Reference `json:"managingorganization,omitempty"`
+		Active *FhirBoolean `json:"active,omitempty"`
+		Link []*PersonLink `json:"link,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Name = temp.Name
+	m.Telecom = temp.Telecom
+	m.Gender = temp.Gender
+	m.BirthDate = temp.BirthDate
+	m.Address = temp.Address
+	m.Photo = temp.Photo
+	m.ManagingOrganization = temp.ManagingOrganization
+	m.Active = temp.Active
+	m.Link = temp.Link
+	return nil
 }
 
-// ToJSON converts Person to JSON data
+// ToJSON converts Person to JSON data.
 func (m *Person) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Name []*HumanName `json:"name,omitempty"`
+		Telecom []*ContactPoint `json:"telecom,omitempty"`
+		Gender *AdministrativeGender `json:"gender,omitempty"`
+		BirthDate interface{} `json:"birthdate,omitempty"`
+		BirthDateElement map[string]interface{} `json:"_birthdate,omitempty"`
+		Address []*Address `json:"address,omitempty"`
+		Photo *Attachment `json:"photo,omitempty"`
+		ManagingOrganization *Reference `json:"managingorganization,omitempty"`
+		Active interface{} `json:"active,omitempty"`
+		ActiveElement map[string]interface{} `json:"_active,omitempty"`
+		Link []*PersonLink `json:"link,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Name = m.Name
+	output.Telecom = m.Telecom
+	output.Gender = m.Gender
+	if m.BirthDate != nil && m.BirthDate.Value != nil {
+		output.BirthDate = m.BirthDate.Value
+		if m.BirthDate.Element != nil {
+			output.BirthDateElement = toMapOrNil(m.BirthDate.Element.ToJSON())
+		}
+	}
+	output.Address = m.Address
+	output.Photo = m.Photo
+	output.ManagingOrganization = m.ManagingOrganization
+	if m.Active != nil && m.Active.Value != nil {
+		output.Active = m.Active.Value
+		if m.Active.Element != nil {
+			output.ActiveElement = toMapOrNil(m.Active.Element.ToJSON())
+		}
+	}
+	output.Link = m.Link
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Person
+// Clone creates a deep copy of Person.
 func (m *Person) Clone() *Person {
 	if m == nil { return nil }
 	return &Person{
@@ -69,7 +173,7 @@ func (m *Person) Clone() *Person {
 	}
 }
 
-// Equals checks for equality with another Person instance
+// Equals checks equality between two Person instances.
 func (m *Person) Equals(other *Person) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -97,7 +201,7 @@ func (m *Person) Equals(other *Person) bool {
 // PersonLink
 // Link to a resource that concerns the same actual person.
 type PersonLink struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -105,22 +209,55 @@ type PersonLink struct {
 	Assurance *IdentityAssuranceLevel `json:"assurance,omitempty"`
 }
 
-// NewPersonLink creates a new PersonLink instance
+// NewPersonLink creates a new PersonLink instance.
 func NewPersonLink() *PersonLink {
 	return &PersonLink{}
 }
 
-// FromJSON populates PersonLink from JSON data
+// FromJSON populates PersonLink from JSON data.
 func (m *PersonLink) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Target *Reference `json:"target,omitempty"`
+		Assurance *IdentityAssuranceLevel `json:"assurance,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Target = temp.Target
+	m.Assurance = temp.Assurance
+	return nil
 }
 
-// ToJSON converts PersonLink to JSON data
+// ToJSON converts PersonLink to JSON data.
 func (m *PersonLink) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Target *Reference `json:"target,omitempty"`
+		Assurance *IdentityAssuranceLevel `json:"assurance,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Target = m.Target
+	output.Assurance = m.Assurance
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of PersonLink
+// Clone creates a deep copy of PersonLink.
 func (m *PersonLink) Clone() *PersonLink {
 	if m == nil { return nil }
 	return &PersonLink{
@@ -132,7 +269,7 @@ func (m *PersonLink) Clone() *PersonLink {
 	}
 }
 
-// Equals checks for equality with another PersonLink instance
+// Equals checks equality between two PersonLink instances.
 func (m *PersonLink) Equals(other *PersonLink) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

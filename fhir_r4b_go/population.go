@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Population
 // A populatioof people with some set of grouping criteria.
 type Population struct {
-	BackboneType
+	extends BackboneType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -19,22 +20,67 @@ type Population struct {
 	PhysiologicalCondition *CodeableConcept `json:"physiologicalcondition,omitempty"`
 }
 
-// NewPopulation creates a new Population instance
+// NewPopulation creates a new Population instance.
 func NewPopulation() *Population {
 	return &Population{}
 }
 
-// FromJSON populates Population from JSON data
+// FromJSON populates Population from JSON data.
 func (m *Population) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		AgeRange *Range `json:"agerange,omitempty"`
+		AgeCodeableConcept *CodeableConcept `json:"agecodeableconcept,omitempty"`
+		Gender *CodeableConcept `json:"gender,omitempty"`
+		Race *CodeableConcept `json:"race,omitempty"`
+		PhysiologicalCondition *CodeableConcept `json:"physiologicalcondition,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.AgeRange = temp.AgeRange
+	m.AgeCodeableConcept = temp.AgeCodeableConcept
+	m.Gender = temp.Gender
+	m.Race = temp.Race
+	m.PhysiologicalCondition = temp.PhysiologicalCondition
+	return nil
 }
 
-// ToJSON converts Population to JSON data
+// ToJSON converts Population to JSON data.
 func (m *Population) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		AgeRange *Range `json:"agerange,omitempty"`
+		AgeCodeableConcept *CodeableConcept `json:"agecodeableconcept,omitempty"`
+		Gender *CodeableConcept `json:"gender,omitempty"`
+		Race *CodeableConcept `json:"race,omitempty"`
+		PhysiologicalCondition *CodeableConcept `json:"physiologicalcondition,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.AgeRange = m.AgeRange
+	output.AgeCodeableConcept = m.AgeCodeableConcept
+	output.Gender = m.Gender
+	output.Race = m.Race
+	output.PhysiologicalCondition = m.PhysiologicalCondition
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Population
+// Clone creates a deep copy of Population.
 func (m *Population) Clone() *Population {
 	if m == nil { return nil }
 	return &Population{
@@ -49,7 +95,7 @@ func (m *Population) Clone() *Population {
 	}
 }
 
-// Equals checks for equality with another Population instance
+// Equals checks equality between two Population instances.
 func (m *Population) Equals(other *Population) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // ResearchStudy
 // A process where a researcher or organization plans and then executes a series of steps intended to increase the field of healthcare-related knowledge.  This includes studies of safety, efficacy, comparative effectiveness and other information about medications, devices, therapies and other interventional and investigative techniques.  A ResearchStudy involves the gathering of information about human or animal subjects.
 type ResearchStudy struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -43,22 +44,181 @@ type ResearchStudy struct {
 	Objective []*ResearchStudyObjective `json:"objective,omitempty"`
 }
 
-// NewResearchStudy creates a new ResearchStudy instance
+// NewResearchStudy creates a new ResearchStudy instance.
 func NewResearchStudy() *ResearchStudy {
 	return &ResearchStudy{}
 }
 
-// FromJSON populates ResearchStudy from JSON data
+// FromJSON populates ResearchStudy from JSON data.
 func (m *ResearchStudy) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Protocol []*Reference `json:"protocol,omitempty"`
+		PartOf []*Reference `json:"partof,omitempty"`
+		Status *ResearchStudyStatus `json:"status,omitempty"`
+		PrimaryPurposeType *CodeableConcept `json:"primarypurposetype,omitempty"`
+		Phase *CodeableConcept `json:"phase,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Focus []*CodeableConcept `json:"focus,omitempty"`
+		Condition []*CodeableConcept `json:"condition,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		RelatedArtifact []*RelatedArtifact `json:"relatedartifact,omitempty"`
+		Keyword []*CodeableConcept `json:"keyword,omitempty"`
+		Location []*CodeableConcept `json:"location,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		Enrollment []*Reference `json:"enrollment,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Sponsor *Reference `json:"sponsor,omitempty"`
+		PrincipalInvestigator *Reference `json:"principalinvestigator,omitempty"`
+		Site []*Reference `json:"site,omitempty"`
+		ReasonStopped *CodeableConcept `json:"reasonstopped,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		Arm []*ResearchStudyArm `json:"arm,omitempty"`
+		Objective []*ResearchStudyObjective `json:"objective,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Title = temp.Title
+	m.Protocol = temp.Protocol
+	m.PartOf = temp.PartOf
+	m.Status = temp.Status
+	m.PrimaryPurposeType = temp.PrimaryPurposeType
+	m.Phase = temp.Phase
+	m.Category = temp.Category
+	m.Focus = temp.Focus
+	m.Condition = temp.Condition
+	m.Contact = temp.Contact
+	m.RelatedArtifact = temp.RelatedArtifact
+	m.Keyword = temp.Keyword
+	m.Location = temp.Location
+	m.Description = temp.Description
+	m.Enrollment = temp.Enrollment
+	m.Period = temp.Period
+	m.Sponsor = temp.Sponsor
+	m.PrincipalInvestigator = temp.PrincipalInvestigator
+	m.Site = temp.Site
+	m.ReasonStopped = temp.ReasonStopped
+	m.Note = temp.Note
+	m.Arm = temp.Arm
+	m.Objective = temp.Objective
+	return nil
 }
 
-// ToJSON converts ResearchStudy to JSON data
+// ToJSON converts ResearchStudy to JSON data.
 func (m *ResearchStudy) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Protocol []*Reference `json:"protocol,omitempty"`
+		PartOf []*Reference `json:"partof,omitempty"`
+		Status *ResearchStudyStatus `json:"status,omitempty"`
+		PrimaryPurposeType *CodeableConcept `json:"primarypurposetype,omitempty"`
+		Phase *CodeableConcept `json:"phase,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Focus []*CodeableConcept `json:"focus,omitempty"`
+		Condition []*CodeableConcept `json:"condition,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		RelatedArtifact []*RelatedArtifact `json:"relatedartifact,omitempty"`
+		Keyword []*CodeableConcept `json:"keyword,omitempty"`
+		Location []*CodeableConcept `json:"location,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Enrollment []*Reference `json:"enrollment,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Sponsor *Reference `json:"sponsor,omitempty"`
+		PrincipalInvestigator *Reference `json:"principalinvestigator,omitempty"`
+		Site []*Reference `json:"site,omitempty"`
+		ReasonStopped *CodeableConcept `json:"reasonstopped,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		Arm []*ResearchStudyArm `json:"arm,omitempty"`
+		Objective []*ResearchStudyObjective `json:"objective,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	output.Protocol = m.Protocol
+	output.PartOf = m.PartOf
+	output.Status = m.Status
+	output.PrimaryPurposeType = m.PrimaryPurposeType
+	output.Phase = m.Phase
+	output.Category = m.Category
+	output.Focus = m.Focus
+	output.Condition = m.Condition
+	output.Contact = m.Contact
+	output.RelatedArtifact = m.RelatedArtifact
+	output.Keyword = m.Keyword
+	output.Location = m.Location
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Enrollment = m.Enrollment
+	output.Period = m.Period
+	output.Sponsor = m.Sponsor
+	output.PrincipalInvestigator = m.PrincipalInvestigator
+	output.Site = m.Site
+	output.ReasonStopped = m.ReasonStopped
+	output.Note = m.Note
+	output.Arm = m.Arm
+	output.Objective = m.Objective
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ResearchStudy
+// Clone creates a deep copy of ResearchStudy.
 func (m *ResearchStudy) Clone() *ResearchStudy {
 	if m == nil { return nil }
 	return &ResearchStudy{
@@ -97,7 +257,7 @@ func (m *ResearchStudy) Clone() *ResearchStudy {
 	}
 }
 
-// Equals checks for equality with another ResearchStudy instance
+// Equals checks equality between two ResearchStudy instances.
 func (m *ResearchStudy) Equals(other *ResearchStudy) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -139,7 +299,7 @@ func (m *ResearchStudy) Equals(other *ResearchStudy) bool {
 // ResearchStudyArm
 // Describes an expected sequence of events for one of the participants of a study.  E.g. Exposure to drug A, wash-out, exposure to drug B, wash-out, follow-up.
 type ResearchStudyArm struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -148,22 +308,71 @@ type ResearchStudyArm struct {
 	Description *FhirString `json:"description,omitempty"`
 }
 
-// NewResearchStudyArm creates a new ResearchStudyArm instance
+// NewResearchStudyArm creates a new ResearchStudyArm instance.
 func NewResearchStudyArm() *ResearchStudyArm {
 	return &ResearchStudyArm{}
 }
 
-// FromJSON populates ResearchStudyArm from JSON data
+// FromJSON populates ResearchStudyArm from JSON data.
 func (m *ResearchStudyArm) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Name = temp.Name
+	m.Type = temp.Type
+	m.Description = temp.Description
+	return nil
 }
 
-// ToJSON converts ResearchStudyArm to JSON data
+// ToJSON converts ResearchStudyArm to JSON data.
 func (m *ResearchStudyArm) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	output.Type = m.Type
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ResearchStudyArm
+// Clone creates a deep copy of ResearchStudyArm.
 func (m *ResearchStudyArm) Clone() *ResearchStudyArm {
 	if m == nil { return nil }
 	return &ResearchStudyArm{
@@ -176,7 +385,7 @@ func (m *ResearchStudyArm) Clone() *ResearchStudyArm {
 	}
 }
 
-// Equals checks for equality with another ResearchStudyArm instance
+// Equals checks equality between two ResearchStudyArm instances.
 func (m *ResearchStudyArm) Equals(other *ResearchStudyArm) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -192,7 +401,7 @@ func (m *ResearchStudyArm) Equals(other *ResearchStudyArm) bool {
 // ResearchStudyObjective
 // A goal that the study is aiming to achieve in terms of a scientific question to be answered by the analysis of data collected during the study.
 type ResearchStudyObjective struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -200,22 +409,61 @@ type ResearchStudyObjective struct {
 	Type *CodeableConcept `json:"type,omitempty"`
 }
 
-// NewResearchStudyObjective creates a new ResearchStudyObjective instance
+// NewResearchStudyObjective creates a new ResearchStudyObjective instance.
 func NewResearchStudyObjective() *ResearchStudyObjective {
 	return &ResearchStudyObjective{}
 }
 
-// FromJSON populates ResearchStudyObjective from JSON data
+// FromJSON populates ResearchStudyObjective from JSON data.
 func (m *ResearchStudyObjective) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Name = temp.Name
+	m.Type = temp.Type
+	return nil
 }
 
-// ToJSON converts ResearchStudyObjective to JSON data
+// ToJSON converts ResearchStudyObjective to JSON data.
 func (m *ResearchStudyObjective) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	output.Type = m.Type
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ResearchStudyObjective
+// Clone creates a deep copy of ResearchStudyObjective.
 func (m *ResearchStudyObjective) Clone() *ResearchStudyObjective {
 	if m == nil { return nil }
 	return &ResearchStudyObjective{
@@ -227,7 +475,7 @@ func (m *ResearchStudyObjective) Clone() *ResearchStudyObjective {
 	}
 }
 
-// Equals checks for equality with another ResearchStudyObjective instance
+// Equals checks equality between two ResearchStudyObjective instances.
 func (m *ResearchStudyObjective) Equals(other *ResearchStudyObjective) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

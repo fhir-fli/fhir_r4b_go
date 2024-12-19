@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Schedule
 // A container for slots of time that may be available for booking appointments.
 type Schedule struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -27,22 +28,117 @@ type Schedule struct {
 	Comment *FhirString `json:"comment,omitempty"`
 }
 
-// NewSchedule creates a new Schedule instance
+// NewSchedule creates a new Schedule instance.
 func NewSchedule() *Schedule {
 	return &Schedule{}
 }
 
-// FromJSON populates Schedule from JSON data
+// FromJSON populates Schedule from JSON data.
 func (m *Schedule) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Active *FhirBoolean `json:"active,omitempty"`
+		ServiceCategory []*CodeableConcept `json:"servicecategory,omitempty"`
+		ServiceType []*CodeableConcept `json:"servicetype,omitempty"`
+		Specialty []*CodeableConcept `json:"specialty,omitempty"`
+		Actor []*Reference `json:"actor,omitempty"`
+		PlanningHorizon *Period `json:"planninghorizon,omitempty"`
+		Comment *FhirString `json:"comment,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Active = temp.Active
+	m.ServiceCategory = temp.ServiceCategory
+	m.ServiceType = temp.ServiceType
+	m.Specialty = temp.Specialty
+	m.Actor = temp.Actor
+	m.PlanningHorizon = temp.PlanningHorizon
+	m.Comment = temp.Comment
+	return nil
 }
 
-// ToJSON converts Schedule to JSON data
+// ToJSON converts Schedule to JSON data.
 func (m *Schedule) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Active interface{} `json:"active,omitempty"`
+		ActiveElement map[string]interface{} `json:"_active,omitempty"`
+		ServiceCategory []*CodeableConcept `json:"servicecategory,omitempty"`
+		ServiceType []*CodeableConcept `json:"servicetype,omitempty"`
+		Specialty []*CodeableConcept `json:"specialty,omitempty"`
+		Actor []*Reference `json:"actor,omitempty"`
+		PlanningHorizon *Period `json:"planninghorizon,omitempty"`
+		Comment interface{} `json:"comment,omitempty"`
+		CommentElement map[string]interface{} `json:"_comment,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	if m.Active != nil && m.Active.Value != nil {
+		output.Active = m.Active.Value
+		if m.Active.Element != nil {
+			output.ActiveElement = toMapOrNil(m.Active.Element.ToJSON())
+		}
+	}
+	output.ServiceCategory = m.ServiceCategory
+	output.ServiceType = m.ServiceType
+	output.Specialty = m.Specialty
+	output.Actor = m.Actor
+	output.PlanningHorizon = m.PlanningHorizon
+	if m.Comment != nil && m.Comment.Value != nil {
+		output.Comment = m.Comment.Value
+		if m.Comment.Element != nil {
+			output.CommentElement = toMapOrNil(m.Comment.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Schedule
+// Clone creates a deep copy of Schedule.
 func (m *Schedule) Clone() *Schedule {
 	if m == nil { return nil }
 	return &Schedule{
@@ -65,7 +161,7 @@ func (m *Schedule) Clone() *Schedule {
 	}
 }
 
-// Equals checks for equality with another Schedule instance
+// Equals checks equality between two Schedule instances.
 func (m *Schedule) Equals(other *Schedule) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

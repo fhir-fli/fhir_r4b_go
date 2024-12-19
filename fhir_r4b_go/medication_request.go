@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // MedicationRequest
 // An order or request for both supply of the medication and the instructions for administration of the medication to a patient. The resource is called "MedicationRequest" rather than "MedicationPrescription" or "MedicationOrder" to generalize the use across inpatient and outpatient settings, including care plans, etc., and to harmonize with workflow patterns.
 type MedicationRequest struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -53,22 +55,269 @@ type MedicationRequest struct {
 	EventHistory []*Reference `json:"eventhistory,omitempty"`
 }
 
-// NewMedicationRequest creates a new MedicationRequest instance
+// NewMedicationRequest creates a new MedicationRequest instance.
 func NewMedicationRequest() *MedicationRequest {
 	return &MedicationRequest{}
 }
 
-// FromJSON populates MedicationRequest from JSON data
+// FromJSON populates MedicationRequest from JSON data.
 func (m *MedicationRequest) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *MedicationrequestStatus `json:"status,omitempty"`
+		StatusReason *CodeableConcept `json:"statusreason,omitempty"`
+		Intent *MedicationRequestIntent `json:"intent,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Priority *RequestPriority `json:"priority,omitempty"`
+		DoNotPerform *FhirBoolean `json:"donotperform,omitempty"`
+		ReportedBoolean *FhirBoolean `json:"reportedboolean,omitempty"`
+		ReportedReference *Reference `json:"reportedreference,omitempty"`
+		MedicationCodeableConcept *CodeableConcept `json:"medicationcodeableconcept,omitempty"`
+		MedicationReference *Reference `json:"medicationreference,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		SupportingInformation []*Reference `json:"supportinginformation,omitempty"`
+		AuthoredOn *FhirDateTime `json:"authoredon,omitempty"`
+		Requester *Reference `json:"requester,omitempty"`
+		Performer *Reference `json:"performer,omitempty"`
+		PerformerType *CodeableConcept `json:"performertype,omitempty"`
+		Recorder *Reference `json:"recorder,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		InstantiatesCanonical []interface{} `json:"instantiatescanonical,omitempty"`
+		InstantiatesUri []interface{} `json:"instantiatesuri,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		GroupIdentifier *Identifier `json:"groupidentifier,omitempty"`
+		CourseOfTherapyType *CodeableConcept `json:"courseoftherapytype,omitempty"`
+		Insurance []*Reference `json:"insurance,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		DosageInstruction []*Dosage `json:"dosageinstruction,omitempty"`
+		DispenseRequest *MedicationRequestDispenseRequest `json:"dispenserequest,omitempty"`
+		Substitution *MedicationRequestSubstitution `json:"substitution,omitempty"`
+		PriorPrescription *Reference `json:"priorprescription,omitempty"`
+		DetectedIssue []*Reference `json:"detectedissue,omitempty"`
+		EventHistory []*Reference `json:"eventhistory,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.StatusReason = temp.StatusReason
+	m.Intent = temp.Intent
+	m.Category = temp.Category
+	m.Priority = temp.Priority
+	m.DoNotPerform = temp.DoNotPerform
+	m.ReportedBoolean = temp.ReportedBoolean
+	m.ReportedReference = temp.ReportedReference
+	m.MedicationCodeableConcept = temp.MedicationCodeableConcept
+	m.MedicationReference = temp.MedicationReference
+	m.Subject = temp.Subject
+	m.Encounter = temp.Encounter
+	m.SupportingInformation = temp.SupportingInformation
+	m.AuthoredOn = temp.AuthoredOn
+	m.Requester = temp.Requester
+	m.Performer = temp.Performer
+	m.PerformerType = temp.PerformerType
+	m.Recorder = temp.Recorder
+	m.ReasonCode = temp.ReasonCode
+	m.ReasonReference = temp.ReasonReference
+	if len(temp.InstantiatesCanonical) > 0 {
+		m.InstantiatesCanonical = make([]*FhirCanonical, len(temp.InstantiatesCanonical))
+		for i := range temp.InstantiatesCanonical {
+			itemMap, ok := temp.InstantiatesCanonical[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for InstantiatesCanonical[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse InstantiatesCanonical[%d]: %v", i, err) }
+			m.InstantiatesCanonical[i] = primitive
+		}
+	}
+	if len(temp.InstantiatesUri) > 0 {
+		m.InstantiatesUri = make([]*FhirUri, len(temp.InstantiatesUri))
+		for i := range temp.InstantiatesUri {
+			itemMap, ok := temp.InstantiatesUri[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for InstantiatesUri[%d]: expected map", i) }
+			primitive, err := NewFhirUriFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse InstantiatesUri[%d]: %v", i, err) }
+			m.InstantiatesUri[i] = primitive
+		}
+	}
+	m.BasedOn = temp.BasedOn
+	m.GroupIdentifier = temp.GroupIdentifier
+	m.CourseOfTherapyType = temp.CourseOfTherapyType
+	m.Insurance = temp.Insurance
+	m.Note = temp.Note
+	m.DosageInstruction = temp.DosageInstruction
+	m.DispenseRequest = temp.DispenseRequest
+	m.Substitution = temp.Substitution
+	m.PriorPrescription = temp.PriorPrescription
+	m.DetectedIssue = temp.DetectedIssue
+	m.EventHistory = temp.EventHistory
+	return nil
 }
 
-// ToJSON converts MedicationRequest to JSON data
+// ToJSON converts MedicationRequest to JSON data.
 func (m *MedicationRequest) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *MedicationrequestStatus `json:"status,omitempty"`
+		StatusReason *CodeableConcept `json:"statusreason,omitempty"`
+		Intent *MedicationRequestIntent `json:"intent,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Priority *RequestPriority `json:"priority,omitempty"`
+		DoNotPerform interface{} `json:"donotperform,omitempty"`
+		DoNotPerformElement map[string]interface{} `json:"_donotperform,omitempty"`
+		ReportedBoolean interface{} `json:"reportedboolean,omitempty"`
+		ReportedBooleanElement map[string]interface{} `json:"_reportedboolean,omitempty"`
+		ReportedReference *Reference `json:"reportedreference,omitempty"`
+		MedicationCodeableConcept *CodeableConcept `json:"medicationcodeableconcept,omitempty"`
+		MedicationReference *Reference `json:"medicationreference,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		SupportingInformation []*Reference `json:"supportinginformation,omitempty"`
+		AuthoredOn interface{} `json:"authoredon,omitempty"`
+		AuthoredOnElement map[string]interface{} `json:"_authoredon,omitempty"`
+		Requester *Reference `json:"requester,omitempty"`
+		Performer *Reference `json:"performer,omitempty"`
+		PerformerType *CodeableConcept `json:"performertype,omitempty"`
+		Recorder *Reference `json:"recorder,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		InstantiatesCanonical []interface{} `json:"instantiatescanonical,omitempty"`
+		InstantiatesCanonicalElement []map[string]interface{} `json:"_instantiatescanonical,omitempty"`
+		InstantiatesUri []interface{} `json:"instantiatesuri,omitempty"`
+		InstantiatesUriElement []map[string]interface{} `json:"_instantiatesuri,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		GroupIdentifier *Identifier `json:"groupidentifier,omitempty"`
+		CourseOfTherapyType *CodeableConcept `json:"courseoftherapytype,omitempty"`
+		Insurance []*Reference `json:"insurance,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		DosageInstruction []*Dosage `json:"dosageinstruction,omitempty"`
+		DispenseRequest *MedicationRequestDispenseRequest `json:"dispenserequest,omitempty"`
+		Substitution *MedicationRequestSubstitution `json:"substitution,omitempty"`
+		PriorPrescription *Reference `json:"priorprescription,omitempty"`
+		DetectedIssue []*Reference `json:"detectedissue,omitempty"`
+		EventHistory []*Reference `json:"eventhistory,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	output.StatusReason = m.StatusReason
+	output.Intent = m.Intent
+	output.Category = m.Category
+	output.Priority = m.Priority
+	if m.DoNotPerform != nil && m.DoNotPerform.Value != nil {
+		output.DoNotPerform = m.DoNotPerform.Value
+		if m.DoNotPerform.Element != nil {
+			output.DoNotPerformElement = toMapOrNil(m.DoNotPerform.Element.ToJSON())
+		}
+	}
+	if m.ReportedBoolean != nil && m.ReportedBoolean.Value != nil {
+		output.ReportedBoolean = m.ReportedBoolean.Value
+		if m.ReportedBoolean.Element != nil {
+			output.ReportedBooleanElement = toMapOrNil(m.ReportedBoolean.Element.ToJSON())
+		}
+	}
+	output.ReportedReference = m.ReportedReference
+	output.MedicationCodeableConcept = m.MedicationCodeableConcept
+	output.MedicationReference = m.MedicationReference
+	output.Subject = m.Subject
+	output.Encounter = m.Encounter
+	output.SupportingInformation = m.SupportingInformation
+	if m.AuthoredOn != nil && m.AuthoredOn.Value != nil {
+		output.AuthoredOn = m.AuthoredOn.Value
+		if m.AuthoredOn.Element != nil {
+			output.AuthoredOnElement = toMapOrNil(m.AuthoredOn.Element.ToJSON())
+		}
+	}
+	output.Requester = m.Requester
+	output.Performer = m.Performer
+	output.PerformerType = m.PerformerType
+	output.Recorder = m.Recorder
+	output.ReasonCode = m.ReasonCode
+	output.ReasonReference = m.ReasonReference
+	if len(m.InstantiatesCanonical) > 0 {
+		output.InstantiatesCanonical = make([]interface{}, len(m.InstantiatesCanonical))
+		output.InstantiatesCanonicalElement = make([]map[string]interface{}, len(m.InstantiatesCanonical))
+		for i, item := range m.InstantiatesCanonical {
+			if item != nil && item.Value != nil {
+				output.InstantiatesCanonical[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.InstantiatesCanonicalElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.InstantiatesUri) > 0 {
+		output.InstantiatesUri = make([]interface{}, len(m.InstantiatesUri))
+		output.InstantiatesUriElement = make([]map[string]interface{}, len(m.InstantiatesUri))
+		for i, item := range m.InstantiatesUri {
+			if item != nil && item.Value != nil {
+				output.InstantiatesUri[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.InstantiatesUriElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.BasedOn = m.BasedOn
+	output.GroupIdentifier = m.GroupIdentifier
+	output.CourseOfTherapyType = m.CourseOfTherapyType
+	output.Insurance = m.Insurance
+	output.Note = m.Note
+	output.DosageInstruction = m.DosageInstruction
+	output.DispenseRequest = m.DispenseRequest
+	output.Substitution = m.Substitution
+	output.PriorPrescription = m.PriorPrescription
+	output.DetectedIssue = m.DetectedIssue
+	output.EventHistory = m.EventHistory
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MedicationRequest
+// Clone creates a deep copy of MedicationRequest.
 func (m *MedicationRequest) Clone() *MedicationRequest {
 	if m == nil { return nil }
 	return &MedicationRequest{
@@ -117,7 +366,7 @@ func (m *MedicationRequest) Clone() *MedicationRequest {
 	}
 }
 
-// Equals checks for equality with another MedicationRequest instance
+// Equals checks equality between two MedicationRequest instances.
 func (m *MedicationRequest) Equals(other *MedicationRequest) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -169,7 +418,7 @@ func (m *MedicationRequest) Equals(other *MedicationRequest) bool {
 // MedicationRequestDispenseRequest
 // Indicates the specific details for the dispense or medication supply part of a medication request (also known as a Medication Prescription or Medication Order).  Note that this information is not always sent with the order.  There may be in some settings (e.g. hospitals) institutional or system support for completing the dispense details in the pharmacy department.
 type MedicationRequestDispenseRequest struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -182,22 +431,81 @@ type MedicationRequestDispenseRequest struct {
 	Performer *Reference `json:"performer,omitempty"`
 }
 
-// NewMedicationRequestDispenseRequest creates a new MedicationRequestDispenseRequest instance
+// NewMedicationRequestDispenseRequest creates a new MedicationRequestDispenseRequest instance.
 func NewMedicationRequestDispenseRequest() *MedicationRequestDispenseRequest {
 	return &MedicationRequestDispenseRequest{}
 }
 
-// FromJSON populates MedicationRequestDispenseRequest from JSON data
+// FromJSON populates MedicationRequestDispenseRequest from JSON data.
 func (m *MedicationRequestDispenseRequest) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		InitialFill *MedicationRequestInitialFill `json:"initialfill,omitempty"`
+		DispenseInterval *FhirDuration `json:"dispenseinterval,omitempty"`
+		ValidityPeriod *Period `json:"validityperiod,omitempty"`
+		NumberOfRepeatsAllowed *FhirUnsignedInt `json:"numberofrepeatsallowed,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		ExpectedSupplyDuration *FhirDuration `json:"expectedsupplyduration,omitempty"`
+		Performer *Reference `json:"performer,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.InitialFill = temp.InitialFill
+	m.DispenseInterval = temp.DispenseInterval
+	m.ValidityPeriod = temp.ValidityPeriod
+	m.NumberOfRepeatsAllowed = temp.NumberOfRepeatsAllowed
+	m.Quantity = temp.Quantity
+	m.ExpectedSupplyDuration = temp.ExpectedSupplyDuration
+	m.Performer = temp.Performer
+	return nil
 }
 
-// ToJSON converts MedicationRequestDispenseRequest to JSON data
+// ToJSON converts MedicationRequestDispenseRequest to JSON data.
 func (m *MedicationRequestDispenseRequest) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		InitialFill *MedicationRequestInitialFill `json:"initialfill,omitempty"`
+		DispenseInterval *FhirDuration `json:"dispenseinterval,omitempty"`
+		ValidityPeriod *Period `json:"validityperiod,omitempty"`
+		NumberOfRepeatsAllowed interface{} `json:"numberofrepeatsallowed,omitempty"`
+		NumberOfRepeatsAllowedElement map[string]interface{} `json:"_numberofrepeatsallowed,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		ExpectedSupplyDuration *FhirDuration `json:"expectedsupplyduration,omitempty"`
+		Performer *Reference `json:"performer,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.InitialFill = m.InitialFill
+	output.DispenseInterval = m.DispenseInterval
+	output.ValidityPeriod = m.ValidityPeriod
+	if m.NumberOfRepeatsAllowed != nil && m.NumberOfRepeatsAllowed.Value != nil {
+		output.NumberOfRepeatsAllowed = m.NumberOfRepeatsAllowed.Value
+		if m.NumberOfRepeatsAllowed.Element != nil {
+			output.NumberOfRepeatsAllowedElement = toMapOrNil(m.NumberOfRepeatsAllowed.Element.ToJSON())
+		}
+	}
+	output.Quantity = m.Quantity
+	output.ExpectedSupplyDuration = m.ExpectedSupplyDuration
+	output.Performer = m.Performer
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MedicationRequestDispenseRequest
+// Clone creates a deep copy of MedicationRequestDispenseRequest.
 func (m *MedicationRequestDispenseRequest) Clone() *MedicationRequestDispenseRequest {
 	if m == nil { return nil }
 	return &MedicationRequestDispenseRequest{
@@ -214,7 +522,7 @@ func (m *MedicationRequestDispenseRequest) Clone() *MedicationRequestDispenseReq
 	}
 }
 
-// Equals checks for equality with another MedicationRequestDispenseRequest instance
+// Equals checks equality between two MedicationRequestDispenseRequest instances.
 func (m *MedicationRequestDispenseRequest) Equals(other *MedicationRequestDispenseRequest) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -234,7 +542,7 @@ func (m *MedicationRequestDispenseRequest) Equals(other *MedicationRequestDispen
 // MedicationRequestInitialFill
 // Indicates the quantity or duration for the first dispense of the medication.
 type MedicationRequestInitialFill struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -242,22 +550,55 @@ type MedicationRequestInitialFill struct {
 	Duration *FhirDuration `json:"duration,omitempty"`
 }
 
-// NewMedicationRequestInitialFill creates a new MedicationRequestInitialFill instance
+// NewMedicationRequestInitialFill creates a new MedicationRequestInitialFill instance.
 func NewMedicationRequestInitialFill() *MedicationRequestInitialFill {
 	return &MedicationRequestInitialFill{}
 }
 
-// FromJSON populates MedicationRequestInitialFill from JSON data
+// FromJSON populates MedicationRequestInitialFill from JSON data.
 func (m *MedicationRequestInitialFill) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		Duration *FhirDuration `json:"duration,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Quantity = temp.Quantity
+	m.Duration = temp.Duration
+	return nil
 }
 
-// ToJSON converts MedicationRequestInitialFill to JSON data
+// ToJSON converts MedicationRequestInitialFill to JSON data.
 func (m *MedicationRequestInitialFill) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		Duration *FhirDuration `json:"duration,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Quantity = m.Quantity
+	output.Duration = m.Duration
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MedicationRequestInitialFill
+// Clone creates a deep copy of MedicationRequestInitialFill.
 func (m *MedicationRequestInitialFill) Clone() *MedicationRequestInitialFill {
 	if m == nil { return nil }
 	return &MedicationRequestInitialFill{
@@ -269,7 +610,7 @@ func (m *MedicationRequestInitialFill) Clone() *MedicationRequestInitialFill {
 	}
 }
 
-// Equals checks for equality with another MedicationRequestInitialFill instance
+// Equals checks equality between two MedicationRequestInitialFill instances.
 func (m *MedicationRequestInitialFill) Equals(other *MedicationRequestInitialFill) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -284,7 +625,7 @@ func (m *MedicationRequestInitialFill) Equals(other *MedicationRequestInitialFil
 // MedicationRequestSubstitution
 // Indicates whether or not substitution can or should be part of the dispense. In some cases, substitution must happen, in other cases substitution must not happen. This block explains the prescriber's intent. If nothing is specified substitution may be done.
 type MedicationRequestSubstitution struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -293,22 +634,65 @@ type MedicationRequestSubstitution struct {
 	Reason *CodeableConcept `json:"reason,omitempty"`
 }
 
-// NewMedicationRequestSubstitution creates a new MedicationRequestSubstitution instance
+// NewMedicationRequestSubstitution creates a new MedicationRequestSubstitution instance.
 func NewMedicationRequestSubstitution() *MedicationRequestSubstitution {
 	return &MedicationRequestSubstitution{}
 }
 
-// FromJSON populates MedicationRequestSubstitution from JSON data
+// FromJSON populates MedicationRequestSubstitution from JSON data.
 func (m *MedicationRequestSubstitution) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		AllowedBoolean *FhirBoolean `json:"allowedboolean,omitempty"`
+		AllowedCodeableConcept *CodeableConcept `json:"allowedcodeableconcept,omitempty"`
+		Reason *CodeableConcept `json:"reason,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.AllowedBoolean = temp.AllowedBoolean
+	m.AllowedCodeableConcept = temp.AllowedCodeableConcept
+	m.Reason = temp.Reason
+	return nil
 }
 
-// ToJSON converts MedicationRequestSubstitution to JSON data
+// ToJSON converts MedicationRequestSubstitution to JSON data.
 func (m *MedicationRequestSubstitution) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		AllowedBoolean interface{} `json:"allowedboolean,omitempty"`
+		AllowedBooleanElement map[string]interface{} `json:"_allowedboolean,omitempty"`
+		AllowedCodeableConcept *CodeableConcept `json:"allowedcodeableconcept,omitempty"`
+		Reason *CodeableConcept `json:"reason,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.AllowedBoolean != nil && m.AllowedBoolean.Value != nil {
+		output.AllowedBoolean = m.AllowedBoolean.Value
+		if m.AllowedBoolean.Element != nil {
+			output.AllowedBooleanElement = toMapOrNil(m.AllowedBoolean.Element.ToJSON())
+		}
+	}
+	output.AllowedCodeableConcept = m.AllowedCodeableConcept
+	output.Reason = m.Reason
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MedicationRequestSubstitution
+// Clone creates a deep copy of MedicationRequestSubstitution.
 func (m *MedicationRequestSubstitution) Clone() *MedicationRequestSubstitution {
 	if m == nil { return nil }
 	return &MedicationRequestSubstitution{
@@ -321,7 +705,7 @@ func (m *MedicationRequestSubstitution) Clone() *MedicationRequestSubstitution {
 	}
 }
 
-// Equals checks for equality with another MedicationRequestSubstitution instance
+// Equals checks equality between two MedicationRequestSubstitution instances.
 func (m *MedicationRequestSubstitution) Equals(other *MedicationRequestSubstitution) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

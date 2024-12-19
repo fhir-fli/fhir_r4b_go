@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // ImagingStudy
 // Representation of the content produced in a DICOM imaging study. A study comprises a set of series, each of which includes a set of Service-Object Pair Instances (SOP Instances - images or other data) acquired or produced in a common context.  A series is of only one modality (e.g. X-ray, CT, MR, ultrasound), but a study may have multiple series of different modalities.
 type ImagingStudy struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -39,22 +40,177 @@ type ImagingStudy struct {
 	Series []*ImagingStudySeries `json:"series,omitempty"`
 }
 
-// NewImagingStudy creates a new ImagingStudy instance
+// NewImagingStudy creates a new ImagingStudy instance.
 func NewImagingStudy() *ImagingStudy {
 	return &ImagingStudy{}
 }
 
-// FromJSON populates ImagingStudy from JSON data
+// FromJSON populates ImagingStudy from JSON data.
 func (m *ImagingStudy) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *ImagingStudyStatus `json:"status,omitempty"`
+		Modality []*Coding `json:"modality,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		Started *FhirDateTime `json:"started,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		Referrer *Reference `json:"referrer,omitempty"`
+		Interpreter []*Reference `json:"interpreter,omitempty"`
+		Endpoint []*Reference `json:"endpoint,omitempty"`
+		NumberOfSeries *FhirUnsignedInt `json:"numberofseries,omitempty"`
+		NumberOfInstances *FhirUnsignedInt `json:"numberofinstances,omitempty"`
+		ProcedureReference *Reference `json:"procedurereference,omitempty"`
+		ProcedureCode []*CodeableConcept `json:"procedurecode,omitempty"`
+		Location *Reference `json:"location,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Series []*ImagingStudySeries `json:"series,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.Modality = temp.Modality
+	m.Subject = temp.Subject
+	m.Encounter = temp.Encounter
+	m.Started = temp.Started
+	m.BasedOn = temp.BasedOn
+	m.Referrer = temp.Referrer
+	m.Interpreter = temp.Interpreter
+	m.Endpoint = temp.Endpoint
+	m.NumberOfSeries = temp.NumberOfSeries
+	m.NumberOfInstances = temp.NumberOfInstances
+	m.ProcedureReference = temp.ProcedureReference
+	m.ProcedureCode = temp.ProcedureCode
+	m.Location = temp.Location
+	m.ReasonCode = temp.ReasonCode
+	m.ReasonReference = temp.ReasonReference
+	m.Note = temp.Note
+	m.Description = temp.Description
+	m.Series = temp.Series
+	return nil
 }
 
-// ToJSON converts ImagingStudy to JSON data
+// ToJSON converts ImagingStudy to JSON data.
 func (m *ImagingStudy) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *ImagingStudyStatus `json:"status,omitempty"`
+		Modality []*Coding `json:"modality,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		Started interface{} `json:"started,omitempty"`
+		StartedElement map[string]interface{} `json:"_started,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		Referrer *Reference `json:"referrer,omitempty"`
+		Interpreter []*Reference `json:"interpreter,omitempty"`
+		Endpoint []*Reference `json:"endpoint,omitempty"`
+		NumberOfSeries interface{} `json:"numberofseries,omitempty"`
+		NumberOfSeriesElement map[string]interface{} `json:"_numberofseries,omitempty"`
+		NumberOfInstances interface{} `json:"numberofinstances,omitempty"`
+		NumberOfInstancesElement map[string]interface{} `json:"_numberofinstances,omitempty"`
+		ProcedureReference *Reference `json:"procedurereference,omitempty"`
+		ProcedureCode []*CodeableConcept `json:"procedurecode,omitempty"`
+		Location *Reference `json:"location,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Series []*ImagingStudySeries `json:"series,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	output.Modality = m.Modality
+	output.Subject = m.Subject
+	output.Encounter = m.Encounter
+	if m.Started != nil && m.Started.Value != nil {
+		output.Started = m.Started.Value
+		if m.Started.Element != nil {
+			output.StartedElement = toMapOrNil(m.Started.Element.ToJSON())
+		}
+	}
+	output.BasedOn = m.BasedOn
+	output.Referrer = m.Referrer
+	output.Interpreter = m.Interpreter
+	output.Endpoint = m.Endpoint
+	if m.NumberOfSeries != nil && m.NumberOfSeries.Value != nil {
+		output.NumberOfSeries = m.NumberOfSeries.Value
+		if m.NumberOfSeries.Element != nil {
+			output.NumberOfSeriesElement = toMapOrNil(m.NumberOfSeries.Element.ToJSON())
+		}
+	}
+	if m.NumberOfInstances != nil && m.NumberOfInstances.Value != nil {
+		output.NumberOfInstances = m.NumberOfInstances.Value
+		if m.NumberOfInstances.Element != nil {
+			output.NumberOfInstancesElement = toMapOrNil(m.NumberOfInstances.Element.ToJSON())
+		}
+	}
+	output.ProcedureReference = m.ProcedureReference
+	output.ProcedureCode = m.ProcedureCode
+	output.Location = m.Location
+	output.ReasonCode = m.ReasonCode
+	output.ReasonReference = m.ReasonReference
+	output.Note = m.Note
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Series = m.Series
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ImagingStudy
+// Clone creates a deep copy of ImagingStudy.
 func (m *ImagingStudy) Clone() *ImagingStudy {
 	if m == nil { return nil }
 	return &ImagingStudy{
@@ -89,7 +245,7 @@ func (m *ImagingStudy) Clone() *ImagingStudy {
 	}
 }
 
-// Equals checks for equality with another ImagingStudy instance
+// Equals checks equality between two ImagingStudy instances.
 func (m *ImagingStudy) Equals(other *ImagingStudy) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -127,7 +283,7 @@ func (m *ImagingStudy) Equals(other *ImagingStudy) bool {
 // ImagingStudySeries
 // Each study has one or more series of images or other content.
 type ImagingStudySeries struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -145,22 +301,125 @@ type ImagingStudySeries struct {
 	Instance []*ImagingStudyInstance `json:"instance,omitempty"`
 }
 
-// NewImagingStudySeries creates a new ImagingStudySeries instance
+// NewImagingStudySeries creates a new ImagingStudySeries instance.
 func NewImagingStudySeries() *ImagingStudySeries {
 	return &ImagingStudySeries{}
 }
 
-// FromJSON populates ImagingStudySeries from JSON data
+// FromJSON populates ImagingStudySeries from JSON data.
 func (m *ImagingStudySeries) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Uid *FhirId `json:"uid,omitempty"`
+		Number *FhirUnsignedInt `json:"number,omitempty"`
+		Modality *Coding `json:"modality,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		NumberOfInstances *FhirUnsignedInt `json:"numberofinstances,omitempty"`
+		Endpoint []*Reference `json:"endpoint,omitempty"`
+		BodySite *Coding `json:"bodysite,omitempty"`
+		Laterality *Coding `json:"laterality,omitempty"`
+		Specimen []*Reference `json:"specimen,omitempty"`
+		Started *FhirDateTime `json:"started,omitempty"`
+		Performer []*ImagingStudyPerformer `json:"performer,omitempty"`
+		Instance []*ImagingStudyInstance `json:"instance,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Uid = temp.Uid
+	m.Number = temp.Number
+	m.Modality = temp.Modality
+	m.Description = temp.Description
+	m.NumberOfInstances = temp.NumberOfInstances
+	m.Endpoint = temp.Endpoint
+	m.BodySite = temp.BodySite
+	m.Laterality = temp.Laterality
+	m.Specimen = temp.Specimen
+	m.Started = temp.Started
+	m.Performer = temp.Performer
+	m.Instance = temp.Instance
+	return nil
 }
 
-// ToJSON converts ImagingStudySeries to JSON data
+// ToJSON converts ImagingStudySeries to JSON data.
 func (m *ImagingStudySeries) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Uid interface{} `json:"uid,omitempty"`
+		UidElement map[string]interface{} `json:"_uid,omitempty"`
+		Number interface{} `json:"number,omitempty"`
+		NumberElement map[string]interface{} `json:"_number,omitempty"`
+		Modality *Coding `json:"modality,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		NumberOfInstances interface{} `json:"numberofinstances,omitempty"`
+		NumberOfInstancesElement map[string]interface{} `json:"_numberofinstances,omitempty"`
+		Endpoint []*Reference `json:"endpoint,omitempty"`
+		BodySite *Coding `json:"bodysite,omitempty"`
+		Laterality *Coding `json:"laterality,omitempty"`
+		Specimen []*Reference `json:"specimen,omitempty"`
+		Started interface{} `json:"started,omitempty"`
+		StartedElement map[string]interface{} `json:"_started,omitempty"`
+		Performer []*ImagingStudyPerformer `json:"performer,omitempty"`
+		Instance []*ImagingStudyInstance `json:"instance,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Uid != nil && m.Uid.Value != nil {
+		output.Uid = m.Uid.Value
+		if m.Uid.Element != nil {
+			output.UidElement = toMapOrNil(m.Uid.Element.ToJSON())
+		}
+	}
+	if m.Number != nil && m.Number.Value != nil {
+		output.Number = m.Number.Value
+		if m.Number.Element != nil {
+			output.NumberElement = toMapOrNil(m.Number.Element.ToJSON())
+		}
+	}
+	output.Modality = m.Modality
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	if m.NumberOfInstances != nil && m.NumberOfInstances.Value != nil {
+		output.NumberOfInstances = m.NumberOfInstances.Value
+		if m.NumberOfInstances.Element != nil {
+			output.NumberOfInstancesElement = toMapOrNil(m.NumberOfInstances.Element.ToJSON())
+		}
+	}
+	output.Endpoint = m.Endpoint
+	output.BodySite = m.BodySite
+	output.Laterality = m.Laterality
+	output.Specimen = m.Specimen
+	if m.Started != nil && m.Started.Value != nil {
+		output.Started = m.Started.Value
+		if m.Started.Element != nil {
+			output.StartedElement = toMapOrNil(m.Started.Element.ToJSON())
+		}
+	}
+	output.Performer = m.Performer
+	output.Instance = m.Instance
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ImagingStudySeries
+// Clone creates a deep copy of ImagingStudySeries.
 func (m *ImagingStudySeries) Clone() *ImagingStudySeries {
 	if m == nil { return nil }
 	return &ImagingStudySeries{
@@ -182,7 +441,7 @@ func (m *ImagingStudySeries) Clone() *ImagingStudySeries {
 	}
 }
 
-// Equals checks for equality with another ImagingStudySeries instance
+// Equals checks equality between two ImagingStudySeries instances.
 func (m *ImagingStudySeries) Equals(other *ImagingStudySeries) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -207,7 +466,7 @@ func (m *ImagingStudySeries) Equals(other *ImagingStudySeries) bool {
 // ImagingStudyPerformer
 // Indicates who or what performed the series and how they were involved.
 type ImagingStudyPerformer struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -215,22 +474,55 @@ type ImagingStudyPerformer struct {
 	Actor *Reference `json:"actor,omitempty"`
 }
 
-// NewImagingStudyPerformer creates a new ImagingStudyPerformer instance
+// NewImagingStudyPerformer creates a new ImagingStudyPerformer instance.
 func NewImagingStudyPerformer() *ImagingStudyPerformer {
 	return &ImagingStudyPerformer{}
 }
 
-// FromJSON populates ImagingStudyPerformer from JSON data
+// FromJSON populates ImagingStudyPerformer from JSON data.
 func (m *ImagingStudyPerformer) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Function_ *CodeableConcept `json:"function,omitempty"`
+		Actor *Reference `json:"actor,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Function_ = temp.Function_
+	m.Actor = temp.Actor
+	return nil
 }
 
-// ToJSON converts ImagingStudyPerformer to JSON data
+// ToJSON converts ImagingStudyPerformer to JSON data.
 func (m *ImagingStudyPerformer) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Function_ *CodeableConcept `json:"function,omitempty"`
+		Actor *Reference `json:"actor,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Function_ = m.Function_
+	output.Actor = m.Actor
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ImagingStudyPerformer
+// Clone creates a deep copy of ImagingStudyPerformer.
 func (m *ImagingStudyPerformer) Clone() *ImagingStudyPerformer {
 	if m == nil { return nil }
 	return &ImagingStudyPerformer{
@@ -242,7 +534,7 @@ func (m *ImagingStudyPerformer) Clone() *ImagingStudyPerformer {
 	}
 }
 
-// Equals checks for equality with another ImagingStudyPerformer instance
+// Equals checks equality between two ImagingStudyPerformer instances.
 func (m *ImagingStudyPerformer) Equals(other *ImagingStudyPerformer) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -257,7 +549,7 @@ func (m *ImagingStudyPerformer) Equals(other *ImagingStudyPerformer) bool {
 // ImagingStudyInstance
 // A single SOP instance within the series, e.g. an image, or presentation state.
 type ImagingStudyInstance struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -267,22 +559,81 @@ type ImagingStudyInstance struct {
 	Title *FhirString `json:"title,omitempty"`
 }
 
-// NewImagingStudyInstance creates a new ImagingStudyInstance instance
+// NewImagingStudyInstance creates a new ImagingStudyInstance instance.
 func NewImagingStudyInstance() *ImagingStudyInstance {
 	return &ImagingStudyInstance{}
 }
 
-// FromJSON populates ImagingStudyInstance from JSON data
+// FromJSON populates ImagingStudyInstance from JSON data.
 func (m *ImagingStudyInstance) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Uid *FhirId `json:"uid,omitempty"`
+		SopClass *Coding `json:"sopclass,omitempty"`
+		Number *FhirUnsignedInt `json:"number,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Uid = temp.Uid
+	m.SopClass = temp.SopClass
+	m.Number = temp.Number
+	m.Title = temp.Title
+	return nil
 }
 
-// ToJSON converts ImagingStudyInstance to JSON data
+// ToJSON converts ImagingStudyInstance to JSON data.
 func (m *ImagingStudyInstance) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Uid interface{} `json:"uid,omitempty"`
+		UidElement map[string]interface{} `json:"_uid,omitempty"`
+		SopClass *Coding `json:"sopclass,omitempty"`
+		Number interface{} `json:"number,omitempty"`
+		NumberElement map[string]interface{} `json:"_number,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Uid != nil && m.Uid.Value != nil {
+		output.Uid = m.Uid.Value
+		if m.Uid.Element != nil {
+			output.UidElement = toMapOrNil(m.Uid.Element.ToJSON())
+		}
+	}
+	output.SopClass = m.SopClass
+	if m.Number != nil && m.Number.Value != nil {
+		output.Number = m.Number.Value
+		if m.Number.Element != nil {
+			output.NumberElement = toMapOrNil(m.Number.Element.ToJSON())
+		}
+	}
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ImagingStudyInstance
+// Clone creates a deep copy of ImagingStudyInstance.
 func (m *ImagingStudyInstance) Clone() *ImagingStudyInstance {
 	if m == nil { return nil }
 	return &ImagingStudyInstance{
@@ -296,7 +647,7 @@ func (m *ImagingStudyInstance) Clone() *ImagingStudyInstance {
 	}
 }
 
-// Equals checks for equality with another ImagingStudyInstance instance
+// Equals checks equality between two ImagingStudyInstance instances.
 func (m *ImagingStudyInstance) Equals(other *ImagingStudyInstance) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

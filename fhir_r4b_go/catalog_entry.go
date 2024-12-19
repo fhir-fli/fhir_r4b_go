@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // CatalogEntry
 // Catalog entries are wrappers that contextualize items included in a catalog.
 type CatalogEntry struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -32,22 +33,143 @@ type CatalogEntry struct {
 	RelatedEntry []*CatalogEntryRelatedEntry `json:"relatedentry,omitempty"`
 }
 
-// NewCatalogEntry creates a new CatalogEntry instance
+// NewCatalogEntry creates a new CatalogEntry instance.
 func NewCatalogEntry() *CatalogEntry {
 	return &CatalogEntry{}
 }
 
-// FromJSON populates CatalogEntry from JSON data
+// FromJSON populates CatalogEntry from JSON data.
 func (m *CatalogEntry) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Orderable *FhirBoolean `json:"orderable,omitempty"`
+		ReferencedItem *Reference `json:"referenceditem,omitempty"`
+		AdditionalIdentifier []*Identifier `json:"additionalidentifier,omitempty"`
+		Classification []*CodeableConcept `json:"classification,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		ValidityPeriod *Period `json:"validityperiod,omitempty"`
+		ValidTo *FhirDateTime `json:"validto,omitempty"`
+		LastUpdated *FhirDateTime `json:"lastupdated,omitempty"`
+		AdditionalCharacteristic []*CodeableConcept `json:"additionalcharacteristic,omitempty"`
+		AdditionalClassification []*CodeableConcept `json:"additionalclassification,omitempty"`
+		RelatedEntry []*CatalogEntryRelatedEntry `json:"relatedentry,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Type = temp.Type
+	m.Orderable = temp.Orderable
+	m.ReferencedItem = temp.ReferencedItem
+	m.AdditionalIdentifier = temp.AdditionalIdentifier
+	m.Classification = temp.Classification
+	m.Status = temp.Status
+	m.ValidityPeriod = temp.ValidityPeriod
+	m.ValidTo = temp.ValidTo
+	m.LastUpdated = temp.LastUpdated
+	m.AdditionalCharacteristic = temp.AdditionalCharacteristic
+	m.AdditionalClassification = temp.AdditionalClassification
+	m.RelatedEntry = temp.RelatedEntry
+	return nil
 }
 
-// ToJSON converts CatalogEntry to JSON data
+// ToJSON converts CatalogEntry to JSON data.
 func (m *CatalogEntry) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Orderable interface{} `json:"orderable,omitempty"`
+		OrderableElement map[string]interface{} `json:"_orderable,omitempty"`
+		ReferencedItem *Reference `json:"referenceditem,omitempty"`
+		AdditionalIdentifier []*Identifier `json:"additionalidentifier,omitempty"`
+		Classification []*CodeableConcept `json:"classification,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		ValidityPeriod *Period `json:"validityperiod,omitempty"`
+		ValidTo interface{} `json:"validto,omitempty"`
+		ValidToElement map[string]interface{} `json:"_validto,omitempty"`
+		LastUpdated interface{} `json:"lastupdated,omitempty"`
+		LastUpdatedElement map[string]interface{} `json:"_lastupdated,omitempty"`
+		AdditionalCharacteristic []*CodeableConcept `json:"additionalcharacteristic,omitempty"`
+		AdditionalClassification []*CodeableConcept `json:"additionalclassification,omitempty"`
+		RelatedEntry []*CatalogEntryRelatedEntry `json:"relatedentry,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Type = m.Type
+	if m.Orderable != nil && m.Orderable.Value != nil {
+		output.Orderable = m.Orderable.Value
+		if m.Orderable.Element != nil {
+			output.OrderableElement = toMapOrNil(m.Orderable.Element.ToJSON())
+		}
+	}
+	output.ReferencedItem = m.ReferencedItem
+	output.AdditionalIdentifier = m.AdditionalIdentifier
+	output.Classification = m.Classification
+	output.Status = m.Status
+	output.ValidityPeriod = m.ValidityPeriod
+	if m.ValidTo != nil && m.ValidTo.Value != nil {
+		output.ValidTo = m.ValidTo.Value
+		if m.ValidTo.Element != nil {
+			output.ValidToElement = toMapOrNil(m.ValidTo.Element.ToJSON())
+		}
+	}
+	if m.LastUpdated != nil && m.LastUpdated.Value != nil {
+		output.LastUpdated = m.LastUpdated.Value
+		if m.LastUpdated.Element != nil {
+			output.LastUpdatedElement = toMapOrNil(m.LastUpdated.Element.ToJSON())
+		}
+	}
+	output.AdditionalCharacteristic = m.AdditionalCharacteristic
+	output.AdditionalClassification = m.AdditionalClassification
+	output.RelatedEntry = m.RelatedEntry
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CatalogEntry
+// Clone creates a deep copy of CatalogEntry.
 func (m *CatalogEntry) Clone() *CatalogEntry {
 	if m == nil { return nil }
 	return &CatalogEntry{
@@ -75,7 +197,7 @@ func (m *CatalogEntry) Clone() *CatalogEntry {
 	}
 }
 
-// Equals checks for equality with another CatalogEntry instance
+// Equals checks equality between two CatalogEntry instances.
 func (m *CatalogEntry) Equals(other *CatalogEntry) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -106,7 +228,7 @@ func (m *CatalogEntry) Equals(other *CatalogEntry) bool {
 // CatalogEntryRelatedEntry
 // Used for example, to point to a substance, or to a device used to administer a medication.
 type CatalogEntryRelatedEntry struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -114,22 +236,55 @@ type CatalogEntryRelatedEntry struct {
 	Item *Reference `json:"item,omitempty"`
 }
 
-// NewCatalogEntryRelatedEntry creates a new CatalogEntryRelatedEntry instance
+// NewCatalogEntryRelatedEntry creates a new CatalogEntryRelatedEntry instance.
 func NewCatalogEntryRelatedEntry() *CatalogEntryRelatedEntry {
 	return &CatalogEntryRelatedEntry{}
 }
 
-// FromJSON populates CatalogEntryRelatedEntry from JSON data
+// FromJSON populates CatalogEntryRelatedEntry from JSON data.
 func (m *CatalogEntryRelatedEntry) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Relationtype *CatalogEntryRelationType `json:"relationtype,omitempty"`
+		Item *Reference `json:"item,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Relationtype = temp.Relationtype
+	m.Item = temp.Item
+	return nil
 }
 
-// ToJSON converts CatalogEntryRelatedEntry to JSON data
+// ToJSON converts CatalogEntryRelatedEntry to JSON data.
 func (m *CatalogEntryRelatedEntry) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Relationtype *CatalogEntryRelationType `json:"relationtype,omitempty"`
+		Item *Reference `json:"item,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Relationtype = m.Relationtype
+	output.Item = m.Item
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CatalogEntryRelatedEntry
+// Clone creates a deep copy of CatalogEntryRelatedEntry.
 func (m *CatalogEntryRelatedEntry) Clone() *CatalogEntryRelatedEntry {
 	if m == nil { return nil }
 	return &CatalogEntryRelatedEntry{
@@ -141,7 +296,7 @@ func (m *CatalogEntryRelatedEntry) Clone() *CatalogEntryRelatedEntry {
 	}
 }
 
-// Equals checks for equality with another CatalogEntryRelatedEntry instance
+// Equals checks equality between two CatalogEntryRelatedEntry instances.
 func (m *CatalogEntryRelatedEntry) Equals(other *CatalogEntryRelatedEntry) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

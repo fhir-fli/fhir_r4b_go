@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Binary
 // A resource that represents the data of a single raw artifact as digital content accessible in its native format.  A Binary resource can contain any content, whether text, image, pdf, zip archive, etc.
 type Binary struct {
-	Resource
+	extends Resource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -18,22 +19,81 @@ type Binary struct {
 	Data *FhirBase64Binary `json:"data,omitempty"`
 }
 
-// NewBinary creates a new Binary instance
+// NewBinary creates a new Binary instance.
 func NewBinary() *Binary {
 	return &Binary{}
 }
 
-// FromJSON populates Binary from JSON data
+// FromJSON populates Binary from JSON data.
 func (m *Binary) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		ContentType *FhirCode `json:"contenttype,omitempty"`
+		SecurityContext *Reference `json:"securitycontext,omitempty"`
+		Data *FhirBase64Binary `json:"data,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.ContentType = temp.ContentType
+	m.SecurityContext = temp.SecurityContext
+	m.Data = temp.Data
+	return nil
 }
 
-// ToJSON converts Binary to JSON data
+// ToJSON converts Binary to JSON data.
 func (m *Binary) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		ContentType interface{} `json:"contenttype,omitempty"`
+		ContentTypeElement map[string]interface{} `json:"_contenttype,omitempty"`
+		SecurityContext *Reference `json:"securitycontext,omitempty"`
+		Data interface{} `json:"data,omitempty"`
+		DataElement map[string]interface{} `json:"_data,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	if m.ContentType != nil && m.ContentType.Value != nil {
+		output.ContentType = m.ContentType.Value
+		if m.ContentType.Element != nil {
+			output.ContentTypeElement = toMapOrNil(m.ContentType.Element.ToJSON())
+		}
+	}
+	output.SecurityContext = m.SecurityContext
+	if m.Data != nil && m.Data.Value != nil {
+		output.Data = m.Data.Value
+		if m.Data.Element != nil {
+			output.DataElement = toMapOrNil(m.Data.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Binary
+// Clone creates a deep copy of Binary.
 func (m *Binary) Clone() *Binary {
 	if m == nil { return nil }
 	return &Binary{
@@ -47,7 +107,7 @@ func (m *Binary) Clone() *Binary {
 	}
 }
 
-// Equals checks for equality with another Binary instance
+// Equals checks equality between two Binary instances.
 func (m *Binary) Equals(other *Binary) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

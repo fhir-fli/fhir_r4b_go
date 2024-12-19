@@ -3,13 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // BiologicallyDerivedProduct
 // A material substance originating from a biological entity intended to be transplanted or infused
 // into another (possibly the same) biological entity.
 type BiologicallyDerivedProduct struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -31,22 +32,123 @@ type BiologicallyDerivedProduct struct {
 	Storage []*BiologicallyDerivedProductStorage `json:"storage,omitempty"`
 }
 
-// NewBiologicallyDerivedProduct creates a new BiologicallyDerivedProduct instance
+// NewBiologicallyDerivedProduct creates a new BiologicallyDerivedProduct instance.
 func NewBiologicallyDerivedProduct() *BiologicallyDerivedProduct {
 	return &BiologicallyDerivedProduct{}
 }
 
-// FromJSON populates BiologicallyDerivedProduct from JSON data
+// FromJSON populates BiologicallyDerivedProduct from JSON data.
 func (m *BiologicallyDerivedProduct) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		ProductCategory *BiologicallyDerivedProductCategory `json:"productcategory,omitempty"`
+		ProductCode *CodeableConcept `json:"productcode,omitempty"`
+		Status *BiologicallyDerivedProductStatus `json:"status,omitempty"`
+		Request []*Reference `json:"request,omitempty"`
+		Quantity *FhirInteger `json:"quantity,omitempty"`
+		Parent []*Reference `json:"parent,omitempty"`
+		Collection *BiologicallyDerivedProductCollection `json:"collection,omitempty"`
+		Processing []*BiologicallyDerivedProductProcessing `json:"processing,omitempty"`
+		Manipulation *BiologicallyDerivedProductManipulation `json:"manipulation,omitempty"`
+		Storage []*BiologicallyDerivedProductStorage `json:"storage,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.ProductCategory = temp.ProductCategory
+	m.ProductCode = temp.ProductCode
+	m.Status = temp.Status
+	m.Request = temp.Request
+	m.Quantity = temp.Quantity
+	m.Parent = temp.Parent
+	m.Collection = temp.Collection
+	m.Processing = temp.Processing
+	m.Manipulation = temp.Manipulation
+	m.Storage = temp.Storage
+	return nil
 }
 
-// ToJSON converts BiologicallyDerivedProduct to JSON data
+// ToJSON converts BiologicallyDerivedProduct to JSON data.
 func (m *BiologicallyDerivedProduct) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		ProductCategory *BiologicallyDerivedProductCategory `json:"productcategory,omitempty"`
+		ProductCode *CodeableConcept `json:"productcode,omitempty"`
+		Status *BiologicallyDerivedProductStatus `json:"status,omitempty"`
+		Request []*Reference `json:"request,omitempty"`
+		Quantity interface{} `json:"quantity,omitempty"`
+		QuantityElement map[string]interface{} `json:"_quantity,omitempty"`
+		Parent []*Reference `json:"parent,omitempty"`
+		Collection *BiologicallyDerivedProductCollection `json:"collection,omitempty"`
+		Processing []*BiologicallyDerivedProductProcessing `json:"processing,omitempty"`
+		Manipulation *BiologicallyDerivedProductManipulation `json:"manipulation,omitempty"`
+		Storage []*BiologicallyDerivedProductStorage `json:"storage,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.ProductCategory = m.ProductCategory
+	output.ProductCode = m.ProductCode
+	output.Status = m.Status
+	output.Request = m.Request
+	if m.Quantity != nil && m.Quantity.Value != nil {
+		output.Quantity = m.Quantity.Value
+		if m.Quantity.Element != nil {
+			output.QuantityElement = toMapOrNil(m.Quantity.Element.ToJSON())
+		}
+	}
+	output.Parent = m.Parent
+	output.Collection = m.Collection
+	output.Processing = m.Processing
+	output.Manipulation = m.Manipulation
+	output.Storage = m.Storage
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of BiologicallyDerivedProduct
+// Clone creates a deep copy of BiologicallyDerivedProduct.
 func (m *BiologicallyDerivedProduct) Clone() *BiologicallyDerivedProduct {
 	if m == nil { return nil }
 	return &BiologicallyDerivedProduct{
@@ -72,7 +174,7 @@ func (m *BiologicallyDerivedProduct) Clone() *BiologicallyDerivedProduct {
 	}
 }
 
-// Equals checks for equality with another BiologicallyDerivedProduct instance
+// Equals checks equality between two BiologicallyDerivedProduct instances.
 func (m *BiologicallyDerivedProduct) Equals(other *BiologicallyDerivedProduct) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -101,7 +203,7 @@ func (m *BiologicallyDerivedProduct) Equals(other *BiologicallyDerivedProduct) b
 // BiologicallyDerivedProductCollection
 // How this product was collected.
 type BiologicallyDerivedProductCollection struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -111,22 +213,69 @@ type BiologicallyDerivedProductCollection struct {
 	CollectedPeriod *Period `json:"collectedperiod,omitempty"`
 }
 
-// NewBiologicallyDerivedProductCollection creates a new BiologicallyDerivedProductCollection instance
+// NewBiologicallyDerivedProductCollection creates a new BiologicallyDerivedProductCollection instance.
 func NewBiologicallyDerivedProductCollection() *BiologicallyDerivedProductCollection {
 	return &BiologicallyDerivedProductCollection{}
 }
 
-// FromJSON populates BiologicallyDerivedProductCollection from JSON data
+// FromJSON populates BiologicallyDerivedProductCollection from JSON data.
 func (m *BiologicallyDerivedProductCollection) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Collector *Reference `json:"collector,omitempty"`
+		Source *Reference `json:"source,omitempty"`
+		CollectedDateTime *FhirDateTime `json:"collecteddatetime,omitempty"`
+		CollectedPeriod *Period `json:"collectedperiod,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Collector = temp.Collector
+	m.Source = temp.Source
+	m.CollectedDateTime = temp.CollectedDateTime
+	m.CollectedPeriod = temp.CollectedPeriod
+	return nil
 }
 
-// ToJSON converts BiologicallyDerivedProductCollection to JSON data
+// ToJSON converts BiologicallyDerivedProductCollection to JSON data.
 func (m *BiologicallyDerivedProductCollection) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Collector *Reference `json:"collector,omitempty"`
+		Source *Reference `json:"source,omitempty"`
+		CollectedDateTime interface{} `json:"collecteddatetime,omitempty"`
+		CollectedDateTimeElement map[string]interface{} `json:"_collecteddatetime,omitempty"`
+		CollectedPeriod *Period `json:"collectedperiod,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Collector = m.Collector
+	output.Source = m.Source
+	if m.CollectedDateTime != nil && m.CollectedDateTime.Value != nil {
+		output.CollectedDateTime = m.CollectedDateTime.Value
+		if m.CollectedDateTime.Element != nil {
+			output.CollectedDateTimeElement = toMapOrNil(m.CollectedDateTime.Element.ToJSON())
+		}
+	}
+	output.CollectedPeriod = m.CollectedPeriod
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of BiologicallyDerivedProductCollection
+// Clone creates a deep copy of BiologicallyDerivedProductCollection.
 func (m *BiologicallyDerivedProductCollection) Clone() *BiologicallyDerivedProductCollection {
 	if m == nil { return nil }
 	return &BiologicallyDerivedProductCollection{
@@ -140,7 +289,7 @@ func (m *BiologicallyDerivedProductCollection) Clone() *BiologicallyDerivedProdu
 	}
 }
 
-// Equals checks for equality with another BiologicallyDerivedProductCollection instance
+// Equals checks equality between two BiologicallyDerivedProductCollection instances.
 func (m *BiologicallyDerivedProductCollection) Equals(other *BiologicallyDerivedProductCollection) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -157,7 +306,7 @@ func (m *BiologicallyDerivedProductCollection) Equals(other *BiologicallyDerived
 // BiologicallyDerivedProductProcessing
 // Any processing of the product during collection that does not change the fundamental nature of the product. For example adding anti-coagulants during the collection of Peripheral Blood Stem Cells.
 type BiologicallyDerivedProductProcessing struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -168,22 +317,79 @@ type BiologicallyDerivedProductProcessing struct {
 	TimePeriod *Period `json:"timeperiod,omitempty"`
 }
 
-// NewBiologicallyDerivedProductProcessing creates a new BiologicallyDerivedProductProcessing instance
+// NewBiologicallyDerivedProductProcessing creates a new BiologicallyDerivedProductProcessing instance.
 func NewBiologicallyDerivedProductProcessing() *BiologicallyDerivedProductProcessing {
 	return &BiologicallyDerivedProductProcessing{}
 }
 
-// FromJSON populates BiologicallyDerivedProductProcessing from JSON data
+// FromJSON populates BiologicallyDerivedProductProcessing from JSON data.
 func (m *BiologicallyDerivedProductProcessing) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Procedure *CodeableConcept `json:"procedure,omitempty"`
+		Additive *Reference `json:"additive,omitempty"`
+		TimeDateTime *FhirDateTime `json:"timedatetime,omitempty"`
+		TimePeriod *Period `json:"timeperiod,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Description = temp.Description
+	m.Procedure = temp.Procedure
+	m.Additive = temp.Additive
+	m.TimeDateTime = temp.TimeDateTime
+	m.TimePeriod = temp.TimePeriod
+	return nil
 }
 
-// ToJSON converts BiologicallyDerivedProductProcessing to JSON data
+// ToJSON converts BiologicallyDerivedProductProcessing to JSON data.
 func (m *BiologicallyDerivedProductProcessing) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Procedure *CodeableConcept `json:"procedure,omitempty"`
+		Additive *Reference `json:"additive,omitempty"`
+		TimeDateTime interface{} `json:"timedatetime,omitempty"`
+		TimeDateTimeElement map[string]interface{} `json:"_timedatetime,omitempty"`
+		TimePeriod *Period `json:"timeperiod,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Procedure = m.Procedure
+	output.Additive = m.Additive
+	if m.TimeDateTime != nil && m.TimeDateTime.Value != nil {
+		output.TimeDateTime = m.TimeDateTime.Value
+		if m.TimeDateTime.Element != nil {
+			output.TimeDateTimeElement = toMapOrNil(m.TimeDateTime.Element.ToJSON())
+		}
+	}
+	output.TimePeriod = m.TimePeriod
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of BiologicallyDerivedProductProcessing
+// Clone creates a deep copy of BiologicallyDerivedProductProcessing.
 func (m *BiologicallyDerivedProductProcessing) Clone() *BiologicallyDerivedProductProcessing {
 	if m == nil { return nil }
 	return &BiologicallyDerivedProductProcessing{
@@ -198,7 +404,7 @@ func (m *BiologicallyDerivedProductProcessing) Clone() *BiologicallyDerivedProdu
 	}
 }
 
-// Equals checks for equality with another BiologicallyDerivedProductProcessing instance
+// Equals checks equality between two BiologicallyDerivedProductProcessing instances.
 func (m *BiologicallyDerivedProductProcessing) Equals(other *BiologicallyDerivedProductProcessing) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -216,7 +422,7 @@ func (m *BiologicallyDerivedProductProcessing) Equals(other *BiologicallyDerived
 // BiologicallyDerivedProductManipulation
 // Any manipulation of product post-collection that is intended to alter the product.  For example a buffy-coat enrichment or CD8 reduction of Peripheral Blood Stem Cells to make it more suitable for infusion.
 type BiologicallyDerivedProductManipulation struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -225,22 +431,71 @@ type BiologicallyDerivedProductManipulation struct {
 	TimePeriod *Period `json:"timeperiod,omitempty"`
 }
 
-// NewBiologicallyDerivedProductManipulation creates a new BiologicallyDerivedProductManipulation instance
+// NewBiologicallyDerivedProductManipulation creates a new BiologicallyDerivedProductManipulation instance.
 func NewBiologicallyDerivedProductManipulation() *BiologicallyDerivedProductManipulation {
 	return &BiologicallyDerivedProductManipulation{}
 }
 
-// FromJSON populates BiologicallyDerivedProductManipulation from JSON data
+// FromJSON populates BiologicallyDerivedProductManipulation from JSON data.
 func (m *BiologicallyDerivedProductManipulation) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		TimeDateTime *FhirDateTime `json:"timedatetime,omitempty"`
+		TimePeriod *Period `json:"timeperiod,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Description = temp.Description
+	m.TimeDateTime = temp.TimeDateTime
+	m.TimePeriod = temp.TimePeriod
+	return nil
 }
 
-// ToJSON converts BiologicallyDerivedProductManipulation to JSON data
+// ToJSON converts BiologicallyDerivedProductManipulation to JSON data.
 func (m *BiologicallyDerivedProductManipulation) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		TimeDateTime interface{} `json:"timedatetime,omitempty"`
+		TimeDateTimeElement map[string]interface{} `json:"_timedatetime,omitempty"`
+		TimePeriod *Period `json:"timeperiod,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	if m.TimeDateTime != nil && m.TimeDateTime.Value != nil {
+		output.TimeDateTime = m.TimeDateTime.Value
+		if m.TimeDateTime.Element != nil {
+			output.TimeDateTimeElement = toMapOrNil(m.TimeDateTime.Element.ToJSON())
+		}
+	}
+	output.TimePeriod = m.TimePeriod
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of BiologicallyDerivedProductManipulation
+// Clone creates a deep copy of BiologicallyDerivedProductManipulation.
 func (m *BiologicallyDerivedProductManipulation) Clone() *BiologicallyDerivedProductManipulation {
 	if m == nil { return nil }
 	return &BiologicallyDerivedProductManipulation{
@@ -253,7 +508,7 @@ func (m *BiologicallyDerivedProductManipulation) Clone() *BiologicallyDerivedPro
 	}
 }
 
-// Equals checks for equality with another BiologicallyDerivedProductManipulation instance
+// Equals checks equality between two BiologicallyDerivedProductManipulation instances.
 func (m *BiologicallyDerivedProductManipulation) Equals(other *BiologicallyDerivedProductManipulation) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -269,7 +524,7 @@ func (m *BiologicallyDerivedProductManipulation) Equals(other *BiologicallyDeriv
 // BiologicallyDerivedProductStorage
 // Product storage.
 type BiologicallyDerivedProductStorage struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -279,22 +534,75 @@ type BiologicallyDerivedProductStorage struct {
 	Duration *Period `json:"duration,omitempty"`
 }
 
-// NewBiologicallyDerivedProductStorage creates a new BiologicallyDerivedProductStorage instance
+// NewBiologicallyDerivedProductStorage creates a new BiologicallyDerivedProductStorage instance.
 func NewBiologicallyDerivedProductStorage() *BiologicallyDerivedProductStorage {
 	return &BiologicallyDerivedProductStorage{}
 }
 
-// FromJSON populates BiologicallyDerivedProductStorage from JSON data
+// FromJSON populates BiologicallyDerivedProductStorage from JSON data.
 func (m *BiologicallyDerivedProductStorage) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Temperature *FhirDecimal `json:"temperature,omitempty"`
+		Scale *BiologicallyDerivedProductStorageScale `json:"scale,omitempty"`
+		Duration *Period `json:"duration,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Description = temp.Description
+	m.Temperature = temp.Temperature
+	m.Scale = temp.Scale
+	m.Duration = temp.Duration
+	return nil
 }
 
-// ToJSON converts BiologicallyDerivedProductStorage to JSON data
+// ToJSON converts BiologicallyDerivedProductStorage to JSON data.
 func (m *BiologicallyDerivedProductStorage) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Temperature interface{} `json:"temperature,omitempty"`
+		TemperatureElement map[string]interface{} `json:"_temperature,omitempty"`
+		Scale *BiologicallyDerivedProductStorageScale `json:"scale,omitempty"`
+		Duration *Period `json:"duration,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	if m.Temperature != nil && m.Temperature.Value != nil {
+		output.Temperature = m.Temperature.Value
+		if m.Temperature.Element != nil {
+			output.TemperatureElement = toMapOrNil(m.Temperature.Element.ToJSON())
+		}
+	}
+	output.Scale = m.Scale
+	output.Duration = m.Duration
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of BiologicallyDerivedProductStorage
+// Clone creates a deep copy of BiologicallyDerivedProductStorage.
 func (m *BiologicallyDerivedProductStorage) Clone() *BiologicallyDerivedProductStorage {
 	if m == nil { return nil }
 	return &BiologicallyDerivedProductStorage{
@@ -308,7 +616,7 @@ func (m *BiologicallyDerivedProductStorage) Clone() *BiologicallyDerivedProductS
 	}
 }
 
-// Equals checks for equality with another BiologicallyDerivedProductStorage instance
+// Equals checks equality between two BiologicallyDerivedProductStorage instances.
 func (m *BiologicallyDerivedProductStorage) Equals(other *BiologicallyDerivedProductStorage) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

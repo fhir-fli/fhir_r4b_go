@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Substance
 // A homogeneous material with a definite composition.
 type Substance struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -26,22 +27,107 @@ type Substance struct {
 	Ingredient []*SubstanceIngredient `json:"ingredient,omitempty"`
 }
 
-// NewSubstance creates a new Substance instance
+// NewSubstance creates a new Substance instance.
 func NewSubstance() *Substance {
 	return &Substance{}
 }
 
-// FromJSON populates Substance from JSON data
+// FromJSON populates Substance from JSON data.
 func (m *Substance) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *FHIRSubstanceStatus `json:"status,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Instance []*SubstanceInstance `json:"instance,omitempty"`
+		Ingredient []*SubstanceIngredient `json:"ingredient,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.Category = temp.Category
+	m.Code = temp.Code
+	m.Description = temp.Description
+	m.Instance = temp.Instance
+	m.Ingredient = temp.Ingredient
+	return nil
 }
 
-// ToJSON converts Substance to JSON data
+// ToJSON converts Substance to JSON data.
 func (m *Substance) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *FHIRSubstanceStatus `json:"status,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Instance []*SubstanceInstance `json:"instance,omitempty"`
+		Ingredient []*SubstanceIngredient `json:"ingredient,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	output.Category = m.Category
+	output.Code = m.Code
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Instance = m.Instance
+	output.Ingredient = m.Ingredient
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Substance
+// Clone creates a deep copy of Substance.
 func (m *Substance) Clone() *Substance {
 	if m == nil { return nil }
 	return &Substance{
@@ -63,7 +149,7 @@ func (m *Substance) Clone() *Substance {
 	}
 }
 
-// Equals checks for equality with another Substance instance
+// Equals checks equality between two Substance instances.
 func (m *Substance) Equals(other *Substance) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -88,7 +174,7 @@ func (m *Substance) Equals(other *Substance) bool {
 // SubstanceInstance
 // Substance may be used to describe a kind of substance, or a specific package/container of the substance: an instance.
 type SubstanceInstance struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -97,22 +183,65 @@ type SubstanceInstance struct {
 	Quantity *Quantity `json:"quantity,omitempty"`
 }
 
-// NewSubstanceInstance creates a new SubstanceInstance instance
+// NewSubstanceInstance creates a new SubstanceInstance instance.
 func NewSubstanceInstance() *SubstanceInstance {
 	return &SubstanceInstance{}
 }
 
-// FromJSON populates SubstanceInstance from JSON data
+// FromJSON populates SubstanceInstance from JSON data.
 func (m *SubstanceInstance) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Expiry *FhirDateTime `json:"expiry,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Expiry = temp.Expiry
+	m.Quantity = temp.Quantity
+	return nil
 }
 
-// ToJSON converts SubstanceInstance to JSON data
+// ToJSON converts SubstanceInstance to JSON data.
 func (m *SubstanceInstance) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Expiry interface{} `json:"expiry,omitempty"`
+		ExpiryElement map[string]interface{} `json:"_expiry,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	if m.Expiry != nil && m.Expiry.Value != nil {
+		output.Expiry = m.Expiry.Value
+		if m.Expiry.Element != nil {
+			output.ExpiryElement = toMapOrNil(m.Expiry.Element.ToJSON())
+		}
+	}
+	output.Quantity = m.Quantity
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SubstanceInstance
+// Clone creates a deep copy of SubstanceInstance.
 func (m *SubstanceInstance) Clone() *SubstanceInstance {
 	if m == nil { return nil }
 	return &SubstanceInstance{
@@ -125,7 +254,7 @@ func (m *SubstanceInstance) Clone() *SubstanceInstance {
 	}
 }
 
-// Equals checks for equality with another SubstanceInstance instance
+// Equals checks equality between two SubstanceInstance instances.
 func (m *SubstanceInstance) Equals(other *SubstanceInstance) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -141,7 +270,7 @@ func (m *SubstanceInstance) Equals(other *SubstanceInstance) bool {
 // SubstanceIngredient
 // A substance can be composed of other substances.
 type SubstanceIngredient struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -150,22 +279,59 @@ type SubstanceIngredient struct {
 	SubstanceReference *Reference `json:"substancereference,omitempty"`
 }
 
-// NewSubstanceIngredient creates a new SubstanceIngredient instance
+// NewSubstanceIngredient creates a new SubstanceIngredient instance.
 func NewSubstanceIngredient() *SubstanceIngredient {
 	return &SubstanceIngredient{}
 }
 
-// FromJSON populates SubstanceIngredient from JSON data
+// FromJSON populates SubstanceIngredient from JSON data.
 func (m *SubstanceIngredient) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Quantity *Ratio `json:"quantity,omitempty"`
+		SubstanceCodeableConcept *CodeableConcept `json:"substancecodeableconcept,omitempty"`
+		SubstanceReference *Reference `json:"substancereference,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Quantity = temp.Quantity
+	m.SubstanceCodeableConcept = temp.SubstanceCodeableConcept
+	m.SubstanceReference = temp.SubstanceReference
+	return nil
 }
 
-// ToJSON converts SubstanceIngredient to JSON data
+// ToJSON converts SubstanceIngredient to JSON data.
 func (m *SubstanceIngredient) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Quantity *Ratio `json:"quantity,omitempty"`
+		SubstanceCodeableConcept *CodeableConcept `json:"substancecodeableconcept,omitempty"`
+		SubstanceReference *Reference `json:"substancereference,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Quantity = m.Quantity
+	output.SubstanceCodeableConcept = m.SubstanceCodeableConcept
+	output.SubstanceReference = m.SubstanceReference
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SubstanceIngredient
+// Clone creates a deep copy of SubstanceIngredient.
 func (m *SubstanceIngredient) Clone() *SubstanceIngredient {
 	if m == nil { return nil }
 	return &SubstanceIngredient{
@@ -178,7 +344,7 @@ func (m *SubstanceIngredient) Clone() *SubstanceIngredient {
 	}
 }
 
-// Equals checks for equality with another SubstanceIngredient instance
+// Equals checks equality between two SubstanceIngredient instances.
 func (m *SubstanceIngredient) Equals(other *SubstanceIngredient) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

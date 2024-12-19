@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // Provenance
 // Provenance of a resource is a record that describes entities and processes involved in producing and delivering or otherwise influencing that resource. Provenance provides a critical foundation for assessing authenticity, enabling trust, and allowing reproducibility. Provenance assertions are a form of contextual metadata and can themselves become important records with their own provenance. Provenance statement indicates clinical significance in terms of confidence in authenticity, reliability, and trustworthiness, integrity, and stage in lifecycle (e.g. Document Completion - has the artifact been legally authenticated), all of which may impact security, privacy, and trust policies.
 type Provenance struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -30,22 +32,150 @@ type Provenance struct {
 	Signature []*Signature `json:"signature,omitempty"`
 }
 
-// NewProvenance creates a new Provenance instance
+// NewProvenance creates a new Provenance instance.
 func NewProvenance() *Provenance {
 	return &Provenance{}
 }
 
-// FromJSON populates Provenance from JSON data
+// FromJSON populates Provenance from JSON data.
 func (m *Provenance) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Target []*Reference `json:"target,omitempty"`
+		OccurredPeriod *Period `json:"occurredperiod,omitempty"`
+		OccurredDateTime *FhirDateTime `json:"occurreddatetime,omitempty"`
+		Recorded *FhirInstant `json:"recorded,omitempty"`
+		Policy []interface{} `json:"policy,omitempty"`
+		Location *Reference `json:"location,omitempty"`
+		Reason []*CodeableConcept `json:"reason,omitempty"`
+		Activity *CodeableConcept `json:"activity,omitempty"`
+		Agent []*ProvenanceAgent `json:"agent,omitempty"`
+		Entity []*ProvenanceEntity `json:"entity,omitempty"`
+		Signature []*Signature `json:"signature,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Target = temp.Target
+	m.OccurredPeriod = temp.OccurredPeriod
+	m.OccurredDateTime = temp.OccurredDateTime
+	m.Recorded = temp.Recorded
+	if len(temp.Policy) > 0 {
+		m.Policy = make([]*FhirUri, len(temp.Policy))
+		for i := range temp.Policy {
+			itemMap, ok := temp.Policy[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Policy[%d]: expected map", i) }
+			primitive, err := NewFhirUriFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Policy[%d]: %v", i, err) }
+			m.Policy[i] = primitive
+		}
+	}
+	m.Location = temp.Location
+	m.Reason = temp.Reason
+	m.Activity = temp.Activity
+	m.Agent = temp.Agent
+	m.Entity = temp.Entity
+	m.Signature = temp.Signature
+	return nil
 }
 
-// ToJSON converts Provenance to JSON data
+// ToJSON converts Provenance to JSON data.
 func (m *Provenance) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Target []*Reference `json:"target,omitempty"`
+		OccurredPeriod *Period `json:"occurredperiod,omitempty"`
+		OccurredDateTime interface{} `json:"occurreddatetime,omitempty"`
+		OccurredDateTimeElement map[string]interface{} `json:"_occurreddatetime,omitempty"`
+		Recorded interface{} `json:"recorded,omitempty"`
+		RecordedElement map[string]interface{} `json:"_recorded,omitempty"`
+		Policy []interface{} `json:"policy,omitempty"`
+		PolicyElement []map[string]interface{} `json:"_policy,omitempty"`
+		Location *Reference `json:"location,omitempty"`
+		Reason []*CodeableConcept `json:"reason,omitempty"`
+		Activity *CodeableConcept `json:"activity,omitempty"`
+		Agent []*ProvenanceAgent `json:"agent,omitempty"`
+		Entity []*ProvenanceEntity `json:"entity,omitempty"`
+		Signature []*Signature `json:"signature,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Target = m.Target
+	output.OccurredPeriod = m.OccurredPeriod
+	if m.OccurredDateTime != nil && m.OccurredDateTime.Value != nil {
+		output.OccurredDateTime = m.OccurredDateTime.Value
+		if m.OccurredDateTime.Element != nil {
+			output.OccurredDateTimeElement = toMapOrNil(m.OccurredDateTime.Element.ToJSON())
+		}
+	}
+	if m.Recorded != nil && m.Recorded.Value != nil {
+		output.Recorded = m.Recorded.Value
+		if m.Recorded.Element != nil {
+			output.RecordedElement = toMapOrNil(m.Recorded.Element.ToJSON())
+		}
+	}
+	if len(m.Policy) > 0 {
+		output.Policy = make([]interface{}, len(m.Policy))
+		output.PolicyElement = make([]map[string]interface{}, len(m.Policy))
+		for i, item := range m.Policy {
+			if item != nil && item.Value != nil {
+				output.Policy[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.PolicyElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Location = m.Location
+	output.Reason = m.Reason
+	output.Activity = m.Activity
+	output.Agent = m.Agent
+	output.Entity = m.Entity
+	output.Signature = m.Signature
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Provenance
+// Clone creates a deep copy of Provenance.
 func (m *Provenance) Clone() *Provenance {
 	if m == nil { return nil }
 	return &Provenance{
@@ -71,7 +201,7 @@ func (m *Provenance) Clone() *Provenance {
 	}
 }
 
-// Equals checks for equality with another Provenance instance
+// Equals checks equality between two Provenance instances.
 func (m *Provenance) Equals(other *Provenance) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -100,7 +230,7 @@ func (m *Provenance) Equals(other *Provenance) bool {
 // ProvenanceAgent
 // An actor taking a role in an activity  for which it can be assigned some degree of responsibility for the activity taking place.
 type ProvenanceAgent struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -110,22 +240,63 @@ type ProvenanceAgent struct {
 	OnBehalfOf *Reference `json:"onbehalfof,omitempty"`
 }
 
-// NewProvenanceAgent creates a new ProvenanceAgent instance
+// NewProvenanceAgent creates a new ProvenanceAgent instance.
 func NewProvenanceAgent() *ProvenanceAgent {
 	return &ProvenanceAgent{}
 }
 
-// FromJSON populates ProvenanceAgent from JSON data
+// FromJSON populates ProvenanceAgent from JSON data.
 func (m *ProvenanceAgent) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Role []*CodeableConcept `json:"role,omitempty"`
+		Who *Reference `json:"who,omitempty"`
+		OnBehalfOf *Reference `json:"onbehalfof,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Role = temp.Role
+	m.Who = temp.Who
+	m.OnBehalfOf = temp.OnBehalfOf
+	return nil
 }
 
-// ToJSON converts ProvenanceAgent to JSON data
+// ToJSON converts ProvenanceAgent to JSON data.
 func (m *ProvenanceAgent) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Role []*CodeableConcept `json:"role,omitempty"`
+		Who *Reference `json:"who,omitempty"`
+		OnBehalfOf *Reference `json:"onbehalfof,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Role = m.Role
+	output.Who = m.Who
+	output.OnBehalfOf = m.OnBehalfOf
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ProvenanceAgent
+// Clone creates a deep copy of ProvenanceAgent.
 func (m *ProvenanceAgent) Clone() *ProvenanceAgent {
 	if m == nil { return nil }
 	return &ProvenanceAgent{
@@ -139,7 +310,7 @@ func (m *ProvenanceAgent) Clone() *ProvenanceAgent {
 	}
 }
 
-// Equals checks for equality with another ProvenanceAgent instance
+// Equals checks equality between two ProvenanceAgent instances.
 func (m *ProvenanceAgent) Equals(other *ProvenanceAgent) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -156,7 +327,7 @@ func (m *ProvenanceAgent) Equals(other *ProvenanceAgent) bool {
 // ProvenanceEntity
 // An entity used in this activity.
 type ProvenanceEntity struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -165,22 +336,59 @@ type ProvenanceEntity struct {
 	Agent []*ProvenanceAgent `json:"agent,omitempty"`
 }
 
-// NewProvenanceEntity creates a new ProvenanceEntity instance
+// NewProvenanceEntity creates a new ProvenanceEntity instance.
 func NewProvenanceEntity() *ProvenanceEntity {
 	return &ProvenanceEntity{}
 }
 
-// FromJSON populates ProvenanceEntity from JSON data
+// FromJSON populates ProvenanceEntity from JSON data.
 func (m *ProvenanceEntity) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Role *ProvenanceEntityRole `json:"role,omitempty"`
+		What *Reference `json:"what,omitempty"`
+		Agent []*ProvenanceAgent `json:"agent,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Role = temp.Role
+	m.What = temp.What
+	m.Agent = temp.Agent
+	return nil
 }
 
-// ToJSON converts ProvenanceEntity to JSON data
+// ToJSON converts ProvenanceEntity to JSON data.
 func (m *ProvenanceEntity) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Role *ProvenanceEntityRole `json:"role,omitempty"`
+		What *Reference `json:"what,omitempty"`
+		Agent []*ProvenanceAgent `json:"agent,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Role = m.Role
+	output.What = m.What
+	output.Agent = m.Agent
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ProvenanceEntity
+// Clone creates a deep copy of ProvenanceEntity.
 func (m *ProvenanceEntity) Clone() *ProvenanceEntity {
 	if m == nil { return nil }
 	return &ProvenanceEntity{
@@ -193,7 +401,7 @@ func (m *ProvenanceEntity) Clone() *ProvenanceEntity {
 	}
 }
 
-// Equals checks for equality with another ProvenanceEntity instance
+// Equals checks equality between two ProvenanceEntity instances.
 func (m *ProvenanceEntity) Equals(other *ProvenanceEntity) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

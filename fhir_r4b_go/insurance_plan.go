@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // InsurancePlan
 // Details of a Health Insurance product/plan provided by an organization.
 type InsurancePlan struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -33,22 +35,156 @@ type InsurancePlan struct {
 	Plan []*InsurancePlanPlan `json:"plan,omitempty"`
 }
 
-// NewInsurancePlan creates a new InsurancePlan instance
+// NewInsurancePlan creates a new InsurancePlan instance.
 func NewInsurancePlan() *InsurancePlan {
 	return &InsurancePlan{}
 }
 
-// FromJSON populates InsurancePlan from JSON data
+// FromJSON populates InsurancePlan from JSON data.
 func (m *InsurancePlan) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Type []*CodeableConcept `json:"type,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Alias []interface{} `json:"alias,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		OwnedBy *Reference `json:"ownedby,omitempty"`
+		AdministeredBy *Reference `json:"administeredby,omitempty"`
+		CoverageArea []*Reference `json:"coveragearea,omitempty"`
+		Contact []*InsurancePlanContact `json:"contact,omitempty"`
+		Endpoint []*Reference `json:"endpoint,omitempty"`
+		Network []*Reference `json:"network,omitempty"`
+		Coverage []*InsurancePlanCoverage `json:"coverage,omitempty"`
+		Plan []*InsurancePlanPlan `json:"plan,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.Type = temp.Type
+	m.Name = temp.Name
+	if len(temp.Alias) > 0 {
+		m.Alias = make([]*FhirString, len(temp.Alias))
+		for i := range temp.Alias {
+			itemMap, ok := temp.Alias[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Alias[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Alias[%d]: %v", i, err) }
+			m.Alias[i] = primitive
+		}
+	}
+	m.Period = temp.Period
+	m.OwnedBy = temp.OwnedBy
+	m.AdministeredBy = temp.AdministeredBy
+	m.CoverageArea = temp.CoverageArea
+	m.Contact = temp.Contact
+	m.Endpoint = temp.Endpoint
+	m.Network = temp.Network
+	m.Coverage = temp.Coverage
+	m.Plan = temp.Plan
+	return nil
 }
 
-// ToJSON converts InsurancePlan to JSON data
+// ToJSON converts InsurancePlan to JSON data.
 func (m *InsurancePlan) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Type []*CodeableConcept `json:"type,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Alias []interface{} `json:"alias,omitempty"`
+		AliasElement []map[string]interface{} `json:"_alias,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		OwnedBy *Reference `json:"ownedby,omitempty"`
+		AdministeredBy *Reference `json:"administeredby,omitempty"`
+		CoverageArea []*Reference `json:"coveragearea,omitempty"`
+		Contact []*InsurancePlanContact `json:"contact,omitempty"`
+		Endpoint []*Reference `json:"endpoint,omitempty"`
+		Network []*Reference `json:"network,omitempty"`
+		Coverage []*InsurancePlanCoverage `json:"coverage,omitempty"`
+		Plan []*InsurancePlanPlan `json:"plan,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	output.Type = m.Type
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if len(m.Alias) > 0 {
+		output.Alias = make([]interface{}, len(m.Alias))
+		output.AliasElement = make([]map[string]interface{}, len(m.Alias))
+		for i, item := range m.Alias {
+			if item != nil && item.Value != nil {
+				output.Alias[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.AliasElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Period = m.Period
+	output.OwnedBy = m.OwnedBy
+	output.AdministeredBy = m.AdministeredBy
+	output.CoverageArea = m.CoverageArea
+	output.Contact = m.Contact
+	output.Endpoint = m.Endpoint
+	output.Network = m.Network
+	output.Coverage = m.Coverage
+	output.Plan = m.Plan
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of InsurancePlan
+// Clone creates a deep copy of InsurancePlan.
 func (m *InsurancePlan) Clone() *InsurancePlan {
 	if m == nil { return nil }
 	return &InsurancePlan{
@@ -77,7 +213,7 @@ func (m *InsurancePlan) Clone() *InsurancePlan {
 	}
 }
 
-// Equals checks for equality with another InsurancePlan instance
+// Equals checks equality between two InsurancePlan instances.
 func (m *InsurancePlan) Equals(other *InsurancePlan) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -109,7 +245,7 @@ func (m *InsurancePlan) Equals(other *InsurancePlan) bool {
 // InsurancePlanContact
 // The contact for the health insurance product for a certain purpose.
 type InsurancePlanContact struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -119,22 +255,63 @@ type InsurancePlanContact struct {
 	Address *Address `json:"address,omitempty"`
 }
 
-// NewInsurancePlanContact creates a new InsurancePlanContact instance
+// NewInsurancePlanContact creates a new InsurancePlanContact instance.
 func NewInsurancePlanContact() *InsurancePlanContact {
 	return &InsurancePlanContact{}
 }
 
-// FromJSON populates InsurancePlanContact from JSON data
+// FromJSON populates InsurancePlanContact from JSON data.
 func (m *InsurancePlanContact) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Purpose *CodeableConcept `json:"purpose,omitempty"`
+		Name *HumanName `json:"name,omitempty"`
+		Telecom []*ContactPoint `json:"telecom,omitempty"`
+		Address *Address `json:"address,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Purpose = temp.Purpose
+	m.Name = temp.Name
+	m.Telecom = temp.Telecom
+	m.Address = temp.Address
+	return nil
 }
 
-// ToJSON converts InsurancePlanContact to JSON data
+// ToJSON converts InsurancePlanContact to JSON data.
 func (m *InsurancePlanContact) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Purpose *CodeableConcept `json:"purpose,omitempty"`
+		Name *HumanName `json:"name,omitempty"`
+		Telecom []*ContactPoint `json:"telecom,omitempty"`
+		Address *Address `json:"address,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Purpose = m.Purpose
+	output.Name = m.Name
+	output.Telecom = m.Telecom
+	output.Address = m.Address
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of InsurancePlanContact
+// Clone creates a deep copy of InsurancePlanContact.
 func (m *InsurancePlanContact) Clone() *InsurancePlanContact {
 	if m == nil { return nil }
 	return &InsurancePlanContact{
@@ -148,7 +325,7 @@ func (m *InsurancePlanContact) Clone() *InsurancePlanContact {
 	}
 }
 
-// Equals checks for equality with another InsurancePlanContact instance
+// Equals checks equality between two InsurancePlanContact instances.
 func (m *InsurancePlanContact) Equals(other *InsurancePlanContact) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -165,7 +342,7 @@ func (m *InsurancePlanContact) Equals(other *InsurancePlanContact) bool {
 // InsurancePlanCoverage
 // Details about the coverage offered by the insurance product.
 type InsurancePlanCoverage struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -174,22 +351,59 @@ type InsurancePlanCoverage struct {
 	Benefit []*InsurancePlanBenefit `json:"benefit,omitempty"`
 }
 
-// NewInsurancePlanCoverage creates a new InsurancePlanCoverage instance
+// NewInsurancePlanCoverage creates a new InsurancePlanCoverage instance.
 func NewInsurancePlanCoverage() *InsurancePlanCoverage {
 	return &InsurancePlanCoverage{}
 }
 
-// FromJSON populates InsurancePlanCoverage from JSON data
+// FromJSON populates InsurancePlanCoverage from JSON data.
 func (m *InsurancePlanCoverage) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Network []*Reference `json:"network,omitempty"`
+		Benefit []*InsurancePlanBenefit `json:"benefit,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Network = temp.Network
+	m.Benefit = temp.Benefit
+	return nil
 }
 
-// ToJSON converts InsurancePlanCoverage to JSON data
+// ToJSON converts InsurancePlanCoverage to JSON data.
 func (m *InsurancePlanCoverage) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Network []*Reference `json:"network,omitempty"`
+		Benefit []*InsurancePlanBenefit `json:"benefit,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Network = m.Network
+	output.Benefit = m.Benefit
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of InsurancePlanCoverage
+// Clone creates a deep copy of InsurancePlanCoverage.
 func (m *InsurancePlanCoverage) Clone() *InsurancePlanCoverage {
 	if m == nil { return nil }
 	return &InsurancePlanCoverage{
@@ -202,7 +416,7 @@ func (m *InsurancePlanCoverage) Clone() *InsurancePlanCoverage {
 	}
 }
 
-// Equals checks for equality with another InsurancePlanCoverage instance
+// Equals checks equality between two InsurancePlanCoverage instances.
 func (m *InsurancePlanCoverage) Equals(other *InsurancePlanCoverage) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -218,7 +432,7 @@ func (m *InsurancePlanCoverage) Equals(other *InsurancePlanCoverage) bool {
 // InsurancePlanBenefit
 // Specific benefits under this type of coverage.
 type InsurancePlanBenefit struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -227,22 +441,65 @@ type InsurancePlanBenefit struct {
 	Limit []*InsurancePlanLimit `json:"limit,omitempty"`
 }
 
-// NewInsurancePlanBenefit creates a new InsurancePlanBenefit instance
+// NewInsurancePlanBenefit creates a new InsurancePlanBenefit instance.
 func NewInsurancePlanBenefit() *InsurancePlanBenefit {
 	return &InsurancePlanBenefit{}
 }
 
-// FromJSON populates InsurancePlanBenefit from JSON data
+// FromJSON populates InsurancePlanBenefit from JSON data.
 func (m *InsurancePlanBenefit) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Requirement *FhirString `json:"requirement,omitempty"`
+		Limit []*InsurancePlanLimit `json:"limit,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Requirement = temp.Requirement
+	m.Limit = temp.Limit
+	return nil
 }
 
-// ToJSON converts InsurancePlanBenefit to JSON data
+// ToJSON converts InsurancePlanBenefit to JSON data.
 func (m *InsurancePlanBenefit) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Requirement interface{} `json:"requirement,omitempty"`
+		RequirementElement map[string]interface{} `json:"_requirement,omitempty"`
+		Limit []*InsurancePlanLimit `json:"limit,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	if m.Requirement != nil && m.Requirement.Value != nil {
+		output.Requirement = m.Requirement.Value
+		if m.Requirement.Element != nil {
+			output.RequirementElement = toMapOrNil(m.Requirement.Element.ToJSON())
+		}
+	}
+	output.Limit = m.Limit
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of InsurancePlanBenefit
+// Clone creates a deep copy of InsurancePlanBenefit.
 func (m *InsurancePlanBenefit) Clone() *InsurancePlanBenefit {
 	if m == nil { return nil }
 	return &InsurancePlanBenefit{
@@ -255,7 +512,7 @@ func (m *InsurancePlanBenefit) Clone() *InsurancePlanBenefit {
 	}
 }
 
-// Equals checks for equality with another InsurancePlanBenefit instance
+// Equals checks equality between two InsurancePlanBenefit instances.
 func (m *InsurancePlanBenefit) Equals(other *InsurancePlanBenefit) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -271,7 +528,7 @@ func (m *InsurancePlanBenefit) Equals(other *InsurancePlanBenefit) bool {
 // InsurancePlanLimit
 // The specific limits on the benefit.
 type InsurancePlanLimit struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -279,22 +536,55 @@ type InsurancePlanLimit struct {
 	Code *CodeableConcept `json:"code,omitempty"`
 }
 
-// NewInsurancePlanLimit creates a new InsurancePlanLimit instance
+// NewInsurancePlanLimit creates a new InsurancePlanLimit instance.
 func NewInsurancePlanLimit() *InsurancePlanLimit {
 	return &InsurancePlanLimit{}
 }
 
-// FromJSON populates InsurancePlanLimit from JSON data
+// FromJSON populates InsurancePlanLimit from JSON data.
 func (m *InsurancePlanLimit) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Value *Quantity `json:"value,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Value = temp.Value
+	m.Code = temp.Code
+	return nil
 }
 
-// ToJSON converts InsurancePlanLimit to JSON data
+// ToJSON converts InsurancePlanLimit to JSON data.
 func (m *InsurancePlanLimit) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Value *Quantity `json:"value,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Value = m.Value
+	output.Code = m.Code
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of InsurancePlanLimit
+// Clone creates a deep copy of InsurancePlanLimit.
 func (m *InsurancePlanLimit) Clone() *InsurancePlanLimit {
 	if m == nil { return nil }
 	return &InsurancePlanLimit{
@@ -306,7 +596,7 @@ func (m *InsurancePlanLimit) Clone() *InsurancePlanLimit {
 	}
 }
 
-// Equals checks for equality with another InsurancePlanLimit instance
+// Equals checks equality between two InsurancePlanLimit instances.
 func (m *InsurancePlanLimit) Equals(other *InsurancePlanLimit) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -321,7 +611,7 @@ func (m *InsurancePlanLimit) Equals(other *InsurancePlanLimit) bool {
 // InsurancePlanPlan
 // Details about an insurance plan.
 type InsurancePlanPlan struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -333,22 +623,71 @@ type InsurancePlanPlan struct {
 	SpecificCost []*InsurancePlanSpecificCost `json:"specificcost,omitempty"`
 }
 
-// NewInsurancePlanPlan creates a new InsurancePlanPlan instance
+// NewInsurancePlanPlan creates a new InsurancePlanPlan instance.
 func NewInsurancePlanPlan() *InsurancePlanPlan {
 	return &InsurancePlanPlan{}
 }
 
-// FromJSON populates InsurancePlanPlan from JSON data
+// FromJSON populates InsurancePlanPlan from JSON data.
 func (m *InsurancePlanPlan) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		CoverageArea []*Reference `json:"coveragearea,omitempty"`
+		Network []*Reference `json:"network,omitempty"`
+		GeneralCost []*InsurancePlanGeneralCost `json:"generalcost,omitempty"`
+		SpecificCost []*InsurancePlanSpecificCost `json:"specificcost,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Type = temp.Type
+	m.CoverageArea = temp.CoverageArea
+	m.Network = temp.Network
+	m.GeneralCost = temp.GeneralCost
+	m.SpecificCost = temp.SpecificCost
+	return nil
 }
 
-// ToJSON converts InsurancePlanPlan to JSON data
+// ToJSON converts InsurancePlanPlan to JSON data.
 func (m *InsurancePlanPlan) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		CoverageArea []*Reference `json:"coveragearea,omitempty"`
+		Network []*Reference `json:"network,omitempty"`
+		GeneralCost []*InsurancePlanGeneralCost `json:"generalcost,omitempty"`
+		SpecificCost []*InsurancePlanSpecificCost `json:"specificcost,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Type = m.Type
+	output.CoverageArea = m.CoverageArea
+	output.Network = m.Network
+	output.GeneralCost = m.GeneralCost
+	output.SpecificCost = m.SpecificCost
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of InsurancePlanPlan
+// Clone creates a deep copy of InsurancePlanPlan.
 func (m *InsurancePlanPlan) Clone() *InsurancePlanPlan {
 	if m == nil { return nil }
 	return &InsurancePlanPlan{
@@ -364,7 +703,7 @@ func (m *InsurancePlanPlan) Clone() *InsurancePlanPlan {
 	}
 }
 
-// Equals checks for equality with another InsurancePlanPlan instance
+// Equals checks equality between two InsurancePlanPlan instances.
 func (m *InsurancePlanPlan) Equals(other *InsurancePlanPlan) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -383,7 +722,7 @@ func (m *InsurancePlanPlan) Equals(other *InsurancePlanPlan) bool {
 // InsurancePlanGeneralCost
 // Overall costs associated with the plan.
 type InsurancePlanGeneralCost struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -393,22 +732,75 @@ type InsurancePlanGeneralCost struct {
 	Comment *FhirString `json:"comment,omitempty"`
 }
 
-// NewInsurancePlanGeneralCost creates a new InsurancePlanGeneralCost instance
+// NewInsurancePlanGeneralCost creates a new InsurancePlanGeneralCost instance.
 func NewInsurancePlanGeneralCost() *InsurancePlanGeneralCost {
 	return &InsurancePlanGeneralCost{}
 }
 
-// FromJSON populates InsurancePlanGeneralCost from JSON data
+// FromJSON populates InsurancePlanGeneralCost from JSON data.
 func (m *InsurancePlanGeneralCost) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		GroupSize *FhirPositiveInt `json:"groupsize,omitempty"`
+		Cost *Money `json:"cost,omitempty"`
+		Comment *FhirString `json:"comment,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.GroupSize = temp.GroupSize
+	m.Cost = temp.Cost
+	m.Comment = temp.Comment
+	return nil
 }
 
-// ToJSON converts InsurancePlanGeneralCost to JSON data
+// ToJSON converts InsurancePlanGeneralCost to JSON data.
 func (m *InsurancePlanGeneralCost) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		GroupSize interface{} `json:"groupsize,omitempty"`
+		GroupSizeElement map[string]interface{} `json:"_groupsize,omitempty"`
+		Cost *Money `json:"cost,omitempty"`
+		Comment interface{} `json:"comment,omitempty"`
+		CommentElement map[string]interface{} `json:"_comment,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	if m.GroupSize != nil && m.GroupSize.Value != nil {
+		output.GroupSize = m.GroupSize.Value
+		if m.GroupSize.Element != nil {
+			output.GroupSizeElement = toMapOrNil(m.GroupSize.Element.ToJSON())
+		}
+	}
+	output.Cost = m.Cost
+	if m.Comment != nil && m.Comment.Value != nil {
+		output.Comment = m.Comment.Value
+		if m.Comment.Element != nil {
+			output.CommentElement = toMapOrNil(m.Comment.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of InsurancePlanGeneralCost
+// Clone creates a deep copy of InsurancePlanGeneralCost.
 func (m *InsurancePlanGeneralCost) Clone() *InsurancePlanGeneralCost {
 	if m == nil { return nil }
 	return &InsurancePlanGeneralCost{
@@ -422,7 +814,7 @@ func (m *InsurancePlanGeneralCost) Clone() *InsurancePlanGeneralCost {
 	}
 }
 
-// Equals checks for equality with another InsurancePlanGeneralCost instance
+// Equals checks equality between two InsurancePlanGeneralCost instances.
 func (m *InsurancePlanGeneralCost) Equals(other *InsurancePlanGeneralCost) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -439,7 +831,7 @@ func (m *InsurancePlanGeneralCost) Equals(other *InsurancePlanGeneralCost) bool 
 // InsurancePlanSpecificCost
 // Costs associated with the coverage provided by the product.
 type InsurancePlanSpecificCost struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -447,22 +839,55 @@ type InsurancePlanSpecificCost struct {
 	Benefit []*InsurancePlanBenefit `json:"benefit,omitempty"`
 }
 
-// NewInsurancePlanSpecificCost creates a new InsurancePlanSpecificCost instance
+// NewInsurancePlanSpecificCost creates a new InsurancePlanSpecificCost instance.
 func NewInsurancePlanSpecificCost() *InsurancePlanSpecificCost {
 	return &InsurancePlanSpecificCost{}
 }
 
-// FromJSON populates InsurancePlanSpecificCost from JSON data
+// FromJSON populates InsurancePlanSpecificCost from JSON data.
 func (m *InsurancePlanSpecificCost) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Category *CodeableConcept `json:"category,omitempty"`
+		Benefit []*InsurancePlanBenefit `json:"benefit,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Category = temp.Category
+	m.Benefit = temp.Benefit
+	return nil
 }
 
-// ToJSON converts InsurancePlanSpecificCost to JSON data
+// ToJSON converts InsurancePlanSpecificCost to JSON data.
 func (m *InsurancePlanSpecificCost) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Category *CodeableConcept `json:"category,omitempty"`
+		Benefit []*InsurancePlanBenefit `json:"benefit,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Category = m.Category
+	output.Benefit = m.Benefit
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of InsurancePlanSpecificCost
+// Clone creates a deep copy of InsurancePlanSpecificCost.
 func (m *InsurancePlanSpecificCost) Clone() *InsurancePlanSpecificCost {
 	if m == nil { return nil }
 	return &InsurancePlanSpecificCost{
@@ -474,7 +899,7 @@ func (m *InsurancePlanSpecificCost) Clone() *InsurancePlanSpecificCost {
 	}
 }
 
-// Equals checks for equality with another InsurancePlanSpecificCost instance
+// Equals checks equality between two InsurancePlanSpecificCost instances.
 func (m *InsurancePlanSpecificCost) Equals(other *InsurancePlanSpecificCost) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -489,7 +914,7 @@ func (m *InsurancePlanSpecificCost) Equals(other *InsurancePlanSpecificCost) boo
 // InsurancePlanBenefit1
 // List of the specific benefits under this category of benefit.
 type InsurancePlanBenefit1 struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -497,22 +922,55 @@ type InsurancePlanBenefit1 struct {
 	Cost []*InsurancePlanCost `json:"cost,omitempty"`
 }
 
-// NewInsurancePlanBenefit1 creates a new InsurancePlanBenefit1 instance
+// NewInsurancePlanBenefit1 creates a new InsurancePlanBenefit1 instance.
 func NewInsurancePlanBenefit1() *InsurancePlanBenefit1 {
 	return &InsurancePlanBenefit1{}
 }
 
-// FromJSON populates InsurancePlanBenefit1 from JSON data
+// FromJSON populates InsurancePlanBenefit1 from JSON data.
 func (m *InsurancePlanBenefit1) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Cost []*InsurancePlanCost `json:"cost,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Cost = temp.Cost
+	return nil
 }
 
-// ToJSON converts InsurancePlanBenefit1 to JSON data
+// ToJSON converts InsurancePlanBenefit1 to JSON data.
 func (m *InsurancePlanBenefit1) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Cost []*InsurancePlanCost `json:"cost,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Cost = m.Cost
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of InsurancePlanBenefit1
+// Clone creates a deep copy of InsurancePlanBenefit1.
 func (m *InsurancePlanBenefit1) Clone() *InsurancePlanBenefit1 {
 	if m == nil { return nil }
 	return &InsurancePlanBenefit1{
@@ -524,7 +982,7 @@ func (m *InsurancePlanBenefit1) Clone() *InsurancePlanBenefit1 {
 	}
 }
 
-// Equals checks for equality with another InsurancePlanBenefit1 instance
+// Equals checks equality between two InsurancePlanBenefit1 instances.
 func (m *InsurancePlanBenefit1) Equals(other *InsurancePlanBenefit1) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -539,7 +997,7 @@ func (m *InsurancePlanBenefit1) Equals(other *InsurancePlanBenefit1) bool {
 // InsurancePlanCost
 // List of the costs associated with a specific benefit.
 type InsurancePlanCost struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -549,22 +1007,63 @@ type InsurancePlanCost struct {
 	Value *Quantity `json:"value,omitempty"`
 }
 
-// NewInsurancePlanCost creates a new InsurancePlanCost instance
+// NewInsurancePlanCost creates a new InsurancePlanCost instance.
 func NewInsurancePlanCost() *InsurancePlanCost {
 	return &InsurancePlanCost{}
 }
 
-// FromJSON populates InsurancePlanCost from JSON data
+// FromJSON populates InsurancePlanCost from JSON data.
 func (m *InsurancePlanCost) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Applicability *CodeableConcept `json:"applicability,omitempty"`
+		Qualifiers []*CodeableConcept `json:"qualifiers,omitempty"`
+		Value *Quantity `json:"value,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Applicability = temp.Applicability
+	m.Qualifiers = temp.Qualifiers
+	m.Value = temp.Value
+	return nil
 }
 
-// ToJSON converts InsurancePlanCost to JSON data
+// ToJSON converts InsurancePlanCost to JSON data.
 func (m *InsurancePlanCost) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Applicability *CodeableConcept `json:"applicability,omitempty"`
+		Qualifiers []*CodeableConcept `json:"qualifiers,omitempty"`
+		Value *Quantity `json:"value,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Applicability = m.Applicability
+	output.Qualifiers = m.Qualifiers
+	output.Value = m.Value
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of InsurancePlanCost
+// Clone creates a deep copy of InsurancePlanCost.
 func (m *InsurancePlanCost) Clone() *InsurancePlanCost {
 	if m == nil { return nil }
 	return &InsurancePlanCost{
@@ -578,7 +1077,7 @@ func (m *InsurancePlanCost) Clone() *InsurancePlanCost {
 	}
 }
 
-// Equals checks for equality with another InsurancePlanCost instance
+// Equals checks equality between two InsurancePlanCost instances.
 func (m *InsurancePlanCost) Equals(other *InsurancePlanCost) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

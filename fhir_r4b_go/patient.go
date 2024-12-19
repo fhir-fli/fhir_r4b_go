@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Patient
 // Demographics and other administrative information about an individual or animal receiving care or other health-related services.
 type Patient struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -37,22 +38,181 @@ type Patient struct {
 	Link []*PatientLink `json:"link,omitempty"`
 }
 
-// NewPatient creates a new Patient instance
+// NewPatient creates a new Patient instance.
 func NewPatient() *Patient {
 	return &Patient{}
 }
 
-// FromJSON populates Patient from JSON data
+// FromJSON populates Patient from JSON data.
 func (m *Patient) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Active *FhirBoolean `json:"active,omitempty"`
+		Name []*HumanName `json:"name,omitempty"`
+		Telecom []*ContactPoint `json:"telecom,omitempty"`
+		Gender *AdministrativeGender `json:"gender,omitempty"`
+		BirthDate *FhirDate `json:"birthdate,omitempty"`
+		DeceasedBoolean *FhirBoolean `json:"deceasedboolean,omitempty"`
+		DeceasedDateTime *FhirDateTime `json:"deceaseddatetime,omitempty"`
+		Address []*Address `json:"address,omitempty"`
+		MaritalStatus *CodeableConcept `json:"maritalstatus,omitempty"`
+		MultipleBirthBoolean *FhirBoolean `json:"multiplebirthboolean,omitempty"`
+		MultipleBirthInteger *FhirInteger `json:"multiplebirthinteger,omitempty"`
+		Photo []*Attachment `json:"photo,omitempty"`
+		Contact []*PatientContact `json:"contact,omitempty"`
+		Communication []*PatientCommunication `json:"communication,omitempty"`
+		GeneralPractitioner []*Reference `json:"generalpractitioner,omitempty"`
+		ManagingOrganization *Reference `json:"managingorganization,omitempty"`
+		Link []*PatientLink `json:"link,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Active = temp.Active
+	m.Name = temp.Name
+	m.Telecom = temp.Telecom
+	m.Gender = temp.Gender
+	m.BirthDate = temp.BirthDate
+	m.DeceasedBoolean = temp.DeceasedBoolean
+	m.DeceasedDateTime = temp.DeceasedDateTime
+	m.Address = temp.Address
+	m.MaritalStatus = temp.MaritalStatus
+	m.MultipleBirthBoolean = temp.MultipleBirthBoolean
+	m.MultipleBirthInteger = temp.MultipleBirthInteger
+	m.Photo = temp.Photo
+	m.Contact = temp.Contact
+	m.Communication = temp.Communication
+	m.GeneralPractitioner = temp.GeneralPractitioner
+	m.ManagingOrganization = temp.ManagingOrganization
+	m.Link = temp.Link
+	return nil
 }
 
-// ToJSON converts Patient to JSON data
+// ToJSON converts Patient to JSON data.
 func (m *Patient) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Active interface{} `json:"active,omitempty"`
+		ActiveElement map[string]interface{} `json:"_active,omitempty"`
+		Name []*HumanName `json:"name,omitempty"`
+		Telecom []*ContactPoint `json:"telecom,omitempty"`
+		Gender *AdministrativeGender `json:"gender,omitempty"`
+		BirthDate interface{} `json:"birthdate,omitempty"`
+		BirthDateElement map[string]interface{} `json:"_birthdate,omitempty"`
+		DeceasedBoolean interface{} `json:"deceasedboolean,omitempty"`
+		DeceasedBooleanElement map[string]interface{} `json:"_deceasedboolean,omitempty"`
+		DeceasedDateTime interface{} `json:"deceaseddatetime,omitempty"`
+		DeceasedDateTimeElement map[string]interface{} `json:"_deceaseddatetime,omitempty"`
+		Address []*Address `json:"address,omitempty"`
+		MaritalStatus *CodeableConcept `json:"maritalstatus,omitempty"`
+		MultipleBirthBoolean interface{} `json:"multiplebirthboolean,omitempty"`
+		MultipleBirthBooleanElement map[string]interface{} `json:"_multiplebirthboolean,omitempty"`
+		MultipleBirthInteger interface{} `json:"multiplebirthinteger,omitempty"`
+		MultipleBirthIntegerElement map[string]interface{} `json:"_multiplebirthinteger,omitempty"`
+		Photo []*Attachment `json:"photo,omitempty"`
+		Contact []*PatientContact `json:"contact,omitempty"`
+		Communication []*PatientCommunication `json:"communication,omitempty"`
+		GeneralPractitioner []*Reference `json:"generalpractitioner,omitempty"`
+		ManagingOrganization *Reference `json:"managingorganization,omitempty"`
+		Link []*PatientLink `json:"link,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	if m.Active != nil && m.Active.Value != nil {
+		output.Active = m.Active.Value
+		if m.Active.Element != nil {
+			output.ActiveElement = toMapOrNil(m.Active.Element.ToJSON())
+		}
+	}
+	output.Name = m.Name
+	output.Telecom = m.Telecom
+	output.Gender = m.Gender
+	if m.BirthDate != nil && m.BirthDate.Value != nil {
+		output.BirthDate = m.BirthDate.Value
+		if m.BirthDate.Element != nil {
+			output.BirthDateElement = toMapOrNil(m.BirthDate.Element.ToJSON())
+		}
+	}
+	if m.DeceasedBoolean != nil && m.DeceasedBoolean.Value != nil {
+		output.DeceasedBoolean = m.DeceasedBoolean.Value
+		if m.DeceasedBoolean.Element != nil {
+			output.DeceasedBooleanElement = toMapOrNil(m.DeceasedBoolean.Element.ToJSON())
+		}
+	}
+	if m.DeceasedDateTime != nil && m.DeceasedDateTime.Value != nil {
+		output.DeceasedDateTime = m.DeceasedDateTime.Value
+		if m.DeceasedDateTime.Element != nil {
+			output.DeceasedDateTimeElement = toMapOrNil(m.DeceasedDateTime.Element.ToJSON())
+		}
+	}
+	output.Address = m.Address
+	output.MaritalStatus = m.MaritalStatus
+	if m.MultipleBirthBoolean != nil && m.MultipleBirthBoolean.Value != nil {
+		output.MultipleBirthBoolean = m.MultipleBirthBoolean.Value
+		if m.MultipleBirthBoolean.Element != nil {
+			output.MultipleBirthBooleanElement = toMapOrNil(m.MultipleBirthBoolean.Element.ToJSON())
+		}
+	}
+	if m.MultipleBirthInteger != nil && m.MultipleBirthInteger.Value != nil {
+		output.MultipleBirthInteger = m.MultipleBirthInteger.Value
+		if m.MultipleBirthInteger.Element != nil {
+			output.MultipleBirthIntegerElement = toMapOrNil(m.MultipleBirthInteger.Element.ToJSON())
+		}
+	}
+	output.Photo = m.Photo
+	output.Contact = m.Contact
+	output.Communication = m.Communication
+	output.GeneralPractitioner = m.GeneralPractitioner
+	output.ManagingOrganization = m.ManagingOrganization
+	output.Link = m.Link
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Patient
+// Clone creates a deep copy of Patient.
 func (m *Patient) Clone() *Patient {
 	if m == nil { return nil }
 	return &Patient{
@@ -85,7 +245,7 @@ func (m *Patient) Clone() *Patient {
 	}
 }
 
-// Equals checks for equality with another Patient instance
+// Equals checks equality between two Patient instances.
 func (m *Patient) Equals(other *Patient) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -121,7 +281,7 @@ func (m *Patient) Equals(other *Patient) bool {
 // PatientContact
 // A contact party (e.g. guardian, partner, friend) for the patient.
 type PatientContact struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -134,22 +294,75 @@ type PatientContact struct {
 	Period *Period `json:"period,omitempty"`
 }
 
-// NewPatientContact creates a new PatientContact instance
+// NewPatientContact creates a new PatientContact instance.
 func NewPatientContact() *PatientContact {
 	return &PatientContact{}
 }
 
-// FromJSON populates PatientContact from JSON data
+// FromJSON populates PatientContact from JSON data.
 func (m *PatientContact) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Relationship []*CodeableConcept `json:"relationship,omitempty"`
+		Name *HumanName `json:"name,omitempty"`
+		Telecom []*ContactPoint `json:"telecom,omitempty"`
+		Address *Address `json:"address,omitempty"`
+		Gender *AdministrativeGender `json:"gender,omitempty"`
+		Organization *Reference `json:"organization,omitempty"`
+		Period *Period `json:"period,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Relationship = temp.Relationship
+	m.Name = temp.Name
+	m.Telecom = temp.Telecom
+	m.Address = temp.Address
+	m.Gender = temp.Gender
+	m.Organization = temp.Organization
+	m.Period = temp.Period
+	return nil
 }
 
-// ToJSON converts PatientContact to JSON data
+// ToJSON converts PatientContact to JSON data.
 func (m *PatientContact) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Relationship []*CodeableConcept `json:"relationship,omitempty"`
+		Name *HumanName `json:"name,omitempty"`
+		Telecom []*ContactPoint `json:"telecom,omitempty"`
+		Address *Address `json:"address,omitempty"`
+		Gender *AdministrativeGender `json:"gender,omitempty"`
+		Organization *Reference `json:"organization,omitempty"`
+		Period *Period `json:"period,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Relationship = m.Relationship
+	output.Name = m.Name
+	output.Telecom = m.Telecom
+	output.Address = m.Address
+	output.Gender = m.Gender
+	output.Organization = m.Organization
+	output.Period = m.Period
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of PatientContact
+// Clone creates a deep copy of PatientContact.
 func (m *PatientContact) Clone() *PatientContact {
 	if m == nil { return nil }
 	return &PatientContact{
@@ -166,7 +379,7 @@ func (m *PatientContact) Clone() *PatientContact {
 	}
 }
 
-// Equals checks for equality with another PatientContact instance
+// Equals checks equality between two PatientContact instances.
 func (m *PatientContact) Equals(other *PatientContact) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -186,7 +399,7 @@ func (m *PatientContact) Equals(other *PatientContact) bool {
 // PatientCommunication
 // A language which may be used to communicate with the patient about his or her health.
 type PatientCommunication struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -194,22 +407,61 @@ type PatientCommunication struct {
 	Preferred *FhirBoolean `json:"preferred,omitempty"`
 }
 
-// NewPatientCommunication creates a new PatientCommunication instance
+// NewPatientCommunication creates a new PatientCommunication instance.
 func NewPatientCommunication() *PatientCommunication {
 	return &PatientCommunication{}
 }
 
-// FromJSON populates PatientCommunication from JSON data
+// FromJSON populates PatientCommunication from JSON data.
 func (m *PatientCommunication) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Language *CodeableConcept `json:"language,omitempty"`
+		Preferred *FhirBoolean `json:"preferred,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Language = temp.Language
+	m.Preferred = temp.Preferred
+	return nil
 }
 
-// ToJSON converts PatientCommunication to JSON data
+// ToJSON converts PatientCommunication to JSON data.
 func (m *PatientCommunication) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Language *CodeableConcept `json:"language,omitempty"`
+		Preferred interface{} `json:"preferred,omitempty"`
+		PreferredElement map[string]interface{} `json:"_preferred,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Language = m.Language
+	if m.Preferred != nil && m.Preferred.Value != nil {
+		output.Preferred = m.Preferred.Value
+		if m.Preferred.Element != nil {
+			output.PreferredElement = toMapOrNil(m.Preferred.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of PatientCommunication
+// Clone creates a deep copy of PatientCommunication.
 func (m *PatientCommunication) Clone() *PatientCommunication {
 	if m == nil { return nil }
 	return &PatientCommunication{
@@ -221,7 +473,7 @@ func (m *PatientCommunication) Clone() *PatientCommunication {
 	}
 }
 
-// Equals checks for equality with another PatientCommunication instance
+// Equals checks equality between two PatientCommunication instances.
 func (m *PatientCommunication) Equals(other *PatientCommunication) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -236,7 +488,7 @@ func (m *PatientCommunication) Equals(other *PatientCommunication) bool {
 // PatientLink
 // Link to another patient resource that concerns the same actual patient.
 type PatientLink struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -244,22 +496,55 @@ type PatientLink struct {
 	Type *LinkType `json:"type,omitempty"`
 }
 
-// NewPatientLink creates a new PatientLink instance
+// NewPatientLink creates a new PatientLink instance.
 func NewPatientLink() *PatientLink {
 	return &PatientLink{}
 }
 
-// FromJSON populates PatientLink from JSON data
+// FromJSON populates PatientLink from JSON data.
 func (m *PatientLink) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Other *Reference `json:"other,omitempty"`
+		Type *LinkType `json:"type,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Other = temp.Other
+	m.Type = temp.Type
+	return nil
 }
 
-// ToJSON converts PatientLink to JSON data
+// ToJSON converts PatientLink to JSON data.
 func (m *PatientLink) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Other *Reference `json:"other,omitempty"`
+		Type *LinkType `json:"type,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Other = m.Other
+	output.Type = m.Type
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of PatientLink
+// Clone creates a deep copy of PatientLink.
 func (m *PatientLink) Clone() *PatientLink {
 	if m == nil { return nil }
 	return &PatientLink{
@@ -271,7 +556,7 @@ func (m *PatientLink) Clone() *PatientLink {
 	}
 }
 
-// Equals checks for equality with another PatientLink instance
+// Equals checks equality between two PatientLink instances.
 func (m *PatientLink) Equals(other *PatientLink) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

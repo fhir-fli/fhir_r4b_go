@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // FhirExpression
 // A expression that is evaluated in a specified context and returns a value. The context of use of the expression must specify the context in which the expression is evaluated, and how the result of the expression is used.
 type FhirExpression struct {
-	DataType
+	extends DataType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	Description *FhirString `json:"description,omitempty"`
@@ -18,22 +19,87 @@ type FhirExpression struct {
 	Reference *FhirUri `json:"reference,omitempty"`
 }
 
-// NewFhirExpression creates a new FhirExpression instance
+// NewFhirExpression creates a new FhirExpression instance.
 func NewFhirExpression() *FhirExpression {
 	return &FhirExpression{}
 }
 
-// FromJSON populates FhirExpression from JSON data
+// FromJSON populates FhirExpression from JSON data.
 func (m *FhirExpression) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Name *FhirId `json:"name,omitempty"`
+		Language *ExpressionLanguage `json:"language,omitempty"`
+		Expression *FhirString `json:"expression,omitempty"`
+		Reference *FhirUri `json:"reference,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.Description = temp.Description
+	m.Name = temp.Name
+	m.Language = temp.Language
+	m.Expression = temp.Expression
+	m.Reference = temp.Reference
+	return nil
 }
 
-// ToJSON converts FhirExpression to JSON data
+// ToJSON converts FhirExpression to JSON data.
 func (m *FhirExpression) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Language *ExpressionLanguage `json:"language,omitempty"`
+		Expression interface{} `json:"expression,omitempty"`
+		ExpressionElement map[string]interface{} `json:"_expression,omitempty"`
+		Reference interface{} `json:"reference,omitempty"`
+		ReferenceElement map[string]interface{} `json:"_reference,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	if m.Expression != nil && m.Expression.Value != nil {
+		output.Expression = m.Expression.Value
+		if m.Expression.Element != nil {
+			output.ExpressionElement = toMapOrNil(m.Expression.Element.ToJSON())
+		}
+	}
+	if m.Reference != nil && m.Reference.Value != nil {
+		output.Reference = m.Reference.Value
+		if m.Reference.Element != nil {
+			output.ReferenceElement = toMapOrNil(m.Reference.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of FhirExpression
+// Clone creates a deep copy of FhirExpression.
 func (m *FhirExpression) Clone() *FhirExpression {
 	if m == nil { return nil }
 	return &FhirExpression{
@@ -47,7 +113,7 @@ func (m *FhirExpression) Clone() *FhirExpression {
 	}
 }
 
-// Equals checks for equality with another FhirExpression instance
+// Equals checks equality between two FhirExpression instances.
 func (m *FhirExpression) Equals(other *FhirExpression) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

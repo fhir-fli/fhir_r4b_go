@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // DeviceMetric
 // Describes a measurement, calculation or setting capability of a medical device.
 type DeviceMetric struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -29,22 +30,113 @@ type DeviceMetric struct {
 	Calibration []*DeviceMetricCalibration `json:"calibration,omitempty"`
 }
 
-// NewDeviceMetric creates a new DeviceMetric instance
+// NewDeviceMetric creates a new DeviceMetric instance.
 func NewDeviceMetric() *DeviceMetric {
 	return &DeviceMetric{}
 }
 
-// FromJSON populates DeviceMetric from JSON data
+// FromJSON populates DeviceMetric from JSON data.
 func (m *DeviceMetric) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Unit *CodeableConcept `json:"unit,omitempty"`
+		Source *Reference `json:"source,omitempty"`
+		Parent *Reference `json:"parent,omitempty"`
+		OperationalStatus *DeviceMetricOperationalStatus `json:"operationalstatus,omitempty"`
+		Color *DeviceMetricColor `json:"color,omitempty"`
+		Category *DeviceMetricCategory `json:"category,omitempty"`
+		MeasurementPeriod *Timing `json:"measurementperiod,omitempty"`
+		Calibration []*DeviceMetricCalibration `json:"calibration,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Type = temp.Type
+	m.Unit = temp.Unit
+	m.Source = temp.Source
+	m.Parent = temp.Parent
+	m.OperationalStatus = temp.OperationalStatus
+	m.Color = temp.Color
+	m.Category = temp.Category
+	m.MeasurementPeriod = temp.MeasurementPeriod
+	m.Calibration = temp.Calibration
+	return nil
 }
 
-// ToJSON converts DeviceMetric to JSON data
+// ToJSON converts DeviceMetric to JSON data.
 func (m *DeviceMetric) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Unit *CodeableConcept `json:"unit,omitempty"`
+		Source *Reference `json:"source,omitempty"`
+		Parent *Reference `json:"parent,omitempty"`
+		OperationalStatus *DeviceMetricOperationalStatus `json:"operationalstatus,omitempty"`
+		Color *DeviceMetricColor `json:"color,omitempty"`
+		Category *DeviceMetricCategory `json:"category,omitempty"`
+		MeasurementPeriod *Timing `json:"measurementperiod,omitempty"`
+		Calibration []*DeviceMetricCalibration `json:"calibration,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Type = m.Type
+	output.Unit = m.Unit
+	output.Source = m.Source
+	output.Parent = m.Parent
+	output.OperationalStatus = m.OperationalStatus
+	output.Color = m.Color
+	output.Category = m.Category
+	output.MeasurementPeriod = m.MeasurementPeriod
+	output.Calibration = m.Calibration
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DeviceMetric
+// Clone creates a deep copy of DeviceMetric.
 func (m *DeviceMetric) Clone() *DeviceMetric {
 	if m == nil { return nil }
 	return &DeviceMetric{
@@ -69,7 +161,7 @@ func (m *DeviceMetric) Clone() *DeviceMetric {
 	}
 }
 
-// Equals checks for equality with another DeviceMetric instance
+// Equals checks equality between two DeviceMetric instances.
 func (m *DeviceMetric) Equals(other *DeviceMetric) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -97,7 +189,7 @@ func (m *DeviceMetric) Equals(other *DeviceMetric) bool {
 // DeviceMetricCalibration
 // Describes the calibrations that have been performed or that are required to be performed.
 type DeviceMetricCalibration struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -106,22 +198,65 @@ type DeviceMetricCalibration struct {
 	Time *FhirInstant `json:"time,omitempty"`
 }
 
-// NewDeviceMetricCalibration creates a new DeviceMetricCalibration instance
+// NewDeviceMetricCalibration creates a new DeviceMetricCalibration instance.
 func NewDeviceMetricCalibration() *DeviceMetricCalibration {
 	return &DeviceMetricCalibration{}
 }
 
-// FromJSON populates DeviceMetricCalibration from JSON data
+// FromJSON populates DeviceMetricCalibration from JSON data.
 func (m *DeviceMetricCalibration) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *DeviceMetricCalibrationType `json:"type,omitempty"`
+		State *DeviceMetricCalibrationState `json:"state,omitempty"`
+		Time *FhirInstant `json:"time,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.State = temp.State
+	m.Time = temp.Time
+	return nil
 }
 
-// ToJSON converts DeviceMetricCalibration to JSON data
+// ToJSON converts DeviceMetricCalibration to JSON data.
 func (m *DeviceMetricCalibration) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *DeviceMetricCalibrationType `json:"type,omitempty"`
+		State *DeviceMetricCalibrationState `json:"state,omitempty"`
+		Time interface{} `json:"time,omitempty"`
+		TimeElement map[string]interface{} `json:"_time,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.State = m.State
+	if m.Time != nil && m.Time.Value != nil {
+		output.Time = m.Time.Value
+		if m.Time.Element != nil {
+			output.TimeElement = toMapOrNil(m.Time.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DeviceMetricCalibration
+// Clone creates a deep copy of DeviceMetricCalibration.
 func (m *DeviceMetricCalibration) Clone() *DeviceMetricCalibration {
 	if m == nil { return nil }
 	return &DeviceMetricCalibration{
@@ -134,7 +269,7 @@ func (m *DeviceMetricCalibration) Clone() *DeviceMetricCalibration {
 	}
 }
 
-// Equals checks for equality with another DeviceMetricCalibration instance
+// Equals checks equality between two DeviceMetricCalibration instances.
 func (m *DeviceMetricCalibration) Equals(other *DeviceMetricCalibration) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Reference
 // A reference from one resource to another.
 type Reference struct {
-	DataType
+	extends DataType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	Reference *FhirString `json:"reference,omitempty"`
@@ -17,22 +18,77 @@ type Reference struct {
 	Display *FhirString `json:"display,omitempty"`
 }
 
-// NewReference creates a new Reference instance
+// NewReference creates a new Reference instance.
 func NewReference() *Reference {
 	return &Reference{}
 }
 
-// FromJSON populates Reference from JSON data
+// FromJSON populates Reference from JSON data.
 func (m *Reference) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Reference *FhirString `json:"reference,omitempty"`
+		Type *FhirUri `json:"type,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Display *FhirString `json:"display,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.Reference = temp.Reference
+	m.Type = temp.Type
+	m.Identifier = temp.Identifier
+	m.Display = temp.Display
+	return nil
 }
 
-// ToJSON converts Reference to JSON data
+// ToJSON converts Reference to JSON data.
 func (m *Reference) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Reference interface{} `json:"reference,omitempty"`
+		ReferenceElement map[string]interface{} `json:"_reference,omitempty"`
+		Type interface{} `json:"type,omitempty"`
+		TypeElement map[string]interface{} `json:"_type,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Display interface{} `json:"display,omitempty"`
+		DisplayElement map[string]interface{} `json:"_display,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	if m.Reference != nil && m.Reference.Value != nil {
+		output.Reference = m.Reference.Value
+		if m.Reference.Element != nil {
+			output.ReferenceElement = toMapOrNil(m.Reference.Element.ToJSON())
+		}
+	}
+	if m.Type != nil && m.Type.Value != nil {
+		output.Type = m.Type.Value
+		if m.Type.Element != nil {
+			output.TypeElement = toMapOrNil(m.Type.Element.ToJSON())
+		}
+	}
+	output.Identifier = m.Identifier
+	if m.Display != nil && m.Display.Value != nil {
+		output.Display = m.Display.Value
+		if m.Display.Element != nil {
+			output.DisplayElement = toMapOrNil(m.Display.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Reference
+// Clone creates a deep copy of Reference.
 func (m *Reference) Clone() *Reference {
 	if m == nil { return nil }
 	return &Reference{
@@ -45,7 +101,7 @@ func (m *Reference) Clone() *Reference {
 	}
 }
 
-// Equals checks for equality with another Reference instance
+// Equals checks equality between two Reference instances.
 func (m *Reference) Equals(other *Reference) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

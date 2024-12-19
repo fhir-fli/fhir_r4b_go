@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // HumanName
 // A human's name with the ability to identify parts and usage.
 type HumanName struct {
-	DataType
+	extends DataType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	Use *NameUse `json:"use,omitempty"`
@@ -20,22 +22,146 @@ type HumanName struct {
 	Period *Period `json:"period,omitempty"`
 }
 
-// NewHumanName creates a new HumanName instance
+// NewHumanName creates a new HumanName instance.
 func NewHumanName() *HumanName {
 	return &HumanName{}
 }
 
-// FromJSON populates HumanName from JSON data
+// FromJSON populates HumanName from JSON data.
 func (m *HumanName) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Use *NameUse `json:"use,omitempty"`
+		Text *FhirString `json:"text,omitempty"`
+		Family *FhirString `json:"family,omitempty"`
+		Given []interface{} `json:"given,omitempty"`
+		Prefix []interface{} `json:"prefix,omitempty"`
+		Suffix []interface{} `json:"suffix,omitempty"`
+		Period *Period `json:"period,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.Use = temp.Use
+	m.Text = temp.Text
+	m.Family = temp.Family
+	if len(temp.Given) > 0 {
+		m.Given = make([]*FhirString, len(temp.Given))
+		for i := range temp.Given {
+			itemMap, ok := temp.Given[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Given[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Given[%d]: %v", i, err) }
+			m.Given[i] = primitive
+		}
+	}
+	if len(temp.Prefix) > 0 {
+		m.Prefix = make([]*FhirString, len(temp.Prefix))
+		for i := range temp.Prefix {
+			itemMap, ok := temp.Prefix[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Prefix[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Prefix[%d]: %v", i, err) }
+			m.Prefix[i] = primitive
+		}
+	}
+	if len(temp.Suffix) > 0 {
+		m.Suffix = make([]*FhirString, len(temp.Suffix))
+		for i := range temp.Suffix {
+			itemMap, ok := temp.Suffix[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Suffix[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Suffix[%d]: %v", i, err) }
+			m.Suffix[i] = primitive
+		}
+	}
+	m.Period = temp.Period
+	return nil
 }
 
-// ToJSON converts HumanName to JSON data
+// ToJSON converts HumanName to JSON data.
 func (m *HumanName) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Use *NameUse `json:"use,omitempty"`
+		Text interface{} `json:"text,omitempty"`
+		TextElement map[string]interface{} `json:"_text,omitempty"`
+		Family interface{} `json:"family,omitempty"`
+		FamilyElement map[string]interface{} `json:"_family,omitempty"`
+		Given []interface{} `json:"given,omitempty"`
+		GivenElement []map[string]interface{} `json:"_given,omitempty"`
+		Prefix []interface{} `json:"prefix,omitempty"`
+		PrefixElement []map[string]interface{} `json:"_prefix,omitempty"`
+		Suffix []interface{} `json:"suffix,omitempty"`
+		SuffixElement []map[string]interface{} `json:"_suffix,omitempty"`
+		Period *Period `json:"period,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.Use = m.Use
+	if m.Text != nil && m.Text.Value != nil {
+		output.Text = m.Text.Value
+		if m.Text.Element != nil {
+			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+		}
+	}
+	if m.Family != nil && m.Family.Value != nil {
+		output.Family = m.Family.Value
+		if m.Family.Element != nil {
+			output.FamilyElement = toMapOrNil(m.Family.Element.ToJSON())
+		}
+	}
+	if len(m.Given) > 0 {
+		output.Given = make([]interface{}, len(m.Given))
+		output.GivenElement = make([]map[string]interface{}, len(m.Given))
+		for i, item := range m.Given {
+			if item != nil && item.Value != nil {
+				output.Given[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.GivenElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.Prefix) > 0 {
+		output.Prefix = make([]interface{}, len(m.Prefix))
+		output.PrefixElement = make([]map[string]interface{}, len(m.Prefix))
+		for i, item := range m.Prefix {
+			if item != nil && item.Value != nil {
+				output.Prefix[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.PrefixElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.Suffix) > 0 {
+		output.Suffix = make([]interface{}, len(m.Suffix))
+		output.SuffixElement = make([]map[string]interface{}, len(m.Suffix))
+		for i, item := range m.Suffix {
+			if item != nil && item.Value != nil {
+				output.Suffix[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.SuffixElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Period = m.Period
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of HumanName
+// Clone creates a deep copy of HumanName.
 func (m *HumanName) Clone() *HumanName {
 	if m == nil { return nil }
 	return &HumanName{
@@ -51,7 +177,7 @@ func (m *HumanName) Clone() *HumanName {
 	}
 }
 
-// Equals checks for equality with another HumanName instance
+// Equals checks equality between two HumanName instances.
 func (m *HumanName) Equals(other *HumanName) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

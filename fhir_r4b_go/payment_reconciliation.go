@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // PaymentReconciliation
 // This resource provides the details including amount of a payment and allocates the payment items being paid.
 type PaymentReconciliation struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -34,22 +35,151 @@ type PaymentReconciliation struct {
 	ProcessNote []*PaymentReconciliationProcessNote `json:"processnote,omitempty"`
 }
 
-// NewPaymentReconciliation creates a new PaymentReconciliation instance
+// NewPaymentReconciliation creates a new PaymentReconciliation instance.
 func NewPaymentReconciliation() *PaymentReconciliation {
 	return &PaymentReconciliation{}
 }
 
-// FromJSON populates PaymentReconciliation from JSON data
+// FromJSON populates PaymentReconciliation from JSON data.
 func (m *PaymentReconciliation) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *FinancialResourceStatusCodes `json:"status,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Created *FhirDateTime `json:"created,omitempty"`
+		PaymentIssuer *Reference `json:"paymentissuer,omitempty"`
+		Request *Reference `json:"request,omitempty"`
+		Requestor *Reference `json:"requestor,omitempty"`
+		Outcome *RemittanceOutcome `json:"outcome,omitempty"`
+		Disposition *FhirString `json:"disposition,omitempty"`
+		PaymentDate *FhirDate `json:"paymentdate,omitempty"`
+		PaymentAmount *Money `json:"paymentamount,omitempty"`
+		PaymentIdentifier *Identifier `json:"paymentidentifier,omitempty"`
+		Detail []*PaymentReconciliationDetail `json:"detail,omitempty"`
+		FormCode *CodeableConcept `json:"formcode,omitempty"`
+		ProcessNote []*PaymentReconciliationProcessNote `json:"processnote,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.Period = temp.Period
+	m.Created = temp.Created
+	m.PaymentIssuer = temp.PaymentIssuer
+	m.Request = temp.Request
+	m.Requestor = temp.Requestor
+	m.Outcome = temp.Outcome
+	m.Disposition = temp.Disposition
+	m.PaymentDate = temp.PaymentDate
+	m.PaymentAmount = temp.PaymentAmount
+	m.PaymentIdentifier = temp.PaymentIdentifier
+	m.Detail = temp.Detail
+	m.FormCode = temp.FormCode
+	m.ProcessNote = temp.ProcessNote
+	return nil
 }
 
-// ToJSON converts PaymentReconciliation to JSON data
+// ToJSON converts PaymentReconciliation to JSON data.
 func (m *PaymentReconciliation) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *FinancialResourceStatusCodes `json:"status,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Created interface{} `json:"created,omitempty"`
+		CreatedElement map[string]interface{} `json:"_created,omitempty"`
+		PaymentIssuer *Reference `json:"paymentissuer,omitempty"`
+		Request *Reference `json:"request,omitempty"`
+		Requestor *Reference `json:"requestor,omitempty"`
+		Outcome *RemittanceOutcome `json:"outcome,omitempty"`
+		Disposition interface{} `json:"disposition,omitempty"`
+		DispositionElement map[string]interface{} `json:"_disposition,omitempty"`
+		PaymentDate interface{} `json:"paymentdate,omitempty"`
+		PaymentDateElement map[string]interface{} `json:"_paymentdate,omitempty"`
+		PaymentAmount *Money `json:"paymentamount,omitempty"`
+		PaymentIdentifier *Identifier `json:"paymentidentifier,omitempty"`
+		Detail []*PaymentReconciliationDetail `json:"detail,omitempty"`
+		FormCode *CodeableConcept `json:"formcode,omitempty"`
+		ProcessNote []*PaymentReconciliationProcessNote `json:"processnote,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	output.Period = m.Period
+	if m.Created != nil && m.Created.Value != nil {
+		output.Created = m.Created.Value
+		if m.Created.Element != nil {
+			output.CreatedElement = toMapOrNil(m.Created.Element.ToJSON())
+		}
+	}
+	output.PaymentIssuer = m.PaymentIssuer
+	output.Request = m.Request
+	output.Requestor = m.Requestor
+	output.Outcome = m.Outcome
+	if m.Disposition != nil && m.Disposition.Value != nil {
+		output.Disposition = m.Disposition.Value
+		if m.Disposition.Element != nil {
+			output.DispositionElement = toMapOrNil(m.Disposition.Element.ToJSON())
+		}
+	}
+	if m.PaymentDate != nil && m.PaymentDate.Value != nil {
+		output.PaymentDate = m.PaymentDate.Value
+		if m.PaymentDate.Element != nil {
+			output.PaymentDateElement = toMapOrNil(m.PaymentDate.Element.ToJSON())
+		}
+	}
+	output.PaymentAmount = m.PaymentAmount
+	output.PaymentIdentifier = m.PaymentIdentifier
+	output.Detail = m.Detail
+	output.FormCode = m.FormCode
+	output.ProcessNote = m.ProcessNote
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of PaymentReconciliation
+// Clone creates a deep copy of PaymentReconciliation.
 func (m *PaymentReconciliation) Clone() *PaymentReconciliation {
 	if m == nil { return nil }
 	return &PaymentReconciliation{
@@ -79,7 +209,7 @@ func (m *PaymentReconciliation) Clone() *PaymentReconciliation {
 	}
 }
 
-// Equals checks for equality with another PaymentReconciliation instance
+// Equals checks equality between two PaymentReconciliation instances.
 func (m *PaymentReconciliation) Equals(other *PaymentReconciliation) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -112,7 +242,7 @@ func (m *PaymentReconciliation) Equals(other *PaymentReconciliation) bool {
 // PaymentReconciliationDetail
 // Distribution of the payment amount for a previously acknowledged payable.
 type PaymentReconciliationDetail struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -128,22 +258,93 @@ type PaymentReconciliationDetail struct {
 	Amount *Money `json:"amount,omitempty"`
 }
 
-// NewPaymentReconciliationDetail creates a new PaymentReconciliationDetail instance
+// NewPaymentReconciliationDetail creates a new PaymentReconciliationDetail instance.
 func NewPaymentReconciliationDetail() *PaymentReconciliationDetail {
 	return &PaymentReconciliationDetail{}
 }
 
-// FromJSON populates PaymentReconciliationDetail from JSON data
+// FromJSON populates PaymentReconciliationDetail from JSON data.
 func (m *PaymentReconciliationDetail) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Predecessor *Identifier `json:"predecessor,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Request *Reference `json:"request,omitempty"`
+		Submitter *Reference `json:"submitter,omitempty"`
+		Response *Reference `json:"response,omitempty"`
+		Date *FhirDate `json:"date,omitempty"`
+		Responsible *Reference `json:"responsible,omitempty"`
+		Payee *Reference `json:"payee,omitempty"`
+		Amount *Money `json:"amount,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Predecessor = temp.Predecessor
+	m.Type = temp.Type
+	m.Request = temp.Request
+	m.Submitter = temp.Submitter
+	m.Response = temp.Response
+	m.Date = temp.Date
+	m.Responsible = temp.Responsible
+	m.Payee = temp.Payee
+	m.Amount = temp.Amount
+	return nil
 }
 
-// ToJSON converts PaymentReconciliationDetail to JSON data
+// ToJSON converts PaymentReconciliationDetail to JSON data.
 func (m *PaymentReconciliationDetail) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Predecessor *Identifier `json:"predecessor,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Request *Reference `json:"request,omitempty"`
+		Submitter *Reference `json:"submitter,omitempty"`
+		Response *Reference `json:"response,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Responsible *Reference `json:"responsible,omitempty"`
+		Payee *Reference `json:"payee,omitempty"`
+		Amount *Money `json:"amount,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Predecessor = m.Predecessor
+	output.Type = m.Type
+	output.Request = m.Request
+	output.Submitter = m.Submitter
+	output.Response = m.Response
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	output.Responsible = m.Responsible
+	output.Payee = m.Payee
+	output.Amount = m.Amount
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of PaymentReconciliationDetail
+// Clone creates a deep copy of PaymentReconciliationDetail.
 func (m *PaymentReconciliationDetail) Clone() *PaymentReconciliationDetail {
 	if m == nil { return nil }
 	return &PaymentReconciliationDetail{
@@ -163,7 +364,7 @@ func (m *PaymentReconciliationDetail) Clone() *PaymentReconciliationDetail {
 	}
 }
 
-// Equals checks for equality with another PaymentReconciliationDetail instance
+// Equals checks equality between two PaymentReconciliationDetail instances.
 func (m *PaymentReconciliationDetail) Equals(other *PaymentReconciliationDetail) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -186,7 +387,7 @@ func (m *PaymentReconciliationDetail) Equals(other *PaymentReconciliationDetail)
 // PaymentReconciliationProcessNote
 // A note that describes or explains the processing in a human readable form.
 type PaymentReconciliationProcessNote struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -194,22 +395,61 @@ type PaymentReconciliationProcessNote struct {
 	Text *FhirString `json:"text,omitempty"`
 }
 
-// NewPaymentReconciliationProcessNote creates a new PaymentReconciliationProcessNote instance
+// NewPaymentReconciliationProcessNote creates a new PaymentReconciliationProcessNote instance.
 func NewPaymentReconciliationProcessNote() *PaymentReconciliationProcessNote {
 	return &PaymentReconciliationProcessNote{}
 }
 
-// FromJSON populates PaymentReconciliationProcessNote from JSON data
+// FromJSON populates PaymentReconciliationProcessNote from JSON data.
 func (m *PaymentReconciliationProcessNote) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *NoteType `json:"type,omitempty"`
+		Text *FhirString `json:"text,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Text = temp.Text
+	return nil
 }
 
-// ToJSON converts PaymentReconciliationProcessNote to JSON data
+// ToJSON converts PaymentReconciliationProcessNote to JSON data.
 func (m *PaymentReconciliationProcessNote) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *NoteType `json:"type,omitempty"`
+		Text interface{} `json:"text,omitempty"`
+		TextElement map[string]interface{} `json:"_text,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	if m.Text != nil && m.Text.Value != nil {
+		output.Text = m.Text.Value
+		if m.Text.Element != nil {
+			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of PaymentReconciliationProcessNote
+// Clone creates a deep copy of PaymentReconciliationProcessNote.
 func (m *PaymentReconciliationProcessNote) Clone() *PaymentReconciliationProcessNote {
 	if m == nil { return nil }
 	return &PaymentReconciliationProcessNote{
@@ -221,7 +461,7 @@ func (m *PaymentReconciliationProcessNote) Clone() *PaymentReconciliationProcess
 	}
 }
 
-// Equals checks for equality with another PaymentReconciliationProcessNote instance
+// Equals checks equality between two PaymentReconciliationProcessNote instances.
 func (m *PaymentReconciliationProcessNote) Equals(other *PaymentReconciliationProcessNote) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

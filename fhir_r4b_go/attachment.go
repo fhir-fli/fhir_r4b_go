@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Attachment
 // For referring to data content defined in other formats.
 type Attachment struct {
-	DataType
+	extends DataType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ContentType *FhirCode `json:"contenttype,omitempty"`
@@ -21,22 +22,117 @@ type Attachment struct {
 	Creation *FhirDateTime `json:"creation,omitempty"`
 }
 
-// NewAttachment creates a new Attachment instance
+// NewAttachment creates a new Attachment instance.
 func NewAttachment() *Attachment {
 	return &Attachment{}
 }
 
-// FromJSON populates Attachment from JSON data
+// FromJSON populates Attachment from JSON data.
 func (m *Attachment) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ContentType *FhirCode `json:"contenttype,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Data *FhirBase64Binary `json:"data,omitempty"`
+		Url *FhirUrl `json:"url,omitempty"`
+		Size *FhirUnsignedInt `json:"size,omitempty"`
+		Hash *FhirBase64Binary `json:"hash,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Creation *FhirDateTime `json:"creation,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ContentType = temp.ContentType
+	m.Language = temp.Language
+	m.Data = temp.Data
+	m.Url = temp.Url
+	m.Size = temp.Size
+	m.Hash = temp.Hash
+	m.Title = temp.Title
+	m.Creation = temp.Creation
+	return nil
 }
 
-// ToJSON converts Attachment to JSON data
+// ToJSON converts Attachment to JSON data.
 func (m *Attachment) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ContentType interface{} `json:"contenttype,omitempty"`
+		ContentTypeElement map[string]interface{} `json:"_contenttype,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Data interface{} `json:"data,omitempty"`
+		DataElement map[string]interface{} `json:"_data,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Size interface{} `json:"size,omitempty"`
+		SizeElement map[string]interface{} `json:"_size,omitempty"`
+		Hash interface{} `json:"hash,omitempty"`
+		HashElement map[string]interface{} `json:"_hash,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Creation interface{} `json:"creation,omitempty"`
+		CreationElement map[string]interface{} `json:"_creation,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	if m.ContentType != nil && m.ContentType.Value != nil {
+		output.ContentType = m.ContentType.Value
+		if m.ContentType.Element != nil {
+			output.ContentTypeElement = toMapOrNil(m.ContentType.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	if m.Data != nil && m.Data.Value != nil {
+		output.Data = m.Data.Value
+		if m.Data.Element != nil {
+			output.DataElement = toMapOrNil(m.Data.Element.ToJSON())
+		}
+	}
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	if m.Size != nil && m.Size.Value != nil {
+		output.Size = m.Size.Value
+		if m.Size.Element != nil {
+			output.SizeElement = toMapOrNil(m.Size.Element.ToJSON())
+		}
+	}
+	if m.Hash != nil && m.Hash.Value != nil {
+		output.Hash = m.Hash.Value
+		if m.Hash.Element != nil {
+			output.HashElement = toMapOrNil(m.Hash.Element.ToJSON())
+		}
+	}
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	if m.Creation != nil && m.Creation.Value != nil {
+		output.Creation = m.Creation.Value
+		if m.Creation.Element != nil {
+			output.CreationElement = toMapOrNil(m.Creation.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Attachment
+// Clone creates a deep copy of Attachment.
 func (m *Attachment) Clone() *Attachment {
 	if m == nil { return nil }
 	return &Attachment{
@@ -53,7 +149,7 @@ func (m *Attachment) Clone() *Attachment {
 	}
 }
 
-// Equals checks for equality with another Attachment instance
+// Equals checks equality between two Attachment instances.
 func (m *Attachment) Equals(other *Attachment) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

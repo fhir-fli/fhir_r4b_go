@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // FhirList
 // A list is a curated collection of resources.
 type FhirList struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -32,22 +33,137 @@ type FhirList struct {
 	EmptyReason *CodeableConcept `json:"emptyreason,omitempty"`
 }
 
-// NewFhirList creates a new FhirList instance
+// NewFhirList creates a new FhirList instance.
 func NewFhirList() *FhirList {
 	return &FhirList{}
 }
 
-// FromJSON populates FhirList from JSON data
+// FromJSON populates FhirList from JSON data.
 func (m *FhirList) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *ListStatus `json:"status,omitempty"`
+		Mode *ListMode `json:"mode,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Source *Reference `json:"source,omitempty"`
+		OrderedBy *CodeableConcept `json:"orderedby,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		Entry []*ListEntry `json:"entry,omitempty"`
+		EmptyReason *CodeableConcept `json:"emptyreason,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.Mode = temp.Mode
+	m.Title = temp.Title
+	m.Code = temp.Code
+	m.Subject = temp.Subject
+	m.Encounter = temp.Encounter
+	m.Date = temp.Date
+	m.Source = temp.Source
+	m.OrderedBy = temp.OrderedBy
+	m.Note = temp.Note
+	m.Entry = temp.Entry
+	m.EmptyReason = temp.EmptyReason
+	return nil
 }
 
-// ToJSON converts FhirList to JSON data
+// ToJSON converts FhirList to JSON data.
 func (m *FhirList) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *ListStatus `json:"status,omitempty"`
+		Mode *ListMode `json:"mode,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Source *Reference `json:"source,omitempty"`
+		OrderedBy *CodeableConcept `json:"orderedby,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		Entry []*ListEntry `json:"entry,omitempty"`
+		EmptyReason *CodeableConcept `json:"emptyreason,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	output.Mode = m.Mode
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	output.Code = m.Code
+	output.Subject = m.Subject
+	output.Encounter = m.Encounter
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	output.Source = m.Source
+	output.OrderedBy = m.OrderedBy
+	output.Note = m.Note
+	output.Entry = m.Entry
+	output.EmptyReason = m.EmptyReason
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of FhirList
+// Clone creates a deep copy of FhirList.
 func (m *FhirList) Clone() *FhirList {
 	if m == nil { return nil }
 	return &FhirList{
@@ -75,7 +191,7 @@ func (m *FhirList) Clone() *FhirList {
 	}
 }
 
-// Equals checks for equality with another FhirList instance
+// Equals checks equality between two FhirList instances.
 func (m *FhirList) Equals(other *FhirList) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -106,7 +222,7 @@ func (m *FhirList) Equals(other *FhirList) bool {
 // ListEntry
 // Entries in this list.
 type ListEntry struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -116,22 +232,75 @@ type ListEntry struct {
 	Item *Reference `json:"item,omitempty"`
 }
 
-// NewListEntry creates a new ListEntry instance
+// NewListEntry creates a new ListEntry instance.
 func NewListEntry() *ListEntry {
 	return &ListEntry{}
 }
 
-// FromJSON populates ListEntry from JSON data
+// FromJSON populates ListEntry from JSON data.
 func (m *ListEntry) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Flag *CodeableConcept `json:"flag,omitempty"`
+		Deleted *FhirBoolean `json:"deleted,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Item *Reference `json:"item,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Flag = temp.Flag
+	m.Deleted = temp.Deleted
+	m.Date = temp.Date
+	m.Item = temp.Item
+	return nil
 }
 
-// ToJSON converts ListEntry to JSON data
+// ToJSON converts ListEntry to JSON data.
 func (m *ListEntry) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Flag *CodeableConcept `json:"flag,omitempty"`
+		Deleted interface{} `json:"deleted,omitempty"`
+		DeletedElement map[string]interface{} `json:"_deleted,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Item *Reference `json:"item,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Flag = m.Flag
+	if m.Deleted != nil && m.Deleted.Value != nil {
+		output.Deleted = m.Deleted.Value
+		if m.Deleted.Element != nil {
+			output.DeletedElement = toMapOrNil(m.Deleted.Element.ToJSON())
+		}
+	}
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	output.Item = m.Item
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ListEntry
+// Clone creates a deep copy of ListEntry.
 func (m *ListEntry) Clone() *ListEntry {
 	if m == nil { return nil }
 	return &ListEntry{
@@ -145,7 +314,7 @@ func (m *ListEntry) Clone() *ListEntry {
 	}
 }
 
-// Equals checks for equality with another ListEntry instance
+// Equals checks equality between two ListEntry instances.
 func (m *ListEntry) Equals(other *ListEntry) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

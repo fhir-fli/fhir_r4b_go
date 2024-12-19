@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Annotation
 // A  text note which also  contains information about who made the statement and when.
 type Annotation struct {
-	DataType
+	extends DataType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	AuthorReference *Reference `json:"authorreference,omitempty"`
@@ -17,22 +18,77 @@ type Annotation struct {
 	Text *FhirMarkdown `json:"text,omitempty"`
 }
 
-// NewAnnotation creates a new Annotation instance
+// NewAnnotation creates a new Annotation instance.
 func NewAnnotation() *Annotation {
 	return &Annotation{}
 }
 
-// FromJSON populates Annotation from JSON data
+// FromJSON populates Annotation from JSON data.
 func (m *Annotation) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		AuthorReference *Reference `json:"authorreference,omitempty"`
+		AuthorString *FhirString `json:"authorstring,omitempty"`
+		Time *FhirDateTime `json:"time,omitempty"`
+		Text *FhirMarkdown `json:"text,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.AuthorReference = temp.AuthorReference
+	m.AuthorString = temp.AuthorString
+	m.Time = temp.Time
+	m.Text = temp.Text
+	return nil
 }
 
-// ToJSON converts Annotation to JSON data
+// ToJSON converts Annotation to JSON data.
 func (m *Annotation) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		AuthorReference *Reference `json:"authorreference,omitempty"`
+		AuthorString interface{} `json:"authorstring,omitempty"`
+		AuthorStringElement map[string]interface{} `json:"_authorstring,omitempty"`
+		Time interface{} `json:"time,omitempty"`
+		TimeElement map[string]interface{} `json:"_time,omitempty"`
+		Text interface{} `json:"text,omitempty"`
+		TextElement map[string]interface{} `json:"_text,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.AuthorReference = m.AuthorReference
+	if m.AuthorString != nil && m.AuthorString.Value != nil {
+		output.AuthorString = m.AuthorString.Value
+		if m.AuthorString.Element != nil {
+			output.AuthorStringElement = toMapOrNil(m.AuthorString.Element.ToJSON())
+		}
+	}
+	if m.Time != nil && m.Time.Value != nil {
+		output.Time = m.Time.Value
+		if m.Time.Element != nil {
+			output.TimeElement = toMapOrNil(m.Time.Element.ToJSON())
+		}
+	}
+	if m.Text != nil && m.Text.Value != nil {
+		output.Text = m.Text.Value
+		if m.Text.Element != nil {
+			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Annotation
+// Clone creates a deep copy of Annotation.
 func (m *Annotation) Clone() *Annotation {
 	if m == nil { return nil }
 	return &Annotation{
@@ -45,7 +101,7 @@ func (m *Annotation) Clone() *Annotation {
 	}
 }
 
-// Equals checks for equality with another Annotation instance
+// Equals checks equality between two Annotation instances.
 func (m *Annotation) Equals(other *Annotation) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

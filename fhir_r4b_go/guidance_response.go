@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // GuidanceResponse
 // A guidance response is the formal response to a guidance request, including any output parameters returned by the evaluation, as well as the description of any proposed actions to be taken.
 type GuidanceResponse struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -36,22 +37,159 @@ type GuidanceResponse struct {
 	DataRequirement []*DataRequirement `json:"datarequirement,omitempty"`
 }
 
-// NewGuidanceResponse creates a new GuidanceResponse instance
+// NewGuidanceResponse creates a new GuidanceResponse instance.
 func NewGuidanceResponse() *GuidanceResponse {
 	return &GuidanceResponse{}
 }
 
-// FromJSON populates GuidanceResponse from JSON data
+// FromJSON populates GuidanceResponse from JSON data.
 func (m *GuidanceResponse) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		RequestIdentifier *Identifier `json:"requestidentifier,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		ModuleUri *FhirUri `json:"moduleuri,omitempty"`
+		ModuleCanonical *FhirCanonical `json:"modulecanonical,omitempty"`
+		ModuleCodeableConcept *CodeableConcept `json:"modulecodeableconcept,omitempty"`
+		Status *GuidanceResponseStatus `json:"status,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		OccurrenceDateTime *FhirDateTime `json:"occurrencedatetime,omitempty"`
+		Performer *Reference `json:"performer,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		EvaluationMessage []*Reference `json:"evaluationmessage,omitempty"`
+		OutputParameters *Reference `json:"outputparameters,omitempty"`
+		Result *Reference `json:"result,omitempty"`
+		DataRequirement []*DataRequirement `json:"datarequirement,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.RequestIdentifier = temp.RequestIdentifier
+	m.Identifier = temp.Identifier
+	m.ModuleUri = temp.ModuleUri
+	m.ModuleCanonical = temp.ModuleCanonical
+	m.ModuleCodeableConcept = temp.ModuleCodeableConcept
+	m.Status = temp.Status
+	m.Subject = temp.Subject
+	m.Encounter = temp.Encounter
+	m.OccurrenceDateTime = temp.OccurrenceDateTime
+	m.Performer = temp.Performer
+	m.ReasonCode = temp.ReasonCode
+	m.ReasonReference = temp.ReasonReference
+	m.Note = temp.Note
+	m.EvaluationMessage = temp.EvaluationMessage
+	m.OutputParameters = temp.OutputParameters
+	m.Result = temp.Result
+	m.DataRequirement = temp.DataRequirement
+	return nil
 }
 
-// ToJSON converts GuidanceResponse to JSON data
+// ToJSON converts GuidanceResponse to JSON data.
 func (m *GuidanceResponse) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		RequestIdentifier *Identifier `json:"requestidentifier,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		ModuleUri interface{} `json:"moduleuri,omitempty"`
+		ModuleUriElement map[string]interface{} `json:"_moduleuri,omitempty"`
+		ModuleCanonical interface{} `json:"modulecanonical,omitempty"`
+		ModuleCanonicalElement map[string]interface{} `json:"_modulecanonical,omitempty"`
+		ModuleCodeableConcept *CodeableConcept `json:"modulecodeableconcept,omitempty"`
+		Status *GuidanceResponseStatus `json:"status,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		OccurrenceDateTime interface{} `json:"occurrencedatetime,omitempty"`
+		OccurrenceDateTimeElement map[string]interface{} `json:"_occurrencedatetime,omitempty"`
+		Performer *Reference `json:"performer,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		EvaluationMessage []*Reference `json:"evaluationmessage,omitempty"`
+		OutputParameters *Reference `json:"outputparameters,omitempty"`
+		Result *Reference `json:"result,omitempty"`
+		DataRequirement []*DataRequirement `json:"datarequirement,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.RequestIdentifier = m.RequestIdentifier
+	output.Identifier = m.Identifier
+	if m.ModuleUri != nil && m.ModuleUri.Value != nil {
+		output.ModuleUri = m.ModuleUri.Value
+		if m.ModuleUri.Element != nil {
+			output.ModuleUriElement = toMapOrNil(m.ModuleUri.Element.ToJSON())
+		}
+	}
+	if m.ModuleCanonical != nil && m.ModuleCanonical.Value != nil {
+		output.ModuleCanonical = m.ModuleCanonical.Value
+		if m.ModuleCanonical.Element != nil {
+			output.ModuleCanonicalElement = toMapOrNil(m.ModuleCanonical.Element.ToJSON())
+		}
+	}
+	output.ModuleCodeableConcept = m.ModuleCodeableConcept
+	output.Status = m.Status
+	output.Subject = m.Subject
+	output.Encounter = m.Encounter
+	if m.OccurrenceDateTime != nil && m.OccurrenceDateTime.Value != nil {
+		output.OccurrenceDateTime = m.OccurrenceDateTime.Value
+		if m.OccurrenceDateTime.Element != nil {
+			output.OccurrenceDateTimeElement = toMapOrNil(m.OccurrenceDateTime.Element.ToJSON())
+		}
+	}
+	output.Performer = m.Performer
+	output.ReasonCode = m.ReasonCode
+	output.ReasonReference = m.ReasonReference
+	output.Note = m.Note
+	output.EvaluationMessage = m.EvaluationMessage
+	output.OutputParameters = m.OutputParameters
+	output.Result = m.Result
+	output.DataRequirement = m.DataRequirement
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of GuidanceResponse
+// Clone creates a deep copy of GuidanceResponse.
 func (m *GuidanceResponse) Clone() *GuidanceResponse {
 	if m == nil { return nil }
 	return &GuidanceResponse{
@@ -83,7 +221,7 @@ func (m *GuidanceResponse) Clone() *GuidanceResponse {
 	}
 }
 
-// Equals checks for equality with another GuidanceResponse instance
+// Equals checks equality between two GuidanceResponse instances.
 func (m *GuidanceResponse) Equals(other *GuidanceResponse) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

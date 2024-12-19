@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // ClinicalImpression
 // A record of a clinical assessment performed to determine what problem(s) may affect the patient and before planning the treatments or management strategies that are best to manage a patient's condition. Assessments are often 1:1 with a clinical consultation / encounter,  but this varies greatly depending on the clinical workflow. This resource is called "ClinicalImpression" rather than "ClinicalAssessment" to avoid confusion with the recording of assessment tools such as Apgar score.
 type ClinicalImpression struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -40,22 +42,202 @@ type ClinicalImpression struct {
 	Note []*Annotation `json:"note,omitempty"`
 }
 
-// NewClinicalImpression creates a new ClinicalImpression instance
+// NewClinicalImpression creates a new ClinicalImpression instance.
 func NewClinicalImpression() *ClinicalImpression {
 	return &ClinicalImpression{}
 }
 
-// FromJSON populates ClinicalImpression from JSON data
+// FromJSON populates ClinicalImpression from JSON data.
 func (m *ClinicalImpression) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *ClinicalImpressionStatus `json:"status,omitempty"`
+		StatusReason *CodeableConcept `json:"statusreason,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		EffectiveDateTime *FhirDateTime `json:"effectivedatetime,omitempty"`
+		EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Assessor *Reference `json:"assessor,omitempty"`
+		Previous *Reference `json:"previous,omitempty"`
+		Problem []*Reference `json:"problem,omitempty"`
+		Investigation []*ClinicalImpressionInvestigation `json:"investigation,omitempty"`
+		Protocol []interface{} `json:"protocol,omitempty"`
+		Summary *FhirString `json:"summary,omitempty"`
+		Finding []*ClinicalImpressionFinding `json:"finding,omitempty"`
+		PrognosisCodeableConcept []*CodeableConcept `json:"prognosiscodeableconcept,omitempty"`
+		PrognosisReference []*Reference `json:"prognosisreference,omitempty"`
+		SupportingInfo []*Reference `json:"supportinginfo,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.StatusReason = temp.StatusReason
+	m.Code = temp.Code
+	m.Description = temp.Description
+	m.Subject = temp.Subject
+	m.Encounter = temp.Encounter
+	m.EffectiveDateTime = temp.EffectiveDateTime
+	m.EffectivePeriod = temp.EffectivePeriod
+	m.Date = temp.Date
+	m.Assessor = temp.Assessor
+	m.Previous = temp.Previous
+	m.Problem = temp.Problem
+	m.Investigation = temp.Investigation
+	if len(temp.Protocol) > 0 {
+		m.Protocol = make([]*FhirUri, len(temp.Protocol))
+		for i := range temp.Protocol {
+			itemMap, ok := temp.Protocol[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Protocol[%d]: expected map", i) }
+			primitive, err := NewFhirUriFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Protocol[%d]: %v", i, err) }
+			m.Protocol[i] = primitive
+		}
+	}
+	m.Summary = temp.Summary
+	m.Finding = temp.Finding
+	m.PrognosisCodeableConcept = temp.PrognosisCodeableConcept
+	m.PrognosisReference = temp.PrognosisReference
+	m.SupportingInfo = temp.SupportingInfo
+	m.Note = temp.Note
+	return nil
 }
 
-// ToJSON converts ClinicalImpression to JSON data
+// ToJSON converts ClinicalImpression to JSON data.
 func (m *ClinicalImpression) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *ClinicalImpressionStatus `json:"status,omitempty"`
+		StatusReason *CodeableConcept `json:"statusreason,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		EffectiveDateTime interface{} `json:"effectivedatetime,omitempty"`
+		EffectiveDateTimeElement map[string]interface{} `json:"_effectivedatetime,omitempty"`
+		EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Assessor *Reference `json:"assessor,omitempty"`
+		Previous *Reference `json:"previous,omitempty"`
+		Problem []*Reference `json:"problem,omitempty"`
+		Investigation []*ClinicalImpressionInvestigation `json:"investigation,omitempty"`
+		Protocol []interface{} `json:"protocol,omitempty"`
+		ProtocolElement []map[string]interface{} `json:"_protocol,omitempty"`
+		Summary interface{} `json:"summary,omitempty"`
+		SummaryElement map[string]interface{} `json:"_summary,omitempty"`
+		Finding []*ClinicalImpressionFinding `json:"finding,omitempty"`
+		PrognosisCodeableConcept []*CodeableConcept `json:"prognosiscodeableconcept,omitempty"`
+		PrognosisReference []*Reference `json:"prognosisreference,omitempty"`
+		SupportingInfo []*Reference `json:"supportinginfo,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	output.StatusReason = m.StatusReason
+	output.Code = m.Code
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Subject = m.Subject
+	output.Encounter = m.Encounter
+	if m.EffectiveDateTime != nil && m.EffectiveDateTime.Value != nil {
+		output.EffectiveDateTime = m.EffectiveDateTime.Value
+		if m.EffectiveDateTime.Element != nil {
+			output.EffectiveDateTimeElement = toMapOrNil(m.EffectiveDateTime.Element.ToJSON())
+		}
+	}
+	output.EffectivePeriod = m.EffectivePeriod
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	output.Assessor = m.Assessor
+	output.Previous = m.Previous
+	output.Problem = m.Problem
+	output.Investigation = m.Investigation
+	if len(m.Protocol) > 0 {
+		output.Protocol = make([]interface{}, len(m.Protocol))
+		output.ProtocolElement = make([]map[string]interface{}, len(m.Protocol))
+		for i, item := range m.Protocol {
+			if item != nil && item.Value != nil {
+				output.Protocol[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.ProtocolElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if m.Summary != nil && m.Summary.Value != nil {
+		output.Summary = m.Summary.Value
+		if m.Summary.Element != nil {
+			output.SummaryElement = toMapOrNil(m.Summary.Element.ToJSON())
+		}
+	}
+	output.Finding = m.Finding
+	output.PrognosisCodeableConcept = m.PrognosisCodeableConcept
+	output.PrognosisReference = m.PrognosisReference
+	output.SupportingInfo = m.SupportingInfo
+	output.Note = m.Note
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ClinicalImpression
+// Clone creates a deep copy of ClinicalImpression.
 func (m *ClinicalImpression) Clone() *ClinicalImpression {
 	if m == nil { return nil }
 	return &ClinicalImpression{
@@ -91,7 +273,7 @@ func (m *ClinicalImpression) Clone() *ClinicalImpression {
 	}
 }
 
-// Equals checks for equality with another ClinicalImpression instance
+// Equals checks equality between two ClinicalImpression instances.
 func (m *ClinicalImpression) Equals(other *ClinicalImpression) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -130,7 +312,7 @@ func (m *ClinicalImpression) Equals(other *ClinicalImpression) bool {
 // ClinicalImpressionInvestigation
 // One or more sets of investigations (signs, symptoms, etc.). The actual grouping of investigations varies greatly depending on the type and context of the assessment. These investigations may include data generated during the assessment process, or data previously generated and recorded that is pertinent to the outcomes.
 type ClinicalImpressionInvestigation struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -138,22 +320,55 @@ type ClinicalImpressionInvestigation struct {
 	Item []*Reference `json:"item,omitempty"`
 }
 
-// NewClinicalImpressionInvestigation creates a new ClinicalImpressionInvestigation instance
+// NewClinicalImpressionInvestigation creates a new ClinicalImpressionInvestigation instance.
 func NewClinicalImpressionInvestigation() *ClinicalImpressionInvestigation {
 	return &ClinicalImpressionInvestigation{}
 }
 
-// FromJSON populates ClinicalImpressionInvestigation from JSON data
+// FromJSON populates ClinicalImpressionInvestigation from JSON data.
 func (m *ClinicalImpressionInvestigation) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Item []*Reference `json:"item,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Item = temp.Item
+	return nil
 }
 
-// ToJSON converts ClinicalImpressionInvestigation to JSON data
+// ToJSON converts ClinicalImpressionInvestigation to JSON data.
 func (m *ClinicalImpressionInvestigation) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Item []*Reference `json:"item,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	output.Item = m.Item
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ClinicalImpressionInvestigation
+// Clone creates a deep copy of ClinicalImpressionInvestigation.
 func (m *ClinicalImpressionInvestigation) Clone() *ClinicalImpressionInvestigation {
 	if m == nil { return nil }
 	return &ClinicalImpressionInvestigation{
@@ -165,7 +380,7 @@ func (m *ClinicalImpressionInvestigation) Clone() *ClinicalImpressionInvestigati
 	}
 }
 
-// Equals checks for equality with another ClinicalImpressionInvestigation instance
+// Equals checks equality between two ClinicalImpressionInvestigation instances.
 func (m *ClinicalImpressionInvestigation) Equals(other *ClinicalImpressionInvestigation) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -180,7 +395,7 @@ func (m *ClinicalImpressionInvestigation) Equals(other *ClinicalImpressionInvest
 // ClinicalImpressionFinding
 // Specific findings or diagnoses that were considered likely or relevant to ongoing treatment.
 type ClinicalImpressionFinding struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -189,22 +404,65 @@ type ClinicalImpressionFinding struct {
 	Basis *FhirString `json:"basis,omitempty"`
 }
 
-// NewClinicalImpressionFinding creates a new ClinicalImpressionFinding instance
+// NewClinicalImpressionFinding creates a new ClinicalImpressionFinding instance.
 func NewClinicalImpressionFinding() *ClinicalImpressionFinding {
 	return &ClinicalImpressionFinding{}
 }
 
-// FromJSON populates ClinicalImpressionFinding from JSON data
+// FromJSON populates ClinicalImpressionFinding from JSON data.
 func (m *ClinicalImpressionFinding) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ItemCodeableConcept *CodeableConcept `json:"itemcodeableconcept,omitempty"`
+		ItemReference *Reference `json:"itemreference,omitempty"`
+		Basis *FhirString `json:"basis,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.ItemCodeableConcept = temp.ItemCodeableConcept
+	m.ItemReference = temp.ItemReference
+	m.Basis = temp.Basis
+	return nil
 }
 
-// ToJSON converts ClinicalImpressionFinding to JSON data
+// ToJSON converts ClinicalImpressionFinding to JSON data.
 func (m *ClinicalImpressionFinding) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ItemCodeableConcept *CodeableConcept `json:"itemcodeableconcept,omitempty"`
+		ItemReference *Reference `json:"itemreference,omitempty"`
+		Basis interface{} `json:"basis,omitempty"`
+		BasisElement map[string]interface{} `json:"_basis,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.ItemCodeableConcept = m.ItemCodeableConcept
+	output.ItemReference = m.ItemReference
+	if m.Basis != nil && m.Basis.Value != nil {
+		output.Basis = m.Basis.Value
+		if m.Basis.Element != nil {
+			output.BasisElement = toMapOrNil(m.Basis.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ClinicalImpressionFinding
+// Clone creates a deep copy of ClinicalImpressionFinding.
 func (m *ClinicalImpressionFinding) Clone() *ClinicalImpressionFinding {
 	if m == nil { return nil }
 	return &ClinicalImpressionFinding{
@@ -217,7 +475,7 @@ func (m *ClinicalImpressionFinding) Clone() *ClinicalImpressionFinding {
 	}
 }
 
-// Equals checks for equality with another ClinicalImpressionFinding instance
+// Equals checks equality between two ClinicalImpressionFinding instances.
 func (m *ClinicalImpressionFinding) Equals(other *ClinicalImpressionFinding) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

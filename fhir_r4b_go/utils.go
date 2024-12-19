@@ -125,3 +125,25 @@ func floatPtrIfNotNil(f *float64) *float64 {
 	}
 	return f
 }
+
+// Helper function to map a map[string]interface{} to a struct.
+func mapToStruct(data map[string]interface{}, target interface{}) error {
+	bytes, err := json.Marshal(data)
+	if err != nil {
+		return err
+	}
+	return json.Unmarshal(bytes, target)
+}
+
+// toMapOrNil safely converts JSON bytes to a map[string]interface{}.
+// Returns nil if an error occurs during the conversion.
+func toMapOrNil(data []byte, err error) map[string]interface{} {
+	if err != nil {
+		return nil
+	}
+	var result map[string]interface{}
+	if jsonErr := json.Unmarshal(data, &result); jsonErr != nil {
+		return nil
+	}
+	return result
+}

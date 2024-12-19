@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // EpisodeOfCare
 // An association between a patient and an organization / healthcare provider(s) during which time encounters may occur. The managing organization assumes a level of responsibility for the patient during this time.
 type EpisodeOfCare struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -31,22 +32,121 @@ type EpisodeOfCare struct {
 	Account []*Reference `json:"account,omitempty"`
 }
 
-// NewEpisodeOfCare creates a new EpisodeOfCare instance
+// NewEpisodeOfCare creates a new EpisodeOfCare instance.
 func NewEpisodeOfCare() *EpisodeOfCare {
 	return &EpisodeOfCare{}
 }
 
-// FromJSON populates EpisodeOfCare from JSON data
+// FromJSON populates EpisodeOfCare from JSON data.
 func (m *EpisodeOfCare) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *EpisodeOfCareStatus `json:"status,omitempty"`
+		StatusHistory []*EpisodeOfCareStatusHistory `json:"statushistory,omitempty"`
+		Type []*CodeableConcept `json:"type,omitempty"`
+		Diagnosis []*EpisodeOfCareDiagnosis `json:"diagnosis,omitempty"`
+		Patient *Reference `json:"patient,omitempty"`
+		ManagingOrganization *Reference `json:"managingorganization,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		ReferralRequest []*Reference `json:"referralrequest,omitempty"`
+		CareManager *Reference `json:"caremanager,omitempty"`
+		Team []*Reference `json:"team,omitempty"`
+		Account []*Reference `json:"account,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.StatusHistory = temp.StatusHistory
+	m.Type = temp.Type
+	m.Diagnosis = temp.Diagnosis
+	m.Patient = temp.Patient
+	m.ManagingOrganization = temp.ManagingOrganization
+	m.Period = temp.Period
+	m.ReferralRequest = temp.ReferralRequest
+	m.CareManager = temp.CareManager
+	m.Team = temp.Team
+	m.Account = temp.Account
+	return nil
 }
 
-// ToJSON converts EpisodeOfCare to JSON data
+// ToJSON converts EpisodeOfCare to JSON data.
 func (m *EpisodeOfCare) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *EpisodeOfCareStatus `json:"status,omitempty"`
+		StatusHistory []*EpisodeOfCareStatusHistory `json:"statushistory,omitempty"`
+		Type []*CodeableConcept `json:"type,omitempty"`
+		Diagnosis []*EpisodeOfCareDiagnosis `json:"diagnosis,omitempty"`
+		Patient *Reference `json:"patient,omitempty"`
+		ManagingOrganization *Reference `json:"managingorganization,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		ReferralRequest []*Reference `json:"referralrequest,omitempty"`
+		CareManager *Reference `json:"caremanager,omitempty"`
+		Team []*Reference `json:"team,omitempty"`
+		Account []*Reference `json:"account,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	output.StatusHistory = m.StatusHistory
+	output.Type = m.Type
+	output.Diagnosis = m.Diagnosis
+	output.Patient = m.Patient
+	output.ManagingOrganization = m.ManagingOrganization
+	output.Period = m.Period
+	output.ReferralRequest = m.ReferralRequest
+	output.CareManager = m.CareManager
+	output.Team = m.Team
+	output.Account = m.Account
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of EpisodeOfCare
+// Clone creates a deep copy of EpisodeOfCare.
 func (m *EpisodeOfCare) Clone() *EpisodeOfCare {
 	if m == nil { return nil }
 	return &EpisodeOfCare{
@@ -73,7 +173,7 @@ func (m *EpisodeOfCare) Clone() *EpisodeOfCare {
 	}
 }
 
-// Equals checks for equality with another EpisodeOfCare instance
+// Equals checks equality between two EpisodeOfCare instances.
 func (m *EpisodeOfCare) Equals(other *EpisodeOfCare) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -103,7 +203,7 @@ func (m *EpisodeOfCare) Equals(other *EpisodeOfCare) bool {
 // EpisodeOfCareStatusHistory
 // The history of statuses that the EpisodeOfCare has been through (without requiring processing the history of the resource).
 type EpisodeOfCareStatusHistory struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -111,22 +211,55 @@ type EpisodeOfCareStatusHistory struct {
 	Period *Period `json:"period,omitempty"`
 }
 
-// NewEpisodeOfCareStatusHistory creates a new EpisodeOfCareStatusHistory instance
+// NewEpisodeOfCareStatusHistory creates a new EpisodeOfCareStatusHistory instance.
 func NewEpisodeOfCareStatusHistory() *EpisodeOfCareStatusHistory {
 	return &EpisodeOfCareStatusHistory{}
 }
 
-// FromJSON populates EpisodeOfCareStatusHistory from JSON data
+// FromJSON populates EpisodeOfCareStatusHistory from JSON data.
 func (m *EpisodeOfCareStatusHistory) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Status *EpisodeOfCareStatus `json:"status,omitempty"`
+		Period *Period `json:"period,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Status = temp.Status
+	m.Period = temp.Period
+	return nil
 }
 
-// ToJSON converts EpisodeOfCareStatusHistory to JSON data
+// ToJSON converts EpisodeOfCareStatusHistory to JSON data.
 func (m *EpisodeOfCareStatusHistory) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Status *EpisodeOfCareStatus `json:"status,omitempty"`
+		Period *Period `json:"period,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Status = m.Status
+	output.Period = m.Period
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of EpisodeOfCareStatusHistory
+// Clone creates a deep copy of EpisodeOfCareStatusHistory.
 func (m *EpisodeOfCareStatusHistory) Clone() *EpisodeOfCareStatusHistory {
 	if m == nil { return nil }
 	return &EpisodeOfCareStatusHistory{
@@ -138,7 +271,7 @@ func (m *EpisodeOfCareStatusHistory) Clone() *EpisodeOfCareStatusHistory {
 	}
 }
 
-// Equals checks for equality with another EpisodeOfCareStatusHistory instance
+// Equals checks equality between two EpisodeOfCareStatusHistory instances.
 func (m *EpisodeOfCareStatusHistory) Equals(other *EpisodeOfCareStatusHistory) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -153,7 +286,7 @@ func (m *EpisodeOfCareStatusHistory) Equals(other *EpisodeOfCareStatusHistory) b
 // EpisodeOfCareDiagnosis
 // The list of diagnosis relevant to this episode of care.
 type EpisodeOfCareDiagnosis struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -162,22 +295,65 @@ type EpisodeOfCareDiagnosis struct {
 	Rank *FhirPositiveInt `json:"rank,omitempty"`
 }
 
-// NewEpisodeOfCareDiagnosis creates a new EpisodeOfCareDiagnosis instance
+// NewEpisodeOfCareDiagnosis creates a new EpisodeOfCareDiagnosis instance.
 func NewEpisodeOfCareDiagnosis() *EpisodeOfCareDiagnosis {
 	return &EpisodeOfCareDiagnosis{}
 }
 
-// FromJSON populates EpisodeOfCareDiagnosis from JSON data
+// FromJSON populates EpisodeOfCareDiagnosis from JSON data.
 func (m *EpisodeOfCareDiagnosis) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Condition *Reference `json:"condition,omitempty"`
+		Role *CodeableConcept `json:"role,omitempty"`
+		Rank *FhirPositiveInt `json:"rank,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Condition = temp.Condition
+	m.Role = temp.Role
+	m.Rank = temp.Rank
+	return nil
 }
 
-// ToJSON converts EpisodeOfCareDiagnosis to JSON data
+// ToJSON converts EpisodeOfCareDiagnosis to JSON data.
 func (m *EpisodeOfCareDiagnosis) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Condition *Reference `json:"condition,omitempty"`
+		Role *CodeableConcept `json:"role,omitempty"`
+		Rank interface{} `json:"rank,omitempty"`
+		RankElement map[string]interface{} `json:"_rank,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Condition = m.Condition
+	output.Role = m.Role
+	if m.Rank != nil && m.Rank.Value != nil {
+		output.Rank = m.Rank.Value
+		if m.Rank.Element != nil {
+			output.RankElement = toMapOrNil(m.Rank.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of EpisodeOfCareDiagnosis
+// Clone creates a deep copy of EpisodeOfCareDiagnosis.
 func (m *EpisodeOfCareDiagnosis) Clone() *EpisodeOfCareDiagnosis {
 	if m == nil { return nil }
 	return &EpisodeOfCareDiagnosis{
@@ -190,7 +366,7 @@ func (m *EpisodeOfCareDiagnosis) Clone() *EpisodeOfCareDiagnosis {
 	}
 }
 
-// Equals checks for equality with another EpisodeOfCareDiagnosis instance
+// Equals checks equality between two EpisodeOfCareDiagnosis instances.
 func (m *EpisodeOfCareDiagnosis) Equals(other *EpisodeOfCareDiagnosis) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

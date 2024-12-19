@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // OrganizationAffiliation
 // Defines an affiliation/assotiation/relationship between 2 distinct oganizations, that is not a part-of relationship/sub-division relationship.
 type OrganizationAffiliation struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -31,22 +32,127 @@ type OrganizationAffiliation struct {
 	Endpoint []*Reference `json:"endpoint,omitempty"`
 }
 
-// NewOrganizationAffiliation creates a new OrganizationAffiliation instance
+// NewOrganizationAffiliation creates a new OrganizationAffiliation instance.
 func NewOrganizationAffiliation() *OrganizationAffiliation {
 	return &OrganizationAffiliation{}
 }
 
-// FromJSON populates OrganizationAffiliation from JSON data
+// FromJSON populates OrganizationAffiliation from JSON data.
 func (m *OrganizationAffiliation) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Active *FhirBoolean `json:"active,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Organization *Reference `json:"organization,omitempty"`
+		ParticipatingOrganization *Reference `json:"participatingorganization,omitempty"`
+		Network []*Reference `json:"network,omitempty"`
+		Code []*CodeableConcept `json:"code,omitempty"`
+		Specialty []*CodeableConcept `json:"specialty,omitempty"`
+		Location []*Reference `json:"location,omitempty"`
+		HealthcareService []*Reference `json:"healthcareservice,omitempty"`
+		Telecom []*ContactPoint `json:"telecom,omitempty"`
+		Endpoint []*Reference `json:"endpoint,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Active = temp.Active
+	m.Period = temp.Period
+	m.Organization = temp.Organization
+	m.ParticipatingOrganization = temp.ParticipatingOrganization
+	m.Network = temp.Network
+	m.Code = temp.Code
+	m.Specialty = temp.Specialty
+	m.Location = temp.Location
+	m.HealthcareService = temp.HealthcareService
+	m.Telecom = temp.Telecom
+	m.Endpoint = temp.Endpoint
+	return nil
 }
 
-// ToJSON converts OrganizationAffiliation to JSON data
+// ToJSON converts OrganizationAffiliation to JSON data.
 func (m *OrganizationAffiliation) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Active interface{} `json:"active,omitempty"`
+		ActiveElement map[string]interface{} `json:"_active,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Organization *Reference `json:"organization,omitempty"`
+		ParticipatingOrganization *Reference `json:"participatingorganization,omitempty"`
+		Network []*Reference `json:"network,omitempty"`
+		Code []*CodeableConcept `json:"code,omitempty"`
+		Specialty []*CodeableConcept `json:"specialty,omitempty"`
+		Location []*Reference `json:"location,omitempty"`
+		HealthcareService []*Reference `json:"healthcareservice,omitempty"`
+		Telecom []*ContactPoint `json:"telecom,omitempty"`
+		Endpoint []*Reference `json:"endpoint,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	if m.Active != nil && m.Active.Value != nil {
+		output.Active = m.Active.Value
+		if m.Active.Element != nil {
+			output.ActiveElement = toMapOrNil(m.Active.Element.ToJSON())
+		}
+	}
+	output.Period = m.Period
+	output.Organization = m.Organization
+	output.ParticipatingOrganization = m.ParticipatingOrganization
+	output.Network = m.Network
+	output.Code = m.Code
+	output.Specialty = m.Specialty
+	output.Location = m.Location
+	output.HealthcareService = m.HealthcareService
+	output.Telecom = m.Telecom
+	output.Endpoint = m.Endpoint
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of OrganizationAffiliation
+// Clone creates a deep copy of OrganizationAffiliation.
 func (m *OrganizationAffiliation) Clone() *OrganizationAffiliation {
 	if m == nil { return nil }
 	return &OrganizationAffiliation{
@@ -73,7 +179,7 @@ func (m *OrganizationAffiliation) Clone() *OrganizationAffiliation {
 	}
 }
 
-// Equals checks for equality with another OrganizationAffiliation instance
+// Equals checks equality between two OrganizationAffiliation instances.
 func (m *OrganizationAffiliation) Equals(other *OrganizationAffiliation) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

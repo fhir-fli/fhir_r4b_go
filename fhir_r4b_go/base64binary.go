@@ -9,8 +9,8 @@ import (
 
 // FhirBase64Binary represents the FHIR primitive type `base64Binary`.
 type FhirBase64Binary struct {
-	Value   *string  `json:"-"`          // The Base64 encoded string
-	Element *Element `json:",inline"`    // Metadata (FHIR element)
+	Value   *string  `json:"-"`       // The Base64 encoded string
+	Element *Element `json:",inline"` // Metadata (FHIR element)
 }
 
 // NewFhirBase64Binary creates a new FhirBase64Binary with validation.

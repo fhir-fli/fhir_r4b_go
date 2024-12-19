@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // TestReport
 // A summary of information based on the results of executing a TestScript.
 type TestReport struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -31,22 +32,145 @@ type TestReport struct {
 	Teardown *TestReportTeardown `json:"teardown,omitempty"`
 }
 
-// NewTestReport creates a new TestReport instance
+// NewTestReport creates a new TestReport instance.
 func NewTestReport() *TestReport {
 	return &TestReport{}
 }
 
-// FromJSON populates TestReport from JSON data
+// FromJSON populates TestReport from JSON data.
 func (m *TestReport) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Status *TestReportStatus `json:"status,omitempty"`
+		TestScript *Reference `json:"testscript,omitempty"`
+		Result *TestReportResult `json:"result,omitempty"`
+		Score *FhirDecimal `json:"score,omitempty"`
+		Tester *FhirString `json:"tester,omitempty"`
+		Issued *FhirDateTime `json:"issued,omitempty"`
+		Participant []*TestReportParticipant `json:"participant,omitempty"`
+		Setup *TestReportSetup `json:"setup,omitempty"`
+		Test []*TestReportTest `json:"test,omitempty"`
+		Teardown *TestReportTeardown `json:"teardown,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Name = temp.Name
+	m.Status = temp.Status
+	m.TestScript = temp.TestScript
+	m.Result = temp.Result
+	m.Score = temp.Score
+	m.Tester = temp.Tester
+	m.Issued = temp.Issued
+	m.Participant = temp.Participant
+	m.Setup = temp.Setup
+	m.Test = temp.Test
+	m.Teardown = temp.Teardown
+	return nil
 }
 
-// ToJSON converts TestReport to JSON data
+// ToJSON converts TestReport to JSON data.
 func (m *TestReport) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Status *TestReportStatus `json:"status,omitempty"`
+		TestScript *Reference `json:"testscript,omitempty"`
+		Result *TestReportResult `json:"result,omitempty"`
+		Score interface{} `json:"score,omitempty"`
+		ScoreElement map[string]interface{} `json:"_score,omitempty"`
+		Tester interface{} `json:"tester,omitempty"`
+		TesterElement map[string]interface{} `json:"_tester,omitempty"`
+		Issued interface{} `json:"issued,omitempty"`
+		IssuedElement map[string]interface{} `json:"_issued,omitempty"`
+		Participant []*TestReportParticipant `json:"participant,omitempty"`
+		Setup *TestReportSetup `json:"setup,omitempty"`
+		Test []*TestReportTest `json:"test,omitempty"`
+		Teardown *TestReportTeardown `json:"teardown,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	output.Status = m.Status
+	output.TestScript = m.TestScript
+	output.Result = m.Result
+	if m.Score != nil && m.Score.Value != nil {
+		output.Score = m.Score.Value
+		if m.Score.Element != nil {
+			output.ScoreElement = toMapOrNil(m.Score.Element.ToJSON())
+		}
+	}
+	if m.Tester != nil && m.Tester.Value != nil {
+		output.Tester = m.Tester.Value
+		if m.Tester.Element != nil {
+			output.TesterElement = toMapOrNil(m.Tester.Element.ToJSON())
+		}
+	}
+	if m.Issued != nil && m.Issued.Value != nil {
+		output.Issued = m.Issued.Value
+		if m.Issued.Element != nil {
+			output.IssuedElement = toMapOrNil(m.Issued.Element.ToJSON())
+		}
+	}
+	output.Participant = m.Participant
+	output.Setup = m.Setup
+	output.Test = m.Test
+	output.Teardown = m.Teardown
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TestReport
+// Clone creates a deep copy of TestReport.
 func (m *TestReport) Clone() *TestReport {
 	if m == nil { return nil }
 	return &TestReport{
@@ -73,7 +197,7 @@ func (m *TestReport) Clone() *TestReport {
 	}
 }
 
-// Equals checks for equality with another TestReport instance
+// Equals checks equality between two TestReport instances.
 func (m *TestReport) Equals(other *TestReport) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -103,7 +227,7 @@ func (m *TestReport) Equals(other *TestReport) bool {
 // TestReportParticipant
 // A participant in the test execution, either the execution engine, a client, or a server.
 type TestReportParticipant struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -112,22 +236,71 @@ type TestReportParticipant struct {
 	Display *FhirString `json:"display,omitempty"`
 }
 
-// NewTestReportParticipant creates a new TestReportParticipant instance
+// NewTestReportParticipant creates a new TestReportParticipant instance.
 func NewTestReportParticipant() *TestReportParticipant {
 	return &TestReportParticipant{}
 }
 
-// FromJSON populates TestReportParticipant from JSON data
+// FromJSON populates TestReportParticipant from JSON data.
 func (m *TestReportParticipant) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *TestReportParticipantType `json:"type,omitempty"`
+		Uri *FhirUri `json:"uri,omitempty"`
+		Display *FhirString `json:"display,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Uri = temp.Uri
+	m.Display = temp.Display
+	return nil
 }
 
-// ToJSON converts TestReportParticipant to JSON data
+// ToJSON converts TestReportParticipant to JSON data.
 func (m *TestReportParticipant) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *TestReportParticipantType `json:"type,omitempty"`
+		Uri interface{} `json:"uri,omitempty"`
+		UriElement map[string]interface{} `json:"_uri,omitempty"`
+		Display interface{} `json:"display,omitempty"`
+		DisplayElement map[string]interface{} `json:"_display,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	if m.Uri != nil && m.Uri.Value != nil {
+		output.Uri = m.Uri.Value
+		if m.Uri.Element != nil {
+			output.UriElement = toMapOrNil(m.Uri.Element.ToJSON())
+		}
+	}
+	if m.Display != nil && m.Display.Value != nil {
+		output.Display = m.Display.Value
+		if m.Display.Element != nil {
+			output.DisplayElement = toMapOrNil(m.Display.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TestReportParticipant
+// Clone creates a deep copy of TestReportParticipant.
 func (m *TestReportParticipant) Clone() *TestReportParticipant {
 	if m == nil { return nil }
 	return &TestReportParticipant{
@@ -140,7 +313,7 @@ func (m *TestReportParticipant) Clone() *TestReportParticipant {
 	}
 }
 
-// Equals checks for equality with another TestReportParticipant instance
+// Equals checks equality between two TestReportParticipant instances.
 func (m *TestReportParticipant) Equals(other *TestReportParticipant) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -156,29 +329,58 @@ func (m *TestReportParticipant) Equals(other *TestReportParticipant) bool {
 // TestReportSetup
 // The results of the series of required setup operations before the tests were executed.
 type TestReportSetup struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
 	Action []*TestReportAction `json:"action,omitempty"`
 }
 
-// NewTestReportSetup creates a new TestReportSetup instance
+// NewTestReportSetup creates a new TestReportSetup instance.
 func NewTestReportSetup() *TestReportSetup {
 	return &TestReportSetup{}
 }
 
-// FromJSON populates TestReportSetup from JSON data
+// FromJSON populates TestReportSetup from JSON data.
 func (m *TestReportSetup) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Action []*TestReportAction `json:"action,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Action = temp.Action
+	return nil
 }
 
-// ToJSON converts TestReportSetup to JSON data
+// ToJSON converts TestReportSetup to JSON data.
 func (m *TestReportSetup) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Action []*TestReportAction `json:"action,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Action = m.Action
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TestReportSetup
+// Clone creates a deep copy of TestReportSetup.
 func (m *TestReportSetup) Clone() *TestReportSetup {
 	if m == nil { return nil }
 	return &TestReportSetup{
@@ -189,7 +391,7 @@ func (m *TestReportSetup) Clone() *TestReportSetup {
 	}
 }
 
-// Equals checks for equality with another TestReportSetup instance
+// Equals checks equality between two TestReportSetup instances.
 func (m *TestReportSetup) Equals(other *TestReportSetup) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -203,7 +405,7 @@ func (m *TestReportSetup) Equals(other *TestReportSetup) bool {
 // TestReportAction
 // Action would contain either an operation or an assertion.
 type TestReportAction struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -211,22 +413,55 @@ type TestReportAction struct {
 	Assert_ *TestReportAssert `json:"assert,omitempty"`
 }
 
-// NewTestReportAction creates a new TestReportAction instance
+// NewTestReportAction creates a new TestReportAction instance.
 func NewTestReportAction() *TestReportAction {
 	return &TestReportAction{}
 }
 
-// FromJSON populates TestReportAction from JSON data
+// FromJSON populates TestReportAction from JSON data.
 func (m *TestReportAction) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Operation *TestReportOperation `json:"operation,omitempty"`
+		Assert_ *TestReportAssert `json:"assert,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Operation = temp.Operation
+	m.Assert_ = temp.Assert_
+	return nil
 }
 
-// ToJSON converts TestReportAction to JSON data
+// ToJSON converts TestReportAction to JSON data.
 func (m *TestReportAction) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Operation *TestReportOperation `json:"operation,omitempty"`
+		Assert_ *TestReportAssert `json:"assert,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Operation = m.Operation
+	output.Assert_ = m.Assert_
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TestReportAction
+// Clone creates a deep copy of TestReportAction.
 func (m *TestReportAction) Clone() *TestReportAction {
 	if m == nil { return nil }
 	return &TestReportAction{
@@ -238,7 +473,7 @@ func (m *TestReportAction) Clone() *TestReportAction {
 	}
 }
 
-// Equals checks for equality with another TestReportAction instance
+// Equals checks equality between two TestReportAction instances.
 func (m *TestReportAction) Equals(other *TestReportAction) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -253,7 +488,7 @@ func (m *TestReportAction) Equals(other *TestReportAction) bool {
 // TestReportOperation
 // The operation performed.
 type TestReportOperation struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -262,22 +497,71 @@ type TestReportOperation struct {
 	Detail *FhirUri `json:"detail,omitempty"`
 }
 
-// NewTestReportOperation creates a new TestReportOperation instance
+// NewTestReportOperation creates a new TestReportOperation instance.
 func NewTestReportOperation() *TestReportOperation {
 	return &TestReportOperation{}
 }
 
-// FromJSON populates TestReportOperation from JSON data
+// FromJSON populates TestReportOperation from JSON data.
 func (m *TestReportOperation) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Result *TestReportActionResult `json:"result,omitempty"`
+		Message *FhirMarkdown `json:"message,omitempty"`
+		Detail *FhirUri `json:"detail,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Result = temp.Result
+	m.Message = temp.Message
+	m.Detail = temp.Detail
+	return nil
 }
 
-// ToJSON converts TestReportOperation to JSON data
+// ToJSON converts TestReportOperation to JSON data.
 func (m *TestReportOperation) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Result *TestReportActionResult `json:"result,omitempty"`
+		Message interface{} `json:"message,omitempty"`
+		MessageElement map[string]interface{} `json:"_message,omitempty"`
+		Detail interface{} `json:"detail,omitempty"`
+		DetailElement map[string]interface{} `json:"_detail,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Result = m.Result
+	if m.Message != nil && m.Message.Value != nil {
+		output.Message = m.Message.Value
+		if m.Message.Element != nil {
+			output.MessageElement = toMapOrNil(m.Message.Element.ToJSON())
+		}
+	}
+	if m.Detail != nil && m.Detail.Value != nil {
+		output.Detail = m.Detail.Value
+		if m.Detail.Element != nil {
+			output.DetailElement = toMapOrNil(m.Detail.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TestReportOperation
+// Clone creates a deep copy of TestReportOperation.
 func (m *TestReportOperation) Clone() *TestReportOperation {
 	if m == nil { return nil }
 	return &TestReportOperation{
@@ -290,7 +574,7 @@ func (m *TestReportOperation) Clone() *TestReportOperation {
 	}
 }
 
-// Equals checks for equality with another TestReportOperation instance
+// Equals checks equality between two TestReportOperation instances.
 func (m *TestReportOperation) Equals(other *TestReportOperation) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -306,7 +590,7 @@ func (m *TestReportOperation) Equals(other *TestReportOperation) bool {
 // TestReportAssert
 // The results of the assertion performed on the previous operations.
 type TestReportAssert struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -315,22 +599,71 @@ type TestReportAssert struct {
 	Detail *FhirString `json:"detail,omitempty"`
 }
 
-// NewTestReportAssert creates a new TestReportAssert instance
+// NewTestReportAssert creates a new TestReportAssert instance.
 func NewTestReportAssert() *TestReportAssert {
 	return &TestReportAssert{}
 }
 
-// FromJSON populates TestReportAssert from JSON data
+// FromJSON populates TestReportAssert from JSON data.
 func (m *TestReportAssert) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Result *TestReportActionResult `json:"result,omitempty"`
+		Message *FhirMarkdown `json:"message,omitempty"`
+		Detail *FhirString `json:"detail,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Result = temp.Result
+	m.Message = temp.Message
+	m.Detail = temp.Detail
+	return nil
 }
 
-// ToJSON converts TestReportAssert to JSON data
+// ToJSON converts TestReportAssert to JSON data.
 func (m *TestReportAssert) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Result *TestReportActionResult `json:"result,omitempty"`
+		Message interface{} `json:"message,omitempty"`
+		MessageElement map[string]interface{} `json:"_message,omitempty"`
+		Detail interface{} `json:"detail,omitempty"`
+		DetailElement map[string]interface{} `json:"_detail,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Result = m.Result
+	if m.Message != nil && m.Message.Value != nil {
+		output.Message = m.Message.Value
+		if m.Message.Element != nil {
+			output.MessageElement = toMapOrNil(m.Message.Element.ToJSON())
+		}
+	}
+	if m.Detail != nil && m.Detail.Value != nil {
+		output.Detail = m.Detail.Value
+		if m.Detail.Element != nil {
+			output.DetailElement = toMapOrNil(m.Detail.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TestReportAssert
+// Clone creates a deep copy of TestReportAssert.
 func (m *TestReportAssert) Clone() *TestReportAssert {
 	if m == nil { return nil }
 	return &TestReportAssert{
@@ -343,7 +676,7 @@ func (m *TestReportAssert) Clone() *TestReportAssert {
 	}
 }
 
-// Equals checks for equality with another TestReportAssert instance
+// Equals checks equality between two TestReportAssert instances.
 func (m *TestReportAssert) Equals(other *TestReportAssert) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -359,7 +692,7 @@ func (m *TestReportAssert) Equals(other *TestReportAssert) bool {
 // TestReportTest
 // A test executed from the test script.
 type TestReportTest struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -368,22 +701,71 @@ type TestReportTest struct {
 	Action []*TestReportAction `json:"action,omitempty"`
 }
 
-// NewTestReportTest creates a new TestReportTest instance
+// NewTestReportTest creates a new TestReportTest instance.
 func NewTestReportTest() *TestReportTest {
 	return &TestReportTest{}
 }
 
-// FromJSON populates TestReportTest from JSON data
+// FromJSON populates TestReportTest from JSON data.
 func (m *TestReportTest) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Action []*TestReportAction `json:"action,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Name = temp.Name
+	m.Description = temp.Description
+	m.Action = temp.Action
+	return nil
 }
 
-// ToJSON converts TestReportTest to JSON data
+// ToJSON converts TestReportTest to JSON data.
 func (m *TestReportTest) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Action []*TestReportAction `json:"action,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Action = m.Action
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TestReportTest
+// Clone creates a deep copy of TestReportTest.
 func (m *TestReportTest) Clone() *TestReportTest {
 	if m == nil { return nil }
 	return &TestReportTest{
@@ -396,7 +778,7 @@ func (m *TestReportTest) Clone() *TestReportTest {
 	}
 }
 
-// Equals checks for equality with another TestReportTest instance
+// Equals checks equality between two TestReportTest instances.
 func (m *TestReportTest) Equals(other *TestReportTest) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -412,7 +794,7 @@ func (m *TestReportTest) Equals(other *TestReportTest) bool {
 // TestReportAction1
 // Action would contain either an operation or an assertion.
 type TestReportAction1 struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -420,22 +802,55 @@ type TestReportAction1 struct {
 	Assert_ *TestReportAssert `json:"assert,omitempty"`
 }
 
-// NewTestReportAction1 creates a new TestReportAction1 instance
+// NewTestReportAction1 creates a new TestReportAction1 instance.
 func NewTestReportAction1() *TestReportAction1 {
 	return &TestReportAction1{}
 }
 
-// FromJSON populates TestReportAction1 from JSON data
+// FromJSON populates TestReportAction1 from JSON data.
 func (m *TestReportAction1) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Operation *TestReportOperation `json:"operation,omitempty"`
+		Assert_ *TestReportAssert `json:"assert,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Operation = temp.Operation
+	m.Assert_ = temp.Assert_
+	return nil
 }
 
-// ToJSON converts TestReportAction1 to JSON data
+// ToJSON converts TestReportAction1 to JSON data.
 func (m *TestReportAction1) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Operation *TestReportOperation `json:"operation,omitempty"`
+		Assert_ *TestReportAssert `json:"assert,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Operation = m.Operation
+	output.Assert_ = m.Assert_
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TestReportAction1
+// Clone creates a deep copy of TestReportAction1.
 func (m *TestReportAction1) Clone() *TestReportAction1 {
 	if m == nil { return nil }
 	return &TestReportAction1{
@@ -447,7 +862,7 @@ func (m *TestReportAction1) Clone() *TestReportAction1 {
 	}
 }
 
-// Equals checks for equality with another TestReportAction1 instance
+// Equals checks equality between two TestReportAction1 instances.
 func (m *TestReportAction1) Equals(other *TestReportAction1) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -462,29 +877,58 @@ func (m *TestReportAction1) Equals(other *TestReportAction1) bool {
 // TestReportTeardown
 // The results of the series of operations required to clean up after all the tests were executed (successfully or otherwise).
 type TestReportTeardown struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
 	Action []*TestReportAction `json:"action,omitempty"`
 }
 
-// NewTestReportTeardown creates a new TestReportTeardown instance
+// NewTestReportTeardown creates a new TestReportTeardown instance.
 func NewTestReportTeardown() *TestReportTeardown {
 	return &TestReportTeardown{}
 }
 
-// FromJSON populates TestReportTeardown from JSON data
+// FromJSON populates TestReportTeardown from JSON data.
 func (m *TestReportTeardown) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Action []*TestReportAction `json:"action,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Action = temp.Action
+	return nil
 }
 
-// ToJSON converts TestReportTeardown to JSON data
+// ToJSON converts TestReportTeardown to JSON data.
 func (m *TestReportTeardown) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Action []*TestReportAction `json:"action,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Action = m.Action
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TestReportTeardown
+// Clone creates a deep copy of TestReportTeardown.
 func (m *TestReportTeardown) Clone() *TestReportTeardown {
 	if m == nil { return nil }
 	return &TestReportTeardown{
@@ -495,7 +939,7 @@ func (m *TestReportTeardown) Clone() *TestReportTeardown {
 	}
 }
 
-// Equals checks for equality with another TestReportTeardown instance
+// Equals checks equality between two TestReportTeardown instances.
 func (m *TestReportTeardown) Equals(other *TestReportTeardown) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -509,29 +953,58 @@ func (m *TestReportTeardown) Equals(other *TestReportTeardown) bool {
 // TestReportAction2
 // The teardown action will only contain an operation.
 type TestReportAction2 struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
 	Operation *TestReportOperation `json:"operation,omitempty"`
 }
 
-// NewTestReportAction2 creates a new TestReportAction2 instance
+// NewTestReportAction2 creates a new TestReportAction2 instance.
 func NewTestReportAction2() *TestReportAction2 {
 	return &TestReportAction2{}
 }
 
-// FromJSON populates TestReportAction2 from JSON data
+// FromJSON populates TestReportAction2 from JSON data.
 func (m *TestReportAction2) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Operation *TestReportOperation `json:"operation,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Operation = temp.Operation
+	return nil
 }
 
-// ToJSON converts TestReportAction2 to JSON data
+// ToJSON converts TestReportAction2 to JSON data.
 func (m *TestReportAction2) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Operation *TestReportOperation `json:"operation,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Operation = m.Operation
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TestReportAction2
+// Clone creates a deep copy of TestReportAction2.
 func (m *TestReportAction2) Clone() *TestReportAction2 {
 	if m == nil { return nil }
 	return &TestReportAction2{
@@ -542,7 +1015,7 @@ func (m *TestReportAction2) Clone() *TestReportAction2 {
 	}
 }
 
-// Equals checks for equality with another TestReportAction2 instance
+// Equals checks equality between two TestReportAction2 instances.
 func (m *TestReportAction2) Equals(other *TestReportAction2) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

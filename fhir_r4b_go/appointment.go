@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Appointment
 // A booking of a healthcare event among patient(s), practitioner(s), related person(s) and/or device(s) for a specific date/time. This may result in one or more Encounter(s).
 type Appointment struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -41,22 +42,209 @@ type Appointment struct {
 	RequestedPeriod []*Period `json:"requestedperiod,omitempty"`
 }
 
-// NewAppointment creates a new Appointment instance
+// NewAppointment creates a new Appointment instance.
 func NewAppointment() *Appointment {
 	return &Appointment{}
 }
 
-// FromJSON populates Appointment from JSON data
+// FromJSON populates Appointment from JSON data.
 func (m *Appointment) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *AppointmentStatus `json:"status,omitempty"`
+		CancelationReason *CodeableConcept `json:"cancelationreason,omitempty"`
+		ServiceCategory []*CodeableConcept `json:"servicecategory,omitempty"`
+		ServiceType []*CodeableConcept `json:"servicetype,omitempty"`
+		Specialty []*CodeableConcept `json:"specialty,omitempty"`
+		AppointmentType *CodeableConcept `json:"appointmenttype,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		Priority *FhirUnsignedInt `json:"priority,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		SupportingInformation []*Reference `json:"supportinginformation,omitempty"`
+		Start *FhirInstant `json:"start,omitempty"`
+		End *FhirInstant `json:"end,omitempty"`
+		MinutesDuration *FhirPositiveInt `json:"minutesduration,omitempty"`
+		Slot []*Reference `json:"slot,omitempty"`
+		Created *FhirDateTime `json:"created,omitempty"`
+		Comment *FhirString `json:"comment,omitempty"`
+		PatientInstruction *FhirString `json:"patientinstruction,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		Participant []*AppointmentParticipant `json:"participant,omitempty"`
+		RequestedPeriod []*Period `json:"requestedperiod,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.CancelationReason = temp.CancelationReason
+	m.ServiceCategory = temp.ServiceCategory
+	m.ServiceType = temp.ServiceType
+	m.Specialty = temp.Specialty
+	m.AppointmentType = temp.AppointmentType
+	m.ReasonCode = temp.ReasonCode
+	m.ReasonReference = temp.ReasonReference
+	m.Priority = temp.Priority
+	m.Description = temp.Description
+	m.SupportingInformation = temp.SupportingInformation
+	m.Start = temp.Start
+	m.End = temp.End
+	m.MinutesDuration = temp.MinutesDuration
+	m.Slot = temp.Slot
+	m.Created = temp.Created
+	m.Comment = temp.Comment
+	m.PatientInstruction = temp.PatientInstruction
+	m.BasedOn = temp.BasedOn
+	m.Participant = temp.Participant
+	m.RequestedPeriod = temp.RequestedPeriod
+	return nil
 }
 
-// ToJSON converts Appointment to JSON data
+// ToJSON converts Appointment to JSON data.
 func (m *Appointment) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *AppointmentStatus `json:"status,omitempty"`
+		CancelationReason *CodeableConcept `json:"cancelationreason,omitempty"`
+		ServiceCategory []*CodeableConcept `json:"servicecategory,omitempty"`
+		ServiceType []*CodeableConcept `json:"servicetype,omitempty"`
+		Specialty []*CodeableConcept `json:"specialty,omitempty"`
+		AppointmentType *CodeableConcept `json:"appointmenttype,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		Priority interface{} `json:"priority,omitempty"`
+		PriorityElement map[string]interface{} `json:"_priority,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		SupportingInformation []*Reference `json:"supportinginformation,omitempty"`
+		Start interface{} `json:"start,omitempty"`
+		StartElement map[string]interface{} `json:"_start,omitempty"`
+		End interface{} `json:"end,omitempty"`
+		EndElement map[string]interface{} `json:"_end,omitempty"`
+		MinutesDuration interface{} `json:"minutesduration,omitempty"`
+		MinutesDurationElement map[string]interface{} `json:"_minutesduration,omitempty"`
+		Slot []*Reference `json:"slot,omitempty"`
+		Created interface{} `json:"created,omitempty"`
+		CreatedElement map[string]interface{} `json:"_created,omitempty"`
+		Comment interface{} `json:"comment,omitempty"`
+		CommentElement map[string]interface{} `json:"_comment,omitempty"`
+		PatientInstruction interface{} `json:"patientinstruction,omitempty"`
+		PatientInstructionElement map[string]interface{} `json:"_patientinstruction,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		Participant []*AppointmentParticipant `json:"participant,omitempty"`
+		RequestedPeriod []*Period `json:"requestedperiod,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	output.CancelationReason = m.CancelationReason
+	output.ServiceCategory = m.ServiceCategory
+	output.ServiceType = m.ServiceType
+	output.Specialty = m.Specialty
+	output.AppointmentType = m.AppointmentType
+	output.ReasonCode = m.ReasonCode
+	output.ReasonReference = m.ReasonReference
+	if m.Priority != nil && m.Priority.Value != nil {
+		output.Priority = m.Priority.Value
+		if m.Priority.Element != nil {
+			output.PriorityElement = toMapOrNil(m.Priority.Element.ToJSON())
+		}
+	}
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.SupportingInformation = m.SupportingInformation
+	if m.Start != nil && m.Start.Value != nil {
+		output.Start = m.Start.Value
+		if m.Start.Element != nil {
+			output.StartElement = toMapOrNil(m.Start.Element.ToJSON())
+		}
+	}
+	if m.End != nil && m.End.Value != nil {
+		output.End = m.End.Value
+		if m.End.Element != nil {
+			output.EndElement = toMapOrNil(m.End.Element.ToJSON())
+		}
+	}
+	if m.MinutesDuration != nil && m.MinutesDuration.Value != nil {
+		output.MinutesDuration = m.MinutesDuration.Value
+		if m.MinutesDuration.Element != nil {
+			output.MinutesDurationElement = toMapOrNil(m.MinutesDuration.Element.ToJSON())
+		}
+	}
+	output.Slot = m.Slot
+	if m.Created != nil && m.Created.Value != nil {
+		output.Created = m.Created.Value
+		if m.Created.Element != nil {
+			output.CreatedElement = toMapOrNil(m.Created.Element.ToJSON())
+		}
+	}
+	if m.Comment != nil && m.Comment.Value != nil {
+		output.Comment = m.Comment.Value
+		if m.Comment.Element != nil {
+			output.CommentElement = toMapOrNil(m.Comment.Element.ToJSON())
+		}
+	}
+	if m.PatientInstruction != nil && m.PatientInstruction.Value != nil {
+		output.PatientInstruction = m.PatientInstruction.Value
+		if m.PatientInstruction.Element != nil {
+			output.PatientInstructionElement = toMapOrNil(m.PatientInstruction.Element.ToJSON())
+		}
+	}
+	output.BasedOn = m.BasedOn
+	output.Participant = m.Participant
+	output.RequestedPeriod = m.RequestedPeriod
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Appointment
+// Clone creates a deep copy of Appointment.
 func (m *Appointment) Clone() *Appointment {
 	if m == nil { return nil }
 	return &Appointment{
@@ -93,7 +281,7 @@ func (m *Appointment) Clone() *Appointment {
 	}
 }
 
-// Equals checks for equality with another Appointment instance
+// Equals checks equality between two Appointment instances.
 func (m *Appointment) Equals(other *Appointment) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -133,7 +321,7 @@ func (m *Appointment) Equals(other *Appointment) bool {
 // AppointmentParticipant
 // List of participants involved in the appointment.
 type AppointmentParticipant struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -144,22 +332,67 @@ type AppointmentParticipant struct {
 	Period *Period `json:"period,omitempty"`
 }
 
-// NewAppointmentParticipant creates a new AppointmentParticipant instance
+// NewAppointmentParticipant creates a new AppointmentParticipant instance.
 func NewAppointmentParticipant() *AppointmentParticipant {
 	return &AppointmentParticipant{}
 }
 
-// FromJSON populates AppointmentParticipant from JSON data
+// FromJSON populates AppointmentParticipant from JSON data.
 func (m *AppointmentParticipant) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type []*CodeableConcept `json:"type,omitempty"`
+		Actor *Reference `json:"actor,omitempty"`
+		Required_ *ParticipantRequired `json:"required,omitempty"`
+		Status *ParticipationStatus `json:"status,omitempty"`
+		Period *Period `json:"period,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Actor = temp.Actor
+	m.Required_ = temp.Required_
+	m.Status = temp.Status
+	m.Period = temp.Period
+	return nil
 }
 
-// ToJSON converts AppointmentParticipant to JSON data
+// ToJSON converts AppointmentParticipant to JSON data.
 func (m *AppointmentParticipant) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type []*CodeableConcept `json:"type,omitempty"`
+		Actor *Reference `json:"actor,omitempty"`
+		Required_ *ParticipantRequired `json:"required,omitempty"`
+		Status *ParticipationStatus `json:"status,omitempty"`
+		Period *Period `json:"period,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Actor = m.Actor
+	output.Required_ = m.Required_
+	output.Status = m.Status
+	output.Period = m.Period
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of AppointmentParticipant
+// Clone creates a deep copy of AppointmentParticipant.
 func (m *AppointmentParticipant) Clone() *AppointmentParticipant {
 	if m == nil { return nil }
 	return &AppointmentParticipant{
@@ -174,7 +407,7 @@ func (m *AppointmentParticipant) Clone() *AppointmentParticipant {
 	}
 }
 
-// Equals checks for equality with another AppointmentParticipant instance
+// Equals checks equality between two AppointmentParticipant instances.
 func (m *AppointmentParticipant) Equals(other *AppointmentParticipant) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

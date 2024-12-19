@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // ActivityDefinition
 // This resource allows for the definition of some activity to be performed, independent of a particular patient, practitioner, or other performance context.
 type ActivityDefinition struct {
-	CanonicalResource
+	extends CanonicalResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -73,22 +75,418 @@ type ActivityDefinition struct {
 	DynamicValue []*ActivityDefinitionDynamicValue `json:"dynamicvalue,omitempty"`
 }
 
-// NewActivityDefinition creates a new ActivityDefinition instance
+// NewActivityDefinition creates a new ActivityDefinition instance.
 func NewActivityDefinition() *ActivityDefinition {
 	return &ActivityDefinition{}
 }
 
-// FromJSON populates ActivityDefinition from JSON data
+// FromJSON populates ActivityDefinition from JSON data.
 func (m *ActivityDefinition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Subtitle *FhirString `json:"subtitle,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental *FhirBoolean `json:"experimental,omitempty"`
+		SubjectCodeableConcept *CodeableConcept `json:"subjectcodeableconcept,omitempty"`
+		SubjectReference *Reference `json:"subjectreference,omitempty"`
+		SubjectCanonical *SubjectType `json:"subjectcanonical,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Publisher *FhirString `json:"publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose *FhirMarkdown `json:"purpose,omitempty"`
+		Usage *FhirString `json:"usage,omitempty"`
+		Copyright *FhirMarkdown `json:"copyright,omitempty"`
+		ApprovalDate *FhirDate `json:"approvaldate,omitempty"`
+		LastReviewDate *FhirDate `json:"lastreviewdate,omitempty"`
+		EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+		Topic []*CodeableConcept `json:"topic,omitempty"`
+		Author []*ContactDetail `json:"author,omitempty"`
+		Editor []*ContactDetail `json:"editor,omitempty"`
+		Reviewer []*ContactDetail `json:"reviewer,omitempty"`
+		Endorser []*ContactDetail `json:"endorser,omitempty"`
+		RelatedArtifact []*RelatedArtifact `json:"relatedartifact,omitempty"`
+		Library_ []interface{} `json:"library,omitempty"`
+		Kind *RequestResourceType `json:"kind,omitempty"`
+		Profile *FhirCanonical `json:"profile,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Intent *RequestIntent `json:"intent,omitempty"`
+		Priority *RequestPriority `json:"priority,omitempty"`
+		DoNotPerform *FhirBoolean `json:"donotperform,omitempty"`
+		TimingTiming *Timing `json:"timingtiming,omitempty"`
+		TimingDateTime *FhirDateTime `json:"timingdatetime,omitempty"`
+		TimingAge *Age `json:"timingage,omitempty"`
+		TimingPeriod *Period `json:"timingperiod,omitempty"`
+		TimingRange *Range `json:"timingrange,omitempty"`
+		TimingDuration *FhirDuration `json:"timingduration,omitempty"`
+		Location *Reference `json:"location,omitempty"`
+		Participant []*ActivityDefinitionParticipant `json:"participant,omitempty"`
+		ProductReference *Reference `json:"productreference,omitempty"`
+		ProductCodeableConcept *CodeableConcept `json:"productcodeableconcept,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		Dosage []*Dosage `json:"dosage,omitempty"`
+		BodySite []*CodeableConcept `json:"bodysite,omitempty"`
+		SpecimenRequirement []*Reference `json:"specimenrequirement,omitempty"`
+		ObservationRequirement []*Reference `json:"observationrequirement,omitempty"`
+		ObservationResultRequirement []*Reference `json:"observationresultrequirement,omitempty"`
+		Transform *FhirCanonical `json:"transform,omitempty"`
+		DynamicValue []*ActivityDefinitionDynamicValue `json:"dynamicvalue,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Url = temp.Url
+	m.Identifier = temp.Identifier
+	m.Version = temp.Version
+	m.Name = temp.Name
+	m.Title = temp.Title
+	m.Subtitle = temp.Subtitle
+	m.Status = temp.Status
+	m.Experimental = temp.Experimental
+	m.SubjectCodeableConcept = temp.SubjectCodeableConcept
+	m.SubjectReference = temp.SubjectReference
+	m.SubjectCanonical = temp.SubjectCanonical
+	m.Date = temp.Date
+	m.Publisher = temp.Publisher
+	m.Contact = temp.Contact
+	m.Description = temp.Description
+	m.UseContext = temp.UseContext
+	m.Jurisdiction = temp.Jurisdiction
+	m.Purpose = temp.Purpose
+	m.Usage = temp.Usage
+	m.Copyright = temp.Copyright
+	m.ApprovalDate = temp.ApprovalDate
+	m.LastReviewDate = temp.LastReviewDate
+	m.EffectivePeriod = temp.EffectivePeriod
+	m.Topic = temp.Topic
+	m.Author = temp.Author
+	m.Editor = temp.Editor
+	m.Reviewer = temp.Reviewer
+	m.Endorser = temp.Endorser
+	m.RelatedArtifact = temp.RelatedArtifact
+	if len(temp.Library_) > 0 {
+		m.Library_ = make([]*FhirCanonical, len(temp.Library_))
+		for i := range temp.Library_ {
+			itemMap, ok := temp.Library_[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Library_[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Library_[%d]: %v", i, err) }
+			m.Library_[i] = primitive
+		}
+	}
+	m.Kind = temp.Kind
+	m.Profile = temp.Profile
+	m.Code = temp.Code
+	m.Intent = temp.Intent
+	m.Priority = temp.Priority
+	m.DoNotPerform = temp.DoNotPerform
+	m.TimingTiming = temp.TimingTiming
+	m.TimingDateTime = temp.TimingDateTime
+	m.TimingAge = temp.TimingAge
+	m.TimingPeriod = temp.TimingPeriod
+	m.TimingRange = temp.TimingRange
+	m.TimingDuration = temp.TimingDuration
+	m.Location = temp.Location
+	m.Participant = temp.Participant
+	m.ProductReference = temp.ProductReference
+	m.ProductCodeableConcept = temp.ProductCodeableConcept
+	m.Quantity = temp.Quantity
+	m.Dosage = temp.Dosage
+	m.BodySite = temp.BodySite
+	m.SpecimenRequirement = temp.SpecimenRequirement
+	m.ObservationRequirement = temp.ObservationRequirement
+	m.ObservationResultRequirement = temp.ObservationResultRequirement
+	m.Transform = temp.Transform
+	m.DynamicValue = temp.DynamicValue
+	return nil
 }
 
-// ToJSON converts ActivityDefinition to JSON data
+// ToJSON converts ActivityDefinition to JSON data.
 func (m *ActivityDefinition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Subtitle interface{} `json:"subtitle,omitempty"`
+		SubtitleElement map[string]interface{} `json:"_subtitle,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental interface{} `json:"experimental,omitempty"`
+		ExperimentalElement map[string]interface{} `json:"_experimental,omitempty"`
+		SubjectCodeableConcept *CodeableConcept `json:"subjectcodeableconcept,omitempty"`
+		SubjectReference *Reference `json:"subjectreference,omitempty"`
+		SubjectCanonical *SubjectType `json:"subjectcanonical,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Publisher interface{} `json:"publisher,omitempty"`
+		PublisherElement map[string]interface{} `json:"_publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose interface{} `json:"purpose,omitempty"`
+		PurposeElement map[string]interface{} `json:"_purpose,omitempty"`
+		Usage interface{} `json:"usage,omitempty"`
+		UsageElement map[string]interface{} `json:"_usage,omitempty"`
+		Copyright interface{} `json:"copyright,omitempty"`
+		CopyrightElement map[string]interface{} `json:"_copyright,omitempty"`
+		ApprovalDate interface{} `json:"approvaldate,omitempty"`
+		ApprovalDateElement map[string]interface{} `json:"_approvaldate,omitempty"`
+		LastReviewDate interface{} `json:"lastreviewdate,omitempty"`
+		LastReviewDateElement map[string]interface{} `json:"_lastreviewdate,omitempty"`
+		EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+		Topic []*CodeableConcept `json:"topic,omitempty"`
+		Author []*ContactDetail `json:"author,omitempty"`
+		Editor []*ContactDetail `json:"editor,omitempty"`
+		Reviewer []*ContactDetail `json:"reviewer,omitempty"`
+		Endorser []*ContactDetail `json:"endorser,omitempty"`
+		RelatedArtifact []*RelatedArtifact `json:"relatedartifact,omitempty"`
+		Library_ []interface{} `json:"library,omitempty"`
+		Library_Element []map[string]interface{} `json:"_library,omitempty"`
+		Kind *RequestResourceType `json:"kind,omitempty"`
+		Profile interface{} `json:"profile,omitempty"`
+		ProfileElement map[string]interface{} `json:"_profile,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Intent *RequestIntent `json:"intent,omitempty"`
+		Priority *RequestPriority `json:"priority,omitempty"`
+		DoNotPerform interface{} `json:"donotperform,omitempty"`
+		DoNotPerformElement map[string]interface{} `json:"_donotperform,omitempty"`
+		TimingTiming *Timing `json:"timingtiming,omitempty"`
+		TimingDateTime interface{} `json:"timingdatetime,omitempty"`
+		TimingDateTimeElement map[string]interface{} `json:"_timingdatetime,omitempty"`
+		TimingAge *Age `json:"timingage,omitempty"`
+		TimingPeriod *Period `json:"timingperiod,omitempty"`
+		TimingRange *Range `json:"timingrange,omitempty"`
+		TimingDuration *FhirDuration `json:"timingduration,omitempty"`
+		Location *Reference `json:"location,omitempty"`
+		Participant []*ActivityDefinitionParticipant `json:"participant,omitempty"`
+		ProductReference *Reference `json:"productreference,omitempty"`
+		ProductCodeableConcept *CodeableConcept `json:"productcodeableconcept,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		Dosage []*Dosage `json:"dosage,omitempty"`
+		BodySite []*CodeableConcept `json:"bodysite,omitempty"`
+		SpecimenRequirement []*Reference `json:"specimenrequirement,omitempty"`
+		ObservationRequirement []*Reference `json:"observationrequirement,omitempty"`
+		ObservationResultRequirement []*Reference `json:"observationresultrequirement,omitempty"`
+		Transform interface{} `json:"transform,omitempty"`
+		TransformElement map[string]interface{} `json:"_transform,omitempty"`
+		DynamicValue []*ActivityDefinitionDynamicValue `json:"dynamicvalue,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	output.Identifier = m.Identifier
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	if m.Subtitle != nil && m.Subtitle.Value != nil {
+		output.Subtitle = m.Subtitle.Value
+		if m.Subtitle.Element != nil {
+			output.SubtitleElement = toMapOrNil(m.Subtitle.Element.ToJSON())
+		}
+	}
+	output.Status = m.Status
+	if m.Experimental != nil && m.Experimental.Value != nil {
+		output.Experimental = m.Experimental.Value
+		if m.Experimental.Element != nil {
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+		}
+	}
+	output.SubjectCodeableConcept = m.SubjectCodeableConcept
+	output.SubjectReference = m.SubjectReference
+	output.SubjectCanonical = m.SubjectCanonical
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.Publisher != nil && m.Publisher.Value != nil {
+		output.Publisher = m.Publisher.Value
+		if m.Publisher.Element != nil {
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+		}
+	}
+	output.Contact = m.Contact
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.UseContext = m.UseContext
+	output.Jurisdiction = m.Jurisdiction
+	if m.Purpose != nil && m.Purpose.Value != nil {
+		output.Purpose = m.Purpose.Value
+		if m.Purpose.Element != nil {
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+		}
+	}
+	if m.Usage != nil && m.Usage.Value != nil {
+		output.Usage = m.Usage.Value
+		if m.Usage.Element != nil {
+			output.UsageElement = toMapOrNil(m.Usage.Element.ToJSON())
+		}
+	}
+	if m.Copyright != nil && m.Copyright.Value != nil {
+		output.Copyright = m.Copyright.Value
+		if m.Copyright.Element != nil {
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+		}
+	}
+	if m.ApprovalDate != nil && m.ApprovalDate.Value != nil {
+		output.ApprovalDate = m.ApprovalDate.Value
+		if m.ApprovalDate.Element != nil {
+			output.ApprovalDateElement = toMapOrNil(m.ApprovalDate.Element.ToJSON())
+		}
+	}
+	if m.LastReviewDate != nil && m.LastReviewDate.Value != nil {
+		output.LastReviewDate = m.LastReviewDate.Value
+		if m.LastReviewDate.Element != nil {
+			output.LastReviewDateElement = toMapOrNil(m.LastReviewDate.Element.ToJSON())
+		}
+	}
+	output.EffectivePeriod = m.EffectivePeriod
+	output.Topic = m.Topic
+	output.Author = m.Author
+	output.Editor = m.Editor
+	output.Reviewer = m.Reviewer
+	output.Endorser = m.Endorser
+	output.RelatedArtifact = m.RelatedArtifact
+	if len(m.Library_) > 0 {
+		output.Library_ = make([]interface{}, len(m.Library_))
+		output.Library_Element = make([]map[string]interface{}, len(m.Library_))
+		for i, item := range m.Library_ {
+			if item != nil && item.Value != nil {
+				output.Library_[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.Library_Element[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Kind = m.Kind
+	if m.Profile != nil && m.Profile.Value != nil {
+		output.Profile = m.Profile.Value
+		if m.Profile.Element != nil {
+			output.ProfileElement = toMapOrNil(m.Profile.Element.ToJSON())
+		}
+	}
+	output.Code = m.Code
+	output.Intent = m.Intent
+	output.Priority = m.Priority
+	if m.DoNotPerform != nil && m.DoNotPerform.Value != nil {
+		output.DoNotPerform = m.DoNotPerform.Value
+		if m.DoNotPerform.Element != nil {
+			output.DoNotPerformElement = toMapOrNil(m.DoNotPerform.Element.ToJSON())
+		}
+	}
+	output.TimingTiming = m.TimingTiming
+	if m.TimingDateTime != nil && m.TimingDateTime.Value != nil {
+		output.TimingDateTime = m.TimingDateTime.Value
+		if m.TimingDateTime.Element != nil {
+			output.TimingDateTimeElement = toMapOrNil(m.TimingDateTime.Element.ToJSON())
+		}
+	}
+	output.TimingAge = m.TimingAge
+	output.TimingPeriod = m.TimingPeriod
+	output.TimingRange = m.TimingRange
+	output.TimingDuration = m.TimingDuration
+	output.Location = m.Location
+	output.Participant = m.Participant
+	output.ProductReference = m.ProductReference
+	output.ProductCodeableConcept = m.ProductCodeableConcept
+	output.Quantity = m.Quantity
+	output.Dosage = m.Dosage
+	output.BodySite = m.BodySite
+	output.SpecimenRequirement = m.SpecimenRequirement
+	output.ObservationRequirement = m.ObservationRequirement
+	output.ObservationResultRequirement = m.ObservationResultRequirement
+	if m.Transform != nil && m.Transform.Value != nil {
+		output.Transform = m.Transform.Value
+		if m.Transform.Element != nil {
+			output.TransformElement = toMapOrNil(m.Transform.Element.ToJSON())
+		}
+	}
+	output.DynamicValue = m.DynamicValue
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ActivityDefinition
+// Clone creates a deep copy of ActivityDefinition.
 func (m *ActivityDefinition) Clone() *ActivityDefinition {
 	if m == nil { return nil }
 	return &ActivityDefinition{
@@ -157,7 +555,7 @@ func (m *ActivityDefinition) Clone() *ActivityDefinition {
 	}
 }
 
-// Equals checks for equality with another ActivityDefinition instance
+// Equals checks equality between two ActivityDefinition instances.
 func (m *ActivityDefinition) Equals(other *ActivityDefinition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -229,7 +627,7 @@ func (m *ActivityDefinition) Equals(other *ActivityDefinition) bool {
 // ActivityDefinitionParticipant
 // Indicates who should participate in performing the action described.
 type ActivityDefinitionParticipant struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -237,22 +635,55 @@ type ActivityDefinitionParticipant struct {
 	Role *CodeableConcept `json:"role,omitempty"`
 }
 
-// NewActivityDefinitionParticipant creates a new ActivityDefinitionParticipant instance
+// NewActivityDefinitionParticipant creates a new ActivityDefinitionParticipant instance.
 func NewActivityDefinitionParticipant() *ActivityDefinitionParticipant {
 	return &ActivityDefinitionParticipant{}
 }
 
-// FromJSON populates ActivityDefinitionParticipant from JSON data
+// FromJSON populates ActivityDefinitionParticipant from JSON data.
 func (m *ActivityDefinitionParticipant) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *ActionParticipantType `json:"type,omitempty"`
+		Role *CodeableConcept `json:"role,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Role = temp.Role
+	return nil
 }
 
-// ToJSON converts ActivityDefinitionParticipant to JSON data
+// ToJSON converts ActivityDefinitionParticipant to JSON data.
 func (m *ActivityDefinitionParticipant) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *ActionParticipantType `json:"type,omitempty"`
+		Role *CodeableConcept `json:"role,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Role = m.Role
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ActivityDefinitionParticipant
+// Clone creates a deep copy of ActivityDefinitionParticipant.
 func (m *ActivityDefinitionParticipant) Clone() *ActivityDefinitionParticipant {
 	if m == nil { return nil }
 	return &ActivityDefinitionParticipant{
@@ -264,7 +695,7 @@ func (m *ActivityDefinitionParticipant) Clone() *ActivityDefinitionParticipant {
 	}
 }
 
-// Equals checks for equality with another ActivityDefinitionParticipant instance
+// Equals checks equality between two ActivityDefinitionParticipant instances.
 func (m *ActivityDefinitionParticipant) Equals(other *ActivityDefinitionParticipant) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -279,7 +710,7 @@ func (m *ActivityDefinitionParticipant) Equals(other *ActivityDefinitionParticip
 // ActivityDefinitionDynamicValue
 // Dynamic values that will be evaluated to produce values for elements of the resulting resource. For example, if the dosage of a medication must be computed based on the patient's weight, a dynamic value would be used to specify an expression that calculated the weight, and the path on the request resource that would contain the result.
 type ActivityDefinitionDynamicValue struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -287,22 +718,61 @@ type ActivityDefinitionDynamicValue struct {
 	Expression *FhirExpression `json:"expression,omitempty"`
 }
 
-// NewActivityDefinitionDynamicValue creates a new ActivityDefinitionDynamicValue instance
+// NewActivityDefinitionDynamicValue creates a new ActivityDefinitionDynamicValue instance.
 func NewActivityDefinitionDynamicValue() *ActivityDefinitionDynamicValue {
 	return &ActivityDefinitionDynamicValue{}
 }
 
-// FromJSON populates ActivityDefinitionDynamicValue from JSON data
+// FromJSON populates ActivityDefinitionDynamicValue from JSON data.
 func (m *ActivityDefinitionDynamicValue) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Path *FhirString `json:"path,omitempty"`
+		Expression *FhirExpression `json:"expression,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Path = temp.Path
+	m.Expression = temp.Expression
+	return nil
 }
 
-// ToJSON converts ActivityDefinitionDynamicValue to JSON data
+// ToJSON converts ActivityDefinitionDynamicValue to JSON data.
 func (m *ActivityDefinitionDynamicValue) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Path interface{} `json:"path,omitempty"`
+		PathElement map[string]interface{} `json:"_path,omitempty"`
+		Expression *FhirExpression `json:"expression,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Path != nil && m.Path.Value != nil {
+		output.Path = m.Path.Value
+		if m.Path.Element != nil {
+			output.PathElement = toMapOrNil(m.Path.Element.ToJSON())
+		}
+	}
+	output.Expression = m.Expression
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ActivityDefinitionDynamicValue
+// Clone creates a deep copy of ActivityDefinitionDynamicValue.
 func (m *ActivityDefinitionDynamicValue) Clone() *ActivityDefinitionDynamicValue {
 	if m == nil { return nil }
 	return &ActivityDefinitionDynamicValue{
@@ -314,7 +784,7 @@ func (m *ActivityDefinitionDynamicValue) Clone() *ActivityDefinitionDynamicValue
 	}
 }
 
-// Equals checks for equality with another ActivityDefinitionDynamicValue instance
+// Equals checks equality between two ActivityDefinitionDynamicValue instances.
 func (m *ActivityDefinitionDynamicValue) Equals(other *ActivityDefinitionDynamicValue) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

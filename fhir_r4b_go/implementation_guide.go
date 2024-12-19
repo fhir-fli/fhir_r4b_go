@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // ImplementationGuide
 // A set of rules of how a particular interoperability or standards problem is solved - typically through the use of FHIR resources. This resource is used to gather all the parts of an implementation guide into a logical whole and to publish a computable definition of all the parts.
 type ImplementationGuide struct {
-	CanonicalResource
+	extends CanonicalResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -39,22 +41,213 @@ type ImplementationGuide struct {
 	Manifest *ImplementationGuideManifest `json:"manifest,omitempty"`
 }
 
-// NewImplementationGuide creates a new ImplementationGuide instance
+// NewImplementationGuide creates a new ImplementationGuide instance.
 func NewImplementationGuide() *ImplementationGuide {
 	return &ImplementationGuide{}
 }
 
-// FromJSON populates ImplementationGuide from JSON data
+// FromJSON populates ImplementationGuide from JSON data.
 func (m *ImplementationGuide) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental *FhirBoolean `json:"experimental,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Publisher *FhirString `json:"publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Copyright *FhirMarkdown `json:"copyright,omitempty"`
+		PackageId *FhirId `json:"packageid,omitempty"`
+		License *SPDXLicense `json:"license,omitempty"`
+		FhirVersion []*FHIRVersion `json:"fhirversion,omitempty"`
+		DependsOn []*ImplementationGuideDependsOn `json:"dependson,omitempty"`
+		Global []*ImplementationGuideGlobal `json:"global,omitempty"`
+		Definition *ImplementationGuideDefinition `json:"definition,omitempty"`
+		Manifest *ImplementationGuideManifest `json:"manifest,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Url = temp.Url
+	m.Version = temp.Version
+	m.Name = temp.Name
+	m.Title = temp.Title
+	m.Status = temp.Status
+	m.Experimental = temp.Experimental
+	m.Date = temp.Date
+	m.Publisher = temp.Publisher
+	m.Contact = temp.Contact
+	m.Description = temp.Description
+	m.UseContext = temp.UseContext
+	m.Jurisdiction = temp.Jurisdiction
+	m.Copyright = temp.Copyright
+	m.PackageId = temp.PackageId
+	m.License = temp.License
+	m.FhirVersion = temp.FhirVersion
+	m.DependsOn = temp.DependsOn
+	m.Global = temp.Global
+	m.Definition = temp.Definition
+	m.Manifest = temp.Manifest
+	return nil
 }
 
-// ToJSON converts ImplementationGuide to JSON data
+// ToJSON converts ImplementationGuide to JSON data.
 func (m *ImplementationGuide) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental interface{} `json:"experimental,omitempty"`
+		ExperimentalElement map[string]interface{} `json:"_experimental,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Publisher interface{} `json:"publisher,omitempty"`
+		PublisherElement map[string]interface{} `json:"_publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Copyright interface{} `json:"copyright,omitempty"`
+		CopyrightElement map[string]interface{} `json:"_copyright,omitempty"`
+		PackageId interface{} `json:"packageid,omitempty"`
+		PackageIdElement map[string]interface{} `json:"_packageid,omitempty"`
+		License *SPDXLicense `json:"license,omitempty"`
+		FhirVersion []*FHIRVersion `json:"fhirversion,omitempty"`
+		DependsOn []*ImplementationGuideDependsOn `json:"dependson,omitempty"`
+		Global []*ImplementationGuideGlobal `json:"global,omitempty"`
+		Definition *ImplementationGuideDefinition `json:"definition,omitempty"`
+		Manifest *ImplementationGuideManifest `json:"manifest,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	output.Status = m.Status
+	if m.Experimental != nil && m.Experimental.Value != nil {
+		output.Experimental = m.Experimental.Value
+		if m.Experimental.Element != nil {
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+		}
+	}
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.Publisher != nil && m.Publisher.Value != nil {
+		output.Publisher = m.Publisher.Value
+		if m.Publisher.Element != nil {
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+		}
+	}
+	output.Contact = m.Contact
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.UseContext = m.UseContext
+	output.Jurisdiction = m.Jurisdiction
+	if m.Copyright != nil && m.Copyright.Value != nil {
+		output.Copyright = m.Copyright.Value
+		if m.Copyright.Element != nil {
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+		}
+	}
+	if m.PackageId != nil && m.PackageId.Value != nil {
+		output.PackageId = m.PackageId.Value
+		if m.PackageId.Element != nil {
+			output.PackageIdElement = toMapOrNil(m.PackageId.Element.ToJSON())
+		}
+	}
+	output.License = m.License
+	output.FhirVersion = m.FhirVersion
+	output.DependsOn = m.DependsOn
+	output.Global = m.Global
+	output.Definition = m.Definition
+	output.Manifest = m.Manifest
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ImplementationGuide
+// Clone creates a deep copy of ImplementationGuide.
 func (m *ImplementationGuide) Clone() *ImplementationGuide {
 	if m == nil { return nil }
 	return &ImplementationGuide{
@@ -89,7 +282,7 @@ func (m *ImplementationGuide) Clone() *ImplementationGuide {
 	}
 }
 
-// Equals checks for equality with another ImplementationGuide instance
+// Equals checks equality between two ImplementationGuide instances.
 func (m *ImplementationGuide) Equals(other *ImplementationGuide) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -127,7 +320,7 @@ func (m *ImplementationGuide) Equals(other *ImplementationGuide) bool {
 // ImplementationGuideDependsOn
 // Another implementation guide that this implementation depends on. Typically, an implementation guide uses value sets, profiles etc.defined in other implementation guides.
 type ImplementationGuideDependsOn struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -136,22 +329,77 @@ type ImplementationGuideDependsOn struct {
 	Version *FhirString `json:"version,omitempty"`
 }
 
-// NewImplementationGuideDependsOn creates a new ImplementationGuideDependsOn instance
+// NewImplementationGuideDependsOn creates a new ImplementationGuideDependsOn instance.
 func NewImplementationGuideDependsOn() *ImplementationGuideDependsOn {
 	return &ImplementationGuideDependsOn{}
 }
 
-// FromJSON populates ImplementationGuideDependsOn from JSON data
+// FromJSON populates ImplementationGuideDependsOn from JSON data.
 func (m *ImplementationGuideDependsOn) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Uri *FhirCanonical `json:"uri,omitempty"`
+		PackageId *FhirId `json:"packageid,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Uri = temp.Uri
+	m.PackageId = temp.PackageId
+	m.Version = temp.Version
+	return nil
 }
 
-// ToJSON converts ImplementationGuideDependsOn to JSON data
+// ToJSON converts ImplementationGuideDependsOn to JSON data.
 func (m *ImplementationGuideDependsOn) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Uri interface{} `json:"uri,omitempty"`
+		UriElement map[string]interface{} `json:"_uri,omitempty"`
+		PackageId interface{} `json:"packageid,omitempty"`
+		PackageIdElement map[string]interface{} `json:"_packageid,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Uri != nil && m.Uri.Value != nil {
+		output.Uri = m.Uri.Value
+		if m.Uri.Element != nil {
+			output.UriElement = toMapOrNil(m.Uri.Element.ToJSON())
+		}
+	}
+	if m.PackageId != nil && m.PackageId.Value != nil {
+		output.PackageId = m.PackageId.Value
+		if m.PackageId.Element != nil {
+			output.PackageIdElement = toMapOrNil(m.PackageId.Element.ToJSON())
+		}
+	}
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ImplementationGuideDependsOn
+// Clone creates a deep copy of ImplementationGuideDependsOn.
 func (m *ImplementationGuideDependsOn) Clone() *ImplementationGuideDependsOn {
 	if m == nil { return nil }
 	return &ImplementationGuideDependsOn{
@@ -164,7 +412,7 @@ func (m *ImplementationGuideDependsOn) Clone() *ImplementationGuideDependsOn {
 	}
 }
 
-// Equals checks for equality with another ImplementationGuideDependsOn instance
+// Equals checks equality between two ImplementationGuideDependsOn instances.
 func (m *ImplementationGuideDependsOn) Equals(other *ImplementationGuideDependsOn) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -180,7 +428,7 @@ func (m *ImplementationGuideDependsOn) Equals(other *ImplementationGuideDependsO
 // ImplementationGuideGlobal
 // A set of profiles that all resources covered by this implementation guide must conform to.
 type ImplementationGuideGlobal struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -188,22 +436,67 @@ type ImplementationGuideGlobal struct {
 	Profile *FhirCanonical `json:"profile,omitempty"`
 }
 
-// NewImplementationGuideGlobal creates a new ImplementationGuideGlobal instance
+// NewImplementationGuideGlobal creates a new ImplementationGuideGlobal instance.
 func NewImplementationGuideGlobal() *ImplementationGuideGlobal {
 	return &ImplementationGuideGlobal{}
 }
 
-// FromJSON populates ImplementationGuideGlobal from JSON data
+// FromJSON populates ImplementationGuideGlobal from JSON data.
 func (m *ImplementationGuideGlobal) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *FhirCode `json:"type,omitempty"`
+		Profile *FhirCanonical `json:"profile,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Profile = temp.Profile
+	return nil
 }
 
-// ToJSON converts ImplementationGuideGlobal to JSON data
+// ToJSON converts ImplementationGuideGlobal to JSON data.
 func (m *ImplementationGuideGlobal) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type interface{} `json:"type,omitempty"`
+		TypeElement map[string]interface{} `json:"_type,omitempty"`
+		Profile interface{} `json:"profile,omitempty"`
+		ProfileElement map[string]interface{} `json:"_profile,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Type != nil && m.Type.Value != nil {
+		output.Type = m.Type.Value
+		if m.Type.Element != nil {
+			output.TypeElement = toMapOrNil(m.Type.Element.ToJSON())
+		}
+	}
+	if m.Profile != nil && m.Profile.Value != nil {
+		output.Profile = m.Profile.Value
+		if m.Profile.Element != nil {
+			output.ProfileElement = toMapOrNil(m.Profile.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ImplementationGuideGlobal
+// Clone creates a deep copy of ImplementationGuideGlobal.
 func (m *ImplementationGuideGlobal) Clone() *ImplementationGuideGlobal {
 	if m == nil { return nil }
 	return &ImplementationGuideGlobal{
@@ -215,7 +508,7 @@ func (m *ImplementationGuideGlobal) Clone() *ImplementationGuideGlobal {
 	}
 }
 
-// Equals checks for equality with another ImplementationGuideGlobal instance
+// Equals checks equality between two ImplementationGuideGlobal instances.
 func (m *ImplementationGuideGlobal) Equals(other *ImplementationGuideGlobal) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -230,7 +523,7 @@ func (m *ImplementationGuideGlobal) Equals(other *ImplementationGuideGlobal) boo
 // ImplementationGuideDefinition
 // The information needed by an IG publisher tool to publish the whole implementation guide.
 type ImplementationGuideDefinition struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -241,22 +534,67 @@ type ImplementationGuideDefinition struct {
 	Template []*ImplementationGuideTemplate `json:"template,omitempty"`
 }
 
-// NewImplementationGuideDefinition creates a new ImplementationGuideDefinition instance
+// NewImplementationGuideDefinition creates a new ImplementationGuideDefinition instance.
 func NewImplementationGuideDefinition() *ImplementationGuideDefinition {
 	return &ImplementationGuideDefinition{}
 }
 
-// FromJSON populates ImplementationGuideDefinition from JSON data
+// FromJSON populates ImplementationGuideDefinition from JSON data.
 func (m *ImplementationGuideDefinition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Grouping []*ImplementationGuideGrouping `json:"grouping,omitempty"`
+		Resource []*ImplementationGuideResource `json:"resource,omitempty"`
+		Page *ImplementationGuidePage `json:"page,omitempty"`
+		Parameter []*ImplementationGuideParameter `json:"parameter,omitempty"`
+		Template []*ImplementationGuideTemplate `json:"template,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Grouping = temp.Grouping
+	m.Resource = temp.Resource
+	m.Page = temp.Page
+	m.Parameter = temp.Parameter
+	m.Template = temp.Template
+	return nil
 }
 
-// ToJSON converts ImplementationGuideDefinition to JSON data
+// ToJSON converts ImplementationGuideDefinition to JSON data.
 func (m *ImplementationGuideDefinition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Grouping []*ImplementationGuideGrouping `json:"grouping,omitempty"`
+		Resource []*ImplementationGuideResource `json:"resource,omitempty"`
+		Page *ImplementationGuidePage `json:"page,omitempty"`
+		Parameter []*ImplementationGuideParameter `json:"parameter,omitempty"`
+		Template []*ImplementationGuideTemplate `json:"template,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Grouping = m.Grouping
+	output.Resource = m.Resource
+	output.Page = m.Page
+	output.Parameter = m.Parameter
+	output.Template = m.Template
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ImplementationGuideDefinition
+// Clone creates a deep copy of ImplementationGuideDefinition.
 func (m *ImplementationGuideDefinition) Clone() *ImplementationGuideDefinition {
 	if m == nil { return nil }
 	return &ImplementationGuideDefinition{
@@ -271,7 +609,7 @@ func (m *ImplementationGuideDefinition) Clone() *ImplementationGuideDefinition {
 	}
 }
 
-// Equals checks for equality with another ImplementationGuideDefinition instance
+// Equals checks equality between two ImplementationGuideDefinition instances.
 func (m *ImplementationGuideDefinition) Equals(other *ImplementationGuideDefinition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -289,7 +627,7 @@ func (m *ImplementationGuideDefinition) Equals(other *ImplementationGuideDefinit
 // ImplementationGuideGrouping
 // A logical group of resources. Logical groups can be used when building pages.
 type ImplementationGuideGrouping struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -297,22 +635,67 @@ type ImplementationGuideGrouping struct {
 	Description *FhirString `json:"description,omitempty"`
 }
 
-// NewImplementationGuideGrouping creates a new ImplementationGuideGrouping instance
+// NewImplementationGuideGrouping creates a new ImplementationGuideGrouping instance.
 func NewImplementationGuideGrouping() *ImplementationGuideGrouping {
 	return &ImplementationGuideGrouping{}
 }
 
-// FromJSON populates ImplementationGuideGrouping from JSON data
+// FromJSON populates ImplementationGuideGrouping from JSON data.
 func (m *ImplementationGuideGrouping) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Name = temp.Name
+	m.Description = temp.Description
+	return nil
 }
 
-// ToJSON converts ImplementationGuideGrouping to JSON data
+// ToJSON converts ImplementationGuideGrouping to JSON data.
 func (m *ImplementationGuideGrouping) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ImplementationGuideGrouping
+// Clone creates a deep copy of ImplementationGuideGrouping.
 func (m *ImplementationGuideGrouping) Clone() *ImplementationGuideGrouping {
 	if m == nil { return nil }
 	return &ImplementationGuideGrouping{
@@ -324,7 +707,7 @@ func (m *ImplementationGuideGrouping) Clone() *ImplementationGuideGrouping {
 	}
 }
 
-// Equals checks for equality with another ImplementationGuideGrouping instance
+// Equals checks equality between two ImplementationGuideGrouping instances.
 func (m *ImplementationGuideGrouping) Equals(other *ImplementationGuideGrouping) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -339,7 +722,7 @@ func (m *ImplementationGuideGrouping) Equals(other *ImplementationGuideGrouping)
 // ImplementationGuideResource
 // A resource that is part of the implementation guide. Conformance resources (value set, structure definition, capability statements etc.) are obvious candidates for inclusion, but any kind of resource can be included as an example resource.
 type ImplementationGuideResource struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -352,22 +735,105 @@ type ImplementationGuideResource struct {
 	GroupingId *FhirId `json:"groupingid,omitempty"`
 }
 
-// NewImplementationGuideResource creates a new ImplementationGuideResource instance
+// NewImplementationGuideResource creates a new ImplementationGuideResource instance.
 func NewImplementationGuideResource() *ImplementationGuideResource {
 	return &ImplementationGuideResource{}
 }
 
-// FromJSON populates ImplementationGuideResource from JSON data
+// FromJSON populates ImplementationGuideResource from JSON data.
 func (m *ImplementationGuideResource) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Reference *Reference `json:"reference,omitempty"`
+		FhirVersion []*FHIRVersion `json:"fhirversion,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		ExampleBoolean *FhirBoolean `json:"exampleboolean,omitempty"`
+		ExampleCanonical *FhirCanonical `json:"examplecanonical,omitempty"`
+		GroupingId *FhirId `json:"groupingid,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Reference = temp.Reference
+	m.FhirVersion = temp.FhirVersion
+	m.Name = temp.Name
+	m.Description = temp.Description
+	m.ExampleBoolean = temp.ExampleBoolean
+	m.ExampleCanonical = temp.ExampleCanonical
+	m.GroupingId = temp.GroupingId
+	return nil
 }
 
-// ToJSON converts ImplementationGuideResource to JSON data
+// ToJSON converts ImplementationGuideResource to JSON data.
 func (m *ImplementationGuideResource) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Reference *Reference `json:"reference,omitempty"`
+		FhirVersion []*FHIRVersion `json:"fhirversion,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		ExampleBoolean interface{} `json:"exampleboolean,omitempty"`
+		ExampleBooleanElement map[string]interface{} `json:"_exampleboolean,omitempty"`
+		ExampleCanonical interface{} `json:"examplecanonical,omitempty"`
+		ExampleCanonicalElement map[string]interface{} `json:"_examplecanonical,omitempty"`
+		GroupingId interface{} `json:"groupingid,omitempty"`
+		GroupingIdElement map[string]interface{} `json:"_groupingid,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Reference = m.Reference
+	output.FhirVersion = m.FhirVersion
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	if m.ExampleBoolean != nil && m.ExampleBoolean.Value != nil {
+		output.ExampleBoolean = m.ExampleBoolean.Value
+		if m.ExampleBoolean.Element != nil {
+			output.ExampleBooleanElement = toMapOrNil(m.ExampleBoolean.Element.ToJSON())
+		}
+	}
+	if m.ExampleCanonical != nil && m.ExampleCanonical.Value != nil {
+		output.ExampleCanonical = m.ExampleCanonical.Value
+		if m.ExampleCanonical.Element != nil {
+			output.ExampleCanonicalElement = toMapOrNil(m.ExampleCanonical.Element.ToJSON())
+		}
+	}
+	if m.GroupingId != nil && m.GroupingId.Value != nil {
+		output.GroupingId = m.GroupingId.Value
+		if m.GroupingId.Element != nil {
+			output.GroupingIdElement = toMapOrNil(m.GroupingId.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ImplementationGuideResource
+// Clone creates a deep copy of ImplementationGuideResource.
 func (m *ImplementationGuideResource) Clone() *ImplementationGuideResource {
 	if m == nil { return nil }
 	return &ImplementationGuideResource{
@@ -384,7 +850,7 @@ func (m *ImplementationGuideResource) Clone() *ImplementationGuideResource {
 	}
 }
 
-// Equals checks for equality with another ImplementationGuideResource instance
+// Equals checks equality between two ImplementationGuideResource instances.
 func (m *ImplementationGuideResource) Equals(other *ImplementationGuideResource) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -404,7 +870,7 @@ func (m *ImplementationGuideResource) Equals(other *ImplementationGuideResource)
 // ImplementationGuidePage
 // A page / section in the implementation guide. The root page is the implementation guide home page.
 type ImplementationGuidePage struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -415,22 +881,79 @@ type ImplementationGuidePage struct {
 	Page []*ImplementationGuidePage `json:"page,omitempty"`
 }
 
-// NewImplementationGuidePage creates a new ImplementationGuidePage instance
+// NewImplementationGuidePage creates a new ImplementationGuidePage instance.
 func NewImplementationGuidePage() *ImplementationGuidePage {
 	return &ImplementationGuidePage{}
 }
 
-// FromJSON populates ImplementationGuidePage from JSON data
+// FromJSON populates ImplementationGuidePage from JSON data.
 func (m *ImplementationGuidePage) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		NameUrl *FhirUrl `json:"nameurl,omitempty"`
+		NameReference *Reference `json:"namereference,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Generation *GuidePageGeneration `json:"generation,omitempty"`
+		Page []*ImplementationGuidePage `json:"page,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.NameUrl = temp.NameUrl
+	m.NameReference = temp.NameReference
+	m.Title = temp.Title
+	m.Generation = temp.Generation
+	m.Page = temp.Page
+	return nil
 }
 
-// ToJSON converts ImplementationGuidePage to JSON data
+// ToJSON converts ImplementationGuidePage to JSON data.
 func (m *ImplementationGuidePage) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		NameUrl interface{} `json:"nameurl,omitempty"`
+		NameUrlElement map[string]interface{} `json:"_nameurl,omitempty"`
+		NameReference *Reference `json:"namereference,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Generation *GuidePageGeneration `json:"generation,omitempty"`
+		Page []*ImplementationGuidePage `json:"page,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.NameUrl != nil && m.NameUrl.Value != nil {
+		output.NameUrl = m.NameUrl.Value
+		if m.NameUrl.Element != nil {
+			output.NameUrlElement = toMapOrNil(m.NameUrl.Element.ToJSON())
+		}
+	}
+	output.NameReference = m.NameReference
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	output.Generation = m.Generation
+	output.Page = m.Page
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ImplementationGuidePage
+// Clone creates a deep copy of ImplementationGuidePage.
 func (m *ImplementationGuidePage) Clone() *ImplementationGuidePage {
 	if m == nil { return nil }
 	return &ImplementationGuidePage{
@@ -445,7 +968,7 @@ func (m *ImplementationGuidePage) Clone() *ImplementationGuidePage {
 	}
 }
 
-// Equals checks for equality with another ImplementationGuidePage instance
+// Equals checks equality between two ImplementationGuidePage instances.
 func (m *ImplementationGuidePage) Equals(other *ImplementationGuidePage) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -463,7 +986,7 @@ func (m *ImplementationGuidePage) Equals(other *ImplementationGuidePage) bool {
 // ImplementationGuideParameter
 // Defines how IG is built by tools.
 type ImplementationGuideParameter struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -471,22 +994,61 @@ type ImplementationGuideParameter struct {
 	Value *FhirString `json:"value,omitempty"`
 }
 
-// NewImplementationGuideParameter creates a new ImplementationGuideParameter instance
+// NewImplementationGuideParameter creates a new ImplementationGuideParameter instance.
 func NewImplementationGuideParameter() *ImplementationGuideParameter {
 	return &ImplementationGuideParameter{}
 }
 
-// FromJSON populates ImplementationGuideParameter from JSON data
+// FromJSON populates ImplementationGuideParameter from JSON data.
 func (m *ImplementationGuideParameter) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *GuideParameterCode `json:"code,omitempty"`
+		Value *FhirString `json:"value,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Value = temp.Value
+	return nil
 }
 
-// ToJSON converts ImplementationGuideParameter to JSON data
+// ToJSON converts ImplementationGuideParameter to JSON data.
 func (m *ImplementationGuideParameter) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *GuideParameterCode `json:"code,omitempty"`
+		Value interface{} `json:"value,omitempty"`
+		ValueElement map[string]interface{} `json:"_value,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	if m.Value != nil && m.Value.Value != nil {
+		output.Value = m.Value.Value
+		if m.Value.Element != nil {
+			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ImplementationGuideParameter
+// Clone creates a deep copy of ImplementationGuideParameter.
 func (m *ImplementationGuideParameter) Clone() *ImplementationGuideParameter {
 	if m == nil { return nil }
 	return &ImplementationGuideParameter{
@@ -498,7 +1060,7 @@ func (m *ImplementationGuideParameter) Clone() *ImplementationGuideParameter {
 	}
 }
 
-// Equals checks for equality with another ImplementationGuideParameter instance
+// Equals checks equality between two ImplementationGuideParameter instances.
 func (m *ImplementationGuideParameter) Equals(other *ImplementationGuideParameter) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -513,7 +1075,7 @@ func (m *ImplementationGuideParameter) Equals(other *ImplementationGuideParamete
 // ImplementationGuideTemplate
 // A template for building resources.
 type ImplementationGuideTemplate struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -522,22 +1084,77 @@ type ImplementationGuideTemplate struct {
 	Scope *FhirString `json:"scope,omitempty"`
 }
 
-// NewImplementationGuideTemplate creates a new ImplementationGuideTemplate instance
+// NewImplementationGuideTemplate creates a new ImplementationGuideTemplate instance.
 func NewImplementationGuideTemplate() *ImplementationGuideTemplate {
 	return &ImplementationGuideTemplate{}
 }
 
-// FromJSON populates ImplementationGuideTemplate from JSON data
+// FromJSON populates ImplementationGuideTemplate from JSON data.
 func (m *ImplementationGuideTemplate) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *FhirCode `json:"code,omitempty"`
+		Source *FhirString `json:"source,omitempty"`
+		Scope *FhirString `json:"scope,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Source = temp.Source
+	m.Scope = temp.Scope
+	return nil
 }
 
-// ToJSON converts ImplementationGuideTemplate to JSON data
+// ToJSON converts ImplementationGuideTemplate to JSON data.
 func (m *ImplementationGuideTemplate) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code interface{} `json:"code,omitempty"`
+		CodeElement map[string]interface{} `json:"_code,omitempty"`
+		Source interface{} `json:"source,omitempty"`
+		SourceElement map[string]interface{} `json:"_source,omitempty"`
+		Scope interface{} `json:"scope,omitempty"`
+		ScopeElement map[string]interface{} `json:"_scope,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Code != nil && m.Code.Value != nil {
+		output.Code = m.Code.Value
+		if m.Code.Element != nil {
+			output.CodeElement = toMapOrNil(m.Code.Element.ToJSON())
+		}
+	}
+	if m.Source != nil && m.Source.Value != nil {
+		output.Source = m.Source.Value
+		if m.Source.Element != nil {
+			output.SourceElement = toMapOrNil(m.Source.Element.ToJSON())
+		}
+	}
+	if m.Scope != nil && m.Scope.Value != nil {
+		output.Scope = m.Scope.Value
+		if m.Scope.Element != nil {
+			output.ScopeElement = toMapOrNil(m.Scope.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ImplementationGuideTemplate
+// Clone creates a deep copy of ImplementationGuideTemplate.
 func (m *ImplementationGuideTemplate) Clone() *ImplementationGuideTemplate {
 	if m == nil { return nil }
 	return &ImplementationGuideTemplate{
@@ -550,7 +1167,7 @@ func (m *ImplementationGuideTemplate) Clone() *ImplementationGuideTemplate {
 	}
 }
 
-// Equals checks for equality with another ImplementationGuideTemplate instance
+// Equals checks equality between two ImplementationGuideTemplate instances.
 func (m *ImplementationGuideTemplate) Equals(other *ImplementationGuideTemplate) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -566,7 +1183,7 @@ func (m *ImplementationGuideTemplate) Equals(other *ImplementationGuideTemplate)
 // ImplementationGuideManifest
 // Information about an assembled implementation guide, created by the publication tooling.
 type ImplementationGuideManifest struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -577,22 +1194,115 @@ type ImplementationGuideManifest struct {
 	Other []*FhirString `json:"other,omitempty"`
 }
 
-// NewImplementationGuideManifest creates a new ImplementationGuideManifest instance
+// NewImplementationGuideManifest creates a new ImplementationGuideManifest instance.
 func NewImplementationGuideManifest() *ImplementationGuideManifest {
 	return &ImplementationGuideManifest{}
 }
 
-// FromJSON populates ImplementationGuideManifest from JSON data
+// FromJSON populates ImplementationGuideManifest from JSON data.
 func (m *ImplementationGuideManifest) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Rendering *FhirUrl `json:"rendering,omitempty"`
+		Resource []*ImplementationGuideResource `json:"resource,omitempty"`
+		Page []*ImplementationGuidePage `json:"page,omitempty"`
+		Image []interface{} `json:"image,omitempty"`
+		Other []interface{} `json:"other,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Rendering = temp.Rendering
+	m.Resource = temp.Resource
+	m.Page = temp.Page
+	if len(temp.Image) > 0 {
+		m.Image = make([]*FhirString, len(temp.Image))
+		for i := range temp.Image {
+			itemMap, ok := temp.Image[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Image[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Image[%d]: %v", i, err) }
+			m.Image[i] = primitive
+		}
+	}
+	if len(temp.Other) > 0 {
+		m.Other = make([]*FhirString, len(temp.Other))
+		for i := range temp.Other {
+			itemMap, ok := temp.Other[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Other[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Other[%d]: %v", i, err) }
+			m.Other[i] = primitive
+		}
+	}
+	return nil
 }
 
-// ToJSON converts ImplementationGuideManifest to JSON data
+// ToJSON converts ImplementationGuideManifest to JSON data.
 func (m *ImplementationGuideManifest) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Rendering interface{} `json:"rendering,omitempty"`
+		RenderingElement map[string]interface{} `json:"_rendering,omitempty"`
+		Resource []*ImplementationGuideResource `json:"resource,omitempty"`
+		Page []*ImplementationGuidePage `json:"page,omitempty"`
+		Image []interface{} `json:"image,omitempty"`
+		ImageElement []map[string]interface{} `json:"_image,omitempty"`
+		Other []interface{} `json:"other,omitempty"`
+		OtherElement []map[string]interface{} `json:"_other,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Rendering != nil && m.Rendering.Value != nil {
+		output.Rendering = m.Rendering.Value
+		if m.Rendering.Element != nil {
+			output.RenderingElement = toMapOrNil(m.Rendering.Element.ToJSON())
+		}
+	}
+	output.Resource = m.Resource
+	output.Page = m.Page
+	if len(m.Image) > 0 {
+		output.Image = make([]interface{}, len(m.Image))
+		output.ImageElement = make([]map[string]interface{}, len(m.Image))
+		for i, item := range m.Image {
+			if item != nil && item.Value != nil {
+				output.Image[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.ImageElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.Other) > 0 {
+		output.Other = make([]interface{}, len(m.Other))
+		output.OtherElement = make([]map[string]interface{}, len(m.Other))
+		for i, item := range m.Other {
+			if item != nil && item.Value != nil {
+				output.Other[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.OtherElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ImplementationGuideManifest
+// Clone creates a deep copy of ImplementationGuideManifest.
 func (m *ImplementationGuideManifest) Clone() *ImplementationGuideManifest {
 	if m == nil { return nil }
 	return &ImplementationGuideManifest{
@@ -607,7 +1317,7 @@ func (m *ImplementationGuideManifest) Clone() *ImplementationGuideManifest {
 	}
 }
 
-// Equals checks for equality with another ImplementationGuideManifest instance
+// Equals checks equality between two ImplementationGuideManifest instances.
 func (m *ImplementationGuideManifest) Equals(other *ImplementationGuideManifest) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -625,7 +1335,7 @@ func (m *ImplementationGuideManifest) Equals(other *ImplementationGuideManifest)
 // ImplementationGuideResource1
 // A resource that is part of the implementation guide. Conformance resources (value set, structure definition, capability statements etc.) are obvious candidates for inclusion, but any kind of resource can be included as an example resource.
 type ImplementationGuideResource1 struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -635,22 +1345,81 @@ type ImplementationGuideResource1 struct {
 	RelativePath *FhirUrl `json:"relativepath,omitempty"`
 }
 
-// NewImplementationGuideResource1 creates a new ImplementationGuideResource1 instance
+// NewImplementationGuideResource1 creates a new ImplementationGuideResource1 instance.
 func NewImplementationGuideResource1() *ImplementationGuideResource1 {
 	return &ImplementationGuideResource1{}
 }
 
-// FromJSON populates ImplementationGuideResource1 from JSON data
+// FromJSON populates ImplementationGuideResource1 from JSON data.
 func (m *ImplementationGuideResource1) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Reference *Reference `json:"reference,omitempty"`
+		ExampleBoolean *FhirBoolean `json:"exampleboolean,omitempty"`
+		ExampleCanonical *FhirCanonical `json:"examplecanonical,omitempty"`
+		RelativePath *FhirUrl `json:"relativepath,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Reference = temp.Reference
+	m.ExampleBoolean = temp.ExampleBoolean
+	m.ExampleCanonical = temp.ExampleCanonical
+	m.RelativePath = temp.RelativePath
+	return nil
 }
 
-// ToJSON converts ImplementationGuideResource1 to JSON data
+// ToJSON converts ImplementationGuideResource1 to JSON data.
 func (m *ImplementationGuideResource1) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Reference *Reference `json:"reference,omitempty"`
+		ExampleBoolean interface{} `json:"exampleboolean,omitempty"`
+		ExampleBooleanElement map[string]interface{} `json:"_exampleboolean,omitempty"`
+		ExampleCanonical interface{} `json:"examplecanonical,omitempty"`
+		ExampleCanonicalElement map[string]interface{} `json:"_examplecanonical,omitempty"`
+		RelativePath interface{} `json:"relativepath,omitempty"`
+		RelativePathElement map[string]interface{} `json:"_relativepath,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Reference = m.Reference
+	if m.ExampleBoolean != nil && m.ExampleBoolean.Value != nil {
+		output.ExampleBoolean = m.ExampleBoolean.Value
+		if m.ExampleBoolean.Element != nil {
+			output.ExampleBooleanElement = toMapOrNil(m.ExampleBoolean.Element.ToJSON())
+		}
+	}
+	if m.ExampleCanonical != nil && m.ExampleCanonical.Value != nil {
+		output.ExampleCanonical = m.ExampleCanonical.Value
+		if m.ExampleCanonical.Element != nil {
+			output.ExampleCanonicalElement = toMapOrNil(m.ExampleCanonical.Element.ToJSON())
+		}
+	}
+	if m.RelativePath != nil && m.RelativePath.Value != nil {
+		output.RelativePath = m.RelativePath.Value
+		if m.RelativePath.Element != nil {
+			output.RelativePathElement = toMapOrNil(m.RelativePath.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ImplementationGuideResource1
+// Clone creates a deep copy of ImplementationGuideResource1.
 func (m *ImplementationGuideResource1) Clone() *ImplementationGuideResource1 {
 	if m == nil { return nil }
 	return &ImplementationGuideResource1{
@@ -664,7 +1433,7 @@ func (m *ImplementationGuideResource1) Clone() *ImplementationGuideResource1 {
 	}
 }
 
-// Equals checks for equality with another ImplementationGuideResource1 instance
+// Equals checks equality between two ImplementationGuideResource1 instances.
 func (m *ImplementationGuideResource1) Equals(other *ImplementationGuideResource1) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -681,7 +1450,7 @@ func (m *ImplementationGuideResource1) Equals(other *ImplementationGuideResource
 // ImplementationGuidePage1
 // Information about a page within the IG.
 type ImplementationGuidePage1 struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -690,22 +1459,92 @@ type ImplementationGuidePage1 struct {
 	Anchor []*FhirString `json:"anchor,omitempty"`
 }
 
-// NewImplementationGuidePage1 creates a new ImplementationGuidePage1 instance
+// NewImplementationGuidePage1 creates a new ImplementationGuidePage1 instance.
 func NewImplementationGuidePage1() *ImplementationGuidePage1 {
 	return &ImplementationGuidePage1{}
 }
 
-// FromJSON populates ImplementationGuidePage1 from JSON data
+// FromJSON populates ImplementationGuidePage1 from JSON data.
 func (m *ImplementationGuidePage1) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Anchor []interface{} `json:"anchor,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Name = temp.Name
+	m.Title = temp.Title
+	if len(temp.Anchor) > 0 {
+		m.Anchor = make([]*FhirString, len(temp.Anchor))
+		for i := range temp.Anchor {
+			itemMap, ok := temp.Anchor[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Anchor[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Anchor[%d]: %v", i, err) }
+			m.Anchor[i] = primitive
+		}
+	}
+	return nil
 }
 
-// ToJSON converts ImplementationGuidePage1 to JSON data
+// ToJSON converts ImplementationGuidePage1 to JSON data.
 func (m *ImplementationGuidePage1) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Anchor []interface{} `json:"anchor,omitempty"`
+		AnchorElement []map[string]interface{} `json:"_anchor,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	if len(m.Anchor) > 0 {
+		output.Anchor = make([]interface{}, len(m.Anchor))
+		output.AnchorElement = make([]map[string]interface{}, len(m.Anchor))
+		for i, item := range m.Anchor {
+			if item != nil && item.Value != nil {
+				output.Anchor[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.AnchorElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ImplementationGuidePage1
+// Clone creates a deep copy of ImplementationGuidePage1.
 func (m *ImplementationGuidePage1) Clone() *ImplementationGuidePage1 {
 	if m == nil { return nil }
 	return &ImplementationGuidePage1{
@@ -718,7 +1557,7 @@ func (m *ImplementationGuidePage1) Clone() *ImplementationGuidePage1 {
 	}
 }
 
-// Equals checks for equality with another ImplementationGuidePage1 instance
+// Equals checks equality between two ImplementationGuidePage1 instances.
 func (m *ImplementationGuidePage1) Equals(other *ImplementationGuidePage1) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

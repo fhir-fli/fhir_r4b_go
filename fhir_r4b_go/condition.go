@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Condition
 // A clinical condition, problem, diagnosis, or other event, situation, issue, or clinical concept that has risen to a level of concern.
 type Condition struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -44,22 +45,203 @@ type Condition struct {
 	Note []*Annotation `json:"note,omitempty"`
 }
 
-// NewCondition creates a new Condition instance
+// NewCondition creates a new Condition instance.
 func NewCondition() *Condition {
 	return &Condition{}
 }
 
-// FromJSON populates Condition from JSON data
+// FromJSON populates Condition from JSON data.
 func (m *Condition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		ClinicalStatus *CodeableConcept `json:"clinicalstatus,omitempty"`
+		VerificationStatus *CodeableConcept `json:"verificationstatus,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Severity *CodeableConcept `json:"severity,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		BodySite []*CodeableConcept `json:"bodysite,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		OnsetDateTime *FhirDateTime `json:"onsetdatetime,omitempty"`
+		OnsetAge *Age `json:"onsetage,omitempty"`
+		OnsetPeriod *Period `json:"onsetperiod,omitempty"`
+		OnsetRange *Range `json:"onsetrange,omitempty"`
+		OnsetString *FhirString `json:"onsetstring,omitempty"`
+		AbatementDateTime *FhirDateTime `json:"abatementdatetime,omitempty"`
+		AbatementAge *Age `json:"abatementage,omitempty"`
+		AbatementPeriod *Period `json:"abatementperiod,omitempty"`
+		AbatementRange *Range `json:"abatementrange,omitempty"`
+		AbatementString *FhirString `json:"abatementstring,omitempty"`
+		RecordedDate *FhirDateTime `json:"recordeddate,omitempty"`
+		Recorder *Reference `json:"recorder,omitempty"`
+		Asserter *Reference `json:"asserter,omitempty"`
+		Stage []*ConditionStage `json:"stage,omitempty"`
+		Evidence []*ConditionEvidence `json:"evidence,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.ClinicalStatus = temp.ClinicalStatus
+	m.VerificationStatus = temp.VerificationStatus
+	m.Category = temp.Category
+	m.Severity = temp.Severity
+	m.Code = temp.Code
+	m.BodySite = temp.BodySite
+	m.Subject = temp.Subject
+	m.Encounter = temp.Encounter
+	m.OnsetDateTime = temp.OnsetDateTime
+	m.OnsetAge = temp.OnsetAge
+	m.OnsetPeriod = temp.OnsetPeriod
+	m.OnsetRange = temp.OnsetRange
+	m.OnsetString = temp.OnsetString
+	m.AbatementDateTime = temp.AbatementDateTime
+	m.AbatementAge = temp.AbatementAge
+	m.AbatementPeriod = temp.AbatementPeriod
+	m.AbatementRange = temp.AbatementRange
+	m.AbatementString = temp.AbatementString
+	m.RecordedDate = temp.RecordedDate
+	m.Recorder = temp.Recorder
+	m.Asserter = temp.Asserter
+	m.Stage = temp.Stage
+	m.Evidence = temp.Evidence
+	m.Note = temp.Note
+	return nil
 }
 
-// ToJSON converts Condition to JSON data
+// ToJSON converts Condition to JSON data.
 func (m *Condition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		ClinicalStatus *CodeableConcept `json:"clinicalstatus,omitempty"`
+		VerificationStatus *CodeableConcept `json:"verificationstatus,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Severity *CodeableConcept `json:"severity,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		BodySite []*CodeableConcept `json:"bodysite,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		OnsetDateTime interface{} `json:"onsetdatetime,omitempty"`
+		OnsetDateTimeElement map[string]interface{} `json:"_onsetdatetime,omitempty"`
+		OnsetAge *Age `json:"onsetage,omitempty"`
+		OnsetPeriod *Period `json:"onsetperiod,omitempty"`
+		OnsetRange *Range `json:"onsetrange,omitempty"`
+		OnsetString interface{} `json:"onsetstring,omitempty"`
+		OnsetStringElement map[string]interface{} `json:"_onsetstring,omitempty"`
+		AbatementDateTime interface{} `json:"abatementdatetime,omitempty"`
+		AbatementDateTimeElement map[string]interface{} `json:"_abatementdatetime,omitempty"`
+		AbatementAge *Age `json:"abatementage,omitempty"`
+		AbatementPeriod *Period `json:"abatementperiod,omitempty"`
+		AbatementRange *Range `json:"abatementrange,omitempty"`
+		AbatementString interface{} `json:"abatementstring,omitempty"`
+		AbatementStringElement map[string]interface{} `json:"_abatementstring,omitempty"`
+		RecordedDate interface{} `json:"recordeddate,omitempty"`
+		RecordedDateElement map[string]interface{} `json:"_recordeddate,omitempty"`
+		Recorder *Reference `json:"recorder,omitempty"`
+		Asserter *Reference `json:"asserter,omitempty"`
+		Stage []*ConditionStage `json:"stage,omitempty"`
+		Evidence []*ConditionEvidence `json:"evidence,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.ClinicalStatus = m.ClinicalStatus
+	output.VerificationStatus = m.VerificationStatus
+	output.Category = m.Category
+	output.Severity = m.Severity
+	output.Code = m.Code
+	output.BodySite = m.BodySite
+	output.Subject = m.Subject
+	output.Encounter = m.Encounter
+	if m.OnsetDateTime != nil && m.OnsetDateTime.Value != nil {
+		output.OnsetDateTime = m.OnsetDateTime.Value
+		if m.OnsetDateTime.Element != nil {
+			output.OnsetDateTimeElement = toMapOrNil(m.OnsetDateTime.Element.ToJSON())
+		}
+	}
+	output.OnsetAge = m.OnsetAge
+	output.OnsetPeriod = m.OnsetPeriod
+	output.OnsetRange = m.OnsetRange
+	if m.OnsetString != nil && m.OnsetString.Value != nil {
+		output.OnsetString = m.OnsetString.Value
+		if m.OnsetString.Element != nil {
+			output.OnsetStringElement = toMapOrNil(m.OnsetString.Element.ToJSON())
+		}
+	}
+	if m.AbatementDateTime != nil && m.AbatementDateTime.Value != nil {
+		output.AbatementDateTime = m.AbatementDateTime.Value
+		if m.AbatementDateTime.Element != nil {
+			output.AbatementDateTimeElement = toMapOrNil(m.AbatementDateTime.Element.ToJSON())
+		}
+	}
+	output.AbatementAge = m.AbatementAge
+	output.AbatementPeriod = m.AbatementPeriod
+	output.AbatementRange = m.AbatementRange
+	if m.AbatementString != nil && m.AbatementString.Value != nil {
+		output.AbatementString = m.AbatementString.Value
+		if m.AbatementString.Element != nil {
+			output.AbatementStringElement = toMapOrNil(m.AbatementString.Element.ToJSON())
+		}
+	}
+	if m.RecordedDate != nil && m.RecordedDate.Value != nil {
+		output.RecordedDate = m.RecordedDate.Value
+		if m.RecordedDate.Element != nil {
+			output.RecordedDateElement = toMapOrNil(m.RecordedDate.Element.ToJSON())
+		}
+	}
+	output.Recorder = m.Recorder
+	output.Asserter = m.Asserter
+	output.Stage = m.Stage
+	output.Evidence = m.Evidence
+	output.Note = m.Note
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Condition
+// Clone creates a deep copy of Condition.
 func (m *Condition) Clone() *Condition {
 	if m == nil { return nil }
 	return &Condition{
@@ -99,7 +281,7 @@ func (m *Condition) Clone() *Condition {
 	}
 }
 
-// Equals checks for equality with another Condition instance
+// Equals checks equality between two Condition instances.
 func (m *Condition) Equals(other *Condition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -142,7 +324,7 @@ func (m *Condition) Equals(other *Condition) bool {
 // ConditionStage
 // Clinical stage or grade of a condition. May include formal severity assessments.
 type ConditionStage struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -151,22 +333,59 @@ type ConditionStage struct {
 	Type *CodeableConcept `json:"type,omitempty"`
 }
 
-// NewConditionStage creates a new ConditionStage instance
+// NewConditionStage creates a new ConditionStage instance.
 func NewConditionStage() *ConditionStage {
 	return &ConditionStage{}
 }
 
-// FromJSON populates ConditionStage from JSON data
+// FromJSON populates ConditionStage from JSON data.
 func (m *ConditionStage) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Summary *CodeableConcept `json:"summary,omitempty"`
+		Assessment []*Reference `json:"assessment,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Summary = temp.Summary
+	m.Assessment = temp.Assessment
+	m.Type = temp.Type
+	return nil
 }
 
-// ToJSON converts ConditionStage to JSON data
+// ToJSON converts ConditionStage to JSON data.
 func (m *ConditionStage) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Summary *CodeableConcept `json:"summary,omitempty"`
+		Assessment []*Reference `json:"assessment,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Summary = m.Summary
+	output.Assessment = m.Assessment
+	output.Type = m.Type
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ConditionStage
+// Clone creates a deep copy of ConditionStage.
 func (m *ConditionStage) Clone() *ConditionStage {
 	if m == nil { return nil }
 	return &ConditionStage{
@@ -179,7 +398,7 @@ func (m *ConditionStage) Clone() *ConditionStage {
 	}
 }
 
-// Equals checks for equality with another ConditionStage instance
+// Equals checks equality between two ConditionStage instances.
 func (m *ConditionStage) Equals(other *ConditionStage) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -195,7 +414,7 @@ func (m *ConditionStage) Equals(other *ConditionStage) bool {
 // ConditionEvidence
 // Supporting evidence / manifestations that are the basis of the Condition's verification status, such as evidence that confirmed or refuted the condition.
 type ConditionEvidence struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -203,22 +422,55 @@ type ConditionEvidence struct {
 	Detail []*Reference `json:"detail,omitempty"`
 }
 
-// NewConditionEvidence creates a new ConditionEvidence instance
+// NewConditionEvidence creates a new ConditionEvidence instance.
 func NewConditionEvidence() *ConditionEvidence {
 	return &ConditionEvidence{}
 }
 
-// FromJSON populates ConditionEvidence from JSON data
+// FromJSON populates ConditionEvidence from JSON data.
 func (m *ConditionEvidence) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code []*CodeableConcept `json:"code,omitempty"`
+		Detail []*Reference `json:"detail,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Detail = temp.Detail
+	return nil
 }
 
-// ToJSON converts ConditionEvidence to JSON data
+// ToJSON converts ConditionEvidence to JSON data.
 func (m *ConditionEvidence) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code []*CodeableConcept `json:"code,omitempty"`
+		Detail []*Reference `json:"detail,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	output.Detail = m.Detail
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ConditionEvidence
+// Clone creates a deep copy of ConditionEvidence.
 func (m *ConditionEvidence) Clone() *ConditionEvidence {
 	if m == nil { return nil }
 	return &ConditionEvidence{
@@ -230,7 +482,7 @@ func (m *ConditionEvidence) Clone() *ConditionEvidence {
 	}
 }
 
-// Equals checks for equality with another ConditionEvidence instance
+// Equals checks equality between two ConditionEvidence instances.
 func (m *ConditionEvidence) Equals(other *ConditionEvidence) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

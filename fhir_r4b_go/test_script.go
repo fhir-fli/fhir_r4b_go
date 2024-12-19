@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // TestScript
 // A structured set of tests against a FHIR server or client implementation to determine compliance against the FHIR specification.
 type TestScript struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -43,22 +45,229 @@ type TestScript struct {
 	Teardown *TestScriptTeardown `json:"teardown,omitempty"`
 }
 
-// NewTestScript creates a new TestScript instance
+// NewTestScript creates a new TestScript instance.
 func NewTestScript() *TestScript {
 	return &TestScript{}
 }
 
-// FromJSON populates TestScript from JSON data
+// FromJSON populates TestScript from JSON data.
 func (m *TestScript) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental *FhirBoolean `json:"experimental,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Publisher *FhirString `json:"publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose *FhirMarkdown `json:"purpose,omitempty"`
+		Copyright *FhirMarkdown `json:"copyright,omitempty"`
+		Origin []*TestScriptOrigin `json:"origin,omitempty"`
+		Destination []*TestScriptDestination `json:"destination,omitempty"`
+		Metadata *TestScriptMetadata `json:"metadata,omitempty"`
+		Fixture []*TestScriptFixture `json:"fixture,omitempty"`
+		Profile []*Reference `json:"profile,omitempty"`
+		Variable []*TestScriptVariable `json:"variable,omitempty"`
+		Setup *TestScriptSetup `json:"setup,omitempty"`
+		Test []*TestScriptTest `json:"test,omitempty"`
+		Teardown *TestScriptTeardown `json:"teardown,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Url = temp.Url
+	m.Identifier = temp.Identifier
+	m.Version = temp.Version
+	m.Name = temp.Name
+	m.Title = temp.Title
+	m.Status = temp.Status
+	m.Experimental = temp.Experimental
+	m.Date = temp.Date
+	m.Publisher = temp.Publisher
+	m.Contact = temp.Contact
+	m.Description = temp.Description
+	m.UseContext = temp.UseContext
+	m.Jurisdiction = temp.Jurisdiction
+	m.Purpose = temp.Purpose
+	m.Copyright = temp.Copyright
+	m.Origin = temp.Origin
+	m.Destination = temp.Destination
+	m.Metadata = temp.Metadata
+	m.Fixture = temp.Fixture
+	m.Profile = temp.Profile
+	m.Variable = temp.Variable
+	m.Setup = temp.Setup
+	m.Test = temp.Test
+	m.Teardown = temp.Teardown
+	return nil
 }
 
-// ToJSON converts TestScript to JSON data
+// ToJSON converts TestScript to JSON data.
 func (m *TestScript) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental interface{} `json:"experimental,omitempty"`
+		ExperimentalElement map[string]interface{} `json:"_experimental,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Publisher interface{} `json:"publisher,omitempty"`
+		PublisherElement map[string]interface{} `json:"_publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose interface{} `json:"purpose,omitempty"`
+		PurposeElement map[string]interface{} `json:"_purpose,omitempty"`
+		Copyright interface{} `json:"copyright,omitempty"`
+		CopyrightElement map[string]interface{} `json:"_copyright,omitempty"`
+		Origin []*TestScriptOrigin `json:"origin,omitempty"`
+		Destination []*TestScriptDestination `json:"destination,omitempty"`
+		Metadata *TestScriptMetadata `json:"metadata,omitempty"`
+		Fixture []*TestScriptFixture `json:"fixture,omitempty"`
+		Profile []*Reference `json:"profile,omitempty"`
+		Variable []*TestScriptVariable `json:"variable,omitempty"`
+		Setup *TestScriptSetup `json:"setup,omitempty"`
+		Test []*TestScriptTest `json:"test,omitempty"`
+		Teardown *TestScriptTeardown `json:"teardown,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	output.Identifier = m.Identifier
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	output.Status = m.Status
+	if m.Experimental != nil && m.Experimental.Value != nil {
+		output.Experimental = m.Experimental.Value
+		if m.Experimental.Element != nil {
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+		}
+	}
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.Publisher != nil && m.Publisher.Value != nil {
+		output.Publisher = m.Publisher.Value
+		if m.Publisher.Element != nil {
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+		}
+	}
+	output.Contact = m.Contact
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.UseContext = m.UseContext
+	output.Jurisdiction = m.Jurisdiction
+	if m.Purpose != nil && m.Purpose.Value != nil {
+		output.Purpose = m.Purpose.Value
+		if m.Purpose.Element != nil {
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+		}
+	}
+	if m.Copyright != nil && m.Copyright.Value != nil {
+		output.Copyright = m.Copyright.Value
+		if m.Copyright.Element != nil {
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+		}
+	}
+	output.Origin = m.Origin
+	output.Destination = m.Destination
+	output.Metadata = m.Metadata
+	output.Fixture = m.Fixture
+	output.Profile = m.Profile
+	output.Variable = m.Variable
+	output.Setup = m.Setup
+	output.Test = m.Test
+	output.Teardown = m.Teardown
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TestScript
+// Clone creates a deep copy of TestScript.
 func (m *TestScript) Clone() *TestScript {
 	if m == nil { return nil }
 	return &TestScript{
@@ -97,7 +306,7 @@ func (m *TestScript) Clone() *TestScript {
 	}
 }
 
-// Equals checks for equality with another TestScript instance
+// Equals checks equality between two TestScript instances.
 func (m *TestScript) Equals(other *TestScript) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -139,7 +348,7 @@ func (m *TestScript) Equals(other *TestScript) bool {
 // TestScriptOrigin
 // An abstract server used in operations within this test script in the origin element.
 type TestScriptOrigin struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -147,22 +356,61 @@ type TestScriptOrigin struct {
 	Profile *Coding `json:"profile,omitempty"`
 }
 
-// NewTestScriptOrigin creates a new TestScriptOrigin instance
+// NewTestScriptOrigin creates a new TestScriptOrigin instance.
 func NewTestScriptOrigin() *TestScriptOrigin {
 	return &TestScriptOrigin{}
 }
 
-// FromJSON populates TestScriptOrigin from JSON data
+// FromJSON populates TestScriptOrigin from JSON data.
 func (m *TestScriptOrigin) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Index *FhirInteger `json:"index,omitempty"`
+		Profile *Coding `json:"profile,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Index = temp.Index
+	m.Profile = temp.Profile
+	return nil
 }
 
-// ToJSON converts TestScriptOrigin to JSON data
+// ToJSON converts TestScriptOrigin to JSON data.
 func (m *TestScriptOrigin) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Index interface{} `json:"index,omitempty"`
+		IndexElement map[string]interface{} `json:"_index,omitempty"`
+		Profile *Coding `json:"profile,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Index != nil && m.Index.Value != nil {
+		output.Index = m.Index.Value
+		if m.Index.Element != nil {
+			output.IndexElement = toMapOrNil(m.Index.Element.ToJSON())
+		}
+	}
+	output.Profile = m.Profile
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TestScriptOrigin
+// Clone creates a deep copy of TestScriptOrigin.
 func (m *TestScriptOrigin) Clone() *TestScriptOrigin {
 	if m == nil { return nil }
 	return &TestScriptOrigin{
@@ -174,7 +422,7 @@ func (m *TestScriptOrigin) Clone() *TestScriptOrigin {
 	}
 }
 
-// Equals checks for equality with another TestScriptOrigin instance
+// Equals checks equality between two TestScriptOrigin instances.
 func (m *TestScriptOrigin) Equals(other *TestScriptOrigin) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -189,7 +437,7 @@ func (m *TestScriptOrigin) Equals(other *TestScriptOrigin) bool {
 // TestScriptDestination
 // An abstract server used in operations within this test script in the destination element.
 type TestScriptDestination struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -197,22 +445,61 @@ type TestScriptDestination struct {
 	Profile *Coding `json:"profile,omitempty"`
 }
 
-// NewTestScriptDestination creates a new TestScriptDestination instance
+// NewTestScriptDestination creates a new TestScriptDestination instance.
 func NewTestScriptDestination() *TestScriptDestination {
 	return &TestScriptDestination{}
 }
 
-// FromJSON populates TestScriptDestination from JSON data
+// FromJSON populates TestScriptDestination from JSON data.
 func (m *TestScriptDestination) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Index *FhirInteger `json:"index,omitempty"`
+		Profile *Coding `json:"profile,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Index = temp.Index
+	m.Profile = temp.Profile
+	return nil
 }
 
-// ToJSON converts TestScriptDestination to JSON data
+// ToJSON converts TestScriptDestination to JSON data.
 func (m *TestScriptDestination) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Index interface{} `json:"index,omitempty"`
+		IndexElement map[string]interface{} `json:"_index,omitempty"`
+		Profile *Coding `json:"profile,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Index != nil && m.Index.Value != nil {
+		output.Index = m.Index.Value
+		if m.Index.Element != nil {
+			output.IndexElement = toMapOrNil(m.Index.Element.ToJSON())
+		}
+	}
+	output.Profile = m.Profile
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TestScriptDestination
+// Clone creates a deep copy of TestScriptDestination.
 func (m *TestScriptDestination) Clone() *TestScriptDestination {
 	if m == nil { return nil }
 	return &TestScriptDestination{
@@ -224,7 +511,7 @@ func (m *TestScriptDestination) Clone() *TestScriptDestination {
 	}
 }
 
-// Equals checks for equality with another TestScriptDestination instance
+// Equals checks equality between two TestScriptDestination instances.
 func (m *TestScriptDestination) Equals(other *TestScriptDestination) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -239,7 +526,7 @@ func (m *TestScriptDestination) Equals(other *TestScriptDestination) bool {
 // TestScriptMetadata
 // The required capability must exist and are assumed to function correctly on the FHIR server being tested.
 type TestScriptMetadata struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -247,22 +534,55 @@ type TestScriptMetadata struct {
 	Capability []*TestScriptCapability `json:"capability,omitempty"`
 }
 
-// NewTestScriptMetadata creates a new TestScriptMetadata instance
+// NewTestScriptMetadata creates a new TestScriptMetadata instance.
 func NewTestScriptMetadata() *TestScriptMetadata {
 	return &TestScriptMetadata{}
 }
 
-// FromJSON populates TestScriptMetadata from JSON data
+// FromJSON populates TestScriptMetadata from JSON data.
 func (m *TestScriptMetadata) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Link []*TestScriptLink `json:"link,omitempty"`
+		Capability []*TestScriptCapability `json:"capability,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Link = temp.Link
+	m.Capability = temp.Capability
+	return nil
 }
 
-// ToJSON converts TestScriptMetadata to JSON data
+// ToJSON converts TestScriptMetadata to JSON data.
 func (m *TestScriptMetadata) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Link []*TestScriptLink `json:"link,omitempty"`
+		Capability []*TestScriptCapability `json:"capability,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Link = m.Link
+	output.Capability = m.Capability
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TestScriptMetadata
+// Clone creates a deep copy of TestScriptMetadata.
 func (m *TestScriptMetadata) Clone() *TestScriptMetadata {
 	if m == nil { return nil }
 	return &TestScriptMetadata{
@@ -274,7 +594,7 @@ func (m *TestScriptMetadata) Clone() *TestScriptMetadata {
 	}
 }
 
-// Equals checks for equality with another TestScriptMetadata instance
+// Equals checks equality between two TestScriptMetadata instances.
 func (m *TestScriptMetadata) Equals(other *TestScriptMetadata) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -289,7 +609,7 @@ func (m *TestScriptMetadata) Equals(other *TestScriptMetadata) bool {
 // TestScriptLink
 // A link to the FHIR specification that this test is covering.
 type TestScriptLink struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -297,22 +617,67 @@ type TestScriptLink struct {
 	Description *FhirString `json:"description,omitempty"`
 }
 
-// NewTestScriptLink creates a new TestScriptLink instance
+// NewTestScriptLink creates a new TestScriptLink instance.
 func NewTestScriptLink() *TestScriptLink {
 	return &TestScriptLink{}
 }
 
-// FromJSON populates TestScriptLink from JSON data
+// FromJSON populates TestScriptLink from JSON data.
 func (m *TestScriptLink) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Url = temp.Url
+	m.Description = temp.Description
+	return nil
 }
 
-// ToJSON converts TestScriptLink to JSON data
+// ToJSON converts TestScriptLink to JSON data.
 func (m *TestScriptLink) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TestScriptLink
+// Clone creates a deep copy of TestScriptLink.
 func (m *TestScriptLink) Clone() *TestScriptLink {
 	if m == nil { return nil }
 	return &TestScriptLink{
@@ -324,7 +689,7 @@ func (m *TestScriptLink) Clone() *TestScriptLink {
 	}
 }
 
-// Equals checks for equality with another TestScriptLink instance
+// Equals checks equality between two TestScriptLink instances.
 func (m *TestScriptLink) Equals(other *TestScriptLink) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -339,7 +704,7 @@ func (m *TestScriptLink) Equals(other *TestScriptLink) bool {
 // TestScriptCapability
 // Capabilities that must exist and are assumed to function correctly on the FHIR server being tested.
 type TestScriptCapability struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -352,22 +717,147 @@ type TestScriptCapability struct {
 	Capabilities *FhirCanonical `json:"capabilities,omitempty"`
 }
 
-// NewTestScriptCapability creates a new TestScriptCapability instance
+// NewTestScriptCapability creates a new TestScriptCapability instance.
 func NewTestScriptCapability() *TestScriptCapability {
 	return &TestScriptCapability{}
 }
 
-// FromJSON populates TestScriptCapability from JSON data
+// FromJSON populates TestScriptCapability from JSON data.
 func (m *TestScriptCapability) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Required_ *FhirBoolean `json:"required,omitempty"`
+		Validated *FhirBoolean `json:"validated,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Origin []interface{} `json:"origin,omitempty"`
+		Destination *FhirInteger `json:"destination,omitempty"`
+		Link []interface{} `json:"link,omitempty"`
+		Capabilities *FhirCanonical `json:"capabilities,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Required_ = temp.Required_
+	m.Validated = temp.Validated
+	m.Description = temp.Description
+	if len(temp.Origin) > 0 {
+		m.Origin = make([]*FhirInteger, len(temp.Origin))
+		for i := range temp.Origin {
+			itemMap, ok := temp.Origin[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Origin[%d]: expected map", i) }
+			primitive, err := NewFhirIntegerFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Origin[%d]: %v", i, err) }
+			m.Origin[i] = primitive
+		}
+	}
+	m.Destination = temp.Destination
+	if len(temp.Link) > 0 {
+		m.Link = make([]*FhirUri, len(temp.Link))
+		for i := range temp.Link {
+			itemMap, ok := temp.Link[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Link[%d]: expected map", i) }
+			primitive, err := NewFhirUriFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Link[%d]: %v", i, err) }
+			m.Link[i] = primitive
+		}
+	}
+	m.Capabilities = temp.Capabilities
+	return nil
 }
 
-// ToJSON converts TestScriptCapability to JSON data
+// ToJSON converts TestScriptCapability to JSON data.
 func (m *TestScriptCapability) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Required_ interface{} `json:"required,omitempty"`
+		Required_Element map[string]interface{} `json:"_required,omitempty"`
+		Validated interface{} `json:"validated,omitempty"`
+		ValidatedElement map[string]interface{} `json:"_validated,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Origin []interface{} `json:"origin,omitempty"`
+		OriginElement []map[string]interface{} `json:"_origin,omitempty"`
+		Destination interface{} `json:"destination,omitempty"`
+		DestinationElement map[string]interface{} `json:"_destination,omitempty"`
+		Link []interface{} `json:"link,omitempty"`
+		LinkElement []map[string]interface{} `json:"_link,omitempty"`
+		Capabilities interface{} `json:"capabilities,omitempty"`
+		CapabilitiesElement map[string]interface{} `json:"_capabilities,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Required_ != nil && m.Required_.Value != nil {
+		output.Required_ = m.Required_.Value
+		if m.Required_.Element != nil {
+			output.Required_Element = toMapOrNil(m.Required_.Element.ToJSON())
+		}
+	}
+	if m.Validated != nil && m.Validated.Value != nil {
+		output.Validated = m.Validated.Value
+		if m.Validated.Element != nil {
+			output.ValidatedElement = toMapOrNil(m.Validated.Element.ToJSON())
+		}
+	}
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	if len(m.Origin) > 0 {
+		output.Origin = make([]interface{}, len(m.Origin))
+		output.OriginElement = make([]map[string]interface{}, len(m.Origin))
+		for i, item := range m.Origin {
+			if item != nil && item.Value != nil {
+				output.Origin[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.OriginElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if m.Destination != nil && m.Destination.Value != nil {
+		output.Destination = m.Destination.Value
+		if m.Destination.Element != nil {
+			output.DestinationElement = toMapOrNil(m.Destination.Element.ToJSON())
+		}
+	}
+	if len(m.Link) > 0 {
+		output.Link = make([]interface{}, len(m.Link))
+		output.LinkElement = make([]map[string]interface{}, len(m.Link))
+		for i, item := range m.Link {
+			if item != nil && item.Value != nil {
+				output.Link[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.LinkElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if m.Capabilities != nil && m.Capabilities.Value != nil {
+		output.Capabilities = m.Capabilities.Value
+		if m.Capabilities.Element != nil {
+			output.CapabilitiesElement = toMapOrNil(m.Capabilities.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TestScriptCapability
+// Clone creates a deep copy of TestScriptCapability.
 func (m *TestScriptCapability) Clone() *TestScriptCapability {
 	if m == nil { return nil }
 	return &TestScriptCapability{
@@ -384,7 +874,7 @@ func (m *TestScriptCapability) Clone() *TestScriptCapability {
 	}
 }
 
-// Equals checks for equality with another TestScriptCapability instance
+// Equals checks equality between two TestScriptCapability instances.
 func (m *TestScriptCapability) Equals(other *TestScriptCapability) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -404,7 +894,7 @@ func (m *TestScriptCapability) Equals(other *TestScriptCapability) bool {
 // TestScriptFixture
 // Fixture in the test script - by reference (uri). All fixtures are required for the test script to execute.
 type TestScriptFixture struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -413,22 +903,71 @@ type TestScriptFixture struct {
 	Resource *Reference `json:"resource,omitempty"`
 }
 
-// NewTestScriptFixture creates a new TestScriptFixture instance
+// NewTestScriptFixture creates a new TestScriptFixture instance.
 func NewTestScriptFixture() *TestScriptFixture {
 	return &TestScriptFixture{}
 }
 
-// FromJSON populates TestScriptFixture from JSON data
+// FromJSON populates TestScriptFixture from JSON data.
 func (m *TestScriptFixture) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Autocreate *FhirBoolean `json:"autocreate,omitempty"`
+		Autodelete *FhirBoolean `json:"autodelete,omitempty"`
+		Resource *Reference `json:"resource,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Autocreate = temp.Autocreate
+	m.Autodelete = temp.Autodelete
+	m.Resource = temp.Resource
+	return nil
 }
 
-// ToJSON converts TestScriptFixture to JSON data
+// ToJSON converts TestScriptFixture to JSON data.
 func (m *TestScriptFixture) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Autocreate interface{} `json:"autocreate,omitempty"`
+		AutocreateElement map[string]interface{} `json:"_autocreate,omitempty"`
+		Autodelete interface{} `json:"autodelete,omitempty"`
+		AutodeleteElement map[string]interface{} `json:"_autodelete,omitempty"`
+		Resource *Reference `json:"resource,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Autocreate != nil && m.Autocreate.Value != nil {
+		output.Autocreate = m.Autocreate.Value
+		if m.Autocreate.Element != nil {
+			output.AutocreateElement = toMapOrNil(m.Autocreate.Element.ToJSON())
+		}
+	}
+	if m.Autodelete != nil && m.Autodelete.Value != nil {
+		output.Autodelete = m.Autodelete.Value
+		if m.Autodelete.Element != nil {
+			output.AutodeleteElement = toMapOrNil(m.Autodelete.Element.ToJSON())
+		}
+	}
+	output.Resource = m.Resource
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TestScriptFixture
+// Clone creates a deep copy of TestScriptFixture.
 func (m *TestScriptFixture) Clone() *TestScriptFixture {
 	if m == nil { return nil }
 	return &TestScriptFixture{
@@ -441,7 +980,7 @@ func (m *TestScriptFixture) Clone() *TestScriptFixture {
 	}
 }
 
-// Equals checks for equality with another TestScriptFixture instance
+// Equals checks equality between two TestScriptFixture instances.
 func (m *TestScriptFixture) Equals(other *TestScriptFixture) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -457,7 +996,7 @@ func (m *TestScriptFixture) Equals(other *TestScriptFixture) bool {
 // TestScriptVariable
 // Variable is set based either on element value in response body or on header field value in the response headers.
 type TestScriptVariable struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -471,22 +1010,127 @@ type TestScriptVariable struct {
 	SourceId *FhirId `json:"sourceid,omitempty"`
 }
 
-// NewTestScriptVariable creates a new TestScriptVariable instance
+// NewTestScriptVariable creates a new TestScriptVariable instance.
 func NewTestScriptVariable() *TestScriptVariable {
 	return &TestScriptVariable{}
 }
 
-// FromJSON populates TestScriptVariable from JSON data
+// FromJSON populates TestScriptVariable from JSON data.
 func (m *TestScriptVariable) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		DefaultValue *FhirString `json:"defaultvalue,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Expression *FhirString `json:"expression,omitempty"`
+		HeaderField *FhirString `json:"headerfield,omitempty"`
+		Hint *FhirString `json:"hint,omitempty"`
+		Path *FhirString `json:"path,omitempty"`
+		SourceId *FhirId `json:"sourceid,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Name = temp.Name
+	m.DefaultValue = temp.DefaultValue
+	m.Description = temp.Description
+	m.Expression = temp.Expression
+	m.HeaderField = temp.HeaderField
+	m.Hint = temp.Hint
+	m.Path = temp.Path
+	m.SourceId = temp.SourceId
+	return nil
 }
 
-// ToJSON converts TestScriptVariable to JSON data
+// ToJSON converts TestScriptVariable to JSON data.
 func (m *TestScriptVariable) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		DefaultValue interface{} `json:"defaultvalue,omitempty"`
+		DefaultValueElement map[string]interface{} `json:"_defaultvalue,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Expression interface{} `json:"expression,omitempty"`
+		ExpressionElement map[string]interface{} `json:"_expression,omitempty"`
+		HeaderField interface{} `json:"headerfield,omitempty"`
+		HeaderFieldElement map[string]interface{} `json:"_headerfield,omitempty"`
+		Hint interface{} `json:"hint,omitempty"`
+		HintElement map[string]interface{} `json:"_hint,omitempty"`
+		Path interface{} `json:"path,omitempty"`
+		PathElement map[string]interface{} `json:"_path,omitempty"`
+		SourceId interface{} `json:"sourceid,omitempty"`
+		SourceIdElement map[string]interface{} `json:"_sourceid,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.DefaultValue != nil && m.DefaultValue.Value != nil {
+		output.DefaultValue = m.DefaultValue.Value
+		if m.DefaultValue.Element != nil {
+			output.DefaultValueElement = toMapOrNil(m.DefaultValue.Element.ToJSON())
+		}
+	}
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	if m.Expression != nil && m.Expression.Value != nil {
+		output.Expression = m.Expression.Value
+		if m.Expression.Element != nil {
+			output.ExpressionElement = toMapOrNil(m.Expression.Element.ToJSON())
+		}
+	}
+	if m.HeaderField != nil && m.HeaderField.Value != nil {
+		output.HeaderField = m.HeaderField.Value
+		if m.HeaderField.Element != nil {
+			output.HeaderFieldElement = toMapOrNil(m.HeaderField.Element.ToJSON())
+		}
+	}
+	if m.Hint != nil && m.Hint.Value != nil {
+		output.Hint = m.Hint.Value
+		if m.Hint.Element != nil {
+			output.HintElement = toMapOrNil(m.Hint.Element.ToJSON())
+		}
+	}
+	if m.Path != nil && m.Path.Value != nil {
+		output.Path = m.Path.Value
+		if m.Path.Element != nil {
+			output.PathElement = toMapOrNil(m.Path.Element.ToJSON())
+		}
+	}
+	if m.SourceId != nil && m.SourceId.Value != nil {
+		output.SourceId = m.SourceId.Value
+		if m.SourceId.Element != nil {
+			output.SourceIdElement = toMapOrNil(m.SourceId.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TestScriptVariable
+// Clone creates a deep copy of TestScriptVariable.
 func (m *TestScriptVariable) Clone() *TestScriptVariable {
 	if m == nil { return nil }
 	return &TestScriptVariable{
@@ -504,7 +1148,7 @@ func (m *TestScriptVariable) Clone() *TestScriptVariable {
 	}
 }
 
-// Equals checks for equality with another TestScriptVariable instance
+// Equals checks equality between two TestScriptVariable instances.
 func (m *TestScriptVariable) Equals(other *TestScriptVariable) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -525,29 +1169,58 @@ func (m *TestScriptVariable) Equals(other *TestScriptVariable) bool {
 // TestScriptSetup
 // A series of required setup operations before tests are executed.
 type TestScriptSetup struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
 	Action []*TestScriptAction `json:"action,omitempty"`
 }
 
-// NewTestScriptSetup creates a new TestScriptSetup instance
+// NewTestScriptSetup creates a new TestScriptSetup instance.
 func NewTestScriptSetup() *TestScriptSetup {
 	return &TestScriptSetup{}
 }
 
-// FromJSON populates TestScriptSetup from JSON data
+// FromJSON populates TestScriptSetup from JSON data.
 func (m *TestScriptSetup) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Action []*TestScriptAction `json:"action,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Action = temp.Action
+	return nil
 }
 
-// ToJSON converts TestScriptSetup to JSON data
+// ToJSON converts TestScriptSetup to JSON data.
 func (m *TestScriptSetup) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Action []*TestScriptAction `json:"action,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Action = m.Action
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TestScriptSetup
+// Clone creates a deep copy of TestScriptSetup.
 func (m *TestScriptSetup) Clone() *TestScriptSetup {
 	if m == nil { return nil }
 	return &TestScriptSetup{
@@ -558,7 +1231,7 @@ func (m *TestScriptSetup) Clone() *TestScriptSetup {
 	}
 }
 
-// Equals checks for equality with another TestScriptSetup instance
+// Equals checks equality between two TestScriptSetup instances.
 func (m *TestScriptSetup) Equals(other *TestScriptSetup) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -572,7 +1245,7 @@ func (m *TestScriptSetup) Equals(other *TestScriptSetup) bool {
 // TestScriptAction
 // Action would contain either an operation or an assertion.
 type TestScriptAction struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -580,22 +1253,55 @@ type TestScriptAction struct {
 	Assert_ *TestScriptAssert `json:"assert,omitempty"`
 }
 
-// NewTestScriptAction creates a new TestScriptAction instance
+// NewTestScriptAction creates a new TestScriptAction instance.
 func NewTestScriptAction() *TestScriptAction {
 	return &TestScriptAction{}
 }
 
-// FromJSON populates TestScriptAction from JSON data
+// FromJSON populates TestScriptAction from JSON data.
 func (m *TestScriptAction) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Operation *TestScriptOperation `json:"operation,omitempty"`
+		Assert_ *TestScriptAssert `json:"assert,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Operation = temp.Operation
+	m.Assert_ = temp.Assert_
+	return nil
 }
 
-// ToJSON converts TestScriptAction to JSON data
+// ToJSON converts TestScriptAction to JSON data.
 func (m *TestScriptAction) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Operation *TestScriptOperation `json:"operation,omitempty"`
+		Assert_ *TestScriptAssert `json:"assert,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Operation = m.Operation
+	output.Assert_ = m.Assert_
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TestScriptAction
+// Clone creates a deep copy of TestScriptAction.
 func (m *TestScriptAction) Clone() *TestScriptAction {
 	if m == nil { return nil }
 	return &TestScriptAction{
@@ -607,7 +1313,7 @@ func (m *TestScriptAction) Clone() *TestScriptAction {
 	}
 }
 
-// Equals checks for equality with another TestScriptAction instance
+// Equals checks equality between two TestScriptAction instances.
 func (m *TestScriptAction) Equals(other *TestScriptAction) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -622,7 +1328,7 @@ func (m *TestScriptAction) Equals(other *TestScriptAction) bool {
 // TestScriptOperation
 // The operation to perform.
 type TestScriptOperation struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -645,22 +1351,199 @@ type TestScriptOperation struct {
 	Url *FhirString `json:"url,omitempty"`
 }
 
-// NewTestScriptOperation creates a new TestScriptOperation instance
+// NewTestScriptOperation creates a new TestScriptOperation instance.
 func NewTestScriptOperation() *TestScriptOperation {
 	return &TestScriptOperation{}
 }
 
-// FromJSON populates TestScriptOperation from JSON data
+// FromJSON populates TestScriptOperation from JSON data.
 func (m *TestScriptOperation) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *Coding `json:"type,omitempty"`
+		Resource *FhirCode `json:"resource,omitempty"`
+		Label *FhirString `json:"label,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Accept *FhirCode `json:"accept,omitempty"`
+		ContentType *FhirCode `json:"contenttype,omitempty"`
+		Destination *FhirInteger `json:"destination,omitempty"`
+		EncodeRequestUrl *FhirBoolean `json:"encoderequesturl,omitempty"`
+		Method *TestScriptRequestMethodCode `json:"method,omitempty"`
+		Origin *FhirInteger `json:"origin,omitempty"`
+		Params *FhirString `json:"params,omitempty"`
+		RequestHeader []*TestScriptRequestHeader `json:"requestheader,omitempty"`
+		RequestId *FhirId `json:"requestid,omitempty"`
+		ResponseId *FhirId `json:"responseid,omitempty"`
+		SourceId *FhirId `json:"sourceid,omitempty"`
+		TargetId *FhirId `json:"targetid,omitempty"`
+		Url *FhirString `json:"url,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Resource = temp.Resource
+	m.Label = temp.Label
+	m.Description = temp.Description
+	m.Accept = temp.Accept
+	m.ContentType = temp.ContentType
+	m.Destination = temp.Destination
+	m.EncodeRequestUrl = temp.EncodeRequestUrl
+	m.Method = temp.Method
+	m.Origin = temp.Origin
+	m.Params = temp.Params
+	m.RequestHeader = temp.RequestHeader
+	m.RequestId = temp.RequestId
+	m.ResponseId = temp.ResponseId
+	m.SourceId = temp.SourceId
+	m.TargetId = temp.TargetId
+	m.Url = temp.Url
+	return nil
 }
 
-// ToJSON converts TestScriptOperation to JSON data
+// ToJSON converts TestScriptOperation to JSON data.
 func (m *TestScriptOperation) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *Coding `json:"type,omitempty"`
+		Resource interface{} `json:"resource,omitempty"`
+		ResourceElement map[string]interface{} `json:"_resource,omitempty"`
+		Label interface{} `json:"label,omitempty"`
+		LabelElement map[string]interface{} `json:"_label,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Accept interface{} `json:"accept,omitempty"`
+		AcceptElement map[string]interface{} `json:"_accept,omitempty"`
+		ContentType interface{} `json:"contenttype,omitempty"`
+		ContentTypeElement map[string]interface{} `json:"_contenttype,omitempty"`
+		Destination interface{} `json:"destination,omitempty"`
+		DestinationElement map[string]interface{} `json:"_destination,omitempty"`
+		EncodeRequestUrl interface{} `json:"encoderequesturl,omitempty"`
+		EncodeRequestUrlElement map[string]interface{} `json:"_encoderequesturl,omitempty"`
+		Method *TestScriptRequestMethodCode `json:"method,omitempty"`
+		Origin interface{} `json:"origin,omitempty"`
+		OriginElement map[string]interface{} `json:"_origin,omitempty"`
+		Params interface{} `json:"params,omitempty"`
+		ParamsElement map[string]interface{} `json:"_params,omitempty"`
+		RequestHeader []*TestScriptRequestHeader `json:"requestheader,omitempty"`
+		RequestId interface{} `json:"requestid,omitempty"`
+		RequestIdElement map[string]interface{} `json:"_requestid,omitempty"`
+		ResponseId interface{} `json:"responseid,omitempty"`
+		ResponseIdElement map[string]interface{} `json:"_responseid,omitempty"`
+		SourceId interface{} `json:"sourceid,omitempty"`
+		SourceIdElement map[string]interface{} `json:"_sourceid,omitempty"`
+		TargetId interface{} `json:"targetid,omitempty"`
+		TargetIdElement map[string]interface{} `json:"_targetid,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	if m.Resource != nil && m.Resource.Value != nil {
+		output.Resource = m.Resource.Value
+		if m.Resource.Element != nil {
+			output.ResourceElement = toMapOrNil(m.Resource.Element.ToJSON())
+		}
+	}
+	if m.Label != nil && m.Label.Value != nil {
+		output.Label = m.Label.Value
+		if m.Label.Element != nil {
+			output.LabelElement = toMapOrNil(m.Label.Element.ToJSON())
+		}
+	}
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	if m.Accept != nil && m.Accept.Value != nil {
+		output.Accept = m.Accept.Value
+		if m.Accept.Element != nil {
+			output.AcceptElement = toMapOrNil(m.Accept.Element.ToJSON())
+		}
+	}
+	if m.ContentType != nil && m.ContentType.Value != nil {
+		output.ContentType = m.ContentType.Value
+		if m.ContentType.Element != nil {
+			output.ContentTypeElement = toMapOrNil(m.ContentType.Element.ToJSON())
+		}
+	}
+	if m.Destination != nil && m.Destination.Value != nil {
+		output.Destination = m.Destination.Value
+		if m.Destination.Element != nil {
+			output.DestinationElement = toMapOrNil(m.Destination.Element.ToJSON())
+		}
+	}
+	if m.EncodeRequestUrl != nil && m.EncodeRequestUrl.Value != nil {
+		output.EncodeRequestUrl = m.EncodeRequestUrl.Value
+		if m.EncodeRequestUrl.Element != nil {
+			output.EncodeRequestUrlElement = toMapOrNil(m.EncodeRequestUrl.Element.ToJSON())
+		}
+	}
+	output.Method = m.Method
+	if m.Origin != nil && m.Origin.Value != nil {
+		output.Origin = m.Origin.Value
+		if m.Origin.Element != nil {
+			output.OriginElement = toMapOrNil(m.Origin.Element.ToJSON())
+		}
+	}
+	if m.Params != nil && m.Params.Value != nil {
+		output.Params = m.Params.Value
+		if m.Params.Element != nil {
+			output.ParamsElement = toMapOrNil(m.Params.Element.ToJSON())
+		}
+	}
+	output.RequestHeader = m.RequestHeader
+	if m.RequestId != nil && m.RequestId.Value != nil {
+		output.RequestId = m.RequestId.Value
+		if m.RequestId.Element != nil {
+			output.RequestIdElement = toMapOrNil(m.RequestId.Element.ToJSON())
+		}
+	}
+	if m.ResponseId != nil && m.ResponseId.Value != nil {
+		output.ResponseId = m.ResponseId.Value
+		if m.ResponseId.Element != nil {
+			output.ResponseIdElement = toMapOrNil(m.ResponseId.Element.ToJSON())
+		}
+	}
+	if m.SourceId != nil && m.SourceId.Value != nil {
+		output.SourceId = m.SourceId.Value
+		if m.SourceId.Element != nil {
+			output.SourceIdElement = toMapOrNil(m.SourceId.Element.ToJSON())
+		}
+	}
+	if m.TargetId != nil && m.TargetId.Value != nil {
+		output.TargetId = m.TargetId.Value
+		if m.TargetId.Element != nil {
+			output.TargetIdElement = toMapOrNil(m.TargetId.Element.ToJSON())
+		}
+	}
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TestScriptOperation
+// Clone creates a deep copy of TestScriptOperation.
 func (m *TestScriptOperation) Clone() *TestScriptOperation {
 	if m == nil { return nil }
 	return &TestScriptOperation{
@@ -687,7 +1570,7 @@ func (m *TestScriptOperation) Clone() *TestScriptOperation {
 	}
 }
 
-// Equals checks for equality with another TestScriptOperation instance
+// Equals checks equality between two TestScriptOperation instances.
 func (m *TestScriptOperation) Equals(other *TestScriptOperation) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -717,7 +1600,7 @@ func (m *TestScriptOperation) Equals(other *TestScriptOperation) bool {
 // TestScriptRequestHeader
 // Header elements would be used to set HTTP headers.
 type TestScriptRequestHeader struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -725,22 +1608,67 @@ type TestScriptRequestHeader struct {
 	Value *FhirString `json:"value,omitempty"`
 }
 
-// NewTestScriptRequestHeader creates a new TestScriptRequestHeader instance
+// NewTestScriptRequestHeader creates a new TestScriptRequestHeader instance.
 func NewTestScriptRequestHeader() *TestScriptRequestHeader {
 	return &TestScriptRequestHeader{}
 }
 
-// FromJSON populates TestScriptRequestHeader from JSON data
+// FromJSON populates TestScriptRequestHeader from JSON data.
 func (m *TestScriptRequestHeader) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Field *FhirString `json:"field,omitempty"`
+		Value *FhirString `json:"value,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Field = temp.Field
+	m.Value = temp.Value
+	return nil
 }
 
-// ToJSON converts TestScriptRequestHeader to JSON data
+// ToJSON converts TestScriptRequestHeader to JSON data.
 func (m *TestScriptRequestHeader) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Field interface{} `json:"field,omitempty"`
+		FieldElement map[string]interface{} `json:"_field,omitempty"`
+		Value interface{} `json:"value,omitempty"`
+		ValueElement map[string]interface{} `json:"_value,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Field != nil && m.Field.Value != nil {
+		output.Field = m.Field.Value
+		if m.Field.Element != nil {
+			output.FieldElement = toMapOrNil(m.Field.Element.ToJSON())
+		}
+	}
+	if m.Value != nil && m.Value.Value != nil {
+		output.Value = m.Value.Value
+		if m.Value.Element != nil {
+			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TestScriptRequestHeader
+// Clone creates a deep copy of TestScriptRequestHeader.
 func (m *TestScriptRequestHeader) Clone() *TestScriptRequestHeader {
 	if m == nil { return nil }
 	return &TestScriptRequestHeader{
@@ -752,7 +1680,7 @@ func (m *TestScriptRequestHeader) Clone() *TestScriptRequestHeader {
 	}
 }
 
-// Equals checks for equality with another TestScriptRequestHeader instance
+// Equals checks equality between two TestScriptRequestHeader instances.
 func (m *TestScriptRequestHeader) Equals(other *TestScriptRequestHeader) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -767,7 +1695,7 @@ func (m *TestScriptRequestHeader) Equals(other *TestScriptRequestHeader) bool {
 // TestScriptAssert
 // Evaluates the results of previous operations to determine if the server under test behaves appropriately.
 type TestScriptAssert struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -795,22 +1723,243 @@ type TestScriptAssert struct {
 	WarningOnly *FhirBoolean `json:"warningonly,omitempty"`
 }
 
-// NewTestScriptAssert creates a new TestScriptAssert instance
+// NewTestScriptAssert creates a new TestScriptAssert instance.
 func NewTestScriptAssert() *TestScriptAssert {
 	return &TestScriptAssert{}
 }
 
-// FromJSON populates TestScriptAssert from JSON data
+// FromJSON populates TestScriptAssert from JSON data.
 func (m *TestScriptAssert) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Label *FhirString `json:"label,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Direction *AssertionDirectionType `json:"direction,omitempty"`
+		CompareToSourceId *FhirString `json:"comparetosourceid,omitempty"`
+		CompareToSourceExpression *FhirString `json:"comparetosourceexpression,omitempty"`
+		CompareToSourcePath *FhirString `json:"comparetosourcepath,omitempty"`
+		ContentType *FhirCode `json:"contenttype,omitempty"`
+		Expression *FhirString `json:"expression,omitempty"`
+		HeaderField *FhirString `json:"headerfield,omitempty"`
+		MinimumId *FhirString `json:"minimumid,omitempty"`
+		NavigationLinks *FhirBoolean `json:"navigationlinks,omitempty"`
+		Operator_ *AssertionOperatorType `json:"operator,omitempty"`
+		Path *FhirString `json:"path,omitempty"`
+		RequestMethod *TestScriptRequestMethodCode `json:"requestmethod,omitempty"`
+		RequestURL *FhirString `json:"requesturl,omitempty"`
+		Resource *FhirCode `json:"resource,omitempty"`
+		Response *AssertionResponseTypes `json:"response,omitempty"`
+		ResponseCode *FhirString `json:"responsecode,omitempty"`
+		SourceId *FhirId `json:"sourceid,omitempty"`
+		ValidateProfileId *FhirId `json:"validateprofileid,omitempty"`
+		Value *FhirString `json:"value,omitempty"`
+		WarningOnly *FhirBoolean `json:"warningonly,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Label = temp.Label
+	m.Description = temp.Description
+	m.Direction = temp.Direction
+	m.CompareToSourceId = temp.CompareToSourceId
+	m.CompareToSourceExpression = temp.CompareToSourceExpression
+	m.CompareToSourcePath = temp.CompareToSourcePath
+	m.ContentType = temp.ContentType
+	m.Expression = temp.Expression
+	m.HeaderField = temp.HeaderField
+	m.MinimumId = temp.MinimumId
+	m.NavigationLinks = temp.NavigationLinks
+	m.Operator_ = temp.Operator_
+	m.Path = temp.Path
+	m.RequestMethod = temp.RequestMethod
+	m.RequestURL = temp.RequestURL
+	m.Resource = temp.Resource
+	m.Response = temp.Response
+	m.ResponseCode = temp.ResponseCode
+	m.SourceId = temp.SourceId
+	m.ValidateProfileId = temp.ValidateProfileId
+	m.Value = temp.Value
+	m.WarningOnly = temp.WarningOnly
+	return nil
 }
 
-// ToJSON converts TestScriptAssert to JSON data
+// ToJSON converts TestScriptAssert to JSON data.
 func (m *TestScriptAssert) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Label interface{} `json:"label,omitempty"`
+		LabelElement map[string]interface{} `json:"_label,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Direction *AssertionDirectionType `json:"direction,omitempty"`
+		CompareToSourceId interface{} `json:"comparetosourceid,omitempty"`
+		CompareToSourceIdElement map[string]interface{} `json:"_comparetosourceid,omitempty"`
+		CompareToSourceExpression interface{} `json:"comparetosourceexpression,omitempty"`
+		CompareToSourceExpressionElement map[string]interface{} `json:"_comparetosourceexpression,omitempty"`
+		CompareToSourcePath interface{} `json:"comparetosourcepath,omitempty"`
+		CompareToSourcePathElement map[string]interface{} `json:"_comparetosourcepath,omitempty"`
+		ContentType interface{} `json:"contenttype,omitempty"`
+		ContentTypeElement map[string]interface{} `json:"_contenttype,omitempty"`
+		Expression interface{} `json:"expression,omitempty"`
+		ExpressionElement map[string]interface{} `json:"_expression,omitempty"`
+		HeaderField interface{} `json:"headerfield,omitempty"`
+		HeaderFieldElement map[string]interface{} `json:"_headerfield,omitempty"`
+		MinimumId interface{} `json:"minimumid,omitempty"`
+		MinimumIdElement map[string]interface{} `json:"_minimumid,omitempty"`
+		NavigationLinks interface{} `json:"navigationlinks,omitempty"`
+		NavigationLinksElement map[string]interface{} `json:"_navigationlinks,omitempty"`
+		Operator_ *AssertionOperatorType `json:"operator,omitempty"`
+		Path interface{} `json:"path,omitempty"`
+		PathElement map[string]interface{} `json:"_path,omitempty"`
+		RequestMethod *TestScriptRequestMethodCode `json:"requestmethod,omitempty"`
+		RequestURL interface{} `json:"requesturl,omitempty"`
+		RequestURLElement map[string]interface{} `json:"_requesturl,omitempty"`
+		Resource interface{} `json:"resource,omitempty"`
+		ResourceElement map[string]interface{} `json:"_resource,omitempty"`
+		Response *AssertionResponseTypes `json:"response,omitempty"`
+		ResponseCode interface{} `json:"responsecode,omitempty"`
+		ResponseCodeElement map[string]interface{} `json:"_responsecode,omitempty"`
+		SourceId interface{} `json:"sourceid,omitempty"`
+		SourceIdElement map[string]interface{} `json:"_sourceid,omitempty"`
+		ValidateProfileId interface{} `json:"validateprofileid,omitempty"`
+		ValidateProfileIdElement map[string]interface{} `json:"_validateprofileid,omitempty"`
+		Value interface{} `json:"value,omitempty"`
+		ValueElement map[string]interface{} `json:"_value,omitempty"`
+		WarningOnly interface{} `json:"warningonly,omitempty"`
+		WarningOnlyElement map[string]interface{} `json:"_warningonly,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Label != nil && m.Label.Value != nil {
+		output.Label = m.Label.Value
+		if m.Label.Element != nil {
+			output.LabelElement = toMapOrNil(m.Label.Element.ToJSON())
+		}
+	}
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Direction = m.Direction
+	if m.CompareToSourceId != nil && m.CompareToSourceId.Value != nil {
+		output.CompareToSourceId = m.CompareToSourceId.Value
+		if m.CompareToSourceId.Element != nil {
+			output.CompareToSourceIdElement = toMapOrNil(m.CompareToSourceId.Element.ToJSON())
+		}
+	}
+	if m.CompareToSourceExpression != nil && m.CompareToSourceExpression.Value != nil {
+		output.CompareToSourceExpression = m.CompareToSourceExpression.Value
+		if m.CompareToSourceExpression.Element != nil {
+			output.CompareToSourceExpressionElement = toMapOrNil(m.CompareToSourceExpression.Element.ToJSON())
+		}
+	}
+	if m.CompareToSourcePath != nil && m.CompareToSourcePath.Value != nil {
+		output.CompareToSourcePath = m.CompareToSourcePath.Value
+		if m.CompareToSourcePath.Element != nil {
+			output.CompareToSourcePathElement = toMapOrNil(m.CompareToSourcePath.Element.ToJSON())
+		}
+	}
+	if m.ContentType != nil && m.ContentType.Value != nil {
+		output.ContentType = m.ContentType.Value
+		if m.ContentType.Element != nil {
+			output.ContentTypeElement = toMapOrNil(m.ContentType.Element.ToJSON())
+		}
+	}
+	if m.Expression != nil && m.Expression.Value != nil {
+		output.Expression = m.Expression.Value
+		if m.Expression.Element != nil {
+			output.ExpressionElement = toMapOrNil(m.Expression.Element.ToJSON())
+		}
+	}
+	if m.HeaderField != nil && m.HeaderField.Value != nil {
+		output.HeaderField = m.HeaderField.Value
+		if m.HeaderField.Element != nil {
+			output.HeaderFieldElement = toMapOrNil(m.HeaderField.Element.ToJSON())
+		}
+	}
+	if m.MinimumId != nil && m.MinimumId.Value != nil {
+		output.MinimumId = m.MinimumId.Value
+		if m.MinimumId.Element != nil {
+			output.MinimumIdElement = toMapOrNil(m.MinimumId.Element.ToJSON())
+		}
+	}
+	if m.NavigationLinks != nil && m.NavigationLinks.Value != nil {
+		output.NavigationLinks = m.NavigationLinks.Value
+		if m.NavigationLinks.Element != nil {
+			output.NavigationLinksElement = toMapOrNil(m.NavigationLinks.Element.ToJSON())
+		}
+	}
+	output.Operator_ = m.Operator_
+	if m.Path != nil && m.Path.Value != nil {
+		output.Path = m.Path.Value
+		if m.Path.Element != nil {
+			output.PathElement = toMapOrNil(m.Path.Element.ToJSON())
+		}
+	}
+	output.RequestMethod = m.RequestMethod
+	if m.RequestURL != nil && m.RequestURL.Value != nil {
+		output.RequestURL = m.RequestURL.Value
+		if m.RequestURL.Element != nil {
+			output.RequestURLElement = toMapOrNil(m.RequestURL.Element.ToJSON())
+		}
+	}
+	if m.Resource != nil && m.Resource.Value != nil {
+		output.Resource = m.Resource.Value
+		if m.Resource.Element != nil {
+			output.ResourceElement = toMapOrNil(m.Resource.Element.ToJSON())
+		}
+	}
+	output.Response = m.Response
+	if m.ResponseCode != nil && m.ResponseCode.Value != nil {
+		output.ResponseCode = m.ResponseCode.Value
+		if m.ResponseCode.Element != nil {
+			output.ResponseCodeElement = toMapOrNil(m.ResponseCode.Element.ToJSON())
+		}
+	}
+	if m.SourceId != nil && m.SourceId.Value != nil {
+		output.SourceId = m.SourceId.Value
+		if m.SourceId.Element != nil {
+			output.SourceIdElement = toMapOrNil(m.SourceId.Element.ToJSON())
+		}
+	}
+	if m.ValidateProfileId != nil && m.ValidateProfileId.Value != nil {
+		output.ValidateProfileId = m.ValidateProfileId.Value
+		if m.ValidateProfileId.Element != nil {
+			output.ValidateProfileIdElement = toMapOrNil(m.ValidateProfileId.Element.ToJSON())
+		}
+	}
+	if m.Value != nil && m.Value.Value != nil {
+		output.Value = m.Value.Value
+		if m.Value.Element != nil {
+			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+		}
+	}
+	if m.WarningOnly != nil && m.WarningOnly.Value != nil {
+		output.WarningOnly = m.WarningOnly.Value
+		if m.WarningOnly.Element != nil {
+			output.WarningOnlyElement = toMapOrNil(m.WarningOnly.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TestScriptAssert
+// Clone creates a deep copy of TestScriptAssert.
 func (m *TestScriptAssert) Clone() *TestScriptAssert {
 	if m == nil { return nil }
 	return &TestScriptAssert{
@@ -842,7 +1991,7 @@ func (m *TestScriptAssert) Clone() *TestScriptAssert {
 	}
 }
 
-// Equals checks for equality with another TestScriptAssert instance
+// Equals checks equality between two TestScriptAssert instances.
 func (m *TestScriptAssert) Equals(other *TestScriptAssert) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -877,7 +2026,7 @@ func (m *TestScriptAssert) Equals(other *TestScriptAssert) bool {
 // TestScriptTest
 // A test in this script.
 type TestScriptTest struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -886,22 +2035,71 @@ type TestScriptTest struct {
 	Action []*TestScriptAction `json:"action,omitempty"`
 }
 
-// NewTestScriptTest creates a new TestScriptTest instance
+// NewTestScriptTest creates a new TestScriptTest instance.
 func NewTestScriptTest() *TestScriptTest {
 	return &TestScriptTest{}
 }
 
-// FromJSON populates TestScriptTest from JSON data
+// FromJSON populates TestScriptTest from JSON data.
 func (m *TestScriptTest) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Action []*TestScriptAction `json:"action,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Name = temp.Name
+	m.Description = temp.Description
+	m.Action = temp.Action
+	return nil
 }
 
-// ToJSON converts TestScriptTest to JSON data
+// ToJSON converts TestScriptTest to JSON data.
 func (m *TestScriptTest) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Action []*TestScriptAction `json:"action,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Action = m.Action
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TestScriptTest
+// Clone creates a deep copy of TestScriptTest.
 func (m *TestScriptTest) Clone() *TestScriptTest {
 	if m == nil { return nil }
 	return &TestScriptTest{
@@ -914,7 +2112,7 @@ func (m *TestScriptTest) Clone() *TestScriptTest {
 	}
 }
 
-// Equals checks for equality with another TestScriptTest instance
+// Equals checks equality between two TestScriptTest instances.
 func (m *TestScriptTest) Equals(other *TestScriptTest) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -930,7 +2128,7 @@ func (m *TestScriptTest) Equals(other *TestScriptTest) bool {
 // TestScriptAction1
 // Action would contain either an operation or an assertion.
 type TestScriptAction1 struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -938,22 +2136,55 @@ type TestScriptAction1 struct {
 	Assert_ *TestScriptAssert `json:"assert,omitempty"`
 }
 
-// NewTestScriptAction1 creates a new TestScriptAction1 instance
+// NewTestScriptAction1 creates a new TestScriptAction1 instance.
 func NewTestScriptAction1() *TestScriptAction1 {
 	return &TestScriptAction1{}
 }
 
-// FromJSON populates TestScriptAction1 from JSON data
+// FromJSON populates TestScriptAction1 from JSON data.
 func (m *TestScriptAction1) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Operation *TestScriptOperation `json:"operation,omitempty"`
+		Assert_ *TestScriptAssert `json:"assert,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Operation = temp.Operation
+	m.Assert_ = temp.Assert_
+	return nil
 }
 
-// ToJSON converts TestScriptAction1 to JSON data
+// ToJSON converts TestScriptAction1 to JSON data.
 func (m *TestScriptAction1) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Operation *TestScriptOperation `json:"operation,omitempty"`
+		Assert_ *TestScriptAssert `json:"assert,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Operation = m.Operation
+	output.Assert_ = m.Assert_
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TestScriptAction1
+// Clone creates a deep copy of TestScriptAction1.
 func (m *TestScriptAction1) Clone() *TestScriptAction1 {
 	if m == nil { return nil }
 	return &TestScriptAction1{
@@ -965,7 +2196,7 @@ func (m *TestScriptAction1) Clone() *TestScriptAction1 {
 	}
 }
 
-// Equals checks for equality with another TestScriptAction1 instance
+// Equals checks equality between two TestScriptAction1 instances.
 func (m *TestScriptAction1) Equals(other *TestScriptAction1) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -980,29 +2211,58 @@ func (m *TestScriptAction1) Equals(other *TestScriptAction1) bool {
 // TestScriptTeardown
 // A series of operations required to clean up after all the tests are executed (successfully or otherwise).
 type TestScriptTeardown struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
 	Action []*TestScriptAction `json:"action,omitempty"`
 }
 
-// NewTestScriptTeardown creates a new TestScriptTeardown instance
+// NewTestScriptTeardown creates a new TestScriptTeardown instance.
 func NewTestScriptTeardown() *TestScriptTeardown {
 	return &TestScriptTeardown{}
 }
 
-// FromJSON populates TestScriptTeardown from JSON data
+// FromJSON populates TestScriptTeardown from JSON data.
 func (m *TestScriptTeardown) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Action []*TestScriptAction `json:"action,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Action = temp.Action
+	return nil
 }
 
-// ToJSON converts TestScriptTeardown to JSON data
+// ToJSON converts TestScriptTeardown to JSON data.
 func (m *TestScriptTeardown) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Action []*TestScriptAction `json:"action,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Action = m.Action
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TestScriptTeardown
+// Clone creates a deep copy of TestScriptTeardown.
 func (m *TestScriptTeardown) Clone() *TestScriptTeardown {
 	if m == nil { return nil }
 	return &TestScriptTeardown{
@@ -1013,7 +2273,7 @@ func (m *TestScriptTeardown) Clone() *TestScriptTeardown {
 	}
 }
 
-// Equals checks for equality with another TestScriptTeardown instance
+// Equals checks equality between two TestScriptTeardown instances.
 func (m *TestScriptTeardown) Equals(other *TestScriptTeardown) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -1027,29 +2287,58 @@ func (m *TestScriptTeardown) Equals(other *TestScriptTeardown) bool {
 // TestScriptAction2
 // The teardown action will only contain an operation.
 type TestScriptAction2 struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
 	Operation *TestScriptOperation `json:"operation,omitempty"`
 }
 
-// NewTestScriptAction2 creates a new TestScriptAction2 instance
+// NewTestScriptAction2 creates a new TestScriptAction2 instance.
 func NewTestScriptAction2() *TestScriptAction2 {
 	return &TestScriptAction2{}
 }
 
-// FromJSON populates TestScriptAction2 from JSON data
+// FromJSON populates TestScriptAction2 from JSON data.
 func (m *TestScriptAction2) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Operation *TestScriptOperation `json:"operation,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Operation = temp.Operation
+	return nil
 }
 
-// ToJSON converts TestScriptAction2 to JSON data
+// ToJSON converts TestScriptAction2 to JSON data.
 func (m *TestScriptAction2) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Operation *TestScriptOperation `json:"operation,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Operation = m.Operation
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TestScriptAction2
+// Clone creates a deep copy of TestScriptAction2.
 func (m *TestScriptAction2) Clone() *TestScriptAction2 {
 	if m == nil { return nil }
 	return &TestScriptAction2{
@@ -1060,7 +2349,7 @@ func (m *TestScriptAction2) Clone() *TestScriptAction2 {
 	}
 }
 
-// Equals checks for equality with another TestScriptAction2 instance
+// Equals checks equality between two TestScriptAction2 instances.
 func (m *TestScriptAction2) Equals(other *TestScriptAction2) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

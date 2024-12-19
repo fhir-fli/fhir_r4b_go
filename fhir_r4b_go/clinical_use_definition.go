@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // ClinicalUseDefinition
 // A single issue - either an indication, contraindication, interaction or an undesirable effect for a medicinal product, medication, device or procedure.
 type ClinicalUseDefinition struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -30,22 +31,117 @@ type ClinicalUseDefinition struct {
 	Warning *ClinicalUseDefinitionWarning `json:"warning,omitempty"`
 }
 
-// NewClinicalUseDefinition creates a new ClinicalUseDefinition instance
+// NewClinicalUseDefinition creates a new ClinicalUseDefinition instance.
 func NewClinicalUseDefinition() *ClinicalUseDefinition {
 	return &ClinicalUseDefinition{}
 }
 
-// FromJSON populates ClinicalUseDefinition from JSON data
+// FromJSON populates ClinicalUseDefinition from JSON data.
 func (m *ClinicalUseDefinition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Type *ClinicalUseDefinitionType `json:"type,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Subject []*Reference `json:"subject,omitempty"`
+		Status *CodeableConcept `json:"status,omitempty"`
+		Contraindication *ClinicalUseDefinitionContraindication `json:"contraindication,omitempty"`
+		Indication *ClinicalUseDefinitionIndication `json:"indication,omitempty"`
+		Interaction *ClinicalUseDefinitionInteraction `json:"interaction,omitempty"`
+		Population []*Reference `json:"population,omitempty"`
+		UndesirableEffect *ClinicalUseDefinitionUndesirableEffect `json:"undesirableeffect,omitempty"`
+		Warning *ClinicalUseDefinitionWarning `json:"warning,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Type = temp.Type
+	m.Category = temp.Category
+	m.Subject = temp.Subject
+	m.Status = temp.Status
+	m.Contraindication = temp.Contraindication
+	m.Indication = temp.Indication
+	m.Interaction = temp.Interaction
+	m.Population = temp.Population
+	m.UndesirableEffect = temp.UndesirableEffect
+	m.Warning = temp.Warning
+	return nil
 }
 
-// ToJSON converts ClinicalUseDefinition to JSON data
+// ToJSON converts ClinicalUseDefinition to JSON data.
 func (m *ClinicalUseDefinition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Type *ClinicalUseDefinitionType `json:"type,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Subject []*Reference `json:"subject,omitempty"`
+		Status *CodeableConcept `json:"status,omitempty"`
+		Contraindication *ClinicalUseDefinitionContraindication `json:"contraindication,omitempty"`
+		Indication *ClinicalUseDefinitionIndication `json:"indication,omitempty"`
+		Interaction *ClinicalUseDefinitionInteraction `json:"interaction,omitempty"`
+		Population []*Reference `json:"population,omitempty"`
+		UndesirableEffect *ClinicalUseDefinitionUndesirableEffect `json:"undesirableeffect,omitempty"`
+		Warning *ClinicalUseDefinitionWarning `json:"warning,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Type = m.Type
+	output.Category = m.Category
+	output.Subject = m.Subject
+	output.Status = m.Status
+	output.Contraindication = m.Contraindication
+	output.Indication = m.Indication
+	output.Interaction = m.Interaction
+	output.Population = m.Population
+	output.UndesirableEffect = m.UndesirableEffect
+	output.Warning = m.Warning
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ClinicalUseDefinition
+// Clone creates a deep copy of ClinicalUseDefinition.
 func (m *ClinicalUseDefinition) Clone() *ClinicalUseDefinition {
 	if m == nil { return nil }
 	return &ClinicalUseDefinition{
@@ -71,7 +167,7 @@ func (m *ClinicalUseDefinition) Clone() *ClinicalUseDefinition {
 	}
 }
 
-// Equals checks for equality with another ClinicalUseDefinition instance
+// Equals checks equality between two ClinicalUseDefinition instances.
 func (m *ClinicalUseDefinition) Equals(other *ClinicalUseDefinition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -100,7 +196,7 @@ func (m *ClinicalUseDefinition) Equals(other *ClinicalUseDefinition) bool {
 // ClinicalUseDefinitionContraindication
 // Specifics for when this is a contraindication.
 type ClinicalUseDefinitionContraindication struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -111,22 +207,67 @@ type ClinicalUseDefinitionContraindication struct {
 	OtherTherapy []*ClinicalUseDefinitionOtherTherapy `json:"othertherapy,omitempty"`
 }
 
-// NewClinicalUseDefinitionContraindication creates a new ClinicalUseDefinitionContraindication instance
+// NewClinicalUseDefinitionContraindication creates a new ClinicalUseDefinitionContraindication instance.
 func NewClinicalUseDefinitionContraindication() *ClinicalUseDefinitionContraindication {
 	return &ClinicalUseDefinitionContraindication{}
 }
 
-// FromJSON populates ClinicalUseDefinitionContraindication from JSON data
+// FromJSON populates ClinicalUseDefinitionContraindication from JSON data.
 func (m *ClinicalUseDefinitionContraindication) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		DiseaseSymptomProcedure *CodeableReference `json:"diseasesymptomprocedure,omitempty"`
+		DiseaseStatus *CodeableReference `json:"diseasestatus,omitempty"`
+		Comorbidity []*CodeableReference `json:"comorbidity,omitempty"`
+		Indication []*Reference `json:"indication,omitempty"`
+		OtherTherapy []*ClinicalUseDefinitionOtherTherapy `json:"othertherapy,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.DiseaseSymptomProcedure = temp.DiseaseSymptomProcedure
+	m.DiseaseStatus = temp.DiseaseStatus
+	m.Comorbidity = temp.Comorbidity
+	m.Indication = temp.Indication
+	m.OtherTherapy = temp.OtherTherapy
+	return nil
 }
 
-// ToJSON converts ClinicalUseDefinitionContraindication to JSON data
+// ToJSON converts ClinicalUseDefinitionContraindication to JSON data.
 func (m *ClinicalUseDefinitionContraindication) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		DiseaseSymptomProcedure *CodeableReference `json:"diseasesymptomprocedure,omitempty"`
+		DiseaseStatus *CodeableReference `json:"diseasestatus,omitempty"`
+		Comorbidity []*CodeableReference `json:"comorbidity,omitempty"`
+		Indication []*Reference `json:"indication,omitempty"`
+		OtherTherapy []*ClinicalUseDefinitionOtherTherapy `json:"othertherapy,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.DiseaseSymptomProcedure = m.DiseaseSymptomProcedure
+	output.DiseaseStatus = m.DiseaseStatus
+	output.Comorbidity = m.Comorbidity
+	output.Indication = m.Indication
+	output.OtherTherapy = m.OtherTherapy
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ClinicalUseDefinitionContraindication
+// Clone creates a deep copy of ClinicalUseDefinitionContraindication.
 func (m *ClinicalUseDefinitionContraindication) Clone() *ClinicalUseDefinitionContraindication {
 	if m == nil { return nil }
 	return &ClinicalUseDefinitionContraindication{
@@ -141,7 +282,7 @@ func (m *ClinicalUseDefinitionContraindication) Clone() *ClinicalUseDefinitionCo
 	}
 }
 
-// Equals checks for equality with another ClinicalUseDefinitionContraindication instance
+// Equals checks equality between two ClinicalUseDefinitionContraindication instances.
 func (m *ClinicalUseDefinitionContraindication) Equals(other *ClinicalUseDefinitionContraindication) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -159,7 +300,7 @@ func (m *ClinicalUseDefinitionContraindication) Equals(other *ClinicalUseDefinit
 // ClinicalUseDefinitionOtherTherapy
 // Information about the use of the medicinal product in relation to other therapies described as part of the contraindication.
 type ClinicalUseDefinitionOtherTherapy struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -167,22 +308,55 @@ type ClinicalUseDefinitionOtherTherapy struct {
 	Therapy *CodeableReference `json:"therapy,omitempty"`
 }
 
-// NewClinicalUseDefinitionOtherTherapy creates a new ClinicalUseDefinitionOtherTherapy instance
+// NewClinicalUseDefinitionOtherTherapy creates a new ClinicalUseDefinitionOtherTherapy instance.
 func NewClinicalUseDefinitionOtherTherapy() *ClinicalUseDefinitionOtherTherapy {
 	return &ClinicalUseDefinitionOtherTherapy{}
 }
 
-// FromJSON populates ClinicalUseDefinitionOtherTherapy from JSON data
+// FromJSON populates ClinicalUseDefinitionOtherTherapy from JSON data.
 func (m *ClinicalUseDefinitionOtherTherapy) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		RelationshipType *CodeableConcept `json:"relationshiptype,omitempty"`
+		Therapy *CodeableReference `json:"therapy,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.RelationshipType = temp.RelationshipType
+	m.Therapy = temp.Therapy
+	return nil
 }
 
-// ToJSON converts ClinicalUseDefinitionOtherTherapy to JSON data
+// ToJSON converts ClinicalUseDefinitionOtherTherapy to JSON data.
 func (m *ClinicalUseDefinitionOtherTherapy) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		RelationshipType *CodeableConcept `json:"relationshiptype,omitempty"`
+		Therapy *CodeableReference `json:"therapy,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.RelationshipType = m.RelationshipType
+	output.Therapy = m.Therapy
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ClinicalUseDefinitionOtherTherapy
+// Clone creates a deep copy of ClinicalUseDefinitionOtherTherapy.
 func (m *ClinicalUseDefinitionOtherTherapy) Clone() *ClinicalUseDefinitionOtherTherapy {
 	if m == nil { return nil }
 	return &ClinicalUseDefinitionOtherTherapy{
@@ -194,7 +368,7 @@ func (m *ClinicalUseDefinitionOtherTherapy) Clone() *ClinicalUseDefinitionOtherT
 	}
 }
 
-// Equals checks for equality with another ClinicalUseDefinitionOtherTherapy instance
+// Equals checks equality between two ClinicalUseDefinitionOtherTherapy instances.
 func (m *ClinicalUseDefinitionOtherTherapy) Equals(other *ClinicalUseDefinitionOtherTherapy) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -209,7 +383,7 @@ func (m *ClinicalUseDefinitionOtherTherapy) Equals(other *ClinicalUseDefinitionO
 // ClinicalUseDefinitionIndication
 // Specifics for when this is an indication.
 type ClinicalUseDefinitionIndication struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -223,22 +397,85 @@ type ClinicalUseDefinitionIndication struct {
 	OtherTherapy []*ClinicalUseDefinitionOtherTherapy `json:"othertherapy,omitempty"`
 }
 
-// NewClinicalUseDefinitionIndication creates a new ClinicalUseDefinitionIndication instance
+// NewClinicalUseDefinitionIndication creates a new ClinicalUseDefinitionIndication instance.
 func NewClinicalUseDefinitionIndication() *ClinicalUseDefinitionIndication {
 	return &ClinicalUseDefinitionIndication{}
 }
 
-// FromJSON populates ClinicalUseDefinitionIndication from JSON data
+// FromJSON populates ClinicalUseDefinitionIndication from JSON data.
 func (m *ClinicalUseDefinitionIndication) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		DiseaseSymptomProcedure *CodeableReference `json:"diseasesymptomprocedure,omitempty"`
+		DiseaseStatus *CodeableReference `json:"diseasestatus,omitempty"`
+		Comorbidity []*CodeableReference `json:"comorbidity,omitempty"`
+		IntendedEffect *CodeableReference `json:"intendedeffect,omitempty"`
+		DurationRange *Range `json:"durationrange,omitempty"`
+		DurationString *FhirString `json:"durationstring,omitempty"`
+		UndesirableEffect []*Reference `json:"undesirableeffect,omitempty"`
+		OtherTherapy []*ClinicalUseDefinitionOtherTherapy `json:"othertherapy,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.DiseaseSymptomProcedure = temp.DiseaseSymptomProcedure
+	m.DiseaseStatus = temp.DiseaseStatus
+	m.Comorbidity = temp.Comorbidity
+	m.IntendedEffect = temp.IntendedEffect
+	m.DurationRange = temp.DurationRange
+	m.DurationString = temp.DurationString
+	m.UndesirableEffect = temp.UndesirableEffect
+	m.OtherTherapy = temp.OtherTherapy
+	return nil
 }
 
-// ToJSON converts ClinicalUseDefinitionIndication to JSON data
+// ToJSON converts ClinicalUseDefinitionIndication to JSON data.
 func (m *ClinicalUseDefinitionIndication) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		DiseaseSymptomProcedure *CodeableReference `json:"diseasesymptomprocedure,omitempty"`
+		DiseaseStatus *CodeableReference `json:"diseasestatus,omitempty"`
+		Comorbidity []*CodeableReference `json:"comorbidity,omitempty"`
+		IntendedEffect *CodeableReference `json:"intendedeffect,omitempty"`
+		DurationRange *Range `json:"durationrange,omitempty"`
+		DurationString interface{} `json:"durationstring,omitempty"`
+		DurationStringElement map[string]interface{} `json:"_durationstring,omitempty"`
+		UndesirableEffect []*Reference `json:"undesirableeffect,omitempty"`
+		OtherTherapy []*ClinicalUseDefinitionOtherTherapy `json:"othertherapy,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.DiseaseSymptomProcedure = m.DiseaseSymptomProcedure
+	output.DiseaseStatus = m.DiseaseStatus
+	output.Comorbidity = m.Comorbidity
+	output.IntendedEffect = m.IntendedEffect
+	output.DurationRange = m.DurationRange
+	if m.DurationString != nil && m.DurationString.Value != nil {
+		output.DurationString = m.DurationString.Value
+		if m.DurationString.Element != nil {
+			output.DurationStringElement = toMapOrNil(m.DurationString.Element.ToJSON())
+		}
+	}
+	output.UndesirableEffect = m.UndesirableEffect
+	output.OtherTherapy = m.OtherTherapy
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ClinicalUseDefinitionIndication
+// Clone creates a deep copy of ClinicalUseDefinitionIndication.
 func (m *ClinicalUseDefinitionIndication) Clone() *ClinicalUseDefinitionIndication {
 	if m == nil { return nil }
 	return &ClinicalUseDefinitionIndication{
@@ -256,7 +493,7 @@ func (m *ClinicalUseDefinitionIndication) Clone() *ClinicalUseDefinitionIndicati
 	}
 }
 
-// Equals checks for equality with another ClinicalUseDefinitionIndication instance
+// Equals checks equality between two ClinicalUseDefinitionIndication instances.
 func (m *ClinicalUseDefinitionIndication) Equals(other *ClinicalUseDefinitionIndication) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -277,7 +514,7 @@ func (m *ClinicalUseDefinitionIndication) Equals(other *ClinicalUseDefinitionInd
 // ClinicalUseDefinitionInteraction
 // Specifics for when this is an interaction.
 type ClinicalUseDefinitionInteraction struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -288,22 +525,67 @@ type ClinicalUseDefinitionInteraction struct {
 	Management []*CodeableConcept `json:"management,omitempty"`
 }
 
-// NewClinicalUseDefinitionInteraction creates a new ClinicalUseDefinitionInteraction instance
+// NewClinicalUseDefinitionInteraction creates a new ClinicalUseDefinitionInteraction instance.
 func NewClinicalUseDefinitionInteraction() *ClinicalUseDefinitionInteraction {
 	return &ClinicalUseDefinitionInteraction{}
 }
 
-// FromJSON populates ClinicalUseDefinitionInteraction from JSON data
+// FromJSON populates ClinicalUseDefinitionInteraction from JSON data.
 func (m *ClinicalUseDefinitionInteraction) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Interactant []*ClinicalUseDefinitionInteractant `json:"interactant,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Effect *CodeableReference `json:"effect,omitempty"`
+		Incidence *CodeableConcept `json:"incidence,omitempty"`
+		Management []*CodeableConcept `json:"management,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Interactant = temp.Interactant
+	m.Type = temp.Type
+	m.Effect = temp.Effect
+	m.Incidence = temp.Incidence
+	m.Management = temp.Management
+	return nil
 }
 
-// ToJSON converts ClinicalUseDefinitionInteraction to JSON data
+// ToJSON converts ClinicalUseDefinitionInteraction to JSON data.
 func (m *ClinicalUseDefinitionInteraction) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Interactant []*ClinicalUseDefinitionInteractant `json:"interactant,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Effect *CodeableReference `json:"effect,omitempty"`
+		Incidence *CodeableConcept `json:"incidence,omitempty"`
+		Management []*CodeableConcept `json:"management,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Interactant = m.Interactant
+	output.Type = m.Type
+	output.Effect = m.Effect
+	output.Incidence = m.Incidence
+	output.Management = m.Management
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ClinicalUseDefinitionInteraction
+// Clone creates a deep copy of ClinicalUseDefinitionInteraction.
 func (m *ClinicalUseDefinitionInteraction) Clone() *ClinicalUseDefinitionInteraction {
 	if m == nil { return nil }
 	return &ClinicalUseDefinitionInteraction{
@@ -318,7 +600,7 @@ func (m *ClinicalUseDefinitionInteraction) Clone() *ClinicalUseDefinitionInterac
 	}
 }
 
-// Equals checks for equality with another ClinicalUseDefinitionInteraction instance
+// Equals checks equality between two ClinicalUseDefinitionInteraction instances.
 func (m *ClinicalUseDefinitionInteraction) Equals(other *ClinicalUseDefinitionInteraction) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -336,7 +618,7 @@ func (m *ClinicalUseDefinitionInteraction) Equals(other *ClinicalUseDefinitionIn
 // ClinicalUseDefinitionInteractant
 // The specific medication, food, substance or laboratory test that interacts.
 type ClinicalUseDefinitionInteractant struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -344,22 +626,55 @@ type ClinicalUseDefinitionInteractant struct {
 	ItemCodeableConcept *CodeableConcept `json:"itemcodeableconcept,omitempty"`
 }
 
-// NewClinicalUseDefinitionInteractant creates a new ClinicalUseDefinitionInteractant instance
+// NewClinicalUseDefinitionInteractant creates a new ClinicalUseDefinitionInteractant instance.
 func NewClinicalUseDefinitionInteractant() *ClinicalUseDefinitionInteractant {
 	return &ClinicalUseDefinitionInteractant{}
 }
 
-// FromJSON populates ClinicalUseDefinitionInteractant from JSON data
+// FromJSON populates ClinicalUseDefinitionInteractant from JSON data.
 func (m *ClinicalUseDefinitionInteractant) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ItemReference *Reference `json:"itemreference,omitempty"`
+		ItemCodeableConcept *CodeableConcept `json:"itemcodeableconcept,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.ItemReference = temp.ItemReference
+	m.ItemCodeableConcept = temp.ItemCodeableConcept
+	return nil
 }
 
-// ToJSON converts ClinicalUseDefinitionInteractant to JSON data
+// ToJSON converts ClinicalUseDefinitionInteractant to JSON data.
 func (m *ClinicalUseDefinitionInteractant) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ItemReference *Reference `json:"itemreference,omitempty"`
+		ItemCodeableConcept *CodeableConcept `json:"itemcodeableconcept,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.ItemReference = m.ItemReference
+	output.ItemCodeableConcept = m.ItemCodeableConcept
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ClinicalUseDefinitionInteractant
+// Clone creates a deep copy of ClinicalUseDefinitionInteractant.
 func (m *ClinicalUseDefinitionInteractant) Clone() *ClinicalUseDefinitionInteractant {
 	if m == nil { return nil }
 	return &ClinicalUseDefinitionInteractant{
@@ -371,7 +686,7 @@ func (m *ClinicalUseDefinitionInteractant) Clone() *ClinicalUseDefinitionInterac
 	}
 }
 
-// Equals checks for equality with another ClinicalUseDefinitionInteractant instance
+// Equals checks equality between two ClinicalUseDefinitionInteractant instances.
 func (m *ClinicalUseDefinitionInteractant) Equals(other *ClinicalUseDefinitionInteractant) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -386,7 +701,7 @@ func (m *ClinicalUseDefinitionInteractant) Equals(other *ClinicalUseDefinitionIn
 // ClinicalUseDefinitionUndesirableEffect
 // Describe the possible undesirable effects (negative outcomes) from the use of the medicinal product as treatment.
 type ClinicalUseDefinitionUndesirableEffect struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -395,22 +710,59 @@ type ClinicalUseDefinitionUndesirableEffect struct {
 	FrequencyOfOccurrence *CodeableConcept `json:"frequencyofoccurrence,omitempty"`
 }
 
-// NewClinicalUseDefinitionUndesirableEffect creates a new ClinicalUseDefinitionUndesirableEffect instance
+// NewClinicalUseDefinitionUndesirableEffect creates a new ClinicalUseDefinitionUndesirableEffect instance.
 func NewClinicalUseDefinitionUndesirableEffect() *ClinicalUseDefinitionUndesirableEffect {
 	return &ClinicalUseDefinitionUndesirableEffect{}
 }
 
-// FromJSON populates ClinicalUseDefinitionUndesirableEffect from JSON data
+// FromJSON populates ClinicalUseDefinitionUndesirableEffect from JSON data.
 func (m *ClinicalUseDefinitionUndesirableEffect) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		SymptomConditionEffect *CodeableReference `json:"symptomconditioneffect,omitempty"`
+		Classification *CodeableConcept `json:"classification,omitempty"`
+		FrequencyOfOccurrence *CodeableConcept `json:"frequencyofoccurrence,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.SymptomConditionEffect = temp.SymptomConditionEffect
+	m.Classification = temp.Classification
+	m.FrequencyOfOccurrence = temp.FrequencyOfOccurrence
+	return nil
 }
 
-// ToJSON converts ClinicalUseDefinitionUndesirableEffect to JSON data
+// ToJSON converts ClinicalUseDefinitionUndesirableEffect to JSON data.
 func (m *ClinicalUseDefinitionUndesirableEffect) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		SymptomConditionEffect *CodeableReference `json:"symptomconditioneffect,omitempty"`
+		Classification *CodeableConcept `json:"classification,omitempty"`
+		FrequencyOfOccurrence *CodeableConcept `json:"frequencyofoccurrence,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.SymptomConditionEffect = m.SymptomConditionEffect
+	output.Classification = m.Classification
+	output.FrequencyOfOccurrence = m.FrequencyOfOccurrence
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ClinicalUseDefinitionUndesirableEffect
+// Clone creates a deep copy of ClinicalUseDefinitionUndesirableEffect.
 func (m *ClinicalUseDefinitionUndesirableEffect) Clone() *ClinicalUseDefinitionUndesirableEffect {
 	if m == nil { return nil }
 	return &ClinicalUseDefinitionUndesirableEffect{
@@ -423,7 +775,7 @@ func (m *ClinicalUseDefinitionUndesirableEffect) Clone() *ClinicalUseDefinitionU
 	}
 }
 
-// Equals checks for equality with another ClinicalUseDefinitionUndesirableEffect instance
+// Equals checks equality between two ClinicalUseDefinitionUndesirableEffect instances.
 func (m *ClinicalUseDefinitionUndesirableEffect) Equals(other *ClinicalUseDefinitionUndesirableEffect) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -439,7 +791,7 @@ func (m *ClinicalUseDefinitionUndesirableEffect) Equals(other *ClinicalUseDefini
 // ClinicalUseDefinitionWarning
 // A critical piece of information about environmental, health or physical risks or hazards that serve as caution to the user. For example 'Do not operate heavy machinery', 'May cause drowsiness', or 'Get medical advice/attention if you feel unwell'.
 type ClinicalUseDefinitionWarning struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -447,22 +799,61 @@ type ClinicalUseDefinitionWarning struct {
 	Code *CodeableConcept `json:"code,omitempty"`
 }
 
-// NewClinicalUseDefinitionWarning creates a new ClinicalUseDefinitionWarning instance
+// NewClinicalUseDefinitionWarning creates a new ClinicalUseDefinitionWarning instance.
 func NewClinicalUseDefinitionWarning() *ClinicalUseDefinitionWarning {
 	return &ClinicalUseDefinitionWarning{}
 }
 
-// FromJSON populates ClinicalUseDefinitionWarning from JSON data
+// FromJSON populates ClinicalUseDefinitionWarning from JSON data.
 func (m *ClinicalUseDefinitionWarning) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Description = temp.Description
+	m.Code = temp.Code
+	return nil
 }
 
-// ToJSON converts ClinicalUseDefinitionWarning to JSON data
+// ToJSON converts ClinicalUseDefinitionWarning to JSON data.
 func (m *ClinicalUseDefinitionWarning) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Code = m.Code
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ClinicalUseDefinitionWarning
+// Clone creates a deep copy of ClinicalUseDefinitionWarning.
 func (m *ClinicalUseDefinitionWarning) Clone() *ClinicalUseDefinitionWarning {
 	if m == nil { return nil }
 	return &ClinicalUseDefinitionWarning{
@@ -474,7 +865,7 @@ func (m *ClinicalUseDefinitionWarning) Clone() *ClinicalUseDefinitionWarning {
 	}
 }
 
-// Equals checks for equality with another ClinicalUseDefinitionWarning instance
+// Equals checks equality between two ClinicalUseDefinitionWarning instances.
 func (m *ClinicalUseDefinitionWarning) Equals(other *ClinicalUseDefinitionWarning) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // SubscriptionTopic
 // Describes a stream of resource state changes or events and annotated with labels useful to filter projections from this topic.
 type SubscriptionTopic struct {
-	CanonicalResource
+	extends CanonicalResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -41,22 +43,248 @@ type SubscriptionTopic struct {
 	NotificationShape []*SubscriptionTopicNotificationShape `json:"notificationshape,omitempty"`
 }
 
-// NewSubscriptionTopic creates a new SubscriptionTopic instance
+// NewSubscriptionTopic creates a new SubscriptionTopic instance.
 func NewSubscriptionTopic() *SubscriptionTopic {
 	return &SubscriptionTopic{}
 }
 
-// FromJSON populates SubscriptionTopic from JSON data
+// FromJSON populates SubscriptionTopic from JSON data.
 func (m *SubscriptionTopic) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		DerivedFrom []interface{} `json:"derivedfrom,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental *FhirBoolean `json:"experimental,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Publisher *FhirString `json:"publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose *FhirMarkdown `json:"purpose,omitempty"`
+		Copyright *FhirMarkdown `json:"copyright,omitempty"`
+		ApprovalDate *FhirDate `json:"approvaldate,omitempty"`
+		LastReviewDate *FhirDate `json:"lastreviewdate,omitempty"`
+		EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+		ResourceTrigger []*SubscriptionTopicResourceTrigger `json:"resourcetrigger,omitempty"`
+		EventTrigger []*SubscriptionTopicEventTrigger `json:"eventtrigger,omitempty"`
+		CanFilterBy []*SubscriptionTopicCanFilterBy `json:"canfilterby,omitempty"`
+		NotificationShape []*SubscriptionTopicNotificationShape `json:"notificationshape,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Url = temp.Url
+	m.Identifier = temp.Identifier
+	m.Version = temp.Version
+	m.Title = temp.Title
+	if len(temp.DerivedFrom) > 0 {
+		m.DerivedFrom = make([]*FhirCanonical, len(temp.DerivedFrom))
+		for i := range temp.DerivedFrom {
+			itemMap, ok := temp.DerivedFrom[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for DerivedFrom[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse DerivedFrom[%d]: %v", i, err) }
+			m.DerivedFrom[i] = primitive
+		}
+	}
+	m.Status = temp.Status
+	m.Experimental = temp.Experimental
+	m.Date = temp.Date
+	m.Publisher = temp.Publisher
+	m.Contact = temp.Contact
+	m.Description = temp.Description
+	m.UseContext = temp.UseContext
+	m.Jurisdiction = temp.Jurisdiction
+	m.Purpose = temp.Purpose
+	m.Copyright = temp.Copyright
+	m.ApprovalDate = temp.ApprovalDate
+	m.LastReviewDate = temp.LastReviewDate
+	m.EffectivePeriod = temp.EffectivePeriod
+	m.ResourceTrigger = temp.ResourceTrigger
+	m.EventTrigger = temp.EventTrigger
+	m.CanFilterBy = temp.CanFilterBy
+	m.NotificationShape = temp.NotificationShape
+	return nil
 }
 
-// ToJSON converts SubscriptionTopic to JSON data
+// ToJSON converts SubscriptionTopic to JSON data.
 func (m *SubscriptionTopic) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		DerivedFrom []interface{} `json:"derivedfrom,omitempty"`
+		DerivedFromElement []map[string]interface{} `json:"_derivedfrom,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental interface{} `json:"experimental,omitempty"`
+		ExperimentalElement map[string]interface{} `json:"_experimental,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Publisher interface{} `json:"publisher,omitempty"`
+		PublisherElement map[string]interface{} `json:"_publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose interface{} `json:"purpose,omitempty"`
+		PurposeElement map[string]interface{} `json:"_purpose,omitempty"`
+		Copyright interface{} `json:"copyright,omitempty"`
+		CopyrightElement map[string]interface{} `json:"_copyright,omitempty"`
+		ApprovalDate interface{} `json:"approvaldate,omitempty"`
+		ApprovalDateElement map[string]interface{} `json:"_approvaldate,omitempty"`
+		LastReviewDate interface{} `json:"lastreviewdate,omitempty"`
+		LastReviewDateElement map[string]interface{} `json:"_lastreviewdate,omitempty"`
+		EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+		ResourceTrigger []*SubscriptionTopicResourceTrigger `json:"resourcetrigger,omitempty"`
+		EventTrigger []*SubscriptionTopicEventTrigger `json:"eventtrigger,omitempty"`
+		CanFilterBy []*SubscriptionTopicCanFilterBy `json:"canfilterby,omitempty"`
+		NotificationShape []*SubscriptionTopicNotificationShape `json:"notificationshape,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	output.Identifier = m.Identifier
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	if len(m.DerivedFrom) > 0 {
+		output.DerivedFrom = make([]interface{}, len(m.DerivedFrom))
+		output.DerivedFromElement = make([]map[string]interface{}, len(m.DerivedFrom))
+		for i, item := range m.DerivedFrom {
+			if item != nil && item.Value != nil {
+				output.DerivedFrom[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.DerivedFromElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Status = m.Status
+	if m.Experimental != nil && m.Experimental.Value != nil {
+		output.Experimental = m.Experimental.Value
+		if m.Experimental.Element != nil {
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+		}
+	}
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.Publisher != nil && m.Publisher.Value != nil {
+		output.Publisher = m.Publisher.Value
+		if m.Publisher.Element != nil {
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+		}
+	}
+	output.Contact = m.Contact
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.UseContext = m.UseContext
+	output.Jurisdiction = m.Jurisdiction
+	if m.Purpose != nil && m.Purpose.Value != nil {
+		output.Purpose = m.Purpose.Value
+		if m.Purpose.Element != nil {
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+		}
+	}
+	if m.Copyright != nil && m.Copyright.Value != nil {
+		output.Copyright = m.Copyright.Value
+		if m.Copyright.Element != nil {
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+		}
+	}
+	if m.ApprovalDate != nil && m.ApprovalDate.Value != nil {
+		output.ApprovalDate = m.ApprovalDate.Value
+		if m.ApprovalDate.Element != nil {
+			output.ApprovalDateElement = toMapOrNil(m.ApprovalDate.Element.ToJSON())
+		}
+	}
+	if m.LastReviewDate != nil && m.LastReviewDate.Value != nil {
+		output.LastReviewDate = m.LastReviewDate.Value
+		if m.LastReviewDate.Element != nil {
+			output.LastReviewDateElement = toMapOrNil(m.LastReviewDate.Element.ToJSON())
+		}
+	}
+	output.EffectivePeriod = m.EffectivePeriod
+	output.ResourceTrigger = m.ResourceTrigger
+	output.EventTrigger = m.EventTrigger
+	output.CanFilterBy = m.CanFilterBy
+	output.NotificationShape = m.NotificationShape
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SubscriptionTopic
+// Clone creates a deep copy of SubscriptionTopic.
 func (m *SubscriptionTopic) Clone() *SubscriptionTopic {
 	if m == nil { return nil }
 	return &SubscriptionTopic{
@@ -93,7 +321,7 @@ func (m *SubscriptionTopic) Clone() *SubscriptionTopic {
 	}
 }
 
-// Equals checks for equality with another SubscriptionTopic instance
+// Equals checks equality between two SubscriptionTopic instances.
 func (m *SubscriptionTopic) Equals(other *SubscriptionTopic) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -133,7 +361,7 @@ func (m *SubscriptionTopic) Equals(other *SubscriptionTopic) bool {
 // SubscriptionTopicResourceTrigger
 // A definition of a resource-based event that triggers a notification based on the SubscriptionTopic. The criteria may be just a human readable description and/or a full FHIR search string or FHIRPath expression. Multiple triggers are considered OR joined (e.g., a resource update matching ANY of the definitions will trigger a notification).
 type SubscriptionTopicResourceTrigger struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -144,22 +372,85 @@ type SubscriptionTopicResourceTrigger struct {
 	FhirPathCriteria *FhirString `json:"fhirpathcriteria,omitempty"`
 }
 
-// NewSubscriptionTopicResourceTrigger creates a new SubscriptionTopicResourceTrigger instance
+// NewSubscriptionTopicResourceTrigger creates a new SubscriptionTopicResourceTrigger instance.
 func NewSubscriptionTopicResourceTrigger() *SubscriptionTopicResourceTrigger {
 	return &SubscriptionTopicResourceTrigger{}
 }
 
-// FromJSON populates SubscriptionTopicResourceTrigger from JSON data
+// FromJSON populates SubscriptionTopicResourceTrigger from JSON data.
 func (m *SubscriptionTopicResourceTrigger) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		Resource *FhirUri `json:"resource,omitempty"`
+		SupportedInteraction []*InteractionTrigger `json:"supportedinteraction,omitempty"`
+		QueryCriteria *SubscriptionTopicQueryCriteria `json:"querycriteria,omitempty"`
+		FhirPathCriteria *FhirString `json:"fhirpathcriteria,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Description = temp.Description
+	m.Resource = temp.Resource
+	m.SupportedInteraction = temp.SupportedInteraction
+	m.QueryCriteria = temp.QueryCriteria
+	m.FhirPathCriteria = temp.FhirPathCriteria
+	return nil
 }
 
-// ToJSON converts SubscriptionTopicResourceTrigger to JSON data
+// ToJSON converts SubscriptionTopicResourceTrigger to JSON data.
 func (m *SubscriptionTopicResourceTrigger) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Resource interface{} `json:"resource,omitempty"`
+		ResourceElement map[string]interface{} `json:"_resource,omitempty"`
+		SupportedInteraction []*InteractionTrigger `json:"supportedinteraction,omitempty"`
+		QueryCriteria *SubscriptionTopicQueryCriteria `json:"querycriteria,omitempty"`
+		FhirPathCriteria interface{} `json:"fhirpathcriteria,omitempty"`
+		FhirPathCriteriaElement map[string]interface{} `json:"_fhirpathcriteria,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	if m.Resource != nil && m.Resource.Value != nil {
+		output.Resource = m.Resource.Value
+		if m.Resource.Element != nil {
+			output.ResourceElement = toMapOrNil(m.Resource.Element.ToJSON())
+		}
+	}
+	output.SupportedInteraction = m.SupportedInteraction
+	output.QueryCriteria = m.QueryCriteria
+	if m.FhirPathCriteria != nil && m.FhirPathCriteria.Value != nil {
+		output.FhirPathCriteria = m.FhirPathCriteria.Value
+		if m.FhirPathCriteria.Element != nil {
+			output.FhirPathCriteriaElement = toMapOrNil(m.FhirPathCriteria.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SubscriptionTopicResourceTrigger
+// Clone creates a deep copy of SubscriptionTopicResourceTrigger.
 func (m *SubscriptionTopicResourceTrigger) Clone() *SubscriptionTopicResourceTrigger {
 	if m == nil { return nil }
 	return &SubscriptionTopicResourceTrigger{
@@ -174,7 +465,7 @@ func (m *SubscriptionTopicResourceTrigger) Clone() *SubscriptionTopicResourceTri
 	}
 }
 
-// Equals checks for equality with another SubscriptionTopicResourceTrigger instance
+// Equals checks equality between two SubscriptionTopicResourceTrigger instances.
 func (m *SubscriptionTopicResourceTrigger) Equals(other *SubscriptionTopicResourceTrigger) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -192,7 +483,7 @@ func (m *SubscriptionTopicResourceTrigger) Equals(other *SubscriptionTopicResour
 // SubscriptionTopicQueryCriteria
 // The FHIR query based rules that the server should use to determine when to trigger a notification for this subscription topic.
 type SubscriptionTopicQueryCriteria struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -203,22 +494,85 @@ type SubscriptionTopicQueryCriteria struct {
 	RequireBoth *FhirBoolean `json:"requireboth,omitempty"`
 }
 
-// NewSubscriptionTopicQueryCriteria creates a new SubscriptionTopicQueryCriteria instance
+// NewSubscriptionTopicQueryCriteria creates a new SubscriptionTopicQueryCriteria instance.
 func NewSubscriptionTopicQueryCriteria() *SubscriptionTopicQueryCriteria {
 	return &SubscriptionTopicQueryCriteria{}
 }
 
-// FromJSON populates SubscriptionTopicQueryCriteria from JSON data
+// FromJSON populates SubscriptionTopicQueryCriteria from JSON data.
 func (m *SubscriptionTopicQueryCriteria) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Previous *FhirString `json:"previous,omitempty"`
+		ResultForCreate *CriteriaNotExistsBehavior `json:"resultforcreate,omitempty"`
+		Current *FhirString `json:"current,omitempty"`
+		ResultForDelete *CriteriaNotExistsBehavior `json:"resultfordelete,omitempty"`
+		RequireBoth *FhirBoolean `json:"requireboth,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Previous = temp.Previous
+	m.ResultForCreate = temp.ResultForCreate
+	m.Current = temp.Current
+	m.ResultForDelete = temp.ResultForDelete
+	m.RequireBoth = temp.RequireBoth
+	return nil
 }
 
-// ToJSON converts SubscriptionTopicQueryCriteria to JSON data
+// ToJSON converts SubscriptionTopicQueryCriteria to JSON data.
 func (m *SubscriptionTopicQueryCriteria) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Previous interface{} `json:"previous,omitempty"`
+		PreviousElement map[string]interface{} `json:"_previous,omitempty"`
+		ResultForCreate *CriteriaNotExistsBehavior `json:"resultforcreate,omitempty"`
+		Current interface{} `json:"current,omitempty"`
+		CurrentElement map[string]interface{} `json:"_current,omitempty"`
+		ResultForDelete *CriteriaNotExistsBehavior `json:"resultfordelete,omitempty"`
+		RequireBoth interface{} `json:"requireboth,omitempty"`
+		RequireBothElement map[string]interface{} `json:"_requireboth,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Previous != nil && m.Previous.Value != nil {
+		output.Previous = m.Previous.Value
+		if m.Previous.Element != nil {
+			output.PreviousElement = toMapOrNil(m.Previous.Element.ToJSON())
+		}
+	}
+	output.ResultForCreate = m.ResultForCreate
+	if m.Current != nil && m.Current.Value != nil {
+		output.Current = m.Current.Value
+		if m.Current.Element != nil {
+			output.CurrentElement = toMapOrNil(m.Current.Element.ToJSON())
+		}
+	}
+	output.ResultForDelete = m.ResultForDelete
+	if m.RequireBoth != nil && m.RequireBoth.Value != nil {
+		output.RequireBoth = m.RequireBoth.Value
+		if m.RequireBoth.Element != nil {
+			output.RequireBothElement = toMapOrNil(m.RequireBoth.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SubscriptionTopicQueryCriteria
+// Clone creates a deep copy of SubscriptionTopicQueryCriteria.
 func (m *SubscriptionTopicQueryCriteria) Clone() *SubscriptionTopicQueryCriteria {
 	if m == nil { return nil }
 	return &SubscriptionTopicQueryCriteria{
@@ -233,7 +587,7 @@ func (m *SubscriptionTopicQueryCriteria) Clone() *SubscriptionTopicQueryCriteria
 	}
 }
 
-// Equals checks for equality with another SubscriptionTopicQueryCriteria instance
+// Equals checks equality between two SubscriptionTopicQueryCriteria instances.
 func (m *SubscriptionTopicQueryCriteria) Equals(other *SubscriptionTopicQueryCriteria) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -251,7 +605,7 @@ func (m *SubscriptionTopicQueryCriteria) Equals(other *SubscriptionTopicQueryCri
 // SubscriptionTopicEventTrigger
 // Event definition which can be used to trigger the SubscriptionTopic.
 type SubscriptionTopicEventTrigger struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -260,22 +614,71 @@ type SubscriptionTopicEventTrigger struct {
 	Resource *FhirUri `json:"resource,omitempty"`
 }
 
-// NewSubscriptionTopicEventTrigger creates a new SubscriptionTopicEventTrigger instance
+// NewSubscriptionTopicEventTrigger creates a new SubscriptionTopicEventTrigger instance.
 func NewSubscriptionTopicEventTrigger() *SubscriptionTopicEventTrigger {
 	return &SubscriptionTopicEventTrigger{}
 }
 
-// FromJSON populates SubscriptionTopicEventTrigger from JSON data
+// FromJSON populates SubscriptionTopicEventTrigger from JSON data.
 func (m *SubscriptionTopicEventTrigger) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		Event *CodeableConcept `json:"event,omitempty"`
+		Resource *FhirUri `json:"resource,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Description = temp.Description
+	m.Event = temp.Event
+	m.Resource = temp.Resource
+	return nil
 }
 
-// ToJSON converts SubscriptionTopicEventTrigger to JSON data
+// ToJSON converts SubscriptionTopicEventTrigger to JSON data.
 func (m *SubscriptionTopicEventTrigger) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Event *CodeableConcept `json:"event,omitempty"`
+		Resource interface{} `json:"resource,omitempty"`
+		ResourceElement map[string]interface{} `json:"_resource,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Event = m.Event
+	if m.Resource != nil && m.Resource.Value != nil {
+		output.Resource = m.Resource.Value
+		if m.Resource.Element != nil {
+			output.ResourceElement = toMapOrNil(m.Resource.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SubscriptionTopicEventTrigger
+// Clone creates a deep copy of SubscriptionTopicEventTrigger.
 func (m *SubscriptionTopicEventTrigger) Clone() *SubscriptionTopicEventTrigger {
 	if m == nil { return nil }
 	return &SubscriptionTopicEventTrigger{
@@ -288,7 +691,7 @@ func (m *SubscriptionTopicEventTrigger) Clone() *SubscriptionTopicEventTrigger {
 	}
 }
 
-// Equals checks for equality with another SubscriptionTopicEventTrigger instance
+// Equals checks equality between two SubscriptionTopicEventTrigger instances.
 func (m *SubscriptionTopicEventTrigger) Equals(other *SubscriptionTopicEventTrigger) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -304,7 +707,7 @@ func (m *SubscriptionTopicEventTrigger) Equals(other *SubscriptionTopicEventTrig
 // SubscriptionTopicCanFilterBy
 // List of properties by which Subscriptions on the SubscriptionTopic can be filtered. May be defined Search Parameters (e.g., Encounter.patient) or parameters defined within this SubscriptionTopic context (e.g., hub.event).
 type SubscriptionTopicCanFilterBy struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -315,22 +718,91 @@ type SubscriptionTopicCanFilterBy struct {
 	Modifier []*SubscriptionSearchModifier `json:"modifier,omitempty"`
 }
 
-// NewSubscriptionTopicCanFilterBy creates a new SubscriptionTopicCanFilterBy instance
+// NewSubscriptionTopicCanFilterBy creates a new SubscriptionTopicCanFilterBy instance.
 func NewSubscriptionTopicCanFilterBy() *SubscriptionTopicCanFilterBy {
 	return &SubscriptionTopicCanFilterBy{}
 }
 
-// FromJSON populates SubscriptionTopicCanFilterBy from JSON data
+// FromJSON populates SubscriptionTopicCanFilterBy from JSON data.
 func (m *SubscriptionTopicCanFilterBy) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		Resource *FhirUri `json:"resource,omitempty"`
+		FilterParameter *FhirString `json:"filterparameter,omitempty"`
+		FilterDefinition *FhirUri `json:"filterdefinition,omitempty"`
+		Modifier []*SubscriptionSearchModifier `json:"modifier,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Description = temp.Description
+	m.Resource = temp.Resource
+	m.FilterParameter = temp.FilterParameter
+	m.FilterDefinition = temp.FilterDefinition
+	m.Modifier = temp.Modifier
+	return nil
 }
 
-// ToJSON converts SubscriptionTopicCanFilterBy to JSON data
+// ToJSON converts SubscriptionTopicCanFilterBy to JSON data.
 func (m *SubscriptionTopicCanFilterBy) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Resource interface{} `json:"resource,omitempty"`
+		ResourceElement map[string]interface{} `json:"_resource,omitempty"`
+		FilterParameter interface{} `json:"filterparameter,omitempty"`
+		FilterParameterElement map[string]interface{} `json:"_filterparameter,omitempty"`
+		FilterDefinition interface{} `json:"filterdefinition,omitempty"`
+		FilterDefinitionElement map[string]interface{} `json:"_filterdefinition,omitempty"`
+		Modifier []*SubscriptionSearchModifier `json:"modifier,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	if m.Resource != nil && m.Resource.Value != nil {
+		output.Resource = m.Resource.Value
+		if m.Resource.Element != nil {
+			output.ResourceElement = toMapOrNil(m.Resource.Element.ToJSON())
+		}
+	}
+	if m.FilterParameter != nil && m.FilterParameter.Value != nil {
+		output.FilterParameter = m.FilterParameter.Value
+		if m.FilterParameter.Element != nil {
+			output.FilterParameterElement = toMapOrNil(m.FilterParameter.Element.ToJSON())
+		}
+	}
+	if m.FilterDefinition != nil && m.FilterDefinition.Value != nil {
+		output.FilterDefinition = m.FilterDefinition.Value
+		if m.FilterDefinition.Element != nil {
+			output.FilterDefinitionElement = toMapOrNil(m.FilterDefinition.Element.ToJSON())
+		}
+	}
+	output.Modifier = m.Modifier
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SubscriptionTopicCanFilterBy
+// Clone creates a deep copy of SubscriptionTopicCanFilterBy.
 func (m *SubscriptionTopicCanFilterBy) Clone() *SubscriptionTopicCanFilterBy {
 	if m == nil { return nil }
 	return &SubscriptionTopicCanFilterBy{
@@ -345,7 +817,7 @@ func (m *SubscriptionTopicCanFilterBy) Clone() *SubscriptionTopicCanFilterBy {
 	}
 }
 
-// Equals checks for equality with another SubscriptionTopicCanFilterBy instance
+// Equals checks equality between two SubscriptionTopicCanFilterBy instances.
 func (m *SubscriptionTopicCanFilterBy) Equals(other *SubscriptionTopicCanFilterBy) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -363,7 +835,7 @@ func (m *SubscriptionTopicCanFilterBy) Equals(other *SubscriptionTopicCanFilterB
 // SubscriptionTopicNotificationShape
 // List of properties to describe the shape (e.g., resources) included in notifications from this Subscription Topic.
 type SubscriptionTopicNotificationShape struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -372,22 +844,107 @@ type SubscriptionTopicNotificationShape struct {
 	RevInclude []*FhirString `json:"revinclude,omitempty"`
 }
 
-// NewSubscriptionTopicNotificationShape creates a new SubscriptionTopicNotificationShape instance
+// NewSubscriptionTopicNotificationShape creates a new SubscriptionTopicNotificationShape instance.
 func NewSubscriptionTopicNotificationShape() *SubscriptionTopicNotificationShape {
 	return &SubscriptionTopicNotificationShape{}
 }
 
-// FromJSON populates SubscriptionTopicNotificationShape from JSON data
+// FromJSON populates SubscriptionTopicNotificationShape from JSON data.
 func (m *SubscriptionTopicNotificationShape) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Resource *FhirUri `json:"resource,omitempty"`
+		Include []interface{} `json:"include,omitempty"`
+		RevInclude []interface{} `json:"revinclude,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Resource = temp.Resource
+	if len(temp.Include) > 0 {
+		m.Include = make([]*FhirString, len(temp.Include))
+		for i := range temp.Include {
+			itemMap, ok := temp.Include[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Include[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Include[%d]: %v", i, err) }
+			m.Include[i] = primitive
+		}
+	}
+	if len(temp.RevInclude) > 0 {
+		m.RevInclude = make([]*FhirString, len(temp.RevInclude))
+		for i := range temp.RevInclude {
+			itemMap, ok := temp.RevInclude[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for RevInclude[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse RevInclude[%d]: %v", i, err) }
+			m.RevInclude[i] = primitive
+		}
+	}
+	return nil
 }
 
-// ToJSON converts SubscriptionTopicNotificationShape to JSON data
+// ToJSON converts SubscriptionTopicNotificationShape to JSON data.
 func (m *SubscriptionTopicNotificationShape) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Resource interface{} `json:"resource,omitempty"`
+		ResourceElement map[string]interface{} `json:"_resource,omitempty"`
+		Include []interface{} `json:"include,omitempty"`
+		IncludeElement []map[string]interface{} `json:"_include,omitempty"`
+		RevInclude []interface{} `json:"revinclude,omitempty"`
+		RevIncludeElement []map[string]interface{} `json:"_revinclude,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Resource != nil && m.Resource.Value != nil {
+		output.Resource = m.Resource.Value
+		if m.Resource.Element != nil {
+			output.ResourceElement = toMapOrNil(m.Resource.Element.ToJSON())
+		}
+	}
+	if len(m.Include) > 0 {
+		output.Include = make([]interface{}, len(m.Include))
+		output.IncludeElement = make([]map[string]interface{}, len(m.Include))
+		for i, item := range m.Include {
+			if item != nil && item.Value != nil {
+				output.Include[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.IncludeElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.RevInclude) > 0 {
+		output.RevInclude = make([]interface{}, len(m.RevInclude))
+		output.RevIncludeElement = make([]map[string]interface{}, len(m.RevInclude))
+		for i, item := range m.RevInclude {
+			if item != nil && item.Value != nil {
+				output.RevInclude[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.RevIncludeElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SubscriptionTopicNotificationShape
+// Clone creates a deep copy of SubscriptionTopicNotificationShape.
 func (m *SubscriptionTopicNotificationShape) Clone() *SubscriptionTopicNotificationShape {
 	if m == nil { return nil }
 	return &SubscriptionTopicNotificationShape{
@@ -400,7 +957,7 @@ func (m *SubscriptionTopicNotificationShape) Clone() *SubscriptionTopicNotificat
 	}
 }
 
-// Equals checks for equality with another SubscriptionTopicNotificationShape instance
+// Equals checks equality between two SubscriptionTopicNotificationShape instances.
 func (m *SubscriptionTopicNotificationShape) Equals(other *SubscriptionTopicNotificationShape) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

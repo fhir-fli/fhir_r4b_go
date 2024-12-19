@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Coding
 // A reference to a code defined by a terminology system.
 type Coding struct {
-	DataType
+	extends DataType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	System *FhirUri `json:"system,omitempty"`
@@ -18,22 +19,93 @@ type Coding struct {
 	UserSelected *FhirBoolean `json:"userselected,omitempty"`
 }
 
-// NewCoding creates a new Coding instance
+// NewCoding creates a new Coding instance.
 func NewCoding() *Coding {
 	return &Coding{}
 }
 
-// FromJSON populates Coding from JSON data
+// FromJSON populates Coding from JSON data.
 func (m *Coding) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		System *FhirUri `json:"system,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Code *FhirCode `json:"code,omitempty"`
+		Display *FhirString `json:"display,omitempty"`
+		UserSelected *FhirBoolean `json:"userselected,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.System = temp.System
+	m.Version = temp.Version
+	m.Code = temp.Code
+	m.Display = temp.Display
+	m.UserSelected = temp.UserSelected
+	return nil
 }
 
-// ToJSON converts Coding to JSON data
+// ToJSON converts Coding to JSON data.
 func (m *Coding) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		System interface{} `json:"system,omitempty"`
+		SystemElement map[string]interface{} `json:"_system,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Code interface{} `json:"code,omitempty"`
+		CodeElement map[string]interface{} `json:"_code,omitempty"`
+		Display interface{} `json:"display,omitempty"`
+		DisplayElement map[string]interface{} `json:"_display,omitempty"`
+		UserSelected interface{} `json:"userselected,omitempty"`
+		UserSelectedElement map[string]interface{} `json:"_userselected,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	if m.System != nil && m.System.Value != nil {
+		output.System = m.System.Value
+		if m.System.Element != nil {
+			output.SystemElement = toMapOrNil(m.System.Element.ToJSON())
+		}
+	}
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	if m.Code != nil && m.Code.Value != nil {
+		output.Code = m.Code.Value
+		if m.Code.Element != nil {
+			output.CodeElement = toMapOrNil(m.Code.Element.ToJSON())
+		}
+	}
+	if m.Display != nil && m.Display.Value != nil {
+		output.Display = m.Display.Value
+		if m.Display.Element != nil {
+			output.DisplayElement = toMapOrNil(m.Display.Element.ToJSON())
+		}
+	}
+	if m.UserSelected != nil && m.UserSelected.Value != nil {
+		output.UserSelected = m.UserSelected.Value
+		if m.UserSelected.Element != nil {
+			output.UserSelectedElement = toMapOrNil(m.UserSelected.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Coding
+// Clone creates a deep copy of Coding.
 func (m *Coding) Clone() *Coding {
 	if m == nil { return nil }
 	return &Coding{
@@ -47,7 +119,7 @@ func (m *Coding) Clone() *Coding {
 	}
 }
 
-// Equals checks for equality with another Coding instance
+// Equals checks equality between two Coding instances.
 func (m *Coding) Equals(other *Coding) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

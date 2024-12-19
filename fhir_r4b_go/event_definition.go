@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // EventDefinition
 // The EventDefinition resource provides a reusable description of when a particular event can occur.
 type EventDefinition struct {
-	CanonicalResource
+	extends CanonicalResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -48,22 +49,273 @@ type EventDefinition struct {
 	Trigger []*TriggerDefinition `json:"trigger,omitempty"`
 }
 
-// NewEventDefinition creates a new EventDefinition instance
+// NewEventDefinition creates a new EventDefinition instance.
 func NewEventDefinition() *EventDefinition {
 	return &EventDefinition{}
 }
 
-// FromJSON populates EventDefinition from JSON data
+// FromJSON populates EventDefinition from JSON data.
 func (m *EventDefinition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Subtitle *FhirString `json:"subtitle,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental *FhirBoolean `json:"experimental,omitempty"`
+		SubjectCodeableConcept *CodeableConcept `json:"subjectcodeableconcept,omitempty"`
+		SubjectReference *Reference `json:"subjectreference,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Publisher *FhirString `json:"publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose *FhirMarkdown `json:"purpose,omitempty"`
+		Usage *FhirString `json:"usage,omitempty"`
+		Copyright *FhirMarkdown `json:"copyright,omitempty"`
+		ApprovalDate *FhirDate `json:"approvaldate,omitempty"`
+		LastReviewDate *FhirDate `json:"lastreviewdate,omitempty"`
+		EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+		Topic []*CodeableConcept `json:"topic,omitempty"`
+		Author []*ContactDetail `json:"author,omitempty"`
+		Editor []*ContactDetail `json:"editor,omitempty"`
+		Reviewer []*ContactDetail `json:"reviewer,omitempty"`
+		Endorser []*ContactDetail `json:"endorser,omitempty"`
+		RelatedArtifact []*RelatedArtifact `json:"relatedartifact,omitempty"`
+		Trigger []*TriggerDefinition `json:"trigger,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Url = temp.Url
+	m.Identifier = temp.Identifier
+	m.Version = temp.Version
+	m.Name = temp.Name
+	m.Title = temp.Title
+	m.Subtitle = temp.Subtitle
+	m.Status = temp.Status
+	m.Experimental = temp.Experimental
+	m.SubjectCodeableConcept = temp.SubjectCodeableConcept
+	m.SubjectReference = temp.SubjectReference
+	m.Date = temp.Date
+	m.Publisher = temp.Publisher
+	m.Contact = temp.Contact
+	m.Description = temp.Description
+	m.UseContext = temp.UseContext
+	m.Jurisdiction = temp.Jurisdiction
+	m.Purpose = temp.Purpose
+	m.Usage = temp.Usage
+	m.Copyright = temp.Copyright
+	m.ApprovalDate = temp.ApprovalDate
+	m.LastReviewDate = temp.LastReviewDate
+	m.EffectivePeriod = temp.EffectivePeriod
+	m.Topic = temp.Topic
+	m.Author = temp.Author
+	m.Editor = temp.Editor
+	m.Reviewer = temp.Reviewer
+	m.Endorser = temp.Endorser
+	m.RelatedArtifact = temp.RelatedArtifact
+	m.Trigger = temp.Trigger
+	return nil
 }
 
-// ToJSON converts EventDefinition to JSON data
+// ToJSON converts EventDefinition to JSON data.
 func (m *EventDefinition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Subtitle interface{} `json:"subtitle,omitempty"`
+		SubtitleElement map[string]interface{} `json:"_subtitle,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental interface{} `json:"experimental,omitempty"`
+		ExperimentalElement map[string]interface{} `json:"_experimental,omitempty"`
+		SubjectCodeableConcept *CodeableConcept `json:"subjectcodeableconcept,omitempty"`
+		SubjectReference *Reference `json:"subjectreference,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Publisher interface{} `json:"publisher,omitempty"`
+		PublisherElement map[string]interface{} `json:"_publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose interface{} `json:"purpose,omitempty"`
+		PurposeElement map[string]interface{} `json:"_purpose,omitempty"`
+		Usage interface{} `json:"usage,omitempty"`
+		UsageElement map[string]interface{} `json:"_usage,omitempty"`
+		Copyright interface{} `json:"copyright,omitempty"`
+		CopyrightElement map[string]interface{} `json:"_copyright,omitempty"`
+		ApprovalDate interface{} `json:"approvaldate,omitempty"`
+		ApprovalDateElement map[string]interface{} `json:"_approvaldate,omitempty"`
+		LastReviewDate interface{} `json:"lastreviewdate,omitempty"`
+		LastReviewDateElement map[string]interface{} `json:"_lastreviewdate,omitempty"`
+		EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+		Topic []*CodeableConcept `json:"topic,omitempty"`
+		Author []*ContactDetail `json:"author,omitempty"`
+		Editor []*ContactDetail `json:"editor,omitempty"`
+		Reviewer []*ContactDetail `json:"reviewer,omitempty"`
+		Endorser []*ContactDetail `json:"endorser,omitempty"`
+		RelatedArtifact []*RelatedArtifact `json:"relatedartifact,omitempty"`
+		Trigger []*TriggerDefinition `json:"trigger,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	output.Identifier = m.Identifier
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	if m.Subtitle != nil && m.Subtitle.Value != nil {
+		output.Subtitle = m.Subtitle.Value
+		if m.Subtitle.Element != nil {
+			output.SubtitleElement = toMapOrNil(m.Subtitle.Element.ToJSON())
+		}
+	}
+	output.Status = m.Status
+	if m.Experimental != nil && m.Experimental.Value != nil {
+		output.Experimental = m.Experimental.Value
+		if m.Experimental.Element != nil {
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+		}
+	}
+	output.SubjectCodeableConcept = m.SubjectCodeableConcept
+	output.SubjectReference = m.SubjectReference
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.Publisher != nil && m.Publisher.Value != nil {
+		output.Publisher = m.Publisher.Value
+		if m.Publisher.Element != nil {
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+		}
+	}
+	output.Contact = m.Contact
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.UseContext = m.UseContext
+	output.Jurisdiction = m.Jurisdiction
+	if m.Purpose != nil && m.Purpose.Value != nil {
+		output.Purpose = m.Purpose.Value
+		if m.Purpose.Element != nil {
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+		}
+	}
+	if m.Usage != nil && m.Usage.Value != nil {
+		output.Usage = m.Usage.Value
+		if m.Usage.Element != nil {
+			output.UsageElement = toMapOrNil(m.Usage.Element.ToJSON())
+		}
+	}
+	if m.Copyright != nil && m.Copyright.Value != nil {
+		output.Copyright = m.Copyright.Value
+		if m.Copyright.Element != nil {
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+		}
+	}
+	if m.ApprovalDate != nil && m.ApprovalDate.Value != nil {
+		output.ApprovalDate = m.ApprovalDate.Value
+		if m.ApprovalDate.Element != nil {
+			output.ApprovalDateElement = toMapOrNil(m.ApprovalDate.Element.ToJSON())
+		}
+	}
+	if m.LastReviewDate != nil && m.LastReviewDate.Value != nil {
+		output.LastReviewDate = m.LastReviewDate.Value
+		if m.LastReviewDate.Element != nil {
+			output.LastReviewDateElement = toMapOrNil(m.LastReviewDate.Element.ToJSON())
+		}
+	}
+	output.EffectivePeriod = m.EffectivePeriod
+	output.Topic = m.Topic
+	output.Author = m.Author
+	output.Editor = m.Editor
+	output.Reviewer = m.Reviewer
+	output.Endorser = m.Endorser
+	output.RelatedArtifact = m.RelatedArtifact
+	output.Trigger = m.Trigger
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of EventDefinition
+// Clone creates a deep copy of EventDefinition.
 func (m *EventDefinition) Clone() *EventDefinition {
 	if m == nil { return nil }
 	return &EventDefinition{
@@ -107,7 +359,7 @@ func (m *EventDefinition) Clone() *EventDefinition {
 	}
 }
 
-// Equals checks for equality with another EventDefinition instance
+// Equals checks equality between two EventDefinition instances.
 func (m *EventDefinition) Equals(other *EventDefinition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // ProductShelfLife
 // The shelf-life and storage information for a medicinal product item or container can be described using this class.
 type ProductShelfLife struct {
-	BackboneType
+	extends BackboneType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -18,22 +19,63 @@ type ProductShelfLife struct {
 	SpecialPrecautionsForStorage []*CodeableConcept `json:"specialprecautionsforstorage,omitempty"`
 }
 
-// NewProductShelfLife creates a new ProductShelfLife instance
+// NewProductShelfLife creates a new ProductShelfLife instance.
 func NewProductShelfLife() *ProductShelfLife {
 	return &ProductShelfLife{}
 }
 
-// FromJSON populates ProductShelfLife from JSON data
+// FromJSON populates ProductShelfLife from JSON data.
 func (m *ProductShelfLife) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Period *Quantity `json:"period,omitempty"`
+		SpecialPrecautionsForStorage []*CodeableConcept `json:"specialprecautionsforstorage,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Type = temp.Type
+	m.Period = temp.Period
+	m.SpecialPrecautionsForStorage = temp.SpecialPrecautionsForStorage
+	return nil
 }
 
-// ToJSON converts ProductShelfLife to JSON data
+// ToJSON converts ProductShelfLife to JSON data.
 func (m *ProductShelfLife) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Period *Quantity `json:"period,omitempty"`
+		SpecialPrecautionsForStorage []*CodeableConcept `json:"specialprecautionsforstorage,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Type = m.Type
+	output.Period = m.Period
+	output.SpecialPrecautionsForStorage = m.SpecialPrecautionsForStorage
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ProductShelfLife
+// Clone creates a deep copy of ProductShelfLife.
 func (m *ProductShelfLife) Clone() *ProductShelfLife {
 	if m == nil { return nil }
 	return &ProductShelfLife{
@@ -47,7 +89,7 @@ func (m *ProductShelfLife) Clone() *ProductShelfLife {
 	}
 }
 
-// Equals checks for equality with another ProductShelfLife instance
+// Equals checks equality between two ProductShelfLife instances.
 func (m *ProductShelfLife) Equals(other *ProductShelfLife) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

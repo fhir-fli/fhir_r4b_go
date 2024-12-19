@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // NamingSystem
 // A curated namespace that issues unique symbols within that namespace for the identification of concepts, people, devices, etc.  Represents a "System" used within the Identifier and Coding data types.
 type NamingSystem struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -32,22 +33,161 @@ type NamingSystem struct {
 	UniqueId []*NamingSystemUniqueId `json:"uniqueid,omitempty"`
 }
 
-// NewNamingSystem creates a new NamingSystem instance
+// NewNamingSystem creates a new NamingSystem instance.
 func NewNamingSystem() *NamingSystem {
 	return &NamingSystem{}
 }
 
-// FromJSON populates NamingSystem from JSON data
+// FromJSON populates NamingSystem from JSON data.
 func (m *NamingSystem) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Kind *NamingSystemType `json:"kind,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Publisher *FhirString `json:"publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Responsible *FhirString `json:"responsible,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Usage *FhirString `json:"usage,omitempty"`
+		UniqueId []*NamingSystemUniqueId `json:"uniqueid,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Name = temp.Name
+	m.Status = temp.Status
+	m.Kind = temp.Kind
+	m.Date = temp.Date
+	m.Publisher = temp.Publisher
+	m.Contact = temp.Contact
+	m.Responsible = temp.Responsible
+	m.Type = temp.Type
+	m.Description = temp.Description
+	m.UseContext = temp.UseContext
+	m.Jurisdiction = temp.Jurisdiction
+	m.Usage = temp.Usage
+	m.UniqueId = temp.UniqueId
+	return nil
 }
 
-// ToJSON converts NamingSystem to JSON data
+// ToJSON converts NamingSystem to JSON data.
 func (m *NamingSystem) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Kind *NamingSystemType `json:"kind,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Publisher interface{} `json:"publisher,omitempty"`
+		PublisherElement map[string]interface{} `json:"_publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Responsible interface{} `json:"responsible,omitempty"`
+		ResponsibleElement map[string]interface{} `json:"_responsible,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Usage interface{} `json:"usage,omitempty"`
+		UsageElement map[string]interface{} `json:"_usage,omitempty"`
+		UniqueId []*NamingSystemUniqueId `json:"uniqueid,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	output.Status = m.Status
+	output.Kind = m.Kind
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.Publisher != nil && m.Publisher.Value != nil {
+		output.Publisher = m.Publisher.Value
+		if m.Publisher.Element != nil {
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+		}
+	}
+	output.Contact = m.Contact
+	if m.Responsible != nil && m.Responsible.Value != nil {
+		output.Responsible = m.Responsible.Value
+		if m.Responsible.Element != nil {
+			output.ResponsibleElement = toMapOrNil(m.Responsible.Element.ToJSON())
+		}
+	}
+	output.Type = m.Type
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.UseContext = m.UseContext
+	output.Jurisdiction = m.Jurisdiction
+	if m.Usage != nil && m.Usage.Value != nil {
+		output.Usage = m.Usage.Value
+		if m.Usage.Element != nil {
+			output.UsageElement = toMapOrNil(m.Usage.Element.ToJSON())
+		}
+	}
+	output.UniqueId = m.UniqueId
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of NamingSystem
+// Clone creates a deep copy of NamingSystem.
 func (m *NamingSystem) Clone() *NamingSystem {
 	if m == nil { return nil }
 	return &NamingSystem{
@@ -75,7 +215,7 @@ func (m *NamingSystem) Clone() *NamingSystem {
 	}
 }
 
-// Equals checks for equality with another NamingSystem instance
+// Equals checks equality between two NamingSystem instances.
 func (m *NamingSystem) Equals(other *NamingSystem) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -106,7 +246,7 @@ func (m *NamingSystem) Equals(other *NamingSystem) bool {
 // NamingSystemUniqueId
 // Indicates how the system may be identified when referenced in electronic exchange.
 type NamingSystemUniqueId struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -117,22 +257,85 @@ type NamingSystemUniqueId struct {
 	Period *Period `json:"period,omitempty"`
 }
 
-// NewNamingSystemUniqueId creates a new NamingSystemUniqueId instance
+// NewNamingSystemUniqueId creates a new NamingSystemUniqueId instance.
 func NewNamingSystemUniqueId() *NamingSystemUniqueId {
 	return &NamingSystemUniqueId{}
 }
 
-// FromJSON populates NamingSystemUniqueId from JSON data
+// FromJSON populates NamingSystemUniqueId from JSON data.
 func (m *NamingSystemUniqueId) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *NamingSystemIdentifierType `json:"type,omitempty"`
+		Value *FhirString `json:"value,omitempty"`
+		Preferred *FhirBoolean `json:"preferred,omitempty"`
+		Comment *FhirString `json:"comment,omitempty"`
+		Period *Period `json:"period,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Value = temp.Value
+	m.Preferred = temp.Preferred
+	m.Comment = temp.Comment
+	m.Period = temp.Period
+	return nil
 }
 
-// ToJSON converts NamingSystemUniqueId to JSON data
+// ToJSON converts NamingSystemUniqueId to JSON data.
 func (m *NamingSystemUniqueId) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *NamingSystemIdentifierType `json:"type,omitempty"`
+		Value interface{} `json:"value,omitempty"`
+		ValueElement map[string]interface{} `json:"_value,omitempty"`
+		Preferred interface{} `json:"preferred,omitempty"`
+		PreferredElement map[string]interface{} `json:"_preferred,omitempty"`
+		Comment interface{} `json:"comment,omitempty"`
+		CommentElement map[string]interface{} `json:"_comment,omitempty"`
+		Period *Period `json:"period,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	if m.Value != nil && m.Value.Value != nil {
+		output.Value = m.Value.Value
+		if m.Value.Element != nil {
+			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+		}
+	}
+	if m.Preferred != nil && m.Preferred.Value != nil {
+		output.Preferred = m.Preferred.Value
+		if m.Preferred.Element != nil {
+			output.PreferredElement = toMapOrNil(m.Preferred.Element.ToJSON())
+		}
+	}
+	if m.Comment != nil && m.Comment.Value != nil {
+		output.Comment = m.Comment.Value
+		if m.Comment.Element != nil {
+			output.CommentElement = toMapOrNil(m.Comment.Element.ToJSON())
+		}
+	}
+	output.Period = m.Period
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of NamingSystemUniqueId
+// Clone creates a deep copy of NamingSystemUniqueId.
 func (m *NamingSystemUniqueId) Clone() *NamingSystemUniqueId {
 	if m == nil { return nil }
 	return &NamingSystemUniqueId{
@@ -147,7 +350,7 @@ func (m *NamingSystemUniqueId) Clone() *NamingSystemUniqueId {
 	}
 }
 
-// Equals checks for equality with another NamingSystemUniqueId instance
+// Equals checks equality between two NamingSystemUniqueId instances.
 func (m *NamingSystemUniqueId) Equals(other *NamingSystemUniqueId) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

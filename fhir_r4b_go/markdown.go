@@ -4,11 +4,12 @@ package fhir_r4b_go
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"regexp"
 )
 
 type FhirMarkdown struct {
-	Value   string   `json:"value,omitempty"`
+	Value   *string  `json:"value,omitempty"`
 	Element *Element `json:"_value,omitempty"`
 }
 
@@ -17,7 +18,29 @@ func NewFhirMarkdown(input string, element *Element) (*FhirMarkdown, error) {
 	if !validateMarkdown(input) {
 		return nil, errors.New("invalid FhirMarkdown: contains invalid characters")
 	}
-	return &FhirMarkdown{Value: input, Element: element}, nil
+	return &FhirMarkdown{
+		Value:   &input,
+		Element: element,
+	}, nil
+}
+
+// NewFhirMarkdownFromMap creates a FhirMarkdown instance from a map.
+func NewFhirMarkdownFromMap(data map[string]interface{}) (*FhirMarkdown, error) {
+	value, ok := data["value"].(string)
+	if !ok {
+		return nil, errors.New("invalid or missing value for FhirMarkdown")
+	}
+
+	markdown := &FhirMarkdown{Value: &value}
+
+	if elementData, ok := data["_value"].(map[string]interface{}); ok {
+		markdown.Element = &Element{}
+		if err := mapToStruct(elementData, markdown.Element); err != nil {
+			return nil, fmt.Errorf("failed to parse _value for FhirMarkdown: %v", err)
+		}
+	}
+
+	return markdown, nil
 }
 
 // validateMarkdown ensures the input conforms to markdown rules.
@@ -29,7 +52,7 @@ func validateMarkdown(input string) bool {
 // MarshalJSON serializes FhirMarkdown to JSON.
 func (f *FhirMarkdown) MarshalJSON() ([]byte, error) {
 	data := map[string]interface{}{}
-	if f.Value != "" {
+	if *f.Value != "" {
 		data["value"] = f.Value
 	}
 	if f.Element != nil {
@@ -50,14 +73,14 @@ func (f *FhirMarkdown) UnmarshalJSON(data []byte) error {
 	if !validateMarkdown(temp.Value) {
 		return errors.New("invalid FhirMarkdown: contains invalid characters")
 	}
-	f.Value = temp.Value
+	f.Value = &temp.Value
 	f.Element = temp.Element
 	return nil
 }
 
 // String returns the markdown value as a string.
 func (f *FhirMarkdown) String() string {
-	return f.Value
+	return *f.Value
 }
 
 // Clone creates a deep copy of FhirMarkdown.
@@ -81,4 +104,3 @@ func (f *FhirMarkdown) Equals(other *FhirMarkdown) bool {
 	}
 	return f.Value == other.Value && f.Element.Equals(other.Element)
 }
-

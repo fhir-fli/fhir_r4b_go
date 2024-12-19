@@ -3,14 +3,15 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // MedicationStatement
 // A record of a medication that is being consumed by a patient.   A MedicationStatement may indicate that the patient may be taking the medication now or has taken the medication in the past or will be taking the medication in the future.  The source of this information can be the patient, significant other (such as a family member or spouse), or a clinician.  A common scenario where this information is captured is during the history taking process during a patient visit or stay.   The medication information may come from sources such as the patient's memory, from a prescription bottle,  or from a list of medications the patient, clinician or other party maintains. 
 // 
 // The primary difference between a medication statement and a medication administration is that the medication administration has complete administration information and is based on actual administration information from the person who administered the medication.  A medication statement is often, if not always, less specific.  There is no required date/time when the medication was administered, in fact we only know that a source has reported the patient is taking this medication, where details such as time, quantity, or rate or even medication product may be incomplete or missing or less precise.  As stated earlier, the medication statement information may come from the patient's memory, from a prescription bottle or from a list of medications the patient, clinician or other party maintains.  Medication administration is more formal and is not missing detailed information.
 type MedicationStatement struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -40,22 +41,161 @@ type MedicationStatement struct {
 	Dosage []*Dosage `json:"dosage,omitempty"`
 }
 
-// NewMedicationStatement creates a new MedicationStatement instance
+// NewMedicationStatement creates a new MedicationStatement instance.
 func NewMedicationStatement() *MedicationStatement {
 	return &MedicationStatement{}
 }
 
-// FromJSON populates MedicationStatement from JSON data
+// FromJSON populates MedicationStatement from JSON data.
 func (m *MedicationStatement) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		PartOf []*Reference `json:"partof,omitempty"`
+		Status *MedicationStatementStatusCodes `json:"status,omitempty"`
+		StatusReason []*CodeableConcept `json:"statusreason,omitempty"`
+		Category *CodeableConcept `json:"category,omitempty"`
+		MedicationCodeableConcept *CodeableConcept `json:"medicationcodeableconcept,omitempty"`
+		MedicationReference *Reference `json:"medicationreference,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Context *Reference `json:"context,omitempty"`
+		EffectiveDateTime *FhirDateTime `json:"effectivedatetime,omitempty"`
+		EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+		DateAsserted *FhirDateTime `json:"dateasserted,omitempty"`
+		InformationSource *Reference `json:"informationsource,omitempty"`
+		DerivedFrom []*Reference `json:"derivedfrom,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		Dosage []*Dosage `json:"dosage,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.BasedOn = temp.BasedOn
+	m.PartOf = temp.PartOf
+	m.Status = temp.Status
+	m.StatusReason = temp.StatusReason
+	m.Category = temp.Category
+	m.MedicationCodeableConcept = temp.MedicationCodeableConcept
+	m.MedicationReference = temp.MedicationReference
+	m.Subject = temp.Subject
+	m.Context = temp.Context
+	m.EffectiveDateTime = temp.EffectiveDateTime
+	m.EffectivePeriod = temp.EffectivePeriod
+	m.DateAsserted = temp.DateAsserted
+	m.InformationSource = temp.InformationSource
+	m.DerivedFrom = temp.DerivedFrom
+	m.ReasonCode = temp.ReasonCode
+	m.ReasonReference = temp.ReasonReference
+	m.Note = temp.Note
+	m.Dosage = temp.Dosage
+	return nil
 }
 
-// ToJSON converts MedicationStatement to JSON data
+// ToJSON converts MedicationStatement to JSON data.
 func (m *MedicationStatement) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		PartOf []*Reference `json:"partof,omitempty"`
+		Status *MedicationStatementStatusCodes `json:"status,omitempty"`
+		StatusReason []*CodeableConcept `json:"statusreason,omitempty"`
+		Category *CodeableConcept `json:"category,omitempty"`
+		MedicationCodeableConcept *CodeableConcept `json:"medicationcodeableconcept,omitempty"`
+		MedicationReference *Reference `json:"medicationreference,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Context *Reference `json:"context,omitempty"`
+		EffectiveDateTime interface{} `json:"effectivedatetime,omitempty"`
+		EffectiveDateTimeElement map[string]interface{} `json:"_effectivedatetime,omitempty"`
+		EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+		DateAsserted interface{} `json:"dateasserted,omitempty"`
+		DateAssertedElement map[string]interface{} `json:"_dateasserted,omitempty"`
+		InformationSource *Reference `json:"informationsource,omitempty"`
+		DerivedFrom []*Reference `json:"derivedfrom,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		Dosage []*Dosage `json:"dosage,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.BasedOn = m.BasedOn
+	output.PartOf = m.PartOf
+	output.Status = m.Status
+	output.StatusReason = m.StatusReason
+	output.Category = m.Category
+	output.MedicationCodeableConcept = m.MedicationCodeableConcept
+	output.MedicationReference = m.MedicationReference
+	output.Subject = m.Subject
+	output.Context = m.Context
+	if m.EffectiveDateTime != nil && m.EffectiveDateTime.Value != nil {
+		output.EffectiveDateTime = m.EffectiveDateTime.Value
+		if m.EffectiveDateTime.Element != nil {
+			output.EffectiveDateTimeElement = toMapOrNil(m.EffectiveDateTime.Element.ToJSON())
+		}
+	}
+	output.EffectivePeriod = m.EffectivePeriod
+	if m.DateAsserted != nil && m.DateAsserted.Value != nil {
+		output.DateAsserted = m.DateAsserted.Value
+		if m.DateAsserted.Element != nil {
+			output.DateAssertedElement = toMapOrNil(m.DateAsserted.Element.ToJSON())
+		}
+	}
+	output.InformationSource = m.InformationSource
+	output.DerivedFrom = m.DerivedFrom
+	output.ReasonCode = m.ReasonCode
+	output.ReasonReference = m.ReasonReference
+	output.Note = m.Note
+	output.Dosage = m.Dosage
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MedicationStatement
+// Clone creates a deep copy of MedicationStatement.
 func (m *MedicationStatement) Clone() *MedicationStatement {
 	if m == nil { return nil }
 	return &MedicationStatement{
@@ -89,7 +229,7 @@ func (m *MedicationStatement) Clone() *MedicationStatement {
 	}
 }
 
-// Equals checks for equality with another MedicationStatement instance
+// Equals checks equality between two MedicationStatement instances.
 func (m *MedicationStatement) Equals(other *MedicationStatement) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

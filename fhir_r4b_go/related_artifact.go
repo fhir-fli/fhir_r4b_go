@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // RelatedArtifact
 // Related artifacts such as additional documentation, justification, or bibliographic references.
 type RelatedArtifact struct {
-	DataType
+	extends DataType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	Type *RelatedArtifactType `json:"type,omitempty"`
@@ -20,22 +21,101 @@ type RelatedArtifact struct {
 	Resource *FhirCanonical `json:"resource,omitempty"`
 }
 
-// NewRelatedArtifact creates a new RelatedArtifact instance
+// NewRelatedArtifact creates a new RelatedArtifact instance.
 func NewRelatedArtifact() *RelatedArtifact {
 	return &RelatedArtifact{}
 }
 
-// FromJSON populates RelatedArtifact from JSON data
+// FromJSON populates RelatedArtifact from JSON data.
 func (m *RelatedArtifact) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Type *RelatedArtifactType `json:"type,omitempty"`
+		Label *FhirString `json:"label,omitempty"`
+		Display *FhirString `json:"display,omitempty"`
+		Citation *FhirMarkdown `json:"citation,omitempty"`
+		Url *FhirUrl `json:"url,omitempty"`
+		Document *Attachment `json:"document,omitempty"`
+		Resource *FhirCanonical `json:"resource,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.Type = temp.Type
+	m.Label = temp.Label
+	m.Display = temp.Display
+	m.Citation = temp.Citation
+	m.Url = temp.Url
+	m.Document = temp.Document
+	m.Resource = temp.Resource
+	return nil
 }
 
-// ToJSON converts RelatedArtifact to JSON data
+// ToJSON converts RelatedArtifact to JSON data.
 func (m *RelatedArtifact) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Type *RelatedArtifactType `json:"type,omitempty"`
+		Label interface{} `json:"label,omitempty"`
+		LabelElement map[string]interface{} `json:"_label,omitempty"`
+		Display interface{} `json:"display,omitempty"`
+		DisplayElement map[string]interface{} `json:"_display,omitempty"`
+		Citation interface{} `json:"citation,omitempty"`
+		CitationElement map[string]interface{} `json:"_citation,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Document *Attachment `json:"document,omitempty"`
+		Resource interface{} `json:"resource,omitempty"`
+		ResourceElement map[string]interface{} `json:"_resource,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.Type = m.Type
+	if m.Label != nil && m.Label.Value != nil {
+		output.Label = m.Label.Value
+		if m.Label.Element != nil {
+			output.LabelElement = toMapOrNil(m.Label.Element.ToJSON())
+		}
+	}
+	if m.Display != nil && m.Display.Value != nil {
+		output.Display = m.Display.Value
+		if m.Display.Element != nil {
+			output.DisplayElement = toMapOrNil(m.Display.Element.ToJSON())
+		}
+	}
+	if m.Citation != nil && m.Citation.Value != nil {
+		output.Citation = m.Citation.Value
+		if m.Citation.Element != nil {
+			output.CitationElement = toMapOrNil(m.Citation.Element.ToJSON())
+		}
+	}
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	output.Document = m.Document
+	if m.Resource != nil && m.Resource.Value != nil {
+		output.Resource = m.Resource.Value
+		if m.Resource.Element != nil {
+			output.ResourceElement = toMapOrNil(m.Resource.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of RelatedArtifact
+// Clone creates a deep copy of RelatedArtifact.
 func (m *RelatedArtifact) Clone() *RelatedArtifact {
 	if m == nil { return nil }
 	return &RelatedArtifact{
@@ -51,7 +131,7 @@ func (m *RelatedArtifact) Clone() *RelatedArtifact {
 	}
 }
 
-// Equals checks for equality with another RelatedArtifact instance
+// Equals checks equality between two RelatedArtifact instances.
 func (m *RelatedArtifact) Equals(other *RelatedArtifact) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // PlanDefinition
 // This resource allows for the definition of various types of plans as a sharable, consumable, and executable artifact. The resource is general enough to support the description of a broad range of clinical and non-clinical artifacts such as clinical decision support rules, order sets, protocols, and drug quality specifications.
 type PlanDefinition struct {
-	CanonicalResource
+	extends CanonicalResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -52,22 +54,310 @@ type PlanDefinition struct {
 	Action []*PlanDefinitionAction `json:"action,omitempty"`
 }
 
-// NewPlanDefinition creates a new PlanDefinition instance
+// NewPlanDefinition creates a new PlanDefinition instance.
 func NewPlanDefinition() *PlanDefinition {
 	return &PlanDefinition{}
 }
 
-// FromJSON populates PlanDefinition from JSON data
+// FromJSON populates PlanDefinition from JSON data.
 func (m *PlanDefinition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Subtitle *FhirString `json:"subtitle,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental *FhirBoolean `json:"experimental,omitempty"`
+		SubjectCodeableConcept *CodeableConcept `json:"subjectcodeableconcept,omitempty"`
+		SubjectReference *Reference `json:"subjectreference,omitempty"`
+		SubjectCanonical *SubjectType `json:"subjectcanonical,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Publisher *FhirString `json:"publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose *FhirMarkdown `json:"purpose,omitempty"`
+		Usage *FhirString `json:"usage,omitempty"`
+		Copyright *FhirMarkdown `json:"copyright,omitempty"`
+		ApprovalDate *FhirDate `json:"approvaldate,omitempty"`
+		LastReviewDate *FhirDate `json:"lastreviewdate,omitempty"`
+		EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+		Topic []*CodeableConcept `json:"topic,omitempty"`
+		Author []*ContactDetail `json:"author,omitempty"`
+		Editor []*ContactDetail `json:"editor,omitempty"`
+		Reviewer []*ContactDetail `json:"reviewer,omitempty"`
+		Endorser []*ContactDetail `json:"endorser,omitempty"`
+		RelatedArtifact []*RelatedArtifact `json:"relatedartifact,omitempty"`
+		Library_ []interface{} `json:"library,omitempty"`
+		Goal []*PlanDefinitionGoal `json:"goal,omitempty"`
+		Action []*PlanDefinitionAction `json:"action,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Url = temp.Url
+	m.Identifier = temp.Identifier
+	m.Version = temp.Version
+	m.Name = temp.Name
+	m.Title = temp.Title
+	m.Subtitle = temp.Subtitle
+	m.Type = temp.Type
+	m.Status = temp.Status
+	m.Experimental = temp.Experimental
+	m.SubjectCodeableConcept = temp.SubjectCodeableConcept
+	m.SubjectReference = temp.SubjectReference
+	m.SubjectCanonical = temp.SubjectCanonical
+	m.Date = temp.Date
+	m.Publisher = temp.Publisher
+	m.Contact = temp.Contact
+	m.Description = temp.Description
+	m.UseContext = temp.UseContext
+	m.Jurisdiction = temp.Jurisdiction
+	m.Purpose = temp.Purpose
+	m.Usage = temp.Usage
+	m.Copyright = temp.Copyright
+	m.ApprovalDate = temp.ApprovalDate
+	m.LastReviewDate = temp.LastReviewDate
+	m.EffectivePeriod = temp.EffectivePeriod
+	m.Topic = temp.Topic
+	m.Author = temp.Author
+	m.Editor = temp.Editor
+	m.Reviewer = temp.Reviewer
+	m.Endorser = temp.Endorser
+	m.RelatedArtifact = temp.RelatedArtifact
+	if len(temp.Library_) > 0 {
+		m.Library_ = make([]*FhirCanonical, len(temp.Library_))
+		for i := range temp.Library_ {
+			itemMap, ok := temp.Library_[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Library_[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Library_[%d]: %v", i, err) }
+			m.Library_[i] = primitive
+		}
+	}
+	m.Goal = temp.Goal
+	m.Action = temp.Action
+	return nil
 }
 
-// ToJSON converts PlanDefinition to JSON data
+// ToJSON converts PlanDefinition to JSON data.
 func (m *PlanDefinition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Subtitle interface{} `json:"subtitle,omitempty"`
+		SubtitleElement map[string]interface{} `json:"_subtitle,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental interface{} `json:"experimental,omitempty"`
+		ExperimentalElement map[string]interface{} `json:"_experimental,omitempty"`
+		SubjectCodeableConcept *CodeableConcept `json:"subjectcodeableconcept,omitempty"`
+		SubjectReference *Reference `json:"subjectreference,omitempty"`
+		SubjectCanonical *SubjectType `json:"subjectcanonical,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Publisher interface{} `json:"publisher,omitempty"`
+		PublisherElement map[string]interface{} `json:"_publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose interface{} `json:"purpose,omitempty"`
+		PurposeElement map[string]interface{} `json:"_purpose,omitempty"`
+		Usage interface{} `json:"usage,omitempty"`
+		UsageElement map[string]interface{} `json:"_usage,omitempty"`
+		Copyright interface{} `json:"copyright,omitempty"`
+		CopyrightElement map[string]interface{} `json:"_copyright,omitempty"`
+		ApprovalDate interface{} `json:"approvaldate,omitempty"`
+		ApprovalDateElement map[string]interface{} `json:"_approvaldate,omitempty"`
+		LastReviewDate interface{} `json:"lastreviewdate,omitempty"`
+		LastReviewDateElement map[string]interface{} `json:"_lastreviewdate,omitempty"`
+		EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+		Topic []*CodeableConcept `json:"topic,omitempty"`
+		Author []*ContactDetail `json:"author,omitempty"`
+		Editor []*ContactDetail `json:"editor,omitempty"`
+		Reviewer []*ContactDetail `json:"reviewer,omitempty"`
+		Endorser []*ContactDetail `json:"endorser,omitempty"`
+		RelatedArtifact []*RelatedArtifact `json:"relatedartifact,omitempty"`
+		Library_ []interface{} `json:"library,omitempty"`
+		Library_Element []map[string]interface{} `json:"_library,omitempty"`
+		Goal []*PlanDefinitionGoal `json:"goal,omitempty"`
+		Action []*PlanDefinitionAction `json:"action,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	output.Identifier = m.Identifier
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	if m.Subtitle != nil && m.Subtitle.Value != nil {
+		output.Subtitle = m.Subtitle.Value
+		if m.Subtitle.Element != nil {
+			output.SubtitleElement = toMapOrNil(m.Subtitle.Element.ToJSON())
+		}
+	}
+	output.Type = m.Type
+	output.Status = m.Status
+	if m.Experimental != nil && m.Experimental.Value != nil {
+		output.Experimental = m.Experimental.Value
+		if m.Experimental.Element != nil {
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+		}
+	}
+	output.SubjectCodeableConcept = m.SubjectCodeableConcept
+	output.SubjectReference = m.SubjectReference
+	output.SubjectCanonical = m.SubjectCanonical
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.Publisher != nil && m.Publisher.Value != nil {
+		output.Publisher = m.Publisher.Value
+		if m.Publisher.Element != nil {
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+		}
+	}
+	output.Contact = m.Contact
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.UseContext = m.UseContext
+	output.Jurisdiction = m.Jurisdiction
+	if m.Purpose != nil && m.Purpose.Value != nil {
+		output.Purpose = m.Purpose.Value
+		if m.Purpose.Element != nil {
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+		}
+	}
+	if m.Usage != nil && m.Usage.Value != nil {
+		output.Usage = m.Usage.Value
+		if m.Usage.Element != nil {
+			output.UsageElement = toMapOrNil(m.Usage.Element.ToJSON())
+		}
+	}
+	if m.Copyright != nil && m.Copyright.Value != nil {
+		output.Copyright = m.Copyright.Value
+		if m.Copyright.Element != nil {
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+		}
+	}
+	if m.ApprovalDate != nil && m.ApprovalDate.Value != nil {
+		output.ApprovalDate = m.ApprovalDate.Value
+		if m.ApprovalDate.Element != nil {
+			output.ApprovalDateElement = toMapOrNil(m.ApprovalDate.Element.ToJSON())
+		}
+	}
+	if m.LastReviewDate != nil && m.LastReviewDate.Value != nil {
+		output.LastReviewDate = m.LastReviewDate.Value
+		if m.LastReviewDate.Element != nil {
+			output.LastReviewDateElement = toMapOrNil(m.LastReviewDate.Element.ToJSON())
+		}
+	}
+	output.EffectivePeriod = m.EffectivePeriod
+	output.Topic = m.Topic
+	output.Author = m.Author
+	output.Editor = m.Editor
+	output.Reviewer = m.Reviewer
+	output.Endorser = m.Endorser
+	output.RelatedArtifact = m.RelatedArtifact
+	if len(m.Library_) > 0 {
+		output.Library_ = make([]interface{}, len(m.Library_))
+		output.Library_Element = make([]map[string]interface{}, len(m.Library_))
+		for i, item := range m.Library_ {
+			if item != nil && item.Value != nil {
+				output.Library_[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.Library_Element[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Goal = m.Goal
+	output.Action = m.Action
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of PlanDefinition
+// Clone creates a deep copy of PlanDefinition.
 func (m *PlanDefinition) Clone() *PlanDefinition {
 	if m == nil { return nil }
 	return &PlanDefinition{
@@ -115,7 +405,7 @@ func (m *PlanDefinition) Clone() *PlanDefinition {
 	}
 }
 
-// Equals checks for equality with another PlanDefinition instance
+// Equals checks equality between two PlanDefinition instances.
 func (m *PlanDefinition) Equals(other *PlanDefinition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -166,7 +456,7 @@ func (m *PlanDefinition) Equals(other *PlanDefinition) bool {
 // PlanDefinitionGoal
 // A goal describes an expected outcome that activities within the plan are intended to achieve. For example, weight loss, restoring an activity of daily living, obtaining herd immunity via immunization, meeting a process improvement objective, meeting the acceptance criteria for a test as specified by a quality specification, etc.
 type PlanDefinitionGoal struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -179,22 +469,75 @@ type PlanDefinitionGoal struct {
 	Target []*PlanDefinitionTarget `json:"target,omitempty"`
 }
 
-// NewPlanDefinitionGoal creates a new PlanDefinitionGoal instance
+// NewPlanDefinitionGoal creates a new PlanDefinitionGoal instance.
 func NewPlanDefinitionGoal() *PlanDefinitionGoal {
 	return &PlanDefinitionGoal{}
 }
 
-// FromJSON populates PlanDefinitionGoal from JSON data
+// FromJSON populates PlanDefinitionGoal from JSON data.
 func (m *PlanDefinitionGoal) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Category *CodeableConcept `json:"category,omitempty"`
+		Description *CodeableConcept `json:"description,omitempty"`
+		Priority *CodeableConcept `json:"priority,omitempty"`
+		Start *CodeableConcept `json:"start,omitempty"`
+		Addresses []*CodeableConcept `json:"addresses,omitempty"`
+		Documentation []*RelatedArtifact `json:"documentation,omitempty"`
+		Target []*PlanDefinitionTarget `json:"target,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Category = temp.Category
+	m.Description = temp.Description
+	m.Priority = temp.Priority
+	m.Start = temp.Start
+	m.Addresses = temp.Addresses
+	m.Documentation = temp.Documentation
+	m.Target = temp.Target
+	return nil
 }
 
-// ToJSON converts PlanDefinitionGoal to JSON data
+// ToJSON converts PlanDefinitionGoal to JSON data.
 func (m *PlanDefinitionGoal) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Category *CodeableConcept `json:"category,omitempty"`
+		Description *CodeableConcept `json:"description,omitempty"`
+		Priority *CodeableConcept `json:"priority,omitempty"`
+		Start *CodeableConcept `json:"start,omitempty"`
+		Addresses []*CodeableConcept `json:"addresses,omitempty"`
+		Documentation []*RelatedArtifact `json:"documentation,omitempty"`
+		Target []*PlanDefinitionTarget `json:"target,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Category = m.Category
+	output.Description = m.Description
+	output.Priority = m.Priority
+	output.Start = m.Start
+	output.Addresses = m.Addresses
+	output.Documentation = m.Documentation
+	output.Target = m.Target
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of PlanDefinitionGoal
+// Clone creates a deep copy of PlanDefinitionGoal.
 func (m *PlanDefinitionGoal) Clone() *PlanDefinitionGoal {
 	if m == nil { return nil }
 	return &PlanDefinitionGoal{
@@ -211,7 +554,7 @@ func (m *PlanDefinitionGoal) Clone() *PlanDefinitionGoal {
 	}
 }
 
-// Equals checks for equality with another PlanDefinitionGoal instance
+// Equals checks equality between two PlanDefinitionGoal instances.
 func (m *PlanDefinitionGoal) Equals(other *PlanDefinitionGoal) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -231,7 +574,7 @@ func (m *PlanDefinitionGoal) Equals(other *PlanDefinitionGoal) bool {
 // PlanDefinitionTarget
 // Indicates what should be done and within what timeframe.
 type PlanDefinitionTarget struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -242,22 +585,67 @@ type PlanDefinitionTarget struct {
 	Due *FhirDuration `json:"due,omitempty"`
 }
 
-// NewPlanDefinitionTarget creates a new PlanDefinitionTarget instance
+// NewPlanDefinitionTarget creates a new PlanDefinitionTarget instance.
 func NewPlanDefinitionTarget() *PlanDefinitionTarget {
 	return &PlanDefinitionTarget{}
 }
 
-// FromJSON populates PlanDefinitionTarget from JSON data
+// FromJSON populates PlanDefinitionTarget from JSON data.
 func (m *PlanDefinitionTarget) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Measure *CodeableConcept `json:"measure,omitempty"`
+		DetailQuantity *Quantity `json:"detailquantity,omitempty"`
+		DetailRange *Range `json:"detailrange,omitempty"`
+		DetailCodeableConcept *CodeableConcept `json:"detailcodeableconcept,omitempty"`
+		Due *FhirDuration `json:"due,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Measure = temp.Measure
+	m.DetailQuantity = temp.DetailQuantity
+	m.DetailRange = temp.DetailRange
+	m.DetailCodeableConcept = temp.DetailCodeableConcept
+	m.Due = temp.Due
+	return nil
 }
 
-// ToJSON converts PlanDefinitionTarget to JSON data
+// ToJSON converts PlanDefinitionTarget to JSON data.
 func (m *PlanDefinitionTarget) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Measure *CodeableConcept `json:"measure,omitempty"`
+		DetailQuantity *Quantity `json:"detailquantity,omitempty"`
+		DetailRange *Range `json:"detailrange,omitempty"`
+		DetailCodeableConcept *CodeableConcept `json:"detailcodeableconcept,omitempty"`
+		Due *FhirDuration `json:"due,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Measure = m.Measure
+	output.DetailQuantity = m.DetailQuantity
+	output.DetailRange = m.DetailRange
+	output.DetailCodeableConcept = m.DetailCodeableConcept
+	output.Due = m.Due
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of PlanDefinitionTarget
+// Clone creates a deep copy of PlanDefinitionTarget.
 func (m *PlanDefinitionTarget) Clone() *PlanDefinitionTarget {
 	if m == nil { return nil }
 	return &PlanDefinitionTarget{
@@ -272,7 +660,7 @@ func (m *PlanDefinitionTarget) Clone() *PlanDefinitionTarget {
 	}
 }
 
-// Equals checks for equality with another PlanDefinitionTarget instance
+// Equals checks equality between two PlanDefinitionTarget instances.
 func (m *PlanDefinitionTarget) Equals(other *PlanDefinitionTarget) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -290,7 +678,7 @@ func (m *PlanDefinitionTarget) Equals(other *PlanDefinitionTarget) bool {
 // PlanDefinitionAction
 // An action or group of actions to be taken as part of the plan. For example, in clinical care, an action would be to prescribe a particular indicated medication, or perform a particular test as appropriate. In pharmaceutical quality, an action would be the test that needs to be performed on a drug product as defined in the quality specification.
 type PlanDefinitionAction struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -331,22 +719,256 @@ type PlanDefinitionAction struct {
 	Action []*PlanDefinitionAction `json:"action,omitempty"`
 }
 
-// NewPlanDefinitionAction creates a new PlanDefinitionAction instance
+// NewPlanDefinitionAction creates a new PlanDefinitionAction instance.
 func NewPlanDefinitionAction() *PlanDefinitionAction {
 	return &PlanDefinitionAction{}
 }
 
-// FromJSON populates PlanDefinitionAction from JSON data
+// FromJSON populates PlanDefinitionAction from JSON data.
 func (m *PlanDefinitionAction) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Prefix *FhirString `json:"prefix,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		TextEquivalent *FhirString `json:"textequivalent,omitempty"`
+		Priority *RequestPriority `json:"priority,omitempty"`
+		Code []*CodeableConcept `json:"code,omitempty"`
+		Reason []*CodeableConcept `json:"reason,omitempty"`
+		Documentation []*RelatedArtifact `json:"documentation,omitempty"`
+		GoalId []interface{} `json:"goalid,omitempty"`
+		SubjectCodeableConcept *CodeableConcept `json:"subjectcodeableconcept,omitempty"`
+		SubjectReference *Reference `json:"subjectreference,omitempty"`
+		SubjectCanonical *SubjectType `json:"subjectcanonical,omitempty"`
+		Trigger []*TriggerDefinition `json:"trigger,omitempty"`
+		Condition []*PlanDefinitionCondition `json:"condition,omitempty"`
+		Input []*DataRequirement `json:"input,omitempty"`
+		Output []*DataRequirement `json:"output,omitempty"`
+		RelatedAction []*PlanDefinitionRelatedAction `json:"relatedaction,omitempty"`
+		TimingDateTime *FhirDateTime `json:"timingdatetime,omitempty"`
+		TimingAge *Age `json:"timingage,omitempty"`
+		TimingPeriod *Period `json:"timingperiod,omitempty"`
+		TimingDuration *FhirDuration `json:"timingduration,omitempty"`
+		TimingRange *Range `json:"timingrange,omitempty"`
+		TimingTiming *Timing `json:"timingtiming,omitempty"`
+		Participant []*PlanDefinitionParticipant `json:"participant,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		GroupingBehavior *ActionGroupingBehavior `json:"groupingbehavior,omitempty"`
+		SelectionBehavior *ActionSelectionBehavior `json:"selectionbehavior,omitempty"`
+		RequiredBehavior *ActionRequiredBehavior `json:"requiredbehavior,omitempty"`
+		PrecheckBehavior *ActionPrecheckBehavior `json:"precheckbehavior,omitempty"`
+		CardinalityBehavior *ActionCardinalityBehavior `json:"cardinalitybehavior,omitempty"`
+		DefinitionCanonical *FhirCanonical `json:"definitioncanonical,omitempty"`
+		DefinitionUri *FhirUri `json:"definitionuri,omitempty"`
+		Transform *FhirCanonical `json:"transform,omitempty"`
+		DynamicValue []*PlanDefinitionDynamicValue `json:"dynamicvalue,omitempty"`
+		Action []*PlanDefinitionAction `json:"action,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Prefix = temp.Prefix
+	m.Title = temp.Title
+	m.Description = temp.Description
+	m.TextEquivalent = temp.TextEquivalent
+	m.Priority = temp.Priority
+	m.Code = temp.Code
+	m.Reason = temp.Reason
+	m.Documentation = temp.Documentation
+	if len(temp.GoalId) > 0 {
+		m.GoalId = make([]*FhirId, len(temp.GoalId))
+		for i := range temp.GoalId {
+			itemMap, ok := temp.GoalId[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for GoalId[%d]: expected map", i) }
+			primitive, err := NewFhirIdFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse GoalId[%d]: %v", i, err) }
+			m.GoalId[i] = primitive
+		}
+	}
+	m.SubjectCodeableConcept = temp.SubjectCodeableConcept
+	m.SubjectReference = temp.SubjectReference
+	m.SubjectCanonical = temp.SubjectCanonical
+	m.Trigger = temp.Trigger
+	m.Condition = temp.Condition
+	m.Input = temp.Input
+	m.Output = temp.Output
+	m.RelatedAction = temp.RelatedAction
+	m.TimingDateTime = temp.TimingDateTime
+	m.TimingAge = temp.TimingAge
+	m.TimingPeriod = temp.TimingPeriod
+	m.TimingDuration = temp.TimingDuration
+	m.TimingRange = temp.TimingRange
+	m.TimingTiming = temp.TimingTiming
+	m.Participant = temp.Participant
+	m.Type = temp.Type
+	m.GroupingBehavior = temp.GroupingBehavior
+	m.SelectionBehavior = temp.SelectionBehavior
+	m.RequiredBehavior = temp.RequiredBehavior
+	m.PrecheckBehavior = temp.PrecheckBehavior
+	m.CardinalityBehavior = temp.CardinalityBehavior
+	m.DefinitionCanonical = temp.DefinitionCanonical
+	m.DefinitionUri = temp.DefinitionUri
+	m.Transform = temp.Transform
+	m.DynamicValue = temp.DynamicValue
+	m.Action = temp.Action
+	return nil
 }
 
-// ToJSON converts PlanDefinitionAction to JSON data
+// ToJSON converts PlanDefinitionAction to JSON data.
 func (m *PlanDefinitionAction) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Prefix interface{} `json:"prefix,omitempty"`
+		PrefixElement map[string]interface{} `json:"_prefix,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		TextEquivalent interface{} `json:"textequivalent,omitempty"`
+		TextEquivalentElement map[string]interface{} `json:"_textequivalent,omitempty"`
+		Priority *RequestPriority `json:"priority,omitempty"`
+		Code []*CodeableConcept `json:"code,omitempty"`
+		Reason []*CodeableConcept `json:"reason,omitempty"`
+		Documentation []*RelatedArtifact `json:"documentation,omitempty"`
+		GoalId []interface{} `json:"goalid,omitempty"`
+		GoalIdElement []map[string]interface{} `json:"_goalid,omitempty"`
+		SubjectCodeableConcept *CodeableConcept `json:"subjectcodeableconcept,omitempty"`
+		SubjectReference *Reference `json:"subjectreference,omitempty"`
+		SubjectCanonical *SubjectType `json:"subjectcanonical,omitempty"`
+		Trigger []*TriggerDefinition `json:"trigger,omitempty"`
+		Condition []*PlanDefinitionCondition `json:"condition,omitempty"`
+		Input []*DataRequirement `json:"input,omitempty"`
+		Output []*DataRequirement `json:"output,omitempty"`
+		RelatedAction []*PlanDefinitionRelatedAction `json:"relatedaction,omitempty"`
+		TimingDateTime interface{} `json:"timingdatetime,omitempty"`
+		TimingDateTimeElement map[string]interface{} `json:"_timingdatetime,omitempty"`
+		TimingAge *Age `json:"timingage,omitempty"`
+		TimingPeriod *Period `json:"timingperiod,omitempty"`
+		TimingDuration *FhirDuration `json:"timingduration,omitempty"`
+		TimingRange *Range `json:"timingrange,omitempty"`
+		TimingTiming *Timing `json:"timingtiming,omitempty"`
+		Participant []*PlanDefinitionParticipant `json:"participant,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		GroupingBehavior *ActionGroupingBehavior `json:"groupingbehavior,omitempty"`
+		SelectionBehavior *ActionSelectionBehavior `json:"selectionbehavior,omitempty"`
+		RequiredBehavior *ActionRequiredBehavior `json:"requiredbehavior,omitempty"`
+		PrecheckBehavior *ActionPrecheckBehavior `json:"precheckbehavior,omitempty"`
+		CardinalityBehavior *ActionCardinalityBehavior `json:"cardinalitybehavior,omitempty"`
+		DefinitionCanonical interface{} `json:"definitioncanonical,omitempty"`
+		DefinitionCanonicalElement map[string]interface{} `json:"_definitioncanonical,omitempty"`
+		DefinitionUri interface{} `json:"definitionuri,omitempty"`
+		DefinitionUriElement map[string]interface{} `json:"_definitionuri,omitempty"`
+		Transform interface{} `json:"transform,omitempty"`
+		TransformElement map[string]interface{} `json:"_transform,omitempty"`
+		DynamicValue []*PlanDefinitionDynamicValue `json:"dynamicvalue,omitempty"`
+		Action []*PlanDefinitionAction `json:"action,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Prefix != nil && m.Prefix.Value != nil {
+		output.Prefix = m.Prefix.Value
+		if m.Prefix.Element != nil {
+			output.PrefixElement = toMapOrNil(m.Prefix.Element.ToJSON())
+		}
+	}
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	if m.TextEquivalent != nil && m.TextEquivalent.Value != nil {
+		output.TextEquivalent = m.TextEquivalent.Value
+		if m.TextEquivalent.Element != nil {
+			output.TextEquivalentElement = toMapOrNil(m.TextEquivalent.Element.ToJSON())
+		}
+	}
+	output.Priority = m.Priority
+	output.Code = m.Code
+	output.Reason = m.Reason
+	output.Documentation = m.Documentation
+	if len(m.GoalId) > 0 {
+		output.GoalId = make([]interface{}, len(m.GoalId))
+		output.GoalIdElement = make([]map[string]interface{}, len(m.GoalId))
+		for i, item := range m.GoalId {
+			if item != nil && item.Value != nil {
+				output.GoalId[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.GoalIdElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.SubjectCodeableConcept = m.SubjectCodeableConcept
+	output.SubjectReference = m.SubjectReference
+	output.SubjectCanonical = m.SubjectCanonical
+	output.Trigger = m.Trigger
+	output.Condition = m.Condition
+	output.Input = m.Input
+	output.Output = m.Output
+	output.RelatedAction = m.RelatedAction
+	if m.TimingDateTime != nil && m.TimingDateTime.Value != nil {
+		output.TimingDateTime = m.TimingDateTime.Value
+		if m.TimingDateTime.Element != nil {
+			output.TimingDateTimeElement = toMapOrNil(m.TimingDateTime.Element.ToJSON())
+		}
+	}
+	output.TimingAge = m.TimingAge
+	output.TimingPeriod = m.TimingPeriod
+	output.TimingDuration = m.TimingDuration
+	output.TimingRange = m.TimingRange
+	output.TimingTiming = m.TimingTiming
+	output.Participant = m.Participant
+	output.Type = m.Type
+	output.GroupingBehavior = m.GroupingBehavior
+	output.SelectionBehavior = m.SelectionBehavior
+	output.RequiredBehavior = m.RequiredBehavior
+	output.PrecheckBehavior = m.PrecheckBehavior
+	output.CardinalityBehavior = m.CardinalityBehavior
+	if m.DefinitionCanonical != nil && m.DefinitionCanonical.Value != nil {
+		output.DefinitionCanonical = m.DefinitionCanonical.Value
+		if m.DefinitionCanonical.Element != nil {
+			output.DefinitionCanonicalElement = toMapOrNil(m.DefinitionCanonical.Element.ToJSON())
+		}
+	}
+	if m.DefinitionUri != nil && m.DefinitionUri.Value != nil {
+		output.DefinitionUri = m.DefinitionUri.Value
+		if m.DefinitionUri.Element != nil {
+			output.DefinitionUriElement = toMapOrNil(m.DefinitionUri.Element.ToJSON())
+		}
+	}
+	if m.Transform != nil && m.Transform.Value != nil {
+		output.Transform = m.Transform.Value
+		if m.Transform.Element != nil {
+			output.TransformElement = toMapOrNil(m.Transform.Element.ToJSON())
+		}
+	}
+	output.DynamicValue = m.DynamicValue
+	output.Action = m.Action
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of PlanDefinitionAction
+// Clone creates a deep copy of PlanDefinitionAction.
 func (m *PlanDefinitionAction) Clone() *PlanDefinitionAction {
 	if m == nil { return nil }
 	return &PlanDefinitionAction{
@@ -391,7 +1013,7 @@ func (m *PlanDefinitionAction) Clone() *PlanDefinitionAction {
 	}
 }
 
-// Equals checks for equality with another PlanDefinitionAction instance
+// Equals checks equality between two PlanDefinitionAction instances.
 func (m *PlanDefinitionAction) Equals(other *PlanDefinitionAction) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -439,7 +1061,7 @@ func (m *PlanDefinitionAction) Equals(other *PlanDefinitionAction) bool {
 // PlanDefinitionCondition
 // An expression that describes applicability criteria or start/stop conditions for the action.
 type PlanDefinitionCondition struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -447,22 +1069,55 @@ type PlanDefinitionCondition struct {
 	Expression *FhirExpression `json:"expression,omitempty"`
 }
 
-// NewPlanDefinitionCondition creates a new PlanDefinitionCondition instance
+// NewPlanDefinitionCondition creates a new PlanDefinitionCondition instance.
 func NewPlanDefinitionCondition() *PlanDefinitionCondition {
 	return &PlanDefinitionCondition{}
 }
 
-// FromJSON populates PlanDefinitionCondition from JSON data
+// FromJSON populates PlanDefinitionCondition from JSON data.
 func (m *PlanDefinitionCondition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Kind *ActionConditionKind `json:"kind,omitempty"`
+		Expression *FhirExpression `json:"expression,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Kind = temp.Kind
+	m.Expression = temp.Expression
+	return nil
 }
 
-// ToJSON converts PlanDefinitionCondition to JSON data
+// ToJSON converts PlanDefinitionCondition to JSON data.
 func (m *PlanDefinitionCondition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Kind *ActionConditionKind `json:"kind,omitempty"`
+		Expression *FhirExpression `json:"expression,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Kind = m.Kind
+	output.Expression = m.Expression
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of PlanDefinitionCondition
+// Clone creates a deep copy of PlanDefinitionCondition.
 func (m *PlanDefinitionCondition) Clone() *PlanDefinitionCondition {
 	if m == nil { return nil }
 	return &PlanDefinitionCondition{
@@ -474,7 +1129,7 @@ func (m *PlanDefinitionCondition) Clone() *PlanDefinitionCondition {
 	}
 }
 
-// Equals checks for equality with another PlanDefinitionCondition instance
+// Equals checks equality between two PlanDefinitionCondition instances.
 func (m *PlanDefinitionCondition) Equals(other *PlanDefinitionCondition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -489,7 +1144,7 @@ func (m *PlanDefinitionCondition) Equals(other *PlanDefinitionCondition) bool {
 // PlanDefinitionRelatedAction
 // A relationship to another action such as "before" or "30-60 minutes after start of".
 type PlanDefinitionRelatedAction struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -499,22 +1154,69 @@ type PlanDefinitionRelatedAction struct {
 	OffsetRange *Range `json:"offsetrange,omitempty"`
 }
 
-// NewPlanDefinitionRelatedAction creates a new PlanDefinitionRelatedAction instance
+// NewPlanDefinitionRelatedAction creates a new PlanDefinitionRelatedAction instance.
 func NewPlanDefinitionRelatedAction() *PlanDefinitionRelatedAction {
 	return &PlanDefinitionRelatedAction{}
 }
 
-// FromJSON populates PlanDefinitionRelatedAction from JSON data
+// FromJSON populates PlanDefinitionRelatedAction from JSON data.
 func (m *PlanDefinitionRelatedAction) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ActionId *FhirId `json:"actionid,omitempty"`
+		Relationship *ActionRelationshipType `json:"relationship,omitempty"`
+		OffsetDuration *FhirDuration `json:"offsetduration,omitempty"`
+		OffsetRange *Range `json:"offsetrange,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.ActionId = temp.ActionId
+	m.Relationship = temp.Relationship
+	m.OffsetDuration = temp.OffsetDuration
+	m.OffsetRange = temp.OffsetRange
+	return nil
 }
 
-// ToJSON converts PlanDefinitionRelatedAction to JSON data
+// ToJSON converts PlanDefinitionRelatedAction to JSON data.
 func (m *PlanDefinitionRelatedAction) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ActionId interface{} `json:"actionid,omitempty"`
+		ActionIdElement map[string]interface{} `json:"_actionid,omitempty"`
+		Relationship *ActionRelationshipType `json:"relationship,omitempty"`
+		OffsetDuration *FhirDuration `json:"offsetduration,omitempty"`
+		OffsetRange *Range `json:"offsetrange,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.ActionId != nil && m.ActionId.Value != nil {
+		output.ActionId = m.ActionId.Value
+		if m.ActionId.Element != nil {
+			output.ActionIdElement = toMapOrNil(m.ActionId.Element.ToJSON())
+		}
+	}
+	output.Relationship = m.Relationship
+	output.OffsetDuration = m.OffsetDuration
+	output.OffsetRange = m.OffsetRange
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of PlanDefinitionRelatedAction
+// Clone creates a deep copy of PlanDefinitionRelatedAction.
 func (m *PlanDefinitionRelatedAction) Clone() *PlanDefinitionRelatedAction {
 	if m == nil { return nil }
 	return &PlanDefinitionRelatedAction{
@@ -528,7 +1230,7 @@ func (m *PlanDefinitionRelatedAction) Clone() *PlanDefinitionRelatedAction {
 	}
 }
 
-// Equals checks for equality with another PlanDefinitionRelatedAction instance
+// Equals checks equality between two PlanDefinitionRelatedAction instances.
 func (m *PlanDefinitionRelatedAction) Equals(other *PlanDefinitionRelatedAction) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -545,7 +1247,7 @@ func (m *PlanDefinitionRelatedAction) Equals(other *PlanDefinitionRelatedAction)
 // PlanDefinitionParticipant
 // Indicates who should participate in performing the action described.
 type PlanDefinitionParticipant struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -553,22 +1255,55 @@ type PlanDefinitionParticipant struct {
 	Role *CodeableConcept `json:"role,omitempty"`
 }
 
-// NewPlanDefinitionParticipant creates a new PlanDefinitionParticipant instance
+// NewPlanDefinitionParticipant creates a new PlanDefinitionParticipant instance.
 func NewPlanDefinitionParticipant() *PlanDefinitionParticipant {
 	return &PlanDefinitionParticipant{}
 }
 
-// FromJSON populates PlanDefinitionParticipant from JSON data
+// FromJSON populates PlanDefinitionParticipant from JSON data.
 func (m *PlanDefinitionParticipant) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *ActionParticipantType `json:"type,omitempty"`
+		Role *CodeableConcept `json:"role,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Role = temp.Role
+	return nil
 }
 
-// ToJSON converts PlanDefinitionParticipant to JSON data
+// ToJSON converts PlanDefinitionParticipant to JSON data.
 func (m *PlanDefinitionParticipant) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *ActionParticipantType `json:"type,omitempty"`
+		Role *CodeableConcept `json:"role,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Role = m.Role
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of PlanDefinitionParticipant
+// Clone creates a deep copy of PlanDefinitionParticipant.
 func (m *PlanDefinitionParticipant) Clone() *PlanDefinitionParticipant {
 	if m == nil { return nil }
 	return &PlanDefinitionParticipant{
@@ -580,7 +1315,7 @@ func (m *PlanDefinitionParticipant) Clone() *PlanDefinitionParticipant {
 	}
 }
 
-// Equals checks for equality with another PlanDefinitionParticipant instance
+// Equals checks equality between two PlanDefinitionParticipant instances.
 func (m *PlanDefinitionParticipant) Equals(other *PlanDefinitionParticipant) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -595,7 +1330,7 @@ func (m *PlanDefinitionParticipant) Equals(other *PlanDefinitionParticipant) boo
 // PlanDefinitionDynamicValue
 // Customizations that should be applied to the statically defined resource. For example, if the dosage of a medication must be computed based on the patient's weight, a customization would be used to specify an expression that calculated the weight, and the path on the resource that would contain the result.
 type PlanDefinitionDynamicValue struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -603,22 +1338,61 @@ type PlanDefinitionDynamicValue struct {
 	Expression *FhirExpression `json:"expression,omitempty"`
 }
 
-// NewPlanDefinitionDynamicValue creates a new PlanDefinitionDynamicValue instance
+// NewPlanDefinitionDynamicValue creates a new PlanDefinitionDynamicValue instance.
 func NewPlanDefinitionDynamicValue() *PlanDefinitionDynamicValue {
 	return &PlanDefinitionDynamicValue{}
 }
 
-// FromJSON populates PlanDefinitionDynamicValue from JSON data
+// FromJSON populates PlanDefinitionDynamicValue from JSON data.
 func (m *PlanDefinitionDynamicValue) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Path *FhirString `json:"path,omitempty"`
+		Expression *FhirExpression `json:"expression,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Path = temp.Path
+	m.Expression = temp.Expression
+	return nil
 }
 
-// ToJSON converts PlanDefinitionDynamicValue to JSON data
+// ToJSON converts PlanDefinitionDynamicValue to JSON data.
 func (m *PlanDefinitionDynamicValue) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Path interface{} `json:"path,omitempty"`
+		PathElement map[string]interface{} `json:"_path,omitempty"`
+		Expression *FhirExpression `json:"expression,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Path != nil && m.Path.Value != nil {
+		output.Path = m.Path.Value
+		if m.Path.Element != nil {
+			output.PathElement = toMapOrNil(m.Path.Element.ToJSON())
+		}
+	}
+	output.Expression = m.Expression
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of PlanDefinitionDynamicValue
+// Clone creates a deep copy of PlanDefinitionDynamicValue.
 func (m *PlanDefinitionDynamicValue) Clone() *PlanDefinitionDynamicValue {
 	if m == nil { return nil }
 	return &PlanDefinitionDynamicValue{
@@ -630,7 +1404,7 @@ func (m *PlanDefinitionDynamicValue) Clone() *PlanDefinitionDynamicValue {
 	}
 }
 
-// Equals checks for equality with another PlanDefinitionDynamicValue instance
+// Equals checks equality between two PlanDefinitionDynamicValue instances.
 func (m *PlanDefinitionDynamicValue) Equals(other *PlanDefinitionDynamicValue) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

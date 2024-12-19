@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // VerificationResult
 // Describes validation requirements, source(s), status and dates for one or more elements.
 type VerificationResult struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -33,22 +35,168 @@ type VerificationResult struct {
 	Validator []*VerificationResultValidator `json:"validator,omitempty"`
 }
 
-// NewVerificationResult creates a new VerificationResult instance
+// NewVerificationResult creates a new VerificationResult instance.
 func NewVerificationResult() *VerificationResult {
 	return &VerificationResult{}
 }
 
-// FromJSON populates VerificationResult from JSON data
+// FromJSON populates VerificationResult from JSON data.
 func (m *VerificationResult) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Target []*Reference `json:"target,omitempty"`
+		TargetLocation []interface{} `json:"targetlocation,omitempty"`
+		Need *CodeableConcept `json:"need,omitempty"`
+		Status *Status `json:"status,omitempty"`
+		StatusDate *FhirDateTime `json:"statusdate,omitempty"`
+		ValidationType *CodeableConcept `json:"validationtype,omitempty"`
+		ValidationProcess []*CodeableConcept `json:"validationprocess,omitempty"`
+		Frequency *Timing `json:"frequency,omitempty"`
+		LastPerformed *FhirDateTime `json:"lastperformed,omitempty"`
+		NextScheduled *FhirDate `json:"nextscheduled,omitempty"`
+		FailureAction *CodeableConcept `json:"failureaction,omitempty"`
+		PrimarySource []*VerificationResultPrimarySource `json:"primarysource,omitempty"`
+		Attestation *VerificationResultAttestation `json:"attestation,omitempty"`
+		Validator []*VerificationResultValidator `json:"validator,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Target = temp.Target
+	if len(temp.TargetLocation) > 0 {
+		m.TargetLocation = make([]*FhirString, len(temp.TargetLocation))
+		for i := range temp.TargetLocation {
+			itemMap, ok := temp.TargetLocation[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for TargetLocation[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse TargetLocation[%d]: %v", i, err) }
+			m.TargetLocation[i] = primitive
+		}
+	}
+	m.Need = temp.Need
+	m.Status = temp.Status
+	m.StatusDate = temp.StatusDate
+	m.ValidationType = temp.ValidationType
+	m.ValidationProcess = temp.ValidationProcess
+	m.Frequency = temp.Frequency
+	m.LastPerformed = temp.LastPerformed
+	m.NextScheduled = temp.NextScheduled
+	m.FailureAction = temp.FailureAction
+	m.PrimarySource = temp.PrimarySource
+	m.Attestation = temp.Attestation
+	m.Validator = temp.Validator
+	return nil
 }
 
-// ToJSON converts VerificationResult to JSON data
+// ToJSON converts VerificationResult to JSON data.
 func (m *VerificationResult) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Target []*Reference `json:"target,omitempty"`
+		TargetLocation []interface{} `json:"targetlocation,omitempty"`
+		TargetLocationElement []map[string]interface{} `json:"_targetlocation,omitempty"`
+		Need *CodeableConcept `json:"need,omitempty"`
+		Status *Status `json:"status,omitempty"`
+		StatusDate interface{} `json:"statusdate,omitempty"`
+		StatusDateElement map[string]interface{} `json:"_statusdate,omitempty"`
+		ValidationType *CodeableConcept `json:"validationtype,omitempty"`
+		ValidationProcess []*CodeableConcept `json:"validationprocess,omitempty"`
+		Frequency *Timing `json:"frequency,omitempty"`
+		LastPerformed interface{} `json:"lastperformed,omitempty"`
+		LastPerformedElement map[string]interface{} `json:"_lastperformed,omitempty"`
+		NextScheduled interface{} `json:"nextscheduled,omitempty"`
+		NextScheduledElement map[string]interface{} `json:"_nextscheduled,omitempty"`
+		FailureAction *CodeableConcept `json:"failureaction,omitempty"`
+		PrimarySource []*VerificationResultPrimarySource `json:"primarysource,omitempty"`
+		Attestation *VerificationResultAttestation `json:"attestation,omitempty"`
+		Validator []*VerificationResultValidator `json:"validator,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Target = m.Target
+	if len(m.TargetLocation) > 0 {
+		output.TargetLocation = make([]interface{}, len(m.TargetLocation))
+		output.TargetLocationElement = make([]map[string]interface{}, len(m.TargetLocation))
+		for i, item := range m.TargetLocation {
+			if item != nil && item.Value != nil {
+				output.TargetLocation[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.TargetLocationElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Need = m.Need
+	output.Status = m.Status
+	if m.StatusDate != nil && m.StatusDate.Value != nil {
+		output.StatusDate = m.StatusDate.Value
+		if m.StatusDate.Element != nil {
+			output.StatusDateElement = toMapOrNil(m.StatusDate.Element.ToJSON())
+		}
+	}
+	output.ValidationType = m.ValidationType
+	output.ValidationProcess = m.ValidationProcess
+	output.Frequency = m.Frequency
+	if m.LastPerformed != nil && m.LastPerformed.Value != nil {
+		output.LastPerformed = m.LastPerformed.Value
+		if m.LastPerformed.Element != nil {
+			output.LastPerformedElement = toMapOrNil(m.LastPerformed.Element.ToJSON())
+		}
+	}
+	if m.NextScheduled != nil && m.NextScheduled.Value != nil {
+		output.NextScheduled = m.NextScheduled.Value
+		if m.NextScheduled.Element != nil {
+			output.NextScheduledElement = toMapOrNil(m.NextScheduled.Element.ToJSON())
+		}
+	}
+	output.FailureAction = m.FailureAction
+	output.PrimarySource = m.PrimarySource
+	output.Attestation = m.Attestation
+	output.Validator = m.Validator
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of VerificationResult
+// Clone creates a deep copy of VerificationResult.
 func (m *VerificationResult) Clone() *VerificationResult {
 	if m == nil { return nil }
 	return &VerificationResult{
@@ -77,7 +225,7 @@ func (m *VerificationResult) Clone() *VerificationResult {
 	}
 }
 
-// Equals checks for equality with another VerificationResult instance
+// Equals checks equality between two VerificationResult instances.
 func (m *VerificationResult) Equals(other *VerificationResult) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -109,7 +257,7 @@ func (m *VerificationResult) Equals(other *VerificationResult) bool {
 // VerificationResultPrimarySource
 // Information about the primary source(s) involved in validation.
 type VerificationResultPrimarySource struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -122,22 +270,81 @@ type VerificationResultPrimarySource struct {
 	PushTypeAvailable []*CodeableConcept `json:"pushtypeavailable,omitempty"`
 }
 
-// NewVerificationResultPrimarySource creates a new VerificationResultPrimarySource instance
+// NewVerificationResultPrimarySource creates a new VerificationResultPrimarySource instance.
 func NewVerificationResultPrimarySource() *VerificationResultPrimarySource {
 	return &VerificationResultPrimarySource{}
 }
 
-// FromJSON populates VerificationResultPrimarySource from JSON data
+// FromJSON populates VerificationResultPrimarySource from JSON data.
 func (m *VerificationResultPrimarySource) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Who *Reference `json:"who,omitempty"`
+		Type []*CodeableConcept `json:"type,omitempty"`
+		CommunicationMethod []*CodeableConcept `json:"communicationmethod,omitempty"`
+		ValidationStatus *CodeableConcept `json:"validationstatus,omitempty"`
+		ValidationDate *FhirDateTime `json:"validationdate,omitempty"`
+		CanPushUpdates *CodeableConcept `json:"canpushupdates,omitempty"`
+		PushTypeAvailable []*CodeableConcept `json:"pushtypeavailable,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Who = temp.Who
+	m.Type = temp.Type
+	m.CommunicationMethod = temp.CommunicationMethod
+	m.ValidationStatus = temp.ValidationStatus
+	m.ValidationDate = temp.ValidationDate
+	m.CanPushUpdates = temp.CanPushUpdates
+	m.PushTypeAvailable = temp.PushTypeAvailable
+	return nil
 }
 
-// ToJSON converts VerificationResultPrimarySource to JSON data
+// ToJSON converts VerificationResultPrimarySource to JSON data.
 func (m *VerificationResultPrimarySource) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Who *Reference `json:"who,omitempty"`
+		Type []*CodeableConcept `json:"type,omitempty"`
+		CommunicationMethod []*CodeableConcept `json:"communicationmethod,omitempty"`
+		ValidationStatus *CodeableConcept `json:"validationstatus,omitempty"`
+		ValidationDate interface{} `json:"validationdate,omitempty"`
+		ValidationDateElement map[string]interface{} `json:"_validationdate,omitempty"`
+		CanPushUpdates *CodeableConcept `json:"canpushupdates,omitempty"`
+		PushTypeAvailable []*CodeableConcept `json:"pushtypeavailable,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Who = m.Who
+	output.Type = m.Type
+	output.CommunicationMethod = m.CommunicationMethod
+	output.ValidationStatus = m.ValidationStatus
+	if m.ValidationDate != nil && m.ValidationDate.Value != nil {
+		output.ValidationDate = m.ValidationDate.Value
+		if m.ValidationDate.Element != nil {
+			output.ValidationDateElement = toMapOrNil(m.ValidationDate.Element.ToJSON())
+		}
+	}
+	output.CanPushUpdates = m.CanPushUpdates
+	output.PushTypeAvailable = m.PushTypeAvailable
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of VerificationResultPrimarySource
+// Clone creates a deep copy of VerificationResultPrimarySource.
 func (m *VerificationResultPrimarySource) Clone() *VerificationResultPrimarySource {
 	if m == nil { return nil }
 	return &VerificationResultPrimarySource{
@@ -154,7 +361,7 @@ func (m *VerificationResultPrimarySource) Clone() *VerificationResultPrimarySour
 	}
 }
 
-// Equals checks for equality with another VerificationResultPrimarySource instance
+// Equals checks equality between two VerificationResultPrimarySource instances.
 func (m *VerificationResultPrimarySource) Equals(other *VerificationResultPrimarySource) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -174,7 +381,7 @@ func (m *VerificationResultPrimarySource) Equals(other *VerificationResultPrimar
 // VerificationResultAttestation
 // Information about the entity attesting to information.
 type VerificationResultAttestation struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -188,22 +395,97 @@ type VerificationResultAttestation struct {
 	SourceSignature *Signature `json:"sourcesignature,omitempty"`
 }
 
-// NewVerificationResultAttestation creates a new VerificationResultAttestation instance
+// NewVerificationResultAttestation creates a new VerificationResultAttestation instance.
 func NewVerificationResultAttestation() *VerificationResultAttestation {
 	return &VerificationResultAttestation{}
 }
 
-// FromJSON populates VerificationResultAttestation from JSON data
+// FromJSON populates VerificationResultAttestation from JSON data.
 func (m *VerificationResultAttestation) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Who *Reference `json:"who,omitempty"`
+		OnBehalfOf *Reference `json:"onbehalfof,omitempty"`
+		CommunicationMethod *CodeableConcept `json:"communicationmethod,omitempty"`
+		Date *FhirDate `json:"date,omitempty"`
+		SourceIdentityCertificate *FhirString `json:"sourceidentitycertificate,omitempty"`
+		ProxyIdentityCertificate *FhirString `json:"proxyidentitycertificate,omitempty"`
+		ProxySignature *Signature `json:"proxysignature,omitempty"`
+		SourceSignature *Signature `json:"sourcesignature,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Who = temp.Who
+	m.OnBehalfOf = temp.OnBehalfOf
+	m.CommunicationMethod = temp.CommunicationMethod
+	m.Date = temp.Date
+	m.SourceIdentityCertificate = temp.SourceIdentityCertificate
+	m.ProxyIdentityCertificate = temp.ProxyIdentityCertificate
+	m.ProxySignature = temp.ProxySignature
+	m.SourceSignature = temp.SourceSignature
+	return nil
 }
 
-// ToJSON converts VerificationResultAttestation to JSON data
+// ToJSON converts VerificationResultAttestation to JSON data.
 func (m *VerificationResultAttestation) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Who *Reference `json:"who,omitempty"`
+		OnBehalfOf *Reference `json:"onbehalfof,omitempty"`
+		CommunicationMethod *CodeableConcept `json:"communicationmethod,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		SourceIdentityCertificate interface{} `json:"sourceidentitycertificate,omitempty"`
+		SourceIdentityCertificateElement map[string]interface{} `json:"_sourceidentitycertificate,omitempty"`
+		ProxyIdentityCertificate interface{} `json:"proxyidentitycertificate,omitempty"`
+		ProxyIdentityCertificateElement map[string]interface{} `json:"_proxyidentitycertificate,omitempty"`
+		ProxySignature *Signature `json:"proxysignature,omitempty"`
+		SourceSignature *Signature `json:"sourcesignature,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Who = m.Who
+	output.OnBehalfOf = m.OnBehalfOf
+	output.CommunicationMethod = m.CommunicationMethod
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.SourceIdentityCertificate != nil && m.SourceIdentityCertificate.Value != nil {
+		output.SourceIdentityCertificate = m.SourceIdentityCertificate.Value
+		if m.SourceIdentityCertificate.Element != nil {
+			output.SourceIdentityCertificateElement = toMapOrNil(m.SourceIdentityCertificate.Element.ToJSON())
+		}
+	}
+	if m.ProxyIdentityCertificate != nil && m.ProxyIdentityCertificate.Value != nil {
+		output.ProxyIdentityCertificate = m.ProxyIdentityCertificate.Value
+		if m.ProxyIdentityCertificate.Element != nil {
+			output.ProxyIdentityCertificateElement = toMapOrNil(m.ProxyIdentityCertificate.Element.ToJSON())
+		}
+	}
+	output.ProxySignature = m.ProxySignature
+	output.SourceSignature = m.SourceSignature
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of VerificationResultAttestation
+// Clone creates a deep copy of VerificationResultAttestation.
 func (m *VerificationResultAttestation) Clone() *VerificationResultAttestation {
 	if m == nil { return nil }
 	return &VerificationResultAttestation{
@@ -221,7 +503,7 @@ func (m *VerificationResultAttestation) Clone() *VerificationResultAttestation {
 	}
 }
 
-// Equals checks for equality with another VerificationResultAttestation instance
+// Equals checks equality between two VerificationResultAttestation instances.
 func (m *VerificationResultAttestation) Equals(other *VerificationResultAttestation) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -242,7 +524,7 @@ func (m *VerificationResultAttestation) Equals(other *VerificationResultAttestat
 // VerificationResultValidator
 // Information about the entity validating information.
 type VerificationResultValidator struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -251,22 +533,65 @@ type VerificationResultValidator struct {
 	AttestationSignature *Signature `json:"attestationsignature,omitempty"`
 }
 
-// NewVerificationResultValidator creates a new VerificationResultValidator instance
+// NewVerificationResultValidator creates a new VerificationResultValidator instance.
 func NewVerificationResultValidator() *VerificationResultValidator {
 	return &VerificationResultValidator{}
 }
 
-// FromJSON populates VerificationResultValidator from JSON data
+// FromJSON populates VerificationResultValidator from JSON data.
 func (m *VerificationResultValidator) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Organization *Reference `json:"organization,omitempty"`
+		IdentityCertificate *FhirString `json:"identitycertificate,omitempty"`
+		AttestationSignature *Signature `json:"attestationsignature,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Organization = temp.Organization
+	m.IdentityCertificate = temp.IdentityCertificate
+	m.AttestationSignature = temp.AttestationSignature
+	return nil
 }
 
-// ToJSON converts VerificationResultValidator to JSON data
+// ToJSON converts VerificationResultValidator to JSON data.
 func (m *VerificationResultValidator) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Organization *Reference `json:"organization,omitempty"`
+		IdentityCertificate interface{} `json:"identitycertificate,omitempty"`
+		IdentityCertificateElement map[string]interface{} `json:"_identitycertificate,omitempty"`
+		AttestationSignature *Signature `json:"attestationsignature,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Organization = m.Organization
+	if m.IdentityCertificate != nil && m.IdentityCertificate.Value != nil {
+		output.IdentityCertificate = m.IdentityCertificate.Value
+		if m.IdentityCertificate.Element != nil {
+			output.IdentityCertificateElement = toMapOrNil(m.IdentityCertificate.Element.ToJSON())
+		}
+	}
+	output.AttestationSignature = m.AttestationSignature
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of VerificationResultValidator
+// Clone creates a deep copy of VerificationResultValidator.
 func (m *VerificationResultValidator) Clone() *VerificationResultValidator {
 	if m == nil { return nil }
 	return &VerificationResultValidator{
@@ -279,7 +604,7 @@ func (m *VerificationResultValidator) Clone() *VerificationResultValidator {
 	}
 }
 
-// Equals checks for equality with another VerificationResultValidator instance
+// Equals checks equality between two VerificationResultValidator instances.
 func (m *VerificationResultValidator) Equals(other *VerificationResultValidator) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

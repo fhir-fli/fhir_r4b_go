@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // DiagnosticReport
 // The findings and interpretation of diagnostic  tests performed on patients, groups of patients, devices, and locations, and/or specimens derived from these. The report includes clinical context such as requesting and provider information, and some mix of atomic results, images, textual and coded interpretations, and formatted representation of diagnostic reports.
 type DiagnosticReport struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -38,22 +39,167 @@ type DiagnosticReport struct {
 	PresentedForm []*Attachment `json:"presentedform,omitempty"`
 }
 
-// NewDiagnosticReport creates a new DiagnosticReport instance
+// NewDiagnosticReport creates a new DiagnosticReport instance.
 func NewDiagnosticReport() *DiagnosticReport {
 	return &DiagnosticReport{}
 }
 
-// FromJSON populates DiagnosticReport from JSON data
+// FromJSON populates DiagnosticReport from JSON data.
 func (m *DiagnosticReport) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		Status *DiagnosticReportStatus `json:"status,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		EffectiveDateTime *FhirDateTime `json:"effectivedatetime,omitempty"`
+		EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+		Issued *FhirInstant `json:"issued,omitempty"`
+		Performer []*Reference `json:"performer,omitempty"`
+		ResultsInterpreter []*Reference `json:"resultsinterpreter,omitempty"`
+		Specimen []*Reference `json:"specimen,omitempty"`
+		Result []*Reference `json:"result,omitempty"`
+		ImagingStudy []*Reference `json:"imagingstudy,omitempty"`
+		Media []*DiagnosticReportMedia `json:"media,omitempty"`
+		Conclusion *FhirString `json:"conclusion,omitempty"`
+		ConclusionCode []*CodeableConcept `json:"conclusioncode,omitempty"`
+		PresentedForm []*Attachment `json:"presentedform,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.BasedOn = temp.BasedOn
+	m.Status = temp.Status
+	m.Category = temp.Category
+	m.Code = temp.Code
+	m.Subject = temp.Subject
+	m.Encounter = temp.Encounter
+	m.EffectiveDateTime = temp.EffectiveDateTime
+	m.EffectivePeriod = temp.EffectivePeriod
+	m.Issued = temp.Issued
+	m.Performer = temp.Performer
+	m.ResultsInterpreter = temp.ResultsInterpreter
+	m.Specimen = temp.Specimen
+	m.Result = temp.Result
+	m.ImagingStudy = temp.ImagingStudy
+	m.Media = temp.Media
+	m.Conclusion = temp.Conclusion
+	m.ConclusionCode = temp.ConclusionCode
+	m.PresentedForm = temp.PresentedForm
+	return nil
 }
 
-// ToJSON converts DiagnosticReport to JSON data
+// ToJSON converts DiagnosticReport to JSON data.
 func (m *DiagnosticReport) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		Status *DiagnosticReportStatus `json:"status,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		EffectiveDateTime interface{} `json:"effectivedatetime,omitempty"`
+		EffectiveDateTimeElement map[string]interface{} `json:"_effectivedatetime,omitempty"`
+		EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+		Issued interface{} `json:"issued,omitempty"`
+		IssuedElement map[string]interface{} `json:"_issued,omitempty"`
+		Performer []*Reference `json:"performer,omitempty"`
+		ResultsInterpreter []*Reference `json:"resultsinterpreter,omitempty"`
+		Specimen []*Reference `json:"specimen,omitempty"`
+		Result []*Reference `json:"result,omitempty"`
+		ImagingStudy []*Reference `json:"imagingstudy,omitempty"`
+		Media []*DiagnosticReportMedia `json:"media,omitempty"`
+		Conclusion interface{} `json:"conclusion,omitempty"`
+		ConclusionElement map[string]interface{} `json:"_conclusion,omitempty"`
+		ConclusionCode []*CodeableConcept `json:"conclusioncode,omitempty"`
+		PresentedForm []*Attachment `json:"presentedform,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.BasedOn = m.BasedOn
+	output.Status = m.Status
+	output.Category = m.Category
+	output.Code = m.Code
+	output.Subject = m.Subject
+	output.Encounter = m.Encounter
+	if m.EffectiveDateTime != nil && m.EffectiveDateTime.Value != nil {
+		output.EffectiveDateTime = m.EffectiveDateTime.Value
+		if m.EffectiveDateTime.Element != nil {
+			output.EffectiveDateTimeElement = toMapOrNil(m.EffectiveDateTime.Element.ToJSON())
+		}
+	}
+	output.EffectivePeriod = m.EffectivePeriod
+	if m.Issued != nil && m.Issued.Value != nil {
+		output.Issued = m.Issued.Value
+		if m.Issued.Element != nil {
+			output.IssuedElement = toMapOrNil(m.Issued.Element.ToJSON())
+		}
+	}
+	output.Performer = m.Performer
+	output.ResultsInterpreter = m.ResultsInterpreter
+	output.Specimen = m.Specimen
+	output.Result = m.Result
+	output.ImagingStudy = m.ImagingStudy
+	output.Media = m.Media
+	if m.Conclusion != nil && m.Conclusion.Value != nil {
+		output.Conclusion = m.Conclusion.Value
+		if m.Conclusion.Element != nil {
+			output.ConclusionElement = toMapOrNil(m.Conclusion.Element.ToJSON())
+		}
+	}
+	output.ConclusionCode = m.ConclusionCode
+	output.PresentedForm = m.PresentedForm
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DiagnosticReport
+// Clone creates a deep copy of DiagnosticReport.
 func (m *DiagnosticReport) Clone() *DiagnosticReport {
 	if m == nil { return nil }
 	return &DiagnosticReport{
@@ -87,7 +233,7 @@ func (m *DiagnosticReport) Clone() *DiagnosticReport {
 	}
 }
 
-// Equals checks for equality with another DiagnosticReport instance
+// Equals checks equality between two DiagnosticReport instances.
 func (m *DiagnosticReport) Equals(other *DiagnosticReport) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -124,7 +270,7 @@ func (m *DiagnosticReport) Equals(other *DiagnosticReport) bool {
 // DiagnosticReportMedia
 // A list of key images associated with this report. The images are generally created during the diagnostic process, and may be directly of the patient, or of treated specimens (i.e. slides of interest).
 type DiagnosticReportMedia struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -132,22 +278,61 @@ type DiagnosticReportMedia struct {
 	Link *Reference `json:"link,omitempty"`
 }
 
-// NewDiagnosticReportMedia creates a new DiagnosticReportMedia instance
+// NewDiagnosticReportMedia creates a new DiagnosticReportMedia instance.
 func NewDiagnosticReportMedia() *DiagnosticReportMedia {
 	return &DiagnosticReportMedia{}
 }
 
-// FromJSON populates DiagnosticReportMedia from JSON data
+// FromJSON populates DiagnosticReportMedia from JSON data.
 func (m *DiagnosticReportMedia) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Comment *FhirString `json:"comment,omitempty"`
+		Link *Reference `json:"link,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Comment = temp.Comment
+	m.Link = temp.Link
+	return nil
 }
 
-// ToJSON converts DiagnosticReportMedia to JSON data
+// ToJSON converts DiagnosticReportMedia to JSON data.
 func (m *DiagnosticReportMedia) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Comment interface{} `json:"comment,omitempty"`
+		CommentElement map[string]interface{} `json:"_comment,omitempty"`
+		Link *Reference `json:"link,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Comment != nil && m.Comment.Value != nil {
+		output.Comment = m.Comment.Value
+		if m.Comment.Element != nil {
+			output.CommentElement = toMapOrNil(m.Comment.Element.ToJSON())
+		}
+	}
+	output.Link = m.Link
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DiagnosticReportMedia
+// Clone creates a deep copy of DiagnosticReportMedia.
 func (m *DiagnosticReportMedia) Clone() *DiagnosticReportMedia {
 	if m == nil { return nil }
 	return &DiagnosticReportMedia{
@@ -159,7 +344,7 @@ func (m *DiagnosticReportMedia) Clone() *DiagnosticReportMedia {
 	}
 }
 
-// Equals checks for equality with another DiagnosticReportMedia instance
+// Equals checks equality between two DiagnosticReportMedia instances.
 func (m *DiagnosticReportMedia) Equals(other *DiagnosticReportMedia) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

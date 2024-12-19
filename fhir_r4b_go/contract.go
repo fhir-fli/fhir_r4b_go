@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // Contract
 // Legally enforceable, formally recorded unilateral or bilateral directive i.e., a policy or agreement.
 type Contract struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -54,22 +56,276 @@ type Contract struct {
 	LegallyBindingReference *Reference `json:"legallybindingreference,omitempty"`
 }
 
-// NewContract creates a new Contract instance
+// NewContract creates a new Contract instance.
 func NewContract() *Contract {
 	return &Contract{}
 }
 
-// FromJSON populates Contract from JSON data
+// FromJSON populates Contract from JSON data.
 func (m *Contract) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Status *ContractResourceStatusCodes `json:"status,omitempty"`
+		LegalState *CodeableConcept `json:"legalstate,omitempty"`
+		InstantiatesCanonical *Reference `json:"instantiatescanonical,omitempty"`
+		InstantiatesUri *FhirUri `json:"instantiatesuri,omitempty"`
+		ContentDerivative *CodeableConcept `json:"contentderivative,omitempty"`
+		Issued *FhirDateTime `json:"issued,omitempty"`
+		Applies *Period `json:"applies,omitempty"`
+		ExpirationType *CodeableConcept `json:"expirationtype,omitempty"`
+		Subject []*Reference `json:"subject,omitempty"`
+		Authority []*Reference `json:"authority,omitempty"`
+		Domain []*Reference `json:"domain,omitempty"`
+		Site []*Reference `json:"site,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Subtitle *FhirString `json:"subtitle,omitempty"`
+		Alias []interface{} `json:"alias,omitempty"`
+		Author *Reference `json:"author,omitempty"`
+		Scope *CodeableConcept `json:"scope,omitempty"`
+		TopicCodeableConcept *CodeableConcept `json:"topiccodeableconcept,omitempty"`
+		TopicReference *Reference `json:"topicreference,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		SubType []*CodeableConcept `json:"subtype,omitempty"`
+		ContentDefinition *ContractContentDefinition `json:"contentdefinition,omitempty"`
+		Term []*ContractTerm `json:"term,omitempty"`
+		SupportingInfo []*Reference `json:"supportinginfo,omitempty"`
+		RelevantHistory []*Reference `json:"relevanthistory,omitempty"`
+		Signer []*ContractSigner `json:"signer,omitempty"`
+		Friendly []*ContractFriendly `json:"friendly,omitempty"`
+		Legal []*ContractLegal `json:"legal,omitempty"`
+		Rule []*ContractRule `json:"rule,omitempty"`
+		LegallyBindingAttachment *Attachment `json:"legallybindingattachment,omitempty"`
+		LegallyBindingReference *Reference `json:"legallybindingreference,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Url = temp.Url
+	m.Version = temp.Version
+	m.Status = temp.Status
+	m.LegalState = temp.LegalState
+	m.InstantiatesCanonical = temp.InstantiatesCanonical
+	m.InstantiatesUri = temp.InstantiatesUri
+	m.ContentDerivative = temp.ContentDerivative
+	m.Issued = temp.Issued
+	m.Applies = temp.Applies
+	m.ExpirationType = temp.ExpirationType
+	m.Subject = temp.Subject
+	m.Authority = temp.Authority
+	m.Domain = temp.Domain
+	m.Site = temp.Site
+	m.Name = temp.Name
+	m.Title = temp.Title
+	m.Subtitle = temp.Subtitle
+	if len(temp.Alias) > 0 {
+		m.Alias = make([]*FhirString, len(temp.Alias))
+		for i := range temp.Alias {
+			itemMap, ok := temp.Alias[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Alias[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Alias[%d]: %v", i, err) }
+			m.Alias[i] = primitive
+		}
+	}
+	m.Author = temp.Author
+	m.Scope = temp.Scope
+	m.TopicCodeableConcept = temp.TopicCodeableConcept
+	m.TopicReference = temp.TopicReference
+	m.Type = temp.Type
+	m.SubType = temp.SubType
+	m.ContentDefinition = temp.ContentDefinition
+	m.Term = temp.Term
+	m.SupportingInfo = temp.SupportingInfo
+	m.RelevantHistory = temp.RelevantHistory
+	m.Signer = temp.Signer
+	m.Friendly = temp.Friendly
+	m.Legal = temp.Legal
+	m.Rule = temp.Rule
+	m.LegallyBindingAttachment = temp.LegallyBindingAttachment
+	m.LegallyBindingReference = temp.LegallyBindingReference
+	return nil
 }
 
-// ToJSON converts Contract to JSON data
+// ToJSON converts Contract to JSON data.
 func (m *Contract) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Status *ContractResourceStatusCodes `json:"status,omitempty"`
+		LegalState *CodeableConcept `json:"legalstate,omitempty"`
+		InstantiatesCanonical *Reference `json:"instantiatescanonical,omitempty"`
+		InstantiatesUri interface{} `json:"instantiatesuri,omitempty"`
+		InstantiatesUriElement map[string]interface{} `json:"_instantiatesuri,omitempty"`
+		ContentDerivative *CodeableConcept `json:"contentderivative,omitempty"`
+		Issued interface{} `json:"issued,omitempty"`
+		IssuedElement map[string]interface{} `json:"_issued,omitempty"`
+		Applies *Period `json:"applies,omitempty"`
+		ExpirationType *CodeableConcept `json:"expirationtype,omitempty"`
+		Subject []*Reference `json:"subject,omitempty"`
+		Authority []*Reference `json:"authority,omitempty"`
+		Domain []*Reference `json:"domain,omitempty"`
+		Site []*Reference `json:"site,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Subtitle interface{} `json:"subtitle,omitempty"`
+		SubtitleElement map[string]interface{} `json:"_subtitle,omitempty"`
+		Alias []interface{} `json:"alias,omitempty"`
+		AliasElement []map[string]interface{} `json:"_alias,omitempty"`
+		Author *Reference `json:"author,omitempty"`
+		Scope *CodeableConcept `json:"scope,omitempty"`
+		TopicCodeableConcept *CodeableConcept `json:"topiccodeableconcept,omitempty"`
+		TopicReference *Reference `json:"topicreference,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		SubType []*CodeableConcept `json:"subtype,omitempty"`
+		ContentDefinition *ContractContentDefinition `json:"contentdefinition,omitempty"`
+		Term []*ContractTerm `json:"term,omitempty"`
+		SupportingInfo []*Reference `json:"supportinginfo,omitempty"`
+		RelevantHistory []*Reference `json:"relevanthistory,omitempty"`
+		Signer []*ContractSigner `json:"signer,omitempty"`
+		Friendly []*ContractFriendly `json:"friendly,omitempty"`
+		Legal []*ContractLegal `json:"legal,omitempty"`
+		Rule []*ContractRule `json:"rule,omitempty"`
+		LegallyBindingAttachment *Attachment `json:"legallybindingattachment,omitempty"`
+		LegallyBindingReference *Reference `json:"legallybindingreference,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	output.Status = m.Status
+	output.LegalState = m.LegalState
+	output.InstantiatesCanonical = m.InstantiatesCanonical
+	if m.InstantiatesUri != nil && m.InstantiatesUri.Value != nil {
+		output.InstantiatesUri = m.InstantiatesUri.Value
+		if m.InstantiatesUri.Element != nil {
+			output.InstantiatesUriElement = toMapOrNil(m.InstantiatesUri.Element.ToJSON())
+		}
+	}
+	output.ContentDerivative = m.ContentDerivative
+	if m.Issued != nil && m.Issued.Value != nil {
+		output.Issued = m.Issued.Value
+		if m.Issued.Element != nil {
+			output.IssuedElement = toMapOrNil(m.Issued.Element.ToJSON())
+		}
+	}
+	output.Applies = m.Applies
+	output.ExpirationType = m.ExpirationType
+	output.Subject = m.Subject
+	output.Authority = m.Authority
+	output.Domain = m.Domain
+	output.Site = m.Site
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	if m.Subtitle != nil && m.Subtitle.Value != nil {
+		output.Subtitle = m.Subtitle.Value
+		if m.Subtitle.Element != nil {
+			output.SubtitleElement = toMapOrNil(m.Subtitle.Element.ToJSON())
+		}
+	}
+	if len(m.Alias) > 0 {
+		output.Alias = make([]interface{}, len(m.Alias))
+		output.AliasElement = make([]map[string]interface{}, len(m.Alias))
+		for i, item := range m.Alias {
+			if item != nil && item.Value != nil {
+				output.Alias[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.AliasElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Author = m.Author
+	output.Scope = m.Scope
+	output.TopicCodeableConcept = m.TopicCodeableConcept
+	output.TopicReference = m.TopicReference
+	output.Type = m.Type
+	output.SubType = m.SubType
+	output.ContentDefinition = m.ContentDefinition
+	output.Term = m.Term
+	output.SupportingInfo = m.SupportingInfo
+	output.RelevantHistory = m.RelevantHistory
+	output.Signer = m.Signer
+	output.Friendly = m.Friendly
+	output.Legal = m.Legal
+	output.Rule = m.Rule
+	output.LegallyBindingAttachment = m.LegallyBindingAttachment
+	output.LegallyBindingReference = m.LegallyBindingReference
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Contract
+// Clone creates a deep copy of Contract.
 func (m *Contract) Clone() *Contract {
 	if m == nil { return nil }
 	return &Contract{
@@ -119,7 +375,7 @@ func (m *Contract) Clone() *Contract {
 	}
 }
 
-// Equals checks for equality with another Contract instance
+// Equals checks equality between two Contract instances.
 func (m *Contract) Equals(other *Contract) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -172,7 +428,7 @@ func (m *Contract) Equals(other *Contract) bool {
 // ContractContentDefinition
 // Precusory content developed with a focus and intent of supporting the formation a Contract instance, which may be associated with and transformable into a Contract.
 type ContractContentDefinition struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -184,22 +440,83 @@ type ContractContentDefinition struct {
 	Copyright *FhirMarkdown `json:"copyright,omitempty"`
 }
 
-// NewContractContentDefinition creates a new ContractContentDefinition instance
+// NewContractContentDefinition creates a new ContractContentDefinition instance.
 func NewContractContentDefinition() *ContractContentDefinition {
 	return &ContractContentDefinition{}
 }
 
-// FromJSON populates ContractContentDefinition from JSON data
+// FromJSON populates ContractContentDefinition from JSON data.
 func (m *ContractContentDefinition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		SubType *CodeableConcept `json:"subtype,omitempty"`
+		Publisher *Reference `json:"publisher,omitempty"`
+		PublicationDate *FhirDateTime `json:"publicationdate,omitempty"`
+		PublicationStatus *ContractResourcePublicationStatusCodes `json:"publicationstatus,omitempty"`
+		Copyright *FhirMarkdown `json:"copyright,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.SubType = temp.SubType
+	m.Publisher = temp.Publisher
+	m.PublicationDate = temp.PublicationDate
+	m.PublicationStatus = temp.PublicationStatus
+	m.Copyright = temp.Copyright
+	return nil
 }
 
-// ToJSON converts ContractContentDefinition to JSON data
+// ToJSON converts ContractContentDefinition to JSON data.
 func (m *ContractContentDefinition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		SubType *CodeableConcept `json:"subtype,omitempty"`
+		Publisher *Reference `json:"publisher,omitempty"`
+		PublicationDate interface{} `json:"publicationdate,omitempty"`
+		PublicationDateElement map[string]interface{} `json:"_publicationdate,omitempty"`
+		PublicationStatus *ContractResourcePublicationStatusCodes `json:"publicationstatus,omitempty"`
+		Copyright interface{} `json:"copyright,omitempty"`
+		CopyrightElement map[string]interface{} `json:"_copyright,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.SubType = m.SubType
+	output.Publisher = m.Publisher
+	if m.PublicationDate != nil && m.PublicationDate.Value != nil {
+		output.PublicationDate = m.PublicationDate.Value
+		if m.PublicationDate.Element != nil {
+			output.PublicationDateElement = toMapOrNil(m.PublicationDate.Element.ToJSON())
+		}
+	}
+	output.PublicationStatus = m.PublicationStatus
+	if m.Copyright != nil && m.Copyright.Value != nil {
+		output.Copyright = m.Copyright.Value
+		if m.Copyright.Element != nil {
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ContractContentDefinition
+// Clone creates a deep copy of ContractContentDefinition.
 func (m *ContractContentDefinition) Clone() *ContractContentDefinition {
 	if m == nil { return nil }
 	return &ContractContentDefinition{
@@ -215,7 +532,7 @@ func (m *ContractContentDefinition) Clone() *ContractContentDefinition {
 	}
 }
 
-// Equals checks for equality with another ContractContentDefinition instance
+// Equals checks equality between two ContractContentDefinition instances.
 func (m *ContractContentDefinition) Equals(other *ContractContentDefinition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -234,7 +551,7 @@ func (m *ContractContentDefinition) Equals(other *ContractContentDefinition) boo
 // ContractTerm
 // One or more Contract Provisions, which may be related and conveyed as a group, and may contain nested groups.
 type ContractTerm struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -253,22 +570,111 @@ type ContractTerm struct {
 	Group []*ContractTerm `json:"group,omitempty"`
 }
 
-// NewContractTerm creates a new ContractTerm instance
+// NewContractTerm creates a new ContractTerm instance.
 func NewContractTerm() *ContractTerm {
 	return &ContractTerm{}
 }
 
-// FromJSON populates ContractTerm from JSON data
+// FromJSON populates ContractTerm from JSON data.
 func (m *ContractTerm) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Issued *FhirDateTime `json:"issued,omitempty"`
+		Applies *Period `json:"applies,omitempty"`
+		TopicCodeableConcept *CodeableConcept `json:"topiccodeableconcept,omitempty"`
+		TopicReference *Reference `json:"topicreference,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		SubType *CodeableConcept `json:"subtype,omitempty"`
+		Text *FhirString `json:"text,omitempty"`
+		SecurityLabel []*ContractSecurityLabel `json:"securitylabel,omitempty"`
+		Offer *ContractOffer `json:"offer,omitempty"`
+		Asset []*ContractAsset `json:"asset,omitempty"`
+		Action []*ContractAction `json:"action,omitempty"`
+		Group []*ContractTerm `json:"group,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Issued = temp.Issued
+	m.Applies = temp.Applies
+	m.TopicCodeableConcept = temp.TopicCodeableConcept
+	m.TopicReference = temp.TopicReference
+	m.Type = temp.Type
+	m.SubType = temp.SubType
+	m.Text = temp.Text
+	m.SecurityLabel = temp.SecurityLabel
+	m.Offer = temp.Offer
+	m.Asset = temp.Asset
+	m.Action = temp.Action
+	m.Group = temp.Group
+	return nil
 }
 
-// ToJSON converts ContractTerm to JSON data
+// ToJSON converts ContractTerm to JSON data.
 func (m *ContractTerm) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Issued interface{} `json:"issued,omitempty"`
+		IssuedElement map[string]interface{} `json:"_issued,omitempty"`
+		Applies *Period `json:"applies,omitempty"`
+		TopicCodeableConcept *CodeableConcept `json:"topiccodeableconcept,omitempty"`
+		TopicReference *Reference `json:"topicreference,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		SubType *CodeableConcept `json:"subtype,omitempty"`
+		Text interface{} `json:"text,omitempty"`
+		TextElement map[string]interface{} `json:"_text,omitempty"`
+		SecurityLabel []*ContractSecurityLabel `json:"securitylabel,omitempty"`
+		Offer *ContractOffer `json:"offer,omitempty"`
+		Asset []*ContractAsset `json:"asset,omitempty"`
+		Action []*ContractAction `json:"action,omitempty"`
+		Group []*ContractTerm `json:"group,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	if m.Issued != nil && m.Issued.Value != nil {
+		output.Issued = m.Issued.Value
+		if m.Issued.Element != nil {
+			output.IssuedElement = toMapOrNil(m.Issued.Element.ToJSON())
+		}
+	}
+	output.Applies = m.Applies
+	output.TopicCodeableConcept = m.TopicCodeableConcept
+	output.TopicReference = m.TopicReference
+	output.Type = m.Type
+	output.SubType = m.SubType
+	if m.Text != nil && m.Text.Value != nil {
+		output.Text = m.Text.Value
+		if m.Text.Element != nil {
+			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+		}
+	}
+	output.SecurityLabel = m.SecurityLabel
+	output.Offer = m.Offer
+	output.Asset = m.Asset
+	output.Action = m.Action
+	output.Group = m.Group
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ContractTerm
+// Clone creates a deep copy of ContractTerm.
 func (m *ContractTerm) Clone() *ContractTerm {
 	if m == nil { return nil }
 	return &ContractTerm{
@@ -291,7 +697,7 @@ func (m *ContractTerm) Clone() *ContractTerm {
 	}
 }
 
-// Equals checks for equality with another ContractTerm instance
+// Equals checks equality between two ContractTerm instances.
 func (m *ContractTerm) Equals(other *ContractTerm) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -317,7 +723,7 @@ func (m *ContractTerm) Equals(other *ContractTerm) bool {
 // ContractSecurityLabel
 // Security labels that protect the handling of information about the term and its elements, which may be specifically identified..
 type ContractSecurityLabel struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -327,22 +733,84 @@ type ContractSecurityLabel struct {
 	Control []*Coding `json:"control,omitempty"`
 }
 
-// NewContractSecurityLabel creates a new ContractSecurityLabel instance
+// NewContractSecurityLabel creates a new ContractSecurityLabel instance.
 func NewContractSecurityLabel() *ContractSecurityLabel {
 	return &ContractSecurityLabel{}
 }
 
-// FromJSON populates ContractSecurityLabel from JSON data
+// FromJSON populates ContractSecurityLabel from JSON data.
 func (m *ContractSecurityLabel) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Number []interface{} `json:"number,omitempty"`
+		Classification *Coding `json:"classification,omitempty"`
+		Category []*Coding `json:"category,omitempty"`
+		Control []*Coding `json:"control,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	if len(temp.Number) > 0 {
+		m.Number = make([]*FhirUnsignedInt, len(temp.Number))
+		for i := range temp.Number {
+			itemMap, ok := temp.Number[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Number[%d]: expected map", i) }
+			primitive, err := NewFhirUnsignedIntFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Number[%d]: %v", i, err) }
+			m.Number[i] = primitive
+		}
+	}
+	m.Classification = temp.Classification
+	m.Category = temp.Category
+	m.Control = temp.Control
+	return nil
 }
 
-// ToJSON converts ContractSecurityLabel to JSON data
+// ToJSON converts ContractSecurityLabel to JSON data.
 func (m *ContractSecurityLabel) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Number []interface{} `json:"number,omitempty"`
+		NumberElement []map[string]interface{} `json:"_number,omitempty"`
+		Classification *Coding `json:"classification,omitempty"`
+		Category []*Coding `json:"category,omitempty"`
+		Control []*Coding `json:"control,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if len(m.Number) > 0 {
+		output.Number = make([]interface{}, len(m.Number))
+		output.NumberElement = make([]map[string]interface{}, len(m.Number))
+		for i, item := range m.Number {
+			if item != nil && item.Value != nil {
+				output.Number[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.NumberElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Classification = m.Classification
+	output.Category = m.Category
+	output.Control = m.Control
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ContractSecurityLabel
+// Clone creates a deep copy of ContractSecurityLabel.
 func (m *ContractSecurityLabel) Clone() *ContractSecurityLabel {
 	if m == nil { return nil }
 	return &ContractSecurityLabel{
@@ -356,7 +824,7 @@ func (m *ContractSecurityLabel) Clone() *ContractSecurityLabel {
 	}
 }
 
-// Equals checks for equality with another ContractSecurityLabel instance
+// Equals checks equality between two ContractSecurityLabel instances.
 func (m *ContractSecurityLabel) Equals(other *ContractSecurityLabel) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -373,7 +841,7 @@ func (m *ContractSecurityLabel) Equals(other *ContractSecurityLabel) bool {
 // ContractOffer
 // The matter of concern in the context of this provision of the agrement.
 type ContractOffer struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -389,22 +857,135 @@ type ContractOffer struct {
 	SecurityLabelNumber []*FhirUnsignedInt `json:"securitylabelnumber,omitempty"`
 }
 
-// NewContractOffer creates a new ContractOffer instance
+// NewContractOffer creates a new ContractOffer instance.
 func NewContractOffer() *ContractOffer {
 	return &ContractOffer{}
 }
 
-// FromJSON populates ContractOffer from JSON data
+// FromJSON populates ContractOffer from JSON data.
 func (m *ContractOffer) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Party []*ContractParty `json:"party,omitempty"`
+		Topic *Reference `json:"topic,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Decision *CodeableConcept `json:"decision,omitempty"`
+		DecisionMode []*CodeableConcept `json:"decisionmode,omitempty"`
+		Answer []*ContractAnswer `json:"answer,omitempty"`
+		Text *FhirString `json:"text,omitempty"`
+		LinkId []interface{} `json:"linkid,omitempty"`
+		SecurityLabelNumber []interface{} `json:"securitylabelnumber,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Party = temp.Party
+	m.Topic = temp.Topic
+	m.Type = temp.Type
+	m.Decision = temp.Decision
+	m.DecisionMode = temp.DecisionMode
+	m.Answer = temp.Answer
+	m.Text = temp.Text
+	if len(temp.LinkId) > 0 {
+		m.LinkId = make([]*FhirString, len(temp.LinkId))
+		for i := range temp.LinkId {
+			itemMap, ok := temp.LinkId[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for LinkId[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse LinkId[%d]: %v", i, err) }
+			m.LinkId[i] = primitive
+		}
+	}
+	if len(temp.SecurityLabelNumber) > 0 {
+		m.SecurityLabelNumber = make([]*FhirUnsignedInt, len(temp.SecurityLabelNumber))
+		for i := range temp.SecurityLabelNumber {
+			itemMap, ok := temp.SecurityLabelNumber[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for SecurityLabelNumber[%d]: expected map", i) }
+			primitive, err := NewFhirUnsignedIntFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse SecurityLabelNumber[%d]: %v", i, err) }
+			m.SecurityLabelNumber[i] = primitive
+		}
+	}
+	return nil
 }
 
-// ToJSON converts ContractOffer to JSON data
+// ToJSON converts ContractOffer to JSON data.
 func (m *ContractOffer) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Party []*ContractParty `json:"party,omitempty"`
+		Topic *Reference `json:"topic,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Decision *CodeableConcept `json:"decision,omitempty"`
+		DecisionMode []*CodeableConcept `json:"decisionmode,omitempty"`
+		Answer []*ContractAnswer `json:"answer,omitempty"`
+		Text interface{} `json:"text,omitempty"`
+		TextElement map[string]interface{} `json:"_text,omitempty"`
+		LinkId []interface{} `json:"linkid,omitempty"`
+		LinkIdElement []map[string]interface{} `json:"_linkid,omitempty"`
+		SecurityLabelNumber []interface{} `json:"securitylabelnumber,omitempty"`
+		SecurityLabelNumberElement []map[string]interface{} `json:"_securitylabelnumber,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Party = m.Party
+	output.Topic = m.Topic
+	output.Type = m.Type
+	output.Decision = m.Decision
+	output.DecisionMode = m.DecisionMode
+	output.Answer = m.Answer
+	if m.Text != nil && m.Text.Value != nil {
+		output.Text = m.Text.Value
+		if m.Text.Element != nil {
+			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+		}
+	}
+	if len(m.LinkId) > 0 {
+		output.LinkId = make([]interface{}, len(m.LinkId))
+		output.LinkIdElement = make([]map[string]interface{}, len(m.LinkId))
+		for i, item := range m.LinkId {
+			if item != nil && item.Value != nil {
+				output.LinkId[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.LinkIdElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.SecurityLabelNumber) > 0 {
+		output.SecurityLabelNumber = make([]interface{}, len(m.SecurityLabelNumber))
+		output.SecurityLabelNumberElement = make([]map[string]interface{}, len(m.SecurityLabelNumber))
+		for i, item := range m.SecurityLabelNumber {
+			if item != nil && item.Value != nil {
+				output.SecurityLabelNumber[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.SecurityLabelNumberElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ContractOffer
+// Clone creates a deep copy of ContractOffer.
 func (m *ContractOffer) Clone() *ContractOffer {
 	if m == nil { return nil }
 	return &ContractOffer{
@@ -424,7 +1005,7 @@ func (m *ContractOffer) Clone() *ContractOffer {
 	}
 }
 
-// Equals checks for equality with another ContractOffer instance
+// Equals checks equality between two ContractOffer instances.
 func (m *ContractOffer) Equals(other *ContractOffer) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -447,7 +1028,7 @@ func (m *ContractOffer) Equals(other *ContractOffer) bool {
 // ContractParty
 // Offer Recipient.
 type ContractParty struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -455,22 +1036,55 @@ type ContractParty struct {
 	Role *CodeableConcept `json:"role,omitempty"`
 }
 
-// NewContractParty creates a new ContractParty instance
+// NewContractParty creates a new ContractParty instance.
 func NewContractParty() *ContractParty {
 	return &ContractParty{}
 }
 
-// FromJSON populates ContractParty from JSON data
+// FromJSON populates ContractParty from JSON data.
 func (m *ContractParty) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Reference []*Reference `json:"reference,omitempty"`
+		Role *CodeableConcept `json:"role,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Reference = temp.Reference
+	m.Role = temp.Role
+	return nil
 }
 
-// ToJSON converts ContractParty to JSON data
+// ToJSON converts ContractParty to JSON data.
 func (m *ContractParty) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Reference []*Reference `json:"reference,omitempty"`
+		Role *CodeableConcept `json:"role,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Reference = m.Reference
+	output.Role = m.Role
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ContractParty
+// Clone creates a deep copy of ContractParty.
 func (m *ContractParty) Clone() *ContractParty {
 	if m == nil { return nil }
 	return &ContractParty{
@@ -482,7 +1096,7 @@ func (m *ContractParty) Clone() *ContractParty {
 	}
 }
 
-// Equals checks for equality with another ContractParty instance
+// Equals checks equality between two ContractParty instances.
 func (m *ContractParty) Equals(other *ContractParty) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -497,7 +1111,7 @@ func (m *ContractParty) Equals(other *ContractParty) bool {
 // ContractAnswer
 // Response to offer text.
 type ContractAnswer struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -515,22 +1129,143 @@ type ContractAnswer struct {
 	ValueReference *Reference `json:"valuereference,omitempty"`
 }
 
-// NewContractAnswer creates a new ContractAnswer instance
+// NewContractAnswer creates a new ContractAnswer instance.
 func NewContractAnswer() *ContractAnswer {
 	return &ContractAnswer{}
 }
 
-// FromJSON populates ContractAnswer from JSON data
+// FromJSON populates ContractAnswer from JSON data.
 func (m *ContractAnswer) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
+		ValueDecimal *FhirDecimal `json:"valuedecimal,omitempty"`
+		ValueInteger *FhirInteger `json:"valueinteger,omitempty"`
+		ValueDate *FhirDate `json:"valuedate,omitempty"`
+		ValueDateTime *FhirDateTime `json:"valuedatetime,omitempty"`
+		ValueTime *FhirTime `json:"valuetime,omitempty"`
+		ValueString *FhirString `json:"valuestring,omitempty"`
+		ValueUri *FhirUri `json:"valueuri,omitempty"`
+		ValueAttachment *Attachment `json:"valueattachment,omitempty"`
+		ValueCoding *Coding `json:"valuecoding,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueReference *Reference `json:"valuereference,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.ValueBoolean = temp.ValueBoolean
+	m.ValueDecimal = temp.ValueDecimal
+	m.ValueInteger = temp.ValueInteger
+	m.ValueDate = temp.ValueDate
+	m.ValueDateTime = temp.ValueDateTime
+	m.ValueTime = temp.ValueTime
+	m.ValueString = temp.ValueString
+	m.ValueUri = temp.ValueUri
+	m.ValueAttachment = temp.ValueAttachment
+	m.ValueCoding = temp.ValueCoding
+	m.ValueQuantity = temp.ValueQuantity
+	m.ValueReference = temp.ValueReference
+	return nil
 }
 
-// ToJSON converts ContractAnswer to JSON data
+// ToJSON converts ContractAnswer to JSON data.
 func (m *ContractAnswer) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ValueBoolean interface{} `json:"valueboolean,omitempty"`
+		ValueBooleanElement map[string]interface{} `json:"_valueboolean,omitempty"`
+		ValueDecimal interface{} `json:"valuedecimal,omitempty"`
+		ValueDecimalElement map[string]interface{} `json:"_valuedecimal,omitempty"`
+		ValueInteger interface{} `json:"valueinteger,omitempty"`
+		ValueIntegerElement map[string]interface{} `json:"_valueinteger,omitempty"`
+		ValueDate interface{} `json:"valuedate,omitempty"`
+		ValueDateElement map[string]interface{} `json:"_valuedate,omitempty"`
+		ValueDateTime interface{} `json:"valuedatetime,omitempty"`
+		ValueDateTimeElement map[string]interface{} `json:"_valuedatetime,omitempty"`
+		ValueTime interface{} `json:"valuetime,omitempty"`
+		ValueTimeElement map[string]interface{} `json:"_valuetime,omitempty"`
+		ValueString interface{} `json:"valuestring,omitempty"`
+		ValueStringElement map[string]interface{} `json:"_valuestring,omitempty"`
+		ValueUri interface{} `json:"valueuri,omitempty"`
+		ValueUriElement map[string]interface{} `json:"_valueuri,omitempty"`
+		ValueAttachment *Attachment `json:"valueattachment,omitempty"`
+		ValueCoding *Coding `json:"valuecoding,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueReference *Reference `json:"valuereference,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.ValueBoolean != nil && m.ValueBoolean.Value != nil {
+		output.ValueBoolean = m.ValueBoolean.Value
+		if m.ValueBoolean.Element != nil {
+			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.ToJSON())
+		}
+	}
+	if m.ValueDecimal != nil && m.ValueDecimal.Value != nil {
+		output.ValueDecimal = m.ValueDecimal.Value
+		if m.ValueDecimal.Element != nil {
+			output.ValueDecimalElement = toMapOrNil(m.ValueDecimal.Element.ToJSON())
+		}
+	}
+	if m.ValueInteger != nil && m.ValueInteger.Value != nil {
+		output.ValueInteger = m.ValueInteger.Value
+		if m.ValueInteger.Element != nil {
+			output.ValueIntegerElement = toMapOrNil(m.ValueInteger.Element.ToJSON())
+		}
+	}
+	if m.ValueDate != nil && m.ValueDate.Value != nil {
+		output.ValueDate = m.ValueDate.Value
+		if m.ValueDate.Element != nil {
+			output.ValueDateElement = toMapOrNil(m.ValueDate.Element.ToJSON())
+		}
+	}
+	if m.ValueDateTime != nil && m.ValueDateTime.Value != nil {
+		output.ValueDateTime = m.ValueDateTime.Value
+		if m.ValueDateTime.Element != nil {
+			output.ValueDateTimeElement = toMapOrNil(m.ValueDateTime.Element.ToJSON())
+		}
+	}
+	if m.ValueTime != nil && m.ValueTime.Value != nil {
+		output.ValueTime = m.ValueTime.Value
+		if m.ValueTime.Element != nil {
+			output.ValueTimeElement = toMapOrNil(m.ValueTime.Element.ToJSON())
+		}
+	}
+	if m.ValueString != nil && m.ValueString.Value != nil {
+		output.ValueString = m.ValueString.Value
+		if m.ValueString.Element != nil {
+			output.ValueStringElement = toMapOrNil(m.ValueString.Element.ToJSON())
+		}
+	}
+	if m.ValueUri != nil && m.ValueUri.Value != nil {
+		output.ValueUri = m.ValueUri.Value
+		if m.ValueUri.Element != nil {
+			output.ValueUriElement = toMapOrNil(m.ValueUri.Element.ToJSON())
+		}
+	}
+	output.ValueAttachment = m.ValueAttachment
+	output.ValueCoding = m.ValueCoding
+	output.ValueQuantity = m.ValueQuantity
+	output.ValueReference = m.ValueReference
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ContractAnswer
+// Clone creates a deep copy of ContractAnswer.
 func (m *ContractAnswer) Clone() *ContractAnswer {
 	if m == nil { return nil }
 	return &ContractAnswer{
@@ -552,7 +1287,7 @@ func (m *ContractAnswer) Clone() *ContractAnswer {
 	}
 }
 
-// Equals checks for equality with another ContractAnswer instance
+// Equals checks equality between two ContractAnswer instances.
 func (m *ContractAnswer) Equals(other *ContractAnswer) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -577,7 +1312,7 @@ func (m *ContractAnswer) Equals(other *ContractAnswer) bool {
 // ContractAsset
 // Contract Term Asset List.
 type ContractAsset struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -598,22 +1333,161 @@ type ContractAsset struct {
 	ValuedItem []*ContractValuedItem `json:"valueditem,omitempty"`
 }
 
-// NewContractAsset creates a new ContractAsset instance
+// NewContractAsset creates a new ContractAsset instance.
 func NewContractAsset() *ContractAsset {
 	return &ContractAsset{}
 }
 
-// FromJSON populates ContractAsset from JSON data
+// FromJSON populates ContractAsset from JSON data.
 func (m *ContractAsset) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Scope *CodeableConcept `json:"scope,omitempty"`
+		Type []*CodeableConcept `json:"type,omitempty"`
+		TypeReference []*Reference `json:"typereference,omitempty"`
+		Subtype []*CodeableConcept `json:"subtype,omitempty"`
+		Relationship *Coding `json:"relationship,omitempty"`
+		Context []*ContractContext `json:"context,omitempty"`
+		Condition *FhirString `json:"condition,omitempty"`
+		PeriodType []*CodeableConcept `json:"periodtype,omitempty"`
+		Period []*Period `json:"period,omitempty"`
+		UsePeriod []*Period `json:"useperiod,omitempty"`
+		Text *FhirString `json:"text,omitempty"`
+		LinkId []interface{} `json:"linkid,omitempty"`
+		Answer []*ContractAnswer `json:"answer,omitempty"`
+		SecurityLabelNumber []interface{} `json:"securitylabelnumber,omitempty"`
+		ValuedItem []*ContractValuedItem `json:"valueditem,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Scope = temp.Scope
+	m.Type = temp.Type
+	m.TypeReference = temp.TypeReference
+	m.Subtype = temp.Subtype
+	m.Relationship = temp.Relationship
+	m.Context = temp.Context
+	m.Condition = temp.Condition
+	m.PeriodType = temp.PeriodType
+	m.Period = temp.Period
+	m.UsePeriod = temp.UsePeriod
+	m.Text = temp.Text
+	if len(temp.LinkId) > 0 {
+		m.LinkId = make([]*FhirString, len(temp.LinkId))
+		for i := range temp.LinkId {
+			itemMap, ok := temp.LinkId[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for LinkId[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse LinkId[%d]: %v", i, err) }
+			m.LinkId[i] = primitive
+		}
+	}
+	m.Answer = temp.Answer
+	if len(temp.SecurityLabelNumber) > 0 {
+		m.SecurityLabelNumber = make([]*FhirUnsignedInt, len(temp.SecurityLabelNumber))
+		for i := range temp.SecurityLabelNumber {
+			itemMap, ok := temp.SecurityLabelNumber[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for SecurityLabelNumber[%d]: expected map", i) }
+			primitive, err := NewFhirUnsignedIntFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse SecurityLabelNumber[%d]: %v", i, err) }
+			m.SecurityLabelNumber[i] = primitive
+		}
+	}
+	m.ValuedItem = temp.ValuedItem
+	return nil
 }
 
-// ToJSON converts ContractAsset to JSON data
+// ToJSON converts ContractAsset to JSON data.
 func (m *ContractAsset) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Scope *CodeableConcept `json:"scope,omitempty"`
+		Type []*CodeableConcept `json:"type,omitempty"`
+		TypeReference []*Reference `json:"typereference,omitempty"`
+		Subtype []*CodeableConcept `json:"subtype,omitempty"`
+		Relationship *Coding `json:"relationship,omitempty"`
+		Context []*ContractContext `json:"context,omitempty"`
+		Condition interface{} `json:"condition,omitempty"`
+		ConditionElement map[string]interface{} `json:"_condition,omitempty"`
+		PeriodType []*CodeableConcept `json:"periodtype,omitempty"`
+		Period []*Period `json:"period,omitempty"`
+		UsePeriod []*Period `json:"useperiod,omitempty"`
+		Text interface{} `json:"text,omitempty"`
+		TextElement map[string]interface{} `json:"_text,omitempty"`
+		LinkId []interface{} `json:"linkid,omitempty"`
+		LinkIdElement []map[string]interface{} `json:"_linkid,omitempty"`
+		Answer []*ContractAnswer `json:"answer,omitempty"`
+		SecurityLabelNumber []interface{} `json:"securitylabelnumber,omitempty"`
+		SecurityLabelNumberElement []map[string]interface{} `json:"_securitylabelnumber,omitempty"`
+		ValuedItem []*ContractValuedItem `json:"valueditem,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Scope = m.Scope
+	output.Type = m.Type
+	output.TypeReference = m.TypeReference
+	output.Subtype = m.Subtype
+	output.Relationship = m.Relationship
+	output.Context = m.Context
+	if m.Condition != nil && m.Condition.Value != nil {
+		output.Condition = m.Condition.Value
+		if m.Condition.Element != nil {
+			output.ConditionElement = toMapOrNil(m.Condition.Element.ToJSON())
+		}
+	}
+	output.PeriodType = m.PeriodType
+	output.Period = m.Period
+	output.UsePeriod = m.UsePeriod
+	if m.Text != nil && m.Text.Value != nil {
+		output.Text = m.Text.Value
+		if m.Text.Element != nil {
+			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+		}
+	}
+	if len(m.LinkId) > 0 {
+		output.LinkId = make([]interface{}, len(m.LinkId))
+		output.LinkIdElement = make([]map[string]interface{}, len(m.LinkId))
+		for i, item := range m.LinkId {
+			if item != nil && item.Value != nil {
+				output.LinkId[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.LinkIdElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Answer = m.Answer
+	if len(m.SecurityLabelNumber) > 0 {
+		output.SecurityLabelNumber = make([]interface{}, len(m.SecurityLabelNumber))
+		output.SecurityLabelNumberElement = make([]map[string]interface{}, len(m.SecurityLabelNumber))
+		for i, item := range m.SecurityLabelNumber {
+			if item != nil && item.Value != nil {
+				output.SecurityLabelNumber[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.SecurityLabelNumberElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.ValuedItem = m.ValuedItem
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ContractAsset
+// Clone creates a deep copy of ContractAsset.
 func (m *ContractAsset) Clone() *ContractAsset {
 	if m == nil { return nil }
 	return &ContractAsset{
@@ -638,7 +1512,7 @@ func (m *ContractAsset) Clone() *ContractAsset {
 	}
 }
 
-// Equals checks for equality with another ContractAsset instance
+// Equals checks equality between two ContractAsset instances.
 func (m *ContractAsset) Equals(other *ContractAsset) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -666,7 +1540,7 @@ func (m *ContractAsset) Equals(other *ContractAsset) bool {
 // ContractContext
 // Circumstance of the asset.
 type ContractContext struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -675,22 +1549,65 @@ type ContractContext struct {
 	Text *FhirString `json:"text,omitempty"`
 }
 
-// NewContractContext creates a new ContractContext instance
+// NewContractContext creates a new ContractContext instance.
 func NewContractContext() *ContractContext {
 	return &ContractContext{}
 }
 
-// FromJSON populates ContractContext from JSON data
+// FromJSON populates ContractContext from JSON data.
 func (m *ContractContext) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Reference *Reference `json:"reference,omitempty"`
+		Code []*CodeableConcept `json:"code,omitempty"`
+		Text *FhirString `json:"text,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Reference = temp.Reference
+	m.Code = temp.Code
+	m.Text = temp.Text
+	return nil
 }
 
-// ToJSON converts ContractContext to JSON data
+// ToJSON converts ContractContext to JSON data.
 func (m *ContractContext) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Reference *Reference `json:"reference,omitempty"`
+		Code []*CodeableConcept `json:"code,omitempty"`
+		Text interface{} `json:"text,omitempty"`
+		TextElement map[string]interface{} `json:"_text,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Reference = m.Reference
+	output.Code = m.Code
+	if m.Text != nil && m.Text.Value != nil {
+		output.Text = m.Text.Value
+		if m.Text.Element != nil {
+			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ContractContext
+// Clone creates a deep copy of ContractContext.
 func (m *ContractContext) Clone() *ContractContext {
 	if m == nil { return nil }
 	return &ContractContext{
@@ -703,7 +1620,7 @@ func (m *ContractContext) Clone() *ContractContext {
 	}
 }
 
-// Equals checks for equality with another ContractContext instance
+// Equals checks equality between two ContractContext instances.
 func (m *ContractContext) Equals(other *ContractContext) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -719,7 +1636,7 @@ func (m *ContractContext) Equals(other *ContractContext) bool {
 // ContractValuedItem
 // Contract Valued Item List.
 type ContractValuedItem struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -740,22 +1657,179 @@ type ContractValuedItem struct {
 	SecurityLabelNumber []*FhirUnsignedInt `json:"securitylabelnumber,omitempty"`
 }
 
-// NewContractValuedItem creates a new ContractValuedItem instance
+// NewContractValuedItem creates a new ContractValuedItem instance.
 func NewContractValuedItem() *ContractValuedItem {
 	return &ContractValuedItem{}
 }
 
-// FromJSON populates ContractValuedItem from JSON data
+// FromJSON populates ContractValuedItem from JSON data.
 func (m *ContractValuedItem) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		EntityCodeableConcept *CodeableConcept `json:"entitycodeableconcept,omitempty"`
+		EntityReference *Reference `json:"entityreference,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		EffectiveTime *FhirDateTime `json:"effectivetime,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		UnitPrice *Money `json:"unitprice,omitempty"`
+		Factor *FhirDecimal `json:"factor,omitempty"`
+		Points *FhirDecimal `json:"points,omitempty"`
+		Net *Money `json:"net,omitempty"`
+		Payment *FhirString `json:"payment,omitempty"`
+		PaymentDate *FhirDateTime `json:"paymentdate,omitempty"`
+		Responsible *Reference `json:"responsible,omitempty"`
+		Recipient *Reference `json:"recipient,omitempty"`
+		LinkId []interface{} `json:"linkid,omitempty"`
+		SecurityLabelNumber []interface{} `json:"securitylabelnumber,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.EntityCodeableConcept = temp.EntityCodeableConcept
+	m.EntityReference = temp.EntityReference
+	m.Identifier = temp.Identifier
+	m.EffectiveTime = temp.EffectiveTime
+	m.Quantity = temp.Quantity
+	m.UnitPrice = temp.UnitPrice
+	m.Factor = temp.Factor
+	m.Points = temp.Points
+	m.Net = temp.Net
+	m.Payment = temp.Payment
+	m.PaymentDate = temp.PaymentDate
+	m.Responsible = temp.Responsible
+	m.Recipient = temp.Recipient
+	if len(temp.LinkId) > 0 {
+		m.LinkId = make([]*FhirString, len(temp.LinkId))
+		for i := range temp.LinkId {
+			itemMap, ok := temp.LinkId[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for LinkId[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse LinkId[%d]: %v", i, err) }
+			m.LinkId[i] = primitive
+		}
+	}
+	if len(temp.SecurityLabelNumber) > 0 {
+		m.SecurityLabelNumber = make([]*FhirUnsignedInt, len(temp.SecurityLabelNumber))
+		for i := range temp.SecurityLabelNumber {
+			itemMap, ok := temp.SecurityLabelNumber[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for SecurityLabelNumber[%d]: expected map", i) }
+			primitive, err := NewFhirUnsignedIntFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse SecurityLabelNumber[%d]: %v", i, err) }
+			m.SecurityLabelNumber[i] = primitive
+		}
+	}
+	return nil
 }
 
-// ToJSON converts ContractValuedItem to JSON data
+// ToJSON converts ContractValuedItem to JSON data.
 func (m *ContractValuedItem) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		EntityCodeableConcept *CodeableConcept `json:"entitycodeableconcept,omitempty"`
+		EntityReference *Reference `json:"entityreference,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		EffectiveTime interface{} `json:"effectivetime,omitempty"`
+		EffectiveTimeElement map[string]interface{} `json:"_effectivetime,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		UnitPrice *Money `json:"unitprice,omitempty"`
+		Factor interface{} `json:"factor,omitempty"`
+		FactorElement map[string]interface{} `json:"_factor,omitempty"`
+		Points interface{} `json:"points,omitempty"`
+		PointsElement map[string]interface{} `json:"_points,omitempty"`
+		Net *Money `json:"net,omitempty"`
+		Payment interface{} `json:"payment,omitempty"`
+		PaymentElement map[string]interface{} `json:"_payment,omitempty"`
+		PaymentDate interface{} `json:"paymentdate,omitempty"`
+		PaymentDateElement map[string]interface{} `json:"_paymentdate,omitempty"`
+		Responsible *Reference `json:"responsible,omitempty"`
+		Recipient *Reference `json:"recipient,omitempty"`
+		LinkId []interface{} `json:"linkid,omitempty"`
+		LinkIdElement []map[string]interface{} `json:"_linkid,omitempty"`
+		SecurityLabelNumber []interface{} `json:"securitylabelnumber,omitempty"`
+		SecurityLabelNumberElement []map[string]interface{} `json:"_securitylabelnumber,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.EntityCodeableConcept = m.EntityCodeableConcept
+	output.EntityReference = m.EntityReference
+	output.Identifier = m.Identifier
+	if m.EffectiveTime != nil && m.EffectiveTime.Value != nil {
+		output.EffectiveTime = m.EffectiveTime.Value
+		if m.EffectiveTime.Element != nil {
+			output.EffectiveTimeElement = toMapOrNil(m.EffectiveTime.Element.ToJSON())
+		}
+	}
+	output.Quantity = m.Quantity
+	output.UnitPrice = m.UnitPrice
+	if m.Factor != nil && m.Factor.Value != nil {
+		output.Factor = m.Factor.Value
+		if m.Factor.Element != nil {
+			output.FactorElement = toMapOrNil(m.Factor.Element.ToJSON())
+		}
+	}
+	if m.Points != nil && m.Points.Value != nil {
+		output.Points = m.Points.Value
+		if m.Points.Element != nil {
+			output.PointsElement = toMapOrNil(m.Points.Element.ToJSON())
+		}
+	}
+	output.Net = m.Net
+	if m.Payment != nil && m.Payment.Value != nil {
+		output.Payment = m.Payment.Value
+		if m.Payment.Element != nil {
+			output.PaymentElement = toMapOrNil(m.Payment.Element.ToJSON())
+		}
+	}
+	if m.PaymentDate != nil && m.PaymentDate.Value != nil {
+		output.PaymentDate = m.PaymentDate.Value
+		if m.PaymentDate.Element != nil {
+			output.PaymentDateElement = toMapOrNil(m.PaymentDate.Element.ToJSON())
+		}
+	}
+	output.Responsible = m.Responsible
+	output.Recipient = m.Recipient
+	if len(m.LinkId) > 0 {
+		output.LinkId = make([]interface{}, len(m.LinkId))
+		output.LinkIdElement = make([]map[string]interface{}, len(m.LinkId))
+		for i, item := range m.LinkId {
+			if item != nil && item.Value != nil {
+				output.LinkId[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.LinkIdElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.SecurityLabelNumber) > 0 {
+		output.SecurityLabelNumber = make([]interface{}, len(m.SecurityLabelNumber))
+		output.SecurityLabelNumberElement = make([]map[string]interface{}, len(m.SecurityLabelNumber))
+		for i, item := range m.SecurityLabelNumber {
+			if item != nil && item.Value != nil {
+				output.SecurityLabelNumber[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.SecurityLabelNumberElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ContractValuedItem
+// Clone creates a deep copy of ContractValuedItem.
 func (m *ContractValuedItem) Clone() *ContractValuedItem {
 	if m == nil { return nil }
 	return &ContractValuedItem{
@@ -780,7 +1854,7 @@ func (m *ContractValuedItem) Clone() *ContractValuedItem {
 	}
 }
 
-// Equals checks for equality with another ContractValuedItem instance
+// Equals checks equality between two ContractValuedItem instances.
 func (m *ContractValuedItem) Equals(other *ContractValuedItem) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -808,7 +1882,7 @@ func (m *ContractValuedItem) Equals(other *ContractValuedItem) bool {
 // ContractAction
 // An actor taking a role in an activity for which it can be assigned some degree of responsibility for the activity taking place.
 type ContractAction struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -837,22 +1911,298 @@ type ContractAction struct {
 	SecurityLabelNumber []*FhirUnsignedInt `json:"securitylabelnumber,omitempty"`
 }
 
-// NewContractAction creates a new ContractAction instance
+// NewContractAction creates a new ContractAction instance.
 func NewContractAction() *ContractAction {
 	return &ContractAction{}
 }
 
-// FromJSON populates ContractAction from JSON data
+// FromJSON populates ContractAction from JSON data.
 func (m *ContractAction) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		DoNotPerform *FhirBoolean `json:"donotperform,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Subject []*ContractSubject `json:"subject,omitempty"`
+		Intent *CodeableConcept `json:"intent,omitempty"`
+		LinkId []interface{} `json:"linkid,omitempty"`
+		Status *CodeableConcept `json:"status,omitempty"`
+		Context *Reference `json:"context,omitempty"`
+		ContextLinkId []interface{} `json:"contextlinkid,omitempty"`
+		OccurrenceDateTime *FhirDateTime `json:"occurrencedatetime,omitempty"`
+		OccurrencePeriod *Period `json:"occurrenceperiod,omitempty"`
+		OccurrenceTiming *Timing `json:"occurrencetiming,omitempty"`
+		Requester []*Reference `json:"requester,omitempty"`
+		RequesterLinkId []interface{} `json:"requesterlinkid,omitempty"`
+		PerformerType []*CodeableConcept `json:"performertype,omitempty"`
+		PerformerRole *CodeableConcept `json:"performerrole,omitempty"`
+		Performer *Reference `json:"performer,omitempty"`
+		PerformerLinkId []interface{} `json:"performerlinkid,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		Reason []interface{} `json:"reason,omitempty"`
+		ReasonLinkId []interface{} `json:"reasonlinkid,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		SecurityLabelNumber []interface{} `json:"securitylabelnumber,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.DoNotPerform = temp.DoNotPerform
+	m.Type = temp.Type
+	m.Subject = temp.Subject
+	m.Intent = temp.Intent
+	if len(temp.LinkId) > 0 {
+		m.LinkId = make([]*FhirString, len(temp.LinkId))
+		for i := range temp.LinkId {
+			itemMap, ok := temp.LinkId[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for LinkId[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse LinkId[%d]: %v", i, err) }
+			m.LinkId[i] = primitive
+		}
+	}
+	m.Status = temp.Status
+	m.Context = temp.Context
+	if len(temp.ContextLinkId) > 0 {
+		m.ContextLinkId = make([]*FhirString, len(temp.ContextLinkId))
+		for i := range temp.ContextLinkId {
+			itemMap, ok := temp.ContextLinkId[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for ContextLinkId[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse ContextLinkId[%d]: %v", i, err) }
+			m.ContextLinkId[i] = primitive
+		}
+	}
+	m.OccurrenceDateTime = temp.OccurrenceDateTime
+	m.OccurrencePeriod = temp.OccurrencePeriod
+	m.OccurrenceTiming = temp.OccurrenceTiming
+	m.Requester = temp.Requester
+	if len(temp.RequesterLinkId) > 0 {
+		m.RequesterLinkId = make([]*FhirString, len(temp.RequesterLinkId))
+		for i := range temp.RequesterLinkId {
+			itemMap, ok := temp.RequesterLinkId[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for RequesterLinkId[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse RequesterLinkId[%d]: %v", i, err) }
+			m.RequesterLinkId[i] = primitive
+		}
+	}
+	m.PerformerType = temp.PerformerType
+	m.PerformerRole = temp.PerformerRole
+	m.Performer = temp.Performer
+	if len(temp.PerformerLinkId) > 0 {
+		m.PerformerLinkId = make([]*FhirString, len(temp.PerformerLinkId))
+		for i := range temp.PerformerLinkId {
+			itemMap, ok := temp.PerformerLinkId[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for PerformerLinkId[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse PerformerLinkId[%d]: %v", i, err) }
+			m.PerformerLinkId[i] = primitive
+		}
+	}
+	m.ReasonCode = temp.ReasonCode
+	m.ReasonReference = temp.ReasonReference
+	if len(temp.Reason) > 0 {
+		m.Reason = make([]*FhirString, len(temp.Reason))
+		for i := range temp.Reason {
+			itemMap, ok := temp.Reason[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Reason[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Reason[%d]: %v", i, err) }
+			m.Reason[i] = primitive
+		}
+	}
+	if len(temp.ReasonLinkId) > 0 {
+		m.ReasonLinkId = make([]*FhirString, len(temp.ReasonLinkId))
+		for i := range temp.ReasonLinkId {
+			itemMap, ok := temp.ReasonLinkId[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for ReasonLinkId[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse ReasonLinkId[%d]: %v", i, err) }
+			m.ReasonLinkId[i] = primitive
+		}
+	}
+	m.Note = temp.Note
+	if len(temp.SecurityLabelNumber) > 0 {
+		m.SecurityLabelNumber = make([]*FhirUnsignedInt, len(temp.SecurityLabelNumber))
+		for i := range temp.SecurityLabelNumber {
+			itemMap, ok := temp.SecurityLabelNumber[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for SecurityLabelNumber[%d]: expected map", i) }
+			primitive, err := NewFhirUnsignedIntFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse SecurityLabelNumber[%d]: %v", i, err) }
+			m.SecurityLabelNumber[i] = primitive
+		}
+	}
+	return nil
 }
 
-// ToJSON converts ContractAction to JSON data
+// ToJSON converts ContractAction to JSON data.
 func (m *ContractAction) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		DoNotPerform interface{} `json:"donotperform,omitempty"`
+		DoNotPerformElement map[string]interface{} `json:"_donotperform,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Subject []*ContractSubject `json:"subject,omitempty"`
+		Intent *CodeableConcept `json:"intent,omitempty"`
+		LinkId []interface{} `json:"linkid,omitempty"`
+		LinkIdElement []map[string]interface{} `json:"_linkid,omitempty"`
+		Status *CodeableConcept `json:"status,omitempty"`
+		Context *Reference `json:"context,omitempty"`
+		ContextLinkId []interface{} `json:"contextlinkid,omitempty"`
+		ContextLinkIdElement []map[string]interface{} `json:"_contextlinkid,omitempty"`
+		OccurrenceDateTime interface{} `json:"occurrencedatetime,omitempty"`
+		OccurrenceDateTimeElement map[string]interface{} `json:"_occurrencedatetime,omitempty"`
+		OccurrencePeriod *Period `json:"occurrenceperiod,omitempty"`
+		OccurrenceTiming *Timing `json:"occurrencetiming,omitempty"`
+		Requester []*Reference `json:"requester,omitempty"`
+		RequesterLinkId []interface{} `json:"requesterlinkid,omitempty"`
+		RequesterLinkIdElement []map[string]interface{} `json:"_requesterlinkid,omitempty"`
+		PerformerType []*CodeableConcept `json:"performertype,omitempty"`
+		PerformerRole *CodeableConcept `json:"performerrole,omitempty"`
+		Performer *Reference `json:"performer,omitempty"`
+		PerformerLinkId []interface{} `json:"performerlinkid,omitempty"`
+		PerformerLinkIdElement []map[string]interface{} `json:"_performerlinkid,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		Reason []interface{} `json:"reason,omitempty"`
+		ReasonElement []map[string]interface{} `json:"_reason,omitempty"`
+		ReasonLinkId []interface{} `json:"reasonlinkid,omitempty"`
+		ReasonLinkIdElement []map[string]interface{} `json:"_reasonlinkid,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		SecurityLabelNumber []interface{} `json:"securitylabelnumber,omitempty"`
+		SecurityLabelNumberElement []map[string]interface{} `json:"_securitylabelnumber,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.DoNotPerform != nil && m.DoNotPerform.Value != nil {
+		output.DoNotPerform = m.DoNotPerform.Value
+		if m.DoNotPerform.Element != nil {
+			output.DoNotPerformElement = toMapOrNil(m.DoNotPerform.Element.ToJSON())
+		}
+	}
+	output.Type = m.Type
+	output.Subject = m.Subject
+	output.Intent = m.Intent
+	if len(m.LinkId) > 0 {
+		output.LinkId = make([]interface{}, len(m.LinkId))
+		output.LinkIdElement = make([]map[string]interface{}, len(m.LinkId))
+		for i, item := range m.LinkId {
+			if item != nil && item.Value != nil {
+				output.LinkId[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.LinkIdElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Status = m.Status
+	output.Context = m.Context
+	if len(m.ContextLinkId) > 0 {
+		output.ContextLinkId = make([]interface{}, len(m.ContextLinkId))
+		output.ContextLinkIdElement = make([]map[string]interface{}, len(m.ContextLinkId))
+		for i, item := range m.ContextLinkId {
+			if item != nil && item.Value != nil {
+				output.ContextLinkId[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.ContextLinkIdElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if m.OccurrenceDateTime != nil && m.OccurrenceDateTime.Value != nil {
+		output.OccurrenceDateTime = m.OccurrenceDateTime.Value
+		if m.OccurrenceDateTime.Element != nil {
+			output.OccurrenceDateTimeElement = toMapOrNil(m.OccurrenceDateTime.Element.ToJSON())
+		}
+	}
+	output.OccurrencePeriod = m.OccurrencePeriod
+	output.OccurrenceTiming = m.OccurrenceTiming
+	output.Requester = m.Requester
+	if len(m.RequesterLinkId) > 0 {
+		output.RequesterLinkId = make([]interface{}, len(m.RequesterLinkId))
+		output.RequesterLinkIdElement = make([]map[string]interface{}, len(m.RequesterLinkId))
+		for i, item := range m.RequesterLinkId {
+			if item != nil && item.Value != nil {
+				output.RequesterLinkId[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.RequesterLinkIdElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.PerformerType = m.PerformerType
+	output.PerformerRole = m.PerformerRole
+	output.Performer = m.Performer
+	if len(m.PerformerLinkId) > 0 {
+		output.PerformerLinkId = make([]interface{}, len(m.PerformerLinkId))
+		output.PerformerLinkIdElement = make([]map[string]interface{}, len(m.PerformerLinkId))
+		for i, item := range m.PerformerLinkId {
+			if item != nil && item.Value != nil {
+				output.PerformerLinkId[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.PerformerLinkIdElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.ReasonCode = m.ReasonCode
+	output.ReasonReference = m.ReasonReference
+	if len(m.Reason) > 0 {
+		output.Reason = make([]interface{}, len(m.Reason))
+		output.ReasonElement = make([]map[string]interface{}, len(m.Reason))
+		for i, item := range m.Reason {
+			if item != nil && item.Value != nil {
+				output.Reason[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.ReasonElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.ReasonLinkId) > 0 {
+		output.ReasonLinkId = make([]interface{}, len(m.ReasonLinkId))
+		output.ReasonLinkIdElement = make([]map[string]interface{}, len(m.ReasonLinkId))
+		for i, item := range m.ReasonLinkId {
+			if item != nil && item.Value != nil {
+				output.ReasonLinkId[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.ReasonLinkIdElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Note = m.Note
+	if len(m.SecurityLabelNumber) > 0 {
+		output.SecurityLabelNumber = make([]interface{}, len(m.SecurityLabelNumber))
+		output.SecurityLabelNumberElement = make([]map[string]interface{}, len(m.SecurityLabelNumber))
+		for i, item := range m.SecurityLabelNumber {
+			if item != nil && item.Value != nil {
+				output.SecurityLabelNumber[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.SecurityLabelNumberElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ContractAction
+// Clone creates a deep copy of ContractAction.
 func (m *ContractAction) Clone() *ContractAction {
 	if m == nil { return nil }
 	return &ContractAction{
@@ -885,7 +2235,7 @@ func (m *ContractAction) Clone() *ContractAction {
 	}
 }
 
-// Equals checks for equality with another ContractAction instance
+// Equals checks equality between two ContractAction instances.
 func (m *ContractAction) Equals(other *ContractAction) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -921,7 +2271,7 @@ func (m *ContractAction) Equals(other *ContractAction) bool {
 // ContractSubject
 // Entity of the action.
 type ContractSubject struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -929,22 +2279,55 @@ type ContractSubject struct {
 	Role *CodeableConcept `json:"role,omitempty"`
 }
 
-// NewContractSubject creates a new ContractSubject instance
+// NewContractSubject creates a new ContractSubject instance.
 func NewContractSubject() *ContractSubject {
 	return &ContractSubject{}
 }
 
-// FromJSON populates ContractSubject from JSON data
+// FromJSON populates ContractSubject from JSON data.
 func (m *ContractSubject) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Reference []*Reference `json:"reference,omitempty"`
+		Role *CodeableConcept `json:"role,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Reference = temp.Reference
+	m.Role = temp.Role
+	return nil
 }
 
-// ToJSON converts ContractSubject to JSON data
+// ToJSON converts ContractSubject to JSON data.
 func (m *ContractSubject) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Reference []*Reference `json:"reference,omitempty"`
+		Role *CodeableConcept `json:"role,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Reference = m.Reference
+	output.Role = m.Role
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ContractSubject
+// Clone creates a deep copy of ContractSubject.
 func (m *ContractSubject) Clone() *ContractSubject {
 	if m == nil { return nil }
 	return &ContractSubject{
@@ -956,7 +2339,7 @@ func (m *ContractSubject) Clone() *ContractSubject {
 	}
 }
 
-// Equals checks for equality with another ContractSubject instance
+// Equals checks equality between two ContractSubject instances.
 func (m *ContractSubject) Equals(other *ContractSubject) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -971,7 +2354,7 @@ func (m *ContractSubject) Equals(other *ContractSubject) bool {
 // ContractSigner
 // Parties with legal standing in the Contract, including the principal parties, the grantor(s) and grantee(s), which are any person or organization bound by the contract, and any ancillary parties, which facilitate the execution of the contract such as a notary or witness.
 type ContractSigner struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -980,22 +2363,59 @@ type ContractSigner struct {
 	Signature []*Signature `json:"signature,omitempty"`
 }
 
-// NewContractSigner creates a new ContractSigner instance
+// NewContractSigner creates a new ContractSigner instance.
 func NewContractSigner() *ContractSigner {
 	return &ContractSigner{}
 }
 
-// FromJSON populates ContractSigner from JSON data
+// FromJSON populates ContractSigner from JSON data.
 func (m *ContractSigner) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *Coding `json:"type,omitempty"`
+		Party *Reference `json:"party,omitempty"`
+		Signature []*Signature `json:"signature,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Party = temp.Party
+	m.Signature = temp.Signature
+	return nil
 }
 
-// ToJSON converts ContractSigner to JSON data
+// ToJSON converts ContractSigner to JSON data.
 func (m *ContractSigner) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *Coding `json:"type,omitempty"`
+		Party *Reference `json:"party,omitempty"`
+		Signature []*Signature `json:"signature,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Party = m.Party
+	output.Signature = m.Signature
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ContractSigner
+// Clone creates a deep copy of ContractSigner.
 func (m *ContractSigner) Clone() *ContractSigner {
 	if m == nil { return nil }
 	return &ContractSigner{
@@ -1008,7 +2428,7 @@ func (m *ContractSigner) Clone() *ContractSigner {
 	}
 }
 
-// Equals checks for equality with another ContractSigner instance
+// Equals checks equality between two ContractSigner instances.
 func (m *ContractSigner) Equals(other *ContractSigner) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -1024,7 +2444,7 @@ func (m *ContractSigner) Equals(other *ContractSigner) bool {
 // ContractFriendly
 // The "patient friendly language" versionof the Contract in whole or in parts. "Patient friendly language" means the representation of the Contract and Contract Provisions in a manner that is readily accessible and understandable by a layperson in accordance with best practices for communication styles that ensure that those agreeing to or signing the Contract understand the roles, actions, obligations, responsibilities, and implication of the agreement.
 type ContractFriendly struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -1032,22 +2452,55 @@ type ContractFriendly struct {
 	ContentReference *Reference `json:"contentreference,omitempty"`
 }
 
-// NewContractFriendly creates a new ContractFriendly instance
+// NewContractFriendly creates a new ContractFriendly instance.
 func NewContractFriendly() *ContractFriendly {
 	return &ContractFriendly{}
 }
 
-// FromJSON populates ContractFriendly from JSON data
+// FromJSON populates ContractFriendly from JSON data.
 func (m *ContractFriendly) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ContentAttachment *Attachment `json:"contentattachment,omitempty"`
+		ContentReference *Reference `json:"contentreference,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.ContentAttachment = temp.ContentAttachment
+	m.ContentReference = temp.ContentReference
+	return nil
 }
 
-// ToJSON converts ContractFriendly to JSON data
+// ToJSON converts ContractFriendly to JSON data.
 func (m *ContractFriendly) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ContentAttachment *Attachment `json:"contentattachment,omitempty"`
+		ContentReference *Reference `json:"contentreference,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.ContentAttachment = m.ContentAttachment
+	output.ContentReference = m.ContentReference
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ContractFriendly
+// Clone creates a deep copy of ContractFriendly.
 func (m *ContractFriendly) Clone() *ContractFriendly {
 	if m == nil { return nil }
 	return &ContractFriendly{
@@ -1059,7 +2512,7 @@ func (m *ContractFriendly) Clone() *ContractFriendly {
 	}
 }
 
-// Equals checks for equality with another ContractFriendly instance
+// Equals checks equality between two ContractFriendly instances.
 func (m *ContractFriendly) Equals(other *ContractFriendly) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -1074,7 +2527,7 @@ func (m *ContractFriendly) Equals(other *ContractFriendly) bool {
 // ContractLegal
 // List of Legal expressions or representations of this Contract.
 type ContractLegal struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -1082,22 +2535,55 @@ type ContractLegal struct {
 	ContentReference *Reference `json:"contentreference,omitempty"`
 }
 
-// NewContractLegal creates a new ContractLegal instance
+// NewContractLegal creates a new ContractLegal instance.
 func NewContractLegal() *ContractLegal {
 	return &ContractLegal{}
 }
 
-// FromJSON populates ContractLegal from JSON data
+// FromJSON populates ContractLegal from JSON data.
 func (m *ContractLegal) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ContentAttachment *Attachment `json:"contentattachment,omitempty"`
+		ContentReference *Reference `json:"contentreference,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.ContentAttachment = temp.ContentAttachment
+	m.ContentReference = temp.ContentReference
+	return nil
 }
 
-// ToJSON converts ContractLegal to JSON data
+// ToJSON converts ContractLegal to JSON data.
 func (m *ContractLegal) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ContentAttachment *Attachment `json:"contentattachment,omitempty"`
+		ContentReference *Reference `json:"contentreference,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.ContentAttachment = m.ContentAttachment
+	output.ContentReference = m.ContentReference
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ContractLegal
+// Clone creates a deep copy of ContractLegal.
 func (m *ContractLegal) Clone() *ContractLegal {
 	if m == nil { return nil }
 	return &ContractLegal{
@@ -1109,7 +2595,7 @@ func (m *ContractLegal) Clone() *ContractLegal {
 	}
 }
 
-// Equals checks for equality with another ContractLegal instance
+// Equals checks equality between two ContractLegal instances.
 func (m *ContractLegal) Equals(other *ContractLegal) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -1124,7 +2610,7 @@ func (m *ContractLegal) Equals(other *ContractLegal) bool {
 // ContractRule
 // List of Computable Policy Rule Language Representations of this Contract.
 type ContractRule struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -1132,22 +2618,55 @@ type ContractRule struct {
 	ContentReference *Reference `json:"contentreference,omitempty"`
 }
 
-// NewContractRule creates a new ContractRule instance
+// NewContractRule creates a new ContractRule instance.
 func NewContractRule() *ContractRule {
 	return &ContractRule{}
 }
 
-// FromJSON populates ContractRule from JSON data
+// FromJSON populates ContractRule from JSON data.
 func (m *ContractRule) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ContentAttachment *Attachment `json:"contentattachment,omitempty"`
+		ContentReference *Reference `json:"contentreference,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.ContentAttachment = temp.ContentAttachment
+	m.ContentReference = temp.ContentReference
+	return nil
 }
 
-// ToJSON converts ContractRule to JSON data
+// ToJSON converts ContractRule to JSON data.
 func (m *ContractRule) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ContentAttachment *Attachment `json:"contentattachment,omitempty"`
+		ContentReference *Reference `json:"contentreference,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.ContentAttachment = m.ContentAttachment
+	output.ContentReference = m.ContentReference
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ContractRule
+// Clone creates a deep copy of ContractRule.
 func (m *ContractRule) Clone() *ContractRule {
 	if m == nil { return nil }
 	return &ContractRule{
@@ -1159,7 +2678,7 @@ func (m *ContractRule) Clone() *ContractRule {
 	}
 }
 
-// Equals checks for equality with another ContractRule instance
+// Equals checks equality between two ContractRule instances.
 func (m *ContractRule) Equals(other *ContractRule) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

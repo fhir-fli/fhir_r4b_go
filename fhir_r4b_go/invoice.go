@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Invoice
 // Invoice containing collected ChargeItems from an Account with calculated individual and total price for Billing purpose.
 type Invoice struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -35,22 +36,155 @@ type Invoice struct {
 	Note []*Annotation `json:"note,omitempty"`
 }
 
-// NewInvoice creates a new Invoice instance
+// NewInvoice creates a new Invoice instance.
 func NewInvoice() *Invoice {
 	return &Invoice{}
 }
 
-// FromJSON populates Invoice from JSON data
+// FromJSON populates Invoice from JSON data.
 func (m *Invoice) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *InvoiceStatus `json:"status,omitempty"`
+		CancelledReason *FhirString `json:"cancelledreason,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Recipient *Reference `json:"recipient,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Participant []*InvoiceParticipant `json:"participant,omitempty"`
+		Issuer *Reference `json:"issuer,omitempty"`
+		Account *Reference `json:"account,omitempty"`
+		LineItem []*InvoiceLineItem `json:"lineitem,omitempty"`
+		TotalPriceComponent []*InvoicePriceComponent `json:"totalpricecomponent,omitempty"`
+		TotalNet *Money `json:"totalnet,omitempty"`
+		TotalGross *Money `json:"totalgross,omitempty"`
+		PaymentTerms *FhirMarkdown `json:"paymentterms,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.CancelledReason = temp.CancelledReason
+	m.Type = temp.Type
+	m.Subject = temp.Subject
+	m.Recipient = temp.Recipient
+	m.Date = temp.Date
+	m.Participant = temp.Participant
+	m.Issuer = temp.Issuer
+	m.Account = temp.Account
+	m.LineItem = temp.LineItem
+	m.TotalPriceComponent = temp.TotalPriceComponent
+	m.TotalNet = temp.TotalNet
+	m.TotalGross = temp.TotalGross
+	m.PaymentTerms = temp.PaymentTerms
+	m.Note = temp.Note
+	return nil
 }
 
-// ToJSON converts Invoice to JSON data
+// ToJSON converts Invoice to JSON data.
 func (m *Invoice) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *InvoiceStatus `json:"status,omitempty"`
+		CancelledReason interface{} `json:"cancelledreason,omitempty"`
+		CancelledReasonElement map[string]interface{} `json:"_cancelledreason,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Recipient *Reference `json:"recipient,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Participant []*InvoiceParticipant `json:"participant,omitempty"`
+		Issuer *Reference `json:"issuer,omitempty"`
+		Account *Reference `json:"account,omitempty"`
+		LineItem []*InvoiceLineItem `json:"lineitem,omitempty"`
+		TotalPriceComponent []*InvoicePriceComponent `json:"totalpricecomponent,omitempty"`
+		TotalNet *Money `json:"totalnet,omitempty"`
+		TotalGross *Money `json:"totalgross,omitempty"`
+		PaymentTerms interface{} `json:"paymentterms,omitempty"`
+		PaymentTermsElement map[string]interface{} `json:"_paymentterms,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	if m.CancelledReason != nil && m.CancelledReason.Value != nil {
+		output.CancelledReason = m.CancelledReason.Value
+		if m.CancelledReason.Element != nil {
+			output.CancelledReasonElement = toMapOrNil(m.CancelledReason.Element.ToJSON())
+		}
+	}
+	output.Type = m.Type
+	output.Subject = m.Subject
+	output.Recipient = m.Recipient
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	output.Participant = m.Participant
+	output.Issuer = m.Issuer
+	output.Account = m.Account
+	output.LineItem = m.LineItem
+	output.TotalPriceComponent = m.TotalPriceComponent
+	output.TotalNet = m.TotalNet
+	output.TotalGross = m.TotalGross
+	if m.PaymentTerms != nil && m.PaymentTerms.Value != nil {
+		output.PaymentTerms = m.PaymentTerms.Value
+		if m.PaymentTerms.Element != nil {
+			output.PaymentTermsElement = toMapOrNil(m.PaymentTerms.Element.ToJSON())
+		}
+	}
+	output.Note = m.Note
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Invoice
+// Clone creates a deep copy of Invoice.
 func (m *Invoice) Clone() *Invoice {
 	if m == nil { return nil }
 	return &Invoice{
@@ -81,7 +215,7 @@ func (m *Invoice) Clone() *Invoice {
 	}
 }
 
-// Equals checks for equality with another Invoice instance
+// Equals checks equality between two Invoice instances.
 func (m *Invoice) Equals(other *Invoice) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -115,7 +249,7 @@ func (m *Invoice) Equals(other *Invoice) bool {
 // InvoiceParticipant
 // Indicates who or what performed or participated in the charged service.
 type InvoiceParticipant struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -123,22 +257,55 @@ type InvoiceParticipant struct {
 	Actor *Reference `json:"actor,omitempty"`
 }
 
-// NewInvoiceParticipant creates a new InvoiceParticipant instance
+// NewInvoiceParticipant creates a new InvoiceParticipant instance.
 func NewInvoiceParticipant() *InvoiceParticipant {
 	return &InvoiceParticipant{}
 }
 
-// FromJSON populates InvoiceParticipant from JSON data
+// FromJSON populates InvoiceParticipant from JSON data.
 func (m *InvoiceParticipant) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Role *CodeableConcept `json:"role,omitempty"`
+		Actor *Reference `json:"actor,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Role = temp.Role
+	m.Actor = temp.Actor
+	return nil
 }
 
-// ToJSON converts InvoiceParticipant to JSON data
+// ToJSON converts InvoiceParticipant to JSON data.
 func (m *InvoiceParticipant) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Role *CodeableConcept `json:"role,omitempty"`
+		Actor *Reference `json:"actor,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Role = m.Role
+	output.Actor = m.Actor
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of InvoiceParticipant
+// Clone creates a deep copy of InvoiceParticipant.
 func (m *InvoiceParticipant) Clone() *InvoiceParticipant {
 	if m == nil { return nil }
 	return &InvoiceParticipant{
@@ -150,7 +317,7 @@ func (m *InvoiceParticipant) Clone() *InvoiceParticipant {
 	}
 }
 
-// Equals checks for equality with another InvoiceParticipant instance
+// Equals checks equality between two InvoiceParticipant instances.
 func (m *InvoiceParticipant) Equals(other *InvoiceParticipant) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -165,7 +332,7 @@ func (m *InvoiceParticipant) Equals(other *InvoiceParticipant) bool {
 // InvoiceLineItem
 // Each line item represents one charge for goods and services rendered. Details such as date, code and amount are found in the referenced ChargeItem resource.
 type InvoiceLineItem struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -175,22 +342,69 @@ type InvoiceLineItem struct {
 	PriceComponent []*InvoicePriceComponent `json:"pricecomponent,omitempty"`
 }
 
-// NewInvoiceLineItem creates a new InvoiceLineItem instance
+// NewInvoiceLineItem creates a new InvoiceLineItem instance.
 func NewInvoiceLineItem() *InvoiceLineItem {
 	return &InvoiceLineItem{}
 }
 
-// FromJSON populates InvoiceLineItem from JSON data
+// FromJSON populates InvoiceLineItem from JSON data.
 func (m *InvoiceLineItem) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Sequence *FhirPositiveInt `json:"sequence,omitempty"`
+		ChargeItemReference *Reference `json:"chargeitemreference,omitempty"`
+		ChargeItemCodeableConcept *CodeableConcept `json:"chargeitemcodeableconcept,omitempty"`
+		PriceComponent []*InvoicePriceComponent `json:"pricecomponent,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Sequence = temp.Sequence
+	m.ChargeItemReference = temp.ChargeItemReference
+	m.ChargeItemCodeableConcept = temp.ChargeItemCodeableConcept
+	m.PriceComponent = temp.PriceComponent
+	return nil
 }
 
-// ToJSON converts InvoiceLineItem to JSON data
+// ToJSON converts InvoiceLineItem to JSON data.
 func (m *InvoiceLineItem) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Sequence interface{} `json:"sequence,omitempty"`
+		SequenceElement map[string]interface{} `json:"_sequence,omitempty"`
+		ChargeItemReference *Reference `json:"chargeitemreference,omitempty"`
+		ChargeItemCodeableConcept *CodeableConcept `json:"chargeitemcodeableconcept,omitempty"`
+		PriceComponent []*InvoicePriceComponent `json:"pricecomponent,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Sequence != nil && m.Sequence.Value != nil {
+		output.Sequence = m.Sequence.Value
+		if m.Sequence.Element != nil {
+			output.SequenceElement = toMapOrNil(m.Sequence.Element.ToJSON())
+		}
+	}
+	output.ChargeItemReference = m.ChargeItemReference
+	output.ChargeItemCodeableConcept = m.ChargeItemCodeableConcept
+	output.PriceComponent = m.PriceComponent
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of InvoiceLineItem
+// Clone creates a deep copy of InvoiceLineItem.
 func (m *InvoiceLineItem) Clone() *InvoiceLineItem {
 	if m == nil { return nil }
 	return &InvoiceLineItem{
@@ -204,7 +418,7 @@ func (m *InvoiceLineItem) Clone() *InvoiceLineItem {
 	}
 }
 
-// Equals checks for equality with another InvoiceLineItem instance
+// Equals checks equality between two InvoiceLineItem instances.
 func (m *InvoiceLineItem) Equals(other *InvoiceLineItem) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -221,7 +435,7 @@ func (m *InvoiceLineItem) Equals(other *InvoiceLineItem) bool {
 // InvoicePriceComponent
 // The price for a ChargeItem may be calculated as a base price with surcharges/deductions that apply in certain conditions. A ChargeItemDefinition resource that defines the prices, factors and conditions that apply to a billing code is currently under development. The priceComponent element can be used to offer transparency to the recipient of the Invoice as to how the prices have been calculated.
 type InvoicePriceComponent struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -231,22 +445,69 @@ type InvoicePriceComponent struct {
 	Amount *Money `json:"amount,omitempty"`
 }
 
-// NewInvoicePriceComponent creates a new InvoicePriceComponent instance
+// NewInvoicePriceComponent creates a new InvoicePriceComponent instance.
 func NewInvoicePriceComponent() *InvoicePriceComponent {
 	return &InvoicePriceComponent{}
 }
 
-// FromJSON populates InvoicePriceComponent from JSON data
+// FromJSON populates InvoicePriceComponent from JSON data.
 func (m *InvoicePriceComponent) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *InvoicePriceComponentType `json:"type,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Factor *FhirDecimal `json:"factor,omitempty"`
+		Amount *Money `json:"amount,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Code = temp.Code
+	m.Factor = temp.Factor
+	m.Amount = temp.Amount
+	return nil
 }
 
-// ToJSON converts InvoicePriceComponent to JSON data
+// ToJSON converts InvoicePriceComponent to JSON data.
 func (m *InvoicePriceComponent) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *InvoicePriceComponentType `json:"type,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Factor interface{} `json:"factor,omitempty"`
+		FactorElement map[string]interface{} `json:"_factor,omitempty"`
+		Amount *Money `json:"amount,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Code = m.Code
+	if m.Factor != nil && m.Factor.Value != nil {
+		output.Factor = m.Factor.Value
+		if m.Factor.Element != nil {
+			output.FactorElement = toMapOrNil(m.Factor.Element.ToJSON())
+		}
+	}
+	output.Amount = m.Amount
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of InvoicePriceComponent
+// Clone creates a deep copy of InvoicePriceComponent.
 func (m *InvoicePriceComponent) Clone() *InvoicePriceComponent {
 	if m == nil { return nil }
 	return &InvoicePriceComponent{
@@ -260,7 +521,7 @@ func (m *InvoicePriceComponent) Clone() *InvoicePriceComponent {
 	}
 }
 
-// Equals checks for equality with another InvoicePriceComponent instance
+// Equals checks equality between two InvoicePriceComponent instances.
 func (m *InvoicePriceComponent) Equals(other *InvoicePriceComponent) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

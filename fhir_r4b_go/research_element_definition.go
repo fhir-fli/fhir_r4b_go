@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // ResearchElementDefinition
 // The ResearchElementDefinition resource describes a "PICO" element that knowledge (evidence, assertion, recommendation) is about.
 type ResearchElementDefinition struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -53,22 +55,341 @@ type ResearchElementDefinition struct {
 	Characteristic []*ResearchElementDefinitionCharacteristic `json:"characteristic,omitempty"`
 }
 
-// NewResearchElementDefinition creates a new ResearchElementDefinition instance
+// NewResearchElementDefinition creates a new ResearchElementDefinition instance.
 func NewResearchElementDefinition() *ResearchElementDefinition {
 	return &ResearchElementDefinition{}
 }
 
-// FromJSON populates ResearchElementDefinition from JSON data
+// FromJSON populates ResearchElementDefinition from JSON data.
 func (m *ResearchElementDefinition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		ShortTitle *FhirString `json:"shorttitle,omitempty"`
+		Subtitle *FhirString `json:"subtitle,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental *FhirBoolean `json:"experimental,omitempty"`
+		SubjectCodeableConcept *CodeableConcept `json:"subjectcodeableconcept,omitempty"`
+		SubjectReference *Reference `json:"subjectreference,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Publisher *FhirString `json:"publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		Comment []interface{} `json:"comment,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose *FhirMarkdown `json:"purpose,omitempty"`
+		Usage *FhirString `json:"usage,omitempty"`
+		Copyright *FhirMarkdown `json:"copyright,omitempty"`
+		ApprovalDate *FhirDate `json:"approvaldate,omitempty"`
+		LastReviewDate *FhirDate `json:"lastreviewdate,omitempty"`
+		EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+		Topic []*CodeableConcept `json:"topic,omitempty"`
+		Author []*ContactDetail `json:"author,omitempty"`
+		Editor []*ContactDetail `json:"editor,omitempty"`
+		Reviewer []*ContactDetail `json:"reviewer,omitempty"`
+		Endorser []*ContactDetail `json:"endorser,omitempty"`
+		RelatedArtifact []*RelatedArtifact `json:"relatedartifact,omitempty"`
+		Library_ []interface{} `json:"library,omitempty"`
+		Type *ResearchElementType `json:"type,omitempty"`
+		VariableType *VariableType `json:"variabletype,omitempty"`
+		Characteristic []*ResearchElementDefinitionCharacteristic `json:"characteristic,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Url = temp.Url
+	m.Identifier = temp.Identifier
+	m.Version = temp.Version
+	m.Name = temp.Name
+	m.Title = temp.Title
+	m.ShortTitle = temp.ShortTitle
+	m.Subtitle = temp.Subtitle
+	m.Status = temp.Status
+	m.Experimental = temp.Experimental
+	m.SubjectCodeableConcept = temp.SubjectCodeableConcept
+	m.SubjectReference = temp.SubjectReference
+	m.Date = temp.Date
+	m.Publisher = temp.Publisher
+	m.Contact = temp.Contact
+	m.Description = temp.Description
+	if len(temp.Comment) > 0 {
+		m.Comment = make([]*FhirString, len(temp.Comment))
+		for i := range temp.Comment {
+			itemMap, ok := temp.Comment[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Comment[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Comment[%d]: %v", i, err) }
+			m.Comment[i] = primitive
+		}
+	}
+	m.UseContext = temp.UseContext
+	m.Jurisdiction = temp.Jurisdiction
+	m.Purpose = temp.Purpose
+	m.Usage = temp.Usage
+	m.Copyright = temp.Copyright
+	m.ApprovalDate = temp.ApprovalDate
+	m.LastReviewDate = temp.LastReviewDate
+	m.EffectivePeriod = temp.EffectivePeriod
+	m.Topic = temp.Topic
+	m.Author = temp.Author
+	m.Editor = temp.Editor
+	m.Reviewer = temp.Reviewer
+	m.Endorser = temp.Endorser
+	m.RelatedArtifact = temp.RelatedArtifact
+	if len(temp.Library_) > 0 {
+		m.Library_ = make([]*FhirCanonical, len(temp.Library_))
+		for i := range temp.Library_ {
+			itemMap, ok := temp.Library_[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Library_[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Library_[%d]: %v", i, err) }
+			m.Library_[i] = primitive
+		}
+	}
+	m.Type = temp.Type
+	m.VariableType = temp.VariableType
+	m.Characteristic = temp.Characteristic
+	return nil
 }
 
-// ToJSON converts ResearchElementDefinition to JSON data
+// ToJSON converts ResearchElementDefinition to JSON data.
 func (m *ResearchElementDefinition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		ShortTitle interface{} `json:"shorttitle,omitempty"`
+		ShortTitleElement map[string]interface{} `json:"_shorttitle,omitempty"`
+		Subtitle interface{} `json:"subtitle,omitempty"`
+		SubtitleElement map[string]interface{} `json:"_subtitle,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental interface{} `json:"experimental,omitempty"`
+		ExperimentalElement map[string]interface{} `json:"_experimental,omitempty"`
+		SubjectCodeableConcept *CodeableConcept `json:"subjectcodeableconcept,omitempty"`
+		SubjectReference *Reference `json:"subjectreference,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Publisher interface{} `json:"publisher,omitempty"`
+		PublisherElement map[string]interface{} `json:"_publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Comment []interface{} `json:"comment,omitempty"`
+		CommentElement []map[string]interface{} `json:"_comment,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose interface{} `json:"purpose,omitempty"`
+		PurposeElement map[string]interface{} `json:"_purpose,omitempty"`
+		Usage interface{} `json:"usage,omitempty"`
+		UsageElement map[string]interface{} `json:"_usage,omitempty"`
+		Copyright interface{} `json:"copyright,omitempty"`
+		CopyrightElement map[string]interface{} `json:"_copyright,omitempty"`
+		ApprovalDate interface{} `json:"approvaldate,omitempty"`
+		ApprovalDateElement map[string]interface{} `json:"_approvaldate,omitempty"`
+		LastReviewDate interface{} `json:"lastreviewdate,omitempty"`
+		LastReviewDateElement map[string]interface{} `json:"_lastreviewdate,omitempty"`
+		EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+		Topic []*CodeableConcept `json:"topic,omitempty"`
+		Author []*ContactDetail `json:"author,omitempty"`
+		Editor []*ContactDetail `json:"editor,omitempty"`
+		Reviewer []*ContactDetail `json:"reviewer,omitempty"`
+		Endorser []*ContactDetail `json:"endorser,omitempty"`
+		RelatedArtifact []*RelatedArtifact `json:"relatedartifact,omitempty"`
+		Library_ []interface{} `json:"library,omitempty"`
+		Library_Element []map[string]interface{} `json:"_library,omitempty"`
+		Type *ResearchElementType `json:"type,omitempty"`
+		VariableType *VariableType `json:"variabletype,omitempty"`
+		Characteristic []*ResearchElementDefinitionCharacteristic `json:"characteristic,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	output.Identifier = m.Identifier
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	if m.ShortTitle != nil && m.ShortTitle.Value != nil {
+		output.ShortTitle = m.ShortTitle.Value
+		if m.ShortTitle.Element != nil {
+			output.ShortTitleElement = toMapOrNil(m.ShortTitle.Element.ToJSON())
+		}
+	}
+	if m.Subtitle != nil && m.Subtitle.Value != nil {
+		output.Subtitle = m.Subtitle.Value
+		if m.Subtitle.Element != nil {
+			output.SubtitleElement = toMapOrNil(m.Subtitle.Element.ToJSON())
+		}
+	}
+	output.Status = m.Status
+	if m.Experimental != nil && m.Experimental.Value != nil {
+		output.Experimental = m.Experimental.Value
+		if m.Experimental.Element != nil {
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+		}
+	}
+	output.SubjectCodeableConcept = m.SubjectCodeableConcept
+	output.SubjectReference = m.SubjectReference
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.Publisher != nil && m.Publisher.Value != nil {
+		output.Publisher = m.Publisher.Value
+		if m.Publisher.Element != nil {
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+		}
+	}
+	output.Contact = m.Contact
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	if len(m.Comment) > 0 {
+		output.Comment = make([]interface{}, len(m.Comment))
+		output.CommentElement = make([]map[string]interface{}, len(m.Comment))
+		for i, item := range m.Comment {
+			if item != nil && item.Value != nil {
+				output.Comment[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.CommentElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.UseContext = m.UseContext
+	output.Jurisdiction = m.Jurisdiction
+	if m.Purpose != nil && m.Purpose.Value != nil {
+		output.Purpose = m.Purpose.Value
+		if m.Purpose.Element != nil {
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+		}
+	}
+	if m.Usage != nil && m.Usage.Value != nil {
+		output.Usage = m.Usage.Value
+		if m.Usage.Element != nil {
+			output.UsageElement = toMapOrNil(m.Usage.Element.ToJSON())
+		}
+	}
+	if m.Copyright != nil && m.Copyright.Value != nil {
+		output.Copyright = m.Copyright.Value
+		if m.Copyright.Element != nil {
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+		}
+	}
+	if m.ApprovalDate != nil && m.ApprovalDate.Value != nil {
+		output.ApprovalDate = m.ApprovalDate.Value
+		if m.ApprovalDate.Element != nil {
+			output.ApprovalDateElement = toMapOrNil(m.ApprovalDate.Element.ToJSON())
+		}
+	}
+	if m.LastReviewDate != nil && m.LastReviewDate.Value != nil {
+		output.LastReviewDate = m.LastReviewDate.Value
+		if m.LastReviewDate.Element != nil {
+			output.LastReviewDateElement = toMapOrNil(m.LastReviewDate.Element.ToJSON())
+		}
+	}
+	output.EffectivePeriod = m.EffectivePeriod
+	output.Topic = m.Topic
+	output.Author = m.Author
+	output.Editor = m.Editor
+	output.Reviewer = m.Reviewer
+	output.Endorser = m.Endorser
+	output.RelatedArtifact = m.RelatedArtifact
+	if len(m.Library_) > 0 {
+		output.Library_ = make([]interface{}, len(m.Library_))
+		output.Library_Element = make([]map[string]interface{}, len(m.Library_))
+		for i, item := range m.Library_ {
+			if item != nil && item.Value != nil {
+				output.Library_[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.Library_Element[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Type = m.Type
+	output.VariableType = m.VariableType
+	output.Characteristic = m.Characteristic
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ResearchElementDefinition
+// Clone creates a deep copy of ResearchElementDefinition.
 func (m *ResearchElementDefinition) Clone() *ResearchElementDefinition {
 	if m == nil { return nil }
 	return &ResearchElementDefinition{
@@ -117,7 +438,7 @@ func (m *ResearchElementDefinition) Clone() *ResearchElementDefinition {
 	}
 }
 
-// Equals checks for equality with another ResearchElementDefinition instance
+// Equals checks equality between two ResearchElementDefinition instances.
 func (m *ResearchElementDefinition) Equals(other *ResearchElementDefinition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -169,7 +490,7 @@ func (m *ResearchElementDefinition) Equals(other *ResearchElementDefinition) boo
 // ResearchElementDefinitionCharacteristic
 // A characteristic that defines the members of the research element. Multiple characteristics are applied with "and" semantics.
 type ResearchElementDefinitionCharacteristic struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -196,22 +517,167 @@ type ResearchElementDefinitionCharacteristic struct {
 	ParticipantEffectiveGroupMeasure *GroupMeasure `json:"participanteffectivegroupmeasure,omitempty"`
 }
 
-// NewResearchElementDefinitionCharacteristic creates a new ResearchElementDefinitionCharacteristic instance
+// NewResearchElementDefinitionCharacteristic creates a new ResearchElementDefinitionCharacteristic instance.
 func NewResearchElementDefinitionCharacteristic() *ResearchElementDefinitionCharacteristic {
 	return &ResearchElementDefinitionCharacteristic{}
 }
 
-// FromJSON populates ResearchElementDefinitionCharacteristic from JSON data
+// FromJSON populates ResearchElementDefinitionCharacteristic from JSON data.
 func (m *ResearchElementDefinitionCharacteristic) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		DefinitionCodeableConcept *CodeableConcept `json:"definitioncodeableconcept,omitempty"`
+		DefinitionCanonical *FhirCanonical `json:"definitioncanonical,omitempty"`
+		DefinitionExpression *FhirExpression `json:"definitionexpression,omitempty"`
+		DefinitionDataRequirement *DataRequirement `json:"definitiondatarequirement,omitempty"`
+		UsageContext []*UsageContext `json:"usagecontext,omitempty"`
+		Exclude *FhirBoolean `json:"exclude,omitempty"`
+		UnitOfMeasure *CodeableConcept `json:"unitofmeasure,omitempty"`
+		StudyEffectiveDescription *FhirString `json:"studyeffectivedescription,omitempty"`
+		StudyEffectiveDateTime *FhirDateTime `json:"studyeffectivedatetime,omitempty"`
+		StudyEffectivePeriod *Period `json:"studyeffectiveperiod,omitempty"`
+		StudyEffectiveDuration *FhirDuration `json:"studyeffectiveduration,omitempty"`
+		StudyEffectiveTiming *Timing `json:"studyeffectivetiming,omitempty"`
+		StudyEffectiveTimeFromStart *FhirDuration `json:"studyeffectivetimefromstart,omitempty"`
+		StudyEffectiveGroupMeasure *GroupMeasure `json:"studyeffectivegroupmeasure,omitempty"`
+		ParticipantEffectiveDescription *FhirString `json:"participanteffectivedescription,omitempty"`
+		ParticipantEffectiveDateTime *FhirDateTime `json:"participanteffectivedatetime,omitempty"`
+		ParticipantEffectivePeriod *Period `json:"participanteffectiveperiod,omitempty"`
+		ParticipantEffectiveDuration *FhirDuration `json:"participanteffectiveduration,omitempty"`
+		ParticipantEffectiveTiming *Timing `json:"participanteffectivetiming,omitempty"`
+		ParticipantEffectiveTimeFromStart *FhirDuration `json:"participanteffectivetimefromstart,omitempty"`
+		ParticipantEffectiveGroupMeasure *GroupMeasure `json:"participanteffectivegroupmeasure,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.DefinitionCodeableConcept = temp.DefinitionCodeableConcept
+	m.DefinitionCanonical = temp.DefinitionCanonical
+	m.DefinitionExpression = temp.DefinitionExpression
+	m.DefinitionDataRequirement = temp.DefinitionDataRequirement
+	m.UsageContext = temp.UsageContext
+	m.Exclude = temp.Exclude
+	m.UnitOfMeasure = temp.UnitOfMeasure
+	m.StudyEffectiveDescription = temp.StudyEffectiveDescription
+	m.StudyEffectiveDateTime = temp.StudyEffectiveDateTime
+	m.StudyEffectivePeriod = temp.StudyEffectivePeriod
+	m.StudyEffectiveDuration = temp.StudyEffectiveDuration
+	m.StudyEffectiveTiming = temp.StudyEffectiveTiming
+	m.StudyEffectiveTimeFromStart = temp.StudyEffectiveTimeFromStart
+	m.StudyEffectiveGroupMeasure = temp.StudyEffectiveGroupMeasure
+	m.ParticipantEffectiveDescription = temp.ParticipantEffectiveDescription
+	m.ParticipantEffectiveDateTime = temp.ParticipantEffectiveDateTime
+	m.ParticipantEffectivePeriod = temp.ParticipantEffectivePeriod
+	m.ParticipantEffectiveDuration = temp.ParticipantEffectiveDuration
+	m.ParticipantEffectiveTiming = temp.ParticipantEffectiveTiming
+	m.ParticipantEffectiveTimeFromStart = temp.ParticipantEffectiveTimeFromStart
+	m.ParticipantEffectiveGroupMeasure = temp.ParticipantEffectiveGroupMeasure
+	return nil
 }
 
-// ToJSON converts ResearchElementDefinitionCharacteristic to JSON data
+// ToJSON converts ResearchElementDefinitionCharacteristic to JSON data.
 func (m *ResearchElementDefinitionCharacteristic) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		DefinitionCodeableConcept *CodeableConcept `json:"definitioncodeableconcept,omitempty"`
+		DefinitionCanonical interface{} `json:"definitioncanonical,omitempty"`
+		DefinitionCanonicalElement map[string]interface{} `json:"_definitioncanonical,omitempty"`
+		DefinitionExpression *FhirExpression `json:"definitionexpression,omitempty"`
+		DefinitionDataRequirement *DataRequirement `json:"definitiondatarequirement,omitempty"`
+		UsageContext []*UsageContext `json:"usagecontext,omitempty"`
+		Exclude interface{} `json:"exclude,omitempty"`
+		ExcludeElement map[string]interface{} `json:"_exclude,omitempty"`
+		UnitOfMeasure *CodeableConcept `json:"unitofmeasure,omitempty"`
+		StudyEffectiveDescription interface{} `json:"studyeffectivedescription,omitempty"`
+		StudyEffectiveDescriptionElement map[string]interface{} `json:"_studyeffectivedescription,omitempty"`
+		StudyEffectiveDateTime interface{} `json:"studyeffectivedatetime,omitempty"`
+		StudyEffectiveDateTimeElement map[string]interface{} `json:"_studyeffectivedatetime,omitempty"`
+		StudyEffectivePeriod *Period `json:"studyeffectiveperiod,omitempty"`
+		StudyEffectiveDuration *FhirDuration `json:"studyeffectiveduration,omitempty"`
+		StudyEffectiveTiming *Timing `json:"studyeffectivetiming,omitempty"`
+		StudyEffectiveTimeFromStart *FhirDuration `json:"studyeffectivetimefromstart,omitempty"`
+		StudyEffectiveGroupMeasure *GroupMeasure `json:"studyeffectivegroupmeasure,omitempty"`
+		ParticipantEffectiveDescription interface{} `json:"participanteffectivedescription,omitempty"`
+		ParticipantEffectiveDescriptionElement map[string]interface{} `json:"_participanteffectivedescription,omitempty"`
+		ParticipantEffectiveDateTime interface{} `json:"participanteffectivedatetime,omitempty"`
+		ParticipantEffectiveDateTimeElement map[string]interface{} `json:"_participanteffectivedatetime,omitempty"`
+		ParticipantEffectivePeriod *Period `json:"participanteffectiveperiod,omitempty"`
+		ParticipantEffectiveDuration *FhirDuration `json:"participanteffectiveduration,omitempty"`
+		ParticipantEffectiveTiming *Timing `json:"participanteffectivetiming,omitempty"`
+		ParticipantEffectiveTimeFromStart *FhirDuration `json:"participanteffectivetimefromstart,omitempty"`
+		ParticipantEffectiveGroupMeasure *GroupMeasure `json:"participanteffectivegroupmeasure,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.DefinitionCodeableConcept = m.DefinitionCodeableConcept
+	if m.DefinitionCanonical != nil && m.DefinitionCanonical.Value != nil {
+		output.DefinitionCanonical = m.DefinitionCanonical.Value
+		if m.DefinitionCanonical.Element != nil {
+			output.DefinitionCanonicalElement = toMapOrNil(m.DefinitionCanonical.Element.ToJSON())
+		}
+	}
+	output.DefinitionExpression = m.DefinitionExpression
+	output.DefinitionDataRequirement = m.DefinitionDataRequirement
+	output.UsageContext = m.UsageContext
+	if m.Exclude != nil && m.Exclude.Value != nil {
+		output.Exclude = m.Exclude.Value
+		if m.Exclude.Element != nil {
+			output.ExcludeElement = toMapOrNil(m.Exclude.Element.ToJSON())
+		}
+	}
+	output.UnitOfMeasure = m.UnitOfMeasure
+	if m.StudyEffectiveDescription != nil && m.StudyEffectiveDescription.Value != nil {
+		output.StudyEffectiveDescription = m.StudyEffectiveDescription.Value
+		if m.StudyEffectiveDescription.Element != nil {
+			output.StudyEffectiveDescriptionElement = toMapOrNil(m.StudyEffectiveDescription.Element.ToJSON())
+		}
+	}
+	if m.StudyEffectiveDateTime != nil && m.StudyEffectiveDateTime.Value != nil {
+		output.StudyEffectiveDateTime = m.StudyEffectiveDateTime.Value
+		if m.StudyEffectiveDateTime.Element != nil {
+			output.StudyEffectiveDateTimeElement = toMapOrNil(m.StudyEffectiveDateTime.Element.ToJSON())
+		}
+	}
+	output.StudyEffectivePeriod = m.StudyEffectivePeriod
+	output.StudyEffectiveDuration = m.StudyEffectiveDuration
+	output.StudyEffectiveTiming = m.StudyEffectiveTiming
+	output.StudyEffectiveTimeFromStart = m.StudyEffectiveTimeFromStart
+	output.StudyEffectiveGroupMeasure = m.StudyEffectiveGroupMeasure
+	if m.ParticipantEffectiveDescription != nil && m.ParticipantEffectiveDescription.Value != nil {
+		output.ParticipantEffectiveDescription = m.ParticipantEffectiveDescription.Value
+		if m.ParticipantEffectiveDescription.Element != nil {
+			output.ParticipantEffectiveDescriptionElement = toMapOrNil(m.ParticipantEffectiveDescription.Element.ToJSON())
+		}
+	}
+	if m.ParticipantEffectiveDateTime != nil && m.ParticipantEffectiveDateTime.Value != nil {
+		output.ParticipantEffectiveDateTime = m.ParticipantEffectiveDateTime.Value
+		if m.ParticipantEffectiveDateTime.Element != nil {
+			output.ParticipantEffectiveDateTimeElement = toMapOrNil(m.ParticipantEffectiveDateTime.Element.ToJSON())
+		}
+	}
+	output.ParticipantEffectivePeriod = m.ParticipantEffectivePeriod
+	output.ParticipantEffectiveDuration = m.ParticipantEffectiveDuration
+	output.ParticipantEffectiveTiming = m.ParticipantEffectiveTiming
+	output.ParticipantEffectiveTimeFromStart = m.ParticipantEffectiveTimeFromStart
+	output.ParticipantEffectiveGroupMeasure = m.ParticipantEffectiveGroupMeasure
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ResearchElementDefinitionCharacteristic
+// Clone creates a deep copy of ResearchElementDefinitionCharacteristic.
 func (m *ResearchElementDefinitionCharacteristic) Clone() *ResearchElementDefinitionCharacteristic {
 	if m == nil { return nil }
 	return &ResearchElementDefinitionCharacteristic{
@@ -242,7 +708,7 @@ func (m *ResearchElementDefinitionCharacteristic) Clone() *ResearchElementDefini
 	}
 }
 
-// Equals checks for equality with another ResearchElementDefinitionCharacteristic instance
+// Equals checks equality between two ResearchElementDefinitionCharacteristic instances.
 func (m *ResearchElementDefinitionCharacteristic) Equals(other *ResearchElementDefinitionCharacteristic) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

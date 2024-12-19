@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Identifier
 // An identifier - identifies some entity uniquely and unambiguously. Typically this is used for business identifiers.
 type Identifier struct {
-	DataType
+	extends DataType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	Use *IdentifierUse `json:"use,omitempty"`
@@ -19,22 +20,79 @@ type Identifier struct {
 	Assigner *Reference `json:"assigner,omitempty"`
 }
 
-// NewIdentifier creates a new Identifier instance
+// NewIdentifier creates a new Identifier instance.
 func NewIdentifier() *Identifier {
 	return &Identifier{}
 }
 
-// FromJSON populates Identifier from JSON data
+// FromJSON populates Identifier from JSON data.
 func (m *Identifier) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Use *IdentifierUse `json:"use,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		System *FhirUri `json:"system,omitempty"`
+		Value *FhirString `json:"value,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Assigner *Reference `json:"assigner,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.Use = temp.Use
+	m.Type = temp.Type
+	m.System = temp.System
+	m.Value = temp.Value
+	m.Period = temp.Period
+	m.Assigner = temp.Assigner
+	return nil
 }
 
-// ToJSON converts Identifier to JSON data
+// ToJSON converts Identifier to JSON data.
 func (m *Identifier) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Use *IdentifierUse `json:"use,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		System interface{} `json:"system,omitempty"`
+		SystemElement map[string]interface{} `json:"_system,omitempty"`
+		Value interface{} `json:"value,omitempty"`
+		ValueElement map[string]interface{} `json:"_value,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Assigner *Reference `json:"assigner,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.Use = m.Use
+	output.Type = m.Type
+	if m.System != nil && m.System.Value != nil {
+		output.System = m.System.Value
+		if m.System.Element != nil {
+			output.SystemElement = toMapOrNil(m.System.Element.ToJSON())
+		}
+	}
+	if m.Value != nil && m.Value.Value != nil {
+		output.Value = m.Value.Value
+		if m.Value.Element != nil {
+			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+		}
+	}
+	output.Period = m.Period
+	output.Assigner = m.Assigner
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Identifier
+// Clone creates a deep copy of Identifier.
 func (m *Identifier) Clone() *Identifier {
 	if m == nil { return nil }
 	return &Identifier{
@@ -49,7 +107,7 @@ func (m *Identifier) Clone() *Identifier {
 	}
 }
 
-// Equals checks for equality with another Identifier instance
+// Equals checks equality between two Identifier instances.
 func (m *Identifier) Equals(other *Identifier) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

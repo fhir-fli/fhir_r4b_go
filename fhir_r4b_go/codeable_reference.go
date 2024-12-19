@@ -3,34 +3,64 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // CodeableReference
 // A reference to a resource (by instance), or instead, a reference to a concept defined in a terminology or ontology (by class).
 type CodeableReference struct {
-	DataType
+	extends DataType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	Concept *CodeableConcept `json:"concept,omitempty"`
 	Reference *Reference `json:"reference,omitempty"`
 }
 
-// NewCodeableReference creates a new CodeableReference instance
+// NewCodeableReference creates a new CodeableReference instance.
 func NewCodeableReference() *CodeableReference {
 	return &CodeableReference{}
 }
 
-// FromJSON populates CodeableReference from JSON data
+// FromJSON populates CodeableReference from JSON data.
 func (m *CodeableReference) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Concept *CodeableConcept `json:"concept,omitempty"`
+		Reference *Reference `json:"reference,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.Concept = temp.Concept
+	m.Reference = temp.Reference
+	return nil
 }
 
-// ToJSON converts CodeableReference to JSON data
+// ToJSON converts CodeableReference to JSON data.
 func (m *CodeableReference) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Concept *CodeableConcept `json:"concept,omitempty"`
+		Reference *Reference `json:"reference,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.Concept = m.Concept
+	output.Reference = m.Reference
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CodeableReference
+// Clone creates a deep copy of CodeableReference.
 func (m *CodeableReference) Clone() *CodeableReference {
 	if m == nil { return nil }
 	return &CodeableReference{
@@ -41,7 +71,7 @@ func (m *CodeableReference) Clone() *CodeableReference {
 	}
 }
 
-// Equals checks for equality with another CodeableReference instance
+// Equals checks equality between two CodeableReference instances.
 func (m *CodeableReference) Equals(other *CodeableReference) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

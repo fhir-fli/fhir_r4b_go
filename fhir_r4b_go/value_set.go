@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // ValueSet
 // A ValueSet resource instance specifies a set of codes drawn from one or more code systems, intended for use in a particular context. Value sets link between [CodeSystem](codesystem.html) definitions and their use in [coded elements](terminologies.html).
 type ValueSet struct {
-	CanonicalResource
+	extends CanonicalResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -37,22 +39,211 @@ type ValueSet struct {
 	Expansion *ValueSetExpansion `json:"expansion,omitempty"`
 }
 
-// NewValueSet creates a new ValueSet instance
+// NewValueSet creates a new ValueSet instance.
 func NewValueSet() *ValueSet {
 	return &ValueSet{}
 }
 
-// FromJSON populates ValueSet from JSON data
+// FromJSON populates ValueSet from JSON data.
 func (m *ValueSet) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental *FhirBoolean `json:"experimental,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Publisher *FhirString `json:"publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Immutable *FhirBoolean `json:"immutable,omitempty"`
+		Purpose *FhirMarkdown `json:"purpose,omitempty"`
+		Copyright *FhirMarkdown `json:"copyright,omitempty"`
+		Compose *ValueSetCompose `json:"compose,omitempty"`
+		Expansion *ValueSetExpansion `json:"expansion,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Url = temp.Url
+	m.Identifier = temp.Identifier
+	m.Version = temp.Version
+	m.Name = temp.Name
+	m.Title = temp.Title
+	m.Status = temp.Status
+	m.Experimental = temp.Experimental
+	m.Date = temp.Date
+	m.Publisher = temp.Publisher
+	m.Contact = temp.Contact
+	m.Description = temp.Description
+	m.UseContext = temp.UseContext
+	m.Jurisdiction = temp.Jurisdiction
+	m.Immutable = temp.Immutable
+	m.Purpose = temp.Purpose
+	m.Copyright = temp.Copyright
+	m.Compose = temp.Compose
+	m.Expansion = temp.Expansion
+	return nil
 }
 
-// ToJSON converts ValueSet to JSON data
+// ToJSON converts ValueSet to JSON data.
 func (m *ValueSet) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental interface{} `json:"experimental,omitempty"`
+		ExperimentalElement map[string]interface{} `json:"_experimental,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Publisher interface{} `json:"publisher,omitempty"`
+		PublisherElement map[string]interface{} `json:"_publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Immutable interface{} `json:"immutable,omitempty"`
+		ImmutableElement map[string]interface{} `json:"_immutable,omitempty"`
+		Purpose interface{} `json:"purpose,omitempty"`
+		PurposeElement map[string]interface{} `json:"_purpose,omitempty"`
+		Copyright interface{} `json:"copyright,omitempty"`
+		CopyrightElement map[string]interface{} `json:"_copyright,omitempty"`
+		Compose *ValueSetCompose `json:"compose,omitempty"`
+		Expansion *ValueSetExpansion `json:"expansion,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	output.Identifier = m.Identifier
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	output.Status = m.Status
+	if m.Experimental != nil && m.Experimental.Value != nil {
+		output.Experimental = m.Experimental.Value
+		if m.Experimental.Element != nil {
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+		}
+	}
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.Publisher != nil && m.Publisher.Value != nil {
+		output.Publisher = m.Publisher.Value
+		if m.Publisher.Element != nil {
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+		}
+	}
+	output.Contact = m.Contact
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.UseContext = m.UseContext
+	output.Jurisdiction = m.Jurisdiction
+	if m.Immutable != nil && m.Immutable.Value != nil {
+		output.Immutable = m.Immutable.Value
+		if m.Immutable.Element != nil {
+			output.ImmutableElement = toMapOrNil(m.Immutable.Element.ToJSON())
+		}
+	}
+	if m.Purpose != nil && m.Purpose.Value != nil {
+		output.Purpose = m.Purpose.Value
+		if m.Purpose.Element != nil {
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+		}
+	}
+	if m.Copyright != nil && m.Copyright.Value != nil {
+		output.Copyright = m.Copyright.Value
+		if m.Copyright.Element != nil {
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+		}
+	}
+	output.Compose = m.Compose
+	output.Expansion = m.Expansion
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ValueSet
+// Clone creates a deep copy of ValueSet.
 func (m *ValueSet) Clone() *ValueSet {
 	if m == nil { return nil }
 	return &ValueSet{
@@ -85,7 +276,7 @@ func (m *ValueSet) Clone() *ValueSet {
 	}
 }
 
-// Equals checks for equality with another ValueSet instance
+// Equals checks equality between two ValueSet instances.
 func (m *ValueSet) Equals(other *ValueSet) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -121,7 +312,7 @@ func (m *ValueSet) Equals(other *ValueSet) bool {
 // ValueSetCompose
 // A set of criteria that define the contents of the value set by including or excluding codes selected from the specified code system(s) that the value set draws from. This is also known as the Content Logical Definition (CLD).
 type ValueSetCompose struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -131,22 +322,75 @@ type ValueSetCompose struct {
 	Exclude []*ValueSetInclude `json:"exclude,omitempty"`
 }
 
-// NewValueSetCompose creates a new ValueSetCompose instance
+// NewValueSetCompose creates a new ValueSetCompose instance.
 func NewValueSetCompose() *ValueSetCompose {
 	return &ValueSetCompose{}
 }
 
-// FromJSON populates ValueSetCompose from JSON data
+// FromJSON populates ValueSetCompose from JSON data.
 func (m *ValueSetCompose) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		LockedDate *FhirDate `json:"lockeddate,omitempty"`
+		Inactive *FhirBoolean `json:"inactive,omitempty"`
+		Include []*ValueSetInclude `json:"include,omitempty"`
+		Exclude []*ValueSetInclude `json:"exclude,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.LockedDate = temp.LockedDate
+	m.Inactive = temp.Inactive
+	m.Include = temp.Include
+	m.Exclude = temp.Exclude
+	return nil
 }
 
-// ToJSON converts ValueSetCompose to JSON data
+// ToJSON converts ValueSetCompose to JSON data.
 func (m *ValueSetCompose) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		LockedDate interface{} `json:"lockeddate,omitempty"`
+		LockedDateElement map[string]interface{} `json:"_lockeddate,omitempty"`
+		Inactive interface{} `json:"inactive,omitempty"`
+		InactiveElement map[string]interface{} `json:"_inactive,omitempty"`
+		Include []*ValueSetInclude `json:"include,omitempty"`
+		Exclude []*ValueSetInclude `json:"exclude,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.LockedDate != nil && m.LockedDate.Value != nil {
+		output.LockedDate = m.LockedDate.Value
+		if m.LockedDate.Element != nil {
+			output.LockedDateElement = toMapOrNil(m.LockedDate.Element.ToJSON())
+		}
+	}
+	if m.Inactive != nil && m.Inactive.Value != nil {
+		output.Inactive = m.Inactive.Value
+		if m.Inactive.Element != nil {
+			output.InactiveElement = toMapOrNil(m.Inactive.Element.ToJSON())
+		}
+	}
+	output.Include = m.Include
+	output.Exclude = m.Exclude
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ValueSetCompose
+// Clone creates a deep copy of ValueSetCompose.
 func (m *ValueSetCompose) Clone() *ValueSetCompose {
 	if m == nil { return nil }
 	return &ValueSetCompose{
@@ -160,7 +404,7 @@ func (m *ValueSetCompose) Clone() *ValueSetCompose {
 	}
 }
 
-// Equals checks for equality with another ValueSetCompose instance
+// Equals checks equality between two ValueSetCompose instances.
 func (m *ValueSetCompose) Equals(other *ValueSetCompose) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -177,7 +421,7 @@ func (m *ValueSetCompose) Equals(other *ValueSetCompose) bool {
 // ValueSetInclude
 // Include one or more codes from a code system or other value set(s).
 type ValueSetInclude struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -188,22 +432,100 @@ type ValueSetInclude struct {
 	ValueSet []*FhirCanonical `json:"valueset,omitempty"`
 }
 
-// NewValueSetInclude creates a new ValueSetInclude instance
+// NewValueSetInclude creates a new ValueSetInclude instance.
 func NewValueSetInclude() *ValueSetInclude {
 	return &ValueSetInclude{}
 }
 
-// FromJSON populates ValueSetInclude from JSON data
+// FromJSON populates ValueSetInclude from JSON data.
 func (m *ValueSetInclude) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		System *FhirUri `json:"system,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Concept []*ValueSetConcept `json:"concept,omitempty"`
+		Filter []*ValueSetFilter `json:"filter,omitempty"`
+		ValueSet []interface{} `json:"valueset,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.System = temp.System
+	m.Version = temp.Version
+	m.Concept = temp.Concept
+	m.Filter = temp.Filter
+	if len(temp.ValueSet) > 0 {
+		m.ValueSet = make([]*FhirCanonical, len(temp.ValueSet))
+		for i := range temp.ValueSet {
+			itemMap, ok := temp.ValueSet[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for ValueSet[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse ValueSet[%d]: %v", i, err) }
+			m.ValueSet[i] = primitive
+		}
+	}
+	return nil
 }
 
-// ToJSON converts ValueSetInclude to JSON data
+// ToJSON converts ValueSetInclude to JSON data.
 func (m *ValueSetInclude) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		System interface{} `json:"system,omitempty"`
+		SystemElement map[string]interface{} `json:"_system,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Concept []*ValueSetConcept `json:"concept,omitempty"`
+		Filter []*ValueSetFilter `json:"filter,omitempty"`
+		ValueSet []interface{} `json:"valueset,omitempty"`
+		ValueSetElement []map[string]interface{} `json:"_valueset,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.System != nil && m.System.Value != nil {
+		output.System = m.System.Value
+		if m.System.Element != nil {
+			output.SystemElement = toMapOrNil(m.System.Element.ToJSON())
+		}
+	}
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	output.Concept = m.Concept
+	output.Filter = m.Filter
+	if len(m.ValueSet) > 0 {
+		output.ValueSet = make([]interface{}, len(m.ValueSet))
+		output.ValueSetElement = make([]map[string]interface{}, len(m.ValueSet))
+		for i, item := range m.ValueSet {
+			if item != nil && item.Value != nil {
+				output.ValueSet[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.ValueSetElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ValueSetInclude
+// Clone creates a deep copy of ValueSetInclude.
 func (m *ValueSetInclude) Clone() *ValueSetInclude {
 	if m == nil { return nil }
 	return &ValueSetInclude{
@@ -218,7 +540,7 @@ func (m *ValueSetInclude) Clone() *ValueSetInclude {
 	}
 }
 
-// Equals checks for equality with another ValueSetInclude instance
+// Equals checks equality between two ValueSetInclude instances.
 func (m *ValueSetInclude) Equals(other *ValueSetInclude) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -236,7 +558,7 @@ func (m *ValueSetInclude) Equals(other *ValueSetInclude) bool {
 // ValueSetConcept
 // Specifies a concept to be included or excluded.
 type ValueSetConcept struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -245,22 +567,71 @@ type ValueSetConcept struct {
 	Designation []*ValueSetDesignation `json:"designation,omitempty"`
 }
 
-// NewValueSetConcept creates a new ValueSetConcept instance
+// NewValueSetConcept creates a new ValueSetConcept instance.
 func NewValueSetConcept() *ValueSetConcept {
 	return &ValueSetConcept{}
 }
 
-// FromJSON populates ValueSetConcept from JSON data
+// FromJSON populates ValueSetConcept from JSON data.
 func (m *ValueSetConcept) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *FhirCode `json:"code,omitempty"`
+		Display *FhirString `json:"display,omitempty"`
+		Designation []*ValueSetDesignation `json:"designation,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Display = temp.Display
+	m.Designation = temp.Designation
+	return nil
 }
 
-// ToJSON converts ValueSetConcept to JSON data
+// ToJSON converts ValueSetConcept to JSON data.
 func (m *ValueSetConcept) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code interface{} `json:"code,omitempty"`
+		CodeElement map[string]interface{} `json:"_code,omitempty"`
+		Display interface{} `json:"display,omitempty"`
+		DisplayElement map[string]interface{} `json:"_display,omitempty"`
+		Designation []*ValueSetDesignation `json:"designation,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Code != nil && m.Code.Value != nil {
+		output.Code = m.Code.Value
+		if m.Code.Element != nil {
+			output.CodeElement = toMapOrNil(m.Code.Element.ToJSON())
+		}
+	}
+	if m.Display != nil && m.Display.Value != nil {
+		output.Display = m.Display.Value
+		if m.Display.Element != nil {
+			output.DisplayElement = toMapOrNil(m.Display.Element.ToJSON())
+		}
+	}
+	output.Designation = m.Designation
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ValueSetConcept
+// Clone creates a deep copy of ValueSetConcept.
 func (m *ValueSetConcept) Clone() *ValueSetConcept {
 	if m == nil { return nil }
 	return &ValueSetConcept{
@@ -273,7 +644,7 @@ func (m *ValueSetConcept) Clone() *ValueSetConcept {
 	}
 }
 
-// Equals checks for equality with another ValueSetConcept instance
+// Equals checks equality between two ValueSetConcept instances.
 func (m *ValueSetConcept) Equals(other *ValueSetConcept) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -289,7 +660,7 @@ func (m *ValueSetConcept) Equals(other *ValueSetConcept) bool {
 // ValueSetDesignation
 // Additional representations for this concept when used in this value set - other languages, aliases, specialized purposes, used for particular purposes, etc.
 type ValueSetDesignation struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -298,22 +669,65 @@ type ValueSetDesignation struct {
 	Value *FhirString `json:"value,omitempty"`
 }
 
-// NewValueSetDesignation creates a new ValueSetDesignation instance
+// NewValueSetDesignation creates a new ValueSetDesignation instance.
 func NewValueSetDesignation() *ValueSetDesignation {
 	return &ValueSetDesignation{}
 }
 
-// FromJSON populates ValueSetDesignation from JSON data
+// FromJSON populates ValueSetDesignation from JSON data.
 func (m *ValueSetDesignation) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Use *Coding `json:"use,omitempty"`
+		Value *FhirString `json:"value,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Language = temp.Language
+	m.Use = temp.Use
+	m.Value = temp.Value
+	return nil
 }
 
-// ToJSON converts ValueSetDesignation to JSON data
+// ToJSON converts ValueSetDesignation to JSON data.
 func (m *ValueSetDesignation) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Use *Coding `json:"use,omitempty"`
+		Value interface{} `json:"value,omitempty"`
+		ValueElement map[string]interface{} `json:"_value,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Language = m.Language
+	output.Use = m.Use
+	if m.Value != nil && m.Value.Value != nil {
+		output.Value = m.Value.Value
+		if m.Value.Element != nil {
+			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ValueSetDesignation
+// Clone creates a deep copy of ValueSetDesignation.
 func (m *ValueSetDesignation) Clone() *ValueSetDesignation {
 	if m == nil { return nil }
 	return &ValueSetDesignation{
@@ -326,7 +740,7 @@ func (m *ValueSetDesignation) Clone() *ValueSetDesignation {
 	}
 }
 
-// Equals checks for equality with another ValueSetDesignation instance
+// Equals checks equality between two ValueSetDesignation instances.
 func (m *ValueSetDesignation) Equals(other *ValueSetDesignation) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -342,7 +756,7 @@ func (m *ValueSetDesignation) Equals(other *ValueSetDesignation) bool {
 // ValueSetFilter
 // Select concepts by specify a matching criterion based on the properties (including relationships) defined by the system, or on filters defined by the system. If multiple filters are specified, they SHALL all be true.
 type ValueSetFilter struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -351,22 +765,71 @@ type ValueSetFilter struct {
 	Value *FhirString `json:"value,omitempty"`
 }
 
-// NewValueSetFilter creates a new ValueSetFilter instance
+// NewValueSetFilter creates a new ValueSetFilter instance.
 func NewValueSetFilter() *ValueSetFilter {
 	return &ValueSetFilter{}
 }
 
-// FromJSON populates ValueSetFilter from JSON data
+// FromJSON populates ValueSetFilter from JSON data.
 func (m *ValueSetFilter) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Property *FhirCode `json:"property,omitempty"`
+		Op *FilterOperator `json:"op,omitempty"`
+		Value *FhirString `json:"value,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Property = temp.Property
+	m.Op = temp.Op
+	m.Value = temp.Value
+	return nil
 }
 
-// ToJSON converts ValueSetFilter to JSON data
+// ToJSON converts ValueSetFilter to JSON data.
 func (m *ValueSetFilter) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Property interface{} `json:"property,omitempty"`
+		PropertyElement map[string]interface{} `json:"_property,omitempty"`
+		Op *FilterOperator `json:"op,omitempty"`
+		Value interface{} `json:"value,omitempty"`
+		ValueElement map[string]interface{} `json:"_value,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Property != nil && m.Property.Value != nil {
+		output.Property = m.Property.Value
+		if m.Property.Element != nil {
+			output.PropertyElement = toMapOrNil(m.Property.Element.ToJSON())
+		}
+	}
+	output.Op = m.Op
+	if m.Value != nil && m.Value.Value != nil {
+		output.Value = m.Value.Value
+		if m.Value.Element != nil {
+			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ValueSetFilter
+// Clone creates a deep copy of ValueSetFilter.
 func (m *ValueSetFilter) Clone() *ValueSetFilter {
 	if m == nil { return nil }
 	return &ValueSetFilter{
@@ -379,7 +842,7 @@ func (m *ValueSetFilter) Clone() *ValueSetFilter {
 	}
 }
 
-// Equals checks for equality with another ValueSetFilter instance
+// Equals checks equality between two ValueSetFilter instances.
 func (m *ValueSetFilter) Equals(other *ValueSetFilter) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -395,7 +858,7 @@ func (m *ValueSetFilter) Equals(other *ValueSetFilter) bool {
 // ValueSetExpansion
 // A value set can also be "expanded", where the value set is turned into a simple collection of enumerated codes. This element holds the expansion, if it has been performed.
 type ValueSetExpansion struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -407,22 +870,95 @@ type ValueSetExpansion struct {
 	Contains []*ValueSetContains `json:"contains,omitempty"`
 }
 
-// NewValueSetExpansion creates a new ValueSetExpansion instance
+// NewValueSetExpansion creates a new ValueSetExpansion instance.
 func NewValueSetExpansion() *ValueSetExpansion {
 	return &ValueSetExpansion{}
 }
 
-// FromJSON populates ValueSetExpansion from JSON data
+// FromJSON populates ValueSetExpansion from JSON data.
 func (m *ValueSetExpansion) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier *FhirUri `json:"identifier,omitempty"`
+		Timestamp *FhirDateTime `json:"timestamp,omitempty"`
+		Total *FhirInteger `json:"total,omitempty"`
+		Offset *FhirInteger `json:"offset,omitempty"`
+		Parameter []*ValueSetParameter `json:"parameter,omitempty"`
+		Contains []*ValueSetContains `json:"contains,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Timestamp = temp.Timestamp
+	m.Total = temp.Total
+	m.Offset = temp.Offset
+	m.Parameter = temp.Parameter
+	m.Contains = temp.Contains
+	return nil
 }
 
-// ToJSON converts ValueSetExpansion to JSON data
+// ToJSON converts ValueSetExpansion to JSON data.
 func (m *ValueSetExpansion) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier interface{} `json:"identifier,omitempty"`
+		IdentifierElement map[string]interface{} `json:"_identifier,omitempty"`
+		Timestamp interface{} `json:"timestamp,omitempty"`
+		TimestampElement map[string]interface{} `json:"_timestamp,omitempty"`
+		Total interface{} `json:"total,omitempty"`
+		TotalElement map[string]interface{} `json:"_total,omitempty"`
+		Offset interface{} `json:"offset,omitempty"`
+		OffsetElement map[string]interface{} `json:"_offset,omitempty"`
+		Parameter []*ValueSetParameter `json:"parameter,omitempty"`
+		Contains []*ValueSetContains `json:"contains,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Identifier != nil && m.Identifier.Value != nil {
+		output.Identifier = m.Identifier.Value
+		if m.Identifier.Element != nil {
+			output.IdentifierElement = toMapOrNil(m.Identifier.Element.ToJSON())
+		}
+	}
+	if m.Timestamp != nil && m.Timestamp.Value != nil {
+		output.Timestamp = m.Timestamp.Value
+		if m.Timestamp.Element != nil {
+			output.TimestampElement = toMapOrNil(m.Timestamp.Element.ToJSON())
+		}
+	}
+	if m.Total != nil && m.Total.Value != nil {
+		output.Total = m.Total.Value
+		if m.Total.Element != nil {
+			output.TotalElement = toMapOrNil(m.Total.Element.ToJSON())
+		}
+	}
+	if m.Offset != nil && m.Offset.Value != nil {
+		output.Offset = m.Offset.Value
+		if m.Offset.Element != nil {
+			output.OffsetElement = toMapOrNil(m.Offset.Element.ToJSON())
+		}
+	}
+	output.Parameter = m.Parameter
+	output.Contains = m.Contains
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ValueSetExpansion
+// Clone creates a deep copy of ValueSetExpansion.
 func (m *ValueSetExpansion) Clone() *ValueSetExpansion {
 	if m == nil { return nil }
 	return &ValueSetExpansion{
@@ -438,7 +974,7 @@ func (m *ValueSetExpansion) Clone() *ValueSetExpansion {
 	}
 }
 
-// Equals checks for equality with another ValueSetExpansion instance
+// Equals checks equality between two ValueSetExpansion instances.
 func (m *ValueSetExpansion) Equals(other *ValueSetExpansion) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -457,7 +993,7 @@ func (m *ValueSetExpansion) Equals(other *ValueSetExpansion) bool {
 // ValueSetParameter
 // A parameter that controlled the expansion process. These parameters may be used by users of expanded value sets to check whether the expansion is suitable for a particular purpose, or to pick the correct expansion.
 type ValueSetParameter struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -471,22 +1007,127 @@ type ValueSetParameter struct {
 	ValueDateTime *FhirDateTime `json:"valuedatetime,omitempty"`
 }
 
-// NewValueSetParameter creates a new ValueSetParameter instance
+// NewValueSetParameter creates a new ValueSetParameter instance.
 func NewValueSetParameter() *ValueSetParameter {
 	return &ValueSetParameter{}
 }
 
-// FromJSON populates ValueSetParameter from JSON data
+// FromJSON populates ValueSetParameter from JSON data.
 func (m *ValueSetParameter) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		ValueString *FhirString `json:"valuestring,omitempty"`
+		ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
+		ValueInteger *FhirInteger `json:"valueinteger,omitempty"`
+		ValueDecimal *FhirDecimal `json:"valuedecimal,omitempty"`
+		ValueUri *FhirUri `json:"valueuri,omitempty"`
+		ValueCode *FhirCode `json:"valuecode,omitempty"`
+		ValueDateTime *FhirDateTime `json:"valuedatetime,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Name = temp.Name
+	m.ValueString = temp.ValueString
+	m.ValueBoolean = temp.ValueBoolean
+	m.ValueInteger = temp.ValueInteger
+	m.ValueDecimal = temp.ValueDecimal
+	m.ValueUri = temp.ValueUri
+	m.ValueCode = temp.ValueCode
+	m.ValueDateTime = temp.ValueDateTime
+	return nil
 }
 
-// ToJSON converts ValueSetParameter to JSON data
+// ToJSON converts ValueSetParameter to JSON data.
 func (m *ValueSetParameter) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		ValueString interface{} `json:"valuestring,omitempty"`
+		ValueStringElement map[string]interface{} `json:"_valuestring,omitempty"`
+		ValueBoolean interface{} `json:"valueboolean,omitempty"`
+		ValueBooleanElement map[string]interface{} `json:"_valueboolean,omitempty"`
+		ValueInteger interface{} `json:"valueinteger,omitempty"`
+		ValueIntegerElement map[string]interface{} `json:"_valueinteger,omitempty"`
+		ValueDecimal interface{} `json:"valuedecimal,omitempty"`
+		ValueDecimalElement map[string]interface{} `json:"_valuedecimal,omitempty"`
+		ValueUri interface{} `json:"valueuri,omitempty"`
+		ValueUriElement map[string]interface{} `json:"_valueuri,omitempty"`
+		ValueCode interface{} `json:"valuecode,omitempty"`
+		ValueCodeElement map[string]interface{} `json:"_valuecode,omitempty"`
+		ValueDateTime interface{} `json:"valuedatetime,omitempty"`
+		ValueDateTimeElement map[string]interface{} `json:"_valuedatetime,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.ValueString != nil && m.ValueString.Value != nil {
+		output.ValueString = m.ValueString.Value
+		if m.ValueString.Element != nil {
+			output.ValueStringElement = toMapOrNil(m.ValueString.Element.ToJSON())
+		}
+	}
+	if m.ValueBoolean != nil && m.ValueBoolean.Value != nil {
+		output.ValueBoolean = m.ValueBoolean.Value
+		if m.ValueBoolean.Element != nil {
+			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.ToJSON())
+		}
+	}
+	if m.ValueInteger != nil && m.ValueInteger.Value != nil {
+		output.ValueInteger = m.ValueInteger.Value
+		if m.ValueInteger.Element != nil {
+			output.ValueIntegerElement = toMapOrNil(m.ValueInteger.Element.ToJSON())
+		}
+	}
+	if m.ValueDecimal != nil && m.ValueDecimal.Value != nil {
+		output.ValueDecimal = m.ValueDecimal.Value
+		if m.ValueDecimal.Element != nil {
+			output.ValueDecimalElement = toMapOrNil(m.ValueDecimal.Element.ToJSON())
+		}
+	}
+	if m.ValueUri != nil && m.ValueUri.Value != nil {
+		output.ValueUri = m.ValueUri.Value
+		if m.ValueUri.Element != nil {
+			output.ValueUriElement = toMapOrNil(m.ValueUri.Element.ToJSON())
+		}
+	}
+	if m.ValueCode != nil && m.ValueCode.Value != nil {
+		output.ValueCode = m.ValueCode.Value
+		if m.ValueCode.Element != nil {
+			output.ValueCodeElement = toMapOrNil(m.ValueCode.Element.ToJSON())
+		}
+	}
+	if m.ValueDateTime != nil && m.ValueDateTime.Value != nil {
+		output.ValueDateTime = m.ValueDateTime.Value
+		if m.ValueDateTime.Element != nil {
+			output.ValueDateTimeElement = toMapOrNil(m.ValueDateTime.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ValueSetParameter
+// Clone creates a deep copy of ValueSetParameter.
 func (m *ValueSetParameter) Clone() *ValueSetParameter {
 	if m == nil { return nil }
 	return &ValueSetParameter{
@@ -504,7 +1145,7 @@ func (m *ValueSetParameter) Clone() *ValueSetParameter {
 	}
 }
 
-// Equals checks for equality with another ValueSetParameter instance
+// Equals checks equality between two ValueSetParameter instances.
 func (m *ValueSetParameter) Equals(other *ValueSetParameter) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -525,7 +1166,7 @@ func (m *ValueSetParameter) Equals(other *ValueSetParameter) bool {
 // ValueSetContains
 // The codes that are contained in the value set expansion.
 type ValueSetContains struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -539,22 +1180,115 @@ type ValueSetContains struct {
 	Contains []*ValueSetContains `json:"contains,omitempty"`
 }
 
-// NewValueSetContains creates a new ValueSetContains instance
+// NewValueSetContains creates a new ValueSetContains instance.
 func NewValueSetContains() *ValueSetContains {
 	return &ValueSetContains{}
 }
 
-// FromJSON populates ValueSetContains from JSON data
+// FromJSON populates ValueSetContains from JSON data.
 func (m *ValueSetContains) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		System *FhirUri `json:"system,omitempty"`
+		Abstract_ *FhirBoolean `json:"abstract,omitempty"`
+		Inactive *FhirBoolean `json:"inactive,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Code *FhirCode `json:"code,omitempty"`
+		Display *FhirString `json:"display,omitempty"`
+		Designation []*ValueSetDesignation `json:"designation,omitempty"`
+		Contains []*ValueSetContains `json:"contains,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.System = temp.System
+	m.Abstract_ = temp.Abstract_
+	m.Inactive = temp.Inactive
+	m.Version = temp.Version
+	m.Code = temp.Code
+	m.Display = temp.Display
+	m.Designation = temp.Designation
+	m.Contains = temp.Contains
+	return nil
 }
 
-// ToJSON converts ValueSetContains to JSON data
+// ToJSON converts ValueSetContains to JSON data.
 func (m *ValueSetContains) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		System interface{} `json:"system,omitempty"`
+		SystemElement map[string]interface{} `json:"_system,omitempty"`
+		Abstract_ interface{} `json:"abstract,omitempty"`
+		Abstract_Element map[string]interface{} `json:"_abstract,omitempty"`
+		Inactive interface{} `json:"inactive,omitempty"`
+		InactiveElement map[string]interface{} `json:"_inactive,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Code interface{} `json:"code,omitempty"`
+		CodeElement map[string]interface{} `json:"_code,omitempty"`
+		Display interface{} `json:"display,omitempty"`
+		DisplayElement map[string]interface{} `json:"_display,omitempty"`
+		Designation []*ValueSetDesignation `json:"designation,omitempty"`
+		Contains []*ValueSetContains `json:"contains,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.System != nil && m.System.Value != nil {
+		output.System = m.System.Value
+		if m.System.Element != nil {
+			output.SystemElement = toMapOrNil(m.System.Element.ToJSON())
+		}
+	}
+	if m.Abstract_ != nil && m.Abstract_.Value != nil {
+		output.Abstract_ = m.Abstract_.Value
+		if m.Abstract_.Element != nil {
+			output.Abstract_Element = toMapOrNil(m.Abstract_.Element.ToJSON())
+		}
+	}
+	if m.Inactive != nil && m.Inactive.Value != nil {
+		output.Inactive = m.Inactive.Value
+		if m.Inactive.Element != nil {
+			output.InactiveElement = toMapOrNil(m.Inactive.Element.ToJSON())
+		}
+	}
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	if m.Code != nil && m.Code.Value != nil {
+		output.Code = m.Code.Value
+		if m.Code.Element != nil {
+			output.CodeElement = toMapOrNil(m.Code.Element.ToJSON())
+		}
+	}
+	if m.Display != nil && m.Display.Value != nil {
+		output.Display = m.Display.Value
+		if m.Display.Element != nil {
+			output.DisplayElement = toMapOrNil(m.Display.Element.ToJSON())
+		}
+	}
+	output.Designation = m.Designation
+	output.Contains = m.Contains
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ValueSetContains
+// Clone creates a deep copy of ValueSetContains.
 func (m *ValueSetContains) Clone() *ValueSetContains {
 	if m == nil { return nil }
 	return &ValueSetContains{
@@ -572,7 +1306,7 @@ func (m *ValueSetContains) Clone() *ValueSetContains {
 	}
 }
 
-// Equals checks for equality with another ValueSetContains instance
+// Equals checks equality between two ValueSetContains instances.
 func (m *ValueSetContains) Equals(other *ValueSetContains) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

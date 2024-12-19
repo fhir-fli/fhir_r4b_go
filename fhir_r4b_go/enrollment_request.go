@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // EnrollmentRequest
 // This resource provides the insurance enrollment details to the insurer regarding a specified coverage.
 type EnrollmentRequest struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -26,22 +27,107 @@ type EnrollmentRequest struct {
 	Coverage *Reference `json:"coverage,omitempty"`
 }
 
-// NewEnrollmentRequest creates a new EnrollmentRequest instance
+// NewEnrollmentRequest creates a new EnrollmentRequest instance.
 func NewEnrollmentRequest() *EnrollmentRequest {
 	return &EnrollmentRequest{}
 }
 
-// FromJSON populates EnrollmentRequest from JSON data
+// FromJSON populates EnrollmentRequest from JSON data.
 func (m *EnrollmentRequest) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *FinancialResourceStatusCodes `json:"status,omitempty"`
+		Created *FhirDateTime `json:"created,omitempty"`
+		Insurer *Reference `json:"insurer,omitempty"`
+		Provider *Reference `json:"provider,omitempty"`
+		Candidate *Reference `json:"candidate,omitempty"`
+		Coverage *Reference `json:"coverage,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.Created = temp.Created
+	m.Insurer = temp.Insurer
+	m.Provider = temp.Provider
+	m.Candidate = temp.Candidate
+	m.Coverage = temp.Coverage
+	return nil
 }
 
-// ToJSON converts EnrollmentRequest to JSON data
+// ToJSON converts EnrollmentRequest to JSON data.
 func (m *EnrollmentRequest) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *FinancialResourceStatusCodes `json:"status,omitempty"`
+		Created interface{} `json:"created,omitempty"`
+		CreatedElement map[string]interface{} `json:"_created,omitempty"`
+		Insurer *Reference `json:"insurer,omitempty"`
+		Provider *Reference `json:"provider,omitempty"`
+		Candidate *Reference `json:"candidate,omitempty"`
+		Coverage *Reference `json:"coverage,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	if m.Created != nil && m.Created.Value != nil {
+		output.Created = m.Created.Value
+		if m.Created.Element != nil {
+			output.CreatedElement = toMapOrNil(m.Created.Element.ToJSON())
+		}
+	}
+	output.Insurer = m.Insurer
+	output.Provider = m.Provider
+	output.Candidate = m.Candidate
+	output.Coverage = m.Coverage
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of EnrollmentRequest
+// Clone creates a deep copy of EnrollmentRequest.
 func (m *EnrollmentRequest) Clone() *EnrollmentRequest {
 	if m == nil { return nil }
 	return &EnrollmentRequest{
@@ -63,7 +149,7 @@ func (m *EnrollmentRequest) Clone() *EnrollmentRequest {
 	}
 }
 
-// Equals checks for equality with another EnrollmentRequest instance
+// Equals checks equality between two EnrollmentRequest instances.
 func (m *EnrollmentRequest) Equals(other *EnrollmentRequest) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

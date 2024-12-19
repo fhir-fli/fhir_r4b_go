@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Flag
 // Prospective warnings of potential issues when providing care to the patient.
 type Flag struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -27,22 +28,105 @@ type Flag struct {
 	Author *Reference `json:"author,omitempty"`
 }
 
-// NewFlag creates a new Flag instance
+// NewFlag creates a new Flag instance.
 func NewFlag() *Flag {
 	return &Flag{}
 }
 
-// FromJSON populates Flag from JSON data
+// FromJSON populates Flag from JSON data.
 func (m *Flag) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *FlagStatus `json:"status,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		Author *Reference `json:"author,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.Category = temp.Category
+	m.Code = temp.Code
+	m.Subject = temp.Subject
+	m.Period = temp.Period
+	m.Encounter = temp.Encounter
+	m.Author = temp.Author
+	return nil
 }
 
-// ToJSON converts Flag to JSON data
+// ToJSON converts Flag to JSON data.
 func (m *Flag) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *FlagStatus `json:"status,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		Author *Reference `json:"author,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	output.Category = m.Category
+	output.Code = m.Code
+	output.Subject = m.Subject
+	output.Period = m.Period
+	output.Encounter = m.Encounter
+	output.Author = m.Author
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Flag
+// Clone creates a deep copy of Flag.
 func (m *Flag) Clone() *Flag {
 	if m == nil { return nil }
 	return &Flag{
@@ -65,7 +149,7 @@ func (m *Flag) Clone() *Flag {
 	}
 }
 
-// Equals checks for equality with another Flag instance
+// Equals checks equality between two Flag instances.
 func (m *Flag) Equals(other *Flag) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

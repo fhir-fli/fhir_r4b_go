@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // FamilyMemberHistory
 // Significant health conditions for a person related to the patient relevant in the context of care for the patient.
 type FamilyMemberHistory struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -45,22 +47,273 @@ type FamilyMemberHistory struct {
 	Condition []*FamilyMemberHistoryCondition `json:"condition,omitempty"`
 }
 
-// NewFamilyMemberHistory creates a new FamilyMemberHistory instance
+// NewFamilyMemberHistory creates a new FamilyMemberHistory instance.
 func NewFamilyMemberHistory() *FamilyMemberHistory {
 	return &FamilyMemberHistory{}
 }
 
-// FromJSON populates FamilyMemberHistory from JSON data
+// FromJSON populates FamilyMemberHistory from JSON data.
 func (m *FamilyMemberHistory) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		InstantiatesCanonical []interface{} `json:"instantiatescanonical,omitempty"`
+		InstantiatesUri []interface{} `json:"instantiatesuri,omitempty"`
+		Status *FamilyHistoryStatus `json:"status,omitempty"`
+		DataAbsentReason *CodeableConcept `json:"dataabsentreason,omitempty"`
+		Patient *Reference `json:"patient,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Relationship *CodeableConcept `json:"relationship,omitempty"`
+		Sex *CodeableConcept `json:"sex,omitempty"`
+		BornPeriod *Period `json:"bornperiod,omitempty"`
+		BornDate *FhirDate `json:"borndate,omitempty"`
+		BornString *FhirString `json:"bornstring,omitempty"`
+		AgeAge *Age `json:"ageage,omitempty"`
+		AgeRange *Range `json:"agerange,omitempty"`
+		AgeString *FhirString `json:"agestring,omitempty"`
+		EstimatedAge *FhirBoolean `json:"estimatedage,omitempty"`
+		DeceasedBoolean *FhirBoolean `json:"deceasedboolean,omitempty"`
+		DeceasedAge *Age `json:"deceasedage,omitempty"`
+		DeceasedRange *Range `json:"deceasedrange,omitempty"`
+		DeceasedDate *FhirDate `json:"deceaseddate,omitempty"`
+		DeceasedString *FhirString `json:"deceasedstring,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		Condition []*FamilyMemberHistoryCondition `json:"condition,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	if len(temp.InstantiatesCanonical) > 0 {
+		m.InstantiatesCanonical = make([]*FhirCanonical, len(temp.InstantiatesCanonical))
+		for i := range temp.InstantiatesCanonical {
+			itemMap, ok := temp.InstantiatesCanonical[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for InstantiatesCanonical[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse InstantiatesCanonical[%d]: %v", i, err) }
+			m.InstantiatesCanonical[i] = primitive
+		}
+	}
+	if len(temp.InstantiatesUri) > 0 {
+		m.InstantiatesUri = make([]*FhirUri, len(temp.InstantiatesUri))
+		for i := range temp.InstantiatesUri {
+			itemMap, ok := temp.InstantiatesUri[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for InstantiatesUri[%d]: expected map", i) }
+			primitive, err := NewFhirUriFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse InstantiatesUri[%d]: %v", i, err) }
+			m.InstantiatesUri[i] = primitive
+		}
+	}
+	m.Status = temp.Status
+	m.DataAbsentReason = temp.DataAbsentReason
+	m.Patient = temp.Patient
+	m.Date = temp.Date
+	m.Name = temp.Name
+	m.Relationship = temp.Relationship
+	m.Sex = temp.Sex
+	m.BornPeriod = temp.BornPeriod
+	m.BornDate = temp.BornDate
+	m.BornString = temp.BornString
+	m.AgeAge = temp.AgeAge
+	m.AgeRange = temp.AgeRange
+	m.AgeString = temp.AgeString
+	m.EstimatedAge = temp.EstimatedAge
+	m.DeceasedBoolean = temp.DeceasedBoolean
+	m.DeceasedAge = temp.DeceasedAge
+	m.DeceasedRange = temp.DeceasedRange
+	m.DeceasedDate = temp.DeceasedDate
+	m.DeceasedString = temp.DeceasedString
+	m.ReasonCode = temp.ReasonCode
+	m.ReasonReference = temp.ReasonReference
+	m.Note = temp.Note
+	m.Condition = temp.Condition
+	return nil
 }
 
-// ToJSON converts FamilyMemberHistory to JSON data
+// ToJSON converts FamilyMemberHistory to JSON data.
 func (m *FamilyMemberHistory) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		InstantiatesCanonical []interface{} `json:"instantiatescanonical,omitempty"`
+		InstantiatesCanonicalElement []map[string]interface{} `json:"_instantiatescanonical,omitempty"`
+		InstantiatesUri []interface{} `json:"instantiatesuri,omitempty"`
+		InstantiatesUriElement []map[string]interface{} `json:"_instantiatesuri,omitempty"`
+		Status *FamilyHistoryStatus `json:"status,omitempty"`
+		DataAbsentReason *CodeableConcept `json:"dataabsentreason,omitempty"`
+		Patient *Reference `json:"patient,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Relationship *CodeableConcept `json:"relationship,omitempty"`
+		Sex *CodeableConcept `json:"sex,omitempty"`
+		BornPeriod *Period `json:"bornperiod,omitempty"`
+		BornDate interface{} `json:"borndate,omitempty"`
+		BornDateElement map[string]interface{} `json:"_borndate,omitempty"`
+		BornString interface{} `json:"bornstring,omitempty"`
+		BornStringElement map[string]interface{} `json:"_bornstring,omitempty"`
+		AgeAge *Age `json:"ageage,omitempty"`
+		AgeRange *Range `json:"agerange,omitempty"`
+		AgeString interface{} `json:"agestring,omitempty"`
+		AgeStringElement map[string]interface{} `json:"_agestring,omitempty"`
+		EstimatedAge interface{} `json:"estimatedage,omitempty"`
+		EstimatedAgeElement map[string]interface{} `json:"_estimatedage,omitempty"`
+		DeceasedBoolean interface{} `json:"deceasedboolean,omitempty"`
+		DeceasedBooleanElement map[string]interface{} `json:"_deceasedboolean,omitempty"`
+		DeceasedAge *Age `json:"deceasedage,omitempty"`
+		DeceasedRange *Range `json:"deceasedrange,omitempty"`
+		DeceasedDate interface{} `json:"deceaseddate,omitempty"`
+		DeceasedDateElement map[string]interface{} `json:"_deceaseddate,omitempty"`
+		DeceasedString interface{} `json:"deceasedstring,omitempty"`
+		DeceasedStringElement map[string]interface{} `json:"_deceasedstring,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		Condition []*FamilyMemberHistoryCondition `json:"condition,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	if len(m.InstantiatesCanonical) > 0 {
+		output.InstantiatesCanonical = make([]interface{}, len(m.InstantiatesCanonical))
+		output.InstantiatesCanonicalElement = make([]map[string]interface{}, len(m.InstantiatesCanonical))
+		for i, item := range m.InstantiatesCanonical {
+			if item != nil && item.Value != nil {
+				output.InstantiatesCanonical[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.InstantiatesCanonicalElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.InstantiatesUri) > 0 {
+		output.InstantiatesUri = make([]interface{}, len(m.InstantiatesUri))
+		output.InstantiatesUriElement = make([]map[string]interface{}, len(m.InstantiatesUri))
+		for i, item := range m.InstantiatesUri {
+			if item != nil && item.Value != nil {
+				output.InstantiatesUri[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.InstantiatesUriElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Status = m.Status
+	output.DataAbsentReason = m.DataAbsentReason
+	output.Patient = m.Patient
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	output.Relationship = m.Relationship
+	output.Sex = m.Sex
+	output.BornPeriod = m.BornPeriod
+	if m.BornDate != nil && m.BornDate.Value != nil {
+		output.BornDate = m.BornDate.Value
+		if m.BornDate.Element != nil {
+			output.BornDateElement = toMapOrNil(m.BornDate.Element.ToJSON())
+		}
+	}
+	if m.BornString != nil && m.BornString.Value != nil {
+		output.BornString = m.BornString.Value
+		if m.BornString.Element != nil {
+			output.BornStringElement = toMapOrNil(m.BornString.Element.ToJSON())
+		}
+	}
+	output.AgeAge = m.AgeAge
+	output.AgeRange = m.AgeRange
+	if m.AgeString != nil && m.AgeString.Value != nil {
+		output.AgeString = m.AgeString.Value
+		if m.AgeString.Element != nil {
+			output.AgeStringElement = toMapOrNil(m.AgeString.Element.ToJSON())
+		}
+	}
+	if m.EstimatedAge != nil && m.EstimatedAge.Value != nil {
+		output.EstimatedAge = m.EstimatedAge.Value
+		if m.EstimatedAge.Element != nil {
+			output.EstimatedAgeElement = toMapOrNil(m.EstimatedAge.Element.ToJSON())
+		}
+	}
+	if m.DeceasedBoolean != nil && m.DeceasedBoolean.Value != nil {
+		output.DeceasedBoolean = m.DeceasedBoolean.Value
+		if m.DeceasedBoolean.Element != nil {
+			output.DeceasedBooleanElement = toMapOrNil(m.DeceasedBoolean.Element.ToJSON())
+		}
+	}
+	output.DeceasedAge = m.DeceasedAge
+	output.DeceasedRange = m.DeceasedRange
+	if m.DeceasedDate != nil && m.DeceasedDate.Value != nil {
+		output.DeceasedDate = m.DeceasedDate.Value
+		if m.DeceasedDate.Element != nil {
+			output.DeceasedDateElement = toMapOrNil(m.DeceasedDate.Element.ToJSON())
+		}
+	}
+	if m.DeceasedString != nil && m.DeceasedString.Value != nil {
+		output.DeceasedString = m.DeceasedString.Value
+		if m.DeceasedString.Element != nil {
+			output.DeceasedStringElement = toMapOrNil(m.DeceasedString.Element.ToJSON())
+		}
+	}
+	output.ReasonCode = m.ReasonCode
+	output.ReasonReference = m.ReasonReference
+	output.Note = m.Note
+	output.Condition = m.Condition
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of FamilyMemberHistory
+// Clone creates a deep copy of FamilyMemberHistory.
 func (m *FamilyMemberHistory) Clone() *FamilyMemberHistory {
 	if m == nil { return nil }
 	return &FamilyMemberHistory{
@@ -101,7 +354,7 @@ func (m *FamilyMemberHistory) Clone() *FamilyMemberHistory {
 	}
 }
 
-// Equals checks for equality with another FamilyMemberHistory instance
+// Equals checks equality between two FamilyMemberHistory instances.
 func (m *FamilyMemberHistory) Equals(other *FamilyMemberHistory) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -145,7 +398,7 @@ func (m *FamilyMemberHistory) Equals(other *FamilyMemberHistory) bool {
 // FamilyMemberHistoryCondition
 // The significant Conditions (or condition) that the family member had. This is a repeating section to allow a system to represent more than one condition per resource, though there is nothing stopping multiple resources - one per condition.
 type FamilyMemberHistoryCondition struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -159,22 +412,91 @@ type FamilyMemberHistoryCondition struct {
 	Note []*Annotation `json:"note,omitempty"`
 }
 
-// NewFamilyMemberHistoryCondition creates a new FamilyMemberHistoryCondition instance
+// NewFamilyMemberHistoryCondition creates a new FamilyMemberHistoryCondition instance.
 func NewFamilyMemberHistoryCondition() *FamilyMemberHistoryCondition {
 	return &FamilyMemberHistoryCondition{}
 }
 
-// FromJSON populates FamilyMemberHistoryCondition from JSON data
+// FromJSON populates FamilyMemberHistoryCondition from JSON data.
 func (m *FamilyMemberHistoryCondition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Outcome *CodeableConcept `json:"outcome,omitempty"`
+		ContributedToDeath *FhirBoolean `json:"contributedtodeath,omitempty"`
+		OnsetAge *Age `json:"onsetage,omitempty"`
+		OnsetRange *Range `json:"onsetrange,omitempty"`
+		OnsetPeriod *Period `json:"onsetperiod,omitempty"`
+		OnsetString *FhirString `json:"onsetstring,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Outcome = temp.Outcome
+	m.ContributedToDeath = temp.ContributedToDeath
+	m.OnsetAge = temp.OnsetAge
+	m.OnsetRange = temp.OnsetRange
+	m.OnsetPeriod = temp.OnsetPeriod
+	m.OnsetString = temp.OnsetString
+	m.Note = temp.Note
+	return nil
 }
 
-// ToJSON converts FamilyMemberHistoryCondition to JSON data
+// ToJSON converts FamilyMemberHistoryCondition to JSON data.
 func (m *FamilyMemberHistoryCondition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Outcome *CodeableConcept `json:"outcome,omitempty"`
+		ContributedToDeath interface{} `json:"contributedtodeath,omitempty"`
+		ContributedToDeathElement map[string]interface{} `json:"_contributedtodeath,omitempty"`
+		OnsetAge *Age `json:"onsetage,omitempty"`
+		OnsetRange *Range `json:"onsetrange,omitempty"`
+		OnsetPeriod *Period `json:"onsetperiod,omitempty"`
+		OnsetString interface{} `json:"onsetstring,omitempty"`
+		OnsetStringElement map[string]interface{} `json:"_onsetstring,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	output.Outcome = m.Outcome
+	if m.ContributedToDeath != nil && m.ContributedToDeath.Value != nil {
+		output.ContributedToDeath = m.ContributedToDeath.Value
+		if m.ContributedToDeath.Element != nil {
+			output.ContributedToDeathElement = toMapOrNil(m.ContributedToDeath.Element.ToJSON())
+		}
+	}
+	output.OnsetAge = m.OnsetAge
+	output.OnsetRange = m.OnsetRange
+	output.OnsetPeriod = m.OnsetPeriod
+	if m.OnsetString != nil && m.OnsetString.Value != nil {
+		output.OnsetString = m.OnsetString.Value
+		if m.OnsetString.Element != nil {
+			output.OnsetStringElement = toMapOrNil(m.OnsetString.Element.ToJSON())
+		}
+	}
+	output.Note = m.Note
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of FamilyMemberHistoryCondition
+// Clone creates a deep copy of FamilyMemberHistoryCondition.
 func (m *FamilyMemberHistoryCondition) Clone() *FamilyMemberHistoryCondition {
 	if m == nil { return nil }
 	return &FamilyMemberHistoryCondition{
@@ -192,7 +514,7 @@ func (m *FamilyMemberHistoryCondition) Clone() *FamilyMemberHistoryCondition {
 	}
 }
 
-// Equals checks for equality with another FamilyMemberHistoryCondition instance
+// Equals checks equality between two FamilyMemberHistoryCondition instances.
 func (m *FamilyMemberHistoryCondition) Equals(other *FamilyMemberHistoryCondition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

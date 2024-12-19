@@ -8,7 +8,7 @@ import (
 
 // FhirOid represents a validated OID value in the FHIR standard.
 type FhirOid struct {
-	Value   string   `json:"value,omitempty"`
+	Value   *string  `json:"value,omitempty"`
 	Element *Element `json:"_value,omitempty"`
 }
 
@@ -17,7 +17,10 @@ func NewFhirOid(input string, element *Element) (*FhirOid, error) {
 	if err := validateOid(input); err != nil {
 		return nil, err
 	}
-	return &FhirOid{Value: input, Element: element}, nil
+	return &FhirOid{
+		Value:   &input,
+		Element: element,
+	}, nil
 }
 
 // validateOid ensures the input matches the OID pattern.
@@ -32,7 +35,7 @@ func validateOid(input string) error {
 // MarshalJSON serializes FhirOid into JSON.
 func (f *FhirOid) MarshalJSON() ([]byte, error) {
 	data := map[string]interface{}{}
-	if f.Value != "" {
+	if *f.Value != "" {
 		data["value"] = f.Value
 	}
 	if f.Element != nil {
@@ -53,14 +56,14 @@ func (f *FhirOid) UnmarshalJSON(data []byte) error {
 	if err := validateOid(temp.Value); err != nil {
 		return err
 	}
-	f.Value = temp.Value
+	f.Value = &temp.Value
 	f.Element = temp.Element
 	return nil
 }
 
 // String returns the string representation of the OID.
 func (f *FhirOid) String() string {
-	return f.Value
+	return *f.Value
 }
 
 // Equals checks equality between two FhirOid instances.
@@ -84,4 +87,3 @@ func (f *FhirOid) Clone() *FhirOid {
 		Element: f.Element.Clone(),
 	}
 }
-

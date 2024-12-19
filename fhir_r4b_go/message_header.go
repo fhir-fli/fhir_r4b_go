@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // MessageHeader
 // The header for a message exchange that is either requesting or responding to an action.  The reference(s) that are the subject of the action as well as other information related to the action are typically transmitted in a bundle in which the MessageHeader resource instance is the first resource in the bundle.
 type MessageHeader struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -31,22 +32,133 @@ type MessageHeader struct {
 	Definition *FhirCanonical `json:"definition,omitempty"`
 }
 
-// NewMessageHeader creates a new MessageHeader instance
+// NewMessageHeader creates a new MessageHeader instance.
 func NewMessageHeader() *MessageHeader {
 	return &MessageHeader{}
 }
 
-// FromJSON populates MessageHeader from JSON data
+// FromJSON populates MessageHeader from JSON data.
 func (m *MessageHeader) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		EventCoding *Coding `json:"eventcoding,omitempty"`
+		EventUri *FhirUri `json:"eventuri,omitempty"`
+		Destination []*MessageHeaderDestination `json:"destination,omitempty"`
+		Sender *Reference `json:"sender,omitempty"`
+		Enterer *Reference `json:"enterer,omitempty"`
+		Author *Reference `json:"author,omitempty"`
+		Source *MessageHeaderSource `json:"source,omitempty"`
+		Responsible *Reference `json:"responsible,omitempty"`
+		Reason *CodeableConcept `json:"reason,omitempty"`
+		Response *MessageHeaderResponse `json:"response,omitempty"`
+		Focus []*Reference `json:"focus,omitempty"`
+		Definition *FhirCanonical `json:"definition,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.EventCoding = temp.EventCoding
+	m.EventUri = temp.EventUri
+	m.Destination = temp.Destination
+	m.Sender = temp.Sender
+	m.Enterer = temp.Enterer
+	m.Author = temp.Author
+	m.Source = temp.Source
+	m.Responsible = temp.Responsible
+	m.Reason = temp.Reason
+	m.Response = temp.Response
+	m.Focus = temp.Focus
+	m.Definition = temp.Definition
+	return nil
 }
 
-// ToJSON converts MessageHeader to JSON data
+// ToJSON converts MessageHeader to JSON data.
 func (m *MessageHeader) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		EventCoding *Coding `json:"eventcoding,omitempty"`
+		EventUri interface{} `json:"eventuri,omitempty"`
+		EventUriElement map[string]interface{} `json:"_eventuri,omitempty"`
+		Destination []*MessageHeaderDestination `json:"destination,omitempty"`
+		Sender *Reference `json:"sender,omitempty"`
+		Enterer *Reference `json:"enterer,omitempty"`
+		Author *Reference `json:"author,omitempty"`
+		Source *MessageHeaderSource `json:"source,omitempty"`
+		Responsible *Reference `json:"responsible,omitempty"`
+		Reason *CodeableConcept `json:"reason,omitempty"`
+		Response *MessageHeaderResponse `json:"response,omitempty"`
+		Focus []*Reference `json:"focus,omitempty"`
+		Definition interface{} `json:"definition,omitempty"`
+		DefinitionElement map[string]interface{} `json:"_definition,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.EventCoding = m.EventCoding
+	if m.EventUri != nil && m.EventUri.Value != nil {
+		output.EventUri = m.EventUri.Value
+		if m.EventUri.Element != nil {
+			output.EventUriElement = toMapOrNil(m.EventUri.Element.ToJSON())
+		}
+	}
+	output.Destination = m.Destination
+	output.Sender = m.Sender
+	output.Enterer = m.Enterer
+	output.Author = m.Author
+	output.Source = m.Source
+	output.Responsible = m.Responsible
+	output.Reason = m.Reason
+	output.Response = m.Response
+	output.Focus = m.Focus
+	if m.Definition != nil && m.Definition.Value != nil {
+		output.Definition = m.Definition.Value
+		if m.Definition.Element != nil {
+			output.DefinitionElement = toMapOrNil(m.Definition.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MessageHeader
+// Clone creates a deep copy of MessageHeader.
 func (m *MessageHeader) Clone() *MessageHeader {
 	if m == nil { return nil }
 	return &MessageHeader{
@@ -73,7 +185,7 @@ func (m *MessageHeader) Clone() *MessageHeader {
 	}
 }
 
-// Equals checks for equality with another MessageHeader instance
+// Equals checks equality between two MessageHeader instances.
 func (m *MessageHeader) Equals(other *MessageHeader) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -103,7 +215,7 @@ func (m *MessageHeader) Equals(other *MessageHeader) bool {
 // MessageHeaderDestination
 // The destination application which the message is intended for.
 type MessageHeaderDestination struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -113,22 +225,75 @@ type MessageHeaderDestination struct {
 	Receiver *Reference `json:"receiver,omitempty"`
 }
 
-// NewMessageHeaderDestination creates a new MessageHeaderDestination instance
+// NewMessageHeaderDestination creates a new MessageHeaderDestination instance.
 func NewMessageHeaderDestination() *MessageHeaderDestination {
 	return &MessageHeaderDestination{}
 }
 
-// FromJSON populates MessageHeaderDestination from JSON data
+// FromJSON populates MessageHeaderDestination from JSON data.
 func (m *MessageHeaderDestination) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Target *Reference `json:"target,omitempty"`
+		Endpoint *FhirUrl `json:"endpoint,omitempty"`
+		Receiver *Reference `json:"receiver,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Name = temp.Name
+	m.Target = temp.Target
+	m.Endpoint = temp.Endpoint
+	m.Receiver = temp.Receiver
+	return nil
 }
 
-// ToJSON converts MessageHeaderDestination to JSON data
+// ToJSON converts MessageHeaderDestination to JSON data.
 func (m *MessageHeaderDestination) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Target *Reference `json:"target,omitempty"`
+		Endpoint interface{} `json:"endpoint,omitempty"`
+		EndpointElement map[string]interface{} `json:"_endpoint,omitempty"`
+		Receiver *Reference `json:"receiver,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	output.Target = m.Target
+	if m.Endpoint != nil && m.Endpoint.Value != nil {
+		output.Endpoint = m.Endpoint.Value
+		if m.Endpoint.Element != nil {
+			output.EndpointElement = toMapOrNil(m.Endpoint.Element.ToJSON())
+		}
+	}
+	output.Receiver = m.Receiver
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MessageHeaderDestination
+// Clone creates a deep copy of MessageHeaderDestination.
 func (m *MessageHeaderDestination) Clone() *MessageHeaderDestination {
 	if m == nil { return nil }
 	return &MessageHeaderDestination{
@@ -142,7 +307,7 @@ func (m *MessageHeaderDestination) Clone() *MessageHeaderDestination {
 	}
 }
 
-// Equals checks for equality with another MessageHeaderDestination instance
+// Equals checks equality between two MessageHeaderDestination instances.
 func (m *MessageHeaderDestination) Equals(other *MessageHeaderDestination) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -159,7 +324,7 @@ func (m *MessageHeaderDestination) Equals(other *MessageHeaderDestination) bool 
 // MessageHeaderSource
 // The source application from which this message originated.
 type MessageHeaderSource struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -170,22 +335,91 @@ type MessageHeaderSource struct {
 	Endpoint *FhirUrl `json:"endpoint,omitempty"`
 }
 
-// NewMessageHeaderSource creates a new MessageHeaderSource instance
+// NewMessageHeaderSource creates a new MessageHeaderSource instance.
 func NewMessageHeaderSource() *MessageHeaderSource {
 	return &MessageHeaderSource{}
 }
 
-// FromJSON populates MessageHeaderSource from JSON data
+// FromJSON populates MessageHeaderSource from JSON data.
 func (m *MessageHeaderSource) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Software *FhirString `json:"software,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Contact *ContactPoint `json:"contact,omitempty"`
+		Endpoint *FhirUrl `json:"endpoint,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Name = temp.Name
+	m.Software = temp.Software
+	m.Version = temp.Version
+	m.Contact = temp.Contact
+	m.Endpoint = temp.Endpoint
+	return nil
 }
 
-// ToJSON converts MessageHeaderSource to JSON data
+// ToJSON converts MessageHeaderSource to JSON data.
 func (m *MessageHeaderSource) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Software interface{} `json:"software,omitempty"`
+		SoftwareElement map[string]interface{} `json:"_software,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Contact *ContactPoint `json:"contact,omitempty"`
+		Endpoint interface{} `json:"endpoint,omitempty"`
+		EndpointElement map[string]interface{} `json:"_endpoint,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Software != nil && m.Software.Value != nil {
+		output.Software = m.Software.Value
+		if m.Software.Element != nil {
+			output.SoftwareElement = toMapOrNil(m.Software.Element.ToJSON())
+		}
+	}
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	output.Contact = m.Contact
+	if m.Endpoint != nil && m.Endpoint.Value != nil {
+		output.Endpoint = m.Endpoint.Value
+		if m.Endpoint.Element != nil {
+			output.EndpointElement = toMapOrNil(m.Endpoint.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MessageHeaderSource
+// Clone creates a deep copy of MessageHeaderSource.
 func (m *MessageHeaderSource) Clone() *MessageHeaderSource {
 	if m == nil { return nil }
 	return &MessageHeaderSource{
@@ -200,7 +434,7 @@ func (m *MessageHeaderSource) Clone() *MessageHeaderSource {
 	}
 }
 
-// Equals checks for equality with another MessageHeaderSource instance
+// Equals checks equality between two MessageHeaderSource instances.
 func (m *MessageHeaderSource) Equals(other *MessageHeaderSource) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -218,7 +452,7 @@ func (m *MessageHeaderSource) Equals(other *MessageHeaderSource) bool {
 // MessageHeaderResponse
 // Information about the message that this message is a response to.  Only present if this message is a response.
 type MessageHeaderResponse struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -227,22 +461,65 @@ type MessageHeaderResponse struct {
 	Details *Reference `json:"details,omitempty"`
 }
 
-// NewMessageHeaderResponse creates a new MessageHeaderResponse instance
+// NewMessageHeaderResponse creates a new MessageHeaderResponse instance.
 func NewMessageHeaderResponse() *MessageHeaderResponse {
 	return &MessageHeaderResponse{}
 }
 
-// FromJSON populates MessageHeaderResponse from JSON data
+// FromJSON populates MessageHeaderResponse from JSON data.
 func (m *MessageHeaderResponse) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier *FhirId `json:"identifier,omitempty"`
+		Code *ResponseType `json:"code,omitempty"`
+		Details *Reference `json:"details,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Code = temp.Code
+	m.Details = temp.Details
+	return nil
 }
 
-// ToJSON converts MessageHeaderResponse to JSON data
+// ToJSON converts MessageHeaderResponse to JSON data.
 func (m *MessageHeaderResponse) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier interface{} `json:"identifier,omitempty"`
+		IdentifierElement map[string]interface{} `json:"_identifier,omitempty"`
+		Code *ResponseType `json:"code,omitempty"`
+		Details *Reference `json:"details,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Identifier != nil && m.Identifier.Value != nil {
+		output.Identifier = m.Identifier.Value
+		if m.Identifier.Element != nil {
+			output.IdentifierElement = toMapOrNil(m.Identifier.Element.ToJSON())
+		}
+	}
+	output.Code = m.Code
+	output.Details = m.Details
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MessageHeaderResponse
+// Clone creates a deep copy of MessageHeaderResponse.
 func (m *MessageHeaderResponse) Clone() *MessageHeaderResponse {
 	if m == nil { return nil }
 	return &MessageHeaderResponse{
@@ -255,7 +532,7 @@ func (m *MessageHeaderResponse) Clone() *MessageHeaderResponse {
 	}
 }
 
-// Equals checks for equality with another MessageHeaderResponse instance
+// Equals checks equality between two MessageHeaderResponse instances.
 func (m *MessageHeaderResponse) Equals(other *MessageHeaderResponse) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

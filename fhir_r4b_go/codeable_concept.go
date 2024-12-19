@@ -3,34 +3,70 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // CodeableConcept
 // A concept that may be defined by a formal reference to a terminology or ontology or may be provided by text.
 type CodeableConcept struct {
-	DataType
+	extends DataType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	Coding []*Coding `json:"coding,omitempty"`
 	Text *FhirString `json:"text,omitempty"`
 }
 
-// NewCodeableConcept creates a new CodeableConcept instance
+// NewCodeableConcept creates a new CodeableConcept instance.
 func NewCodeableConcept() *CodeableConcept {
 	return &CodeableConcept{}
 }
 
-// FromJSON populates CodeableConcept from JSON data
+// FromJSON populates CodeableConcept from JSON data.
 func (m *CodeableConcept) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Coding []*Coding `json:"coding,omitempty"`
+		Text *FhirString `json:"text,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.Coding = temp.Coding
+	m.Text = temp.Text
+	return nil
 }
 
-// ToJSON converts CodeableConcept to JSON data
+// ToJSON converts CodeableConcept to JSON data.
 func (m *CodeableConcept) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Coding []*Coding `json:"coding,omitempty"`
+		Text interface{} `json:"text,omitempty"`
+		TextElement map[string]interface{} `json:"_text,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.Coding = m.Coding
+	if m.Text != nil && m.Text.Value != nil {
+		output.Text = m.Text.Value
+		if m.Text.Element != nil {
+			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CodeableConcept
+// Clone creates a deep copy of CodeableConcept.
 func (m *CodeableConcept) Clone() *CodeableConcept {
 	if m == nil { return nil }
 	return &CodeableConcept{
@@ -41,7 +77,7 @@ func (m *CodeableConcept) Clone() *CodeableConcept {
 	}
 }
 
-// Equals checks for equality with another CodeableConcept instance
+// Equals checks equality between two CodeableConcept instances.
 func (m *CodeableConcept) Equals(other *CodeableConcept) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

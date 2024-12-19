@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // Questionnaire
 // A structured set of questions intended to guide the collection of answers from end-users. Questionnaires provide detailed control over order, presentation, phraseology and grouping to allow coherent, consistent data collection.
 type Questionnaire struct {
-	CanonicalResource
+	extends CanonicalResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -41,22 +43,275 @@ type Questionnaire struct {
 	Item []*QuestionnaireItem `json:"item,omitempty"`
 }
 
-// NewQuestionnaire creates a new Questionnaire instance
+// NewQuestionnaire creates a new Questionnaire instance.
 func NewQuestionnaire() *Questionnaire {
 	return &Questionnaire{}
 }
 
-// FromJSON populates Questionnaire from JSON data
+// FromJSON populates Questionnaire from JSON data.
 func (m *Questionnaire) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		DerivedFrom []interface{} `json:"derivedfrom,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental *FhirBoolean `json:"experimental,omitempty"`
+		SubjectType []interface{} `json:"subjecttype,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Publisher *FhirString `json:"publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose *FhirMarkdown `json:"purpose,omitempty"`
+		Copyright *FhirMarkdown `json:"copyright,omitempty"`
+		ApprovalDate *FhirDate `json:"approvaldate,omitempty"`
+		LastReviewDate *FhirDate `json:"lastreviewdate,omitempty"`
+		EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+		Code []*Coding `json:"code,omitempty"`
+		Item []*QuestionnaireItem `json:"item,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Url = temp.Url
+	m.Identifier = temp.Identifier
+	m.Version = temp.Version
+	m.Name = temp.Name
+	m.Title = temp.Title
+	if len(temp.DerivedFrom) > 0 {
+		m.DerivedFrom = make([]*FhirCanonical, len(temp.DerivedFrom))
+		for i := range temp.DerivedFrom {
+			itemMap, ok := temp.DerivedFrom[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for DerivedFrom[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse DerivedFrom[%d]: %v", i, err) }
+			m.DerivedFrom[i] = primitive
+		}
+	}
+	m.Status = temp.Status
+	m.Experimental = temp.Experimental
+	if len(temp.SubjectType) > 0 {
+		m.SubjectType = make([]*FhirCode, len(temp.SubjectType))
+		for i := range temp.SubjectType {
+			itemMap, ok := temp.SubjectType[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for SubjectType[%d]: expected map", i) }
+			primitive, err := NewFhirCodeFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse SubjectType[%d]: %v", i, err) }
+			m.SubjectType[i] = primitive
+		}
+	}
+	m.Date = temp.Date
+	m.Publisher = temp.Publisher
+	m.Contact = temp.Contact
+	m.Description = temp.Description
+	m.UseContext = temp.UseContext
+	m.Jurisdiction = temp.Jurisdiction
+	m.Purpose = temp.Purpose
+	m.Copyright = temp.Copyright
+	m.ApprovalDate = temp.ApprovalDate
+	m.LastReviewDate = temp.LastReviewDate
+	m.EffectivePeriod = temp.EffectivePeriod
+	m.Code = temp.Code
+	m.Item = temp.Item
+	return nil
 }
 
-// ToJSON converts Questionnaire to JSON data
+// ToJSON converts Questionnaire to JSON data.
 func (m *Questionnaire) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		DerivedFrom []interface{} `json:"derivedfrom,omitempty"`
+		DerivedFromElement []map[string]interface{} `json:"_derivedfrom,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental interface{} `json:"experimental,omitempty"`
+		ExperimentalElement map[string]interface{} `json:"_experimental,omitempty"`
+		SubjectType []interface{} `json:"subjecttype,omitempty"`
+		SubjectTypeElement []map[string]interface{} `json:"_subjecttype,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Publisher interface{} `json:"publisher,omitempty"`
+		PublisherElement map[string]interface{} `json:"_publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose interface{} `json:"purpose,omitempty"`
+		PurposeElement map[string]interface{} `json:"_purpose,omitempty"`
+		Copyright interface{} `json:"copyright,omitempty"`
+		CopyrightElement map[string]interface{} `json:"_copyright,omitempty"`
+		ApprovalDate interface{} `json:"approvaldate,omitempty"`
+		ApprovalDateElement map[string]interface{} `json:"_approvaldate,omitempty"`
+		LastReviewDate interface{} `json:"lastreviewdate,omitempty"`
+		LastReviewDateElement map[string]interface{} `json:"_lastreviewdate,omitempty"`
+		EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+		Code []*Coding `json:"code,omitempty"`
+		Item []*QuestionnaireItem `json:"item,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	output.Identifier = m.Identifier
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	if len(m.DerivedFrom) > 0 {
+		output.DerivedFrom = make([]interface{}, len(m.DerivedFrom))
+		output.DerivedFromElement = make([]map[string]interface{}, len(m.DerivedFrom))
+		for i, item := range m.DerivedFrom {
+			if item != nil && item.Value != nil {
+				output.DerivedFrom[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.DerivedFromElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Status = m.Status
+	if m.Experimental != nil && m.Experimental.Value != nil {
+		output.Experimental = m.Experimental.Value
+		if m.Experimental.Element != nil {
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+		}
+	}
+	if len(m.SubjectType) > 0 {
+		output.SubjectType = make([]interface{}, len(m.SubjectType))
+		output.SubjectTypeElement = make([]map[string]interface{}, len(m.SubjectType))
+		for i, item := range m.SubjectType {
+			if item != nil && item.Value != nil {
+				output.SubjectType[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.SubjectTypeElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.Publisher != nil && m.Publisher.Value != nil {
+		output.Publisher = m.Publisher.Value
+		if m.Publisher.Element != nil {
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+		}
+	}
+	output.Contact = m.Contact
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.UseContext = m.UseContext
+	output.Jurisdiction = m.Jurisdiction
+	if m.Purpose != nil && m.Purpose.Value != nil {
+		output.Purpose = m.Purpose.Value
+		if m.Purpose.Element != nil {
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+		}
+	}
+	if m.Copyright != nil && m.Copyright.Value != nil {
+		output.Copyright = m.Copyright.Value
+		if m.Copyright.Element != nil {
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+		}
+	}
+	if m.ApprovalDate != nil && m.ApprovalDate.Value != nil {
+		output.ApprovalDate = m.ApprovalDate.Value
+		if m.ApprovalDate.Element != nil {
+			output.ApprovalDateElement = toMapOrNil(m.ApprovalDate.Element.ToJSON())
+		}
+	}
+	if m.LastReviewDate != nil && m.LastReviewDate.Value != nil {
+		output.LastReviewDate = m.LastReviewDate.Value
+		if m.LastReviewDate.Element != nil {
+			output.LastReviewDateElement = toMapOrNil(m.LastReviewDate.Element.ToJSON())
+		}
+	}
+	output.EffectivePeriod = m.EffectivePeriod
+	output.Code = m.Code
+	output.Item = m.Item
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Questionnaire
+// Clone creates a deep copy of Questionnaire.
 func (m *Questionnaire) Clone() *Questionnaire {
 	if m == nil { return nil }
 	return &Questionnaire{
@@ -93,7 +348,7 @@ func (m *Questionnaire) Clone() *Questionnaire {
 	}
 }
 
-// Equals checks for equality with another Questionnaire instance
+// Equals checks equality between two Questionnaire instances.
 func (m *Questionnaire) Equals(other *Questionnaire) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -133,7 +388,7 @@ func (m *Questionnaire) Equals(other *Questionnaire) bool {
 // QuestionnaireItem
 // A particular question, question grouping or display text that is part of the questionnaire.
 type QuestionnaireItem struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -155,22 +410,165 @@ type QuestionnaireItem struct {
 	Item []*QuestionnaireItem `json:"item,omitempty"`
 }
 
-// NewQuestionnaireItem creates a new QuestionnaireItem instance
+// NewQuestionnaireItem creates a new QuestionnaireItem instance.
 func NewQuestionnaireItem() *QuestionnaireItem {
 	return &QuestionnaireItem{}
 }
 
-// FromJSON populates QuestionnaireItem from JSON data
+// FromJSON populates QuestionnaireItem from JSON data.
 func (m *QuestionnaireItem) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		LinkId *FhirString `json:"linkid,omitempty"`
+		Definition *FhirUri `json:"definition,omitempty"`
+		Code []*Coding `json:"code,omitempty"`
+		Prefix *FhirString `json:"prefix,omitempty"`
+		Text *FhirString `json:"text,omitempty"`
+		Type *QuestionnaireItemType `json:"type,omitempty"`
+		EnableWhen []*QuestionnaireEnableWhen `json:"enablewhen,omitempty"`
+		EnableBehavior *EnableWhenBehavior `json:"enablebehavior,omitempty"`
+		Required_ *FhirBoolean `json:"required,omitempty"`
+		Repeats *FhirBoolean `json:"repeats,omitempty"`
+		ReadOnly *FhirBoolean `json:"readonly,omitempty"`
+		MaxLength *FhirInteger `json:"maxlength,omitempty"`
+		AnswerValueSet *FhirCanonical `json:"answervalueset,omitempty"`
+		AnswerOption []*QuestionnaireAnswerOption `json:"answeroption,omitempty"`
+		Initial []*QuestionnaireInitial `json:"initial,omitempty"`
+		Item []*QuestionnaireItem `json:"item,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.LinkId = temp.LinkId
+	m.Definition = temp.Definition
+	m.Code = temp.Code
+	m.Prefix = temp.Prefix
+	m.Text = temp.Text
+	m.Type = temp.Type
+	m.EnableWhen = temp.EnableWhen
+	m.EnableBehavior = temp.EnableBehavior
+	m.Required_ = temp.Required_
+	m.Repeats = temp.Repeats
+	m.ReadOnly = temp.ReadOnly
+	m.MaxLength = temp.MaxLength
+	m.AnswerValueSet = temp.AnswerValueSet
+	m.AnswerOption = temp.AnswerOption
+	m.Initial = temp.Initial
+	m.Item = temp.Item
+	return nil
 }
 
-// ToJSON converts QuestionnaireItem to JSON data
+// ToJSON converts QuestionnaireItem to JSON data.
 func (m *QuestionnaireItem) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		LinkId interface{} `json:"linkid,omitempty"`
+		LinkIdElement map[string]interface{} `json:"_linkid,omitempty"`
+		Definition interface{} `json:"definition,omitempty"`
+		DefinitionElement map[string]interface{} `json:"_definition,omitempty"`
+		Code []*Coding `json:"code,omitempty"`
+		Prefix interface{} `json:"prefix,omitempty"`
+		PrefixElement map[string]interface{} `json:"_prefix,omitempty"`
+		Text interface{} `json:"text,omitempty"`
+		TextElement map[string]interface{} `json:"_text,omitempty"`
+		Type *QuestionnaireItemType `json:"type,omitempty"`
+		EnableWhen []*QuestionnaireEnableWhen `json:"enablewhen,omitempty"`
+		EnableBehavior *EnableWhenBehavior `json:"enablebehavior,omitempty"`
+		Required_ interface{} `json:"required,omitempty"`
+		Required_Element map[string]interface{} `json:"_required,omitempty"`
+		Repeats interface{} `json:"repeats,omitempty"`
+		RepeatsElement map[string]interface{} `json:"_repeats,omitempty"`
+		ReadOnly interface{} `json:"readonly,omitempty"`
+		ReadOnlyElement map[string]interface{} `json:"_readonly,omitempty"`
+		MaxLength interface{} `json:"maxlength,omitempty"`
+		MaxLengthElement map[string]interface{} `json:"_maxlength,omitempty"`
+		AnswerValueSet interface{} `json:"answervalueset,omitempty"`
+		AnswerValueSetElement map[string]interface{} `json:"_answervalueset,omitempty"`
+		AnswerOption []*QuestionnaireAnswerOption `json:"answeroption,omitempty"`
+		Initial []*QuestionnaireInitial `json:"initial,omitempty"`
+		Item []*QuestionnaireItem `json:"item,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.LinkId != nil && m.LinkId.Value != nil {
+		output.LinkId = m.LinkId.Value
+		if m.LinkId.Element != nil {
+			output.LinkIdElement = toMapOrNil(m.LinkId.Element.ToJSON())
+		}
+	}
+	if m.Definition != nil && m.Definition.Value != nil {
+		output.Definition = m.Definition.Value
+		if m.Definition.Element != nil {
+			output.DefinitionElement = toMapOrNil(m.Definition.Element.ToJSON())
+		}
+	}
+	output.Code = m.Code
+	if m.Prefix != nil && m.Prefix.Value != nil {
+		output.Prefix = m.Prefix.Value
+		if m.Prefix.Element != nil {
+			output.PrefixElement = toMapOrNil(m.Prefix.Element.ToJSON())
+		}
+	}
+	if m.Text != nil && m.Text.Value != nil {
+		output.Text = m.Text.Value
+		if m.Text.Element != nil {
+			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+		}
+	}
+	output.Type = m.Type
+	output.EnableWhen = m.EnableWhen
+	output.EnableBehavior = m.EnableBehavior
+	if m.Required_ != nil && m.Required_.Value != nil {
+		output.Required_ = m.Required_.Value
+		if m.Required_.Element != nil {
+			output.Required_Element = toMapOrNil(m.Required_.Element.ToJSON())
+		}
+	}
+	if m.Repeats != nil && m.Repeats.Value != nil {
+		output.Repeats = m.Repeats.Value
+		if m.Repeats.Element != nil {
+			output.RepeatsElement = toMapOrNil(m.Repeats.Element.ToJSON())
+		}
+	}
+	if m.ReadOnly != nil && m.ReadOnly.Value != nil {
+		output.ReadOnly = m.ReadOnly.Value
+		if m.ReadOnly.Element != nil {
+			output.ReadOnlyElement = toMapOrNil(m.ReadOnly.Element.ToJSON())
+		}
+	}
+	if m.MaxLength != nil && m.MaxLength.Value != nil {
+		output.MaxLength = m.MaxLength.Value
+		if m.MaxLength.Element != nil {
+			output.MaxLengthElement = toMapOrNil(m.MaxLength.Element.ToJSON())
+		}
+	}
+	if m.AnswerValueSet != nil && m.AnswerValueSet.Value != nil {
+		output.AnswerValueSet = m.AnswerValueSet.Value
+		if m.AnswerValueSet.Element != nil {
+			output.AnswerValueSetElement = toMapOrNil(m.AnswerValueSet.Element.ToJSON())
+		}
+	}
+	output.AnswerOption = m.AnswerOption
+	output.Initial = m.Initial
+	output.Item = m.Item
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of QuestionnaireItem
+// Clone creates a deep copy of QuestionnaireItem.
 func (m *QuestionnaireItem) Clone() *QuestionnaireItem {
 	if m == nil { return nil }
 	return &QuestionnaireItem{
@@ -196,7 +594,7 @@ func (m *QuestionnaireItem) Clone() *QuestionnaireItem {
 	}
 }
 
-// Equals checks for equality with another QuestionnaireItem instance
+// Equals checks equality between two QuestionnaireItem instances.
 func (m *QuestionnaireItem) Equals(other *QuestionnaireItem) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -225,7 +623,7 @@ func (m *QuestionnaireItem) Equals(other *QuestionnaireItem) bool {
 // QuestionnaireEnableWhen
 // A constraint indicating that this item should only be enabled (displayed/allow answers to be captured) when the specified condition is true.
 type QuestionnaireEnableWhen struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -243,22 +641,143 @@ type QuestionnaireEnableWhen struct {
 	AnswerReference *Reference `json:"answerreference,omitempty"`
 }
 
-// NewQuestionnaireEnableWhen creates a new QuestionnaireEnableWhen instance
+// NewQuestionnaireEnableWhen creates a new QuestionnaireEnableWhen instance.
 func NewQuestionnaireEnableWhen() *QuestionnaireEnableWhen {
 	return &QuestionnaireEnableWhen{}
 }
 
-// FromJSON populates QuestionnaireEnableWhen from JSON data
+// FromJSON populates QuestionnaireEnableWhen from JSON data.
 func (m *QuestionnaireEnableWhen) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Question *FhirString `json:"question,omitempty"`
+		Operator_ *QuestionnaireItemOperator `json:"operator,omitempty"`
+		AnswerBoolean *FhirBoolean `json:"answerboolean,omitempty"`
+		AnswerDecimal *FhirDecimal `json:"answerdecimal,omitempty"`
+		AnswerInteger *FhirInteger `json:"answerinteger,omitempty"`
+		AnswerDate *FhirDate `json:"answerdate,omitempty"`
+		AnswerDateTime *FhirDateTime `json:"answerdatetime,omitempty"`
+		AnswerTime *FhirTime `json:"answertime,omitempty"`
+		AnswerString *FhirString `json:"answerstring,omitempty"`
+		AnswerCoding *Coding `json:"answercoding,omitempty"`
+		AnswerQuantity *Quantity `json:"answerquantity,omitempty"`
+		AnswerReference *Reference `json:"answerreference,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Question = temp.Question
+	m.Operator_ = temp.Operator_
+	m.AnswerBoolean = temp.AnswerBoolean
+	m.AnswerDecimal = temp.AnswerDecimal
+	m.AnswerInteger = temp.AnswerInteger
+	m.AnswerDate = temp.AnswerDate
+	m.AnswerDateTime = temp.AnswerDateTime
+	m.AnswerTime = temp.AnswerTime
+	m.AnswerString = temp.AnswerString
+	m.AnswerCoding = temp.AnswerCoding
+	m.AnswerQuantity = temp.AnswerQuantity
+	m.AnswerReference = temp.AnswerReference
+	return nil
 }
 
-// ToJSON converts QuestionnaireEnableWhen to JSON data
+// ToJSON converts QuestionnaireEnableWhen to JSON data.
 func (m *QuestionnaireEnableWhen) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Question interface{} `json:"question,omitempty"`
+		QuestionElement map[string]interface{} `json:"_question,omitempty"`
+		Operator_ *QuestionnaireItemOperator `json:"operator,omitempty"`
+		AnswerBoolean interface{} `json:"answerboolean,omitempty"`
+		AnswerBooleanElement map[string]interface{} `json:"_answerboolean,omitempty"`
+		AnswerDecimal interface{} `json:"answerdecimal,omitempty"`
+		AnswerDecimalElement map[string]interface{} `json:"_answerdecimal,omitempty"`
+		AnswerInteger interface{} `json:"answerinteger,omitempty"`
+		AnswerIntegerElement map[string]interface{} `json:"_answerinteger,omitempty"`
+		AnswerDate interface{} `json:"answerdate,omitempty"`
+		AnswerDateElement map[string]interface{} `json:"_answerdate,omitempty"`
+		AnswerDateTime interface{} `json:"answerdatetime,omitempty"`
+		AnswerDateTimeElement map[string]interface{} `json:"_answerdatetime,omitempty"`
+		AnswerTime interface{} `json:"answertime,omitempty"`
+		AnswerTimeElement map[string]interface{} `json:"_answertime,omitempty"`
+		AnswerString interface{} `json:"answerstring,omitempty"`
+		AnswerStringElement map[string]interface{} `json:"_answerstring,omitempty"`
+		AnswerCoding *Coding `json:"answercoding,omitempty"`
+		AnswerQuantity *Quantity `json:"answerquantity,omitempty"`
+		AnswerReference *Reference `json:"answerreference,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Question != nil && m.Question.Value != nil {
+		output.Question = m.Question.Value
+		if m.Question.Element != nil {
+			output.QuestionElement = toMapOrNil(m.Question.Element.ToJSON())
+		}
+	}
+	output.Operator_ = m.Operator_
+	if m.AnswerBoolean != nil && m.AnswerBoolean.Value != nil {
+		output.AnswerBoolean = m.AnswerBoolean.Value
+		if m.AnswerBoolean.Element != nil {
+			output.AnswerBooleanElement = toMapOrNil(m.AnswerBoolean.Element.ToJSON())
+		}
+	}
+	if m.AnswerDecimal != nil && m.AnswerDecimal.Value != nil {
+		output.AnswerDecimal = m.AnswerDecimal.Value
+		if m.AnswerDecimal.Element != nil {
+			output.AnswerDecimalElement = toMapOrNil(m.AnswerDecimal.Element.ToJSON())
+		}
+	}
+	if m.AnswerInteger != nil && m.AnswerInteger.Value != nil {
+		output.AnswerInteger = m.AnswerInteger.Value
+		if m.AnswerInteger.Element != nil {
+			output.AnswerIntegerElement = toMapOrNil(m.AnswerInteger.Element.ToJSON())
+		}
+	}
+	if m.AnswerDate != nil && m.AnswerDate.Value != nil {
+		output.AnswerDate = m.AnswerDate.Value
+		if m.AnswerDate.Element != nil {
+			output.AnswerDateElement = toMapOrNil(m.AnswerDate.Element.ToJSON())
+		}
+	}
+	if m.AnswerDateTime != nil && m.AnswerDateTime.Value != nil {
+		output.AnswerDateTime = m.AnswerDateTime.Value
+		if m.AnswerDateTime.Element != nil {
+			output.AnswerDateTimeElement = toMapOrNil(m.AnswerDateTime.Element.ToJSON())
+		}
+	}
+	if m.AnswerTime != nil && m.AnswerTime.Value != nil {
+		output.AnswerTime = m.AnswerTime.Value
+		if m.AnswerTime.Element != nil {
+			output.AnswerTimeElement = toMapOrNil(m.AnswerTime.Element.ToJSON())
+		}
+	}
+	if m.AnswerString != nil && m.AnswerString.Value != nil {
+		output.AnswerString = m.AnswerString.Value
+		if m.AnswerString.Element != nil {
+			output.AnswerStringElement = toMapOrNil(m.AnswerString.Element.ToJSON())
+		}
+	}
+	output.AnswerCoding = m.AnswerCoding
+	output.AnswerQuantity = m.AnswerQuantity
+	output.AnswerReference = m.AnswerReference
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of QuestionnaireEnableWhen
+// Clone creates a deep copy of QuestionnaireEnableWhen.
 func (m *QuestionnaireEnableWhen) Clone() *QuestionnaireEnableWhen {
 	if m == nil { return nil }
 	return &QuestionnaireEnableWhen{
@@ -280,7 +799,7 @@ func (m *QuestionnaireEnableWhen) Clone() *QuestionnaireEnableWhen {
 	}
 }
 
-// Equals checks for equality with another QuestionnaireEnableWhen instance
+// Equals checks equality between two QuestionnaireEnableWhen instances.
 func (m *QuestionnaireEnableWhen) Equals(other *QuestionnaireEnableWhen) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -305,7 +824,7 @@ func (m *QuestionnaireEnableWhen) Equals(other *QuestionnaireEnableWhen) bool {
 // QuestionnaireAnswerOption
 // One of the permitted answers for a "choice" or "open-choice" question.
 type QuestionnaireAnswerOption struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -318,22 +837,105 @@ type QuestionnaireAnswerOption struct {
 	InitialSelected *FhirBoolean `json:"initialselected,omitempty"`
 }
 
-// NewQuestionnaireAnswerOption creates a new QuestionnaireAnswerOption instance
+// NewQuestionnaireAnswerOption creates a new QuestionnaireAnswerOption instance.
 func NewQuestionnaireAnswerOption() *QuestionnaireAnswerOption {
 	return &QuestionnaireAnswerOption{}
 }
 
-// FromJSON populates QuestionnaireAnswerOption from JSON data
+// FromJSON populates QuestionnaireAnswerOption from JSON data.
 func (m *QuestionnaireAnswerOption) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ValueInteger *FhirInteger `json:"valueinteger,omitempty"`
+		ValueDate *FhirDate `json:"valuedate,omitempty"`
+		ValueTime *FhirTime `json:"valuetime,omitempty"`
+		ValueString *FhirString `json:"valuestring,omitempty"`
+		ValueCoding *Coding `json:"valuecoding,omitempty"`
+		ValueReference *Reference `json:"valuereference,omitempty"`
+		InitialSelected *FhirBoolean `json:"initialselected,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.ValueInteger = temp.ValueInteger
+	m.ValueDate = temp.ValueDate
+	m.ValueTime = temp.ValueTime
+	m.ValueString = temp.ValueString
+	m.ValueCoding = temp.ValueCoding
+	m.ValueReference = temp.ValueReference
+	m.InitialSelected = temp.InitialSelected
+	return nil
 }
 
-// ToJSON converts QuestionnaireAnswerOption to JSON data
+// ToJSON converts QuestionnaireAnswerOption to JSON data.
 func (m *QuestionnaireAnswerOption) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ValueInteger interface{} `json:"valueinteger,omitempty"`
+		ValueIntegerElement map[string]interface{} `json:"_valueinteger,omitempty"`
+		ValueDate interface{} `json:"valuedate,omitempty"`
+		ValueDateElement map[string]interface{} `json:"_valuedate,omitempty"`
+		ValueTime interface{} `json:"valuetime,omitempty"`
+		ValueTimeElement map[string]interface{} `json:"_valuetime,omitempty"`
+		ValueString interface{} `json:"valuestring,omitempty"`
+		ValueStringElement map[string]interface{} `json:"_valuestring,omitempty"`
+		ValueCoding *Coding `json:"valuecoding,omitempty"`
+		ValueReference *Reference `json:"valuereference,omitempty"`
+		InitialSelected interface{} `json:"initialselected,omitempty"`
+		InitialSelectedElement map[string]interface{} `json:"_initialselected,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.ValueInteger != nil && m.ValueInteger.Value != nil {
+		output.ValueInteger = m.ValueInteger.Value
+		if m.ValueInteger.Element != nil {
+			output.ValueIntegerElement = toMapOrNil(m.ValueInteger.Element.ToJSON())
+		}
+	}
+	if m.ValueDate != nil && m.ValueDate.Value != nil {
+		output.ValueDate = m.ValueDate.Value
+		if m.ValueDate.Element != nil {
+			output.ValueDateElement = toMapOrNil(m.ValueDate.Element.ToJSON())
+		}
+	}
+	if m.ValueTime != nil && m.ValueTime.Value != nil {
+		output.ValueTime = m.ValueTime.Value
+		if m.ValueTime.Element != nil {
+			output.ValueTimeElement = toMapOrNil(m.ValueTime.Element.ToJSON())
+		}
+	}
+	if m.ValueString != nil && m.ValueString.Value != nil {
+		output.ValueString = m.ValueString.Value
+		if m.ValueString.Element != nil {
+			output.ValueStringElement = toMapOrNil(m.ValueString.Element.ToJSON())
+		}
+	}
+	output.ValueCoding = m.ValueCoding
+	output.ValueReference = m.ValueReference
+	if m.InitialSelected != nil && m.InitialSelected.Value != nil {
+		output.InitialSelected = m.InitialSelected.Value
+		if m.InitialSelected.Element != nil {
+			output.InitialSelectedElement = toMapOrNil(m.InitialSelected.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of QuestionnaireAnswerOption
+// Clone creates a deep copy of QuestionnaireAnswerOption.
 func (m *QuestionnaireAnswerOption) Clone() *QuestionnaireAnswerOption {
 	if m == nil { return nil }
 	return &QuestionnaireAnswerOption{
@@ -350,7 +952,7 @@ func (m *QuestionnaireAnswerOption) Clone() *QuestionnaireAnswerOption {
 	}
 }
 
-// Equals checks for equality with another QuestionnaireAnswerOption instance
+// Equals checks equality between two QuestionnaireAnswerOption instances.
 func (m *QuestionnaireAnswerOption) Equals(other *QuestionnaireAnswerOption) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -370,7 +972,7 @@ func (m *QuestionnaireAnswerOption) Equals(other *QuestionnaireAnswerOption) boo
 // QuestionnaireInitial
 // One or more values that should be pre-populated in the answer when initially rendering the questionnaire for user input.
 type QuestionnaireInitial struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -388,22 +990,143 @@ type QuestionnaireInitial struct {
 	ValueReference *Reference `json:"valuereference,omitempty"`
 }
 
-// NewQuestionnaireInitial creates a new QuestionnaireInitial instance
+// NewQuestionnaireInitial creates a new QuestionnaireInitial instance.
 func NewQuestionnaireInitial() *QuestionnaireInitial {
 	return &QuestionnaireInitial{}
 }
 
-// FromJSON populates QuestionnaireInitial from JSON data
+// FromJSON populates QuestionnaireInitial from JSON data.
 func (m *QuestionnaireInitial) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
+		ValueDecimal *FhirDecimal `json:"valuedecimal,omitempty"`
+		ValueInteger *FhirInteger `json:"valueinteger,omitempty"`
+		ValueDate *FhirDate `json:"valuedate,omitempty"`
+		ValueDateTime *FhirDateTime `json:"valuedatetime,omitempty"`
+		ValueTime *FhirTime `json:"valuetime,omitempty"`
+		ValueString *FhirString `json:"valuestring,omitempty"`
+		ValueUri *FhirUri `json:"valueuri,omitempty"`
+		ValueAttachment *Attachment `json:"valueattachment,omitempty"`
+		ValueCoding *Coding `json:"valuecoding,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueReference *Reference `json:"valuereference,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.ValueBoolean = temp.ValueBoolean
+	m.ValueDecimal = temp.ValueDecimal
+	m.ValueInteger = temp.ValueInteger
+	m.ValueDate = temp.ValueDate
+	m.ValueDateTime = temp.ValueDateTime
+	m.ValueTime = temp.ValueTime
+	m.ValueString = temp.ValueString
+	m.ValueUri = temp.ValueUri
+	m.ValueAttachment = temp.ValueAttachment
+	m.ValueCoding = temp.ValueCoding
+	m.ValueQuantity = temp.ValueQuantity
+	m.ValueReference = temp.ValueReference
+	return nil
 }
 
-// ToJSON converts QuestionnaireInitial to JSON data
+// ToJSON converts QuestionnaireInitial to JSON data.
 func (m *QuestionnaireInitial) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ValueBoolean interface{} `json:"valueboolean,omitempty"`
+		ValueBooleanElement map[string]interface{} `json:"_valueboolean,omitempty"`
+		ValueDecimal interface{} `json:"valuedecimal,omitempty"`
+		ValueDecimalElement map[string]interface{} `json:"_valuedecimal,omitempty"`
+		ValueInteger interface{} `json:"valueinteger,omitempty"`
+		ValueIntegerElement map[string]interface{} `json:"_valueinteger,omitempty"`
+		ValueDate interface{} `json:"valuedate,omitempty"`
+		ValueDateElement map[string]interface{} `json:"_valuedate,omitempty"`
+		ValueDateTime interface{} `json:"valuedatetime,omitempty"`
+		ValueDateTimeElement map[string]interface{} `json:"_valuedatetime,omitempty"`
+		ValueTime interface{} `json:"valuetime,omitempty"`
+		ValueTimeElement map[string]interface{} `json:"_valuetime,omitempty"`
+		ValueString interface{} `json:"valuestring,omitempty"`
+		ValueStringElement map[string]interface{} `json:"_valuestring,omitempty"`
+		ValueUri interface{} `json:"valueuri,omitempty"`
+		ValueUriElement map[string]interface{} `json:"_valueuri,omitempty"`
+		ValueAttachment *Attachment `json:"valueattachment,omitempty"`
+		ValueCoding *Coding `json:"valuecoding,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueReference *Reference `json:"valuereference,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.ValueBoolean != nil && m.ValueBoolean.Value != nil {
+		output.ValueBoolean = m.ValueBoolean.Value
+		if m.ValueBoolean.Element != nil {
+			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.ToJSON())
+		}
+	}
+	if m.ValueDecimal != nil && m.ValueDecimal.Value != nil {
+		output.ValueDecimal = m.ValueDecimal.Value
+		if m.ValueDecimal.Element != nil {
+			output.ValueDecimalElement = toMapOrNil(m.ValueDecimal.Element.ToJSON())
+		}
+	}
+	if m.ValueInteger != nil && m.ValueInteger.Value != nil {
+		output.ValueInteger = m.ValueInteger.Value
+		if m.ValueInteger.Element != nil {
+			output.ValueIntegerElement = toMapOrNil(m.ValueInteger.Element.ToJSON())
+		}
+	}
+	if m.ValueDate != nil && m.ValueDate.Value != nil {
+		output.ValueDate = m.ValueDate.Value
+		if m.ValueDate.Element != nil {
+			output.ValueDateElement = toMapOrNil(m.ValueDate.Element.ToJSON())
+		}
+	}
+	if m.ValueDateTime != nil && m.ValueDateTime.Value != nil {
+		output.ValueDateTime = m.ValueDateTime.Value
+		if m.ValueDateTime.Element != nil {
+			output.ValueDateTimeElement = toMapOrNil(m.ValueDateTime.Element.ToJSON())
+		}
+	}
+	if m.ValueTime != nil && m.ValueTime.Value != nil {
+		output.ValueTime = m.ValueTime.Value
+		if m.ValueTime.Element != nil {
+			output.ValueTimeElement = toMapOrNil(m.ValueTime.Element.ToJSON())
+		}
+	}
+	if m.ValueString != nil && m.ValueString.Value != nil {
+		output.ValueString = m.ValueString.Value
+		if m.ValueString.Element != nil {
+			output.ValueStringElement = toMapOrNil(m.ValueString.Element.ToJSON())
+		}
+	}
+	if m.ValueUri != nil && m.ValueUri.Value != nil {
+		output.ValueUri = m.ValueUri.Value
+		if m.ValueUri.Element != nil {
+			output.ValueUriElement = toMapOrNil(m.ValueUri.Element.ToJSON())
+		}
+	}
+	output.ValueAttachment = m.ValueAttachment
+	output.ValueCoding = m.ValueCoding
+	output.ValueQuantity = m.ValueQuantity
+	output.ValueReference = m.ValueReference
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of QuestionnaireInitial
+// Clone creates a deep copy of QuestionnaireInitial.
 func (m *QuestionnaireInitial) Clone() *QuestionnaireInitial {
 	if m == nil { return nil }
 	return &QuestionnaireInitial{
@@ -425,7 +1148,7 @@ func (m *QuestionnaireInitial) Clone() *QuestionnaireInitial {
 	}
 }
 
-// Equals checks for equality with another QuestionnaireInitial instance
+// Equals checks equality between two QuestionnaireInitial instances.
 func (m *QuestionnaireInitial) Equals(other *QuestionnaireInitial) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

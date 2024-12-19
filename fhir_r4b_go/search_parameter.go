@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // SearchParameter
 // A search parameter that defines a named search item that can be used to search/filter on a resource.
 type SearchParameter struct {
-	CanonicalResource
+	extends CanonicalResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -45,22 +47,324 @@ type SearchParameter struct {
 	Component []*SearchParameterComponent `json:"component,omitempty"`
 }
 
-// NewSearchParameter creates a new SearchParameter instance
+// NewSearchParameter creates a new SearchParameter instance.
 func NewSearchParameter() *SearchParameter {
 	return &SearchParameter{}
 }
 
-// FromJSON populates SearchParameter from JSON data
+// FromJSON populates SearchParameter from JSON data.
 func (m *SearchParameter) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		DerivedFrom *FhirCanonical `json:"derivedfrom,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental *FhirBoolean `json:"experimental,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Publisher *FhirString `json:"publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose *FhirMarkdown `json:"purpose,omitempty"`
+		Code *FhirCode `json:"code,omitempty"`
+		Base []interface{} `json:"base,omitempty"`
+		Type *SearchParamType `json:"type,omitempty"`
+		Expression *FhirString `json:"expression,omitempty"`
+		Xpath *FhirString `json:"xpath,omitempty"`
+		XpathUsage *XPathUsageType `json:"xpathusage,omitempty"`
+		Target []interface{} `json:"target,omitempty"`
+		MultipleOr *FhirBoolean `json:"multipleor,omitempty"`
+		MultipleAnd *FhirBoolean `json:"multipleand,omitempty"`
+		Comparator []*SearchComparator `json:"comparator,omitempty"`
+		Modifier []*SearchModifierCode `json:"modifier,omitempty"`
+		Chain []interface{} `json:"chain,omitempty"`
+		Component []*SearchParameterComponent `json:"component,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Url = temp.Url
+	m.Version = temp.Version
+	m.Name = temp.Name
+	m.DerivedFrom = temp.DerivedFrom
+	m.Status = temp.Status
+	m.Experimental = temp.Experimental
+	m.Date = temp.Date
+	m.Publisher = temp.Publisher
+	m.Contact = temp.Contact
+	m.Description = temp.Description
+	m.UseContext = temp.UseContext
+	m.Jurisdiction = temp.Jurisdiction
+	m.Purpose = temp.Purpose
+	m.Code = temp.Code
+	if len(temp.Base) > 0 {
+		m.Base = make([]*FhirCode, len(temp.Base))
+		for i := range temp.Base {
+			itemMap, ok := temp.Base[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Base[%d]: expected map", i) }
+			primitive, err := NewFhirCodeFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Base[%d]: %v", i, err) }
+			m.Base[i] = primitive
+		}
+	}
+	m.Type = temp.Type
+	m.Expression = temp.Expression
+	m.Xpath = temp.Xpath
+	m.XpathUsage = temp.XpathUsage
+	if len(temp.Target) > 0 {
+		m.Target = make([]*FhirCode, len(temp.Target))
+		for i := range temp.Target {
+			itemMap, ok := temp.Target[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Target[%d]: expected map", i) }
+			primitive, err := NewFhirCodeFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Target[%d]: %v", i, err) }
+			m.Target[i] = primitive
+		}
+	}
+	m.MultipleOr = temp.MultipleOr
+	m.MultipleAnd = temp.MultipleAnd
+	m.Comparator = temp.Comparator
+	m.Modifier = temp.Modifier
+	if len(temp.Chain) > 0 {
+		m.Chain = make([]*FhirString, len(temp.Chain))
+		for i := range temp.Chain {
+			itemMap, ok := temp.Chain[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Chain[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Chain[%d]: %v", i, err) }
+			m.Chain[i] = primitive
+		}
+	}
+	m.Component = temp.Component
+	return nil
 }
 
-// ToJSON converts SearchParameter to JSON data
+// ToJSON converts SearchParameter to JSON data.
 func (m *SearchParameter) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		DerivedFrom interface{} `json:"derivedfrom,omitempty"`
+		DerivedFromElement map[string]interface{} `json:"_derivedfrom,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental interface{} `json:"experimental,omitempty"`
+		ExperimentalElement map[string]interface{} `json:"_experimental,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Publisher interface{} `json:"publisher,omitempty"`
+		PublisherElement map[string]interface{} `json:"_publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose interface{} `json:"purpose,omitempty"`
+		PurposeElement map[string]interface{} `json:"_purpose,omitempty"`
+		Code interface{} `json:"code,omitempty"`
+		CodeElement map[string]interface{} `json:"_code,omitempty"`
+		Base []interface{} `json:"base,omitempty"`
+		BaseElement []map[string]interface{} `json:"_base,omitempty"`
+		Type *SearchParamType `json:"type,omitempty"`
+		Expression interface{} `json:"expression,omitempty"`
+		ExpressionElement map[string]interface{} `json:"_expression,omitempty"`
+		Xpath interface{} `json:"xpath,omitempty"`
+		XpathElement map[string]interface{} `json:"_xpath,omitempty"`
+		XpathUsage *XPathUsageType `json:"xpathusage,omitempty"`
+		Target []interface{} `json:"target,omitempty"`
+		TargetElement []map[string]interface{} `json:"_target,omitempty"`
+		MultipleOr interface{} `json:"multipleor,omitempty"`
+		MultipleOrElement map[string]interface{} `json:"_multipleor,omitempty"`
+		MultipleAnd interface{} `json:"multipleand,omitempty"`
+		MultipleAndElement map[string]interface{} `json:"_multipleand,omitempty"`
+		Comparator []*SearchComparator `json:"comparator,omitempty"`
+		Modifier []*SearchModifierCode `json:"modifier,omitempty"`
+		Chain []interface{} `json:"chain,omitempty"`
+		ChainElement []map[string]interface{} `json:"_chain,omitempty"`
+		Component []*SearchParameterComponent `json:"component,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.DerivedFrom != nil && m.DerivedFrom.Value != nil {
+		output.DerivedFrom = m.DerivedFrom.Value
+		if m.DerivedFrom.Element != nil {
+			output.DerivedFromElement = toMapOrNil(m.DerivedFrom.Element.ToJSON())
+		}
+	}
+	output.Status = m.Status
+	if m.Experimental != nil && m.Experimental.Value != nil {
+		output.Experimental = m.Experimental.Value
+		if m.Experimental.Element != nil {
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+		}
+	}
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.Publisher != nil && m.Publisher.Value != nil {
+		output.Publisher = m.Publisher.Value
+		if m.Publisher.Element != nil {
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+		}
+	}
+	output.Contact = m.Contact
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.UseContext = m.UseContext
+	output.Jurisdiction = m.Jurisdiction
+	if m.Purpose != nil && m.Purpose.Value != nil {
+		output.Purpose = m.Purpose.Value
+		if m.Purpose.Element != nil {
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+		}
+	}
+	if m.Code != nil && m.Code.Value != nil {
+		output.Code = m.Code.Value
+		if m.Code.Element != nil {
+			output.CodeElement = toMapOrNil(m.Code.Element.ToJSON())
+		}
+	}
+	if len(m.Base) > 0 {
+		output.Base = make([]interface{}, len(m.Base))
+		output.BaseElement = make([]map[string]interface{}, len(m.Base))
+		for i, item := range m.Base {
+			if item != nil && item.Value != nil {
+				output.Base[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.BaseElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Type = m.Type
+	if m.Expression != nil && m.Expression.Value != nil {
+		output.Expression = m.Expression.Value
+		if m.Expression.Element != nil {
+			output.ExpressionElement = toMapOrNil(m.Expression.Element.ToJSON())
+		}
+	}
+	if m.Xpath != nil && m.Xpath.Value != nil {
+		output.Xpath = m.Xpath.Value
+		if m.Xpath.Element != nil {
+			output.XpathElement = toMapOrNil(m.Xpath.Element.ToJSON())
+		}
+	}
+	output.XpathUsage = m.XpathUsage
+	if len(m.Target) > 0 {
+		output.Target = make([]interface{}, len(m.Target))
+		output.TargetElement = make([]map[string]interface{}, len(m.Target))
+		for i, item := range m.Target {
+			if item != nil && item.Value != nil {
+				output.Target[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.TargetElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if m.MultipleOr != nil && m.MultipleOr.Value != nil {
+		output.MultipleOr = m.MultipleOr.Value
+		if m.MultipleOr.Element != nil {
+			output.MultipleOrElement = toMapOrNil(m.MultipleOr.Element.ToJSON())
+		}
+	}
+	if m.MultipleAnd != nil && m.MultipleAnd.Value != nil {
+		output.MultipleAnd = m.MultipleAnd.Value
+		if m.MultipleAnd.Element != nil {
+			output.MultipleAndElement = toMapOrNil(m.MultipleAnd.Element.ToJSON())
+		}
+	}
+	output.Comparator = m.Comparator
+	output.Modifier = m.Modifier
+	if len(m.Chain) > 0 {
+		output.Chain = make([]interface{}, len(m.Chain))
+		output.ChainElement = make([]map[string]interface{}, len(m.Chain))
+		for i, item := range m.Chain {
+			if item != nil && item.Value != nil {
+				output.Chain[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.ChainElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Component = m.Component
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SearchParameter
+// Clone creates a deep copy of SearchParameter.
 func (m *SearchParameter) Clone() *SearchParameter {
 	if m == nil { return nil }
 	return &SearchParameter{
@@ -101,7 +405,7 @@ func (m *SearchParameter) Clone() *SearchParameter {
 	}
 }
 
-// Equals checks for equality with another SearchParameter instance
+// Equals checks equality between two SearchParameter instances.
 func (m *SearchParameter) Equals(other *SearchParameter) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -145,7 +449,7 @@ func (m *SearchParameter) Equals(other *SearchParameter) bool {
 // SearchParameterComponent
 // Used to define the parts of a composite search parameter.
 type SearchParameterComponent struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -153,22 +457,67 @@ type SearchParameterComponent struct {
 	Expression *FhirString `json:"expression,omitempty"`
 }
 
-// NewSearchParameterComponent creates a new SearchParameterComponent instance
+// NewSearchParameterComponent creates a new SearchParameterComponent instance.
 func NewSearchParameterComponent() *SearchParameterComponent {
 	return &SearchParameterComponent{}
 }
 
-// FromJSON populates SearchParameterComponent from JSON data
+// FromJSON populates SearchParameterComponent from JSON data.
 func (m *SearchParameterComponent) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Definition *FhirCanonical `json:"definition,omitempty"`
+		Expression *FhirString `json:"expression,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Definition = temp.Definition
+	m.Expression = temp.Expression
+	return nil
 }
 
-// ToJSON converts SearchParameterComponent to JSON data
+// ToJSON converts SearchParameterComponent to JSON data.
 func (m *SearchParameterComponent) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Definition interface{} `json:"definition,omitempty"`
+		DefinitionElement map[string]interface{} `json:"_definition,omitempty"`
+		Expression interface{} `json:"expression,omitempty"`
+		ExpressionElement map[string]interface{} `json:"_expression,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Definition != nil && m.Definition.Value != nil {
+		output.Definition = m.Definition.Value
+		if m.Definition.Element != nil {
+			output.DefinitionElement = toMapOrNil(m.Definition.Element.ToJSON())
+		}
+	}
+	if m.Expression != nil && m.Expression.Value != nil {
+		output.Expression = m.Expression.Value
+		if m.Expression.Element != nil {
+			output.ExpressionElement = toMapOrNil(m.Expression.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SearchParameterComponent
+// Clone creates a deep copy of SearchParameterComponent.
 func (m *SearchParameterComponent) Clone() *SearchParameterComponent {
 	if m == nil { return nil }
 	return &SearchParameterComponent{
@@ -180,7 +529,7 @@ func (m *SearchParameterComponent) Clone() *SearchParameterComponent {
 	}
 }
 
-// Equals checks for equality with another SearchParameterComponent instance
+// Equals checks equality between two SearchParameterComponent instances.
 func (m *SearchParameterComponent) Equals(other *SearchParameterComponent) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

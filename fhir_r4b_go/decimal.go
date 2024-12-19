@@ -3,14 +3,15 @@ package fhir_r4b_go
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"strconv"
 	"strings"
 )
 
 // FhirDecimal represents the FHIR 'decimal' type.
 type FhirDecimal struct {
-	Value   *float64 `json:"-"`          // The actual value
-	Element *Element `json:",inline"`    // Metadata (FHIR element)
+	Value   *float64 `json:"-"`       // The actual value
+	Element *Element `json:",inline"` // Metadata (FHIR element)
 }
 
 // NewFhirDecimal creates a new validated FhirDecimal.
@@ -20,6 +21,25 @@ func NewFhirDecimal(input interface{}, element *Element) (*FhirDecimal, error) {
 		return nil, err
 	}
 	return &FhirDecimal{Value: val, Element: element}, nil
+}
+
+// NewFhirDecimalFromMap creates a FhirDecimal instance from a map.
+func NewFhirDecimalFromMap(data map[string]interface{}) (*FhirDecimal, error) {
+	value, ok := data["value"].(float64)
+	if !ok {
+		return nil, errors.New("invalid or missing value for FhirDecimal")
+	}
+
+	decimal := &FhirDecimal{Value: &value}
+
+	if elementData, ok := data["_value"].(map[string]interface{}); ok {
+		decimal.Element = &Element{}
+		if err := mapToStruct(elementData, decimal.Element); err != nil {
+			return nil, fmt.Errorf("failed to parse _value for FhirDecimal: %v", err)
+		}
+	}
+
+	return decimal, nil
 }
 
 // UnmarshalJSON deserializes JSON into FhirDecimal.

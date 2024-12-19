@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // DeviceUseStatement
 // A record of a device being used by a patient where the record is the result of a report from the patient or another clinician.
 type DeviceUseStatement struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -34,22 +35,145 @@ type DeviceUseStatement struct {
 	Note []*Annotation `json:"note,omitempty"`
 }
 
-// NewDeviceUseStatement creates a new DeviceUseStatement instance
+// NewDeviceUseStatement creates a new DeviceUseStatement instance.
 func NewDeviceUseStatement() *DeviceUseStatement {
 	return &DeviceUseStatement{}
 }
 
-// FromJSON populates DeviceUseStatement from JSON data
+// FromJSON populates DeviceUseStatement from JSON data.
 func (m *DeviceUseStatement) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		Status *DeviceUseStatementStatus `json:"status,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		DerivedFrom []*Reference `json:"derivedfrom,omitempty"`
+		TimingTiming *Timing `json:"timingtiming,omitempty"`
+		TimingPeriod *Period `json:"timingperiod,omitempty"`
+		TimingDateTime *FhirDateTime `json:"timingdatetime,omitempty"`
+		RecordedOn *FhirDateTime `json:"recordedon,omitempty"`
+		Source *Reference `json:"source,omitempty"`
+		Device *Reference `json:"device,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		BodySite *CodeableConcept `json:"bodysite,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.BasedOn = temp.BasedOn
+	m.Status = temp.Status
+	m.Subject = temp.Subject
+	m.DerivedFrom = temp.DerivedFrom
+	m.TimingTiming = temp.TimingTiming
+	m.TimingPeriod = temp.TimingPeriod
+	m.TimingDateTime = temp.TimingDateTime
+	m.RecordedOn = temp.RecordedOn
+	m.Source = temp.Source
+	m.Device = temp.Device
+	m.ReasonCode = temp.ReasonCode
+	m.ReasonReference = temp.ReasonReference
+	m.BodySite = temp.BodySite
+	m.Note = temp.Note
+	return nil
 }
 
-// ToJSON converts DeviceUseStatement to JSON data
+// ToJSON converts DeviceUseStatement to JSON data.
 func (m *DeviceUseStatement) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		Status *DeviceUseStatementStatus `json:"status,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		DerivedFrom []*Reference `json:"derivedfrom,omitempty"`
+		TimingTiming *Timing `json:"timingtiming,omitempty"`
+		TimingPeriod *Period `json:"timingperiod,omitempty"`
+		TimingDateTime interface{} `json:"timingdatetime,omitempty"`
+		TimingDateTimeElement map[string]interface{} `json:"_timingdatetime,omitempty"`
+		RecordedOn interface{} `json:"recordedon,omitempty"`
+		RecordedOnElement map[string]interface{} `json:"_recordedon,omitempty"`
+		Source *Reference `json:"source,omitempty"`
+		Device *Reference `json:"device,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		BodySite *CodeableConcept `json:"bodysite,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.BasedOn = m.BasedOn
+	output.Status = m.Status
+	output.Subject = m.Subject
+	output.DerivedFrom = m.DerivedFrom
+	output.TimingTiming = m.TimingTiming
+	output.TimingPeriod = m.TimingPeriod
+	if m.TimingDateTime != nil && m.TimingDateTime.Value != nil {
+		output.TimingDateTime = m.TimingDateTime.Value
+		if m.TimingDateTime.Element != nil {
+			output.TimingDateTimeElement = toMapOrNil(m.TimingDateTime.Element.ToJSON())
+		}
+	}
+	if m.RecordedOn != nil && m.RecordedOn.Value != nil {
+		output.RecordedOn = m.RecordedOn.Value
+		if m.RecordedOn.Element != nil {
+			output.RecordedOnElement = toMapOrNil(m.RecordedOn.Element.ToJSON())
+		}
+	}
+	output.Source = m.Source
+	output.Device = m.Device
+	output.ReasonCode = m.ReasonCode
+	output.ReasonReference = m.ReasonReference
+	output.BodySite = m.BodySite
+	output.Note = m.Note
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DeviceUseStatement
+// Clone creates a deep copy of DeviceUseStatement.
 func (m *DeviceUseStatement) Clone() *DeviceUseStatement {
 	if m == nil { return nil }
 	return &DeviceUseStatement{
@@ -79,7 +203,7 @@ func (m *DeviceUseStatement) Clone() *DeviceUseStatement {
 	}
 }
 
-// Equals checks for equality with another DeviceUseStatement instance
+// Equals checks equality between two DeviceUseStatement instances.
 func (m *DeviceUseStatement) Equals(other *DeviceUseStatement) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

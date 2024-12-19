@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // MarketingStatus
 // The marketing status describes the date when a medicinal product is actually put on the market or the date as of which it is no longer available.
 type MarketingStatus struct {
-	BackboneType
+	extends BackboneType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -19,22 +20,73 @@ type MarketingStatus struct {
 	RestoreDate *FhirDateTime `json:"restoredate,omitempty"`
 }
 
-// NewMarketingStatus creates a new MarketingStatus instance
+// NewMarketingStatus creates a new MarketingStatus instance.
 func NewMarketingStatus() *MarketingStatus {
 	return &MarketingStatus{}
 }
 
-// FromJSON populates MarketingStatus from JSON data
+// FromJSON populates MarketingStatus from JSON data.
 func (m *MarketingStatus) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Country *CodeableConcept `json:"country,omitempty"`
+		Jurisdiction *CodeableConcept `json:"jurisdiction,omitempty"`
+		Status *CodeableConcept `json:"status,omitempty"`
+		DateRange *Period `json:"daterange,omitempty"`
+		RestoreDate *FhirDateTime `json:"restoredate,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Country = temp.Country
+	m.Jurisdiction = temp.Jurisdiction
+	m.Status = temp.Status
+	m.DateRange = temp.DateRange
+	m.RestoreDate = temp.RestoreDate
+	return nil
 }
 
-// ToJSON converts MarketingStatus to JSON data
+// ToJSON converts MarketingStatus to JSON data.
 func (m *MarketingStatus) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Country *CodeableConcept `json:"country,omitempty"`
+		Jurisdiction *CodeableConcept `json:"jurisdiction,omitempty"`
+		Status *CodeableConcept `json:"status,omitempty"`
+		DateRange *Period `json:"daterange,omitempty"`
+		RestoreDate interface{} `json:"restoredate,omitempty"`
+		RestoreDateElement map[string]interface{} `json:"_restoredate,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Country = m.Country
+	output.Jurisdiction = m.Jurisdiction
+	output.Status = m.Status
+	output.DateRange = m.DateRange
+	if m.RestoreDate != nil && m.RestoreDate.Value != nil {
+		output.RestoreDate = m.RestoreDate.Value
+		if m.RestoreDate.Element != nil {
+			output.RestoreDateElement = toMapOrNil(m.RestoreDate.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MarketingStatus
+// Clone creates a deep copy of MarketingStatus.
 func (m *MarketingStatus) Clone() *MarketingStatus {
 	if m == nil { return nil }
 	return &MarketingStatus{
@@ -49,7 +101,7 @@ func (m *MarketingStatus) Clone() *MarketingStatus {
 	}
 }
 
-// Equals checks for equality with another MarketingStatus instance
+// Equals checks equality between two MarketingStatus instances.
 func (m *MarketingStatus) Equals(other *MarketingStatus) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

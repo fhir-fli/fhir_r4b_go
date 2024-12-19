@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Distance
 // A length - a value with a unit that is a physical distance.
 type Distance struct {
-	Quantity
+	extends Quantity
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	Value *FhirDecimal `json:"value,omitempty"`
@@ -18,22 +19,87 @@ type Distance struct {
 	Code *FhirCode `json:"code,omitempty"`
 }
 
-// NewDistance creates a new Distance instance
+// NewDistance creates a new Distance instance.
 func NewDistance() *Distance {
 	return &Distance{}
 }
 
-// FromJSON populates Distance from JSON data
+// FromJSON populates Distance from JSON data.
 func (m *Distance) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Value *FhirDecimal `json:"value,omitempty"`
+		Comparator *QuantityComparator `json:"comparator,omitempty"`
+		Unit *FhirString `json:"unit,omitempty"`
+		System *FhirUri `json:"system,omitempty"`
+		Code *FhirCode `json:"code,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.Value = temp.Value
+	m.Comparator = temp.Comparator
+	m.Unit = temp.Unit
+	m.System = temp.System
+	m.Code = temp.Code
+	return nil
 }
 
-// ToJSON converts Distance to JSON data
+// ToJSON converts Distance to JSON data.
 func (m *Distance) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Value interface{} `json:"value,omitempty"`
+		ValueElement map[string]interface{} `json:"_value,omitempty"`
+		Comparator *QuantityComparator `json:"comparator,omitempty"`
+		Unit interface{} `json:"unit,omitempty"`
+		UnitElement map[string]interface{} `json:"_unit,omitempty"`
+		System interface{} `json:"system,omitempty"`
+		SystemElement map[string]interface{} `json:"_system,omitempty"`
+		Code interface{} `json:"code,omitempty"`
+		CodeElement map[string]interface{} `json:"_code,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	if m.Value != nil && m.Value.Value != nil {
+		output.Value = m.Value.Value
+		if m.Value.Element != nil {
+			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+		}
+	}
+	output.Comparator = m.Comparator
+	if m.Unit != nil && m.Unit.Value != nil {
+		output.Unit = m.Unit.Value
+		if m.Unit.Element != nil {
+			output.UnitElement = toMapOrNil(m.Unit.Element.ToJSON())
+		}
+	}
+	if m.System != nil && m.System.Value != nil {
+		output.System = m.System.Value
+		if m.System.Element != nil {
+			output.SystemElement = toMapOrNil(m.System.Element.ToJSON())
+		}
+	}
+	if m.Code != nil && m.Code.Value != nil {
+		output.Code = m.Code.Value
+		if m.Code.Element != nil {
+			output.CodeElement = toMapOrNil(m.Code.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Distance
+// Clone creates a deep copy of Distance.
 func (m *Distance) Clone() *Distance {
 	if m == nil { return nil }
 	return &Distance{
@@ -47,7 +113,7 @@ func (m *Distance) Clone() *Distance {
 	}
 }
 
-// Equals checks for equality with another Distance instance
+// Equals checks equality between two Distance instances.
 func (m *Distance) Equals(other *Distance) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

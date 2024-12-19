@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // ContactPoint
 // Details for all kinds of technology mediated contact points for a person or organization, including telephone, email, etc.
 type ContactPoint struct {
-	DataType
+	extends DataType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	System *ContactPointSystem `json:"system,omitempty"`
@@ -18,22 +19,75 @@ type ContactPoint struct {
 	Period *Period `json:"period,omitempty"`
 }
 
-// NewContactPoint creates a new ContactPoint instance
+// NewContactPoint creates a new ContactPoint instance.
 func NewContactPoint() *ContactPoint {
 	return &ContactPoint{}
 }
 
-// FromJSON populates ContactPoint from JSON data
+// FromJSON populates ContactPoint from JSON data.
 func (m *ContactPoint) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		System *ContactPointSystem `json:"system,omitempty"`
+		Value *FhirString `json:"value,omitempty"`
+		Use *ContactPointUse `json:"use,omitempty"`
+		Rank *FhirPositiveInt `json:"rank,omitempty"`
+		Period *Period `json:"period,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.System = temp.System
+	m.Value = temp.Value
+	m.Use = temp.Use
+	m.Rank = temp.Rank
+	m.Period = temp.Period
+	return nil
 }
 
-// ToJSON converts ContactPoint to JSON data
+// ToJSON converts ContactPoint to JSON data.
 func (m *ContactPoint) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		System *ContactPointSystem `json:"system,omitempty"`
+		Value interface{} `json:"value,omitempty"`
+		ValueElement map[string]interface{} `json:"_value,omitempty"`
+		Use *ContactPointUse `json:"use,omitempty"`
+		Rank interface{} `json:"rank,omitempty"`
+		RankElement map[string]interface{} `json:"_rank,omitempty"`
+		Period *Period `json:"period,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.System = m.System
+	if m.Value != nil && m.Value.Value != nil {
+		output.Value = m.Value.Value
+		if m.Value.Element != nil {
+			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+		}
+	}
+	output.Use = m.Use
+	if m.Rank != nil && m.Rank.Value != nil {
+		output.Rank = m.Rank.Value
+		if m.Rank.Element != nil {
+			output.RankElement = toMapOrNil(m.Rank.Element.ToJSON())
+		}
+	}
+	output.Period = m.Period
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ContactPoint
+// Clone creates a deep copy of ContactPoint.
 func (m *ContactPoint) Clone() *ContactPoint {
 	if m == nil { return nil }
 	return &ContactPoint{
@@ -47,7 +101,7 @@ func (m *ContactPoint) Clone() *ContactPoint {
 	}
 }
 
-// Equals checks for equality with another ContactPoint instance
+// Equals checks equality between two ContactPoint instances.
 func (m *ContactPoint) Equals(other *ContactPoint) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

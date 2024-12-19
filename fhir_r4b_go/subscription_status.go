@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // SubscriptionStatus
 // The SubscriptionStatus resource describes the state of a Subscription during notifications.
 type SubscriptionStatus struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -26,22 +27,113 @@ type SubscriptionStatus struct {
 	Error []*CodeableConcept `json:"error,omitempty"`
 }
 
-// NewSubscriptionStatus creates a new SubscriptionStatus instance
+// NewSubscriptionStatus creates a new SubscriptionStatus instance.
 func NewSubscriptionStatus() *SubscriptionStatus {
 	return &SubscriptionStatus{}
 }
 
-// FromJSON populates SubscriptionStatus from JSON data
+// FromJSON populates SubscriptionStatus from JSON data.
 func (m *SubscriptionStatus) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Status *SubscriptionStatusCodes `json:"status,omitempty"`
+		Type *SubscriptionNotificationType `json:"type,omitempty"`
+		EventsSinceSubscriptionStart *FhirString `json:"eventssincesubscriptionstart,omitempty"`
+		NotificationEvent []*SubscriptionStatusNotificationEvent `json:"notificationevent,omitempty"`
+		Subscription *Reference `json:"subscription,omitempty"`
+		Topic *FhirCanonical `json:"topic,omitempty"`
+		Error []*CodeableConcept `json:"error,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Status = temp.Status
+	m.Type = temp.Type
+	m.EventsSinceSubscriptionStart = temp.EventsSinceSubscriptionStart
+	m.NotificationEvent = temp.NotificationEvent
+	m.Subscription = temp.Subscription
+	m.Topic = temp.Topic
+	m.Error = temp.Error
+	return nil
 }
 
-// ToJSON converts SubscriptionStatus to JSON data
+// ToJSON converts SubscriptionStatus to JSON data.
 func (m *SubscriptionStatus) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Status *SubscriptionStatusCodes `json:"status,omitempty"`
+		Type *SubscriptionNotificationType `json:"type,omitempty"`
+		EventsSinceSubscriptionStart interface{} `json:"eventssincesubscriptionstart,omitempty"`
+		EventsSinceSubscriptionStartElement map[string]interface{} `json:"_eventssincesubscriptionstart,omitempty"`
+		NotificationEvent []*SubscriptionStatusNotificationEvent `json:"notificationevent,omitempty"`
+		Subscription *Reference `json:"subscription,omitempty"`
+		Topic interface{} `json:"topic,omitempty"`
+		TopicElement map[string]interface{} `json:"_topic,omitempty"`
+		Error []*CodeableConcept `json:"error,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Status = m.Status
+	output.Type = m.Type
+	if m.EventsSinceSubscriptionStart != nil && m.EventsSinceSubscriptionStart.Value != nil {
+		output.EventsSinceSubscriptionStart = m.EventsSinceSubscriptionStart.Value
+		if m.EventsSinceSubscriptionStart.Element != nil {
+			output.EventsSinceSubscriptionStartElement = toMapOrNil(m.EventsSinceSubscriptionStart.Element.ToJSON())
+		}
+	}
+	output.NotificationEvent = m.NotificationEvent
+	output.Subscription = m.Subscription
+	if m.Topic != nil && m.Topic.Value != nil {
+		output.Topic = m.Topic.Value
+		if m.Topic.Element != nil {
+			output.TopicElement = toMapOrNil(m.Topic.Element.ToJSON())
+		}
+	}
+	output.Error = m.Error
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SubscriptionStatus
+// Clone creates a deep copy of SubscriptionStatus.
 func (m *SubscriptionStatus) Clone() *SubscriptionStatus {
 	if m == nil { return nil }
 	return &SubscriptionStatus{
@@ -63,7 +155,7 @@ func (m *SubscriptionStatus) Clone() *SubscriptionStatus {
 	}
 }
 
-// Equals checks for equality with another SubscriptionStatus instance
+// Equals checks equality between two SubscriptionStatus instances.
 func (m *SubscriptionStatus) Equals(other *SubscriptionStatus) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -88,7 +180,7 @@ func (m *SubscriptionStatus) Equals(other *SubscriptionStatus) bool {
 // SubscriptionStatusNotificationEvent
 // Detailed information about events relevant to this subscription notification.
 type SubscriptionStatusNotificationEvent struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -98,22 +190,75 @@ type SubscriptionStatusNotificationEvent struct {
 	AdditionalContext []*Reference `json:"additionalcontext,omitempty"`
 }
 
-// NewSubscriptionStatusNotificationEvent creates a new SubscriptionStatusNotificationEvent instance
+// NewSubscriptionStatusNotificationEvent creates a new SubscriptionStatusNotificationEvent instance.
 func NewSubscriptionStatusNotificationEvent() *SubscriptionStatusNotificationEvent {
 	return &SubscriptionStatusNotificationEvent{}
 }
 
-// FromJSON populates SubscriptionStatusNotificationEvent from JSON data
+// FromJSON populates SubscriptionStatusNotificationEvent from JSON data.
 func (m *SubscriptionStatusNotificationEvent) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		EventNumber *FhirString `json:"eventnumber,omitempty"`
+		Timestamp *FhirInstant `json:"timestamp,omitempty"`
+		Focus *Reference `json:"focus,omitempty"`
+		AdditionalContext []*Reference `json:"additionalcontext,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.EventNumber = temp.EventNumber
+	m.Timestamp = temp.Timestamp
+	m.Focus = temp.Focus
+	m.AdditionalContext = temp.AdditionalContext
+	return nil
 }
 
-// ToJSON converts SubscriptionStatusNotificationEvent to JSON data
+// ToJSON converts SubscriptionStatusNotificationEvent to JSON data.
 func (m *SubscriptionStatusNotificationEvent) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		EventNumber interface{} `json:"eventnumber,omitempty"`
+		EventNumberElement map[string]interface{} `json:"_eventnumber,omitempty"`
+		Timestamp interface{} `json:"timestamp,omitempty"`
+		TimestampElement map[string]interface{} `json:"_timestamp,omitempty"`
+		Focus *Reference `json:"focus,omitempty"`
+		AdditionalContext []*Reference `json:"additionalcontext,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.EventNumber != nil && m.EventNumber.Value != nil {
+		output.EventNumber = m.EventNumber.Value
+		if m.EventNumber.Element != nil {
+			output.EventNumberElement = toMapOrNil(m.EventNumber.Element.ToJSON())
+		}
+	}
+	if m.Timestamp != nil && m.Timestamp.Value != nil {
+		output.Timestamp = m.Timestamp.Value
+		if m.Timestamp.Element != nil {
+			output.TimestampElement = toMapOrNil(m.Timestamp.Element.ToJSON())
+		}
+	}
+	output.Focus = m.Focus
+	output.AdditionalContext = m.AdditionalContext
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SubscriptionStatusNotificationEvent
+// Clone creates a deep copy of SubscriptionStatusNotificationEvent.
 func (m *SubscriptionStatusNotificationEvent) Clone() *SubscriptionStatusNotificationEvent {
 	if m == nil { return nil }
 	return &SubscriptionStatusNotificationEvent{
@@ -127,7 +272,7 @@ func (m *SubscriptionStatusNotificationEvent) Clone() *SubscriptionStatusNotific
 	}
 }
 
-// Equals checks for equality with another SubscriptionStatusNotificationEvent instance
+// Equals checks equality between two SubscriptionStatusNotificationEvent instances.
 func (m *SubscriptionStatusNotificationEvent) Equals(other *SubscriptionStatusNotificationEvent) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

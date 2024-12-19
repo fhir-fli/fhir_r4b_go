@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // MessageDefinition
 // Defines the characteristics of a message that can be shared between systems, including the type of event that initiates the message, the content to be transmitted and what response(s), if any, are permitted.
 type MessageDefinition struct {
-	CanonicalResource
+	extends CanonicalResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -44,22 +46,308 @@ type MessageDefinition struct {
 	Graph []*FhirCanonical `json:"graph,omitempty"`
 }
 
-// NewMessageDefinition creates a new MessageDefinition instance
+// NewMessageDefinition creates a new MessageDefinition instance.
 func NewMessageDefinition() *MessageDefinition {
 	return &MessageDefinition{}
 }
 
-// FromJSON populates MessageDefinition from JSON data
+// FromJSON populates MessageDefinition from JSON data.
 func (m *MessageDefinition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Replaces []interface{} `json:"replaces,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental *FhirBoolean `json:"experimental,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Publisher *FhirString `json:"publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose *FhirMarkdown `json:"purpose,omitempty"`
+		Copyright *FhirMarkdown `json:"copyright,omitempty"`
+		Base *FhirCanonical `json:"base,omitempty"`
+		Parent []interface{} `json:"parent,omitempty"`
+		EventCoding *Coding `json:"eventcoding,omitempty"`
+		EventUri *FhirUri `json:"eventuri,omitempty"`
+		Category *MessageSignificanceCategory `json:"category,omitempty"`
+		Focus []*MessageDefinitionFocus `json:"focus,omitempty"`
+		ResponseRequired *MessageheaderResponseRequest `json:"responserequired,omitempty"`
+		AllowedResponse []*MessageDefinitionAllowedResponse `json:"allowedresponse,omitempty"`
+		Graph []interface{} `json:"graph,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Url = temp.Url
+	m.Identifier = temp.Identifier
+	m.Version = temp.Version
+	m.Name = temp.Name
+	m.Title = temp.Title
+	if len(temp.Replaces) > 0 {
+		m.Replaces = make([]*FhirCanonical, len(temp.Replaces))
+		for i := range temp.Replaces {
+			itemMap, ok := temp.Replaces[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Replaces[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Replaces[%d]: %v", i, err) }
+			m.Replaces[i] = primitive
+		}
+	}
+	m.Status = temp.Status
+	m.Experimental = temp.Experimental
+	m.Date = temp.Date
+	m.Publisher = temp.Publisher
+	m.Contact = temp.Contact
+	m.Description = temp.Description
+	m.UseContext = temp.UseContext
+	m.Jurisdiction = temp.Jurisdiction
+	m.Purpose = temp.Purpose
+	m.Copyright = temp.Copyright
+	m.Base = temp.Base
+	if len(temp.Parent) > 0 {
+		m.Parent = make([]*FhirCanonical, len(temp.Parent))
+		for i := range temp.Parent {
+			itemMap, ok := temp.Parent[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Parent[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Parent[%d]: %v", i, err) }
+			m.Parent[i] = primitive
+		}
+	}
+	m.EventCoding = temp.EventCoding
+	m.EventUri = temp.EventUri
+	m.Category = temp.Category
+	m.Focus = temp.Focus
+	m.ResponseRequired = temp.ResponseRequired
+	m.AllowedResponse = temp.AllowedResponse
+	if len(temp.Graph) > 0 {
+		m.Graph = make([]*FhirCanonical, len(temp.Graph))
+		for i := range temp.Graph {
+			itemMap, ok := temp.Graph[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Graph[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Graph[%d]: %v", i, err) }
+			m.Graph[i] = primitive
+		}
+	}
+	return nil
 }
 
-// ToJSON converts MessageDefinition to JSON data
+// ToJSON converts MessageDefinition to JSON data.
 func (m *MessageDefinition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Replaces []interface{} `json:"replaces,omitempty"`
+		ReplacesElement []map[string]interface{} `json:"_replaces,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental interface{} `json:"experimental,omitempty"`
+		ExperimentalElement map[string]interface{} `json:"_experimental,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Publisher interface{} `json:"publisher,omitempty"`
+		PublisherElement map[string]interface{} `json:"_publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose interface{} `json:"purpose,omitempty"`
+		PurposeElement map[string]interface{} `json:"_purpose,omitempty"`
+		Copyright interface{} `json:"copyright,omitempty"`
+		CopyrightElement map[string]interface{} `json:"_copyright,omitempty"`
+		Base interface{} `json:"base,omitempty"`
+		BaseElement map[string]interface{} `json:"_base,omitempty"`
+		Parent []interface{} `json:"parent,omitempty"`
+		ParentElement []map[string]interface{} `json:"_parent,omitempty"`
+		EventCoding *Coding `json:"eventcoding,omitempty"`
+		EventUri interface{} `json:"eventuri,omitempty"`
+		EventUriElement map[string]interface{} `json:"_eventuri,omitempty"`
+		Category *MessageSignificanceCategory `json:"category,omitempty"`
+		Focus []*MessageDefinitionFocus `json:"focus,omitempty"`
+		ResponseRequired *MessageheaderResponseRequest `json:"responserequired,omitempty"`
+		AllowedResponse []*MessageDefinitionAllowedResponse `json:"allowedresponse,omitempty"`
+		Graph []interface{} `json:"graph,omitempty"`
+		GraphElement []map[string]interface{} `json:"_graph,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	output.Identifier = m.Identifier
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	if len(m.Replaces) > 0 {
+		output.Replaces = make([]interface{}, len(m.Replaces))
+		output.ReplacesElement = make([]map[string]interface{}, len(m.Replaces))
+		for i, item := range m.Replaces {
+			if item != nil && item.Value != nil {
+				output.Replaces[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.ReplacesElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Status = m.Status
+	if m.Experimental != nil && m.Experimental.Value != nil {
+		output.Experimental = m.Experimental.Value
+		if m.Experimental.Element != nil {
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+		}
+	}
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.Publisher != nil && m.Publisher.Value != nil {
+		output.Publisher = m.Publisher.Value
+		if m.Publisher.Element != nil {
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+		}
+	}
+	output.Contact = m.Contact
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.UseContext = m.UseContext
+	output.Jurisdiction = m.Jurisdiction
+	if m.Purpose != nil && m.Purpose.Value != nil {
+		output.Purpose = m.Purpose.Value
+		if m.Purpose.Element != nil {
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+		}
+	}
+	if m.Copyright != nil && m.Copyright.Value != nil {
+		output.Copyright = m.Copyright.Value
+		if m.Copyright.Element != nil {
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+		}
+	}
+	if m.Base != nil && m.Base.Value != nil {
+		output.Base = m.Base.Value
+		if m.Base.Element != nil {
+			output.BaseElement = toMapOrNil(m.Base.Element.ToJSON())
+		}
+	}
+	if len(m.Parent) > 0 {
+		output.Parent = make([]interface{}, len(m.Parent))
+		output.ParentElement = make([]map[string]interface{}, len(m.Parent))
+		for i, item := range m.Parent {
+			if item != nil && item.Value != nil {
+				output.Parent[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.ParentElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.EventCoding = m.EventCoding
+	if m.EventUri != nil && m.EventUri.Value != nil {
+		output.EventUri = m.EventUri.Value
+		if m.EventUri.Element != nil {
+			output.EventUriElement = toMapOrNil(m.EventUri.Element.ToJSON())
+		}
+	}
+	output.Category = m.Category
+	output.Focus = m.Focus
+	output.ResponseRequired = m.ResponseRequired
+	output.AllowedResponse = m.AllowedResponse
+	if len(m.Graph) > 0 {
+		output.Graph = make([]interface{}, len(m.Graph))
+		output.GraphElement = make([]map[string]interface{}, len(m.Graph))
+		for i, item := range m.Graph {
+			if item != nil && item.Value != nil {
+				output.Graph[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.GraphElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MessageDefinition
+// Clone creates a deep copy of MessageDefinition.
 func (m *MessageDefinition) Clone() *MessageDefinition {
 	if m == nil { return nil }
 	return &MessageDefinition{
@@ -99,7 +387,7 @@ func (m *MessageDefinition) Clone() *MessageDefinition {
 	}
 }
 
-// Equals checks for equality with another MessageDefinition instance
+// Equals checks equality between two MessageDefinition instances.
 func (m *MessageDefinition) Equals(other *MessageDefinition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -142,7 +430,7 @@ func (m *MessageDefinition) Equals(other *MessageDefinition) bool {
 // MessageDefinitionFocus
 // Identifies the resource (or resources) that are being addressed by the event.  For example, the Encounter for an admit message or two Account records for a merge.
 type MessageDefinitionFocus struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -152,22 +440,87 @@ type MessageDefinitionFocus struct {
 	Max *FhirString `json:"max,omitempty"`
 }
 
-// NewMessageDefinitionFocus creates a new MessageDefinitionFocus instance
+// NewMessageDefinitionFocus creates a new MessageDefinitionFocus instance.
 func NewMessageDefinitionFocus() *MessageDefinitionFocus {
 	return &MessageDefinitionFocus{}
 }
 
-// FromJSON populates MessageDefinitionFocus from JSON data
+// FromJSON populates MessageDefinitionFocus from JSON data.
 func (m *MessageDefinitionFocus) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *FhirCode `json:"code,omitempty"`
+		Profile *FhirCanonical `json:"profile,omitempty"`
+		Min *FhirUnsignedInt `json:"min,omitempty"`
+		Max *FhirString `json:"max,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Profile = temp.Profile
+	m.Min = temp.Min
+	m.Max = temp.Max
+	return nil
 }
 
-// ToJSON converts MessageDefinitionFocus to JSON data
+// ToJSON converts MessageDefinitionFocus to JSON data.
 func (m *MessageDefinitionFocus) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code interface{} `json:"code,omitempty"`
+		CodeElement map[string]interface{} `json:"_code,omitempty"`
+		Profile interface{} `json:"profile,omitempty"`
+		ProfileElement map[string]interface{} `json:"_profile,omitempty"`
+		Min interface{} `json:"min,omitempty"`
+		MinElement map[string]interface{} `json:"_min,omitempty"`
+		Max interface{} `json:"max,omitempty"`
+		MaxElement map[string]interface{} `json:"_max,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Code != nil && m.Code.Value != nil {
+		output.Code = m.Code.Value
+		if m.Code.Element != nil {
+			output.CodeElement = toMapOrNil(m.Code.Element.ToJSON())
+		}
+	}
+	if m.Profile != nil && m.Profile.Value != nil {
+		output.Profile = m.Profile.Value
+		if m.Profile.Element != nil {
+			output.ProfileElement = toMapOrNil(m.Profile.Element.ToJSON())
+		}
+	}
+	if m.Min != nil && m.Min.Value != nil {
+		output.Min = m.Min.Value
+		if m.Min.Element != nil {
+			output.MinElement = toMapOrNil(m.Min.Element.ToJSON())
+		}
+	}
+	if m.Max != nil && m.Max.Value != nil {
+		output.Max = m.Max.Value
+		if m.Max.Element != nil {
+			output.MaxElement = toMapOrNil(m.Max.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MessageDefinitionFocus
+// Clone creates a deep copy of MessageDefinitionFocus.
 func (m *MessageDefinitionFocus) Clone() *MessageDefinitionFocus {
 	if m == nil { return nil }
 	return &MessageDefinitionFocus{
@@ -181,7 +534,7 @@ func (m *MessageDefinitionFocus) Clone() *MessageDefinitionFocus {
 	}
 }
 
-// Equals checks for equality with another MessageDefinitionFocus instance
+// Equals checks equality between two MessageDefinitionFocus instances.
 func (m *MessageDefinitionFocus) Equals(other *MessageDefinitionFocus) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -198,7 +551,7 @@ func (m *MessageDefinitionFocus) Equals(other *MessageDefinitionFocus) bool {
 // MessageDefinitionAllowedResponse
 // Indicates what types of messages may be sent as an application-level response to this message.
 type MessageDefinitionAllowedResponse struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -206,22 +559,67 @@ type MessageDefinitionAllowedResponse struct {
 	Situation *FhirMarkdown `json:"situation,omitempty"`
 }
 
-// NewMessageDefinitionAllowedResponse creates a new MessageDefinitionAllowedResponse instance
+// NewMessageDefinitionAllowedResponse creates a new MessageDefinitionAllowedResponse instance.
 func NewMessageDefinitionAllowedResponse() *MessageDefinitionAllowedResponse {
 	return &MessageDefinitionAllowedResponse{}
 }
 
-// FromJSON populates MessageDefinitionAllowedResponse from JSON data
+// FromJSON populates MessageDefinitionAllowedResponse from JSON data.
 func (m *MessageDefinitionAllowedResponse) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Message *FhirCanonical `json:"message,omitempty"`
+		Situation *FhirMarkdown `json:"situation,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Message = temp.Message
+	m.Situation = temp.Situation
+	return nil
 }
 
-// ToJSON converts MessageDefinitionAllowedResponse to JSON data
+// ToJSON converts MessageDefinitionAllowedResponse to JSON data.
 func (m *MessageDefinitionAllowedResponse) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Message interface{} `json:"message,omitempty"`
+		MessageElement map[string]interface{} `json:"_message,omitempty"`
+		Situation interface{} `json:"situation,omitempty"`
+		SituationElement map[string]interface{} `json:"_situation,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Message != nil && m.Message.Value != nil {
+		output.Message = m.Message.Value
+		if m.Message.Element != nil {
+			output.MessageElement = toMapOrNil(m.Message.Element.ToJSON())
+		}
+	}
+	if m.Situation != nil && m.Situation.Value != nil {
+		output.Situation = m.Situation.Value
+		if m.Situation.Element != nil {
+			output.SituationElement = toMapOrNil(m.Situation.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MessageDefinitionAllowedResponse
+// Clone creates a deep copy of MessageDefinitionAllowedResponse.
 func (m *MessageDefinitionAllowedResponse) Clone() *MessageDefinitionAllowedResponse {
 	if m == nil { return nil }
 	return &MessageDefinitionAllowedResponse{
@@ -233,7 +631,7 @@ func (m *MessageDefinitionAllowedResponse) Clone() *MessageDefinitionAllowedResp
 	}
 }
 
-// Equals checks for equality with another MessageDefinitionAllowedResponse instance
+// Equals checks equality between two MessageDefinitionAllowedResponse instances.
 func (m *MessageDefinitionAllowedResponse) Equals(other *MessageDefinitionAllowedResponse) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

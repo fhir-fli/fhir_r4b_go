@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // Communication
 // An occurrence of information being transmitted; e.g. an alert that was sent to a responsible provider, a public health agency that was notified about a reportable condition.
 type Communication struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -42,22 +44,219 @@ type Communication struct {
 	Note []*Annotation `json:"note,omitempty"`
 }
 
-// NewCommunication creates a new Communication instance
+// NewCommunication creates a new Communication instance.
 func NewCommunication() *Communication {
 	return &Communication{}
 }
 
-// FromJSON populates Communication from JSON data
+// FromJSON populates Communication from JSON data.
 func (m *Communication) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		InstantiatesCanonical []interface{} `json:"instantiatescanonical,omitempty"`
+		InstantiatesUri []interface{} `json:"instantiatesuri,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		PartOf []*Reference `json:"partof,omitempty"`
+		InResponseTo []*Reference `json:"inresponseto,omitempty"`
+		Status *EventStatus `json:"status,omitempty"`
+		StatusReason *CodeableConcept `json:"statusreason,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Priority *RequestPriority `json:"priority,omitempty"`
+		Medium []*CodeableConcept `json:"medium,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Topic *CodeableConcept `json:"topic,omitempty"`
+		About []*Reference `json:"about,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		Sent *FhirDateTime `json:"sent,omitempty"`
+		Received *FhirDateTime `json:"received,omitempty"`
+		Recipient []*Reference `json:"recipient,omitempty"`
+		Sender *Reference `json:"sender,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		Payload []*CommunicationPayload `json:"payload,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	if len(temp.InstantiatesCanonical) > 0 {
+		m.InstantiatesCanonical = make([]*FhirCanonical, len(temp.InstantiatesCanonical))
+		for i := range temp.InstantiatesCanonical {
+			itemMap, ok := temp.InstantiatesCanonical[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for InstantiatesCanonical[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse InstantiatesCanonical[%d]: %v", i, err) }
+			m.InstantiatesCanonical[i] = primitive
+		}
+	}
+	if len(temp.InstantiatesUri) > 0 {
+		m.InstantiatesUri = make([]*FhirUri, len(temp.InstantiatesUri))
+		for i := range temp.InstantiatesUri {
+			itemMap, ok := temp.InstantiatesUri[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for InstantiatesUri[%d]: expected map", i) }
+			primitive, err := NewFhirUriFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse InstantiatesUri[%d]: %v", i, err) }
+			m.InstantiatesUri[i] = primitive
+		}
+	}
+	m.BasedOn = temp.BasedOn
+	m.PartOf = temp.PartOf
+	m.InResponseTo = temp.InResponseTo
+	m.Status = temp.Status
+	m.StatusReason = temp.StatusReason
+	m.Category = temp.Category
+	m.Priority = temp.Priority
+	m.Medium = temp.Medium
+	m.Subject = temp.Subject
+	m.Topic = temp.Topic
+	m.About = temp.About
+	m.Encounter = temp.Encounter
+	m.Sent = temp.Sent
+	m.Received = temp.Received
+	m.Recipient = temp.Recipient
+	m.Sender = temp.Sender
+	m.ReasonCode = temp.ReasonCode
+	m.ReasonReference = temp.ReasonReference
+	m.Payload = temp.Payload
+	m.Note = temp.Note
+	return nil
 }
 
-// ToJSON converts Communication to JSON data
+// ToJSON converts Communication to JSON data.
 func (m *Communication) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		InstantiatesCanonical []interface{} `json:"instantiatescanonical,omitempty"`
+		InstantiatesCanonicalElement []map[string]interface{} `json:"_instantiatescanonical,omitempty"`
+		InstantiatesUri []interface{} `json:"instantiatesuri,omitempty"`
+		InstantiatesUriElement []map[string]interface{} `json:"_instantiatesuri,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		PartOf []*Reference `json:"partof,omitempty"`
+		InResponseTo []*Reference `json:"inresponseto,omitempty"`
+		Status *EventStatus `json:"status,omitempty"`
+		StatusReason *CodeableConcept `json:"statusreason,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Priority *RequestPriority `json:"priority,omitempty"`
+		Medium []*CodeableConcept `json:"medium,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Topic *CodeableConcept `json:"topic,omitempty"`
+		About []*Reference `json:"about,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		Sent interface{} `json:"sent,omitempty"`
+		SentElement map[string]interface{} `json:"_sent,omitempty"`
+		Received interface{} `json:"received,omitempty"`
+		ReceivedElement map[string]interface{} `json:"_received,omitempty"`
+		Recipient []*Reference `json:"recipient,omitempty"`
+		Sender *Reference `json:"sender,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		Payload []*CommunicationPayload `json:"payload,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	if len(m.InstantiatesCanonical) > 0 {
+		output.InstantiatesCanonical = make([]interface{}, len(m.InstantiatesCanonical))
+		output.InstantiatesCanonicalElement = make([]map[string]interface{}, len(m.InstantiatesCanonical))
+		for i, item := range m.InstantiatesCanonical {
+			if item != nil && item.Value != nil {
+				output.InstantiatesCanonical[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.InstantiatesCanonicalElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.InstantiatesUri) > 0 {
+		output.InstantiatesUri = make([]interface{}, len(m.InstantiatesUri))
+		output.InstantiatesUriElement = make([]map[string]interface{}, len(m.InstantiatesUri))
+		for i, item := range m.InstantiatesUri {
+			if item != nil && item.Value != nil {
+				output.InstantiatesUri[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.InstantiatesUriElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.BasedOn = m.BasedOn
+	output.PartOf = m.PartOf
+	output.InResponseTo = m.InResponseTo
+	output.Status = m.Status
+	output.StatusReason = m.StatusReason
+	output.Category = m.Category
+	output.Priority = m.Priority
+	output.Medium = m.Medium
+	output.Subject = m.Subject
+	output.Topic = m.Topic
+	output.About = m.About
+	output.Encounter = m.Encounter
+	if m.Sent != nil && m.Sent.Value != nil {
+		output.Sent = m.Sent.Value
+		if m.Sent.Element != nil {
+			output.SentElement = toMapOrNil(m.Sent.Element.ToJSON())
+		}
+	}
+	if m.Received != nil && m.Received.Value != nil {
+		output.Received = m.Received.Value
+		if m.Received.Element != nil {
+			output.ReceivedElement = toMapOrNil(m.Received.Element.ToJSON())
+		}
+	}
+	output.Recipient = m.Recipient
+	output.Sender = m.Sender
+	output.ReasonCode = m.ReasonCode
+	output.ReasonReference = m.ReasonReference
+	output.Payload = m.Payload
+	output.Note = m.Note
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Communication
+// Clone creates a deep copy of Communication.
 func (m *Communication) Clone() *Communication {
 	if m == nil { return nil }
 	return &Communication{
@@ -95,7 +294,7 @@ func (m *Communication) Clone() *Communication {
 	}
 }
 
-// Equals checks for equality with another Communication instance
+// Equals checks equality between two Communication instances.
 func (m *Communication) Equals(other *Communication) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -136,7 +335,7 @@ func (m *Communication) Equals(other *Communication) bool {
 // CommunicationPayload
 // Text, attachment(s), or resource(s) that was communicated to the recipient.
 type CommunicationPayload struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -145,22 +344,65 @@ type CommunicationPayload struct {
 	ContentReference *Reference `json:"contentreference,omitempty"`
 }
 
-// NewCommunicationPayload creates a new CommunicationPayload instance
+// NewCommunicationPayload creates a new CommunicationPayload instance.
 func NewCommunicationPayload() *CommunicationPayload {
 	return &CommunicationPayload{}
 }
 
-// FromJSON populates CommunicationPayload from JSON data
+// FromJSON populates CommunicationPayload from JSON data.
 func (m *CommunicationPayload) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ContentString *FhirString `json:"contentstring,omitempty"`
+		ContentAttachment *Attachment `json:"contentattachment,omitempty"`
+		ContentReference *Reference `json:"contentreference,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.ContentString = temp.ContentString
+	m.ContentAttachment = temp.ContentAttachment
+	m.ContentReference = temp.ContentReference
+	return nil
 }
 
-// ToJSON converts CommunicationPayload to JSON data
+// ToJSON converts CommunicationPayload to JSON data.
 func (m *CommunicationPayload) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ContentString interface{} `json:"contentstring,omitempty"`
+		ContentStringElement map[string]interface{} `json:"_contentstring,omitempty"`
+		ContentAttachment *Attachment `json:"contentattachment,omitempty"`
+		ContentReference *Reference `json:"contentreference,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.ContentString != nil && m.ContentString.Value != nil {
+		output.ContentString = m.ContentString.Value
+		if m.ContentString.Element != nil {
+			output.ContentStringElement = toMapOrNil(m.ContentString.Element.ToJSON())
+		}
+	}
+	output.ContentAttachment = m.ContentAttachment
+	output.ContentReference = m.ContentReference
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CommunicationPayload
+// Clone creates a deep copy of CommunicationPayload.
 func (m *CommunicationPayload) Clone() *CommunicationPayload {
 	if m == nil { return nil }
 	return &CommunicationPayload{
@@ -173,7 +415,7 @@ func (m *CommunicationPayload) Clone() *CommunicationPayload {
 	}
 }
 
-// Equals checks for equality with another CommunicationPayload instance
+// Equals checks equality between two CommunicationPayload instances.
 func (m *CommunicationPayload) Equals(other *CommunicationPayload) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

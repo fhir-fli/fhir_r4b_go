@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Medication
 // This resource is primarily used for the identification and definition of a medication for the purposes of prescribing, dispensing, and administering a medication as well as for making statements about medication use.
 type Medication struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -27,22 +28,105 @@ type Medication struct {
 	Batch *MedicationBatch `json:"batch,omitempty"`
 }
 
-// NewMedication creates a new Medication instance
+// NewMedication creates a new Medication instance.
 func NewMedication() *Medication {
 	return &Medication{}
 }
 
-// FromJSON populates Medication from JSON data
+// FromJSON populates Medication from JSON data.
 func (m *Medication) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Status *MedicationStatusCodes `json:"status,omitempty"`
+		Manufacturer *Reference `json:"manufacturer,omitempty"`
+		Form *CodeableConcept `json:"form,omitempty"`
+		Amount *Ratio `json:"amount,omitempty"`
+		Ingredient []*MedicationIngredient `json:"ingredient,omitempty"`
+		Batch *MedicationBatch `json:"batch,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Code = temp.Code
+	m.Status = temp.Status
+	m.Manufacturer = temp.Manufacturer
+	m.Form = temp.Form
+	m.Amount = temp.Amount
+	m.Ingredient = temp.Ingredient
+	m.Batch = temp.Batch
+	return nil
 }
 
-// ToJSON converts Medication to JSON data
+// ToJSON converts Medication to JSON data.
 func (m *Medication) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Status *MedicationStatusCodes `json:"status,omitempty"`
+		Manufacturer *Reference `json:"manufacturer,omitempty"`
+		Form *CodeableConcept `json:"form,omitempty"`
+		Amount *Ratio `json:"amount,omitempty"`
+		Ingredient []*MedicationIngredient `json:"ingredient,omitempty"`
+		Batch *MedicationBatch `json:"batch,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Code = m.Code
+	output.Status = m.Status
+	output.Manufacturer = m.Manufacturer
+	output.Form = m.Form
+	output.Amount = m.Amount
+	output.Ingredient = m.Ingredient
+	output.Batch = m.Batch
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Medication
+// Clone creates a deep copy of Medication.
 func (m *Medication) Clone() *Medication {
 	if m == nil { return nil }
 	return &Medication{
@@ -65,7 +149,7 @@ func (m *Medication) Clone() *Medication {
 	}
 }
 
-// Equals checks for equality with another Medication instance
+// Equals checks equality between two Medication instances.
 func (m *Medication) Equals(other *Medication) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -91,7 +175,7 @@ func (m *Medication) Equals(other *Medication) bool {
 // MedicationIngredient
 // Identifies a particular constituent of interest in the product.
 type MedicationIngredient struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -101,22 +185,69 @@ type MedicationIngredient struct {
 	Strength *Ratio `json:"strength,omitempty"`
 }
 
-// NewMedicationIngredient creates a new MedicationIngredient instance
+// NewMedicationIngredient creates a new MedicationIngredient instance.
 func NewMedicationIngredient() *MedicationIngredient {
 	return &MedicationIngredient{}
 }
 
-// FromJSON populates MedicationIngredient from JSON data
+// FromJSON populates MedicationIngredient from JSON data.
 func (m *MedicationIngredient) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ItemCodeableConcept *CodeableConcept `json:"itemcodeableconcept,omitempty"`
+		ItemReference *Reference `json:"itemreference,omitempty"`
+		IsActive *FhirBoolean `json:"isactive,omitempty"`
+		Strength *Ratio `json:"strength,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.ItemCodeableConcept = temp.ItemCodeableConcept
+	m.ItemReference = temp.ItemReference
+	m.IsActive = temp.IsActive
+	m.Strength = temp.Strength
+	return nil
 }
 
-// ToJSON converts MedicationIngredient to JSON data
+// ToJSON converts MedicationIngredient to JSON data.
 func (m *MedicationIngredient) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ItemCodeableConcept *CodeableConcept `json:"itemcodeableconcept,omitempty"`
+		ItemReference *Reference `json:"itemreference,omitempty"`
+		IsActive interface{} `json:"isactive,omitempty"`
+		IsActiveElement map[string]interface{} `json:"_isactive,omitempty"`
+		Strength *Ratio `json:"strength,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.ItemCodeableConcept = m.ItemCodeableConcept
+	output.ItemReference = m.ItemReference
+	if m.IsActive != nil && m.IsActive.Value != nil {
+		output.IsActive = m.IsActive.Value
+		if m.IsActive.Element != nil {
+			output.IsActiveElement = toMapOrNil(m.IsActive.Element.ToJSON())
+		}
+	}
+	output.Strength = m.Strength
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MedicationIngredient
+// Clone creates a deep copy of MedicationIngredient.
 func (m *MedicationIngredient) Clone() *MedicationIngredient {
 	if m == nil { return nil }
 	return &MedicationIngredient{
@@ -130,7 +261,7 @@ func (m *MedicationIngredient) Clone() *MedicationIngredient {
 	}
 }
 
-// Equals checks for equality with another MedicationIngredient instance
+// Equals checks equality between two MedicationIngredient instances.
 func (m *MedicationIngredient) Equals(other *MedicationIngredient) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -147,7 +278,7 @@ func (m *MedicationIngredient) Equals(other *MedicationIngredient) bool {
 // MedicationBatch
 // Information that only applies to packages (not products).
 type MedicationBatch struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -155,22 +286,67 @@ type MedicationBatch struct {
 	ExpirationDate *FhirDateTime `json:"expirationdate,omitempty"`
 }
 
-// NewMedicationBatch creates a new MedicationBatch instance
+// NewMedicationBatch creates a new MedicationBatch instance.
 func NewMedicationBatch() *MedicationBatch {
 	return &MedicationBatch{}
 }
 
-// FromJSON populates MedicationBatch from JSON data
+// FromJSON populates MedicationBatch from JSON data.
 func (m *MedicationBatch) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		LotNumber *FhirString `json:"lotnumber,omitempty"`
+		ExpirationDate *FhirDateTime `json:"expirationdate,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.LotNumber = temp.LotNumber
+	m.ExpirationDate = temp.ExpirationDate
+	return nil
 }
 
-// ToJSON converts MedicationBatch to JSON data
+// ToJSON converts MedicationBatch to JSON data.
 func (m *MedicationBatch) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		LotNumber interface{} `json:"lotnumber,omitempty"`
+		LotNumberElement map[string]interface{} `json:"_lotnumber,omitempty"`
+		ExpirationDate interface{} `json:"expirationdate,omitempty"`
+		ExpirationDateElement map[string]interface{} `json:"_expirationdate,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.LotNumber != nil && m.LotNumber.Value != nil {
+		output.LotNumber = m.LotNumber.Value
+		if m.LotNumber.Element != nil {
+			output.LotNumberElement = toMapOrNil(m.LotNumber.Element.ToJSON())
+		}
+	}
+	if m.ExpirationDate != nil && m.ExpirationDate.Value != nil {
+		output.ExpirationDate = m.ExpirationDate.Value
+		if m.ExpirationDate.Element != nil {
+			output.ExpirationDateElement = toMapOrNil(m.ExpirationDate.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MedicationBatch
+// Clone creates a deep copy of MedicationBatch.
 func (m *MedicationBatch) Clone() *MedicationBatch {
 	if m == nil { return nil }
 	return &MedicationBatch{
@@ -182,7 +358,7 @@ func (m *MedicationBatch) Clone() *MedicationBatch {
 	}
 }
 
-// Equals checks for equality with another MedicationBatch instance
+// Equals checks equality between two MedicationBatch instances.
 func (m *MedicationBatch) Equals(other *MedicationBatch) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

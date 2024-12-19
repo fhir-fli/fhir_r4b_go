@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // Measure
 // The Measure resource provides the definition of a quality measure.
 type Measure struct {
-	CanonicalResource
+	extends CanonicalResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -61,22 +63,403 @@ type Measure struct {
 	SupplementalData []*MeasureSupplementalData `json:"supplementaldata,omitempty"`
 }
 
-// NewMeasure creates a new Measure instance
+// NewMeasure creates a new Measure instance.
 func NewMeasure() *Measure {
 	return &Measure{}
 }
 
-// FromJSON populates Measure from JSON data
+// FromJSON populates Measure from JSON data.
 func (m *Measure) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Subtitle *FhirString `json:"subtitle,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental *FhirBoolean `json:"experimental,omitempty"`
+		SubjectCodeableConcept *CodeableConcept `json:"subjectcodeableconcept,omitempty"`
+		SubjectReference *Reference `json:"subjectreference,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Publisher *FhirString `json:"publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose *FhirMarkdown `json:"purpose,omitempty"`
+		Usage *FhirString `json:"usage,omitempty"`
+		Copyright *FhirMarkdown `json:"copyright,omitempty"`
+		ApprovalDate *FhirDate `json:"approvaldate,omitempty"`
+		LastReviewDate *FhirDate `json:"lastreviewdate,omitempty"`
+		EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+		Topic []*CodeableConcept `json:"topic,omitempty"`
+		Author []*ContactDetail `json:"author,omitempty"`
+		Editor []*ContactDetail `json:"editor,omitempty"`
+		Reviewer []*ContactDetail `json:"reviewer,omitempty"`
+		Endorser []*ContactDetail `json:"endorser,omitempty"`
+		RelatedArtifact []*RelatedArtifact `json:"relatedartifact,omitempty"`
+		Library_ []interface{} `json:"library,omitempty"`
+		Disclaimer *FhirMarkdown `json:"disclaimer,omitempty"`
+		Scoring *CodeableConcept `json:"scoring,omitempty"`
+		CompositeScoring *CodeableConcept `json:"compositescoring,omitempty"`
+		Type []*CodeableConcept `json:"type,omitempty"`
+		RiskAdjustment *FhirString `json:"riskadjustment,omitempty"`
+		RateAggregation *FhirString `json:"rateaggregation,omitempty"`
+		Rationale *FhirMarkdown `json:"rationale,omitempty"`
+		ClinicalRecommendationStatement *FhirMarkdown `json:"clinicalrecommendationstatement,omitempty"`
+		ImprovementNotation *CodeableConcept `json:"improvementnotation,omitempty"`
+		Definition []interface{} `json:"definition,omitempty"`
+		Guidance *FhirMarkdown `json:"guidance,omitempty"`
+		Group []*MeasureGroup `json:"group,omitempty"`
+		SupplementalData []*MeasureSupplementalData `json:"supplementaldata,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Url = temp.Url
+	m.Identifier = temp.Identifier
+	m.Version = temp.Version
+	m.Name = temp.Name
+	m.Title = temp.Title
+	m.Subtitle = temp.Subtitle
+	m.Status = temp.Status
+	m.Experimental = temp.Experimental
+	m.SubjectCodeableConcept = temp.SubjectCodeableConcept
+	m.SubjectReference = temp.SubjectReference
+	m.Date = temp.Date
+	m.Publisher = temp.Publisher
+	m.Contact = temp.Contact
+	m.Description = temp.Description
+	m.UseContext = temp.UseContext
+	m.Jurisdiction = temp.Jurisdiction
+	m.Purpose = temp.Purpose
+	m.Usage = temp.Usage
+	m.Copyright = temp.Copyright
+	m.ApprovalDate = temp.ApprovalDate
+	m.LastReviewDate = temp.LastReviewDate
+	m.EffectivePeriod = temp.EffectivePeriod
+	m.Topic = temp.Topic
+	m.Author = temp.Author
+	m.Editor = temp.Editor
+	m.Reviewer = temp.Reviewer
+	m.Endorser = temp.Endorser
+	m.RelatedArtifact = temp.RelatedArtifact
+	if len(temp.Library_) > 0 {
+		m.Library_ = make([]*FhirCanonical, len(temp.Library_))
+		for i := range temp.Library_ {
+			itemMap, ok := temp.Library_[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Library_[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Library_[%d]: %v", i, err) }
+			m.Library_[i] = primitive
+		}
+	}
+	m.Disclaimer = temp.Disclaimer
+	m.Scoring = temp.Scoring
+	m.CompositeScoring = temp.CompositeScoring
+	m.Type = temp.Type
+	m.RiskAdjustment = temp.RiskAdjustment
+	m.RateAggregation = temp.RateAggregation
+	m.Rationale = temp.Rationale
+	m.ClinicalRecommendationStatement = temp.ClinicalRecommendationStatement
+	m.ImprovementNotation = temp.ImprovementNotation
+	if len(temp.Definition) > 0 {
+		m.Definition = make([]*FhirMarkdown, len(temp.Definition))
+		for i := range temp.Definition {
+			itemMap, ok := temp.Definition[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Definition[%d]: expected map", i) }
+			primitive, err := NewFhirMarkdownFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Definition[%d]: %v", i, err) }
+			m.Definition[i] = primitive
+		}
+	}
+	m.Guidance = temp.Guidance
+	m.Group = temp.Group
+	m.SupplementalData = temp.SupplementalData
+	return nil
 }
 
-// ToJSON converts Measure to JSON data
+// ToJSON converts Measure to JSON data.
 func (m *Measure) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Subtitle interface{} `json:"subtitle,omitempty"`
+		SubtitleElement map[string]interface{} `json:"_subtitle,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental interface{} `json:"experimental,omitempty"`
+		ExperimentalElement map[string]interface{} `json:"_experimental,omitempty"`
+		SubjectCodeableConcept *CodeableConcept `json:"subjectcodeableconcept,omitempty"`
+		SubjectReference *Reference `json:"subjectreference,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Publisher interface{} `json:"publisher,omitempty"`
+		PublisherElement map[string]interface{} `json:"_publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose interface{} `json:"purpose,omitempty"`
+		PurposeElement map[string]interface{} `json:"_purpose,omitempty"`
+		Usage interface{} `json:"usage,omitempty"`
+		UsageElement map[string]interface{} `json:"_usage,omitempty"`
+		Copyright interface{} `json:"copyright,omitempty"`
+		CopyrightElement map[string]interface{} `json:"_copyright,omitempty"`
+		ApprovalDate interface{} `json:"approvaldate,omitempty"`
+		ApprovalDateElement map[string]interface{} `json:"_approvaldate,omitempty"`
+		LastReviewDate interface{} `json:"lastreviewdate,omitempty"`
+		LastReviewDateElement map[string]interface{} `json:"_lastreviewdate,omitempty"`
+		EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+		Topic []*CodeableConcept `json:"topic,omitempty"`
+		Author []*ContactDetail `json:"author,omitempty"`
+		Editor []*ContactDetail `json:"editor,omitempty"`
+		Reviewer []*ContactDetail `json:"reviewer,omitempty"`
+		Endorser []*ContactDetail `json:"endorser,omitempty"`
+		RelatedArtifact []*RelatedArtifact `json:"relatedartifact,omitempty"`
+		Library_ []interface{} `json:"library,omitempty"`
+		Library_Element []map[string]interface{} `json:"_library,omitempty"`
+		Disclaimer interface{} `json:"disclaimer,omitempty"`
+		DisclaimerElement map[string]interface{} `json:"_disclaimer,omitempty"`
+		Scoring *CodeableConcept `json:"scoring,omitempty"`
+		CompositeScoring *CodeableConcept `json:"compositescoring,omitempty"`
+		Type []*CodeableConcept `json:"type,omitempty"`
+		RiskAdjustment interface{} `json:"riskadjustment,omitempty"`
+		RiskAdjustmentElement map[string]interface{} `json:"_riskadjustment,omitempty"`
+		RateAggregation interface{} `json:"rateaggregation,omitempty"`
+		RateAggregationElement map[string]interface{} `json:"_rateaggregation,omitempty"`
+		Rationale interface{} `json:"rationale,omitempty"`
+		RationaleElement map[string]interface{} `json:"_rationale,omitempty"`
+		ClinicalRecommendationStatement interface{} `json:"clinicalrecommendationstatement,omitempty"`
+		ClinicalRecommendationStatementElement map[string]interface{} `json:"_clinicalrecommendationstatement,omitempty"`
+		ImprovementNotation *CodeableConcept `json:"improvementnotation,omitempty"`
+		Definition []interface{} `json:"definition,omitempty"`
+		DefinitionElement []map[string]interface{} `json:"_definition,omitempty"`
+		Guidance interface{} `json:"guidance,omitempty"`
+		GuidanceElement map[string]interface{} `json:"_guidance,omitempty"`
+		Group []*MeasureGroup `json:"group,omitempty"`
+		SupplementalData []*MeasureSupplementalData `json:"supplementaldata,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	output.Identifier = m.Identifier
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	if m.Subtitle != nil && m.Subtitle.Value != nil {
+		output.Subtitle = m.Subtitle.Value
+		if m.Subtitle.Element != nil {
+			output.SubtitleElement = toMapOrNil(m.Subtitle.Element.ToJSON())
+		}
+	}
+	output.Status = m.Status
+	if m.Experimental != nil && m.Experimental.Value != nil {
+		output.Experimental = m.Experimental.Value
+		if m.Experimental.Element != nil {
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+		}
+	}
+	output.SubjectCodeableConcept = m.SubjectCodeableConcept
+	output.SubjectReference = m.SubjectReference
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.Publisher != nil && m.Publisher.Value != nil {
+		output.Publisher = m.Publisher.Value
+		if m.Publisher.Element != nil {
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+		}
+	}
+	output.Contact = m.Contact
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.UseContext = m.UseContext
+	output.Jurisdiction = m.Jurisdiction
+	if m.Purpose != nil && m.Purpose.Value != nil {
+		output.Purpose = m.Purpose.Value
+		if m.Purpose.Element != nil {
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+		}
+	}
+	if m.Usage != nil && m.Usage.Value != nil {
+		output.Usage = m.Usage.Value
+		if m.Usage.Element != nil {
+			output.UsageElement = toMapOrNil(m.Usage.Element.ToJSON())
+		}
+	}
+	if m.Copyright != nil && m.Copyright.Value != nil {
+		output.Copyright = m.Copyright.Value
+		if m.Copyright.Element != nil {
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+		}
+	}
+	if m.ApprovalDate != nil && m.ApprovalDate.Value != nil {
+		output.ApprovalDate = m.ApprovalDate.Value
+		if m.ApprovalDate.Element != nil {
+			output.ApprovalDateElement = toMapOrNil(m.ApprovalDate.Element.ToJSON())
+		}
+	}
+	if m.LastReviewDate != nil && m.LastReviewDate.Value != nil {
+		output.LastReviewDate = m.LastReviewDate.Value
+		if m.LastReviewDate.Element != nil {
+			output.LastReviewDateElement = toMapOrNil(m.LastReviewDate.Element.ToJSON())
+		}
+	}
+	output.EffectivePeriod = m.EffectivePeriod
+	output.Topic = m.Topic
+	output.Author = m.Author
+	output.Editor = m.Editor
+	output.Reviewer = m.Reviewer
+	output.Endorser = m.Endorser
+	output.RelatedArtifact = m.RelatedArtifact
+	if len(m.Library_) > 0 {
+		output.Library_ = make([]interface{}, len(m.Library_))
+		output.Library_Element = make([]map[string]interface{}, len(m.Library_))
+		for i, item := range m.Library_ {
+			if item != nil && item.Value != nil {
+				output.Library_[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.Library_Element[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if m.Disclaimer != nil && m.Disclaimer.Value != nil {
+		output.Disclaimer = m.Disclaimer.Value
+		if m.Disclaimer.Element != nil {
+			output.DisclaimerElement = toMapOrNil(m.Disclaimer.Element.ToJSON())
+		}
+	}
+	output.Scoring = m.Scoring
+	output.CompositeScoring = m.CompositeScoring
+	output.Type = m.Type
+	if m.RiskAdjustment != nil && m.RiskAdjustment.Value != nil {
+		output.RiskAdjustment = m.RiskAdjustment.Value
+		if m.RiskAdjustment.Element != nil {
+			output.RiskAdjustmentElement = toMapOrNil(m.RiskAdjustment.Element.ToJSON())
+		}
+	}
+	if m.RateAggregation != nil && m.RateAggregation.Value != nil {
+		output.RateAggregation = m.RateAggregation.Value
+		if m.RateAggregation.Element != nil {
+			output.RateAggregationElement = toMapOrNil(m.RateAggregation.Element.ToJSON())
+		}
+	}
+	if m.Rationale != nil && m.Rationale.Value != nil {
+		output.Rationale = m.Rationale.Value
+		if m.Rationale.Element != nil {
+			output.RationaleElement = toMapOrNil(m.Rationale.Element.ToJSON())
+		}
+	}
+	if m.ClinicalRecommendationStatement != nil && m.ClinicalRecommendationStatement.Value != nil {
+		output.ClinicalRecommendationStatement = m.ClinicalRecommendationStatement.Value
+		if m.ClinicalRecommendationStatement.Element != nil {
+			output.ClinicalRecommendationStatementElement = toMapOrNil(m.ClinicalRecommendationStatement.Element.ToJSON())
+		}
+	}
+	output.ImprovementNotation = m.ImprovementNotation
+	if len(m.Definition) > 0 {
+		output.Definition = make([]interface{}, len(m.Definition))
+		output.DefinitionElement = make([]map[string]interface{}, len(m.Definition))
+		for i, item := range m.Definition {
+			if item != nil && item.Value != nil {
+				output.Definition[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.DefinitionElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if m.Guidance != nil && m.Guidance.Value != nil {
+		output.Guidance = m.Guidance.Value
+		if m.Guidance.Element != nil {
+			output.GuidanceElement = toMapOrNil(m.Guidance.Element.ToJSON())
+		}
+	}
+	output.Group = m.Group
+	output.SupplementalData = m.SupplementalData
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Measure
+// Clone creates a deep copy of Measure.
 func (m *Measure) Clone() *Measure {
 	if m == nil { return nil }
 	return &Measure{
@@ -133,7 +516,7 @@ func (m *Measure) Clone() *Measure {
 	}
 }
 
-// Equals checks for equality with another Measure instance
+// Equals checks equality between two Measure instances.
 func (m *Measure) Equals(other *Measure) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -193,7 +576,7 @@ func (m *Measure) Equals(other *Measure) bool {
 // MeasureGroup
 // A group of population criteria for the measure.
 type MeasureGroup struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -203,22 +586,69 @@ type MeasureGroup struct {
 	Stratifier []*MeasureStratifier `json:"stratifier,omitempty"`
 }
 
-// NewMeasureGroup creates a new MeasureGroup instance
+// NewMeasureGroup creates a new MeasureGroup instance.
 func NewMeasureGroup() *MeasureGroup {
 	return &MeasureGroup{}
 }
 
-// FromJSON populates MeasureGroup from JSON data
+// FromJSON populates MeasureGroup from JSON data.
 func (m *MeasureGroup) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Population []*MeasurePopulation `json:"population,omitempty"`
+		Stratifier []*MeasureStratifier `json:"stratifier,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Description = temp.Description
+	m.Population = temp.Population
+	m.Stratifier = temp.Stratifier
+	return nil
 }
 
-// ToJSON converts MeasureGroup to JSON data
+// ToJSON converts MeasureGroup to JSON data.
 func (m *MeasureGroup) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Population []*MeasurePopulation `json:"population,omitempty"`
+		Stratifier []*MeasureStratifier `json:"stratifier,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Population = m.Population
+	output.Stratifier = m.Stratifier
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MeasureGroup
+// Clone creates a deep copy of MeasureGroup.
 func (m *MeasureGroup) Clone() *MeasureGroup {
 	if m == nil { return nil }
 	return &MeasureGroup{
@@ -232,7 +662,7 @@ func (m *MeasureGroup) Clone() *MeasureGroup {
 	}
 }
 
-// Equals checks for equality with another MeasureGroup instance
+// Equals checks equality between two MeasureGroup instances.
 func (m *MeasureGroup) Equals(other *MeasureGroup) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -249,7 +679,7 @@ func (m *MeasureGroup) Equals(other *MeasureGroup) bool {
 // MeasurePopulation
 // A population criteria for the measure.
 type MeasurePopulation struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -258,22 +688,65 @@ type MeasurePopulation struct {
 	Criteria *FhirExpression `json:"criteria,omitempty"`
 }
 
-// NewMeasurePopulation creates a new MeasurePopulation instance
+// NewMeasurePopulation creates a new MeasurePopulation instance.
 func NewMeasurePopulation() *MeasurePopulation {
 	return &MeasurePopulation{}
 }
 
-// FromJSON populates MeasurePopulation from JSON data
+// FromJSON populates MeasurePopulation from JSON data.
 func (m *MeasurePopulation) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Criteria *FhirExpression `json:"criteria,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Description = temp.Description
+	m.Criteria = temp.Criteria
+	return nil
 }
 
-// ToJSON converts MeasurePopulation to JSON data
+// ToJSON converts MeasurePopulation to JSON data.
 func (m *MeasurePopulation) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Criteria *FhirExpression `json:"criteria,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Criteria = m.Criteria
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MeasurePopulation
+// Clone creates a deep copy of MeasurePopulation.
 func (m *MeasurePopulation) Clone() *MeasurePopulation {
 	if m == nil { return nil }
 	return &MeasurePopulation{
@@ -286,7 +759,7 @@ func (m *MeasurePopulation) Clone() *MeasurePopulation {
 	}
 }
 
-// Equals checks for equality with another MeasurePopulation instance
+// Equals checks equality between two MeasurePopulation instances.
 func (m *MeasurePopulation) Equals(other *MeasurePopulation) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -302,7 +775,7 @@ func (m *MeasurePopulation) Equals(other *MeasurePopulation) bool {
 // MeasureStratifier
 // The stratifier criteria for the measure report, specified as either the name of a valid CQL expression defined within a referenced library or a valid FHIR Resource Path.
 type MeasureStratifier struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -312,22 +785,69 @@ type MeasureStratifier struct {
 	Component []*MeasureComponent `json:"component,omitempty"`
 }
 
-// NewMeasureStratifier creates a new MeasureStratifier instance
+// NewMeasureStratifier creates a new MeasureStratifier instance.
 func NewMeasureStratifier() *MeasureStratifier {
 	return &MeasureStratifier{}
 }
 
-// FromJSON populates MeasureStratifier from JSON data
+// FromJSON populates MeasureStratifier from JSON data.
 func (m *MeasureStratifier) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Criteria *FhirExpression `json:"criteria,omitempty"`
+		Component []*MeasureComponent `json:"component,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Description = temp.Description
+	m.Criteria = temp.Criteria
+	m.Component = temp.Component
+	return nil
 }
 
-// ToJSON converts MeasureStratifier to JSON data
+// ToJSON converts MeasureStratifier to JSON data.
 func (m *MeasureStratifier) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Criteria *FhirExpression `json:"criteria,omitempty"`
+		Component []*MeasureComponent `json:"component,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Criteria = m.Criteria
+	output.Component = m.Component
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MeasureStratifier
+// Clone creates a deep copy of MeasureStratifier.
 func (m *MeasureStratifier) Clone() *MeasureStratifier {
 	if m == nil { return nil }
 	return &MeasureStratifier{
@@ -341,7 +861,7 @@ func (m *MeasureStratifier) Clone() *MeasureStratifier {
 	}
 }
 
-// Equals checks for equality with another MeasureStratifier instance
+// Equals checks equality between two MeasureStratifier instances.
 func (m *MeasureStratifier) Equals(other *MeasureStratifier) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -358,7 +878,7 @@ func (m *MeasureStratifier) Equals(other *MeasureStratifier) bool {
 // MeasureComponent
 // A component of the stratifier criteria for the measure report, specified as either the name of a valid CQL expression defined within a referenced library or a valid FHIR Resource Path.
 type MeasureComponent struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -367,22 +887,65 @@ type MeasureComponent struct {
 	Criteria *FhirExpression `json:"criteria,omitempty"`
 }
 
-// NewMeasureComponent creates a new MeasureComponent instance
+// NewMeasureComponent creates a new MeasureComponent instance.
 func NewMeasureComponent() *MeasureComponent {
 	return &MeasureComponent{}
 }
 
-// FromJSON populates MeasureComponent from JSON data
+// FromJSON populates MeasureComponent from JSON data.
 func (m *MeasureComponent) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Criteria *FhirExpression `json:"criteria,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Description = temp.Description
+	m.Criteria = temp.Criteria
+	return nil
 }
 
-// ToJSON converts MeasureComponent to JSON data
+// ToJSON converts MeasureComponent to JSON data.
 func (m *MeasureComponent) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Criteria *FhirExpression `json:"criteria,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Criteria = m.Criteria
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MeasureComponent
+// Clone creates a deep copy of MeasureComponent.
 func (m *MeasureComponent) Clone() *MeasureComponent {
 	if m == nil { return nil }
 	return &MeasureComponent{
@@ -395,7 +958,7 @@ func (m *MeasureComponent) Clone() *MeasureComponent {
 	}
 }
 
-// Equals checks for equality with another MeasureComponent instance
+// Equals checks equality between two MeasureComponent instances.
 func (m *MeasureComponent) Equals(other *MeasureComponent) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -411,7 +974,7 @@ func (m *MeasureComponent) Equals(other *MeasureComponent) bool {
 // MeasureSupplementalData
 // The supplemental data criteria for the measure report, specified as either the name of a valid CQL expression within a referenced library, or a valid FHIR Resource Path.
 type MeasureSupplementalData struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -421,22 +984,69 @@ type MeasureSupplementalData struct {
 	Criteria *FhirExpression `json:"criteria,omitempty"`
 }
 
-// NewMeasureSupplementalData creates a new MeasureSupplementalData instance
+// NewMeasureSupplementalData creates a new MeasureSupplementalData instance.
 func NewMeasureSupplementalData() *MeasureSupplementalData {
 	return &MeasureSupplementalData{}
 }
 
-// FromJSON populates MeasureSupplementalData from JSON data
+// FromJSON populates MeasureSupplementalData from JSON data.
 func (m *MeasureSupplementalData) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Usage []*CodeableConcept `json:"usage,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Criteria *FhirExpression `json:"criteria,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Usage = temp.Usage
+	m.Description = temp.Description
+	m.Criteria = temp.Criteria
+	return nil
 }
 
-// ToJSON converts MeasureSupplementalData to JSON data
+// ToJSON converts MeasureSupplementalData to JSON data.
 func (m *MeasureSupplementalData) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Usage []*CodeableConcept `json:"usage,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Criteria *FhirExpression `json:"criteria,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	output.Usage = m.Usage
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Criteria = m.Criteria
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MeasureSupplementalData
+// Clone creates a deep copy of MeasureSupplementalData.
 func (m *MeasureSupplementalData) Clone() *MeasureSupplementalData {
 	if m == nil { return nil }
 	return &MeasureSupplementalData{
@@ -450,7 +1060,7 @@ func (m *MeasureSupplementalData) Clone() *MeasureSupplementalData {
 	}
 }
 
-// Equals checks for equality with another MeasureSupplementalData instance
+// Equals checks equality between two MeasureSupplementalData instances.
 func (m *MeasureSupplementalData) Equals(other *MeasureSupplementalData) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

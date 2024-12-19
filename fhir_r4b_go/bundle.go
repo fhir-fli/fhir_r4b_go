@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Bundle
 // A container for a collection of resources.
 type Bundle struct {
-	Resource
+	extends Resource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -22,22 +23,97 @@ type Bundle struct {
 	Signature *Signature `json:"signature,omitempty"`
 }
 
-// NewBundle creates a new Bundle instance
+// NewBundle creates a new Bundle instance.
 func NewBundle() *Bundle {
 	return &Bundle{}
 }
 
-// FromJSON populates Bundle from JSON data
+// FromJSON populates Bundle from JSON data.
 func (m *Bundle) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Type *BundleType `json:"type,omitempty"`
+		Timestamp *FhirInstant `json:"timestamp,omitempty"`
+		Total *FhirUnsignedInt `json:"total,omitempty"`
+		Link []*BundleLink `json:"link,omitempty"`
+		Entry []*BundleEntry `json:"entry,omitempty"`
+		Signature *Signature `json:"signature,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Identifier = temp.Identifier
+	m.Type = temp.Type
+	m.Timestamp = temp.Timestamp
+	m.Total = temp.Total
+	m.Link = temp.Link
+	m.Entry = temp.Entry
+	m.Signature = temp.Signature
+	return nil
 }
 
-// ToJSON converts Bundle to JSON data
+// ToJSON converts Bundle to JSON data.
 func (m *Bundle) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Type *BundleType `json:"type,omitempty"`
+		Timestamp interface{} `json:"timestamp,omitempty"`
+		TimestampElement map[string]interface{} `json:"_timestamp,omitempty"`
+		Total interface{} `json:"total,omitempty"`
+		TotalElement map[string]interface{} `json:"_total,omitempty"`
+		Link []*BundleLink `json:"link,omitempty"`
+		Entry []*BundleEntry `json:"entry,omitempty"`
+		Signature *Signature `json:"signature,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Identifier = m.Identifier
+	output.Type = m.Type
+	if m.Timestamp != nil && m.Timestamp.Value != nil {
+		output.Timestamp = m.Timestamp.Value
+		if m.Timestamp.Element != nil {
+			output.TimestampElement = toMapOrNil(m.Timestamp.Element.ToJSON())
+		}
+	}
+	if m.Total != nil && m.Total.Value != nil {
+		output.Total = m.Total.Value
+		if m.Total.Element != nil {
+			output.TotalElement = toMapOrNil(m.Total.Element.ToJSON())
+		}
+	}
+	output.Link = m.Link
+	output.Entry = m.Entry
+	output.Signature = m.Signature
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Bundle
+// Clone creates a deep copy of Bundle.
 func (m *Bundle) Clone() *Bundle {
 	if m == nil { return nil }
 	return &Bundle{
@@ -55,7 +131,7 @@ func (m *Bundle) Clone() *Bundle {
 	}
 }
 
-// Equals checks for equality with another Bundle instance
+// Equals checks equality between two Bundle instances.
 func (m *Bundle) Equals(other *Bundle) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -76,7 +152,7 @@ func (m *Bundle) Equals(other *Bundle) bool {
 // BundleLink
 // A series of links that provide context to this bundle.
 type BundleLink struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -84,22 +160,67 @@ type BundleLink struct {
 	Url *FhirUri `json:"url,omitempty"`
 }
 
-// NewBundleLink creates a new BundleLink instance
+// NewBundleLink creates a new BundleLink instance.
 func NewBundleLink() *BundleLink {
 	return &BundleLink{}
 }
 
-// FromJSON populates BundleLink from JSON data
+// FromJSON populates BundleLink from JSON data.
 func (m *BundleLink) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Relation *FhirString `json:"relation,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Relation = temp.Relation
+	m.Url = temp.Url
+	return nil
 }
 
-// ToJSON converts BundleLink to JSON data
+// ToJSON converts BundleLink to JSON data.
 func (m *BundleLink) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Relation interface{} `json:"relation,omitempty"`
+		RelationElement map[string]interface{} `json:"_relation,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Relation != nil && m.Relation.Value != nil {
+		output.Relation = m.Relation.Value
+		if m.Relation.Element != nil {
+			output.RelationElement = toMapOrNil(m.Relation.Element.ToJSON())
+		}
+	}
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of BundleLink
+// Clone creates a deep copy of BundleLink.
 func (m *BundleLink) Clone() *BundleLink {
 	if m == nil { return nil }
 	return &BundleLink{
@@ -111,7 +232,7 @@ func (m *BundleLink) Clone() *BundleLink {
 	}
 }
 
-// Equals checks for equality with another BundleLink instance
+// Equals checks equality between two BundleLink instances.
 func (m *BundleLink) Equals(other *BundleLink) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -126,7 +247,7 @@ func (m *BundleLink) Equals(other *BundleLink) bool {
 // BundleEntry
 // An entry in a bundle resource - will either contain a resource or information about a resource (transactions and history only).
 type BundleEntry struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -138,22 +259,77 @@ type BundleEntry struct {
 	Response *BundleResponse `json:"response,omitempty"`
 }
 
-// NewBundleEntry creates a new BundleEntry instance
+// NewBundleEntry creates a new BundleEntry instance.
 func NewBundleEntry() *BundleEntry {
 	return &BundleEntry{}
 }
 
-// FromJSON populates BundleEntry from JSON data
+// FromJSON populates BundleEntry from JSON data.
 func (m *BundleEntry) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Link []*BundleLink `json:"link,omitempty"`
+		FullUrl *FhirUri `json:"fullurl,omitempty"`
+		Resource *Resource `json:"resource,omitempty"`
+		Search *BundleSearch `json:"search,omitempty"`
+		Request *BundleRequest `json:"request,omitempty"`
+		Response *BundleResponse `json:"response,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Link = temp.Link
+	m.FullUrl = temp.FullUrl
+	m.Resource = temp.Resource
+	m.Search = temp.Search
+	m.Request = temp.Request
+	m.Response = temp.Response
+	return nil
 }
 
-// ToJSON converts BundleEntry to JSON data
+// ToJSON converts BundleEntry to JSON data.
 func (m *BundleEntry) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Link []*BundleLink `json:"link,omitempty"`
+		FullUrl interface{} `json:"fullurl,omitempty"`
+		FullUrlElement map[string]interface{} `json:"_fullurl,omitempty"`
+		Resource *Resource `json:"resource,omitempty"`
+		Search *BundleSearch `json:"search,omitempty"`
+		Request *BundleRequest `json:"request,omitempty"`
+		Response *BundleResponse `json:"response,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Link = m.Link
+	if m.FullUrl != nil && m.FullUrl.Value != nil {
+		output.FullUrl = m.FullUrl.Value
+		if m.FullUrl.Element != nil {
+			output.FullUrlElement = toMapOrNil(m.FullUrl.Element.ToJSON())
+		}
+	}
+	output.Resource = m.Resource
+	output.Search = m.Search
+	output.Request = m.Request
+	output.Response = m.Response
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of BundleEntry
+// Clone creates a deep copy of BundleEntry.
 func (m *BundleEntry) Clone() *BundleEntry {
 	if m == nil { return nil }
 	return &BundleEntry{
@@ -169,7 +345,7 @@ func (m *BundleEntry) Clone() *BundleEntry {
 	}
 }
 
-// Equals checks for equality with another BundleEntry instance
+// Equals checks equality between two BundleEntry instances.
 func (m *BundleEntry) Equals(other *BundleEntry) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -188,7 +364,7 @@ func (m *BundleEntry) Equals(other *BundleEntry) bool {
 // BundleSearch
 // Information about the search process that lead to the creation of this entry.
 type BundleSearch struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -196,22 +372,61 @@ type BundleSearch struct {
 	Score *FhirDecimal `json:"score,omitempty"`
 }
 
-// NewBundleSearch creates a new BundleSearch instance
+// NewBundleSearch creates a new BundleSearch instance.
 func NewBundleSearch() *BundleSearch {
 	return &BundleSearch{}
 }
 
-// FromJSON populates BundleSearch from JSON data
+// FromJSON populates BundleSearch from JSON data.
 func (m *BundleSearch) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Mode *SearchEntryMode `json:"mode,omitempty"`
+		Score *FhirDecimal `json:"score,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Mode = temp.Mode
+	m.Score = temp.Score
+	return nil
 }
 
-// ToJSON converts BundleSearch to JSON data
+// ToJSON converts BundleSearch to JSON data.
 func (m *BundleSearch) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Mode *SearchEntryMode `json:"mode,omitempty"`
+		Score interface{} `json:"score,omitempty"`
+		ScoreElement map[string]interface{} `json:"_score,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Mode = m.Mode
+	if m.Score != nil && m.Score.Value != nil {
+		output.Score = m.Score.Value
+		if m.Score.Element != nil {
+			output.ScoreElement = toMapOrNil(m.Score.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of BundleSearch
+// Clone creates a deep copy of BundleSearch.
 func (m *BundleSearch) Clone() *BundleSearch {
 	if m == nil { return nil }
 	return &BundleSearch{
@@ -223,7 +438,7 @@ func (m *BundleSearch) Clone() *BundleSearch {
 	}
 }
 
-// Equals checks for equality with another BundleSearch instance
+// Equals checks equality between two BundleSearch instances.
 func (m *BundleSearch) Equals(other *BundleSearch) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -238,7 +453,7 @@ func (m *BundleSearch) Equals(other *BundleSearch) bool {
 // BundleRequest
 // Additional information about how this entry should be processed as part of a transaction or batch.  For history, it shows how the entry was processed to create the version contained in the entry.
 type BundleRequest struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -250,22 +465,101 @@ type BundleRequest struct {
 	IfNoneExist *FhirString `json:"ifnoneexist,omitempty"`
 }
 
-// NewBundleRequest creates a new BundleRequest instance
+// NewBundleRequest creates a new BundleRequest instance.
 func NewBundleRequest() *BundleRequest {
 	return &BundleRequest{}
 }
 
-// FromJSON populates BundleRequest from JSON data
+// FromJSON populates BundleRequest from JSON data.
 func (m *BundleRequest) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Method *HTTPVerb `json:"method,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		IfNoneMatch *FhirString `json:"ifnonematch,omitempty"`
+		IfModifiedSince *FhirInstant `json:"ifmodifiedsince,omitempty"`
+		IfMatch *FhirString `json:"ifmatch,omitempty"`
+		IfNoneExist *FhirString `json:"ifnoneexist,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Method = temp.Method
+	m.Url = temp.Url
+	m.IfNoneMatch = temp.IfNoneMatch
+	m.IfModifiedSince = temp.IfModifiedSince
+	m.IfMatch = temp.IfMatch
+	m.IfNoneExist = temp.IfNoneExist
+	return nil
 }
 
-// ToJSON converts BundleRequest to JSON data
+// ToJSON converts BundleRequest to JSON data.
 func (m *BundleRequest) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Method *HTTPVerb `json:"method,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		IfNoneMatch interface{} `json:"ifnonematch,omitempty"`
+		IfNoneMatchElement map[string]interface{} `json:"_ifnonematch,omitempty"`
+		IfModifiedSince interface{} `json:"ifmodifiedsince,omitempty"`
+		IfModifiedSinceElement map[string]interface{} `json:"_ifmodifiedsince,omitempty"`
+		IfMatch interface{} `json:"ifmatch,omitempty"`
+		IfMatchElement map[string]interface{} `json:"_ifmatch,omitempty"`
+		IfNoneExist interface{} `json:"ifnoneexist,omitempty"`
+		IfNoneExistElement map[string]interface{} `json:"_ifnoneexist,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Method = m.Method
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	if m.IfNoneMatch != nil && m.IfNoneMatch.Value != nil {
+		output.IfNoneMatch = m.IfNoneMatch.Value
+		if m.IfNoneMatch.Element != nil {
+			output.IfNoneMatchElement = toMapOrNil(m.IfNoneMatch.Element.ToJSON())
+		}
+	}
+	if m.IfModifiedSince != nil && m.IfModifiedSince.Value != nil {
+		output.IfModifiedSince = m.IfModifiedSince.Value
+		if m.IfModifiedSince.Element != nil {
+			output.IfModifiedSinceElement = toMapOrNil(m.IfModifiedSince.Element.ToJSON())
+		}
+	}
+	if m.IfMatch != nil && m.IfMatch.Value != nil {
+		output.IfMatch = m.IfMatch.Value
+		if m.IfMatch.Element != nil {
+			output.IfMatchElement = toMapOrNil(m.IfMatch.Element.ToJSON())
+		}
+	}
+	if m.IfNoneExist != nil && m.IfNoneExist.Value != nil {
+		output.IfNoneExist = m.IfNoneExist.Value
+		if m.IfNoneExist.Element != nil {
+			output.IfNoneExistElement = toMapOrNil(m.IfNoneExist.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of BundleRequest
+// Clone creates a deep copy of BundleRequest.
 func (m *BundleRequest) Clone() *BundleRequest {
 	if m == nil { return nil }
 	return &BundleRequest{
@@ -281,7 +575,7 @@ func (m *BundleRequest) Clone() *BundleRequest {
 	}
 }
 
-// Equals checks for equality with another BundleRequest instance
+// Equals checks equality between two BundleRequest instances.
 func (m *BundleRequest) Equals(other *BundleRequest) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -300,7 +594,7 @@ func (m *BundleRequest) Equals(other *BundleRequest) bool {
 // BundleResponse
 // Indicates the results of processing the corresponding 'request' entry in the batch or transaction being responded to or what the results of an operation where when returning history.
 type BundleResponse struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -311,22 +605,91 @@ type BundleResponse struct {
 	Outcome *Resource `json:"outcome,omitempty"`
 }
 
-// NewBundleResponse creates a new BundleResponse instance
+// NewBundleResponse creates a new BundleResponse instance.
 func NewBundleResponse() *BundleResponse {
 	return &BundleResponse{}
 }
 
-// FromJSON populates BundleResponse from JSON data
+// FromJSON populates BundleResponse from JSON data.
 func (m *BundleResponse) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Status *FhirString `json:"status,omitempty"`
+		Location *FhirUri `json:"location,omitempty"`
+		Etag *FhirString `json:"etag,omitempty"`
+		LastModified *FhirInstant `json:"lastmodified,omitempty"`
+		Outcome *Resource `json:"outcome,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Status = temp.Status
+	m.Location = temp.Location
+	m.Etag = temp.Etag
+	m.LastModified = temp.LastModified
+	m.Outcome = temp.Outcome
+	return nil
 }
 
-// ToJSON converts BundleResponse to JSON data
+// ToJSON converts BundleResponse to JSON data.
 func (m *BundleResponse) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Status interface{} `json:"status,omitempty"`
+		StatusElement map[string]interface{} `json:"_status,omitempty"`
+		Location interface{} `json:"location,omitempty"`
+		LocationElement map[string]interface{} `json:"_location,omitempty"`
+		Etag interface{} `json:"etag,omitempty"`
+		EtagElement map[string]interface{} `json:"_etag,omitempty"`
+		LastModified interface{} `json:"lastmodified,omitempty"`
+		LastModifiedElement map[string]interface{} `json:"_lastmodified,omitempty"`
+		Outcome *Resource `json:"outcome,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Status != nil && m.Status.Value != nil {
+		output.Status = m.Status.Value
+		if m.Status.Element != nil {
+			output.StatusElement = toMapOrNil(m.Status.Element.ToJSON())
+		}
+	}
+	if m.Location != nil && m.Location.Value != nil {
+		output.Location = m.Location.Value
+		if m.Location.Element != nil {
+			output.LocationElement = toMapOrNil(m.Location.Element.ToJSON())
+		}
+	}
+	if m.Etag != nil && m.Etag.Value != nil {
+		output.Etag = m.Etag.Value
+		if m.Etag.Element != nil {
+			output.EtagElement = toMapOrNil(m.Etag.Element.ToJSON())
+		}
+	}
+	if m.LastModified != nil && m.LastModified.Value != nil {
+		output.LastModified = m.LastModified.Value
+		if m.LastModified.Element != nil {
+			output.LastModifiedElement = toMapOrNil(m.LastModified.Element.ToJSON())
+		}
+	}
+	output.Outcome = m.Outcome
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of BundleResponse
+// Clone creates a deep copy of BundleResponse.
 func (m *BundleResponse) Clone() *BundleResponse {
 	if m == nil { return nil }
 	return &BundleResponse{
@@ -341,7 +704,7 @@ func (m *BundleResponse) Clone() *BundleResponse {
 	}
 }
 
-// Equals checks for equality with another BundleResponse instance
+// Equals checks equality between two BundleResponse instances.
 func (m *BundleResponse) Equals(other *BundleResponse) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

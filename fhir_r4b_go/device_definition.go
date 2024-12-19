@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // DeviceDefinition
 // The characteristics, operational status and capabilities of a medical-related component of a medical device.
 type DeviceDefinition struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -42,22 +44,210 @@ type DeviceDefinition struct {
 	Material []*DeviceDefinitionMaterial `json:"material,omitempty"`
 }
 
-// NewDeviceDefinition creates a new DeviceDefinition instance
+// NewDeviceDefinition creates a new DeviceDefinition instance.
 func NewDeviceDefinition() *DeviceDefinition {
 	return &DeviceDefinition{}
 }
 
-// FromJSON populates DeviceDefinition from JSON data
+// FromJSON populates DeviceDefinition from JSON data.
 func (m *DeviceDefinition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		UdiDeviceIdentifier []*DeviceDefinitionUdiDeviceIdentifier `json:"udideviceidentifier,omitempty"`
+		ManufacturerString *FhirString `json:"manufacturerstring,omitempty"`
+		ManufacturerReference *Reference `json:"manufacturerreference,omitempty"`
+		DeviceName []*DeviceDefinitionDeviceName `json:"devicename,omitempty"`
+		ModelNumber *FhirString `json:"modelnumber,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Specialization []*DeviceDefinitionSpecialization `json:"specialization,omitempty"`
+		Version []interface{} `json:"version,omitempty"`
+		Safety []*CodeableConcept `json:"safety,omitempty"`
+		ShelfLifeStorage []*ProductShelfLife `json:"shelflifestorage,omitempty"`
+		PhysicalCharacteristics *ProdCharacteristic `json:"physicalcharacteristics,omitempty"`
+		LanguageCode []*CodeableConcept `json:"languagecode,omitempty"`
+		Capability []*DeviceDefinitionCapability `json:"capability,omitempty"`
+		Property []*DeviceDefinitionProperty `json:"property,omitempty"`
+		Owner *Reference `json:"owner,omitempty"`
+		Contact []*ContactPoint `json:"contact,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		OnlineInformation *FhirUri `json:"onlineinformation,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		ParentDevice *Reference `json:"parentdevice,omitempty"`
+		Material []*DeviceDefinitionMaterial `json:"material,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.UdiDeviceIdentifier = temp.UdiDeviceIdentifier
+	m.ManufacturerString = temp.ManufacturerString
+	m.ManufacturerReference = temp.ManufacturerReference
+	m.DeviceName = temp.DeviceName
+	m.ModelNumber = temp.ModelNumber
+	m.Type = temp.Type
+	m.Specialization = temp.Specialization
+	if len(temp.Version) > 0 {
+		m.Version = make([]*FhirString, len(temp.Version))
+		for i := range temp.Version {
+			itemMap, ok := temp.Version[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Version[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Version[%d]: %v", i, err) }
+			m.Version[i] = primitive
+		}
+	}
+	m.Safety = temp.Safety
+	m.ShelfLifeStorage = temp.ShelfLifeStorage
+	m.PhysicalCharacteristics = temp.PhysicalCharacteristics
+	m.LanguageCode = temp.LanguageCode
+	m.Capability = temp.Capability
+	m.Property = temp.Property
+	m.Owner = temp.Owner
+	m.Contact = temp.Contact
+	m.Url = temp.Url
+	m.OnlineInformation = temp.OnlineInformation
+	m.Note = temp.Note
+	m.Quantity = temp.Quantity
+	m.ParentDevice = temp.ParentDevice
+	m.Material = temp.Material
+	return nil
 }
 
-// ToJSON converts DeviceDefinition to JSON data
+// ToJSON converts DeviceDefinition to JSON data.
 func (m *DeviceDefinition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		UdiDeviceIdentifier []*DeviceDefinitionUdiDeviceIdentifier `json:"udideviceidentifier,omitempty"`
+		ManufacturerString interface{} `json:"manufacturerstring,omitempty"`
+		ManufacturerStringElement map[string]interface{} `json:"_manufacturerstring,omitempty"`
+		ManufacturerReference *Reference `json:"manufacturerreference,omitempty"`
+		DeviceName []*DeviceDefinitionDeviceName `json:"devicename,omitempty"`
+		ModelNumber interface{} `json:"modelnumber,omitempty"`
+		ModelNumberElement map[string]interface{} `json:"_modelnumber,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Specialization []*DeviceDefinitionSpecialization `json:"specialization,omitempty"`
+		Version []interface{} `json:"version,omitempty"`
+		VersionElement []map[string]interface{} `json:"_version,omitempty"`
+		Safety []*CodeableConcept `json:"safety,omitempty"`
+		ShelfLifeStorage []*ProductShelfLife `json:"shelflifestorage,omitempty"`
+		PhysicalCharacteristics *ProdCharacteristic `json:"physicalcharacteristics,omitempty"`
+		LanguageCode []*CodeableConcept `json:"languagecode,omitempty"`
+		Capability []*DeviceDefinitionCapability `json:"capability,omitempty"`
+		Property []*DeviceDefinitionProperty `json:"property,omitempty"`
+		Owner *Reference `json:"owner,omitempty"`
+		Contact []*ContactPoint `json:"contact,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		OnlineInformation interface{} `json:"onlineinformation,omitempty"`
+		OnlineInformationElement map[string]interface{} `json:"_onlineinformation,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		ParentDevice *Reference `json:"parentdevice,omitempty"`
+		Material []*DeviceDefinitionMaterial `json:"material,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.UdiDeviceIdentifier = m.UdiDeviceIdentifier
+	if m.ManufacturerString != nil && m.ManufacturerString.Value != nil {
+		output.ManufacturerString = m.ManufacturerString.Value
+		if m.ManufacturerString.Element != nil {
+			output.ManufacturerStringElement = toMapOrNil(m.ManufacturerString.Element.ToJSON())
+		}
+	}
+	output.ManufacturerReference = m.ManufacturerReference
+	output.DeviceName = m.DeviceName
+	if m.ModelNumber != nil && m.ModelNumber.Value != nil {
+		output.ModelNumber = m.ModelNumber.Value
+		if m.ModelNumber.Element != nil {
+			output.ModelNumberElement = toMapOrNil(m.ModelNumber.Element.ToJSON())
+		}
+	}
+	output.Type = m.Type
+	output.Specialization = m.Specialization
+	if len(m.Version) > 0 {
+		output.Version = make([]interface{}, len(m.Version))
+		output.VersionElement = make([]map[string]interface{}, len(m.Version))
+		for i, item := range m.Version {
+			if item != nil && item.Value != nil {
+				output.Version[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.VersionElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Safety = m.Safety
+	output.ShelfLifeStorage = m.ShelfLifeStorage
+	output.PhysicalCharacteristics = m.PhysicalCharacteristics
+	output.LanguageCode = m.LanguageCode
+	output.Capability = m.Capability
+	output.Property = m.Property
+	output.Owner = m.Owner
+	output.Contact = m.Contact
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	if m.OnlineInformation != nil && m.OnlineInformation.Value != nil {
+		output.OnlineInformation = m.OnlineInformation.Value
+		if m.OnlineInformation.Element != nil {
+			output.OnlineInformationElement = toMapOrNil(m.OnlineInformation.Element.ToJSON())
+		}
+	}
+	output.Note = m.Note
+	output.Quantity = m.Quantity
+	output.ParentDevice = m.ParentDevice
+	output.Material = m.Material
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DeviceDefinition
+// Clone creates a deep copy of DeviceDefinition.
 func (m *DeviceDefinition) Clone() *DeviceDefinition {
 	if m == nil { return nil }
 	return &DeviceDefinition{
@@ -95,7 +285,7 @@ func (m *DeviceDefinition) Clone() *DeviceDefinition {
 	}
 }
 
-// Equals checks for equality with another DeviceDefinition instance
+// Equals checks equality between two DeviceDefinition instances.
 func (m *DeviceDefinition) Equals(other *DeviceDefinition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -136,7 +326,7 @@ func (m *DeviceDefinition) Equals(other *DeviceDefinition) bool {
 // DeviceDefinitionUdiDeviceIdentifier
 // Unique device identifier (UDI) assigned to device label or package.  Note that the Device may include multiple udiCarriers as it either may include just the udiCarrier for the jurisdiction it is sold, or for multiple jurisdictions it could have been sold.
 type DeviceDefinitionUdiDeviceIdentifier struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -145,22 +335,77 @@ type DeviceDefinitionUdiDeviceIdentifier struct {
 	Jurisdiction *FhirUri `json:"jurisdiction,omitempty"`
 }
 
-// NewDeviceDefinitionUdiDeviceIdentifier creates a new DeviceDefinitionUdiDeviceIdentifier instance
+// NewDeviceDefinitionUdiDeviceIdentifier creates a new DeviceDefinitionUdiDeviceIdentifier instance.
 func NewDeviceDefinitionUdiDeviceIdentifier() *DeviceDefinitionUdiDeviceIdentifier {
 	return &DeviceDefinitionUdiDeviceIdentifier{}
 }
 
-// FromJSON populates DeviceDefinitionUdiDeviceIdentifier from JSON data
+// FromJSON populates DeviceDefinitionUdiDeviceIdentifier from JSON data.
 func (m *DeviceDefinitionUdiDeviceIdentifier) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		DeviceIdentifier *FhirString `json:"deviceidentifier,omitempty"`
+		Issuer *FhirUri `json:"issuer,omitempty"`
+		Jurisdiction *FhirUri `json:"jurisdiction,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.DeviceIdentifier = temp.DeviceIdentifier
+	m.Issuer = temp.Issuer
+	m.Jurisdiction = temp.Jurisdiction
+	return nil
 }
 
-// ToJSON converts DeviceDefinitionUdiDeviceIdentifier to JSON data
+// ToJSON converts DeviceDefinitionUdiDeviceIdentifier to JSON data.
 func (m *DeviceDefinitionUdiDeviceIdentifier) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		DeviceIdentifier interface{} `json:"deviceidentifier,omitempty"`
+		DeviceIdentifierElement map[string]interface{} `json:"_deviceidentifier,omitempty"`
+		Issuer interface{} `json:"issuer,omitempty"`
+		IssuerElement map[string]interface{} `json:"_issuer,omitempty"`
+		Jurisdiction interface{} `json:"jurisdiction,omitempty"`
+		JurisdictionElement map[string]interface{} `json:"_jurisdiction,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.DeviceIdentifier != nil && m.DeviceIdentifier.Value != nil {
+		output.DeviceIdentifier = m.DeviceIdentifier.Value
+		if m.DeviceIdentifier.Element != nil {
+			output.DeviceIdentifierElement = toMapOrNil(m.DeviceIdentifier.Element.ToJSON())
+		}
+	}
+	if m.Issuer != nil && m.Issuer.Value != nil {
+		output.Issuer = m.Issuer.Value
+		if m.Issuer.Element != nil {
+			output.IssuerElement = toMapOrNil(m.Issuer.Element.ToJSON())
+		}
+	}
+	if m.Jurisdiction != nil && m.Jurisdiction.Value != nil {
+		output.Jurisdiction = m.Jurisdiction.Value
+		if m.Jurisdiction.Element != nil {
+			output.JurisdictionElement = toMapOrNil(m.Jurisdiction.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DeviceDefinitionUdiDeviceIdentifier
+// Clone creates a deep copy of DeviceDefinitionUdiDeviceIdentifier.
 func (m *DeviceDefinitionUdiDeviceIdentifier) Clone() *DeviceDefinitionUdiDeviceIdentifier {
 	if m == nil { return nil }
 	return &DeviceDefinitionUdiDeviceIdentifier{
@@ -173,7 +418,7 @@ func (m *DeviceDefinitionUdiDeviceIdentifier) Clone() *DeviceDefinitionUdiDevice
 	}
 }
 
-// Equals checks for equality with another DeviceDefinitionUdiDeviceIdentifier instance
+// Equals checks equality between two DeviceDefinitionUdiDeviceIdentifier instances.
 func (m *DeviceDefinitionUdiDeviceIdentifier) Equals(other *DeviceDefinitionUdiDeviceIdentifier) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -189,7 +434,7 @@ func (m *DeviceDefinitionUdiDeviceIdentifier) Equals(other *DeviceDefinitionUdiD
 // DeviceDefinitionDeviceName
 // A name given to the device to identify it.
 type DeviceDefinitionDeviceName struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -197,22 +442,61 @@ type DeviceDefinitionDeviceName struct {
 	Type *DeviceNameType `json:"type,omitempty"`
 }
 
-// NewDeviceDefinitionDeviceName creates a new DeviceDefinitionDeviceName instance
+// NewDeviceDefinitionDeviceName creates a new DeviceDefinitionDeviceName instance.
 func NewDeviceDefinitionDeviceName() *DeviceDefinitionDeviceName {
 	return &DeviceDefinitionDeviceName{}
 }
 
-// FromJSON populates DeviceDefinitionDeviceName from JSON data
+// FromJSON populates DeviceDefinitionDeviceName from JSON data.
 func (m *DeviceDefinitionDeviceName) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Type *DeviceNameType `json:"type,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Name = temp.Name
+	m.Type = temp.Type
+	return nil
 }
 
-// ToJSON converts DeviceDefinitionDeviceName to JSON data
+// ToJSON converts DeviceDefinitionDeviceName to JSON data.
 func (m *DeviceDefinitionDeviceName) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Type *DeviceNameType `json:"type,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	output.Type = m.Type
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DeviceDefinitionDeviceName
+// Clone creates a deep copy of DeviceDefinitionDeviceName.
 func (m *DeviceDefinitionDeviceName) Clone() *DeviceDefinitionDeviceName {
 	if m == nil { return nil }
 	return &DeviceDefinitionDeviceName{
@@ -224,7 +508,7 @@ func (m *DeviceDefinitionDeviceName) Clone() *DeviceDefinitionDeviceName {
 	}
 }
 
-// Equals checks for equality with another DeviceDefinitionDeviceName instance
+// Equals checks equality between two DeviceDefinitionDeviceName instances.
 func (m *DeviceDefinitionDeviceName) Equals(other *DeviceDefinitionDeviceName) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -239,7 +523,7 @@ func (m *DeviceDefinitionDeviceName) Equals(other *DeviceDefinitionDeviceName) b
 // DeviceDefinitionSpecialization
 // The capabilities supported on a  device, the standards to which the device conforms for a particular purpose, and used for the communication.
 type DeviceDefinitionSpecialization struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -247,22 +531,67 @@ type DeviceDefinitionSpecialization struct {
 	Version *FhirString `json:"version,omitempty"`
 }
 
-// NewDeviceDefinitionSpecialization creates a new DeviceDefinitionSpecialization instance
+// NewDeviceDefinitionSpecialization creates a new DeviceDefinitionSpecialization instance.
 func NewDeviceDefinitionSpecialization() *DeviceDefinitionSpecialization {
 	return &DeviceDefinitionSpecialization{}
 }
 
-// FromJSON populates DeviceDefinitionSpecialization from JSON data
+// FromJSON populates DeviceDefinitionSpecialization from JSON data.
 func (m *DeviceDefinitionSpecialization) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		SystemType *FhirString `json:"systemtype,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.SystemType = temp.SystemType
+	m.Version = temp.Version
+	return nil
 }
 
-// ToJSON converts DeviceDefinitionSpecialization to JSON data
+// ToJSON converts DeviceDefinitionSpecialization to JSON data.
 func (m *DeviceDefinitionSpecialization) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		SystemType interface{} `json:"systemtype,omitempty"`
+		SystemTypeElement map[string]interface{} `json:"_systemtype,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.SystemType != nil && m.SystemType.Value != nil {
+		output.SystemType = m.SystemType.Value
+		if m.SystemType.Element != nil {
+			output.SystemTypeElement = toMapOrNil(m.SystemType.Element.ToJSON())
+		}
+	}
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DeviceDefinitionSpecialization
+// Clone creates a deep copy of DeviceDefinitionSpecialization.
 func (m *DeviceDefinitionSpecialization) Clone() *DeviceDefinitionSpecialization {
 	if m == nil { return nil }
 	return &DeviceDefinitionSpecialization{
@@ -274,7 +603,7 @@ func (m *DeviceDefinitionSpecialization) Clone() *DeviceDefinitionSpecialization
 	}
 }
 
-// Equals checks for equality with another DeviceDefinitionSpecialization instance
+// Equals checks equality between two DeviceDefinitionSpecialization instances.
 func (m *DeviceDefinitionSpecialization) Equals(other *DeviceDefinitionSpecialization) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -289,7 +618,7 @@ func (m *DeviceDefinitionSpecialization) Equals(other *DeviceDefinitionSpecializ
 // DeviceDefinitionCapability
 // Device capabilities.
 type DeviceDefinitionCapability struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -297,22 +626,55 @@ type DeviceDefinitionCapability struct {
 	Description []*CodeableConcept `json:"description,omitempty"`
 }
 
-// NewDeviceDefinitionCapability creates a new DeviceDefinitionCapability instance
+// NewDeviceDefinitionCapability creates a new DeviceDefinitionCapability instance.
 func NewDeviceDefinitionCapability() *DeviceDefinitionCapability {
 	return &DeviceDefinitionCapability{}
 }
 
-// FromJSON populates DeviceDefinitionCapability from JSON data
+// FromJSON populates DeviceDefinitionCapability from JSON data.
 func (m *DeviceDefinitionCapability) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Description []*CodeableConcept `json:"description,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Description = temp.Description
+	return nil
 }
 
-// ToJSON converts DeviceDefinitionCapability to JSON data
+// ToJSON converts DeviceDefinitionCapability to JSON data.
 func (m *DeviceDefinitionCapability) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Description []*CodeableConcept `json:"description,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Description = m.Description
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DeviceDefinitionCapability
+// Clone creates a deep copy of DeviceDefinitionCapability.
 func (m *DeviceDefinitionCapability) Clone() *DeviceDefinitionCapability {
 	if m == nil { return nil }
 	return &DeviceDefinitionCapability{
@@ -324,7 +686,7 @@ func (m *DeviceDefinitionCapability) Clone() *DeviceDefinitionCapability {
 	}
 }
 
-// Equals checks for equality with another DeviceDefinitionCapability instance
+// Equals checks equality between two DeviceDefinitionCapability instances.
 func (m *DeviceDefinitionCapability) Equals(other *DeviceDefinitionCapability) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -339,7 +701,7 @@ func (m *DeviceDefinitionCapability) Equals(other *DeviceDefinitionCapability) b
 // DeviceDefinitionProperty
 // The actual configuration settings of a device as it actually operates, e.g., regulation status, time properties.
 type DeviceDefinitionProperty struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -348,22 +710,59 @@ type DeviceDefinitionProperty struct {
 	ValueCode []*CodeableConcept `json:"valuecode,omitempty"`
 }
 
-// NewDeviceDefinitionProperty creates a new DeviceDefinitionProperty instance
+// NewDeviceDefinitionProperty creates a new DeviceDefinitionProperty instance.
 func NewDeviceDefinitionProperty() *DeviceDefinitionProperty {
 	return &DeviceDefinitionProperty{}
 }
 
-// FromJSON populates DeviceDefinitionProperty from JSON data
+// FromJSON populates DeviceDefinitionProperty from JSON data.
 func (m *DeviceDefinitionProperty) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		ValueQuantity []*Quantity `json:"valuequantity,omitempty"`
+		ValueCode []*CodeableConcept `json:"valuecode,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.ValueQuantity = temp.ValueQuantity
+	m.ValueCode = temp.ValueCode
+	return nil
 }
 
-// ToJSON converts DeviceDefinitionProperty to JSON data
+// ToJSON converts DeviceDefinitionProperty to JSON data.
 func (m *DeviceDefinitionProperty) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		ValueQuantity []*Quantity `json:"valuequantity,omitempty"`
+		ValueCode []*CodeableConcept `json:"valuecode,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.ValueQuantity = m.ValueQuantity
+	output.ValueCode = m.ValueCode
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DeviceDefinitionProperty
+// Clone creates a deep copy of DeviceDefinitionProperty.
 func (m *DeviceDefinitionProperty) Clone() *DeviceDefinitionProperty {
 	if m == nil { return nil }
 	return &DeviceDefinitionProperty{
@@ -376,7 +775,7 @@ func (m *DeviceDefinitionProperty) Clone() *DeviceDefinitionProperty {
 	}
 }
 
-// Equals checks for equality with another DeviceDefinitionProperty instance
+// Equals checks equality between two DeviceDefinitionProperty instances.
 func (m *DeviceDefinitionProperty) Equals(other *DeviceDefinitionProperty) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -392,7 +791,7 @@ func (m *DeviceDefinitionProperty) Equals(other *DeviceDefinitionProperty) bool 
 // DeviceDefinitionMaterial
 // A substance used to create the material(s) of which the device is made.
 type DeviceDefinitionMaterial struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -401,22 +800,71 @@ type DeviceDefinitionMaterial struct {
 	AllergenicIndicator *FhirBoolean `json:"allergenicindicator,omitempty"`
 }
 
-// NewDeviceDefinitionMaterial creates a new DeviceDefinitionMaterial instance
+// NewDeviceDefinitionMaterial creates a new DeviceDefinitionMaterial instance.
 func NewDeviceDefinitionMaterial() *DeviceDefinitionMaterial {
 	return &DeviceDefinitionMaterial{}
 }
 
-// FromJSON populates DeviceDefinitionMaterial from JSON data
+// FromJSON populates DeviceDefinitionMaterial from JSON data.
 func (m *DeviceDefinitionMaterial) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Substance *CodeableConcept `json:"substance,omitempty"`
+		Alternate *FhirBoolean `json:"alternate,omitempty"`
+		AllergenicIndicator *FhirBoolean `json:"allergenicindicator,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Substance = temp.Substance
+	m.Alternate = temp.Alternate
+	m.AllergenicIndicator = temp.AllergenicIndicator
+	return nil
 }
 
-// ToJSON converts DeviceDefinitionMaterial to JSON data
+// ToJSON converts DeviceDefinitionMaterial to JSON data.
 func (m *DeviceDefinitionMaterial) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Substance *CodeableConcept `json:"substance,omitempty"`
+		Alternate interface{} `json:"alternate,omitempty"`
+		AlternateElement map[string]interface{} `json:"_alternate,omitempty"`
+		AllergenicIndicator interface{} `json:"allergenicindicator,omitempty"`
+		AllergenicIndicatorElement map[string]interface{} `json:"_allergenicindicator,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Substance = m.Substance
+	if m.Alternate != nil && m.Alternate.Value != nil {
+		output.Alternate = m.Alternate.Value
+		if m.Alternate.Element != nil {
+			output.AlternateElement = toMapOrNil(m.Alternate.Element.ToJSON())
+		}
+	}
+	if m.AllergenicIndicator != nil && m.AllergenicIndicator.Value != nil {
+		output.AllergenicIndicator = m.AllergenicIndicator.Value
+		if m.AllergenicIndicator.Element != nil {
+			output.AllergenicIndicatorElement = toMapOrNil(m.AllergenicIndicator.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DeviceDefinitionMaterial
+// Clone creates a deep copy of DeviceDefinitionMaterial.
 func (m *DeviceDefinitionMaterial) Clone() *DeviceDefinitionMaterial {
 	if m == nil { return nil }
 	return &DeviceDefinitionMaterial{
@@ -429,7 +877,7 @@ func (m *DeviceDefinitionMaterial) Clone() *DeviceDefinitionMaterial {
 	}
 }
 
-// Equals checks for equality with another DeviceDefinitionMaterial instance
+// Equals checks equality between two DeviceDefinitionMaterial instances.
 func (m *DeviceDefinitionMaterial) Equals(other *DeviceDefinitionMaterial) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

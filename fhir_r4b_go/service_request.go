@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // ServiceRequest
 // A record of a request for service such as diagnostic investigations, treatments, or operations to be performed.
 type ServiceRequest struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -57,22 +59,297 @@ type ServiceRequest struct {
 	RelevantHistory []*Reference `json:"relevanthistory,omitempty"`
 }
 
-// NewServiceRequest creates a new ServiceRequest instance
+// NewServiceRequest creates a new ServiceRequest instance.
 func NewServiceRequest() *ServiceRequest {
 	return &ServiceRequest{}
 }
 
-// FromJSON populates ServiceRequest from JSON data
+// FromJSON populates ServiceRequest from JSON data.
 func (m *ServiceRequest) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		InstantiatesCanonical []interface{} `json:"instantiatescanonical,omitempty"`
+		InstantiatesUri []interface{} `json:"instantiatesuri,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		Replaces []*Reference `json:"replaces,omitempty"`
+		Requisition *Identifier `json:"requisition,omitempty"`
+		Status *RequestStatus `json:"status,omitempty"`
+		Intent *RequestIntent `json:"intent,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Priority *RequestPriority `json:"priority,omitempty"`
+		DoNotPerform *FhirBoolean `json:"donotperform,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		OrderDetail []*CodeableConcept `json:"orderdetail,omitempty"`
+		QuantityQuantity *Quantity `json:"quantityquantity,omitempty"`
+		QuantityRatio *Ratio `json:"quantityratio,omitempty"`
+		QuantityRange *Range `json:"quantityrange,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		OccurrenceDateTime *FhirDateTime `json:"occurrencedatetime,omitempty"`
+		OccurrencePeriod *Period `json:"occurrenceperiod,omitempty"`
+		OccurrenceTiming *Timing `json:"occurrencetiming,omitempty"`
+		AsNeededBoolean *FhirBoolean `json:"asneededboolean,omitempty"`
+		AsNeededCodeableConcept *CodeableConcept `json:"asneededcodeableconcept,omitempty"`
+		AuthoredOn *FhirDateTime `json:"authoredon,omitempty"`
+		Requester *Reference `json:"requester,omitempty"`
+		PerformerType *CodeableConcept `json:"performertype,omitempty"`
+		Performer []*Reference `json:"performer,omitempty"`
+		LocationCode []*CodeableConcept `json:"locationcode,omitempty"`
+		LocationReference []*Reference `json:"locationreference,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		Insurance []*Reference `json:"insurance,omitempty"`
+		SupportingInfo []*Reference `json:"supportinginfo,omitempty"`
+		Specimen []*Reference `json:"specimen,omitempty"`
+		BodySite []*CodeableConcept `json:"bodysite,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		PatientInstruction *FhirString `json:"patientinstruction,omitempty"`
+		RelevantHistory []*Reference `json:"relevanthistory,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	if len(temp.InstantiatesCanonical) > 0 {
+		m.InstantiatesCanonical = make([]*FhirCanonical, len(temp.InstantiatesCanonical))
+		for i := range temp.InstantiatesCanonical {
+			itemMap, ok := temp.InstantiatesCanonical[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for InstantiatesCanonical[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse InstantiatesCanonical[%d]: %v", i, err) }
+			m.InstantiatesCanonical[i] = primitive
+		}
+	}
+	if len(temp.InstantiatesUri) > 0 {
+		m.InstantiatesUri = make([]*FhirUri, len(temp.InstantiatesUri))
+		for i := range temp.InstantiatesUri {
+			itemMap, ok := temp.InstantiatesUri[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for InstantiatesUri[%d]: expected map", i) }
+			primitive, err := NewFhirUriFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse InstantiatesUri[%d]: %v", i, err) }
+			m.InstantiatesUri[i] = primitive
+		}
+	}
+	m.BasedOn = temp.BasedOn
+	m.Replaces = temp.Replaces
+	m.Requisition = temp.Requisition
+	m.Status = temp.Status
+	m.Intent = temp.Intent
+	m.Category = temp.Category
+	m.Priority = temp.Priority
+	m.DoNotPerform = temp.DoNotPerform
+	m.Code = temp.Code
+	m.OrderDetail = temp.OrderDetail
+	m.QuantityQuantity = temp.QuantityQuantity
+	m.QuantityRatio = temp.QuantityRatio
+	m.QuantityRange = temp.QuantityRange
+	m.Subject = temp.Subject
+	m.Encounter = temp.Encounter
+	m.OccurrenceDateTime = temp.OccurrenceDateTime
+	m.OccurrencePeriod = temp.OccurrencePeriod
+	m.OccurrenceTiming = temp.OccurrenceTiming
+	m.AsNeededBoolean = temp.AsNeededBoolean
+	m.AsNeededCodeableConcept = temp.AsNeededCodeableConcept
+	m.AuthoredOn = temp.AuthoredOn
+	m.Requester = temp.Requester
+	m.PerformerType = temp.PerformerType
+	m.Performer = temp.Performer
+	m.LocationCode = temp.LocationCode
+	m.LocationReference = temp.LocationReference
+	m.ReasonCode = temp.ReasonCode
+	m.ReasonReference = temp.ReasonReference
+	m.Insurance = temp.Insurance
+	m.SupportingInfo = temp.SupportingInfo
+	m.Specimen = temp.Specimen
+	m.BodySite = temp.BodySite
+	m.Note = temp.Note
+	m.PatientInstruction = temp.PatientInstruction
+	m.RelevantHistory = temp.RelevantHistory
+	return nil
 }
 
-// ToJSON converts ServiceRequest to JSON data
+// ToJSON converts ServiceRequest to JSON data.
 func (m *ServiceRequest) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		InstantiatesCanonical []interface{} `json:"instantiatescanonical,omitempty"`
+		InstantiatesCanonicalElement []map[string]interface{} `json:"_instantiatescanonical,omitempty"`
+		InstantiatesUri []interface{} `json:"instantiatesuri,omitempty"`
+		InstantiatesUriElement []map[string]interface{} `json:"_instantiatesuri,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		Replaces []*Reference `json:"replaces,omitempty"`
+		Requisition *Identifier `json:"requisition,omitempty"`
+		Status *RequestStatus `json:"status,omitempty"`
+		Intent *RequestIntent `json:"intent,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Priority *RequestPriority `json:"priority,omitempty"`
+		DoNotPerform interface{} `json:"donotperform,omitempty"`
+		DoNotPerformElement map[string]interface{} `json:"_donotperform,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		OrderDetail []*CodeableConcept `json:"orderdetail,omitempty"`
+		QuantityQuantity *Quantity `json:"quantityquantity,omitempty"`
+		QuantityRatio *Ratio `json:"quantityratio,omitempty"`
+		QuantityRange *Range `json:"quantityrange,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		OccurrenceDateTime interface{} `json:"occurrencedatetime,omitempty"`
+		OccurrenceDateTimeElement map[string]interface{} `json:"_occurrencedatetime,omitempty"`
+		OccurrencePeriod *Period `json:"occurrenceperiod,omitempty"`
+		OccurrenceTiming *Timing `json:"occurrencetiming,omitempty"`
+		AsNeededBoolean interface{} `json:"asneededboolean,omitempty"`
+		AsNeededBooleanElement map[string]interface{} `json:"_asneededboolean,omitempty"`
+		AsNeededCodeableConcept *CodeableConcept `json:"asneededcodeableconcept,omitempty"`
+		AuthoredOn interface{} `json:"authoredon,omitempty"`
+		AuthoredOnElement map[string]interface{} `json:"_authoredon,omitempty"`
+		Requester *Reference `json:"requester,omitempty"`
+		PerformerType *CodeableConcept `json:"performertype,omitempty"`
+		Performer []*Reference `json:"performer,omitempty"`
+		LocationCode []*CodeableConcept `json:"locationcode,omitempty"`
+		LocationReference []*Reference `json:"locationreference,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		Insurance []*Reference `json:"insurance,omitempty"`
+		SupportingInfo []*Reference `json:"supportinginfo,omitempty"`
+		Specimen []*Reference `json:"specimen,omitempty"`
+		BodySite []*CodeableConcept `json:"bodysite,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		PatientInstruction interface{} `json:"patientinstruction,omitempty"`
+		PatientInstructionElement map[string]interface{} `json:"_patientinstruction,omitempty"`
+		RelevantHistory []*Reference `json:"relevanthistory,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	if len(m.InstantiatesCanonical) > 0 {
+		output.InstantiatesCanonical = make([]interface{}, len(m.InstantiatesCanonical))
+		output.InstantiatesCanonicalElement = make([]map[string]interface{}, len(m.InstantiatesCanonical))
+		for i, item := range m.InstantiatesCanonical {
+			if item != nil && item.Value != nil {
+				output.InstantiatesCanonical[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.InstantiatesCanonicalElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.InstantiatesUri) > 0 {
+		output.InstantiatesUri = make([]interface{}, len(m.InstantiatesUri))
+		output.InstantiatesUriElement = make([]map[string]interface{}, len(m.InstantiatesUri))
+		for i, item := range m.InstantiatesUri {
+			if item != nil && item.Value != nil {
+				output.InstantiatesUri[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.InstantiatesUriElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.BasedOn = m.BasedOn
+	output.Replaces = m.Replaces
+	output.Requisition = m.Requisition
+	output.Status = m.Status
+	output.Intent = m.Intent
+	output.Category = m.Category
+	output.Priority = m.Priority
+	if m.DoNotPerform != nil && m.DoNotPerform.Value != nil {
+		output.DoNotPerform = m.DoNotPerform.Value
+		if m.DoNotPerform.Element != nil {
+			output.DoNotPerformElement = toMapOrNil(m.DoNotPerform.Element.ToJSON())
+		}
+	}
+	output.Code = m.Code
+	output.OrderDetail = m.OrderDetail
+	output.QuantityQuantity = m.QuantityQuantity
+	output.QuantityRatio = m.QuantityRatio
+	output.QuantityRange = m.QuantityRange
+	output.Subject = m.Subject
+	output.Encounter = m.Encounter
+	if m.OccurrenceDateTime != nil && m.OccurrenceDateTime.Value != nil {
+		output.OccurrenceDateTime = m.OccurrenceDateTime.Value
+		if m.OccurrenceDateTime.Element != nil {
+			output.OccurrenceDateTimeElement = toMapOrNil(m.OccurrenceDateTime.Element.ToJSON())
+		}
+	}
+	output.OccurrencePeriod = m.OccurrencePeriod
+	output.OccurrenceTiming = m.OccurrenceTiming
+	if m.AsNeededBoolean != nil && m.AsNeededBoolean.Value != nil {
+		output.AsNeededBoolean = m.AsNeededBoolean.Value
+		if m.AsNeededBoolean.Element != nil {
+			output.AsNeededBooleanElement = toMapOrNil(m.AsNeededBoolean.Element.ToJSON())
+		}
+	}
+	output.AsNeededCodeableConcept = m.AsNeededCodeableConcept
+	if m.AuthoredOn != nil && m.AuthoredOn.Value != nil {
+		output.AuthoredOn = m.AuthoredOn.Value
+		if m.AuthoredOn.Element != nil {
+			output.AuthoredOnElement = toMapOrNil(m.AuthoredOn.Element.ToJSON())
+		}
+	}
+	output.Requester = m.Requester
+	output.PerformerType = m.PerformerType
+	output.Performer = m.Performer
+	output.LocationCode = m.LocationCode
+	output.LocationReference = m.LocationReference
+	output.ReasonCode = m.ReasonCode
+	output.ReasonReference = m.ReasonReference
+	output.Insurance = m.Insurance
+	output.SupportingInfo = m.SupportingInfo
+	output.Specimen = m.Specimen
+	output.BodySite = m.BodySite
+	output.Note = m.Note
+	if m.PatientInstruction != nil && m.PatientInstruction.Value != nil {
+		output.PatientInstruction = m.PatientInstruction.Value
+		if m.PatientInstruction.Element != nil {
+			output.PatientInstructionElement = toMapOrNil(m.PatientInstruction.Element.ToJSON())
+		}
+	}
+	output.RelevantHistory = m.RelevantHistory
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ServiceRequest
+// Clone creates a deep copy of ServiceRequest.
 func (m *ServiceRequest) Clone() *ServiceRequest {
 	if m == nil { return nil }
 	return &ServiceRequest{
@@ -125,7 +402,7 @@ func (m *ServiceRequest) Clone() *ServiceRequest {
 	}
 }
 
-// Equals checks for equality with another ServiceRequest instance
+// Equals checks equality between two ServiceRequest instances.
 func (m *ServiceRequest) Equals(other *ServiceRequest) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

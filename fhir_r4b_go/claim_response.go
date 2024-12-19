@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // ClaimResponse
 // This resource provides the adjudication details from the processing of a Claim resource.
 type ClaimResponse struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -46,22 +48,199 @@ type ClaimResponse struct {
 	Error []*ClaimResponseError `json:"error,omitempty"`
 }
 
-// NewClaimResponse creates a new ClaimResponse instance
+// NewClaimResponse creates a new ClaimResponse instance.
 func NewClaimResponse() *ClaimResponse {
 	return &ClaimResponse{}
 }
 
-// FromJSON populates ClaimResponse from JSON data
+// FromJSON populates ClaimResponse from JSON data.
 func (m *ClaimResponse) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *FinancialResourceStatusCodes `json:"status,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		SubType *CodeableConcept `json:"subtype,omitempty"`
+		Use *Use `json:"use,omitempty"`
+		Patient *Reference `json:"patient,omitempty"`
+		Created *FhirDateTime `json:"created,omitempty"`
+		Insurer *Reference `json:"insurer,omitempty"`
+		Requestor *Reference `json:"requestor,omitempty"`
+		Request *Reference `json:"request,omitempty"`
+		Outcome *RemittanceOutcome `json:"outcome,omitempty"`
+		Disposition *FhirString `json:"disposition,omitempty"`
+		PreAuthRef *FhirString `json:"preauthref,omitempty"`
+		PreAuthPeriod *Period `json:"preauthperiod,omitempty"`
+		PayeeType *CodeableConcept `json:"payeetype,omitempty"`
+		Item []*ClaimResponseItem `json:"item,omitempty"`
+		AddItem []*ClaimResponseAddItem `json:"additem,omitempty"`
+		Adjudication []*ClaimResponseAdjudication `json:"adjudication,omitempty"`
+		Total []*ClaimResponseTotal `json:"total,omitempty"`
+		Payment *ClaimResponsePayment `json:"payment,omitempty"`
+		FundsReserve *CodeableConcept `json:"fundsreserve,omitempty"`
+		FormCode *CodeableConcept `json:"formcode,omitempty"`
+		Form *Attachment `json:"form,omitempty"`
+		ProcessNote []*ClaimResponseProcessNote `json:"processnote,omitempty"`
+		CommunicationRequest []*Reference `json:"communicationrequest,omitempty"`
+		Insurance []*ClaimResponseInsurance `json:"insurance,omitempty"`
+		Error []*ClaimResponseError `json:"error,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.Type = temp.Type
+	m.SubType = temp.SubType
+	m.Use = temp.Use
+	m.Patient = temp.Patient
+	m.Created = temp.Created
+	m.Insurer = temp.Insurer
+	m.Requestor = temp.Requestor
+	m.Request = temp.Request
+	m.Outcome = temp.Outcome
+	m.Disposition = temp.Disposition
+	m.PreAuthRef = temp.PreAuthRef
+	m.PreAuthPeriod = temp.PreAuthPeriod
+	m.PayeeType = temp.PayeeType
+	m.Item = temp.Item
+	m.AddItem = temp.AddItem
+	m.Adjudication = temp.Adjudication
+	m.Total = temp.Total
+	m.Payment = temp.Payment
+	m.FundsReserve = temp.FundsReserve
+	m.FormCode = temp.FormCode
+	m.Form = temp.Form
+	m.ProcessNote = temp.ProcessNote
+	m.CommunicationRequest = temp.CommunicationRequest
+	m.Insurance = temp.Insurance
+	m.Error = temp.Error
+	return nil
 }
 
-// ToJSON converts ClaimResponse to JSON data
+// ToJSON converts ClaimResponse to JSON data.
 func (m *ClaimResponse) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *FinancialResourceStatusCodes `json:"status,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		SubType *CodeableConcept `json:"subtype,omitempty"`
+		Use *Use `json:"use,omitempty"`
+		Patient *Reference `json:"patient,omitempty"`
+		Created interface{} `json:"created,omitempty"`
+		CreatedElement map[string]interface{} `json:"_created,omitempty"`
+		Insurer *Reference `json:"insurer,omitempty"`
+		Requestor *Reference `json:"requestor,omitempty"`
+		Request *Reference `json:"request,omitempty"`
+		Outcome *RemittanceOutcome `json:"outcome,omitempty"`
+		Disposition interface{} `json:"disposition,omitempty"`
+		DispositionElement map[string]interface{} `json:"_disposition,omitempty"`
+		PreAuthRef interface{} `json:"preauthref,omitempty"`
+		PreAuthRefElement map[string]interface{} `json:"_preauthref,omitempty"`
+		PreAuthPeriod *Period `json:"preauthperiod,omitempty"`
+		PayeeType *CodeableConcept `json:"payeetype,omitempty"`
+		Item []*ClaimResponseItem `json:"item,omitempty"`
+		AddItem []*ClaimResponseAddItem `json:"additem,omitempty"`
+		Adjudication []*ClaimResponseAdjudication `json:"adjudication,omitempty"`
+		Total []*ClaimResponseTotal `json:"total,omitempty"`
+		Payment *ClaimResponsePayment `json:"payment,omitempty"`
+		FundsReserve *CodeableConcept `json:"fundsreserve,omitempty"`
+		FormCode *CodeableConcept `json:"formcode,omitempty"`
+		Form *Attachment `json:"form,omitempty"`
+		ProcessNote []*ClaimResponseProcessNote `json:"processnote,omitempty"`
+		CommunicationRequest []*Reference `json:"communicationrequest,omitempty"`
+		Insurance []*ClaimResponseInsurance `json:"insurance,omitempty"`
+		Error []*ClaimResponseError `json:"error,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	output.Type = m.Type
+	output.SubType = m.SubType
+	output.Use = m.Use
+	output.Patient = m.Patient
+	if m.Created != nil && m.Created.Value != nil {
+		output.Created = m.Created.Value
+		if m.Created.Element != nil {
+			output.CreatedElement = toMapOrNil(m.Created.Element.ToJSON())
+		}
+	}
+	output.Insurer = m.Insurer
+	output.Requestor = m.Requestor
+	output.Request = m.Request
+	output.Outcome = m.Outcome
+	if m.Disposition != nil && m.Disposition.Value != nil {
+		output.Disposition = m.Disposition.Value
+		if m.Disposition.Element != nil {
+			output.DispositionElement = toMapOrNil(m.Disposition.Element.ToJSON())
+		}
+	}
+	if m.PreAuthRef != nil && m.PreAuthRef.Value != nil {
+		output.PreAuthRef = m.PreAuthRef.Value
+		if m.PreAuthRef.Element != nil {
+			output.PreAuthRefElement = toMapOrNil(m.PreAuthRef.Element.ToJSON())
+		}
+	}
+	output.PreAuthPeriod = m.PreAuthPeriod
+	output.PayeeType = m.PayeeType
+	output.Item = m.Item
+	output.AddItem = m.AddItem
+	output.Adjudication = m.Adjudication
+	output.Total = m.Total
+	output.Payment = m.Payment
+	output.FundsReserve = m.FundsReserve
+	output.FormCode = m.FormCode
+	output.Form = m.Form
+	output.ProcessNote = m.ProcessNote
+	output.CommunicationRequest = m.CommunicationRequest
+	output.Insurance = m.Insurance
+	output.Error = m.Error
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ClaimResponse
+// Clone creates a deep copy of ClaimResponse.
 func (m *ClaimResponse) Clone() *ClaimResponse {
 	if m == nil { return nil }
 	return &ClaimResponse{
@@ -103,7 +282,7 @@ func (m *ClaimResponse) Clone() *ClaimResponse {
 	}
 }
 
-// Equals checks for equality with another ClaimResponse instance
+// Equals checks equality between two ClaimResponse instances.
 func (m *ClaimResponse) Equals(other *ClaimResponse) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -148,7 +327,7 @@ func (m *ClaimResponse) Equals(other *ClaimResponse) bool {
 // ClaimResponseItem
 // A claim line. Either a simple (a product or service) or a 'group' of details which can also be a simple items or groups of sub-details.
 type ClaimResponseItem struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -158,22 +337,90 @@ type ClaimResponseItem struct {
 	Detail []*ClaimResponseDetail `json:"detail,omitempty"`
 }
 
-// NewClaimResponseItem creates a new ClaimResponseItem instance
+// NewClaimResponseItem creates a new ClaimResponseItem instance.
 func NewClaimResponseItem() *ClaimResponseItem {
 	return &ClaimResponseItem{}
 }
 
-// FromJSON populates ClaimResponseItem from JSON data
+// FromJSON populates ClaimResponseItem from JSON data.
 func (m *ClaimResponseItem) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ItemSequence *FhirPositiveInt `json:"itemsequence,omitempty"`
+		NoteNumber []interface{} `json:"notenumber,omitempty"`
+		Adjudication []*ClaimResponseAdjudication `json:"adjudication,omitempty"`
+		Detail []*ClaimResponseDetail `json:"detail,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.ItemSequence = temp.ItemSequence
+	if len(temp.NoteNumber) > 0 {
+		m.NoteNumber = make([]*FhirPositiveInt, len(temp.NoteNumber))
+		for i := range temp.NoteNumber {
+			itemMap, ok := temp.NoteNumber[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for NoteNumber[%d]: expected map", i) }
+			primitive, err := NewFhirPositiveIntFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse NoteNumber[%d]: %v", i, err) }
+			m.NoteNumber[i] = primitive
+		}
+	}
+	m.Adjudication = temp.Adjudication
+	m.Detail = temp.Detail
+	return nil
 }
 
-// ToJSON converts ClaimResponseItem to JSON data
+// ToJSON converts ClaimResponseItem to JSON data.
 func (m *ClaimResponseItem) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ItemSequence interface{} `json:"itemsequence,omitempty"`
+		ItemSequenceElement map[string]interface{} `json:"_itemsequence,omitempty"`
+		NoteNumber []interface{} `json:"notenumber,omitempty"`
+		NoteNumberElement []map[string]interface{} `json:"_notenumber,omitempty"`
+		Adjudication []*ClaimResponseAdjudication `json:"adjudication,omitempty"`
+		Detail []*ClaimResponseDetail `json:"detail,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.ItemSequence != nil && m.ItemSequence.Value != nil {
+		output.ItemSequence = m.ItemSequence.Value
+		if m.ItemSequence.Element != nil {
+			output.ItemSequenceElement = toMapOrNil(m.ItemSequence.Element.ToJSON())
+		}
+	}
+	if len(m.NoteNumber) > 0 {
+		output.NoteNumber = make([]interface{}, len(m.NoteNumber))
+		output.NoteNumberElement = make([]map[string]interface{}, len(m.NoteNumber))
+		for i, item := range m.NoteNumber {
+			if item != nil && item.Value != nil {
+				output.NoteNumber[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.NoteNumberElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Adjudication = m.Adjudication
+	output.Detail = m.Detail
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ClaimResponseItem
+// Clone creates a deep copy of ClaimResponseItem.
 func (m *ClaimResponseItem) Clone() *ClaimResponseItem {
 	if m == nil { return nil }
 	return &ClaimResponseItem{
@@ -187,7 +434,7 @@ func (m *ClaimResponseItem) Clone() *ClaimResponseItem {
 	}
 }
 
-// Equals checks for equality with another ClaimResponseItem instance
+// Equals checks equality between two ClaimResponseItem instances.
 func (m *ClaimResponseItem) Equals(other *ClaimResponseItem) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -204,7 +451,7 @@ func (m *ClaimResponseItem) Equals(other *ClaimResponseItem) bool {
 // ClaimResponseAdjudication
 // If this item is a group then the values here are a summary of the adjudication of the detail items. If this item is a simple product or service then this is the result of the adjudication of this item.
 type ClaimResponseAdjudication struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -214,22 +461,69 @@ type ClaimResponseAdjudication struct {
 	Value *FhirDecimal `json:"value,omitempty"`
 }
 
-// NewClaimResponseAdjudication creates a new ClaimResponseAdjudication instance
+// NewClaimResponseAdjudication creates a new ClaimResponseAdjudication instance.
 func NewClaimResponseAdjudication() *ClaimResponseAdjudication {
 	return &ClaimResponseAdjudication{}
 }
 
-// FromJSON populates ClaimResponseAdjudication from JSON data
+// FromJSON populates ClaimResponseAdjudication from JSON data.
 func (m *ClaimResponseAdjudication) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Category *CodeableConcept `json:"category,omitempty"`
+		Reason *CodeableConcept `json:"reason,omitempty"`
+		Amount *Money `json:"amount,omitempty"`
+		Value *FhirDecimal `json:"value,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Category = temp.Category
+	m.Reason = temp.Reason
+	m.Amount = temp.Amount
+	m.Value = temp.Value
+	return nil
 }
 
-// ToJSON converts ClaimResponseAdjudication to JSON data
+// ToJSON converts ClaimResponseAdjudication to JSON data.
 func (m *ClaimResponseAdjudication) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Category *CodeableConcept `json:"category,omitempty"`
+		Reason *CodeableConcept `json:"reason,omitempty"`
+		Amount *Money `json:"amount,omitempty"`
+		Value interface{} `json:"value,omitempty"`
+		ValueElement map[string]interface{} `json:"_value,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Category = m.Category
+	output.Reason = m.Reason
+	output.Amount = m.Amount
+	if m.Value != nil && m.Value.Value != nil {
+		output.Value = m.Value.Value
+		if m.Value.Element != nil {
+			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ClaimResponseAdjudication
+// Clone creates a deep copy of ClaimResponseAdjudication.
 func (m *ClaimResponseAdjudication) Clone() *ClaimResponseAdjudication {
 	if m == nil { return nil }
 	return &ClaimResponseAdjudication{
@@ -243,7 +537,7 @@ func (m *ClaimResponseAdjudication) Clone() *ClaimResponseAdjudication {
 	}
 }
 
-// Equals checks for equality with another ClaimResponseAdjudication instance
+// Equals checks equality between two ClaimResponseAdjudication instances.
 func (m *ClaimResponseAdjudication) Equals(other *ClaimResponseAdjudication) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -260,7 +554,7 @@ func (m *ClaimResponseAdjudication) Equals(other *ClaimResponseAdjudication) boo
 // ClaimResponseDetail
 // A claim detail. Either a simple (a product or service) or a 'group' of sub-details which are simple items.
 type ClaimResponseDetail struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -270,22 +564,90 @@ type ClaimResponseDetail struct {
 	SubDetail []*ClaimResponseSubDetail `json:"subdetail,omitempty"`
 }
 
-// NewClaimResponseDetail creates a new ClaimResponseDetail instance
+// NewClaimResponseDetail creates a new ClaimResponseDetail instance.
 func NewClaimResponseDetail() *ClaimResponseDetail {
 	return &ClaimResponseDetail{}
 }
 
-// FromJSON populates ClaimResponseDetail from JSON data
+// FromJSON populates ClaimResponseDetail from JSON data.
 func (m *ClaimResponseDetail) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		DetailSequence *FhirPositiveInt `json:"detailsequence,omitempty"`
+		NoteNumber []interface{} `json:"notenumber,omitempty"`
+		Adjudication []*ClaimResponseAdjudication `json:"adjudication,omitempty"`
+		SubDetail []*ClaimResponseSubDetail `json:"subdetail,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.DetailSequence = temp.DetailSequence
+	if len(temp.NoteNumber) > 0 {
+		m.NoteNumber = make([]*FhirPositiveInt, len(temp.NoteNumber))
+		for i := range temp.NoteNumber {
+			itemMap, ok := temp.NoteNumber[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for NoteNumber[%d]: expected map", i) }
+			primitive, err := NewFhirPositiveIntFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse NoteNumber[%d]: %v", i, err) }
+			m.NoteNumber[i] = primitive
+		}
+	}
+	m.Adjudication = temp.Adjudication
+	m.SubDetail = temp.SubDetail
+	return nil
 }
 
-// ToJSON converts ClaimResponseDetail to JSON data
+// ToJSON converts ClaimResponseDetail to JSON data.
 func (m *ClaimResponseDetail) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		DetailSequence interface{} `json:"detailsequence,omitempty"`
+		DetailSequenceElement map[string]interface{} `json:"_detailsequence,omitempty"`
+		NoteNumber []interface{} `json:"notenumber,omitempty"`
+		NoteNumberElement []map[string]interface{} `json:"_notenumber,omitempty"`
+		Adjudication []*ClaimResponseAdjudication `json:"adjudication,omitempty"`
+		SubDetail []*ClaimResponseSubDetail `json:"subdetail,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.DetailSequence != nil && m.DetailSequence.Value != nil {
+		output.DetailSequence = m.DetailSequence.Value
+		if m.DetailSequence.Element != nil {
+			output.DetailSequenceElement = toMapOrNil(m.DetailSequence.Element.ToJSON())
+		}
+	}
+	if len(m.NoteNumber) > 0 {
+		output.NoteNumber = make([]interface{}, len(m.NoteNumber))
+		output.NoteNumberElement = make([]map[string]interface{}, len(m.NoteNumber))
+		for i, item := range m.NoteNumber {
+			if item != nil && item.Value != nil {
+				output.NoteNumber[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.NoteNumberElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Adjudication = m.Adjudication
+	output.SubDetail = m.SubDetail
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ClaimResponseDetail
+// Clone creates a deep copy of ClaimResponseDetail.
 func (m *ClaimResponseDetail) Clone() *ClaimResponseDetail {
 	if m == nil { return nil }
 	return &ClaimResponseDetail{
@@ -299,7 +661,7 @@ func (m *ClaimResponseDetail) Clone() *ClaimResponseDetail {
 	}
 }
 
-// Equals checks for equality with another ClaimResponseDetail instance
+// Equals checks equality between two ClaimResponseDetail instances.
 func (m *ClaimResponseDetail) Equals(other *ClaimResponseDetail) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -316,7 +678,7 @@ func (m *ClaimResponseDetail) Equals(other *ClaimResponseDetail) bool {
 // ClaimResponseSubDetail
 // A sub-detail adjudication of a simple product or service.
 type ClaimResponseSubDetail struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -325,22 +687,86 @@ type ClaimResponseSubDetail struct {
 	Adjudication []*ClaimResponseAdjudication `json:"adjudication,omitempty"`
 }
 
-// NewClaimResponseSubDetail creates a new ClaimResponseSubDetail instance
+// NewClaimResponseSubDetail creates a new ClaimResponseSubDetail instance.
 func NewClaimResponseSubDetail() *ClaimResponseSubDetail {
 	return &ClaimResponseSubDetail{}
 }
 
-// FromJSON populates ClaimResponseSubDetail from JSON data
+// FromJSON populates ClaimResponseSubDetail from JSON data.
 func (m *ClaimResponseSubDetail) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		SubDetailSequence *FhirPositiveInt `json:"subdetailsequence,omitempty"`
+		NoteNumber []interface{} `json:"notenumber,omitempty"`
+		Adjudication []*ClaimResponseAdjudication `json:"adjudication,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.SubDetailSequence = temp.SubDetailSequence
+	if len(temp.NoteNumber) > 0 {
+		m.NoteNumber = make([]*FhirPositiveInt, len(temp.NoteNumber))
+		for i := range temp.NoteNumber {
+			itemMap, ok := temp.NoteNumber[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for NoteNumber[%d]: expected map", i) }
+			primitive, err := NewFhirPositiveIntFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse NoteNumber[%d]: %v", i, err) }
+			m.NoteNumber[i] = primitive
+		}
+	}
+	m.Adjudication = temp.Adjudication
+	return nil
 }
 
-// ToJSON converts ClaimResponseSubDetail to JSON data
+// ToJSON converts ClaimResponseSubDetail to JSON data.
 func (m *ClaimResponseSubDetail) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		SubDetailSequence interface{} `json:"subdetailsequence,omitempty"`
+		SubDetailSequenceElement map[string]interface{} `json:"_subdetailsequence,omitempty"`
+		NoteNumber []interface{} `json:"notenumber,omitempty"`
+		NoteNumberElement []map[string]interface{} `json:"_notenumber,omitempty"`
+		Adjudication []*ClaimResponseAdjudication `json:"adjudication,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.SubDetailSequence != nil && m.SubDetailSequence.Value != nil {
+		output.SubDetailSequence = m.SubDetailSequence.Value
+		if m.SubDetailSequence.Element != nil {
+			output.SubDetailSequenceElement = toMapOrNil(m.SubDetailSequence.Element.ToJSON())
+		}
+	}
+	if len(m.NoteNumber) > 0 {
+		output.NoteNumber = make([]interface{}, len(m.NoteNumber))
+		output.NoteNumberElement = make([]map[string]interface{}, len(m.NoteNumber))
+		for i, item := range m.NoteNumber {
+			if item != nil && item.Value != nil {
+				output.NoteNumber[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.NoteNumberElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Adjudication = m.Adjudication
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ClaimResponseSubDetail
+// Clone creates a deep copy of ClaimResponseSubDetail.
 func (m *ClaimResponseSubDetail) Clone() *ClaimResponseSubDetail {
 	if m == nil { return nil }
 	return &ClaimResponseSubDetail{
@@ -353,7 +779,7 @@ func (m *ClaimResponseSubDetail) Clone() *ClaimResponseSubDetail {
 	}
 }
 
-// Equals checks for equality with another ClaimResponseSubDetail instance
+// Equals checks equality between two ClaimResponseSubDetail instances.
 func (m *ClaimResponseSubDetail) Equals(other *ClaimResponseSubDetail) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -369,7 +795,7 @@ func (m *ClaimResponseSubDetail) Equals(other *ClaimResponseSubDetail) bool {
 // ClaimResponseAddItem
 // The first-tier service adjudications for payor added product or service lines.
 type ClaimResponseAddItem struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -396,22 +822,227 @@ type ClaimResponseAddItem struct {
 	Detail []*ClaimResponseDetail `json:"detail,omitempty"`
 }
 
-// NewClaimResponseAddItem creates a new ClaimResponseAddItem instance
+// NewClaimResponseAddItem creates a new ClaimResponseAddItem instance.
 func NewClaimResponseAddItem() *ClaimResponseAddItem {
 	return &ClaimResponseAddItem{}
 }
 
-// FromJSON populates ClaimResponseAddItem from JSON data
+// FromJSON populates ClaimResponseAddItem from JSON data.
 func (m *ClaimResponseAddItem) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ItemSequence []interface{} `json:"itemsequence,omitempty"`
+		DetailSequence []interface{} `json:"detailsequence,omitempty"`
+		SubdetailSequence []interface{} `json:"subdetailsequence,omitempty"`
+		Provider []*Reference `json:"provider,omitempty"`
+		ProductOrService *CodeableConcept `json:"productorservice,omitempty"`
+		Modifier []*CodeableConcept `json:"modifier,omitempty"`
+		ProgramCode []*CodeableConcept `json:"programcode,omitempty"`
+		ServicedDate *FhirDate `json:"serviceddate,omitempty"`
+		ServicedPeriod *Period `json:"servicedperiod,omitempty"`
+		LocationCodeableConcept *CodeableConcept `json:"locationcodeableconcept,omitempty"`
+		LocationAddress *Address `json:"locationaddress,omitempty"`
+		LocationReference *Reference `json:"locationreference,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		UnitPrice *Money `json:"unitprice,omitempty"`
+		Factor *FhirDecimal `json:"factor,omitempty"`
+		Net *Money `json:"net,omitempty"`
+		BodySite *CodeableConcept `json:"bodysite,omitempty"`
+		SubSite []*CodeableConcept `json:"subsite,omitempty"`
+		NoteNumber []interface{} `json:"notenumber,omitempty"`
+		Adjudication []*ClaimResponseAdjudication `json:"adjudication,omitempty"`
+		Detail []*ClaimResponseDetail `json:"detail,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	if len(temp.ItemSequence) > 0 {
+		m.ItemSequence = make([]*FhirPositiveInt, len(temp.ItemSequence))
+		for i := range temp.ItemSequence {
+			itemMap, ok := temp.ItemSequence[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for ItemSequence[%d]: expected map", i) }
+			primitive, err := NewFhirPositiveIntFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse ItemSequence[%d]: %v", i, err) }
+			m.ItemSequence[i] = primitive
+		}
+	}
+	if len(temp.DetailSequence) > 0 {
+		m.DetailSequence = make([]*FhirPositiveInt, len(temp.DetailSequence))
+		for i := range temp.DetailSequence {
+			itemMap, ok := temp.DetailSequence[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for DetailSequence[%d]: expected map", i) }
+			primitive, err := NewFhirPositiveIntFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse DetailSequence[%d]: %v", i, err) }
+			m.DetailSequence[i] = primitive
+		}
+	}
+	if len(temp.SubdetailSequence) > 0 {
+		m.SubdetailSequence = make([]*FhirPositiveInt, len(temp.SubdetailSequence))
+		for i := range temp.SubdetailSequence {
+			itemMap, ok := temp.SubdetailSequence[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for SubdetailSequence[%d]: expected map", i) }
+			primitive, err := NewFhirPositiveIntFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse SubdetailSequence[%d]: %v", i, err) }
+			m.SubdetailSequence[i] = primitive
+		}
+	}
+	m.Provider = temp.Provider
+	m.ProductOrService = temp.ProductOrService
+	m.Modifier = temp.Modifier
+	m.ProgramCode = temp.ProgramCode
+	m.ServicedDate = temp.ServicedDate
+	m.ServicedPeriod = temp.ServicedPeriod
+	m.LocationCodeableConcept = temp.LocationCodeableConcept
+	m.LocationAddress = temp.LocationAddress
+	m.LocationReference = temp.LocationReference
+	m.Quantity = temp.Quantity
+	m.UnitPrice = temp.UnitPrice
+	m.Factor = temp.Factor
+	m.Net = temp.Net
+	m.BodySite = temp.BodySite
+	m.SubSite = temp.SubSite
+	if len(temp.NoteNumber) > 0 {
+		m.NoteNumber = make([]*FhirPositiveInt, len(temp.NoteNumber))
+		for i := range temp.NoteNumber {
+			itemMap, ok := temp.NoteNumber[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for NoteNumber[%d]: expected map", i) }
+			primitive, err := NewFhirPositiveIntFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse NoteNumber[%d]: %v", i, err) }
+			m.NoteNumber[i] = primitive
+		}
+	}
+	m.Adjudication = temp.Adjudication
+	m.Detail = temp.Detail
+	return nil
 }
 
-// ToJSON converts ClaimResponseAddItem to JSON data
+// ToJSON converts ClaimResponseAddItem to JSON data.
 func (m *ClaimResponseAddItem) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ItemSequence []interface{} `json:"itemsequence,omitempty"`
+		ItemSequenceElement []map[string]interface{} `json:"_itemsequence,omitempty"`
+		DetailSequence []interface{} `json:"detailsequence,omitempty"`
+		DetailSequenceElement []map[string]interface{} `json:"_detailsequence,omitempty"`
+		SubdetailSequence []interface{} `json:"subdetailsequence,omitempty"`
+		SubdetailSequenceElement []map[string]interface{} `json:"_subdetailsequence,omitempty"`
+		Provider []*Reference `json:"provider,omitempty"`
+		ProductOrService *CodeableConcept `json:"productorservice,omitempty"`
+		Modifier []*CodeableConcept `json:"modifier,omitempty"`
+		ProgramCode []*CodeableConcept `json:"programcode,omitempty"`
+		ServicedDate interface{} `json:"serviceddate,omitempty"`
+		ServicedDateElement map[string]interface{} `json:"_serviceddate,omitempty"`
+		ServicedPeriod *Period `json:"servicedperiod,omitempty"`
+		LocationCodeableConcept *CodeableConcept `json:"locationcodeableconcept,omitempty"`
+		LocationAddress *Address `json:"locationaddress,omitempty"`
+		LocationReference *Reference `json:"locationreference,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		UnitPrice *Money `json:"unitprice,omitempty"`
+		Factor interface{} `json:"factor,omitempty"`
+		FactorElement map[string]interface{} `json:"_factor,omitempty"`
+		Net *Money `json:"net,omitempty"`
+		BodySite *CodeableConcept `json:"bodysite,omitempty"`
+		SubSite []*CodeableConcept `json:"subsite,omitempty"`
+		NoteNumber []interface{} `json:"notenumber,omitempty"`
+		NoteNumberElement []map[string]interface{} `json:"_notenumber,omitempty"`
+		Adjudication []*ClaimResponseAdjudication `json:"adjudication,omitempty"`
+		Detail []*ClaimResponseDetail `json:"detail,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if len(m.ItemSequence) > 0 {
+		output.ItemSequence = make([]interface{}, len(m.ItemSequence))
+		output.ItemSequenceElement = make([]map[string]interface{}, len(m.ItemSequence))
+		for i, item := range m.ItemSequence {
+			if item != nil && item.Value != nil {
+				output.ItemSequence[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.ItemSequenceElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.DetailSequence) > 0 {
+		output.DetailSequence = make([]interface{}, len(m.DetailSequence))
+		output.DetailSequenceElement = make([]map[string]interface{}, len(m.DetailSequence))
+		for i, item := range m.DetailSequence {
+			if item != nil && item.Value != nil {
+				output.DetailSequence[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.DetailSequenceElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.SubdetailSequence) > 0 {
+		output.SubdetailSequence = make([]interface{}, len(m.SubdetailSequence))
+		output.SubdetailSequenceElement = make([]map[string]interface{}, len(m.SubdetailSequence))
+		for i, item := range m.SubdetailSequence {
+			if item != nil && item.Value != nil {
+				output.SubdetailSequence[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.SubdetailSequenceElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Provider = m.Provider
+	output.ProductOrService = m.ProductOrService
+	output.Modifier = m.Modifier
+	output.ProgramCode = m.ProgramCode
+	if m.ServicedDate != nil && m.ServicedDate.Value != nil {
+		output.ServicedDate = m.ServicedDate.Value
+		if m.ServicedDate.Element != nil {
+			output.ServicedDateElement = toMapOrNil(m.ServicedDate.Element.ToJSON())
+		}
+	}
+	output.ServicedPeriod = m.ServicedPeriod
+	output.LocationCodeableConcept = m.LocationCodeableConcept
+	output.LocationAddress = m.LocationAddress
+	output.LocationReference = m.LocationReference
+	output.Quantity = m.Quantity
+	output.UnitPrice = m.UnitPrice
+	if m.Factor != nil && m.Factor.Value != nil {
+		output.Factor = m.Factor.Value
+		if m.Factor.Element != nil {
+			output.FactorElement = toMapOrNil(m.Factor.Element.ToJSON())
+		}
+	}
+	output.Net = m.Net
+	output.BodySite = m.BodySite
+	output.SubSite = m.SubSite
+	if len(m.NoteNumber) > 0 {
+		output.NoteNumber = make([]interface{}, len(m.NoteNumber))
+		output.NoteNumberElement = make([]map[string]interface{}, len(m.NoteNumber))
+		for i, item := range m.NoteNumber {
+			if item != nil && item.Value != nil {
+				output.NoteNumber[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.NoteNumberElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Adjudication = m.Adjudication
+	output.Detail = m.Detail
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ClaimResponseAddItem
+// Clone creates a deep copy of ClaimResponseAddItem.
 func (m *ClaimResponseAddItem) Clone() *ClaimResponseAddItem {
 	if m == nil { return nil }
 	return &ClaimResponseAddItem{
@@ -442,7 +1073,7 @@ func (m *ClaimResponseAddItem) Clone() *ClaimResponseAddItem {
 	}
 }
 
-// Equals checks for equality with another ClaimResponseAddItem instance
+// Equals checks equality between two ClaimResponseAddItem instances.
 func (m *ClaimResponseAddItem) Equals(other *ClaimResponseAddItem) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -476,7 +1107,7 @@ func (m *ClaimResponseAddItem) Equals(other *ClaimResponseAddItem) bool {
 // ClaimResponseDetail1
 // The second-tier service adjudications for payor added services.
 type ClaimResponseDetail1 struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -491,22 +1122,110 @@ type ClaimResponseDetail1 struct {
 	SubDetail []*ClaimResponseSubDetail `json:"subdetail,omitempty"`
 }
 
-// NewClaimResponseDetail1 creates a new ClaimResponseDetail1 instance
+// NewClaimResponseDetail1 creates a new ClaimResponseDetail1 instance.
 func NewClaimResponseDetail1() *ClaimResponseDetail1 {
 	return &ClaimResponseDetail1{}
 }
 
-// FromJSON populates ClaimResponseDetail1 from JSON data
+// FromJSON populates ClaimResponseDetail1 from JSON data.
 func (m *ClaimResponseDetail1) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ProductOrService *CodeableConcept `json:"productorservice,omitempty"`
+		Modifier []*CodeableConcept `json:"modifier,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		UnitPrice *Money `json:"unitprice,omitempty"`
+		Factor *FhirDecimal `json:"factor,omitempty"`
+		Net *Money `json:"net,omitempty"`
+		NoteNumber []interface{} `json:"notenumber,omitempty"`
+		Adjudication []*ClaimResponseAdjudication `json:"adjudication,omitempty"`
+		SubDetail []*ClaimResponseSubDetail `json:"subdetail,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.ProductOrService = temp.ProductOrService
+	m.Modifier = temp.Modifier
+	m.Quantity = temp.Quantity
+	m.UnitPrice = temp.UnitPrice
+	m.Factor = temp.Factor
+	m.Net = temp.Net
+	if len(temp.NoteNumber) > 0 {
+		m.NoteNumber = make([]*FhirPositiveInt, len(temp.NoteNumber))
+		for i := range temp.NoteNumber {
+			itemMap, ok := temp.NoteNumber[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for NoteNumber[%d]: expected map", i) }
+			primitive, err := NewFhirPositiveIntFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse NoteNumber[%d]: %v", i, err) }
+			m.NoteNumber[i] = primitive
+		}
+	}
+	m.Adjudication = temp.Adjudication
+	m.SubDetail = temp.SubDetail
+	return nil
 }
 
-// ToJSON converts ClaimResponseDetail1 to JSON data
+// ToJSON converts ClaimResponseDetail1 to JSON data.
 func (m *ClaimResponseDetail1) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ProductOrService *CodeableConcept `json:"productorservice,omitempty"`
+		Modifier []*CodeableConcept `json:"modifier,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		UnitPrice *Money `json:"unitprice,omitempty"`
+		Factor interface{} `json:"factor,omitempty"`
+		FactorElement map[string]interface{} `json:"_factor,omitempty"`
+		Net *Money `json:"net,omitempty"`
+		NoteNumber []interface{} `json:"notenumber,omitempty"`
+		NoteNumberElement []map[string]interface{} `json:"_notenumber,omitempty"`
+		Adjudication []*ClaimResponseAdjudication `json:"adjudication,omitempty"`
+		SubDetail []*ClaimResponseSubDetail `json:"subdetail,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.ProductOrService = m.ProductOrService
+	output.Modifier = m.Modifier
+	output.Quantity = m.Quantity
+	output.UnitPrice = m.UnitPrice
+	if m.Factor != nil && m.Factor.Value != nil {
+		output.Factor = m.Factor.Value
+		if m.Factor.Element != nil {
+			output.FactorElement = toMapOrNil(m.Factor.Element.ToJSON())
+		}
+	}
+	output.Net = m.Net
+	if len(m.NoteNumber) > 0 {
+		output.NoteNumber = make([]interface{}, len(m.NoteNumber))
+		output.NoteNumberElement = make([]map[string]interface{}, len(m.NoteNumber))
+		for i, item := range m.NoteNumber {
+			if item != nil && item.Value != nil {
+				output.NoteNumber[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.NoteNumberElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Adjudication = m.Adjudication
+	output.SubDetail = m.SubDetail
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ClaimResponseDetail1
+// Clone creates a deep copy of ClaimResponseDetail1.
 func (m *ClaimResponseDetail1) Clone() *ClaimResponseDetail1 {
 	if m == nil { return nil }
 	return &ClaimResponseDetail1{
@@ -525,7 +1244,7 @@ func (m *ClaimResponseDetail1) Clone() *ClaimResponseDetail1 {
 	}
 }
 
-// Equals checks for equality with another ClaimResponseDetail1 instance
+// Equals checks equality between two ClaimResponseDetail1 instances.
 func (m *ClaimResponseDetail1) Equals(other *ClaimResponseDetail1) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -547,7 +1266,7 @@ func (m *ClaimResponseDetail1) Equals(other *ClaimResponseDetail1) bool {
 // ClaimResponseSubDetail1
 // The third-tier service adjudications for payor added services.
 type ClaimResponseSubDetail1 struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -561,22 +1280,106 @@ type ClaimResponseSubDetail1 struct {
 	Adjudication []*ClaimResponseAdjudication `json:"adjudication,omitempty"`
 }
 
-// NewClaimResponseSubDetail1 creates a new ClaimResponseSubDetail1 instance
+// NewClaimResponseSubDetail1 creates a new ClaimResponseSubDetail1 instance.
 func NewClaimResponseSubDetail1() *ClaimResponseSubDetail1 {
 	return &ClaimResponseSubDetail1{}
 }
 
-// FromJSON populates ClaimResponseSubDetail1 from JSON data
+// FromJSON populates ClaimResponseSubDetail1 from JSON data.
 func (m *ClaimResponseSubDetail1) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ProductOrService *CodeableConcept `json:"productorservice,omitempty"`
+		Modifier []*CodeableConcept `json:"modifier,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		UnitPrice *Money `json:"unitprice,omitempty"`
+		Factor *FhirDecimal `json:"factor,omitempty"`
+		Net *Money `json:"net,omitempty"`
+		NoteNumber []interface{} `json:"notenumber,omitempty"`
+		Adjudication []*ClaimResponseAdjudication `json:"adjudication,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.ProductOrService = temp.ProductOrService
+	m.Modifier = temp.Modifier
+	m.Quantity = temp.Quantity
+	m.UnitPrice = temp.UnitPrice
+	m.Factor = temp.Factor
+	m.Net = temp.Net
+	if len(temp.NoteNumber) > 0 {
+		m.NoteNumber = make([]*FhirPositiveInt, len(temp.NoteNumber))
+		for i := range temp.NoteNumber {
+			itemMap, ok := temp.NoteNumber[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for NoteNumber[%d]: expected map", i) }
+			primitive, err := NewFhirPositiveIntFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse NoteNumber[%d]: %v", i, err) }
+			m.NoteNumber[i] = primitive
+		}
+	}
+	m.Adjudication = temp.Adjudication
+	return nil
 }
 
-// ToJSON converts ClaimResponseSubDetail1 to JSON data
+// ToJSON converts ClaimResponseSubDetail1 to JSON data.
 func (m *ClaimResponseSubDetail1) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ProductOrService *CodeableConcept `json:"productorservice,omitempty"`
+		Modifier []*CodeableConcept `json:"modifier,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		UnitPrice *Money `json:"unitprice,omitempty"`
+		Factor interface{} `json:"factor,omitempty"`
+		FactorElement map[string]interface{} `json:"_factor,omitempty"`
+		Net *Money `json:"net,omitempty"`
+		NoteNumber []interface{} `json:"notenumber,omitempty"`
+		NoteNumberElement []map[string]interface{} `json:"_notenumber,omitempty"`
+		Adjudication []*ClaimResponseAdjudication `json:"adjudication,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.ProductOrService = m.ProductOrService
+	output.Modifier = m.Modifier
+	output.Quantity = m.Quantity
+	output.UnitPrice = m.UnitPrice
+	if m.Factor != nil && m.Factor.Value != nil {
+		output.Factor = m.Factor.Value
+		if m.Factor.Element != nil {
+			output.FactorElement = toMapOrNil(m.Factor.Element.ToJSON())
+		}
+	}
+	output.Net = m.Net
+	if len(m.NoteNumber) > 0 {
+		output.NoteNumber = make([]interface{}, len(m.NoteNumber))
+		output.NoteNumberElement = make([]map[string]interface{}, len(m.NoteNumber))
+		for i, item := range m.NoteNumber {
+			if item != nil && item.Value != nil {
+				output.NoteNumber[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.NoteNumberElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Adjudication = m.Adjudication
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ClaimResponseSubDetail1
+// Clone creates a deep copy of ClaimResponseSubDetail1.
 func (m *ClaimResponseSubDetail1) Clone() *ClaimResponseSubDetail1 {
 	if m == nil { return nil }
 	return &ClaimResponseSubDetail1{
@@ -594,7 +1397,7 @@ func (m *ClaimResponseSubDetail1) Clone() *ClaimResponseSubDetail1 {
 	}
 }
 
-// Equals checks for equality with another ClaimResponseSubDetail1 instance
+// Equals checks equality between two ClaimResponseSubDetail1 instances.
 func (m *ClaimResponseSubDetail1) Equals(other *ClaimResponseSubDetail1) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -615,7 +1418,7 @@ func (m *ClaimResponseSubDetail1) Equals(other *ClaimResponseSubDetail1) bool {
 // ClaimResponseTotal
 // Categorized monetary totals for the adjudication.
 type ClaimResponseTotal struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -623,22 +1426,55 @@ type ClaimResponseTotal struct {
 	Amount *Money `json:"amount,omitempty"`
 }
 
-// NewClaimResponseTotal creates a new ClaimResponseTotal instance
+// NewClaimResponseTotal creates a new ClaimResponseTotal instance.
 func NewClaimResponseTotal() *ClaimResponseTotal {
 	return &ClaimResponseTotal{}
 }
 
-// FromJSON populates ClaimResponseTotal from JSON data
+// FromJSON populates ClaimResponseTotal from JSON data.
 func (m *ClaimResponseTotal) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Category *CodeableConcept `json:"category,omitempty"`
+		Amount *Money `json:"amount,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Category = temp.Category
+	m.Amount = temp.Amount
+	return nil
 }
 
-// ToJSON converts ClaimResponseTotal to JSON data
+// ToJSON converts ClaimResponseTotal to JSON data.
 func (m *ClaimResponseTotal) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Category *CodeableConcept `json:"category,omitempty"`
+		Amount *Money `json:"amount,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Category = m.Category
+	output.Amount = m.Amount
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ClaimResponseTotal
+// Clone creates a deep copy of ClaimResponseTotal.
 func (m *ClaimResponseTotal) Clone() *ClaimResponseTotal {
 	if m == nil { return nil }
 	return &ClaimResponseTotal{
@@ -650,7 +1486,7 @@ func (m *ClaimResponseTotal) Clone() *ClaimResponseTotal {
 	}
 }
 
-// Equals checks for equality with another ClaimResponseTotal instance
+// Equals checks equality between two ClaimResponseTotal instances.
 func (m *ClaimResponseTotal) Equals(other *ClaimResponseTotal) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -665,7 +1501,7 @@ func (m *ClaimResponseTotal) Equals(other *ClaimResponseTotal) bool {
 // ClaimResponsePayment
 // Payment details for the adjudication of the claim.
 type ClaimResponsePayment struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -677,22 +1513,77 @@ type ClaimResponsePayment struct {
 	Identifier *Identifier `json:"identifier,omitempty"`
 }
 
-// NewClaimResponsePayment creates a new ClaimResponsePayment instance
+// NewClaimResponsePayment creates a new ClaimResponsePayment instance.
 func NewClaimResponsePayment() *ClaimResponsePayment {
 	return &ClaimResponsePayment{}
 }
 
-// FromJSON populates ClaimResponsePayment from JSON data
+// FromJSON populates ClaimResponsePayment from JSON data.
 func (m *ClaimResponsePayment) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Adjustment *Money `json:"adjustment,omitempty"`
+		AdjustmentReason *CodeableConcept `json:"adjustmentreason,omitempty"`
+		Date *FhirDate `json:"date,omitempty"`
+		Amount *Money `json:"amount,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Adjustment = temp.Adjustment
+	m.AdjustmentReason = temp.AdjustmentReason
+	m.Date = temp.Date
+	m.Amount = temp.Amount
+	m.Identifier = temp.Identifier
+	return nil
 }
 
-// ToJSON converts ClaimResponsePayment to JSON data
+// ToJSON converts ClaimResponsePayment to JSON data.
 func (m *ClaimResponsePayment) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Adjustment *Money `json:"adjustment,omitempty"`
+		AdjustmentReason *CodeableConcept `json:"adjustmentreason,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Amount *Money `json:"amount,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Adjustment = m.Adjustment
+	output.AdjustmentReason = m.AdjustmentReason
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	output.Amount = m.Amount
+	output.Identifier = m.Identifier
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ClaimResponsePayment
+// Clone creates a deep copy of ClaimResponsePayment.
 func (m *ClaimResponsePayment) Clone() *ClaimResponsePayment {
 	if m == nil { return nil }
 	return &ClaimResponsePayment{
@@ -708,7 +1599,7 @@ func (m *ClaimResponsePayment) Clone() *ClaimResponsePayment {
 	}
 }
 
-// Equals checks for equality with another ClaimResponsePayment instance
+// Equals checks equality between two ClaimResponsePayment instances.
 func (m *ClaimResponsePayment) Equals(other *ClaimResponsePayment) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -727,7 +1618,7 @@ func (m *ClaimResponsePayment) Equals(other *ClaimResponsePayment) bool {
 // ClaimResponseProcessNote
 // A note that describes or explains adjudication results in a human readable form.
 type ClaimResponseProcessNote struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -737,22 +1628,75 @@ type ClaimResponseProcessNote struct {
 	Language *CodeableConcept `json:"language,omitempty"`
 }
 
-// NewClaimResponseProcessNote creates a new ClaimResponseProcessNote instance
+// NewClaimResponseProcessNote creates a new ClaimResponseProcessNote instance.
 func NewClaimResponseProcessNote() *ClaimResponseProcessNote {
 	return &ClaimResponseProcessNote{}
 }
 
-// FromJSON populates ClaimResponseProcessNote from JSON data
+// FromJSON populates ClaimResponseProcessNote from JSON data.
 func (m *ClaimResponseProcessNote) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Number *FhirPositiveInt `json:"number,omitempty"`
+		Type *NoteType `json:"type,omitempty"`
+		Text *FhirString `json:"text,omitempty"`
+		Language *CodeableConcept `json:"language,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Number = temp.Number
+	m.Type = temp.Type
+	m.Text = temp.Text
+	m.Language = temp.Language
+	return nil
 }
 
-// ToJSON converts ClaimResponseProcessNote to JSON data
+// ToJSON converts ClaimResponseProcessNote to JSON data.
 func (m *ClaimResponseProcessNote) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Number interface{} `json:"number,omitempty"`
+		NumberElement map[string]interface{} `json:"_number,omitempty"`
+		Type *NoteType `json:"type,omitempty"`
+		Text interface{} `json:"text,omitempty"`
+		TextElement map[string]interface{} `json:"_text,omitempty"`
+		Language *CodeableConcept `json:"language,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Number != nil && m.Number.Value != nil {
+		output.Number = m.Number.Value
+		if m.Number.Element != nil {
+			output.NumberElement = toMapOrNil(m.Number.Element.ToJSON())
+		}
+	}
+	output.Type = m.Type
+	if m.Text != nil && m.Text.Value != nil {
+		output.Text = m.Text.Value
+		if m.Text.Element != nil {
+			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ClaimResponseProcessNote
+// Clone creates a deep copy of ClaimResponseProcessNote.
 func (m *ClaimResponseProcessNote) Clone() *ClaimResponseProcessNote {
 	if m == nil { return nil }
 	return &ClaimResponseProcessNote{
@@ -766,7 +1710,7 @@ func (m *ClaimResponseProcessNote) Clone() *ClaimResponseProcessNote {
 	}
 }
 
-// Equals checks for equality with another ClaimResponseProcessNote instance
+// Equals checks equality between two ClaimResponseProcessNote instances.
 func (m *ClaimResponseProcessNote) Equals(other *ClaimResponseProcessNote) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -783,7 +1727,7 @@ func (m *ClaimResponseProcessNote) Equals(other *ClaimResponseProcessNote) bool 
 // ClaimResponseInsurance
 // Financial instruments for reimbursement for the health care products and services specified on the claim.
 type ClaimResponseInsurance struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -794,22 +1738,85 @@ type ClaimResponseInsurance struct {
 	ClaimResponse *Reference `json:"claimresponse,omitempty"`
 }
 
-// NewClaimResponseInsurance creates a new ClaimResponseInsurance instance
+// NewClaimResponseInsurance creates a new ClaimResponseInsurance instance.
 func NewClaimResponseInsurance() *ClaimResponseInsurance {
 	return &ClaimResponseInsurance{}
 }
 
-// FromJSON populates ClaimResponseInsurance from JSON data
+// FromJSON populates ClaimResponseInsurance from JSON data.
 func (m *ClaimResponseInsurance) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Sequence *FhirPositiveInt `json:"sequence,omitempty"`
+		Focal *FhirBoolean `json:"focal,omitempty"`
+		Coverage *Reference `json:"coverage,omitempty"`
+		BusinessArrangement *FhirString `json:"businessarrangement,omitempty"`
+		ClaimResponse *Reference `json:"claimresponse,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Sequence = temp.Sequence
+	m.Focal = temp.Focal
+	m.Coverage = temp.Coverage
+	m.BusinessArrangement = temp.BusinessArrangement
+	m.ClaimResponse = temp.ClaimResponse
+	return nil
 }
 
-// ToJSON converts ClaimResponseInsurance to JSON data
+// ToJSON converts ClaimResponseInsurance to JSON data.
 func (m *ClaimResponseInsurance) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Sequence interface{} `json:"sequence,omitempty"`
+		SequenceElement map[string]interface{} `json:"_sequence,omitempty"`
+		Focal interface{} `json:"focal,omitempty"`
+		FocalElement map[string]interface{} `json:"_focal,omitempty"`
+		Coverage *Reference `json:"coverage,omitempty"`
+		BusinessArrangement interface{} `json:"businessarrangement,omitempty"`
+		BusinessArrangementElement map[string]interface{} `json:"_businessarrangement,omitempty"`
+		ClaimResponse *Reference `json:"claimresponse,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Sequence != nil && m.Sequence.Value != nil {
+		output.Sequence = m.Sequence.Value
+		if m.Sequence.Element != nil {
+			output.SequenceElement = toMapOrNil(m.Sequence.Element.ToJSON())
+		}
+	}
+	if m.Focal != nil && m.Focal.Value != nil {
+		output.Focal = m.Focal.Value
+		if m.Focal.Element != nil {
+			output.FocalElement = toMapOrNil(m.Focal.Element.ToJSON())
+		}
+	}
+	output.Coverage = m.Coverage
+	if m.BusinessArrangement != nil && m.BusinessArrangement.Value != nil {
+		output.BusinessArrangement = m.BusinessArrangement.Value
+		if m.BusinessArrangement.Element != nil {
+			output.BusinessArrangementElement = toMapOrNil(m.BusinessArrangement.Element.ToJSON())
+		}
+	}
+	output.ClaimResponse = m.ClaimResponse
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ClaimResponseInsurance
+// Clone creates a deep copy of ClaimResponseInsurance.
 func (m *ClaimResponseInsurance) Clone() *ClaimResponseInsurance {
 	if m == nil { return nil }
 	return &ClaimResponseInsurance{
@@ -824,7 +1831,7 @@ func (m *ClaimResponseInsurance) Clone() *ClaimResponseInsurance {
 	}
 }
 
-// Equals checks for equality with another ClaimResponseInsurance instance
+// Equals checks equality between two ClaimResponseInsurance instances.
 func (m *ClaimResponseInsurance) Equals(other *ClaimResponseInsurance) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -842,7 +1849,7 @@ func (m *ClaimResponseInsurance) Equals(other *ClaimResponseInsurance) bool {
 // ClaimResponseError
 // Errors encountered during the processing of the adjudication.
 type ClaimResponseError struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -852,22 +1859,81 @@ type ClaimResponseError struct {
 	Code *CodeableConcept `json:"code,omitempty"`
 }
 
-// NewClaimResponseError creates a new ClaimResponseError instance
+// NewClaimResponseError creates a new ClaimResponseError instance.
 func NewClaimResponseError() *ClaimResponseError {
 	return &ClaimResponseError{}
 }
 
-// FromJSON populates ClaimResponseError from JSON data
+// FromJSON populates ClaimResponseError from JSON data.
 func (m *ClaimResponseError) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ItemSequence *FhirPositiveInt `json:"itemsequence,omitempty"`
+		DetailSequence *FhirPositiveInt `json:"detailsequence,omitempty"`
+		SubDetailSequence *FhirPositiveInt `json:"subdetailsequence,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.ItemSequence = temp.ItemSequence
+	m.DetailSequence = temp.DetailSequence
+	m.SubDetailSequence = temp.SubDetailSequence
+	m.Code = temp.Code
+	return nil
 }
 
-// ToJSON converts ClaimResponseError to JSON data
+// ToJSON converts ClaimResponseError to JSON data.
 func (m *ClaimResponseError) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ItemSequence interface{} `json:"itemsequence,omitempty"`
+		ItemSequenceElement map[string]interface{} `json:"_itemsequence,omitempty"`
+		DetailSequence interface{} `json:"detailsequence,omitempty"`
+		DetailSequenceElement map[string]interface{} `json:"_detailsequence,omitempty"`
+		SubDetailSequence interface{} `json:"subdetailsequence,omitempty"`
+		SubDetailSequenceElement map[string]interface{} `json:"_subdetailsequence,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.ItemSequence != nil && m.ItemSequence.Value != nil {
+		output.ItemSequence = m.ItemSequence.Value
+		if m.ItemSequence.Element != nil {
+			output.ItemSequenceElement = toMapOrNil(m.ItemSequence.Element.ToJSON())
+		}
+	}
+	if m.DetailSequence != nil && m.DetailSequence.Value != nil {
+		output.DetailSequence = m.DetailSequence.Value
+		if m.DetailSequence.Element != nil {
+			output.DetailSequenceElement = toMapOrNil(m.DetailSequence.Element.ToJSON())
+		}
+	}
+	if m.SubDetailSequence != nil && m.SubDetailSequence.Value != nil {
+		output.SubDetailSequence = m.SubDetailSequence.Value
+		if m.SubDetailSequence.Element != nil {
+			output.SubDetailSequenceElement = toMapOrNil(m.SubDetailSequence.Element.ToJSON())
+		}
+	}
+	output.Code = m.Code
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ClaimResponseError
+// Clone creates a deep copy of ClaimResponseError.
 func (m *ClaimResponseError) Clone() *ClaimResponseError {
 	if m == nil { return nil }
 	return &ClaimResponseError{
@@ -881,7 +1947,7 @@ func (m *ClaimResponseError) Clone() *ClaimResponseError {
 	}
 }
 
-// Equals checks for equality with another ClaimResponseError instance
+// Equals checks equality between two ClaimResponseError instances.
 func (m *ClaimResponseError) Equals(other *ClaimResponseError) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

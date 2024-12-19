@@ -2,18 +2,37 @@ package fhir_r4b_go
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 )
 
 // FhirPositiveInt represents the FHIR 'integer' type.
 type FhirPositiveInt struct {
-	Value   *int64   `json:"-"`          // The actual value
-	Element *Element `json:",inline"`    // Metadata (FHIR element)
+	Value   *int64   `json:"-"`       // The actual value
+	Element *Element `json:",inline"` // Metadata (FHIR element)
 }
 
 // NewFhirPositiveInt creates a new validated FhirPositiveInt.
 func NewFhirPositiveInt(value int64, element *Element) *FhirPositiveInt {
 	return &FhirPositiveInt{Value: &value, Element: element}
+}
+
+func NewFhirPositiveIntFromMap(data map[string]interface{}) (*FhirPositiveInt, error) {
+	value, ok := data["value"].(*int64)
+	if !ok {
+		return nil, errors.New("invalid or missing value for FhirPositiveInt")
+	}
+
+	integer := &FhirPositiveInt{Value: value}
+
+	if elementData, ok := data["_value"].(map[string]interface{}); ok {
+		integer.Element = &Element{}
+		if err := mapToStruct(elementData, integer.Element); err != nil {
+			return nil, fmt.Errorf("failed to parse _value for FhirPositiveInt: %v", err)
+		}
+	}
+
+	return integer, nil
 }
 
 // UnmarshalJSON deserializes JSON into FhirPositiveInt.

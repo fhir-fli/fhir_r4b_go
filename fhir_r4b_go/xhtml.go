@@ -3,6 +3,7 @@ package fhir_r4b_go
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"strings"
 
 	"github.com/antchfx/xmlquery"
@@ -10,7 +11,7 @@ import (
 
 // FhirXhtml represents the FHIR primitive type "xhtml".
 type FhirXhtml struct {
-	Value   string   `json:"value,omitempty"`
+	Value   *string  `json:"value,omitempty"`
 	Element *Element `json:"_value,omitempty"`
 }
 
@@ -19,7 +20,33 @@ func NewFhirXhtml(input string, element *Element) (*FhirXhtml, error) {
 	if err := validateXhtml(input); err != nil {
 		return nil, err
 	}
-	return &FhirXhtml{Value: input, Element: element}, nil
+	return &FhirXhtml{
+		Value:   &input,
+		Element: element,
+	}, nil
+}
+
+// NewFhirXhtmlFromMap creates a FhirXhtml instance from a map.
+func NewFhirXhtmlFromMap(data map[string]interface{}) (*FhirXhtml, error) {
+	valueStr, ok := data["value"].(string)
+	if !ok {
+		return nil, errors.New("invalid or missing value for FhirXhtml")
+	}
+
+	if err := validateXhtml(valueStr); err != nil {
+		return nil, fmt.Errorf("invalid XHTML value for FhirXhtml: %v", err)
+	}
+
+	xhtmlInstance := &FhirXhtml{Value: &valueStr}
+
+	if elementData, ok := data["_value"].(map[string]interface{}); ok {
+		xhtmlInstance.Element = &Element{}
+		if err := mapToStruct(elementData, xhtmlInstance.Element); err != nil {
+			return nil, fmt.Errorf("failed to parse _value for FhirXhtml: %v", err)
+		}
+	}
+
+	return xhtmlInstance, nil
 }
 
 // validateXhtml validates the XHTML string structure.
@@ -56,7 +83,7 @@ func isAllowedElement(name string) bool {
 // MarshalJSON serializes FhirXhtml into JSON.
 func (f *FhirXhtml) MarshalJSON() ([]byte, error) {
 	data := map[string]interface{}{}
-	if f.Value != "" {
+	if *f.Value != "" {
 		data["value"] = f.Value
 	}
 	if f.Element != nil {
@@ -80,7 +107,7 @@ func (f *FhirXhtml) UnmarshalJSON(data []byte) error {
 		return err
 	}
 
-	f.Value = temp.Value
+	f.Value = &temp.Value
 	f.Element = temp.Element
 	return nil
 }
@@ -106,7 +133,6 @@ func (f *FhirXhtml) Equals(other *FhirXhtml) bool {
 	}
 	return f.Value == other.Value && f.Element.Equals(other.Element)
 }
-
 
 // validateElement recursively validates an element's attributes and children.
 func validateElement(element *xmlquery.Node, isRoot bool) error {
@@ -142,4 +168,3 @@ func isAllowedAttribute(attrName string, isRoot bool) bool {
 	// Allow xmlns attribute for the root element.
 	return (isRoot && attrName == "xmlns") || allowedAttributes[attrName]
 }
-

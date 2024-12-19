@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // SpecimenDefinition
 // A kind of specimen with associated set of requirements.
 type SpecimenDefinition struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -25,22 +26,103 @@ type SpecimenDefinition struct {
 	TypeTested []*SpecimenDefinitionTypeTested `json:"typetested,omitempty"`
 }
 
-// NewSpecimenDefinition creates a new SpecimenDefinition instance
+// NewSpecimenDefinition creates a new SpecimenDefinition instance.
 func NewSpecimenDefinition() *SpecimenDefinition {
 	return &SpecimenDefinition{}
 }
 
-// FromJSON populates SpecimenDefinition from JSON data
+// FromJSON populates SpecimenDefinition from JSON data.
 func (m *SpecimenDefinition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		TypeCollected *CodeableConcept `json:"typecollected,omitempty"`
+		PatientPreparation []*CodeableConcept `json:"patientpreparation,omitempty"`
+		TimeAspect *FhirString `json:"timeaspect,omitempty"`
+		Collection []*CodeableConcept `json:"collection,omitempty"`
+		TypeTested []*SpecimenDefinitionTypeTested `json:"typetested,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.TypeCollected = temp.TypeCollected
+	m.PatientPreparation = temp.PatientPreparation
+	m.TimeAspect = temp.TimeAspect
+	m.Collection = temp.Collection
+	m.TypeTested = temp.TypeTested
+	return nil
 }
 
-// ToJSON converts SpecimenDefinition to JSON data
+// ToJSON converts SpecimenDefinition to JSON data.
 func (m *SpecimenDefinition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		TypeCollected *CodeableConcept `json:"typecollected,omitempty"`
+		PatientPreparation []*CodeableConcept `json:"patientpreparation,omitempty"`
+		TimeAspect interface{} `json:"timeaspect,omitempty"`
+		TimeAspectElement map[string]interface{} `json:"_timeaspect,omitempty"`
+		Collection []*CodeableConcept `json:"collection,omitempty"`
+		TypeTested []*SpecimenDefinitionTypeTested `json:"typetested,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.TypeCollected = m.TypeCollected
+	output.PatientPreparation = m.PatientPreparation
+	if m.TimeAspect != nil && m.TimeAspect.Value != nil {
+		output.TimeAspect = m.TimeAspect.Value
+		if m.TimeAspect.Element != nil {
+			output.TimeAspectElement = toMapOrNil(m.TimeAspect.Element.ToJSON())
+		}
+	}
+	output.Collection = m.Collection
+	output.TypeTested = m.TypeTested
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SpecimenDefinition
+// Clone creates a deep copy of SpecimenDefinition.
 func (m *SpecimenDefinition) Clone() *SpecimenDefinition {
 	if m == nil { return nil }
 	return &SpecimenDefinition{
@@ -61,7 +143,7 @@ func (m *SpecimenDefinition) Clone() *SpecimenDefinition {
 	}
 }
 
-// Equals checks for equality with another SpecimenDefinition instance
+// Equals checks equality between two SpecimenDefinition instances.
 func (m *SpecimenDefinition) Equals(other *SpecimenDefinition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -85,7 +167,7 @@ func (m *SpecimenDefinition) Equals(other *SpecimenDefinition) bool {
 // SpecimenDefinitionTypeTested
 // Specimen conditioned in a container as expected by the testing laboratory.
 type SpecimenDefinitionTypeTested struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -99,22 +181,91 @@ type SpecimenDefinitionTypeTested struct {
 	Handling []*SpecimenDefinitionHandling `json:"handling,omitempty"`
 }
 
-// NewSpecimenDefinitionTypeTested creates a new SpecimenDefinitionTypeTested instance
+// NewSpecimenDefinitionTypeTested creates a new SpecimenDefinitionTypeTested instance.
 func NewSpecimenDefinitionTypeTested() *SpecimenDefinitionTypeTested {
 	return &SpecimenDefinitionTypeTested{}
 }
 
-// FromJSON populates SpecimenDefinitionTypeTested from JSON data
+// FromJSON populates SpecimenDefinitionTypeTested from JSON data.
 func (m *SpecimenDefinitionTypeTested) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		IsDerived *FhirBoolean `json:"isderived,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Preference *SpecimenContainedPreference `json:"preference,omitempty"`
+		Container *SpecimenDefinitionContainer `json:"container,omitempty"`
+		Requirement *FhirString `json:"requirement,omitempty"`
+		RetentionTime *FhirDuration `json:"retentiontime,omitempty"`
+		RejectionCriterion []*CodeableConcept `json:"rejectioncriterion,omitempty"`
+		Handling []*SpecimenDefinitionHandling `json:"handling,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.IsDerived = temp.IsDerived
+	m.Type = temp.Type
+	m.Preference = temp.Preference
+	m.Container = temp.Container
+	m.Requirement = temp.Requirement
+	m.RetentionTime = temp.RetentionTime
+	m.RejectionCriterion = temp.RejectionCriterion
+	m.Handling = temp.Handling
+	return nil
 }
 
-// ToJSON converts SpecimenDefinitionTypeTested to JSON data
+// ToJSON converts SpecimenDefinitionTypeTested to JSON data.
 func (m *SpecimenDefinitionTypeTested) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		IsDerived interface{} `json:"isderived,omitempty"`
+		IsDerivedElement map[string]interface{} `json:"_isderived,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Preference *SpecimenContainedPreference `json:"preference,omitempty"`
+		Container *SpecimenDefinitionContainer `json:"container,omitempty"`
+		Requirement interface{} `json:"requirement,omitempty"`
+		RequirementElement map[string]interface{} `json:"_requirement,omitempty"`
+		RetentionTime *FhirDuration `json:"retentiontime,omitempty"`
+		RejectionCriterion []*CodeableConcept `json:"rejectioncriterion,omitempty"`
+		Handling []*SpecimenDefinitionHandling `json:"handling,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.IsDerived != nil && m.IsDerived.Value != nil {
+		output.IsDerived = m.IsDerived.Value
+		if m.IsDerived.Element != nil {
+			output.IsDerivedElement = toMapOrNil(m.IsDerived.Element.ToJSON())
+		}
+	}
+	output.Type = m.Type
+	output.Preference = m.Preference
+	output.Container = m.Container
+	if m.Requirement != nil && m.Requirement.Value != nil {
+		output.Requirement = m.Requirement.Value
+		if m.Requirement.Element != nil {
+			output.RequirementElement = toMapOrNil(m.Requirement.Element.ToJSON())
+		}
+	}
+	output.RetentionTime = m.RetentionTime
+	output.RejectionCriterion = m.RejectionCriterion
+	output.Handling = m.Handling
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SpecimenDefinitionTypeTested
+// Clone creates a deep copy of SpecimenDefinitionTypeTested.
 func (m *SpecimenDefinitionTypeTested) Clone() *SpecimenDefinitionTypeTested {
 	if m == nil { return nil }
 	return &SpecimenDefinitionTypeTested{
@@ -132,7 +283,7 @@ func (m *SpecimenDefinitionTypeTested) Clone() *SpecimenDefinitionTypeTested {
 	}
 }
 
-// Equals checks for equality with another SpecimenDefinitionTypeTested instance
+// Equals checks equality between two SpecimenDefinitionTypeTested instances.
 func (m *SpecimenDefinitionTypeTested) Equals(other *SpecimenDefinitionTypeTested) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -153,7 +304,7 @@ func (m *SpecimenDefinitionTypeTested) Equals(other *SpecimenDefinitionTypeTeste
 // SpecimenDefinitionContainer
 // The specimen's container.
 type SpecimenDefinitionContainer struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -168,22 +319,101 @@ type SpecimenDefinitionContainer struct {
 	Preparation *FhirString `json:"preparation,omitempty"`
 }
 
-// NewSpecimenDefinitionContainer creates a new SpecimenDefinitionContainer instance
+// NewSpecimenDefinitionContainer creates a new SpecimenDefinitionContainer instance.
 func NewSpecimenDefinitionContainer() *SpecimenDefinitionContainer {
 	return &SpecimenDefinitionContainer{}
 }
 
-// FromJSON populates SpecimenDefinitionContainer from JSON data
+// FromJSON populates SpecimenDefinitionContainer from JSON data.
 func (m *SpecimenDefinitionContainer) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Material *CodeableConcept `json:"material,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Cap *CodeableConcept `json:"cap,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Capacity *Quantity `json:"capacity,omitempty"`
+		MinimumVolumeQuantity *Quantity `json:"minimumvolumequantity,omitempty"`
+		MinimumVolumeString *FhirString `json:"minimumvolumestring,omitempty"`
+		Additive []*SpecimenDefinitionAdditive `json:"additive,omitempty"`
+		Preparation *FhirString `json:"preparation,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Material = temp.Material
+	m.Type = temp.Type
+	m.Cap = temp.Cap
+	m.Description = temp.Description
+	m.Capacity = temp.Capacity
+	m.MinimumVolumeQuantity = temp.MinimumVolumeQuantity
+	m.MinimumVolumeString = temp.MinimumVolumeString
+	m.Additive = temp.Additive
+	m.Preparation = temp.Preparation
+	return nil
 }
 
-// ToJSON converts SpecimenDefinitionContainer to JSON data
+// ToJSON converts SpecimenDefinitionContainer to JSON data.
 func (m *SpecimenDefinitionContainer) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Material *CodeableConcept `json:"material,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Cap *CodeableConcept `json:"cap,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Capacity *Quantity `json:"capacity,omitempty"`
+		MinimumVolumeQuantity *Quantity `json:"minimumvolumequantity,omitempty"`
+		MinimumVolumeString interface{} `json:"minimumvolumestring,omitempty"`
+		MinimumVolumeStringElement map[string]interface{} `json:"_minimumvolumestring,omitempty"`
+		Additive []*SpecimenDefinitionAdditive `json:"additive,omitempty"`
+		Preparation interface{} `json:"preparation,omitempty"`
+		PreparationElement map[string]interface{} `json:"_preparation,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Material = m.Material
+	output.Type = m.Type
+	output.Cap = m.Cap
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Capacity = m.Capacity
+	output.MinimumVolumeQuantity = m.MinimumVolumeQuantity
+	if m.MinimumVolumeString != nil && m.MinimumVolumeString.Value != nil {
+		output.MinimumVolumeString = m.MinimumVolumeString.Value
+		if m.MinimumVolumeString.Element != nil {
+			output.MinimumVolumeStringElement = toMapOrNil(m.MinimumVolumeString.Element.ToJSON())
+		}
+	}
+	output.Additive = m.Additive
+	if m.Preparation != nil && m.Preparation.Value != nil {
+		output.Preparation = m.Preparation.Value
+		if m.Preparation.Element != nil {
+			output.PreparationElement = toMapOrNil(m.Preparation.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SpecimenDefinitionContainer
+// Clone creates a deep copy of SpecimenDefinitionContainer.
 func (m *SpecimenDefinitionContainer) Clone() *SpecimenDefinitionContainer {
 	if m == nil { return nil }
 	return &SpecimenDefinitionContainer{
@@ -202,7 +432,7 @@ func (m *SpecimenDefinitionContainer) Clone() *SpecimenDefinitionContainer {
 	}
 }
 
-// Equals checks for equality with another SpecimenDefinitionContainer instance
+// Equals checks equality between two SpecimenDefinitionContainer instances.
 func (m *SpecimenDefinitionContainer) Equals(other *SpecimenDefinitionContainer) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -224,7 +454,7 @@ func (m *SpecimenDefinitionContainer) Equals(other *SpecimenDefinitionContainer)
 // SpecimenDefinitionAdditive
 // Substance introduced in the kind of container to preserve, maintain or enhance the specimen. Examples: Formalin, Citrate, EDTA.
 type SpecimenDefinitionAdditive struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -232,22 +462,55 @@ type SpecimenDefinitionAdditive struct {
 	AdditiveReference *Reference `json:"additivereference,omitempty"`
 }
 
-// NewSpecimenDefinitionAdditive creates a new SpecimenDefinitionAdditive instance
+// NewSpecimenDefinitionAdditive creates a new SpecimenDefinitionAdditive instance.
 func NewSpecimenDefinitionAdditive() *SpecimenDefinitionAdditive {
 	return &SpecimenDefinitionAdditive{}
 }
 
-// FromJSON populates SpecimenDefinitionAdditive from JSON data
+// FromJSON populates SpecimenDefinitionAdditive from JSON data.
 func (m *SpecimenDefinitionAdditive) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		AdditiveCodeableConcept *CodeableConcept `json:"additivecodeableconcept,omitempty"`
+		AdditiveReference *Reference `json:"additivereference,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.AdditiveCodeableConcept = temp.AdditiveCodeableConcept
+	m.AdditiveReference = temp.AdditiveReference
+	return nil
 }
 
-// ToJSON converts SpecimenDefinitionAdditive to JSON data
+// ToJSON converts SpecimenDefinitionAdditive to JSON data.
 func (m *SpecimenDefinitionAdditive) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		AdditiveCodeableConcept *CodeableConcept `json:"additivecodeableconcept,omitempty"`
+		AdditiveReference *Reference `json:"additivereference,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.AdditiveCodeableConcept = m.AdditiveCodeableConcept
+	output.AdditiveReference = m.AdditiveReference
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SpecimenDefinitionAdditive
+// Clone creates a deep copy of SpecimenDefinitionAdditive.
 func (m *SpecimenDefinitionAdditive) Clone() *SpecimenDefinitionAdditive {
 	if m == nil { return nil }
 	return &SpecimenDefinitionAdditive{
@@ -259,7 +522,7 @@ func (m *SpecimenDefinitionAdditive) Clone() *SpecimenDefinitionAdditive {
 	}
 }
 
-// Equals checks for equality with another SpecimenDefinitionAdditive instance
+// Equals checks equality between two SpecimenDefinitionAdditive instances.
 func (m *SpecimenDefinitionAdditive) Equals(other *SpecimenDefinitionAdditive) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -274,7 +537,7 @@ func (m *SpecimenDefinitionAdditive) Equals(other *SpecimenDefinitionAdditive) b
 // SpecimenDefinitionHandling
 // Set of instructions for preservation/transport of the specimen at a defined temperature interval, prior the testing process.
 type SpecimenDefinitionHandling struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -284,22 +547,69 @@ type SpecimenDefinitionHandling struct {
 	Instruction *FhirString `json:"instruction,omitempty"`
 }
 
-// NewSpecimenDefinitionHandling creates a new SpecimenDefinitionHandling instance
+// NewSpecimenDefinitionHandling creates a new SpecimenDefinitionHandling instance.
 func NewSpecimenDefinitionHandling() *SpecimenDefinitionHandling {
 	return &SpecimenDefinitionHandling{}
 }
 
-// FromJSON populates SpecimenDefinitionHandling from JSON data
+// FromJSON populates SpecimenDefinitionHandling from JSON data.
 func (m *SpecimenDefinitionHandling) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		TemperatureQualifier *CodeableConcept `json:"temperaturequalifier,omitempty"`
+		TemperatureRange *Range `json:"temperaturerange,omitempty"`
+		MaxDuration *FhirDuration `json:"maxduration,omitempty"`
+		Instruction *FhirString `json:"instruction,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.TemperatureQualifier = temp.TemperatureQualifier
+	m.TemperatureRange = temp.TemperatureRange
+	m.MaxDuration = temp.MaxDuration
+	m.Instruction = temp.Instruction
+	return nil
 }
 
-// ToJSON converts SpecimenDefinitionHandling to JSON data
+// ToJSON converts SpecimenDefinitionHandling to JSON data.
 func (m *SpecimenDefinitionHandling) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		TemperatureQualifier *CodeableConcept `json:"temperaturequalifier,omitempty"`
+		TemperatureRange *Range `json:"temperaturerange,omitempty"`
+		MaxDuration *FhirDuration `json:"maxduration,omitempty"`
+		Instruction interface{} `json:"instruction,omitempty"`
+		InstructionElement map[string]interface{} `json:"_instruction,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.TemperatureQualifier = m.TemperatureQualifier
+	output.TemperatureRange = m.TemperatureRange
+	output.MaxDuration = m.MaxDuration
+	if m.Instruction != nil && m.Instruction.Value != nil {
+		output.Instruction = m.Instruction.Value
+		if m.Instruction.Element != nil {
+			output.InstructionElement = toMapOrNil(m.Instruction.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SpecimenDefinitionHandling
+// Clone creates a deep copy of SpecimenDefinitionHandling.
 func (m *SpecimenDefinitionHandling) Clone() *SpecimenDefinitionHandling {
 	if m == nil { return nil }
 	return &SpecimenDefinitionHandling{
@@ -313,7 +623,7 @@ func (m *SpecimenDefinitionHandling) Clone() *SpecimenDefinitionHandling {
 	}
 }
 
-// Equals checks for equality with another SpecimenDefinitionHandling instance
+// Equals checks equality between two SpecimenDefinitionHandling instances.
 func (m *SpecimenDefinitionHandling) Equals(other *SpecimenDefinitionHandling) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

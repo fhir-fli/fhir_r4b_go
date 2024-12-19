@@ -1,8 +1,8 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json"
 	"errors"
+	"fmt"
 )
 
 // FhirDateTime represents FHIR-compliant dateTime.
@@ -22,11 +22,20 @@ func NewFhirDateTimeFromComponents(
 	}
 
 	return &FhirDateTime{
-		FhirDateTimeBase: *NewFhirDateTimeBase(&year, isUTC, month, day, hour, minute, second, millisecond, nil, offset),
+		FhirDateTimeBase: *NewFhirDateTimeBase(&year, isUTC, month, day, hour, minute, second, millisecond, nil, offset, nil),
 	}, nil
 }
 
-// NewFhirDateTimeFromString parses a FHIR-compliant dateTime string.
+// MarshalJSON serializes FhirDateTime.
+func (f *FhirDateTime) MarshalJSON() ([]byte, error) {
+	return f.FhirDateTimeBase.MarshalJSON()
+}
+
+// UnmarshalJSON deserializes JSON into FhirDateTime.
+func (f *FhirDateTime) UnmarshalJSON(data []byte) error {
+	return f.FhirDateTimeBase.UnmarshalJSON(data)
+}
+
 func NewFhirDateTimeFromString(input string) (*FhirDateTime, error) {
 	base, err := FhirDateTimeBaseFromString(input)
 	if err != nil {
@@ -37,30 +46,43 @@ func NewFhirDateTimeFromString(input string) (*FhirDateTime, error) {
 		return nil, errors.New("FHIR dateTime must include at least year, month, and day")
 	}
 
+	base.Value = &input // Cache the parsed string
 	return &FhirDateTime{FhirDateTimeBase: *base}, nil
 }
 
-// MarshalJSON serializes FhirDateTime.
-func (f *FhirDateTime) MarshalJSON() ([]byte, error) {
-	return json.Marshal(map[string]string{"value": f.ToString()})
-}
+// NewFhirDateTimeFromMap creates a new FhirDateTime from a map representation.
+func NewFhirDateTimeFromMap(data map[string]interface{}) (*FhirDateTime, error) {
+	// Validate that the map contains the necessary keys
+	value, ok := data["value"].(string)
+	if !ok || value == "" {
+		return nil, fmt.Errorf("missing or invalid 'value' in map")
+	}
 
-// UnmarshalJSON deserializes JSON into FhirDateTime.
-func (f *FhirDateTime) UnmarshalJSON(data []byte) error {
-	var input map[string]string
-	if err := json.Unmarshal(data, &input); err != nil {
-		return err
-	}
-	value, ok := input["value"]
-	if !ok {
-		return nil
-	}
-	parsed, err := NewFhirDateTimeFromString(value)
+	// Parse the date-time string into a FhirDateTimeBase
+	base, err := FhirDateTimeBaseFromString(value)
 	if err != nil {
-		return err
+		return nil, fmt.Errorf("failed to parse FHIR dateTime: %w", err)
 	}
-	*f = *parsed
-	return nil
+
+	// Check that required fields (year, month, day) are populated
+	if base.Year == nil || base.Month == nil || base.Day == nil {
+		return nil, fmt.Errorf("FHIR dateTime must include at least year, month, and day")
+	}
+
+	// Initialize the FhirDateTime instance
+	result := &FhirDateTime{
+		FhirDateTimeBase: *base,
+	}
+
+	// Parse the optional _value element if present
+	if elementData, ok := data["_value"].(map[string]interface{}); ok {
+		result.FhirDateTimeBase.Element = &Element{}
+		if err := mapToStruct(elementData, result.FhirDateTimeBase.Element); err != nil {
+			return nil, fmt.Errorf("failed to parse '_value' element: %w", err)
+		}
+	}
+
+	return result, nil
 }
 
 // Clone creates a deep copy of FhirDateTime.

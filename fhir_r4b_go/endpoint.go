@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // FhirEndpoint
 // The technical details of an endpoint that can be used for electronic services, such as for web services providing XDS.b or a REST endpoint for another FHIR server. This may include any security context information.
 type FhirEndpoint struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -30,22 +32,171 @@ type FhirEndpoint struct {
 	Header []*FhirString `json:"header,omitempty"`
 }
 
-// NewFhirEndpoint creates a new FhirEndpoint instance
+// NewFhirEndpoint creates a new FhirEndpoint instance.
 func NewFhirEndpoint() *FhirEndpoint {
 	return &FhirEndpoint{}
 }
 
-// FromJSON populates FhirEndpoint from JSON data
+// FromJSON populates FhirEndpoint from JSON data.
 func (m *FhirEndpoint) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *EndpointStatus `json:"status,omitempty"`
+		ConnectionType *Coding `json:"connectiontype,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		ManagingOrganization *Reference `json:"managingorganization,omitempty"`
+		Contact []*ContactPoint `json:"contact,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		PayloadType []*CodeableConcept `json:"payloadtype,omitempty"`
+		PayloadMimeType []interface{} `json:"payloadmimetype,omitempty"`
+		Address *FhirUrl `json:"address,omitempty"`
+		Header []interface{} `json:"header,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.ConnectionType = temp.ConnectionType
+	m.Name = temp.Name
+	m.ManagingOrganization = temp.ManagingOrganization
+	m.Contact = temp.Contact
+	m.Period = temp.Period
+	m.PayloadType = temp.PayloadType
+	if len(temp.PayloadMimeType) > 0 {
+		m.PayloadMimeType = make([]*FhirCode, len(temp.PayloadMimeType))
+		for i := range temp.PayloadMimeType {
+			itemMap, ok := temp.PayloadMimeType[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for PayloadMimeType[%d]: expected map", i) }
+			primitive, err := NewFhirCodeFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse PayloadMimeType[%d]: %v", i, err) }
+			m.PayloadMimeType[i] = primitive
+		}
+	}
+	m.Address = temp.Address
+	if len(temp.Header) > 0 {
+		m.Header = make([]*FhirString, len(temp.Header))
+		for i := range temp.Header {
+			itemMap, ok := temp.Header[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Header[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Header[%d]: %v", i, err) }
+			m.Header[i] = primitive
+		}
+	}
+	return nil
 }
 
-// ToJSON converts FhirEndpoint to JSON data
+// ToJSON converts FhirEndpoint to JSON data.
 func (m *FhirEndpoint) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *EndpointStatus `json:"status,omitempty"`
+		ConnectionType *Coding `json:"connectiontype,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		ManagingOrganization *Reference `json:"managingorganization,omitempty"`
+		Contact []*ContactPoint `json:"contact,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		PayloadType []*CodeableConcept `json:"payloadtype,omitempty"`
+		PayloadMimeType []interface{} `json:"payloadmimetype,omitempty"`
+		PayloadMimeTypeElement []map[string]interface{} `json:"_payloadmimetype,omitempty"`
+		Address interface{} `json:"address,omitempty"`
+		AddressElement map[string]interface{} `json:"_address,omitempty"`
+		Header []interface{} `json:"header,omitempty"`
+		HeaderElement []map[string]interface{} `json:"_header,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	output.ConnectionType = m.ConnectionType
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	output.ManagingOrganization = m.ManagingOrganization
+	output.Contact = m.Contact
+	output.Period = m.Period
+	output.PayloadType = m.PayloadType
+	if len(m.PayloadMimeType) > 0 {
+		output.PayloadMimeType = make([]interface{}, len(m.PayloadMimeType))
+		output.PayloadMimeTypeElement = make([]map[string]interface{}, len(m.PayloadMimeType))
+		for i, item := range m.PayloadMimeType {
+			if item != nil && item.Value != nil {
+				output.PayloadMimeType[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.PayloadMimeTypeElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if m.Address != nil && m.Address.Value != nil {
+		output.Address = m.Address.Value
+		if m.Address.Element != nil {
+			output.AddressElement = toMapOrNil(m.Address.Element.ToJSON())
+		}
+	}
+	if len(m.Header) > 0 {
+		output.Header = make([]interface{}, len(m.Header))
+		output.HeaderElement = make([]map[string]interface{}, len(m.Header))
+		for i, item := range m.Header {
+			if item != nil && item.Value != nil {
+				output.Header[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.HeaderElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of FhirEndpoint
+// Clone creates a deep copy of FhirEndpoint.
 func (m *FhirEndpoint) Clone() *FhirEndpoint {
 	if m == nil { return nil }
 	return &FhirEndpoint{
@@ -71,7 +222,7 @@ func (m *FhirEndpoint) Clone() *FhirEndpoint {
 	}
 }
 
-// Equals checks for equality with another FhirEndpoint instance
+// Equals checks equality between two FhirEndpoint instances.
 func (m *FhirEndpoint) Equals(other *FhirEndpoint) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

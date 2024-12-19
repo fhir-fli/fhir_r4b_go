@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // DetectedIssue
 // Indicates an actual or potential clinical issue with or between one or more active or proposed clinical actions for a patient; e.g. Drug-drug interaction, Ineffective treatment frequency, Procedure-condition conflict, etc.
 type DetectedIssue struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -32,22 +33,143 @@ type DetectedIssue struct {
 	Mitigation []*DetectedIssueMitigation `json:"mitigation,omitempty"`
 }
 
-// NewDetectedIssue creates a new DetectedIssue instance
+// NewDetectedIssue creates a new DetectedIssue instance.
 func NewDetectedIssue() *DetectedIssue {
 	return &DetectedIssue{}
 }
 
-// FromJSON populates DetectedIssue from JSON data
+// FromJSON populates DetectedIssue from JSON data.
 func (m *DetectedIssue) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *ObservationStatus `json:"status,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Severity *DetectedIssueSeverity `json:"severity,omitempty"`
+		Patient *Reference `json:"patient,omitempty"`
+		IdentifiedDateTime *FhirDateTime `json:"identifieddatetime,omitempty"`
+		IdentifiedPeriod *Period `json:"identifiedperiod,omitempty"`
+		Author *Reference `json:"author,omitempty"`
+		Implicated []*Reference `json:"implicated,omitempty"`
+		Evidence []*DetectedIssueEvidence `json:"evidence,omitempty"`
+		Detail *FhirString `json:"detail,omitempty"`
+		Reference *FhirUri `json:"reference,omitempty"`
+		Mitigation []*DetectedIssueMitigation `json:"mitigation,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.Code = temp.Code
+	m.Severity = temp.Severity
+	m.Patient = temp.Patient
+	m.IdentifiedDateTime = temp.IdentifiedDateTime
+	m.IdentifiedPeriod = temp.IdentifiedPeriod
+	m.Author = temp.Author
+	m.Implicated = temp.Implicated
+	m.Evidence = temp.Evidence
+	m.Detail = temp.Detail
+	m.Reference = temp.Reference
+	m.Mitigation = temp.Mitigation
+	return nil
 }
 
-// ToJSON converts DetectedIssue to JSON data
+// ToJSON converts DetectedIssue to JSON data.
 func (m *DetectedIssue) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *ObservationStatus `json:"status,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Severity *DetectedIssueSeverity `json:"severity,omitempty"`
+		Patient *Reference `json:"patient,omitempty"`
+		IdentifiedDateTime interface{} `json:"identifieddatetime,omitempty"`
+		IdentifiedDateTimeElement map[string]interface{} `json:"_identifieddatetime,omitempty"`
+		IdentifiedPeriod *Period `json:"identifiedperiod,omitempty"`
+		Author *Reference `json:"author,omitempty"`
+		Implicated []*Reference `json:"implicated,omitempty"`
+		Evidence []*DetectedIssueEvidence `json:"evidence,omitempty"`
+		Detail interface{} `json:"detail,omitempty"`
+		DetailElement map[string]interface{} `json:"_detail,omitempty"`
+		Reference interface{} `json:"reference,omitempty"`
+		ReferenceElement map[string]interface{} `json:"_reference,omitempty"`
+		Mitigation []*DetectedIssueMitigation `json:"mitigation,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	output.Code = m.Code
+	output.Severity = m.Severity
+	output.Patient = m.Patient
+	if m.IdentifiedDateTime != nil && m.IdentifiedDateTime.Value != nil {
+		output.IdentifiedDateTime = m.IdentifiedDateTime.Value
+		if m.IdentifiedDateTime.Element != nil {
+			output.IdentifiedDateTimeElement = toMapOrNil(m.IdentifiedDateTime.Element.ToJSON())
+		}
+	}
+	output.IdentifiedPeriod = m.IdentifiedPeriod
+	output.Author = m.Author
+	output.Implicated = m.Implicated
+	output.Evidence = m.Evidence
+	if m.Detail != nil && m.Detail.Value != nil {
+		output.Detail = m.Detail.Value
+		if m.Detail.Element != nil {
+			output.DetailElement = toMapOrNil(m.Detail.Element.ToJSON())
+		}
+	}
+	if m.Reference != nil && m.Reference.Value != nil {
+		output.Reference = m.Reference.Value
+		if m.Reference.Element != nil {
+			output.ReferenceElement = toMapOrNil(m.Reference.Element.ToJSON())
+		}
+	}
+	output.Mitigation = m.Mitigation
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DetectedIssue
+// Clone creates a deep copy of DetectedIssue.
 func (m *DetectedIssue) Clone() *DetectedIssue {
 	if m == nil { return nil }
 	return &DetectedIssue{
@@ -75,7 +197,7 @@ func (m *DetectedIssue) Clone() *DetectedIssue {
 	}
 }
 
-// Equals checks for equality with another DetectedIssue instance
+// Equals checks equality between two DetectedIssue instances.
 func (m *DetectedIssue) Equals(other *DetectedIssue) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -106,7 +228,7 @@ func (m *DetectedIssue) Equals(other *DetectedIssue) bool {
 // DetectedIssueEvidence
 // Supporting evidence or manifestations that provide the basis for identifying the detected issue such as a GuidanceResponse or MeasureReport.
 type DetectedIssueEvidence struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -114,22 +236,55 @@ type DetectedIssueEvidence struct {
 	Detail []*Reference `json:"detail,omitempty"`
 }
 
-// NewDetectedIssueEvidence creates a new DetectedIssueEvidence instance
+// NewDetectedIssueEvidence creates a new DetectedIssueEvidence instance.
 func NewDetectedIssueEvidence() *DetectedIssueEvidence {
 	return &DetectedIssueEvidence{}
 }
 
-// FromJSON populates DetectedIssueEvidence from JSON data
+// FromJSON populates DetectedIssueEvidence from JSON data.
 func (m *DetectedIssueEvidence) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code []*CodeableConcept `json:"code,omitempty"`
+		Detail []*Reference `json:"detail,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Detail = temp.Detail
+	return nil
 }
 
-// ToJSON converts DetectedIssueEvidence to JSON data
+// ToJSON converts DetectedIssueEvidence to JSON data.
 func (m *DetectedIssueEvidence) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code []*CodeableConcept `json:"code,omitempty"`
+		Detail []*Reference `json:"detail,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	output.Detail = m.Detail
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DetectedIssueEvidence
+// Clone creates a deep copy of DetectedIssueEvidence.
 func (m *DetectedIssueEvidence) Clone() *DetectedIssueEvidence {
 	if m == nil { return nil }
 	return &DetectedIssueEvidence{
@@ -141,7 +296,7 @@ func (m *DetectedIssueEvidence) Clone() *DetectedIssueEvidence {
 	}
 }
 
-// Equals checks for equality with another DetectedIssueEvidence instance
+// Equals checks equality between two DetectedIssueEvidence instances.
 func (m *DetectedIssueEvidence) Equals(other *DetectedIssueEvidence) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -156,7 +311,7 @@ func (m *DetectedIssueEvidence) Equals(other *DetectedIssueEvidence) bool {
 // DetectedIssueMitigation
 // Indicates an action that has been taken or is committed to reduce or eliminate the likelihood of the risk identified by the detected issue from manifesting.  Can also reflect an observation of known mitigating factors that may reduce/eliminate the need for any action.
 type DetectedIssueMitigation struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -165,22 +320,65 @@ type DetectedIssueMitigation struct {
 	Author *Reference `json:"author,omitempty"`
 }
 
-// NewDetectedIssueMitigation creates a new DetectedIssueMitigation instance
+// NewDetectedIssueMitigation creates a new DetectedIssueMitigation instance.
 func NewDetectedIssueMitigation() *DetectedIssueMitigation {
 	return &DetectedIssueMitigation{}
 }
 
-// FromJSON populates DetectedIssueMitigation from JSON data
+// FromJSON populates DetectedIssueMitigation from JSON data.
 func (m *DetectedIssueMitigation) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Action *CodeableConcept `json:"action,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Author *Reference `json:"author,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Action = temp.Action
+	m.Date = temp.Date
+	m.Author = temp.Author
+	return nil
 }
 
-// ToJSON converts DetectedIssueMitigation to JSON data
+// ToJSON converts DetectedIssueMitigation to JSON data.
 func (m *DetectedIssueMitigation) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Action *CodeableConcept `json:"action,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Author *Reference `json:"author,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Action = m.Action
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	output.Author = m.Author
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DetectedIssueMitigation
+// Clone creates a deep copy of DetectedIssueMitigation.
 func (m *DetectedIssueMitigation) Clone() *DetectedIssueMitigation {
 	if m == nil { return nil }
 	return &DetectedIssueMitigation{
@@ -193,7 +391,7 @@ func (m *DetectedIssueMitigation) Clone() *DetectedIssueMitigation {
 	}
 }
 
-// Equals checks for equality with another DetectedIssueMitigation instance
+// Equals checks equality between two DetectedIssueMitigation instances.
 func (m *DetectedIssueMitigation) Equals(other *DetectedIssueMitigation) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // TriggerDefinition
 // A description of a triggering event. Triggering events can be named events, data events, or periodic, as determined by the type element.
 type TriggerDefinition struct {
-	DataType
+	extends DataType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	Type *TriggerType `json:"type,omitempty"`
@@ -21,22 +22,93 @@ type TriggerDefinition struct {
 	Condition *FhirExpression `json:"condition,omitempty"`
 }
 
-// NewTriggerDefinition creates a new TriggerDefinition instance
+// NewTriggerDefinition creates a new TriggerDefinition instance.
 func NewTriggerDefinition() *TriggerDefinition {
 	return &TriggerDefinition{}
 }
 
-// FromJSON populates TriggerDefinition from JSON data
+// FromJSON populates TriggerDefinition from JSON data.
 func (m *TriggerDefinition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Type *TriggerType `json:"type,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		TimingTiming *Timing `json:"timingtiming,omitempty"`
+		TimingReference *Reference `json:"timingreference,omitempty"`
+		TimingDate *FhirDate `json:"timingdate,omitempty"`
+		TimingDateTime *FhirDateTime `json:"timingdatetime,omitempty"`
+		Data []*DataRequirement `json:"data,omitempty"`
+		Condition *FhirExpression `json:"condition,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.Type = temp.Type
+	m.Name = temp.Name
+	m.TimingTiming = temp.TimingTiming
+	m.TimingReference = temp.TimingReference
+	m.TimingDate = temp.TimingDate
+	m.TimingDateTime = temp.TimingDateTime
+	m.Data = temp.Data
+	m.Condition = temp.Condition
+	return nil
 }
 
-// ToJSON converts TriggerDefinition to JSON data
+// ToJSON converts TriggerDefinition to JSON data.
 func (m *TriggerDefinition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Type *TriggerType `json:"type,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		TimingTiming *Timing `json:"timingtiming,omitempty"`
+		TimingReference *Reference `json:"timingreference,omitempty"`
+		TimingDate interface{} `json:"timingdate,omitempty"`
+		TimingDateElement map[string]interface{} `json:"_timingdate,omitempty"`
+		TimingDateTime interface{} `json:"timingdatetime,omitempty"`
+		TimingDateTimeElement map[string]interface{} `json:"_timingdatetime,omitempty"`
+		Data []*DataRequirement `json:"data,omitempty"`
+		Condition *FhirExpression `json:"condition,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.Type = m.Type
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	output.TimingTiming = m.TimingTiming
+	output.TimingReference = m.TimingReference
+	if m.TimingDate != nil && m.TimingDate.Value != nil {
+		output.TimingDate = m.TimingDate.Value
+		if m.TimingDate.Element != nil {
+			output.TimingDateElement = toMapOrNil(m.TimingDate.Element.ToJSON())
+		}
+	}
+	if m.TimingDateTime != nil && m.TimingDateTime.Value != nil {
+		output.TimingDateTime = m.TimingDateTime.Value
+		if m.TimingDateTime.Element != nil {
+			output.TimingDateTimeElement = toMapOrNil(m.TimingDateTime.Element.ToJSON())
+		}
+	}
+	output.Data = m.Data
+	output.Condition = m.Condition
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TriggerDefinition
+// Clone creates a deep copy of TriggerDefinition.
 func (m *TriggerDefinition) Clone() *TriggerDefinition {
 	if m == nil { return nil }
 	return &TriggerDefinition{
@@ -53,7 +125,7 @@ func (m *TriggerDefinition) Clone() *TriggerDefinition {
 	}
 }
 
-// Equals checks for equality with another TriggerDefinition instance
+// Equals checks equality between two TriggerDefinition instances.
 func (m *TriggerDefinition) Equals(other *TriggerDefinition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Coverage
 // Financial instrument which may be used to reimburse or pay for health care products and services. Includes both insurance and self-payment.
 type Coverage struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -36,22 +37,171 @@ type Coverage struct {
 	Contract []*Reference `json:"contract,omitempty"`
 }
 
-// NewCoverage creates a new Coverage instance
+// NewCoverage creates a new Coverage instance.
 func NewCoverage() *Coverage {
 	return &Coverage{}
 }
 
-// FromJSON populates Coverage from JSON data
+// FromJSON populates Coverage from JSON data.
 func (m *Coverage) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *FinancialResourceStatusCodes `json:"status,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		PolicyHolder *Reference `json:"policyholder,omitempty"`
+		Subscriber *Reference `json:"subscriber,omitempty"`
+		SubscriberId *FhirString `json:"subscriberid,omitempty"`
+		Beneficiary *Reference `json:"beneficiary,omitempty"`
+		Dependent *FhirString `json:"dependent,omitempty"`
+		Relationship *CodeableConcept `json:"relationship,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Payor []*Reference `json:"payor,omitempty"`
+		Class_ []*CoverageClass `json:"class,omitempty"`
+		Order *FhirPositiveInt `json:"order,omitempty"`
+		Network *FhirString `json:"network,omitempty"`
+		CostToBeneficiary []*CoverageCostToBeneficiary `json:"costtobeneficiary,omitempty"`
+		Subrogation *FhirBoolean `json:"subrogation,omitempty"`
+		Contract []*Reference `json:"contract,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.Type = temp.Type
+	m.PolicyHolder = temp.PolicyHolder
+	m.Subscriber = temp.Subscriber
+	m.SubscriberId = temp.SubscriberId
+	m.Beneficiary = temp.Beneficiary
+	m.Dependent = temp.Dependent
+	m.Relationship = temp.Relationship
+	m.Period = temp.Period
+	m.Payor = temp.Payor
+	m.Class_ = temp.Class_
+	m.Order = temp.Order
+	m.Network = temp.Network
+	m.CostToBeneficiary = temp.CostToBeneficiary
+	m.Subrogation = temp.Subrogation
+	m.Contract = temp.Contract
+	return nil
 }
 
-// ToJSON converts Coverage to JSON data
+// ToJSON converts Coverage to JSON data.
 func (m *Coverage) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *FinancialResourceStatusCodes `json:"status,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		PolicyHolder *Reference `json:"policyholder,omitempty"`
+		Subscriber *Reference `json:"subscriber,omitempty"`
+		SubscriberId interface{} `json:"subscriberid,omitempty"`
+		SubscriberIdElement map[string]interface{} `json:"_subscriberid,omitempty"`
+		Beneficiary *Reference `json:"beneficiary,omitempty"`
+		Dependent interface{} `json:"dependent,omitempty"`
+		DependentElement map[string]interface{} `json:"_dependent,omitempty"`
+		Relationship *CodeableConcept `json:"relationship,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Payor []*Reference `json:"payor,omitempty"`
+		Class_ []*CoverageClass `json:"class,omitempty"`
+		Order interface{} `json:"order,omitempty"`
+		OrderElement map[string]interface{} `json:"_order,omitempty"`
+		Network interface{} `json:"network,omitempty"`
+		NetworkElement map[string]interface{} `json:"_network,omitempty"`
+		CostToBeneficiary []*CoverageCostToBeneficiary `json:"costtobeneficiary,omitempty"`
+		Subrogation interface{} `json:"subrogation,omitempty"`
+		SubrogationElement map[string]interface{} `json:"_subrogation,omitempty"`
+		Contract []*Reference `json:"contract,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	output.Type = m.Type
+	output.PolicyHolder = m.PolicyHolder
+	output.Subscriber = m.Subscriber
+	if m.SubscriberId != nil && m.SubscriberId.Value != nil {
+		output.SubscriberId = m.SubscriberId.Value
+		if m.SubscriberId.Element != nil {
+			output.SubscriberIdElement = toMapOrNil(m.SubscriberId.Element.ToJSON())
+		}
+	}
+	output.Beneficiary = m.Beneficiary
+	if m.Dependent != nil && m.Dependent.Value != nil {
+		output.Dependent = m.Dependent.Value
+		if m.Dependent.Element != nil {
+			output.DependentElement = toMapOrNil(m.Dependent.Element.ToJSON())
+		}
+	}
+	output.Relationship = m.Relationship
+	output.Period = m.Period
+	output.Payor = m.Payor
+	output.Class_ = m.Class_
+	if m.Order != nil && m.Order.Value != nil {
+		output.Order = m.Order.Value
+		if m.Order.Element != nil {
+			output.OrderElement = toMapOrNil(m.Order.Element.ToJSON())
+		}
+	}
+	if m.Network != nil && m.Network.Value != nil {
+		output.Network = m.Network.Value
+		if m.Network.Element != nil {
+			output.NetworkElement = toMapOrNil(m.Network.Element.ToJSON())
+		}
+	}
+	output.CostToBeneficiary = m.CostToBeneficiary
+	if m.Subrogation != nil && m.Subrogation.Value != nil {
+		output.Subrogation = m.Subrogation.Value
+		if m.Subrogation.Element != nil {
+			output.SubrogationElement = toMapOrNil(m.Subrogation.Element.ToJSON())
+		}
+	}
+	output.Contract = m.Contract
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Coverage
+// Clone creates a deep copy of Coverage.
 func (m *Coverage) Clone() *Coverage {
 	if m == nil { return nil }
 	return &Coverage{
@@ -83,7 +233,7 @@ func (m *Coverage) Clone() *Coverage {
 	}
 }
 
-// Equals checks for equality with another Coverage instance
+// Equals checks equality between two Coverage instances.
 func (m *Coverage) Equals(other *Coverage) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -118,7 +268,7 @@ func (m *Coverage) Equals(other *Coverage) bool {
 // CoverageClass
 // A suite of underwriter specific classifiers.
 type CoverageClass struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -127,22 +277,71 @@ type CoverageClass struct {
 	Name *FhirString `json:"name,omitempty"`
 }
 
-// NewCoverageClass creates a new CoverageClass instance
+// NewCoverageClass creates a new CoverageClass instance.
 func NewCoverageClass() *CoverageClass {
 	return &CoverageClass{}
 }
 
-// FromJSON populates CoverageClass from JSON data
+// FromJSON populates CoverageClass from JSON data.
 func (m *CoverageClass) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Value *FhirString `json:"value,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Value = temp.Value
+	m.Name = temp.Name
+	return nil
 }
 
-// ToJSON converts CoverageClass to JSON data
+// ToJSON converts CoverageClass to JSON data.
 func (m *CoverageClass) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Value interface{} `json:"value,omitempty"`
+		ValueElement map[string]interface{} `json:"_value,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	if m.Value != nil && m.Value.Value != nil {
+		output.Value = m.Value.Value
+		if m.Value.Element != nil {
+			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CoverageClass
+// Clone creates a deep copy of CoverageClass.
 func (m *CoverageClass) Clone() *CoverageClass {
 	if m == nil { return nil }
 	return &CoverageClass{
@@ -155,7 +354,7 @@ func (m *CoverageClass) Clone() *CoverageClass {
 	}
 }
 
-// Equals checks for equality with another CoverageClass instance
+// Equals checks equality between two CoverageClass instances.
 func (m *CoverageClass) Equals(other *CoverageClass) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -171,7 +370,7 @@ func (m *CoverageClass) Equals(other *CoverageClass) bool {
 // CoverageCostToBeneficiary
 // A suite of codes indicating the cost category and associated amount which have been detailed in the policy and may have been  included on the health card.
 type CoverageCostToBeneficiary struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -181,22 +380,63 @@ type CoverageCostToBeneficiary struct {
 	Exception []*CoverageException `json:"exception,omitempty"`
 }
 
-// NewCoverageCostToBeneficiary creates a new CoverageCostToBeneficiary instance
+// NewCoverageCostToBeneficiary creates a new CoverageCostToBeneficiary instance.
 func NewCoverageCostToBeneficiary() *CoverageCostToBeneficiary {
 	return &CoverageCostToBeneficiary{}
 }
 
-// FromJSON populates CoverageCostToBeneficiary from JSON data
+// FromJSON populates CoverageCostToBeneficiary from JSON data.
 func (m *CoverageCostToBeneficiary) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueMoney *Money `json:"valuemoney,omitempty"`
+		Exception []*CoverageException `json:"exception,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.ValueQuantity = temp.ValueQuantity
+	m.ValueMoney = temp.ValueMoney
+	m.Exception = temp.Exception
+	return nil
 }
 
-// ToJSON converts CoverageCostToBeneficiary to JSON data
+// ToJSON converts CoverageCostToBeneficiary to JSON data.
 func (m *CoverageCostToBeneficiary) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueMoney *Money `json:"valuemoney,omitempty"`
+		Exception []*CoverageException `json:"exception,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.ValueQuantity = m.ValueQuantity
+	output.ValueMoney = m.ValueMoney
+	output.Exception = m.Exception
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CoverageCostToBeneficiary
+// Clone creates a deep copy of CoverageCostToBeneficiary.
 func (m *CoverageCostToBeneficiary) Clone() *CoverageCostToBeneficiary {
 	if m == nil { return nil }
 	return &CoverageCostToBeneficiary{
@@ -210,7 +450,7 @@ func (m *CoverageCostToBeneficiary) Clone() *CoverageCostToBeneficiary {
 	}
 }
 
-// Equals checks for equality with another CoverageCostToBeneficiary instance
+// Equals checks equality between two CoverageCostToBeneficiary instances.
 func (m *CoverageCostToBeneficiary) Equals(other *CoverageCostToBeneficiary) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -227,7 +467,7 @@ func (m *CoverageCostToBeneficiary) Equals(other *CoverageCostToBeneficiary) boo
 // CoverageException
 // A suite of codes indicating exceptions or reductions to patient costs and their effective periods.
 type CoverageException struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -235,22 +475,55 @@ type CoverageException struct {
 	Period *Period `json:"period,omitempty"`
 }
 
-// NewCoverageException creates a new CoverageException instance
+// NewCoverageException creates a new CoverageException instance.
 func NewCoverageException() *CoverageException {
 	return &CoverageException{}
 }
 
-// FromJSON populates CoverageException from JSON data
+// FromJSON populates CoverageException from JSON data.
 func (m *CoverageException) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Period *Period `json:"period,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Period = temp.Period
+	return nil
 }
 
-// ToJSON converts CoverageException to JSON data
+// ToJSON converts CoverageException to JSON data.
 func (m *CoverageException) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Period *Period `json:"period,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Period = m.Period
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CoverageException
+// Clone creates a deep copy of CoverageException.
 func (m *CoverageException) Clone() *CoverageException {
 	if m == nil { return nil }
 	return &CoverageException{
@@ -262,7 +535,7 @@ func (m *CoverageException) Clone() *CoverageException {
 	}
 }
 
-// Equals checks for equality with another CoverageException instance
+// Equals checks equality between two CoverageException instances.
 func (m *CoverageException) Equals(other *CoverageException) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

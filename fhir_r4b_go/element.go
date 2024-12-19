@@ -77,7 +77,7 @@ func (e *Element) Equals(other *Element) bool {
 	if len(e.Extension) != len(other.Extension) {
 		return false
 	}
-	if(!compareSlices(e.Extension, other.Extension)){
+	if !compareSlices(e.Extension, other.Extension) {
 		return false
 	}
 	// Compare DisallowExtension
@@ -98,7 +98,7 @@ func (e *Element) AddExtension(ext *FhirExtension) {
 func (e *Element) GetExtensionByURL(url string) []*FhirExtension {
 	var matchingExtensions []*FhirExtension
 	for _, ext := range e.Extension {
-		if ext != nil && ext.Url.Value == url {
+		if ext != nil && ext.Url.Value == &url {
 			matchingExtensions = append(matchingExtensions, ext)
 		}
 	}
@@ -109,7 +109,7 @@ func (e *Element) GetExtensionByURL(url string) []*FhirExtension {
 func (e *Element) RemoveExtensionByURL(url string) {
 	var filteredExtensions []*FhirExtension
 	for _, ext := range e.Extension {
-		if ext != nil && ext.Url.Value != url {
+		if ext != nil && ext.Url.Value != &url {
 			filteredExtensions = append(filteredExtensions, ext)
 		}
 	}

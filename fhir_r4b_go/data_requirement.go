@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // DataRequirement
 // Describes a required data item for evaluation in terms of the type of data, and optional code or date-based filters of the data.
 type DataRequirement struct {
-	DataType
+	extends DataType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	Type *FHIRAllTypes `json:"type,omitempty"`
@@ -22,22 +24,127 @@ type DataRequirement struct {
 	Sort []*DataRequirementSort `json:"sort,omitempty"`
 }
 
-// NewDataRequirement creates a new DataRequirement instance
+// NewDataRequirement creates a new DataRequirement instance.
 func NewDataRequirement() *DataRequirement {
 	return &DataRequirement{}
 }
 
-// FromJSON populates DataRequirement from JSON data
+// FromJSON populates DataRequirement from JSON data.
 func (m *DataRequirement) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Type *FHIRAllTypes `json:"type,omitempty"`
+		Profile []interface{} `json:"profile,omitempty"`
+		SubjectCodeableConcept *CodeableConcept `json:"subjectcodeableconcept,omitempty"`
+		SubjectReference *Reference `json:"subjectreference,omitempty"`
+		MustSupport []interface{} `json:"mustsupport,omitempty"`
+		CodeFilter []*DataRequirementCodeFilter `json:"codefilter,omitempty"`
+		DateFilter []*DataRequirementDateFilter `json:"datefilter,omitempty"`
+		Limit *FhirPositiveInt `json:"limit,omitempty"`
+		Sort []*DataRequirementSort `json:"sort,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.Type = temp.Type
+	if len(temp.Profile) > 0 {
+		m.Profile = make([]*FhirCanonical, len(temp.Profile))
+		for i := range temp.Profile {
+			itemMap, ok := temp.Profile[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Profile[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Profile[%d]: %v", i, err) }
+			m.Profile[i] = primitive
+		}
+	}
+	m.SubjectCodeableConcept = temp.SubjectCodeableConcept
+	m.SubjectReference = temp.SubjectReference
+	if len(temp.MustSupport) > 0 {
+		m.MustSupport = make([]*FhirString, len(temp.MustSupport))
+		for i := range temp.MustSupport {
+			itemMap, ok := temp.MustSupport[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for MustSupport[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse MustSupport[%d]: %v", i, err) }
+			m.MustSupport[i] = primitive
+		}
+	}
+	m.CodeFilter = temp.CodeFilter
+	m.DateFilter = temp.DateFilter
+	m.Limit = temp.Limit
+	m.Sort = temp.Sort
+	return nil
 }
 
-// ToJSON converts DataRequirement to JSON data
+// ToJSON converts DataRequirement to JSON data.
 func (m *DataRequirement) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Type *FHIRAllTypes `json:"type,omitempty"`
+		Profile []interface{} `json:"profile,omitempty"`
+		ProfileElement []map[string]interface{} `json:"_profile,omitempty"`
+		SubjectCodeableConcept *CodeableConcept `json:"subjectcodeableconcept,omitempty"`
+		SubjectReference *Reference `json:"subjectreference,omitempty"`
+		MustSupport []interface{} `json:"mustsupport,omitempty"`
+		MustSupportElement []map[string]interface{} `json:"_mustsupport,omitempty"`
+		CodeFilter []*DataRequirementCodeFilter `json:"codefilter,omitempty"`
+		DateFilter []*DataRequirementDateFilter `json:"datefilter,omitempty"`
+		Limit interface{} `json:"limit,omitempty"`
+		LimitElement map[string]interface{} `json:"_limit,omitempty"`
+		Sort []*DataRequirementSort `json:"sort,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.Type = m.Type
+	if len(m.Profile) > 0 {
+		output.Profile = make([]interface{}, len(m.Profile))
+		output.ProfileElement = make([]map[string]interface{}, len(m.Profile))
+		for i, item := range m.Profile {
+			if item != nil && item.Value != nil {
+				output.Profile[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.ProfileElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.SubjectCodeableConcept = m.SubjectCodeableConcept
+	output.SubjectReference = m.SubjectReference
+	if len(m.MustSupport) > 0 {
+		output.MustSupport = make([]interface{}, len(m.MustSupport))
+		output.MustSupportElement = make([]map[string]interface{}, len(m.MustSupport))
+		for i, item := range m.MustSupport {
+			if item != nil && item.Value != nil {
+				output.MustSupport[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.MustSupportElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.CodeFilter = m.CodeFilter
+	output.DateFilter = m.DateFilter
+	if m.Limit != nil && m.Limit.Value != nil {
+		output.Limit = m.Limit.Value
+		if m.Limit.Element != nil {
+			output.LimitElement = toMapOrNil(m.Limit.Element.ToJSON())
+		}
+	}
+	output.Sort = m.Sort
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DataRequirement
+// Clone creates a deep copy of DataRequirement.
 func (m *DataRequirement) Clone() *DataRequirement {
 	if m == nil { return nil }
 	return &DataRequirement{
@@ -55,7 +162,7 @@ func (m *DataRequirement) Clone() *DataRequirement {
 	}
 }
 
-// Equals checks for equality with another DataRequirement instance
+// Equals checks equality between two DataRequirement instances.
 func (m *DataRequirement) Equals(other *DataRequirement) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -76,7 +183,7 @@ func (m *DataRequirement) Equals(other *DataRequirement) bool {
 // DataRequirementCodeFilter
 // Code filters specify additional constraints on the data, specifying the value set of interest for a particular element of the data. Each code filter defines an additional constraint on the data, i.e. code filters are AND'ed, not OR'ed.
 type DataRequirementCodeFilter struct {
-	Element
+	extends Element
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	Path *FhirString `json:"path,omitempty"`
@@ -85,22 +192,77 @@ type DataRequirementCodeFilter struct {
 	Code []*Coding `json:"code,omitempty"`
 }
 
-// NewDataRequirementCodeFilter creates a new DataRequirementCodeFilter instance
+// NewDataRequirementCodeFilter creates a new DataRequirementCodeFilter instance.
 func NewDataRequirementCodeFilter() *DataRequirementCodeFilter {
 	return &DataRequirementCodeFilter{}
 }
 
-// FromJSON populates DataRequirementCodeFilter from JSON data
+// FromJSON populates DataRequirementCodeFilter from JSON data.
 func (m *DataRequirementCodeFilter) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Path *FhirString `json:"path,omitempty"`
+		SearchParam *FhirString `json:"searchparam,omitempty"`
+		ValueSet *FhirCanonical `json:"valueset,omitempty"`
+		Code []*Coding `json:"code,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.Path = temp.Path
+	m.SearchParam = temp.SearchParam
+	m.ValueSet = temp.ValueSet
+	m.Code = temp.Code
+	return nil
 }
 
-// ToJSON converts DataRequirementCodeFilter to JSON data
+// ToJSON converts DataRequirementCodeFilter to JSON data.
 func (m *DataRequirementCodeFilter) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Path interface{} `json:"path,omitempty"`
+		PathElement map[string]interface{} `json:"_path,omitempty"`
+		SearchParam interface{} `json:"searchparam,omitempty"`
+		SearchParamElement map[string]interface{} `json:"_searchparam,omitempty"`
+		ValueSet interface{} `json:"valueset,omitempty"`
+		ValueSetElement map[string]interface{} `json:"_valueset,omitempty"`
+		Code []*Coding `json:"code,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	if m.Path != nil && m.Path.Value != nil {
+		output.Path = m.Path.Value
+		if m.Path.Element != nil {
+			output.PathElement = toMapOrNil(m.Path.Element.ToJSON())
+		}
+	}
+	if m.SearchParam != nil && m.SearchParam.Value != nil {
+		output.SearchParam = m.SearchParam.Value
+		if m.SearchParam.Element != nil {
+			output.SearchParamElement = toMapOrNil(m.SearchParam.Element.ToJSON())
+		}
+	}
+	if m.ValueSet != nil && m.ValueSet.Value != nil {
+		output.ValueSet = m.ValueSet.Value
+		if m.ValueSet.Element != nil {
+			output.ValueSetElement = toMapOrNil(m.ValueSet.Element.ToJSON())
+		}
+	}
+	output.Code = m.Code
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DataRequirementCodeFilter
+// Clone creates a deep copy of DataRequirementCodeFilter.
 func (m *DataRequirementCodeFilter) Clone() *DataRequirementCodeFilter {
 	if m == nil { return nil }
 	return &DataRequirementCodeFilter{
@@ -113,7 +275,7 @@ func (m *DataRequirementCodeFilter) Clone() *DataRequirementCodeFilter {
 	}
 }
 
-// Equals checks for equality with another DataRequirementCodeFilter instance
+// Equals checks equality between two DataRequirementCodeFilter instances.
 func (m *DataRequirementCodeFilter) Equals(other *DataRequirementCodeFilter) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -129,7 +291,7 @@ func (m *DataRequirementCodeFilter) Equals(other *DataRequirementCodeFilter) boo
 // DataRequirementDateFilter
 // Date filters specify additional constraints on the data in terms of the applicable date range for specific elements. Each date filter specifies an additional constraint on the data, i.e. date filters are AND'ed, not OR'ed.
 type DataRequirementDateFilter struct {
-	Element
+	extends Element
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	Path *FhirString `json:"path,omitempty"`
@@ -139,22 +301,81 @@ type DataRequirementDateFilter struct {
 	ValueDuration *FhirDuration `json:"valueduration,omitempty"`
 }
 
-// NewDataRequirementDateFilter creates a new DataRequirementDateFilter instance
+// NewDataRequirementDateFilter creates a new DataRequirementDateFilter instance.
 func NewDataRequirementDateFilter() *DataRequirementDateFilter {
 	return &DataRequirementDateFilter{}
 }
 
-// FromJSON populates DataRequirementDateFilter from JSON data
+// FromJSON populates DataRequirementDateFilter from JSON data.
 func (m *DataRequirementDateFilter) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Path *FhirString `json:"path,omitempty"`
+		SearchParam *FhirString `json:"searchparam,omitempty"`
+		ValueDateTime *FhirDateTime `json:"valuedatetime,omitempty"`
+		ValuePeriod *Period `json:"valueperiod,omitempty"`
+		ValueDuration *FhirDuration `json:"valueduration,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.Path = temp.Path
+	m.SearchParam = temp.SearchParam
+	m.ValueDateTime = temp.ValueDateTime
+	m.ValuePeriod = temp.ValuePeriod
+	m.ValueDuration = temp.ValueDuration
+	return nil
 }
 
-// ToJSON converts DataRequirementDateFilter to JSON data
+// ToJSON converts DataRequirementDateFilter to JSON data.
 func (m *DataRequirementDateFilter) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Path interface{} `json:"path,omitempty"`
+		PathElement map[string]interface{} `json:"_path,omitempty"`
+		SearchParam interface{} `json:"searchparam,omitempty"`
+		SearchParamElement map[string]interface{} `json:"_searchparam,omitempty"`
+		ValueDateTime interface{} `json:"valuedatetime,omitempty"`
+		ValueDateTimeElement map[string]interface{} `json:"_valuedatetime,omitempty"`
+		ValuePeriod *Period `json:"valueperiod,omitempty"`
+		ValueDuration *FhirDuration `json:"valueduration,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	if m.Path != nil && m.Path.Value != nil {
+		output.Path = m.Path.Value
+		if m.Path.Element != nil {
+			output.PathElement = toMapOrNil(m.Path.Element.ToJSON())
+		}
+	}
+	if m.SearchParam != nil && m.SearchParam.Value != nil {
+		output.SearchParam = m.SearchParam.Value
+		if m.SearchParam.Element != nil {
+			output.SearchParamElement = toMapOrNil(m.SearchParam.Element.ToJSON())
+		}
+	}
+	if m.ValueDateTime != nil && m.ValueDateTime.Value != nil {
+		output.ValueDateTime = m.ValueDateTime.Value
+		if m.ValueDateTime.Element != nil {
+			output.ValueDateTimeElement = toMapOrNil(m.ValueDateTime.Element.ToJSON())
+		}
+	}
+	output.ValuePeriod = m.ValuePeriod
+	output.ValueDuration = m.ValueDuration
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DataRequirementDateFilter
+// Clone creates a deep copy of DataRequirementDateFilter.
 func (m *DataRequirementDateFilter) Clone() *DataRequirementDateFilter {
 	if m == nil { return nil }
 	return &DataRequirementDateFilter{
@@ -168,7 +389,7 @@ func (m *DataRequirementDateFilter) Clone() *DataRequirementDateFilter {
 	}
 }
 
-// Equals checks for equality with another DataRequirementDateFilter instance
+// Equals checks equality between two DataRequirementDateFilter instances.
 func (m *DataRequirementDateFilter) Equals(other *DataRequirementDateFilter) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -185,29 +406,64 @@ func (m *DataRequirementDateFilter) Equals(other *DataRequirementDateFilter) boo
 // DataRequirementSort
 // Specifies the order of the results to be returned.
 type DataRequirementSort struct {
-	Element
+	extends Element
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	Path *FhirString `json:"path,omitempty"`
 	Direction *SortDirection `json:"direction,omitempty"`
 }
 
-// NewDataRequirementSort creates a new DataRequirementSort instance
+// NewDataRequirementSort creates a new DataRequirementSort instance.
 func NewDataRequirementSort() *DataRequirementSort {
 	return &DataRequirementSort{}
 }
 
-// FromJSON populates DataRequirementSort from JSON data
+// FromJSON populates DataRequirementSort from JSON data.
 func (m *DataRequirementSort) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Path *FhirString `json:"path,omitempty"`
+		Direction *SortDirection `json:"direction,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.Path = temp.Path
+	m.Direction = temp.Direction
+	return nil
 }
 
-// ToJSON converts DataRequirementSort to JSON data
+// ToJSON converts DataRequirementSort to JSON data.
 func (m *DataRequirementSort) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Path interface{} `json:"path,omitempty"`
+		PathElement map[string]interface{} `json:"_path,omitempty"`
+		Direction *SortDirection `json:"direction,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	if m.Path != nil && m.Path.Value != nil {
+		output.Path = m.Path.Value
+		if m.Path.Element != nil {
+			output.PathElement = toMapOrNil(m.Path.Element.ToJSON())
+		}
+	}
+	output.Direction = m.Direction
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DataRequirementSort
+// Clone creates a deep copy of DataRequirementSort.
 func (m *DataRequirementSort) Clone() *DataRequirementSort {
 	if m == nil { return nil }
 	return &DataRequirementSort{
@@ -218,7 +474,7 @@ func (m *DataRequirementSort) Clone() *DataRequirementSort {
 	}
 }
 
-// Equals checks for equality with another DataRequirementSort instance
+// Equals checks equality between two DataRequirementSort instances.
 func (m *DataRequirementSort) Equals(other *DataRequirementSort) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // CodeSystem
 // The CodeSystem resource is used to declare the existence of and describe a code system or code system supplement and its key properties, and optionally define a part or all of its content.
 type CodeSystem struct {
-	CanonicalResource
+	extends CanonicalResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -45,22 +46,273 @@ type CodeSystem struct {
 	Concept []*CodeSystemConcept `json:"concept,omitempty"`
 }
 
-// NewCodeSystem creates a new CodeSystem instance
+// NewCodeSystem creates a new CodeSystem instance.
 func NewCodeSystem() *CodeSystem {
 	return &CodeSystem{}
 }
 
-// FromJSON populates CodeSystem from JSON data
+// FromJSON populates CodeSystem from JSON data.
 func (m *CodeSystem) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental *FhirBoolean `json:"experimental,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Publisher *FhirString `json:"publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose *FhirMarkdown `json:"purpose,omitempty"`
+		Copyright *FhirMarkdown `json:"copyright,omitempty"`
+		CaseSensitive *FhirBoolean `json:"casesensitive,omitempty"`
+		ValueSet *FhirCanonical `json:"valueset,omitempty"`
+		HierarchyMeaning *CodeSystemHierarchyMeaning `json:"hierarchymeaning,omitempty"`
+		Compositional *FhirBoolean `json:"compositional,omitempty"`
+		VersionNeeded *FhirBoolean `json:"versionneeded,omitempty"`
+		Content *CodeSystemContentMode `json:"content,omitempty"`
+		Supplements *FhirCanonical `json:"supplements,omitempty"`
+		Count *FhirUnsignedInt `json:"count,omitempty"`
+		Filter []*CodeSystemFilter `json:"filter,omitempty"`
+		Property []*CodeSystemProperty `json:"property,omitempty"`
+		Concept []*CodeSystemConcept `json:"concept,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Url = temp.Url
+	m.Identifier = temp.Identifier
+	m.Version = temp.Version
+	m.Name = temp.Name
+	m.Title = temp.Title
+	m.Status = temp.Status
+	m.Experimental = temp.Experimental
+	m.Date = temp.Date
+	m.Publisher = temp.Publisher
+	m.Contact = temp.Contact
+	m.Description = temp.Description
+	m.UseContext = temp.UseContext
+	m.Jurisdiction = temp.Jurisdiction
+	m.Purpose = temp.Purpose
+	m.Copyright = temp.Copyright
+	m.CaseSensitive = temp.CaseSensitive
+	m.ValueSet = temp.ValueSet
+	m.HierarchyMeaning = temp.HierarchyMeaning
+	m.Compositional = temp.Compositional
+	m.VersionNeeded = temp.VersionNeeded
+	m.Content = temp.Content
+	m.Supplements = temp.Supplements
+	m.Count = temp.Count
+	m.Filter = temp.Filter
+	m.Property = temp.Property
+	m.Concept = temp.Concept
+	return nil
 }
 
-// ToJSON converts CodeSystem to JSON data
+// ToJSON converts CodeSystem to JSON data.
 func (m *CodeSystem) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental interface{} `json:"experimental,omitempty"`
+		ExperimentalElement map[string]interface{} `json:"_experimental,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Publisher interface{} `json:"publisher,omitempty"`
+		PublisherElement map[string]interface{} `json:"_publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose interface{} `json:"purpose,omitempty"`
+		PurposeElement map[string]interface{} `json:"_purpose,omitempty"`
+		Copyright interface{} `json:"copyright,omitempty"`
+		CopyrightElement map[string]interface{} `json:"_copyright,omitempty"`
+		CaseSensitive interface{} `json:"casesensitive,omitempty"`
+		CaseSensitiveElement map[string]interface{} `json:"_casesensitive,omitempty"`
+		ValueSet interface{} `json:"valueset,omitempty"`
+		ValueSetElement map[string]interface{} `json:"_valueset,omitempty"`
+		HierarchyMeaning *CodeSystemHierarchyMeaning `json:"hierarchymeaning,omitempty"`
+		Compositional interface{} `json:"compositional,omitempty"`
+		CompositionalElement map[string]interface{} `json:"_compositional,omitempty"`
+		VersionNeeded interface{} `json:"versionneeded,omitempty"`
+		VersionNeededElement map[string]interface{} `json:"_versionneeded,omitempty"`
+		Content *CodeSystemContentMode `json:"content,omitempty"`
+		Supplements interface{} `json:"supplements,omitempty"`
+		SupplementsElement map[string]interface{} `json:"_supplements,omitempty"`
+		Count interface{} `json:"count,omitempty"`
+		CountElement map[string]interface{} `json:"_count,omitempty"`
+		Filter []*CodeSystemFilter `json:"filter,omitempty"`
+		Property []*CodeSystemProperty `json:"property,omitempty"`
+		Concept []*CodeSystemConcept `json:"concept,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	output.Identifier = m.Identifier
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	output.Status = m.Status
+	if m.Experimental != nil && m.Experimental.Value != nil {
+		output.Experimental = m.Experimental.Value
+		if m.Experimental.Element != nil {
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+		}
+	}
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.Publisher != nil && m.Publisher.Value != nil {
+		output.Publisher = m.Publisher.Value
+		if m.Publisher.Element != nil {
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+		}
+	}
+	output.Contact = m.Contact
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.UseContext = m.UseContext
+	output.Jurisdiction = m.Jurisdiction
+	if m.Purpose != nil && m.Purpose.Value != nil {
+		output.Purpose = m.Purpose.Value
+		if m.Purpose.Element != nil {
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+		}
+	}
+	if m.Copyright != nil && m.Copyright.Value != nil {
+		output.Copyright = m.Copyright.Value
+		if m.Copyright.Element != nil {
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+		}
+	}
+	if m.CaseSensitive != nil && m.CaseSensitive.Value != nil {
+		output.CaseSensitive = m.CaseSensitive.Value
+		if m.CaseSensitive.Element != nil {
+			output.CaseSensitiveElement = toMapOrNil(m.CaseSensitive.Element.ToJSON())
+		}
+	}
+	if m.ValueSet != nil && m.ValueSet.Value != nil {
+		output.ValueSet = m.ValueSet.Value
+		if m.ValueSet.Element != nil {
+			output.ValueSetElement = toMapOrNil(m.ValueSet.Element.ToJSON())
+		}
+	}
+	output.HierarchyMeaning = m.HierarchyMeaning
+	if m.Compositional != nil && m.Compositional.Value != nil {
+		output.Compositional = m.Compositional.Value
+		if m.Compositional.Element != nil {
+			output.CompositionalElement = toMapOrNil(m.Compositional.Element.ToJSON())
+		}
+	}
+	if m.VersionNeeded != nil && m.VersionNeeded.Value != nil {
+		output.VersionNeeded = m.VersionNeeded.Value
+		if m.VersionNeeded.Element != nil {
+			output.VersionNeededElement = toMapOrNil(m.VersionNeeded.Element.ToJSON())
+		}
+	}
+	output.Content = m.Content
+	if m.Supplements != nil && m.Supplements.Value != nil {
+		output.Supplements = m.Supplements.Value
+		if m.Supplements.Element != nil {
+			output.SupplementsElement = toMapOrNil(m.Supplements.Element.ToJSON())
+		}
+	}
+	if m.Count != nil && m.Count.Value != nil {
+		output.Count = m.Count.Value
+		if m.Count.Element != nil {
+			output.CountElement = toMapOrNil(m.Count.Element.ToJSON())
+		}
+	}
+	output.Filter = m.Filter
+	output.Property = m.Property
+	output.Concept = m.Concept
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CodeSystem
+// Clone creates a deep copy of CodeSystem.
 func (m *CodeSystem) Clone() *CodeSystem {
 	if m == nil { return nil }
 	return &CodeSystem{
@@ -101,7 +353,7 @@ func (m *CodeSystem) Clone() *CodeSystem {
 	}
 }
 
-// Equals checks for equality with another CodeSystem instance
+// Equals checks equality between two CodeSystem instances.
 func (m *CodeSystem) Equals(other *CodeSystem) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -145,7 +397,7 @@ func (m *CodeSystem) Equals(other *CodeSystem) bool {
 // CodeSystemFilter
 // A filter that can be used in a value set compose statement when selecting concepts using a filter.
 type CodeSystemFilter struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -155,22 +407,81 @@ type CodeSystemFilter struct {
 	Value *FhirString `json:"value,omitempty"`
 }
 
-// NewCodeSystemFilter creates a new CodeSystemFilter instance
+// NewCodeSystemFilter creates a new CodeSystemFilter instance.
 func NewCodeSystemFilter() *CodeSystemFilter {
 	return &CodeSystemFilter{}
 }
 
-// FromJSON populates CodeSystemFilter from JSON data
+// FromJSON populates CodeSystemFilter from JSON data.
 func (m *CodeSystemFilter) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *FhirCode `json:"code,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Operator_ []*FilterOperator `json:"operator,omitempty"`
+		Value *FhirString `json:"value,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Description = temp.Description
+	m.Operator_ = temp.Operator_
+	m.Value = temp.Value
+	return nil
 }
 
-// ToJSON converts CodeSystemFilter to JSON data
+// ToJSON converts CodeSystemFilter to JSON data.
 func (m *CodeSystemFilter) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code interface{} `json:"code,omitempty"`
+		CodeElement map[string]interface{} `json:"_code,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Operator_ []*FilterOperator `json:"operator,omitempty"`
+		Value interface{} `json:"value,omitempty"`
+		ValueElement map[string]interface{} `json:"_value,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Code != nil && m.Code.Value != nil {
+		output.Code = m.Code.Value
+		if m.Code.Element != nil {
+			output.CodeElement = toMapOrNil(m.Code.Element.ToJSON())
+		}
+	}
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Operator_ = m.Operator_
+	if m.Value != nil && m.Value.Value != nil {
+		output.Value = m.Value.Value
+		if m.Value.Element != nil {
+			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CodeSystemFilter
+// Clone creates a deep copy of CodeSystemFilter.
 func (m *CodeSystemFilter) Clone() *CodeSystemFilter {
 	if m == nil { return nil }
 	return &CodeSystemFilter{
@@ -184,7 +495,7 @@ func (m *CodeSystemFilter) Clone() *CodeSystemFilter {
 	}
 }
 
-// Equals checks for equality with another CodeSystemFilter instance
+// Equals checks equality between two CodeSystemFilter instances.
 func (m *CodeSystemFilter) Equals(other *CodeSystemFilter) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -201,7 +512,7 @@ func (m *CodeSystemFilter) Equals(other *CodeSystemFilter) bool {
 // CodeSystemProperty
 // A property defines an additional slot through which additional information can be provided about a concept.
 type CodeSystemProperty struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -211,22 +522,81 @@ type CodeSystemProperty struct {
 	Type *PropertyType `json:"type,omitempty"`
 }
 
-// NewCodeSystemProperty creates a new CodeSystemProperty instance
+// NewCodeSystemProperty creates a new CodeSystemProperty instance.
 func NewCodeSystemProperty() *CodeSystemProperty {
 	return &CodeSystemProperty{}
 }
 
-// FromJSON populates CodeSystemProperty from JSON data
+// FromJSON populates CodeSystemProperty from JSON data.
 func (m *CodeSystemProperty) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *FhirCode `json:"code,omitempty"`
+		Uri *FhirUri `json:"uri,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Type *PropertyType `json:"type,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Uri = temp.Uri
+	m.Description = temp.Description
+	m.Type = temp.Type
+	return nil
 }
 
-// ToJSON converts CodeSystemProperty to JSON data
+// ToJSON converts CodeSystemProperty to JSON data.
 func (m *CodeSystemProperty) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code interface{} `json:"code,omitempty"`
+		CodeElement map[string]interface{} `json:"_code,omitempty"`
+		Uri interface{} `json:"uri,omitempty"`
+		UriElement map[string]interface{} `json:"_uri,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Type *PropertyType `json:"type,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Code != nil && m.Code.Value != nil {
+		output.Code = m.Code.Value
+		if m.Code.Element != nil {
+			output.CodeElement = toMapOrNil(m.Code.Element.ToJSON())
+		}
+	}
+	if m.Uri != nil && m.Uri.Value != nil {
+		output.Uri = m.Uri.Value
+		if m.Uri.Element != nil {
+			output.UriElement = toMapOrNil(m.Uri.Element.ToJSON())
+		}
+	}
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Type = m.Type
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CodeSystemProperty
+// Clone creates a deep copy of CodeSystemProperty.
 func (m *CodeSystemProperty) Clone() *CodeSystemProperty {
 	if m == nil { return nil }
 	return &CodeSystemProperty{
@@ -240,7 +610,7 @@ func (m *CodeSystemProperty) Clone() *CodeSystemProperty {
 	}
 }
 
-// Equals checks for equality with another CodeSystemProperty instance
+// Equals checks equality between two CodeSystemProperty instances.
 func (m *CodeSystemProperty) Equals(other *CodeSystemProperty) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -257,7 +627,7 @@ func (m *CodeSystemProperty) Equals(other *CodeSystemProperty) bool {
 // CodeSystemConcept
 // Concepts that are in the code system. The concept definitions are inherently hierarchical, but the definitions must be consulted to determine what the meanings of the hierarchical relationships are.
 type CodeSystemConcept struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -269,22 +639,89 @@ type CodeSystemConcept struct {
 	Concept []*CodeSystemConcept `json:"concept,omitempty"`
 }
 
-// NewCodeSystemConcept creates a new CodeSystemConcept instance
+// NewCodeSystemConcept creates a new CodeSystemConcept instance.
 func NewCodeSystemConcept() *CodeSystemConcept {
 	return &CodeSystemConcept{}
 }
 
-// FromJSON populates CodeSystemConcept from JSON data
+// FromJSON populates CodeSystemConcept from JSON data.
 func (m *CodeSystemConcept) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *FhirCode `json:"code,omitempty"`
+		Display *FhirString `json:"display,omitempty"`
+		Definition *FhirString `json:"definition,omitempty"`
+		Designation []*CodeSystemDesignation `json:"designation,omitempty"`
+		Property []*CodeSystemProperty1 `json:"property,omitempty"`
+		Concept []*CodeSystemConcept `json:"concept,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Display = temp.Display
+	m.Definition = temp.Definition
+	m.Designation = temp.Designation
+	m.Property = temp.Property
+	m.Concept = temp.Concept
+	return nil
 }
 
-// ToJSON converts CodeSystemConcept to JSON data
+// ToJSON converts CodeSystemConcept to JSON data.
 func (m *CodeSystemConcept) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code interface{} `json:"code,omitempty"`
+		CodeElement map[string]interface{} `json:"_code,omitempty"`
+		Display interface{} `json:"display,omitempty"`
+		DisplayElement map[string]interface{} `json:"_display,omitempty"`
+		Definition interface{} `json:"definition,omitempty"`
+		DefinitionElement map[string]interface{} `json:"_definition,omitempty"`
+		Designation []*CodeSystemDesignation `json:"designation,omitempty"`
+		Property []*CodeSystemProperty1 `json:"property,omitempty"`
+		Concept []*CodeSystemConcept `json:"concept,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Code != nil && m.Code.Value != nil {
+		output.Code = m.Code.Value
+		if m.Code.Element != nil {
+			output.CodeElement = toMapOrNil(m.Code.Element.ToJSON())
+		}
+	}
+	if m.Display != nil && m.Display.Value != nil {
+		output.Display = m.Display.Value
+		if m.Display.Element != nil {
+			output.DisplayElement = toMapOrNil(m.Display.Element.ToJSON())
+		}
+	}
+	if m.Definition != nil && m.Definition.Value != nil {
+		output.Definition = m.Definition.Value
+		if m.Definition.Element != nil {
+			output.DefinitionElement = toMapOrNil(m.Definition.Element.ToJSON())
+		}
+	}
+	output.Designation = m.Designation
+	output.Property = m.Property
+	output.Concept = m.Concept
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CodeSystemConcept
+// Clone creates a deep copy of CodeSystemConcept.
 func (m *CodeSystemConcept) Clone() *CodeSystemConcept {
 	if m == nil { return nil }
 	return &CodeSystemConcept{
@@ -300,7 +737,7 @@ func (m *CodeSystemConcept) Clone() *CodeSystemConcept {
 	}
 }
 
-// Equals checks for equality with another CodeSystemConcept instance
+// Equals checks equality between two CodeSystemConcept instances.
 func (m *CodeSystemConcept) Equals(other *CodeSystemConcept) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -319,7 +756,7 @@ func (m *CodeSystemConcept) Equals(other *CodeSystemConcept) bool {
 // CodeSystemDesignation
 // Additional representations for the concept - other languages, aliases, specialized purposes, used for particular purposes, etc.
 type CodeSystemDesignation struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -328,22 +765,65 @@ type CodeSystemDesignation struct {
 	Value *FhirString `json:"value,omitempty"`
 }
 
-// NewCodeSystemDesignation creates a new CodeSystemDesignation instance
+// NewCodeSystemDesignation creates a new CodeSystemDesignation instance.
 func NewCodeSystemDesignation() *CodeSystemDesignation {
 	return &CodeSystemDesignation{}
 }
 
-// FromJSON populates CodeSystemDesignation from JSON data
+// FromJSON populates CodeSystemDesignation from JSON data.
 func (m *CodeSystemDesignation) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Use *Coding `json:"use,omitempty"`
+		Value *FhirString `json:"value,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Language = temp.Language
+	m.Use = temp.Use
+	m.Value = temp.Value
+	return nil
 }
 
-// ToJSON converts CodeSystemDesignation to JSON data
+// ToJSON converts CodeSystemDesignation to JSON data.
 func (m *CodeSystemDesignation) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Use *Coding `json:"use,omitempty"`
+		Value interface{} `json:"value,omitempty"`
+		ValueElement map[string]interface{} `json:"_value,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Language = m.Language
+	output.Use = m.Use
+	if m.Value != nil && m.Value.Value != nil {
+		output.Value = m.Value.Value
+		if m.Value.Element != nil {
+			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CodeSystemDesignation
+// Clone creates a deep copy of CodeSystemDesignation.
 func (m *CodeSystemDesignation) Clone() *CodeSystemDesignation {
 	if m == nil { return nil }
 	return &CodeSystemDesignation{
@@ -356,7 +836,7 @@ func (m *CodeSystemDesignation) Clone() *CodeSystemDesignation {
 	}
 }
 
-// Equals checks for equality with another CodeSystemDesignation instance
+// Equals checks equality between two CodeSystemDesignation instances.
 func (m *CodeSystemDesignation) Equals(other *CodeSystemDesignation) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -372,7 +852,7 @@ func (m *CodeSystemDesignation) Equals(other *CodeSystemDesignation) bool {
 // CodeSystemProperty1
 // A property value for this concept.
 type CodeSystemProperty1 struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -386,22 +866,121 @@ type CodeSystemProperty1 struct {
 	ValueDecimal *FhirDecimal `json:"valuedecimal,omitempty"`
 }
 
-// NewCodeSystemProperty1 creates a new CodeSystemProperty1 instance
+// NewCodeSystemProperty1 creates a new CodeSystemProperty1 instance.
 func NewCodeSystemProperty1() *CodeSystemProperty1 {
 	return &CodeSystemProperty1{}
 }
 
-// FromJSON populates CodeSystemProperty1 from JSON data
+// FromJSON populates CodeSystemProperty1 from JSON data.
 func (m *CodeSystemProperty1) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *FhirCode `json:"code,omitempty"`
+		ValueCode *FhirCode `json:"valuecode,omitempty"`
+		ValueCoding *Coding `json:"valuecoding,omitempty"`
+		ValueString *FhirString `json:"valuestring,omitempty"`
+		ValueInteger *FhirInteger `json:"valueinteger,omitempty"`
+		ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
+		ValueDateTime *FhirDateTime `json:"valuedatetime,omitempty"`
+		ValueDecimal *FhirDecimal `json:"valuedecimal,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.ValueCode = temp.ValueCode
+	m.ValueCoding = temp.ValueCoding
+	m.ValueString = temp.ValueString
+	m.ValueInteger = temp.ValueInteger
+	m.ValueBoolean = temp.ValueBoolean
+	m.ValueDateTime = temp.ValueDateTime
+	m.ValueDecimal = temp.ValueDecimal
+	return nil
 }
 
-// ToJSON converts CodeSystemProperty1 to JSON data
+// ToJSON converts CodeSystemProperty1 to JSON data.
 func (m *CodeSystemProperty1) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code interface{} `json:"code,omitempty"`
+		CodeElement map[string]interface{} `json:"_code,omitempty"`
+		ValueCode interface{} `json:"valuecode,omitempty"`
+		ValueCodeElement map[string]interface{} `json:"_valuecode,omitempty"`
+		ValueCoding *Coding `json:"valuecoding,omitempty"`
+		ValueString interface{} `json:"valuestring,omitempty"`
+		ValueStringElement map[string]interface{} `json:"_valuestring,omitempty"`
+		ValueInteger interface{} `json:"valueinteger,omitempty"`
+		ValueIntegerElement map[string]interface{} `json:"_valueinteger,omitempty"`
+		ValueBoolean interface{} `json:"valueboolean,omitempty"`
+		ValueBooleanElement map[string]interface{} `json:"_valueboolean,omitempty"`
+		ValueDateTime interface{} `json:"valuedatetime,omitempty"`
+		ValueDateTimeElement map[string]interface{} `json:"_valuedatetime,omitempty"`
+		ValueDecimal interface{} `json:"valuedecimal,omitempty"`
+		ValueDecimalElement map[string]interface{} `json:"_valuedecimal,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Code != nil && m.Code.Value != nil {
+		output.Code = m.Code.Value
+		if m.Code.Element != nil {
+			output.CodeElement = toMapOrNil(m.Code.Element.ToJSON())
+		}
+	}
+	if m.ValueCode != nil && m.ValueCode.Value != nil {
+		output.ValueCode = m.ValueCode.Value
+		if m.ValueCode.Element != nil {
+			output.ValueCodeElement = toMapOrNil(m.ValueCode.Element.ToJSON())
+		}
+	}
+	output.ValueCoding = m.ValueCoding
+	if m.ValueString != nil && m.ValueString.Value != nil {
+		output.ValueString = m.ValueString.Value
+		if m.ValueString.Element != nil {
+			output.ValueStringElement = toMapOrNil(m.ValueString.Element.ToJSON())
+		}
+	}
+	if m.ValueInteger != nil && m.ValueInteger.Value != nil {
+		output.ValueInteger = m.ValueInteger.Value
+		if m.ValueInteger.Element != nil {
+			output.ValueIntegerElement = toMapOrNil(m.ValueInteger.Element.ToJSON())
+		}
+	}
+	if m.ValueBoolean != nil && m.ValueBoolean.Value != nil {
+		output.ValueBoolean = m.ValueBoolean.Value
+		if m.ValueBoolean.Element != nil {
+			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.ToJSON())
+		}
+	}
+	if m.ValueDateTime != nil && m.ValueDateTime.Value != nil {
+		output.ValueDateTime = m.ValueDateTime.Value
+		if m.ValueDateTime.Element != nil {
+			output.ValueDateTimeElement = toMapOrNil(m.ValueDateTime.Element.ToJSON())
+		}
+	}
+	if m.ValueDecimal != nil && m.ValueDecimal.Value != nil {
+		output.ValueDecimal = m.ValueDecimal.Value
+		if m.ValueDecimal.Element != nil {
+			output.ValueDecimalElement = toMapOrNil(m.ValueDecimal.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CodeSystemProperty1
+// Clone creates a deep copy of CodeSystemProperty1.
 func (m *CodeSystemProperty1) Clone() *CodeSystemProperty1 {
 	if m == nil { return nil }
 	return &CodeSystemProperty1{
@@ -419,7 +998,7 @@ func (m *CodeSystemProperty1) Clone() *CodeSystemProperty1 {
 	}
 }
 
-// Equals checks for equality with another CodeSystemProperty1 instance
+// Equals checks equality between two CodeSystemProperty1 instances.
 func (m *CodeSystemProperty1) Equals(other *CodeSystemProperty1) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

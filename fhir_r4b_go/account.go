@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Account
 // A financial tool for tracking value accrued for a particular purpose.  In the healthcare field, used to track charges for a patient, cost centers, etc.
 type Account struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -30,22 +31,129 @@ type Account struct {
 	PartOf *Reference `json:"partof,omitempty"`
 }
 
-// NewAccount creates a new Account instance
+// NewAccount creates a new Account instance.
 func NewAccount() *Account {
 	return &Account{}
 }
 
-// FromJSON populates Account from JSON data
+// FromJSON populates Account from JSON data.
 func (m *Account) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *AccountStatus `json:"status,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Subject []*Reference `json:"subject,omitempty"`
+		ServicePeriod *Period `json:"serviceperiod,omitempty"`
+		Coverage []*AccountCoverage `json:"coverage,omitempty"`
+		Owner *Reference `json:"owner,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Guarantor []*AccountGuarantor `json:"guarantor,omitempty"`
+		PartOf *Reference `json:"partof,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.Type = temp.Type
+	m.Name = temp.Name
+	m.Subject = temp.Subject
+	m.ServicePeriod = temp.ServicePeriod
+	m.Coverage = temp.Coverage
+	m.Owner = temp.Owner
+	m.Description = temp.Description
+	m.Guarantor = temp.Guarantor
+	m.PartOf = temp.PartOf
+	return nil
 }
 
-// ToJSON converts Account to JSON data
+// ToJSON converts Account to JSON data.
 func (m *Account) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *AccountStatus `json:"status,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Subject []*Reference `json:"subject,omitempty"`
+		ServicePeriod *Period `json:"serviceperiod,omitempty"`
+		Coverage []*AccountCoverage `json:"coverage,omitempty"`
+		Owner *Reference `json:"owner,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Guarantor []*AccountGuarantor `json:"guarantor,omitempty"`
+		PartOf *Reference `json:"partof,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	output.Type = m.Type
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	output.Subject = m.Subject
+	output.ServicePeriod = m.ServicePeriod
+	output.Coverage = m.Coverage
+	output.Owner = m.Owner
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Guarantor = m.Guarantor
+	output.PartOf = m.PartOf
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Account
+// Clone creates a deep copy of Account.
 func (m *Account) Clone() *Account {
 	if m == nil { return nil }
 	return &Account{
@@ -71,7 +179,7 @@ func (m *Account) Clone() *Account {
 	}
 }
 
-// Equals checks for equality with another Account instance
+// Equals checks equality between two Account instances.
 func (m *Account) Equals(other *Account) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -100,7 +208,7 @@ func (m *Account) Equals(other *Account) bool {
 // AccountCoverage
 // The party(s) that are responsible for covering the payment of this account, and what order should they be applied to the account.
 type AccountCoverage struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -108,22 +216,61 @@ type AccountCoverage struct {
 	Priority *FhirPositiveInt `json:"priority,omitempty"`
 }
 
-// NewAccountCoverage creates a new AccountCoverage instance
+// NewAccountCoverage creates a new AccountCoverage instance.
 func NewAccountCoverage() *AccountCoverage {
 	return &AccountCoverage{}
 }
 
-// FromJSON populates AccountCoverage from JSON data
+// FromJSON populates AccountCoverage from JSON data.
 func (m *AccountCoverage) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Coverage *Reference `json:"coverage,omitempty"`
+		Priority *FhirPositiveInt `json:"priority,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Coverage = temp.Coverage
+	m.Priority = temp.Priority
+	return nil
 }
 
-// ToJSON converts AccountCoverage to JSON data
+// ToJSON converts AccountCoverage to JSON data.
 func (m *AccountCoverage) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Coverage *Reference `json:"coverage,omitempty"`
+		Priority interface{} `json:"priority,omitempty"`
+		PriorityElement map[string]interface{} `json:"_priority,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Coverage = m.Coverage
+	if m.Priority != nil && m.Priority.Value != nil {
+		output.Priority = m.Priority.Value
+		if m.Priority.Element != nil {
+			output.PriorityElement = toMapOrNil(m.Priority.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of AccountCoverage
+// Clone creates a deep copy of AccountCoverage.
 func (m *AccountCoverage) Clone() *AccountCoverage {
 	if m == nil { return nil }
 	return &AccountCoverage{
@@ -135,7 +282,7 @@ func (m *AccountCoverage) Clone() *AccountCoverage {
 	}
 }
 
-// Equals checks for equality with another AccountCoverage instance
+// Equals checks equality between two AccountCoverage instances.
 func (m *AccountCoverage) Equals(other *AccountCoverage) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -150,7 +297,7 @@ func (m *AccountCoverage) Equals(other *AccountCoverage) bool {
 // AccountGuarantor
 // The parties responsible for balancing the account if other payment options fall short.
 type AccountGuarantor struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -159,22 +306,65 @@ type AccountGuarantor struct {
 	Period *Period `json:"period,omitempty"`
 }
 
-// NewAccountGuarantor creates a new AccountGuarantor instance
+// NewAccountGuarantor creates a new AccountGuarantor instance.
 func NewAccountGuarantor() *AccountGuarantor {
 	return &AccountGuarantor{}
 }
 
-// FromJSON populates AccountGuarantor from JSON data
+// FromJSON populates AccountGuarantor from JSON data.
 func (m *AccountGuarantor) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Party *Reference `json:"party,omitempty"`
+		OnHold *FhirBoolean `json:"onhold,omitempty"`
+		Period *Period `json:"period,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Party = temp.Party
+	m.OnHold = temp.OnHold
+	m.Period = temp.Period
+	return nil
 }
 
-// ToJSON converts AccountGuarantor to JSON data
+// ToJSON converts AccountGuarantor to JSON data.
 func (m *AccountGuarantor) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Party *Reference `json:"party,omitempty"`
+		OnHold interface{} `json:"onhold,omitempty"`
+		OnHoldElement map[string]interface{} `json:"_onhold,omitempty"`
+		Period *Period `json:"period,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Party = m.Party
+	if m.OnHold != nil && m.OnHold.Value != nil {
+		output.OnHold = m.OnHold.Value
+		if m.OnHold.Element != nil {
+			output.OnHoldElement = toMapOrNil(m.OnHold.Element.ToJSON())
+		}
+	}
+	output.Period = m.Period
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of AccountGuarantor
+// Clone creates a deep copy of AccountGuarantor.
 func (m *AccountGuarantor) Clone() *AccountGuarantor {
 	if m == nil { return nil }
 	return &AccountGuarantor{
@@ -187,7 +377,7 @@ func (m *AccountGuarantor) Clone() *AccountGuarantor {
 	}
 }
 
-// Equals checks for equality with another AccountGuarantor instance
+// Equals checks equality between two AccountGuarantor instances.
 func (m *AccountGuarantor) Equals(other *AccountGuarantor) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

@@ -2,12 +2,14 @@ package fhir_r4b_go
 
 import (
 	"encoding/json"
+	"errors"
+	"fmt"
 )
 
 // FhirBoolean represents the FHIR primitive type `boolean`.
 type FhirBoolean struct {
-	Value   *bool   `json:"-"`           // The boolean value
-	Element *Element `json:",inline"`    // Metadata (FHIR element)
+	Value   *bool    `json:"-"`       // The boolean value
+	Element *Element `json:",inline"` // Metadata (FHIR element)
 }
 
 // NewFhirBoolean creates a new FhirBoolean instance.
@@ -16,6 +18,25 @@ func NewFhirBoolean(value bool, element *Element) *FhirBoolean {
 		Value:   &value,
 		Element: element,
 	}
+}
+
+// NewFhirBooleanFromMap creates a FhirBoolean instance from a map.
+func NewFhirBooleanFromMap(data map[string]interface{}) (*FhirBoolean, error) {
+	value, ok := data["value"].(bool)
+	if !ok {
+		return nil, errors.New("invalid or missing value for FhirBoolean")
+	}
+
+	boolean := &FhirBoolean{Value: &value}
+
+	if elementData, ok := data["_value"].(map[string]interface{}); ok {
+		boolean.Element = &Element{}
+		if err := mapToStruct(elementData, boolean.Element); err != nil {
+			return nil, fmt.Errorf("failed to parse _value for FhirBoolean: %v", err)
+		}
+	}
+
+	return boolean, nil
 }
 
 // UnmarshalJSON initializes a FhirBoolean from JSON input.

@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // PackagedProductDefinition
 // A medically related item or items, in a container or package.
 type PackagedProductDefinition struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -33,22 +34,153 @@ type PackagedProductDefinition struct {
 	Package *PackagedProductDefinitionPackage `json:"package,omitempty"`
 }
 
-// NewPackagedProductDefinition creates a new PackagedProductDefinition instance
+// NewPackagedProductDefinition creates a new PackagedProductDefinition instance.
 func NewPackagedProductDefinition() *PackagedProductDefinition {
 	return &PackagedProductDefinition{}
 }
 
-// FromJSON populates PackagedProductDefinition from JSON data
+// FromJSON populates PackagedProductDefinition from JSON data.
 func (m *PackagedProductDefinition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		PackageFor []*Reference `json:"packagefor,omitempty"`
+		Status *CodeableConcept `json:"status,omitempty"`
+		StatusDate *FhirDateTime `json:"statusdate,omitempty"`
+		ContainedItemQuantity []*Quantity `json:"containeditemquantity,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		LegalStatusOfSupply []*PackagedProductDefinitionLegalStatusOfSupply `json:"legalstatusofsupply,omitempty"`
+		MarketingStatus []*MarketingStatus `json:"marketingstatus,omitempty"`
+		Characteristic []*CodeableConcept `json:"characteristic,omitempty"`
+		CopackagedIndicator *FhirBoolean `json:"copackagedindicator,omitempty"`
+		Manufacturer []*Reference `json:"manufacturer,omitempty"`
+		Package *PackagedProductDefinitionPackage `json:"package,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Name = temp.Name
+	m.Type = temp.Type
+	m.PackageFor = temp.PackageFor
+	m.Status = temp.Status
+	m.StatusDate = temp.StatusDate
+	m.ContainedItemQuantity = temp.ContainedItemQuantity
+	m.Description = temp.Description
+	m.LegalStatusOfSupply = temp.LegalStatusOfSupply
+	m.MarketingStatus = temp.MarketingStatus
+	m.Characteristic = temp.Characteristic
+	m.CopackagedIndicator = temp.CopackagedIndicator
+	m.Manufacturer = temp.Manufacturer
+	m.Package = temp.Package
+	return nil
 }
 
-// ToJSON converts PackagedProductDefinition to JSON data
+// ToJSON converts PackagedProductDefinition to JSON data.
 func (m *PackagedProductDefinition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		PackageFor []*Reference `json:"packagefor,omitempty"`
+		Status *CodeableConcept `json:"status,omitempty"`
+		StatusDate interface{} `json:"statusdate,omitempty"`
+		StatusDateElement map[string]interface{} `json:"_statusdate,omitempty"`
+		ContainedItemQuantity []*Quantity `json:"containeditemquantity,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		LegalStatusOfSupply []*PackagedProductDefinitionLegalStatusOfSupply `json:"legalstatusofsupply,omitempty"`
+		MarketingStatus []*MarketingStatus `json:"marketingstatus,omitempty"`
+		Characteristic []*CodeableConcept `json:"characteristic,omitempty"`
+		CopackagedIndicator interface{} `json:"copackagedindicator,omitempty"`
+		CopackagedIndicatorElement map[string]interface{} `json:"_copackagedindicator,omitempty"`
+		Manufacturer []*Reference `json:"manufacturer,omitempty"`
+		Package *PackagedProductDefinitionPackage `json:"package,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	output.Type = m.Type
+	output.PackageFor = m.PackageFor
+	output.Status = m.Status
+	if m.StatusDate != nil && m.StatusDate.Value != nil {
+		output.StatusDate = m.StatusDate.Value
+		if m.StatusDate.Element != nil {
+			output.StatusDateElement = toMapOrNil(m.StatusDate.Element.ToJSON())
+		}
+	}
+	output.ContainedItemQuantity = m.ContainedItemQuantity
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.LegalStatusOfSupply = m.LegalStatusOfSupply
+	output.MarketingStatus = m.MarketingStatus
+	output.Characteristic = m.Characteristic
+	if m.CopackagedIndicator != nil && m.CopackagedIndicator.Value != nil {
+		output.CopackagedIndicator = m.CopackagedIndicator.Value
+		if m.CopackagedIndicator.Element != nil {
+			output.CopackagedIndicatorElement = toMapOrNil(m.CopackagedIndicator.Element.ToJSON())
+		}
+	}
+	output.Manufacturer = m.Manufacturer
+	output.Package = m.Package
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of PackagedProductDefinition
+// Clone creates a deep copy of PackagedProductDefinition.
 func (m *PackagedProductDefinition) Clone() *PackagedProductDefinition {
 	if m == nil { return nil }
 	return &PackagedProductDefinition{
@@ -77,7 +209,7 @@ func (m *PackagedProductDefinition) Clone() *PackagedProductDefinition {
 	}
 }
 
-// Equals checks for equality with another PackagedProductDefinition instance
+// Equals checks equality between two PackagedProductDefinition instances.
 func (m *PackagedProductDefinition) Equals(other *PackagedProductDefinition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -109,7 +241,7 @@ func (m *PackagedProductDefinition) Equals(other *PackagedProductDefinition) boo
 // PackagedProductDefinitionLegalStatusOfSupply
 // The legal status of supply of the packaged item as classified by the regulator.
 type PackagedProductDefinitionLegalStatusOfSupply struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -117,22 +249,55 @@ type PackagedProductDefinitionLegalStatusOfSupply struct {
 	Jurisdiction *CodeableConcept `json:"jurisdiction,omitempty"`
 }
 
-// NewPackagedProductDefinitionLegalStatusOfSupply creates a new PackagedProductDefinitionLegalStatusOfSupply instance
+// NewPackagedProductDefinitionLegalStatusOfSupply creates a new PackagedProductDefinitionLegalStatusOfSupply instance.
 func NewPackagedProductDefinitionLegalStatusOfSupply() *PackagedProductDefinitionLegalStatusOfSupply {
 	return &PackagedProductDefinitionLegalStatusOfSupply{}
 }
 
-// FromJSON populates PackagedProductDefinitionLegalStatusOfSupply from JSON data
+// FromJSON populates PackagedProductDefinitionLegalStatusOfSupply from JSON data.
 func (m *PackagedProductDefinitionLegalStatusOfSupply) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Jurisdiction *CodeableConcept `json:"jurisdiction,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Jurisdiction = temp.Jurisdiction
+	return nil
 }
 
-// ToJSON converts PackagedProductDefinitionLegalStatusOfSupply to JSON data
+// ToJSON converts PackagedProductDefinitionLegalStatusOfSupply to JSON data.
 func (m *PackagedProductDefinitionLegalStatusOfSupply) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Jurisdiction *CodeableConcept `json:"jurisdiction,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	output.Jurisdiction = m.Jurisdiction
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of PackagedProductDefinitionLegalStatusOfSupply
+// Clone creates a deep copy of PackagedProductDefinitionLegalStatusOfSupply.
 func (m *PackagedProductDefinitionLegalStatusOfSupply) Clone() *PackagedProductDefinitionLegalStatusOfSupply {
 	if m == nil { return nil }
 	return &PackagedProductDefinitionLegalStatusOfSupply{
@@ -144,7 +309,7 @@ func (m *PackagedProductDefinitionLegalStatusOfSupply) Clone() *PackagedProductD
 	}
 }
 
-// Equals checks for equality with another PackagedProductDefinitionLegalStatusOfSupply instance
+// Equals checks equality between two PackagedProductDefinitionLegalStatusOfSupply instances.
 func (m *PackagedProductDefinitionLegalStatusOfSupply) Equals(other *PackagedProductDefinitionLegalStatusOfSupply) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -159,7 +324,7 @@ func (m *PackagedProductDefinitionLegalStatusOfSupply) Equals(other *PackagedPro
 // PackagedProductDefinitionPackage
 // A packaging item, as a container for medically related items, possibly with other packaging items within, or a packaging component, such as bottle cap (which is not a device or a medication manufactured item).
 type PackagedProductDefinitionPackage struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -175,22 +340,93 @@ type PackagedProductDefinitionPackage struct {
 	Package []*PackagedProductDefinitionPackage `json:"package,omitempty"`
 }
 
-// NewPackagedProductDefinitionPackage creates a new PackagedProductDefinitionPackage instance
+// NewPackagedProductDefinitionPackage creates a new PackagedProductDefinitionPackage instance.
 func NewPackagedProductDefinitionPackage() *PackagedProductDefinitionPackage {
 	return &PackagedProductDefinitionPackage{}
 }
 
-// FromJSON populates PackagedProductDefinitionPackage from JSON data
+// FromJSON populates PackagedProductDefinitionPackage from JSON data.
 func (m *PackagedProductDefinitionPackage) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Quantity *FhirInteger `json:"quantity,omitempty"`
+		Material []*CodeableConcept `json:"material,omitempty"`
+		AlternateMaterial []*CodeableConcept `json:"alternatematerial,omitempty"`
+		ShelfLifeStorage []*PackagedProductDefinitionShelfLifeStorage `json:"shelflifestorage,omitempty"`
+		Manufacturer []*Reference `json:"manufacturer,omitempty"`
+		Property []*PackagedProductDefinitionProperty `json:"property,omitempty"`
+		ContainedItem []*PackagedProductDefinitionContainedItem `json:"containeditem,omitempty"`
+		Package []*PackagedProductDefinitionPackage `json:"package,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Type = temp.Type
+	m.Quantity = temp.Quantity
+	m.Material = temp.Material
+	m.AlternateMaterial = temp.AlternateMaterial
+	m.ShelfLifeStorage = temp.ShelfLifeStorage
+	m.Manufacturer = temp.Manufacturer
+	m.Property = temp.Property
+	m.ContainedItem = temp.ContainedItem
+	m.Package = temp.Package
+	return nil
 }
 
-// ToJSON converts PackagedProductDefinitionPackage to JSON data
+// ToJSON converts PackagedProductDefinitionPackage to JSON data.
 func (m *PackagedProductDefinitionPackage) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Quantity interface{} `json:"quantity,omitempty"`
+		QuantityElement map[string]interface{} `json:"_quantity,omitempty"`
+		Material []*CodeableConcept `json:"material,omitempty"`
+		AlternateMaterial []*CodeableConcept `json:"alternatematerial,omitempty"`
+		ShelfLifeStorage []*PackagedProductDefinitionShelfLifeStorage `json:"shelflifestorage,omitempty"`
+		Manufacturer []*Reference `json:"manufacturer,omitempty"`
+		Property []*PackagedProductDefinitionProperty `json:"property,omitempty"`
+		ContainedItem []*PackagedProductDefinitionContainedItem `json:"containeditem,omitempty"`
+		Package []*PackagedProductDefinitionPackage `json:"package,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Type = m.Type
+	if m.Quantity != nil && m.Quantity.Value != nil {
+		output.Quantity = m.Quantity.Value
+		if m.Quantity.Element != nil {
+			output.QuantityElement = toMapOrNil(m.Quantity.Element.ToJSON())
+		}
+	}
+	output.Material = m.Material
+	output.AlternateMaterial = m.AlternateMaterial
+	output.ShelfLifeStorage = m.ShelfLifeStorage
+	output.Manufacturer = m.Manufacturer
+	output.Property = m.Property
+	output.ContainedItem = m.ContainedItem
+	output.Package = m.Package
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of PackagedProductDefinitionPackage
+// Clone creates a deep copy of PackagedProductDefinitionPackage.
 func (m *PackagedProductDefinitionPackage) Clone() *PackagedProductDefinitionPackage {
 	if m == nil { return nil }
 	return &PackagedProductDefinitionPackage{
@@ -210,7 +446,7 @@ func (m *PackagedProductDefinitionPackage) Clone() *PackagedProductDefinitionPac
 	}
 }
 
-// Equals checks for equality with another PackagedProductDefinitionPackage instance
+// Equals checks equality between two PackagedProductDefinitionPackage instances.
 func (m *PackagedProductDefinitionPackage) Equals(other *PackagedProductDefinitionPackage) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -233,7 +469,7 @@ func (m *PackagedProductDefinitionPackage) Equals(other *PackagedProductDefiniti
 // PackagedProductDefinitionShelfLifeStorage
 // Shelf Life and storage information.
 type PackagedProductDefinitionShelfLifeStorage struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -243,22 +479,69 @@ type PackagedProductDefinitionShelfLifeStorage struct {
 	SpecialPrecautionsForStorage []*CodeableConcept `json:"specialprecautionsforstorage,omitempty"`
 }
 
-// NewPackagedProductDefinitionShelfLifeStorage creates a new PackagedProductDefinitionShelfLifeStorage instance
+// NewPackagedProductDefinitionShelfLifeStorage creates a new PackagedProductDefinitionShelfLifeStorage instance.
 func NewPackagedProductDefinitionShelfLifeStorage() *PackagedProductDefinitionShelfLifeStorage {
 	return &PackagedProductDefinitionShelfLifeStorage{}
 }
 
-// FromJSON populates PackagedProductDefinitionShelfLifeStorage from JSON data
+// FromJSON populates PackagedProductDefinitionShelfLifeStorage from JSON data.
 func (m *PackagedProductDefinitionShelfLifeStorage) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		PeriodDuration *FhirDuration `json:"periodduration,omitempty"`
+		PeriodString *FhirString `json:"periodstring,omitempty"`
+		SpecialPrecautionsForStorage []*CodeableConcept `json:"specialprecautionsforstorage,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.PeriodDuration = temp.PeriodDuration
+	m.PeriodString = temp.PeriodString
+	m.SpecialPrecautionsForStorage = temp.SpecialPrecautionsForStorage
+	return nil
 }
 
-// ToJSON converts PackagedProductDefinitionShelfLifeStorage to JSON data
+// ToJSON converts PackagedProductDefinitionShelfLifeStorage to JSON data.
 func (m *PackagedProductDefinitionShelfLifeStorage) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		PeriodDuration *FhirDuration `json:"periodduration,omitempty"`
+		PeriodString interface{} `json:"periodstring,omitempty"`
+		PeriodStringElement map[string]interface{} `json:"_periodstring,omitempty"`
+		SpecialPrecautionsForStorage []*CodeableConcept `json:"specialprecautionsforstorage,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.PeriodDuration = m.PeriodDuration
+	if m.PeriodString != nil && m.PeriodString.Value != nil {
+		output.PeriodString = m.PeriodString.Value
+		if m.PeriodString.Element != nil {
+			output.PeriodStringElement = toMapOrNil(m.PeriodString.Element.ToJSON())
+		}
+	}
+	output.SpecialPrecautionsForStorage = m.SpecialPrecautionsForStorage
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of PackagedProductDefinitionShelfLifeStorage
+// Clone creates a deep copy of PackagedProductDefinitionShelfLifeStorage.
 func (m *PackagedProductDefinitionShelfLifeStorage) Clone() *PackagedProductDefinitionShelfLifeStorage {
 	if m == nil { return nil }
 	return &PackagedProductDefinitionShelfLifeStorage{
@@ -272,7 +555,7 @@ func (m *PackagedProductDefinitionShelfLifeStorage) Clone() *PackagedProductDefi
 	}
 }
 
-// Equals checks for equality with another PackagedProductDefinitionShelfLifeStorage instance
+// Equals checks equality between two PackagedProductDefinitionShelfLifeStorage instances.
 func (m *PackagedProductDefinitionShelfLifeStorage) Equals(other *PackagedProductDefinitionShelfLifeStorage) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -289,7 +572,7 @@ func (m *PackagedProductDefinitionShelfLifeStorage) Equals(other *PackagedProduc
 // PackagedProductDefinitionProperty
 // General characteristics of this item.
 type PackagedProductDefinitionProperty struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -301,22 +584,83 @@ type PackagedProductDefinitionProperty struct {
 	ValueAttachment *Attachment `json:"valueattachment,omitempty"`
 }
 
-// NewPackagedProductDefinitionProperty creates a new PackagedProductDefinitionProperty instance
+// NewPackagedProductDefinitionProperty creates a new PackagedProductDefinitionProperty instance.
 func NewPackagedProductDefinitionProperty() *PackagedProductDefinitionProperty {
 	return &PackagedProductDefinitionProperty{}
 }
 
-// FromJSON populates PackagedProductDefinitionProperty from JSON data
+// FromJSON populates PackagedProductDefinitionProperty from JSON data.
 func (m *PackagedProductDefinitionProperty) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueDate *FhirDate `json:"valuedate,omitempty"`
+		ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
+		ValueAttachment *Attachment `json:"valueattachment,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.ValueCodeableConcept = temp.ValueCodeableConcept
+	m.ValueQuantity = temp.ValueQuantity
+	m.ValueDate = temp.ValueDate
+	m.ValueBoolean = temp.ValueBoolean
+	m.ValueAttachment = temp.ValueAttachment
+	return nil
 }
 
-// ToJSON converts PackagedProductDefinitionProperty to JSON data
+// ToJSON converts PackagedProductDefinitionProperty to JSON data.
 func (m *PackagedProductDefinitionProperty) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueDate interface{} `json:"valuedate,omitempty"`
+		ValueDateElement map[string]interface{} `json:"_valuedate,omitempty"`
+		ValueBoolean interface{} `json:"valueboolean,omitempty"`
+		ValueBooleanElement map[string]interface{} `json:"_valueboolean,omitempty"`
+		ValueAttachment *Attachment `json:"valueattachment,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.ValueCodeableConcept = m.ValueCodeableConcept
+	output.ValueQuantity = m.ValueQuantity
+	if m.ValueDate != nil && m.ValueDate.Value != nil {
+		output.ValueDate = m.ValueDate.Value
+		if m.ValueDate.Element != nil {
+			output.ValueDateElement = toMapOrNil(m.ValueDate.Element.ToJSON())
+		}
+	}
+	if m.ValueBoolean != nil && m.ValueBoolean.Value != nil {
+		output.ValueBoolean = m.ValueBoolean.Value
+		if m.ValueBoolean.Element != nil {
+			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.ToJSON())
+		}
+	}
+	output.ValueAttachment = m.ValueAttachment
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of PackagedProductDefinitionProperty
+// Clone creates a deep copy of PackagedProductDefinitionProperty.
 func (m *PackagedProductDefinitionProperty) Clone() *PackagedProductDefinitionProperty {
 	if m == nil { return nil }
 	return &PackagedProductDefinitionProperty{
@@ -332,7 +676,7 @@ func (m *PackagedProductDefinitionProperty) Clone() *PackagedProductDefinitionPr
 	}
 }
 
-// Equals checks for equality with another PackagedProductDefinitionProperty instance
+// Equals checks equality between two PackagedProductDefinitionProperty instances.
 func (m *PackagedProductDefinitionProperty) Equals(other *PackagedProductDefinitionProperty) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -351,7 +695,7 @@ func (m *PackagedProductDefinitionProperty) Equals(other *PackagedProductDefinit
 // PackagedProductDefinitionContainedItem
 // The item(s) within the packaging.
 type PackagedProductDefinitionContainedItem struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -359,22 +703,55 @@ type PackagedProductDefinitionContainedItem struct {
 	Amount *Quantity `json:"amount,omitempty"`
 }
 
-// NewPackagedProductDefinitionContainedItem creates a new PackagedProductDefinitionContainedItem instance
+// NewPackagedProductDefinitionContainedItem creates a new PackagedProductDefinitionContainedItem instance.
 func NewPackagedProductDefinitionContainedItem() *PackagedProductDefinitionContainedItem {
 	return &PackagedProductDefinitionContainedItem{}
 }
 
-// FromJSON populates PackagedProductDefinitionContainedItem from JSON data
+// FromJSON populates PackagedProductDefinitionContainedItem from JSON data.
 func (m *PackagedProductDefinitionContainedItem) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Item *CodeableReference `json:"item,omitempty"`
+		Amount *Quantity `json:"amount,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Item = temp.Item
+	m.Amount = temp.Amount
+	return nil
 }
 
-// ToJSON converts PackagedProductDefinitionContainedItem to JSON data
+// ToJSON converts PackagedProductDefinitionContainedItem to JSON data.
 func (m *PackagedProductDefinitionContainedItem) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Item *CodeableReference `json:"item,omitempty"`
+		Amount *Quantity `json:"amount,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Item = m.Item
+	output.Amount = m.Amount
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of PackagedProductDefinitionContainedItem
+// Clone creates a deep copy of PackagedProductDefinitionContainedItem.
 func (m *PackagedProductDefinitionContainedItem) Clone() *PackagedProductDefinitionContainedItem {
 	if m == nil { return nil }
 	return &PackagedProductDefinitionContainedItem{
@@ -386,7 +763,7 @@ func (m *PackagedProductDefinitionContainedItem) Clone() *PackagedProductDefinit
 	}
 }
 
-// Equals checks for equality with another PackagedProductDefinitionContainedItem instance
+// Equals checks equality between two PackagedProductDefinitionContainedItem instances.
 func (m *PackagedProductDefinitionContainedItem) Equals(other *PackagedProductDefinitionContainedItem) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

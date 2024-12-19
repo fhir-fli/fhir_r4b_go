@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // StructureMap
 // A Map of relationships between 2 structures that can be used to transform data.
 type StructureMap struct {
-	CanonicalResource
+	extends CanonicalResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -37,22 +39,226 @@ type StructureMap struct {
 	Group []*StructureMapGroup `json:"group,omitempty"`
 }
 
-// NewStructureMap creates a new StructureMap instance
+// NewStructureMap creates a new StructureMap instance.
 func NewStructureMap() *StructureMap {
 	return &StructureMap{}
 }
 
-// FromJSON populates StructureMap from JSON data
+// FromJSON populates StructureMap from JSON data.
 func (m *StructureMap) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental *FhirBoolean `json:"experimental,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Publisher *FhirString `json:"publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose *FhirMarkdown `json:"purpose,omitempty"`
+		Copyright *FhirMarkdown `json:"copyright,omitempty"`
+		Structure []*StructureMapStructure `json:"structure,omitempty"`
+		Import_ []interface{} `json:"import,omitempty"`
+		Group []*StructureMapGroup `json:"group,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Url = temp.Url
+	m.Identifier = temp.Identifier
+	m.Version = temp.Version
+	m.Name = temp.Name
+	m.Title = temp.Title
+	m.Status = temp.Status
+	m.Experimental = temp.Experimental
+	m.Date = temp.Date
+	m.Publisher = temp.Publisher
+	m.Contact = temp.Contact
+	m.Description = temp.Description
+	m.UseContext = temp.UseContext
+	m.Jurisdiction = temp.Jurisdiction
+	m.Purpose = temp.Purpose
+	m.Copyright = temp.Copyright
+	m.Structure = temp.Structure
+	if len(temp.Import_) > 0 {
+		m.Import_ = make([]*FhirCanonical, len(temp.Import_))
+		for i := range temp.Import_ {
+			itemMap, ok := temp.Import_[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Import_[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Import_[%d]: %v", i, err) }
+			m.Import_[i] = primitive
+		}
+	}
+	m.Group = temp.Group
+	return nil
 }
 
-// ToJSON converts StructureMap to JSON data
+// ToJSON converts StructureMap to JSON data.
 func (m *StructureMap) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental interface{} `json:"experimental,omitempty"`
+		ExperimentalElement map[string]interface{} `json:"_experimental,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Publisher interface{} `json:"publisher,omitempty"`
+		PublisherElement map[string]interface{} `json:"_publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose interface{} `json:"purpose,omitempty"`
+		PurposeElement map[string]interface{} `json:"_purpose,omitempty"`
+		Copyright interface{} `json:"copyright,omitempty"`
+		CopyrightElement map[string]interface{} `json:"_copyright,omitempty"`
+		Structure []*StructureMapStructure `json:"structure,omitempty"`
+		Import_ []interface{} `json:"import,omitempty"`
+		Import_Element []map[string]interface{} `json:"_import,omitempty"`
+		Group []*StructureMapGroup `json:"group,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	output.Identifier = m.Identifier
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	output.Status = m.Status
+	if m.Experimental != nil && m.Experimental.Value != nil {
+		output.Experimental = m.Experimental.Value
+		if m.Experimental.Element != nil {
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+		}
+	}
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.Publisher != nil && m.Publisher.Value != nil {
+		output.Publisher = m.Publisher.Value
+		if m.Publisher.Element != nil {
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+		}
+	}
+	output.Contact = m.Contact
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.UseContext = m.UseContext
+	output.Jurisdiction = m.Jurisdiction
+	if m.Purpose != nil && m.Purpose.Value != nil {
+		output.Purpose = m.Purpose.Value
+		if m.Purpose.Element != nil {
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+		}
+	}
+	if m.Copyright != nil && m.Copyright.Value != nil {
+		output.Copyright = m.Copyright.Value
+		if m.Copyright.Element != nil {
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+		}
+	}
+	output.Structure = m.Structure
+	if len(m.Import_) > 0 {
+		output.Import_ = make([]interface{}, len(m.Import_))
+		output.Import_Element = make([]map[string]interface{}, len(m.Import_))
+		for i, item := range m.Import_ {
+			if item != nil && item.Value != nil {
+				output.Import_[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.Import_Element[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Group = m.Group
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of StructureMap
+// Clone creates a deep copy of StructureMap.
 func (m *StructureMap) Clone() *StructureMap {
 	if m == nil { return nil }
 	return &StructureMap{
@@ -85,7 +291,7 @@ func (m *StructureMap) Clone() *StructureMap {
 	}
 }
 
-// Equals checks for equality with another StructureMap instance
+// Equals checks equality between two StructureMap instances.
 func (m *StructureMap) Equals(other *StructureMap) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -121,7 +327,7 @@ func (m *StructureMap) Equals(other *StructureMap) bool {
 // StructureMapStructure
 // A structure definition used by this map. The structure definition may describe instances that are converted, or the instances that are produced.
 type StructureMapStructure struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -131,22 +337,81 @@ type StructureMapStructure struct {
 	Documentation *FhirString `json:"documentation,omitempty"`
 }
 
-// NewStructureMapStructure creates a new StructureMapStructure instance
+// NewStructureMapStructure creates a new StructureMapStructure instance.
 func NewStructureMapStructure() *StructureMapStructure {
 	return &StructureMapStructure{}
 }
 
-// FromJSON populates StructureMapStructure from JSON data
+// FromJSON populates StructureMapStructure from JSON data.
 func (m *StructureMapStructure) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url *FhirCanonical `json:"url,omitempty"`
+		Mode *StructureMapModelMode `json:"mode,omitempty"`
+		Alias *FhirString `json:"alias,omitempty"`
+		Documentation *FhirString `json:"documentation,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Url = temp.Url
+	m.Mode = temp.Mode
+	m.Alias = temp.Alias
+	m.Documentation = temp.Documentation
+	return nil
 }
 
-// ToJSON converts StructureMapStructure to JSON data
+// ToJSON converts StructureMapStructure to JSON data.
 func (m *StructureMapStructure) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Mode *StructureMapModelMode `json:"mode,omitempty"`
+		Alias interface{} `json:"alias,omitempty"`
+		AliasElement map[string]interface{} `json:"_alias,omitempty"`
+		Documentation interface{} `json:"documentation,omitempty"`
+		DocumentationElement map[string]interface{} `json:"_documentation,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	output.Mode = m.Mode
+	if m.Alias != nil && m.Alias.Value != nil {
+		output.Alias = m.Alias.Value
+		if m.Alias.Element != nil {
+			output.AliasElement = toMapOrNil(m.Alias.Element.ToJSON())
+		}
+	}
+	if m.Documentation != nil && m.Documentation.Value != nil {
+		output.Documentation = m.Documentation.Value
+		if m.Documentation.Element != nil {
+			output.DocumentationElement = toMapOrNil(m.Documentation.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of StructureMapStructure
+// Clone creates a deep copy of StructureMapStructure.
 func (m *StructureMapStructure) Clone() *StructureMapStructure {
 	if m == nil { return nil }
 	return &StructureMapStructure{
@@ -160,7 +425,7 @@ func (m *StructureMapStructure) Clone() *StructureMapStructure {
 	}
 }
 
-// Equals checks for equality with another StructureMapStructure instance
+// Equals checks equality between two StructureMapStructure instances.
 func (m *StructureMapStructure) Equals(other *StructureMapStructure) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -177,7 +442,7 @@ func (m *StructureMapStructure) Equals(other *StructureMapStructure) bool {
 // StructureMapGroup
 // Organizes the mapping into manageable chunks for human review/ease of maintenance.
 type StructureMapGroup struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -189,22 +454,89 @@ type StructureMapGroup struct {
 	Rule []*StructureMapRule `json:"rule,omitempty"`
 }
 
-// NewStructureMapGroup creates a new StructureMapGroup instance
+// NewStructureMapGroup creates a new StructureMapGroup instance.
 func NewStructureMapGroup() *StructureMapGroup {
 	return &StructureMapGroup{}
 }
 
-// FromJSON populates StructureMapGroup from JSON data
+// FromJSON populates StructureMapGroup from JSON data.
 func (m *StructureMapGroup) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name *FhirId `json:"name,omitempty"`
+		Extends_ *FhirId `json:"extends,omitempty"`
+		TypeMode *StructureMapGroupTypeMode `json:"typemode,omitempty"`
+		Documentation *FhirString `json:"documentation,omitempty"`
+		Input []*StructureMapInput `json:"input,omitempty"`
+		Rule []*StructureMapRule `json:"rule,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Name = temp.Name
+	m.Extends_ = temp.Extends_
+	m.TypeMode = temp.TypeMode
+	m.Documentation = temp.Documentation
+	m.Input = temp.Input
+	m.Rule = temp.Rule
+	return nil
 }
 
-// ToJSON converts StructureMapGroup to JSON data
+// ToJSON converts StructureMapGroup to JSON data.
 func (m *StructureMapGroup) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Extends_ interface{} `json:"extends,omitempty"`
+		Extends_Element map[string]interface{} `json:"_extends,omitempty"`
+		TypeMode *StructureMapGroupTypeMode `json:"typemode,omitempty"`
+		Documentation interface{} `json:"documentation,omitempty"`
+		DocumentationElement map[string]interface{} `json:"_documentation,omitempty"`
+		Input []*StructureMapInput `json:"input,omitempty"`
+		Rule []*StructureMapRule `json:"rule,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Extends_ != nil && m.Extends_.Value != nil {
+		output.Extends_ = m.Extends_.Value
+		if m.Extends_.Element != nil {
+			output.Extends_Element = toMapOrNil(m.Extends_.Element.ToJSON())
+		}
+	}
+	output.TypeMode = m.TypeMode
+	if m.Documentation != nil && m.Documentation.Value != nil {
+		output.Documentation = m.Documentation.Value
+		if m.Documentation.Element != nil {
+			output.DocumentationElement = toMapOrNil(m.Documentation.Element.ToJSON())
+		}
+	}
+	output.Input = m.Input
+	output.Rule = m.Rule
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of StructureMapGroup
+// Clone creates a deep copy of StructureMapGroup.
 func (m *StructureMapGroup) Clone() *StructureMapGroup {
 	if m == nil { return nil }
 	return &StructureMapGroup{
@@ -220,7 +552,7 @@ func (m *StructureMapGroup) Clone() *StructureMapGroup {
 	}
 }
 
-// Equals checks for equality with another StructureMapGroup instance
+// Equals checks equality between two StructureMapGroup instances.
 func (m *StructureMapGroup) Equals(other *StructureMapGroup) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -239,7 +571,7 @@ func (m *StructureMapGroup) Equals(other *StructureMapGroup) bool {
 // StructureMapInput
 // A name assigned to an instance of data. The instance must be provided when the mapping is invoked.
 type StructureMapInput struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -249,22 +581,81 @@ type StructureMapInput struct {
 	Documentation *FhirString `json:"documentation,omitempty"`
 }
 
-// NewStructureMapInput creates a new StructureMapInput instance
+// NewStructureMapInput creates a new StructureMapInput instance.
 func NewStructureMapInput() *StructureMapInput {
 	return &StructureMapInput{}
 }
 
-// FromJSON populates StructureMapInput from JSON data
+// FromJSON populates StructureMapInput from JSON data.
 func (m *StructureMapInput) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name *FhirId `json:"name,omitempty"`
+		Type *FhirString `json:"type,omitempty"`
+		Mode *StructureMapInputMode `json:"mode,omitempty"`
+		Documentation *FhirString `json:"documentation,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Name = temp.Name
+	m.Type = temp.Type
+	m.Mode = temp.Mode
+	m.Documentation = temp.Documentation
+	return nil
 }
 
-// ToJSON converts StructureMapInput to JSON data
+// ToJSON converts StructureMapInput to JSON data.
 func (m *StructureMapInput) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Type interface{} `json:"type,omitempty"`
+		TypeElement map[string]interface{} `json:"_type,omitempty"`
+		Mode *StructureMapInputMode `json:"mode,omitempty"`
+		Documentation interface{} `json:"documentation,omitempty"`
+		DocumentationElement map[string]interface{} `json:"_documentation,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Type != nil && m.Type.Value != nil {
+		output.Type = m.Type.Value
+		if m.Type.Element != nil {
+			output.TypeElement = toMapOrNil(m.Type.Element.ToJSON())
+		}
+	}
+	output.Mode = m.Mode
+	if m.Documentation != nil && m.Documentation.Value != nil {
+		output.Documentation = m.Documentation.Value
+		if m.Documentation.Element != nil {
+			output.DocumentationElement = toMapOrNil(m.Documentation.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of StructureMapInput
+// Clone creates a deep copy of StructureMapInput.
 func (m *StructureMapInput) Clone() *StructureMapInput {
 	if m == nil { return nil }
 	return &StructureMapInput{
@@ -278,7 +669,7 @@ func (m *StructureMapInput) Clone() *StructureMapInput {
 	}
 }
 
-// Equals checks for equality with another StructureMapInput instance
+// Equals checks equality between two StructureMapInput instances.
 func (m *StructureMapInput) Equals(other *StructureMapInput) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -295,7 +686,7 @@ func (m *StructureMapInput) Equals(other *StructureMapInput) bool {
 // StructureMapRule
 // Transform Rule from source to target.
 type StructureMapRule struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -307,22 +698,83 @@ type StructureMapRule struct {
 	Documentation *FhirString `json:"documentation,omitempty"`
 }
 
-// NewStructureMapRule creates a new StructureMapRule instance
+// NewStructureMapRule creates a new StructureMapRule instance.
 func NewStructureMapRule() *StructureMapRule {
 	return &StructureMapRule{}
 }
 
-// FromJSON populates StructureMapRule from JSON data
+// FromJSON populates StructureMapRule from JSON data.
 func (m *StructureMapRule) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name *FhirId `json:"name,omitempty"`
+		Source []*StructureMapSource `json:"source,omitempty"`
+		Target []*StructureMapTarget `json:"target,omitempty"`
+		Rule []*StructureMapRule `json:"rule,omitempty"`
+		Dependent []*StructureMapDependent `json:"dependent,omitempty"`
+		Documentation *FhirString `json:"documentation,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Name = temp.Name
+	m.Source = temp.Source
+	m.Target = temp.Target
+	m.Rule = temp.Rule
+	m.Dependent = temp.Dependent
+	m.Documentation = temp.Documentation
+	return nil
 }
 
-// ToJSON converts StructureMapRule to JSON data
+// ToJSON converts StructureMapRule to JSON data.
 func (m *StructureMapRule) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Source []*StructureMapSource `json:"source,omitempty"`
+		Target []*StructureMapTarget `json:"target,omitempty"`
+		Rule []*StructureMapRule `json:"rule,omitempty"`
+		Dependent []*StructureMapDependent `json:"dependent,omitempty"`
+		Documentation interface{} `json:"documentation,omitempty"`
+		DocumentationElement map[string]interface{} `json:"_documentation,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	output.Source = m.Source
+	output.Target = m.Target
+	output.Rule = m.Rule
+	output.Dependent = m.Dependent
+	if m.Documentation != nil && m.Documentation.Value != nil {
+		output.Documentation = m.Documentation.Value
+		if m.Documentation.Element != nil {
+			output.DocumentationElement = toMapOrNil(m.Documentation.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of StructureMapRule
+// Clone creates a deep copy of StructureMapRule.
 func (m *StructureMapRule) Clone() *StructureMapRule {
 	if m == nil { return nil }
 	return &StructureMapRule{
@@ -338,7 +790,7 @@ func (m *StructureMapRule) Clone() *StructureMapRule {
 	}
 }
 
-// Equals checks for equality with another StructureMapRule instance
+// Equals checks equality between two StructureMapRule instances.
 func (m *StructureMapRule) Equals(other *StructureMapRule) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -357,7 +809,7 @@ func (m *StructureMapRule) Equals(other *StructureMapRule) bool {
 // StructureMapSource
 // Source inputs to the mapping.
 type StructureMapSource struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -423,22 +875,455 @@ type StructureMapSource struct {
 	LogMessage *FhirString `json:"logmessage,omitempty"`
 }
 
-// NewStructureMapSource creates a new StructureMapSource instance
+// NewStructureMapSource creates a new StructureMapSource instance.
 func NewStructureMapSource() *StructureMapSource {
 	return &StructureMapSource{}
 }
 
-// FromJSON populates StructureMapSource from JSON data
+// FromJSON populates StructureMapSource from JSON data.
 func (m *StructureMapSource) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Context *FhirId `json:"context,omitempty"`
+		Min *FhirInteger `json:"min,omitempty"`
+		Max *FhirString `json:"max,omitempty"`
+		Type *FhirString `json:"type,omitempty"`
+		DefaultValueBase64Binary *FhirBase64Binary `json:"defaultvaluebase64binary,omitempty"`
+		DefaultValueBoolean *FhirBoolean `json:"defaultvalueboolean,omitempty"`
+		DefaultValueCanonical *FhirCanonical `json:"defaultvaluecanonical,omitempty"`
+		DefaultValueCode *FhirCode `json:"defaultvaluecode,omitempty"`
+		DefaultValueDate *FhirDate `json:"defaultvaluedate,omitempty"`
+		DefaultValueDateTime *FhirDateTime `json:"defaultvaluedatetime,omitempty"`
+		DefaultValueDecimal *FhirDecimal `json:"defaultvaluedecimal,omitempty"`
+		DefaultValueId *FhirId `json:"defaultvalueid,omitempty"`
+		DefaultValueInstant *FhirInstant `json:"defaultvalueinstant,omitempty"`
+		DefaultValueInteger *FhirInteger `json:"defaultvalueinteger,omitempty"`
+		DefaultValueMarkdown *FhirMarkdown `json:"defaultvaluemarkdown,omitempty"`
+		DefaultValueOid *FhirOid `json:"defaultvalueoid,omitempty"`
+		DefaultValuePositiveInt *FhirPositiveInt `json:"defaultvaluepositiveint,omitempty"`
+		DefaultValueString *FhirString `json:"defaultvaluestring,omitempty"`
+		DefaultValueTime *FhirTime `json:"defaultvaluetime,omitempty"`
+		DefaultValueUnsignedInt *FhirUnsignedInt `json:"defaultvalueunsignedint,omitempty"`
+		DefaultValueUri *FhirUri `json:"defaultvalueuri,omitempty"`
+		DefaultValueUrl *FhirUrl `json:"defaultvalueurl,omitempty"`
+		DefaultValueUuid *FhirUuid `json:"defaultvalueuuid,omitempty"`
+		DefaultValueAddress *Address `json:"defaultvalueaddress,omitempty"`
+		DefaultValueAge *Age `json:"defaultvalueage,omitempty"`
+		DefaultValueAnnotation *Annotation `json:"defaultvalueannotation,omitempty"`
+		DefaultValueAttachment *Attachment `json:"defaultvalueattachment,omitempty"`
+		DefaultValueCodeableConcept *CodeableConcept `json:"defaultvaluecodeableconcept,omitempty"`
+		DefaultValueCoding *Coding `json:"defaultvaluecoding,omitempty"`
+		DefaultValueContactPoint *ContactPoint `json:"defaultvaluecontactpoint,omitempty"`
+		DefaultValueCount *Count `json:"defaultvaluecount,omitempty"`
+		DefaultValueDistance *Distance `json:"defaultvaluedistance,omitempty"`
+		DefaultValueDuration *FhirDuration `json:"defaultvalueduration,omitempty"`
+		DefaultValueHumanName *HumanName `json:"defaultvaluehumanname,omitempty"`
+		DefaultValueIdentifier *Identifier `json:"defaultvalueidentifier,omitempty"`
+		DefaultValueMoney *Money `json:"defaultvaluemoney,omitempty"`
+		DefaultValuePeriod *Period `json:"defaultvalueperiod,omitempty"`
+		DefaultValueQuantity *Quantity `json:"defaultvaluequantity,omitempty"`
+		DefaultValueRange *Range `json:"defaultvaluerange,omitempty"`
+		DefaultValueRatio *Ratio `json:"defaultvalueratio,omitempty"`
+		DefaultValueReference *Reference `json:"defaultvaluereference,omitempty"`
+		DefaultValueSampledData *SampledData `json:"defaultvaluesampleddata,omitempty"`
+		DefaultValueSignature *Signature `json:"defaultvaluesignature,omitempty"`
+		DefaultValueTiming *Timing `json:"defaultvaluetiming,omitempty"`
+		DefaultValueContactDetail *ContactDetail `json:"defaultvaluecontactdetail,omitempty"`
+		DefaultValueContributor *Contributor `json:"defaultvaluecontributor,omitempty"`
+		DefaultValueDataRequirement *DataRequirement `json:"defaultvaluedatarequirement,omitempty"`
+		DefaultValueExpression *FhirExpression `json:"defaultvalueexpression,omitempty"`
+		DefaultValueParameterDefinition *ParameterDefinition `json:"defaultvalueparameterdefinition,omitempty"`
+		DefaultValueRelatedArtifact *RelatedArtifact `json:"defaultvaluerelatedartifact,omitempty"`
+		DefaultValueTriggerDefinition *TriggerDefinition `json:"defaultvaluetriggerdefinition,omitempty"`
+		DefaultValueUsageContext *UsageContext `json:"defaultvalueusagecontext,omitempty"`
+		DefaultValueDosage *Dosage `json:"defaultvaluedosage,omitempty"`
+		DefaultValueMeta *FhirMeta `json:"defaultvaluemeta,omitempty"`
+		Element *FhirString `json:"element,omitempty"`
+		ListMode *StructureMapSourceListMode `json:"listmode,omitempty"`
+		Variable *FhirId `json:"variable,omitempty"`
+		Condition *FhirString `json:"condition,omitempty"`
+		Check *FhirString `json:"check,omitempty"`
+		LogMessage *FhirString `json:"logmessage,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Context = temp.Context
+	m.Min = temp.Min
+	m.Max = temp.Max
+	m.Type = temp.Type
+	m.DefaultValueBase64Binary = temp.DefaultValueBase64Binary
+	m.DefaultValueBoolean = temp.DefaultValueBoolean
+	m.DefaultValueCanonical = temp.DefaultValueCanonical
+	m.DefaultValueCode = temp.DefaultValueCode
+	m.DefaultValueDate = temp.DefaultValueDate
+	m.DefaultValueDateTime = temp.DefaultValueDateTime
+	m.DefaultValueDecimal = temp.DefaultValueDecimal
+	m.DefaultValueId = temp.DefaultValueId
+	m.DefaultValueInstant = temp.DefaultValueInstant
+	m.DefaultValueInteger = temp.DefaultValueInteger
+	m.DefaultValueMarkdown = temp.DefaultValueMarkdown
+	m.DefaultValueOid = temp.DefaultValueOid
+	m.DefaultValuePositiveInt = temp.DefaultValuePositiveInt
+	m.DefaultValueString = temp.DefaultValueString
+	m.DefaultValueTime = temp.DefaultValueTime
+	m.DefaultValueUnsignedInt = temp.DefaultValueUnsignedInt
+	m.DefaultValueUri = temp.DefaultValueUri
+	m.DefaultValueUrl = temp.DefaultValueUrl
+	m.DefaultValueUuid = temp.DefaultValueUuid
+	m.DefaultValueAddress = temp.DefaultValueAddress
+	m.DefaultValueAge = temp.DefaultValueAge
+	m.DefaultValueAnnotation = temp.DefaultValueAnnotation
+	m.DefaultValueAttachment = temp.DefaultValueAttachment
+	m.DefaultValueCodeableConcept = temp.DefaultValueCodeableConcept
+	m.DefaultValueCoding = temp.DefaultValueCoding
+	m.DefaultValueContactPoint = temp.DefaultValueContactPoint
+	m.DefaultValueCount = temp.DefaultValueCount
+	m.DefaultValueDistance = temp.DefaultValueDistance
+	m.DefaultValueDuration = temp.DefaultValueDuration
+	m.DefaultValueHumanName = temp.DefaultValueHumanName
+	m.DefaultValueIdentifier = temp.DefaultValueIdentifier
+	m.DefaultValueMoney = temp.DefaultValueMoney
+	m.DefaultValuePeriod = temp.DefaultValuePeriod
+	m.DefaultValueQuantity = temp.DefaultValueQuantity
+	m.DefaultValueRange = temp.DefaultValueRange
+	m.DefaultValueRatio = temp.DefaultValueRatio
+	m.DefaultValueReference = temp.DefaultValueReference
+	m.DefaultValueSampledData = temp.DefaultValueSampledData
+	m.DefaultValueSignature = temp.DefaultValueSignature
+	m.DefaultValueTiming = temp.DefaultValueTiming
+	m.DefaultValueContactDetail = temp.DefaultValueContactDetail
+	m.DefaultValueContributor = temp.DefaultValueContributor
+	m.DefaultValueDataRequirement = temp.DefaultValueDataRequirement
+	m.DefaultValueExpression = temp.DefaultValueExpression
+	m.DefaultValueParameterDefinition = temp.DefaultValueParameterDefinition
+	m.DefaultValueRelatedArtifact = temp.DefaultValueRelatedArtifact
+	m.DefaultValueTriggerDefinition = temp.DefaultValueTriggerDefinition
+	m.DefaultValueUsageContext = temp.DefaultValueUsageContext
+	m.DefaultValueDosage = temp.DefaultValueDosage
+	m.DefaultValueMeta = temp.DefaultValueMeta
+	m.Element = temp.Element
+	m.ListMode = temp.ListMode
+	m.Variable = temp.Variable
+	m.Condition = temp.Condition
+	m.Check = temp.Check
+	m.LogMessage = temp.LogMessage
+	return nil
 }
 
-// ToJSON converts StructureMapSource to JSON data
+// ToJSON converts StructureMapSource to JSON data.
 func (m *StructureMapSource) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Context interface{} `json:"context,omitempty"`
+		ContextElement map[string]interface{} `json:"_context,omitempty"`
+		Min interface{} `json:"min,omitempty"`
+		MinElement map[string]interface{} `json:"_min,omitempty"`
+		Max interface{} `json:"max,omitempty"`
+		MaxElement map[string]interface{} `json:"_max,omitempty"`
+		Type interface{} `json:"type,omitempty"`
+		TypeElement map[string]interface{} `json:"_type,omitempty"`
+		DefaultValueBase64Binary interface{} `json:"defaultvaluebase64binary,omitempty"`
+		DefaultValueBase64BinaryElement map[string]interface{} `json:"_defaultvaluebase64binary,omitempty"`
+		DefaultValueBoolean interface{} `json:"defaultvalueboolean,omitempty"`
+		DefaultValueBooleanElement map[string]interface{} `json:"_defaultvalueboolean,omitempty"`
+		DefaultValueCanonical interface{} `json:"defaultvaluecanonical,omitempty"`
+		DefaultValueCanonicalElement map[string]interface{} `json:"_defaultvaluecanonical,omitempty"`
+		DefaultValueCode interface{} `json:"defaultvaluecode,omitempty"`
+		DefaultValueCodeElement map[string]interface{} `json:"_defaultvaluecode,omitempty"`
+		DefaultValueDate interface{} `json:"defaultvaluedate,omitempty"`
+		DefaultValueDateElement map[string]interface{} `json:"_defaultvaluedate,omitempty"`
+		DefaultValueDateTime interface{} `json:"defaultvaluedatetime,omitempty"`
+		DefaultValueDateTimeElement map[string]interface{} `json:"_defaultvaluedatetime,omitempty"`
+		DefaultValueDecimal interface{} `json:"defaultvaluedecimal,omitempty"`
+		DefaultValueDecimalElement map[string]interface{} `json:"_defaultvaluedecimal,omitempty"`
+		DefaultValueId interface{} `json:"defaultvalueid,omitempty"`
+		DefaultValueIdElement map[string]interface{} `json:"_defaultvalueid,omitempty"`
+		DefaultValueInstant interface{} `json:"defaultvalueinstant,omitempty"`
+		DefaultValueInstantElement map[string]interface{} `json:"_defaultvalueinstant,omitempty"`
+		DefaultValueInteger interface{} `json:"defaultvalueinteger,omitempty"`
+		DefaultValueIntegerElement map[string]interface{} `json:"_defaultvalueinteger,omitempty"`
+		DefaultValueMarkdown interface{} `json:"defaultvaluemarkdown,omitempty"`
+		DefaultValueMarkdownElement map[string]interface{} `json:"_defaultvaluemarkdown,omitempty"`
+		DefaultValueOid interface{} `json:"defaultvalueoid,omitempty"`
+		DefaultValueOidElement map[string]interface{} `json:"_defaultvalueoid,omitempty"`
+		DefaultValuePositiveInt interface{} `json:"defaultvaluepositiveint,omitempty"`
+		DefaultValuePositiveIntElement map[string]interface{} `json:"_defaultvaluepositiveint,omitempty"`
+		DefaultValueString interface{} `json:"defaultvaluestring,omitempty"`
+		DefaultValueStringElement map[string]interface{} `json:"_defaultvaluestring,omitempty"`
+		DefaultValueTime interface{} `json:"defaultvaluetime,omitempty"`
+		DefaultValueTimeElement map[string]interface{} `json:"_defaultvaluetime,omitempty"`
+		DefaultValueUnsignedInt interface{} `json:"defaultvalueunsignedint,omitempty"`
+		DefaultValueUnsignedIntElement map[string]interface{} `json:"_defaultvalueunsignedint,omitempty"`
+		DefaultValueUri interface{} `json:"defaultvalueuri,omitempty"`
+		DefaultValueUriElement map[string]interface{} `json:"_defaultvalueuri,omitempty"`
+		DefaultValueUrl interface{} `json:"defaultvalueurl,omitempty"`
+		DefaultValueUrlElement map[string]interface{} `json:"_defaultvalueurl,omitempty"`
+		DefaultValueUuid interface{} `json:"defaultvalueuuid,omitempty"`
+		DefaultValueUuidElement map[string]interface{} `json:"_defaultvalueuuid,omitempty"`
+		DefaultValueAddress *Address `json:"defaultvalueaddress,omitempty"`
+		DefaultValueAge *Age `json:"defaultvalueage,omitempty"`
+		DefaultValueAnnotation *Annotation `json:"defaultvalueannotation,omitempty"`
+		DefaultValueAttachment *Attachment `json:"defaultvalueattachment,omitempty"`
+		DefaultValueCodeableConcept *CodeableConcept `json:"defaultvaluecodeableconcept,omitempty"`
+		DefaultValueCoding *Coding `json:"defaultvaluecoding,omitempty"`
+		DefaultValueContactPoint *ContactPoint `json:"defaultvaluecontactpoint,omitempty"`
+		DefaultValueCount *Count `json:"defaultvaluecount,omitempty"`
+		DefaultValueDistance *Distance `json:"defaultvaluedistance,omitempty"`
+		DefaultValueDuration *FhirDuration `json:"defaultvalueduration,omitempty"`
+		DefaultValueHumanName *HumanName `json:"defaultvaluehumanname,omitempty"`
+		DefaultValueIdentifier *Identifier `json:"defaultvalueidentifier,omitempty"`
+		DefaultValueMoney *Money `json:"defaultvaluemoney,omitempty"`
+		DefaultValuePeriod *Period `json:"defaultvalueperiod,omitempty"`
+		DefaultValueQuantity *Quantity `json:"defaultvaluequantity,omitempty"`
+		DefaultValueRange *Range `json:"defaultvaluerange,omitempty"`
+		DefaultValueRatio *Ratio `json:"defaultvalueratio,omitempty"`
+		DefaultValueReference *Reference `json:"defaultvaluereference,omitempty"`
+		DefaultValueSampledData *SampledData `json:"defaultvaluesampleddata,omitempty"`
+		DefaultValueSignature *Signature `json:"defaultvaluesignature,omitempty"`
+		DefaultValueTiming *Timing `json:"defaultvaluetiming,omitempty"`
+		DefaultValueContactDetail *ContactDetail `json:"defaultvaluecontactdetail,omitempty"`
+		DefaultValueContributor *Contributor `json:"defaultvaluecontributor,omitempty"`
+		DefaultValueDataRequirement *DataRequirement `json:"defaultvaluedatarequirement,omitempty"`
+		DefaultValueExpression *FhirExpression `json:"defaultvalueexpression,omitempty"`
+		DefaultValueParameterDefinition *ParameterDefinition `json:"defaultvalueparameterdefinition,omitempty"`
+		DefaultValueRelatedArtifact *RelatedArtifact `json:"defaultvaluerelatedartifact,omitempty"`
+		DefaultValueTriggerDefinition *TriggerDefinition `json:"defaultvaluetriggerdefinition,omitempty"`
+		DefaultValueUsageContext *UsageContext `json:"defaultvalueusagecontext,omitempty"`
+		DefaultValueDosage *Dosage `json:"defaultvaluedosage,omitempty"`
+		DefaultValueMeta *FhirMeta `json:"defaultvaluemeta,omitempty"`
+		Element interface{} `json:"element,omitempty"`
+		ElementElement map[string]interface{} `json:"_element,omitempty"`
+		ListMode *StructureMapSourceListMode `json:"listmode,omitempty"`
+		Variable interface{} `json:"variable,omitempty"`
+		VariableElement map[string]interface{} `json:"_variable,omitempty"`
+		Condition interface{} `json:"condition,omitempty"`
+		ConditionElement map[string]interface{} `json:"_condition,omitempty"`
+		Check interface{} `json:"check,omitempty"`
+		CheckElement map[string]interface{} `json:"_check,omitempty"`
+		LogMessage interface{} `json:"logmessage,omitempty"`
+		LogMessageElement map[string]interface{} `json:"_logmessage,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Context != nil && m.Context.Value != nil {
+		output.Context = m.Context.Value
+		if m.Context.Element != nil {
+			output.ContextElement = toMapOrNil(m.Context.Element.ToJSON())
+		}
+	}
+	if m.Min != nil && m.Min.Value != nil {
+		output.Min = m.Min.Value
+		if m.Min.Element != nil {
+			output.MinElement = toMapOrNil(m.Min.Element.ToJSON())
+		}
+	}
+	if m.Max != nil && m.Max.Value != nil {
+		output.Max = m.Max.Value
+		if m.Max.Element != nil {
+			output.MaxElement = toMapOrNil(m.Max.Element.ToJSON())
+		}
+	}
+	if m.Type != nil && m.Type.Value != nil {
+		output.Type = m.Type.Value
+		if m.Type.Element != nil {
+			output.TypeElement = toMapOrNil(m.Type.Element.ToJSON())
+		}
+	}
+	if m.DefaultValueBase64Binary != nil && m.DefaultValueBase64Binary.Value != nil {
+		output.DefaultValueBase64Binary = m.DefaultValueBase64Binary.Value
+		if m.DefaultValueBase64Binary.Element != nil {
+			output.DefaultValueBase64BinaryElement = toMapOrNil(m.DefaultValueBase64Binary.Element.ToJSON())
+		}
+	}
+	if m.DefaultValueBoolean != nil && m.DefaultValueBoolean.Value != nil {
+		output.DefaultValueBoolean = m.DefaultValueBoolean.Value
+		if m.DefaultValueBoolean.Element != nil {
+			output.DefaultValueBooleanElement = toMapOrNil(m.DefaultValueBoolean.Element.ToJSON())
+		}
+	}
+	if m.DefaultValueCanonical != nil && m.DefaultValueCanonical.Value != nil {
+		output.DefaultValueCanonical = m.DefaultValueCanonical.Value
+		if m.DefaultValueCanonical.Element != nil {
+			output.DefaultValueCanonicalElement = toMapOrNil(m.DefaultValueCanonical.Element.ToJSON())
+		}
+	}
+	if m.DefaultValueCode != nil && m.DefaultValueCode.Value != nil {
+		output.DefaultValueCode = m.DefaultValueCode.Value
+		if m.DefaultValueCode.Element != nil {
+			output.DefaultValueCodeElement = toMapOrNil(m.DefaultValueCode.Element.ToJSON())
+		}
+	}
+	if m.DefaultValueDate != nil && m.DefaultValueDate.Value != nil {
+		output.DefaultValueDate = m.DefaultValueDate.Value
+		if m.DefaultValueDate.Element != nil {
+			output.DefaultValueDateElement = toMapOrNil(m.DefaultValueDate.Element.ToJSON())
+		}
+	}
+	if m.DefaultValueDateTime != nil && m.DefaultValueDateTime.Value != nil {
+		output.DefaultValueDateTime = m.DefaultValueDateTime.Value
+		if m.DefaultValueDateTime.Element != nil {
+			output.DefaultValueDateTimeElement = toMapOrNil(m.DefaultValueDateTime.Element.ToJSON())
+		}
+	}
+	if m.DefaultValueDecimal != nil && m.DefaultValueDecimal.Value != nil {
+		output.DefaultValueDecimal = m.DefaultValueDecimal.Value
+		if m.DefaultValueDecimal.Element != nil {
+			output.DefaultValueDecimalElement = toMapOrNil(m.DefaultValueDecimal.Element.ToJSON())
+		}
+	}
+	if m.DefaultValueId != nil && m.DefaultValueId.Value != nil {
+		output.DefaultValueId = m.DefaultValueId.Value
+		if m.DefaultValueId.Element != nil {
+			output.DefaultValueIdElement = toMapOrNil(m.DefaultValueId.Element.ToJSON())
+		}
+	}
+	if m.DefaultValueInstant != nil && m.DefaultValueInstant.Value != nil {
+		output.DefaultValueInstant = m.DefaultValueInstant.Value
+		if m.DefaultValueInstant.Element != nil {
+			output.DefaultValueInstantElement = toMapOrNil(m.DefaultValueInstant.Element.ToJSON())
+		}
+	}
+	if m.DefaultValueInteger != nil && m.DefaultValueInteger.Value != nil {
+		output.DefaultValueInteger = m.DefaultValueInteger.Value
+		if m.DefaultValueInteger.Element != nil {
+			output.DefaultValueIntegerElement = toMapOrNil(m.DefaultValueInteger.Element.ToJSON())
+		}
+	}
+	if m.DefaultValueMarkdown != nil && m.DefaultValueMarkdown.Value != nil {
+		output.DefaultValueMarkdown = m.DefaultValueMarkdown.Value
+		if m.DefaultValueMarkdown.Element != nil {
+			output.DefaultValueMarkdownElement = toMapOrNil(m.DefaultValueMarkdown.Element.ToJSON())
+		}
+	}
+	if m.DefaultValueOid != nil && m.DefaultValueOid.Value != nil {
+		output.DefaultValueOid = m.DefaultValueOid.Value
+		if m.DefaultValueOid.Element != nil {
+			output.DefaultValueOidElement = toMapOrNil(m.DefaultValueOid.Element.ToJSON())
+		}
+	}
+	if m.DefaultValuePositiveInt != nil && m.DefaultValuePositiveInt.Value != nil {
+		output.DefaultValuePositiveInt = m.DefaultValuePositiveInt.Value
+		if m.DefaultValuePositiveInt.Element != nil {
+			output.DefaultValuePositiveIntElement = toMapOrNil(m.DefaultValuePositiveInt.Element.ToJSON())
+		}
+	}
+	if m.DefaultValueString != nil && m.DefaultValueString.Value != nil {
+		output.DefaultValueString = m.DefaultValueString.Value
+		if m.DefaultValueString.Element != nil {
+			output.DefaultValueStringElement = toMapOrNil(m.DefaultValueString.Element.ToJSON())
+		}
+	}
+	if m.DefaultValueTime != nil && m.DefaultValueTime.Value != nil {
+		output.DefaultValueTime = m.DefaultValueTime.Value
+		if m.DefaultValueTime.Element != nil {
+			output.DefaultValueTimeElement = toMapOrNil(m.DefaultValueTime.Element.ToJSON())
+		}
+	}
+	if m.DefaultValueUnsignedInt != nil && m.DefaultValueUnsignedInt.Value != nil {
+		output.DefaultValueUnsignedInt = m.DefaultValueUnsignedInt.Value
+		if m.DefaultValueUnsignedInt.Element != nil {
+			output.DefaultValueUnsignedIntElement = toMapOrNil(m.DefaultValueUnsignedInt.Element.ToJSON())
+		}
+	}
+	if m.DefaultValueUri != nil && m.DefaultValueUri.Value != nil {
+		output.DefaultValueUri = m.DefaultValueUri.Value
+		if m.DefaultValueUri.Element != nil {
+			output.DefaultValueUriElement = toMapOrNil(m.DefaultValueUri.Element.ToJSON())
+		}
+	}
+	if m.DefaultValueUrl != nil && m.DefaultValueUrl.Value != nil {
+		output.DefaultValueUrl = m.DefaultValueUrl.Value
+		if m.DefaultValueUrl.Element != nil {
+			output.DefaultValueUrlElement = toMapOrNil(m.DefaultValueUrl.Element.ToJSON())
+		}
+	}
+	if m.DefaultValueUuid != nil && m.DefaultValueUuid.Value != nil {
+		output.DefaultValueUuid = m.DefaultValueUuid.Value
+		if m.DefaultValueUuid.Element != nil {
+			output.DefaultValueUuidElement = toMapOrNil(m.DefaultValueUuid.Element.ToJSON())
+		}
+	}
+	output.DefaultValueAddress = m.DefaultValueAddress
+	output.DefaultValueAge = m.DefaultValueAge
+	output.DefaultValueAnnotation = m.DefaultValueAnnotation
+	output.DefaultValueAttachment = m.DefaultValueAttachment
+	output.DefaultValueCodeableConcept = m.DefaultValueCodeableConcept
+	output.DefaultValueCoding = m.DefaultValueCoding
+	output.DefaultValueContactPoint = m.DefaultValueContactPoint
+	output.DefaultValueCount = m.DefaultValueCount
+	output.DefaultValueDistance = m.DefaultValueDistance
+	output.DefaultValueDuration = m.DefaultValueDuration
+	output.DefaultValueHumanName = m.DefaultValueHumanName
+	output.DefaultValueIdentifier = m.DefaultValueIdentifier
+	output.DefaultValueMoney = m.DefaultValueMoney
+	output.DefaultValuePeriod = m.DefaultValuePeriod
+	output.DefaultValueQuantity = m.DefaultValueQuantity
+	output.DefaultValueRange = m.DefaultValueRange
+	output.DefaultValueRatio = m.DefaultValueRatio
+	output.DefaultValueReference = m.DefaultValueReference
+	output.DefaultValueSampledData = m.DefaultValueSampledData
+	output.DefaultValueSignature = m.DefaultValueSignature
+	output.DefaultValueTiming = m.DefaultValueTiming
+	output.DefaultValueContactDetail = m.DefaultValueContactDetail
+	output.DefaultValueContributor = m.DefaultValueContributor
+	output.DefaultValueDataRequirement = m.DefaultValueDataRequirement
+	output.DefaultValueExpression = m.DefaultValueExpression
+	output.DefaultValueParameterDefinition = m.DefaultValueParameterDefinition
+	output.DefaultValueRelatedArtifact = m.DefaultValueRelatedArtifact
+	output.DefaultValueTriggerDefinition = m.DefaultValueTriggerDefinition
+	output.DefaultValueUsageContext = m.DefaultValueUsageContext
+	output.DefaultValueDosage = m.DefaultValueDosage
+	output.DefaultValueMeta = m.DefaultValueMeta
+	if m.Element != nil && m.Element.Value != nil {
+		output.Element = m.Element.Value
+		if m.Element.Element != nil {
+			output.ElementElement = toMapOrNil(m.Element.Element.ToJSON())
+		}
+	}
+	output.ListMode = m.ListMode
+	if m.Variable != nil && m.Variable.Value != nil {
+		output.Variable = m.Variable.Value
+		if m.Variable.Element != nil {
+			output.VariableElement = toMapOrNil(m.Variable.Element.ToJSON())
+		}
+	}
+	if m.Condition != nil && m.Condition.Value != nil {
+		output.Condition = m.Condition.Value
+		if m.Condition.Element != nil {
+			output.ConditionElement = toMapOrNil(m.Condition.Element.ToJSON())
+		}
+	}
+	if m.Check != nil && m.Check.Value != nil {
+		output.Check = m.Check.Value
+		if m.Check.Element != nil {
+			output.CheckElement = toMapOrNil(m.Check.Element.ToJSON())
+		}
+	}
+	if m.LogMessage != nil && m.LogMessage.Value != nil {
+		output.LogMessage = m.LogMessage.Value
+		if m.LogMessage.Element != nil {
+			output.LogMessageElement = toMapOrNil(m.LogMessage.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of StructureMapSource
+// Clone creates a deep copy of StructureMapSource.
 func (m *StructureMapSource) Clone() *StructureMapSource {
 	if m == nil { return nil }
 	return &StructureMapSource{
@@ -508,7 +1393,7 @@ func (m *StructureMapSource) Clone() *StructureMapSource {
 	}
 }
 
-// Equals checks for equality with another StructureMapSource instance
+// Equals checks equality between two StructureMapSource instances.
 func (m *StructureMapSource) Equals(other *StructureMapSource) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -581,7 +1466,7 @@ func (m *StructureMapSource) Equals(other *StructureMapSource) bool {
 // StructureMapTarget
 // Content to create because of this mapping rule.
 type StructureMapTarget struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -595,22 +1480,103 @@ type StructureMapTarget struct {
 	Parameter []*StructureMapParameter `json:"parameter,omitempty"`
 }
 
-// NewStructureMapTarget creates a new StructureMapTarget instance
+// NewStructureMapTarget creates a new StructureMapTarget instance.
 func NewStructureMapTarget() *StructureMapTarget {
 	return &StructureMapTarget{}
 }
 
-// FromJSON populates StructureMapTarget from JSON data
+// FromJSON populates StructureMapTarget from JSON data.
 func (m *StructureMapTarget) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Context *FhirId `json:"context,omitempty"`
+		ContextType *StructureMapContextType `json:"contexttype,omitempty"`
+		Element *FhirString `json:"element,omitempty"`
+		Variable *FhirId `json:"variable,omitempty"`
+		ListMode []*StructureMapTargetListMode `json:"listmode,omitempty"`
+		ListRuleId *FhirId `json:"listruleid,omitempty"`
+		Transform *StructureMapTransform `json:"transform,omitempty"`
+		Parameter []*StructureMapParameter `json:"parameter,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Context = temp.Context
+	m.ContextType = temp.ContextType
+	m.Element = temp.Element
+	m.Variable = temp.Variable
+	m.ListMode = temp.ListMode
+	m.ListRuleId = temp.ListRuleId
+	m.Transform = temp.Transform
+	m.Parameter = temp.Parameter
+	return nil
 }
 
-// ToJSON converts StructureMapTarget to JSON data
+// ToJSON converts StructureMapTarget to JSON data.
 func (m *StructureMapTarget) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Context interface{} `json:"context,omitempty"`
+		ContextElement map[string]interface{} `json:"_context,omitempty"`
+		ContextType *StructureMapContextType `json:"contexttype,omitempty"`
+		Element interface{} `json:"element,omitempty"`
+		ElementElement map[string]interface{} `json:"_element,omitempty"`
+		Variable interface{} `json:"variable,omitempty"`
+		VariableElement map[string]interface{} `json:"_variable,omitempty"`
+		ListMode []*StructureMapTargetListMode `json:"listmode,omitempty"`
+		ListRuleId interface{} `json:"listruleid,omitempty"`
+		ListRuleIdElement map[string]interface{} `json:"_listruleid,omitempty"`
+		Transform *StructureMapTransform `json:"transform,omitempty"`
+		Parameter []*StructureMapParameter `json:"parameter,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Context != nil && m.Context.Value != nil {
+		output.Context = m.Context.Value
+		if m.Context.Element != nil {
+			output.ContextElement = toMapOrNil(m.Context.Element.ToJSON())
+		}
+	}
+	output.ContextType = m.ContextType
+	if m.Element != nil && m.Element.Value != nil {
+		output.Element = m.Element.Value
+		if m.Element.Element != nil {
+			output.ElementElement = toMapOrNil(m.Element.Element.ToJSON())
+		}
+	}
+	if m.Variable != nil && m.Variable.Value != nil {
+		output.Variable = m.Variable.Value
+		if m.Variable.Element != nil {
+			output.VariableElement = toMapOrNil(m.Variable.Element.ToJSON())
+		}
+	}
+	output.ListMode = m.ListMode
+	if m.ListRuleId != nil && m.ListRuleId.Value != nil {
+		output.ListRuleId = m.ListRuleId.Value
+		if m.ListRuleId.Element != nil {
+			output.ListRuleIdElement = toMapOrNil(m.ListRuleId.Element.ToJSON())
+		}
+	}
+	output.Transform = m.Transform
+	output.Parameter = m.Parameter
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of StructureMapTarget
+// Clone creates a deep copy of StructureMapTarget.
 func (m *StructureMapTarget) Clone() *StructureMapTarget {
 	if m == nil { return nil }
 	return &StructureMapTarget{
@@ -628,7 +1594,7 @@ func (m *StructureMapTarget) Clone() *StructureMapTarget {
 	}
 }
 
-// Equals checks for equality with another StructureMapTarget instance
+// Equals checks equality between two StructureMapTarget instances.
 func (m *StructureMapTarget) Equals(other *StructureMapTarget) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -649,7 +1615,7 @@ func (m *StructureMapTarget) Equals(other *StructureMapTarget) bool {
 // StructureMapParameter
 // Parameters to the transform.
 type StructureMapParameter struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -660,22 +1626,97 @@ type StructureMapParameter struct {
 	ValueDecimal *FhirDecimal `json:"valuedecimal,omitempty"`
 }
 
-// NewStructureMapParameter creates a new StructureMapParameter instance
+// NewStructureMapParameter creates a new StructureMapParameter instance.
 func NewStructureMapParameter() *StructureMapParameter {
 	return &StructureMapParameter{}
 }
 
-// FromJSON populates StructureMapParameter from JSON data
+// FromJSON populates StructureMapParameter from JSON data.
 func (m *StructureMapParameter) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ValueId *FhirId `json:"valueid,omitempty"`
+		ValueString *FhirString `json:"valuestring,omitempty"`
+		ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
+		ValueInteger *FhirInteger `json:"valueinteger,omitempty"`
+		ValueDecimal *FhirDecimal `json:"valuedecimal,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.ValueId = temp.ValueId
+	m.ValueString = temp.ValueString
+	m.ValueBoolean = temp.ValueBoolean
+	m.ValueInteger = temp.ValueInteger
+	m.ValueDecimal = temp.ValueDecimal
+	return nil
 }
 
-// ToJSON converts StructureMapParameter to JSON data
+// ToJSON converts StructureMapParameter to JSON data.
 func (m *StructureMapParameter) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ValueId interface{} `json:"valueid,omitempty"`
+		ValueIdElement map[string]interface{} `json:"_valueid,omitempty"`
+		ValueString interface{} `json:"valuestring,omitempty"`
+		ValueStringElement map[string]interface{} `json:"_valuestring,omitempty"`
+		ValueBoolean interface{} `json:"valueboolean,omitempty"`
+		ValueBooleanElement map[string]interface{} `json:"_valueboolean,omitempty"`
+		ValueInteger interface{} `json:"valueinteger,omitempty"`
+		ValueIntegerElement map[string]interface{} `json:"_valueinteger,omitempty"`
+		ValueDecimal interface{} `json:"valuedecimal,omitempty"`
+		ValueDecimalElement map[string]interface{} `json:"_valuedecimal,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.ValueId != nil && m.ValueId.Value != nil {
+		output.ValueId = m.ValueId.Value
+		if m.ValueId.Element != nil {
+			output.ValueIdElement = toMapOrNil(m.ValueId.Element.ToJSON())
+		}
+	}
+	if m.ValueString != nil && m.ValueString.Value != nil {
+		output.ValueString = m.ValueString.Value
+		if m.ValueString.Element != nil {
+			output.ValueStringElement = toMapOrNil(m.ValueString.Element.ToJSON())
+		}
+	}
+	if m.ValueBoolean != nil && m.ValueBoolean.Value != nil {
+		output.ValueBoolean = m.ValueBoolean.Value
+		if m.ValueBoolean.Element != nil {
+			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.ToJSON())
+		}
+	}
+	if m.ValueInteger != nil && m.ValueInteger.Value != nil {
+		output.ValueInteger = m.ValueInteger.Value
+		if m.ValueInteger.Element != nil {
+			output.ValueIntegerElement = toMapOrNil(m.ValueInteger.Element.ToJSON())
+		}
+	}
+	if m.ValueDecimal != nil && m.ValueDecimal.Value != nil {
+		output.ValueDecimal = m.ValueDecimal.Value
+		if m.ValueDecimal.Element != nil {
+			output.ValueDecimalElement = toMapOrNil(m.ValueDecimal.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of StructureMapParameter
+// Clone creates a deep copy of StructureMapParameter.
 func (m *StructureMapParameter) Clone() *StructureMapParameter {
 	if m == nil { return nil }
 	return &StructureMapParameter{
@@ -690,7 +1731,7 @@ func (m *StructureMapParameter) Clone() *StructureMapParameter {
 	}
 }
 
-// Equals checks for equality with another StructureMapParameter instance
+// Equals checks equality between two StructureMapParameter instances.
 func (m *StructureMapParameter) Equals(other *StructureMapParameter) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -708,7 +1749,7 @@ func (m *StructureMapParameter) Equals(other *StructureMapParameter) bool {
 // StructureMapDependent
 // Which other rules to apply in the context of this rule.
 type StructureMapDependent struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -716,22 +1757,82 @@ type StructureMapDependent struct {
 	Variable []*FhirString `json:"variable,omitempty"`
 }
 
-// NewStructureMapDependent creates a new StructureMapDependent instance
+// NewStructureMapDependent creates a new StructureMapDependent instance.
 func NewStructureMapDependent() *StructureMapDependent {
 	return &StructureMapDependent{}
 }
 
-// FromJSON populates StructureMapDependent from JSON data
+// FromJSON populates StructureMapDependent from JSON data.
 func (m *StructureMapDependent) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name *FhirId `json:"name,omitempty"`
+		Variable []interface{} `json:"variable,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Name = temp.Name
+	if len(temp.Variable) > 0 {
+		m.Variable = make([]*FhirString, len(temp.Variable))
+		for i := range temp.Variable {
+			itemMap, ok := temp.Variable[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Variable[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Variable[%d]: %v", i, err) }
+			m.Variable[i] = primitive
+		}
+	}
+	return nil
 }
 
-// ToJSON converts StructureMapDependent to JSON data
+// ToJSON converts StructureMapDependent to JSON data.
 func (m *StructureMapDependent) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Variable []interface{} `json:"variable,omitempty"`
+		VariableElement []map[string]interface{} `json:"_variable,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if len(m.Variable) > 0 {
+		output.Variable = make([]interface{}, len(m.Variable))
+		output.VariableElement = make([]map[string]interface{}, len(m.Variable))
+		for i, item := range m.Variable {
+			if item != nil && item.Value != nil {
+				output.Variable[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.VariableElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of StructureMapDependent
+// Clone creates a deep copy of StructureMapDependent.
 func (m *StructureMapDependent) Clone() *StructureMapDependent {
 	if m == nil { return nil }
 	return &StructureMapDependent{
@@ -743,7 +1844,7 @@ func (m *StructureMapDependent) Clone() *StructureMapDependent {
 	}
 }
 
-// Equals checks for equality with another StructureMapDependent instance
+// Equals checks equality between two StructureMapDependent instances.
 func (m *StructureMapDependent) Equals(other *StructureMapDependent) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

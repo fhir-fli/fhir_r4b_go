@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Immunization
 // Describes the event of a patient being administered a vaccine or a record of an immunization as reported by a patient, a clinician or another party.
 type Immunization struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -48,22 +49,231 @@ type Immunization struct {
 	ProtocolApplied []*ImmunizationProtocolApplied `json:"protocolapplied,omitempty"`
 }
 
-// NewImmunization creates a new Immunization instance
+// NewImmunization creates a new Immunization instance.
 func NewImmunization() *Immunization {
 	return &Immunization{}
 }
 
-// FromJSON populates Immunization from JSON data
+// FromJSON populates Immunization from JSON data.
 func (m *Immunization) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *ImmunizationStatusCodes `json:"status,omitempty"`
+		StatusReason *CodeableConcept `json:"statusreason,omitempty"`
+		VaccineCode *CodeableConcept `json:"vaccinecode,omitempty"`
+		Patient *Reference `json:"patient,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		OccurrenceDateTime *FhirDateTime `json:"occurrencedatetime,omitempty"`
+		OccurrenceString *FhirString `json:"occurrencestring,omitempty"`
+		Recorded *FhirDateTime `json:"recorded,omitempty"`
+		PrimarySource *FhirBoolean `json:"primarysource,omitempty"`
+		ReportOrigin *CodeableConcept `json:"reportorigin,omitempty"`
+		Location *Reference `json:"location,omitempty"`
+		Manufacturer *Reference `json:"manufacturer,omitempty"`
+		LotNumber *FhirString `json:"lotnumber,omitempty"`
+		ExpirationDate *FhirDate `json:"expirationdate,omitempty"`
+		Site *CodeableConcept `json:"site,omitempty"`
+		Route *CodeableConcept `json:"route,omitempty"`
+		DoseQuantity *Quantity `json:"dosequantity,omitempty"`
+		Performer []*ImmunizationPerformer `json:"performer,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		IsSubpotent *FhirBoolean `json:"issubpotent,omitempty"`
+		SubpotentReason []*CodeableConcept `json:"subpotentreason,omitempty"`
+		Education []*ImmunizationEducation `json:"education,omitempty"`
+		ProgramEligibility []*CodeableConcept `json:"programeligibility,omitempty"`
+		FundingSource *CodeableConcept `json:"fundingsource,omitempty"`
+		Reaction []*ImmunizationReaction `json:"reaction,omitempty"`
+		ProtocolApplied []*ImmunizationProtocolApplied `json:"protocolapplied,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.StatusReason = temp.StatusReason
+	m.VaccineCode = temp.VaccineCode
+	m.Patient = temp.Patient
+	m.Encounter = temp.Encounter
+	m.OccurrenceDateTime = temp.OccurrenceDateTime
+	m.OccurrenceString = temp.OccurrenceString
+	m.Recorded = temp.Recorded
+	m.PrimarySource = temp.PrimarySource
+	m.ReportOrigin = temp.ReportOrigin
+	m.Location = temp.Location
+	m.Manufacturer = temp.Manufacturer
+	m.LotNumber = temp.LotNumber
+	m.ExpirationDate = temp.ExpirationDate
+	m.Site = temp.Site
+	m.Route = temp.Route
+	m.DoseQuantity = temp.DoseQuantity
+	m.Performer = temp.Performer
+	m.Note = temp.Note
+	m.ReasonCode = temp.ReasonCode
+	m.ReasonReference = temp.ReasonReference
+	m.IsSubpotent = temp.IsSubpotent
+	m.SubpotentReason = temp.SubpotentReason
+	m.Education = temp.Education
+	m.ProgramEligibility = temp.ProgramEligibility
+	m.FundingSource = temp.FundingSource
+	m.Reaction = temp.Reaction
+	m.ProtocolApplied = temp.ProtocolApplied
+	return nil
 }
 
-// ToJSON converts Immunization to JSON data
+// ToJSON converts Immunization to JSON data.
 func (m *Immunization) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *ImmunizationStatusCodes `json:"status,omitempty"`
+		StatusReason *CodeableConcept `json:"statusreason,omitempty"`
+		VaccineCode *CodeableConcept `json:"vaccinecode,omitempty"`
+		Patient *Reference `json:"patient,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		OccurrenceDateTime interface{} `json:"occurrencedatetime,omitempty"`
+		OccurrenceDateTimeElement map[string]interface{} `json:"_occurrencedatetime,omitempty"`
+		OccurrenceString interface{} `json:"occurrencestring,omitempty"`
+		OccurrenceStringElement map[string]interface{} `json:"_occurrencestring,omitempty"`
+		Recorded interface{} `json:"recorded,omitempty"`
+		RecordedElement map[string]interface{} `json:"_recorded,omitempty"`
+		PrimarySource interface{} `json:"primarysource,omitempty"`
+		PrimarySourceElement map[string]interface{} `json:"_primarysource,omitempty"`
+		ReportOrigin *CodeableConcept `json:"reportorigin,omitempty"`
+		Location *Reference `json:"location,omitempty"`
+		Manufacturer *Reference `json:"manufacturer,omitempty"`
+		LotNumber interface{} `json:"lotnumber,omitempty"`
+		LotNumberElement map[string]interface{} `json:"_lotnumber,omitempty"`
+		ExpirationDate interface{} `json:"expirationdate,omitempty"`
+		ExpirationDateElement map[string]interface{} `json:"_expirationdate,omitempty"`
+		Site *CodeableConcept `json:"site,omitempty"`
+		Route *CodeableConcept `json:"route,omitempty"`
+		DoseQuantity *Quantity `json:"dosequantity,omitempty"`
+		Performer []*ImmunizationPerformer `json:"performer,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		IsSubpotent interface{} `json:"issubpotent,omitempty"`
+		IsSubpotentElement map[string]interface{} `json:"_issubpotent,omitempty"`
+		SubpotentReason []*CodeableConcept `json:"subpotentreason,omitempty"`
+		Education []*ImmunizationEducation `json:"education,omitempty"`
+		ProgramEligibility []*CodeableConcept `json:"programeligibility,omitempty"`
+		FundingSource *CodeableConcept `json:"fundingsource,omitempty"`
+		Reaction []*ImmunizationReaction `json:"reaction,omitempty"`
+		ProtocolApplied []*ImmunizationProtocolApplied `json:"protocolapplied,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	output.StatusReason = m.StatusReason
+	output.VaccineCode = m.VaccineCode
+	output.Patient = m.Patient
+	output.Encounter = m.Encounter
+	if m.OccurrenceDateTime != nil && m.OccurrenceDateTime.Value != nil {
+		output.OccurrenceDateTime = m.OccurrenceDateTime.Value
+		if m.OccurrenceDateTime.Element != nil {
+			output.OccurrenceDateTimeElement = toMapOrNil(m.OccurrenceDateTime.Element.ToJSON())
+		}
+	}
+	if m.OccurrenceString != nil && m.OccurrenceString.Value != nil {
+		output.OccurrenceString = m.OccurrenceString.Value
+		if m.OccurrenceString.Element != nil {
+			output.OccurrenceStringElement = toMapOrNil(m.OccurrenceString.Element.ToJSON())
+		}
+	}
+	if m.Recorded != nil && m.Recorded.Value != nil {
+		output.Recorded = m.Recorded.Value
+		if m.Recorded.Element != nil {
+			output.RecordedElement = toMapOrNil(m.Recorded.Element.ToJSON())
+		}
+	}
+	if m.PrimarySource != nil && m.PrimarySource.Value != nil {
+		output.PrimarySource = m.PrimarySource.Value
+		if m.PrimarySource.Element != nil {
+			output.PrimarySourceElement = toMapOrNil(m.PrimarySource.Element.ToJSON())
+		}
+	}
+	output.ReportOrigin = m.ReportOrigin
+	output.Location = m.Location
+	output.Manufacturer = m.Manufacturer
+	if m.LotNumber != nil && m.LotNumber.Value != nil {
+		output.LotNumber = m.LotNumber.Value
+		if m.LotNumber.Element != nil {
+			output.LotNumberElement = toMapOrNil(m.LotNumber.Element.ToJSON())
+		}
+	}
+	if m.ExpirationDate != nil && m.ExpirationDate.Value != nil {
+		output.ExpirationDate = m.ExpirationDate.Value
+		if m.ExpirationDate.Element != nil {
+			output.ExpirationDateElement = toMapOrNil(m.ExpirationDate.Element.ToJSON())
+		}
+	}
+	output.Site = m.Site
+	output.Route = m.Route
+	output.DoseQuantity = m.DoseQuantity
+	output.Performer = m.Performer
+	output.Note = m.Note
+	output.ReasonCode = m.ReasonCode
+	output.ReasonReference = m.ReasonReference
+	if m.IsSubpotent != nil && m.IsSubpotent.Value != nil {
+		output.IsSubpotent = m.IsSubpotent.Value
+		if m.IsSubpotent.Element != nil {
+			output.IsSubpotentElement = toMapOrNil(m.IsSubpotent.Element.ToJSON())
+		}
+	}
+	output.SubpotentReason = m.SubpotentReason
+	output.Education = m.Education
+	output.ProgramEligibility = m.ProgramEligibility
+	output.FundingSource = m.FundingSource
+	output.Reaction = m.Reaction
+	output.ProtocolApplied = m.ProtocolApplied
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Immunization
+// Clone creates a deep copy of Immunization.
 func (m *Immunization) Clone() *Immunization {
 	if m == nil { return nil }
 	return &Immunization{
@@ -107,7 +317,7 @@ func (m *Immunization) Clone() *Immunization {
 	}
 }
 
-// Equals checks for equality with another Immunization instance
+// Equals checks equality between two Immunization instances.
 func (m *Immunization) Equals(other *Immunization) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -154,7 +364,7 @@ func (m *Immunization) Equals(other *Immunization) bool {
 // ImmunizationPerformer
 // Indicates who performed the immunization event.
 type ImmunizationPerformer struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -162,22 +372,55 @@ type ImmunizationPerformer struct {
 	Actor *Reference `json:"actor,omitempty"`
 }
 
-// NewImmunizationPerformer creates a new ImmunizationPerformer instance
+// NewImmunizationPerformer creates a new ImmunizationPerformer instance.
 func NewImmunizationPerformer() *ImmunizationPerformer {
 	return &ImmunizationPerformer{}
 }
 
-// FromJSON populates ImmunizationPerformer from JSON data
+// FromJSON populates ImmunizationPerformer from JSON data.
 func (m *ImmunizationPerformer) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Function_ *CodeableConcept `json:"function,omitempty"`
+		Actor *Reference `json:"actor,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Function_ = temp.Function_
+	m.Actor = temp.Actor
+	return nil
 }
 
-// ToJSON converts ImmunizationPerformer to JSON data
+// ToJSON converts ImmunizationPerformer to JSON data.
 func (m *ImmunizationPerformer) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Function_ *CodeableConcept `json:"function,omitempty"`
+		Actor *Reference `json:"actor,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Function_ = m.Function_
+	output.Actor = m.Actor
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ImmunizationPerformer
+// Clone creates a deep copy of ImmunizationPerformer.
 func (m *ImmunizationPerformer) Clone() *ImmunizationPerformer {
 	if m == nil { return nil }
 	return &ImmunizationPerformer{
@@ -189,7 +432,7 @@ func (m *ImmunizationPerformer) Clone() *ImmunizationPerformer {
 	}
 }
 
-// Equals checks for equality with another ImmunizationPerformer instance
+// Equals checks equality between two ImmunizationPerformer instances.
 func (m *ImmunizationPerformer) Equals(other *ImmunizationPerformer) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -204,7 +447,7 @@ func (m *ImmunizationPerformer) Equals(other *ImmunizationPerformer) bool {
 // ImmunizationEducation
 // Educational material presented to the patient (or guardian) at the time of vaccine administration.
 type ImmunizationEducation struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -214,22 +457,87 @@ type ImmunizationEducation struct {
 	PresentationDate *FhirDateTime `json:"presentationdate,omitempty"`
 }
 
-// NewImmunizationEducation creates a new ImmunizationEducation instance
+// NewImmunizationEducation creates a new ImmunizationEducation instance.
 func NewImmunizationEducation() *ImmunizationEducation {
 	return &ImmunizationEducation{}
 }
 
-// FromJSON populates ImmunizationEducation from JSON data
+// FromJSON populates ImmunizationEducation from JSON data.
 func (m *ImmunizationEducation) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		DocumentType *FhirString `json:"documenttype,omitempty"`
+		Reference *FhirUri `json:"reference,omitempty"`
+		PublicationDate *FhirDateTime `json:"publicationdate,omitempty"`
+		PresentationDate *FhirDateTime `json:"presentationdate,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.DocumentType = temp.DocumentType
+	m.Reference = temp.Reference
+	m.PublicationDate = temp.PublicationDate
+	m.PresentationDate = temp.PresentationDate
+	return nil
 }
 
-// ToJSON converts ImmunizationEducation to JSON data
+// ToJSON converts ImmunizationEducation to JSON data.
 func (m *ImmunizationEducation) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		DocumentType interface{} `json:"documenttype,omitempty"`
+		DocumentTypeElement map[string]interface{} `json:"_documenttype,omitempty"`
+		Reference interface{} `json:"reference,omitempty"`
+		ReferenceElement map[string]interface{} `json:"_reference,omitempty"`
+		PublicationDate interface{} `json:"publicationdate,omitempty"`
+		PublicationDateElement map[string]interface{} `json:"_publicationdate,omitempty"`
+		PresentationDate interface{} `json:"presentationdate,omitempty"`
+		PresentationDateElement map[string]interface{} `json:"_presentationdate,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.DocumentType != nil && m.DocumentType.Value != nil {
+		output.DocumentType = m.DocumentType.Value
+		if m.DocumentType.Element != nil {
+			output.DocumentTypeElement = toMapOrNil(m.DocumentType.Element.ToJSON())
+		}
+	}
+	if m.Reference != nil && m.Reference.Value != nil {
+		output.Reference = m.Reference.Value
+		if m.Reference.Element != nil {
+			output.ReferenceElement = toMapOrNil(m.Reference.Element.ToJSON())
+		}
+	}
+	if m.PublicationDate != nil && m.PublicationDate.Value != nil {
+		output.PublicationDate = m.PublicationDate.Value
+		if m.PublicationDate.Element != nil {
+			output.PublicationDateElement = toMapOrNil(m.PublicationDate.Element.ToJSON())
+		}
+	}
+	if m.PresentationDate != nil && m.PresentationDate.Value != nil {
+		output.PresentationDate = m.PresentationDate.Value
+		if m.PresentationDate.Element != nil {
+			output.PresentationDateElement = toMapOrNil(m.PresentationDate.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ImmunizationEducation
+// Clone creates a deep copy of ImmunizationEducation.
 func (m *ImmunizationEducation) Clone() *ImmunizationEducation {
 	if m == nil { return nil }
 	return &ImmunizationEducation{
@@ -243,7 +551,7 @@ func (m *ImmunizationEducation) Clone() *ImmunizationEducation {
 	}
 }
 
-// Equals checks for equality with another ImmunizationEducation instance
+// Equals checks equality between two ImmunizationEducation instances.
 func (m *ImmunizationEducation) Equals(other *ImmunizationEducation) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -260,7 +568,7 @@ func (m *ImmunizationEducation) Equals(other *ImmunizationEducation) bool {
 // ImmunizationReaction
 // Categorical data indicating that an adverse event is associated in time to an immunization.
 type ImmunizationReaction struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -269,22 +577,71 @@ type ImmunizationReaction struct {
 	Reported *FhirBoolean `json:"reported,omitempty"`
 }
 
-// NewImmunizationReaction creates a new ImmunizationReaction instance
+// NewImmunizationReaction creates a new ImmunizationReaction instance.
 func NewImmunizationReaction() *ImmunizationReaction {
 	return &ImmunizationReaction{}
 }
 
-// FromJSON populates ImmunizationReaction from JSON data
+// FromJSON populates ImmunizationReaction from JSON data.
 func (m *ImmunizationReaction) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Detail *Reference `json:"detail,omitempty"`
+		Reported *FhirBoolean `json:"reported,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Date = temp.Date
+	m.Detail = temp.Detail
+	m.Reported = temp.Reported
+	return nil
 }
 
-// ToJSON converts ImmunizationReaction to JSON data
+// ToJSON converts ImmunizationReaction to JSON data.
 func (m *ImmunizationReaction) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Detail *Reference `json:"detail,omitempty"`
+		Reported interface{} `json:"reported,omitempty"`
+		ReportedElement map[string]interface{} `json:"_reported,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	output.Detail = m.Detail
+	if m.Reported != nil && m.Reported.Value != nil {
+		output.Reported = m.Reported.Value
+		if m.Reported.Element != nil {
+			output.ReportedElement = toMapOrNil(m.Reported.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ImmunizationReaction
+// Clone creates a deep copy of ImmunizationReaction.
 func (m *ImmunizationReaction) Clone() *ImmunizationReaction {
 	if m == nil { return nil }
 	return &ImmunizationReaction{
@@ -297,7 +654,7 @@ func (m *ImmunizationReaction) Clone() *ImmunizationReaction {
 	}
 }
 
-// Equals checks for equality with another ImmunizationReaction instance
+// Equals checks equality between two ImmunizationReaction instances.
 func (m *ImmunizationReaction) Equals(other *ImmunizationReaction) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -313,7 +670,7 @@ func (m *ImmunizationReaction) Equals(other *ImmunizationReaction) bool {
 // ImmunizationProtocolApplied
 // The protocol (set of recommendations) being followed by the provider who administered the dose.
 type ImmunizationProtocolApplied struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -326,22 +683,105 @@ type ImmunizationProtocolApplied struct {
 	SeriesDosesString *FhirString `json:"seriesdosesstring,omitempty"`
 }
 
-// NewImmunizationProtocolApplied creates a new ImmunizationProtocolApplied instance
+// NewImmunizationProtocolApplied creates a new ImmunizationProtocolApplied instance.
 func NewImmunizationProtocolApplied() *ImmunizationProtocolApplied {
 	return &ImmunizationProtocolApplied{}
 }
 
-// FromJSON populates ImmunizationProtocolApplied from JSON data
+// FromJSON populates ImmunizationProtocolApplied from JSON data.
 func (m *ImmunizationProtocolApplied) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Series *FhirString `json:"series,omitempty"`
+		Authority *Reference `json:"authority,omitempty"`
+		TargetDisease []*CodeableConcept `json:"targetdisease,omitempty"`
+		DoseNumberPositiveInt *FhirPositiveInt `json:"dosenumberpositiveint,omitempty"`
+		DoseNumberString *FhirString `json:"dosenumberstring,omitempty"`
+		SeriesDosesPositiveInt *FhirPositiveInt `json:"seriesdosespositiveint,omitempty"`
+		SeriesDosesString *FhirString `json:"seriesdosesstring,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Series = temp.Series
+	m.Authority = temp.Authority
+	m.TargetDisease = temp.TargetDisease
+	m.DoseNumberPositiveInt = temp.DoseNumberPositiveInt
+	m.DoseNumberString = temp.DoseNumberString
+	m.SeriesDosesPositiveInt = temp.SeriesDosesPositiveInt
+	m.SeriesDosesString = temp.SeriesDosesString
+	return nil
 }
 
-// ToJSON converts ImmunizationProtocolApplied to JSON data
+// ToJSON converts ImmunizationProtocolApplied to JSON data.
 func (m *ImmunizationProtocolApplied) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Series interface{} `json:"series,omitempty"`
+		SeriesElement map[string]interface{} `json:"_series,omitempty"`
+		Authority *Reference `json:"authority,omitempty"`
+		TargetDisease []*CodeableConcept `json:"targetdisease,omitempty"`
+		DoseNumberPositiveInt interface{} `json:"dosenumberpositiveint,omitempty"`
+		DoseNumberPositiveIntElement map[string]interface{} `json:"_dosenumberpositiveint,omitempty"`
+		DoseNumberString interface{} `json:"dosenumberstring,omitempty"`
+		DoseNumberStringElement map[string]interface{} `json:"_dosenumberstring,omitempty"`
+		SeriesDosesPositiveInt interface{} `json:"seriesdosespositiveint,omitempty"`
+		SeriesDosesPositiveIntElement map[string]interface{} `json:"_seriesdosespositiveint,omitempty"`
+		SeriesDosesString interface{} `json:"seriesdosesstring,omitempty"`
+		SeriesDosesStringElement map[string]interface{} `json:"_seriesdosesstring,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Series != nil && m.Series.Value != nil {
+		output.Series = m.Series.Value
+		if m.Series.Element != nil {
+			output.SeriesElement = toMapOrNil(m.Series.Element.ToJSON())
+		}
+	}
+	output.Authority = m.Authority
+	output.TargetDisease = m.TargetDisease
+	if m.DoseNumberPositiveInt != nil && m.DoseNumberPositiveInt.Value != nil {
+		output.DoseNumberPositiveInt = m.DoseNumberPositiveInt.Value
+		if m.DoseNumberPositiveInt.Element != nil {
+			output.DoseNumberPositiveIntElement = toMapOrNil(m.DoseNumberPositiveInt.Element.ToJSON())
+		}
+	}
+	if m.DoseNumberString != nil && m.DoseNumberString.Value != nil {
+		output.DoseNumberString = m.DoseNumberString.Value
+		if m.DoseNumberString.Element != nil {
+			output.DoseNumberStringElement = toMapOrNil(m.DoseNumberString.Element.ToJSON())
+		}
+	}
+	if m.SeriesDosesPositiveInt != nil && m.SeriesDosesPositiveInt.Value != nil {
+		output.SeriesDosesPositiveInt = m.SeriesDosesPositiveInt.Value
+		if m.SeriesDosesPositiveInt.Element != nil {
+			output.SeriesDosesPositiveIntElement = toMapOrNil(m.SeriesDosesPositiveInt.Element.ToJSON())
+		}
+	}
+	if m.SeriesDosesString != nil && m.SeriesDosesString.Value != nil {
+		output.SeriesDosesString = m.SeriesDosesString.Value
+		if m.SeriesDosesString.Element != nil {
+			output.SeriesDosesStringElement = toMapOrNil(m.SeriesDosesString.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ImmunizationProtocolApplied
+// Clone creates a deep copy of ImmunizationProtocolApplied.
 func (m *ImmunizationProtocolApplied) Clone() *ImmunizationProtocolApplied {
 	if m == nil { return nil }
 	return &ImmunizationProtocolApplied{
@@ -358,7 +798,7 @@ func (m *ImmunizationProtocolApplied) Clone() *ImmunizationProtocolApplied {
 	}
 }
 
-// Equals checks for equality with another ImmunizationProtocolApplied instance
+// Equals checks equality between two ImmunizationProtocolApplied instances.
 func (m *ImmunizationProtocolApplied) Equals(other *ImmunizationProtocolApplied) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // Organization
 // A formally or informally recognized grouping of people or organizations formed for the purpose of achieving some form of collective action.  Includes companies, institutions, corporations, departments, community groups, healthcare practice groups, payer/insurer, etc.
 type Organization struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -29,22 +31,146 @@ type Organization struct {
 	Endpoint []*Reference `json:"endpoint,omitempty"`
 }
 
-// NewOrganization creates a new Organization instance
+// NewOrganization creates a new Organization instance.
 func NewOrganization() *Organization {
 	return &Organization{}
 }
 
-// FromJSON populates Organization from JSON data
+// FromJSON populates Organization from JSON data.
 func (m *Organization) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Active *FhirBoolean `json:"active,omitempty"`
+		Type []*CodeableConcept `json:"type,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Alias []interface{} `json:"alias,omitempty"`
+		Telecom []*ContactPoint `json:"telecom,omitempty"`
+		Address []*Address `json:"address,omitempty"`
+		PartOf *Reference `json:"partof,omitempty"`
+		Contact []*OrganizationContact `json:"contact,omitempty"`
+		Endpoint []*Reference `json:"endpoint,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Active = temp.Active
+	m.Type = temp.Type
+	m.Name = temp.Name
+	if len(temp.Alias) > 0 {
+		m.Alias = make([]*FhirString, len(temp.Alias))
+		for i := range temp.Alias {
+			itemMap, ok := temp.Alias[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Alias[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Alias[%d]: %v", i, err) }
+			m.Alias[i] = primitive
+		}
+	}
+	m.Telecom = temp.Telecom
+	m.Address = temp.Address
+	m.PartOf = temp.PartOf
+	m.Contact = temp.Contact
+	m.Endpoint = temp.Endpoint
+	return nil
 }
 
-// ToJSON converts Organization to JSON data
+// ToJSON converts Organization to JSON data.
 func (m *Organization) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Active interface{} `json:"active,omitempty"`
+		ActiveElement map[string]interface{} `json:"_active,omitempty"`
+		Type []*CodeableConcept `json:"type,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Alias []interface{} `json:"alias,omitempty"`
+		AliasElement []map[string]interface{} `json:"_alias,omitempty"`
+		Telecom []*ContactPoint `json:"telecom,omitempty"`
+		Address []*Address `json:"address,omitempty"`
+		PartOf *Reference `json:"partof,omitempty"`
+		Contact []*OrganizationContact `json:"contact,omitempty"`
+		Endpoint []*Reference `json:"endpoint,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	if m.Active != nil && m.Active.Value != nil {
+		output.Active = m.Active.Value
+		if m.Active.Element != nil {
+			output.ActiveElement = toMapOrNil(m.Active.Element.ToJSON())
+		}
+	}
+	output.Type = m.Type
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if len(m.Alias) > 0 {
+		output.Alias = make([]interface{}, len(m.Alias))
+		output.AliasElement = make([]map[string]interface{}, len(m.Alias))
+		for i, item := range m.Alias {
+			if item != nil && item.Value != nil {
+				output.Alias[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.AliasElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Telecom = m.Telecom
+	output.Address = m.Address
+	output.PartOf = m.PartOf
+	output.Contact = m.Contact
+	output.Endpoint = m.Endpoint
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Organization
+// Clone creates a deep copy of Organization.
 func (m *Organization) Clone() *Organization {
 	if m == nil { return nil }
 	return &Organization{
@@ -69,7 +195,7 @@ func (m *Organization) Clone() *Organization {
 	}
 }
 
-// Equals checks for equality with another Organization instance
+// Equals checks equality between two Organization instances.
 func (m *Organization) Equals(other *Organization) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -97,7 +223,7 @@ func (m *Organization) Equals(other *Organization) bool {
 // OrganizationContact
 // Contact for the organization for a certain purpose.
 type OrganizationContact struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -107,22 +233,63 @@ type OrganizationContact struct {
 	Address *Address `json:"address,omitempty"`
 }
 
-// NewOrganizationContact creates a new OrganizationContact instance
+// NewOrganizationContact creates a new OrganizationContact instance.
 func NewOrganizationContact() *OrganizationContact {
 	return &OrganizationContact{}
 }
 
-// FromJSON populates OrganizationContact from JSON data
+// FromJSON populates OrganizationContact from JSON data.
 func (m *OrganizationContact) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Purpose *CodeableConcept `json:"purpose,omitempty"`
+		Name *HumanName `json:"name,omitempty"`
+		Telecom []*ContactPoint `json:"telecom,omitempty"`
+		Address *Address `json:"address,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Purpose = temp.Purpose
+	m.Name = temp.Name
+	m.Telecom = temp.Telecom
+	m.Address = temp.Address
+	return nil
 }
 
-// ToJSON converts OrganizationContact to JSON data
+// ToJSON converts OrganizationContact to JSON data.
 func (m *OrganizationContact) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Purpose *CodeableConcept `json:"purpose,omitempty"`
+		Name *HumanName `json:"name,omitempty"`
+		Telecom []*ContactPoint `json:"telecom,omitempty"`
+		Address *Address `json:"address,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Purpose = m.Purpose
+	output.Name = m.Name
+	output.Telecom = m.Telecom
+	output.Address = m.Address
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of OrganizationContact
+// Clone creates a deep copy of OrganizationContact.
 func (m *OrganizationContact) Clone() *OrganizationContact {
 	if m == nil { return nil }
 	return &OrganizationContact{
@@ -136,7 +303,7 @@ func (m *OrganizationContact) Clone() *OrganizationContact {
 	}
 }
 
-// Equals checks for equality with another OrganizationContact instance
+// Equals checks equality between two OrganizationContact instances.
 func (m *OrganizationContact) Equals(other *OrganizationContact) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

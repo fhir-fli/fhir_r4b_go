@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // Timing
 // Specifies an event that may occur multiple times. Timing schedules are used to record when things are planned, expected or requested to occur. The most common usage is in dosage instructions for medications. They are also used when planning care of various kinds, and may be used for reporting the schedule to which past regular activities were carried out.
 type Timing struct {
-	BackboneType
+	extends BackboneType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -17,22 +19,80 @@ type Timing struct {
 	Code *CodeableConcept `json:"code,omitempty"`
 }
 
-// NewTiming creates a new Timing instance
+// NewTiming creates a new Timing instance.
 func NewTiming() *Timing {
 	return &Timing{}
 }
 
-// FromJSON populates Timing from JSON data
+// FromJSON populates Timing from JSON data.
 func (m *Timing) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Event []interface{} `json:"event,omitempty"`
+		Repeat *TimingRepeat `json:"repeat,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	if len(temp.Event) > 0 {
+		m.Event = make([]*FhirDateTime, len(temp.Event))
+		for i := range temp.Event {
+			itemMap, ok := temp.Event[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Event[%d]: expected map", i) }
+			primitive, err := NewFhirDateTimeFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Event[%d]: %v", i, err) }
+			m.Event[i] = primitive
+		}
+	}
+	m.Repeat = temp.Repeat
+	m.Code = temp.Code
+	return nil
 }
 
-// ToJSON converts Timing to JSON data
+// ToJSON converts Timing to JSON data.
 func (m *Timing) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Event []interface{} `json:"event,omitempty"`
+		EventElement []map[string]interface{} `json:"_event,omitempty"`
+		Repeat *TimingRepeat `json:"repeat,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if len(m.Event) > 0 {
+		output.Event = make([]interface{}, len(m.Event))
+		output.EventElement = make([]map[string]interface{}, len(m.Event))
+		for i, item := range m.Event {
+			if item != nil && item.Value != nil {
+				output.Event[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.EventElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Repeat = m.Repeat
+	output.Code = m.Code
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Timing
+// Clone creates a deep copy of Timing.
 func (m *Timing) Clone() *Timing {
 	if m == nil { return nil }
 	return &Timing{
@@ -45,7 +105,7 @@ func (m *Timing) Clone() *Timing {
 	}
 }
 
-// Equals checks for equality with another Timing instance
+// Equals checks equality between two Timing instances.
 func (m *Timing) Equals(other *Timing) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -61,7 +121,7 @@ func (m *Timing) Equals(other *Timing) bool {
 // TimingRepeat
 // A set of rules that describe when the event is scheduled.
 type TimingRepeat struct {
-	Element
+	extends Element
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	BoundsDuration *FhirDuration `json:"boundsduration,omitempty"`
@@ -83,22 +143,186 @@ type TimingRepeat struct {
 	Offset *FhirUnsignedInt `json:"offset,omitempty"`
 }
 
-// NewTimingRepeat creates a new TimingRepeat instance
+// NewTimingRepeat creates a new TimingRepeat instance.
 func NewTimingRepeat() *TimingRepeat {
 	return &TimingRepeat{}
 }
 
-// FromJSON populates TimingRepeat from JSON data
+// FromJSON populates TimingRepeat from JSON data.
 func (m *TimingRepeat) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		BoundsDuration *FhirDuration `json:"boundsduration,omitempty"`
+		BoundsRange *Range `json:"boundsrange,omitempty"`
+		BoundsPeriod *Period `json:"boundsperiod,omitempty"`
+		Count *FhirPositiveInt `json:"count,omitempty"`
+		CountMax *FhirPositiveInt `json:"countmax,omitempty"`
+		Duration *FhirDecimal `json:"duration,omitempty"`
+		DurationMax *FhirDecimal `json:"durationmax,omitempty"`
+		DurationUnit *UnitsOfTime `json:"durationunit,omitempty"`
+		Frequency *FhirPositiveInt `json:"frequency,omitempty"`
+		FrequencyMax *FhirPositiveInt `json:"frequencymax,omitempty"`
+		Period *FhirDecimal `json:"period,omitempty"`
+		PeriodMax *FhirDecimal `json:"periodmax,omitempty"`
+		PeriodUnit *UnitsOfTime `json:"periodunit,omitempty"`
+		DayOfWeek []*DaysOfWeek `json:"dayofweek,omitempty"`
+		TimeOfDay []interface{} `json:"timeofday,omitempty"`
+		When []*EventTiming `json:"when,omitempty"`
+		Offset *FhirUnsignedInt `json:"offset,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.BoundsDuration = temp.BoundsDuration
+	m.BoundsRange = temp.BoundsRange
+	m.BoundsPeriod = temp.BoundsPeriod
+	m.Count = temp.Count
+	m.CountMax = temp.CountMax
+	m.Duration = temp.Duration
+	m.DurationMax = temp.DurationMax
+	m.DurationUnit = temp.DurationUnit
+	m.Frequency = temp.Frequency
+	m.FrequencyMax = temp.FrequencyMax
+	m.Period = temp.Period
+	m.PeriodMax = temp.PeriodMax
+	m.PeriodUnit = temp.PeriodUnit
+	m.DayOfWeek = temp.DayOfWeek
+	if len(temp.TimeOfDay) > 0 {
+		m.TimeOfDay = make([]*FhirTime, len(temp.TimeOfDay))
+		for i := range temp.TimeOfDay {
+			itemMap, ok := temp.TimeOfDay[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for TimeOfDay[%d]: expected map", i) }
+			primitive, err := NewFhirTimeFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse TimeOfDay[%d]: %v", i, err) }
+			m.TimeOfDay[i] = primitive
+		}
+	}
+	m.When = temp.When
+	m.Offset = temp.Offset
+	return nil
 }
 
-// ToJSON converts TimingRepeat to JSON data
+// ToJSON converts TimingRepeat to JSON data.
 func (m *TimingRepeat) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		BoundsDuration *FhirDuration `json:"boundsduration,omitempty"`
+		BoundsRange *Range `json:"boundsrange,omitempty"`
+		BoundsPeriod *Period `json:"boundsperiod,omitempty"`
+		Count interface{} `json:"count,omitempty"`
+		CountElement map[string]interface{} `json:"_count,omitempty"`
+		CountMax interface{} `json:"countmax,omitempty"`
+		CountMaxElement map[string]interface{} `json:"_countmax,omitempty"`
+		Duration interface{} `json:"duration,omitempty"`
+		DurationElement map[string]interface{} `json:"_duration,omitempty"`
+		DurationMax interface{} `json:"durationmax,omitempty"`
+		DurationMaxElement map[string]interface{} `json:"_durationmax,omitempty"`
+		DurationUnit *UnitsOfTime `json:"durationunit,omitempty"`
+		Frequency interface{} `json:"frequency,omitempty"`
+		FrequencyElement map[string]interface{} `json:"_frequency,omitempty"`
+		FrequencyMax interface{} `json:"frequencymax,omitempty"`
+		FrequencyMaxElement map[string]interface{} `json:"_frequencymax,omitempty"`
+		Period interface{} `json:"period,omitempty"`
+		PeriodElement map[string]interface{} `json:"_period,omitempty"`
+		PeriodMax interface{} `json:"periodmax,omitempty"`
+		PeriodMaxElement map[string]interface{} `json:"_periodmax,omitempty"`
+		PeriodUnit *UnitsOfTime `json:"periodunit,omitempty"`
+		DayOfWeek []*DaysOfWeek `json:"dayofweek,omitempty"`
+		TimeOfDay []interface{} `json:"timeofday,omitempty"`
+		TimeOfDayElement []map[string]interface{} `json:"_timeofday,omitempty"`
+		When []*EventTiming `json:"when,omitempty"`
+		Offset interface{} `json:"offset,omitempty"`
+		OffsetElement map[string]interface{} `json:"_offset,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.BoundsDuration = m.BoundsDuration
+	output.BoundsRange = m.BoundsRange
+	output.BoundsPeriod = m.BoundsPeriod
+	if m.Count != nil && m.Count.Value != nil {
+		output.Count = m.Count.Value
+		if m.Count.Element != nil {
+			output.CountElement = toMapOrNil(m.Count.Element.ToJSON())
+		}
+	}
+	if m.CountMax != nil && m.CountMax.Value != nil {
+		output.CountMax = m.CountMax.Value
+		if m.CountMax.Element != nil {
+			output.CountMaxElement = toMapOrNil(m.CountMax.Element.ToJSON())
+		}
+	}
+	if m.Duration != nil && m.Duration.Value != nil {
+		output.Duration = m.Duration.Value
+		if m.Duration.Element != nil {
+			output.DurationElement = toMapOrNil(m.Duration.Element.ToJSON())
+		}
+	}
+	if m.DurationMax != nil && m.DurationMax.Value != nil {
+		output.DurationMax = m.DurationMax.Value
+		if m.DurationMax.Element != nil {
+			output.DurationMaxElement = toMapOrNil(m.DurationMax.Element.ToJSON())
+		}
+	}
+	output.DurationUnit = m.DurationUnit
+	if m.Frequency != nil && m.Frequency.Value != nil {
+		output.Frequency = m.Frequency.Value
+		if m.Frequency.Element != nil {
+			output.FrequencyElement = toMapOrNil(m.Frequency.Element.ToJSON())
+		}
+	}
+	if m.FrequencyMax != nil && m.FrequencyMax.Value != nil {
+		output.FrequencyMax = m.FrequencyMax.Value
+		if m.FrequencyMax.Element != nil {
+			output.FrequencyMaxElement = toMapOrNil(m.FrequencyMax.Element.ToJSON())
+		}
+	}
+	if m.Period != nil && m.Period.Value != nil {
+		output.Period = m.Period.Value
+		if m.Period.Element != nil {
+			output.PeriodElement = toMapOrNil(m.Period.Element.ToJSON())
+		}
+	}
+	if m.PeriodMax != nil && m.PeriodMax.Value != nil {
+		output.PeriodMax = m.PeriodMax.Value
+		if m.PeriodMax.Element != nil {
+			output.PeriodMaxElement = toMapOrNil(m.PeriodMax.Element.ToJSON())
+		}
+	}
+	output.PeriodUnit = m.PeriodUnit
+	output.DayOfWeek = m.DayOfWeek
+	if len(m.TimeOfDay) > 0 {
+		output.TimeOfDay = make([]interface{}, len(m.TimeOfDay))
+		output.TimeOfDayElement = make([]map[string]interface{}, len(m.TimeOfDay))
+		for i, item := range m.TimeOfDay {
+			if item != nil && item.Value != nil {
+				output.TimeOfDay[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.TimeOfDayElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.When = m.When
+	if m.Offset != nil && m.Offset.Value != nil {
+		output.Offset = m.Offset.Value
+		if m.Offset.Element != nil {
+			output.OffsetElement = toMapOrNil(m.Offset.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TimingRepeat
+// Clone creates a deep copy of TimingRepeat.
 func (m *TimingRepeat) Clone() *TimingRepeat {
 	if m == nil { return nil }
 	return &TimingRepeat{
@@ -124,7 +348,7 @@ func (m *TimingRepeat) Clone() *TimingRepeat {
 	}
 }
 
-// Equals checks for equality with another TimingRepeat instance
+// Equals checks equality between two TimingRepeat instances.
 func (m *TimingRepeat) Equals(other *TimingRepeat) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

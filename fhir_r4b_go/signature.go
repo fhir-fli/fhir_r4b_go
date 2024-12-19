@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Signature
 // A signature along with supporting context. The signature may be a digital signature that is cryptographic in nature, or some other signature acceptable to the domain. This other signature may be as simple as a graphical image representing a hand-written signature, or a signature ceremony Different signature approaches have different utilities.
 type Signature struct {
-	DataType
+	extends DataType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	Type []*Coding `json:"type,omitempty"`
@@ -20,22 +21,95 @@ type Signature struct {
 	Data *FhirBase64Binary `json:"data,omitempty"`
 }
 
-// NewSignature creates a new Signature instance
+// NewSignature creates a new Signature instance.
 func NewSignature() *Signature {
 	return &Signature{}
 }
 
-// FromJSON populates Signature from JSON data
+// FromJSON populates Signature from JSON data.
 func (m *Signature) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Type []*Coding `json:"type,omitempty"`
+		When *FhirInstant `json:"when,omitempty"`
+		Who *Reference `json:"who,omitempty"`
+		OnBehalfOf *Reference `json:"onbehalfof,omitempty"`
+		TargetFormat *FhirCode `json:"targetformat,omitempty"`
+		SigFormat *FhirCode `json:"sigformat,omitempty"`
+		Data *FhirBase64Binary `json:"data,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.Type = temp.Type
+	m.When = temp.When
+	m.Who = temp.Who
+	m.OnBehalfOf = temp.OnBehalfOf
+	m.TargetFormat = temp.TargetFormat
+	m.SigFormat = temp.SigFormat
+	m.Data = temp.Data
+	return nil
 }
 
-// ToJSON converts Signature to JSON data
+// ToJSON converts Signature to JSON data.
 func (m *Signature) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Type []*Coding `json:"type,omitempty"`
+		When interface{} `json:"when,omitempty"`
+		WhenElement map[string]interface{} `json:"_when,omitempty"`
+		Who *Reference `json:"who,omitempty"`
+		OnBehalfOf *Reference `json:"onbehalfof,omitempty"`
+		TargetFormat interface{} `json:"targetformat,omitempty"`
+		TargetFormatElement map[string]interface{} `json:"_targetformat,omitempty"`
+		SigFormat interface{} `json:"sigformat,omitempty"`
+		SigFormatElement map[string]interface{} `json:"_sigformat,omitempty"`
+		Data interface{} `json:"data,omitempty"`
+		DataElement map[string]interface{} `json:"_data,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.Type = m.Type
+	if m.When != nil && m.When.Value != nil {
+		output.When = m.When.Value
+		if m.When.Element != nil {
+			output.WhenElement = toMapOrNil(m.When.Element.ToJSON())
+		}
+	}
+	output.Who = m.Who
+	output.OnBehalfOf = m.OnBehalfOf
+	if m.TargetFormat != nil && m.TargetFormat.Value != nil {
+		output.TargetFormat = m.TargetFormat.Value
+		if m.TargetFormat.Element != nil {
+			output.TargetFormatElement = toMapOrNil(m.TargetFormat.Element.ToJSON())
+		}
+	}
+	if m.SigFormat != nil && m.SigFormat.Value != nil {
+		output.SigFormat = m.SigFormat.Value
+		if m.SigFormat.Element != nil {
+			output.SigFormatElement = toMapOrNil(m.SigFormat.Element.ToJSON())
+		}
+	}
+	if m.Data != nil && m.Data.Value != nil {
+		output.Data = m.Data.Value
+		if m.Data.Element != nil {
+			output.DataElement = toMapOrNil(m.Data.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Signature
+// Clone creates a deep copy of Signature.
 func (m *Signature) Clone() *Signature {
 	if m == nil { return nil }
 	return &Signature{
@@ -51,7 +125,7 @@ func (m *Signature) Clone() *Signature {
 	}
 }
 
-// Equals checks for equality with another Signature instance
+// Equals checks equality between two Signature instances.
 func (m *Signature) Equals(other *Signature) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

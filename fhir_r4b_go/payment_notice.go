@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // PaymentNotice
 // This resource provides the status of the payment for goods and services rendered, and the request and response resource references.
 type PaymentNotice struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -31,22 +32,133 @@ type PaymentNotice struct {
 	PaymentStatus *CodeableConcept `json:"paymentstatus,omitempty"`
 }
 
-// NewPaymentNotice creates a new PaymentNotice instance
+// NewPaymentNotice creates a new PaymentNotice instance.
 func NewPaymentNotice() *PaymentNotice {
 	return &PaymentNotice{}
 }
 
-// FromJSON populates PaymentNotice from JSON data
+// FromJSON populates PaymentNotice from JSON data.
 func (m *PaymentNotice) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *FinancialResourceStatusCodes `json:"status,omitempty"`
+		Request *Reference `json:"request,omitempty"`
+		Response *Reference `json:"response,omitempty"`
+		Created *FhirDateTime `json:"created,omitempty"`
+		Provider *Reference `json:"provider,omitempty"`
+		Payment *Reference `json:"payment,omitempty"`
+		PaymentDate *FhirDate `json:"paymentdate,omitempty"`
+		Payee *Reference `json:"payee,omitempty"`
+		Recipient *Reference `json:"recipient,omitempty"`
+		Amount *Money `json:"amount,omitempty"`
+		PaymentStatus *CodeableConcept `json:"paymentstatus,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.Request = temp.Request
+	m.Response = temp.Response
+	m.Created = temp.Created
+	m.Provider = temp.Provider
+	m.Payment = temp.Payment
+	m.PaymentDate = temp.PaymentDate
+	m.Payee = temp.Payee
+	m.Recipient = temp.Recipient
+	m.Amount = temp.Amount
+	m.PaymentStatus = temp.PaymentStatus
+	return nil
 }
 
-// ToJSON converts PaymentNotice to JSON data
+// ToJSON converts PaymentNotice to JSON data.
 func (m *PaymentNotice) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *FinancialResourceStatusCodes `json:"status,omitempty"`
+		Request *Reference `json:"request,omitempty"`
+		Response *Reference `json:"response,omitempty"`
+		Created interface{} `json:"created,omitempty"`
+		CreatedElement map[string]interface{} `json:"_created,omitempty"`
+		Provider *Reference `json:"provider,omitempty"`
+		Payment *Reference `json:"payment,omitempty"`
+		PaymentDate interface{} `json:"paymentdate,omitempty"`
+		PaymentDateElement map[string]interface{} `json:"_paymentdate,omitempty"`
+		Payee *Reference `json:"payee,omitempty"`
+		Recipient *Reference `json:"recipient,omitempty"`
+		Amount *Money `json:"amount,omitempty"`
+		PaymentStatus *CodeableConcept `json:"paymentstatus,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	output.Request = m.Request
+	output.Response = m.Response
+	if m.Created != nil && m.Created.Value != nil {
+		output.Created = m.Created.Value
+		if m.Created.Element != nil {
+			output.CreatedElement = toMapOrNil(m.Created.Element.ToJSON())
+		}
+	}
+	output.Provider = m.Provider
+	output.Payment = m.Payment
+	if m.PaymentDate != nil && m.PaymentDate.Value != nil {
+		output.PaymentDate = m.PaymentDate.Value
+		if m.PaymentDate.Element != nil {
+			output.PaymentDateElement = toMapOrNil(m.PaymentDate.Element.ToJSON())
+		}
+	}
+	output.Payee = m.Payee
+	output.Recipient = m.Recipient
+	output.Amount = m.Amount
+	output.PaymentStatus = m.PaymentStatus
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of PaymentNotice
+// Clone creates a deep copy of PaymentNotice.
 func (m *PaymentNotice) Clone() *PaymentNotice {
 	if m == nil { return nil }
 	return &PaymentNotice{
@@ -73,7 +185,7 @@ func (m *PaymentNotice) Clone() *PaymentNotice {
 	}
 }
 
-// Equals checks for equality with another PaymentNotice instance
+// Equals checks equality between two PaymentNotice instances.
 func (m *PaymentNotice) Equals(other *PaymentNotice) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

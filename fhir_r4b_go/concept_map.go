@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // ConceptMap
 // A statement of relationships from one set of concepts to one or more other concepts - either concepts in code systems, or data element/data element concepts, or classes in class models.
 type ConceptMap struct {
-	CanonicalResource
+	extends CanonicalResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -39,22 +40,237 @@ type ConceptMap struct {
 	Group []*ConceptMapGroup `json:"group,omitempty"`
 }
 
-// NewConceptMap creates a new ConceptMap instance
+// NewConceptMap creates a new ConceptMap instance.
 func NewConceptMap() *ConceptMap {
 	return &ConceptMap{}
 }
 
-// FromJSON populates ConceptMap from JSON data
+// FromJSON populates ConceptMap from JSON data.
 func (m *ConceptMap) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental *FhirBoolean `json:"experimental,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Publisher *FhirString `json:"publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose *FhirMarkdown `json:"purpose,omitempty"`
+		Copyright *FhirMarkdown `json:"copyright,omitempty"`
+		SourceUri *FhirUri `json:"sourceuri,omitempty"`
+		SourceCanonical *FhirCanonical `json:"sourcecanonical,omitempty"`
+		TargetUri *FhirUri `json:"targeturi,omitempty"`
+		TargetCanonical *FhirCanonical `json:"targetcanonical,omitempty"`
+		Group []*ConceptMapGroup `json:"group,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Url = temp.Url
+	m.Identifier = temp.Identifier
+	m.Version = temp.Version
+	m.Name = temp.Name
+	m.Title = temp.Title
+	m.Status = temp.Status
+	m.Experimental = temp.Experimental
+	m.Date = temp.Date
+	m.Publisher = temp.Publisher
+	m.Contact = temp.Contact
+	m.Description = temp.Description
+	m.UseContext = temp.UseContext
+	m.Jurisdiction = temp.Jurisdiction
+	m.Purpose = temp.Purpose
+	m.Copyright = temp.Copyright
+	m.SourceUri = temp.SourceUri
+	m.SourceCanonical = temp.SourceCanonical
+	m.TargetUri = temp.TargetUri
+	m.TargetCanonical = temp.TargetCanonical
+	m.Group = temp.Group
+	return nil
 }
 
-// ToJSON converts ConceptMap to JSON data
+// ToJSON converts ConceptMap to JSON data.
 func (m *ConceptMap) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental interface{} `json:"experimental,omitempty"`
+		ExperimentalElement map[string]interface{} `json:"_experimental,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Publisher interface{} `json:"publisher,omitempty"`
+		PublisherElement map[string]interface{} `json:"_publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose interface{} `json:"purpose,omitempty"`
+		PurposeElement map[string]interface{} `json:"_purpose,omitempty"`
+		Copyright interface{} `json:"copyright,omitempty"`
+		CopyrightElement map[string]interface{} `json:"_copyright,omitempty"`
+		SourceUri interface{} `json:"sourceuri,omitempty"`
+		SourceUriElement map[string]interface{} `json:"_sourceuri,omitempty"`
+		SourceCanonical interface{} `json:"sourcecanonical,omitempty"`
+		SourceCanonicalElement map[string]interface{} `json:"_sourcecanonical,omitempty"`
+		TargetUri interface{} `json:"targeturi,omitempty"`
+		TargetUriElement map[string]interface{} `json:"_targeturi,omitempty"`
+		TargetCanonical interface{} `json:"targetcanonical,omitempty"`
+		TargetCanonicalElement map[string]interface{} `json:"_targetcanonical,omitempty"`
+		Group []*ConceptMapGroup `json:"group,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	output.Identifier = m.Identifier
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	output.Status = m.Status
+	if m.Experimental != nil && m.Experimental.Value != nil {
+		output.Experimental = m.Experimental.Value
+		if m.Experimental.Element != nil {
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+		}
+	}
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.Publisher != nil && m.Publisher.Value != nil {
+		output.Publisher = m.Publisher.Value
+		if m.Publisher.Element != nil {
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+		}
+	}
+	output.Contact = m.Contact
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.UseContext = m.UseContext
+	output.Jurisdiction = m.Jurisdiction
+	if m.Purpose != nil && m.Purpose.Value != nil {
+		output.Purpose = m.Purpose.Value
+		if m.Purpose.Element != nil {
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+		}
+	}
+	if m.Copyright != nil && m.Copyright.Value != nil {
+		output.Copyright = m.Copyright.Value
+		if m.Copyright.Element != nil {
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+		}
+	}
+	if m.SourceUri != nil && m.SourceUri.Value != nil {
+		output.SourceUri = m.SourceUri.Value
+		if m.SourceUri.Element != nil {
+			output.SourceUriElement = toMapOrNil(m.SourceUri.Element.ToJSON())
+		}
+	}
+	if m.SourceCanonical != nil && m.SourceCanonical.Value != nil {
+		output.SourceCanonical = m.SourceCanonical.Value
+		if m.SourceCanonical.Element != nil {
+			output.SourceCanonicalElement = toMapOrNil(m.SourceCanonical.Element.ToJSON())
+		}
+	}
+	if m.TargetUri != nil && m.TargetUri.Value != nil {
+		output.TargetUri = m.TargetUri.Value
+		if m.TargetUri.Element != nil {
+			output.TargetUriElement = toMapOrNil(m.TargetUri.Element.ToJSON())
+		}
+	}
+	if m.TargetCanonical != nil && m.TargetCanonical.Value != nil {
+		output.TargetCanonical = m.TargetCanonical.Value
+		if m.TargetCanonical.Element != nil {
+			output.TargetCanonicalElement = toMapOrNil(m.TargetCanonical.Element.ToJSON())
+		}
+	}
+	output.Group = m.Group
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ConceptMap
+// Clone creates a deep copy of ConceptMap.
 func (m *ConceptMap) Clone() *ConceptMap {
 	if m == nil { return nil }
 	return &ConceptMap{
@@ -89,7 +305,7 @@ func (m *ConceptMap) Clone() *ConceptMap {
 	}
 }
 
-// Equals checks for equality with another ConceptMap instance
+// Equals checks equality between two ConceptMap instances.
 func (m *ConceptMap) Equals(other *ConceptMap) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -127,7 +343,7 @@ func (m *ConceptMap) Equals(other *ConceptMap) bool {
 // ConceptMapGroup
 // A group of mappings that all have the same source and target system.
 type ConceptMapGroup struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -139,22 +355,95 @@ type ConceptMapGroup struct {
 	Unmapped *ConceptMapUnmapped `json:"unmapped,omitempty"`
 }
 
-// NewConceptMapGroup creates a new ConceptMapGroup instance
+// NewConceptMapGroup creates a new ConceptMapGroup instance.
 func NewConceptMapGroup() *ConceptMapGroup {
 	return &ConceptMapGroup{}
 }
 
-// FromJSON populates ConceptMapGroup from JSON data
+// FromJSON populates ConceptMapGroup from JSON data.
 func (m *ConceptMapGroup) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Source *FhirUri `json:"source,omitempty"`
+		SourceVersion *FhirString `json:"sourceversion,omitempty"`
+		Target *FhirUri `json:"target,omitempty"`
+		TargetVersion *FhirString `json:"targetversion,omitempty"`
+		Element []*ConceptMapElement `json:"element,omitempty"`
+		Unmapped *ConceptMapUnmapped `json:"unmapped,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Source = temp.Source
+	m.SourceVersion = temp.SourceVersion
+	m.Target = temp.Target
+	m.TargetVersion = temp.TargetVersion
+	m.Element = temp.Element
+	m.Unmapped = temp.Unmapped
+	return nil
 }
 
-// ToJSON converts ConceptMapGroup to JSON data
+// ToJSON converts ConceptMapGroup to JSON data.
 func (m *ConceptMapGroup) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Source interface{} `json:"source,omitempty"`
+		SourceElement map[string]interface{} `json:"_source,omitempty"`
+		SourceVersion interface{} `json:"sourceversion,omitempty"`
+		SourceVersionElement map[string]interface{} `json:"_sourceversion,omitempty"`
+		Target interface{} `json:"target,omitempty"`
+		TargetElement map[string]interface{} `json:"_target,omitempty"`
+		TargetVersion interface{} `json:"targetversion,omitempty"`
+		TargetVersionElement map[string]interface{} `json:"_targetversion,omitempty"`
+		Element []*ConceptMapElement `json:"element,omitempty"`
+		Unmapped *ConceptMapUnmapped `json:"unmapped,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Source != nil && m.Source.Value != nil {
+		output.Source = m.Source.Value
+		if m.Source.Element != nil {
+			output.SourceElement = toMapOrNil(m.Source.Element.ToJSON())
+		}
+	}
+	if m.SourceVersion != nil && m.SourceVersion.Value != nil {
+		output.SourceVersion = m.SourceVersion.Value
+		if m.SourceVersion.Element != nil {
+			output.SourceVersionElement = toMapOrNil(m.SourceVersion.Element.ToJSON())
+		}
+	}
+	if m.Target != nil && m.Target.Value != nil {
+		output.Target = m.Target.Value
+		if m.Target.Element != nil {
+			output.TargetElement = toMapOrNil(m.Target.Element.ToJSON())
+		}
+	}
+	if m.TargetVersion != nil && m.TargetVersion.Value != nil {
+		output.TargetVersion = m.TargetVersion.Value
+		if m.TargetVersion.Element != nil {
+			output.TargetVersionElement = toMapOrNil(m.TargetVersion.Element.ToJSON())
+		}
+	}
+	output.Element = m.Element
+	output.Unmapped = m.Unmapped
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ConceptMapGroup
+// Clone creates a deep copy of ConceptMapGroup.
 func (m *ConceptMapGroup) Clone() *ConceptMapGroup {
 	if m == nil { return nil }
 	return &ConceptMapGroup{
@@ -170,7 +459,7 @@ func (m *ConceptMapGroup) Clone() *ConceptMapGroup {
 	}
 }
 
-// Equals checks for equality with another ConceptMapGroup instance
+// Equals checks equality between two ConceptMapGroup instances.
 func (m *ConceptMapGroup) Equals(other *ConceptMapGroup) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -189,7 +478,7 @@ func (m *ConceptMapGroup) Equals(other *ConceptMapGroup) bool {
 // ConceptMapElement
 // Mappings for an individual concept in the source to one or more concepts in the target.
 type ConceptMapElement struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -198,22 +487,71 @@ type ConceptMapElement struct {
 	Target []*ConceptMapTarget `json:"target,omitempty"`
 }
 
-// NewConceptMapElement creates a new ConceptMapElement instance
+// NewConceptMapElement creates a new ConceptMapElement instance.
 func NewConceptMapElement() *ConceptMapElement {
 	return &ConceptMapElement{}
 }
 
-// FromJSON populates ConceptMapElement from JSON data
+// FromJSON populates ConceptMapElement from JSON data.
 func (m *ConceptMapElement) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *FhirCode `json:"code,omitempty"`
+		Display *FhirString `json:"display,omitempty"`
+		Target []*ConceptMapTarget `json:"target,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Display = temp.Display
+	m.Target = temp.Target
+	return nil
 }
 
-// ToJSON converts ConceptMapElement to JSON data
+// ToJSON converts ConceptMapElement to JSON data.
 func (m *ConceptMapElement) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code interface{} `json:"code,omitempty"`
+		CodeElement map[string]interface{} `json:"_code,omitempty"`
+		Display interface{} `json:"display,omitempty"`
+		DisplayElement map[string]interface{} `json:"_display,omitempty"`
+		Target []*ConceptMapTarget `json:"target,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Code != nil && m.Code.Value != nil {
+		output.Code = m.Code.Value
+		if m.Code.Element != nil {
+			output.CodeElement = toMapOrNil(m.Code.Element.ToJSON())
+		}
+	}
+	if m.Display != nil && m.Display.Value != nil {
+		output.Display = m.Display.Value
+		if m.Display.Element != nil {
+			output.DisplayElement = toMapOrNil(m.Display.Element.ToJSON())
+		}
+	}
+	output.Target = m.Target
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ConceptMapElement
+// Clone creates a deep copy of ConceptMapElement.
 func (m *ConceptMapElement) Clone() *ConceptMapElement {
 	if m == nil { return nil }
 	return &ConceptMapElement{
@@ -226,7 +564,7 @@ func (m *ConceptMapElement) Clone() *ConceptMapElement {
 	}
 }
 
-// Equals checks for equality with another ConceptMapElement instance
+// Equals checks equality between two ConceptMapElement instances.
 func (m *ConceptMapElement) Equals(other *ConceptMapElement) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -242,7 +580,7 @@ func (m *ConceptMapElement) Equals(other *ConceptMapElement) bool {
 // ConceptMapTarget
 // A concept from the target value set that this concept maps to.
 type ConceptMapTarget struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -254,22 +592,89 @@ type ConceptMapTarget struct {
 	Product []*ConceptMapDependsOn `json:"product,omitempty"`
 }
 
-// NewConceptMapTarget creates a new ConceptMapTarget instance
+// NewConceptMapTarget creates a new ConceptMapTarget instance.
 func NewConceptMapTarget() *ConceptMapTarget {
 	return &ConceptMapTarget{}
 }
 
-// FromJSON populates ConceptMapTarget from JSON data
+// FromJSON populates ConceptMapTarget from JSON data.
 func (m *ConceptMapTarget) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *FhirCode `json:"code,omitempty"`
+		Display *FhirString `json:"display,omitempty"`
+		Equivalence *ConceptMapEquivalence `json:"equivalence,omitempty"`
+		Comment *FhirString `json:"comment,omitempty"`
+		DependsOn []*ConceptMapDependsOn `json:"dependson,omitempty"`
+		Product []*ConceptMapDependsOn `json:"product,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Display = temp.Display
+	m.Equivalence = temp.Equivalence
+	m.Comment = temp.Comment
+	m.DependsOn = temp.DependsOn
+	m.Product = temp.Product
+	return nil
 }
 
-// ToJSON converts ConceptMapTarget to JSON data
+// ToJSON converts ConceptMapTarget to JSON data.
 func (m *ConceptMapTarget) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code interface{} `json:"code,omitempty"`
+		CodeElement map[string]interface{} `json:"_code,omitempty"`
+		Display interface{} `json:"display,omitempty"`
+		DisplayElement map[string]interface{} `json:"_display,omitempty"`
+		Equivalence *ConceptMapEquivalence `json:"equivalence,omitempty"`
+		Comment interface{} `json:"comment,omitempty"`
+		CommentElement map[string]interface{} `json:"_comment,omitempty"`
+		DependsOn []*ConceptMapDependsOn `json:"dependson,omitempty"`
+		Product []*ConceptMapDependsOn `json:"product,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Code != nil && m.Code.Value != nil {
+		output.Code = m.Code.Value
+		if m.Code.Element != nil {
+			output.CodeElement = toMapOrNil(m.Code.Element.ToJSON())
+		}
+	}
+	if m.Display != nil && m.Display.Value != nil {
+		output.Display = m.Display.Value
+		if m.Display.Element != nil {
+			output.DisplayElement = toMapOrNil(m.Display.Element.ToJSON())
+		}
+	}
+	output.Equivalence = m.Equivalence
+	if m.Comment != nil && m.Comment.Value != nil {
+		output.Comment = m.Comment.Value
+		if m.Comment.Element != nil {
+			output.CommentElement = toMapOrNil(m.Comment.Element.ToJSON())
+		}
+	}
+	output.DependsOn = m.DependsOn
+	output.Product = m.Product
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ConceptMapTarget
+// Clone creates a deep copy of ConceptMapTarget.
 func (m *ConceptMapTarget) Clone() *ConceptMapTarget {
 	if m == nil { return nil }
 	return &ConceptMapTarget{
@@ -285,7 +690,7 @@ func (m *ConceptMapTarget) Clone() *ConceptMapTarget {
 	}
 }
 
-// Equals checks for equality with another ConceptMapTarget instance
+// Equals checks equality between two ConceptMapTarget instances.
 func (m *ConceptMapTarget) Equals(other *ConceptMapTarget) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -304,7 +709,7 @@ func (m *ConceptMapTarget) Equals(other *ConceptMapTarget) bool {
 // ConceptMapDependsOn
 // A set of additional dependencies for this mapping to hold. This mapping is only applicable if the specified element can be resolved, and it has the specified value.
 type ConceptMapDependsOn struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -314,22 +719,87 @@ type ConceptMapDependsOn struct {
 	Display *FhirString `json:"display,omitempty"`
 }
 
-// NewConceptMapDependsOn creates a new ConceptMapDependsOn instance
+// NewConceptMapDependsOn creates a new ConceptMapDependsOn instance.
 func NewConceptMapDependsOn() *ConceptMapDependsOn {
 	return &ConceptMapDependsOn{}
 }
 
-// FromJSON populates ConceptMapDependsOn from JSON data
+// FromJSON populates ConceptMapDependsOn from JSON data.
 func (m *ConceptMapDependsOn) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Property *FhirUri `json:"property,omitempty"`
+		System *FhirCanonical `json:"system,omitempty"`
+		Value *FhirString `json:"value,omitempty"`
+		Display *FhirString `json:"display,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Property = temp.Property
+	m.System = temp.System
+	m.Value = temp.Value
+	m.Display = temp.Display
+	return nil
 }
 
-// ToJSON converts ConceptMapDependsOn to JSON data
+// ToJSON converts ConceptMapDependsOn to JSON data.
 func (m *ConceptMapDependsOn) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Property interface{} `json:"property,omitempty"`
+		PropertyElement map[string]interface{} `json:"_property,omitempty"`
+		System interface{} `json:"system,omitempty"`
+		SystemElement map[string]interface{} `json:"_system,omitempty"`
+		Value interface{} `json:"value,omitempty"`
+		ValueElement map[string]interface{} `json:"_value,omitempty"`
+		Display interface{} `json:"display,omitempty"`
+		DisplayElement map[string]interface{} `json:"_display,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Property != nil && m.Property.Value != nil {
+		output.Property = m.Property.Value
+		if m.Property.Element != nil {
+			output.PropertyElement = toMapOrNil(m.Property.Element.ToJSON())
+		}
+	}
+	if m.System != nil && m.System.Value != nil {
+		output.System = m.System.Value
+		if m.System.Element != nil {
+			output.SystemElement = toMapOrNil(m.System.Element.ToJSON())
+		}
+	}
+	if m.Value != nil && m.Value.Value != nil {
+		output.Value = m.Value.Value
+		if m.Value.Element != nil {
+			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+		}
+	}
+	if m.Display != nil && m.Display.Value != nil {
+		output.Display = m.Display.Value
+		if m.Display.Element != nil {
+			output.DisplayElement = toMapOrNil(m.Display.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ConceptMapDependsOn
+// Clone creates a deep copy of ConceptMapDependsOn.
 func (m *ConceptMapDependsOn) Clone() *ConceptMapDependsOn {
 	if m == nil { return nil }
 	return &ConceptMapDependsOn{
@@ -343,7 +813,7 @@ func (m *ConceptMapDependsOn) Clone() *ConceptMapDependsOn {
 	}
 }
 
-// Equals checks for equality with another ConceptMapDependsOn instance
+// Equals checks equality between two ConceptMapDependsOn instances.
 func (m *ConceptMapDependsOn) Equals(other *ConceptMapDependsOn) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -360,7 +830,7 @@ func (m *ConceptMapDependsOn) Equals(other *ConceptMapDependsOn) bool {
 // ConceptMapUnmapped
 // What to do when there is no mapping for the source concept. "Unmapped" does not include codes that are unmatched, and the unmapped element is ignored in a code is specified to have equivalence = unmatched.
 type ConceptMapUnmapped struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -370,22 +840,81 @@ type ConceptMapUnmapped struct {
 	Url *FhirCanonical `json:"url,omitempty"`
 }
 
-// NewConceptMapUnmapped creates a new ConceptMapUnmapped instance
+// NewConceptMapUnmapped creates a new ConceptMapUnmapped instance.
 func NewConceptMapUnmapped() *ConceptMapUnmapped {
 	return &ConceptMapUnmapped{}
 }
 
-// FromJSON populates ConceptMapUnmapped from JSON data
+// FromJSON populates ConceptMapUnmapped from JSON data.
 func (m *ConceptMapUnmapped) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Mode *ConceptMapGroupUnmappedMode `json:"mode,omitempty"`
+		Code *FhirCode `json:"code,omitempty"`
+		Display *FhirString `json:"display,omitempty"`
+		Url *FhirCanonical `json:"url,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Mode = temp.Mode
+	m.Code = temp.Code
+	m.Display = temp.Display
+	m.Url = temp.Url
+	return nil
 }
 
-// ToJSON converts ConceptMapUnmapped to JSON data
+// ToJSON converts ConceptMapUnmapped to JSON data.
 func (m *ConceptMapUnmapped) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Mode *ConceptMapGroupUnmappedMode `json:"mode,omitempty"`
+		Code interface{} `json:"code,omitempty"`
+		CodeElement map[string]interface{} `json:"_code,omitempty"`
+		Display interface{} `json:"display,omitempty"`
+		DisplayElement map[string]interface{} `json:"_display,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Mode = m.Mode
+	if m.Code != nil && m.Code.Value != nil {
+		output.Code = m.Code.Value
+		if m.Code.Element != nil {
+			output.CodeElement = toMapOrNil(m.Code.Element.ToJSON())
+		}
+	}
+	if m.Display != nil && m.Display.Value != nil {
+		output.Display = m.Display.Value
+		if m.Display.Element != nil {
+			output.DisplayElement = toMapOrNil(m.Display.Element.ToJSON())
+		}
+	}
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ConceptMapUnmapped
+// Clone creates a deep copy of ConceptMapUnmapped.
 func (m *ConceptMapUnmapped) Clone() *ConceptMapUnmapped {
 	if m == nil { return nil }
 	return &ConceptMapUnmapped{
@@ -399,7 +928,7 @@ func (m *ConceptMapUnmapped) Clone() *ConceptMapUnmapped {
 	}
 }
 
-// Equals checks for equality with another ConceptMapUnmapped instance
+// Equals checks equality between two ConceptMapUnmapped instances.
 func (m *ConceptMapUnmapped) Equals(other *ConceptMapUnmapped) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

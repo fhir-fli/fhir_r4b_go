@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // RequestGroup
 // A group of related requests that can be used to capture intended activities that have inter-dependencies such as "give this medication after that one".
 type RequestGroup struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -37,22 +39,193 @@ type RequestGroup struct {
 	Action []*RequestGroupAction `json:"action,omitempty"`
 }
 
-// NewRequestGroup creates a new RequestGroup instance
+// NewRequestGroup creates a new RequestGroup instance.
 func NewRequestGroup() *RequestGroup {
 	return &RequestGroup{}
 }
 
-// FromJSON populates RequestGroup from JSON data
+// FromJSON populates RequestGroup from JSON data.
 func (m *RequestGroup) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		InstantiatesCanonical []interface{} `json:"instantiatescanonical,omitempty"`
+		InstantiatesUri []interface{} `json:"instantiatesuri,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		Replaces []*Reference `json:"replaces,omitempty"`
+		GroupIdentifier *Identifier `json:"groupidentifier,omitempty"`
+		Status *RequestStatus `json:"status,omitempty"`
+		Intent *RequestIntent `json:"intent,omitempty"`
+		Priority *RequestPriority `json:"priority,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		AuthoredOn *FhirDateTime `json:"authoredon,omitempty"`
+		Author *Reference `json:"author,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		Action []*RequestGroupAction `json:"action,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	if len(temp.InstantiatesCanonical) > 0 {
+		m.InstantiatesCanonical = make([]*FhirCanonical, len(temp.InstantiatesCanonical))
+		for i := range temp.InstantiatesCanonical {
+			itemMap, ok := temp.InstantiatesCanonical[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for InstantiatesCanonical[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse InstantiatesCanonical[%d]: %v", i, err) }
+			m.InstantiatesCanonical[i] = primitive
+		}
+	}
+	if len(temp.InstantiatesUri) > 0 {
+		m.InstantiatesUri = make([]*FhirUri, len(temp.InstantiatesUri))
+		for i := range temp.InstantiatesUri {
+			itemMap, ok := temp.InstantiatesUri[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for InstantiatesUri[%d]: expected map", i) }
+			primitive, err := NewFhirUriFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse InstantiatesUri[%d]: %v", i, err) }
+			m.InstantiatesUri[i] = primitive
+		}
+	}
+	m.BasedOn = temp.BasedOn
+	m.Replaces = temp.Replaces
+	m.GroupIdentifier = temp.GroupIdentifier
+	m.Status = temp.Status
+	m.Intent = temp.Intent
+	m.Priority = temp.Priority
+	m.Code = temp.Code
+	m.Subject = temp.Subject
+	m.Encounter = temp.Encounter
+	m.AuthoredOn = temp.AuthoredOn
+	m.Author = temp.Author
+	m.ReasonCode = temp.ReasonCode
+	m.ReasonReference = temp.ReasonReference
+	m.Note = temp.Note
+	m.Action = temp.Action
+	return nil
 }
 
-// ToJSON converts RequestGroup to JSON data
+// ToJSON converts RequestGroup to JSON data.
 func (m *RequestGroup) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		InstantiatesCanonical []interface{} `json:"instantiatescanonical,omitempty"`
+		InstantiatesCanonicalElement []map[string]interface{} `json:"_instantiatescanonical,omitempty"`
+		InstantiatesUri []interface{} `json:"instantiatesuri,omitempty"`
+		InstantiatesUriElement []map[string]interface{} `json:"_instantiatesuri,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		Replaces []*Reference `json:"replaces,omitempty"`
+		GroupIdentifier *Identifier `json:"groupidentifier,omitempty"`
+		Status *RequestStatus `json:"status,omitempty"`
+		Intent *RequestIntent `json:"intent,omitempty"`
+		Priority *RequestPriority `json:"priority,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		AuthoredOn interface{} `json:"authoredon,omitempty"`
+		AuthoredOnElement map[string]interface{} `json:"_authoredon,omitempty"`
+		Author *Reference `json:"author,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		Action []*RequestGroupAction `json:"action,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	if len(m.InstantiatesCanonical) > 0 {
+		output.InstantiatesCanonical = make([]interface{}, len(m.InstantiatesCanonical))
+		output.InstantiatesCanonicalElement = make([]map[string]interface{}, len(m.InstantiatesCanonical))
+		for i, item := range m.InstantiatesCanonical {
+			if item != nil && item.Value != nil {
+				output.InstantiatesCanonical[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.InstantiatesCanonicalElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.InstantiatesUri) > 0 {
+		output.InstantiatesUri = make([]interface{}, len(m.InstantiatesUri))
+		output.InstantiatesUriElement = make([]map[string]interface{}, len(m.InstantiatesUri))
+		for i, item := range m.InstantiatesUri {
+			if item != nil && item.Value != nil {
+				output.InstantiatesUri[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.InstantiatesUriElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.BasedOn = m.BasedOn
+	output.Replaces = m.Replaces
+	output.GroupIdentifier = m.GroupIdentifier
+	output.Status = m.Status
+	output.Intent = m.Intent
+	output.Priority = m.Priority
+	output.Code = m.Code
+	output.Subject = m.Subject
+	output.Encounter = m.Encounter
+	if m.AuthoredOn != nil && m.AuthoredOn.Value != nil {
+		output.AuthoredOn = m.AuthoredOn.Value
+		if m.AuthoredOn.Element != nil {
+			output.AuthoredOnElement = toMapOrNil(m.AuthoredOn.Element.ToJSON())
+		}
+	}
+	output.Author = m.Author
+	output.ReasonCode = m.ReasonCode
+	output.ReasonReference = m.ReasonReference
+	output.Note = m.Note
+	output.Action = m.Action
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of RequestGroup
+// Clone creates a deep copy of RequestGroup.
 func (m *RequestGroup) Clone() *RequestGroup {
 	if m == nil { return nil }
 	return &RequestGroup{
@@ -85,7 +258,7 @@ func (m *RequestGroup) Clone() *RequestGroup {
 	}
 }
 
-// Equals checks for equality with another RequestGroup instance
+// Equals checks equality between two RequestGroup instances.
 func (m *RequestGroup) Equals(other *RequestGroup) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -121,7 +294,7 @@ func (m *RequestGroup) Equals(other *RequestGroup) bool {
 // RequestGroupAction
 // The actions, if any, produced by the evaluation of the artifact.
 type RequestGroupAction struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -151,22 +324,173 @@ type RequestGroupAction struct {
 	Action []*RequestGroupAction `json:"action,omitempty"`
 }
 
-// NewRequestGroupAction creates a new RequestGroupAction instance
+// NewRequestGroupAction creates a new RequestGroupAction instance.
 func NewRequestGroupAction() *RequestGroupAction {
 	return &RequestGroupAction{}
 }
 
-// FromJSON populates RequestGroupAction from JSON data
+// FromJSON populates RequestGroupAction from JSON data.
 func (m *RequestGroupAction) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Prefix *FhirString `json:"prefix,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		TextEquivalent *FhirString `json:"textequivalent,omitempty"`
+		Priority *RequestPriority `json:"priority,omitempty"`
+		Code []*CodeableConcept `json:"code,omitempty"`
+		Documentation []*RelatedArtifact `json:"documentation,omitempty"`
+		Condition []*RequestGroupCondition `json:"condition,omitempty"`
+		RelatedAction []*RequestGroupRelatedAction `json:"relatedaction,omitempty"`
+		TimingDateTime *FhirDateTime `json:"timingdatetime,omitempty"`
+		TimingAge *Age `json:"timingage,omitempty"`
+		TimingPeriod *Period `json:"timingperiod,omitempty"`
+		TimingDuration *FhirDuration `json:"timingduration,omitempty"`
+		TimingRange *Range `json:"timingrange,omitempty"`
+		TimingTiming *Timing `json:"timingtiming,omitempty"`
+		Participant []*Reference `json:"participant,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		GroupingBehavior *ActionGroupingBehavior `json:"groupingbehavior,omitempty"`
+		SelectionBehavior *ActionSelectionBehavior `json:"selectionbehavior,omitempty"`
+		RequiredBehavior *ActionRequiredBehavior `json:"requiredbehavior,omitempty"`
+		PrecheckBehavior *ActionPrecheckBehavior `json:"precheckbehavior,omitempty"`
+		CardinalityBehavior *ActionCardinalityBehavior `json:"cardinalitybehavior,omitempty"`
+		Resource *Reference `json:"resource,omitempty"`
+		Action []*RequestGroupAction `json:"action,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Prefix = temp.Prefix
+	m.Title = temp.Title
+	m.Description = temp.Description
+	m.TextEquivalent = temp.TextEquivalent
+	m.Priority = temp.Priority
+	m.Code = temp.Code
+	m.Documentation = temp.Documentation
+	m.Condition = temp.Condition
+	m.RelatedAction = temp.RelatedAction
+	m.TimingDateTime = temp.TimingDateTime
+	m.TimingAge = temp.TimingAge
+	m.TimingPeriod = temp.TimingPeriod
+	m.TimingDuration = temp.TimingDuration
+	m.TimingRange = temp.TimingRange
+	m.TimingTiming = temp.TimingTiming
+	m.Participant = temp.Participant
+	m.Type = temp.Type
+	m.GroupingBehavior = temp.GroupingBehavior
+	m.SelectionBehavior = temp.SelectionBehavior
+	m.RequiredBehavior = temp.RequiredBehavior
+	m.PrecheckBehavior = temp.PrecheckBehavior
+	m.CardinalityBehavior = temp.CardinalityBehavior
+	m.Resource = temp.Resource
+	m.Action = temp.Action
+	return nil
 }
 
-// ToJSON converts RequestGroupAction to JSON data
+// ToJSON converts RequestGroupAction to JSON data.
 func (m *RequestGroupAction) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Prefix interface{} `json:"prefix,omitempty"`
+		PrefixElement map[string]interface{} `json:"_prefix,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		TextEquivalent interface{} `json:"textequivalent,omitempty"`
+		TextEquivalentElement map[string]interface{} `json:"_textequivalent,omitempty"`
+		Priority *RequestPriority `json:"priority,omitempty"`
+		Code []*CodeableConcept `json:"code,omitempty"`
+		Documentation []*RelatedArtifact `json:"documentation,omitempty"`
+		Condition []*RequestGroupCondition `json:"condition,omitempty"`
+		RelatedAction []*RequestGroupRelatedAction `json:"relatedaction,omitempty"`
+		TimingDateTime interface{} `json:"timingdatetime,omitempty"`
+		TimingDateTimeElement map[string]interface{} `json:"_timingdatetime,omitempty"`
+		TimingAge *Age `json:"timingage,omitempty"`
+		TimingPeriod *Period `json:"timingperiod,omitempty"`
+		TimingDuration *FhirDuration `json:"timingduration,omitempty"`
+		TimingRange *Range `json:"timingrange,omitempty"`
+		TimingTiming *Timing `json:"timingtiming,omitempty"`
+		Participant []*Reference `json:"participant,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		GroupingBehavior *ActionGroupingBehavior `json:"groupingbehavior,omitempty"`
+		SelectionBehavior *ActionSelectionBehavior `json:"selectionbehavior,omitempty"`
+		RequiredBehavior *ActionRequiredBehavior `json:"requiredbehavior,omitempty"`
+		PrecheckBehavior *ActionPrecheckBehavior `json:"precheckbehavior,omitempty"`
+		CardinalityBehavior *ActionCardinalityBehavior `json:"cardinalitybehavior,omitempty"`
+		Resource *Reference `json:"resource,omitempty"`
+		Action []*RequestGroupAction `json:"action,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Prefix != nil && m.Prefix.Value != nil {
+		output.Prefix = m.Prefix.Value
+		if m.Prefix.Element != nil {
+			output.PrefixElement = toMapOrNil(m.Prefix.Element.ToJSON())
+		}
+	}
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	if m.TextEquivalent != nil && m.TextEquivalent.Value != nil {
+		output.TextEquivalent = m.TextEquivalent.Value
+		if m.TextEquivalent.Element != nil {
+			output.TextEquivalentElement = toMapOrNil(m.TextEquivalent.Element.ToJSON())
+		}
+	}
+	output.Priority = m.Priority
+	output.Code = m.Code
+	output.Documentation = m.Documentation
+	output.Condition = m.Condition
+	output.RelatedAction = m.RelatedAction
+	if m.TimingDateTime != nil && m.TimingDateTime.Value != nil {
+		output.TimingDateTime = m.TimingDateTime.Value
+		if m.TimingDateTime.Element != nil {
+			output.TimingDateTimeElement = toMapOrNil(m.TimingDateTime.Element.ToJSON())
+		}
+	}
+	output.TimingAge = m.TimingAge
+	output.TimingPeriod = m.TimingPeriod
+	output.TimingDuration = m.TimingDuration
+	output.TimingRange = m.TimingRange
+	output.TimingTiming = m.TimingTiming
+	output.Participant = m.Participant
+	output.Type = m.Type
+	output.GroupingBehavior = m.GroupingBehavior
+	output.SelectionBehavior = m.SelectionBehavior
+	output.RequiredBehavior = m.RequiredBehavior
+	output.PrecheckBehavior = m.PrecheckBehavior
+	output.CardinalityBehavior = m.CardinalityBehavior
+	output.Resource = m.Resource
+	output.Action = m.Action
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of RequestGroupAction
+// Clone creates a deep copy of RequestGroupAction.
 func (m *RequestGroupAction) Clone() *RequestGroupAction {
 	if m == nil { return nil }
 	return &RequestGroupAction{
@@ -200,7 +524,7 @@ func (m *RequestGroupAction) Clone() *RequestGroupAction {
 	}
 }
 
-// Equals checks for equality with another RequestGroupAction instance
+// Equals checks equality between two RequestGroupAction instances.
 func (m *RequestGroupAction) Equals(other *RequestGroupAction) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -237,7 +561,7 @@ func (m *RequestGroupAction) Equals(other *RequestGroupAction) bool {
 // RequestGroupCondition
 // An expression that describes applicability criteria, or start/stop conditions for the action.
 type RequestGroupCondition struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -245,22 +569,55 @@ type RequestGroupCondition struct {
 	Expression *FhirExpression `json:"expression,omitempty"`
 }
 
-// NewRequestGroupCondition creates a new RequestGroupCondition instance
+// NewRequestGroupCondition creates a new RequestGroupCondition instance.
 func NewRequestGroupCondition() *RequestGroupCondition {
 	return &RequestGroupCondition{}
 }
 
-// FromJSON populates RequestGroupCondition from JSON data
+// FromJSON populates RequestGroupCondition from JSON data.
 func (m *RequestGroupCondition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Kind *ActionConditionKind `json:"kind,omitempty"`
+		Expression *FhirExpression `json:"expression,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Kind = temp.Kind
+	m.Expression = temp.Expression
+	return nil
 }
 
-// ToJSON converts RequestGroupCondition to JSON data
+// ToJSON converts RequestGroupCondition to JSON data.
 func (m *RequestGroupCondition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Kind *ActionConditionKind `json:"kind,omitempty"`
+		Expression *FhirExpression `json:"expression,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Kind = m.Kind
+	output.Expression = m.Expression
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of RequestGroupCondition
+// Clone creates a deep copy of RequestGroupCondition.
 func (m *RequestGroupCondition) Clone() *RequestGroupCondition {
 	if m == nil { return nil }
 	return &RequestGroupCondition{
@@ -272,7 +629,7 @@ func (m *RequestGroupCondition) Clone() *RequestGroupCondition {
 	}
 }
 
-// Equals checks for equality with another RequestGroupCondition instance
+// Equals checks equality between two RequestGroupCondition instances.
 func (m *RequestGroupCondition) Equals(other *RequestGroupCondition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -287,7 +644,7 @@ func (m *RequestGroupCondition) Equals(other *RequestGroupCondition) bool {
 // RequestGroupRelatedAction
 // A relationship to another action such as "before" or "30-60 minutes after start of".
 type RequestGroupRelatedAction struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -297,22 +654,69 @@ type RequestGroupRelatedAction struct {
 	OffsetRange *Range `json:"offsetrange,omitempty"`
 }
 
-// NewRequestGroupRelatedAction creates a new RequestGroupRelatedAction instance
+// NewRequestGroupRelatedAction creates a new RequestGroupRelatedAction instance.
 func NewRequestGroupRelatedAction() *RequestGroupRelatedAction {
 	return &RequestGroupRelatedAction{}
 }
 
-// FromJSON populates RequestGroupRelatedAction from JSON data
+// FromJSON populates RequestGroupRelatedAction from JSON data.
 func (m *RequestGroupRelatedAction) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ActionId *FhirId `json:"actionid,omitempty"`
+		Relationship *ActionRelationshipType `json:"relationship,omitempty"`
+		OffsetDuration *FhirDuration `json:"offsetduration,omitempty"`
+		OffsetRange *Range `json:"offsetrange,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.ActionId = temp.ActionId
+	m.Relationship = temp.Relationship
+	m.OffsetDuration = temp.OffsetDuration
+	m.OffsetRange = temp.OffsetRange
+	return nil
 }
 
-// ToJSON converts RequestGroupRelatedAction to JSON data
+// ToJSON converts RequestGroupRelatedAction to JSON data.
 func (m *RequestGroupRelatedAction) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ActionId interface{} `json:"actionid,omitempty"`
+		ActionIdElement map[string]interface{} `json:"_actionid,omitempty"`
+		Relationship *ActionRelationshipType `json:"relationship,omitempty"`
+		OffsetDuration *FhirDuration `json:"offsetduration,omitempty"`
+		OffsetRange *Range `json:"offsetrange,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.ActionId != nil && m.ActionId.Value != nil {
+		output.ActionId = m.ActionId.Value
+		if m.ActionId.Element != nil {
+			output.ActionIdElement = toMapOrNil(m.ActionId.Element.ToJSON())
+		}
+	}
+	output.Relationship = m.Relationship
+	output.OffsetDuration = m.OffsetDuration
+	output.OffsetRange = m.OffsetRange
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of RequestGroupRelatedAction
+// Clone creates a deep copy of RequestGroupRelatedAction.
 func (m *RequestGroupRelatedAction) Clone() *RequestGroupRelatedAction {
 	if m == nil { return nil }
 	return &RequestGroupRelatedAction{
@@ -326,7 +730,7 @@ func (m *RequestGroupRelatedAction) Clone() *RequestGroupRelatedAction {
 	}
 }
 
-// Equals checks for equality with another RequestGroupRelatedAction instance
+// Equals checks equality between two RequestGroupRelatedAction instances.
 func (m *RequestGroupRelatedAction) Equals(other *RequestGroupRelatedAction) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

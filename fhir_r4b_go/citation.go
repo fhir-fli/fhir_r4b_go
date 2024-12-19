@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Citation
 // The Citation Resource enables reference to any knowledge artifact for purposes of identification and attribution. The Citation Resource supports existing reference structures and developing publication practices such as versioning, expressing complex contributorship roles, and referencing computable resources.
 type Citation struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -48,22 +49,261 @@ type Citation struct {
 	CitedArtifact *CitationCitedArtifact `json:"citedartifact,omitempty"`
 }
 
-// NewCitation creates a new Citation instance
+// NewCitation creates a new Citation instance.
 func NewCitation() *Citation {
 	return &Citation{}
 }
 
-// FromJSON populates Citation from JSON data
+// FromJSON populates Citation from JSON data.
 func (m *Citation) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental *FhirBoolean `json:"experimental,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Publisher *FhirString `json:"publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose *FhirMarkdown `json:"purpose,omitempty"`
+		Copyright *FhirMarkdown `json:"copyright,omitempty"`
+		ApprovalDate *FhirDate `json:"approvaldate,omitempty"`
+		LastReviewDate *FhirDate `json:"lastreviewdate,omitempty"`
+		EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+		Author []*ContactDetail `json:"author,omitempty"`
+		Editor []*ContactDetail `json:"editor,omitempty"`
+		Reviewer []*ContactDetail `json:"reviewer,omitempty"`
+		Endorser []*ContactDetail `json:"endorser,omitempty"`
+		Summary []*CitationSummary `json:"summary,omitempty"`
+		Classification []*CitationClassification `json:"classification,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		CurrentState []*CodeableConcept `json:"currentstate,omitempty"`
+		StatusDate []*CitationStatusDate `json:"statusdate,omitempty"`
+		RelatesTo []*CitationRelatesTo `json:"relatesto,omitempty"`
+		CitedArtifact *CitationCitedArtifact `json:"citedartifact,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Url = temp.Url
+	m.Identifier = temp.Identifier
+	m.Version = temp.Version
+	m.Name = temp.Name
+	m.Title = temp.Title
+	m.Status = temp.Status
+	m.Experimental = temp.Experimental
+	m.Date = temp.Date
+	m.Publisher = temp.Publisher
+	m.Contact = temp.Contact
+	m.Description = temp.Description
+	m.UseContext = temp.UseContext
+	m.Jurisdiction = temp.Jurisdiction
+	m.Purpose = temp.Purpose
+	m.Copyright = temp.Copyright
+	m.ApprovalDate = temp.ApprovalDate
+	m.LastReviewDate = temp.LastReviewDate
+	m.EffectivePeriod = temp.EffectivePeriod
+	m.Author = temp.Author
+	m.Editor = temp.Editor
+	m.Reviewer = temp.Reviewer
+	m.Endorser = temp.Endorser
+	m.Summary = temp.Summary
+	m.Classification = temp.Classification
+	m.Note = temp.Note
+	m.CurrentState = temp.CurrentState
+	m.StatusDate = temp.StatusDate
+	m.RelatesTo = temp.RelatesTo
+	m.CitedArtifact = temp.CitedArtifact
+	return nil
 }
 
-// ToJSON converts Citation to JSON data
+// ToJSON converts Citation to JSON data.
 func (m *Citation) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental interface{} `json:"experimental,omitempty"`
+		ExperimentalElement map[string]interface{} `json:"_experimental,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Publisher interface{} `json:"publisher,omitempty"`
+		PublisherElement map[string]interface{} `json:"_publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose interface{} `json:"purpose,omitempty"`
+		PurposeElement map[string]interface{} `json:"_purpose,omitempty"`
+		Copyright interface{} `json:"copyright,omitempty"`
+		CopyrightElement map[string]interface{} `json:"_copyright,omitempty"`
+		ApprovalDate interface{} `json:"approvaldate,omitempty"`
+		ApprovalDateElement map[string]interface{} `json:"_approvaldate,omitempty"`
+		LastReviewDate interface{} `json:"lastreviewdate,omitempty"`
+		LastReviewDateElement map[string]interface{} `json:"_lastreviewdate,omitempty"`
+		EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+		Author []*ContactDetail `json:"author,omitempty"`
+		Editor []*ContactDetail `json:"editor,omitempty"`
+		Reviewer []*ContactDetail `json:"reviewer,omitempty"`
+		Endorser []*ContactDetail `json:"endorser,omitempty"`
+		Summary []*CitationSummary `json:"summary,omitempty"`
+		Classification []*CitationClassification `json:"classification,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		CurrentState []*CodeableConcept `json:"currentstate,omitempty"`
+		StatusDate []*CitationStatusDate `json:"statusdate,omitempty"`
+		RelatesTo []*CitationRelatesTo `json:"relatesto,omitempty"`
+		CitedArtifact *CitationCitedArtifact `json:"citedartifact,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	output.Identifier = m.Identifier
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	output.Status = m.Status
+	if m.Experimental != nil && m.Experimental.Value != nil {
+		output.Experimental = m.Experimental.Value
+		if m.Experimental.Element != nil {
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+		}
+	}
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.Publisher != nil && m.Publisher.Value != nil {
+		output.Publisher = m.Publisher.Value
+		if m.Publisher.Element != nil {
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+		}
+	}
+	output.Contact = m.Contact
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.UseContext = m.UseContext
+	output.Jurisdiction = m.Jurisdiction
+	if m.Purpose != nil && m.Purpose.Value != nil {
+		output.Purpose = m.Purpose.Value
+		if m.Purpose.Element != nil {
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+		}
+	}
+	if m.Copyright != nil && m.Copyright.Value != nil {
+		output.Copyright = m.Copyright.Value
+		if m.Copyright.Element != nil {
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+		}
+	}
+	if m.ApprovalDate != nil && m.ApprovalDate.Value != nil {
+		output.ApprovalDate = m.ApprovalDate.Value
+		if m.ApprovalDate.Element != nil {
+			output.ApprovalDateElement = toMapOrNil(m.ApprovalDate.Element.ToJSON())
+		}
+	}
+	if m.LastReviewDate != nil && m.LastReviewDate.Value != nil {
+		output.LastReviewDate = m.LastReviewDate.Value
+		if m.LastReviewDate.Element != nil {
+			output.LastReviewDateElement = toMapOrNil(m.LastReviewDate.Element.ToJSON())
+		}
+	}
+	output.EffectivePeriod = m.EffectivePeriod
+	output.Author = m.Author
+	output.Editor = m.Editor
+	output.Reviewer = m.Reviewer
+	output.Endorser = m.Endorser
+	output.Summary = m.Summary
+	output.Classification = m.Classification
+	output.Note = m.Note
+	output.CurrentState = m.CurrentState
+	output.StatusDate = m.StatusDate
+	output.RelatesTo = m.RelatesTo
+	output.CitedArtifact = m.CitedArtifact
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Citation
+// Clone creates a deep copy of Citation.
 func (m *Citation) Clone() *Citation {
 	if m == nil { return nil }
 	return &Citation{
@@ -107,7 +347,7 @@ func (m *Citation) Clone() *Citation {
 	}
 }
 
-// Equals checks for equality with another Citation instance
+// Equals checks equality between two Citation instances.
 func (m *Citation) Equals(other *Citation) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -154,7 +394,7 @@ func (m *Citation) Equals(other *Citation) bool {
 // CitationSummary
 // A human-readable display of the citation.
 type CitationSummary struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -162,22 +402,61 @@ type CitationSummary struct {
 	Text *FhirMarkdown `json:"text,omitempty"`
 }
 
-// NewCitationSummary creates a new CitationSummary instance
+// NewCitationSummary creates a new CitationSummary instance.
 func NewCitationSummary() *CitationSummary {
 	return &CitationSummary{}
 }
 
-// FromJSON populates CitationSummary from JSON data
+// FromJSON populates CitationSummary from JSON data.
 func (m *CitationSummary) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Style *CodeableConcept `json:"style,omitempty"`
+		Text *FhirMarkdown `json:"text,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Style = temp.Style
+	m.Text = temp.Text
+	return nil
 }
 
-// ToJSON converts CitationSummary to JSON data
+// ToJSON converts CitationSummary to JSON data.
 func (m *CitationSummary) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Style *CodeableConcept `json:"style,omitempty"`
+		Text interface{} `json:"text,omitempty"`
+		TextElement map[string]interface{} `json:"_text,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Style = m.Style
+	if m.Text != nil && m.Text.Value != nil {
+		output.Text = m.Text.Value
+		if m.Text.Element != nil {
+			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CitationSummary
+// Clone creates a deep copy of CitationSummary.
 func (m *CitationSummary) Clone() *CitationSummary {
 	if m == nil { return nil }
 	return &CitationSummary{
@@ -189,7 +468,7 @@ func (m *CitationSummary) Clone() *CitationSummary {
 	}
 }
 
-// Equals checks for equality with another CitationSummary instance
+// Equals checks equality between two CitationSummary instances.
 func (m *CitationSummary) Equals(other *CitationSummary) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -204,7 +483,7 @@ func (m *CitationSummary) Equals(other *CitationSummary) bool {
 // CitationClassification
 // The assignment to an organizing scheme.
 type CitationClassification struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -212,22 +491,55 @@ type CitationClassification struct {
 	Classifier []*CodeableConcept `json:"classifier,omitempty"`
 }
 
-// NewCitationClassification creates a new CitationClassification instance
+// NewCitationClassification creates a new CitationClassification instance.
 func NewCitationClassification() *CitationClassification {
 	return &CitationClassification{}
 }
 
-// FromJSON populates CitationClassification from JSON data
+// FromJSON populates CitationClassification from JSON data.
 func (m *CitationClassification) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Classifier []*CodeableConcept `json:"classifier,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Classifier = temp.Classifier
+	return nil
 }
 
-// ToJSON converts CitationClassification to JSON data
+// ToJSON converts CitationClassification to JSON data.
 func (m *CitationClassification) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Classifier []*CodeableConcept `json:"classifier,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Classifier = m.Classifier
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CitationClassification
+// Clone creates a deep copy of CitationClassification.
 func (m *CitationClassification) Clone() *CitationClassification {
 	if m == nil { return nil }
 	return &CitationClassification{
@@ -239,7 +551,7 @@ func (m *CitationClassification) Clone() *CitationClassification {
 	}
 }
 
-// Equals checks for equality with another CitationClassification instance
+// Equals checks equality between two CitationClassification instances.
 func (m *CitationClassification) Equals(other *CitationClassification) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -254,7 +566,7 @@ func (m *CitationClassification) Equals(other *CitationClassification) bool {
 // CitationStatusDate
 // An effective date or period for a status of the citation.
 type CitationStatusDate struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -263,22 +575,65 @@ type CitationStatusDate struct {
 	Period *Period `json:"period,omitempty"`
 }
 
-// NewCitationStatusDate creates a new CitationStatusDate instance
+// NewCitationStatusDate creates a new CitationStatusDate instance.
 func NewCitationStatusDate() *CitationStatusDate {
 	return &CitationStatusDate{}
 }
 
-// FromJSON populates CitationStatusDate from JSON data
+// FromJSON populates CitationStatusDate from JSON data.
 func (m *CitationStatusDate) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Activity *CodeableConcept `json:"activity,omitempty"`
+		Actual *FhirBoolean `json:"actual,omitempty"`
+		Period *Period `json:"period,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Activity = temp.Activity
+	m.Actual = temp.Actual
+	m.Period = temp.Period
+	return nil
 }
 
-// ToJSON converts CitationStatusDate to JSON data
+// ToJSON converts CitationStatusDate to JSON data.
 func (m *CitationStatusDate) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Activity *CodeableConcept `json:"activity,omitempty"`
+		Actual interface{} `json:"actual,omitempty"`
+		ActualElement map[string]interface{} `json:"_actual,omitempty"`
+		Period *Period `json:"period,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Activity = m.Activity
+	if m.Actual != nil && m.Actual.Value != nil {
+		output.Actual = m.Actual.Value
+		if m.Actual.Element != nil {
+			output.ActualElement = toMapOrNil(m.Actual.Element.ToJSON())
+		}
+	}
+	output.Period = m.Period
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CitationStatusDate
+// Clone creates a deep copy of CitationStatusDate.
 func (m *CitationStatusDate) Clone() *CitationStatusDate {
 	if m == nil { return nil }
 	return &CitationStatusDate{
@@ -291,7 +646,7 @@ func (m *CitationStatusDate) Clone() *CitationStatusDate {
 	}
 }
 
-// Equals checks for equality with another CitationStatusDate instance
+// Equals checks equality between two CitationStatusDate instances.
 func (m *CitationStatusDate) Equals(other *CitationStatusDate) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -307,7 +662,7 @@ func (m *CitationStatusDate) Equals(other *CitationStatusDate) bool {
 // CitationRelatesTo
 // Artifact related to the Citation Resource.
 type CitationRelatesTo struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -319,22 +674,77 @@ type CitationRelatesTo struct {
 	TargetAttachment *Attachment `json:"targetattachment,omitempty"`
 }
 
-// NewCitationRelatesTo creates a new CitationRelatesTo instance
+// NewCitationRelatesTo creates a new CitationRelatesTo instance.
 func NewCitationRelatesTo() *CitationRelatesTo {
 	return &CitationRelatesTo{}
 }
 
-// FromJSON populates CitationRelatesTo from JSON data
+// FromJSON populates CitationRelatesTo from JSON data.
 func (m *CitationRelatesTo) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		RelationshipType *CodeableConcept `json:"relationshiptype,omitempty"`
+		TargetClassifier []*CodeableConcept `json:"targetclassifier,omitempty"`
+		TargetUri *FhirUri `json:"targeturi,omitempty"`
+		TargetIdentifier *Identifier `json:"targetidentifier,omitempty"`
+		TargetReference *Reference `json:"targetreference,omitempty"`
+		TargetAttachment *Attachment `json:"targetattachment,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.RelationshipType = temp.RelationshipType
+	m.TargetClassifier = temp.TargetClassifier
+	m.TargetUri = temp.TargetUri
+	m.TargetIdentifier = temp.TargetIdentifier
+	m.TargetReference = temp.TargetReference
+	m.TargetAttachment = temp.TargetAttachment
+	return nil
 }
 
-// ToJSON converts CitationRelatesTo to JSON data
+// ToJSON converts CitationRelatesTo to JSON data.
 func (m *CitationRelatesTo) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		RelationshipType *CodeableConcept `json:"relationshiptype,omitempty"`
+		TargetClassifier []*CodeableConcept `json:"targetclassifier,omitempty"`
+		TargetUri interface{} `json:"targeturi,omitempty"`
+		TargetUriElement map[string]interface{} `json:"_targeturi,omitempty"`
+		TargetIdentifier *Identifier `json:"targetidentifier,omitempty"`
+		TargetReference *Reference `json:"targetreference,omitempty"`
+		TargetAttachment *Attachment `json:"targetattachment,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.RelationshipType = m.RelationshipType
+	output.TargetClassifier = m.TargetClassifier
+	if m.TargetUri != nil && m.TargetUri.Value != nil {
+		output.TargetUri = m.TargetUri.Value
+		if m.TargetUri.Element != nil {
+			output.TargetUriElement = toMapOrNil(m.TargetUri.Element.ToJSON())
+		}
+	}
+	output.TargetIdentifier = m.TargetIdentifier
+	output.TargetReference = m.TargetReference
+	output.TargetAttachment = m.TargetAttachment
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CitationRelatesTo
+// Clone creates a deep copy of CitationRelatesTo.
 func (m *CitationRelatesTo) Clone() *CitationRelatesTo {
 	if m == nil { return nil }
 	return &CitationRelatesTo{
@@ -350,7 +760,7 @@ func (m *CitationRelatesTo) Clone() *CitationRelatesTo {
 	}
 }
 
-// Equals checks for equality with another CitationRelatesTo instance
+// Equals checks equality between two CitationRelatesTo instances.
 func (m *CitationRelatesTo) Equals(other *CitationRelatesTo) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -369,7 +779,7 @@ func (m *CitationRelatesTo) Equals(other *CitationRelatesTo) bool {
 // CitationCitedArtifact
 // The article or artifact being described.
 type CitationCitedArtifact struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -390,22 +800,113 @@ type CitationCitedArtifact struct {
 	Note []*Annotation `json:"note,omitempty"`
 }
 
-// NewCitationCitedArtifact creates a new CitationCitedArtifact instance
+// NewCitationCitedArtifact creates a new CitationCitedArtifact instance.
 func NewCitationCitedArtifact() *CitationCitedArtifact {
 	return &CitationCitedArtifact{}
 }
 
-// FromJSON populates CitationCitedArtifact from JSON data
+// FromJSON populates CitationCitedArtifact from JSON data.
 func (m *CitationCitedArtifact) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		RelatedIdentifier []*Identifier `json:"relatedidentifier,omitempty"`
+		DateAccessed *FhirDateTime `json:"dateaccessed,omitempty"`
+		Version *CitationVersion `json:"version,omitempty"`
+		CurrentState []*CodeableConcept `json:"currentstate,omitempty"`
+		StatusDate []*CitationStatusDate `json:"statusdate,omitempty"`
+		Title []*CitationTitle `json:"title,omitempty"`
+		Abstract_ []*CitationAbstract `json:"abstract,omitempty"`
+		Part_ *CitationPart `json:"part,omitempty"`
+		RelatesTo []*CitationRelatesTo `json:"relatesto,omitempty"`
+		PublicationForm []*CitationPublicationForm `json:"publicationform,omitempty"`
+		WebLocation []*CitationWebLocation `json:"weblocation,omitempty"`
+		Classification []*CitationClassification `json:"classification,omitempty"`
+		Contributorship *CitationContributorship `json:"contributorship,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.RelatedIdentifier = temp.RelatedIdentifier
+	m.DateAccessed = temp.DateAccessed
+	m.Version = temp.Version
+	m.CurrentState = temp.CurrentState
+	m.StatusDate = temp.StatusDate
+	m.Title = temp.Title
+	m.Abstract_ = temp.Abstract_
+	m.Part_ = temp.Part_
+	m.RelatesTo = temp.RelatesTo
+	m.PublicationForm = temp.PublicationForm
+	m.WebLocation = temp.WebLocation
+	m.Classification = temp.Classification
+	m.Contributorship = temp.Contributorship
+	m.Note = temp.Note
+	return nil
 }
 
-// ToJSON converts CitationCitedArtifact to JSON data
+// ToJSON converts CitationCitedArtifact to JSON data.
 func (m *CitationCitedArtifact) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		RelatedIdentifier []*Identifier `json:"relatedidentifier,omitempty"`
+		DateAccessed interface{} `json:"dateaccessed,omitempty"`
+		DateAccessedElement map[string]interface{} `json:"_dateaccessed,omitempty"`
+		Version *CitationVersion `json:"version,omitempty"`
+		CurrentState []*CodeableConcept `json:"currentstate,omitempty"`
+		StatusDate []*CitationStatusDate `json:"statusdate,omitempty"`
+		Title []*CitationTitle `json:"title,omitempty"`
+		Abstract_ []*CitationAbstract `json:"abstract,omitempty"`
+		Part_ *CitationPart `json:"part,omitempty"`
+		RelatesTo []*CitationRelatesTo `json:"relatesto,omitempty"`
+		PublicationForm []*CitationPublicationForm `json:"publicationform,omitempty"`
+		WebLocation []*CitationWebLocation `json:"weblocation,omitempty"`
+		Classification []*CitationClassification `json:"classification,omitempty"`
+		Contributorship *CitationContributorship `json:"contributorship,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.RelatedIdentifier = m.RelatedIdentifier
+	if m.DateAccessed != nil && m.DateAccessed.Value != nil {
+		output.DateAccessed = m.DateAccessed.Value
+		if m.DateAccessed.Element != nil {
+			output.DateAccessedElement = toMapOrNil(m.DateAccessed.Element.ToJSON())
+		}
+	}
+	output.Version = m.Version
+	output.CurrentState = m.CurrentState
+	output.StatusDate = m.StatusDate
+	output.Title = m.Title
+	output.Abstract_ = m.Abstract_
+	output.Part_ = m.Part_
+	output.RelatesTo = m.RelatesTo
+	output.PublicationForm = m.PublicationForm
+	output.WebLocation = m.WebLocation
+	output.Classification = m.Classification
+	output.Contributorship = m.Contributorship
+	output.Note = m.Note
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CitationCitedArtifact
+// Clone creates a deep copy of CitationCitedArtifact.
 func (m *CitationCitedArtifact) Clone() *CitationCitedArtifact {
 	if m == nil { return nil }
 	return &CitationCitedArtifact{
@@ -430,7 +931,7 @@ func (m *CitationCitedArtifact) Clone() *CitationCitedArtifact {
 	}
 }
 
-// Equals checks for equality with another CitationCitedArtifact instance
+// Equals checks equality between two CitationCitedArtifact instances.
 func (m *CitationCitedArtifact) Equals(other *CitationCitedArtifact) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -458,7 +959,7 @@ func (m *CitationCitedArtifact) Equals(other *CitationCitedArtifact) bool {
 // CitationVersion
 // The defined version of the cited artifact.
 type CitationVersion struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -466,22 +967,61 @@ type CitationVersion struct {
 	BaseCitation *Reference `json:"basecitation,omitempty"`
 }
 
-// NewCitationVersion creates a new CitationVersion instance
+// NewCitationVersion creates a new CitationVersion instance.
 func NewCitationVersion() *CitationVersion {
 	return &CitationVersion{}
 }
 
-// FromJSON populates CitationVersion from JSON data
+// FromJSON populates CitationVersion from JSON data.
 func (m *CitationVersion) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Value *FhirString `json:"value,omitempty"`
+		BaseCitation *Reference `json:"basecitation,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Value = temp.Value
+	m.BaseCitation = temp.BaseCitation
+	return nil
 }
 
-// ToJSON converts CitationVersion to JSON data
+// ToJSON converts CitationVersion to JSON data.
 func (m *CitationVersion) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Value interface{} `json:"value,omitempty"`
+		ValueElement map[string]interface{} `json:"_value,omitempty"`
+		BaseCitation *Reference `json:"basecitation,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Value != nil && m.Value.Value != nil {
+		output.Value = m.Value.Value
+		if m.Value.Element != nil {
+			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+		}
+	}
+	output.BaseCitation = m.BaseCitation
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CitationVersion
+// Clone creates a deep copy of CitationVersion.
 func (m *CitationVersion) Clone() *CitationVersion {
 	if m == nil { return nil }
 	return &CitationVersion{
@@ -493,7 +1033,7 @@ func (m *CitationVersion) Clone() *CitationVersion {
 	}
 }
 
-// Equals checks for equality with another CitationVersion instance
+// Equals checks equality between two CitationVersion instances.
 func (m *CitationVersion) Equals(other *CitationVersion) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -508,7 +1048,7 @@ func (m *CitationVersion) Equals(other *CitationVersion) bool {
 // CitationStatusDate1
 // An effective date or period for a status of the cited artifact.
 type CitationStatusDate1 struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -517,22 +1057,65 @@ type CitationStatusDate1 struct {
 	Period *Period `json:"period,omitempty"`
 }
 
-// NewCitationStatusDate1 creates a new CitationStatusDate1 instance
+// NewCitationStatusDate1 creates a new CitationStatusDate1 instance.
 func NewCitationStatusDate1() *CitationStatusDate1 {
 	return &CitationStatusDate1{}
 }
 
-// FromJSON populates CitationStatusDate1 from JSON data
+// FromJSON populates CitationStatusDate1 from JSON data.
 func (m *CitationStatusDate1) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Activity *CodeableConcept `json:"activity,omitempty"`
+		Actual *FhirBoolean `json:"actual,omitempty"`
+		Period *Period `json:"period,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Activity = temp.Activity
+	m.Actual = temp.Actual
+	m.Period = temp.Period
+	return nil
 }
 
-// ToJSON converts CitationStatusDate1 to JSON data
+// ToJSON converts CitationStatusDate1 to JSON data.
 func (m *CitationStatusDate1) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Activity *CodeableConcept `json:"activity,omitempty"`
+		Actual interface{} `json:"actual,omitempty"`
+		ActualElement map[string]interface{} `json:"_actual,omitempty"`
+		Period *Period `json:"period,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Activity = m.Activity
+	if m.Actual != nil && m.Actual.Value != nil {
+		output.Actual = m.Actual.Value
+		if m.Actual.Element != nil {
+			output.ActualElement = toMapOrNil(m.Actual.Element.ToJSON())
+		}
+	}
+	output.Period = m.Period
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CitationStatusDate1
+// Clone creates a deep copy of CitationStatusDate1.
 func (m *CitationStatusDate1) Clone() *CitationStatusDate1 {
 	if m == nil { return nil }
 	return &CitationStatusDate1{
@@ -545,7 +1128,7 @@ func (m *CitationStatusDate1) Clone() *CitationStatusDate1 {
 	}
 }
 
-// Equals checks for equality with another CitationStatusDate1 instance
+// Equals checks equality between two CitationStatusDate1 instances.
 func (m *CitationStatusDate1) Equals(other *CitationStatusDate1) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -561,7 +1144,7 @@ func (m *CitationStatusDate1) Equals(other *CitationStatusDate1) bool {
 // CitationTitle
 // The title details of the article or artifact.
 type CitationTitle struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -570,22 +1153,65 @@ type CitationTitle struct {
 	Text *FhirMarkdown `json:"text,omitempty"`
 }
 
-// NewCitationTitle creates a new CitationTitle instance
+// NewCitationTitle creates a new CitationTitle instance.
 func NewCitationTitle() *CitationTitle {
 	return &CitationTitle{}
 }
 
-// FromJSON populates CitationTitle from JSON data
+// FromJSON populates CitationTitle from JSON data.
 func (m *CitationTitle) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type []*CodeableConcept `json:"type,omitempty"`
+		Language *CodeableConcept `json:"language,omitempty"`
+		Text *FhirMarkdown `json:"text,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Language = temp.Language
+	m.Text = temp.Text
+	return nil
 }
 
-// ToJSON converts CitationTitle to JSON data
+// ToJSON converts CitationTitle to JSON data.
 func (m *CitationTitle) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type []*CodeableConcept `json:"type,omitempty"`
+		Language *CodeableConcept `json:"language,omitempty"`
+		Text interface{} `json:"text,omitempty"`
+		TextElement map[string]interface{} `json:"_text,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Language = m.Language
+	if m.Text != nil && m.Text.Value != nil {
+		output.Text = m.Text.Value
+		if m.Text.Element != nil {
+			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CitationTitle
+// Clone creates a deep copy of CitationTitle.
 func (m *CitationTitle) Clone() *CitationTitle {
 	if m == nil { return nil }
 	return &CitationTitle{
@@ -598,7 +1224,7 @@ func (m *CitationTitle) Clone() *CitationTitle {
 	}
 }
 
-// Equals checks for equality with another CitationTitle instance
+// Equals checks equality between two CitationTitle instances.
 func (m *CitationTitle) Equals(other *CitationTitle) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -614,7 +1240,7 @@ func (m *CitationTitle) Equals(other *CitationTitle) bool {
 // CitationAbstract
 // Summary of the article or artifact.
 type CitationAbstract struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -624,22 +1250,75 @@ type CitationAbstract struct {
 	Copyright *FhirMarkdown `json:"copyright,omitempty"`
 }
 
-// NewCitationAbstract creates a new CitationAbstract instance
+// NewCitationAbstract creates a new CitationAbstract instance.
 func NewCitationAbstract() *CitationAbstract {
 	return &CitationAbstract{}
 }
 
-// FromJSON populates CitationAbstract from JSON data
+// FromJSON populates CitationAbstract from JSON data.
 func (m *CitationAbstract) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Language *CodeableConcept `json:"language,omitempty"`
+		Text *FhirMarkdown `json:"text,omitempty"`
+		Copyright *FhirMarkdown `json:"copyright,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Copyright = temp.Copyright
+	return nil
 }
 
-// ToJSON converts CitationAbstract to JSON data
+// ToJSON converts CitationAbstract to JSON data.
 func (m *CitationAbstract) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Language *CodeableConcept `json:"language,omitempty"`
+		Text interface{} `json:"text,omitempty"`
+		TextElement map[string]interface{} `json:"_text,omitempty"`
+		Copyright interface{} `json:"copyright,omitempty"`
+		CopyrightElement map[string]interface{} `json:"_copyright,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Language = m.Language
+	if m.Text != nil && m.Text.Value != nil {
+		output.Text = m.Text.Value
+		if m.Text.Element != nil {
+			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+		}
+	}
+	if m.Copyright != nil && m.Copyright.Value != nil {
+		output.Copyright = m.Copyright.Value
+		if m.Copyright.Element != nil {
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CitationAbstract
+// Clone creates a deep copy of CitationAbstract.
 func (m *CitationAbstract) Clone() *CitationAbstract {
 	if m == nil { return nil }
 	return &CitationAbstract{
@@ -653,7 +1332,7 @@ func (m *CitationAbstract) Clone() *CitationAbstract {
 	}
 }
 
-// Equals checks for equality with another CitationAbstract instance
+// Equals checks equality between two CitationAbstract instances.
 func (m *CitationAbstract) Equals(other *CitationAbstract) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -670,7 +1349,7 @@ func (m *CitationAbstract) Equals(other *CitationAbstract) bool {
 // CitationPart
 // The component of the article or artifact.
 type CitationPart struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -679,22 +1358,65 @@ type CitationPart struct {
 	BaseCitation *Reference `json:"basecitation,omitempty"`
 }
 
-// NewCitationPart creates a new CitationPart instance
+// NewCitationPart creates a new CitationPart instance.
 func NewCitationPart() *CitationPart {
 	return &CitationPart{}
 }
 
-// FromJSON populates CitationPart from JSON data
+// FromJSON populates CitationPart from JSON data.
 func (m *CitationPart) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Value *FhirString `json:"value,omitempty"`
+		BaseCitation *Reference `json:"basecitation,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Value = temp.Value
+	m.BaseCitation = temp.BaseCitation
+	return nil
 }
 
-// ToJSON converts CitationPart to JSON data
+// ToJSON converts CitationPart to JSON data.
 func (m *CitationPart) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Value interface{} `json:"value,omitempty"`
+		ValueElement map[string]interface{} `json:"_value,omitempty"`
+		BaseCitation *Reference `json:"basecitation,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	if m.Value != nil && m.Value.Value != nil {
+		output.Value = m.Value.Value
+		if m.Value.Element != nil {
+			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+		}
+	}
+	output.BaseCitation = m.BaseCitation
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CitationPart
+// Clone creates a deep copy of CitationPart.
 func (m *CitationPart) Clone() *CitationPart {
 	if m == nil { return nil }
 	return &CitationPart{
@@ -707,7 +1429,7 @@ func (m *CitationPart) Clone() *CitationPart {
 	}
 }
 
-// Equals checks for equality with another CitationPart instance
+// Equals checks equality between two CitationPart instances.
 func (m *CitationPart) Equals(other *CitationPart) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -723,7 +1445,7 @@ func (m *CitationPart) Equals(other *CitationPart) bool {
 // CitationRelatesTo1
 // The artifact related to the cited artifact.
 type CitationRelatesTo1 struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -735,22 +1457,77 @@ type CitationRelatesTo1 struct {
 	TargetAttachment *Attachment `json:"targetattachment,omitempty"`
 }
 
-// NewCitationRelatesTo1 creates a new CitationRelatesTo1 instance
+// NewCitationRelatesTo1 creates a new CitationRelatesTo1 instance.
 func NewCitationRelatesTo1() *CitationRelatesTo1 {
 	return &CitationRelatesTo1{}
 }
 
-// FromJSON populates CitationRelatesTo1 from JSON data
+// FromJSON populates CitationRelatesTo1 from JSON data.
 func (m *CitationRelatesTo1) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		RelationshipType *CodeableConcept `json:"relationshiptype,omitempty"`
+		TargetClassifier []*CodeableConcept `json:"targetclassifier,omitempty"`
+		TargetUri *FhirUri `json:"targeturi,omitempty"`
+		TargetIdentifier *Identifier `json:"targetidentifier,omitempty"`
+		TargetReference *Reference `json:"targetreference,omitempty"`
+		TargetAttachment *Attachment `json:"targetattachment,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.RelationshipType = temp.RelationshipType
+	m.TargetClassifier = temp.TargetClassifier
+	m.TargetUri = temp.TargetUri
+	m.TargetIdentifier = temp.TargetIdentifier
+	m.TargetReference = temp.TargetReference
+	m.TargetAttachment = temp.TargetAttachment
+	return nil
 }
 
-// ToJSON converts CitationRelatesTo1 to JSON data
+// ToJSON converts CitationRelatesTo1 to JSON data.
 func (m *CitationRelatesTo1) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		RelationshipType *CodeableConcept `json:"relationshiptype,omitempty"`
+		TargetClassifier []*CodeableConcept `json:"targetclassifier,omitempty"`
+		TargetUri interface{} `json:"targeturi,omitempty"`
+		TargetUriElement map[string]interface{} `json:"_targeturi,omitempty"`
+		TargetIdentifier *Identifier `json:"targetidentifier,omitempty"`
+		TargetReference *Reference `json:"targetreference,omitempty"`
+		TargetAttachment *Attachment `json:"targetattachment,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.RelationshipType = m.RelationshipType
+	output.TargetClassifier = m.TargetClassifier
+	if m.TargetUri != nil && m.TargetUri.Value != nil {
+		output.TargetUri = m.TargetUri.Value
+		if m.TargetUri.Element != nil {
+			output.TargetUriElement = toMapOrNil(m.TargetUri.Element.ToJSON())
+		}
+	}
+	output.TargetIdentifier = m.TargetIdentifier
+	output.TargetReference = m.TargetReference
+	output.TargetAttachment = m.TargetAttachment
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CitationRelatesTo1
+// Clone creates a deep copy of CitationRelatesTo1.
 func (m *CitationRelatesTo1) Clone() *CitationRelatesTo1 {
 	if m == nil { return nil }
 	return &CitationRelatesTo1{
@@ -766,7 +1543,7 @@ func (m *CitationRelatesTo1) Clone() *CitationRelatesTo1 {
 	}
 }
 
-// Equals checks for equality with another CitationRelatesTo1 instance
+// Equals checks equality between two CitationRelatesTo1 instances.
 func (m *CitationRelatesTo1) Equals(other *CitationRelatesTo1) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -785,7 +1562,7 @@ func (m *CitationRelatesTo1) Equals(other *CitationRelatesTo1) bool {
 // CitationPublicationForm
 // If multiple, used to represent alternative forms of the article that are not separate citations.
 type CitationPublicationForm struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -802,22 +1579,139 @@ type CitationPublicationForm struct {
 	Copyright *FhirMarkdown `json:"copyright,omitempty"`
 }
 
-// NewCitationPublicationForm creates a new CitationPublicationForm instance
+// NewCitationPublicationForm creates a new CitationPublicationForm instance.
 func NewCitationPublicationForm() *CitationPublicationForm {
 	return &CitationPublicationForm{}
 }
 
-// FromJSON populates CitationPublicationForm from JSON data
+// FromJSON populates CitationPublicationForm from JSON data.
 func (m *CitationPublicationForm) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		PublishedIn *CitationPublishedIn `json:"publishedin,omitempty"`
+		PeriodicRelease *CitationPeriodicRelease `json:"periodicrelease,omitempty"`
+		ArticleDate *FhirDateTime `json:"articledate,omitempty"`
+		LastRevisionDate *FhirDateTime `json:"lastrevisiondate,omitempty"`
+		Language []*CodeableConcept `json:"language,omitempty"`
+		AccessionNumber *FhirString `json:"accessionnumber,omitempty"`
+		PageString *FhirString `json:"pagestring,omitempty"`
+		FirstPage *FhirString `json:"firstpage,omitempty"`
+		LastPage *FhirString `json:"lastpage,omitempty"`
+		PageCount *FhirString `json:"pagecount,omitempty"`
+		Copyright *FhirMarkdown `json:"copyright,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.PublishedIn = temp.PublishedIn
+	m.PeriodicRelease = temp.PeriodicRelease
+	m.ArticleDate = temp.ArticleDate
+	m.LastRevisionDate = temp.LastRevisionDate
+	m.Language = temp.Language
+	m.AccessionNumber = temp.AccessionNumber
+	m.PageString = temp.PageString
+	m.FirstPage = temp.FirstPage
+	m.LastPage = temp.LastPage
+	m.PageCount = temp.PageCount
+	m.Copyright = temp.Copyright
+	return nil
 }
 
-// ToJSON converts CitationPublicationForm to JSON data
+// ToJSON converts CitationPublicationForm to JSON data.
 func (m *CitationPublicationForm) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		PublishedIn *CitationPublishedIn `json:"publishedin,omitempty"`
+		PeriodicRelease *CitationPeriodicRelease `json:"periodicrelease,omitempty"`
+		ArticleDate interface{} `json:"articledate,omitempty"`
+		ArticleDateElement map[string]interface{} `json:"_articledate,omitempty"`
+		LastRevisionDate interface{} `json:"lastrevisiondate,omitempty"`
+		LastRevisionDateElement map[string]interface{} `json:"_lastrevisiondate,omitempty"`
+		Language []*CodeableConcept `json:"language,omitempty"`
+		AccessionNumber interface{} `json:"accessionnumber,omitempty"`
+		AccessionNumberElement map[string]interface{} `json:"_accessionnumber,omitempty"`
+		PageString interface{} `json:"pagestring,omitempty"`
+		PageStringElement map[string]interface{} `json:"_pagestring,omitempty"`
+		FirstPage interface{} `json:"firstpage,omitempty"`
+		FirstPageElement map[string]interface{} `json:"_firstpage,omitempty"`
+		LastPage interface{} `json:"lastpage,omitempty"`
+		LastPageElement map[string]interface{} `json:"_lastpage,omitempty"`
+		PageCount interface{} `json:"pagecount,omitempty"`
+		PageCountElement map[string]interface{} `json:"_pagecount,omitempty"`
+		Copyright interface{} `json:"copyright,omitempty"`
+		CopyrightElement map[string]interface{} `json:"_copyright,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.PublishedIn = m.PublishedIn
+	output.PeriodicRelease = m.PeriodicRelease
+	if m.ArticleDate != nil && m.ArticleDate.Value != nil {
+		output.ArticleDate = m.ArticleDate.Value
+		if m.ArticleDate.Element != nil {
+			output.ArticleDateElement = toMapOrNil(m.ArticleDate.Element.ToJSON())
+		}
+	}
+	if m.LastRevisionDate != nil && m.LastRevisionDate.Value != nil {
+		output.LastRevisionDate = m.LastRevisionDate.Value
+		if m.LastRevisionDate.Element != nil {
+			output.LastRevisionDateElement = toMapOrNil(m.LastRevisionDate.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	if m.AccessionNumber != nil && m.AccessionNumber.Value != nil {
+		output.AccessionNumber = m.AccessionNumber.Value
+		if m.AccessionNumber.Element != nil {
+			output.AccessionNumberElement = toMapOrNil(m.AccessionNumber.Element.ToJSON())
+		}
+	}
+	if m.PageString != nil && m.PageString.Value != nil {
+		output.PageString = m.PageString.Value
+		if m.PageString.Element != nil {
+			output.PageStringElement = toMapOrNil(m.PageString.Element.ToJSON())
+		}
+	}
+	if m.FirstPage != nil && m.FirstPage.Value != nil {
+		output.FirstPage = m.FirstPage.Value
+		if m.FirstPage.Element != nil {
+			output.FirstPageElement = toMapOrNil(m.FirstPage.Element.ToJSON())
+		}
+	}
+	if m.LastPage != nil && m.LastPage.Value != nil {
+		output.LastPage = m.LastPage.Value
+		if m.LastPage.Element != nil {
+			output.LastPageElement = toMapOrNil(m.LastPage.Element.ToJSON())
+		}
+	}
+	if m.PageCount != nil && m.PageCount.Value != nil {
+		output.PageCount = m.PageCount.Value
+		if m.PageCount.Element != nil {
+			output.PageCountElement = toMapOrNil(m.PageCount.Element.ToJSON())
+		}
+	}
+	if m.Copyright != nil && m.Copyright.Value != nil {
+		output.Copyright = m.Copyright.Value
+		if m.Copyright.Element != nil {
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CitationPublicationForm
+// Clone creates a deep copy of CitationPublicationForm.
 func (m *CitationPublicationForm) Clone() *CitationPublicationForm {
 	if m == nil { return nil }
 	return &CitationPublicationForm{
@@ -838,7 +1732,7 @@ func (m *CitationPublicationForm) Clone() *CitationPublicationForm {
 	}
 }
 
-// Equals checks for equality with another CitationPublicationForm instance
+// Equals checks equality between two CitationPublicationForm instances.
 func (m *CitationPublicationForm) Equals(other *CitationPublicationForm) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -862,7 +1756,7 @@ func (m *CitationPublicationForm) Equals(other *CitationPublicationForm) bool {
 // CitationPublishedIn
 // The collection the cited article or artifact is published in.
 type CitationPublishedIn struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -873,22 +1767,79 @@ type CitationPublishedIn struct {
 	PublisherLocation *FhirString `json:"publisherlocation,omitempty"`
 }
 
-// NewCitationPublishedIn creates a new CitationPublishedIn instance
+// NewCitationPublishedIn creates a new CitationPublishedIn instance.
 func NewCitationPublishedIn() *CitationPublishedIn {
 	return &CitationPublishedIn{}
 }
 
-// FromJSON populates CitationPublishedIn from JSON data
+// FromJSON populates CitationPublishedIn from JSON data.
 func (m *CitationPublishedIn) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Publisher *Reference `json:"publisher,omitempty"`
+		PublisherLocation *FhirString `json:"publisherlocation,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Identifier = temp.Identifier
+	m.Title = temp.Title
+	m.Publisher = temp.Publisher
+	m.PublisherLocation = temp.PublisherLocation
+	return nil
 }
 
-// ToJSON converts CitationPublishedIn to JSON data
+// ToJSON converts CitationPublishedIn to JSON data.
 func (m *CitationPublishedIn) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Publisher *Reference `json:"publisher,omitempty"`
+		PublisherLocation interface{} `json:"publisherlocation,omitempty"`
+		PublisherLocationElement map[string]interface{} `json:"_publisherlocation,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Identifier = m.Identifier
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	output.Publisher = m.Publisher
+	if m.PublisherLocation != nil && m.PublisherLocation.Value != nil {
+		output.PublisherLocation = m.PublisherLocation.Value
+		if m.PublisherLocation.Element != nil {
+			output.PublisherLocationElement = toMapOrNil(m.PublisherLocation.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CitationPublishedIn
+// Clone creates a deep copy of CitationPublishedIn.
 func (m *CitationPublishedIn) Clone() *CitationPublishedIn {
 	if m == nil { return nil }
 	return &CitationPublishedIn{
@@ -903,7 +1854,7 @@ func (m *CitationPublishedIn) Clone() *CitationPublishedIn {
 	}
 }
 
-// Equals checks for equality with another CitationPublishedIn instance
+// Equals checks equality between two CitationPublishedIn instances.
 func (m *CitationPublishedIn) Equals(other *CitationPublishedIn) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -921,7 +1872,7 @@ func (m *CitationPublishedIn) Equals(other *CitationPublishedIn) bool {
 // CitationPeriodicRelease
 // The specific issue in which the cited article resides.
 type CitationPeriodicRelease struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -931,22 +1882,75 @@ type CitationPeriodicRelease struct {
 	DateOfPublication *CitationDateOfPublication `json:"dateofpublication,omitempty"`
 }
 
-// NewCitationPeriodicRelease creates a new CitationPeriodicRelease instance
+// NewCitationPeriodicRelease creates a new CitationPeriodicRelease instance.
 func NewCitationPeriodicRelease() *CitationPeriodicRelease {
 	return &CitationPeriodicRelease{}
 }
 
-// FromJSON populates CitationPeriodicRelease from JSON data
+// FromJSON populates CitationPeriodicRelease from JSON data.
 func (m *CitationPeriodicRelease) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		CitedMedium *CodeableConcept `json:"citedmedium,omitempty"`
+		Volume *FhirString `json:"volume,omitempty"`
+		Issue *FhirString `json:"issue,omitempty"`
+		DateOfPublication *CitationDateOfPublication `json:"dateofpublication,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.CitedMedium = temp.CitedMedium
+	m.Volume = temp.Volume
+	m.Issue = temp.Issue
+	m.DateOfPublication = temp.DateOfPublication
+	return nil
 }
 
-// ToJSON converts CitationPeriodicRelease to JSON data
+// ToJSON converts CitationPeriodicRelease to JSON data.
 func (m *CitationPeriodicRelease) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		CitedMedium *CodeableConcept `json:"citedmedium,omitempty"`
+		Volume interface{} `json:"volume,omitempty"`
+		VolumeElement map[string]interface{} `json:"_volume,omitempty"`
+		Issue interface{} `json:"issue,omitempty"`
+		IssueElement map[string]interface{} `json:"_issue,omitempty"`
+		DateOfPublication *CitationDateOfPublication `json:"dateofpublication,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.CitedMedium = m.CitedMedium
+	if m.Volume != nil && m.Volume.Value != nil {
+		output.Volume = m.Volume.Value
+		if m.Volume.Element != nil {
+			output.VolumeElement = toMapOrNil(m.Volume.Element.ToJSON())
+		}
+	}
+	if m.Issue != nil && m.Issue.Value != nil {
+		output.Issue = m.Issue.Value
+		if m.Issue.Element != nil {
+			output.IssueElement = toMapOrNil(m.Issue.Element.ToJSON())
+		}
+	}
+	output.DateOfPublication = m.DateOfPublication
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CitationPeriodicRelease
+// Clone creates a deep copy of CitationPeriodicRelease.
 func (m *CitationPeriodicRelease) Clone() *CitationPeriodicRelease {
 	if m == nil { return nil }
 	return &CitationPeriodicRelease{
@@ -960,7 +1964,7 @@ func (m *CitationPeriodicRelease) Clone() *CitationPeriodicRelease {
 	}
 }
 
-// Equals checks for equality with another CitationPeriodicRelease instance
+// Equals checks equality between two CitationPeriodicRelease instances.
 func (m *CitationPeriodicRelease) Equals(other *CitationPeriodicRelease) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -977,7 +1981,7 @@ func (m *CitationPeriodicRelease) Equals(other *CitationPeriodicRelease) bool {
 // CitationDateOfPublication
 // Defining the date on which the issue of the journal was published.
 type CitationDateOfPublication struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -989,22 +1993,107 @@ type CitationDateOfPublication struct {
 	Text *FhirString `json:"text,omitempty"`
 }
 
-// NewCitationDateOfPublication creates a new CitationDateOfPublication instance
+// NewCitationDateOfPublication creates a new CitationDateOfPublication instance.
 func NewCitationDateOfPublication() *CitationDateOfPublication {
 	return &CitationDateOfPublication{}
 }
 
-// FromJSON populates CitationDateOfPublication from JSON data
+// FromJSON populates CitationDateOfPublication from JSON data.
 func (m *CitationDateOfPublication) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Date *FhirDate `json:"date,omitempty"`
+		Year *FhirString `json:"year,omitempty"`
+		Month *FhirString `json:"month,omitempty"`
+		Day *FhirString `json:"day,omitempty"`
+		Season *FhirString `json:"season,omitempty"`
+		Text *FhirString `json:"text,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Date = temp.Date
+	m.Year = temp.Year
+	m.Month = temp.Month
+	m.Day = temp.Day
+	m.Season = temp.Season
+	m.Text = temp.Text
+	return nil
 }
 
-// ToJSON converts CitationDateOfPublication to JSON data
+// ToJSON converts CitationDateOfPublication to JSON data.
 func (m *CitationDateOfPublication) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Year interface{} `json:"year,omitempty"`
+		YearElement map[string]interface{} `json:"_year,omitempty"`
+		Month interface{} `json:"month,omitempty"`
+		MonthElement map[string]interface{} `json:"_month,omitempty"`
+		Day interface{} `json:"day,omitempty"`
+		DayElement map[string]interface{} `json:"_day,omitempty"`
+		Season interface{} `json:"season,omitempty"`
+		SeasonElement map[string]interface{} `json:"_season,omitempty"`
+		Text interface{} `json:"text,omitempty"`
+		TextElement map[string]interface{} `json:"_text,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.Year != nil && m.Year.Value != nil {
+		output.Year = m.Year.Value
+		if m.Year.Element != nil {
+			output.YearElement = toMapOrNil(m.Year.Element.ToJSON())
+		}
+	}
+	if m.Month != nil && m.Month.Value != nil {
+		output.Month = m.Month.Value
+		if m.Month.Element != nil {
+			output.MonthElement = toMapOrNil(m.Month.Element.ToJSON())
+		}
+	}
+	if m.Day != nil && m.Day.Value != nil {
+		output.Day = m.Day.Value
+		if m.Day.Element != nil {
+			output.DayElement = toMapOrNil(m.Day.Element.ToJSON())
+		}
+	}
+	if m.Season != nil && m.Season.Value != nil {
+		output.Season = m.Season.Value
+		if m.Season.Element != nil {
+			output.SeasonElement = toMapOrNil(m.Season.Element.ToJSON())
+		}
+	}
+	if m.Text != nil && m.Text.Value != nil {
+		output.Text = m.Text.Value
+		if m.Text.Element != nil {
+			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CitationDateOfPublication
+// Clone creates a deep copy of CitationDateOfPublication.
 func (m *CitationDateOfPublication) Clone() *CitationDateOfPublication {
 	if m == nil { return nil }
 	return &CitationDateOfPublication{
@@ -1020,7 +2109,7 @@ func (m *CitationDateOfPublication) Clone() *CitationDateOfPublication {
 	}
 }
 
-// Equals checks for equality with another CitationDateOfPublication instance
+// Equals checks equality between two CitationDateOfPublication instances.
 func (m *CitationDateOfPublication) Equals(other *CitationDateOfPublication) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -1039,7 +2128,7 @@ func (m *CitationDateOfPublication) Equals(other *CitationDateOfPublication) boo
 // CitationWebLocation
 // Used for any URL for the article or artifact cited.
 type CitationWebLocation struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -1047,22 +2136,61 @@ type CitationWebLocation struct {
 	Url *FhirUri `json:"url,omitempty"`
 }
 
-// NewCitationWebLocation creates a new CitationWebLocation instance
+// NewCitationWebLocation creates a new CitationWebLocation instance.
 func NewCitationWebLocation() *CitationWebLocation {
 	return &CitationWebLocation{}
 }
 
-// FromJSON populates CitationWebLocation from JSON data
+// FromJSON populates CitationWebLocation from JSON data.
 func (m *CitationWebLocation) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Url = temp.Url
+	return nil
 }
 
-// ToJSON converts CitationWebLocation to JSON data
+// ToJSON converts CitationWebLocation to JSON data.
 func (m *CitationWebLocation) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CitationWebLocation
+// Clone creates a deep copy of CitationWebLocation.
 func (m *CitationWebLocation) Clone() *CitationWebLocation {
 	if m == nil { return nil }
 	return &CitationWebLocation{
@@ -1074,7 +2202,7 @@ func (m *CitationWebLocation) Clone() *CitationWebLocation {
 	}
 }
 
-// Equals checks for equality with another CitationWebLocation instance
+// Equals checks equality between two CitationWebLocation instances.
 func (m *CitationWebLocation) Equals(other *CitationWebLocation) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -1089,7 +2217,7 @@ func (m *CitationWebLocation) Equals(other *CitationWebLocation) bool {
 // CitationClassification1
 // The assignment to an organizing scheme.
 type CitationClassification1 struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -1098,22 +2226,59 @@ type CitationClassification1 struct {
 	WhoClassified *CitationWhoClassified `json:"whoclassified,omitempty"`
 }
 
-// NewCitationClassification1 creates a new CitationClassification1 instance
+// NewCitationClassification1 creates a new CitationClassification1 instance.
 func NewCitationClassification1() *CitationClassification1 {
 	return &CitationClassification1{}
 }
 
-// FromJSON populates CitationClassification1 from JSON data
+// FromJSON populates CitationClassification1 from JSON data.
 func (m *CitationClassification1) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Classifier []*CodeableConcept `json:"classifier,omitempty"`
+		WhoClassified *CitationWhoClassified `json:"whoclassified,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Classifier = temp.Classifier
+	m.WhoClassified = temp.WhoClassified
+	return nil
 }
 
-// ToJSON converts CitationClassification1 to JSON data
+// ToJSON converts CitationClassification1 to JSON data.
 func (m *CitationClassification1) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Classifier []*CodeableConcept `json:"classifier,omitempty"`
+		WhoClassified *CitationWhoClassified `json:"whoclassified,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Classifier = m.Classifier
+	output.WhoClassified = m.WhoClassified
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CitationClassification1
+// Clone creates a deep copy of CitationClassification1.
 func (m *CitationClassification1) Clone() *CitationClassification1 {
 	if m == nil { return nil }
 	return &CitationClassification1{
@@ -1126,7 +2291,7 @@ func (m *CitationClassification1) Clone() *CitationClassification1 {
 	}
 }
 
-// Equals checks for equality with another CitationClassification1 instance
+// Equals checks equality between two CitationClassification1 instances.
 func (m *CitationClassification1) Equals(other *CitationClassification1) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -1142,7 +2307,7 @@ func (m *CitationClassification1) Equals(other *CitationClassification1) bool {
 // CitationWhoClassified
 // Provenance and copyright of classification.
 type CitationWhoClassified struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -1153,22 +2318,79 @@ type CitationWhoClassified struct {
 	FreeToShare *FhirBoolean `json:"freetoshare,omitempty"`
 }
 
-// NewCitationWhoClassified creates a new CitationWhoClassified instance
+// NewCitationWhoClassified creates a new CitationWhoClassified instance.
 func NewCitationWhoClassified() *CitationWhoClassified {
 	return &CitationWhoClassified{}
 }
 
-// FromJSON populates CitationWhoClassified from JSON data
+// FromJSON populates CitationWhoClassified from JSON data.
 func (m *CitationWhoClassified) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Person *Reference `json:"person,omitempty"`
+		Organization *Reference `json:"organization,omitempty"`
+		Publisher *Reference `json:"publisher,omitempty"`
+		ClassifierCopyright *FhirString `json:"classifiercopyright,omitempty"`
+		FreeToShare *FhirBoolean `json:"freetoshare,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Person = temp.Person
+	m.Organization = temp.Organization
+	m.Publisher = temp.Publisher
+	m.ClassifierCopyright = temp.ClassifierCopyright
+	m.FreeToShare = temp.FreeToShare
+	return nil
 }
 
-// ToJSON converts CitationWhoClassified to JSON data
+// ToJSON converts CitationWhoClassified to JSON data.
 func (m *CitationWhoClassified) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Person *Reference `json:"person,omitempty"`
+		Organization *Reference `json:"organization,omitempty"`
+		Publisher *Reference `json:"publisher,omitempty"`
+		ClassifierCopyright interface{} `json:"classifiercopyright,omitempty"`
+		ClassifierCopyrightElement map[string]interface{} `json:"_classifiercopyright,omitempty"`
+		FreeToShare interface{} `json:"freetoshare,omitempty"`
+		FreeToShareElement map[string]interface{} `json:"_freetoshare,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Person = m.Person
+	output.Organization = m.Organization
+	output.Publisher = m.Publisher
+	if m.ClassifierCopyright != nil && m.ClassifierCopyright.Value != nil {
+		output.ClassifierCopyright = m.ClassifierCopyright.Value
+		if m.ClassifierCopyright.Element != nil {
+			output.ClassifierCopyrightElement = toMapOrNil(m.ClassifierCopyright.Element.ToJSON())
+		}
+	}
+	if m.FreeToShare != nil && m.FreeToShare.Value != nil {
+		output.FreeToShare = m.FreeToShare.Value
+		if m.FreeToShare.Element != nil {
+			output.FreeToShareElement = toMapOrNil(m.FreeToShare.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CitationWhoClassified
+// Clone creates a deep copy of CitationWhoClassified.
 func (m *CitationWhoClassified) Clone() *CitationWhoClassified {
 	if m == nil { return nil }
 	return &CitationWhoClassified{
@@ -1183,7 +2405,7 @@ func (m *CitationWhoClassified) Clone() *CitationWhoClassified {
 	}
 }
 
-// Equals checks for equality with another CitationWhoClassified instance
+// Equals checks equality between two CitationWhoClassified instances.
 func (m *CitationWhoClassified) Equals(other *CitationWhoClassified) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -1201,7 +2423,7 @@ func (m *CitationWhoClassified) Equals(other *CitationWhoClassified) bool {
 // CitationContributorship
 // This element is used to list authors and other contributors, their contact information, specific contributions, and summary statements.
 type CitationContributorship struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -1210,22 +2432,65 @@ type CitationContributorship struct {
 	Summary []*CitationSummary `json:"summary,omitempty"`
 }
 
-// NewCitationContributorship creates a new CitationContributorship instance
+// NewCitationContributorship creates a new CitationContributorship instance.
 func NewCitationContributorship() *CitationContributorship {
 	return &CitationContributorship{}
 }
 
-// FromJSON populates CitationContributorship from JSON data
+// FromJSON populates CitationContributorship from JSON data.
 func (m *CitationContributorship) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Complete *FhirBoolean `json:"complete,omitempty"`
+		Entry []*CitationEntry `json:"entry,omitempty"`
+		Summary []*CitationSummary `json:"summary,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Complete = temp.Complete
+	m.Entry = temp.Entry
+	m.Summary = temp.Summary
+	return nil
 }
 
-// ToJSON converts CitationContributorship to JSON data
+// ToJSON converts CitationContributorship to JSON data.
 func (m *CitationContributorship) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Complete interface{} `json:"complete,omitempty"`
+		CompleteElement map[string]interface{} `json:"_complete,omitempty"`
+		Entry []*CitationEntry `json:"entry,omitempty"`
+		Summary []*CitationSummary `json:"summary,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Complete != nil && m.Complete.Value != nil {
+		output.Complete = m.Complete.Value
+		if m.Complete.Element != nil {
+			output.CompleteElement = toMapOrNil(m.Complete.Element.ToJSON())
+		}
+	}
+	output.Entry = m.Entry
+	output.Summary = m.Summary
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CitationContributorship
+// Clone creates a deep copy of CitationContributorship.
 func (m *CitationContributorship) Clone() *CitationContributorship {
 	if m == nil { return nil }
 	return &CitationContributorship{
@@ -1238,7 +2503,7 @@ func (m *CitationContributorship) Clone() *CitationContributorship {
 	}
 }
 
-// Equals checks for equality with another CitationContributorship instance
+// Equals checks equality between two CitationContributorship instances.
 func (m *CitationContributorship) Equals(other *CitationContributorship) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -1254,7 +2519,7 @@ func (m *CitationContributorship) Equals(other *CitationContributorship) bool {
 // CitationEntry
 // An individual entity named in the author list or contributor list.
 type CitationEntry struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -1272,22 +2537,119 @@ type CitationEntry struct {
 	ListOrder *FhirPositiveInt `json:"listorder,omitempty"`
 }
 
-// NewCitationEntry creates a new CitationEntry instance
+// NewCitationEntry creates a new CitationEntry instance.
 func NewCitationEntry() *CitationEntry {
 	return &CitationEntry{}
 }
 
-// FromJSON populates CitationEntry from JSON data
+// FromJSON populates CitationEntry from JSON data.
 func (m *CitationEntry) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name *HumanName `json:"name,omitempty"`
+		Initials *FhirString `json:"initials,omitempty"`
+		CollectiveName *FhirString `json:"collectivename,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		AffiliationInfo []*CitationAffiliationInfo `json:"affiliationinfo,omitempty"`
+		Address []*Address `json:"address,omitempty"`
+		Telecom []*ContactPoint `json:"telecom,omitempty"`
+		ContributionType []*CodeableConcept `json:"contributiontype,omitempty"`
+		Role *CodeableConcept `json:"role,omitempty"`
+		ContributionInstance []*CitationContributionInstance `json:"contributioninstance,omitempty"`
+		CorrespondingContact *FhirBoolean `json:"correspondingcontact,omitempty"`
+		ListOrder *FhirPositiveInt `json:"listorder,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Name = temp.Name
+	m.Initials = temp.Initials
+	m.CollectiveName = temp.CollectiveName
+	m.Identifier = temp.Identifier
+	m.AffiliationInfo = temp.AffiliationInfo
+	m.Address = temp.Address
+	m.Telecom = temp.Telecom
+	m.ContributionType = temp.ContributionType
+	m.Role = temp.Role
+	m.ContributionInstance = temp.ContributionInstance
+	m.CorrespondingContact = temp.CorrespondingContact
+	m.ListOrder = temp.ListOrder
+	return nil
 }
 
-// ToJSON converts CitationEntry to JSON data
+// ToJSON converts CitationEntry to JSON data.
 func (m *CitationEntry) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name *HumanName `json:"name,omitempty"`
+		Initials interface{} `json:"initials,omitempty"`
+		InitialsElement map[string]interface{} `json:"_initials,omitempty"`
+		CollectiveName interface{} `json:"collectivename,omitempty"`
+		CollectiveNameElement map[string]interface{} `json:"_collectivename,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		AffiliationInfo []*CitationAffiliationInfo `json:"affiliationinfo,omitempty"`
+		Address []*Address `json:"address,omitempty"`
+		Telecom []*ContactPoint `json:"telecom,omitempty"`
+		ContributionType []*CodeableConcept `json:"contributiontype,omitempty"`
+		Role *CodeableConcept `json:"role,omitempty"`
+		ContributionInstance []*CitationContributionInstance `json:"contributioninstance,omitempty"`
+		CorrespondingContact interface{} `json:"correspondingcontact,omitempty"`
+		CorrespondingContactElement map[string]interface{} `json:"_correspondingcontact,omitempty"`
+		ListOrder interface{} `json:"listorder,omitempty"`
+		ListOrderElement map[string]interface{} `json:"_listorder,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Name = m.Name
+	if m.Initials != nil && m.Initials.Value != nil {
+		output.Initials = m.Initials.Value
+		if m.Initials.Element != nil {
+			output.InitialsElement = toMapOrNil(m.Initials.Element.ToJSON())
+		}
+	}
+	if m.CollectiveName != nil && m.CollectiveName.Value != nil {
+		output.CollectiveName = m.CollectiveName.Value
+		if m.CollectiveName.Element != nil {
+			output.CollectiveNameElement = toMapOrNil(m.CollectiveName.Element.ToJSON())
+		}
+	}
+	output.Identifier = m.Identifier
+	output.AffiliationInfo = m.AffiliationInfo
+	output.Address = m.Address
+	output.Telecom = m.Telecom
+	output.ContributionType = m.ContributionType
+	output.Role = m.Role
+	output.ContributionInstance = m.ContributionInstance
+	if m.CorrespondingContact != nil && m.CorrespondingContact.Value != nil {
+		output.CorrespondingContact = m.CorrespondingContact.Value
+		if m.CorrespondingContact.Element != nil {
+			output.CorrespondingContactElement = toMapOrNil(m.CorrespondingContact.Element.ToJSON())
+		}
+	}
+	if m.ListOrder != nil && m.ListOrder.Value != nil {
+		output.ListOrder = m.ListOrder.Value
+		if m.ListOrder.Element != nil {
+			output.ListOrderElement = toMapOrNil(m.ListOrder.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CitationEntry
+// Clone creates a deep copy of CitationEntry.
 func (m *CitationEntry) Clone() *CitationEntry {
 	if m == nil { return nil }
 	return &CitationEntry{
@@ -1309,7 +2671,7 @@ func (m *CitationEntry) Clone() *CitationEntry {
 	}
 }
 
-// Equals checks for equality with another CitationEntry instance
+// Equals checks equality between two CitationEntry instances.
 func (m *CitationEntry) Equals(other *CitationEntry) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -1334,7 +2696,7 @@ func (m *CitationEntry) Equals(other *CitationEntry) bool {
 // CitationAffiliationInfo
 // Organization affiliated with the entity.
 type CitationAffiliationInfo struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -1343,22 +2705,71 @@ type CitationAffiliationInfo struct {
 	Identifier []*Identifier `json:"identifier,omitempty"`
 }
 
-// NewCitationAffiliationInfo creates a new CitationAffiliationInfo instance
+// NewCitationAffiliationInfo creates a new CitationAffiliationInfo instance.
 func NewCitationAffiliationInfo() *CitationAffiliationInfo {
 	return &CitationAffiliationInfo{}
 }
 
-// FromJSON populates CitationAffiliationInfo from JSON data
+// FromJSON populates CitationAffiliationInfo from JSON data.
 func (m *CitationAffiliationInfo) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Affiliation *FhirString `json:"affiliation,omitempty"`
+		Role *FhirString `json:"role,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Affiliation = temp.Affiliation
+	m.Role = temp.Role
+	m.Identifier = temp.Identifier
+	return nil
 }
 
-// ToJSON converts CitationAffiliationInfo to JSON data
+// ToJSON converts CitationAffiliationInfo to JSON data.
 func (m *CitationAffiliationInfo) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Affiliation interface{} `json:"affiliation,omitempty"`
+		AffiliationElement map[string]interface{} `json:"_affiliation,omitempty"`
+		Role interface{} `json:"role,omitempty"`
+		RoleElement map[string]interface{} `json:"_role,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Affiliation != nil && m.Affiliation.Value != nil {
+		output.Affiliation = m.Affiliation.Value
+		if m.Affiliation.Element != nil {
+			output.AffiliationElement = toMapOrNil(m.Affiliation.Element.ToJSON())
+		}
+	}
+	if m.Role != nil && m.Role.Value != nil {
+		output.Role = m.Role.Value
+		if m.Role.Element != nil {
+			output.RoleElement = toMapOrNil(m.Role.Element.ToJSON())
+		}
+	}
+	output.Identifier = m.Identifier
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CitationAffiliationInfo
+// Clone creates a deep copy of CitationAffiliationInfo.
 func (m *CitationAffiliationInfo) Clone() *CitationAffiliationInfo {
 	if m == nil { return nil }
 	return &CitationAffiliationInfo{
@@ -1371,7 +2782,7 @@ func (m *CitationAffiliationInfo) Clone() *CitationAffiliationInfo {
 	}
 }
 
-// Equals checks for equality with another CitationAffiliationInfo instance
+// Equals checks equality between two CitationAffiliationInfo instances.
 func (m *CitationAffiliationInfo) Equals(other *CitationAffiliationInfo) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -1387,7 +2798,7 @@ func (m *CitationAffiliationInfo) Equals(other *CitationAffiliationInfo) bool {
 // CitationContributionInstance
 // Contributions with accounting for time or number.
 type CitationContributionInstance struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -1395,22 +2806,61 @@ type CitationContributionInstance struct {
 	Time *FhirDateTime `json:"time,omitempty"`
 }
 
-// NewCitationContributionInstance creates a new CitationContributionInstance instance
+// NewCitationContributionInstance creates a new CitationContributionInstance instance.
 func NewCitationContributionInstance() *CitationContributionInstance {
 	return &CitationContributionInstance{}
 }
 
-// FromJSON populates CitationContributionInstance from JSON data
+// FromJSON populates CitationContributionInstance from JSON data.
 func (m *CitationContributionInstance) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Time *FhirDateTime `json:"time,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Time = temp.Time
+	return nil
 }
 
-// ToJSON converts CitationContributionInstance to JSON data
+// ToJSON converts CitationContributionInstance to JSON data.
 func (m *CitationContributionInstance) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Time interface{} `json:"time,omitempty"`
+		TimeElement map[string]interface{} `json:"_time,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	if m.Time != nil && m.Time.Value != nil {
+		output.Time = m.Time.Value
+		if m.Time.Element != nil {
+			output.TimeElement = toMapOrNil(m.Time.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CitationContributionInstance
+// Clone creates a deep copy of CitationContributionInstance.
 func (m *CitationContributionInstance) Clone() *CitationContributionInstance {
 	if m == nil { return nil }
 	return &CitationContributionInstance{
@@ -1422,7 +2872,7 @@ func (m *CitationContributionInstance) Clone() *CitationContributionInstance {
 	}
 }
 
-// Equals checks for equality with another CitationContributionInstance instance
+// Equals checks equality between two CitationContributionInstance instances.
 func (m *CitationContributionInstance) Equals(other *CitationContributionInstance) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -1437,7 +2887,7 @@ func (m *CitationContributionInstance) Equals(other *CitationContributionInstanc
 // CitationSummary1
 // Used to record a display of the author/contributor list without separate coding for each list member.
 type CitationSummary1 struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -1447,22 +2897,69 @@ type CitationSummary1 struct {
 	Value *FhirMarkdown `json:"value,omitempty"`
 }
 
-// NewCitationSummary1 creates a new CitationSummary1 instance
+// NewCitationSummary1 creates a new CitationSummary1 instance.
 func NewCitationSummary1() *CitationSummary1 {
 	return &CitationSummary1{}
 }
 
-// FromJSON populates CitationSummary1 from JSON data
+// FromJSON populates CitationSummary1 from JSON data.
 func (m *CitationSummary1) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Style *CodeableConcept `json:"style,omitempty"`
+		Source *CodeableConcept `json:"source,omitempty"`
+		Value *FhirMarkdown `json:"value,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Style = temp.Style
+	m.Source = temp.Source
+	m.Value = temp.Value
+	return nil
 }
 
-// ToJSON converts CitationSummary1 to JSON data
+// ToJSON converts CitationSummary1 to JSON data.
 func (m *CitationSummary1) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Style *CodeableConcept `json:"style,omitempty"`
+		Source *CodeableConcept `json:"source,omitempty"`
+		Value interface{} `json:"value,omitempty"`
+		ValueElement map[string]interface{} `json:"_value,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Style = m.Style
+	output.Source = m.Source
+	if m.Value != nil && m.Value.Value != nil {
+		output.Value = m.Value.Value
+		if m.Value.Element != nil {
+			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CitationSummary1
+// Clone creates a deep copy of CitationSummary1.
 func (m *CitationSummary1) Clone() *CitationSummary1 {
 	if m == nil { return nil }
 	return &CitationSummary1{
@@ -1476,7 +2973,7 @@ func (m *CitationSummary1) Clone() *CitationSummary1 {
 	}
 }
 
-// Equals checks for equality with another CitationSummary1 instance
+// Equals checks equality between two CitationSummary1 instances.
 func (m *CitationSummary1) Equals(other *CitationSummary1) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

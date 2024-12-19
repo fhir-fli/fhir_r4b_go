@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Composition
 // A set of healthcare-related information that is assembled together into a single logical package that provides a single coherent statement of meaning, establishes its own context and that has clinical attestation with regard to who is making the statement. A Composition defines the structure and narrative content necessary for a document. However, a Composition alone does not constitute a document. Rather, the Composition must be the first entry in a Bundle where Bundle.type=document, and any other resources referenced from Composition must be included as subsequent entries in the Bundle (for example Patient, Practitioner, Encounter, etc.).
 type Composition struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -34,22 +35,151 @@ type Composition struct {
 	Section []*CompositionSection `json:"section,omitempty"`
 }
 
-// NewComposition creates a new Composition instance
+// NewComposition creates a new Composition instance.
 func NewComposition() *Composition {
 	return &Composition{}
 }
 
-// FromJSON populates Composition from JSON data
+// FromJSON populates Composition from JSON data.
 func (m *Composition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Status *CompositionStatus `json:"status,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Author []*Reference `json:"author,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Confidentiality *FhirCode `json:"confidentiality,omitempty"`
+		Attester []*CompositionAttester `json:"attester,omitempty"`
+		Custodian *Reference `json:"custodian,omitempty"`
+		RelatesTo []*CompositionRelatesTo `json:"relatesto,omitempty"`
+		Event []*CompositionEvent `json:"event,omitempty"`
+		Section []*CompositionSection `json:"section,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.Type = temp.Type
+	m.Category = temp.Category
+	m.Subject = temp.Subject
+	m.Encounter = temp.Encounter
+	m.Date = temp.Date
+	m.Author = temp.Author
+	m.Title = temp.Title
+	m.Confidentiality = temp.Confidentiality
+	m.Attester = temp.Attester
+	m.Custodian = temp.Custodian
+	m.RelatesTo = temp.RelatesTo
+	m.Event = temp.Event
+	m.Section = temp.Section
+	return nil
 }
 
-// ToJSON converts Composition to JSON data
+// ToJSON converts Composition to JSON data.
 func (m *Composition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Status *CompositionStatus `json:"status,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Author []*Reference `json:"author,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Confidentiality interface{} `json:"confidentiality,omitempty"`
+		ConfidentialityElement map[string]interface{} `json:"_confidentiality,omitempty"`
+		Attester []*CompositionAttester `json:"attester,omitempty"`
+		Custodian *Reference `json:"custodian,omitempty"`
+		RelatesTo []*CompositionRelatesTo `json:"relatesto,omitempty"`
+		Event []*CompositionEvent `json:"event,omitempty"`
+		Section []*CompositionSection `json:"section,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	output.Type = m.Type
+	output.Category = m.Category
+	output.Subject = m.Subject
+	output.Encounter = m.Encounter
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	output.Author = m.Author
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	if m.Confidentiality != nil && m.Confidentiality.Value != nil {
+		output.Confidentiality = m.Confidentiality.Value
+		if m.Confidentiality.Element != nil {
+			output.ConfidentialityElement = toMapOrNil(m.Confidentiality.Element.ToJSON())
+		}
+	}
+	output.Attester = m.Attester
+	output.Custodian = m.Custodian
+	output.RelatesTo = m.RelatesTo
+	output.Event = m.Event
+	output.Section = m.Section
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Composition
+// Clone creates a deep copy of Composition.
 func (m *Composition) Clone() *Composition {
 	if m == nil { return nil }
 	return &Composition{
@@ -79,7 +209,7 @@ func (m *Composition) Clone() *Composition {
 	}
 }
 
-// Equals checks for equality with another Composition instance
+// Equals checks equality between two Composition instances.
 func (m *Composition) Equals(other *Composition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -112,7 +242,7 @@ func (m *Composition) Equals(other *Composition) bool {
 // CompositionAttester
 // A participant who has attested to the accuracy of the composition/document.
 type CompositionAttester struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -121,22 +251,65 @@ type CompositionAttester struct {
 	Party *Reference `json:"party,omitempty"`
 }
 
-// NewCompositionAttester creates a new CompositionAttester instance
+// NewCompositionAttester creates a new CompositionAttester instance.
 func NewCompositionAttester() *CompositionAttester {
 	return &CompositionAttester{}
 }
 
-// FromJSON populates CompositionAttester from JSON data
+// FromJSON populates CompositionAttester from JSON data.
 func (m *CompositionAttester) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Mode *CompositionAttestationMode `json:"mode,omitempty"`
+		Time *FhirDateTime `json:"time,omitempty"`
+		Party *Reference `json:"party,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Mode = temp.Mode
+	m.Time = temp.Time
+	m.Party = temp.Party
+	return nil
 }
 
-// ToJSON converts CompositionAttester to JSON data
+// ToJSON converts CompositionAttester to JSON data.
 func (m *CompositionAttester) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Mode *CompositionAttestationMode `json:"mode,omitempty"`
+		Time interface{} `json:"time,omitempty"`
+		TimeElement map[string]interface{} `json:"_time,omitempty"`
+		Party *Reference `json:"party,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Mode = m.Mode
+	if m.Time != nil && m.Time.Value != nil {
+		output.Time = m.Time.Value
+		if m.Time.Element != nil {
+			output.TimeElement = toMapOrNil(m.Time.Element.ToJSON())
+		}
+	}
+	output.Party = m.Party
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CompositionAttester
+// Clone creates a deep copy of CompositionAttester.
 func (m *CompositionAttester) Clone() *CompositionAttester {
 	if m == nil { return nil }
 	return &CompositionAttester{
@@ -149,7 +322,7 @@ func (m *CompositionAttester) Clone() *CompositionAttester {
 	}
 }
 
-// Equals checks for equality with another CompositionAttester instance
+// Equals checks equality between two CompositionAttester instances.
 func (m *CompositionAttester) Equals(other *CompositionAttester) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -165,7 +338,7 @@ func (m *CompositionAttester) Equals(other *CompositionAttester) bool {
 // CompositionRelatesTo
 // Relationships that this composition has with other compositions or documents that already exist.
 type CompositionRelatesTo struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -174,22 +347,59 @@ type CompositionRelatesTo struct {
 	TargetReference *Reference `json:"targetreference,omitempty"`
 }
 
-// NewCompositionRelatesTo creates a new CompositionRelatesTo instance
+// NewCompositionRelatesTo creates a new CompositionRelatesTo instance.
 func NewCompositionRelatesTo() *CompositionRelatesTo {
 	return &CompositionRelatesTo{}
 }
 
-// FromJSON populates CompositionRelatesTo from JSON data
+// FromJSON populates CompositionRelatesTo from JSON data.
 func (m *CompositionRelatesTo) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *DocumentRelationshipType `json:"code,omitempty"`
+		TargetIdentifier *Identifier `json:"targetidentifier,omitempty"`
+		TargetReference *Reference `json:"targetreference,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.TargetIdentifier = temp.TargetIdentifier
+	m.TargetReference = temp.TargetReference
+	return nil
 }
 
-// ToJSON converts CompositionRelatesTo to JSON data
+// ToJSON converts CompositionRelatesTo to JSON data.
 func (m *CompositionRelatesTo) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *DocumentRelationshipType `json:"code,omitempty"`
+		TargetIdentifier *Identifier `json:"targetidentifier,omitempty"`
+		TargetReference *Reference `json:"targetreference,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	output.TargetIdentifier = m.TargetIdentifier
+	output.TargetReference = m.TargetReference
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CompositionRelatesTo
+// Clone creates a deep copy of CompositionRelatesTo.
 func (m *CompositionRelatesTo) Clone() *CompositionRelatesTo {
 	if m == nil { return nil }
 	return &CompositionRelatesTo{
@@ -202,7 +412,7 @@ func (m *CompositionRelatesTo) Clone() *CompositionRelatesTo {
 	}
 }
 
-// Equals checks for equality with another CompositionRelatesTo instance
+// Equals checks equality between two CompositionRelatesTo instances.
 func (m *CompositionRelatesTo) Equals(other *CompositionRelatesTo) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -218,7 +428,7 @@ func (m *CompositionRelatesTo) Equals(other *CompositionRelatesTo) bool {
 // CompositionEvent
 // The clinical service, such as a colonoscopy or an appendectomy, being documented.
 type CompositionEvent struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -227,22 +437,59 @@ type CompositionEvent struct {
 	Detail []*Reference `json:"detail,omitempty"`
 }
 
-// NewCompositionEvent creates a new CompositionEvent instance
+// NewCompositionEvent creates a new CompositionEvent instance.
 func NewCompositionEvent() *CompositionEvent {
 	return &CompositionEvent{}
 }
 
-// FromJSON populates CompositionEvent from JSON data
+// FromJSON populates CompositionEvent from JSON data.
 func (m *CompositionEvent) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code []*CodeableConcept `json:"code,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Detail []*Reference `json:"detail,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Period = temp.Period
+	m.Detail = temp.Detail
+	return nil
 }
 
-// ToJSON converts CompositionEvent to JSON data
+// ToJSON converts CompositionEvent to JSON data.
 func (m *CompositionEvent) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code []*CodeableConcept `json:"code,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Detail []*Reference `json:"detail,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	output.Period = m.Period
+	output.Detail = m.Detail
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CompositionEvent
+// Clone creates a deep copy of CompositionEvent.
 func (m *CompositionEvent) Clone() *CompositionEvent {
 	if m == nil { return nil }
 	return &CompositionEvent{
@@ -255,7 +502,7 @@ func (m *CompositionEvent) Clone() *CompositionEvent {
 	}
 }
 
-// Equals checks for equality with another CompositionEvent instance
+// Equals checks equality between two CompositionEvent instances.
 func (m *CompositionEvent) Equals(other *CompositionEvent) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -271,7 +518,7 @@ func (m *CompositionEvent) Equals(other *CompositionEvent) bool {
 // CompositionSection
 // The root of the sections that make up the composition.
 type CompositionSection struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -287,22 +534,93 @@ type CompositionSection struct {
 	Section []*CompositionSection `json:"section,omitempty"`
 }
 
-// NewCompositionSection creates a new CompositionSection instance
+// NewCompositionSection creates a new CompositionSection instance.
 func NewCompositionSection() *CompositionSection {
 	return &CompositionSection{}
 }
 
-// FromJSON populates CompositionSection from JSON data
+// FromJSON populates CompositionSection from JSON data.
 func (m *CompositionSection) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Author []*Reference `json:"author,omitempty"`
+		Focus *Reference `json:"focus,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Mode *ListMode `json:"mode,omitempty"`
+		OrderedBy *CodeableConcept `json:"orderedby,omitempty"`
+		Entry []*Reference `json:"entry,omitempty"`
+		EmptyReason *CodeableConcept `json:"emptyreason,omitempty"`
+		Section []*CompositionSection `json:"section,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Title = temp.Title
+	m.Code = temp.Code
+	m.Author = temp.Author
+	m.Focus = temp.Focus
+	m.Text = temp.Text
+	m.Mode = temp.Mode
+	m.OrderedBy = temp.OrderedBy
+	m.Entry = temp.Entry
+	m.EmptyReason = temp.EmptyReason
+	m.Section = temp.Section
+	return nil
 }
 
-// ToJSON converts CompositionSection to JSON data
+// ToJSON converts CompositionSection to JSON data.
 func (m *CompositionSection) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Author []*Reference `json:"author,omitempty"`
+		Focus *Reference `json:"focus,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Mode *ListMode `json:"mode,omitempty"`
+		OrderedBy *CodeableConcept `json:"orderedby,omitempty"`
+		Entry []*Reference `json:"entry,omitempty"`
+		EmptyReason *CodeableConcept `json:"emptyreason,omitempty"`
+		Section []*CompositionSection `json:"section,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	output.Code = m.Code
+	output.Author = m.Author
+	output.Focus = m.Focus
+	output.Text = m.Text
+	output.Mode = m.Mode
+	output.OrderedBy = m.OrderedBy
+	output.Entry = m.Entry
+	output.EmptyReason = m.EmptyReason
+	output.Section = m.Section
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CompositionSection
+// Clone creates a deep copy of CompositionSection.
 func (m *CompositionSection) Clone() *CompositionSection {
 	if m == nil { return nil }
 	return &CompositionSection{
@@ -322,7 +640,7 @@ func (m *CompositionSection) Clone() *CompositionSection {
 	}
 }
 
-// Equals checks for equality with another CompositionSection instance
+// Equals checks equality between two CompositionSection instances.
 func (m *CompositionSection) Equals(other *CompositionSection) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

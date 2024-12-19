@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Media
 // A photo, video, or audio recording acquired or used in healthcare. The actual content may be inline or provided by direct reference.
 type Media struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -42,22 +43,207 @@ type Media struct {
 	Note []*Annotation `json:"note,omitempty"`
 }
 
-// NewMedia creates a new Media instance
+// NewMedia creates a new Media instance.
 func NewMedia() *Media {
 	return &Media{}
 }
 
-// FromJSON populates Media from JSON data
+// FromJSON populates Media from JSON data.
 func (m *Media) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		PartOf []*Reference `json:"partof,omitempty"`
+		Status *EventStatus `json:"status,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Modality *CodeableConcept `json:"modality,omitempty"`
+		View *CodeableConcept `json:"view,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		CreatedDateTime *FhirDateTime `json:"createddatetime,omitempty"`
+		CreatedPeriod *Period `json:"createdperiod,omitempty"`
+		Issued *FhirInstant `json:"issued,omitempty"`
+		Operator_ *Reference `json:"operator,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		BodySite *CodeableConcept `json:"bodysite,omitempty"`
+		DeviceName *FhirString `json:"devicename,omitempty"`
+		Device *Reference `json:"device,omitempty"`
+		Height *FhirPositiveInt `json:"height,omitempty"`
+		Width *FhirPositiveInt `json:"width,omitempty"`
+		Frames *FhirPositiveInt `json:"frames,omitempty"`
+		Duration *FhirDecimal `json:"duration,omitempty"`
+		Content *Attachment `json:"content,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.BasedOn = temp.BasedOn
+	m.PartOf = temp.PartOf
+	m.Status = temp.Status
+	m.Type = temp.Type
+	m.Modality = temp.Modality
+	m.View = temp.View
+	m.Subject = temp.Subject
+	m.Encounter = temp.Encounter
+	m.CreatedDateTime = temp.CreatedDateTime
+	m.CreatedPeriod = temp.CreatedPeriod
+	m.Issued = temp.Issued
+	m.Operator_ = temp.Operator_
+	m.ReasonCode = temp.ReasonCode
+	m.BodySite = temp.BodySite
+	m.DeviceName = temp.DeviceName
+	m.Device = temp.Device
+	m.Height = temp.Height
+	m.Width = temp.Width
+	m.Frames = temp.Frames
+	m.Duration = temp.Duration
+	m.Content = temp.Content
+	m.Note = temp.Note
+	return nil
 }
 
-// ToJSON converts Media to JSON data
+// ToJSON converts Media to JSON data.
 func (m *Media) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		PartOf []*Reference `json:"partof,omitempty"`
+		Status *EventStatus `json:"status,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Modality *CodeableConcept `json:"modality,omitempty"`
+		View *CodeableConcept `json:"view,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		CreatedDateTime interface{} `json:"createddatetime,omitempty"`
+		CreatedDateTimeElement map[string]interface{} `json:"_createddatetime,omitempty"`
+		CreatedPeriod *Period `json:"createdperiod,omitempty"`
+		Issued interface{} `json:"issued,omitempty"`
+		IssuedElement map[string]interface{} `json:"_issued,omitempty"`
+		Operator_ *Reference `json:"operator,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		BodySite *CodeableConcept `json:"bodysite,omitempty"`
+		DeviceName interface{} `json:"devicename,omitempty"`
+		DeviceNameElement map[string]interface{} `json:"_devicename,omitempty"`
+		Device *Reference `json:"device,omitempty"`
+		Height interface{} `json:"height,omitempty"`
+		HeightElement map[string]interface{} `json:"_height,omitempty"`
+		Width interface{} `json:"width,omitempty"`
+		WidthElement map[string]interface{} `json:"_width,omitempty"`
+		Frames interface{} `json:"frames,omitempty"`
+		FramesElement map[string]interface{} `json:"_frames,omitempty"`
+		Duration interface{} `json:"duration,omitempty"`
+		DurationElement map[string]interface{} `json:"_duration,omitempty"`
+		Content *Attachment `json:"content,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.BasedOn = m.BasedOn
+	output.PartOf = m.PartOf
+	output.Status = m.Status
+	output.Type = m.Type
+	output.Modality = m.Modality
+	output.View = m.View
+	output.Subject = m.Subject
+	output.Encounter = m.Encounter
+	if m.CreatedDateTime != nil && m.CreatedDateTime.Value != nil {
+		output.CreatedDateTime = m.CreatedDateTime.Value
+		if m.CreatedDateTime.Element != nil {
+			output.CreatedDateTimeElement = toMapOrNil(m.CreatedDateTime.Element.ToJSON())
+		}
+	}
+	output.CreatedPeriod = m.CreatedPeriod
+	if m.Issued != nil && m.Issued.Value != nil {
+		output.Issued = m.Issued.Value
+		if m.Issued.Element != nil {
+			output.IssuedElement = toMapOrNil(m.Issued.Element.ToJSON())
+		}
+	}
+	output.Operator_ = m.Operator_
+	output.ReasonCode = m.ReasonCode
+	output.BodySite = m.BodySite
+	if m.DeviceName != nil && m.DeviceName.Value != nil {
+		output.DeviceName = m.DeviceName.Value
+		if m.DeviceName.Element != nil {
+			output.DeviceNameElement = toMapOrNil(m.DeviceName.Element.ToJSON())
+		}
+	}
+	output.Device = m.Device
+	if m.Height != nil && m.Height.Value != nil {
+		output.Height = m.Height.Value
+		if m.Height.Element != nil {
+			output.HeightElement = toMapOrNil(m.Height.Element.ToJSON())
+		}
+	}
+	if m.Width != nil && m.Width.Value != nil {
+		output.Width = m.Width.Value
+		if m.Width.Element != nil {
+			output.WidthElement = toMapOrNil(m.Width.Element.ToJSON())
+		}
+	}
+	if m.Frames != nil && m.Frames.Value != nil {
+		output.Frames = m.Frames.Value
+		if m.Frames.Element != nil {
+			output.FramesElement = toMapOrNil(m.Frames.Element.ToJSON())
+		}
+	}
+	if m.Duration != nil && m.Duration.Value != nil {
+		output.Duration = m.Duration.Value
+		if m.Duration.Element != nil {
+			output.DurationElement = toMapOrNil(m.Duration.Element.ToJSON())
+		}
+	}
+	output.Content = m.Content
+	output.Note = m.Note
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Media
+// Clone creates a deep copy of Media.
 func (m *Media) Clone() *Media {
 	if m == nil { return nil }
 	return &Media{
@@ -95,7 +281,7 @@ func (m *Media) Clone() *Media {
 	}
 }
 
-// Equals checks for equality with another Media instance
+// Equals checks equality between two Media instances.
 func (m *Media) Equals(other *Media) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

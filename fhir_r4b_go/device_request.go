@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // DeviceRequest
 // Represents a request for a patient to employ a medical device. The device may be an implantable device, or an external assistive device, such as a walker.
 type DeviceRequest struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -46,22 +48,235 @@ type DeviceRequest struct {
 	RelevantHistory []*Reference `json:"relevanthistory,omitempty"`
 }
 
-// NewDeviceRequest creates a new DeviceRequest instance
+// NewDeviceRequest creates a new DeviceRequest instance.
 func NewDeviceRequest() *DeviceRequest {
 	return &DeviceRequest{}
 }
 
-// FromJSON populates DeviceRequest from JSON data
+// FromJSON populates DeviceRequest from JSON data.
 func (m *DeviceRequest) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		InstantiatesCanonical []interface{} `json:"instantiatescanonical,omitempty"`
+		InstantiatesUri []interface{} `json:"instantiatesuri,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		PriorRequest []*Reference `json:"priorrequest,omitempty"`
+		GroupIdentifier *Identifier `json:"groupidentifier,omitempty"`
+		Status *RequestStatus `json:"status,omitempty"`
+		Intent *RequestIntent `json:"intent,omitempty"`
+		Priority *RequestPriority `json:"priority,omitempty"`
+		CodeReference *Reference `json:"codereference,omitempty"`
+		CodeCodeableConcept *CodeableConcept `json:"codecodeableconcept,omitempty"`
+		Parameter []*DeviceRequestParameter `json:"parameter,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		OccurrenceDateTime *FhirDateTime `json:"occurrencedatetime,omitempty"`
+		OccurrencePeriod *Period `json:"occurrenceperiod,omitempty"`
+		OccurrenceTiming *Timing `json:"occurrencetiming,omitempty"`
+		AuthoredOn *FhirDateTime `json:"authoredon,omitempty"`
+		Requester *Reference `json:"requester,omitempty"`
+		PerformerType *CodeableConcept `json:"performertype,omitempty"`
+		Performer *Reference `json:"performer,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		Insurance []*Reference `json:"insurance,omitempty"`
+		SupportingInfo []*Reference `json:"supportinginfo,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		RelevantHistory []*Reference `json:"relevanthistory,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	if len(temp.InstantiatesCanonical) > 0 {
+		m.InstantiatesCanonical = make([]*FhirCanonical, len(temp.InstantiatesCanonical))
+		for i := range temp.InstantiatesCanonical {
+			itemMap, ok := temp.InstantiatesCanonical[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for InstantiatesCanonical[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse InstantiatesCanonical[%d]: %v", i, err) }
+			m.InstantiatesCanonical[i] = primitive
+		}
+	}
+	if len(temp.InstantiatesUri) > 0 {
+		m.InstantiatesUri = make([]*FhirUri, len(temp.InstantiatesUri))
+		for i := range temp.InstantiatesUri {
+			itemMap, ok := temp.InstantiatesUri[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for InstantiatesUri[%d]: expected map", i) }
+			primitive, err := NewFhirUriFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse InstantiatesUri[%d]: %v", i, err) }
+			m.InstantiatesUri[i] = primitive
+		}
+	}
+	m.BasedOn = temp.BasedOn
+	m.PriorRequest = temp.PriorRequest
+	m.GroupIdentifier = temp.GroupIdentifier
+	m.Status = temp.Status
+	m.Intent = temp.Intent
+	m.Priority = temp.Priority
+	m.CodeReference = temp.CodeReference
+	m.CodeCodeableConcept = temp.CodeCodeableConcept
+	m.Parameter = temp.Parameter
+	m.Subject = temp.Subject
+	m.Encounter = temp.Encounter
+	m.OccurrenceDateTime = temp.OccurrenceDateTime
+	m.OccurrencePeriod = temp.OccurrencePeriod
+	m.OccurrenceTiming = temp.OccurrenceTiming
+	m.AuthoredOn = temp.AuthoredOn
+	m.Requester = temp.Requester
+	m.PerformerType = temp.PerformerType
+	m.Performer = temp.Performer
+	m.ReasonCode = temp.ReasonCode
+	m.ReasonReference = temp.ReasonReference
+	m.Insurance = temp.Insurance
+	m.SupportingInfo = temp.SupportingInfo
+	m.Note = temp.Note
+	m.RelevantHistory = temp.RelevantHistory
+	return nil
 }
 
-// ToJSON converts DeviceRequest to JSON data
+// ToJSON converts DeviceRequest to JSON data.
 func (m *DeviceRequest) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		InstantiatesCanonical []interface{} `json:"instantiatescanonical,omitempty"`
+		InstantiatesCanonicalElement []map[string]interface{} `json:"_instantiatescanonical,omitempty"`
+		InstantiatesUri []interface{} `json:"instantiatesuri,omitempty"`
+		InstantiatesUriElement []map[string]interface{} `json:"_instantiatesuri,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		PriorRequest []*Reference `json:"priorrequest,omitempty"`
+		GroupIdentifier *Identifier `json:"groupidentifier,omitempty"`
+		Status *RequestStatus `json:"status,omitempty"`
+		Intent *RequestIntent `json:"intent,omitempty"`
+		Priority *RequestPriority `json:"priority,omitempty"`
+		CodeReference *Reference `json:"codereference,omitempty"`
+		CodeCodeableConcept *CodeableConcept `json:"codecodeableconcept,omitempty"`
+		Parameter []*DeviceRequestParameter `json:"parameter,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		OccurrenceDateTime interface{} `json:"occurrencedatetime,omitempty"`
+		OccurrenceDateTimeElement map[string]interface{} `json:"_occurrencedatetime,omitempty"`
+		OccurrencePeriod *Period `json:"occurrenceperiod,omitempty"`
+		OccurrenceTiming *Timing `json:"occurrencetiming,omitempty"`
+		AuthoredOn interface{} `json:"authoredon,omitempty"`
+		AuthoredOnElement map[string]interface{} `json:"_authoredon,omitempty"`
+		Requester *Reference `json:"requester,omitempty"`
+		PerformerType *CodeableConcept `json:"performertype,omitempty"`
+		Performer *Reference `json:"performer,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		Insurance []*Reference `json:"insurance,omitempty"`
+		SupportingInfo []*Reference `json:"supportinginfo,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		RelevantHistory []*Reference `json:"relevanthistory,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	if len(m.InstantiatesCanonical) > 0 {
+		output.InstantiatesCanonical = make([]interface{}, len(m.InstantiatesCanonical))
+		output.InstantiatesCanonicalElement = make([]map[string]interface{}, len(m.InstantiatesCanonical))
+		for i, item := range m.InstantiatesCanonical {
+			if item != nil && item.Value != nil {
+				output.InstantiatesCanonical[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.InstantiatesCanonicalElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.InstantiatesUri) > 0 {
+		output.InstantiatesUri = make([]interface{}, len(m.InstantiatesUri))
+		output.InstantiatesUriElement = make([]map[string]interface{}, len(m.InstantiatesUri))
+		for i, item := range m.InstantiatesUri {
+			if item != nil && item.Value != nil {
+				output.InstantiatesUri[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.InstantiatesUriElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.BasedOn = m.BasedOn
+	output.PriorRequest = m.PriorRequest
+	output.GroupIdentifier = m.GroupIdentifier
+	output.Status = m.Status
+	output.Intent = m.Intent
+	output.Priority = m.Priority
+	output.CodeReference = m.CodeReference
+	output.CodeCodeableConcept = m.CodeCodeableConcept
+	output.Parameter = m.Parameter
+	output.Subject = m.Subject
+	output.Encounter = m.Encounter
+	if m.OccurrenceDateTime != nil && m.OccurrenceDateTime.Value != nil {
+		output.OccurrenceDateTime = m.OccurrenceDateTime.Value
+		if m.OccurrenceDateTime.Element != nil {
+			output.OccurrenceDateTimeElement = toMapOrNil(m.OccurrenceDateTime.Element.ToJSON())
+		}
+	}
+	output.OccurrencePeriod = m.OccurrencePeriod
+	output.OccurrenceTiming = m.OccurrenceTiming
+	if m.AuthoredOn != nil && m.AuthoredOn.Value != nil {
+		output.AuthoredOn = m.AuthoredOn.Value
+		if m.AuthoredOn.Element != nil {
+			output.AuthoredOnElement = toMapOrNil(m.AuthoredOn.Element.ToJSON())
+		}
+	}
+	output.Requester = m.Requester
+	output.PerformerType = m.PerformerType
+	output.Performer = m.Performer
+	output.ReasonCode = m.ReasonCode
+	output.ReasonReference = m.ReasonReference
+	output.Insurance = m.Insurance
+	output.SupportingInfo = m.SupportingInfo
+	output.Note = m.Note
+	output.RelevantHistory = m.RelevantHistory
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DeviceRequest
+// Clone creates a deep copy of DeviceRequest.
 func (m *DeviceRequest) Clone() *DeviceRequest {
 	if m == nil { return nil }
 	return &DeviceRequest{
@@ -103,7 +318,7 @@ func (m *DeviceRequest) Clone() *DeviceRequest {
 	}
 }
 
-// Equals checks for equality with another DeviceRequest instance
+// Equals checks equality between two DeviceRequest instances.
 func (m *DeviceRequest) Equals(other *DeviceRequest) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -148,7 +363,7 @@ func (m *DeviceRequest) Equals(other *DeviceRequest) bool {
 // DeviceRequestParameter
 // Specific parameters for the ordered item.  For example, the prism value for lenses.
 type DeviceRequestParameter struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -159,22 +374,73 @@ type DeviceRequestParameter struct {
 	ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
 }
 
-// NewDeviceRequestParameter creates a new DeviceRequestParameter instance
+// NewDeviceRequestParameter creates a new DeviceRequestParameter instance.
 func NewDeviceRequestParameter() *DeviceRequestParameter {
 	return &DeviceRequestParameter{}
 }
 
-// FromJSON populates DeviceRequestParameter from JSON data
+// FromJSON populates DeviceRequestParameter from JSON data.
 func (m *DeviceRequestParameter) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueRange *Range `json:"valuerange,omitempty"`
+		ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.ValueCodeableConcept = temp.ValueCodeableConcept
+	m.ValueQuantity = temp.ValueQuantity
+	m.ValueRange = temp.ValueRange
+	m.ValueBoolean = temp.ValueBoolean
+	return nil
 }
 
-// ToJSON converts DeviceRequestParameter to JSON data
+// ToJSON converts DeviceRequestParameter to JSON data.
 func (m *DeviceRequestParameter) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueRange *Range `json:"valuerange,omitempty"`
+		ValueBoolean interface{} `json:"valueboolean,omitempty"`
+		ValueBooleanElement map[string]interface{} `json:"_valueboolean,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	output.ValueCodeableConcept = m.ValueCodeableConcept
+	output.ValueQuantity = m.ValueQuantity
+	output.ValueRange = m.ValueRange
+	if m.ValueBoolean != nil && m.ValueBoolean.Value != nil {
+		output.ValueBoolean = m.ValueBoolean.Value
+		if m.ValueBoolean.Element != nil {
+			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DeviceRequestParameter
+// Clone creates a deep copy of DeviceRequestParameter.
 func (m *DeviceRequestParameter) Clone() *DeviceRequestParameter {
 	if m == nil { return nil }
 	return &DeviceRequestParameter{
@@ -189,7 +455,7 @@ func (m *DeviceRequestParameter) Clone() *DeviceRequestParameter {
 	}
 }
 
-// Equals checks for equality with another DeviceRequestParameter instance
+// Equals checks equality between two DeviceRequestParameter instances.
 func (m *DeviceRequestParameter) Equals(other *DeviceRequestParameter) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

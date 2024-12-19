@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // AdministrableProductDefinition
 // A medicinal product in the final form which is suitable for administering to a patient (after any mixing of multiple components, dissolution etc. has been performed).
 type AdministrableProductDefinition struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -29,22 +30,113 @@ type AdministrableProductDefinition struct {
 	RouteOfAdministration []*AdministrableProductDefinitionRouteOfAdministration `json:"routeofadministration,omitempty"`
 }
 
-// NewAdministrableProductDefinition creates a new AdministrableProductDefinition instance
+// NewAdministrableProductDefinition creates a new AdministrableProductDefinition instance.
 func NewAdministrableProductDefinition() *AdministrableProductDefinition {
 	return &AdministrableProductDefinition{}
 }
 
-// FromJSON populates AdministrableProductDefinition from JSON data
+// FromJSON populates AdministrableProductDefinition from JSON data.
 func (m *AdministrableProductDefinition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		FormOf []*Reference `json:"formof,omitempty"`
+		AdministrableDoseForm *CodeableConcept `json:"administrabledoseform,omitempty"`
+		UnitOfPresentation *CodeableConcept `json:"unitofpresentation,omitempty"`
+		ProducedFrom []*Reference `json:"producedfrom,omitempty"`
+		Ingredient []*CodeableConcept `json:"ingredient,omitempty"`
+		Device *Reference `json:"device,omitempty"`
+		Property []*AdministrableProductDefinitionProperty `json:"property,omitempty"`
+		RouteOfAdministration []*AdministrableProductDefinitionRouteOfAdministration `json:"routeofadministration,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.FormOf = temp.FormOf
+	m.AdministrableDoseForm = temp.AdministrableDoseForm
+	m.UnitOfPresentation = temp.UnitOfPresentation
+	m.ProducedFrom = temp.ProducedFrom
+	m.Ingredient = temp.Ingredient
+	m.Device = temp.Device
+	m.Property = temp.Property
+	m.RouteOfAdministration = temp.RouteOfAdministration
+	return nil
 }
 
-// ToJSON converts AdministrableProductDefinition to JSON data
+// ToJSON converts AdministrableProductDefinition to JSON data.
 func (m *AdministrableProductDefinition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		FormOf []*Reference `json:"formof,omitempty"`
+		AdministrableDoseForm *CodeableConcept `json:"administrabledoseform,omitempty"`
+		UnitOfPresentation *CodeableConcept `json:"unitofpresentation,omitempty"`
+		ProducedFrom []*Reference `json:"producedfrom,omitempty"`
+		Ingredient []*CodeableConcept `json:"ingredient,omitempty"`
+		Device *Reference `json:"device,omitempty"`
+		Property []*AdministrableProductDefinitionProperty `json:"property,omitempty"`
+		RouteOfAdministration []*AdministrableProductDefinitionRouteOfAdministration `json:"routeofadministration,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	output.FormOf = m.FormOf
+	output.AdministrableDoseForm = m.AdministrableDoseForm
+	output.UnitOfPresentation = m.UnitOfPresentation
+	output.ProducedFrom = m.ProducedFrom
+	output.Ingredient = m.Ingredient
+	output.Device = m.Device
+	output.Property = m.Property
+	output.RouteOfAdministration = m.RouteOfAdministration
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of AdministrableProductDefinition
+// Clone creates a deep copy of AdministrableProductDefinition.
 func (m *AdministrableProductDefinition) Clone() *AdministrableProductDefinition {
 	if m == nil { return nil }
 	return &AdministrableProductDefinition{
@@ -69,7 +161,7 @@ func (m *AdministrableProductDefinition) Clone() *AdministrableProductDefinition
 	}
 }
 
-// Equals checks for equality with another AdministrableProductDefinition instance
+// Equals checks equality between two AdministrableProductDefinition instances.
 func (m *AdministrableProductDefinition) Equals(other *AdministrableProductDefinition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -97,7 +189,7 @@ func (m *AdministrableProductDefinition) Equals(other *AdministrableProductDefin
 // AdministrableProductDefinitionProperty
 // Characteristics e.g. a product's onset of action.
 type AdministrableProductDefinitionProperty struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -110,22 +202,87 @@ type AdministrableProductDefinitionProperty struct {
 	Status *CodeableConcept `json:"status,omitempty"`
 }
 
-// NewAdministrableProductDefinitionProperty creates a new AdministrableProductDefinitionProperty instance
+// NewAdministrableProductDefinitionProperty creates a new AdministrableProductDefinitionProperty instance.
 func NewAdministrableProductDefinitionProperty() *AdministrableProductDefinitionProperty {
 	return &AdministrableProductDefinitionProperty{}
 }
 
-// FromJSON populates AdministrableProductDefinitionProperty from JSON data
+// FromJSON populates AdministrableProductDefinitionProperty from JSON data.
 func (m *AdministrableProductDefinitionProperty) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueDate *FhirDate `json:"valuedate,omitempty"`
+		ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
+		ValueAttachment *Attachment `json:"valueattachment,omitempty"`
+		Status *CodeableConcept `json:"status,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.ValueCodeableConcept = temp.ValueCodeableConcept
+	m.ValueQuantity = temp.ValueQuantity
+	m.ValueDate = temp.ValueDate
+	m.ValueBoolean = temp.ValueBoolean
+	m.ValueAttachment = temp.ValueAttachment
+	m.Status = temp.Status
+	return nil
 }
 
-// ToJSON converts AdministrableProductDefinitionProperty to JSON data
+// ToJSON converts AdministrableProductDefinitionProperty to JSON data.
 func (m *AdministrableProductDefinitionProperty) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueDate interface{} `json:"valuedate,omitempty"`
+		ValueDateElement map[string]interface{} `json:"_valuedate,omitempty"`
+		ValueBoolean interface{} `json:"valueboolean,omitempty"`
+		ValueBooleanElement map[string]interface{} `json:"_valueboolean,omitempty"`
+		ValueAttachment *Attachment `json:"valueattachment,omitempty"`
+		Status *CodeableConcept `json:"status,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.ValueCodeableConcept = m.ValueCodeableConcept
+	output.ValueQuantity = m.ValueQuantity
+	if m.ValueDate != nil && m.ValueDate.Value != nil {
+		output.ValueDate = m.ValueDate.Value
+		if m.ValueDate.Element != nil {
+			output.ValueDateElement = toMapOrNil(m.ValueDate.Element.ToJSON())
+		}
+	}
+	if m.ValueBoolean != nil && m.ValueBoolean.Value != nil {
+		output.ValueBoolean = m.ValueBoolean.Value
+		if m.ValueBoolean.Element != nil {
+			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.ToJSON())
+		}
+	}
+	output.ValueAttachment = m.ValueAttachment
+	output.Status = m.Status
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of AdministrableProductDefinitionProperty
+// Clone creates a deep copy of AdministrableProductDefinitionProperty.
 func (m *AdministrableProductDefinitionProperty) Clone() *AdministrableProductDefinitionProperty {
 	if m == nil { return nil }
 	return &AdministrableProductDefinitionProperty{
@@ -142,7 +299,7 @@ func (m *AdministrableProductDefinitionProperty) Clone() *AdministrableProductDe
 	}
 }
 
-// Equals checks for equality with another AdministrableProductDefinitionProperty instance
+// Equals checks equality between two AdministrableProductDefinitionProperty instances.
 func (m *AdministrableProductDefinitionProperty) Equals(other *AdministrableProductDefinitionProperty) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -162,7 +319,7 @@ func (m *AdministrableProductDefinitionProperty) Equals(other *AdministrableProd
 // AdministrableProductDefinitionRouteOfAdministration
 // The path by which the product is taken into or makes contact with the body. In some regions this is referred to as the licenced or approved route. RouteOfAdministration cannot be used when the 'formOf' product already uses MedicinalProductDefinition.route (and vice versa).
 type AdministrableProductDefinitionRouteOfAdministration struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -175,22 +332,75 @@ type AdministrableProductDefinitionRouteOfAdministration struct {
 	TargetSpecies []*AdministrableProductDefinitionTargetSpecies `json:"targetspecies,omitempty"`
 }
 
-// NewAdministrableProductDefinitionRouteOfAdministration creates a new AdministrableProductDefinitionRouteOfAdministration instance
+// NewAdministrableProductDefinitionRouteOfAdministration creates a new AdministrableProductDefinitionRouteOfAdministration instance.
 func NewAdministrableProductDefinitionRouteOfAdministration() *AdministrableProductDefinitionRouteOfAdministration {
 	return &AdministrableProductDefinitionRouteOfAdministration{}
 }
 
-// FromJSON populates AdministrableProductDefinitionRouteOfAdministration from JSON data
+// FromJSON populates AdministrableProductDefinitionRouteOfAdministration from JSON data.
 func (m *AdministrableProductDefinitionRouteOfAdministration) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		FirstDose *Quantity `json:"firstdose,omitempty"`
+		MaxSingleDose *Quantity `json:"maxsingledose,omitempty"`
+		MaxDosePerDay *Quantity `json:"maxdoseperday,omitempty"`
+		MaxDosePerTreatmentPeriod *Ratio `json:"maxdosepertreatmentperiod,omitempty"`
+		MaxTreatmentPeriod *FhirDuration `json:"maxtreatmentperiod,omitempty"`
+		TargetSpecies []*AdministrableProductDefinitionTargetSpecies `json:"targetspecies,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.FirstDose = temp.FirstDose
+	m.MaxSingleDose = temp.MaxSingleDose
+	m.MaxDosePerDay = temp.MaxDosePerDay
+	m.MaxDosePerTreatmentPeriod = temp.MaxDosePerTreatmentPeriod
+	m.MaxTreatmentPeriod = temp.MaxTreatmentPeriod
+	m.TargetSpecies = temp.TargetSpecies
+	return nil
 }
 
-// ToJSON converts AdministrableProductDefinitionRouteOfAdministration to JSON data
+// ToJSON converts AdministrableProductDefinitionRouteOfAdministration to JSON data.
 func (m *AdministrableProductDefinitionRouteOfAdministration) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		FirstDose *Quantity `json:"firstdose,omitempty"`
+		MaxSingleDose *Quantity `json:"maxsingledose,omitempty"`
+		MaxDosePerDay *Quantity `json:"maxdoseperday,omitempty"`
+		MaxDosePerTreatmentPeriod *Ratio `json:"maxdosepertreatmentperiod,omitempty"`
+		MaxTreatmentPeriod *FhirDuration `json:"maxtreatmentperiod,omitempty"`
+		TargetSpecies []*AdministrableProductDefinitionTargetSpecies `json:"targetspecies,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	output.FirstDose = m.FirstDose
+	output.MaxSingleDose = m.MaxSingleDose
+	output.MaxDosePerDay = m.MaxDosePerDay
+	output.MaxDosePerTreatmentPeriod = m.MaxDosePerTreatmentPeriod
+	output.MaxTreatmentPeriod = m.MaxTreatmentPeriod
+	output.TargetSpecies = m.TargetSpecies
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of AdministrableProductDefinitionRouteOfAdministration
+// Clone creates a deep copy of AdministrableProductDefinitionRouteOfAdministration.
 func (m *AdministrableProductDefinitionRouteOfAdministration) Clone() *AdministrableProductDefinitionRouteOfAdministration {
 	if m == nil { return nil }
 	return &AdministrableProductDefinitionRouteOfAdministration{
@@ -207,7 +417,7 @@ func (m *AdministrableProductDefinitionRouteOfAdministration) Clone() *Administr
 	}
 }
 
-// Equals checks for equality with another AdministrableProductDefinitionRouteOfAdministration instance
+// Equals checks equality between two AdministrableProductDefinitionRouteOfAdministration instances.
 func (m *AdministrableProductDefinitionRouteOfAdministration) Equals(other *AdministrableProductDefinitionRouteOfAdministration) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -227,7 +437,7 @@ func (m *AdministrableProductDefinitionRouteOfAdministration) Equals(other *Admi
 // AdministrableProductDefinitionTargetSpecies
 // A species for which this route applies.
 type AdministrableProductDefinitionTargetSpecies struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -235,22 +445,55 @@ type AdministrableProductDefinitionTargetSpecies struct {
 	WithdrawalPeriod []*AdministrableProductDefinitionWithdrawalPeriod `json:"withdrawalperiod,omitempty"`
 }
 
-// NewAdministrableProductDefinitionTargetSpecies creates a new AdministrableProductDefinitionTargetSpecies instance
+// NewAdministrableProductDefinitionTargetSpecies creates a new AdministrableProductDefinitionTargetSpecies instance.
 func NewAdministrableProductDefinitionTargetSpecies() *AdministrableProductDefinitionTargetSpecies {
 	return &AdministrableProductDefinitionTargetSpecies{}
 }
 
-// FromJSON populates AdministrableProductDefinitionTargetSpecies from JSON data
+// FromJSON populates AdministrableProductDefinitionTargetSpecies from JSON data.
 func (m *AdministrableProductDefinitionTargetSpecies) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		WithdrawalPeriod []*AdministrableProductDefinitionWithdrawalPeriod `json:"withdrawalperiod,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.WithdrawalPeriod = temp.WithdrawalPeriod
+	return nil
 }
 
-// ToJSON converts AdministrableProductDefinitionTargetSpecies to JSON data
+// ToJSON converts AdministrableProductDefinitionTargetSpecies to JSON data.
 func (m *AdministrableProductDefinitionTargetSpecies) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		WithdrawalPeriod []*AdministrableProductDefinitionWithdrawalPeriod `json:"withdrawalperiod,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	output.WithdrawalPeriod = m.WithdrawalPeriod
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of AdministrableProductDefinitionTargetSpecies
+// Clone creates a deep copy of AdministrableProductDefinitionTargetSpecies.
 func (m *AdministrableProductDefinitionTargetSpecies) Clone() *AdministrableProductDefinitionTargetSpecies {
 	if m == nil { return nil }
 	return &AdministrableProductDefinitionTargetSpecies{
@@ -262,7 +505,7 @@ func (m *AdministrableProductDefinitionTargetSpecies) Clone() *AdministrableProd
 	}
 }
 
-// Equals checks for equality with another AdministrableProductDefinitionTargetSpecies instance
+// Equals checks equality between two AdministrableProductDefinitionTargetSpecies instances.
 func (m *AdministrableProductDefinitionTargetSpecies) Equals(other *AdministrableProductDefinitionTargetSpecies) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -277,7 +520,7 @@ func (m *AdministrableProductDefinitionTargetSpecies) Equals(other *Administrabl
 // AdministrableProductDefinitionWithdrawalPeriod
 // A species specific time during which consumption of animal product is not appropriate.
 type AdministrableProductDefinitionWithdrawalPeriod struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -286,22 +529,65 @@ type AdministrableProductDefinitionWithdrawalPeriod struct {
 	SupportingInformation *FhirString `json:"supportinginformation,omitempty"`
 }
 
-// NewAdministrableProductDefinitionWithdrawalPeriod creates a new AdministrableProductDefinitionWithdrawalPeriod instance
+// NewAdministrableProductDefinitionWithdrawalPeriod creates a new AdministrableProductDefinitionWithdrawalPeriod instance.
 func NewAdministrableProductDefinitionWithdrawalPeriod() *AdministrableProductDefinitionWithdrawalPeriod {
 	return &AdministrableProductDefinitionWithdrawalPeriod{}
 }
 
-// FromJSON populates AdministrableProductDefinitionWithdrawalPeriod from JSON data
+// FromJSON populates AdministrableProductDefinitionWithdrawalPeriod from JSON data.
 func (m *AdministrableProductDefinitionWithdrawalPeriod) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Tissue *CodeableConcept `json:"tissue,omitempty"`
+		Value *Quantity `json:"value,omitempty"`
+		SupportingInformation *FhirString `json:"supportinginformation,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Tissue = temp.Tissue
+	m.Value = temp.Value
+	m.SupportingInformation = temp.SupportingInformation
+	return nil
 }
 
-// ToJSON converts AdministrableProductDefinitionWithdrawalPeriod to JSON data
+// ToJSON converts AdministrableProductDefinitionWithdrawalPeriod to JSON data.
 func (m *AdministrableProductDefinitionWithdrawalPeriod) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Tissue *CodeableConcept `json:"tissue,omitempty"`
+		Value *Quantity `json:"value,omitempty"`
+		SupportingInformation interface{} `json:"supportinginformation,omitempty"`
+		SupportingInformationElement map[string]interface{} `json:"_supportinginformation,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Tissue = m.Tissue
+	output.Value = m.Value
+	if m.SupportingInformation != nil && m.SupportingInformation.Value != nil {
+		output.SupportingInformation = m.SupportingInformation.Value
+		if m.SupportingInformation.Element != nil {
+			output.SupportingInformationElement = toMapOrNil(m.SupportingInformation.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of AdministrableProductDefinitionWithdrawalPeriod
+// Clone creates a deep copy of AdministrableProductDefinitionWithdrawalPeriod.
 func (m *AdministrableProductDefinitionWithdrawalPeriod) Clone() *AdministrableProductDefinitionWithdrawalPeriod {
 	if m == nil { return nil }
 	return &AdministrableProductDefinitionWithdrawalPeriod{
@@ -314,7 +600,7 @@ func (m *AdministrableProductDefinitionWithdrawalPeriod) Clone() *AdministrableP
 	}
 }
 
-// Equals checks for equality with another AdministrableProductDefinitionWithdrawalPeriod instance
+// Equals checks equality between two AdministrableProductDefinitionWithdrawalPeriod instances.
 func (m *AdministrableProductDefinitionWithdrawalPeriod) Equals(other *AdministrableProductDefinitionWithdrawalPeriod) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

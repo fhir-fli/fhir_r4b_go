@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Goal
 // Describes the intended objective(s) for a patient, group or organization care, for example, weight loss, restoring an activity of daily living, obtaining herd immunity via immunization, meeting a process improvement objective, etc.
 type Goal struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -36,22 +37,153 @@ type Goal struct {
 	OutcomeReference []*Reference `json:"outcomereference,omitempty"`
 }
 
-// NewGoal creates a new Goal instance
+// NewGoal creates a new Goal instance.
 func NewGoal() *Goal {
 	return &Goal{}
 }
 
-// FromJSON populates Goal from JSON data
+// FromJSON populates Goal from JSON data.
 func (m *Goal) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		LifecycleStatus *GoalLifecycleStatus `json:"lifecyclestatus,omitempty"`
+		AchievementStatus *CodeableConcept `json:"achievementstatus,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Priority *CodeableConcept `json:"priority,omitempty"`
+		Description *CodeableConcept `json:"description,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		StartDate *GoalStartEvent `json:"startdate,omitempty"`
+		StartCodeableConcept *CodeableConcept `json:"startcodeableconcept,omitempty"`
+		Target []*GoalTarget `json:"target,omitempty"`
+		StatusDate *FhirDate `json:"statusdate,omitempty"`
+		StatusReason *FhirString `json:"statusreason,omitempty"`
+		ExpressedBy *Reference `json:"expressedby,omitempty"`
+		Addresses []*Reference `json:"addresses,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		OutcomeCode []*CodeableConcept `json:"outcomecode,omitempty"`
+		OutcomeReference []*Reference `json:"outcomereference,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.LifecycleStatus = temp.LifecycleStatus
+	m.AchievementStatus = temp.AchievementStatus
+	m.Category = temp.Category
+	m.Priority = temp.Priority
+	m.Description = temp.Description
+	m.Subject = temp.Subject
+	m.StartDate = temp.StartDate
+	m.StartCodeableConcept = temp.StartCodeableConcept
+	m.Target = temp.Target
+	m.StatusDate = temp.StatusDate
+	m.StatusReason = temp.StatusReason
+	m.ExpressedBy = temp.ExpressedBy
+	m.Addresses = temp.Addresses
+	m.Note = temp.Note
+	m.OutcomeCode = temp.OutcomeCode
+	m.OutcomeReference = temp.OutcomeReference
+	return nil
 }
 
-// ToJSON converts Goal to JSON data
+// ToJSON converts Goal to JSON data.
 func (m *Goal) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		LifecycleStatus *GoalLifecycleStatus `json:"lifecyclestatus,omitempty"`
+		AchievementStatus *CodeableConcept `json:"achievementstatus,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Priority *CodeableConcept `json:"priority,omitempty"`
+		Description *CodeableConcept `json:"description,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		StartDate *GoalStartEvent `json:"startdate,omitempty"`
+		StartCodeableConcept *CodeableConcept `json:"startcodeableconcept,omitempty"`
+		Target []*GoalTarget `json:"target,omitempty"`
+		StatusDate interface{} `json:"statusdate,omitempty"`
+		StatusDateElement map[string]interface{} `json:"_statusdate,omitempty"`
+		StatusReason interface{} `json:"statusreason,omitempty"`
+		StatusReasonElement map[string]interface{} `json:"_statusreason,omitempty"`
+		ExpressedBy *Reference `json:"expressedby,omitempty"`
+		Addresses []*Reference `json:"addresses,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		OutcomeCode []*CodeableConcept `json:"outcomecode,omitempty"`
+		OutcomeReference []*Reference `json:"outcomereference,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.LifecycleStatus = m.LifecycleStatus
+	output.AchievementStatus = m.AchievementStatus
+	output.Category = m.Category
+	output.Priority = m.Priority
+	output.Description = m.Description
+	output.Subject = m.Subject
+	output.StartDate = m.StartDate
+	output.StartCodeableConcept = m.StartCodeableConcept
+	output.Target = m.Target
+	if m.StatusDate != nil && m.StatusDate.Value != nil {
+		output.StatusDate = m.StatusDate.Value
+		if m.StatusDate.Element != nil {
+			output.StatusDateElement = toMapOrNil(m.StatusDate.Element.ToJSON())
+		}
+	}
+	if m.StatusReason != nil && m.StatusReason.Value != nil {
+		output.StatusReason = m.StatusReason.Value
+		if m.StatusReason.Element != nil {
+			output.StatusReasonElement = toMapOrNil(m.StatusReason.Element.ToJSON())
+		}
+	}
+	output.ExpressedBy = m.ExpressedBy
+	output.Addresses = m.Addresses
+	output.Note = m.Note
+	output.OutcomeCode = m.OutcomeCode
+	output.OutcomeReference = m.OutcomeReference
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Goal
+// Clone creates a deep copy of Goal.
 func (m *Goal) Clone() *Goal {
 	if m == nil { return nil }
 	return &Goal{
@@ -83,7 +215,7 @@ func (m *Goal) Clone() *Goal {
 	}
 }
 
-// Equals checks for equality with another Goal instance
+// Equals checks equality between two Goal instances.
 func (m *Goal) Equals(other *Goal) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -118,7 +250,7 @@ func (m *Goal) Equals(other *Goal) bool {
 // GoalTarget
 // Indicates what should be done by when.
 type GoalTarget struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -134,22 +266,111 @@ type GoalTarget struct {
 	DueDuration *FhirDuration `json:"dueduration,omitempty"`
 }
 
-// NewGoalTarget creates a new GoalTarget instance
+// NewGoalTarget creates a new GoalTarget instance.
 func NewGoalTarget() *GoalTarget {
 	return &GoalTarget{}
 }
 
-// FromJSON populates GoalTarget from JSON data
+// FromJSON populates GoalTarget from JSON data.
 func (m *GoalTarget) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Measure *CodeableConcept `json:"measure,omitempty"`
+		DetailQuantity *Quantity `json:"detailquantity,omitempty"`
+		DetailRange *Range `json:"detailrange,omitempty"`
+		DetailCodeableConcept *CodeableConcept `json:"detailcodeableconcept,omitempty"`
+		DetailString *FhirString `json:"detailstring,omitempty"`
+		DetailBoolean *FhirBoolean `json:"detailboolean,omitempty"`
+		DetailInteger *FhirInteger `json:"detailinteger,omitempty"`
+		DetailRatio *Ratio `json:"detailratio,omitempty"`
+		DueDate *FhirDate `json:"duedate,omitempty"`
+		DueDuration *FhirDuration `json:"dueduration,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Measure = temp.Measure
+	m.DetailQuantity = temp.DetailQuantity
+	m.DetailRange = temp.DetailRange
+	m.DetailCodeableConcept = temp.DetailCodeableConcept
+	m.DetailString = temp.DetailString
+	m.DetailBoolean = temp.DetailBoolean
+	m.DetailInteger = temp.DetailInteger
+	m.DetailRatio = temp.DetailRatio
+	m.DueDate = temp.DueDate
+	m.DueDuration = temp.DueDuration
+	return nil
 }
 
-// ToJSON converts GoalTarget to JSON data
+// ToJSON converts GoalTarget to JSON data.
 func (m *GoalTarget) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Measure *CodeableConcept `json:"measure,omitempty"`
+		DetailQuantity *Quantity `json:"detailquantity,omitempty"`
+		DetailRange *Range `json:"detailrange,omitempty"`
+		DetailCodeableConcept *CodeableConcept `json:"detailcodeableconcept,omitempty"`
+		DetailString interface{} `json:"detailstring,omitempty"`
+		DetailStringElement map[string]interface{} `json:"_detailstring,omitempty"`
+		DetailBoolean interface{} `json:"detailboolean,omitempty"`
+		DetailBooleanElement map[string]interface{} `json:"_detailboolean,omitempty"`
+		DetailInteger interface{} `json:"detailinteger,omitempty"`
+		DetailIntegerElement map[string]interface{} `json:"_detailinteger,omitempty"`
+		DetailRatio *Ratio `json:"detailratio,omitempty"`
+		DueDate interface{} `json:"duedate,omitempty"`
+		DueDateElement map[string]interface{} `json:"_duedate,omitempty"`
+		DueDuration *FhirDuration `json:"dueduration,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Measure = m.Measure
+	output.DetailQuantity = m.DetailQuantity
+	output.DetailRange = m.DetailRange
+	output.DetailCodeableConcept = m.DetailCodeableConcept
+	if m.DetailString != nil && m.DetailString.Value != nil {
+		output.DetailString = m.DetailString.Value
+		if m.DetailString.Element != nil {
+			output.DetailStringElement = toMapOrNil(m.DetailString.Element.ToJSON())
+		}
+	}
+	if m.DetailBoolean != nil && m.DetailBoolean.Value != nil {
+		output.DetailBoolean = m.DetailBoolean.Value
+		if m.DetailBoolean.Element != nil {
+			output.DetailBooleanElement = toMapOrNil(m.DetailBoolean.Element.ToJSON())
+		}
+	}
+	if m.DetailInteger != nil && m.DetailInteger.Value != nil {
+		output.DetailInteger = m.DetailInteger.Value
+		if m.DetailInteger.Element != nil {
+			output.DetailIntegerElement = toMapOrNil(m.DetailInteger.Element.ToJSON())
+		}
+	}
+	output.DetailRatio = m.DetailRatio
+	if m.DueDate != nil && m.DueDate.Value != nil {
+		output.DueDate = m.DueDate.Value
+		if m.DueDate.Element != nil {
+			output.DueDateElement = toMapOrNil(m.DueDate.Element.ToJSON())
+		}
+	}
+	output.DueDuration = m.DueDuration
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of GoalTarget
+// Clone creates a deep copy of GoalTarget.
 func (m *GoalTarget) Clone() *GoalTarget {
 	if m == nil { return nil }
 	return &GoalTarget{
@@ -169,7 +390,7 @@ func (m *GoalTarget) Clone() *GoalTarget {
 	}
 }
 
-// Equals checks for equality with another GoalTarget instance
+// Equals checks equality between two GoalTarget instances.
 func (m *GoalTarget) Equals(other *GoalTarget) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

@@ -3,13 +3,14 @@ package fhir_r4b_go
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"net/url"
 )
 
 // FhirUri represents the FHIR primitive type `canonical`.
 type FhirUri struct {
-	Value   *url.URL `json:"-"`          // The URL value
-	Element *Element `json:",inline"`    // Metadata (FHIR element)
+	Value   *url.URL `json:"-"`       // The URL value
+	Element *Element `json:",inline"` // Metadata (FHIR element)
 }
 
 // NewFhirUri creates a new FhirUri with validation.
@@ -22,6 +23,30 @@ func NewFhirUri(input string, element *Element) (*FhirUri, error) {
 		Value:   parsed,
 		Element: element,
 	}, nil
+}
+
+// NewFhirUtiFromMap creates a FhirUti instance from a map.
+func NewFhirUriFromMap(data map[string]interface{}) (*FhirUri, error) {
+	valueStr, ok := data["value"].(string)
+	if !ok {
+		return nil, errors.New("missing or invalid value for FhirCanonical")
+	}
+
+	parsedValue, err := url.Parse(valueStr)
+	if err != nil {
+		return nil, fmt.Errorf("invalid URL value for FhirCanonical: %v", err)
+	}
+
+	uri := &FhirUri{Value: parsedValue}
+
+	if elementData, ok := data["_value"].(map[string]interface{}); ok {
+		uri.Element = &Element{}
+		if err := mapToStruct(elementData, uri.Element); err != nil {
+			return nil, fmt.Errorf("failed to parse _value for FhirCanonical: %v", err)
+		}
+	}
+
+	return uri, nil
 }
 
 // UnmarshalJSON initializes a FhirUri from JSON input.

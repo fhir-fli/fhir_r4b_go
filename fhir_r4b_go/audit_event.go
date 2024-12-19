@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // AuditEvent
 // A record of an event made for purposes of maintaining a security log. Typical uses include detection of intrusion attempts and monitoring for inappropriate usage.
 type AuditEvent struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -30,22 +32,129 @@ type AuditEvent struct {
 	Entity []*AuditEventEntity `json:"entity,omitempty"`
 }
 
-// NewAuditEvent creates a new AuditEvent instance
+// NewAuditEvent creates a new AuditEvent instance.
 func NewAuditEvent() *AuditEvent {
 	return &AuditEvent{}
 }
 
-// FromJSON populates AuditEvent from JSON data
+// FromJSON populates AuditEvent from JSON data.
 func (m *AuditEvent) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *Coding `json:"type,omitempty"`
+		Subtype []*Coding `json:"subtype,omitempty"`
+		Action *AuditEventAction `json:"action,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Recorded *FhirInstant `json:"recorded,omitempty"`
+		Outcome *AuditEventOutcome `json:"outcome,omitempty"`
+		OutcomeDesc *FhirString `json:"outcomedesc,omitempty"`
+		PurposeOfEvent []*CodeableConcept `json:"purposeofevent,omitempty"`
+		Agent []*AuditEventAgent `json:"agent,omitempty"`
+		Source *AuditEventSource `json:"source,omitempty"`
+		Entity []*AuditEventEntity `json:"entity,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Subtype = temp.Subtype
+	m.Action = temp.Action
+	m.Period = temp.Period
+	m.Recorded = temp.Recorded
+	m.Outcome = temp.Outcome
+	m.OutcomeDesc = temp.OutcomeDesc
+	m.PurposeOfEvent = temp.PurposeOfEvent
+	m.Agent = temp.Agent
+	m.Source = temp.Source
+	m.Entity = temp.Entity
+	return nil
 }
 
-// ToJSON converts AuditEvent to JSON data
+// ToJSON converts AuditEvent to JSON data.
 func (m *AuditEvent) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *Coding `json:"type,omitempty"`
+		Subtype []*Coding `json:"subtype,omitempty"`
+		Action *AuditEventAction `json:"action,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Recorded interface{} `json:"recorded,omitempty"`
+		RecordedElement map[string]interface{} `json:"_recorded,omitempty"`
+		Outcome *AuditEventOutcome `json:"outcome,omitempty"`
+		OutcomeDesc interface{} `json:"outcomedesc,omitempty"`
+		OutcomeDescElement map[string]interface{} `json:"_outcomedesc,omitempty"`
+		PurposeOfEvent []*CodeableConcept `json:"purposeofevent,omitempty"`
+		Agent []*AuditEventAgent `json:"agent,omitempty"`
+		Source *AuditEventSource `json:"source,omitempty"`
+		Entity []*AuditEventEntity `json:"entity,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Subtype = m.Subtype
+	output.Action = m.Action
+	output.Period = m.Period
+	if m.Recorded != nil && m.Recorded.Value != nil {
+		output.Recorded = m.Recorded.Value
+		if m.Recorded.Element != nil {
+			output.RecordedElement = toMapOrNil(m.Recorded.Element.ToJSON())
+		}
+	}
+	output.Outcome = m.Outcome
+	if m.OutcomeDesc != nil && m.OutcomeDesc.Value != nil {
+		output.OutcomeDesc = m.OutcomeDesc.Value
+		if m.OutcomeDesc.Element != nil {
+			output.OutcomeDescElement = toMapOrNil(m.OutcomeDesc.Element.ToJSON())
+		}
+	}
+	output.PurposeOfEvent = m.PurposeOfEvent
+	output.Agent = m.Agent
+	output.Source = m.Source
+	output.Entity = m.Entity
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of AuditEvent
+// Clone creates a deep copy of AuditEvent.
 func (m *AuditEvent) Clone() *AuditEvent {
 	if m == nil { return nil }
 	return &AuditEvent{
@@ -71,7 +180,7 @@ func (m *AuditEvent) Clone() *AuditEvent {
 	}
 }
 
-// Equals checks for equality with another AuditEvent instance
+// Equals checks equality between two AuditEvent instances.
 func (m *AuditEvent) Equals(other *AuditEvent) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -100,7 +209,7 @@ func (m *AuditEvent) Equals(other *AuditEvent) bool {
 // AuditEventAgent
 // An actor taking an active role in the event or activity that is logged.
 type AuditEventAgent struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -117,22 +226,130 @@ type AuditEventAgent struct {
 	PurposeOfUse []*CodeableConcept `json:"purposeofuse,omitempty"`
 }
 
-// NewAuditEventAgent creates a new AuditEventAgent instance
+// NewAuditEventAgent creates a new AuditEventAgent instance.
 func NewAuditEventAgent() *AuditEventAgent {
 	return &AuditEventAgent{}
 }
 
-// FromJSON populates AuditEventAgent from JSON data
+// FromJSON populates AuditEventAgent from JSON data.
 func (m *AuditEventAgent) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Role []*CodeableConcept `json:"role,omitempty"`
+		Who *Reference `json:"who,omitempty"`
+		AltId *FhirString `json:"altid,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Requestor *FhirBoolean `json:"requestor,omitempty"`
+		Location *Reference `json:"location,omitempty"`
+		Policy []interface{} `json:"policy,omitempty"`
+		Media *Coding `json:"media,omitempty"`
+		Network *AuditEventNetwork `json:"network,omitempty"`
+		PurposeOfUse []*CodeableConcept `json:"purposeofuse,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Role = temp.Role
+	m.Who = temp.Who
+	m.AltId = temp.AltId
+	m.Name = temp.Name
+	m.Requestor = temp.Requestor
+	m.Location = temp.Location
+	if len(temp.Policy) > 0 {
+		m.Policy = make([]*FhirUri, len(temp.Policy))
+		for i := range temp.Policy {
+			itemMap, ok := temp.Policy[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Policy[%d]: expected map", i) }
+			primitive, err := NewFhirUriFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Policy[%d]: %v", i, err) }
+			m.Policy[i] = primitive
+		}
+	}
+	m.Media = temp.Media
+	m.Network = temp.Network
+	m.PurposeOfUse = temp.PurposeOfUse
+	return nil
 }
 
-// ToJSON converts AuditEventAgent to JSON data
+// ToJSON converts AuditEventAgent to JSON data.
 func (m *AuditEventAgent) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Role []*CodeableConcept `json:"role,omitempty"`
+		Who *Reference `json:"who,omitempty"`
+		AltId interface{} `json:"altid,omitempty"`
+		AltIdElement map[string]interface{} `json:"_altid,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Requestor interface{} `json:"requestor,omitempty"`
+		RequestorElement map[string]interface{} `json:"_requestor,omitempty"`
+		Location *Reference `json:"location,omitempty"`
+		Policy []interface{} `json:"policy,omitempty"`
+		PolicyElement []map[string]interface{} `json:"_policy,omitempty"`
+		Media *Coding `json:"media,omitempty"`
+		Network *AuditEventNetwork `json:"network,omitempty"`
+		PurposeOfUse []*CodeableConcept `json:"purposeofuse,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Role = m.Role
+	output.Who = m.Who
+	if m.AltId != nil && m.AltId.Value != nil {
+		output.AltId = m.AltId.Value
+		if m.AltId.Element != nil {
+			output.AltIdElement = toMapOrNil(m.AltId.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Requestor != nil && m.Requestor.Value != nil {
+		output.Requestor = m.Requestor.Value
+		if m.Requestor.Element != nil {
+			output.RequestorElement = toMapOrNil(m.Requestor.Element.ToJSON())
+		}
+	}
+	output.Location = m.Location
+	if len(m.Policy) > 0 {
+		output.Policy = make([]interface{}, len(m.Policy))
+		output.PolicyElement = make([]map[string]interface{}, len(m.Policy))
+		for i, item := range m.Policy {
+			if item != nil && item.Value != nil {
+				output.Policy[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.PolicyElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Media = m.Media
+	output.Network = m.Network
+	output.PurposeOfUse = m.PurposeOfUse
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of AuditEventAgent
+// Clone creates a deep copy of AuditEventAgent.
 func (m *AuditEventAgent) Clone() *AuditEventAgent {
 	if m == nil { return nil }
 	return &AuditEventAgent{
@@ -153,7 +370,7 @@ func (m *AuditEventAgent) Clone() *AuditEventAgent {
 	}
 }
 
-// Equals checks for equality with another AuditEventAgent instance
+// Equals checks equality between two AuditEventAgent instances.
 func (m *AuditEventAgent) Equals(other *AuditEventAgent) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -177,7 +394,7 @@ func (m *AuditEventAgent) Equals(other *AuditEventAgent) bool {
 // AuditEventNetwork
 // Logical network location for application activity, if the activity has a network location.
 type AuditEventNetwork struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -185,22 +402,61 @@ type AuditEventNetwork struct {
 	Type *AuditEventAgentNetworkType `json:"type,omitempty"`
 }
 
-// NewAuditEventNetwork creates a new AuditEventNetwork instance
+// NewAuditEventNetwork creates a new AuditEventNetwork instance.
 func NewAuditEventNetwork() *AuditEventNetwork {
 	return &AuditEventNetwork{}
 }
 
-// FromJSON populates AuditEventNetwork from JSON data
+// FromJSON populates AuditEventNetwork from JSON data.
 func (m *AuditEventNetwork) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Address *FhirString `json:"address,omitempty"`
+		Type *AuditEventAgentNetworkType `json:"type,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Address = temp.Address
+	m.Type = temp.Type
+	return nil
 }
 
-// ToJSON converts AuditEventNetwork to JSON data
+// ToJSON converts AuditEventNetwork to JSON data.
 func (m *AuditEventNetwork) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Address interface{} `json:"address,omitempty"`
+		AddressElement map[string]interface{} `json:"_address,omitempty"`
+		Type *AuditEventAgentNetworkType `json:"type,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Address != nil && m.Address.Value != nil {
+		output.Address = m.Address.Value
+		if m.Address.Element != nil {
+			output.AddressElement = toMapOrNil(m.Address.Element.ToJSON())
+		}
+	}
+	output.Type = m.Type
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of AuditEventNetwork
+// Clone creates a deep copy of AuditEventNetwork.
 func (m *AuditEventNetwork) Clone() *AuditEventNetwork {
 	if m == nil { return nil }
 	return &AuditEventNetwork{
@@ -212,7 +468,7 @@ func (m *AuditEventNetwork) Clone() *AuditEventNetwork {
 	}
 }
 
-// Equals checks for equality with another AuditEventNetwork instance
+// Equals checks equality between two AuditEventNetwork instances.
 func (m *AuditEventNetwork) Equals(other *AuditEventNetwork) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -227,7 +483,7 @@ func (m *AuditEventNetwork) Equals(other *AuditEventNetwork) bool {
 // AuditEventSource
 // The system that is reporting the event.
 type AuditEventSource struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -236,22 +492,65 @@ type AuditEventSource struct {
 	Type []*Coding `json:"type,omitempty"`
 }
 
-// NewAuditEventSource creates a new AuditEventSource instance
+// NewAuditEventSource creates a new AuditEventSource instance.
 func NewAuditEventSource() *AuditEventSource {
 	return &AuditEventSource{}
 }
 
-// FromJSON populates AuditEventSource from JSON data
+// FromJSON populates AuditEventSource from JSON data.
 func (m *AuditEventSource) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Site *FhirString `json:"site,omitempty"`
+		Observer *Reference `json:"observer,omitempty"`
+		Type []*Coding `json:"type,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Site = temp.Site
+	m.Observer = temp.Observer
+	m.Type = temp.Type
+	return nil
 }
 
-// ToJSON converts AuditEventSource to JSON data
+// ToJSON converts AuditEventSource to JSON data.
 func (m *AuditEventSource) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Site interface{} `json:"site,omitempty"`
+		SiteElement map[string]interface{} `json:"_site,omitempty"`
+		Observer *Reference `json:"observer,omitempty"`
+		Type []*Coding `json:"type,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Site != nil && m.Site.Value != nil {
+		output.Site = m.Site.Value
+		if m.Site.Element != nil {
+			output.SiteElement = toMapOrNil(m.Site.Element.ToJSON())
+		}
+	}
+	output.Observer = m.Observer
+	output.Type = m.Type
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of AuditEventSource
+// Clone creates a deep copy of AuditEventSource.
 func (m *AuditEventSource) Clone() *AuditEventSource {
 	if m == nil { return nil }
 	return &AuditEventSource{
@@ -264,7 +563,7 @@ func (m *AuditEventSource) Clone() *AuditEventSource {
 	}
 }
 
-// Equals checks for equality with another AuditEventSource instance
+// Equals checks equality between two AuditEventSource instances.
 func (m *AuditEventSource) Equals(other *AuditEventSource) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -280,7 +579,7 @@ func (m *AuditEventSource) Equals(other *AuditEventSource) bool {
 // AuditEventEntity
 // Specific instances of data or objects that have been accessed.
 type AuditEventEntity struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -295,22 +594,101 @@ type AuditEventEntity struct {
 	Detail []*AuditEventDetail `json:"detail,omitempty"`
 }
 
-// NewAuditEventEntity creates a new AuditEventEntity instance
+// NewAuditEventEntity creates a new AuditEventEntity instance.
 func NewAuditEventEntity() *AuditEventEntity {
 	return &AuditEventEntity{}
 }
 
-// FromJSON populates AuditEventEntity from JSON data
+// FromJSON populates AuditEventEntity from JSON data.
 func (m *AuditEventEntity) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		What *Reference `json:"what,omitempty"`
+		Type *Coding `json:"type,omitempty"`
+		Role *Coding `json:"role,omitempty"`
+		Lifecycle *Coding `json:"lifecycle,omitempty"`
+		SecurityLabel []*Coding `json:"securitylabel,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Query *FhirBase64Binary `json:"query,omitempty"`
+		Detail []*AuditEventDetail `json:"detail,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.What = temp.What
+	m.Type = temp.Type
+	m.Role = temp.Role
+	m.Lifecycle = temp.Lifecycle
+	m.SecurityLabel = temp.SecurityLabel
+	m.Name = temp.Name
+	m.Description = temp.Description
+	m.Query = temp.Query
+	m.Detail = temp.Detail
+	return nil
 }
 
-// ToJSON converts AuditEventEntity to JSON data
+// ToJSON converts AuditEventEntity to JSON data.
 func (m *AuditEventEntity) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		What *Reference `json:"what,omitempty"`
+		Type *Coding `json:"type,omitempty"`
+		Role *Coding `json:"role,omitempty"`
+		Lifecycle *Coding `json:"lifecycle,omitempty"`
+		SecurityLabel []*Coding `json:"securitylabel,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Query interface{} `json:"query,omitempty"`
+		QueryElement map[string]interface{} `json:"_query,omitempty"`
+		Detail []*AuditEventDetail `json:"detail,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.What = m.What
+	output.Type = m.Type
+	output.Role = m.Role
+	output.Lifecycle = m.Lifecycle
+	output.SecurityLabel = m.SecurityLabel
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	if m.Query != nil && m.Query.Value != nil {
+		output.Query = m.Query.Value
+		if m.Query.Element != nil {
+			output.QueryElement = toMapOrNil(m.Query.Element.ToJSON())
+		}
+	}
+	output.Detail = m.Detail
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of AuditEventEntity
+// Clone creates a deep copy of AuditEventEntity.
 func (m *AuditEventEntity) Clone() *AuditEventEntity {
 	if m == nil { return nil }
 	return &AuditEventEntity{
@@ -329,7 +707,7 @@ func (m *AuditEventEntity) Clone() *AuditEventEntity {
 	}
 }
 
-// Equals checks for equality with another AuditEventEntity instance
+// Equals checks equality between two AuditEventEntity instances.
 func (m *AuditEventEntity) Equals(other *AuditEventEntity) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -351,7 +729,7 @@ func (m *AuditEventEntity) Equals(other *AuditEventEntity) bool {
 // AuditEventDetail
 // Tagged value pairs for conveying additional information about the entity.
 type AuditEventDetail struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -360,22 +738,77 @@ type AuditEventDetail struct {
 	ValueBase64Binary *FhirBase64Binary `json:"valuebase64binary,omitempty"`
 }
 
-// NewAuditEventDetail creates a new AuditEventDetail instance
+// NewAuditEventDetail creates a new AuditEventDetail instance.
 func NewAuditEventDetail() *AuditEventDetail {
 	return &AuditEventDetail{}
 }
 
-// FromJSON populates AuditEventDetail from JSON data
+// FromJSON populates AuditEventDetail from JSON data.
 func (m *AuditEventDetail) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *FhirString `json:"type,omitempty"`
+		ValueString *FhirString `json:"valuestring,omitempty"`
+		ValueBase64Binary *FhirBase64Binary `json:"valuebase64binary,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.ValueString = temp.ValueString
+	m.ValueBase64Binary = temp.ValueBase64Binary
+	return nil
 }
 
-// ToJSON converts AuditEventDetail to JSON data
+// ToJSON converts AuditEventDetail to JSON data.
 func (m *AuditEventDetail) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type interface{} `json:"type,omitempty"`
+		TypeElement map[string]interface{} `json:"_type,omitempty"`
+		ValueString interface{} `json:"valuestring,omitempty"`
+		ValueStringElement map[string]interface{} `json:"_valuestring,omitempty"`
+		ValueBase64Binary interface{} `json:"valuebase64binary,omitempty"`
+		ValueBase64BinaryElement map[string]interface{} `json:"_valuebase64binary,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Type != nil && m.Type.Value != nil {
+		output.Type = m.Type.Value
+		if m.Type.Element != nil {
+			output.TypeElement = toMapOrNil(m.Type.Element.ToJSON())
+		}
+	}
+	if m.ValueString != nil && m.ValueString.Value != nil {
+		output.ValueString = m.ValueString.Value
+		if m.ValueString.Element != nil {
+			output.ValueStringElement = toMapOrNil(m.ValueString.Element.ToJSON())
+		}
+	}
+	if m.ValueBase64Binary != nil && m.ValueBase64Binary.Value != nil {
+		output.ValueBase64Binary = m.ValueBase64Binary.Value
+		if m.ValueBase64Binary.Element != nil {
+			output.ValueBase64BinaryElement = toMapOrNil(m.ValueBase64Binary.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of AuditEventDetail
+// Clone creates a deep copy of AuditEventDetail.
 func (m *AuditEventDetail) Clone() *AuditEventDetail {
 	if m == nil { return nil }
 	return &AuditEventDetail{
@@ -388,7 +821,7 @@ func (m *AuditEventDetail) Clone() *AuditEventDetail {
 	}
 }
 
-// Equals checks for equality with another AuditEventDetail instance
+// Equals checks equality between two AuditEventDetail instances.
 func (m *AuditEventDetail) Equals(other *AuditEventDetail) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

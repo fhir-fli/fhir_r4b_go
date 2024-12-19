@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // Location
 // Details and position information for a physical place where services are provided and resources and participants may be stored, found, contained, or accommodated.
 type Location struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -36,22 +38,180 @@ type Location struct {
 	Endpoint []*Reference `json:"endpoint,omitempty"`
 }
 
-// NewLocation creates a new Location instance
+// NewLocation creates a new Location instance.
 func NewLocation() *Location {
 	return &Location{}
 }
 
-// FromJSON populates Location from JSON data
+// FromJSON populates Location from JSON data.
 func (m *Location) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *LocationStatus `json:"status,omitempty"`
+		OperationalStatus *Coding `json:"operationalstatus,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Alias []interface{} `json:"alias,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Mode *LocationMode `json:"mode,omitempty"`
+		Type []*CodeableConcept `json:"type,omitempty"`
+		Telecom []*ContactPoint `json:"telecom,omitempty"`
+		Address *Address `json:"address,omitempty"`
+		PhysicalType *CodeableConcept `json:"physicaltype,omitempty"`
+		Position *LocationPosition `json:"position,omitempty"`
+		ManagingOrganization *Reference `json:"managingorganization,omitempty"`
+		PartOf *Reference `json:"partof,omitempty"`
+		HoursOfOperation []*LocationHoursOfOperation `json:"hoursofoperation,omitempty"`
+		AvailabilityExceptions *FhirString `json:"availabilityexceptions,omitempty"`
+		Endpoint []*Reference `json:"endpoint,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.OperationalStatus = temp.OperationalStatus
+	m.Name = temp.Name
+	if len(temp.Alias) > 0 {
+		m.Alias = make([]*FhirString, len(temp.Alias))
+		for i := range temp.Alias {
+			itemMap, ok := temp.Alias[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Alias[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Alias[%d]: %v", i, err) }
+			m.Alias[i] = primitive
+		}
+	}
+	m.Description = temp.Description
+	m.Mode = temp.Mode
+	m.Type = temp.Type
+	m.Telecom = temp.Telecom
+	m.Address = temp.Address
+	m.PhysicalType = temp.PhysicalType
+	m.Position = temp.Position
+	m.ManagingOrganization = temp.ManagingOrganization
+	m.PartOf = temp.PartOf
+	m.HoursOfOperation = temp.HoursOfOperation
+	m.AvailabilityExceptions = temp.AvailabilityExceptions
+	m.Endpoint = temp.Endpoint
+	return nil
 }
 
-// ToJSON converts Location to JSON data
+// ToJSON converts Location to JSON data.
 func (m *Location) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *LocationStatus `json:"status,omitempty"`
+		OperationalStatus *Coding `json:"operationalstatus,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Alias []interface{} `json:"alias,omitempty"`
+		AliasElement []map[string]interface{} `json:"_alias,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Mode *LocationMode `json:"mode,omitempty"`
+		Type []*CodeableConcept `json:"type,omitempty"`
+		Telecom []*ContactPoint `json:"telecom,omitempty"`
+		Address *Address `json:"address,omitempty"`
+		PhysicalType *CodeableConcept `json:"physicaltype,omitempty"`
+		Position *LocationPosition `json:"position,omitempty"`
+		ManagingOrganization *Reference `json:"managingorganization,omitempty"`
+		PartOf *Reference `json:"partof,omitempty"`
+		HoursOfOperation []*LocationHoursOfOperation `json:"hoursofoperation,omitempty"`
+		AvailabilityExceptions interface{} `json:"availabilityexceptions,omitempty"`
+		AvailabilityExceptionsElement map[string]interface{} `json:"_availabilityexceptions,omitempty"`
+		Endpoint []*Reference `json:"endpoint,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	output.OperationalStatus = m.OperationalStatus
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if len(m.Alias) > 0 {
+		output.Alias = make([]interface{}, len(m.Alias))
+		output.AliasElement = make([]map[string]interface{}, len(m.Alias))
+		for i, item := range m.Alias {
+			if item != nil && item.Value != nil {
+				output.Alias[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.AliasElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Mode = m.Mode
+	output.Type = m.Type
+	output.Telecom = m.Telecom
+	output.Address = m.Address
+	output.PhysicalType = m.PhysicalType
+	output.Position = m.Position
+	output.ManagingOrganization = m.ManagingOrganization
+	output.PartOf = m.PartOf
+	output.HoursOfOperation = m.HoursOfOperation
+	if m.AvailabilityExceptions != nil && m.AvailabilityExceptions.Value != nil {
+		output.AvailabilityExceptions = m.AvailabilityExceptions.Value
+		if m.AvailabilityExceptions.Element != nil {
+			output.AvailabilityExceptionsElement = toMapOrNil(m.AvailabilityExceptions.Element.ToJSON())
+		}
+	}
+	output.Endpoint = m.Endpoint
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Location
+// Clone creates a deep copy of Location.
 func (m *Location) Clone() *Location {
 	if m == nil { return nil }
 	return &Location{
@@ -83,7 +243,7 @@ func (m *Location) Clone() *Location {
 	}
 }
 
-// Equals checks for equality with another Location instance
+// Equals checks equality between two Location instances.
 func (m *Location) Equals(other *Location) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -118,7 +278,7 @@ func (m *Location) Equals(other *Location) bool {
 // LocationPosition
 // The absolute geographic location of the Location, expressed using the WGS84 datum (This is the same co-ordinate system used in KML).
 type LocationPosition struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -127,22 +287,77 @@ type LocationPosition struct {
 	Altitude *FhirDecimal `json:"altitude,omitempty"`
 }
 
-// NewLocationPosition creates a new LocationPosition instance
+// NewLocationPosition creates a new LocationPosition instance.
 func NewLocationPosition() *LocationPosition {
 	return &LocationPosition{}
 }
 
-// FromJSON populates LocationPosition from JSON data
+// FromJSON populates LocationPosition from JSON data.
 func (m *LocationPosition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Longitude *FhirDecimal `json:"longitude,omitempty"`
+		Latitude *FhirDecimal `json:"latitude,omitempty"`
+		Altitude *FhirDecimal `json:"altitude,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Longitude = temp.Longitude
+	m.Latitude = temp.Latitude
+	m.Altitude = temp.Altitude
+	return nil
 }
 
-// ToJSON converts LocationPosition to JSON data
+// ToJSON converts LocationPosition to JSON data.
 func (m *LocationPosition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Longitude interface{} `json:"longitude,omitempty"`
+		LongitudeElement map[string]interface{} `json:"_longitude,omitempty"`
+		Latitude interface{} `json:"latitude,omitempty"`
+		LatitudeElement map[string]interface{} `json:"_latitude,omitempty"`
+		Altitude interface{} `json:"altitude,omitempty"`
+		AltitudeElement map[string]interface{} `json:"_altitude,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Longitude != nil && m.Longitude.Value != nil {
+		output.Longitude = m.Longitude.Value
+		if m.Longitude.Element != nil {
+			output.LongitudeElement = toMapOrNil(m.Longitude.Element.ToJSON())
+		}
+	}
+	if m.Latitude != nil && m.Latitude.Value != nil {
+		output.Latitude = m.Latitude.Value
+		if m.Latitude.Element != nil {
+			output.LatitudeElement = toMapOrNil(m.Latitude.Element.ToJSON())
+		}
+	}
+	if m.Altitude != nil && m.Altitude.Value != nil {
+		output.Altitude = m.Altitude.Value
+		if m.Altitude.Element != nil {
+			output.AltitudeElement = toMapOrNil(m.Altitude.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of LocationPosition
+// Clone creates a deep copy of LocationPosition.
 func (m *LocationPosition) Clone() *LocationPosition {
 	if m == nil { return nil }
 	return &LocationPosition{
@@ -155,7 +370,7 @@ func (m *LocationPosition) Clone() *LocationPosition {
 	}
 }
 
-// Equals checks for equality with another LocationPosition instance
+// Equals checks equality between two LocationPosition instances.
 func (m *LocationPosition) Equals(other *LocationPosition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -171,7 +386,7 @@ func (m *LocationPosition) Equals(other *LocationPosition) bool {
 // LocationHoursOfOperation
 // What days/times during a week is this location usually open.
 type LocationHoursOfOperation struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -181,22 +396,81 @@ type LocationHoursOfOperation struct {
 	ClosingTime *FhirTime `json:"closingtime,omitempty"`
 }
 
-// NewLocationHoursOfOperation creates a new LocationHoursOfOperation instance
+// NewLocationHoursOfOperation creates a new LocationHoursOfOperation instance.
 func NewLocationHoursOfOperation() *LocationHoursOfOperation {
 	return &LocationHoursOfOperation{}
 }
 
-// FromJSON populates LocationHoursOfOperation from JSON data
+// FromJSON populates LocationHoursOfOperation from JSON data.
 func (m *LocationHoursOfOperation) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		DaysOfWeek []*DaysOfWeek `json:"daysofweek,omitempty"`
+		AllDay *FhirBoolean `json:"allday,omitempty"`
+		OpeningTime *FhirTime `json:"openingtime,omitempty"`
+		ClosingTime *FhirTime `json:"closingtime,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.DaysOfWeek = temp.DaysOfWeek
+	m.AllDay = temp.AllDay
+	m.OpeningTime = temp.OpeningTime
+	m.ClosingTime = temp.ClosingTime
+	return nil
 }
 
-// ToJSON converts LocationHoursOfOperation to JSON data
+// ToJSON converts LocationHoursOfOperation to JSON data.
 func (m *LocationHoursOfOperation) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		DaysOfWeek []*DaysOfWeek `json:"daysofweek,omitempty"`
+		AllDay interface{} `json:"allday,omitempty"`
+		AllDayElement map[string]interface{} `json:"_allday,omitempty"`
+		OpeningTime interface{} `json:"openingtime,omitempty"`
+		OpeningTimeElement map[string]interface{} `json:"_openingtime,omitempty"`
+		ClosingTime interface{} `json:"closingtime,omitempty"`
+		ClosingTimeElement map[string]interface{} `json:"_closingtime,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.DaysOfWeek = m.DaysOfWeek
+	if m.AllDay != nil && m.AllDay.Value != nil {
+		output.AllDay = m.AllDay.Value
+		if m.AllDay.Element != nil {
+			output.AllDayElement = toMapOrNil(m.AllDay.Element.ToJSON())
+		}
+	}
+	if m.OpeningTime != nil && m.OpeningTime.Value != nil {
+		output.OpeningTime = m.OpeningTime.Value
+		if m.OpeningTime.Element != nil {
+			output.OpeningTimeElement = toMapOrNil(m.OpeningTime.Element.ToJSON())
+		}
+	}
+	if m.ClosingTime != nil && m.ClosingTime.Value != nil {
+		output.ClosingTime = m.ClosingTime.Value
+		if m.ClosingTime.Element != nil {
+			output.ClosingTimeElement = toMapOrNil(m.ClosingTime.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of LocationHoursOfOperation
+// Clone creates a deep copy of LocationHoursOfOperation.
 func (m *LocationHoursOfOperation) Clone() *LocationHoursOfOperation {
 	if m == nil { return nil }
 	return &LocationHoursOfOperation{
@@ -210,7 +484,7 @@ func (m *LocationHoursOfOperation) Clone() *LocationHoursOfOperation {
 	}
 }
 
-// Equals checks for equality with another LocationHoursOfOperation instance
+// Equals checks equality between two LocationHoursOfOperation instances.
 func (m *LocationHoursOfOperation) Equals(other *LocationHoursOfOperation) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

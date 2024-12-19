@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // TerminologyCapabilities
 // A TerminologyCapabilities resource documents a set of capabilities (behaviors) of a FHIR Terminology Server that may be used as a statement of actual server functionality or a statement of required or desired server implementation.
 type TerminologyCapabilities struct {
-	CanonicalResource
+	extends CanonicalResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -43,22 +45,235 @@ type TerminologyCapabilities struct {
 	Closure *TerminologyCapabilitiesClosure `json:"closure,omitempty"`
 }
 
-// NewTerminologyCapabilities creates a new TerminologyCapabilities instance
+// NewTerminologyCapabilities creates a new TerminologyCapabilities instance.
 func NewTerminologyCapabilities() *TerminologyCapabilities {
 	return &TerminologyCapabilities{}
 }
 
-// FromJSON populates TerminologyCapabilities from JSON data
+// FromJSON populates TerminologyCapabilities from JSON data.
 func (m *TerminologyCapabilities) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental *FhirBoolean `json:"experimental,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Publisher *FhirString `json:"publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose *FhirMarkdown `json:"purpose,omitempty"`
+		Copyright *FhirMarkdown `json:"copyright,omitempty"`
+		Kind *CapabilityStatementKind `json:"kind,omitempty"`
+		Software *TerminologyCapabilitiesSoftware `json:"software,omitempty"`
+		Implementation *TerminologyCapabilitiesImplementation `json:"implementation,omitempty"`
+		LockedDate *FhirBoolean `json:"lockeddate,omitempty"`
+		CodeSystem []*TerminologyCapabilitiesCodeSystem `json:"codesystem,omitempty"`
+		Expansion *TerminologyCapabilitiesExpansion `json:"expansion,omitempty"`
+		CodeSearch *CodeSearchSupport `json:"codesearch,omitempty"`
+		ValidateCode *TerminologyCapabilitiesValidateCode `json:"validatecode,omitempty"`
+		Translation *TerminologyCapabilitiesTranslation `json:"translation,omitempty"`
+		Closure *TerminologyCapabilitiesClosure `json:"closure,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Url = temp.Url
+	m.Version = temp.Version
+	m.Name = temp.Name
+	m.Title = temp.Title
+	m.Status = temp.Status
+	m.Experimental = temp.Experimental
+	m.Date = temp.Date
+	m.Publisher = temp.Publisher
+	m.Contact = temp.Contact
+	m.Description = temp.Description
+	m.UseContext = temp.UseContext
+	m.Jurisdiction = temp.Jurisdiction
+	m.Purpose = temp.Purpose
+	m.Copyright = temp.Copyright
+	m.Kind = temp.Kind
+	m.Software = temp.Software
+	m.Implementation = temp.Implementation
+	m.LockedDate = temp.LockedDate
+	m.CodeSystem = temp.CodeSystem
+	m.Expansion = temp.Expansion
+	m.CodeSearch = temp.CodeSearch
+	m.ValidateCode = temp.ValidateCode
+	m.Translation = temp.Translation
+	m.Closure = temp.Closure
+	return nil
 }
 
-// ToJSON converts TerminologyCapabilities to JSON data
+// ToJSON converts TerminologyCapabilities to JSON data.
 func (m *TerminologyCapabilities) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental interface{} `json:"experimental,omitempty"`
+		ExperimentalElement map[string]interface{} `json:"_experimental,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Publisher interface{} `json:"publisher,omitempty"`
+		PublisherElement map[string]interface{} `json:"_publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose interface{} `json:"purpose,omitempty"`
+		PurposeElement map[string]interface{} `json:"_purpose,omitempty"`
+		Copyright interface{} `json:"copyright,omitempty"`
+		CopyrightElement map[string]interface{} `json:"_copyright,omitempty"`
+		Kind *CapabilityStatementKind `json:"kind,omitempty"`
+		Software *TerminologyCapabilitiesSoftware `json:"software,omitempty"`
+		Implementation *TerminologyCapabilitiesImplementation `json:"implementation,omitempty"`
+		LockedDate interface{} `json:"lockeddate,omitempty"`
+		LockedDateElement map[string]interface{} `json:"_lockeddate,omitempty"`
+		CodeSystem []*TerminologyCapabilitiesCodeSystem `json:"codesystem,omitempty"`
+		Expansion *TerminologyCapabilitiesExpansion `json:"expansion,omitempty"`
+		CodeSearch *CodeSearchSupport `json:"codesearch,omitempty"`
+		ValidateCode *TerminologyCapabilitiesValidateCode `json:"validatecode,omitempty"`
+		Translation *TerminologyCapabilitiesTranslation `json:"translation,omitempty"`
+		Closure *TerminologyCapabilitiesClosure `json:"closure,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	output.Status = m.Status
+	if m.Experimental != nil && m.Experimental.Value != nil {
+		output.Experimental = m.Experimental.Value
+		if m.Experimental.Element != nil {
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+		}
+	}
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.Publisher != nil && m.Publisher.Value != nil {
+		output.Publisher = m.Publisher.Value
+		if m.Publisher.Element != nil {
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+		}
+	}
+	output.Contact = m.Contact
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.UseContext = m.UseContext
+	output.Jurisdiction = m.Jurisdiction
+	if m.Purpose != nil && m.Purpose.Value != nil {
+		output.Purpose = m.Purpose.Value
+		if m.Purpose.Element != nil {
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+		}
+	}
+	if m.Copyright != nil && m.Copyright.Value != nil {
+		output.Copyright = m.Copyright.Value
+		if m.Copyright.Element != nil {
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+		}
+	}
+	output.Kind = m.Kind
+	output.Software = m.Software
+	output.Implementation = m.Implementation
+	if m.LockedDate != nil && m.LockedDate.Value != nil {
+		output.LockedDate = m.LockedDate.Value
+		if m.LockedDate.Element != nil {
+			output.LockedDateElement = toMapOrNil(m.LockedDate.Element.ToJSON())
+		}
+	}
+	output.CodeSystem = m.CodeSystem
+	output.Expansion = m.Expansion
+	output.CodeSearch = m.CodeSearch
+	output.ValidateCode = m.ValidateCode
+	output.Translation = m.Translation
+	output.Closure = m.Closure
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TerminologyCapabilities
+// Clone creates a deep copy of TerminologyCapabilities.
 func (m *TerminologyCapabilities) Clone() *TerminologyCapabilities {
 	if m == nil { return nil }
 	return &TerminologyCapabilities{
@@ -97,7 +312,7 @@ func (m *TerminologyCapabilities) Clone() *TerminologyCapabilities {
 	}
 }
 
-// Equals checks for equality with another TerminologyCapabilities instance
+// Equals checks equality between two TerminologyCapabilities instances.
 func (m *TerminologyCapabilities) Equals(other *TerminologyCapabilities) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -139,7 +354,7 @@ func (m *TerminologyCapabilities) Equals(other *TerminologyCapabilities) bool {
 // TerminologyCapabilitiesSoftware
 // Software that is covered by this terminology capability statement.  It is used when the statement describes the capabilities of a particular software version, independent of an installation.
 type TerminologyCapabilitiesSoftware struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -147,22 +362,67 @@ type TerminologyCapabilitiesSoftware struct {
 	Version *FhirString `json:"version,omitempty"`
 }
 
-// NewTerminologyCapabilitiesSoftware creates a new TerminologyCapabilitiesSoftware instance
+// NewTerminologyCapabilitiesSoftware creates a new TerminologyCapabilitiesSoftware instance.
 func NewTerminologyCapabilitiesSoftware() *TerminologyCapabilitiesSoftware {
 	return &TerminologyCapabilitiesSoftware{}
 }
 
-// FromJSON populates TerminologyCapabilitiesSoftware from JSON data
+// FromJSON populates TerminologyCapabilitiesSoftware from JSON data.
 func (m *TerminologyCapabilitiesSoftware) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Name = temp.Name
+	m.Version = temp.Version
+	return nil
 }
 
-// ToJSON converts TerminologyCapabilitiesSoftware to JSON data
+// ToJSON converts TerminologyCapabilitiesSoftware to JSON data.
 func (m *TerminologyCapabilitiesSoftware) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TerminologyCapabilitiesSoftware
+// Clone creates a deep copy of TerminologyCapabilitiesSoftware.
 func (m *TerminologyCapabilitiesSoftware) Clone() *TerminologyCapabilitiesSoftware {
 	if m == nil { return nil }
 	return &TerminologyCapabilitiesSoftware{
@@ -174,7 +434,7 @@ func (m *TerminologyCapabilitiesSoftware) Clone() *TerminologyCapabilitiesSoftwa
 	}
 }
 
-// Equals checks for equality with another TerminologyCapabilitiesSoftware instance
+// Equals checks equality between two TerminologyCapabilitiesSoftware instances.
 func (m *TerminologyCapabilitiesSoftware) Equals(other *TerminologyCapabilitiesSoftware) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -189,7 +449,7 @@ func (m *TerminologyCapabilitiesSoftware) Equals(other *TerminologyCapabilitiesS
 // TerminologyCapabilitiesImplementation
 // Identifies a specific implementation instance that is described by the terminology capability statement - i.e. a particular installation, rather than the capabilities of a software program.
 type TerminologyCapabilitiesImplementation struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -197,22 +457,67 @@ type TerminologyCapabilitiesImplementation struct {
 	Url *FhirUrl `json:"url,omitempty"`
 }
 
-// NewTerminologyCapabilitiesImplementation creates a new TerminologyCapabilitiesImplementation instance
+// NewTerminologyCapabilitiesImplementation creates a new TerminologyCapabilitiesImplementation instance.
 func NewTerminologyCapabilitiesImplementation() *TerminologyCapabilitiesImplementation {
 	return &TerminologyCapabilitiesImplementation{}
 }
 
-// FromJSON populates TerminologyCapabilitiesImplementation from JSON data
+// FromJSON populates TerminologyCapabilitiesImplementation from JSON data.
 func (m *TerminologyCapabilitiesImplementation) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Url *FhirUrl `json:"url,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Description = temp.Description
+	m.Url = temp.Url
+	return nil
 }
 
-// ToJSON converts TerminologyCapabilitiesImplementation to JSON data
+// ToJSON converts TerminologyCapabilitiesImplementation to JSON data.
 func (m *TerminologyCapabilitiesImplementation) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TerminologyCapabilitiesImplementation
+// Clone creates a deep copy of TerminologyCapabilitiesImplementation.
 func (m *TerminologyCapabilitiesImplementation) Clone() *TerminologyCapabilitiesImplementation {
 	if m == nil { return nil }
 	return &TerminologyCapabilitiesImplementation{
@@ -224,7 +529,7 @@ func (m *TerminologyCapabilitiesImplementation) Clone() *TerminologyCapabilities
 	}
 }
 
-// Equals checks for equality with another TerminologyCapabilitiesImplementation instance
+// Equals checks equality between two TerminologyCapabilitiesImplementation instances.
 func (m *TerminologyCapabilitiesImplementation) Equals(other *TerminologyCapabilitiesImplementation) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -239,7 +544,7 @@ func (m *TerminologyCapabilitiesImplementation) Equals(other *TerminologyCapabil
 // TerminologyCapabilitiesCodeSystem
 // Identifies a code system that is supported by the server. If there is a no code system URL, then this declares the general assumptions a client can make about support for any CodeSystem resource.
 type TerminologyCapabilitiesCodeSystem struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -248,22 +553,71 @@ type TerminologyCapabilitiesCodeSystem struct {
 	Subsumption *FhirBoolean `json:"subsumption,omitempty"`
 }
 
-// NewTerminologyCapabilitiesCodeSystem creates a new TerminologyCapabilitiesCodeSystem instance
+// NewTerminologyCapabilitiesCodeSystem creates a new TerminologyCapabilitiesCodeSystem instance.
 func NewTerminologyCapabilitiesCodeSystem() *TerminologyCapabilitiesCodeSystem {
 	return &TerminologyCapabilitiesCodeSystem{}
 }
 
-// FromJSON populates TerminologyCapabilitiesCodeSystem from JSON data
+// FromJSON populates TerminologyCapabilitiesCodeSystem from JSON data.
 func (m *TerminologyCapabilitiesCodeSystem) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Uri *FhirCanonical `json:"uri,omitempty"`
+		Version []*TerminologyCapabilitiesVersion `json:"version,omitempty"`
+		Subsumption *FhirBoolean `json:"subsumption,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Uri = temp.Uri
+	m.Version = temp.Version
+	m.Subsumption = temp.Subsumption
+	return nil
 }
 
-// ToJSON converts TerminologyCapabilitiesCodeSystem to JSON data
+// ToJSON converts TerminologyCapabilitiesCodeSystem to JSON data.
 func (m *TerminologyCapabilitiesCodeSystem) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Uri interface{} `json:"uri,omitempty"`
+		UriElement map[string]interface{} `json:"_uri,omitempty"`
+		Version []*TerminologyCapabilitiesVersion `json:"version,omitempty"`
+		Subsumption interface{} `json:"subsumption,omitempty"`
+		SubsumptionElement map[string]interface{} `json:"_subsumption,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Uri != nil && m.Uri.Value != nil {
+		output.Uri = m.Uri.Value
+		if m.Uri.Element != nil {
+			output.UriElement = toMapOrNil(m.Uri.Element.ToJSON())
+		}
+	}
+	output.Version = m.Version
+	if m.Subsumption != nil && m.Subsumption.Value != nil {
+		output.Subsumption = m.Subsumption.Value
+		if m.Subsumption.Element != nil {
+			output.SubsumptionElement = toMapOrNil(m.Subsumption.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TerminologyCapabilitiesCodeSystem
+// Clone creates a deep copy of TerminologyCapabilitiesCodeSystem.
 func (m *TerminologyCapabilitiesCodeSystem) Clone() *TerminologyCapabilitiesCodeSystem {
 	if m == nil { return nil }
 	return &TerminologyCapabilitiesCodeSystem{
@@ -276,7 +630,7 @@ func (m *TerminologyCapabilitiesCodeSystem) Clone() *TerminologyCapabilitiesCode
 	}
 }
 
-// Equals checks for equality with another TerminologyCapabilitiesCodeSystem instance
+// Equals checks equality between two TerminologyCapabilitiesCodeSystem instances.
 func (m *TerminologyCapabilitiesCodeSystem) Equals(other *TerminologyCapabilitiesCodeSystem) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -292,7 +646,7 @@ func (m *TerminologyCapabilitiesCodeSystem) Equals(other *TerminologyCapabilitie
 // TerminologyCapabilitiesVersion
 // For the code system, a list of versions that are supported by the server.
 type TerminologyCapabilitiesVersion struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -304,22 +658,131 @@ type TerminologyCapabilitiesVersion struct {
 	Property []*FhirCode `json:"property,omitempty"`
 }
 
-// NewTerminologyCapabilitiesVersion creates a new TerminologyCapabilitiesVersion instance
+// NewTerminologyCapabilitiesVersion creates a new TerminologyCapabilitiesVersion instance.
 func NewTerminologyCapabilitiesVersion() *TerminologyCapabilitiesVersion {
 	return &TerminologyCapabilitiesVersion{}
 }
 
-// FromJSON populates TerminologyCapabilitiesVersion from JSON data
+// FromJSON populates TerminologyCapabilitiesVersion from JSON data.
 func (m *TerminologyCapabilitiesVersion) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *FhirString `json:"code,omitempty"`
+		IsDefault *FhirBoolean `json:"isdefault,omitempty"`
+		Compositional *FhirBoolean `json:"compositional,omitempty"`
+		Language []interface{} `json:"language,omitempty"`
+		Filter []*TerminologyCapabilitiesFilter `json:"filter,omitempty"`
+		Property []interface{} `json:"property,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.IsDefault = temp.IsDefault
+	m.Compositional = temp.Compositional
+	if len(temp.Language) > 0 {
+		m.Language = make([]*FhirCode, len(temp.Language))
+		for i := range temp.Language {
+			itemMap, ok := temp.Language[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Language[%d]: expected map", i) }
+			primitive, err := NewFhirCodeFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Language[%d]: %v", i, err) }
+			m.Language[i] = primitive
+		}
+	}
+	m.Filter = temp.Filter
+	if len(temp.Property) > 0 {
+		m.Property = make([]*FhirCode, len(temp.Property))
+		for i := range temp.Property {
+			itemMap, ok := temp.Property[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Property[%d]: expected map", i) }
+			primitive, err := NewFhirCodeFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Property[%d]: %v", i, err) }
+			m.Property[i] = primitive
+		}
+	}
+	return nil
 }
 
-// ToJSON converts TerminologyCapabilitiesVersion to JSON data
+// ToJSON converts TerminologyCapabilitiesVersion to JSON data.
 func (m *TerminologyCapabilitiesVersion) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code interface{} `json:"code,omitempty"`
+		CodeElement map[string]interface{} `json:"_code,omitempty"`
+		IsDefault interface{} `json:"isdefault,omitempty"`
+		IsDefaultElement map[string]interface{} `json:"_isdefault,omitempty"`
+		Compositional interface{} `json:"compositional,omitempty"`
+		CompositionalElement map[string]interface{} `json:"_compositional,omitempty"`
+		Language []interface{} `json:"language,omitempty"`
+		LanguageElement []map[string]interface{} `json:"_language,omitempty"`
+		Filter []*TerminologyCapabilitiesFilter `json:"filter,omitempty"`
+		Property []interface{} `json:"property,omitempty"`
+		PropertyElement []map[string]interface{} `json:"_property,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Code != nil && m.Code.Value != nil {
+		output.Code = m.Code.Value
+		if m.Code.Element != nil {
+			output.CodeElement = toMapOrNil(m.Code.Element.ToJSON())
+		}
+	}
+	if m.IsDefault != nil && m.IsDefault.Value != nil {
+		output.IsDefault = m.IsDefault.Value
+		if m.IsDefault.Element != nil {
+			output.IsDefaultElement = toMapOrNil(m.IsDefault.Element.ToJSON())
+		}
+	}
+	if m.Compositional != nil && m.Compositional.Value != nil {
+		output.Compositional = m.Compositional.Value
+		if m.Compositional.Element != nil {
+			output.CompositionalElement = toMapOrNil(m.Compositional.Element.ToJSON())
+		}
+	}
+	if len(m.Language) > 0 {
+		output.Language = make([]interface{}, len(m.Language))
+		output.LanguageElement = make([]map[string]interface{}, len(m.Language))
+		for i, item := range m.Language {
+			if item != nil && item.Value != nil {
+				output.Language[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.LanguageElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Filter = m.Filter
+	if len(m.Property) > 0 {
+		output.Property = make([]interface{}, len(m.Property))
+		output.PropertyElement = make([]map[string]interface{}, len(m.Property))
+		for i, item := range m.Property {
+			if item != nil && item.Value != nil {
+				output.Property[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.PropertyElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TerminologyCapabilitiesVersion
+// Clone creates a deep copy of TerminologyCapabilitiesVersion.
 func (m *TerminologyCapabilitiesVersion) Clone() *TerminologyCapabilitiesVersion {
 	if m == nil { return nil }
 	return &TerminologyCapabilitiesVersion{
@@ -335,7 +798,7 @@ func (m *TerminologyCapabilitiesVersion) Clone() *TerminologyCapabilitiesVersion
 	}
 }
 
-// Equals checks for equality with another TerminologyCapabilitiesVersion instance
+// Equals checks equality between two TerminologyCapabilitiesVersion instances.
 func (m *TerminologyCapabilitiesVersion) Equals(other *TerminologyCapabilitiesVersion) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -354,7 +817,7 @@ func (m *TerminologyCapabilitiesVersion) Equals(other *TerminologyCapabilitiesVe
 // TerminologyCapabilitiesFilter
 // Filter Properties supported.
 type TerminologyCapabilitiesFilter struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -362,22 +825,82 @@ type TerminologyCapabilitiesFilter struct {
 	Op []*FhirCode `json:"op,omitempty"`
 }
 
-// NewTerminologyCapabilitiesFilter creates a new TerminologyCapabilitiesFilter instance
+// NewTerminologyCapabilitiesFilter creates a new TerminologyCapabilitiesFilter instance.
 func NewTerminologyCapabilitiesFilter() *TerminologyCapabilitiesFilter {
 	return &TerminologyCapabilitiesFilter{}
 }
 
-// FromJSON populates TerminologyCapabilitiesFilter from JSON data
+// FromJSON populates TerminologyCapabilitiesFilter from JSON data.
 func (m *TerminologyCapabilitiesFilter) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *FhirCode `json:"code,omitempty"`
+		Op []interface{} `json:"op,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	if len(temp.Op) > 0 {
+		m.Op = make([]*FhirCode, len(temp.Op))
+		for i := range temp.Op {
+			itemMap, ok := temp.Op[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Op[%d]: expected map", i) }
+			primitive, err := NewFhirCodeFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Op[%d]: %v", i, err) }
+			m.Op[i] = primitive
+		}
+	}
+	return nil
 }
 
-// ToJSON converts TerminologyCapabilitiesFilter to JSON data
+// ToJSON converts TerminologyCapabilitiesFilter to JSON data.
 func (m *TerminologyCapabilitiesFilter) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code interface{} `json:"code,omitempty"`
+		CodeElement map[string]interface{} `json:"_code,omitempty"`
+		Op []interface{} `json:"op,omitempty"`
+		OpElement []map[string]interface{} `json:"_op,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Code != nil && m.Code.Value != nil {
+		output.Code = m.Code.Value
+		if m.Code.Element != nil {
+			output.CodeElement = toMapOrNil(m.Code.Element.ToJSON())
+		}
+	}
+	if len(m.Op) > 0 {
+		output.Op = make([]interface{}, len(m.Op))
+		output.OpElement = make([]map[string]interface{}, len(m.Op))
+		for i, item := range m.Op {
+			if item != nil && item.Value != nil {
+				output.Op[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.OpElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TerminologyCapabilitiesFilter
+// Clone creates a deep copy of TerminologyCapabilitiesFilter.
 func (m *TerminologyCapabilitiesFilter) Clone() *TerminologyCapabilitiesFilter {
 	if m == nil { return nil }
 	return &TerminologyCapabilitiesFilter{
@@ -389,7 +912,7 @@ func (m *TerminologyCapabilitiesFilter) Clone() *TerminologyCapabilitiesFilter {
 	}
 }
 
-// Equals checks for equality with another TerminologyCapabilitiesFilter instance
+// Equals checks equality between two TerminologyCapabilitiesFilter instances.
 func (m *TerminologyCapabilitiesFilter) Equals(other *TerminologyCapabilitiesFilter) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -404,7 +927,7 @@ func (m *TerminologyCapabilitiesFilter) Equals(other *TerminologyCapabilitiesFil
 // TerminologyCapabilitiesExpansion
 // Information about the [ValueSet/$expand](valueset-operation-expand.html) operation.
 type TerminologyCapabilitiesExpansion struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -415,22 +938,91 @@ type TerminologyCapabilitiesExpansion struct {
 	TextFilter *FhirMarkdown `json:"textfilter,omitempty"`
 }
 
-// NewTerminologyCapabilitiesExpansion creates a new TerminologyCapabilitiesExpansion instance
+// NewTerminologyCapabilitiesExpansion creates a new TerminologyCapabilitiesExpansion instance.
 func NewTerminologyCapabilitiesExpansion() *TerminologyCapabilitiesExpansion {
 	return &TerminologyCapabilitiesExpansion{}
 }
 
-// FromJSON populates TerminologyCapabilitiesExpansion from JSON data
+// FromJSON populates TerminologyCapabilitiesExpansion from JSON data.
 func (m *TerminologyCapabilitiesExpansion) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Hierarchical *FhirBoolean `json:"hierarchical,omitempty"`
+		Paging *FhirBoolean `json:"paging,omitempty"`
+		Incomplete *FhirBoolean `json:"incomplete,omitempty"`
+		Parameter []*TerminologyCapabilitiesParameter `json:"parameter,omitempty"`
+		TextFilter *FhirMarkdown `json:"textfilter,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Hierarchical = temp.Hierarchical
+	m.Paging = temp.Paging
+	m.Incomplete = temp.Incomplete
+	m.Parameter = temp.Parameter
+	m.TextFilter = temp.TextFilter
+	return nil
 }
 
-// ToJSON converts TerminologyCapabilitiesExpansion to JSON data
+// ToJSON converts TerminologyCapabilitiesExpansion to JSON data.
 func (m *TerminologyCapabilitiesExpansion) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Hierarchical interface{} `json:"hierarchical,omitempty"`
+		HierarchicalElement map[string]interface{} `json:"_hierarchical,omitempty"`
+		Paging interface{} `json:"paging,omitempty"`
+		PagingElement map[string]interface{} `json:"_paging,omitempty"`
+		Incomplete interface{} `json:"incomplete,omitempty"`
+		IncompleteElement map[string]interface{} `json:"_incomplete,omitempty"`
+		Parameter []*TerminologyCapabilitiesParameter `json:"parameter,omitempty"`
+		TextFilter interface{} `json:"textfilter,omitempty"`
+		TextFilterElement map[string]interface{} `json:"_textfilter,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Hierarchical != nil && m.Hierarchical.Value != nil {
+		output.Hierarchical = m.Hierarchical.Value
+		if m.Hierarchical.Element != nil {
+			output.HierarchicalElement = toMapOrNil(m.Hierarchical.Element.ToJSON())
+		}
+	}
+	if m.Paging != nil && m.Paging.Value != nil {
+		output.Paging = m.Paging.Value
+		if m.Paging.Element != nil {
+			output.PagingElement = toMapOrNil(m.Paging.Element.ToJSON())
+		}
+	}
+	if m.Incomplete != nil && m.Incomplete.Value != nil {
+		output.Incomplete = m.Incomplete.Value
+		if m.Incomplete.Element != nil {
+			output.IncompleteElement = toMapOrNil(m.Incomplete.Element.ToJSON())
+		}
+	}
+	output.Parameter = m.Parameter
+	if m.TextFilter != nil && m.TextFilter.Value != nil {
+		output.TextFilter = m.TextFilter.Value
+		if m.TextFilter.Element != nil {
+			output.TextFilterElement = toMapOrNil(m.TextFilter.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TerminologyCapabilitiesExpansion
+// Clone creates a deep copy of TerminologyCapabilitiesExpansion.
 func (m *TerminologyCapabilitiesExpansion) Clone() *TerminologyCapabilitiesExpansion {
 	if m == nil { return nil }
 	return &TerminologyCapabilitiesExpansion{
@@ -445,7 +1037,7 @@ func (m *TerminologyCapabilitiesExpansion) Clone() *TerminologyCapabilitiesExpan
 	}
 }
 
-// Equals checks for equality with another TerminologyCapabilitiesExpansion instance
+// Equals checks equality between two TerminologyCapabilitiesExpansion instances.
 func (m *TerminologyCapabilitiesExpansion) Equals(other *TerminologyCapabilitiesExpansion) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -463,7 +1055,7 @@ func (m *TerminologyCapabilitiesExpansion) Equals(other *TerminologyCapabilities
 // TerminologyCapabilitiesParameter
 // Supported expansion parameter.
 type TerminologyCapabilitiesParameter struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -471,22 +1063,67 @@ type TerminologyCapabilitiesParameter struct {
 	Documentation *FhirString `json:"documentation,omitempty"`
 }
 
-// NewTerminologyCapabilitiesParameter creates a new TerminologyCapabilitiesParameter instance
+// NewTerminologyCapabilitiesParameter creates a new TerminologyCapabilitiesParameter instance.
 func NewTerminologyCapabilitiesParameter() *TerminologyCapabilitiesParameter {
 	return &TerminologyCapabilitiesParameter{}
 }
 
-// FromJSON populates TerminologyCapabilitiesParameter from JSON data
+// FromJSON populates TerminologyCapabilitiesParameter from JSON data.
 func (m *TerminologyCapabilitiesParameter) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name *FhirCode `json:"name,omitempty"`
+		Documentation *FhirString `json:"documentation,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Name = temp.Name
+	m.Documentation = temp.Documentation
+	return nil
 }
 
-// ToJSON converts TerminologyCapabilitiesParameter to JSON data
+// ToJSON converts TerminologyCapabilitiesParameter to JSON data.
 func (m *TerminologyCapabilitiesParameter) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Documentation interface{} `json:"documentation,omitempty"`
+		DocumentationElement map[string]interface{} `json:"_documentation,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Documentation != nil && m.Documentation.Value != nil {
+		output.Documentation = m.Documentation.Value
+		if m.Documentation.Element != nil {
+			output.DocumentationElement = toMapOrNil(m.Documentation.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TerminologyCapabilitiesParameter
+// Clone creates a deep copy of TerminologyCapabilitiesParameter.
 func (m *TerminologyCapabilitiesParameter) Clone() *TerminologyCapabilitiesParameter {
 	if m == nil { return nil }
 	return &TerminologyCapabilitiesParameter{
@@ -498,7 +1135,7 @@ func (m *TerminologyCapabilitiesParameter) Clone() *TerminologyCapabilitiesParam
 	}
 }
 
-// Equals checks for equality with another TerminologyCapabilitiesParameter instance
+// Equals checks equality between two TerminologyCapabilitiesParameter instances.
 func (m *TerminologyCapabilitiesParameter) Equals(other *TerminologyCapabilitiesParameter) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -513,29 +1150,64 @@ func (m *TerminologyCapabilitiesParameter) Equals(other *TerminologyCapabilities
 // TerminologyCapabilitiesValidateCode
 // Information about the [ValueSet/$validate-code](valueset-operation-validate-code.html) operation.
 type TerminologyCapabilitiesValidateCode struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
 	Translations *FhirBoolean `json:"translations,omitempty"`
 }
 
-// NewTerminologyCapabilitiesValidateCode creates a new TerminologyCapabilitiesValidateCode instance
+// NewTerminologyCapabilitiesValidateCode creates a new TerminologyCapabilitiesValidateCode instance.
 func NewTerminologyCapabilitiesValidateCode() *TerminologyCapabilitiesValidateCode {
 	return &TerminologyCapabilitiesValidateCode{}
 }
 
-// FromJSON populates TerminologyCapabilitiesValidateCode from JSON data
+// FromJSON populates TerminologyCapabilitiesValidateCode from JSON data.
 func (m *TerminologyCapabilitiesValidateCode) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Translations *FhirBoolean `json:"translations,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Translations = temp.Translations
+	return nil
 }
 
-// ToJSON converts TerminologyCapabilitiesValidateCode to JSON data
+// ToJSON converts TerminologyCapabilitiesValidateCode to JSON data.
 func (m *TerminologyCapabilitiesValidateCode) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Translations interface{} `json:"translations,omitempty"`
+		TranslationsElement map[string]interface{} `json:"_translations,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Translations != nil && m.Translations.Value != nil {
+		output.Translations = m.Translations.Value
+		if m.Translations.Element != nil {
+			output.TranslationsElement = toMapOrNil(m.Translations.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TerminologyCapabilitiesValidateCode
+// Clone creates a deep copy of TerminologyCapabilitiesValidateCode.
 func (m *TerminologyCapabilitiesValidateCode) Clone() *TerminologyCapabilitiesValidateCode {
 	if m == nil { return nil }
 	return &TerminologyCapabilitiesValidateCode{
@@ -546,7 +1218,7 @@ func (m *TerminologyCapabilitiesValidateCode) Clone() *TerminologyCapabilitiesVa
 	}
 }
 
-// Equals checks for equality with another TerminologyCapabilitiesValidateCode instance
+// Equals checks equality between two TerminologyCapabilitiesValidateCode instances.
 func (m *TerminologyCapabilitiesValidateCode) Equals(other *TerminologyCapabilitiesValidateCode) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -560,29 +1232,64 @@ func (m *TerminologyCapabilitiesValidateCode) Equals(other *TerminologyCapabilit
 // TerminologyCapabilitiesTranslation
 // Information about the [ConceptMap/$translate](conceptmap-operation-translate.html) operation.
 type TerminologyCapabilitiesTranslation struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
 	NeedsMap *FhirBoolean `json:"needsmap,omitempty"`
 }
 
-// NewTerminologyCapabilitiesTranslation creates a new TerminologyCapabilitiesTranslation instance
+// NewTerminologyCapabilitiesTranslation creates a new TerminologyCapabilitiesTranslation instance.
 func NewTerminologyCapabilitiesTranslation() *TerminologyCapabilitiesTranslation {
 	return &TerminologyCapabilitiesTranslation{}
 }
 
-// FromJSON populates TerminologyCapabilitiesTranslation from JSON data
+// FromJSON populates TerminologyCapabilitiesTranslation from JSON data.
 func (m *TerminologyCapabilitiesTranslation) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		NeedsMap *FhirBoolean `json:"needsmap,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.NeedsMap = temp.NeedsMap
+	return nil
 }
 
-// ToJSON converts TerminologyCapabilitiesTranslation to JSON data
+// ToJSON converts TerminologyCapabilitiesTranslation to JSON data.
 func (m *TerminologyCapabilitiesTranslation) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		NeedsMap interface{} `json:"needsmap,omitempty"`
+		NeedsMapElement map[string]interface{} `json:"_needsmap,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.NeedsMap != nil && m.NeedsMap.Value != nil {
+		output.NeedsMap = m.NeedsMap.Value
+		if m.NeedsMap.Element != nil {
+			output.NeedsMapElement = toMapOrNil(m.NeedsMap.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TerminologyCapabilitiesTranslation
+// Clone creates a deep copy of TerminologyCapabilitiesTranslation.
 func (m *TerminologyCapabilitiesTranslation) Clone() *TerminologyCapabilitiesTranslation {
 	if m == nil { return nil }
 	return &TerminologyCapabilitiesTranslation{
@@ -593,7 +1300,7 @@ func (m *TerminologyCapabilitiesTranslation) Clone() *TerminologyCapabilitiesTra
 	}
 }
 
-// Equals checks for equality with another TerminologyCapabilitiesTranslation instance
+// Equals checks equality between two TerminologyCapabilitiesTranslation instances.
 func (m *TerminologyCapabilitiesTranslation) Equals(other *TerminologyCapabilitiesTranslation) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -607,29 +1314,64 @@ func (m *TerminologyCapabilitiesTranslation) Equals(other *TerminologyCapabiliti
 // TerminologyCapabilitiesClosure
 // Whether the $closure operation is supported.
 type TerminologyCapabilitiesClosure struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
 	Translation *FhirBoolean `json:"translation,omitempty"`
 }
 
-// NewTerminologyCapabilitiesClosure creates a new TerminologyCapabilitiesClosure instance
+// NewTerminologyCapabilitiesClosure creates a new TerminologyCapabilitiesClosure instance.
 func NewTerminologyCapabilitiesClosure() *TerminologyCapabilitiesClosure {
 	return &TerminologyCapabilitiesClosure{}
 }
 
-// FromJSON populates TerminologyCapabilitiesClosure from JSON data
+// FromJSON populates TerminologyCapabilitiesClosure from JSON data.
 func (m *TerminologyCapabilitiesClosure) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Translation *FhirBoolean `json:"translation,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Translation = temp.Translation
+	return nil
 }
 
-// ToJSON converts TerminologyCapabilitiesClosure to JSON data
+// ToJSON converts TerminologyCapabilitiesClosure to JSON data.
 func (m *TerminologyCapabilitiesClosure) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Translation interface{} `json:"translation,omitempty"`
+		TranslationElement map[string]interface{} `json:"_translation,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Translation != nil && m.Translation.Value != nil {
+		output.Translation = m.Translation.Value
+		if m.Translation.Element != nil {
+			output.TranslationElement = toMapOrNil(m.Translation.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TerminologyCapabilitiesClosure
+// Clone creates a deep copy of TerminologyCapabilitiesClosure.
 func (m *TerminologyCapabilitiesClosure) Clone() *TerminologyCapabilitiesClosure {
 	if m == nil { return nil }
 	return &TerminologyCapabilitiesClosure{
@@ -640,7 +1382,7 @@ func (m *TerminologyCapabilitiesClosure) Clone() *TerminologyCapabilitiesClosure
 	}
 }
 
-// Equals checks for equality with another TerminologyCapabilitiesClosure instance
+// Equals checks equality between two TerminologyCapabilitiesClosure instances.
 func (m *TerminologyCapabilitiesClosure) Equals(other *TerminologyCapabilitiesClosure) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

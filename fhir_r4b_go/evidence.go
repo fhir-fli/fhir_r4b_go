@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Evidence
 // The Evidence Resource provides a machine-interpretable expression of an evidence concept including the evidence variables (eg population, exposures/interventions, comparators, outcomes, measured variables, confounding variables), the statistics, and the certainty of this evidence.
 type Evidence struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -45,22 +46,237 @@ type Evidence struct {
 	Certainty []*EvidenceCertainty `json:"certainty,omitempty"`
 }
 
-// NewEvidence creates a new Evidence instance
+// NewEvidence creates a new Evidence instance.
 func NewEvidence() *Evidence {
 	return &Evidence{}
 }
 
-// FromJSON populates Evidence from JSON data
+// FromJSON populates Evidence from JSON data.
 func (m *Evidence) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		CiteAsReference *Reference `json:"citeasreference,omitempty"`
+		CiteAsMarkdown *FhirMarkdown `json:"citeasmarkdown,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		ApprovalDate *FhirDate `json:"approvaldate,omitempty"`
+		LastReviewDate *FhirDate `json:"lastreviewdate,omitempty"`
+		Publisher *FhirString `json:"publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Author []*ContactDetail `json:"author,omitempty"`
+		Editor []*ContactDetail `json:"editor,omitempty"`
+		Reviewer []*ContactDetail `json:"reviewer,omitempty"`
+		Endorser []*ContactDetail `json:"endorser,omitempty"`
+		RelatedArtifact []*RelatedArtifact `json:"relatedartifact,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		Assertion *FhirMarkdown `json:"assertion,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		VariableDefinition []*EvidenceVariableDefinition `json:"variabledefinition,omitempty"`
+		SynthesisType *CodeableConcept `json:"synthesistype,omitempty"`
+		StudyType *CodeableConcept `json:"studytype,omitempty"`
+		Statistic []*EvidenceStatistic `json:"statistic,omitempty"`
+		Certainty []*EvidenceCertainty `json:"certainty,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Url = temp.Url
+	m.Identifier = temp.Identifier
+	m.Version = temp.Version
+	m.Title = temp.Title
+	m.CiteAsReference = temp.CiteAsReference
+	m.CiteAsMarkdown = temp.CiteAsMarkdown
+	m.Status = temp.Status
+	m.Date = temp.Date
+	m.UseContext = temp.UseContext
+	m.ApprovalDate = temp.ApprovalDate
+	m.LastReviewDate = temp.LastReviewDate
+	m.Publisher = temp.Publisher
+	m.Contact = temp.Contact
+	m.Author = temp.Author
+	m.Editor = temp.Editor
+	m.Reviewer = temp.Reviewer
+	m.Endorser = temp.Endorser
+	m.RelatedArtifact = temp.RelatedArtifact
+	m.Description = temp.Description
+	m.Assertion = temp.Assertion
+	m.Note = temp.Note
+	m.VariableDefinition = temp.VariableDefinition
+	m.SynthesisType = temp.SynthesisType
+	m.StudyType = temp.StudyType
+	m.Statistic = temp.Statistic
+	m.Certainty = temp.Certainty
+	return nil
 }
 
-// ToJSON converts Evidence to JSON data
+// ToJSON converts Evidence to JSON data.
 func (m *Evidence) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		CiteAsReference *Reference `json:"citeasreference,omitempty"`
+		CiteAsMarkdown interface{} `json:"citeasmarkdown,omitempty"`
+		CiteAsMarkdownElement map[string]interface{} `json:"_citeasmarkdown,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		ApprovalDate interface{} `json:"approvaldate,omitempty"`
+		ApprovalDateElement map[string]interface{} `json:"_approvaldate,omitempty"`
+		LastReviewDate interface{} `json:"lastreviewdate,omitempty"`
+		LastReviewDateElement map[string]interface{} `json:"_lastreviewdate,omitempty"`
+		Publisher interface{} `json:"publisher,omitempty"`
+		PublisherElement map[string]interface{} `json:"_publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Author []*ContactDetail `json:"author,omitempty"`
+		Editor []*ContactDetail `json:"editor,omitempty"`
+		Reviewer []*ContactDetail `json:"reviewer,omitempty"`
+		Endorser []*ContactDetail `json:"endorser,omitempty"`
+		RelatedArtifact []*RelatedArtifact `json:"relatedartifact,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Assertion interface{} `json:"assertion,omitempty"`
+		AssertionElement map[string]interface{} `json:"_assertion,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		VariableDefinition []*EvidenceVariableDefinition `json:"variabledefinition,omitempty"`
+		SynthesisType *CodeableConcept `json:"synthesistype,omitempty"`
+		StudyType *CodeableConcept `json:"studytype,omitempty"`
+		Statistic []*EvidenceStatistic `json:"statistic,omitempty"`
+		Certainty []*EvidenceCertainty `json:"certainty,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	output.Identifier = m.Identifier
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	output.CiteAsReference = m.CiteAsReference
+	if m.CiteAsMarkdown != nil && m.CiteAsMarkdown.Value != nil {
+		output.CiteAsMarkdown = m.CiteAsMarkdown.Value
+		if m.CiteAsMarkdown.Element != nil {
+			output.CiteAsMarkdownElement = toMapOrNil(m.CiteAsMarkdown.Element.ToJSON())
+		}
+	}
+	output.Status = m.Status
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	output.UseContext = m.UseContext
+	if m.ApprovalDate != nil && m.ApprovalDate.Value != nil {
+		output.ApprovalDate = m.ApprovalDate.Value
+		if m.ApprovalDate.Element != nil {
+			output.ApprovalDateElement = toMapOrNil(m.ApprovalDate.Element.ToJSON())
+		}
+	}
+	if m.LastReviewDate != nil && m.LastReviewDate.Value != nil {
+		output.LastReviewDate = m.LastReviewDate.Value
+		if m.LastReviewDate.Element != nil {
+			output.LastReviewDateElement = toMapOrNil(m.LastReviewDate.Element.ToJSON())
+		}
+	}
+	if m.Publisher != nil && m.Publisher.Value != nil {
+		output.Publisher = m.Publisher.Value
+		if m.Publisher.Element != nil {
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+		}
+	}
+	output.Contact = m.Contact
+	output.Author = m.Author
+	output.Editor = m.Editor
+	output.Reviewer = m.Reviewer
+	output.Endorser = m.Endorser
+	output.RelatedArtifact = m.RelatedArtifact
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	if m.Assertion != nil && m.Assertion.Value != nil {
+		output.Assertion = m.Assertion.Value
+		if m.Assertion.Element != nil {
+			output.AssertionElement = toMapOrNil(m.Assertion.Element.ToJSON())
+		}
+	}
+	output.Note = m.Note
+	output.VariableDefinition = m.VariableDefinition
+	output.SynthesisType = m.SynthesisType
+	output.StudyType = m.StudyType
+	output.Statistic = m.Statistic
+	output.Certainty = m.Certainty
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Evidence
+// Clone creates a deep copy of Evidence.
 func (m *Evidence) Clone() *Evidence {
 	if m == nil { return nil }
 	return &Evidence{
@@ -101,7 +317,7 @@ func (m *Evidence) Clone() *Evidence {
 	}
 }
 
-// Equals checks for equality with another Evidence instance
+// Equals checks equality between two Evidence instances.
 func (m *Evidence) Equals(other *Evidence) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -145,7 +361,7 @@ func (m *Evidence) Equals(other *Evidence) bool {
 // EvidenceVariableDefinition
 // Evidence variable such as population, exposure, or outcome.
 type EvidenceVariableDefinition struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -157,22 +373,77 @@ type EvidenceVariableDefinition struct {
 	DirectnessMatch *CodeableConcept `json:"directnessmatch,omitempty"`
 }
 
-// NewEvidenceVariableDefinition creates a new EvidenceVariableDefinition instance
+// NewEvidenceVariableDefinition creates a new EvidenceVariableDefinition instance.
 func NewEvidenceVariableDefinition() *EvidenceVariableDefinition {
 	return &EvidenceVariableDefinition{}
 }
 
-// FromJSON populates EvidenceVariableDefinition from JSON data
+// FromJSON populates EvidenceVariableDefinition from JSON data.
 func (m *EvidenceVariableDefinition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		VariableRole *CodeableConcept `json:"variablerole,omitempty"`
+		Observed *Reference `json:"observed,omitempty"`
+		Intended *Reference `json:"intended,omitempty"`
+		DirectnessMatch *CodeableConcept `json:"directnessmatch,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Description = temp.Description
+	m.Note = temp.Note
+	m.VariableRole = temp.VariableRole
+	m.Observed = temp.Observed
+	m.Intended = temp.Intended
+	m.DirectnessMatch = temp.DirectnessMatch
+	return nil
 }
 
-// ToJSON converts EvidenceVariableDefinition to JSON data
+// ToJSON converts EvidenceVariableDefinition to JSON data.
 func (m *EvidenceVariableDefinition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		VariableRole *CodeableConcept `json:"variablerole,omitempty"`
+		Observed *Reference `json:"observed,omitempty"`
+		Intended *Reference `json:"intended,omitempty"`
+		DirectnessMatch *CodeableConcept `json:"directnessmatch,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Note = m.Note
+	output.VariableRole = m.VariableRole
+	output.Observed = m.Observed
+	output.Intended = m.Intended
+	output.DirectnessMatch = m.DirectnessMatch
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of EvidenceVariableDefinition
+// Clone creates a deep copy of EvidenceVariableDefinition.
 func (m *EvidenceVariableDefinition) Clone() *EvidenceVariableDefinition {
 	if m == nil { return nil }
 	return &EvidenceVariableDefinition{
@@ -188,7 +459,7 @@ func (m *EvidenceVariableDefinition) Clone() *EvidenceVariableDefinition {
 	}
 }
 
-// Equals checks for equality with another EvidenceVariableDefinition instance
+// Equals checks equality between two EvidenceVariableDefinition instances.
 func (m *EvidenceVariableDefinition) Equals(other *EvidenceVariableDefinition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -207,7 +478,7 @@ func (m *EvidenceVariableDefinition) Equals(other *EvidenceVariableDefinition) b
 // EvidenceStatistic
 // Values and parameters for a single statistic.
 type EvidenceStatistic struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -223,22 +494,105 @@ type EvidenceStatistic struct {
 	ModelCharacteristic []*EvidenceModelCharacteristic `json:"modelcharacteristic,omitempty"`
 }
 
-// NewEvidenceStatistic creates a new EvidenceStatistic instance
+// NewEvidenceStatistic creates a new EvidenceStatistic instance.
 func NewEvidenceStatistic() *EvidenceStatistic {
 	return &EvidenceStatistic{}
 }
 
-// FromJSON populates EvidenceStatistic from JSON data
+// FromJSON populates EvidenceStatistic from JSON data.
 func (m *EvidenceStatistic) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		StatisticType *CodeableConcept `json:"statistictype,omitempty"`
+		Category *CodeableConcept `json:"category,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		NumberOfEvents *FhirUnsignedInt `json:"numberofevents,omitempty"`
+		NumberAffected *FhirUnsignedInt `json:"numberaffected,omitempty"`
+		SampleSize *EvidenceSampleSize `json:"samplesize,omitempty"`
+		AttributeEstimate []*EvidenceAttributeEstimate `json:"attributeestimate,omitempty"`
+		ModelCharacteristic []*EvidenceModelCharacteristic `json:"modelcharacteristic,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Description = temp.Description
+	m.Note = temp.Note
+	m.StatisticType = temp.StatisticType
+	m.Category = temp.Category
+	m.Quantity = temp.Quantity
+	m.NumberOfEvents = temp.NumberOfEvents
+	m.NumberAffected = temp.NumberAffected
+	m.SampleSize = temp.SampleSize
+	m.AttributeEstimate = temp.AttributeEstimate
+	m.ModelCharacteristic = temp.ModelCharacteristic
+	return nil
 }
 
-// ToJSON converts EvidenceStatistic to JSON data
+// ToJSON converts EvidenceStatistic to JSON data.
 func (m *EvidenceStatistic) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		StatisticType *CodeableConcept `json:"statistictype,omitempty"`
+		Category *CodeableConcept `json:"category,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		NumberOfEvents interface{} `json:"numberofevents,omitempty"`
+		NumberOfEventsElement map[string]interface{} `json:"_numberofevents,omitempty"`
+		NumberAffected interface{} `json:"numberaffected,omitempty"`
+		NumberAffectedElement map[string]interface{} `json:"_numberaffected,omitempty"`
+		SampleSize *EvidenceSampleSize `json:"samplesize,omitempty"`
+		AttributeEstimate []*EvidenceAttributeEstimate `json:"attributeestimate,omitempty"`
+		ModelCharacteristic []*EvidenceModelCharacteristic `json:"modelcharacteristic,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Note = m.Note
+	output.StatisticType = m.StatisticType
+	output.Category = m.Category
+	output.Quantity = m.Quantity
+	if m.NumberOfEvents != nil && m.NumberOfEvents.Value != nil {
+		output.NumberOfEvents = m.NumberOfEvents.Value
+		if m.NumberOfEvents.Element != nil {
+			output.NumberOfEventsElement = toMapOrNil(m.NumberOfEvents.Element.ToJSON())
+		}
+	}
+	if m.NumberAffected != nil && m.NumberAffected.Value != nil {
+		output.NumberAffected = m.NumberAffected.Value
+		if m.NumberAffected.Element != nil {
+			output.NumberAffectedElement = toMapOrNil(m.NumberAffected.Element.ToJSON())
+		}
+	}
+	output.SampleSize = m.SampleSize
+	output.AttributeEstimate = m.AttributeEstimate
+	output.ModelCharacteristic = m.ModelCharacteristic
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of EvidenceStatistic
+// Clone creates a deep copy of EvidenceStatistic.
 func (m *EvidenceStatistic) Clone() *EvidenceStatistic {
 	if m == nil { return nil }
 	return &EvidenceStatistic{
@@ -258,7 +612,7 @@ func (m *EvidenceStatistic) Clone() *EvidenceStatistic {
 	}
 }
 
-// Equals checks for equality with another EvidenceStatistic instance
+// Equals checks equality between two EvidenceStatistic instances.
 func (m *EvidenceStatistic) Equals(other *EvidenceStatistic) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -281,7 +635,7 @@ func (m *EvidenceStatistic) Equals(other *EvidenceStatistic) bool {
 // EvidenceSampleSize
 // Number of samples in the statistic.
 type EvidenceSampleSize struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -292,22 +646,91 @@ type EvidenceSampleSize struct {
 	KnownDataCount *FhirUnsignedInt `json:"knowndatacount,omitempty"`
 }
 
-// NewEvidenceSampleSize creates a new EvidenceSampleSize instance
+// NewEvidenceSampleSize creates a new EvidenceSampleSize instance.
 func NewEvidenceSampleSize() *EvidenceSampleSize {
 	return &EvidenceSampleSize{}
 }
 
-// FromJSON populates EvidenceSampleSize from JSON data
+// FromJSON populates EvidenceSampleSize from JSON data.
 func (m *EvidenceSampleSize) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		NumberOfStudies *FhirUnsignedInt `json:"numberofstudies,omitempty"`
+		NumberOfParticipants *FhirUnsignedInt `json:"numberofparticipants,omitempty"`
+		KnownDataCount *FhirUnsignedInt `json:"knowndatacount,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Description = temp.Description
+	m.Note = temp.Note
+	m.NumberOfStudies = temp.NumberOfStudies
+	m.NumberOfParticipants = temp.NumberOfParticipants
+	m.KnownDataCount = temp.KnownDataCount
+	return nil
 }
 
-// ToJSON converts EvidenceSampleSize to JSON data
+// ToJSON converts EvidenceSampleSize to JSON data.
 func (m *EvidenceSampleSize) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		NumberOfStudies interface{} `json:"numberofstudies,omitempty"`
+		NumberOfStudiesElement map[string]interface{} `json:"_numberofstudies,omitempty"`
+		NumberOfParticipants interface{} `json:"numberofparticipants,omitempty"`
+		NumberOfParticipantsElement map[string]interface{} `json:"_numberofparticipants,omitempty"`
+		KnownDataCount interface{} `json:"knowndatacount,omitempty"`
+		KnownDataCountElement map[string]interface{} `json:"_knowndatacount,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Note = m.Note
+	if m.NumberOfStudies != nil && m.NumberOfStudies.Value != nil {
+		output.NumberOfStudies = m.NumberOfStudies.Value
+		if m.NumberOfStudies.Element != nil {
+			output.NumberOfStudiesElement = toMapOrNil(m.NumberOfStudies.Element.ToJSON())
+		}
+	}
+	if m.NumberOfParticipants != nil && m.NumberOfParticipants.Value != nil {
+		output.NumberOfParticipants = m.NumberOfParticipants.Value
+		if m.NumberOfParticipants.Element != nil {
+			output.NumberOfParticipantsElement = toMapOrNil(m.NumberOfParticipants.Element.ToJSON())
+		}
+	}
+	if m.KnownDataCount != nil && m.KnownDataCount.Value != nil {
+		output.KnownDataCount = m.KnownDataCount.Value
+		if m.KnownDataCount.Element != nil {
+			output.KnownDataCountElement = toMapOrNil(m.KnownDataCount.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of EvidenceSampleSize
+// Clone creates a deep copy of EvidenceSampleSize.
 func (m *EvidenceSampleSize) Clone() *EvidenceSampleSize {
 	if m == nil { return nil }
 	return &EvidenceSampleSize{
@@ -322,7 +745,7 @@ func (m *EvidenceSampleSize) Clone() *EvidenceSampleSize {
 	}
 }
 
-// Equals checks for equality with another EvidenceSampleSize instance
+// Equals checks equality between two EvidenceSampleSize instances.
 func (m *EvidenceSampleSize) Equals(other *EvidenceSampleSize) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -340,7 +763,7 @@ func (m *EvidenceSampleSize) Equals(other *EvidenceSampleSize) bool {
 // EvidenceAttributeEstimate
 // A statistical attribute of the statistic such as a measure of heterogeneity.
 type EvidenceAttributeEstimate struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -353,22 +776,87 @@ type EvidenceAttributeEstimate struct {
 	AttributeEstimate []*EvidenceAttributeEstimate `json:"attributeestimate,omitempty"`
 }
 
-// NewEvidenceAttributeEstimate creates a new EvidenceAttributeEstimate instance
+// NewEvidenceAttributeEstimate creates a new EvidenceAttributeEstimate instance.
 func NewEvidenceAttributeEstimate() *EvidenceAttributeEstimate {
 	return &EvidenceAttributeEstimate{}
 }
 
-// FromJSON populates EvidenceAttributeEstimate from JSON data
+// FromJSON populates EvidenceAttributeEstimate from JSON data.
 func (m *EvidenceAttributeEstimate) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		Level *FhirDecimal `json:"level,omitempty"`
+		Range *Range `json:"range,omitempty"`
+		AttributeEstimate []*EvidenceAttributeEstimate `json:"attributeestimate,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Description = temp.Description
+	m.Note = temp.Note
+	m.Type = temp.Type
+	m.Quantity = temp.Quantity
+	m.Level = temp.Level
+	m.Range = temp.Range
+	m.AttributeEstimate = temp.AttributeEstimate
+	return nil
 }
 
-// ToJSON converts EvidenceAttributeEstimate to JSON data
+// ToJSON converts EvidenceAttributeEstimate to JSON data.
 func (m *EvidenceAttributeEstimate) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		Level interface{} `json:"level,omitempty"`
+		LevelElement map[string]interface{} `json:"_level,omitempty"`
+		Range *Range `json:"range,omitempty"`
+		AttributeEstimate []*EvidenceAttributeEstimate `json:"attributeestimate,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Note = m.Note
+	output.Type = m.Type
+	output.Quantity = m.Quantity
+	if m.Level != nil && m.Level.Value != nil {
+		output.Level = m.Level.Value
+		if m.Level.Element != nil {
+			output.LevelElement = toMapOrNil(m.Level.Element.ToJSON())
+		}
+	}
+	output.Range = m.Range
+	output.AttributeEstimate = m.AttributeEstimate
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of EvidenceAttributeEstimate
+// Clone creates a deep copy of EvidenceAttributeEstimate.
 func (m *EvidenceAttributeEstimate) Clone() *EvidenceAttributeEstimate {
 	if m == nil { return nil }
 	return &EvidenceAttributeEstimate{
@@ -385,7 +873,7 @@ func (m *EvidenceAttributeEstimate) Clone() *EvidenceAttributeEstimate {
 	}
 }
 
-// Equals checks for equality with another EvidenceAttributeEstimate instance
+// Equals checks equality between two EvidenceAttributeEstimate instances.
 func (m *EvidenceAttributeEstimate) Equals(other *EvidenceAttributeEstimate) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -405,7 +893,7 @@ func (m *EvidenceAttributeEstimate) Equals(other *EvidenceAttributeEstimate) boo
 // EvidenceModelCharacteristic
 // A component of the method to generate the statistic.
 type EvidenceModelCharacteristic struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -415,22 +903,63 @@ type EvidenceModelCharacteristic struct {
 	AttributeEstimate []*EvidenceAttributeEstimate `json:"attributeestimate,omitempty"`
 }
 
-// NewEvidenceModelCharacteristic creates a new EvidenceModelCharacteristic instance
+// NewEvidenceModelCharacteristic creates a new EvidenceModelCharacteristic instance.
 func NewEvidenceModelCharacteristic() *EvidenceModelCharacteristic {
 	return &EvidenceModelCharacteristic{}
 }
 
-// FromJSON populates EvidenceModelCharacteristic from JSON data
+// FromJSON populates EvidenceModelCharacteristic from JSON data.
 func (m *EvidenceModelCharacteristic) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Value *Quantity `json:"value,omitempty"`
+		Variable []*EvidenceModelCharacteristicVariable `json:"variable,omitempty"`
+		AttributeEstimate []*EvidenceAttributeEstimate `json:"attributeestimate,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Value = temp.Value
+	m.Variable = temp.Variable
+	m.AttributeEstimate = temp.AttributeEstimate
+	return nil
 }
 
-// ToJSON converts EvidenceModelCharacteristic to JSON data
+// ToJSON converts EvidenceModelCharacteristic to JSON data.
 func (m *EvidenceModelCharacteristic) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Value *Quantity `json:"value,omitempty"`
+		Variable []*EvidenceModelCharacteristicVariable `json:"variable,omitempty"`
+		AttributeEstimate []*EvidenceAttributeEstimate `json:"attributeestimate,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	output.Value = m.Value
+	output.Variable = m.Variable
+	output.AttributeEstimate = m.AttributeEstimate
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of EvidenceModelCharacteristic
+// Clone creates a deep copy of EvidenceModelCharacteristic.
 func (m *EvidenceModelCharacteristic) Clone() *EvidenceModelCharacteristic {
 	if m == nil { return nil }
 	return &EvidenceModelCharacteristic{
@@ -444,7 +973,7 @@ func (m *EvidenceModelCharacteristic) Clone() *EvidenceModelCharacteristic {
 	}
 }
 
-// Equals checks for equality with another EvidenceModelCharacteristic instance
+// Equals checks equality between two EvidenceModelCharacteristic instances.
 func (m *EvidenceModelCharacteristic) Equals(other *EvidenceModelCharacteristic) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -461,7 +990,7 @@ func (m *EvidenceModelCharacteristic) Equals(other *EvidenceModelCharacteristic)
 // EvidenceModelCharacteristicVariable
 // A variable adjusted for in the adjusted analysis.
 type EvidenceModelCharacteristicVariable struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -472,22 +1001,67 @@ type EvidenceModelCharacteristicVariable struct {
 	ValueRange []*Range `json:"valuerange,omitempty"`
 }
 
-// NewEvidenceModelCharacteristicVariable creates a new EvidenceModelCharacteristicVariable instance
+// NewEvidenceModelCharacteristicVariable creates a new EvidenceModelCharacteristicVariable instance.
 func NewEvidenceModelCharacteristicVariable() *EvidenceModelCharacteristicVariable {
 	return &EvidenceModelCharacteristicVariable{}
 }
 
-// FromJSON populates EvidenceModelCharacteristicVariable from JSON data
+// FromJSON populates EvidenceModelCharacteristicVariable from JSON data.
 func (m *EvidenceModelCharacteristicVariable) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		VariableDefinition *Reference `json:"variabledefinition,omitempty"`
+		Handling *EvidenceVariableHandling `json:"handling,omitempty"`
+		ValueCategory []*CodeableConcept `json:"valuecategory,omitempty"`
+		ValueQuantity []*Quantity `json:"valuequantity,omitempty"`
+		ValueRange []*Range `json:"valuerange,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.VariableDefinition = temp.VariableDefinition
+	m.Handling = temp.Handling
+	m.ValueCategory = temp.ValueCategory
+	m.ValueQuantity = temp.ValueQuantity
+	m.ValueRange = temp.ValueRange
+	return nil
 }
 
-// ToJSON converts EvidenceModelCharacteristicVariable to JSON data
+// ToJSON converts EvidenceModelCharacteristicVariable to JSON data.
 func (m *EvidenceModelCharacteristicVariable) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		VariableDefinition *Reference `json:"variabledefinition,omitempty"`
+		Handling *EvidenceVariableHandling `json:"handling,omitempty"`
+		ValueCategory []*CodeableConcept `json:"valuecategory,omitempty"`
+		ValueQuantity []*Quantity `json:"valuequantity,omitempty"`
+		ValueRange []*Range `json:"valuerange,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.VariableDefinition = m.VariableDefinition
+	output.Handling = m.Handling
+	output.ValueCategory = m.ValueCategory
+	output.ValueQuantity = m.ValueQuantity
+	output.ValueRange = m.ValueRange
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of EvidenceModelCharacteristicVariable
+// Clone creates a deep copy of EvidenceModelCharacteristicVariable.
 func (m *EvidenceModelCharacteristicVariable) Clone() *EvidenceModelCharacteristicVariable {
 	if m == nil { return nil }
 	return &EvidenceModelCharacteristicVariable{
@@ -502,7 +1076,7 @@ func (m *EvidenceModelCharacteristicVariable) Clone() *EvidenceModelCharacterist
 	}
 }
 
-// Equals checks for equality with another EvidenceModelCharacteristicVariable instance
+// Equals checks equality between two EvidenceModelCharacteristicVariable instances.
 func (m *EvidenceModelCharacteristicVariable) Equals(other *EvidenceModelCharacteristicVariable) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -520,7 +1094,7 @@ func (m *EvidenceModelCharacteristicVariable) Equals(other *EvidenceModelCharact
 // EvidenceCertainty
 // Assessment of certainty, confidence in the estimates, or quality of the evidence.
 type EvidenceCertainty struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -532,22 +1106,83 @@ type EvidenceCertainty struct {
 	Subcomponent []*EvidenceCertainty `json:"subcomponent,omitempty"`
 }
 
-// NewEvidenceCertainty creates a new EvidenceCertainty instance
+// NewEvidenceCertainty creates a new EvidenceCertainty instance.
 func NewEvidenceCertainty() *EvidenceCertainty {
 	return &EvidenceCertainty{}
 }
 
-// FromJSON populates EvidenceCertainty from JSON data
+// FromJSON populates EvidenceCertainty from JSON data.
 func (m *EvidenceCertainty) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Rating *CodeableConcept `json:"rating,omitempty"`
+		Rater *FhirString `json:"rater,omitempty"`
+		Subcomponent []*EvidenceCertainty `json:"subcomponent,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Description = temp.Description
+	m.Note = temp.Note
+	m.Type = temp.Type
+	m.Rating = temp.Rating
+	m.Rater = temp.Rater
+	m.Subcomponent = temp.Subcomponent
+	return nil
 }
 
-// ToJSON converts EvidenceCertainty to JSON data
+// ToJSON converts EvidenceCertainty to JSON data.
 func (m *EvidenceCertainty) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Rating *CodeableConcept `json:"rating,omitempty"`
+		Rater interface{} `json:"rater,omitempty"`
+		RaterElement map[string]interface{} `json:"_rater,omitempty"`
+		Subcomponent []*EvidenceCertainty `json:"subcomponent,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Note = m.Note
+	output.Type = m.Type
+	output.Rating = m.Rating
+	if m.Rater != nil && m.Rater.Value != nil {
+		output.Rater = m.Rater.Value
+		if m.Rater.Element != nil {
+			output.RaterElement = toMapOrNil(m.Rater.Element.ToJSON())
+		}
+	}
+	output.Subcomponent = m.Subcomponent
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of EvidenceCertainty
+// Clone creates a deep copy of EvidenceCertainty.
 func (m *EvidenceCertainty) Clone() *EvidenceCertainty {
 	if m == nil { return nil }
 	return &EvidenceCertainty{
@@ -563,7 +1198,7 @@ func (m *EvidenceCertainty) Clone() *EvidenceCertainty {
 	}
 }
 
-// Equals checks for equality with another EvidenceCertainty instance
+// Equals checks equality between two EvidenceCertainty instances.
 func (m *EvidenceCertainty) Equals(other *EvidenceCertainty) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

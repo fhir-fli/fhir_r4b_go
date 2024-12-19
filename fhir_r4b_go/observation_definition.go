@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // ObservationDefinition
 // Set of definitional characteristics for a kind of observation or measurement produced or consumed by an orderable health care service.
 type ObservationDefinition struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -32,22 +33,137 @@ type ObservationDefinition struct {
 	CriticalCodedValueSet *Reference `json:"criticalcodedvalueset,omitempty"`
 }
 
-// NewObservationDefinition creates a new ObservationDefinition instance
+// NewObservationDefinition creates a new ObservationDefinition instance.
 func NewObservationDefinition() *ObservationDefinition {
 	return &ObservationDefinition{}
 }
 
-// FromJSON populates ObservationDefinition from JSON data
+// FromJSON populates ObservationDefinition from JSON data.
 func (m *ObservationDefinition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		PermittedDataType []*ObservationDataType `json:"permitteddatatype,omitempty"`
+		MultipleResultsAllowed *FhirBoolean `json:"multipleresultsallowed,omitempty"`
+		Method *CodeableConcept `json:"method,omitempty"`
+		PreferredReportName *FhirString `json:"preferredreportname,omitempty"`
+		QuantitativeDetails *ObservationDefinitionQuantitativeDetails `json:"quantitativedetails,omitempty"`
+		QualifiedInterval []*ObservationDefinitionQualifiedInterval `json:"qualifiedinterval,omitempty"`
+		ValidCodedValueSet *Reference `json:"validcodedvalueset,omitempty"`
+		NormalCodedValueSet *Reference `json:"normalcodedvalueset,omitempty"`
+		AbnormalCodedValueSet *Reference `json:"abnormalcodedvalueset,omitempty"`
+		CriticalCodedValueSet *Reference `json:"criticalcodedvalueset,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Category = temp.Category
+	m.Code = temp.Code
+	m.Identifier = temp.Identifier
+	m.PermittedDataType = temp.PermittedDataType
+	m.MultipleResultsAllowed = temp.MultipleResultsAllowed
+	m.Method = temp.Method
+	m.PreferredReportName = temp.PreferredReportName
+	m.QuantitativeDetails = temp.QuantitativeDetails
+	m.QualifiedInterval = temp.QualifiedInterval
+	m.ValidCodedValueSet = temp.ValidCodedValueSet
+	m.NormalCodedValueSet = temp.NormalCodedValueSet
+	m.AbnormalCodedValueSet = temp.AbnormalCodedValueSet
+	m.CriticalCodedValueSet = temp.CriticalCodedValueSet
+	return nil
 }
 
-// ToJSON converts ObservationDefinition to JSON data
+// ToJSON converts ObservationDefinition to JSON data.
 func (m *ObservationDefinition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		PermittedDataType []*ObservationDataType `json:"permitteddatatype,omitempty"`
+		MultipleResultsAllowed interface{} `json:"multipleresultsallowed,omitempty"`
+		MultipleResultsAllowedElement map[string]interface{} `json:"_multipleresultsallowed,omitempty"`
+		Method *CodeableConcept `json:"method,omitempty"`
+		PreferredReportName interface{} `json:"preferredreportname,omitempty"`
+		PreferredReportNameElement map[string]interface{} `json:"_preferredreportname,omitempty"`
+		QuantitativeDetails *ObservationDefinitionQuantitativeDetails `json:"quantitativedetails,omitempty"`
+		QualifiedInterval []*ObservationDefinitionQualifiedInterval `json:"qualifiedinterval,omitempty"`
+		ValidCodedValueSet *Reference `json:"validcodedvalueset,omitempty"`
+		NormalCodedValueSet *Reference `json:"normalcodedvalueset,omitempty"`
+		AbnormalCodedValueSet *Reference `json:"abnormalcodedvalueset,omitempty"`
+		CriticalCodedValueSet *Reference `json:"criticalcodedvalueset,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Category = m.Category
+	output.Code = m.Code
+	output.Identifier = m.Identifier
+	output.PermittedDataType = m.PermittedDataType
+	if m.MultipleResultsAllowed != nil && m.MultipleResultsAllowed.Value != nil {
+		output.MultipleResultsAllowed = m.MultipleResultsAllowed.Value
+		if m.MultipleResultsAllowed.Element != nil {
+			output.MultipleResultsAllowedElement = toMapOrNil(m.MultipleResultsAllowed.Element.ToJSON())
+		}
+	}
+	output.Method = m.Method
+	if m.PreferredReportName != nil && m.PreferredReportName.Value != nil {
+		output.PreferredReportName = m.PreferredReportName.Value
+		if m.PreferredReportName.Element != nil {
+			output.PreferredReportNameElement = toMapOrNil(m.PreferredReportName.Element.ToJSON())
+		}
+	}
+	output.QuantitativeDetails = m.QuantitativeDetails
+	output.QualifiedInterval = m.QualifiedInterval
+	output.ValidCodedValueSet = m.ValidCodedValueSet
+	output.NormalCodedValueSet = m.NormalCodedValueSet
+	output.AbnormalCodedValueSet = m.AbnormalCodedValueSet
+	output.CriticalCodedValueSet = m.CriticalCodedValueSet
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ObservationDefinition
+// Clone creates a deep copy of ObservationDefinition.
 func (m *ObservationDefinition) Clone() *ObservationDefinition {
 	if m == nil { return nil }
 	return &ObservationDefinition{
@@ -75,7 +191,7 @@ func (m *ObservationDefinition) Clone() *ObservationDefinition {
 	}
 }
 
-// Equals checks for equality with another ObservationDefinition instance
+// Equals checks equality between two ObservationDefinition instances.
 func (m *ObservationDefinition) Equals(other *ObservationDefinition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -106,7 +222,7 @@ func (m *ObservationDefinition) Equals(other *ObservationDefinition) bool {
 // ObservationDefinitionQuantitativeDetails
 // Characteristics for quantitative results of this observation.
 type ObservationDefinitionQuantitativeDetails struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -116,22 +232,75 @@ type ObservationDefinitionQuantitativeDetails struct {
 	DecimalPrecision *FhirInteger `json:"decimalprecision,omitempty"`
 }
 
-// NewObservationDefinitionQuantitativeDetails creates a new ObservationDefinitionQuantitativeDetails instance
+// NewObservationDefinitionQuantitativeDetails creates a new ObservationDefinitionQuantitativeDetails instance.
 func NewObservationDefinitionQuantitativeDetails() *ObservationDefinitionQuantitativeDetails {
 	return &ObservationDefinitionQuantitativeDetails{}
 }
 
-// FromJSON populates ObservationDefinitionQuantitativeDetails from JSON data
+// FromJSON populates ObservationDefinitionQuantitativeDetails from JSON data.
 func (m *ObservationDefinitionQuantitativeDetails) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		CustomaryUnit *CodeableConcept `json:"customaryunit,omitempty"`
+		Unit *CodeableConcept `json:"unit,omitempty"`
+		ConversionFactor *FhirDecimal `json:"conversionfactor,omitempty"`
+		DecimalPrecision *FhirInteger `json:"decimalprecision,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.CustomaryUnit = temp.CustomaryUnit
+	m.Unit = temp.Unit
+	m.ConversionFactor = temp.ConversionFactor
+	m.DecimalPrecision = temp.DecimalPrecision
+	return nil
 }
 
-// ToJSON converts ObservationDefinitionQuantitativeDetails to JSON data
+// ToJSON converts ObservationDefinitionQuantitativeDetails to JSON data.
 func (m *ObservationDefinitionQuantitativeDetails) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		CustomaryUnit *CodeableConcept `json:"customaryunit,omitempty"`
+		Unit *CodeableConcept `json:"unit,omitempty"`
+		ConversionFactor interface{} `json:"conversionfactor,omitempty"`
+		ConversionFactorElement map[string]interface{} `json:"_conversionfactor,omitempty"`
+		DecimalPrecision interface{} `json:"decimalprecision,omitempty"`
+		DecimalPrecisionElement map[string]interface{} `json:"_decimalprecision,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.CustomaryUnit = m.CustomaryUnit
+	output.Unit = m.Unit
+	if m.ConversionFactor != nil && m.ConversionFactor.Value != nil {
+		output.ConversionFactor = m.ConversionFactor.Value
+		if m.ConversionFactor.Element != nil {
+			output.ConversionFactorElement = toMapOrNil(m.ConversionFactor.Element.ToJSON())
+		}
+	}
+	if m.DecimalPrecision != nil && m.DecimalPrecision.Value != nil {
+		output.DecimalPrecision = m.DecimalPrecision.Value
+		if m.DecimalPrecision.Element != nil {
+			output.DecimalPrecisionElement = toMapOrNil(m.DecimalPrecision.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ObservationDefinitionQuantitativeDetails
+// Clone creates a deep copy of ObservationDefinitionQuantitativeDetails.
 func (m *ObservationDefinitionQuantitativeDetails) Clone() *ObservationDefinitionQuantitativeDetails {
 	if m == nil { return nil }
 	return &ObservationDefinitionQuantitativeDetails{
@@ -145,7 +314,7 @@ func (m *ObservationDefinitionQuantitativeDetails) Clone() *ObservationDefinitio
 	}
 }
 
-// Equals checks for equality with another ObservationDefinitionQuantitativeDetails instance
+// Equals checks equality between two ObservationDefinitionQuantitativeDetails instances.
 func (m *ObservationDefinitionQuantitativeDetails) Equals(other *ObservationDefinitionQuantitativeDetails) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -162,7 +331,7 @@ func (m *ObservationDefinitionQuantitativeDetails) Equals(other *ObservationDefi
 // ObservationDefinitionQualifiedInterval
 // Multiple  ranges of results qualified by different contexts for ordinal or continuous observations conforming to this ObservationDefinition.
 type ObservationDefinitionQualifiedInterval struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -176,22 +345,85 @@ type ObservationDefinitionQualifiedInterval struct {
 	Condition *FhirString `json:"condition,omitempty"`
 }
 
-// NewObservationDefinitionQualifiedInterval creates a new ObservationDefinitionQualifiedInterval instance
+// NewObservationDefinitionQualifiedInterval creates a new ObservationDefinitionQualifiedInterval instance.
 func NewObservationDefinitionQualifiedInterval() *ObservationDefinitionQualifiedInterval {
 	return &ObservationDefinitionQualifiedInterval{}
 }
 
-// FromJSON populates ObservationDefinitionQualifiedInterval from JSON data
+// FromJSON populates ObservationDefinitionQualifiedInterval from JSON data.
 func (m *ObservationDefinitionQualifiedInterval) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Category *ObservationRangeCategory `json:"category,omitempty"`
+		Range *Range `json:"range,omitempty"`
+		Context *CodeableConcept `json:"context,omitempty"`
+		AppliesTo []*CodeableConcept `json:"appliesto,omitempty"`
+		Gender *AdministrativeGender `json:"gender,omitempty"`
+		Age *Range `json:"age,omitempty"`
+		GestationalAge *Range `json:"gestationalage,omitempty"`
+		Condition *FhirString `json:"condition,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Category = temp.Category
+	m.Range = temp.Range
+	m.Context = temp.Context
+	m.AppliesTo = temp.AppliesTo
+	m.Gender = temp.Gender
+	m.Age = temp.Age
+	m.GestationalAge = temp.GestationalAge
+	m.Condition = temp.Condition
+	return nil
 }
 
-// ToJSON converts ObservationDefinitionQualifiedInterval to JSON data
+// ToJSON converts ObservationDefinitionQualifiedInterval to JSON data.
 func (m *ObservationDefinitionQualifiedInterval) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Category *ObservationRangeCategory `json:"category,omitempty"`
+		Range *Range `json:"range,omitempty"`
+		Context *CodeableConcept `json:"context,omitempty"`
+		AppliesTo []*CodeableConcept `json:"appliesto,omitempty"`
+		Gender *AdministrativeGender `json:"gender,omitempty"`
+		Age *Range `json:"age,omitempty"`
+		GestationalAge *Range `json:"gestationalage,omitempty"`
+		Condition interface{} `json:"condition,omitempty"`
+		ConditionElement map[string]interface{} `json:"_condition,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Category = m.Category
+	output.Range = m.Range
+	output.Context = m.Context
+	output.AppliesTo = m.AppliesTo
+	output.Gender = m.Gender
+	output.Age = m.Age
+	output.GestationalAge = m.GestationalAge
+	if m.Condition != nil && m.Condition.Value != nil {
+		output.Condition = m.Condition.Value
+		if m.Condition.Element != nil {
+			output.ConditionElement = toMapOrNil(m.Condition.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ObservationDefinitionQualifiedInterval
+// Clone creates a deep copy of ObservationDefinitionQualifiedInterval.
 func (m *ObservationDefinitionQualifiedInterval) Clone() *ObservationDefinitionQualifiedInterval {
 	if m == nil { return nil }
 	return &ObservationDefinitionQualifiedInterval{
@@ -209,7 +441,7 @@ func (m *ObservationDefinitionQualifiedInterval) Clone() *ObservationDefinitionQ
 	}
 }
 
-// Equals checks for equality with another ObservationDefinitionQualifiedInterval instance
+// Equals checks equality between two ObservationDefinitionQualifiedInterval instances.
 func (m *ObservationDefinitionQualifiedInterval) Equals(other *ObservationDefinitionQualifiedInterval) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

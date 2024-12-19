@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // ExampleScenario
 // Example of workflow instance.
 type ExampleScenario struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -36,22 +38,210 @@ type ExampleScenario struct {
 	Workflow []*FhirCanonical `json:"workflow,omitempty"`
 }
 
-// NewExampleScenario creates a new ExampleScenario instance
+// NewExampleScenario creates a new ExampleScenario instance.
 func NewExampleScenario() *ExampleScenario {
 	return &ExampleScenario{}
 }
 
-// FromJSON populates ExampleScenario from JSON data
+// FromJSON populates ExampleScenario from JSON data.
 func (m *ExampleScenario) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental *FhirBoolean `json:"experimental,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Publisher *FhirString `json:"publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Copyright *FhirMarkdown `json:"copyright,omitempty"`
+		Purpose *FhirMarkdown `json:"purpose,omitempty"`
+		Actor []*ExampleScenarioActor `json:"actor,omitempty"`
+		Instance []*ExampleScenarioInstance `json:"instance,omitempty"`
+		Process []*ExampleScenarioProcess `json:"process,omitempty"`
+		Workflow []interface{} `json:"workflow,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Url = temp.Url
+	m.Identifier = temp.Identifier
+	m.Version = temp.Version
+	m.Name = temp.Name
+	m.Status = temp.Status
+	m.Experimental = temp.Experimental
+	m.Date = temp.Date
+	m.Publisher = temp.Publisher
+	m.Contact = temp.Contact
+	m.UseContext = temp.UseContext
+	m.Jurisdiction = temp.Jurisdiction
+	m.Copyright = temp.Copyright
+	m.Purpose = temp.Purpose
+	m.Actor = temp.Actor
+	m.Instance = temp.Instance
+	m.Process = temp.Process
+	if len(temp.Workflow) > 0 {
+		m.Workflow = make([]*FhirCanonical, len(temp.Workflow))
+		for i := range temp.Workflow {
+			itemMap, ok := temp.Workflow[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Workflow[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Workflow[%d]: %v", i, err) }
+			m.Workflow[i] = primitive
+		}
+	}
+	return nil
 }
 
-// ToJSON converts ExampleScenario to JSON data
+// ToJSON converts ExampleScenario to JSON data.
 func (m *ExampleScenario) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental interface{} `json:"experimental,omitempty"`
+		ExperimentalElement map[string]interface{} `json:"_experimental,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Publisher interface{} `json:"publisher,omitempty"`
+		PublisherElement map[string]interface{} `json:"_publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Copyright interface{} `json:"copyright,omitempty"`
+		CopyrightElement map[string]interface{} `json:"_copyright,omitempty"`
+		Purpose interface{} `json:"purpose,omitempty"`
+		PurposeElement map[string]interface{} `json:"_purpose,omitempty"`
+		Actor []*ExampleScenarioActor `json:"actor,omitempty"`
+		Instance []*ExampleScenarioInstance `json:"instance,omitempty"`
+		Process []*ExampleScenarioProcess `json:"process,omitempty"`
+		Workflow []interface{} `json:"workflow,omitempty"`
+		WorkflowElement []map[string]interface{} `json:"_workflow,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	output.Identifier = m.Identifier
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	output.Status = m.Status
+	if m.Experimental != nil && m.Experimental.Value != nil {
+		output.Experimental = m.Experimental.Value
+		if m.Experimental.Element != nil {
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+		}
+	}
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.Publisher != nil && m.Publisher.Value != nil {
+		output.Publisher = m.Publisher.Value
+		if m.Publisher.Element != nil {
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+		}
+	}
+	output.Contact = m.Contact
+	output.UseContext = m.UseContext
+	output.Jurisdiction = m.Jurisdiction
+	if m.Copyright != nil && m.Copyright.Value != nil {
+		output.Copyright = m.Copyright.Value
+		if m.Copyright.Element != nil {
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+		}
+	}
+	if m.Purpose != nil && m.Purpose.Value != nil {
+		output.Purpose = m.Purpose.Value
+		if m.Purpose.Element != nil {
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+		}
+	}
+	output.Actor = m.Actor
+	output.Instance = m.Instance
+	output.Process = m.Process
+	if len(m.Workflow) > 0 {
+		output.Workflow = make([]interface{}, len(m.Workflow))
+		output.WorkflowElement = make([]map[string]interface{}, len(m.Workflow))
+		for i, item := range m.Workflow {
+			if item != nil && item.Value != nil {
+				output.Workflow[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.WorkflowElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ExampleScenario
+// Clone creates a deep copy of ExampleScenario.
 func (m *ExampleScenario) Clone() *ExampleScenario {
 	if m == nil { return nil }
 	return &ExampleScenario{
@@ -83,7 +273,7 @@ func (m *ExampleScenario) Clone() *ExampleScenario {
 	}
 }
 
-// Equals checks for equality with another ExampleScenario instance
+// Equals checks equality between two ExampleScenario instances.
 func (m *ExampleScenario) Equals(other *ExampleScenario) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -118,7 +308,7 @@ func (m *ExampleScenario) Equals(other *ExampleScenario) bool {
 // ExampleScenarioActor
 // Actor participating in the resource.
 type ExampleScenarioActor struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -128,22 +318,81 @@ type ExampleScenarioActor struct {
 	Description *FhirMarkdown `json:"description,omitempty"`
 }
 
-// NewExampleScenarioActor creates a new ExampleScenarioActor instance
+// NewExampleScenarioActor creates a new ExampleScenarioActor instance.
 func NewExampleScenarioActor() *ExampleScenarioActor {
 	return &ExampleScenarioActor{}
 }
 
-// FromJSON populates ExampleScenarioActor from JSON data
+// FromJSON populates ExampleScenarioActor from JSON data.
 func (m *ExampleScenarioActor) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ActorId *FhirString `json:"actorid,omitempty"`
+		Type *ExampleScenarioActorType `json:"type,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.ActorId = temp.ActorId
+	m.Type = temp.Type
+	m.Name = temp.Name
+	m.Description = temp.Description
+	return nil
 }
 
-// ToJSON converts ExampleScenarioActor to JSON data
+// ToJSON converts ExampleScenarioActor to JSON data.
 func (m *ExampleScenarioActor) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ActorId interface{} `json:"actorid,omitempty"`
+		ActorIdElement map[string]interface{} `json:"_actorid,omitempty"`
+		Type *ExampleScenarioActorType `json:"type,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.ActorId != nil && m.ActorId.Value != nil {
+		output.ActorId = m.ActorId.Value
+		if m.ActorId.Element != nil {
+			output.ActorIdElement = toMapOrNil(m.ActorId.Element.ToJSON())
+		}
+	}
+	output.Type = m.Type
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ExampleScenarioActor
+// Clone creates a deep copy of ExampleScenarioActor.
 func (m *ExampleScenarioActor) Clone() *ExampleScenarioActor {
 	if m == nil { return nil }
 	return &ExampleScenarioActor{
@@ -157,7 +406,7 @@ func (m *ExampleScenarioActor) Clone() *ExampleScenarioActor {
 	}
 }
 
-// Equals checks for equality with another ExampleScenarioActor instance
+// Equals checks equality between two ExampleScenarioActor instances.
 func (m *ExampleScenarioActor) Equals(other *ExampleScenarioActor) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -174,7 +423,7 @@ func (m *ExampleScenarioActor) Equals(other *ExampleScenarioActor) bool {
 // ExampleScenarioInstance
 // Each resource and each version that is present in the workflow.
 type ExampleScenarioInstance struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -186,22 +435,95 @@ type ExampleScenarioInstance struct {
 	ContainedInstance []*ExampleScenarioContainedInstance `json:"containedinstance,omitempty"`
 }
 
-// NewExampleScenarioInstance creates a new ExampleScenarioInstance instance
+// NewExampleScenarioInstance creates a new ExampleScenarioInstance instance.
 func NewExampleScenarioInstance() *ExampleScenarioInstance {
 	return &ExampleScenarioInstance{}
 }
 
-// FromJSON populates ExampleScenarioInstance from JSON data
+// FromJSON populates ExampleScenarioInstance from JSON data.
 func (m *ExampleScenarioInstance) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ResourceId *FhirString `json:"resourceid,omitempty"`
+		ResourceType *FhirCode `json:"resourcetype,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		Version []*ExampleScenarioVersion `json:"version,omitempty"`
+		ContainedInstance []*ExampleScenarioContainedInstance `json:"containedinstance,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.ResourceId = temp.ResourceId
+	m.ResourceType = temp.ResourceType
+	m.Name = temp.Name
+	m.Description = temp.Description
+	m.Version = temp.Version
+	m.ContainedInstance = temp.ContainedInstance
+	return nil
 }
 
-// ToJSON converts ExampleScenarioInstance to JSON data
+// ToJSON converts ExampleScenarioInstance to JSON data.
 func (m *ExampleScenarioInstance) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ResourceId interface{} `json:"resourceid,omitempty"`
+		ResourceIdElement map[string]interface{} `json:"_resourceid,omitempty"`
+		ResourceType interface{} `json:"resourcetype,omitempty"`
+		ResourceTypeElement map[string]interface{} `json:"_resourcetype,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Version []*ExampleScenarioVersion `json:"version,omitempty"`
+		ContainedInstance []*ExampleScenarioContainedInstance `json:"containedinstance,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.ResourceId != nil && m.ResourceId.Value != nil {
+		output.ResourceId = m.ResourceId.Value
+		if m.ResourceId.Element != nil {
+			output.ResourceIdElement = toMapOrNil(m.ResourceId.Element.ToJSON())
+		}
+	}
+	if m.ResourceType != nil && m.ResourceType.Value != nil {
+		output.ResourceType = m.ResourceType.Value
+		if m.ResourceType.Element != nil {
+			output.ResourceTypeElement = toMapOrNil(m.ResourceType.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Version = m.Version
+	output.ContainedInstance = m.ContainedInstance
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ExampleScenarioInstance
+// Clone creates a deep copy of ExampleScenarioInstance.
 func (m *ExampleScenarioInstance) Clone() *ExampleScenarioInstance {
 	if m == nil { return nil }
 	return &ExampleScenarioInstance{
@@ -217,7 +539,7 @@ func (m *ExampleScenarioInstance) Clone() *ExampleScenarioInstance {
 	}
 }
 
-// Equals checks for equality with another ExampleScenarioInstance instance
+// Equals checks equality between two ExampleScenarioInstance instances.
 func (m *ExampleScenarioInstance) Equals(other *ExampleScenarioInstance) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -236,7 +558,7 @@ func (m *ExampleScenarioInstance) Equals(other *ExampleScenarioInstance) bool {
 // ExampleScenarioVersion
 // A specific version of the resource.
 type ExampleScenarioVersion struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -244,22 +566,67 @@ type ExampleScenarioVersion struct {
 	Description *FhirMarkdown `json:"description,omitempty"`
 }
 
-// NewExampleScenarioVersion creates a new ExampleScenarioVersion instance
+// NewExampleScenarioVersion creates a new ExampleScenarioVersion instance.
 func NewExampleScenarioVersion() *ExampleScenarioVersion {
 	return &ExampleScenarioVersion{}
 }
 
-// FromJSON populates ExampleScenarioVersion from JSON data
+// FromJSON populates ExampleScenarioVersion from JSON data.
 func (m *ExampleScenarioVersion) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		VersionId *FhirString `json:"versionid,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.VersionId = temp.VersionId
+	m.Description = temp.Description
+	return nil
 }
 
-// ToJSON converts ExampleScenarioVersion to JSON data
+// ToJSON converts ExampleScenarioVersion to JSON data.
 func (m *ExampleScenarioVersion) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		VersionId interface{} `json:"versionid,omitempty"`
+		VersionIdElement map[string]interface{} `json:"_versionid,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.VersionId != nil && m.VersionId.Value != nil {
+		output.VersionId = m.VersionId.Value
+		if m.VersionId.Element != nil {
+			output.VersionIdElement = toMapOrNil(m.VersionId.Element.ToJSON())
+		}
+	}
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ExampleScenarioVersion
+// Clone creates a deep copy of ExampleScenarioVersion.
 func (m *ExampleScenarioVersion) Clone() *ExampleScenarioVersion {
 	if m == nil { return nil }
 	return &ExampleScenarioVersion{
@@ -271,7 +638,7 @@ func (m *ExampleScenarioVersion) Clone() *ExampleScenarioVersion {
 	}
 }
 
-// Equals checks for equality with another ExampleScenarioVersion instance
+// Equals checks equality between two ExampleScenarioVersion instances.
 func (m *ExampleScenarioVersion) Equals(other *ExampleScenarioVersion) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -286,7 +653,7 @@ func (m *ExampleScenarioVersion) Equals(other *ExampleScenarioVersion) bool {
 // ExampleScenarioContainedInstance
 // Resources contained in the instance (e.g. the observations contained in a bundle).
 type ExampleScenarioContainedInstance struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -294,22 +661,67 @@ type ExampleScenarioContainedInstance struct {
 	VersionId *FhirString `json:"versionid,omitempty"`
 }
 
-// NewExampleScenarioContainedInstance creates a new ExampleScenarioContainedInstance instance
+// NewExampleScenarioContainedInstance creates a new ExampleScenarioContainedInstance instance.
 func NewExampleScenarioContainedInstance() *ExampleScenarioContainedInstance {
 	return &ExampleScenarioContainedInstance{}
 }
 
-// FromJSON populates ExampleScenarioContainedInstance from JSON data
+// FromJSON populates ExampleScenarioContainedInstance from JSON data.
 func (m *ExampleScenarioContainedInstance) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ResourceId *FhirString `json:"resourceid,omitempty"`
+		VersionId *FhirString `json:"versionid,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.ResourceId = temp.ResourceId
+	m.VersionId = temp.VersionId
+	return nil
 }
 
-// ToJSON converts ExampleScenarioContainedInstance to JSON data
+// ToJSON converts ExampleScenarioContainedInstance to JSON data.
 func (m *ExampleScenarioContainedInstance) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ResourceId interface{} `json:"resourceid,omitempty"`
+		ResourceIdElement map[string]interface{} `json:"_resourceid,omitempty"`
+		VersionId interface{} `json:"versionid,omitempty"`
+		VersionIdElement map[string]interface{} `json:"_versionid,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.ResourceId != nil && m.ResourceId.Value != nil {
+		output.ResourceId = m.ResourceId.Value
+		if m.ResourceId.Element != nil {
+			output.ResourceIdElement = toMapOrNil(m.ResourceId.Element.ToJSON())
+		}
+	}
+	if m.VersionId != nil && m.VersionId.Value != nil {
+		output.VersionId = m.VersionId.Value
+		if m.VersionId.Element != nil {
+			output.VersionIdElement = toMapOrNil(m.VersionId.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ExampleScenarioContainedInstance
+// Clone creates a deep copy of ExampleScenarioContainedInstance.
 func (m *ExampleScenarioContainedInstance) Clone() *ExampleScenarioContainedInstance {
 	if m == nil { return nil }
 	return &ExampleScenarioContainedInstance{
@@ -321,7 +733,7 @@ func (m *ExampleScenarioContainedInstance) Clone() *ExampleScenarioContainedInst
 	}
 }
 
-// Equals checks for equality with another ExampleScenarioContainedInstance instance
+// Equals checks equality between two ExampleScenarioContainedInstance instances.
 func (m *ExampleScenarioContainedInstance) Equals(other *ExampleScenarioContainedInstance) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -336,7 +748,7 @@ func (m *ExampleScenarioContainedInstance) Equals(other *ExampleScenarioContaine
 // ExampleScenarioProcess
 // Each major process - a group of operations.
 type ExampleScenarioProcess struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -347,22 +759,91 @@ type ExampleScenarioProcess struct {
 	Step []*ExampleScenarioStep `json:"step,omitempty"`
 }
 
-// NewExampleScenarioProcess creates a new ExampleScenarioProcess instance
+// NewExampleScenarioProcess creates a new ExampleScenarioProcess instance.
 func NewExampleScenarioProcess() *ExampleScenarioProcess {
 	return &ExampleScenarioProcess{}
 }
 
-// FromJSON populates ExampleScenarioProcess from JSON data
+// FromJSON populates ExampleScenarioProcess from JSON data.
 func (m *ExampleScenarioProcess) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		PreConditions *FhirMarkdown `json:"preconditions,omitempty"`
+		PostConditions *FhirMarkdown `json:"postconditions,omitempty"`
+		Step []*ExampleScenarioStep `json:"step,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Title = temp.Title
+	m.Description = temp.Description
+	m.PreConditions = temp.PreConditions
+	m.PostConditions = temp.PostConditions
+	m.Step = temp.Step
+	return nil
 }
 
-// ToJSON converts ExampleScenarioProcess to JSON data
+// ToJSON converts ExampleScenarioProcess to JSON data.
 func (m *ExampleScenarioProcess) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		PreConditions interface{} `json:"preconditions,omitempty"`
+		PreConditionsElement map[string]interface{} `json:"_preconditions,omitempty"`
+		PostConditions interface{} `json:"postconditions,omitempty"`
+		PostConditionsElement map[string]interface{} `json:"_postconditions,omitempty"`
+		Step []*ExampleScenarioStep `json:"step,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	if m.PreConditions != nil && m.PreConditions.Value != nil {
+		output.PreConditions = m.PreConditions.Value
+		if m.PreConditions.Element != nil {
+			output.PreConditionsElement = toMapOrNil(m.PreConditions.Element.ToJSON())
+		}
+	}
+	if m.PostConditions != nil && m.PostConditions.Value != nil {
+		output.PostConditions = m.PostConditions.Value
+		if m.PostConditions.Element != nil {
+			output.PostConditionsElement = toMapOrNil(m.PostConditions.Element.ToJSON())
+		}
+	}
+	output.Step = m.Step
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ExampleScenarioProcess
+// Clone creates a deep copy of ExampleScenarioProcess.
 func (m *ExampleScenarioProcess) Clone() *ExampleScenarioProcess {
 	if m == nil { return nil }
 	return &ExampleScenarioProcess{
@@ -377,7 +858,7 @@ func (m *ExampleScenarioProcess) Clone() *ExampleScenarioProcess {
 	}
 }
 
-// Equals checks for equality with another ExampleScenarioProcess instance
+// Equals checks equality between two ExampleScenarioProcess instances.
 func (m *ExampleScenarioProcess) Equals(other *ExampleScenarioProcess) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -395,7 +876,7 @@ func (m *ExampleScenarioProcess) Equals(other *ExampleScenarioProcess) bool {
 // ExampleScenarioStep
 // Each step of the process.
 type ExampleScenarioStep struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -405,22 +886,69 @@ type ExampleScenarioStep struct {
 	Alternative []*ExampleScenarioAlternative `json:"alternative,omitempty"`
 }
 
-// NewExampleScenarioStep creates a new ExampleScenarioStep instance
+// NewExampleScenarioStep creates a new ExampleScenarioStep instance.
 func NewExampleScenarioStep() *ExampleScenarioStep {
 	return &ExampleScenarioStep{}
 }
 
-// FromJSON populates ExampleScenarioStep from JSON data
+// FromJSON populates ExampleScenarioStep from JSON data.
 func (m *ExampleScenarioStep) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Process []*ExampleScenarioProcess `json:"process,omitempty"`
+		Pause *FhirBoolean `json:"pause,omitempty"`
+		Operation *ExampleScenarioOperation `json:"operation,omitempty"`
+		Alternative []*ExampleScenarioAlternative `json:"alternative,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Process = temp.Process
+	m.Pause = temp.Pause
+	m.Operation = temp.Operation
+	m.Alternative = temp.Alternative
+	return nil
 }
 
-// ToJSON converts ExampleScenarioStep to JSON data
+// ToJSON converts ExampleScenarioStep to JSON data.
 func (m *ExampleScenarioStep) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Process []*ExampleScenarioProcess `json:"process,omitempty"`
+		Pause interface{} `json:"pause,omitempty"`
+		PauseElement map[string]interface{} `json:"_pause,omitempty"`
+		Operation *ExampleScenarioOperation `json:"operation,omitempty"`
+		Alternative []*ExampleScenarioAlternative `json:"alternative,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Process = m.Process
+	if m.Pause != nil && m.Pause.Value != nil {
+		output.Pause = m.Pause.Value
+		if m.Pause.Element != nil {
+			output.PauseElement = toMapOrNil(m.Pause.Element.ToJSON())
+		}
+	}
+	output.Operation = m.Operation
+	output.Alternative = m.Alternative
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ExampleScenarioStep
+// Clone creates a deep copy of ExampleScenarioStep.
 func (m *ExampleScenarioStep) Clone() *ExampleScenarioStep {
 	if m == nil { return nil }
 	return &ExampleScenarioStep{
@@ -434,7 +962,7 @@ func (m *ExampleScenarioStep) Clone() *ExampleScenarioStep {
 	}
 }
 
-// Equals checks for equality with another ExampleScenarioStep instance
+// Equals checks equality between two ExampleScenarioStep instances.
 func (m *ExampleScenarioStep) Equals(other *ExampleScenarioStep) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -451,7 +979,7 @@ func (m *ExampleScenarioStep) Equals(other *ExampleScenarioStep) bool {
 // ExampleScenarioOperation
 // Each interaction or action.
 type ExampleScenarioOperation struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -467,22 +995,135 @@ type ExampleScenarioOperation struct {
 	Response *ExampleScenarioContainedInstance `json:"response,omitempty"`
 }
 
-// NewExampleScenarioOperation creates a new ExampleScenarioOperation instance
+// NewExampleScenarioOperation creates a new ExampleScenarioOperation instance.
 func NewExampleScenarioOperation() *ExampleScenarioOperation {
 	return &ExampleScenarioOperation{}
 }
 
-// FromJSON populates ExampleScenarioOperation from JSON data
+// FromJSON populates ExampleScenarioOperation from JSON data.
 func (m *ExampleScenarioOperation) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Number *FhirString `json:"number,omitempty"`
+		Type *FhirString `json:"type,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Initiator *FhirString `json:"initiator,omitempty"`
+		Receiver *FhirString `json:"receiver,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		InitiatorActive *FhirBoolean `json:"initiatoractive,omitempty"`
+		ReceiverActive *FhirBoolean `json:"receiveractive,omitempty"`
+		Request *ExampleScenarioContainedInstance `json:"request,omitempty"`
+		Response *ExampleScenarioContainedInstance `json:"response,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Number = temp.Number
+	m.Type = temp.Type
+	m.Name = temp.Name
+	m.Initiator = temp.Initiator
+	m.Receiver = temp.Receiver
+	m.Description = temp.Description
+	m.InitiatorActive = temp.InitiatorActive
+	m.ReceiverActive = temp.ReceiverActive
+	m.Request = temp.Request
+	m.Response = temp.Response
+	return nil
 }
 
-// ToJSON converts ExampleScenarioOperation to JSON data
+// ToJSON converts ExampleScenarioOperation to JSON data.
 func (m *ExampleScenarioOperation) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Number interface{} `json:"number,omitempty"`
+		NumberElement map[string]interface{} `json:"_number,omitempty"`
+		Type interface{} `json:"type,omitempty"`
+		TypeElement map[string]interface{} `json:"_type,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Initiator interface{} `json:"initiator,omitempty"`
+		InitiatorElement map[string]interface{} `json:"_initiator,omitempty"`
+		Receiver interface{} `json:"receiver,omitempty"`
+		ReceiverElement map[string]interface{} `json:"_receiver,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		InitiatorActive interface{} `json:"initiatoractive,omitempty"`
+		InitiatorActiveElement map[string]interface{} `json:"_initiatoractive,omitempty"`
+		ReceiverActive interface{} `json:"receiveractive,omitempty"`
+		ReceiverActiveElement map[string]interface{} `json:"_receiveractive,omitempty"`
+		Request *ExampleScenarioContainedInstance `json:"request,omitempty"`
+		Response *ExampleScenarioContainedInstance `json:"response,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Number != nil && m.Number.Value != nil {
+		output.Number = m.Number.Value
+		if m.Number.Element != nil {
+			output.NumberElement = toMapOrNil(m.Number.Element.ToJSON())
+		}
+	}
+	if m.Type != nil && m.Type.Value != nil {
+		output.Type = m.Type.Value
+		if m.Type.Element != nil {
+			output.TypeElement = toMapOrNil(m.Type.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Initiator != nil && m.Initiator.Value != nil {
+		output.Initiator = m.Initiator.Value
+		if m.Initiator.Element != nil {
+			output.InitiatorElement = toMapOrNil(m.Initiator.Element.ToJSON())
+		}
+	}
+	if m.Receiver != nil && m.Receiver.Value != nil {
+		output.Receiver = m.Receiver.Value
+		if m.Receiver.Element != nil {
+			output.ReceiverElement = toMapOrNil(m.Receiver.Element.ToJSON())
+		}
+	}
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	if m.InitiatorActive != nil && m.InitiatorActive.Value != nil {
+		output.InitiatorActive = m.InitiatorActive.Value
+		if m.InitiatorActive.Element != nil {
+			output.InitiatorActiveElement = toMapOrNil(m.InitiatorActive.Element.ToJSON())
+		}
+	}
+	if m.ReceiverActive != nil && m.ReceiverActive.Value != nil {
+		output.ReceiverActive = m.ReceiverActive.Value
+		if m.ReceiverActive.Element != nil {
+			output.ReceiverActiveElement = toMapOrNil(m.ReceiverActive.Element.ToJSON())
+		}
+	}
+	output.Request = m.Request
+	output.Response = m.Response
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ExampleScenarioOperation
+// Clone creates a deep copy of ExampleScenarioOperation.
 func (m *ExampleScenarioOperation) Clone() *ExampleScenarioOperation {
 	if m == nil { return nil }
 	return &ExampleScenarioOperation{
@@ -502,7 +1143,7 @@ func (m *ExampleScenarioOperation) Clone() *ExampleScenarioOperation {
 	}
 }
 
-// Equals checks for equality with another ExampleScenarioOperation instance
+// Equals checks equality between two ExampleScenarioOperation instances.
 func (m *ExampleScenarioOperation) Equals(other *ExampleScenarioOperation) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -525,7 +1166,7 @@ func (m *ExampleScenarioOperation) Equals(other *ExampleScenarioOperation) bool 
 // ExampleScenarioAlternative
 // Indicates an alternative step that can be taken instead of the operations on the base step in exceptional/atypical circumstances.
 type ExampleScenarioAlternative struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -534,22 +1175,71 @@ type ExampleScenarioAlternative struct {
 	Step []*ExampleScenarioStep `json:"step,omitempty"`
 }
 
-// NewExampleScenarioAlternative creates a new ExampleScenarioAlternative instance
+// NewExampleScenarioAlternative creates a new ExampleScenarioAlternative instance.
 func NewExampleScenarioAlternative() *ExampleScenarioAlternative {
 	return &ExampleScenarioAlternative{}
 }
 
-// FromJSON populates ExampleScenarioAlternative from JSON data
+// FromJSON populates ExampleScenarioAlternative from JSON data.
 func (m *ExampleScenarioAlternative) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		Step []*ExampleScenarioStep `json:"step,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Title = temp.Title
+	m.Description = temp.Description
+	m.Step = temp.Step
+	return nil
 }
 
-// ToJSON converts ExampleScenarioAlternative to JSON data
+// ToJSON converts ExampleScenarioAlternative to JSON data.
 func (m *ExampleScenarioAlternative) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Step []*ExampleScenarioStep `json:"step,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Step = m.Step
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ExampleScenarioAlternative
+// Clone creates a deep copy of ExampleScenarioAlternative.
 func (m *ExampleScenarioAlternative) Clone() *ExampleScenarioAlternative {
 	if m == nil { return nil }
 	return &ExampleScenarioAlternative{
@@ -562,7 +1252,7 @@ func (m *ExampleScenarioAlternative) Clone() *ExampleScenarioAlternative {
 	}
 }
 
-// Equals checks for equality with another ExampleScenarioAlternative instance
+// Equals checks equality between two ExampleScenarioAlternative instances.
 func (m *ExampleScenarioAlternative) Equals(other *ExampleScenarioAlternative) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

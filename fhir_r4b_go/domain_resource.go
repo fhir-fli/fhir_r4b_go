@@ -7,7 +7,7 @@ import (
 // DomainResource represents the base definition for FHIR domain resources.
 type DomainResource struct {
 	Resource
-	Text              *Narrative      `json:"text,omitempty"`
+	Text              *Narrative       `json:"text,omitempty"`
 	Contained         []*Resource      `json:"contained,omitempty"`
 	Extension_        []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierExtension,omitempty"`

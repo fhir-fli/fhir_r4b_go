@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // ChargeItem
 // The resource ChargeItem describes the provision of healthcare provider products for a certain patient, therefore referring not only to the product, but containing in addition details of the provision, like date, time, amounts and participating organizations and persons. Main Usage of the ChargeItem is to enable the billing process and internal cost allocation.
 type ChargeItem struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -48,22 +50,255 @@ type ChargeItem struct {
 	SupportingInformation []*Reference `json:"supportinginformation,omitempty"`
 }
 
-// NewChargeItem creates a new ChargeItem instance
+// NewChargeItem creates a new ChargeItem instance.
 func NewChargeItem() *ChargeItem {
 	return &ChargeItem{}
 }
 
-// FromJSON populates ChargeItem from JSON data
+// FromJSON populates ChargeItem from JSON data.
 func (m *ChargeItem) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		DefinitionUri []interface{} `json:"definitionuri,omitempty"`
+		DefinitionCanonical []interface{} `json:"definitioncanonical,omitempty"`
+		Status *ChargeItemStatus `json:"status,omitempty"`
+		PartOf []*Reference `json:"partof,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Context *Reference `json:"context,omitempty"`
+		OccurrenceDateTime *FhirDateTime `json:"occurrencedatetime,omitempty"`
+		OccurrencePeriod *Period `json:"occurrenceperiod,omitempty"`
+		OccurrenceTiming *Timing `json:"occurrencetiming,omitempty"`
+		Performer []*ChargeItemPerformer `json:"performer,omitempty"`
+		PerformingOrganization *Reference `json:"performingorganization,omitempty"`
+		RequestingOrganization *Reference `json:"requestingorganization,omitempty"`
+		CostCenter *Reference `json:"costcenter,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		Bodysite []*CodeableConcept `json:"bodysite,omitempty"`
+		FactorOverride *FhirDecimal `json:"factoroverride,omitempty"`
+		PriceOverride *Money `json:"priceoverride,omitempty"`
+		OverrideReason *FhirString `json:"overridereason,omitempty"`
+		Enterer *Reference `json:"enterer,omitempty"`
+		EnteredDate *FhirDateTime `json:"entereddate,omitempty"`
+		Reason []*CodeableConcept `json:"reason,omitempty"`
+		Service []*Reference `json:"service,omitempty"`
+		ProductReference *Reference `json:"productreference,omitempty"`
+		ProductCodeableConcept *CodeableConcept `json:"productcodeableconcept,omitempty"`
+		Account []*Reference `json:"account,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		SupportingInformation []*Reference `json:"supportinginformation,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	if len(temp.DefinitionUri) > 0 {
+		m.DefinitionUri = make([]*FhirUri, len(temp.DefinitionUri))
+		for i := range temp.DefinitionUri {
+			itemMap, ok := temp.DefinitionUri[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for DefinitionUri[%d]: expected map", i) }
+			primitive, err := NewFhirUriFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse DefinitionUri[%d]: %v", i, err) }
+			m.DefinitionUri[i] = primitive
+		}
+	}
+	if len(temp.DefinitionCanonical) > 0 {
+		m.DefinitionCanonical = make([]*FhirCanonical, len(temp.DefinitionCanonical))
+		for i := range temp.DefinitionCanonical {
+			itemMap, ok := temp.DefinitionCanonical[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for DefinitionCanonical[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse DefinitionCanonical[%d]: %v", i, err) }
+			m.DefinitionCanonical[i] = primitive
+		}
+	}
+	m.Status = temp.Status
+	m.PartOf = temp.PartOf
+	m.Code = temp.Code
+	m.Subject = temp.Subject
+	m.Context = temp.Context
+	m.OccurrenceDateTime = temp.OccurrenceDateTime
+	m.OccurrencePeriod = temp.OccurrencePeriod
+	m.OccurrenceTiming = temp.OccurrenceTiming
+	m.Performer = temp.Performer
+	m.PerformingOrganization = temp.PerformingOrganization
+	m.RequestingOrganization = temp.RequestingOrganization
+	m.CostCenter = temp.CostCenter
+	m.Quantity = temp.Quantity
+	m.Bodysite = temp.Bodysite
+	m.FactorOverride = temp.FactorOverride
+	m.PriceOverride = temp.PriceOverride
+	m.OverrideReason = temp.OverrideReason
+	m.Enterer = temp.Enterer
+	m.EnteredDate = temp.EnteredDate
+	m.Reason = temp.Reason
+	m.Service = temp.Service
+	m.ProductReference = temp.ProductReference
+	m.ProductCodeableConcept = temp.ProductCodeableConcept
+	m.Account = temp.Account
+	m.Note = temp.Note
+	m.SupportingInformation = temp.SupportingInformation
+	return nil
 }
 
-// ToJSON converts ChargeItem to JSON data
+// ToJSON converts ChargeItem to JSON data.
 func (m *ChargeItem) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		DefinitionUri []interface{} `json:"definitionuri,omitempty"`
+		DefinitionUriElement []map[string]interface{} `json:"_definitionuri,omitempty"`
+		DefinitionCanonical []interface{} `json:"definitioncanonical,omitempty"`
+		DefinitionCanonicalElement []map[string]interface{} `json:"_definitioncanonical,omitempty"`
+		Status *ChargeItemStatus `json:"status,omitempty"`
+		PartOf []*Reference `json:"partof,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Context *Reference `json:"context,omitempty"`
+		OccurrenceDateTime interface{} `json:"occurrencedatetime,omitempty"`
+		OccurrenceDateTimeElement map[string]interface{} `json:"_occurrencedatetime,omitempty"`
+		OccurrencePeriod *Period `json:"occurrenceperiod,omitempty"`
+		OccurrenceTiming *Timing `json:"occurrencetiming,omitempty"`
+		Performer []*ChargeItemPerformer `json:"performer,omitempty"`
+		PerformingOrganization *Reference `json:"performingorganization,omitempty"`
+		RequestingOrganization *Reference `json:"requestingorganization,omitempty"`
+		CostCenter *Reference `json:"costcenter,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		Bodysite []*CodeableConcept `json:"bodysite,omitempty"`
+		FactorOverride interface{} `json:"factoroverride,omitempty"`
+		FactorOverrideElement map[string]interface{} `json:"_factoroverride,omitempty"`
+		PriceOverride *Money `json:"priceoverride,omitempty"`
+		OverrideReason interface{} `json:"overridereason,omitempty"`
+		OverrideReasonElement map[string]interface{} `json:"_overridereason,omitempty"`
+		Enterer *Reference `json:"enterer,omitempty"`
+		EnteredDate interface{} `json:"entereddate,omitempty"`
+		EnteredDateElement map[string]interface{} `json:"_entereddate,omitempty"`
+		Reason []*CodeableConcept `json:"reason,omitempty"`
+		Service []*Reference `json:"service,omitempty"`
+		ProductReference *Reference `json:"productreference,omitempty"`
+		ProductCodeableConcept *CodeableConcept `json:"productcodeableconcept,omitempty"`
+		Account []*Reference `json:"account,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		SupportingInformation []*Reference `json:"supportinginformation,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	if len(m.DefinitionUri) > 0 {
+		output.DefinitionUri = make([]interface{}, len(m.DefinitionUri))
+		output.DefinitionUriElement = make([]map[string]interface{}, len(m.DefinitionUri))
+		for i, item := range m.DefinitionUri {
+			if item != nil && item.Value != nil {
+				output.DefinitionUri[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.DefinitionUriElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.DefinitionCanonical) > 0 {
+		output.DefinitionCanonical = make([]interface{}, len(m.DefinitionCanonical))
+		output.DefinitionCanonicalElement = make([]map[string]interface{}, len(m.DefinitionCanonical))
+		for i, item := range m.DefinitionCanonical {
+			if item != nil && item.Value != nil {
+				output.DefinitionCanonical[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.DefinitionCanonicalElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Status = m.Status
+	output.PartOf = m.PartOf
+	output.Code = m.Code
+	output.Subject = m.Subject
+	output.Context = m.Context
+	if m.OccurrenceDateTime != nil && m.OccurrenceDateTime.Value != nil {
+		output.OccurrenceDateTime = m.OccurrenceDateTime.Value
+		if m.OccurrenceDateTime.Element != nil {
+			output.OccurrenceDateTimeElement = toMapOrNil(m.OccurrenceDateTime.Element.ToJSON())
+		}
+	}
+	output.OccurrencePeriod = m.OccurrencePeriod
+	output.OccurrenceTiming = m.OccurrenceTiming
+	output.Performer = m.Performer
+	output.PerformingOrganization = m.PerformingOrganization
+	output.RequestingOrganization = m.RequestingOrganization
+	output.CostCenter = m.CostCenter
+	output.Quantity = m.Quantity
+	output.Bodysite = m.Bodysite
+	if m.FactorOverride != nil && m.FactorOverride.Value != nil {
+		output.FactorOverride = m.FactorOverride.Value
+		if m.FactorOverride.Element != nil {
+			output.FactorOverrideElement = toMapOrNil(m.FactorOverride.Element.ToJSON())
+		}
+	}
+	output.PriceOverride = m.PriceOverride
+	if m.OverrideReason != nil && m.OverrideReason.Value != nil {
+		output.OverrideReason = m.OverrideReason.Value
+		if m.OverrideReason.Element != nil {
+			output.OverrideReasonElement = toMapOrNil(m.OverrideReason.Element.ToJSON())
+		}
+	}
+	output.Enterer = m.Enterer
+	if m.EnteredDate != nil && m.EnteredDate.Value != nil {
+		output.EnteredDate = m.EnteredDate.Value
+		if m.EnteredDate.Element != nil {
+			output.EnteredDateElement = toMapOrNil(m.EnteredDate.Element.ToJSON())
+		}
+	}
+	output.Reason = m.Reason
+	output.Service = m.Service
+	output.ProductReference = m.ProductReference
+	output.ProductCodeableConcept = m.ProductCodeableConcept
+	output.Account = m.Account
+	output.Note = m.Note
+	output.SupportingInformation = m.SupportingInformation
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ChargeItem
+// Clone creates a deep copy of ChargeItem.
 func (m *ChargeItem) Clone() *ChargeItem {
 	if m == nil { return nil }
 	return &ChargeItem{
@@ -107,7 +342,7 @@ func (m *ChargeItem) Clone() *ChargeItem {
 	}
 }
 
-// Equals checks for equality with another ChargeItem instance
+// Equals checks equality between two ChargeItem instances.
 func (m *ChargeItem) Equals(other *ChargeItem) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -154,7 +389,7 @@ func (m *ChargeItem) Equals(other *ChargeItem) bool {
 // ChargeItemPerformer
 // Indicates who or what performed or participated in the charged service.
 type ChargeItemPerformer struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -162,22 +397,55 @@ type ChargeItemPerformer struct {
 	Actor *Reference `json:"actor,omitempty"`
 }
 
-// NewChargeItemPerformer creates a new ChargeItemPerformer instance
+// NewChargeItemPerformer creates a new ChargeItemPerformer instance.
 func NewChargeItemPerformer() *ChargeItemPerformer {
 	return &ChargeItemPerformer{}
 }
 
-// FromJSON populates ChargeItemPerformer from JSON data
+// FromJSON populates ChargeItemPerformer from JSON data.
 func (m *ChargeItemPerformer) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Function_ *CodeableConcept `json:"function,omitempty"`
+		Actor *Reference `json:"actor,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Function_ = temp.Function_
+	m.Actor = temp.Actor
+	return nil
 }
 
-// ToJSON converts ChargeItemPerformer to JSON data
+// ToJSON converts ChargeItemPerformer to JSON data.
 func (m *ChargeItemPerformer) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Function_ *CodeableConcept `json:"function,omitempty"`
+		Actor *Reference `json:"actor,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Function_ = m.Function_
+	output.Actor = m.Actor
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ChargeItemPerformer
+// Clone creates a deep copy of ChargeItemPerformer.
 func (m *ChargeItemPerformer) Clone() *ChargeItemPerformer {
 	if m == nil { return nil }
 	return &ChargeItemPerformer{
@@ -189,7 +457,7 @@ func (m *ChargeItemPerformer) Clone() *ChargeItemPerformer {
 	}
 }
 
-// Equals checks for equality with another ChargeItemPerformer instance
+// Equals checks equality between two ChargeItemPerformer instances.
 func (m *ChargeItemPerformer) Equals(other *ChargeItemPerformer) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

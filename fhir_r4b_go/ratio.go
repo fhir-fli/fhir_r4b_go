@@ -3,34 +3,64 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Ratio
 // A relationship of two Quantity values - expressed as a numerator and a denominator.
 type Ratio struct {
-	DataType
+	extends DataType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	Numerator *Quantity `json:"numerator,omitempty"`
 	Denominator *Quantity `json:"denominator,omitempty"`
 }
 
-// NewRatio creates a new Ratio instance
+// NewRatio creates a new Ratio instance.
 func NewRatio() *Ratio {
 	return &Ratio{}
 }
 
-// FromJSON populates Ratio from JSON data
+// FromJSON populates Ratio from JSON data.
 func (m *Ratio) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Numerator *Quantity `json:"numerator,omitempty"`
+		Denominator *Quantity `json:"denominator,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.Numerator = temp.Numerator
+	m.Denominator = temp.Denominator
+	return nil
 }
 
-// ToJSON converts Ratio to JSON data
+// ToJSON converts Ratio to JSON data.
 func (m *Ratio) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Numerator *Quantity `json:"numerator,omitempty"`
+		Denominator *Quantity `json:"denominator,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.Numerator = m.Numerator
+	output.Denominator = m.Denominator
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Ratio
+// Clone creates a deep copy of Ratio.
 func (m *Ratio) Clone() *Ratio {
 	if m == nil { return nil }
 	return &Ratio{
@@ -41,7 +71,7 @@ func (m *Ratio) Clone() *Ratio {
 	}
 }
 
-// Equals checks for equality with another Ratio instance
+// Equals checks equality between two Ratio instances.
 func (m *Ratio) Equals(other *Ratio) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

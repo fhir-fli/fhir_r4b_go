@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // RatioRange
 // A range of ratios expressed as a low and high numerator and a denominator.
 type RatioRange struct {
-	DataType
+	extends DataType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	LowNumerator *Quantity `json:"lownumerator,omitempty"`
@@ -16,22 +17,55 @@ type RatioRange struct {
 	Denominator *Quantity `json:"denominator,omitempty"`
 }
 
-// NewRatioRange creates a new RatioRange instance
+// NewRatioRange creates a new RatioRange instance.
 func NewRatioRange() *RatioRange {
 	return &RatioRange{}
 }
 
-// FromJSON populates RatioRange from JSON data
+// FromJSON populates RatioRange from JSON data.
 func (m *RatioRange) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		LowNumerator *Quantity `json:"lownumerator,omitempty"`
+		HighNumerator *Quantity `json:"highnumerator,omitempty"`
+		Denominator *Quantity `json:"denominator,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.LowNumerator = temp.LowNumerator
+	m.HighNumerator = temp.HighNumerator
+	m.Denominator = temp.Denominator
+	return nil
 }
 
-// ToJSON converts RatioRange to JSON data
+// ToJSON converts RatioRange to JSON data.
 func (m *RatioRange) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		LowNumerator *Quantity `json:"lownumerator,omitempty"`
+		HighNumerator *Quantity `json:"highnumerator,omitempty"`
+		Denominator *Quantity `json:"denominator,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.LowNumerator = m.LowNumerator
+	output.HighNumerator = m.HighNumerator
+	output.Denominator = m.Denominator
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of RatioRange
+// Clone creates a deep copy of RatioRange.
 func (m *RatioRange) Clone() *RatioRange {
 	if m == nil { return nil }
 	return &RatioRange{
@@ -43,7 +77,7 @@ func (m *RatioRange) Clone() *RatioRange {
 	}
 }
 
-// Equals checks for equality with another RatioRange instance
+// Equals checks equality between two RatioRange instances.
 func (m *RatioRange) Equals(other *RatioRange) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

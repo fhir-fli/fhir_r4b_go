@@ -3,12 +3,13 @@ package fhir_r4b_go
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"strings"
 )
 
 // FhirString represents a validated string used in FHIR resources.
 type FhirString struct {
-	Value   string   `json:"value,omitempty"`
+	Value   *string  `json:"value,omitempty"`
 	Element *Element `json:"_value,omitempty"`
 }
 
@@ -17,13 +18,35 @@ func NewFhirString(input string, element *Element) (*FhirString, error) {
 	if input == "" && element == nil {
 		return nil, errors.New("a value or element is required")
 	}
-	return &FhirString{Value: input, Element: element}, nil
+	return &FhirString{
+		Value:   &input,
+		Element: element,
+	}, nil
+}
+
+// NewFhirStringFromMap creates a FhirString instance from a map.
+func NewFhirStringFromMap(data map[string]interface{}) (*FhirString, error) {
+	value, ok := data["value"].(string)
+	if !ok {
+		return nil, errors.New("invalid or missing value for FhirString")
+	}
+
+	str := &FhirString{Value: &value}
+
+	if elementData, ok := data["_value"].(map[string]interface{}); ok {
+		str.Element = &Element{}
+		if err := mapToStruct(elementData, str.Element); err != nil {
+			return nil, fmt.Errorf("failed to parse _value for FhirString: %v", err)
+		}
+	}
+
+	return str, nil
 }
 
 // MarshalJSON serializes FhirString into JSON.
 func (f *FhirString) MarshalJSON() ([]byte, error) {
 	data := map[string]interface{}{}
-	if f.Value != "" {
+	if f.Value != nil && *f.Value != "" {
 		data["value"] = f.Value
 	}
 	if f.Element != nil {
@@ -35,7 +58,7 @@ func (f *FhirString) MarshalJSON() ([]byte, error) {
 // UnmarshalJSON deserializes JSON into FhirString.
 func (f *FhirString) UnmarshalJSON(data []byte) error {
 	temp := struct {
-		Value   string   `json:"value"`
+		Value   *string  `json:"value"`
 		Element *Element `json:"_value"`
 	}{}
 	if err := json.Unmarshal(data, &temp); err != nil {
@@ -46,9 +69,12 @@ func (f *FhirString) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-// String returns the string value.
+// String returns the string value or an empty string if nil.
 func (f *FhirString) String() string {
-	return f.Value
+	if f.Value == nil {
+		return ""
+	}
+	return *f.Value
 }
 
 // Clone creates a deep copy of FhirString.
@@ -56,8 +82,13 @@ func (f *FhirString) Clone() *FhirString {
 	if f == nil {
 		return nil
 	}
+	var clonedValue *string
+	if f.Value != nil {
+		val := *f.Value
+		clonedValue = &val
+	}
 	return &FhirString{
-		Value:   f.Value,
+		Value:   clonedValue,
 		Element: f.Element.Clone(),
 	}
 }
@@ -70,23 +101,37 @@ func (f *FhirString) Equals(other *FhirString) bool {
 	if f == nil || other == nil {
 		return false
 	}
-	return f.Value == other.Value && f.Element.Equals(other.Element)
+	if (f.Value == nil && other.Value != nil) || (f.Value != nil && other.Value == nil) {
+		return false
+	}
+	return (f.Value == nil || *f.Value == *other.Value) && f.Element.Equals(other.Element)
 }
 
 // Utility methods for FhirString.
 func (f *FhirString) Length() int {
-	return len(f.Value)
+	if f.Value == nil {
+		return 0
+	}
+	return len(*f.Value)
 }
 
 func (f *FhirString) IsEmpty() bool {
-	return strings.TrimSpace(f.Value) == ""
+	if f.Value == nil {
+		return true
+	}
+	return strings.TrimSpace(*f.Value) == ""
 }
 
 func (f *FhirString) Trim() string {
-	return strings.TrimSpace(f.Value)
+	if f.Value == nil {
+		return ""
+	}
+	return strings.TrimSpace(*f.Value)
 }
 
 func (f *FhirString) Concat(other string) string {
-	return f.Value + other
+	if f.Value == nil {
+		return other
+	}
+	return *f.Value + other
 }
-

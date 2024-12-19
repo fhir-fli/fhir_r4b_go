@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // MedicationDispense
 // Indicates that a medication product is to be or has been dispensed for a named person/patient.  This includes a description of the medication product (supply) provided and the instructions for administering the medication.  The medication dispense is the result of a pharmacy system responding to a medication order.
 type MedicationDispense struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -45,22 +46,189 @@ type MedicationDispense struct {
 	EventHistory []*Reference `json:"eventhistory,omitempty"`
 }
 
-// NewMedicationDispense creates a new MedicationDispense instance
+// NewMedicationDispense creates a new MedicationDispense instance.
 func NewMedicationDispense() *MedicationDispense {
 	return &MedicationDispense{}
 }
 
-// FromJSON populates MedicationDispense from JSON data
+// FromJSON populates MedicationDispense from JSON data.
 func (m *MedicationDispense) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		PartOf []*Reference `json:"partof,omitempty"`
+		Status *MedicationDispenseStatusCodes `json:"status,omitempty"`
+		StatusReasonCodeableConcept *CodeableConcept `json:"statusreasoncodeableconcept,omitempty"`
+		StatusReasonReference *Reference `json:"statusreasonreference,omitempty"`
+		Category *CodeableConcept `json:"category,omitempty"`
+		MedicationCodeableConcept *CodeableConcept `json:"medicationcodeableconcept,omitempty"`
+		MedicationReference *Reference `json:"medicationreference,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Context *Reference `json:"context,omitempty"`
+		SupportingInformation []*Reference `json:"supportinginformation,omitempty"`
+		Performer []*MedicationDispensePerformer `json:"performer,omitempty"`
+		Location *Reference `json:"location,omitempty"`
+		AuthorizingPrescription []*Reference `json:"authorizingprescription,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		DaysSupply *Quantity `json:"dayssupply,omitempty"`
+		WhenPrepared *FhirDateTime `json:"whenprepared,omitempty"`
+		WhenHandedOver *FhirDateTime `json:"whenhandedover,omitempty"`
+		Destination *Reference `json:"destination,omitempty"`
+		Receiver []*Reference `json:"receiver,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		DosageInstruction []*Dosage `json:"dosageinstruction,omitempty"`
+		Substitution *MedicationDispenseSubstitution `json:"substitution,omitempty"`
+		DetectedIssue []*Reference `json:"detectedissue,omitempty"`
+		EventHistory []*Reference `json:"eventhistory,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.PartOf = temp.PartOf
+	m.Status = temp.Status
+	m.StatusReasonCodeableConcept = temp.StatusReasonCodeableConcept
+	m.StatusReasonReference = temp.StatusReasonReference
+	m.Category = temp.Category
+	m.MedicationCodeableConcept = temp.MedicationCodeableConcept
+	m.MedicationReference = temp.MedicationReference
+	m.Subject = temp.Subject
+	m.Context = temp.Context
+	m.SupportingInformation = temp.SupportingInformation
+	m.Performer = temp.Performer
+	m.Location = temp.Location
+	m.AuthorizingPrescription = temp.AuthorizingPrescription
+	m.Type = temp.Type
+	m.Quantity = temp.Quantity
+	m.DaysSupply = temp.DaysSupply
+	m.WhenPrepared = temp.WhenPrepared
+	m.WhenHandedOver = temp.WhenHandedOver
+	m.Destination = temp.Destination
+	m.Receiver = temp.Receiver
+	m.Note = temp.Note
+	m.DosageInstruction = temp.DosageInstruction
+	m.Substitution = temp.Substitution
+	m.DetectedIssue = temp.DetectedIssue
+	m.EventHistory = temp.EventHistory
+	return nil
 }
 
-// ToJSON converts MedicationDispense to JSON data
+// ToJSON converts MedicationDispense to JSON data.
 func (m *MedicationDispense) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		PartOf []*Reference `json:"partof,omitempty"`
+		Status *MedicationDispenseStatusCodes `json:"status,omitempty"`
+		StatusReasonCodeableConcept *CodeableConcept `json:"statusreasoncodeableconcept,omitempty"`
+		StatusReasonReference *Reference `json:"statusreasonreference,omitempty"`
+		Category *CodeableConcept `json:"category,omitempty"`
+		MedicationCodeableConcept *CodeableConcept `json:"medicationcodeableconcept,omitempty"`
+		MedicationReference *Reference `json:"medicationreference,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Context *Reference `json:"context,omitempty"`
+		SupportingInformation []*Reference `json:"supportinginformation,omitempty"`
+		Performer []*MedicationDispensePerformer `json:"performer,omitempty"`
+		Location *Reference `json:"location,omitempty"`
+		AuthorizingPrescription []*Reference `json:"authorizingprescription,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		DaysSupply *Quantity `json:"dayssupply,omitempty"`
+		WhenPrepared interface{} `json:"whenprepared,omitempty"`
+		WhenPreparedElement map[string]interface{} `json:"_whenprepared,omitempty"`
+		WhenHandedOver interface{} `json:"whenhandedover,omitempty"`
+		WhenHandedOverElement map[string]interface{} `json:"_whenhandedover,omitempty"`
+		Destination *Reference `json:"destination,omitempty"`
+		Receiver []*Reference `json:"receiver,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		DosageInstruction []*Dosage `json:"dosageinstruction,omitempty"`
+		Substitution *MedicationDispenseSubstitution `json:"substitution,omitempty"`
+		DetectedIssue []*Reference `json:"detectedissue,omitempty"`
+		EventHistory []*Reference `json:"eventhistory,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.PartOf = m.PartOf
+	output.Status = m.Status
+	output.StatusReasonCodeableConcept = m.StatusReasonCodeableConcept
+	output.StatusReasonReference = m.StatusReasonReference
+	output.Category = m.Category
+	output.MedicationCodeableConcept = m.MedicationCodeableConcept
+	output.MedicationReference = m.MedicationReference
+	output.Subject = m.Subject
+	output.Context = m.Context
+	output.SupportingInformation = m.SupportingInformation
+	output.Performer = m.Performer
+	output.Location = m.Location
+	output.AuthorizingPrescription = m.AuthorizingPrescription
+	output.Type = m.Type
+	output.Quantity = m.Quantity
+	output.DaysSupply = m.DaysSupply
+	if m.WhenPrepared != nil && m.WhenPrepared.Value != nil {
+		output.WhenPrepared = m.WhenPrepared.Value
+		if m.WhenPrepared.Element != nil {
+			output.WhenPreparedElement = toMapOrNil(m.WhenPrepared.Element.ToJSON())
+		}
+	}
+	if m.WhenHandedOver != nil && m.WhenHandedOver.Value != nil {
+		output.WhenHandedOver = m.WhenHandedOver.Value
+		if m.WhenHandedOver.Element != nil {
+			output.WhenHandedOverElement = toMapOrNil(m.WhenHandedOver.Element.ToJSON())
+		}
+	}
+	output.Destination = m.Destination
+	output.Receiver = m.Receiver
+	output.Note = m.Note
+	output.DosageInstruction = m.DosageInstruction
+	output.Substitution = m.Substitution
+	output.DetectedIssue = m.DetectedIssue
+	output.EventHistory = m.EventHistory
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MedicationDispense
+// Clone creates a deep copy of MedicationDispense.
 func (m *MedicationDispense) Clone() *MedicationDispense {
 	if m == nil { return nil }
 	return &MedicationDispense{
@@ -101,7 +269,7 @@ func (m *MedicationDispense) Clone() *MedicationDispense {
 	}
 }
 
-// Equals checks for equality with another MedicationDispense instance
+// Equals checks equality between two MedicationDispense instances.
 func (m *MedicationDispense) Equals(other *MedicationDispense) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -145,7 +313,7 @@ func (m *MedicationDispense) Equals(other *MedicationDispense) bool {
 // MedicationDispensePerformer
 // Indicates who or what performed the event.
 type MedicationDispensePerformer struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -153,22 +321,55 @@ type MedicationDispensePerformer struct {
 	Actor *Reference `json:"actor,omitempty"`
 }
 
-// NewMedicationDispensePerformer creates a new MedicationDispensePerformer instance
+// NewMedicationDispensePerformer creates a new MedicationDispensePerformer instance.
 func NewMedicationDispensePerformer() *MedicationDispensePerformer {
 	return &MedicationDispensePerformer{}
 }
 
-// FromJSON populates MedicationDispensePerformer from JSON data
+// FromJSON populates MedicationDispensePerformer from JSON data.
 func (m *MedicationDispensePerformer) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Function_ *CodeableConcept `json:"function,omitempty"`
+		Actor *Reference `json:"actor,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Function_ = temp.Function_
+	m.Actor = temp.Actor
+	return nil
 }
 
-// ToJSON converts MedicationDispensePerformer to JSON data
+// ToJSON converts MedicationDispensePerformer to JSON data.
 func (m *MedicationDispensePerformer) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Function_ *CodeableConcept `json:"function,omitempty"`
+		Actor *Reference `json:"actor,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Function_ = m.Function_
+	output.Actor = m.Actor
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MedicationDispensePerformer
+// Clone creates a deep copy of MedicationDispensePerformer.
 func (m *MedicationDispensePerformer) Clone() *MedicationDispensePerformer {
 	if m == nil { return nil }
 	return &MedicationDispensePerformer{
@@ -180,7 +381,7 @@ func (m *MedicationDispensePerformer) Clone() *MedicationDispensePerformer {
 	}
 }
 
-// Equals checks for equality with another MedicationDispensePerformer instance
+// Equals checks equality between two MedicationDispensePerformer instances.
 func (m *MedicationDispensePerformer) Equals(other *MedicationDispensePerformer) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -195,7 +396,7 @@ func (m *MedicationDispensePerformer) Equals(other *MedicationDispensePerformer)
 // MedicationDispenseSubstitution
 // Indicates whether or not substitution was made as part of the dispense.  In some cases, substitution will be expected but does not happen, in other cases substitution is not expected but does happen.  This block explains what substitution did or did not happen and why.  If nothing is specified, substitution was not done.
 type MedicationDispenseSubstitution struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -205,22 +406,69 @@ type MedicationDispenseSubstitution struct {
 	ResponsibleParty []*Reference `json:"responsibleparty,omitempty"`
 }
 
-// NewMedicationDispenseSubstitution creates a new MedicationDispenseSubstitution instance
+// NewMedicationDispenseSubstitution creates a new MedicationDispenseSubstitution instance.
 func NewMedicationDispenseSubstitution() *MedicationDispenseSubstitution {
 	return &MedicationDispenseSubstitution{}
 }
 
-// FromJSON populates MedicationDispenseSubstitution from JSON data
+// FromJSON populates MedicationDispenseSubstitution from JSON data.
 func (m *MedicationDispenseSubstitution) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		WasSubstituted *FhirBoolean `json:"wassubstituted,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Reason []*CodeableConcept `json:"reason,omitempty"`
+		ResponsibleParty []*Reference `json:"responsibleparty,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.WasSubstituted = temp.WasSubstituted
+	m.Type = temp.Type
+	m.Reason = temp.Reason
+	m.ResponsibleParty = temp.ResponsibleParty
+	return nil
 }
 
-// ToJSON converts MedicationDispenseSubstitution to JSON data
+// ToJSON converts MedicationDispenseSubstitution to JSON data.
 func (m *MedicationDispenseSubstitution) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		WasSubstituted interface{} `json:"wassubstituted,omitempty"`
+		WasSubstitutedElement map[string]interface{} `json:"_wassubstituted,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Reason []*CodeableConcept `json:"reason,omitempty"`
+		ResponsibleParty []*Reference `json:"responsibleparty,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.WasSubstituted != nil && m.WasSubstituted.Value != nil {
+		output.WasSubstituted = m.WasSubstituted.Value
+		if m.WasSubstituted.Element != nil {
+			output.WasSubstitutedElement = toMapOrNil(m.WasSubstituted.Element.ToJSON())
+		}
+	}
+	output.Type = m.Type
+	output.Reason = m.Reason
+	output.ResponsibleParty = m.ResponsibleParty
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MedicationDispenseSubstitution
+// Clone creates a deep copy of MedicationDispenseSubstitution.
 func (m *MedicationDispenseSubstitution) Clone() *MedicationDispenseSubstitution {
 	if m == nil { return nil }
 	return &MedicationDispenseSubstitution{
@@ -234,7 +482,7 @@ func (m *MedicationDispenseSubstitution) Clone() *MedicationDispenseSubstitution
 	}
 }
 
-// Equals checks for equality with another MedicationDispenseSubstitution instance
+// Equals checks equality between two MedicationDispenseSubstitution instances.
 func (m *MedicationDispenseSubstitution) Equals(other *MedicationDispenseSubstitution) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

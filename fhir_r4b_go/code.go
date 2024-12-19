@@ -8,8 +8,8 @@ import (
 
 // FhirCode represents the FHIR primitive type `code`.
 type FhirCode struct {
-	Value   *string  `json:"-"`          // The actual code value
-	Element *Element `json:",inline"`    // Metadata (FHIR element)
+	Value   *string  `json:"-"`       // The actual code value
+	Element *Element `json:",inline"` // Metadata (FHIR element)
 }
 
 // NewFhirCode creates a new FhirCode with validation.
@@ -115,4 +115,36 @@ func (fc *FhirCode) Equals(other *FhirCode) bool {
 		return false
 	}
 	return fc.Element.Equals(other.Element)
+}
+
+// NewFhirCodeFromFhirMap creates a FhirCode instance from a map representation.
+func NewFhirCodeFromMap(data map[string]interface{}) (*FhirCode, error) {
+	var fc FhirCode
+
+	// Extract and validate the `value` field
+	if rawValue, exists := data["value"]; exists {
+		value, ok := rawValue.(string)
+		if !ok {
+			return nil, errors.New("invalid type for 'value', expected string")
+		}
+		if err := validateFhirCode(value); err != nil {
+			return nil, err
+		}
+		fc.Value = &value
+	}
+
+	// Extract the `_value` metadata field
+	if rawElement, exists := data["_value"]; exists {
+		elementData, ok := rawElement.(map[string]interface{})
+		if !ok {
+			return nil, errors.New("invalid type for '_value', expected map[string]interface{}")
+		}
+		element := &Element{}
+		if err := mapToStruct(elementData, element); err != nil {
+			return nil, err
+		}
+		fc.Element = element
+	}
+
+	return &fc, nil
 }

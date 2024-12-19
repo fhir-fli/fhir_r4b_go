@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // CommunicationRequest
 // A request to convey information; e.g. the CDS system proposes that an alert be sent to a responsible provider, the CDS system proposes that the public health agency be notified about a reportable condition.
 type CommunicationRequest struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -42,22 +43,183 @@ type CommunicationRequest struct {
 	Note []*Annotation `json:"note,omitempty"`
 }
 
-// NewCommunicationRequest creates a new CommunicationRequest instance
+// NewCommunicationRequest creates a new CommunicationRequest instance.
 func NewCommunicationRequest() *CommunicationRequest {
 	return &CommunicationRequest{}
 }
 
-// FromJSON populates CommunicationRequest from JSON data
+// FromJSON populates CommunicationRequest from JSON data.
 func (m *CommunicationRequest) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		Replaces []*Reference `json:"replaces,omitempty"`
+		GroupIdentifier *Identifier `json:"groupidentifier,omitempty"`
+		Status *RequestStatus `json:"status,omitempty"`
+		StatusReason *CodeableConcept `json:"statusreason,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Priority *RequestPriority `json:"priority,omitempty"`
+		DoNotPerform *FhirBoolean `json:"donotperform,omitempty"`
+		Medium []*CodeableConcept `json:"medium,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		About []*Reference `json:"about,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		Payload []*CommunicationRequestPayload `json:"payload,omitempty"`
+		OccurrenceDateTime *FhirDateTime `json:"occurrencedatetime,omitempty"`
+		OccurrencePeriod *Period `json:"occurrenceperiod,omitempty"`
+		AuthoredOn *FhirDateTime `json:"authoredon,omitempty"`
+		Requester *Reference `json:"requester,omitempty"`
+		Recipient []*Reference `json:"recipient,omitempty"`
+		Sender *Reference `json:"sender,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.BasedOn = temp.BasedOn
+	m.Replaces = temp.Replaces
+	m.GroupIdentifier = temp.GroupIdentifier
+	m.Status = temp.Status
+	m.StatusReason = temp.StatusReason
+	m.Category = temp.Category
+	m.Priority = temp.Priority
+	m.DoNotPerform = temp.DoNotPerform
+	m.Medium = temp.Medium
+	m.Subject = temp.Subject
+	m.About = temp.About
+	m.Encounter = temp.Encounter
+	m.Payload = temp.Payload
+	m.OccurrenceDateTime = temp.OccurrenceDateTime
+	m.OccurrencePeriod = temp.OccurrencePeriod
+	m.AuthoredOn = temp.AuthoredOn
+	m.Requester = temp.Requester
+	m.Recipient = temp.Recipient
+	m.Sender = temp.Sender
+	m.ReasonCode = temp.ReasonCode
+	m.ReasonReference = temp.ReasonReference
+	m.Note = temp.Note
+	return nil
 }
 
-// ToJSON converts CommunicationRequest to JSON data
+// ToJSON converts CommunicationRequest to JSON data.
 func (m *CommunicationRequest) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		Replaces []*Reference `json:"replaces,omitempty"`
+		GroupIdentifier *Identifier `json:"groupidentifier,omitempty"`
+		Status *RequestStatus `json:"status,omitempty"`
+		StatusReason *CodeableConcept `json:"statusreason,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Priority *RequestPriority `json:"priority,omitempty"`
+		DoNotPerform interface{} `json:"donotperform,omitempty"`
+		DoNotPerformElement map[string]interface{} `json:"_donotperform,omitempty"`
+		Medium []*CodeableConcept `json:"medium,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		About []*Reference `json:"about,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		Payload []*CommunicationRequestPayload `json:"payload,omitempty"`
+		OccurrenceDateTime interface{} `json:"occurrencedatetime,omitempty"`
+		OccurrenceDateTimeElement map[string]interface{} `json:"_occurrencedatetime,omitempty"`
+		OccurrencePeriod *Period `json:"occurrenceperiod,omitempty"`
+		AuthoredOn interface{} `json:"authoredon,omitempty"`
+		AuthoredOnElement map[string]interface{} `json:"_authoredon,omitempty"`
+		Requester *Reference `json:"requester,omitempty"`
+		Recipient []*Reference `json:"recipient,omitempty"`
+		Sender *Reference `json:"sender,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.BasedOn = m.BasedOn
+	output.Replaces = m.Replaces
+	output.GroupIdentifier = m.GroupIdentifier
+	output.Status = m.Status
+	output.StatusReason = m.StatusReason
+	output.Category = m.Category
+	output.Priority = m.Priority
+	if m.DoNotPerform != nil && m.DoNotPerform.Value != nil {
+		output.DoNotPerform = m.DoNotPerform.Value
+		if m.DoNotPerform.Element != nil {
+			output.DoNotPerformElement = toMapOrNil(m.DoNotPerform.Element.ToJSON())
+		}
+	}
+	output.Medium = m.Medium
+	output.Subject = m.Subject
+	output.About = m.About
+	output.Encounter = m.Encounter
+	output.Payload = m.Payload
+	if m.OccurrenceDateTime != nil && m.OccurrenceDateTime.Value != nil {
+		output.OccurrenceDateTime = m.OccurrenceDateTime.Value
+		if m.OccurrenceDateTime.Element != nil {
+			output.OccurrenceDateTimeElement = toMapOrNil(m.OccurrenceDateTime.Element.ToJSON())
+		}
+	}
+	output.OccurrencePeriod = m.OccurrencePeriod
+	if m.AuthoredOn != nil && m.AuthoredOn.Value != nil {
+		output.AuthoredOn = m.AuthoredOn.Value
+		if m.AuthoredOn.Element != nil {
+			output.AuthoredOnElement = toMapOrNil(m.AuthoredOn.Element.ToJSON())
+		}
+	}
+	output.Requester = m.Requester
+	output.Recipient = m.Recipient
+	output.Sender = m.Sender
+	output.ReasonCode = m.ReasonCode
+	output.ReasonReference = m.ReasonReference
+	output.Note = m.Note
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CommunicationRequest
+// Clone creates a deep copy of CommunicationRequest.
 func (m *CommunicationRequest) Clone() *CommunicationRequest {
 	if m == nil { return nil }
 	return &CommunicationRequest{
@@ -95,7 +257,7 @@ func (m *CommunicationRequest) Clone() *CommunicationRequest {
 	}
 }
 
-// Equals checks for equality with another CommunicationRequest instance
+// Equals checks equality between two CommunicationRequest instances.
 func (m *CommunicationRequest) Equals(other *CommunicationRequest) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -136,7 +298,7 @@ func (m *CommunicationRequest) Equals(other *CommunicationRequest) bool {
 // CommunicationRequestPayload
 // Text, attachment(s), or resource(s) to be communicated to the recipient.
 type CommunicationRequestPayload struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -145,22 +307,65 @@ type CommunicationRequestPayload struct {
 	ContentReference *Reference `json:"contentreference,omitempty"`
 }
 
-// NewCommunicationRequestPayload creates a new CommunicationRequestPayload instance
+// NewCommunicationRequestPayload creates a new CommunicationRequestPayload instance.
 func NewCommunicationRequestPayload() *CommunicationRequestPayload {
 	return &CommunicationRequestPayload{}
 }
 
-// FromJSON populates CommunicationRequestPayload from JSON data
+// FromJSON populates CommunicationRequestPayload from JSON data.
 func (m *CommunicationRequestPayload) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ContentString *FhirString `json:"contentstring,omitempty"`
+		ContentAttachment *Attachment `json:"contentattachment,omitempty"`
+		ContentReference *Reference `json:"contentreference,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.ContentString = temp.ContentString
+	m.ContentAttachment = temp.ContentAttachment
+	m.ContentReference = temp.ContentReference
+	return nil
 }
 
-// ToJSON converts CommunicationRequestPayload to JSON data
+// ToJSON converts CommunicationRequestPayload to JSON data.
 func (m *CommunicationRequestPayload) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ContentString interface{} `json:"contentstring,omitempty"`
+		ContentStringElement map[string]interface{} `json:"_contentstring,omitempty"`
+		ContentAttachment *Attachment `json:"contentattachment,omitempty"`
+		ContentReference *Reference `json:"contentreference,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.ContentString != nil && m.ContentString.Value != nil {
+		output.ContentString = m.ContentString.Value
+		if m.ContentString.Element != nil {
+			output.ContentStringElement = toMapOrNil(m.ContentString.Element.ToJSON())
+		}
+	}
+	output.ContentAttachment = m.ContentAttachment
+	output.ContentReference = m.ContentReference
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CommunicationRequestPayload
+// Clone creates a deep copy of CommunicationRequestPayload.
 func (m *CommunicationRequestPayload) Clone() *CommunicationRequestPayload {
 	if m == nil { return nil }
 	return &CommunicationRequestPayload{
@@ -173,7 +378,7 @@ func (m *CommunicationRequestPayload) Clone() *CommunicationRequestPayload {
 	}
 }
 
-// Equals checks for equality with another CommunicationRequestPayload instance
+// Equals checks equality between two CommunicationRequestPayload instances.
 func (m *CommunicationRequestPayload) Equals(other *CommunicationRequestPayload) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

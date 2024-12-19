@@ -3,34 +3,70 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Narrative
 // A human-readable summary of the resource conveying the essential clinical and business information for the resource.
 type Narrative struct {
-	DataType
+	extends DataType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	Status *NarrativeStatus `json:"status,omitempty"`
 	Div *FhirXhtml `json:"div,omitempty"`
 }
 
-// NewNarrative creates a new Narrative instance
+// NewNarrative creates a new Narrative instance.
 func NewNarrative() *Narrative {
 	return &Narrative{}
 }
 
-// FromJSON populates Narrative from JSON data
+// FromJSON populates Narrative from JSON data.
 func (m *Narrative) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Status *NarrativeStatus `json:"status,omitempty"`
+		Div *FhirXhtml `json:"div,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.Status = temp.Status
+	m.Div = temp.Div
+	return nil
 }
 
-// ToJSON converts Narrative to JSON data
+// ToJSON converts Narrative to JSON data.
 func (m *Narrative) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Status *NarrativeStatus `json:"status,omitempty"`
+		Div interface{} `json:"div,omitempty"`
+		DivElement map[string]interface{} `json:"_div,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.Status = m.Status
+	if m.Div != nil && m.Div.Value != nil {
+		output.Div = m.Div.Value
+		if m.Div.Element != nil {
+			output.DivElement = toMapOrNil(m.Div.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Narrative
+// Clone creates a deep copy of Narrative.
 func (m *Narrative) Clone() *Narrative {
 	if m == nil { return nil }
 	return &Narrative{
@@ -41,7 +77,7 @@ func (m *Narrative) Clone() *Narrative {
 	}
 }
 
-// Equals checks for equality with another Narrative instance
+// Equals checks equality between two Narrative instances.
 func (m *Narrative) Equals(other *Narrative) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

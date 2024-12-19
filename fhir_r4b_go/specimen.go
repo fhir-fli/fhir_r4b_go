@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Specimen
 // A sample to be used for analysis.
 type Specimen struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -32,22 +33,131 @@ type Specimen struct {
 	Note []*Annotation `json:"note,omitempty"`
 }
 
-// NewSpecimen creates a new Specimen instance
+// NewSpecimen creates a new Specimen instance.
 func NewSpecimen() *Specimen {
 	return &Specimen{}
 }
 
-// FromJSON populates Specimen from JSON data
+// FromJSON populates Specimen from JSON data.
 func (m *Specimen) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		AccessionIdentifier *Identifier `json:"accessionidentifier,omitempty"`
+		Status *SpecimenStatus `json:"status,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		ReceivedTime *FhirDateTime `json:"receivedtime,omitempty"`
+		Parent []*Reference `json:"parent,omitempty"`
+		Request []*Reference `json:"request,omitempty"`
+		Collection *SpecimenCollection `json:"collection,omitempty"`
+		Processing []*SpecimenProcessing `json:"processing,omitempty"`
+		Container []*SpecimenContainer `json:"container,omitempty"`
+		Condition []*CodeableConcept `json:"condition,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.AccessionIdentifier = temp.AccessionIdentifier
+	m.Status = temp.Status
+	m.Type = temp.Type
+	m.Subject = temp.Subject
+	m.ReceivedTime = temp.ReceivedTime
+	m.Parent = temp.Parent
+	m.Request = temp.Request
+	m.Collection = temp.Collection
+	m.Processing = temp.Processing
+	m.Container = temp.Container
+	m.Condition = temp.Condition
+	m.Note = temp.Note
+	return nil
 }
 
-// ToJSON converts Specimen to JSON data
+// ToJSON converts Specimen to JSON data.
 func (m *Specimen) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		AccessionIdentifier *Identifier `json:"accessionidentifier,omitempty"`
+		Status *SpecimenStatus `json:"status,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		ReceivedTime interface{} `json:"receivedtime,omitempty"`
+		ReceivedTimeElement map[string]interface{} `json:"_receivedtime,omitempty"`
+		Parent []*Reference `json:"parent,omitempty"`
+		Request []*Reference `json:"request,omitempty"`
+		Collection *SpecimenCollection `json:"collection,omitempty"`
+		Processing []*SpecimenProcessing `json:"processing,omitempty"`
+		Container []*SpecimenContainer `json:"container,omitempty"`
+		Condition []*CodeableConcept `json:"condition,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.AccessionIdentifier = m.AccessionIdentifier
+	output.Status = m.Status
+	output.Type = m.Type
+	output.Subject = m.Subject
+	if m.ReceivedTime != nil && m.ReceivedTime.Value != nil {
+		output.ReceivedTime = m.ReceivedTime.Value
+		if m.ReceivedTime.Element != nil {
+			output.ReceivedTimeElement = toMapOrNil(m.ReceivedTime.Element.ToJSON())
+		}
+	}
+	output.Parent = m.Parent
+	output.Request = m.Request
+	output.Collection = m.Collection
+	output.Processing = m.Processing
+	output.Container = m.Container
+	output.Condition = m.Condition
+	output.Note = m.Note
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Specimen
+// Clone creates a deep copy of Specimen.
 func (m *Specimen) Clone() *Specimen {
 	if m == nil { return nil }
 	return &Specimen{
@@ -75,7 +185,7 @@ func (m *Specimen) Clone() *Specimen {
 	}
 }
 
-// Equals checks for equality with another Specimen instance
+// Equals checks equality between two Specimen instances.
 func (m *Specimen) Equals(other *Specimen) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -106,7 +216,7 @@ func (m *Specimen) Equals(other *Specimen) bool {
 // SpecimenCollection
 // Details concerning the specimen collection.
 type SpecimenCollection struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -121,22 +231,89 @@ type SpecimenCollection struct {
 	FastingStatusDuration *FhirDuration `json:"fastingstatusduration,omitempty"`
 }
 
-// NewSpecimenCollection creates a new SpecimenCollection instance
+// NewSpecimenCollection creates a new SpecimenCollection instance.
 func NewSpecimenCollection() *SpecimenCollection {
 	return &SpecimenCollection{}
 }
 
-// FromJSON populates SpecimenCollection from JSON data
+// FromJSON populates SpecimenCollection from JSON data.
 func (m *SpecimenCollection) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Collector *Reference `json:"collector,omitempty"`
+		CollectedDateTime *FhirDateTime `json:"collecteddatetime,omitempty"`
+		CollectedPeriod *Period `json:"collectedperiod,omitempty"`
+		Duration *FhirDuration `json:"duration,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		Method *CodeableConcept `json:"method,omitempty"`
+		BodySite *CodeableConcept `json:"bodysite,omitempty"`
+		FastingStatusCodeableConcept *CodeableConcept `json:"fastingstatuscodeableconcept,omitempty"`
+		FastingStatusDuration *FhirDuration `json:"fastingstatusduration,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Collector = temp.Collector
+	m.CollectedDateTime = temp.CollectedDateTime
+	m.CollectedPeriod = temp.CollectedPeriod
+	m.Duration = temp.Duration
+	m.Quantity = temp.Quantity
+	m.Method = temp.Method
+	m.BodySite = temp.BodySite
+	m.FastingStatusCodeableConcept = temp.FastingStatusCodeableConcept
+	m.FastingStatusDuration = temp.FastingStatusDuration
+	return nil
 }
 
-// ToJSON converts SpecimenCollection to JSON data
+// ToJSON converts SpecimenCollection to JSON data.
 func (m *SpecimenCollection) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Collector *Reference `json:"collector,omitempty"`
+		CollectedDateTime interface{} `json:"collecteddatetime,omitempty"`
+		CollectedDateTimeElement map[string]interface{} `json:"_collecteddatetime,omitempty"`
+		CollectedPeriod *Period `json:"collectedperiod,omitempty"`
+		Duration *FhirDuration `json:"duration,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		Method *CodeableConcept `json:"method,omitempty"`
+		BodySite *CodeableConcept `json:"bodysite,omitempty"`
+		FastingStatusCodeableConcept *CodeableConcept `json:"fastingstatuscodeableconcept,omitempty"`
+		FastingStatusDuration *FhirDuration `json:"fastingstatusduration,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Collector = m.Collector
+	if m.CollectedDateTime != nil && m.CollectedDateTime.Value != nil {
+		output.CollectedDateTime = m.CollectedDateTime.Value
+		if m.CollectedDateTime.Element != nil {
+			output.CollectedDateTimeElement = toMapOrNil(m.CollectedDateTime.Element.ToJSON())
+		}
+	}
+	output.CollectedPeriod = m.CollectedPeriod
+	output.Duration = m.Duration
+	output.Quantity = m.Quantity
+	output.Method = m.Method
+	output.BodySite = m.BodySite
+	output.FastingStatusCodeableConcept = m.FastingStatusCodeableConcept
+	output.FastingStatusDuration = m.FastingStatusDuration
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SpecimenCollection
+// Clone creates a deep copy of SpecimenCollection.
 func (m *SpecimenCollection) Clone() *SpecimenCollection {
 	if m == nil { return nil }
 	return &SpecimenCollection{
@@ -155,7 +332,7 @@ func (m *SpecimenCollection) Clone() *SpecimenCollection {
 	}
 }
 
-// Equals checks for equality with another SpecimenCollection instance
+// Equals checks equality between two SpecimenCollection instances.
 func (m *SpecimenCollection) Equals(other *SpecimenCollection) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -177,7 +354,7 @@ func (m *SpecimenCollection) Equals(other *SpecimenCollection) bool {
 // SpecimenProcessing
 // Details concerning processing and processing steps for the specimen.
 type SpecimenProcessing struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -188,22 +365,79 @@ type SpecimenProcessing struct {
 	TimePeriod *Period `json:"timeperiod,omitempty"`
 }
 
-// NewSpecimenProcessing creates a new SpecimenProcessing instance
+// NewSpecimenProcessing creates a new SpecimenProcessing instance.
 func NewSpecimenProcessing() *SpecimenProcessing {
 	return &SpecimenProcessing{}
 }
 
-// FromJSON populates SpecimenProcessing from JSON data
+// FromJSON populates SpecimenProcessing from JSON data.
 func (m *SpecimenProcessing) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Procedure *CodeableConcept `json:"procedure,omitempty"`
+		Additive []*Reference `json:"additive,omitempty"`
+		TimeDateTime *FhirDateTime `json:"timedatetime,omitempty"`
+		TimePeriod *Period `json:"timeperiod,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Description = temp.Description
+	m.Procedure = temp.Procedure
+	m.Additive = temp.Additive
+	m.TimeDateTime = temp.TimeDateTime
+	m.TimePeriod = temp.TimePeriod
+	return nil
 }
 
-// ToJSON converts SpecimenProcessing to JSON data
+// ToJSON converts SpecimenProcessing to JSON data.
 func (m *SpecimenProcessing) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Procedure *CodeableConcept `json:"procedure,omitempty"`
+		Additive []*Reference `json:"additive,omitempty"`
+		TimeDateTime interface{} `json:"timedatetime,omitempty"`
+		TimeDateTimeElement map[string]interface{} `json:"_timedatetime,omitempty"`
+		TimePeriod *Period `json:"timeperiod,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Procedure = m.Procedure
+	output.Additive = m.Additive
+	if m.TimeDateTime != nil && m.TimeDateTime.Value != nil {
+		output.TimeDateTime = m.TimeDateTime.Value
+		if m.TimeDateTime.Element != nil {
+			output.TimeDateTimeElement = toMapOrNil(m.TimeDateTime.Element.ToJSON())
+		}
+	}
+	output.TimePeriod = m.TimePeriod
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SpecimenProcessing
+// Clone creates a deep copy of SpecimenProcessing.
 func (m *SpecimenProcessing) Clone() *SpecimenProcessing {
 	if m == nil { return nil }
 	return &SpecimenProcessing{
@@ -218,7 +452,7 @@ func (m *SpecimenProcessing) Clone() *SpecimenProcessing {
 	}
 }
 
-// Equals checks for equality with another SpecimenProcessing instance
+// Equals checks equality between two SpecimenProcessing instances.
 func (m *SpecimenProcessing) Equals(other *SpecimenProcessing) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -236,7 +470,7 @@ func (m *SpecimenProcessing) Equals(other *SpecimenProcessing) bool {
 // SpecimenContainer
 // The container holding the specimen.  The recursive nature of containers; i.e. blood in tube in tray in rack is not addressed here.
 type SpecimenContainer struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -249,22 +483,81 @@ type SpecimenContainer struct {
 	AdditiveReference *Reference `json:"additivereference,omitempty"`
 }
 
-// NewSpecimenContainer creates a new SpecimenContainer instance
+// NewSpecimenContainer creates a new SpecimenContainer instance.
 func NewSpecimenContainer() *SpecimenContainer {
 	return &SpecimenContainer{}
 }
 
-// FromJSON populates SpecimenContainer from JSON data
+// FromJSON populates SpecimenContainer from JSON data.
 func (m *SpecimenContainer) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Capacity *Quantity `json:"capacity,omitempty"`
+		SpecimenQuantity *Quantity `json:"specimenquantity,omitempty"`
+		AdditiveCodeableConcept *CodeableConcept `json:"additivecodeableconcept,omitempty"`
+		AdditiveReference *Reference `json:"additivereference,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Description = temp.Description
+	m.Type = temp.Type
+	m.Capacity = temp.Capacity
+	m.SpecimenQuantity = temp.SpecimenQuantity
+	m.AdditiveCodeableConcept = temp.AdditiveCodeableConcept
+	m.AdditiveReference = temp.AdditiveReference
+	return nil
 }
 
-// ToJSON converts SpecimenContainer to JSON data
+// ToJSON converts SpecimenContainer to JSON data.
 func (m *SpecimenContainer) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Capacity *Quantity `json:"capacity,omitempty"`
+		SpecimenQuantity *Quantity `json:"specimenquantity,omitempty"`
+		AdditiveCodeableConcept *CodeableConcept `json:"additivecodeableconcept,omitempty"`
+		AdditiveReference *Reference `json:"additivereference,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Type = m.Type
+	output.Capacity = m.Capacity
+	output.SpecimenQuantity = m.SpecimenQuantity
+	output.AdditiveCodeableConcept = m.AdditiveCodeableConcept
+	output.AdditiveReference = m.AdditiveReference
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SpecimenContainer
+// Clone creates a deep copy of SpecimenContainer.
 func (m *SpecimenContainer) Clone() *SpecimenContainer {
 	if m == nil { return nil }
 	return &SpecimenContainer{
@@ -281,7 +574,7 @@ func (m *SpecimenContainer) Clone() *SpecimenContainer {
 	}
 }
 
-// Equals checks for equality with another SpecimenContainer instance
+// Equals checks equality between two SpecimenContainer instances.
 func (m *SpecimenContainer) Equals(other *SpecimenContainer) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

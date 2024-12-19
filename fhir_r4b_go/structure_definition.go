@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // StructureDefinition
 // A definition of a FHIR structure. This resource is used to describe the underlying resources, data types defined in FHIR, and also for describing extensions and constraints on resources and data types.
 type StructureDefinition struct {
-	CanonicalResource
+	extends CanonicalResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -46,22 +48,280 @@ type StructureDefinition struct {
 	Differential *StructureDefinitionDifferential `json:"differential,omitempty"`
 }
 
-// NewStructureDefinition creates a new StructureDefinition instance
+// NewStructureDefinition creates a new StructureDefinition instance.
 func NewStructureDefinition() *StructureDefinition {
 	return &StructureDefinition{}
 }
 
-// FromJSON populates StructureDefinition from JSON data
+// FromJSON populates StructureDefinition from JSON data.
 func (m *StructureDefinition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental *FhirBoolean `json:"experimental,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Publisher *FhirString `json:"publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose *FhirMarkdown `json:"purpose,omitempty"`
+		Copyright *FhirMarkdown `json:"copyright,omitempty"`
+		Keyword []*Coding `json:"keyword,omitempty"`
+		FhirVersion *FHIRVersion `json:"fhirversion,omitempty"`
+		Mapping []*StructureDefinitionMapping `json:"mapping,omitempty"`
+		Kind *StructureDefinitionKind `json:"kind,omitempty"`
+		Abstract_ *FhirBoolean `json:"abstract,omitempty"`
+		Context []*StructureDefinitionContext `json:"context,omitempty"`
+		ContextInvariant []interface{} `json:"contextinvariant,omitempty"`
+		Type *FhirUri `json:"type,omitempty"`
+		BaseDefinition *FhirCanonical `json:"basedefinition,omitempty"`
+		Derivation *TypeDerivationRule `json:"derivation,omitempty"`
+		Snapshot *StructureDefinitionSnapshot `json:"snapshot,omitempty"`
+		Differential *StructureDefinitionDifferential `json:"differential,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Url = temp.Url
+	m.Identifier = temp.Identifier
+	m.Version = temp.Version
+	m.Name = temp.Name
+	m.Title = temp.Title
+	m.Status = temp.Status
+	m.Experimental = temp.Experimental
+	m.Date = temp.Date
+	m.Publisher = temp.Publisher
+	m.Contact = temp.Contact
+	m.Description = temp.Description
+	m.UseContext = temp.UseContext
+	m.Jurisdiction = temp.Jurisdiction
+	m.Purpose = temp.Purpose
+	m.Copyright = temp.Copyright
+	m.Keyword = temp.Keyword
+	m.FhirVersion = temp.FhirVersion
+	m.Mapping = temp.Mapping
+	m.Kind = temp.Kind
+	m.Abstract_ = temp.Abstract_
+	m.Context = temp.Context
+	if len(temp.ContextInvariant) > 0 {
+		m.ContextInvariant = make([]*FhirString, len(temp.ContextInvariant))
+		for i := range temp.ContextInvariant {
+			itemMap, ok := temp.ContextInvariant[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for ContextInvariant[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse ContextInvariant[%d]: %v", i, err) }
+			m.ContextInvariant[i] = primitive
+		}
+	}
+	m.Type = temp.Type
+	m.BaseDefinition = temp.BaseDefinition
+	m.Derivation = temp.Derivation
+	m.Snapshot = temp.Snapshot
+	m.Differential = temp.Differential
+	return nil
 }
 
-// ToJSON converts StructureDefinition to JSON data
+// ToJSON converts StructureDefinition to JSON data.
 func (m *StructureDefinition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental interface{} `json:"experimental,omitempty"`
+		ExperimentalElement map[string]interface{} `json:"_experimental,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Publisher interface{} `json:"publisher,omitempty"`
+		PublisherElement map[string]interface{} `json:"_publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose interface{} `json:"purpose,omitempty"`
+		PurposeElement map[string]interface{} `json:"_purpose,omitempty"`
+		Copyright interface{} `json:"copyright,omitempty"`
+		CopyrightElement map[string]interface{} `json:"_copyright,omitempty"`
+		Keyword []*Coding `json:"keyword,omitempty"`
+		FhirVersion *FHIRVersion `json:"fhirversion,omitempty"`
+		Mapping []*StructureDefinitionMapping `json:"mapping,omitempty"`
+		Kind *StructureDefinitionKind `json:"kind,omitempty"`
+		Abstract_ interface{} `json:"abstract,omitempty"`
+		Abstract_Element map[string]interface{} `json:"_abstract,omitempty"`
+		Context []*StructureDefinitionContext `json:"context,omitempty"`
+		ContextInvariant []interface{} `json:"contextinvariant,omitempty"`
+		ContextInvariantElement []map[string]interface{} `json:"_contextinvariant,omitempty"`
+		Type interface{} `json:"type,omitempty"`
+		TypeElement map[string]interface{} `json:"_type,omitempty"`
+		BaseDefinition interface{} `json:"basedefinition,omitempty"`
+		BaseDefinitionElement map[string]interface{} `json:"_basedefinition,omitempty"`
+		Derivation *TypeDerivationRule `json:"derivation,omitempty"`
+		Snapshot *StructureDefinitionSnapshot `json:"snapshot,omitempty"`
+		Differential *StructureDefinitionDifferential `json:"differential,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	output.Identifier = m.Identifier
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	output.Status = m.Status
+	if m.Experimental != nil && m.Experimental.Value != nil {
+		output.Experimental = m.Experimental.Value
+		if m.Experimental.Element != nil {
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+		}
+	}
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.Publisher != nil && m.Publisher.Value != nil {
+		output.Publisher = m.Publisher.Value
+		if m.Publisher.Element != nil {
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+		}
+	}
+	output.Contact = m.Contact
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.UseContext = m.UseContext
+	output.Jurisdiction = m.Jurisdiction
+	if m.Purpose != nil && m.Purpose.Value != nil {
+		output.Purpose = m.Purpose.Value
+		if m.Purpose.Element != nil {
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+		}
+	}
+	if m.Copyright != nil && m.Copyright.Value != nil {
+		output.Copyright = m.Copyright.Value
+		if m.Copyright.Element != nil {
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+		}
+	}
+	output.Keyword = m.Keyword
+	output.FhirVersion = m.FhirVersion
+	output.Mapping = m.Mapping
+	output.Kind = m.Kind
+	if m.Abstract_ != nil && m.Abstract_.Value != nil {
+		output.Abstract_ = m.Abstract_.Value
+		if m.Abstract_.Element != nil {
+			output.Abstract_Element = toMapOrNil(m.Abstract_.Element.ToJSON())
+		}
+	}
+	output.Context = m.Context
+	if len(m.ContextInvariant) > 0 {
+		output.ContextInvariant = make([]interface{}, len(m.ContextInvariant))
+		output.ContextInvariantElement = make([]map[string]interface{}, len(m.ContextInvariant))
+		for i, item := range m.ContextInvariant {
+			if item != nil && item.Value != nil {
+				output.ContextInvariant[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.ContextInvariantElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if m.Type != nil && m.Type.Value != nil {
+		output.Type = m.Type.Value
+		if m.Type.Element != nil {
+			output.TypeElement = toMapOrNil(m.Type.Element.ToJSON())
+		}
+	}
+	if m.BaseDefinition != nil && m.BaseDefinition.Value != nil {
+		output.BaseDefinition = m.BaseDefinition.Value
+		if m.BaseDefinition.Element != nil {
+			output.BaseDefinitionElement = toMapOrNil(m.BaseDefinition.Element.ToJSON())
+		}
+	}
+	output.Derivation = m.Derivation
+	output.Snapshot = m.Snapshot
+	output.Differential = m.Differential
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of StructureDefinition
+// Clone creates a deep copy of StructureDefinition.
 func (m *StructureDefinition) Clone() *StructureDefinition {
 	if m == nil { return nil }
 	return &StructureDefinition{
@@ -103,7 +363,7 @@ func (m *StructureDefinition) Clone() *StructureDefinition {
 	}
 }
 
-// Equals checks for equality with another StructureDefinition instance
+// Equals checks equality between two StructureDefinition instances.
 func (m *StructureDefinition) Equals(other *StructureDefinition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -148,7 +408,7 @@ func (m *StructureDefinition) Equals(other *StructureDefinition) bool {
 // StructureDefinitionMapping
 // An external specification that the content is mapped to.
 type StructureDefinitionMapping struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -158,22 +418,87 @@ type StructureDefinitionMapping struct {
 	Comment *FhirString `json:"comment,omitempty"`
 }
 
-// NewStructureDefinitionMapping creates a new StructureDefinitionMapping instance
+// NewStructureDefinitionMapping creates a new StructureDefinitionMapping instance.
 func NewStructureDefinitionMapping() *StructureDefinitionMapping {
 	return &StructureDefinitionMapping{}
 }
 
-// FromJSON populates StructureDefinitionMapping from JSON data
+// FromJSON populates StructureDefinitionMapping from JSON data.
 func (m *StructureDefinitionMapping) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identity *FhirId `json:"identity,omitempty"`
+		Uri *FhirUri `json:"uri,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Comment *FhirString `json:"comment,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identity = temp.Identity
+	m.Uri = temp.Uri
+	m.Name = temp.Name
+	m.Comment = temp.Comment
+	return nil
 }
 
-// ToJSON converts StructureDefinitionMapping to JSON data
+// ToJSON converts StructureDefinitionMapping to JSON data.
 func (m *StructureDefinitionMapping) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identity interface{} `json:"identity,omitempty"`
+		IdentityElement map[string]interface{} `json:"_identity,omitempty"`
+		Uri interface{} `json:"uri,omitempty"`
+		UriElement map[string]interface{} `json:"_uri,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Comment interface{} `json:"comment,omitempty"`
+		CommentElement map[string]interface{} `json:"_comment,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Identity != nil && m.Identity.Value != nil {
+		output.Identity = m.Identity.Value
+		if m.Identity.Element != nil {
+			output.IdentityElement = toMapOrNil(m.Identity.Element.ToJSON())
+		}
+	}
+	if m.Uri != nil && m.Uri.Value != nil {
+		output.Uri = m.Uri.Value
+		if m.Uri.Element != nil {
+			output.UriElement = toMapOrNil(m.Uri.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Comment != nil && m.Comment.Value != nil {
+		output.Comment = m.Comment.Value
+		if m.Comment.Element != nil {
+			output.CommentElement = toMapOrNil(m.Comment.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of StructureDefinitionMapping
+// Clone creates a deep copy of StructureDefinitionMapping.
 func (m *StructureDefinitionMapping) Clone() *StructureDefinitionMapping {
 	if m == nil { return nil }
 	return &StructureDefinitionMapping{
@@ -187,7 +512,7 @@ func (m *StructureDefinitionMapping) Clone() *StructureDefinitionMapping {
 	}
 }
 
-// Equals checks for equality with another StructureDefinitionMapping instance
+// Equals checks equality between two StructureDefinitionMapping instances.
 func (m *StructureDefinitionMapping) Equals(other *StructureDefinitionMapping) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -204,7 +529,7 @@ func (m *StructureDefinitionMapping) Equals(other *StructureDefinitionMapping) b
 // StructureDefinitionContext
 // Identifies the types of resource or data type elements to which the extension can be applied.
 type StructureDefinitionContext struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -212,22 +537,61 @@ type StructureDefinitionContext struct {
 	Expression *FhirString `json:"expression,omitempty"`
 }
 
-// NewStructureDefinitionContext creates a new StructureDefinitionContext instance
+// NewStructureDefinitionContext creates a new StructureDefinitionContext instance.
 func NewStructureDefinitionContext() *StructureDefinitionContext {
 	return &StructureDefinitionContext{}
 }
 
-// FromJSON populates StructureDefinitionContext from JSON data
+// FromJSON populates StructureDefinitionContext from JSON data.
 func (m *StructureDefinitionContext) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *ExtensionContextType `json:"type,omitempty"`
+		Expression *FhirString `json:"expression,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Expression = temp.Expression
+	return nil
 }
 
-// ToJSON converts StructureDefinitionContext to JSON data
+// ToJSON converts StructureDefinitionContext to JSON data.
 func (m *StructureDefinitionContext) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *ExtensionContextType `json:"type,omitempty"`
+		Expression interface{} `json:"expression,omitempty"`
+		ExpressionElement map[string]interface{} `json:"_expression,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	if m.Expression != nil && m.Expression.Value != nil {
+		output.Expression = m.Expression.Value
+		if m.Expression.Element != nil {
+			output.ExpressionElement = toMapOrNil(m.Expression.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of StructureDefinitionContext
+// Clone creates a deep copy of StructureDefinitionContext.
 func (m *StructureDefinitionContext) Clone() *StructureDefinitionContext {
 	if m == nil { return nil }
 	return &StructureDefinitionContext{
@@ -239,7 +603,7 @@ func (m *StructureDefinitionContext) Clone() *StructureDefinitionContext {
 	}
 }
 
-// Equals checks for equality with another StructureDefinitionContext instance
+// Equals checks equality between two StructureDefinitionContext instances.
 func (m *StructureDefinitionContext) Equals(other *StructureDefinitionContext) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -254,29 +618,58 @@ func (m *StructureDefinitionContext) Equals(other *StructureDefinitionContext) b
 // StructureDefinitionSnapshot
 // A snapshot view is expressed in a standalone form that can be used and interpreted without considering the base StructureDefinition.
 type StructureDefinitionSnapshot struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
 	Element []*ElementDefinition `json:"element,omitempty"`
 }
 
-// NewStructureDefinitionSnapshot creates a new StructureDefinitionSnapshot instance
+// NewStructureDefinitionSnapshot creates a new StructureDefinitionSnapshot instance.
 func NewStructureDefinitionSnapshot() *StructureDefinitionSnapshot {
 	return &StructureDefinitionSnapshot{}
 }
 
-// FromJSON populates StructureDefinitionSnapshot from JSON data
+// FromJSON populates StructureDefinitionSnapshot from JSON data.
 func (m *StructureDefinitionSnapshot) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Element []*ElementDefinition `json:"element,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Element = temp.Element
+	return nil
 }
 
-// ToJSON converts StructureDefinitionSnapshot to JSON data
+// ToJSON converts StructureDefinitionSnapshot to JSON data.
 func (m *StructureDefinitionSnapshot) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Element []*ElementDefinition `json:"element,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Element = m.Element
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of StructureDefinitionSnapshot
+// Clone creates a deep copy of StructureDefinitionSnapshot.
 func (m *StructureDefinitionSnapshot) Clone() *StructureDefinitionSnapshot {
 	if m == nil { return nil }
 	return &StructureDefinitionSnapshot{
@@ -287,7 +680,7 @@ func (m *StructureDefinitionSnapshot) Clone() *StructureDefinitionSnapshot {
 	}
 }
 
-// Equals checks for equality with another StructureDefinitionSnapshot instance
+// Equals checks equality between two StructureDefinitionSnapshot instances.
 func (m *StructureDefinitionSnapshot) Equals(other *StructureDefinitionSnapshot) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -301,29 +694,58 @@ func (m *StructureDefinitionSnapshot) Equals(other *StructureDefinitionSnapshot)
 // StructureDefinitionDifferential
 // A differential view is expressed relative to the base StructureDefinition - a statement of differences that it applies.
 type StructureDefinitionDifferential struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
 	Element []*ElementDefinition `json:"element,omitempty"`
 }
 
-// NewStructureDefinitionDifferential creates a new StructureDefinitionDifferential instance
+// NewStructureDefinitionDifferential creates a new StructureDefinitionDifferential instance.
 func NewStructureDefinitionDifferential() *StructureDefinitionDifferential {
 	return &StructureDefinitionDifferential{}
 }
 
-// FromJSON populates StructureDefinitionDifferential from JSON data
+// FromJSON populates StructureDefinitionDifferential from JSON data.
 func (m *StructureDefinitionDifferential) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Element []*ElementDefinition `json:"element,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Element = temp.Element
+	return nil
 }
 
-// ToJSON converts StructureDefinitionDifferential to JSON data
+// ToJSON converts StructureDefinitionDifferential to JSON data.
 func (m *StructureDefinitionDifferential) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Element []*ElementDefinition `json:"element,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Element = m.Element
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of StructureDefinitionDifferential
+// Clone creates a deep copy of StructureDefinitionDifferential.
 func (m *StructureDefinitionDifferential) Clone() *StructureDefinitionDifferential {
 	if m == nil { return nil }
 	return &StructureDefinitionDifferential{
@@ -334,7 +756,7 @@ func (m *StructureDefinitionDifferential) Clone() *StructureDefinitionDifferenti
 	}
 }
 
-// Equals checks for equality with another StructureDefinitionDifferential instance
+// Equals checks equality between two StructureDefinitionDifferential instances.
 func (m *StructureDefinitionDifferential) Equals(other *StructureDefinitionDifferential) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

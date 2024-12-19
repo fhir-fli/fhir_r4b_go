@@ -3,6 +3,7 @@ package fhir_r4b_go
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 
 	"github.com/google/uuid"
 )
@@ -20,6 +21,30 @@ func NewFhirUuid(input string, element *Element) (*FhirUuid, error) {
 		return nil, errors.New("invalid FhirUuid: " + input)
 	}
 	return &FhirUuid{Value: &parsedUUID, Element: element}, nil
+}
+
+// NewFhirUuidFromMap creates a FhirUuid instance from a map.
+func NewFhirUuidFromMap(data map[string]interface{}) (*FhirUuid, error) {
+	valueStr, ok := data["value"].(string)
+	if !ok {
+		return nil, errors.New("invalid or missing value for FhirUuid")
+	}
+
+	uuidValue, err := uuid.Parse(valueStr)
+	if err != nil {
+		return nil, fmt.Errorf("invalid UUID value for FhirUuid: %v", err)
+	}
+
+	uuidInstance := &FhirUuid{Value: &uuidValue}
+
+	if elementData, ok := data["_value"].(map[string]interface{}); ok {
+		uuidInstance.Element = &Element{}
+		if err := mapToStruct(elementData, uuidInstance.Element); err != nil {
+			return nil, fmt.Errorf("failed to parse _value for FhirUuid: %v", err)
+		}
+	}
+
+	return uuidInstance, nil
 }
 
 // GenerateFhirUuidV4 generates a new version 4 UUID.
@@ -43,7 +68,7 @@ func (f *FhirUuid) MarshalJSON() ([]byte, error) {
 // UnmarshalJSON deserializes JSON into FhirUuid.
 func (f *FhirUuid) UnmarshalJSON(data []byte) error {
 	temp := struct {
-		Value   string   `json:"value"`
+		Value   *string  `json:"value"`
 		Element *Element `json:"_value"`
 	}{}
 
@@ -51,8 +76,8 @@ func (f *FhirUuid) UnmarshalJSON(data []byte) error {
 		return err
 	}
 
-	if temp.Value != "" {
-		parsedUUID, err := uuid.Parse(temp.Value)
+	if *temp.Value != "" {
+		parsedUUID, err := uuid.Parse(*temp.Value)
 		if err != nil {
 			return errors.New("invalid FhirUuid value")
 		}

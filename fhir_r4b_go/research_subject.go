@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // ResearchSubject
 // A physical entity which is the primary unit of operational and/or administrative interest in a study.
 type ResearchSubject struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -27,22 +28,117 @@ type ResearchSubject struct {
 	Consent *Reference `json:"consent,omitempty"`
 }
 
-// NewResearchSubject creates a new ResearchSubject instance
+// NewResearchSubject creates a new ResearchSubject instance.
 func NewResearchSubject() *ResearchSubject {
 	return &ResearchSubject{}
 }
 
-// FromJSON populates ResearchSubject from JSON data
+// FromJSON populates ResearchSubject from JSON data.
 func (m *ResearchSubject) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *ResearchSubjectStatus `json:"status,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Study *Reference `json:"study,omitempty"`
+		Individual *Reference `json:"individual,omitempty"`
+		AssignedArm *FhirString `json:"assignedarm,omitempty"`
+		ActualArm *FhirString `json:"actualarm,omitempty"`
+		Consent *Reference `json:"consent,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.Period = temp.Period
+	m.Study = temp.Study
+	m.Individual = temp.Individual
+	m.AssignedArm = temp.AssignedArm
+	m.ActualArm = temp.ActualArm
+	m.Consent = temp.Consent
+	return nil
 }
 
-// ToJSON converts ResearchSubject to JSON data
+// ToJSON converts ResearchSubject to JSON data.
 func (m *ResearchSubject) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *ResearchSubjectStatus `json:"status,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Study *Reference `json:"study,omitempty"`
+		Individual *Reference `json:"individual,omitempty"`
+		AssignedArm interface{} `json:"assignedarm,omitempty"`
+		AssignedArmElement map[string]interface{} `json:"_assignedarm,omitempty"`
+		ActualArm interface{} `json:"actualarm,omitempty"`
+		ActualArmElement map[string]interface{} `json:"_actualarm,omitempty"`
+		Consent *Reference `json:"consent,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	output.Period = m.Period
+	output.Study = m.Study
+	output.Individual = m.Individual
+	if m.AssignedArm != nil && m.AssignedArm.Value != nil {
+		output.AssignedArm = m.AssignedArm.Value
+		if m.AssignedArm.Element != nil {
+			output.AssignedArmElement = toMapOrNil(m.AssignedArm.Element.ToJSON())
+		}
+	}
+	if m.ActualArm != nil && m.ActualArm.Value != nil {
+		output.ActualArm = m.ActualArm.Value
+		if m.ActualArm.Element != nil {
+			output.ActualArmElement = toMapOrNil(m.ActualArm.Element.ToJSON())
+		}
+	}
+	output.Consent = m.Consent
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ResearchSubject
+// Clone creates a deep copy of ResearchSubject.
 func (m *ResearchSubject) Clone() *ResearchSubject {
 	if m == nil { return nil }
 	return &ResearchSubject{
@@ -65,7 +161,7 @@ func (m *ResearchSubject) Clone() *ResearchSubject {
 	}
 }
 
-// Equals checks for equality with another ResearchSubject instance
+// Equals checks equality between two ResearchSubject instances.
 func (m *ResearchSubject) Equals(other *ResearchSubject) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // Address
 // An address expressed using postal conventions (as opposed to GPS or other location definition formats).  This data type may be used to convey addresses for use in delivering mail as well as for visiting locations which might not be valid for mail delivery.  There are a variety of postal address formats defined around the world.
 type Address struct {
-	DataType
+	extends DataType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	Use *AddressUse `json:"use,omitempty"`
@@ -23,22 +25,140 @@ type Address struct {
 	Period *Period `json:"period,omitempty"`
 }
 
-// NewAddress creates a new Address instance
+// NewAddress creates a new Address instance.
 func NewAddress() *Address {
 	return &Address{}
 }
 
-// FromJSON populates Address from JSON data
+// FromJSON populates Address from JSON data.
 func (m *Address) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Use *AddressUse `json:"use,omitempty"`
+		Type *AddressType `json:"type,omitempty"`
+		Text *FhirString `json:"text,omitempty"`
+		Line []interface{} `json:"line,omitempty"`
+		City *FhirString `json:"city,omitempty"`
+		District *FhirString `json:"district,omitempty"`
+		State *FhirString `json:"state,omitempty"`
+		PostalCode *FhirString `json:"postalcode,omitempty"`
+		Country *FhirString `json:"country,omitempty"`
+		Period *Period `json:"period,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.Use = temp.Use
+	m.Type = temp.Type
+	m.Text = temp.Text
+	if len(temp.Line) > 0 {
+		m.Line = make([]*FhirString, len(temp.Line))
+		for i := range temp.Line {
+			itemMap, ok := temp.Line[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Line[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Line[%d]: %v", i, err) }
+			m.Line[i] = primitive
+		}
+	}
+	m.City = temp.City
+	m.District = temp.District
+	m.State = temp.State
+	m.PostalCode = temp.PostalCode
+	m.Country = temp.Country
+	m.Period = temp.Period
+	return nil
 }
 
-// ToJSON converts Address to JSON data
+// ToJSON converts Address to JSON data.
 func (m *Address) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Use *AddressUse `json:"use,omitempty"`
+		Type *AddressType `json:"type,omitempty"`
+		Text interface{} `json:"text,omitempty"`
+		TextElement map[string]interface{} `json:"_text,omitempty"`
+		Line []interface{} `json:"line,omitempty"`
+		LineElement []map[string]interface{} `json:"_line,omitempty"`
+		City interface{} `json:"city,omitempty"`
+		CityElement map[string]interface{} `json:"_city,omitempty"`
+		District interface{} `json:"district,omitempty"`
+		DistrictElement map[string]interface{} `json:"_district,omitempty"`
+		State interface{} `json:"state,omitempty"`
+		StateElement map[string]interface{} `json:"_state,omitempty"`
+		PostalCode interface{} `json:"postalcode,omitempty"`
+		PostalCodeElement map[string]interface{} `json:"_postalcode,omitempty"`
+		Country interface{} `json:"country,omitempty"`
+		CountryElement map[string]interface{} `json:"_country,omitempty"`
+		Period *Period `json:"period,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.Use = m.Use
+	output.Type = m.Type
+	if m.Text != nil && m.Text.Value != nil {
+		output.Text = m.Text.Value
+		if m.Text.Element != nil {
+			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+		}
+	}
+	if len(m.Line) > 0 {
+		output.Line = make([]interface{}, len(m.Line))
+		output.LineElement = make([]map[string]interface{}, len(m.Line))
+		for i, item := range m.Line {
+			if item != nil && item.Value != nil {
+				output.Line[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.LineElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if m.City != nil && m.City.Value != nil {
+		output.City = m.City.Value
+		if m.City.Element != nil {
+			output.CityElement = toMapOrNil(m.City.Element.ToJSON())
+		}
+	}
+	if m.District != nil && m.District.Value != nil {
+		output.District = m.District.Value
+		if m.District.Element != nil {
+			output.DistrictElement = toMapOrNil(m.District.Element.ToJSON())
+		}
+	}
+	if m.State != nil && m.State.Value != nil {
+		output.State = m.State.Value
+		if m.State.Element != nil {
+			output.StateElement = toMapOrNil(m.State.Element.ToJSON())
+		}
+	}
+	if m.PostalCode != nil && m.PostalCode.Value != nil {
+		output.PostalCode = m.PostalCode.Value
+		if m.PostalCode.Element != nil {
+			output.PostalCodeElement = toMapOrNil(m.PostalCode.Element.ToJSON())
+		}
+	}
+	if m.Country != nil && m.Country.Value != nil {
+		output.Country = m.Country.Value
+		if m.Country.Element != nil {
+			output.CountryElement = toMapOrNil(m.Country.Element.ToJSON())
+		}
+	}
+	output.Period = m.Period
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Address
+// Clone creates a deep copy of Address.
 func (m *Address) Clone() *Address {
 	if m == nil { return nil }
 	return &Address{
@@ -57,7 +177,7 @@ func (m *Address) Clone() *Address {
 	}
 }
 
-// Equals checks for equality with another Address instance
+// Equals checks equality between two Address instances.
 func (m *Address) Equals(other *Address) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

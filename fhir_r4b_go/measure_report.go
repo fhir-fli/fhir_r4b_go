@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // MeasureReport
 // The MeasureReport resource contains the results of the calculation of a measure; and optionally a reference to the resources involved in that calculation.
 type MeasureReport struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -30,22 +31,129 @@ type MeasureReport struct {
 	EvaluatedResource []*Reference `json:"evaluatedresource,omitempty"`
 }
 
-// NewMeasureReport creates a new MeasureReport instance
+// NewMeasureReport creates a new MeasureReport instance.
 func NewMeasureReport() *MeasureReport {
 	return &MeasureReport{}
 }
 
-// FromJSON populates MeasureReport from JSON data
+// FromJSON populates MeasureReport from JSON data.
 func (m *MeasureReport) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *MeasureReportStatus `json:"status,omitempty"`
+		Type *MeasureReportType `json:"type,omitempty"`
+		Measure *FhirCanonical `json:"measure,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Reporter *Reference `json:"reporter,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		ImprovementNotation *CodeableConcept `json:"improvementnotation,omitempty"`
+		Group []*MeasureReportGroup `json:"group,omitempty"`
+		EvaluatedResource []*Reference `json:"evaluatedresource,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.Type = temp.Type
+	m.Measure = temp.Measure
+	m.Subject = temp.Subject
+	m.Date = temp.Date
+	m.Reporter = temp.Reporter
+	m.Period = temp.Period
+	m.ImprovementNotation = temp.ImprovementNotation
+	m.Group = temp.Group
+	m.EvaluatedResource = temp.EvaluatedResource
+	return nil
 }
 
-// ToJSON converts MeasureReport to JSON data
+// ToJSON converts MeasureReport to JSON data.
 func (m *MeasureReport) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *MeasureReportStatus `json:"status,omitempty"`
+		Type *MeasureReportType `json:"type,omitempty"`
+		Measure interface{} `json:"measure,omitempty"`
+		MeasureElement map[string]interface{} `json:"_measure,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Reporter *Reference `json:"reporter,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		ImprovementNotation *CodeableConcept `json:"improvementnotation,omitempty"`
+		Group []*MeasureReportGroup `json:"group,omitempty"`
+		EvaluatedResource []*Reference `json:"evaluatedresource,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	output.Type = m.Type
+	if m.Measure != nil && m.Measure.Value != nil {
+		output.Measure = m.Measure.Value
+		if m.Measure.Element != nil {
+			output.MeasureElement = toMapOrNil(m.Measure.Element.ToJSON())
+		}
+	}
+	output.Subject = m.Subject
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	output.Reporter = m.Reporter
+	output.Period = m.Period
+	output.ImprovementNotation = m.ImprovementNotation
+	output.Group = m.Group
+	output.EvaluatedResource = m.EvaluatedResource
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MeasureReport
+// Clone creates a deep copy of MeasureReport.
 func (m *MeasureReport) Clone() *MeasureReport {
 	if m == nil { return nil }
 	return &MeasureReport{
@@ -71,7 +179,7 @@ func (m *MeasureReport) Clone() *MeasureReport {
 	}
 }
 
-// Equals checks for equality with another MeasureReport instance
+// Equals checks equality between two MeasureReport instances.
 func (m *MeasureReport) Equals(other *MeasureReport) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -100,7 +208,7 @@ func (m *MeasureReport) Equals(other *MeasureReport) bool {
 // MeasureReportGroup
 // The results of the calculation, one for each population group in the measure.
 type MeasureReportGroup struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -110,22 +218,63 @@ type MeasureReportGroup struct {
 	Stratifier []*MeasureReportStratifier `json:"stratifier,omitempty"`
 }
 
-// NewMeasureReportGroup creates a new MeasureReportGroup instance
+// NewMeasureReportGroup creates a new MeasureReportGroup instance.
 func NewMeasureReportGroup() *MeasureReportGroup {
 	return &MeasureReportGroup{}
 }
 
-// FromJSON populates MeasureReportGroup from JSON data
+// FromJSON populates MeasureReportGroup from JSON data.
 func (m *MeasureReportGroup) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Population []*MeasureReportPopulation `json:"population,omitempty"`
+		MeasureScore *Quantity `json:"measurescore,omitempty"`
+		Stratifier []*MeasureReportStratifier `json:"stratifier,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Population = temp.Population
+	m.MeasureScore = temp.MeasureScore
+	m.Stratifier = temp.Stratifier
+	return nil
 }
 
-// ToJSON converts MeasureReportGroup to JSON data
+// ToJSON converts MeasureReportGroup to JSON data.
 func (m *MeasureReportGroup) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Population []*MeasureReportPopulation `json:"population,omitempty"`
+		MeasureScore *Quantity `json:"measurescore,omitempty"`
+		Stratifier []*MeasureReportStratifier `json:"stratifier,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	output.Population = m.Population
+	output.MeasureScore = m.MeasureScore
+	output.Stratifier = m.Stratifier
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MeasureReportGroup
+// Clone creates a deep copy of MeasureReportGroup.
 func (m *MeasureReportGroup) Clone() *MeasureReportGroup {
 	if m == nil { return nil }
 	return &MeasureReportGroup{
@@ -139,7 +288,7 @@ func (m *MeasureReportGroup) Clone() *MeasureReportGroup {
 	}
 }
 
-// Equals checks for equality with another MeasureReportGroup instance
+// Equals checks equality between two MeasureReportGroup instances.
 func (m *MeasureReportGroup) Equals(other *MeasureReportGroup) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -156,7 +305,7 @@ func (m *MeasureReportGroup) Equals(other *MeasureReportGroup) bool {
 // MeasureReportPopulation
 // The populations that make up the population group, one for each type of population appropriate for the measure.
 type MeasureReportPopulation struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -165,22 +314,65 @@ type MeasureReportPopulation struct {
 	SubjectResults *Reference `json:"subjectresults,omitempty"`
 }
 
-// NewMeasureReportPopulation creates a new MeasureReportPopulation instance
+// NewMeasureReportPopulation creates a new MeasureReportPopulation instance.
 func NewMeasureReportPopulation() *MeasureReportPopulation {
 	return &MeasureReportPopulation{}
 }
 
-// FromJSON populates MeasureReportPopulation from JSON data
+// FromJSON populates MeasureReportPopulation from JSON data.
 func (m *MeasureReportPopulation) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Count *FhirInteger `json:"count,omitempty"`
+		SubjectResults *Reference `json:"subjectresults,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Count = temp.Count
+	m.SubjectResults = temp.SubjectResults
+	return nil
 }
 
-// ToJSON converts MeasureReportPopulation to JSON data
+// ToJSON converts MeasureReportPopulation to JSON data.
 func (m *MeasureReportPopulation) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Count interface{} `json:"count,omitempty"`
+		CountElement map[string]interface{} `json:"_count,omitempty"`
+		SubjectResults *Reference `json:"subjectresults,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	if m.Count != nil && m.Count.Value != nil {
+		output.Count = m.Count.Value
+		if m.Count.Element != nil {
+			output.CountElement = toMapOrNil(m.Count.Element.ToJSON())
+		}
+	}
+	output.SubjectResults = m.SubjectResults
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MeasureReportPopulation
+// Clone creates a deep copy of MeasureReportPopulation.
 func (m *MeasureReportPopulation) Clone() *MeasureReportPopulation {
 	if m == nil { return nil }
 	return &MeasureReportPopulation{
@@ -193,7 +385,7 @@ func (m *MeasureReportPopulation) Clone() *MeasureReportPopulation {
 	}
 }
 
-// Equals checks for equality with another MeasureReportPopulation instance
+// Equals checks equality between two MeasureReportPopulation instances.
 func (m *MeasureReportPopulation) Equals(other *MeasureReportPopulation) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -209,7 +401,7 @@ func (m *MeasureReportPopulation) Equals(other *MeasureReportPopulation) bool {
 // MeasureReportStratifier
 // When a measure includes multiple stratifiers, there will be a stratifier group for each stratifier defined by the measure.
 type MeasureReportStratifier struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -217,22 +409,55 @@ type MeasureReportStratifier struct {
 	Stratum []*MeasureReportStratum `json:"stratum,omitempty"`
 }
 
-// NewMeasureReportStratifier creates a new MeasureReportStratifier instance
+// NewMeasureReportStratifier creates a new MeasureReportStratifier instance.
 func NewMeasureReportStratifier() *MeasureReportStratifier {
 	return &MeasureReportStratifier{}
 }
 
-// FromJSON populates MeasureReportStratifier from JSON data
+// FromJSON populates MeasureReportStratifier from JSON data.
 func (m *MeasureReportStratifier) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code []*CodeableConcept `json:"code,omitempty"`
+		Stratum []*MeasureReportStratum `json:"stratum,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Stratum = temp.Stratum
+	return nil
 }
 
-// ToJSON converts MeasureReportStratifier to JSON data
+// ToJSON converts MeasureReportStratifier to JSON data.
 func (m *MeasureReportStratifier) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code []*CodeableConcept `json:"code,omitempty"`
+		Stratum []*MeasureReportStratum `json:"stratum,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	output.Stratum = m.Stratum
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MeasureReportStratifier
+// Clone creates a deep copy of MeasureReportStratifier.
 func (m *MeasureReportStratifier) Clone() *MeasureReportStratifier {
 	if m == nil { return nil }
 	return &MeasureReportStratifier{
@@ -244,7 +469,7 @@ func (m *MeasureReportStratifier) Clone() *MeasureReportStratifier {
 	}
 }
 
-// Equals checks for equality with another MeasureReportStratifier instance
+// Equals checks equality between two MeasureReportStratifier instances.
 func (m *MeasureReportStratifier) Equals(other *MeasureReportStratifier) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -259,7 +484,7 @@ func (m *MeasureReportStratifier) Equals(other *MeasureReportStratifier) bool {
 // MeasureReportStratum
 // This element contains the results for a single stratum within the stratifier. For example, when stratifying on administrative gender, there will be four strata, one for each possible gender value.
 type MeasureReportStratum struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -269,22 +494,63 @@ type MeasureReportStratum struct {
 	MeasureScore *Quantity `json:"measurescore,omitempty"`
 }
 
-// NewMeasureReportStratum creates a new MeasureReportStratum instance
+// NewMeasureReportStratum creates a new MeasureReportStratum instance.
 func NewMeasureReportStratum() *MeasureReportStratum {
 	return &MeasureReportStratum{}
 }
 
-// FromJSON populates MeasureReportStratum from JSON data
+// FromJSON populates MeasureReportStratum from JSON data.
 func (m *MeasureReportStratum) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Value *CodeableConcept `json:"value,omitempty"`
+		Component []*MeasureReportComponent `json:"component,omitempty"`
+		Population []*MeasureReportPopulation `json:"population,omitempty"`
+		MeasureScore *Quantity `json:"measurescore,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Value = temp.Value
+	m.Component = temp.Component
+	m.Population = temp.Population
+	m.MeasureScore = temp.MeasureScore
+	return nil
 }
 
-// ToJSON converts MeasureReportStratum to JSON data
+// ToJSON converts MeasureReportStratum to JSON data.
 func (m *MeasureReportStratum) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Value *CodeableConcept `json:"value,omitempty"`
+		Component []*MeasureReportComponent `json:"component,omitempty"`
+		Population []*MeasureReportPopulation `json:"population,omitempty"`
+		MeasureScore *Quantity `json:"measurescore,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Value = m.Value
+	output.Component = m.Component
+	output.Population = m.Population
+	output.MeasureScore = m.MeasureScore
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MeasureReportStratum
+// Clone creates a deep copy of MeasureReportStratum.
 func (m *MeasureReportStratum) Clone() *MeasureReportStratum {
 	if m == nil { return nil }
 	return &MeasureReportStratum{
@@ -298,7 +564,7 @@ func (m *MeasureReportStratum) Clone() *MeasureReportStratum {
 	}
 }
 
-// Equals checks for equality with another MeasureReportStratum instance
+// Equals checks equality between two MeasureReportStratum instances.
 func (m *MeasureReportStratum) Equals(other *MeasureReportStratum) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -315,7 +581,7 @@ func (m *MeasureReportStratum) Equals(other *MeasureReportStratum) bool {
 // MeasureReportComponent
 // A stratifier component value.
 type MeasureReportComponent struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -323,22 +589,55 @@ type MeasureReportComponent struct {
 	Value *CodeableConcept `json:"value,omitempty"`
 }
 
-// NewMeasureReportComponent creates a new MeasureReportComponent instance
+// NewMeasureReportComponent creates a new MeasureReportComponent instance.
 func NewMeasureReportComponent() *MeasureReportComponent {
 	return &MeasureReportComponent{}
 }
 
-// FromJSON populates MeasureReportComponent from JSON data
+// FromJSON populates MeasureReportComponent from JSON data.
 func (m *MeasureReportComponent) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Value *CodeableConcept `json:"value,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Value = temp.Value
+	return nil
 }
 
-// ToJSON converts MeasureReportComponent to JSON data
+// ToJSON converts MeasureReportComponent to JSON data.
 func (m *MeasureReportComponent) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Value *CodeableConcept `json:"value,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	output.Value = m.Value
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MeasureReportComponent
+// Clone creates a deep copy of MeasureReportComponent.
 func (m *MeasureReportComponent) Clone() *MeasureReportComponent {
 	if m == nil { return nil }
 	return &MeasureReportComponent{
@@ -350,7 +649,7 @@ func (m *MeasureReportComponent) Clone() *MeasureReportComponent {
 	}
 }
 
-// Equals checks for equality with another MeasureReportComponent instance
+// Equals checks equality between two MeasureReportComponent instances.
 func (m *MeasureReportComponent) Equals(other *MeasureReportComponent) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -365,7 +664,7 @@ func (m *MeasureReportComponent) Equals(other *MeasureReportComponent) bool {
 // MeasureReportPopulation1
 // The populations that make up the stratum, one for each type of population appropriate to the measure.
 type MeasureReportPopulation1 struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -374,22 +673,65 @@ type MeasureReportPopulation1 struct {
 	SubjectResults *Reference `json:"subjectresults,omitempty"`
 }
 
-// NewMeasureReportPopulation1 creates a new MeasureReportPopulation1 instance
+// NewMeasureReportPopulation1 creates a new MeasureReportPopulation1 instance.
 func NewMeasureReportPopulation1() *MeasureReportPopulation1 {
 	return &MeasureReportPopulation1{}
 }
 
-// FromJSON populates MeasureReportPopulation1 from JSON data
+// FromJSON populates MeasureReportPopulation1 from JSON data.
 func (m *MeasureReportPopulation1) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Count *FhirInteger `json:"count,omitempty"`
+		SubjectResults *Reference `json:"subjectresults,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Count = temp.Count
+	m.SubjectResults = temp.SubjectResults
+	return nil
 }
 
-// ToJSON converts MeasureReportPopulation1 to JSON data
+// ToJSON converts MeasureReportPopulation1 to JSON data.
 func (m *MeasureReportPopulation1) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Count interface{} `json:"count,omitempty"`
+		CountElement map[string]interface{} `json:"_count,omitempty"`
+		SubjectResults *Reference `json:"subjectresults,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	if m.Count != nil && m.Count.Value != nil {
+		output.Count = m.Count.Value
+		if m.Count.Element != nil {
+			output.CountElement = toMapOrNil(m.Count.Element.ToJSON())
+		}
+	}
+	output.SubjectResults = m.SubjectResults
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MeasureReportPopulation1
+// Clone creates a deep copy of MeasureReportPopulation1.
 func (m *MeasureReportPopulation1) Clone() *MeasureReportPopulation1 {
 	if m == nil { return nil }
 	return &MeasureReportPopulation1{
@@ -402,7 +744,7 @@ func (m *MeasureReportPopulation1) Clone() *MeasureReportPopulation1 {
 	}
 }
 
-// Equals checks for equality with another MeasureReportPopulation1 instance
+// Equals checks equality between two MeasureReportPopulation1 instances.
 func (m *MeasureReportPopulation1) Equals(other *MeasureReportPopulation1) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

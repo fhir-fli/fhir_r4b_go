@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // FhirMeta
 // The metadata about a resource. This is content in the resource that is maintained by the infrastructure. Changes to the content might not always be associated with version changes to the resource.
 type FhirMeta struct {
-	DataType
+	extends DataType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	VersionId *FhirId `json:"versionid,omitempty"`
@@ -19,22 +21,106 @@ type FhirMeta struct {
 	Tag []*Coding `json:"tag,omitempty"`
 }
 
-// NewFhirMeta creates a new FhirMeta instance
+// NewFhirMeta creates a new FhirMeta instance.
 func NewFhirMeta() *FhirMeta {
 	return &FhirMeta{}
 }
 
-// FromJSON populates FhirMeta from JSON data
+// FromJSON populates FhirMeta from JSON data.
 func (m *FhirMeta) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		VersionId *FhirId `json:"versionid,omitempty"`
+		LastUpdated *FhirInstant `json:"lastupdated,omitempty"`
+		Source *FhirUri `json:"source,omitempty"`
+		Profile []interface{} `json:"profile,omitempty"`
+		Security []*Coding `json:"security,omitempty"`
+		Tag []*Coding `json:"tag,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.VersionId = temp.VersionId
+	m.LastUpdated = temp.LastUpdated
+	m.Source = temp.Source
+	if len(temp.Profile) > 0 {
+		m.Profile = make([]*FhirCanonical, len(temp.Profile))
+		for i := range temp.Profile {
+			itemMap, ok := temp.Profile[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Profile[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Profile[%d]: %v", i, err) }
+			m.Profile[i] = primitive
+		}
+	}
+	m.Security = temp.Security
+	m.Tag = temp.Tag
+	return nil
 }
 
-// ToJSON converts FhirMeta to JSON data
+// ToJSON converts FhirMeta to JSON data.
 func (m *FhirMeta) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		VersionId interface{} `json:"versionid,omitempty"`
+		VersionIdElement map[string]interface{} `json:"_versionid,omitempty"`
+		LastUpdated interface{} `json:"lastupdated,omitempty"`
+		LastUpdatedElement map[string]interface{} `json:"_lastupdated,omitempty"`
+		Source interface{} `json:"source,omitempty"`
+		SourceElement map[string]interface{} `json:"_source,omitempty"`
+		Profile []interface{} `json:"profile,omitempty"`
+		ProfileElement []map[string]interface{} `json:"_profile,omitempty"`
+		Security []*Coding `json:"security,omitempty"`
+		Tag []*Coding `json:"tag,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	if m.VersionId != nil && m.VersionId.Value != nil {
+		output.VersionId = m.VersionId.Value
+		if m.VersionId.Element != nil {
+			output.VersionIdElement = toMapOrNil(m.VersionId.Element.ToJSON())
+		}
+	}
+	if m.LastUpdated != nil && m.LastUpdated.Value != nil {
+		output.LastUpdated = m.LastUpdated.Value
+		if m.LastUpdated.Element != nil {
+			output.LastUpdatedElement = toMapOrNil(m.LastUpdated.Element.ToJSON())
+		}
+	}
+	if m.Source != nil && m.Source.Value != nil {
+		output.Source = m.Source.Value
+		if m.Source.Element != nil {
+			output.SourceElement = toMapOrNil(m.Source.Element.ToJSON())
+		}
+	}
+	if len(m.Profile) > 0 {
+		output.Profile = make([]interface{}, len(m.Profile))
+		output.ProfileElement = make([]map[string]interface{}, len(m.Profile))
+		for i, item := range m.Profile {
+			if item != nil && item.Value != nil {
+				output.Profile[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.ProfileElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Security = m.Security
+	output.Tag = m.Tag
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of FhirMeta
+// Clone creates a deep copy of FhirMeta.
 func (m *FhirMeta) Clone() *FhirMeta {
 	if m == nil { return nil }
 	return &FhirMeta{
@@ -49,7 +135,7 @@ func (m *FhirMeta) Clone() *FhirMeta {
 	}
 }
 
-// Equals checks for equality with another FhirMeta instance
+// Equals checks equality between two FhirMeta instances.
 func (m *FhirMeta) Equals(other *FhirMeta) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

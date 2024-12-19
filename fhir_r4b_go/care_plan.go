@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // CarePlan
 // Describes the intention of how one or more practitioners intend to deliver care for a particular patient, group or community for a period of time, possibly limited to care for a specific condition or set of conditions.
 type CarePlan struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -42,22 +44,225 @@ type CarePlan struct {
 	Note []*Annotation `json:"note,omitempty"`
 }
 
-// NewCarePlan creates a new CarePlan instance
+// NewCarePlan creates a new CarePlan instance.
 func NewCarePlan() *CarePlan {
 	return &CarePlan{}
 }
 
-// FromJSON populates CarePlan from JSON data
+// FromJSON populates CarePlan from JSON data.
 func (m *CarePlan) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		InstantiatesCanonical []interface{} `json:"instantiatescanonical,omitempty"`
+		InstantiatesUri []interface{} `json:"instantiatesuri,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		Replaces []*Reference `json:"replaces,omitempty"`
+		PartOf []*Reference `json:"partof,omitempty"`
+		Status *RequestStatus `json:"status,omitempty"`
+		Intent *CarePlanIntent `json:"intent,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Created *FhirDateTime `json:"created,omitempty"`
+		Author *Reference `json:"author,omitempty"`
+		Contributor []*Reference `json:"contributor,omitempty"`
+		CareTeam []*Reference `json:"careteam,omitempty"`
+		Addresses []*Reference `json:"addresses,omitempty"`
+		SupportingInfo []*Reference `json:"supportinginfo,omitempty"`
+		Goal []*Reference `json:"goal,omitempty"`
+		Activity []*CarePlanActivity `json:"activity,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	if len(temp.InstantiatesCanonical) > 0 {
+		m.InstantiatesCanonical = make([]*FhirCanonical, len(temp.InstantiatesCanonical))
+		for i := range temp.InstantiatesCanonical {
+			itemMap, ok := temp.InstantiatesCanonical[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for InstantiatesCanonical[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse InstantiatesCanonical[%d]: %v", i, err) }
+			m.InstantiatesCanonical[i] = primitive
+		}
+	}
+	if len(temp.InstantiatesUri) > 0 {
+		m.InstantiatesUri = make([]*FhirUri, len(temp.InstantiatesUri))
+		for i := range temp.InstantiatesUri {
+			itemMap, ok := temp.InstantiatesUri[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for InstantiatesUri[%d]: expected map", i) }
+			primitive, err := NewFhirUriFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse InstantiatesUri[%d]: %v", i, err) }
+			m.InstantiatesUri[i] = primitive
+		}
+	}
+	m.BasedOn = temp.BasedOn
+	m.Replaces = temp.Replaces
+	m.PartOf = temp.PartOf
+	m.Status = temp.Status
+	m.Intent = temp.Intent
+	m.Category = temp.Category
+	m.Title = temp.Title
+	m.Description = temp.Description
+	m.Subject = temp.Subject
+	m.Encounter = temp.Encounter
+	m.Period = temp.Period
+	m.Created = temp.Created
+	m.Author = temp.Author
+	m.Contributor = temp.Contributor
+	m.CareTeam = temp.CareTeam
+	m.Addresses = temp.Addresses
+	m.SupportingInfo = temp.SupportingInfo
+	m.Goal = temp.Goal
+	m.Activity = temp.Activity
+	m.Note = temp.Note
+	return nil
 }
 
-// ToJSON converts CarePlan to JSON data
+// ToJSON converts CarePlan to JSON data.
 func (m *CarePlan) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		InstantiatesCanonical []interface{} `json:"instantiatescanonical,omitempty"`
+		InstantiatesCanonicalElement []map[string]interface{} `json:"_instantiatescanonical,omitempty"`
+		InstantiatesUri []interface{} `json:"instantiatesuri,omitempty"`
+		InstantiatesUriElement []map[string]interface{} `json:"_instantiatesuri,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		Replaces []*Reference `json:"replaces,omitempty"`
+		PartOf []*Reference `json:"partof,omitempty"`
+		Status *RequestStatus `json:"status,omitempty"`
+		Intent *CarePlanIntent `json:"intent,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Created interface{} `json:"created,omitempty"`
+		CreatedElement map[string]interface{} `json:"_created,omitempty"`
+		Author *Reference `json:"author,omitempty"`
+		Contributor []*Reference `json:"contributor,omitempty"`
+		CareTeam []*Reference `json:"careteam,omitempty"`
+		Addresses []*Reference `json:"addresses,omitempty"`
+		SupportingInfo []*Reference `json:"supportinginfo,omitempty"`
+		Goal []*Reference `json:"goal,omitempty"`
+		Activity []*CarePlanActivity `json:"activity,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	if len(m.InstantiatesCanonical) > 0 {
+		output.InstantiatesCanonical = make([]interface{}, len(m.InstantiatesCanonical))
+		output.InstantiatesCanonicalElement = make([]map[string]interface{}, len(m.InstantiatesCanonical))
+		for i, item := range m.InstantiatesCanonical {
+			if item != nil && item.Value != nil {
+				output.InstantiatesCanonical[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.InstantiatesCanonicalElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.InstantiatesUri) > 0 {
+		output.InstantiatesUri = make([]interface{}, len(m.InstantiatesUri))
+		output.InstantiatesUriElement = make([]map[string]interface{}, len(m.InstantiatesUri))
+		for i, item := range m.InstantiatesUri {
+			if item != nil && item.Value != nil {
+				output.InstantiatesUri[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.InstantiatesUriElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.BasedOn = m.BasedOn
+	output.Replaces = m.Replaces
+	output.PartOf = m.PartOf
+	output.Status = m.Status
+	output.Intent = m.Intent
+	output.Category = m.Category
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Subject = m.Subject
+	output.Encounter = m.Encounter
+	output.Period = m.Period
+	if m.Created != nil && m.Created.Value != nil {
+		output.Created = m.Created.Value
+		if m.Created.Element != nil {
+			output.CreatedElement = toMapOrNil(m.Created.Element.ToJSON())
+		}
+	}
+	output.Author = m.Author
+	output.Contributor = m.Contributor
+	output.CareTeam = m.CareTeam
+	output.Addresses = m.Addresses
+	output.SupportingInfo = m.SupportingInfo
+	output.Goal = m.Goal
+	output.Activity = m.Activity
+	output.Note = m.Note
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CarePlan
+// Clone creates a deep copy of CarePlan.
 func (m *CarePlan) Clone() *CarePlan {
 	if m == nil { return nil }
 	return &CarePlan{
@@ -95,7 +300,7 @@ func (m *CarePlan) Clone() *CarePlan {
 	}
 }
 
-// Equals checks for equality with another CarePlan instance
+// Equals checks equality between two CarePlan instances.
 func (m *CarePlan) Equals(other *CarePlan) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -136,7 +341,7 @@ func (m *CarePlan) Equals(other *CarePlan) bool {
 // CarePlanActivity
 // Identifies a planned action to occur as part of the plan.  For example, a medication to be used, lab tests to perform, self-monitoring, education, etc.
 type CarePlanActivity struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -147,22 +352,67 @@ type CarePlanActivity struct {
 	Detail *CarePlanDetail `json:"detail,omitempty"`
 }
 
-// NewCarePlanActivity creates a new CarePlanActivity instance
+// NewCarePlanActivity creates a new CarePlanActivity instance.
 func NewCarePlanActivity() *CarePlanActivity {
 	return &CarePlanActivity{}
 }
 
-// FromJSON populates CarePlanActivity from JSON data
+// FromJSON populates CarePlanActivity from JSON data.
 func (m *CarePlanActivity) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		OutcomeCodeableConcept []*CodeableConcept `json:"outcomecodeableconcept,omitempty"`
+		OutcomeReference []*Reference `json:"outcomereference,omitempty"`
+		Progress []*Annotation `json:"progress,omitempty"`
+		Reference *Reference `json:"reference,omitempty"`
+		Detail *CarePlanDetail `json:"detail,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.OutcomeCodeableConcept = temp.OutcomeCodeableConcept
+	m.OutcomeReference = temp.OutcomeReference
+	m.Progress = temp.Progress
+	m.Reference = temp.Reference
+	m.Detail = temp.Detail
+	return nil
 }
 
-// ToJSON converts CarePlanActivity to JSON data
+// ToJSON converts CarePlanActivity to JSON data.
 func (m *CarePlanActivity) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		OutcomeCodeableConcept []*CodeableConcept `json:"outcomecodeableconcept,omitempty"`
+		OutcomeReference []*Reference `json:"outcomereference,omitempty"`
+		Progress []*Annotation `json:"progress,omitempty"`
+		Reference *Reference `json:"reference,omitempty"`
+		Detail *CarePlanDetail `json:"detail,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.OutcomeCodeableConcept = m.OutcomeCodeableConcept
+	output.OutcomeReference = m.OutcomeReference
+	output.Progress = m.Progress
+	output.Reference = m.Reference
+	output.Detail = m.Detail
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CarePlanActivity
+// Clone creates a deep copy of CarePlanActivity.
 func (m *CarePlanActivity) Clone() *CarePlanActivity {
 	if m == nil { return nil }
 	return &CarePlanActivity{
@@ -177,7 +427,7 @@ func (m *CarePlanActivity) Clone() *CarePlanActivity {
 	}
 }
 
-// Equals checks for equality with another CarePlanActivity instance
+// Equals checks equality between two CarePlanActivity instances.
 func (m *CarePlanActivity) Equals(other *CarePlanActivity) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -195,7 +445,7 @@ func (m *CarePlanActivity) Equals(other *CarePlanActivity) bool {
 // CarePlanDetail
 // A simple summary of a planned activity suitable for a general care plan system (e.g. form driven) that doesn't know about specific resources such as procedure etc.
 type CarePlanDetail struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -221,22 +471,187 @@ type CarePlanDetail struct {
 	Description *FhirString `json:"description,omitempty"`
 }
 
-// NewCarePlanDetail creates a new CarePlanDetail instance
+// NewCarePlanDetail creates a new CarePlanDetail instance.
 func NewCarePlanDetail() *CarePlanDetail {
 	return &CarePlanDetail{}
 }
 
-// FromJSON populates CarePlanDetail from JSON data
+// FromJSON populates CarePlanDetail from JSON data.
 func (m *CarePlanDetail) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Kind *CarePlanActivityKind `json:"kind,omitempty"`
+		InstantiatesCanonical []interface{} `json:"instantiatescanonical,omitempty"`
+		InstantiatesUri []interface{} `json:"instantiatesuri,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		Goal []*Reference `json:"goal,omitempty"`
+		Status *CarePlanActivityStatus `json:"status,omitempty"`
+		StatusReason *CodeableConcept `json:"statusreason,omitempty"`
+		DoNotPerform *FhirBoolean `json:"donotperform,omitempty"`
+		ScheduledTiming *Timing `json:"scheduledtiming,omitempty"`
+		ScheduledPeriod *Period `json:"scheduledperiod,omitempty"`
+		ScheduledString *FhirString `json:"scheduledstring,omitempty"`
+		Location *Reference `json:"location,omitempty"`
+		Performer []*Reference `json:"performer,omitempty"`
+		ProductCodeableConcept *CodeableConcept `json:"productcodeableconcept,omitempty"`
+		ProductReference *Reference `json:"productreference,omitempty"`
+		DailyAmount *Quantity `json:"dailyamount,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Kind = temp.Kind
+	if len(temp.InstantiatesCanonical) > 0 {
+		m.InstantiatesCanonical = make([]*FhirCanonical, len(temp.InstantiatesCanonical))
+		for i := range temp.InstantiatesCanonical {
+			itemMap, ok := temp.InstantiatesCanonical[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for InstantiatesCanonical[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse InstantiatesCanonical[%d]: %v", i, err) }
+			m.InstantiatesCanonical[i] = primitive
+		}
+	}
+	if len(temp.InstantiatesUri) > 0 {
+		m.InstantiatesUri = make([]*FhirUri, len(temp.InstantiatesUri))
+		for i := range temp.InstantiatesUri {
+			itemMap, ok := temp.InstantiatesUri[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for InstantiatesUri[%d]: expected map", i) }
+			primitive, err := NewFhirUriFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse InstantiatesUri[%d]: %v", i, err) }
+			m.InstantiatesUri[i] = primitive
+		}
+	}
+	m.Code = temp.Code
+	m.ReasonCode = temp.ReasonCode
+	m.ReasonReference = temp.ReasonReference
+	m.Goal = temp.Goal
+	m.Status = temp.Status
+	m.StatusReason = temp.StatusReason
+	m.DoNotPerform = temp.DoNotPerform
+	m.ScheduledTiming = temp.ScheduledTiming
+	m.ScheduledPeriod = temp.ScheduledPeriod
+	m.ScheduledString = temp.ScheduledString
+	m.Location = temp.Location
+	m.Performer = temp.Performer
+	m.ProductCodeableConcept = temp.ProductCodeableConcept
+	m.ProductReference = temp.ProductReference
+	m.DailyAmount = temp.DailyAmount
+	m.Quantity = temp.Quantity
+	m.Description = temp.Description
+	return nil
 }
 
-// ToJSON converts CarePlanDetail to JSON data
+// ToJSON converts CarePlanDetail to JSON data.
 func (m *CarePlanDetail) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Kind *CarePlanActivityKind `json:"kind,omitempty"`
+		InstantiatesCanonical []interface{} `json:"instantiatescanonical,omitempty"`
+		InstantiatesCanonicalElement []map[string]interface{} `json:"_instantiatescanonical,omitempty"`
+		InstantiatesUri []interface{} `json:"instantiatesuri,omitempty"`
+		InstantiatesUriElement []map[string]interface{} `json:"_instantiatesuri,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		Goal []*Reference `json:"goal,omitempty"`
+		Status *CarePlanActivityStatus `json:"status,omitempty"`
+		StatusReason *CodeableConcept `json:"statusreason,omitempty"`
+		DoNotPerform interface{} `json:"donotperform,omitempty"`
+		DoNotPerformElement map[string]interface{} `json:"_donotperform,omitempty"`
+		ScheduledTiming *Timing `json:"scheduledtiming,omitempty"`
+		ScheduledPeriod *Period `json:"scheduledperiod,omitempty"`
+		ScheduledString interface{} `json:"scheduledstring,omitempty"`
+		ScheduledStringElement map[string]interface{} `json:"_scheduledstring,omitempty"`
+		Location *Reference `json:"location,omitempty"`
+		Performer []*Reference `json:"performer,omitempty"`
+		ProductCodeableConcept *CodeableConcept `json:"productcodeableconcept,omitempty"`
+		ProductReference *Reference `json:"productreference,omitempty"`
+		DailyAmount *Quantity `json:"dailyamount,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Kind = m.Kind
+	if len(m.InstantiatesCanonical) > 0 {
+		output.InstantiatesCanonical = make([]interface{}, len(m.InstantiatesCanonical))
+		output.InstantiatesCanonicalElement = make([]map[string]interface{}, len(m.InstantiatesCanonical))
+		for i, item := range m.InstantiatesCanonical {
+			if item != nil && item.Value != nil {
+				output.InstantiatesCanonical[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.InstantiatesCanonicalElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.InstantiatesUri) > 0 {
+		output.InstantiatesUri = make([]interface{}, len(m.InstantiatesUri))
+		output.InstantiatesUriElement = make([]map[string]interface{}, len(m.InstantiatesUri))
+		for i, item := range m.InstantiatesUri {
+			if item != nil && item.Value != nil {
+				output.InstantiatesUri[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.InstantiatesUriElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Code = m.Code
+	output.ReasonCode = m.ReasonCode
+	output.ReasonReference = m.ReasonReference
+	output.Goal = m.Goal
+	output.Status = m.Status
+	output.StatusReason = m.StatusReason
+	if m.DoNotPerform != nil && m.DoNotPerform.Value != nil {
+		output.DoNotPerform = m.DoNotPerform.Value
+		if m.DoNotPerform.Element != nil {
+			output.DoNotPerformElement = toMapOrNil(m.DoNotPerform.Element.ToJSON())
+		}
+	}
+	output.ScheduledTiming = m.ScheduledTiming
+	output.ScheduledPeriod = m.ScheduledPeriod
+	if m.ScheduledString != nil && m.ScheduledString.Value != nil {
+		output.ScheduledString = m.ScheduledString.Value
+		if m.ScheduledString.Element != nil {
+			output.ScheduledStringElement = toMapOrNil(m.ScheduledString.Element.ToJSON())
+		}
+	}
+	output.Location = m.Location
+	output.Performer = m.Performer
+	output.ProductCodeableConcept = m.ProductCodeableConcept
+	output.ProductReference = m.ProductReference
+	output.DailyAmount = m.DailyAmount
+	output.Quantity = m.Quantity
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CarePlanDetail
+// Clone creates a deep copy of CarePlanDetail.
 func (m *CarePlanDetail) Clone() *CarePlanDetail {
 	if m == nil { return nil }
 	return &CarePlanDetail{
@@ -266,7 +681,7 @@ func (m *CarePlanDetail) Clone() *CarePlanDetail {
 	}
 }
 
-// Equals checks for equality with another CarePlanDetail instance
+// Equals checks equality between two CarePlanDetail instances.
 func (m *CarePlanDetail) Equals(other *CarePlanDetail) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

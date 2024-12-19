@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Slot
 // A slot of time on a schedule that may be available for booking appointments.
 type Slot struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -30,22 +31,141 @@ type Slot struct {
 	Comment *FhirString `json:"comment,omitempty"`
 }
 
-// NewSlot creates a new Slot instance
+// NewSlot creates a new Slot instance.
 func NewSlot() *Slot {
 	return &Slot{}
 }
 
-// FromJSON populates Slot from JSON data
+// FromJSON populates Slot from JSON data.
 func (m *Slot) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		ServiceCategory []*CodeableConcept `json:"servicecategory,omitempty"`
+		ServiceType []*CodeableConcept `json:"servicetype,omitempty"`
+		Specialty []*CodeableConcept `json:"specialty,omitempty"`
+		AppointmentType *CodeableConcept `json:"appointmenttype,omitempty"`
+		Schedule *Reference `json:"schedule,omitempty"`
+		Status *SlotStatus `json:"status,omitempty"`
+		Start *FhirInstant `json:"start,omitempty"`
+		End *FhirInstant `json:"end,omitempty"`
+		Overbooked *FhirBoolean `json:"overbooked,omitempty"`
+		Comment *FhirString `json:"comment,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.ServiceCategory = temp.ServiceCategory
+	m.ServiceType = temp.ServiceType
+	m.Specialty = temp.Specialty
+	m.AppointmentType = temp.AppointmentType
+	m.Schedule = temp.Schedule
+	m.Status = temp.Status
+	m.Start = temp.Start
+	m.End = temp.End
+	m.Overbooked = temp.Overbooked
+	m.Comment = temp.Comment
+	return nil
 }
 
-// ToJSON converts Slot to JSON data
+// ToJSON converts Slot to JSON data.
 func (m *Slot) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		ServiceCategory []*CodeableConcept `json:"servicecategory,omitempty"`
+		ServiceType []*CodeableConcept `json:"servicetype,omitempty"`
+		Specialty []*CodeableConcept `json:"specialty,omitempty"`
+		AppointmentType *CodeableConcept `json:"appointmenttype,omitempty"`
+		Schedule *Reference `json:"schedule,omitempty"`
+		Status *SlotStatus `json:"status,omitempty"`
+		Start interface{} `json:"start,omitempty"`
+		StartElement map[string]interface{} `json:"_start,omitempty"`
+		End interface{} `json:"end,omitempty"`
+		EndElement map[string]interface{} `json:"_end,omitempty"`
+		Overbooked interface{} `json:"overbooked,omitempty"`
+		OverbookedElement map[string]interface{} `json:"_overbooked,omitempty"`
+		Comment interface{} `json:"comment,omitempty"`
+		CommentElement map[string]interface{} `json:"_comment,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.ServiceCategory = m.ServiceCategory
+	output.ServiceType = m.ServiceType
+	output.Specialty = m.Specialty
+	output.AppointmentType = m.AppointmentType
+	output.Schedule = m.Schedule
+	output.Status = m.Status
+	if m.Start != nil && m.Start.Value != nil {
+		output.Start = m.Start.Value
+		if m.Start.Element != nil {
+			output.StartElement = toMapOrNil(m.Start.Element.ToJSON())
+		}
+	}
+	if m.End != nil && m.End.Value != nil {
+		output.End = m.End.Value
+		if m.End.Element != nil {
+			output.EndElement = toMapOrNil(m.End.Element.ToJSON())
+		}
+	}
+	if m.Overbooked != nil && m.Overbooked.Value != nil {
+		output.Overbooked = m.Overbooked.Value
+		if m.Overbooked.Element != nil {
+			output.OverbookedElement = toMapOrNil(m.Overbooked.Element.ToJSON())
+		}
+	}
+	if m.Comment != nil && m.Comment.Value != nil {
+		output.Comment = m.Comment.Value
+		if m.Comment.Element != nil {
+			output.CommentElement = toMapOrNil(m.Comment.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Slot
+// Clone creates a deep copy of Slot.
 func (m *Slot) Clone() *Slot {
 	if m == nil { return nil }
 	return &Slot{
@@ -71,7 +191,7 @@ func (m *Slot) Clone() *Slot {
 	}
 }
 
-// Equals checks for equality with another Slot instance
+// Equals checks equality between two Slot instances.
 func (m *Slot) Equals(other *Slot) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

@@ -72,17 +72,17 @@ func (c *CanonicalResource) Clone() *CanonicalResource {
 		return nil
 	}
 	return &CanonicalResource{
-		DomainResource:   *c.DomainResource.Clone(),
-		URL:              c.URL.Clone(),
-		Version:          c.Version.Clone(),
-		Status:           c.Status.Clone(),
-		Experimental:     c.Experimental.Clone(),
-		Date:             c.Date.Clone(),
-		Publisher:        c.Publisher.Clone(),
-		Contact:          cloneSlices(c.Contact),
-		Description:      c.Description.Clone(),
-		UseContext:       cloneSlices(c.UseContext),
-		Jurisdiction:     cloneSlices(c.Jurisdiction),
+		DomainResource: *c.DomainResource.Clone(),
+		URL:            c.URL.Clone(),
+		Version:        c.Version.Clone(),
+		Status:         c.Status.Clone(),
+		Experimental:   c.Experimental.Clone(),
+		Date:           c.Date.Clone(),
+		Publisher:      c.Publisher.Clone(),
+		Contact:        cloneSlices(c.Contact),
+		Description:    c.Description.Clone(),
+		UseContext:     cloneSlices(c.UseContext),
+		Jurisdiction:   cloneSlices(c.Jurisdiction),
 	}
 }
 

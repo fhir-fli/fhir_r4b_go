@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Consent
 // A record of a healthcare consumer’s  choices, which permits or denies identified recipient(s) or recipient role(s) to perform one or more actions within a given policy context, for specific purposes and periods of time.
 type Consent struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -33,22 +34,135 @@ type Consent struct {
 	Provision *ConsentProvision `json:"provision,omitempty"`
 }
 
-// NewConsent creates a new Consent instance
+// NewConsent creates a new Consent instance.
 func NewConsent() *Consent {
 	return &Consent{}
 }
 
-// FromJSON populates Consent from JSON data
+// FromJSON populates Consent from JSON data.
 func (m *Consent) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *ConsentState `json:"status,omitempty"`
+		Scope *CodeableConcept `json:"scope,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Patient *Reference `json:"patient,omitempty"`
+		DateTime *FhirDateTime `json:"datetime,omitempty"`
+		Performer []*Reference `json:"performer,omitempty"`
+		Organization []*Reference `json:"organization,omitempty"`
+		SourceAttachment *Attachment `json:"sourceattachment,omitempty"`
+		SourceReference *Reference `json:"sourcereference,omitempty"`
+		Policy []*ConsentPolicy `json:"policy,omitempty"`
+		PolicyRule *CodeableConcept `json:"policyrule,omitempty"`
+		Verification []*ConsentVerification `json:"verification,omitempty"`
+		Provision *ConsentProvision `json:"provision,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.Scope = temp.Scope
+	m.Category = temp.Category
+	m.Patient = temp.Patient
+	m.DateTime = temp.DateTime
+	m.Performer = temp.Performer
+	m.Organization = temp.Organization
+	m.SourceAttachment = temp.SourceAttachment
+	m.SourceReference = temp.SourceReference
+	m.Policy = temp.Policy
+	m.PolicyRule = temp.PolicyRule
+	m.Verification = temp.Verification
+	m.Provision = temp.Provision
+	return nil
 }
 
-// ToJSON converts Consent to JSON data
+// ToJSON converts Consent to JSON data.
 func (m *Consent) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *ConsentState `json:"status,omitempty"`
+		Scope *CodeableConcept `json:"scope,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Patient *Reference `json:"patient,omitempty"`
+		DateTime interface{} `json:"datetime,omitempty"`
+		DateTimeElement map[string]interface{} `json:"_datetime,omitempty"`
+		Performer []*Reference `json:"performer,omitempty"`
+		Organization []*Reference `json:"organization,omitempty"`
+		SourceAttachment *Attachment `json:"sourceattachment,omitempty"`
+		SourceReference *Reference `json:"sourcereference,omitempty"`
+		Policy []*ConsentPolicy `json:"policy,omitempty"`
+		PolicyRule *CodeableConcept `json:"policyrule,omitempty"`
+		Verification []*ConsentVerification `json:"verification,omitempty"`
+		Provision *ConsentProvision `json:"provision,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	output.Scope = m.Scope
+	output.Category = m.Category
+	output.Patient = m.Patient
+	if m.DateTime != nil && m.DateTime.Value != nil {
+		output.DateTime = m.DateTime.Value
+		if m.DateTime.Element != nil {
+			output.DateTimeElement = toMapOrNil(m.DateTime.Element.ToJSON())
+		}
+	}
+	output.Performer = m.Performer
+	output.Organization = m.Organization
+	output.SourceAttachment = m.SourceAttachment
+	output.SourceReference = m.SourceReference
+	output.Policy = m.Policy
+	output.PolicyRule = m.PolicyRule
+	output.Verification = m.Verification
+	output.Provision = m.Provision
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Consent
+// Clone creates a deep copy of Consent.
 func (m *Consent) Clone() *Consent {
 	if m == nil { return nil }
 	return &Consent{
@@ -77,7 +191,7 @@ func (m *Consent) Clone() *Consent {
 	}
 }
 
-// Equals checks for equality with another Consent instance
+// Equals checks equality between two Consent instances.
 func (m *Consent) Equals(other *Consent) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -109,7 +223,7 @@ func (m *Consent) Equals(other *Consent) bool {
 // ConsentPolicy
 // The references to the policies that are included in this consent scope. Policies may be organizational, but are often defined jurisdictionally, or in law.
 type ConsentPolicy struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -117,22 +231,67 @@ type ConsentPolicy struct {
 	Uri *FhirUri `json:"uri,omitempty"`
 }
 
-// NewConsentPolicy creates a new ConsentPolicy instance
+// NewConsentPolicy creates a new ConsentPolicy instance.
 func NewConsentPolicy() *ConsentPolicy {
 	return &ConsentPolicy{}
 }
 
-// FromJSON populates ConsentPolicy from JSON data
+// FromJSON populates ConsentPolicy from JSON data.
 func (m *ConsentPolicy) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Authority *FhirUri `json:"authority,omitempty"`
+		Uri *FhirUri `json:"uri,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Authority = temp.Authority
+	m.Uri = temp.Uri
+	return nil
 }
 
-// ToJSON converts ConsentPolicy to JSON data
+// ToJSON converts ConsentPolicy to JSON data.
 func (m *ConsentPolicy) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Authority interface{} `json:"authority,omitempty"`
+		AuthorityElement map[string]interface{} `json:"_authority,omitempty"`
+		Uri interface{} `json:"uri,omitempty"`
+		UriElement map[string]interface{} `json:"_uri,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Authority != nil && m.Authority.Value != nil {
+		output.Authority = m.Authority.Value
+		if m.Authority.Element != nil {
+			output.AuthorityElement = toMapOrNil(m.Authority.Element.ToJSON())
+		}
+	}
+	if m.Uri != nil && m.Uri.Value != nil {
+		output.Uri = m.Uri.Value
+		if m.Uri.Element != nil {
+			output.UriElement = toMapOrNil(m.Uri.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ConsentPolicy
+// Clone creates a deep copy of ConsentPolicy.
 func (m *ConsentPolicy) Clone() *ConsentPolicy {
 	if m == nil { return nil }
 	return &ConsentPolicy{
@@ -144,7 +303,7 @@ func (m *ConsentPolicy) Clone() *ConsentPolicy {
 	}
 }
 
-// Equals checks for equality with another ConsentPolicy instance
+// Equals checks equality between two ConsentPolicy instances.
 func (m *ConsentPolicy) Equals(other *ConsentPolicy) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -159,7 +318,7 @@ func (m *ConsentPolicy) Equals(other *ConsentPolicy) bool {
 // ConsentVerification
 // Whether a treatment instruction (e.g. artificial respiration yes or no) was verified with the patient, his/her family or another authorized person.
 type ConsentVerification struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -168,22 +327,71 @@ type ConsentVerification struct {
 	VerificationDate *FhirDateTime `json:"verificationdate,omitempty"`
 }
 
-// NewConsentVerification creates a new ConsentVerification instance
+// NewConsentVerification creates a new ConsentVerification instance.
 func NewConsentVerification() *ConsentVerification {
 	return &ConsentVerification{}
 }
 
-// FromJSON populates ConsentVerification from JSON data
+// FromJSON populates ConsentVerification from JSON data.
 func (m *ConsentVerification) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Verified *FhirBoolean `json:"verified,omitempty"`
+		VerifiedWith *Reference `json:"verifiedwith,omitempty"`
+		VerificationDate *FhirDateTime `json:"verificationdate,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Verified = temp.Verified
+	m.VerifiedWith = temp.VerifiedWith
+	m.VerificationDate = temp.VerificationDate
+	return nil
 }
 
-// ToJSON converts ConsentVerification to JSON data
+// ToJSON converts ConsentVerification to JSON data.
 func (m *ConsentVerification) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Verified interface{} `json:"verified,omitempty"`
+		VerifiedElement map[string]interface{} `json:"_verified,omitempty"`
+		VerifiedWith *Reference `json:"verifiedwith,omitempty"`
+		VerificationDate interface{} `json:"verificationdate,omitempty"`
+		VerificationDateElement map[string]interface{} `json:"_verificationdate,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Verified != nil && m.Verified.Value != nil {
+		output.Verified = m.Verified.Value
+		if m.Verified.Element != nil {
+			output.VerifiedElement = toMapOrNil(m.Verified.Element.ToJSON())
+		}
+	}
+	output.VerifiedWith = m.VerifiedWith
+	if m.VerificationDate != nil && m.VerificationDate.Value != nil {
+		output.VerificationDate = m.VerificationDate.Value
+		if m.VerificationDate.Element != nil {
+			output.VerificationDateElement = toMapOrNil(m.VerificationDate.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ConsentVerification
+// Clone creates a deep copy of ConsentVerification.
 func (m *ConsentVerification) Clone() *ConsentVerification {
 	if m == nil { return nil }
 	return &ConsentVerification{
@@ -196,7 +404,7 @@ func (m *ConsentVerification) Clone() *ConsentVerification {
 	}
 }
 
-// Equals checks for equality with another ConsentVerification instance
+// Equals checks equality between two ConsentVerification instances.
 func (m *ConsentVerification) Equals(other *ConsentVerification) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -212,7 +420,7 @@ func (m *ConsentVerification) Equals(other *ConsentVerification) bool {
 // ConsentProvision
 // An exception to the base policy of this consent. An exception can be an addition or removal of access permissions.
 type ConsentProvision struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -229,22 +437,91 @@ type ConsentProvision struct {
 	Provision []*ConsentProvision `json:"provision,omitempty"`
 }
 
-// NewConsentProvision creates a new ConsentProvision instance
+// NewConsentProvision creates a new ConsentProvision instance.
 func NewConsentProvision() *ConsentProvision {
 	return &ConsentProvision{}
 }
 
-// FromJSON populates ConsentProvision from JSON data
+// FromJSON populates ConsentProvision from JSON data.
 func (m *ConsentProvision) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *ConsentProvisionType `json:"type,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Actor []*ConsentActor `json:"actor,omitempty"`
+		Action []*CodeableConcept `json:"action,omitempty"`
+		SecurityLabel []*Coding `json:"securitylabel,omitempty"`
+		Purpose []*Coding `json:"purpose,omitempty"`
+		Class_ []*Coding `json:"class,omitempty"`
+		Code []*CodeableConcept `json:"code,omitempty"`
+		DataPeriod *Period `json:"dataperiod,omitempty"`
+		Data []*ConsentData `json:"data,omitempty"`
+		Provision []*ConsentProvision `json:"provision,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Period = temp.Period
+	m.Actor = temp.Actor
+	m.Action = temp.Action
+	m.SecurityLabel = temp.SecurityLabel
+	m.Purpose = temp.Purpose
+	m.Class_ = temp.Class_
+	m.Code = temp.Code
+	m.DataPeriod = temp.DataPeriod
+	m.Data = temp.Data
+	m.Provision = temp.Provision
+	return nil
 }
 
-// ToJSON converts ConsentProvision to JSON data
+// ToJSON converts ConsentProvision to JSON data.
 func (m *ConsentProvision) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *ConsentProvisionType `json:"type,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Actor []*ConsentActor `json:"actor,omitempty"`
+		Action []*CodeableConcept `json:"action,omitempty"`
+		SecurityLabel []*Coding `json:"securitylabel,omitempty"`
+		Purpose []*Coding `json:"purpose,omitempty"`
+		Class_ []*Coding `json:"class,omitempty"`
+		Code []*CodeableConcept `json:"code,omitempty"`
+		DataPeriod *Period `json:"dataperiod,omitempty"`
+		Data []*ConsentData `json:"data,omitempty"`
+		Provision []*ConsentProvision `json:"provision,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Period = m.Period
+	output.Actor = m.Actor
+	output.Action = m.Action
+	output.SecurityLabel = m.SecurityLabel
+	output.Purpose = m.Purpose
+	output.Class_ = m.Class_
+	output.Code = m.Code
+	output.DataPeriod = m.DataPeriod
+	output.Data = m.Data
+	output.Provision = m.Provision
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ConsentProvision
+// Clone creates a deep copy of ConsentProvision.
 func (m *ConsentProvision) Clone() *ConsentProvision {
 	if m == nil { return nil }
 	return &ConsentProvision{
@@ -265,7 +542,7 @@ func (m *ConsentProvision) Clone() *ConsentProvision {
 	}
 }
 
-// Equals checks for equality with another ConsentProvision instance
+// Equals checks equality between two ConsentProvision instances.
 func (m *ConsentProvision) Equals(other *ConsentProvision) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -289,7 +566,7 @@ func (m *ConsentProvision) Equals(other *ConsentProvision) bool {
 // ConsentActor
 // Who or what is controlled by this rule. Use group to identify a set of actors by some property they share (e.g. 'admitting officers').
 type ConsentActor struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -297,22 +574,55 @@ type ConsentActor struct {
 	Reference *Reference `json:"reference,omitempty"`
 }
 
-// NewConsentActor creates a new ConsentActor instance
+// NewConsentActor creates a new ConsentActor instance.
 func NewConsentActor() *ConsentActor {
 	return &ConsentActor{}
 }
 
-// FromJSON populates ConsentActor from JSON data
+// FromJSON populates ConsentActor from JSON data.
 func (m *ConsentActor) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Role *CodeableConcept `json:"role,omitempty"`
+		Reference *Reference `json:"reference,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Role = temp.Role
+	m.Reference = temp.Reference
+	return nil
 }
 
-// ToJSON converts ConsentActor to JSON data
+// ToJSON converts ConsentActor to JSON data.
 func (m *ConsentActor) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Role *CodeableConcept `json:"role,omitempty"`
+		Reference *Reference `json:"reference,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Role = m.Role
+	output.Reference = m.Reference
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ConsentActor
+// Clone creates a deep copy of ConsentActor.
 func (m *ConsentActor) Clone() *ConsentActor {
 	if m == nil { return nil }
 	return &ConsentActor{
@@ -324,7 +634,7 @@ func (m *ConsentActor) Clone() *ConsentActor {
 	}
 }
 
-// Equals checks for equality with another ConsentActor instance
+// Equals checks equality between two ConsentActor instances.
 func (m *ConsentActor) Equals(other *ConsentActor) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -339,7 +649,7 @@ func (m *ConsentActor) Equals(other *ConsentActor) bool {
 // ConsentData
 // The resources controlled by this rule if specific resources are referenced.
 type ConsentData struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -347,22 +657,55 @@ type ConsentData struct {
 	Reference *Reference `json:"reference,omitempty"`
 }
 
-// NewConsentData creates a new ConsentData instance
+// NewConsentData creates a new ConsentData instance.
 func NewConsentData() *ConsentData {
 	return &ConsentData{}
 }
 
-// FromJSON populates ConsentData from JSON data
+// FromJSON populates ConsentData from JSON data.
 func (m *ConsentData) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Meaning *ConsentDataMeaning `json:"meaning,omitempty"`
+		Reference *Reference `json:"reference,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Meaning = temp.Meaning
+	m.Reference = temp.Reference
+	return nil
 }
 
-// ToJSON converts ConsentData to JSON data
+// ToJSON converts ConsentData to JSON data.
 func (m *ConsentData) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Meaning *ConsentDataMeaning `json:"meaning,omitempty"`
+		Reference *Reference `json:"reference,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Meaning = m.Meaning
+	output.Reference = m.Reference
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ConsentData
+// Clone creates a deep copy of ConsentData.
 func (m *ConsentData) Clone() *ConsentData {
 	if m == nil { return nil }
 	return &ConsentData{
@@ -374,7 +717,7 @@ func (m *ConsentData) Clone() *ConsentData {
 	}
 }
 
-// Equals checks for equality with another ConsentData instance
+// Equals checks equality between two ConsentData instances.
 func (m *ConsentData) Equals(other *ConsentData) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

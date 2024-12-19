@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // CompartmentDefinition
 // A compartment definition that defines how resources are accessed on a server.
 type CompartmentDefinition struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -33,22 +35,183 @@ type CompartmentDefinition struct {
 	Resource []*CompartmentDefinitionResource `json:"resource,omitempty"`
 }
 
-// NewCompartmentDefinition creates a new CompartmentDefinition instance
+// NewCompartmentDefinition creates a new CompartmentDefinition instance.
 func NewCompartmentDefinition() *CompartmentDefinition {
 	return &CompartmentDefinition{}
 }
 
-// FromJSON populates CompartmentDefinition from JSON data
+// FromJSON populates CompartmentDefinition from JSON data.
 func (m *CompartmentDefinition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental *FhirBoolean `json:"experimental,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Publisher *FhirString `json:"publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Purpose *FhirMarkdown `json:"purpose,omitempty"`
+		Code *CompartmentType `json:"code,omitempty"`
+		Search *FhirBoolean `json:"search,omitempty"`
+		Resource []*CompartmentDefinitionResource `json:"resource,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Url = temp.Url
+	m.Version = temp.Version
+	m.Name = temp.Name
+	m.Status = temp.Status
+	m.Experimental = temp.Experimental
+	m.Date = temp.Date
+	m.Publisher = temp.Publisher
+	m.Contact = temp.Contact
+	m.Description = temp.Description
+	m.UseContext = temp.UseContext
+	m.Purpose = temp.Purpose
+	m.Code = temp.Code
+	m.Search = temp.Search
+	m.Resource = temp.Resource
+	return nil
 }
 
-// ToJSON converts CompartmentDefinition to JSON data
+// ToJSON converts CompartmentDefinition to JSON data.
 func (m *CompartmentDefinition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental interface{} `json:"experimental,omitempty"`
+		ExperimentalElement map[string]interface{} `json:"_experimental,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Publisher interface{} `json:"publisher,omitempty"`
+		PublisherElement map[string]interface{} `json:"_publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Purpose interface{} `json:"purpose,omitempty"`
+		PurposeElement map[string]interface{} `json:"_purpose,omitempty"`
+		Code *CompartmentType `json:"code,omitempty"`
+		Search interface{} `json:"search,omitempty"`
+		SearchElement map[string]interface{} `json:"_search,omitempty"`
+		Resource []*CompartmentDefinitionResource `json:"resource,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	output.Status = m.Status
+	if m.Experimental != nil && m.Experimental.Value != nil {
+		output.Experimental = m.Experimental.Value
+		if m.Experimental.Element != nil {
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+		}
+	}
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.Publisher != nil && m.Publisher.Value != nil {
+		output.Publisher = m.Publisher.Value
+		if m.Publisher.Element != nil {
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+		}
+	}
+	output.Contact = m.Contact
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.UseContext = m.UseContext
+	if m.Purpose != nil && m.Purpose.Value != nil {
+		output.Purpose = m.Purpose.Value
+		if m.Purpose.Element != nil {
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+		}
+	}
+	output.Code = m.Code
+	if m.Search != nil && m.Search.Value != nil {
+		output.Search = m.Search.Value
+		if m.Search.Element != nil {
+			output.SearchElement = toMapOrNil(m.Search.Element.ToJSON())
+		}
+	}
+	output.Resource = m.Resource
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CompartmentDefinition
+// Clone creates a deep copy of CompartmentDefinition.
 func (m *CompartmentDefinition) Clone() *CompartmentDefinition {
 	if m == nil { return nil }
 	return &CompartmentDefinition{
@@ -77,7 +240,7 @@ func (m *CompartmentDefinition) Clone() *CompartmentDefinition {
 	}
 }
 
-// Equals checks for equality with another CompartmentDefinition instance
+// Equals checks equality between two CompartmentDefinition instances.
 func (m *CompartmentDefinition) Equals(other *CompartmentDefinition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -109,7 +272,7 @@ func (m *CompartmentDefinition) Equals(other *CompartmentDefinition) bool {
 // CompartmentDefinitionResource
 // Information about how a resource is related to the compartment.
 type CompartmentDefinitionResource struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -118,22 +281,92 @@ type CompartmentDefinitionResource struct {
 	Documentation *FhirString `json:"documentation,omitempty"`
 }
 
-// NewCompartmentDefinitionResource creates a new CompartmentDefinitionResource instance
+// NewCompartmentDefinitionResource creates a new CompartmentDefinitionResource instance.
 func NewCompartmentDefinitionResource() *CompartmentDefinitionResource {
 	return &CompartmentDefinitionResource{}
 }
 
-// FromJSON populates CompartmentDefinitionResource from JSON data
+// FromJSON populates CompartmentDefinitionResource from JSON data.
 func (m *CompartmentDefinitionResource) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *FhirCode `json:"code,omitempty"`
+		Param []interface{} `json:"param,omitempty"`
+		Documentation *FhirString `json:"documentation,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	if len(temp.Param) > 0 {
+		m.Param = make([]*FhirString, len(temp.Param))
+		for i := range temp.Param {
+			itemMap, ok := temp.Param[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Param[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Param[%d]: %v", i, err) }
+			m.Param[i] = primitive
+		}
+	}
+	m.Documentation = temp.Documentation
+	return nil
 }
 
-// ToJSON converts CompartmentDefinitionResource to JSON data
+// ToJSON converts CompartmentDefinitionResource to JSON data.
 func (m *CompartmentDefinitionResource) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code interface{} `json:"code,omitempty"`
+		CodeElement map[string]interface{} `json:"_code,omitempty"`
+		Param []interface{} `json:"param,omitempty"`
+		ParamElement []map[string]interface{} `json:"_param,omitempty"`
+		Documentation interface{} `json:"documentation,omitempty"`
+		DocumentationElement map[string]interface{} `json:"_documentation,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Code != nil && m.Code.Value != nil {
+		output.Code = m.Code.Value
+		if m.Code.Element != nil {
+			output.CodeElement = toMapOrNil(m.Code.Element.ToJSON())
+		}
+	}
+	if len(m.Param) > 0 {
+		output.Param = make([]interface{}, len(m.Param))
+		output.ParamElement = make([]map[string]interface{}, len(m.Param))
+		for i, item := range m.Param {
+			if item != nil && item.Value != nil {
+				output.Param[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.ParamElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if m.Documentation != nil && m.Documentation.Value != nil {
+		output.Documentation = m.Documentation.Value
+		if m.Documentation.Element != nil {
+			output.DocumentationElement = toMapOrNil(m.Documentation.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CompartmentDefinitionResource
+// Clone creates a deep copy of CompartmentDefinitionResource.
 func (m *CompartmentDefinitionResource) Clone() *CompartmentDefinitionResource {
 	if m == nil { return nil }
 	return &CompartmentDefinitionResource{
@@ -146,7 +379,7 @@ func (m *CompartmentDefinitionResource) Clone() *CompartmentDefinitionResource {
 	}
 }
 
-// Equals checks for equality with another CompartmentDefinitionResource instance
+// Equals checks equality between two CompartmentDefinitionResource instances.
 func (m *CompartmentDefinitionResource) Equals(other *CompartmentDefinitionResource) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

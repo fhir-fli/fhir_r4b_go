@@ -71,7 +71,7 @@ func (r *Resource) ToJSON() ([]byte, error) {
 // Path returns the local reference for this Resource in the form "ResourceType/Id".
 func (r *Resource) Path() string {
 	if r.ID != nil {
-		return fmt.Sprintf("%s/%s", r.ResourceType.String(), *r.ID)
+		return fmt.Sprintf("%s/%s", r.ResourceType.String(), *r.ID.Value)
 	}
 	return fmt.Sprintf("%s/", r.ResourceType.String())
 }
@@ -94,7 +94,7 @@ func UpdateMeta(currentMeta, oldMeta *FhirMeta, versionIDAsTime bool) *FhirMeta 
 			intPtr(int(now.Month())), intPtr(now.Day()),
 			intPtr(now.Hour()), intPtr(now.Minute()),
 			intPtr(now.Second()), intPtr(now.Nanosecond()/1e6),
-			nil, nil,
+			nil, nil, nil,
 		),
 	}
 	if versionIDAsTime {

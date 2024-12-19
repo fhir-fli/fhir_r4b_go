@@ -1,8 +1,6 @@
 package fhir_r4b_go
 
-import (
-	"encoding/json"
-)
+import "errors"
 
 // FhirDate represents FHIR-compliant date (year-month-day).
 type FhirDate struct {
@@ -12,40 +10,32 @@ type FhirDate struct {
 // NewFhirDateFromComponents creates a new FhirDate.
 func NewFhirDateFromComponents(year int, month, day *int, isUTC bool) *FhirDate {
 	return &FhirDate{
-		FhirDateTimeBase: *NewFhirDateTimeBase(&year, isUTC, month, day, nil, nil, nil, nil, nil, nil),
+		FhirDateTimeBase: *NewFhirDateTimeBase(&year, isUTC, month, day, nil, nil, nil, nil, nil, nil, nil),
 	}
 }
 
-// NewFhirDateFromString parses a date string into FhirDate.
+// MarshalJSON serializes FhirDate.
+func (f *FhirDate) MarshalJSON() ([]byte, error) {
+	return f.FhirDateTimeBase.MarshalJSON()
+}
+
+// UnmarshalJSON deserializes JSON into FhirDate.
+func (f *FhirDate) UnmarshalJSON(data []byte) error {
+	return f.FhirDateTimeBase.UnmarshalJSON(data)
+}
+
 func NewFhirDateFromString(input string) (*FhirDate, error) {
 	base, err := FhirDateTimeBaseFromString(input)
 	if err != nil {
 		return nil, err
 	}
+
+	if base.Year == nil || base.Month == nil || base.Day == nil {
+		return nil, errors.New("FHIR date must include at least year, month, and day")
+	}
+
+	base.Value = &input // Cache the parsed string
 	return &FhirDate{FhirDateTimeBase: *base}, nil
-}
-
-// MarshalJSON serializes FhirDate.
-func (f *FhirDate) MarshalJSON() ([]byte, error) {
-	return json.Marshal(map[string]string{"value": f.ToString()})
-}
-
-// UnmarshalJSON deserializes JSON into FhirDate.
-func (f *FhirDate) UnmarshalJSON(data []byte) error {
-	var input map[string]string
-	if err := json.Unmarshal(data, &input); err != nil {
-		return err
-	}
-	value, ok := input["value"]
-	if !ok {
-		return nil
-	}
-	parsed, err := NewFhirDateFromString(value)
-	if err != nil {
-		return err
-	}
-	*f = *parsed
-	return nil
 }
 
 // Clone creates a deep copy of FhirDate.

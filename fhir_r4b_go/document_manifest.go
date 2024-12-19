@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // DocumentManifest
 // A collection of documents compiled for a purpose together with metadata that applies to the collection.
 type DocumentManifest struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -31,22 +32,139 @@ type DocumentManifest struct {
 	Related []*DocumentManifestRelated `json:"related,omitempty"`
 }
 
-// NewDocumentManifest creates a new DocumentManifest instance
+// NewDocumentManifest creates a new DocumentManifest instance.
 func NewDocumentManifest() *DocumentManifest {
 	return &DocumentManifest{}
 }
 
-// FromJSON populates DocumentManifest from JSON data
+// FromJSON populates DocumentManifest from JSON data.
 func (m *DocumentManifest) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		MasterIdentifier *Identifier `json:"masteridentifier,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *DocumentReferenceStatus `json:"status,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Created *FhirDateTime `json:"created,omitempty"`
+		Author []*Reference `json:"author,omitempty"`
+		Recipient []*Reference `json:"recipient,omitempty"`
+		Source *FhirUri `json:"source,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Content []*Reference `json:"content,omitempty"`
+		Related []*DocumentManifestRelated `json:"related,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.MasterIdentifier = temp.MasterIdentifier
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.Type = temp.Type
+	m.Subject = temp.Subject
+	m.Created = temp.Created
+	m.Author = temp.Author
+	m.Recipient = temp.Recipient
+	m.Source = temp.Source
+	m.Description = temp.Description
+	m.Content = temp.Content
+	m.Related = temp.Related
+	return nil
 }
 
-// ToJSON converts DocumentManifest to JSON data
+// ToJSON converts DocumentManifest to JSON data.
 func (m *DocumentManifest) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		MasterIdentifier *Identifier `json:"masteridentifier,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *DocumentReferenceStatus `json:"status,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Created interface{} `json:"created,omitempty"`
+		CreatedElement map[string]interface{} `json:"_created,omitempty"`
+		Author []*Reference `json:"author,omitempty"`
+		Recipient []*Reference `json:"recipient,omitempty"`
+		Source interface{} `json:"source,omitempty"`
+		SourceElement map[string]interface{} `json:"_source,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Content []*Reference `json:"content,omitempty"`
+		Related []*DocumentManifestRelated `json:"related,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.MasterIdentifier = m.MasterIdentifier
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	output.Type = m.Type
+	output.Subject = m.Subject
+	if m.Created != nil && m.Created.Value != nil {
+		output.Created = m.Created.Value
+		if m.Created.Element != nil {
+			output.CreatedElement = toMapOrNil(m.Created.Element.ToJSON())
+		}
+	}
+	output.Author = m.Author
+	output.Recipient = m.Recipient
+	if m.Source != nil && m.Source.Value != nil {
+		output.Source = m.Source.Value
+		if m.Source.Element != nil {
+			output.SourceElement = toMapOrNil(m.Source.Element.ToJSON())
+		}
+	}
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Content = m.Content
+	output.Related = m.Related
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DocumentManifest
+// Clone creates a deep copy of DocumentManifest.
 func (m *DocumentManifest) Clone() *DocumentManifest {
 	if m == nil { return nil }
 	return &DocumentManifest{
@@ -73,7 +191,7 @@ func (m *DocumentManifest) Clone() *DocumentManifest {
 	}
 }
 
-// Equals checks for equality with another DocumentManifest instance
+// Equals checks equality between two DocumentManifest instances.
 func (m *DocumentManifest) Equals(other *DocumentManifest) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -103,7 +221,7 @@ func (m *DocumentManifest) Equals(other *DocumentManifest) bool {
 // DocumentManifestRelated
 // Related identifiers or resources associated with the DocumentManifest.
 type DocumentManifestRelated struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -111,22 +229,55 @@ type DocumentManifestRelated struct {
 	Ref *Reference `json:"ref,omitempty"`
 }
 
-// NewDocumentManifestRelated creates a new DocumentManifestRelated instance
+// NewDocumentManifestRelated creates a new DocumentManifestRelated instance.
 func NewDocumentManifestRelated() *DocumentManifestRelated {
 	return &DocumentManifestRelated{}
 }
 
-// FromJSON populates DocumentManifestRelated from JSON data
+// FromJSON populates DocumentManifestRelated from JSON data.
 func (m *DocumentManifestRelated) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Ref *Reference `json:"ref,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Ref = temp.Ref
+	return nil
 }
 
-// ToJSON converts DocumentManifestRelated to JSON data
+// ToJSON converts DocumentManifestRelated to JSON data.
 func (m *DocumentManifestRelated) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Ref *Reference `json:"ref,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Ref = m.Ref
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DocumentManifestRelated
+// Clone creates a deep copy of DocumentManifestRelated.
 func (m *DocumentManifestRelated) Clone() *DocumentManifestRelated {
 	if m == nil { return nil }
 	return &DocumentManifestRelated{
@@ -138,7 +289,7 @@ func (m *DocumentManifestRelated) Clone() *DocumentManifestRelated {
 	}
 }
 
-// Equals checks for equality with another DocumentManifestRelated instance
+// Equals checks equality between two DocumentManifestRelated instances.
 func (m *DocumentManifestRelated) Equals(other *DocumentManifestRelated) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

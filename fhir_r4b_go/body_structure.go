@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // BodyStructure
 // Record details about an anatomical structure.  This resource may be used when a coded concept does not provide the necessary detail needed for the use case.
 type BodyStructure struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -27,22 +28,117 @@ type BodyStructure struct {
 	Patient *Reference `json:"patient,omitempty"`
 }
 
-// NewBodyStructure creates a new BodyStructure instance
+// NewBodyStructure creates a new BodyStructure instance.
 func NewBodyStructure() *BodyStructure {
 	return &BodyStructure{}
 }
 
-// FromJSON populates BodyStructure from JSON data
+// FromJSON populates BodyStructure from JSON data.
 func (m *BodyStructure) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Active *FhirBoolean `json:"active,omitempty"`
+		Morphology *CodeableConcept `json:"morphology,omitempty"`
+		Location *CodeableConcept `json:"location,omitempty"`
+		LocationQualifier []*CodeableConcept `json:"locationqualifier,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Image []*Attachment `json:"image,omitempty"`
+		Patient *Reference `json:"patient,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Active = temp.Active
+	m.Morphology = temp.Morphology
+	m.Location = temp.Location
+	m.LocationQualifier = temp.LocationQualifier
+	m.Description = temp.Description
+	m.Image = temp.Image
+	m.Patient = temp.Patient
+	return nil
 }
 
-// ToJSON converts BodyStructure to JSON data
+// ToJSON converts BodyStructure to JSON data.
 func (m *BodyStructure) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Active interface{} `json:"active,omitempty"`
+		ActiveElement map[string]interface{} `json:"_active,omitempty"`
+		Morphology *CodeableConcept `json:"morphology,omitempty"`
+		Location *CodeableConcept `json:"location,omitempty"`
+		LocationQualifier []*CodeableConcept `json:"locationqualifier,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Image []*Attachment `json:"image,omitempty"`
+		Patient *Reference `json:"patient,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	if m.Active != nil && m.Active.Value != nil {
+		output.Active = m.Active.Value
+		if m.Active.Element != nil {
+			output.ActiveElement = toMapOrNil(m.Active.Element.ToJSON())
+		}
+	}
+	output.Morphology = m.Morphology
+	output.Location = m.Location
+	output.LocationQualifier = m.LocationQualifier
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Image = m.Image
+	output.Patient = m.Patient
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of BodyStructure
+// Clone creates a deep copy of BodyStructure.
 func (m *BodyStructure) Clone() *BodyStructure {
 	if m == nil { return nil }
 	return &BodyStructure{
@@ -65,7 +161,7 @@ func (m *BodyStructure) Clone() *BodyStructure {
 	}
 }
 
-// Equals checks for equality with another BodyStructure instance
+// Equals checks equality between two BodyStructure instances.
 func (m *BodyStructure) Equals(other *BodyStructure) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

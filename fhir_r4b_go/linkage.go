@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Linkage
 // Identifies two or more records (resource instances) that refer to the same real-world "occurrence".
 type Linkage struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -22,22 +23,91 @@ type Linkage struct {
 	Item []*LinkageItem `json:"item,omitempty"`
 }
 
-// NewLinkage creates a new Linkage instance
+// NewLinkage creates a new Linkage instance.
 func NewLinkage() *Linkage {
 	return &Linkage{}
 }
 
-// FromJSON populates Linkage from JSON data
+// FromJSON populates Linkage from JSON data.
 func (m *Linkage) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Active *FhirBoolean `json:"active,omitempty"`
+		Author *Reference `json:"author,omitempty"`
+		Item []*LinkageItem `json:"item,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Active = temp.Active
+	m.Author = temp.Author
+	m.Item = temp.Item
+	return nil
 }
 
-// ToJSON converts Linkage to JSON data
+// ToJSON converts Linkage to JSON data.
 func (m *Linkage) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Active interface{} `json:"active,omitempty"`
+		ActiveElement map[string]interface{} `json:"_active,omitempty"`
+		Author *Reference `json:"author,omitempty"`
+		Item []*LinkageItem `json:"item,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Active != nil && m.Active.Value != nil {
+		output.Active = m.Active.Value
+		if m.Active.Element != nil {
+			output.ActiveElement = toMapOrNil(m.Active.Element.ToJSON())
+		}
+	}
+	output.Author = m.Author
+	output.Item = m.Item
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Linkage
+// Clone creates a deep copy of Linkage.
 func (m *Linkage) Clone() *Linkage {
 	if m == nil { return nil }
 	return &Linkage{
@@ -55,7 +125,7 @@ func (m *Linkage) Clone() *Linkage {
 	}
 }
 
-// Equals checks for equality with another Linkage instance
+// Equals checks equality between two Linkage instances.
 func (m *Linkage) Equals(other *Linkage) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -76,7 +146,7 @@ func (m *Linkage) Equals(other *Linkage) bool {
 // LinkageItem
 // Identifies which record considered as the reference to the same real-world occurrence as well as how the items should be evaluated within the collection of linked items.
 type LinkageItem struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -84,22 +154,55 @@ type LinkageItem struct {
 	Resource *Reference `json:"resource,omitempty"`
 }
 
-// NewLinkageItem creates a new LinkageItem instance
+// NewLinkageItem creates a new LinkageItem instance.
 func NewLinkageItem() *LinkageItem {
 	return &LinkageItem{}
 }
 
-// FromJSON populates LinkageItem from JSON data
+// FromJSON populates LinkageItem from JSON data.
 func (m *LinkageItem) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *LinkageType `json:"type,omitempty"`
+		Resource *Reference `json:"resource,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Resource = temp.Resource
+	return nil
 }
 
-// ToJSON converts LinkageItem to JSON data
+// ToJSON converts LinkageItem to JSON data.
 func (m *LinkageItem) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *LinkageType `json:"type,omitempty"`
+		Resource *Reference `json:"resource,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Resource = m.Resource
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of LinkageItem
+// Clone creates a deep copy of LinkageItem.
 func (m *LinkageItem) Clone() *LinkageItem {
 	if m == nil { return nil }
 	return &LinkageItem{
@@ -111,7 +214,7 @@ func (m *LinkageItem) Clone() *LinkageItem {
 	}
 }
 
-// Equals checks for equality with another LinkageItem instance
+// Equals checks equality between two LinkageItem instances.
 func (m *LinkageItem) Equals(other *LinkageItem) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // AppointmentResponse
 // A reply to an appointment request for a patient and/or practitioner(s), such as a confirmation or rejection.
 type AppointmentResponse struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -27,22 +28,123 @@ type AppointmentResponse struct {
 	Comment *FhirString `json:"comment,omitempty"`
 }
 
-// NewAppointmentResponse creates a new AppointmentResponse instance
+// NewAppointmentResponse creates a new AppointmentResponse instance.
 func NewAppointmentResponse() *AppointmentResponse {
 	return &AppointmentResponse{}
 }
 
-// FromJSON populates AppointmentResponse from JSON data
+// FromJSON populates AppointmentResponse from JSON data.
 func (m *AppointmentResponse) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Appointment *Reference `json:"appointment,omitempty"`
+		Start *FhirInstant `json:"start,omitempty"`
+		End *FhirInstant `json:"end,omitempty"`
+		ParticipantType []*CodeableConcept `json:"participanttype,omitempty"`
+		Actor *Reference `json:"actor,omitempty"`
+		ParticipantStatus *ParticipationStatus `json:"participantstatus,omitempty"`
+		Comment *FhirString `json:"comment,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Appointment = temp.Appointment
+	m.Start = temp.Start
+	m.End = temp.End
+	m.ParticipantType = temp.ParticipantType
+	m.Actor = temp.Actor
+	m.ParticipantStatus = temp.ParticipantStatus
+	m.Comment = temp.Comment
+	return nil
 }
 
-// ToJSON converts AppointmentResponse to JSON data
+// ToJSON converts AppointmentResponse to JSON data.
 func (m *AppointmentResponse) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Appointment *Reference `json:"appointment,omitempty"`
+		Start interface{} `json:"start,omitempty"`
+		StartElement map[string]interface{} `json:"_start,omitempty"`
+		End interface{} `json:"end,omitempty"`
+		EndElement map[string]interface{} `json:"_end,omitempty"`
+		ParticipantType []*CodeableConcept `json:"participanttype,omitempty"`
+		Actor *Reference `json:"actor,omitempty"`
+		ParticipantStatus *ParticipationStatus `json:"participantstatus,omitempty"`
+		Comment interface{} `json:"comment,omitempty"`
+		CommentElement map[string]interface{} `json:"_comment,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Appointment = m.Appointment
+	if m.Start != nil && m.Start.Value != nil {
+		output.Start = m.Start.Value
+		if m.Start.Element != nil {
+			output.StartElement = toMapOrNil(m.Start.Element.ToJSON())
+		}
+	}
+	if m.End != nil && m.End.Value != nil {
+		output.End = m.End.Value
+		if m.End.Element != nil {
+			output.EndElement = toMapOrNil(m.End.Element.ToJSON())
+		}
+	}
+	output.ParticipantType = m.ParticipantType
+	output.Actor = m.Actor
+	output.ParticipantStatus = m.ParticipantStatus
+	if m.Comment != nil && m.Comment.Value != nil {
+		output.Comment = m.Comment.Value
+		if m.Comment.Element != nil {
+			output.CommentElement = toMapOrNil(m.Comment.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of AppointmentResponse
+// Clone creates a deep copy of AppointmentResponse.
 func (m *AppointmentResponse) Clone() *AppointmentResponse {
 	if m == nil { return nil }
 	return &AppointmentResponse{
@@ -65,7 +167,7 @@ func (m *AppointmentResponse) Clone() *AppointmentResponse {
 	}
 }
 
-// Equals checks for equality with another AppointmentResponse instance
+// Equals checks equality between two AppointmentResponse instances.
 func (m *AppointmentResponse) Equals(other *AppointmentResponse) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

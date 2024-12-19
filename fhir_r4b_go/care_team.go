@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // CareTeam
 // The Care Team includes all the people and organizations who plan to participate in the coordination and delivery of care for a patient.
 type CareTeam struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -32,22 +33,131 @@ type CareTeam struct {
 	Note []*Annotation `json:"note,omitempty"`
 }
 
-// NewCareTeam creates a new CareTeam instance
+// NewCareTeam creates a new CareTeam instance.
 func NewCareTeam() *CareTeam {
 	return &CareTeam{}
 }
 
-// FromJSON populates CareTeam from JSON data
+// FromJSON populates CareTeam from JSON data.
 func (m *CareTeam) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *CareTeamStatus `json:"status,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Participant []*CareTeamParticipant `json:"participant,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		ManagingOrganization []*Reference `json:"managingorganization,omitempty"`
+		Telecom []*ContactPoint `json:"telecom,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.Category = temp.Category
+	m.Name = temp.Name
+	m.Subject = temp.Subject
+	m.Encounter = temp.Encounter
+	m.Period = temp.Period
+	m.Participant = temp.Participant
+	m.ReasonCode = temp.ReasonCode
+	m.ReasonReference = temp.ReasonReference
+	m.ManagingOrganization = temp.ManagingOrganization
+	m.Telecom = temp.Telecom
+	m.Note = temp.Note
+	return nil
 }
 
-// ToJSON converts CareTeam to JSON data
+// ToJSON converts CareTeam to JSON data.
 func (m *CareTeam) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *CareTeamStatus `json:"status,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Participant []*CareTeamParticipant `json:"participant,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		ManagingOrganization []*Reference `json:"managingorganization,omitempty"`
+		Telecom []*ContactPoint `json:"telecom,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	output.Category = m.Category
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	output.Subject = m.Subject
+	output.Encounter = m.Encounter
+	output.Period = m.Period
+	output.Participant = m.Participant
+	output.ReasonCode = m.ReasonCode
+	output.ReasonReference = m.ReasonReference
+	output.ManagingOrganization = m.ManagingOrganization
+	output.Telecom = m.Telecom
+	output.Note = m.Note
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CareTeam
+// Clone creates a deep copy of CareTeam.
 func (m *CareTeam) Clone() *CareTeam {
 	if m == nil { return nil }
 	return &CareTeam{
@@ -75,7 +185,7 @@ func (m *CareTeam) Clone() *CareTeam {
 	}
 }
 
-// Equals checks for equality with another CareTeam instance
+// Equals checks equality between two CareTeam instances.
 func (m *CareTeam) Equals(other *CareTeam) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -106,7 +216,7 @@ func (m *CareTeam) Equals(other *CareTeam) bool {
 // CareTeamParticipant
 // Identifies all people and organizations who are expected to be involved in the care team.
 type CareTeamParticipant struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -116,22 +226,63 @@ type CareTeamParticipant struct {
 	Period *Period `json:"period,omitempty"`
 }
 
-// NewCareTeamParticipant creates a new CareTeamParticipant instance
+// NewCareTeamParticipant creates a new CareTeamParticipant instance.
 func NewCareTeamParticipant() *CareTeamParticipant {
 	return &CareTeamParticipant{}
 }
 
-// FromJSON populates CareTeamParticipant from JSON data
+// FromJSON populates CareTeamParticipant from JSON data.
 func (m *CareTeamParticipant) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Role []*CodeableConcept `json:"role,omitempty"`
+		Member *Reference `json:"member,omitempty"`
+		OnBehalfOf *Reference `json:"onbehalfof,omitempty"`
+		Period *Period `json:"period,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Role = temp.Role
+	m.Member = temp.Member
+	m.OnBehalfOf = temp.OnBehalfOf
+	m.Period = temp.Period
+	return nil
 }
 
-// ToJSON converts CareTeamParticipant to JSON data
+// ToJSON converts CareTeamParticipant to JSON data.
 func (m *CareTeamParticipant) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Role []*CodeableConcept `json:"role,omitempty"`
+		Member *Reference `json:"member,omitempty"`
+		OnBehalfOf *Reference `json:"onbehalfof,omitempty"`
+		Period *Period `json:"period,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Role = m.Role
+	output.Member = m.Member
+	output.OnBehalfOf = m.OnBehalfOf
+	output.Period = m.Period
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CareTeamParticipant
+// Clone creates a deep copy of CareTeamParticipant.
 func (m *CareTeamParticipant) Clone() *CareTeamParticipant {
 	if m == nil { return nil }
 	return &CareTeamParticipant{
@@ -145,7 +296,7 @@ func (m *CareTeamParticipant) Clone() *CareTeamParticipant {
 	}
 }
 
-// Equals checks for equality with another CareTeamParticipant instance
+// Equals checks equality between two CareTeamParticipant instances.
 func (m *CareTeamParticipant) Equals(other *CareTeamParticipant) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

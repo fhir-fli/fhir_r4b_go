@@ -2,18 +2,38 @@ package fhir_r4b_go
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 )
 
 // FhirInteger represents the FHIR 'integer' type.
 type FhirInteger struct {
-	Value   *int64   `json:"-"`          // The actual value
-	Element *Element `json:",inline"`    // Metadata (FHIR element)
+	Value   *int64   `json:"-"`       // The actual value
+	Element *Element `json:",inline"` // Metadata (FHIR element)
 }
 
 // NewFhirInteger creates a new validated FhirInteger.
 func NewFhirInteger(value int64, element *Element) *FhirInteger {
 	return &FhirInteger{Value: &value, Element: element}
+}
+
+// NewFhirIntegerFromMap creates a FhirInteger instance from a map.
+func NewFhirIntegerFromMap(data map[string]interface{}) (*FhirInteger, error) {
+	value, ok := data["value"].(*int64)
+	if !ok {
+		return nil, errors.New("invalid or missing value for FhirInteger")
+	}
+
+	integer := &FhirInteger{Value: value}
+
+	if elementData, ok := data["_value"].(map[string]interface{}); ok {
+		integer.Element = &Element{}
+		if err := mapToStruct(elementData, integer.Element); err != nil {
+			return nil, fmt.Errorf("failed to parse _value for FhirInteger: %v", err)
+		}
+	}
+
+	return integer, nil
 }
 
 // UnmarshalJSON deserializes JSON into FhirInteger.

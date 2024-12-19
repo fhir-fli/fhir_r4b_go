@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // SupplyDelivery
 // Record of delivery of what is supplied.
 type SupplyDelivery struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -32,22 +33,131 @@ type SupplyDelivery struct {
 	Receiver []*Reference `json:"receiver,omitempty"`
 }
 
-// NewSupplyDelivery creates a new SupplyDelivery instance
+// NewSupplyDelivery creates a new SupplyDelivery instance.
 func NewSupplyDelivery() *SupplyDelivery {
 	return &SupplyDelivery{}
 }
 
-// FromJSON populates SupplyDelivery from JSON data
+// FromJSON populates SupplyDelivery from JSON data.
 func (m *SupplyDelivery) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		PartOf []*Reference `json:"partof,omitempty"`
+		Status *SupplyDeliveryStatus `json:"status,omitempty"`
+		Patient *Reference `json:"patient,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		SuppliedItem *SupplyDeliverySuppliedItem `json:"supplieditem,omitempty"`
+		OccurrenceDateTime *FhirDateTime `json:"occurrencedatetime,omitempty"`
+		OccurrencePeriod *Period `json:"occurrenceperiod,omitempty"`
+		OccurrenceTiming *Timing `json:"occurrencetiming,omitempty"`
+		Supplier *Reference `json:"supplier,omitempty"`
+		Destination *Reference `json:"destination,omitempty"`
+		Receiver []*Reference `json:"receiver,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.BasedOn = temp.BasedOn
+	m.PartOf = temp.PartOf
+	m.Status = temp.Status
+	m.Patient = temp.Patient
+	m.Type = temp.Type
+	m.SuppliedItem = temp.SuppliedItem
+	m.OccurrenceDateTime = temp.OccurrenceDateTime
+	m.OccurrencePeriod = temp.OccurrencePeriod
+	m.OccurrenceTiming = temp.OccurrenceTiming
+	m.Supplier = temp.Supplier
+	m.Destination = temp.Destination
+	m.Receiver = temp.Receiver
+	return nil
 }
 
-// ToJSON converts SupplyDelivery to JSON data
+// ToJSON converts SupplyDelivery to JSON data.
 func (m *SupplyDelivery) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		PartOf []*Reference `json:"partof,omitempty"`
+		Status *SupplyDeliveryStatus `json:"status,omitempty"`
+		Patient *Reference `json:"patient,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		SuppliedItem *SupplyDeliverySuppliedItem `json:"supplieditem,omitempty"`
+		OccurrenceDateTime interface{} `json:"occurrencedatetime,omitempty"`
+		OccurrenceDateTimeElement map[string]interface{} `json:"_occurrencedatetime,omitempty"`
+		OccurrencePeriod *Period `json:"occurrenceperiod,omitempty"`
+		OccurrenceTiming *Timing `json:"occurrencetiming,omitempty"`
+		Supplier *Reference `json:"supplier,omitempty"`
+		Destination *Reference `json:"destination,omitempty"`
+		Receiver []*Reference `json:"receiver,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.BasedOn = m.BasedOn
+	output.PartOf = m.PartOf
+	output.Status = m.Status
+	output.Patient = m.Patient
+	output.Type = m.Type
+	output.SuppliedItem = m.SuppliedItem
+	if m.OccurrenceDateTime != nil && m.OccurrenceDateTime.Value != nil {
+		output.OccurrenceDateTime = m.OccurrenceDateTime.Value
+		if m.OccurrenceDateTime.Element != nil {
+			output.OccurrenceDateTimeElement = toMapOrNil(m.OccurrenceDateTime.Element.ToJSON())
+		}
+	}
+	output.OccurrencePeriod = m.OccurrencePeriod
+	output.OccurrenceTiming = m.OccurrenceTiming
+	output.Supplier = m.Supplier
+	output.Destination = m.Destination
+	output.Receiver = m.Receiver
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SupplyDelivery
+// Clone creates a deep copy of SupplyDelivery.
 func (m *SupplyDelivery) Clone() *SupplyDelivery {
 	if m == nil { return nil }
 	return &SupplyDelivery{
@@ -75,7 +185,7 @@ func (m *SupplyDelivery) Clone() *SupplyDelivery {
 	}
 }
 
-// Equals checks for equality with another SupplyDelivery instance
+// Equals checks equality between two SupplyDelivery instances.
 func (m *SupplyDelivery) Equals(other *SupplyDelivery) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -106,7 +216,7 @@ func (m *SupplyDelivery) Equals(other *SupplyDelivery) bool {
 // SupplyDeliverySuppliedItem
 // The item that is being delivered or has been supplied.
 type SupplyDeliverySuppliedItem struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -115,22 +225,59 @@ type SupplyDeliverySuppliedItem struct {
 	ItemReference *Reference `json:"itemreference,omitempty"`
 }
 
-// NewSupplyDeliverySuppliedItem creates a new SupplyDeliverySuppliedItem instance
+// NewSupplyDeliverySuppliedItem creates a new SupplyDeliverySuppliedItem instance.
 func NewSupplyDeliverySuppliedItem() *SupplyDeliverySuppliedItem {
 	return &SupplyDeliverySuppliedItem{}
 }
 
-// FromJSON populates SupplyDeliverySuppliedItem from JSON data
+// FromJSON populates SupplyDeliverySuppliedItem from JSON data.
 func (m *SupplyDeliverySuppliedItem) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		ItemCodeableConcept *CodeableConcept `json:"itemcodeableconcept,omitempty"`
+		ItemReference *Reference `json:"itemreference,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Quantity = temp.Quantity
+	m.ItemCodeableConcept = temp.ItemCodeableConcept
+	m.ItemReference = temp.ItemReference
+	return nil
 }
 
-// ToJSON converts SupplyDeliverySuppliedItem to JSON data
+// ToJSON converts SupplyDeliverySuppliedItem to JSON data.
 func (m *SupplyDeliverySuppliedItem) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		ItemCodeableConcept *CodeableConcept `json:"itemcodeableconcept,omitempty"`
+		ItemReference *Reference `json:"itemreference,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Quantity = m.Quantity
+	output.ItemCodeableConcept = m.ItemCodeableConcept
+	output.ItemReference = m.ItemReference
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SupplyDeliverySuppliedItem
+// Clone creates a deep copy of SupplyDeliverySuppliedItem.
 func (m *SupplyDeliverySuppliedItem) Clone() *SupplyDeliverySuppliedItem {
 	if m == nil { return nil }
 	return &SupplyDeliverySuppliedItem{
@@ -143,7 +290,7 @@ func (m *SupplyDeliverySuppliedItem) Clone() *SupplyDeliverySuppliedItem {
 	}
 }
 
-// Equals checks for equality with another SupplyDeliverySuppliedItem instance
+// Equals checks equality between two SupplyDeliverySuppliedItem instances.
 func (m *SupplyDeliverySuppliedItem) Equals(other *SupplyDeliverySuppliedItem) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

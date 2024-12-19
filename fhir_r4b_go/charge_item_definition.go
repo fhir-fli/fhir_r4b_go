@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // ChargeItemDefinition
 // The ChargeItemDefinition resource provides the properties that apply to the (billing) codes necessary to calculate costs and prices. The properties may differ largely depending on type and realm, therefore this resource gives only a rough structure and requires profiling for each type of billing code system.
 type ChargeItemDefinition struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -42,22 +44,288 @@ type ChargeItemDefinition struct {
 	PropertyGroup []*ChargeItemDefinitionPropertyGroup `json:"propertygroup,omitempty"`
 }
 
-// NewChargeItemDefinition creates a new ChargeItemDefinition instance
+// NewChargeItemDefinition creates a new ChargeItemDefinition instance.
 func NewChargeItemDefinition() *ChargeItemDefinition {
 	return &ChargeItemDefinition{}
 }
 
-// FromJSON populates ChargeItemDefinition from JSON data
+// FromJSON populates ChargeItemDefinition from JSON data.
 func (m *ChargeItemDefinition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		DerivedFromUri []interface{} `json:"derivedfromuri,omitempty"`
+		PartOf []interface{} `json:"partof,omitempty"`
+		Replaces []interface{} `json:"replaces,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental *FhirBoolean `json:"experimental,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Publisher *FhirString `json:"publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Copyright *FhirMarkdown `json:"copyright,omitempty"`
+		ApprovalDate *FhirDate `json:"approvaldate,omitempty"`
+		LastReviewDate *FhirDate `json:"lastreviewdate,omitempty"`
+		EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Instance []*Reference `json:"instance,omitempty"`
+		Applicability []*ChargeItemDefinitionApplicability `json:"applicability,omitempty"`
+		PropertyGroup []*ChargeItemDefinitionPropertyGroup `json:"propertygroup,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Url = temp.Url
+	m.Identifier = temp.Identifier
+	m.Version = temp.Version
+	m.Title = temp.Title
+	if len(temp.DerivedFromUri) > 0 {
+		m.DerivedFromUri = make([]*FhirUri, len(temp.DerivedFromUri))
+		for i := range temp.DerivedFromUri {
+			itemMap, ok := temp.DerivedFromUri[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for DerivedFromUri[%d]: expected map", i) }
+			primitive, err := NewFhirUriFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse DerivedFromUri[%d]: %v", i, err) }
+			m.DerivedFromUri[i] = primitive
+		}
+	}
+	if len(temp.PartOf) > 0 {
+		m.PartOf = make([]*FhirCanonical, len(temp.PartOf))
+		for i := range temp.PartOf {
+			itemMap, ok := temp.PartOf[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for PartOf[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse PartOf[%d]: %v", i, err) }
+			m.PartOf[i] = primitive
+		}
+	}
+	if len(temp.Replaces) > 0 {
+		m.Replaces = make([]*FhirCanonical, len(temp.Replaces))
+		for i := range temp.Replaces {
+			itemMap, ok := temp.Replaces[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Replaces[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Replaces[%d]: %v", i, err) }
+			m.Replaces[i] = primitive
+		}
+	}
+	m.Status = temp.Status
+	m.Experimental = temp.Experimental
+	m.Date = temp.Date
+	m.Publisher = temp.Publisher
+	m.Contact = temp.Contact
+	m.Description = temp.Description
+	m.UseContext = temp.UseContext
+	m.Jurisdiction = temp.Jurisdiction
+	m.Copyright = temp.Copyright
+	m.ApprovalDate = temp.ApprovalDate
+	m.LastReviewDate = temp.LastReviewDate
+	m.EffectivePeriod = temp.EffectivePeriod
+	m.Code = temp.Code
+	m.Instance = temp.Instance
+	m.Applicability = temp.Applicability
+	m.PropertyGroup = temp.PropertyGroup
+	return nil
 }
 
-// ToJSON converts ChargeItemDefinition to JSON data
+// ToJSON converts ChargeItemDefinition to JSON data.
 func (m *ChargeItemDefinition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		DerivedFromUri []interface{} `json:"derivedfromuri,omitempty"`
+		DerivedFromUriElement []map[string]interface{} `json:"_derivedfromuri,omitempty"`
+		PartOf []interface{} `json:"partof,omitempty"`
+		PartOfElement []map[string]interface{} `json:"_partof,omitempty"`
+		Replaces []interface{} `json:"replaces,omitempty"`
+		ReplacesElement []map[string]interface{} `json:"_replaces,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental interface{} `json:"experimental,omitempty"`
+		ExperimentalElement map[string]interface{} `json:"_experimental,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Publisher interface{} `json:"publisher,omitempty"`
+		PublisherElement map[string]interface{} `json:"_publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Copyright interface{} `json:"copyright,omitempty"`
+		CopyrightElement map[string]interface{} `json:"_copyright,omitempty"`
+		ApprovalDate interface{} `json:"approvaldate,omitempty"`
+		ApprovalDateElement map[string]interface{} `json:"_approvaldate,omitempty"`
+		LastReviewDate interface{} `json:"lastreviewdate,omitempty"`
+		LastReviewDateElement map[string]interface{} `json:"_lastreviewdate,omitempty"`
+		EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Instance []*Reference `json:"instance,omitempty"`
+		Applicability []*ChargeItemDefinitionApplicability `json:"applicability,omitempty"`
+		PropertyGroup []*ChargeItemDefinitionPropertyGroup `json:"propertygroup,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	output.Identifier = m.Identifier
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	if len(m.DerivedFromUri) > 0 {
+		output.DerivedFromUri = make([]interface{}, len(m.DerivedFromUri))
+		output.DerivedFromUriElement = make([]map[string]interface{}, len(m.DerivedFromUri))
+		for i, item := range m.DerivedFromUri {
+			if item != nil && item.Value != nil {
+				output.DerivedFromUri[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.DerivedFromUriElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.PartOf) > 0 {
+		output.PartOf = make([]interface{}, len(m.PartOf))
+		output.PartOfElement = make([]map[string]interface{}, len(m.PartOf))
+		for i, item := range m.PartOf {
+			if item != nil && item.Value != nil {
+				output.PartOf[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.PartOfElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.Replaces) > 0 {
+		output.Replaces = make([]interface{}, len(m.Replaces))
+		output.ReplacesElement = make([]map[string]interface{}, len(m.Replaces))
+		for i, item := range m.Replaces {
+			if item != nil && item.Value != nil {
+				output.Replaces[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.ReplacesElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Status = m.Status
+	if m.Experimental != nil && m.Experimental.Value != nil {
+		output.Experimental = m.Experimental.Value
+		if m.Experimental.Element != nil {
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+		}
+	}
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.Publisher != nil && m.Publisher.Value != nil {
+		output.Publisher = m.Publisher.Value
+		if m.Publisher.Element != nil {
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+		}
+	}
+	output.Contact = m.Contact
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.UseContext = m.UseContext
+	output.Jurisdiction = m.Jurisdiction
+	if m.Copyright != nil && m.Copyright.Value != nil {
+		output.Copyright = m.Copyright.Value
+		if m.Copyright.Element != nil {
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+		}
+	}
+	if m.ApprovalDate != nil && m.ApprovalDate.Value != nil {
+		output.ApprovalDate = m.ApprovalDate.Value
+		if m.ApprovalDate.Element != nil {
+			output.ApprovalDateElement = toMapOrNil(m.ApprovalDate.Element.ToJSON())
+		}
+	}
+	if m.LastReviewDate != nil && m.LastReviewDate.Value != nil {
+		output.LastReviewDate = m.LastReviewDate.Value
+		if m.LastReviewDate.Element != nil {
+			output.LastReviewDateElement = toMapOrNil(m.LastReviewDate.Element.ToJSON())
+		}
+	}
+	output.EffectivePeriod = m.EffectivePeriod
+	output.Code = m.Code
+	output.Instance = m.Instance
+	output.Applicability = m.Applicability
+	output.PropertyGroup = m.PropertyGroup
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ChargeItemDefinition
+// Clone creates a deep copy of ChargeItemDefinition.
 func (m *ChargeItemDefinition) Clone() *ChargeItemDefinition {
 	if m == nil { return nil }
 	return &ChargeItemDefinition{
@@ -95,7 +363,7 @@ func (m *ChargeItemDefinition) Clone() *ChargeItemDefinition {
 	}
 }
 
-// Equals checks for equality with another ChargeItemDefinition instance
+// Equals checks equality between two ChargeItemDefinition instances.
 func (m *ChargeItemDefinition) Equals(other *ChargeItemDefinition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -136,7 +404,7 @@ func (m *ChargeItemDefinition) Equals(other *ChargeItemDefinition) bool {
 // ChargeItemDefinitionApplicability
 // Expressions that describe applicability criteria for the billing code.
 type ChargeItemDefinitionApplicability struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -145,22 +413,77 @@ type ChargeItemDefinitionApplicability struct {
 	Expression *FhirString `json:"expression,omitempty"`
 }
 
-// NewChargeItemDefinitionApplicability creates a new ChargeItemDefinitionApplicability instance
+// NewChargeItemDefinitionApplicability creates a new ChargeItemDefinitionApplicability instance.
 func NewChargeItemDefinitionApplicability() *ChargeItemDefinitionApplicability {
 	return &ChargeItemDefinitionApplicability{}
 }
 
-// FromJSON populates ChargeItemDefinitionApplicability from JSON data
+// FromJSON populates ChargeItemDefinitionApplicability from JSON data.
 func (m *ChargeItemDefinitionApplicability) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Language *FhirString `json:"language,omitempty"`
+		Expression *FhirString `json:"expression,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Description = temp.Description
+	m.Language = temp.Language
+	m.Expression = temp.Expression
+	return nil
 }
 
-// ToJSON converts ChargeItemDefinitionApplicability to JSON data
+// ToJSON converts ChargeItemDefinitionApplicability to JSON data.
 func (m *ChargeItemDefinitionApplicability) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Language interface{} `json:"language,omitempty"`
+		LanguageElement map[string]interface{} `json:"_language,omitempty"`
+		Expression interface{} `json:"expression,omitempty"`
+		ExpressionElement map[string]interface{} `json:"_expression,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	if m.Language != nil && m.Language.Value != nil {
+		output.Language = m.Language.Value
+		if m.Language.Element != nil {
+			output.LanguageElement = toMapOrNil(m.Language.Element.ToJSON())
+		}
+	}
+	if m.Expression != nil && m.Expression.Value != nil {
+		output.Expression = m.Expression.Value
+		if m.Expression.Element != nil {
+			output.ExpressionElement = toMapOrNil(m.Expression.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ChargeItemDefinitionApplicability
+// Clone creates a deep copy of ChargeItemDefinitionApplicability.
 func (m *ChargeItemDefinitionApplicability) Clone() *ChargeItemDefinitionApplicability {
 	if m == nil { return nil }
 	return &ChargeItemDefinitionApplicability{
@@ -173,7 +496,7 @@ func (m *ChargeItemDefinitionApplicability) Clone() *ChargeItemDefinitionApplica
 	}
 }
 
-// Equals checks for equality with another ChargeItemDefinitionApplicability instance
+// Equals checks equality between two ChargeItemDefinitionApplicability instances.
 func (m *ChargeItemDefinitionApplicability) Equals(other *ChargeItemDefinitionApplicability) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -189,7 +512,7 @@ func (m *ChargeItemDefinitionApplicability) Equals(other *ChargeItemDefinitionAp
 // ChargeItemDefinitionPropertyGroup
 // Group of properties which are applicable under the same conditions. If no applicability rules are established for the group, then all properties always apply.
 type ChargeItemDefinitionPropertyGroup struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -197,22 +520,55 @@ type ChargeItemDefinitionPropertyGroup struct {
 	PriceComponent []*ChargeItemDefinitionPriceComponent `json:"pricecomponent,omitempty"`
 }
 
-// NewChargeItemDefinitionPropertyGroup creates a new ChargeItemDefinitionPropertyGroup instance
+// NewChargeItemDefinitionPropertyGroup creates a new ChargeItemDefinitionPropertyGroup instance.
 func NewChargeItemDefinitionPropertyGroup() *ChargeItemDefinitionPropertyGroup {
 	return &ChargeItemDefinitionPropertyGroup{}
 }
 
-// FromJSON populates ChargeItemDefinitionPropertyGroup from JSON data
+// FromJSON populates ChargeItemDefinitionPropertyGroup from JSON data.
 func (m *ChargeItemDefinitionPropertyGroup) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Applicability []*ChargeItemDefinitionApplicability `json:"applicability,omitempty"`
+		PriceComponent []*ChargeItemDefinitionPriceComponent `json:"pricecomponent,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Applicability = temp.Applicability
+	m.PriceComponent = temp.PriceComponent
+	return nil
 }
 
-// ToJSON converts ChargeItemDefinitionPropertyGroup to JSON data
+// ToJSON converts ChargeItemDefinitionPropertyGroup to JSON data.
 func (m *ChargeItemDefinitionPropertyGroup) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Applicability []*ChargeItemDefinitionApplicability `json:"applicability,omitempty"`
+		PriceComponent []*ChargeItemDefinitionPriceComponent `json:"pricecomponent,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Applicability = m.Applicability
+	output.PriceComponent = m.PriceComponent
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ChargeItemDefinitionPropertyGroup
+// Clone creates a deep copy of ChargeItemDefinitionPropertyGroup.
 func (m *ChargeItemDefinitionPropertyGroup) Clone() *ChargeItemDefinitionPropertyGroup {
 	if m == nil { return nil }
 	return &ChargeItemDefinitionPropertyGroup{
@@ -224,7 +580,7 @@ func (m *ChargeItemDefinitionPropertyGroup) Clone() *ChargeItemDefinitionPropert
 	}
 }
 
-// Equals checks for equality with another ChargeItemDefinitionPropertyGroup instance
+// Equals checks equality between two ChargeItemDefinitionPropertyGroup instances.
 func (m *ChargeItemDefinitionPropertyGroup) Equals(other *ChargeItemDefinitionPropertyGroup) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -239,7 +595,7 @@ func (m *ChargeItemDefinitionPropertyGroup) Equals(other *ChargeItemDefinitionPr
 // ChargeItemDefinitionPriceComponent
 // The price for a ChargeItem may be calculated as a base price with surcharges/deductions that apply in certain conditions. A ChargeItemDefinition resource that defines the prices, factors and conditions that apply to a billing code is currently under development. The priceComponent element can be used to offer transparency to the recipient of the Invoice of how the prices have been calculated.
 type ChargeItemDefinitionPriceComponent struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -249,22 +605,69 @@ type ChargeItemDefinitionPriceComponent struct {
 	Amount *Money `json:"amount,omitempty"`
 }
 
-// NewChargeItemDefinitionPriceComponent creates a new ChargeItemDefinitionPriceComponent instance
+// NewChargeItemDefinitionPriceComponent creates a new ChargeItemDefinitionPriceComponent instance.
 func NewChargeItemDefinitionPriceComponent() *ChargeItemDefinitionPriceComponent {
 	return &ChargeItemDefinitionPriceComponent{}
 }
 
-// FromJSON populates ChargeItemDefinitionPriceComponent from JSON data
+// FromJSON populates ChargeItemDefinitionPriceComponent from JSON data.
 func (m *ChargeItemDefinitionPriceComponent) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *InvoicePriceComponentType `json:"type,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Factor *FhirDecimal `json:"factor,omitempty"`
+		Amount *Money `json:"amount,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Code = temp.Code
+	m.Factor = temp.Factor
+	m.Amount = temp.Amount
+	return nil
 }
 
-// ToJSON converts ChargeItemDefinitionPriceComponent to JSON data
+// ToJSON converts ChargeItemDefinitionPriceComponent to JSON data.
 func (m *ChargeItemDefinitionPriceComponent) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *InvoicePriceComponentType `json:"type,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Factor interface{} `json:"factor,omitempty"`
+		FactorElement map[string]interface{} `json:"_factor,omitempty"`
+		Amount *Money `json:"amount,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Code = m.Code
+	if m.Factor != nil && m.Factor.Value != nil {
+		output.Factor = m.Factor.Value
+		if m.Factor.Element != nil {
+			output.FactorElement = toMapOrNil(m.Factor.Element.ToJSON())
+		}
+	}
+	output.Amount = m.Amount
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ChargeItemDefinitionPriceComponent
+// Clone creates a deep copy of ChargeItemDefinitionPriceComponent.
 func (m *ChargeItemDefinitionPriceComponent) Clone() *ChargeItemDefinitionPriceComponent {
 	if m == nil { return nil }
 	return &ChargeItemDefinitionPriceComponent{
@@ -278,7 +681,7 @@ func (m *ChargeItemDefinitionPriceComponent) Clone() *ChargeItemDefinitionPriceC
 	}
 }
 
-// Equals checks for equality with another ChargeItemDefinitionPriceComponent instance
+// Equals checks equality between two ChargeItemDefinitionPriceComponent instances.
 func (m *ChargeItemDefinitionPriceComponent) Equals(other *ChargeItemDefinitionPriceComponent) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

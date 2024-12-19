@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // AdverseEvent
 // Actual or  potential/avoided event causing unintended physical injury resulting from or contributed to by medical care, a research study or other healthcare setting factors that requires additional monitoring, treatment, or hospitalization, or that results in death.
 type AdverseEvent struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -39,22 +40,171 @@ type AdverseEvent struct {
 	Study []*Reference `json:"study,omitempty"`
 }
 
-// NewAdverseEvent creates a new AdverseEvent instance
+// NewAdverseEvent creates a new AdverseEvent instance.
 func NewAdverseEvent() *AdverseEvent {
 	return &AdverseEvent{}
 }
 
-// FromJSON populates AdverseEvent from JSON data
+// FromJSON populates AdverseEvent from JSON data.
 func (m *AdverseEvent) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Actuality *AdverseEventActuality `json:"actuality,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Event *CodeableConcept `json:"event,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Detected *FhirDateTime `json:"detected,omitempty"`
+		RecordedDate *FhirDateTime `json:"recordeddate,omitempty"`
+		ResultingCondition []*Reference `json:"resultingcondition,omitempty"`
+		Location *Reference `json:"location,omitempty"`
+		Seriousness *CodeableConcept `json:"seriousness,omitempty"`
+		Severity *CodeableConcept `json:"severity,omitempty"`
+		Outcome *CodeableConcept `json:"outcome,omitempty"`
+		Recorder *Reference `json:"recorder,omitempty"`
+		Contributor []*Reference `json:"contributor,omitempty"`
+		SuspectEntity []*AdverseEventSuspectEntity `json:"suspectentity,omitempty"`
+		SubjectMedicalHistory []*Reference `json:"subjectmedicalhistory,omitempty"`
+		ReferenceDocument []*Reference `json:"referencedocument,omitempty"`
+		Study []*Reference `json:"study,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Actuality = temp.Actuality
+	m.Category = temp.Category
+	m.Event = temp.Event
+	m.Subject = temp.Subject
+	m.Encounter = temp.Encounter
+	m.Date = temp.Date
+	m.Detected = temp.Detected
+	m.RecordedDate = temp.RecordedDate
+	m.ResultingCondition = temp.ResultingCondition
+	m.Location = temp.Location
+	m.Seriousness = temp.Seriousness
+	m.Severity = temp.Severity
+	m.Outcome = temp.Outcome
+	m.Recorder = temp.Recorder
+	m.Contributor = temp.Contributor
+	m.SuspectEntity = temp.SuspectEntity
+	m.SubjectMedicalHistory = temp.SubjectMedicalHistory
+	m.ReferenceDocument = temp.ReferenceDocument
+	m.Study = temp.Study
+	return nil
 }
 
-// ToJSON converts AdverseEvent to JSON data
+// ToJSON converts AdverseEvent to JSON data.
 func (m *AdverseEvent) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Actuality *AdverseEventActuality `json:"actuality,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Event *CodeableConcept `json:"event,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Detected interface{} `json:"detected,omitempty"`
+		DetectedElement map[string]interface{} `json:"_detected,omitempty"`
+		RecordedDate interface{} `json:"recordeddate,omitempty"`
+		RecordedDateElement map[string]interface{} `json:"_recordeddate,omitempty"`
+		ResultingCondition []*Reference `json:"resultingcondition,omitempty"`
+		Location *Reference `json:"location,omitempty"`
+		Seriousness *CodeableConcept `json:"seriousness,omitempty"`
+		Severity *CodeableConcept `json:"severity,omitempty"`
+		Outcome *CodeableConcept `json:"outcome,omitempty"`
+		Recorder *Reference `json:"recorder,omitempty"`
+		Contributor []*Reference `json:"contributor,omitempty"`
+		SuspectEntity []*AdverseEventSuspectEntity `json:"suspectentity,omitempty"`
+		SubjectMedicalHistory []*Reference `json:"subjectmedicalhistory,omitempty"`
+		ReferenceDocument []*Reference `json:"referencedocument,omitempty"`
+		Study []*Reference `json:"study,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Actuality = m.Actuality
+	output.Category = m.Category
+	output.Event = m.Event
+	output.Subject = m.Subject
+	output.Encounter = m.Encounter
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.Detected != nil && m.Detected.Value != nil {
+		output.Detected = m.Detected.Value
+		if m.Detected.Element != nil {
+			output.DetectedElement = toMapOrNil(m.Detected.Element.ToJSON())
+		}
+	}
+	if m.RecordedDate != nil && m.RecordedDate.Value != nil {
+		output.RecordedDate = m.RecordedDate.Value
+		if m.RecordedDate.Element != nil {
+			output.RecordedDateElement = toMapOrNil(m.RecordedDate.Element.ToJSON())
+		}
+	}
+	output.ResultingCondition = m.ResultingCondition
+	output.Location = m.Location
+	output.Seriousness = m.Seriousness
+	output.Severity = m.Severity
+	output.Outcome = m.Outcome
+	output.Recorder = m.Recorder
+	output.Contributor = m.Contributor
+	output.SuspectEntity = m.SuspectEntity
+	output.SubjectMedicalHistory = m.SubjectMedicalHistory
+	output.ReferenceDocument = m.ReferenceDocument
+	output.Study = m.Study
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of AdverseEvent
+// Clone creates a deep copy of AdverseEvent.
 func (m *AdverseEvent) Clone() *AdverseEvent {
 	if m == nil { return nil }
 	return &AdverseEvent{
@@ -89,7 +239,7 @@ func (m *AdverseEvent) Clone() *AdverseEvent {
 	}
 }
 
-// Equals checks for equality with another AdverseEvent instance
+// Equals checks equality between two AdverseEvent instances.
 func (m *AdverseEvent) Equals(other *AdverseEvent) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -127,7 +277,7 @@ func (m *AdverseEvent) Equals(other *AdverseEvent) bool {
 // AdverseEventSuspectEntity
 // Describes the entity that is suspected to have caused the adverse event.
 type AdverseEventSuspectEntity struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -135,22 +285,55 @@ type AdverseEventSuspectEntity struct {
 	Causality []*AdverseEventCausality `json:"causality,omitempty"`
 }
 
-// NewAdverseEventSuspectEntity creates a new AdverseEventSuspectEntity instance
+// NewAdverseEventSuspectEntity creates a new AdverseEventSuspectEntity instance.
 func NewAdverseEventSuspectEntity() *AdverseEventSuspectEntity {
 	return &AdverseEventSuspectEntity{}
 }
 
-// FromJSON populates AdverseEventSuspectEntity from JSON data
+// FromJSON populates AdverseEventSuspectEntity from JSON data.
 func (m *AdverseEventSuspectEntity) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Instance *Reference `json:"instance,omitempty"`
+		Causality []*AdverseEventCausality `json:"causality,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Instance = temp.Instance
+	m.Causality = temp.Causality
+	return nil
 }
 
-// ToJSON converts AdverseEventSuspectEntity to JSON data
+// ToJSON converts AdverseEventSuspectEntity to JSON data.
 func (m *AdverseEventSuspectEntity) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Instance *Reference `json:"instance,omitempty"`
+		Causality []*AdverseEventCausality `json:"causality,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Instance = m.Instance
+	output.Causality = m.Causality
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of AdverseEventSuspectEntity
+// Clone creates a deep copy of AdverseEventSuspectEntity.
 func (m *AdverseEventSuspectEntity) Clone() *AdverseEventSuspectEntity {
 	if m == nil { return nil }
 	return &AdverseEventSuspectEntity{
@@ -162,7 +345,7 @@ func (m *AdverseEventSuspectEntity) Clone() *AdverseEventSuspectEntity {
 	}
 }
 
-// Equals checks for equality with another AdverseEventSuspectEntity instance
+// Equals checks equality between two AdverseEventSuspectEntity instances.
 func (m *AdverseEventSuspectEntity) Equals(other *AdverseEventSuspectEntity) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -177,7 +360,7 @@ func (m *AdverseEventSuspectEntity) Equals(other *AdverseEventSuspectEntity) boo
 // AdverseEventCausality
 // Information on the possible cause of the event.
 type AdverseEventCausality struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -187,22 +370,69 @@ type AdverseEventCausality struct {
 	Method *CodeableConcept `json:"method,omitempty"`
 }
 
-// NewAdverseEventCausality creates a new AdverseEventCausality instance
+// NewAdverseEventCausality creates a new AdverseEventCausality instance.
 func NewAdverseEventCausality() *AdverseEventCausality {
 	return &AdverseEventCausality{}
 }
 
-// FromJSON populates AdverseEventCausality from JSON data
+// FromJSON populates AdverseEventCausality from JSON data.
 func (m *AdverseEventCausality) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Assessment *CodeableConcept `json:"assessment,omitempty"`
+		ProductRelatedness *FhirString `json:"productrelatedness,omitempty"`
+		Author *Reference `json:"author,omitempty"`
+		Method *CodeableConcept `json:"method,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Assessment = temp.Assessment
+	m.ProductRelatedness = temp.ProductRelatedness
+	m.Author = temp.Author
+	m.Method = temp.Method
+	return nil
 }
 
-// ToJSON converts AdverseEventCausality to JSON data
+// ToJSON converts AdverseEventCausality to JSON data.
 func (m *AdverseEventCausality) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Assessment *CodeableConcept `json:"assessment,omitempty"`
+		ProductRelatedness interface{} `json:"productrelatedness,omitempty"`
+		ProductRelatednessElement map[string]interface{} `json:"_productrelatedness,omitempty"`
+		Author *Reference `json:"author,omitempty"`
+		Method *CodeableConcept `json:"method,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Assessment = m.Assessment
+	if m.ProductRelatedness != nil && m.ProductRelatedness.Value != nil {
+		output.ProductRelatedness = m.ProductRelatedness.Value
+		if m.ProductRelatedness.Element != nil {
+			output.ProductRelatednessElement = toMapOrNil(m.ProductRelatedness.Element.ToJSON())
+		}
+	}
+	output.Author = m.Author
+	output.Method = m.Method
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of AdverseEventCausality
+// Clone creates a deep copy of AdverseEventCausality.
 func (m *AdverseEventCausality) Clone() *AdverseEventCausality {
 	if m == nil { return nil }
 	return &AdverseEventCausality{
@@ -216,7 +446,7 @@ func (m *AdverseEventCausality) Clone() *AdverseEventCausality {
 	}
 }
 
-// Equals checks for equality with another AdverseEventCausality instance
+// Equals checks equality between two AdverseEventCausality instances.
 func (m *AdverseEventCausality) Equals(other *AdverseEventCausality) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

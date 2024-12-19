@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // CapabilityStatement
 // A Capability Statement documents a set of capabilities (behaviors) of a FHIR Server for a particular version of FHIR that may be used as a statement of actual server functionality or a statement of required or desired server implementation.
 type CapabilityStatement struct {
-	CanonicalResource
+	extends CanonicalResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -45,22 +47,342 @@ type CapabilityStatement struct {
 	Document []*CapabilityStatementDocument `json:"document,omitempty"`
 }
 
-// NewCapabilityStatement creates a new CapabilityStatement instance
+// NewCapabilityStatement creates a new CapabilityStatement instance.
 func NewCapabilityStatement() *CapabilityStatement {
 	return &CapabilityStatement{}
 }
 
-// FromJSON populates CapabilityStatement from JSON data
+// FromJSON populates CapabilityStatement from JSON data.
 func (m *CapabilityStatement) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental *FhirBoolean `json:"experimental,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Publisher *FhirString `json:"publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose *FhirMarkdown `json:"purpose,omitempty"`
+		Copyright *FhirMarkdown `json:"copyright,omitempty"`
+		Kind *CapabilityStatementKind `json:"kind,omitempty"`
+		Instantiates []interface{} `json:"instantiates,omitempty"`
+		Imports []interface{} `json:"imports,omitempty"`
+		Software *CapabilityStatementSoftware `json:"software,omitempty"`
+		Implementation *CapabilityStatementImplementation `json:"implementation,omitempty"`
+		FhirVersion *FHIRVersion `json:"fhirversion,omitempty"`
+		Format []interface{} `json:"format,omitempty"`
+		PatchFormat []interface{} `json:"patchformat,omitempty"`
+		ImplementationGuide []interface{} `json:"implementationguide,omitempty"`
+		Rest []*CapabilityStatementRest `json:"rest,omitempty"`
+		Messaging []*CapabilityStatementMessaging `json:"messaging,omitempty"`
+		Document []*CapabilityStatementDocument `json:"document,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Url = temp.Url
+	m.Version = temp.Version
+	m.Name = temp.Name
+	m.Title = temp.Title
+	m.Status = temp.Status
+	m.Experimental = temp.Experimental
+	m.Date = temp.Date
+	m.Publisher = temp.Publisher
+	m.Contact = temp.Contact
+	m.Description = temp.Description
+	m.UseContext = temp.UseContext
+	m.Jurisdiction = temp.Jurisdiction
+	m.Purpose = temp.Purpose
+	m.Copyright = temp.Copyright
+	m.Kind = temp.Kind
+	if len(temp.Instantiates) > 0 {
+		m.Instantiates = make([]*FhirCanonical, len(temp.Instantiates))
+		for i := range temp.Instantiates {
+			itemMap, ok := temp.Instantiates[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Instantiates[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Instantiates[%d]: %v", i, err) }
+			m.Instantiates[i] = primitive
+		}
+	}
+	if len(temp.Imports) > 0 {
+		m.Imports = make([]*FhirCanonical, len(temp.Imports))
+		for i := range temp.Imports {
+			itemMap, ok := temp.Imports[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Imports[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Imports[%d]: %v", i, err) }
+			m.Imports[i] = primitive
+		}
+	}
+	m.Software = temp.Software
+	m.Implementation = temp.Implementation
+	m.FhirVersion = temp.FhirVersion
+	if len(temp.Format) > 0 {
+		m.Format = make([]*FhirCode, len(temp.Format))
+		for i := range temp.Format {
+			itemMap, ok := temp.Format[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Format[%d]: expected map", i) }
+			primitive, err := NewFhirCodeFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Format[%d]: %v", i, err) }
+			m.Format[i] = primitive
+		}
+	}
+	if len(temp.PatchFormat) > 0 {
+		m.PatchFormat = make([]*FhirCode, len(temp.PatchFormat))
+		for i := range temp.PatchFormat {
+			itemMap, ok := temp.PatchFormat[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for PatchFormat[%d]: expected map", i) }
+			primitive, err := NewFhirCodeFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse PatchFormat[%d]: %v", i, err) }
+			m.PatchFormat[i] = primitive
+		}
+	}
+	if len(temp.ImplementationGuide) > 0 {
+		m.ImplementationGuide = make([]*FhirCanonical, len(temp.ImplementationGuide))
+		for i := range temp.ImplementationGuide {
+			itemMap, ok := temp.ImplementationGuide[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for ImplementationGuide[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse ImplementationGuide[%d]: %v", i, err) }
+			m.ImplementationGuide[i] = primitive
+		}
+	}
+	m.Rest = temp.Rest
+	m.Messaging = temp.Messaging
+	m.Document = temp.Document
+	return nil
 }
 
-// ToJSON converts CapabilityStatement to JSON data
+// ToJSON converts CapabilityStatement to JSON data.
 func (m *CapabilityStatement) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Experimental interface{} `json:"experimental,omitempty"`
+		ExperimentalElement map[string]interface{} `json:"_experimental,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Publisher interface{} `json:"publisher,omitempty"`
+		PublisherElement map[string]interface{} `json:"_publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose interface{} `json:"purpose,omitempty"`
+		PurposeElement map[string]interface{} `json:"_purpose,omitempty"`
+		Copyright interface{} `json:"copyright,omitempty"`
+		CopyrightElement map[string]interface{} `json:"_copyright,omitempty"`
+		Kind *CapabilityStatementKind `json:"kind,omitempty"`
+		Instantiates []interface{} `json:"instantiates,omitempty"`
+		InstantiatesElement []map[string]interface{} `json:"_instantiates,omitempty"`
+		Imports []interface{} `json:"imports,omitempty"`
+		ImportsElement []map[string]interface{} `json:"_imports,omitempty"`
+		Software *CapabilityStatementSoftware `json:"software,omitempty"`
+		Implementation *CapabilityStatementImplementation `json:"implementation,omitempty"`
+		FhirVersion *FHIRVersion `json:"fhirversion,omitempty"`
+		Format []interface{} `json:"format,omitempty"`
+		FormatElement []map[string]interface{} `json:"_format,omitempty"`
+		PatchFormat []interface{} `json:"patchformat,omitempty"`
+		PatchFormatElement []map[string]interface{} `json:"_patchformat,omitempty"`
+		ImplementationGuide []interface{} `json:"implementationguide,omitempty"`
+		ImplementationGuideElement []map[string]interface{} `json:"_implementationguide,omitempty"`
+		Rest []*CapabilityStatementRest `json:"rest,omitempty"`
+		Messaging []*CapabilityStatementMessaging `json:"messaging,omitempty"`
+		Document []*CapabilityStatementDocument `json:"document,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	output.Status = m.Status
+	if m.Experimental != nil && m.Experimental.Value != nil {
+		output.Experimental = m.Experimental.Value
+		if m.Experimental.Element != nil {
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+		}
+	}
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.Publisher != nil && m.Publisher.Value != nil {
+		output.Publisher = m.Publisher.Value
+		if m.Publisher.Element != nil {
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+		}
+	}
+	output.Contact = m.Contact
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.UseContext = m.UseContext
+	output.Jurisdiction = m.Jurisdiction
+	if m.Purpose != nil && m.Purpose.Value != nil {
+		output.Purpose = m.Purpose.Value
+		if m.Purpose.Element != nil {
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+		}
+	}
+	if m.Copyright != nil && m.Copyright.Value != nil {
+		output.Copyright = m.Copyright.Value
+		if m.Copyright.Element != nil {
+			output.CopyrightElement = toMapOrNil(m.Copyright.Element.ToJSON())
+		}
+	}
+	output.Kind = m.Kind
+	if len(m.Instantiates) > 0 {
+		output.Instantiates = make([]interface{}, len(m.Instantiates))
+		output.InstantiatesElement = make([]map[string]interface{}, len(m.Instantiates))
+		for i, item := range m.Instantiates {
+			if item != nil && item.Value != nil {
+				output.Instantiates[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.InstantiatesElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.Imports) > 0 {
+		output.Imports = make([]interface{}, len(m.Imports))
+		output.ImportsElement = make([]map[string]interface{}, len(m.Imports))
+		for i, item := range m.Imports {
+			if item != nil && item.Value != nil {
+				output.Imports[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.ImportsElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Software = m.Software
+	output.Implementation = m.Implementation
+	output.FhirVersion = m.FhirVersion
+	if len(m.Format) > 0 {
+		output.Format = make([]interface{}, len(m.Format))
+		output.FormatElement = make([]map[string]interface{}, len(m.Format))
+		for i, item := range m.Format {
+			if item != nil && item.Value != nil {
+				output.Format[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.FormatElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.PatchFormat) > 0 {
+		output.PatchFormat = make([]interface{}, len(m.PatchFormat))
+		output.PatchFormatElement = make([]map[string]interface{}, len(m.PatchFormat))
+		for i, item := range m.PatchFormat {
+			if item != nil && item.Value != nil {
+				output.PatchFormat[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.PatchFormatElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.ImplementationGuide) > 0 {
+		output.ImplementationGuide = make([]interface{}, len(m.ImplementationGuide))
+		output.ImplementationGuideElement = make([]map[string]interface{}, len(m.ImplementationGuide))
+		for i, item := range m.ImplementationGuide {
+			if item != nil && item.Value != nil {
+				output.ImplementationGuide[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.ImplementationGuideElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Rest = m.Rest
+	output.Messaging = m.Messaging
+	output.Document = m.Document
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CapabilityStatement
+// Clone creates a deep copy of CapabilityStatement.
 func (m *CapabilityStatement) Clone() *CapabilityStatement {
 	if m == nil { return nil }
 	return &CapabilityStatement{
@@ -101,7 +423,7 @@ func (m *CapabilityStatement) Clone() *CapabilityStatement {
 	}
 }
 
-// Equals checks for equality with another CapabilityStatement instance
+// Equals checks equality between two CapabilityStatement instances.
 func (m *CapabilityStatement) Equals(other *CapabilityStatement) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -145,7 +467,7 @@ func (m *CapabilityStatement) Equals(other *CapabilityStatement) bool {
 // CapabilityStatementSoftware
 // Software that is covered by this capability statement.  It is used when the capability statement describes the capabilities of a particular software version, independent of an installation.
 type CapabilityStatementSoftware struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -154,22 +476,77 @@ type CapabilityStatementSoftware struct {
 	ReleaseDate *FhirDateTime `json:"releasedate,omitempty"`
 }
 
-// NewCapabilityStatementSoftware creates a new CapabilityStatementSoftware instance
+// NewCapabilityStatementSoftware creates a new CapabilityStatementSoftware instance.
 func NewCapabilityStatementSoftware() *CapabilityStatementSoftware {
 	return &CapabilityStatementSoftware{}
 }
 
-// FromJSON populates CapabilityStatementSoftware from JSON data
+// FromJSON populates CapabilityStatementSoftware from JSON data.
 func (m *CapabilityStatementSoftware) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		ReleaseDate *FhirDateTime `json:"releasedate,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Name = temp.Name
+	m.Version = temp.Version
+	m.ReleaseDate = temp.ReleaseDate
+	return nil
 }
 
-// ToJSON converts CapabilityStatementSoftware to JSON data
+// ToJSON converts CapabilityStatementSoftware to JSON data.
 func (m *CapabilityStatementSoftware) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		ReleaseDate interface{} `json:"releasedate,omitempty"`
+		ReleaseDateElement map[string]interface{} `json:"_releasedate,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	if m.ReleaseDate != nil && m.ReleaseDate.Value != nil {
+		output.ReleaseDate = m.ReleaseDate.Value
+		if m.ReleaseDate.Element != nil {
+			output.ReleaseDateElement = toMapOrNil(m.ReleaseDate.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CapabilityStatementSoftware
+// Clone creates a deep copy of CapabilityStatementSoftware.
 func (m *CapabilityStatementSoftware) Clone() *CapabilityStatementSoftware {
 	if m == nil { return nil }
 	return &CapabilityStatementSoftware{
@@ -182,7 +559,7 @@ func (m *CapabilityStatementSoftware) Clone() *CapabilityStatementSoftware {
 	}
 }
 
-// Equals checks for equality with another CapabilityStatementSoftware instance
+// Equals checks equality between two CapabilityStatementSoftware instances.
 func (m *CapabilityStatementSoftware) Equals(other *CapabilityStatementSoftware) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -198,7 +575,7 @@ func (m *CapabilityStatementSoftware) Equals(other *CapabilityStatementSoftware)
 // CapabilityStatementImplementation
 // Identifies a specific implementation instance that is described by the capability statement - i.e. a particular installation, rather than the capabilities of a software program.
 type CapabilityStatementImplementation struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -207,22 +584,71 @@ type CapabilityStatementImplementation struct {
 	Custodian *Reference `json:"custodian,omitempty"`
 }
 
-// NewCapabilityStatementImplementation creates a new CapabilityStatementImplementation instance
+// NewCapabilityStatementImplementation creates a new CapabilityStatementImplementation instance.
 func NewCapabilityStatementImplementation() *CapabilityStatementImplementation {
 	return &CapabilityStatementImplementation{}
 }
 
-// FromJSON populates CapabilityStatementImplementation from JSON data
+// FromJSON populates CapabilityStatementImplementation from JSON data.
 func (m *CapabilityStatementImplementation) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Url *FhirUrl `json:"url,omitempty"`
+		Custodian *Reference `json:"custodian,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Description = temp.Description
+	m.Url = temp.Url
+	m.Custodian = temp.Custodian
+	return nil
 }
 
-// ToJSON converts CapabilityStatementImplementation to JSON data
+// ToJSON converts CapabilityStatementImplementation to JSON data.
 func (m *CapabilityStatementImplementation) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Custodian *Reference `json:"custodian,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	output.Custodian = m.Custodian
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CapabilityStatementImplementation
+// Clone creates a deep copy of CapabilityStatementImplementation.
 func (m *CapabilityStatementImplementation) Clone() *CapabilityStatementImplementation {
 	if m == nil { return nil }
 	return &CapabilityStatementImplementation{
@@ -235,7 +661,7 @@ func (m *CapabilityStatementImplementation) Clone() *CapabilityStatementImplemen
 	}
 }
 
-// Equals checks for equality with another CapabilityStatementImplementation instance
+// Equals checks equality between two CapabilityStatementImplementation instances.
 func (m *CapabilityStatementImplementation) Equals(other *CapabilityStatementImplementation) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -251,7 +677,7 @@ func (m *CapabilityStatementImplementation) Equals(other *CapabilityStatementImp
 // CapabilityStatementRest
 // A definition of the restful capabilities of the solution, if any.
 type CapabilityStatementRest struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -265,22 +691,106 @@ type CapabilityStatementRest struct {
 	Compartment []*FhirCanonical `json:"compartment,omitempty"`
 }
 
-// NewCapabilityStatementRest creates a new CapabilityStatementRest instance
+// NewCapabilityStatementRest creates a new CapabilityStatementRest instance.
 func NewCapabilityStatementRest() *CapabilityStatementRest {
 	return &CapabilityStatementRest{}
 }
 
-// FromJSON populates CapabilityStatementRest from JSON data
+// FromJSON populates CapabilityStatementRest from JSON data.
 func (m *CapabilityStatementRest) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Mode *RestfulCapabilityMode `json:"mode,omitempty"`
+		Documentation *FhirMarkdown `json:"documentation,omitempty"`
+		Security *CapabilityStatementSecurity `json:"security,omitempty"`
+		Resource []*CapabilityStatementResource `json:"resource,omitempty"`
+		Interaction []*CapabilityStatementInteraction `json:"interaction,omitempty"`
+		SearchParam []*CapabilityStatementSearchParam `json:"searchparam,omitempty"`
+		Operation []*CapabilityStatementOperation `json:"operation,omitempty"`
+		Compartment []interface{} `json:"compartment,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Mode = temp.Mode
+	m.Documentation = temp.Documentation
+	m.Security = temp.Security
+	m.Resource = temp.Resource
+	m.Interaction = temp.Interaction
+	m.SearchParam = temp.SearchParam
+	m.Operation = temp.Operation
+	if len(temp.Compartment) > 0 {
+		m.Compartment = make([]*FhirCanonical, len(temp.Compartment))
+		for i := range temp.Compartment {
+			itemMap, ok := temp.Compartment[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Compartment[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Compartment[%d]: %v", i, err) }
+			m.Compartment[i] = primitive
+		}
+	}
+	return nil
 }
 
-// ToJSON converts CapabilityStatementRest to JSON data
+// ToJSON converts CapabilityStatementRest to JSON data.
 func (m *CapabilityStatementRest) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Mode *RestfulCapabilityMode `json:"mode,omitempty"`
+		Documentation interface{} `json:"documentation,omitempty"`
+		DocumentationElement map[string]interface{} `json:"_documentation,omitempty"`
+		Security *CapabilityStatementSecurity `json:"security,omitempty"`
+		Resource []*CapabilityStatementResource `json:"resource,omitempty"`
+		Interaction []*CapabilityStatementInteraction `json:"interaction,omitempty"`
+		SearchParam []*CapabilityStatementSearchParam `json:"searchparam,omitempty"`
+		Operation []*CapabilityStatementOperation `json:"operation,omitempty"`
+		Compartment []interface{} `json:"compartment,omitempty"`
+		CompartmentElement []map[string]interface{} `json:"_compartment,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Mode = m.Mode
+	if m.Documentation != nil && m.Documentation.Value != nil {
+		output.Documentation = m.Documentation.Value
+		if m.Documentation.Element != nil {
+			output.DocumentationElement = toMapOrNil(m.Documentation.Element.ToJSON())
+		}
+	}
+	output.Security = m.Security
+	output.Resource = m.Resource
+	output.Interaction = m.Interaction
+	output.SearchParam = m.SearchParam
+	output.Operation = m.Operation
+	if len(m.Compartment) > 0 {
+		output.Compartment = make([]interface{}, len(m.Compartment))
+		output.CompartmentElement = make([]map[string]interface{}, len(m.Compartment))
+		for i, item := range m.Compartment {
+			if item != nil && item.Value != nil {
+				output.Compartment[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.CompartmentElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CapabilityStatementRest
+// Clone creates a deep copy of CapabilityStatementRest.
 func (m *CapabilityStatementRest) Clone() *CapabilityStatementRest {
 	if m == nil { return nil }
 	return &CapabilityStatementRest{
@@ -298,7 +808,7 @@ func (m *CapabilityStatementRest) Clone() *CapabilityStatementRest {
 	}
 }
 
-// Equals checks for equality with another CapabilityStatementRest instance
+// Equals checks equality between two CapabilityStatementRest instances.
 func (m *CapabilityStatementRest) Equals(other *CapabilityStatementRest) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -319,7 +829,7 @@ func (m *CapabilityStatementRest) Equals(other *CapabilityStatementRest) bool {
 // CapabilityStatementSecurity
 // Information about security implementation from an interface perspective - what a client needs to know.
 type CapabilityStatementSecurity struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -328,22 +838,71 @@ type CapabilityStatementSecurity struct {
 	Description *FhirMarkdown `json:"description,omitempty"`
 }
 
-// NewCapabilityStatementSecurity creates a new CapabilityStatementSecurity instance
+// NewCapabilityStatementSecurity creates a new CapabilityStatementSecurity instance.
 func NewCapabilityStatementSecurity() *CapabilityStatementSecurity {
 	return &CapabilityStatementSecurity{}
 }
 
-// FromJSON populates CapabilityStatementSecurity from JSON data
+// FromJSON populates CapabilityStatementSecurity from JSON data.
 func (m *CapabilityStatementSecurity) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Cors *FhirBoolean `json:"cors,omitempty"`
+		Service []*CodeableConcept `json:"service,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Cors = temp.Cors
+	m.Service = temp.Service
+	m.Description = temp.Description
+	return nil
 }
 
-// ToJSON converts CapabilityStatementSecurity to JSON data
+// ToJSON converts CapabilityStatementSecurity to JSON data.
 func (m *CapabilityStatementSecurity) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Cors interface{} `json:"cors,omitempty"`
+		CorsElement map[string]interface{} `json:"_cors,omitempty"`
+		Service []*CodeableConcept `json:"service,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Cors != nil && m.Cors.Value != nil {
+		output.Cors = m.Cors.Value
+		if m.Cors.Element != nil {
+			output.CorsElement = toMapOrNil(m.Cors.Element.ToJSON())
+		}
+	}
+	output.Service = m.Service
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CapabilityStatementSecurity
+// Clone creates a deep copy of CapabilityStatementSecurity.
 func (m *CapabilityStatementSecurity) Clone() *CapabilityStatementSecurity {
 	if m == nil { return nil }
 	return &CapabilityStatementSecurity{
@@ -356,7 +915,7 @@ func (m *CapabilityStatementSecurity) Clone() *CapabilityStatementSecurity {
 	}
 }
 
-// Equals checks for equality with another CapabilityStatementSecurity instance
+// Equals checks equality between two CapabilityStatementSecurity instances.
 func (m *CapabilityStatementSecurity) Equals(other *CapabilityStatementSecurity) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -372,7 +931,7 @@ func (m *CapabilityStatementSecurity) Equals(other *CapabilityStatementSecurity)
 // CapabilityStatementResource
 // A specification of the restful capabilities of the solution for a specific resource type.
 type CapabilityStatementResource struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -395,22 +954,220 @@ type CapabilityStatementResource struct {
 	Operation []*CapabilityStatementOperation `json:"operation,omitempty"`
 }
 
-// NewCapabilityStatementResource creates a new CapabilityStatementResource instance
+// NewCapabilityStatementResource creates a new CapabilityStatementResource instance.
 func NewCapabilityStatementResource() *CapabilityStatementResource {
 	return &CapabilityStatementResource{}
 }
 
-// FromJSON populates CapabilityStatementResource from JSON data
+// FromJSON populates CapabilityStatementResource from JSON data.
 func (m *CapabilityStatementResource) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *FhirCode `json:"type,omitempty"`
+		Profile *FhirCanonical `json:"profile,omitempty"`
+		SupportedProfile []interface{} `json:"supportedprofile,omitempty"`
+		Documentation *FhirMarkdown `json:"documentation,omitempty"`
+		Interaction []*CapabilityStatementInteraction `json:"interaction,omitempty"`
+		Versioning *ResourceVersionPolicy `json:"versioning,omitempty"`
+		ReadHistory *FhirBoolean `json:"readhistory,omitempty"`
+		UpdateCreate *FhirBoolean `json:"updatecreate,omitempty"`
+		ConditionalCreate *FhirBoolean `json:"conditionalcreate,omitempty"`
+		ConditionalRead *ConditionalReadStatus `json:"conditionalread,omitempty"`
+		ConditionalUpdate *FhirBoolean `json:"conditionalupdate,omitempty"`
+		ConditionalDelete *ConditionalDeleteStatus `json:"conditionaldelete,omitempty"`
+		ReferencePolicy []*ReferenceHandlingPolicy `json:"referencepolicy,omitempty"`
+		SearchInclude []interface{} `json:"searchinclude,omitempty"`
+		SearchRevInclude []interface{} `json:"searchrevinclude,omitempty"`
+		SearchParam []*CapabilityStatementSearchParam `json:"searchparam,omitempty"`
+		Operation []*CapabilityStatementOperation `json:"operation,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Profile = temp.Profile
+	if len(temp.SupportedProfile) > 0 {
+		m.SupportedProfile = make([]*FhirCanonical, len(temp.SupportedProfile))
+		for i := range temp.SupportedProfile {
+			itemMap, ok := temp.SupportedProfile[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for SupportedProfile[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse SupportedProfile[%d]: %v", i, err) }
+			m.SupportedProfile[i] = primitive
+		}
+	}
+	m.Documentation = temp.Documentation
+	m.Interaction = temp.Interaction
+	m.Versioning = temp.Versioning
+	m.ReadHistory = temp.ReadHistory
+	m.UpdateCreate = temp.UpdateCreate
+	m.ConditionalCreate = temp.ConditionalCreate
+	m.ConditionalRead = temp.ConditionalRead
+	m.ConditionalUpdate = temp.ConditionalUpdate
+	m.ConditionalDelete = temp.ConditionalDelete
+	m.ReferencePolicy = temp.ReferencePolicy
+	if len(temp.SearchInclude) > 0 {
+		m.SearchInclude = make([]*FhirString, len(temp.SearchInclude))
+		for i := range temp.SearchInclude {
+			itemMap, ok := temp.SearchInclude[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for SearchInclude[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse SearchInclude[%d]: %v", i, err) }
+			m.SearchInclude[i] = primitive
+		}
+	}
+	if len(temp.SearchRevInclude) > 0 {
+		m.SearchRevInclude = make([]*FhirString, len(temp.SearchRevInclude))
+		for i := range temp.SearchRevInclude {
+			itemMap, ok := temp.SearchRevInclude[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for SearchRevInclude[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse SearchRevInclude[%d]: %v", i, err) }
+			m.SearchRevInclude[i] = primitive
+		}
+	}
+	m.SearchParam = temp.SearchParam
+	m.Operation = temp.Operation
+	return nil
 }
 
-// ToJSON converts CapabilityStatementResource to JSON data
+// ToJSON converts CapabilityStatementResource to JSON data.
 func (m *CapabilityStatementResource) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type interface{} `json:"type,omitempty"`
+		TypeElement map[string]interface{} `json:"_type,omitempty"`
+		Profile interface{} `json:"profile,omitempty"`
+		ProfileElement map[string]interface{} `json:"_profile,omitempty"`
+		SupportedProfile []interface{} `json:"supportedprofile,omitempty"`
+		SupportedProfileElement []map[string]interface{} `json:"_supportedprofile,omitempty"`
+		Documentation interface{} `json:"documentation,omitempty"`
+		DocumentationElement map[string]interface{} `json:"_documentation,omitempty"`
+		Interaction []*CapabilityStatementInteraction `json:"interaction,omitempty"`
+		Versioning *ResourceVersionPolicy `json:"versioning,omitempty"`
+		ReadHistory interface{} `json:"readhistory,omitempty"`
+		ReadHistoryElement map[string]interface{} `json:"_readhistory,omitempty"`
+		UpdateCreate interface{} `json:"updatecreate,omitempty"`
+		UpdateCreateElement map[string]interface{} `json:"_updatecreate,omitempty"`
+		ConditionalCreate interface{} `json:"conditionalcreate,omitempty"`
+		ConditionalCreateElement map[string]interface{} `json:"_conditionalcreate,omitempty"`
+		ConditionalRead *ConditionalReadStatus `json:"conditionalread,omitempty"`
+		ConditionalUpdate interface{} `json:"conditionalupdate,omitempty"`
+		ConditionalUpdateElement map[string]interface{} `json:"_conditionalupdate,omitempty"`
+		ConditionalDelete *ConditionalDeleteStatus `json:"conditionaldelete,omitempty"`
+		ReferencePolicy []*ReferenceHandlingPolicy `json:"referencepolicy,omitempty"`
+		SearchInclude []interface{} `json:"searchinclude,omitempty"`
+		SearchIncludeElement []map[string]interface{} `json:"_searchinclude,omitempty"`
+		SearchRevInclude []interface{} `json:"searchrevinclude,omitempty"`
+		SearchRevIncludeElement []map[string]interface{} `json:"_searchrevinclude,omitempty"`
+		SearchParam []*CapabilityStatementSearchParam `json:"searchparam,omitempty"`
+		Operation []*CapabilityStatementOperation `json:"operation,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Type != nil && m.Type.Value != nil {
+		output.Type = m.Type.Value
+		if m.Type.Element != nil {
+			output.TypeElement = toMapOrNil(m.Type.Element.ToJSON())
+		}
+	}
+	if m.Profile != nil && m.Profile.Value != nil {
+		output.Profile = m.Profile.Value
+		if m.Profile.Element != nil {
+			output.ProfileElement = toMapOrNil(m.Profile.Element.ToJSON())
+		}
+	}
+	if len(m.SupportedProfile) > 0 {
+		output.SupportedProfile = make([]interface{}, len(m.SupportedProfile))
+		output.SupportedProfileElement = make([]map[string]interface{}, len(m.SupportedProfile))
+		for i, item := range m.SupportedProfile {
+			if item != nil && item.Value != nil {
+				output.SupportedProfile[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.SupportedProfileElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if m.Documentation != nil && m.Documentation.Value != nil {
+		output.Documentation = m.Documentation.Value
+		if m.Documentation.Element != nil {
+			output.DocumentationElement = toMapOrNil(m.Documentation.Element.ToJSON())
+		}
+	}
+	output.Interaction = m.Interaction
+	output.Versioning = m.Versioning
+	if m.ReadHistory != nil && m.ReadHistory.Value != nil {
+		output.ReadHistory = m.ReadHistory.Value
+		if m.ReadHistory.Element != nil {
+			output.ReadHistoryElement = toMapOrNil(m.ReadHistory.Element.ToJSON())
+		}
+	}
+	if m.UpdateCreate != nil && m.UpdateCreate.Value != nil {
+		output.UpdateCreate = m.UpdateCreate.Value
+		if m.UpdateCreate.Element != nil {
+			output.UpdateCreateElement = toMapOrNil(m.UpdateCreate.Element.ToJSON())
+		}
+	}
+	if m.ConditionalCreate != nil && m.ConditionalCreate.Value != nil {
+		output.ConditionalCreate = m.ConditionalCreate.Value
+		if m.ConditionalCreate.Element != nil {
+			output.ConditionalCreateElement = toMapOrNil(m.ConditionalCreate.Element.ToJSON())
+		}
+	}
+	output.ConditionalRead = m.ConditionalRead
+	if m.ConditionalUpdate != nil && m.ConditionalUpdate.Value != nil {
+		output.ConditionalUpdate = m.ConditionalUpdate.Value
+		if m.ConditionalUpdate.Element != nil {
+			output.ConditionalUpdateElement = toMapOrNil(m.ConditionalUpdate.Element.ToJSON())
+		}
+	}
+	output.ConditionalDelete = m.ConditionalDelete
+	output.ReferencePolicy = m.ReferencePolicy
+	if len(m.SearchInclude) > 0 {
+		output.SearchInclude = make([]interface{}, len(m.SearchInclude))
+		output.SearchIncludeElement = make([]map[string]interface{}, len(m.SearchInclude))
+		for i, item := range m.SearchInclude {
+			if item != nil && item.Value != nil {
+				output.SearchInclude[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.SearchIncludeElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.SearchRevInclude) > 0 {
+		output.SearchRevInclude = make([]interface{}, len(m.SearchRevInclude))
+		output.SearchRevIncludeElement = make([]map[string]interface{}, len(m.SearchRevInclude))
+		for i, item := range m.SearchRevInclude {
+			if item != nil && item.Value != nil {
+				output.SearchRevInclude[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.SearchRevIncludeElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.SearchParam = m.SearchParam
+	output.Operation = m.Operation
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CapabilityStatementResource
+// Clone creates a deep copy of CapabilityStatementResource.
 func (m *CapabilityStatementResource) Clone() *CapabilityStatementResource {
 	if m == nil { return nil }
 	return &CapabilityStatementResource{
@@ -437,7 +1194,7 @@ func (m *CapabilityStatementResource) Clone() *CapabilityStatementResource {
 	}
 }
 
-// Equals checks for equality with another CapabilityStatementResource instance
+// Equals checks equality between two CapabilityStatementResource instances.
 func (m *CapabilityStatementResource) Equals(other *CapabilityStatementResource) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -467,7 +1224,7 @@ func (m *CapabilityStatementResource) Equals(other *CapabilityStatementResource)
 // CapabilityStatementInteraction
 // Identifies a restful operation supported by the solution.
 type CapabilityStatementInteraction struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -475,22 +1232,61 @@ type CapabilityStatementInteraction struct {
 	Documentation *FhirMarkdown `json:"documentation,omitempty"`
 }
 
-// NewCapabilityStatementInteraction creates a new CapabilityStatementInteraction instance
+// NewCapabilityStatementInteraction creates a new CapabilityStatementInteraction instance.
 func NewCapabilityStatementInteraction() *CapabilityStatementInteraction {
 	return &CapabilityStatementInteraction{}
 }
 
-// FromJSON populates CapabilityStatementInteraction from JSON data
+// FromJSON populates CapabilityStatementInteraction from JSON data.
 func (m *CapabilityStatementInteraction) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *TypeRestfulInteraction `json:"code,omitempty"`
+		Documentation *FhirMarkdown `json:"documentation,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Documentation = temp.Documentation
+	return nil
 }
 
-// ToJSON converts CapabilityStatementInteraction to JSON data
+// ToJSON converts CapabilityStatementInteraction to JSON data.
 func (m *CapabilityStatementInteraction) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *TypeRestfulInteraction `json:"code,omitempty"`
+		Documentation interface{} `json:"documentation,omitempty"`
+		DocumentationElement map[string]interface{} `json:"_documentation,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	if m.Documentation != nil && m.Documentation.Value != nil {
+		output.Documentation = m.Documentation.Value
+		if m.Documentation.Element != nil {
+			output.DocumentationElement = toMapOrNil(m.Documentation.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CapabilityStatementInteraction
+// Clone creates a deep copy of CapabilityStatementInteraction.
 func (m *CapabilityStatementInteraction) Clone() *CapabilityStatementInteraction {
 	if m == nil { return nil }
 	return &CapabilityStatementInteraction{
@@ -502,7 +1298,7 @@ func (m *CapabilityStatementInteraction) Clone() *CapabilityStatementInteraction
 	}
 }
 
-// Equals checks for equality with another CapabilityStatementInteraction instance
+// Equals checks equality between two CapabilityStatementInteraction instances.
 func (m *CapabilityStatementInteraction) Equals(other *CapabilityStatementInteraction) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -517,7 +1313,7 @@ func (m *CapabilityStatementInteraction) Equals(other *CapabilityStatementIntera
 // CapabilityStatementSearchParam
 // Search parameters for implementations to support and/or make use of - either references to ones defined in the specification, or additional ones defined for/by the implementation.
 type CapabilityStatementSearchParam struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -527,22 +1323,81 @@ type CapabilityStatementSearchParam struct {
 	Documentation *FhirMarkdown `json:"documentation,omitempty"`
 }
 
-// NewCapabilityStatementSearchParam creates a new CapabilityStatementSearchParam instance
+// NewCapabilityStatementSearchParam creates a new CapabilityStatementSearchParam instance.
 func NewCapabilityStatementSearchParam() *CapabilityStatementSearchParam {
 	return &CapabilityStatementSearchParam{}
 }
 
-// FromJSON populates CapabilityStatementSearchParam from JSON data
+// FromJSON populates CapabilityStatementSearchParam from JSON data.
 func (m *CapabilityStatementSearchParam) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Definition *FhirCanonical `json:"definition,omitempty"`
+		Type *SearchParamType `json:"type,omitempty"`
+		Documentation *FhirMarkdown `json:"documentation,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Name = temp.Name
+	m.Definition = temp.Definition
+	m.Type = temp.Type
+	m.Documentation = temp.Documentation
+	return nil
 }
 
-// ToJSON converts CapabilityStatementSearchParam to JSON data
+// ToJSON converts CapabilityStatementSearchParam to JSON data.
 func (m *CapabilityStatementSearchParam) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Definition interface{} `json:"definition,omitempty"`
+		DefinitionElement map[string]interface{} `json:"_definition,omitempty"`
+		Type *SearchParamType `json:"type,omitempty"`
+		Documentation interface{} `json:"documentation,omitempty"`
+		DocumentationElement map[string]interface{} `json:"_documentation,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Definition != nil && m.Definition.Value != nil {
+		output.Definition = m.Definition.Value
+		if m.Definition.Element != nil {
+			output.DefinitionElement = toMapOrNil(m.Definition.Element.ToJSON())
+		}
+	}
+	output.Type = m.Type
+	if m.Documentation != nil && m.Documentation.Value != nil {
+		output.Documentation = m.Documentation.Value
+		if m.Documentation.Element != nil {
+			output.DocumentationElement = toMapOrNil(m.Documentation.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CapabilityStatementSearchParam
+// Clone creates a deep copy of CapabilityStatementSearchParam.
 func (m *CapabilityStatementSearchParam) Clone() *CapabilityStatementSearchParam {
 	if m == nil { return nil }
 	return &CapabilityStatementSearchParam{
@@ -556,7 +1411,7 @@ func (m *CapabilityStatementSearchParam) Clone() *CapabilityStatementSearchParam
 	}
 }
 
-// Equals checks for equality with another CapabilityStatementSearchParam instance
+// Equals checks equality between two CapabilityStatementSearchParam instances.
 func (m *CapabilityStatementSearchParam) Equals(other *CapabilityStatementSearchParam) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -573,7 +1428,7 @@ func (m *CapabilityStatementSearchParam) Equals(other *CapabilityStatementSearch
 // CapabilityStatementOperation
 // Definition of an operation or a named query together with its parameters and their meaning and type. Consult the definition of the operation for details about how to invoke the operation, and the parameters.
 type CapabilityStatementOperation struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -582,22 +1437,77 @@ type CapabilityStatementOperation struct {
 	Documentation *FhirMarkdown `json:"documentation,omitempty"`
 }
 
-// NewCapabilityStatementOperation creates a new CapabilityStatementOperation instance
+// NewCapabilityStatementOperation creates a new CapabilityStatementOperation instance.
 func NewCapabilityStatementOperation() *CapabilityStatementOperation {
 	return &CapabilityStatementOperation{}
 }
 
-// FromJSON populates CapabilityStatementOperation from JSON data
+// FromJSON populates CapabilityStatementOperation from JSON data.
 func (m *CapabilityStatementOperation) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Definition *FhirCanonical `json:"definition,omitempty"`
+		Documentation *FhirMarkdown `json:"documentation,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Name = temp.Name
+	m.Definition = temp.Definition
+	m.Documentation = temp.Documentation
+	return nil
 }
 
-// ToJSON converts CapabilityStatementOperation to JSON data
+// ToJSON converts CapabilityStatementOperation to JSON data.
 func (m *CapabilityStatementOperation) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Definition interface{} `json:"definition,omitempty"`
+		DefinitionElement map[string]interface{} `json:"_definition,omitempty"`
+		Documentation interface{} `json:"documentation,omitempty"`
+		DocumentationElement map[string]interface{} `json:"_documentation,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Definition != nil && m.Definition.Value != nil {
+		output.Definition = m.Definition.Value
+		if m.Definition.Element != nil {
+			output.DefinitionElement = toMapOrNil(m.Definition.Element.ToJSON())
+		}
+	}
+	if m.Documentation != nil && m.Documentation.Value != nil {
+		output.Documentation = m.Documentation.Value
+		if m.Documentation.Element != nil {
+			output.DocumentationElement = toMapOrNil(m.Documentation.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CapabilityStatementOperation
+// Clone creates a deep copy of CapabilityStatementOperation.
 func (m *CapabilityStatementOperation) Clone() *CapabilityStatementOperation {
 	if m == nil { return nil }
 	return &CapabilityStatementOperation{
@@ -610,7 +1520,7 @@ func (m *CapabilityStatementOperation) Clone() *CapabilityStatementOperation {
 	}
 }
 
-// Equals checks for equality with another CapabilityStatementOperation instance
+// Equals checks equality between two CapabilityStatementOperation instances.
 func (m *CapabilityStatementOperation) Equals(other *CapabilityStatementOperation) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -626,7 +1536,7 @@ func (m *CapabilityStatementOperation) Equals(other *CapabilityStatementOperatio
 // CapabilityStatementInteraction1
 // A specification of restful operations supported by the system.
 type CapabilityStatementInteraction1 struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -634,22 +1544,61 @@ type CapabilityStatementInteraction1 struct {
 	Documentation *FhirMarkdown `json:"documentation,omitempty"`
 }
 
-// NewCapabilityStatementInteraction1 creates a new CapabilityStatementInteraction1 instance
+// NewCapabilityStatementInteraction1 creates a new CapabilityStatementInteraction1 instance.
 func NewCapabilityStatementInteraction1() *CapabilityStatementInteraction1 {
 	return &CapabilityStatementInteraction1{}
 }
 
-// FromJSON populates CapabilityStatementInteraction1 from JSON data
+// FromJSON populates CapabilityStatementInteraction1 from JSON data.
 func (m *CapabilityStatementInteraction1) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *SystemRestfulInteraction `json:"code,omitempty"`
+		Documentation *FhirMarkdown `json:"documentation,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Documentation = temp.Documentation
+	return nil
 }
 
-// ToJSON converts CapabilityStatementInteraction1 to JSON data
+// ToJSON converts CapabilityStatementInteraction1 to JSON data.
 func (m *CapabilityStatementInteraction1) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *SystemRestfulInteraction `json:"code,omitempty"`
+		Documentation interface{} `json:"documentation,omitempty"`
+		DocumentationElement map[string]interface{} `json:"_documentation,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	if m.Documentation != nil && m.Documentation.Value != nil {
+		output.Documentation = m.Documentation.Value
+		if m.Documentation.Element != nil {
+			output.DocumentationElement = toMapOrNil(m.Documentation.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CapabilityStatementInteraction1
+// Clone creates a deep copy of CapabilityStatementInteraction1.
 func (m *CapabilityStatementInteraction1) Clone() *CapabilityStatementInteraction1 {
 	if m == nil { return nil }
 	return &CapabilityStatementInteraction1{
@@ -661,7 +1610,7 @@ func (m *CapabilityStatementInteraction1) Clone() *CapabilityStatementInteractio
 	}
 }
 
-// Equals checks for equality with another CapabilityStatementInteraction1 instance
+// Equals checks equality between two CapabilityStatementInteraction1 instances.
 func (m *CapabilityStatementInteraction1) Equals(other *CapabilityStatementInteraction1) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -676,7 +1625,7 @@ func (m *CapabilityStatementInteraction1) Equals(other *CapabilityStatementInter
 // CapabilityStatementMessaging
 // A description of the messaging capabilities of the solution.
 type CapabilityStatementMessaging struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -686,22 +1635,75 @@ type CapabilityStatementMessaging struct {
 	SupportedMessage []*CapabilityStatementSupportedMessage `json:"supportedmessage,omitempty"`
 }
 
-// NewCapabilityStatementMessaging creates a new CapabilityStatementMessaging instance
+// NewCapabilityStatementMessaging creates a new CapabilityStatementMessaging instance.
 func NewCapabilityStatementMessaging() *CapabilityStatementMessaging {
 	return &CapabilityStatementMessaging{}
 }
 
-// FromJSON populates CapabilityStatementMessaging from JSON data
+// FromJSON populates CapabilityStatementMessaging from JSON data.
 func (m *CapabilityStatementMessaging) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Endpoint []*CapabilityStatementEndpoint `json:"endpoint,omitempty"`
+		ReliableCache *FhirUnsignedInt `json:"reliablecache,omitempty"`
+		Documentation *FhirMarkdown `json:"documentation,omitempty"`
+		SupportedMessage []*CapabilityStatementSupportedMessage `json:"supportedmessage,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Endpoint = temp.Endpoint
+	m.ReliableCache = temp.ReliableCache
+	m.Documentation = temp.Documentation
+	m.SupportedMessage = temp.SupportedMessage
+	return nil
 }
 
-// ToJSON converts CapabilityStatementMessaging to JSON data
+// ToJSON converts CapabilityStatementMessaging to JSON data.
 func (m *CapabilityStatementMessaging) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Endpoint []*CapabilityStatementEndpoint `json:"endpoint,omitempty"`
+		ReliableCache interface{} `json:"reliablecache,omitempty"`
+		ReliableCacheElement map[string]interface{} `json:"_reliablecache,omitempty"`
+		Documentation interface{} `json:"documentation,omitempty"`
+		DocumentationElement map[string]interface{} `json:"_documentation,omitempty"`
+		SupportedMessage []*CapabilityStatementSupportedMessage `json:"supportedmessage,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Endpoint = m.Endpoint
+	if m.ReliableCache != nil && m.ReliableCache.Value != nil {
+		output.ReliableCache = m.ReliableCache.Value
+		if m.ReliableCache.Element != nil {
+			output.ReliableCacheElement = toMapOrNil(m.ReliableCache.Element.ToJSON())
+		}
+	}
+	if m.Documentation != nil && m.Documentation.Value != nil {
+		output.Documentation = m.Documentation.Value
+		if m.Documentation.Element != nil {
+			output.DocumentationElement = toMapOrNil(m.Documentation.Element.ToJSON())
+		}
+	}
+	output.SupportedMessage = m.SupportedMessage
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CapabilityStatementMessaging
+// Clone creates a deep copy of CapabilityStatementMessaging.
 func (m *CapabilityStatementMessaging) Clone() *CapabilityStatementMessaging {
 	if m == nil { return nil }
 	return &CapabilityStatementMessaging{
@@ -715,7 +1717,7 @@ func (m *CapabilityStatementMessaging) Clone() *CapabilityStatementMessaging {
 	}
 }
 
-// Equals checks for equality with another CapabilityStatementMessaging instance
+// Equals checks equality between two CapabilityStatementMessaging instances.
 func (m *CapabilityStatementMessaging) Equals(other *CapabilityStatementMessaging) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -732,7 +1734,7 @@ func (m *CapabilityStatementMessaging) Equals(other *CapabilityStatementMessagin
 // CapabilityStatementEndpoint
 // An endpoint (network accessible address) to which messages and/or replies are to be sent.
 type CapabilityStatementEndpoint struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -740,22 +1742,61 @@ type CapabilityStatementEndpoint struct {
 	Address *FhirUrl `json:"address,omitempty"`
 }
 
-// NewCapabilityStatementEndpoint creates a new CapabilityStatementEndpoint instance
+// NewCapabilityStatementEndpoint creates a new CapabilityStatementEndpoint instance.
 func NewCapabilityStatementEndpoint() *CapabilityStatementEndpoint {
 	return &CapabilityStatementEndpoint{}
 }
 
-// FromJSON populates CapabilityStatementEndpoint from JSON data
+// FromJSON populates CapabilityStatementEndpoint from JSON data.
 func (m *CapabilityStatementEndpoint) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Protocol *Coding `json:"protocol,omitempty"`
+		Address *FhirUrl `json:"address,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Protocol = temp.Protocol
+	m.Address = temp.Address
+	return nil
 }
 
-// ToJSON converts CapabilityStatementEndpoint to JSON data
+// ToJSON converts CapabilityStatementEndpoint to JSON data.
 func (m *CapabilityStatementEndpoint) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Protocol *Coding `json:"protocol,omitempty"`
+		Address interface{} `json:"address,omitempty"`
+		AddressElement map[string]interface{} `json:"_address,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Protocol = m.Protocol
+	if m.Address != nil && m.Address.Value != nil {
+		output.Address = m.Address.Value
+		if m.Address.Element != nil {
+			output.AddressElement = toMapOrNil(m.Address.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CapabilityStatementEndpoint
+// Clone creates a deep copy of CapabilityStatementEndpoint.
 func (m *CapabilityStatementEndpoint) Clone() *CapabilityStatementEndpoint {
 	if m == nil { return nil }
 	return &CapabilityStatementEndpoint{
@@ -767,7 +1808,7 @@ func (m *CapabilityStatementEndpoint) Clone() *CapabilityStatementEndpoint {
 	}
 }
 
-// Equals checks for equality with another CapabilityStatementEndpoint instance
+// Equals checks equality between two CapabilityStatementEndpoint instances.
 func (m *CapabilityStatementEndpoint) Equals(other *CapabilityStatementEndpoint) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -782,7 +1823,7 @@ func (m *CapabilityStatementEndpoint) Equals(other *CapabilityStatementEndpoint)
 // CapabilityStatementSupportedMessage
 // References to message definitions for messages this system can send or receive.
 type CapabilityStatementSupportedMessage struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -790,22 +1831,61 @@ type CapabilityStatementSupportedMessage struct {
 	Definition *FhirCanonical `json:"definition,omitempty"`
 }
 
-// NewCapabilityStatementSupportedMessage creates a new CapabilityStatementSupportedMessage instance
+// NewCapabilityStatementSupportedMessage creates a new CapabilityStatementSupportedMessage instance.
 func NewCapabilityStatementSupportedMessage() *CapabilityStatementSupportedMessage {
 	return &CapabilityStatementSupportedMessage{}
 }
 
-// FromJSON populates CapabilityStatementSupportedMessage from JSON data
+// FromJSON populates CapabilityStatementSupportedMessage from JSON data.
 func (m *CapabilityStatementSupportedMessage) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Mode *EventCapabilityMode `json:"mode,omitempty"`
+		Definition *FhirCanonical `json:"definition,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Mode = temp.Mode
+	m.Definition = temp.Definition
+	return nil
 }
 
-// ToJSON converts CapabilityStatementSupportedMessage to JSON data
+// ToJSON converts CapabilityStatementSupportedMessage to JSON data.
 func (m *CapabilityStatementSupportedMessage) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Mode *EventCapabilityMode `json:"mode,omitempty"`
+		Definition interface{} `json:"definition,omitempty"`
+		DefinitionElement map[string]interface{} `json:"_definition,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Mode = m.Mode
+	if m.Definition != nil && m.Definition.Value != nil {
+		output.Definition = m.Definition.Value
+		if m.Definition.Element != nil {
+			output.DefinitionElement = toMapOrNil(m.Definition.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CapabilityStatementSupportedMessage
+// Clone creates a deep copy of CapabilityStatementSupportedMessage.
 func (m *CapabilityStatementSupportedMessage) Clone() *CapabilityStatementSupportedMessage {
 	if m == nil { return nil }
 	return &CapabilityStatementSupportedMessage{
@@ -817,7 +1897,7 @@ func (m *CapabilityStatementSupportedMessage) Clone() *CapabilityStatementSuppor
 	}
 }
 
-// Equals checks for equality with another CapabilityStatementSupportedMessage instance
+// Equals checks equality between two CapabilityStatementSupportedMessage instances.
 func (m *CapabilityStatementSupportedMessage) Equals(other *CapabilityStatementSupportedMessage) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -832,7 +1912,7 @@ func (m *CapabilityStatementSupportedMessage) Equals(other *CapabilityStatementS
 // CapabilityStatementDocument
 // A document definition.
 type CapabilityStatementDocument struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -841,22 +1921,71 @@ type CapabilityStatementDocument struct {
 	Profile *FhirCanonical `json:"profile,omitempty"`
 }
 
-// NewCapabilityStatementDocument creates a new CapabilityStatementDocument instance
+// NewCapabilityStatementDocument creates a new CapabilityStatementDocument instance.
 func NewCapabilityStatementDocument() *CapabilityStatementDocument {
 	return &CapabilityStatementDocument{}
 }
 
-// FromJSON populates CapabilityStatementDocument from JSON data
+// FromJSON populates CapabilityStatementDocument from JSON data.
 func (m *CapabilityStatementDocument) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Mode *DocumentMode `json:"mode,omitempty"`
+		Documentation *FhirMarkdown `json:"documentation,omitempty"`
+		Profile *FhirCanonical `json:"profile,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Mode = temp.Mode
+	m.Documentation = temp.Documentation
+	m.Profile = temp.Profile
+	return nil
 }
 
-// ToJSON converts CapabilityStatementDocument to JSON data
+// ToJSON converts CapabilityStatementDocument to JSON data.
 func (m *CapabilityStatementDocument) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Mode *DocumentMode `json:"mode,omitempty"`
+		Documentation interface{} `json:"documentation,omitempty"`
+		DocumentationElement map[string]interface{} `json:"_documentation,omitempty"`
+		Profile interface{} `json:"profile,omitempty"`
+		ProfileElement map[string]interface{} `json:"_profile,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Mode = m.Mode
+	if m.Documentation != nil && m.Documentation.Value != nil {
+		output.Documentation = m.Documentation.Value
+		if m.Documentation.Element != nil {
+			output.DocumentationElement = toMapOrNil(m.Documentation.Element.ToJSON())
+		}
+	}
+	if m.Profile != nil && m.Profile.Value != nil {
+		output.Profile = m.Profile.Value
+		if m.Profile.Element != nil {
+			output.ProfileElement = toMapOrNil(m.Profile.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of CapabilityStatementDocument
+// Clone creates a deep copy of CapabilityStatementDocument.
 func (m *CapabilityStatementDocument) Clone() *CapabilityStatementDocument {
 	if m == nil { return nil }
 	return &CapabilityStatementDocument{
@@ -869,7 +1998,7 @@ func (m *CapabilityStatementDocument) Clone() *CapabilityStatementDocument {
 	}
 }
 
-// Equals checks for equality with another CapabilityStatementDocument instance
+// Equals checks equality between two CapabilityStatementDocument instances.
 func (m *CapabilityStatementDocument) Equals(other *CapabilityStatementDocument) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

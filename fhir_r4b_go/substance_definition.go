@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // SubstanceDefinition
 // The detailed description of a substance, typically at a level beyond what is used for prescribing.
 type SubstanceDefinition struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -38,22 +39,161 @@ type SubstanceDefinition struct {
 	SourceMaterial *SubstanceDefinitionSourceMaterial `json:"sourcematerial,omitempty"`
 }
 
-// NewSubstanceDefinition creates a new SubstanceDefinition instance
+// NewSubstanceDefinition creates a new SubstanceDefinition instance.
 func NewSubstanceDefinition() *SubstanceDefinition {
 	return &SubstanceDefinition{}
 }
 
-// FromJSON populates SubstanceDefinition from JSON data
+// FromJSON populates SubstanceDefinition from JSON data.
 func (m *SubstanceDefinition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Status *CodeableConcept `json:"status,omitempty"`
+		Classification []*CodeableConcept `json:"classification,omitempty"`
+		Domain *CodeableConcept `json:"domain,omitempty"`
+		Grade []*CodeableConcept `json:"grade,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		InformationSource []*Reference `json:"informationsource,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		Manufacturer []*Reference `json:"manufacturer,omitempty"`
+		Supplier []*Reference `json:"supplier,omitempty"`
+		Moiety []*SubstanceDefinitionMoiety `json:"moiety,omitempty"`
+		Property []*SubstanceDefinitionProperty `json:"property,omitempty"`
+		MolecularWeight []*SubstanceDefinitionMolecularWeight `json:"molecularweight,omitempty"`
+		Structure *SubstanceDefinitionStructure `json:"structure,omitempty"`
+		Code []*SubstanceDefinitionCode `json:"code,omitempty"`
+		Name []*SubstanceDefinitionName `json:"name,omitempty"`
+		Relationship []*SubstanceDefinitionRelationship `json:"relationship,omitempty"`
+		SourceMaterial *SubstanceDefinitionSourceMaterial `json:"sourcematerial,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Version = temp.Version
+	m.Status = temp.Status
+	m.Classification = temp.Classification
+	m.Domain = temp.Domain
+	m.Grade = temp.Grade
+	m.Description = temp.Description
+	m.InformationSource = temp.InformationSource
+	m.Note = temp.Note
+	m.Manufacturer = temp.Manufacturer
+	m.Supplier = temp.Supplier
+	m.Moiety = temp.Moiety
+	m.Property = temp.Property
+	m.MolecularWeight = temp.MolecularWeight
+	m.Structure = temp.Structure
+	m.Code = temp.Code
+	m.Name = temp.Name
+	m.Relationship = temp.Relationship
+	m.SourceMaterial = temp.SourceMaterial
+	return nil
 }
 
-// ToJSON converts SubstanceDefinition to JSON data
+// ToJSON converts SubstanceDefinition to JSON data.
 func (m *SubstanceDefinition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Status *CodeableConcept `json:"status,omitempty"`
+		Classification []*CodeableConcept `json:"classification,omitempty"`
+		Domain *CodeableConcept `json:"domain,omitempty"`
+		Grade []*CodeableConcept `json:"grade,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		InformationSource []*Reference `json:"informationsource,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		Manufacturer []*Reference `json:"manufacturer,omitempty"`
+		Supplier []*Reference `json:"supplier,omitempty"`
+		Moiety []*SubstanceDefinitionMoiety `json:"moiety,omitempty"`
+		Property []*SubstanceDefinitionProperty `json:"property,omitempty"`
+		MolecularWeight []*SubstanceDefinitionMolecularWeight `json:"molecularweight,omitempty"`
+		Structure *SubstanceDefinitionStructure `json:"structure,omitempty"`
+		Code []*SubstanceDefinitionCode `json:"code,omitempty"`
+		Name []*SubstanceDefinitionName `json:"name,omitempty"`
+		Relationship []*SubstanceDefinitionRelationship `json:"relationship,omitempty"`
+		SourceMaterial *SubstanceDefinitionSourceMaterial `json:"sourcematerial,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	output.Status = m.Status
+	output.Classification = m.Classification
+	output.Domain = m.Domain
+	output.Grade = m.Grade
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.InformationSource = m.InformationSource
+	output.Note = m.Note
+	output.Manufacturer = m.Manufacturer
+	output.Supplier = m.Supplier
+	output.Moiety = m.Moiety
+	output.Property = m.Property
+	output.MolecularWeight = m.MolecularWeight
+	output.Structure = m.Structure
+	output.Code = m.Code
+	output.Name = m.Name
+	output.Relationship = m.Relationship
+	output.SourceMaterial = m.SourceMaterial
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SubstanceDefinition
+// Clone creates a deep copy of SubstanceDefinition.
 func (m *SubstanceDefinition) Clone() *SubstanceDefinition {
 	if m == nil { return nil }
 	return &SubstanceDefinition{
@@ -87,7 +227,7 @@ func (m *SubstanceDefinition) Clone() *SubstanceDefinition {
 	}
 }
 
-// Equals checks for equality with another SubstanceDefinition instance
+// Equals checks equality between two SubstanceDefinition instances.
 func (m *SubstanceDefinition) Equals(other *SubstanceDefinition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -124,7 +264,7 @@ func (m *SubstanceDefinition) Equals(other *SubstanceDefinition) bool {
 // SubstanceDefinitionMoiety
 // Moiety, for structural modifications.
 type SubstanceDefinitionMoiety struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -139,22 +279,101 @@ type SubstanceDefinitionMoiety struct {
 	MeasurementType *CodeableConcept `json:"measurementtype,omitempty"`
 }
 
-// NewSubstanceDefinitionMoiety creates a new SubstanceDefinitionMoiety instance
+// NewSubstanceDefinitionMoiety creates a new SubstanceDefinitionMoiety instance.
 func NewSubstanceDefinitionMoiety() *SubstanceDefinitionMoiety {
 	return &SubstanceDefinitionMoiety{}
 }
 
-// FromJSON populates SubstanceDefinitionMoiety from JSON data
+// FromJSON populates SubstanceDefinitionMoiety from JSON data.
 func (m *SubstanceDefinitionMoiety) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Role *CodeableConcept `json:"role,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Stereochemistry *CodeableConcept `json:"stereochemistry,omitempty"`
+		OpticalActivity *CodeableConcept `json:"opticalactivity,omitempty"`
+		MolecularFormula *FhirString `json:"molecularformula,omitempty"`
+		AmountQuantity *Quantity `json:"amountquantity,omitempty"`
+		AmountString *FhirString `json:"amountstring,omitempty"`
+		MeasurementType *CodeableConcept `json:"measurementtype,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Role = temp.Role
+	m.Identifier = temp.Identifier
+	m.Name = temp.Name
+	m.Stereochemistry = temp.Stereochemistry
+	m.OpticalActivity = temp.OpticalActivity
+	m.MolecularFormula = temp.MolecularFormula
+	m.AmountQuantity = temp.AmountQuantity
+	m.AmountString = temp.AmountString
+	m.MeasurementType = temp.MeasurementType
+	return nil
 }
 
-// ToJSON converts SubstanceDefinitionMoiety to JSON data
+// ToJSON converts SubstanceDefinitionMoiety to JSON data.
 func (m *SubstanceDefinitionMoiety) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Role *CodeableConcept `json:"role,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Stereochemistry *CodeableConcept `json:"stereochemistry,omitempty"`
+		OpticalActivity *CodeableConcept `json:"opticalactivity,omitempty"`
+		MolecularFormula interface{} `json:"molecularformula,omitempty"`
+		MolecularFormulaElement map[string]interface{} `json:"_molecularformula,omitempty"`
+		AmountQuantity *Quantity `json:"amountquantity,omitempty"`
+		AmountString interface{} `json:"amountstring,omitempty"`
+		AmountStringElement map[string]interface{} `json:"_amountstring,omitempty"`
+		MeasurementType *CodeableConcept `json:"measurementtype,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Role = m.Role
+	output.Identifier = m.Identifier
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	output.Stereochemistry = m.Stereochemistry
+	output.OpticalActivity = m.OpticalActivity
+	if m.MolecularFormula != nil && m.MolecularFormula.Value != nil {
+		output.MolecularFormula = m.MolecularFormula.Value
+		if m.MolecularFormula.Element != nil {
+			output.MolecularFormulaElement = toMapOrNil(m.MolecularFormula.Element.ToJSON())
+		}
+	}
+	output.AmountQuantity = m.AmountQuantity
+	if m.AmountString != nil && m.AmountString.Value != nil {
+		output.AmountString = m.AmountString.Value
+		if m.AmountString.Element != nil {
+			output.AmountStringElement = toMapOrNil(m.AmountString.Element.ToJSON())
+		}
+	}
+	output.MeasurementType = m.MeasurementType
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SubstanceDefinitionMoiety
+// Clone creates a deep copy of SubstanceDefinitionMoiety.
 func (m *SubstanceDefinitionMoiety) Clone() *SubstanceDefinitionMoiety {
 	if m == nil { return nil }
 	return &SubstanceDefinitionMoiety{
@@ -173,7 +392,7 @@ func (m *SubstanceDefinitionMoiety) Clone() *SubstanceDefinitionMoiety {
 	}
 }
 
-// Equals checks for equality with another SubstanceDefinitionMoiety instance
+// Equals checks equality between two SubstanceDefinitionMoiety instances.
 func (m *SubstanceDefinitionMoiety) Equals(other *SubstanceDefinitionMoiety) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -195,7 +414,7 @@ func (m *SubstanceDefinitionMoiety) Equals(other *SubstanceDefinitionMoiety) boo
 // SubstanceDefinitionProperty
 // General specifications for this substance.
 type SubstanceDefinitionProperty struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -207,22 +426,83 @@ type SubstanceDefinitionProperty struct {
 	ValueAttachment *Attachment `json:"valueattachment,omitempty"`
 }
 
-// NewSubstanceDefinitionProperty creates a new SubstanceDefinitionProperty instance
+// NewSubstanceDefinitionProperty creates a new SubstanceDefinitionProperty instance.
 func NewSubstanceDefinitionProperty() *SubstanceDefinitionProperty {
 	return &SubstanceDefinitionProperty{}
 }
 
-// FromJSON populates SubstanceDefinitionProperty from JSON data
+// FromJSON populates SubstanceDefinitionProperty from JSON data.
 func (m *SubstanceDefinitionProperty) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueDate *FhirDate `json:"valuedate,omitempty"`
+		ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
+		ValueAttachment *Attachment `json:"valueattachment,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.ValueCodeableConcept = temp.ValueCodeableConcept
+	m.ValueQuantity = temp.ValueQuantity
+	m.ValueDate = temp.ValueDate
+	m.ValueBoolean = temp.ValueBoolean
+	m.ValueAttachment = temp.ValueAttachment
+	return nil
 }
 
-// ToJSON converts SubstanceDefinitionProperty to JSON data
+// ToJSON converts SubstanceDefinitionProperty to JSON data.
 func (m *SubstanceDefinitionProperty) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueDate interface{} `json:"valuedate,omitempty"`
+		ValueDateElement map[string]interface{} `json:"_valuedate,omitempty"`
+		ValueBoolean interface{} `json:"valueboolean,omitempty"`
+		ValueBooleanElement map[string]interface{} `json:"_valueboolean,omitempty"`
+		ValueAttachment *Attachment `json:"valueattachment,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.ValueCodeableConcept = m.ValueCodeableConcept
+	output.ValueQuantity = m.ValueQuantity
+	if m.ValueDate != nil && m.ValueDate.Value != nil {
+		output.ValueDate = m.ValueDate.Value
+		if m.ValueDate.Element != nil {
+			output.ValueDateElement = toMapOrNil(m.ValueDate.Element.ToJSON())
+		}
+	}
+	if m.ValueBoolean != nil && m.ValueBoolean.Value != nil {
+		output.ValueBoolean = m.ValueBoolean.Value
+		if m.ValueBoolean.Element != nil {
+			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.ToJSON())
+		}
+	}
+	output.ValueAttachment = m.ValueAttachment
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SubstanceDefinitionProperty
+// Clone creates a deep copy of SubstanceDefinitionProperty.
 func (m *SubstanceDefinitionProperty) Clone() *SubstanceDefinitionProperty {
 	if m == nil { return nil }
 	return &SubstanceDefinitionProperty{
@@ -238,7 +518,7 @@ func (m *SubstanceDefinitionProperty) Clone() *SubstanceDefinitionProperty {
 	}
 }
 
-// Equals checks for equality with another SubstanceDefinitionProperty instance
+// Equals checks equality between two SubstanceDefinitionProperty instances.
 func (m *SubstanceDefinitionProperty) Equals(other *SubstanceDefinitionProperty) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -257,7 +537,7 @@ func (m *SubstanceDefinitionProperty) Equals(other *SubstanceDefinitionProperty)
 // SubstanceDefinitionMolecularWeight
 // The molecular weight or weight range (for proteins, polymers or nucleic acids).
 type SubstanceDefinitionMolecularWeight struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -266,22 +546,59 @@ type SubstanceDefinitionMolecularWeight struct {
 	Amount *Quantity `json:"amount,omitempty"`
 }
 
-// NewSubstanceDefinitionMolecularWeight creates a new SubstanceDefinitionMolecularWeight instance
+// NewSubstanceDefinitionMolecularWeight creates a new SubstanceDefinitionMolecularWeight instance.
 func NewSubstanceDefinitionMolecularWeight() *SubstanceDefinitionMolecularWeight {
 	return &SubstanceDefinitionMolecularWeight{}
 }
 
-// FromJSON populates SubstanceDefinitionMolecularWeight from JSON data
+// FromJSON populates SubstanceDefinitionMolecularWeight from JSON data.
 func (m *SubstanceDefinitionMolecularWeight) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Method *CodeableConcept `json:"method,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Amount *Quantity `json:"amount,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Method = temp.Method
+	m.Type = temp.Type
+	m.Amount = temp.Amount
+	return nil
 }
 
-// ToJSON converts SubstanceDefinitionMolecularWeight to JSON data
+// ToJSON converts SubstanceDefinitionMolecularWeight to JSON data.
 func (m *SubstanceDefinitionMolecularWeight) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Method *CodeableConcept `json:"method,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Amount *Quantity `json:"amount,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Method = m.Method
+	output.Type = m.Type
+	output.Amount = m.Amount
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SubstanceDefinitionMolecularWeight
+// Clone creates a deep copy of SubstanceDefinitionMolecularWeight.
 func (m *SubstanceDefinitionMolecularWeight) Clone() *SubstanceDefinitionMolecularWeight {
 	if m == nil { return nil }
 	return &SubstanceDefinitionMolecularWeight{
@@ -294,7 +611,7 @@ func (m *SubstanceDefinitionMolecularWeight) Clone() *SubstanceDefinitionMolecul
 	}
 }
 
-// Equals checks for equality with another SubstanceDefinitionMolecularWeight instance
+// Equals checks equality between two SubstanceDefinitionMolecularWeight instances.
 func (m *SubstanceDefinitionMolecularWeight) Equals(other *SubstanceDefinitionMolecularWeight) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -310,7 +627,7 @@ func (m *SubstanceDefinitionMolecularWeight) Equals(other *SubstanceDefinitionMo
 // SubstanceDefinitionStructure
 // Structural information.
 type SubstanceDefinitionStructure struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -324,22 +641,91 @@ type SubstanceDefinitionStructure struct {
 	Representation []*SubstanceDefinitionRepresentation `json:"representation,omitempty"`
 }
 
-// NewSubstanceDefinitionStructure creates a new SubstanceDefinitionStructure instance
+// NewSubstanceDefinitionStructure creates a new SubstanceDefinitionStructure instance.
 func NewSubstanceDefinitionStructure() *SubstanceDefinitionStructure {
 	return &SubstanceDefinitionStructure{}
 }
 
-// FromJSON populates SubstanceDefinitionStructure from JSON data
+// FromJSON populates SubstanceDefinitionStructure from JSON data.
 func (m *SubstanceDefinitionStructure) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Stereochemistry *CodeableConcept `json:"stereochemistry,omitempty"`
+		OpticalActivity *CodeableConcept `json:"opticalactivity,omitempty"`
+		MolecularFormula *FhirString `json:"molecularformula,omitempty"`
+		MolecularFormulaByMoiety *FhirString `json:"molecularformulabymoiety,omitempty"`
+		MolecularWeight *SubstanceDefinitionMolecularWeight `json:"molecularweight,omitempty"`
+		Technique []*CodeableConcept `json:"technique,omitempty"`
+		SourceDocument []*Reference `json:"sourcedocument,omitempty"`
+		Representation []*SubstanceDefinitionRepresentation `json:"representation,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Stereochemistry = temp.Stereochemistry
+	m.OpticalActivity = temp.OpticalActivity
+	m.MolecularFormula = temp.MolecularFormula
+	m.MolecularFormulaByMoiety = temp.MolecularFormulaByMoiety
+	m.MolecularWeight = temp.MolecularWeight
+	m.Technique = temp.Technique
+	m.SourceDocument = temp.SourceDocument
+	m.Representation = temp.Representation
+	return nil
 }
 
-// ToJSON converts SubstanceDefinitionStructure to JSON data
+// ToJSON converts SubstanceDefinitionStructure to JSON data.
 func (m *SubstanceDefinitionStructure) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Stereochemistry *CodeableConcept `json:"stereochemistry,omitempty"`
+		OpticalActivity *CodeableConcept `json:"opticalactivity,omitempty"`
+		MolecularFormula interface{} `json:"molecularformula,omitempty"`
+		MolecularFormulaElement map[string]interface{} `json:"_molecularformula,omitempty"`
+		MolecularFormulaByMoiety interface{} `json:"molecularformulabymoiety,omitempty"`
+		MolecularFormulaByMoietyElement map[string]interface{} `json:"_molecularformulabymoiety,omitempty"`
+		MolecularWeight *SubstanceDefinitionMolecularWeight `json:"molecularweight,omitempty"`
+		Technique []*CodeableConcept `json:"technique,omitempty"`
+		SourceDocument []*Reference `json:"sourcedocument,omitempty"`
+		Representation []*SubstanceDefinitionRepresentation `json:"representation,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Stereochemistry = m.Stereochemistry
+	output.OpticalActivity = m.OpticalActivity
+	if m.MolecularFormula != nil && m.MolecularFormula.Value != nil {
+		output.MolecularFormula = m.MolecularFormula.Value
+		if m.MolecularFormula.Element != nil {
+			output.MolecularFormulaElement = toMapOrNil(m.MolecularFormula.Element.ToJSON())
+		}
+	}
+	if m.MolecularFormulaByMoiety != nil && m.MolecularFormulaByMoiety.Value != nil {
+		output.MolecularFormulaByMoiety = m.MolecularFormulaByMoiety.Value
+		if m.MolecularFormulaByMoiety.Element != nil {
+			output.MolecularFormulaByMoietyElement = toMapOrNil(m.MolecularFormulaByMoiety.Element.ToJSON())
+		}
+	}
+	output.MolecularWeight = m.MolecularWeight
+	output.Technique = m.Technique
+	output.SourceDocument = m.SourceDocument
+	output.Representation = m.Representation
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SubstanceDefinitionStructure
+// Clone creates a deep copy of SubstanceDefinitionStructure.
 func (m *SubstanceDefinitionStructure) Clone() *SubstanceDefinitionStructure {
 	if m == nil { return nil }
 	return &SubstanceDefinitionStructure{
@@ -357,7 +743,7 @@ func (m *SubstanceDefinitionStructure) Clone() *SubstanceDefinitionStructure {
 	}
 }
 
-// Equals checks for equality with another SubstanceDefinitionStructure instance
+// Equals checks equality between two SubstanceDefinitionStructure instances.
 func (m *SubstanceDefinitionStructure) Equals(other *SubstanceDefinitionStructure) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -378,7 +764,7 @@ func (m *SubstanceDefinitionStructure) Equals(other *SubstanceDefinitionStructur
 // SubstanceDefinitionRepresentation
 // A depiction of the structure or characterization of the substance.
 type SubstanceDefinitionRepresentation struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -388,22 +774,69 @@ type SubstanceDefinitionRepresentation struct {
 	Document *Reference `json:"document,omitempty"`
 }
 
-// NewSubstanceDefinitionRepresentation creates a new SubstanceDefinitionRepresentation instance
+// NewSubstanceDefinitionRepresentation creates a new SubstanceDefinitionRepresentation instance.
 func NewSubstanceDefinitionRepresentation() *SubstanceDefinitionRepresentation {
 	return &SubstanceDefinitionRepresentation{}
 }
 
-// FromJSON populates SubstanceDefinitionRepresentation from JSON data
+// FromJSON populates SubstanceDefinitionRepresentation from JSON data.
 func (m *SubstanceDefinitionRepresentation) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Representation *FhirString `json:"representation,omitempty"`
+		Format *CodeableConcept `json:"format,omitempty"`
+		Document *Reference `json:"document,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Representation = temp.Representation
+	m.Format = temp.Format
+	m.Document = temp.Document
+	return nil
 }
 
-// ToJSON converts SubstanceDefinitionRepresentation to JSON data
+// ToJSON converts SubstanceDefinitionRepresentation to JSON data.
 func (m *SubstanceDefinitionRepresentation) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Representation interface{} `json:"representation,omitempty"`
+		RepresentationElement map[string]interface{} `json:"_representation,omitempty"`
+		Format *CodeableConcept `json:"format,omitempty"`
+		Document *Reference `json:"document,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	if m.Representation != nil && m.Representation.Value != nil {
+		output.Representation = m.Representation.Value
+		if m.Representation.Element != nil {
+			output.RepresentationElement = toMapOrNil(m.Representation.Element.ToJSON())
+		}
+	}
+	output.Format = m.Format
+	output.Document = m.Document
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SubstanceDefinitionRepresentation
+// Clone creates a deep copy of SubstanceDefinitionRepresentation.
 func (m *SubstanceDefinitionRepresentation) Clone() *SubstanceDefinitionRepresentation {
 	if m == nil { return nil }
 	return &SubstanceDefinitionRepresentation{
@@ -417,7 +850,7 @@ func (m *SubstanceDefinitionRepresentation) Clone() *SubstanceDefinitionRepresen
 	}
 }
 
-// Equals checks for equality with another SubstanceDefinitionRepresentation instance
+// Equals checks equality between two SubstanceDefinitionRepresentation instances.
 func (m *SubstanceDefinitionRepresentation) Equals(other *SubstanceDefinitionRepresentation) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -434,7 +867,7 @@ func (m *SubstanceDefinitionRepresentation) Equals(other *SubstanceDefinitionRep
 // SubstanceDefinitionCode
 // Codes associated with the substance.
 type SubstanceDefinitionCode struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -445,22 +878,73 @@ type SubstanceDefinitionCode struct {
 	Source []*Reference `json:"source,omitempty"`
 }
 
-// NewSubstanceDefinitionCode creates a new SubstanceDefinitionCode instance
+// NewSubstanceDefinitionCode creates a new SubstanceDefinitionCode instance.
 func NewSubstanceDefinitionCode() *SubstanceDefinitionCode {
 	return &SubstanceDefinitionCode{}
 }
 
-// FromJSON populates SubstanceDefinitionCode from JSON data
+// FromJSON populates SubstanceDefinitionCode from JSON data.
 func (m *SubstanceDefinitionCode) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Status *CodeableConcept `json:"status,omitempty"`
+		StatusDate *FhirDateTime `json:"statusdate,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		Source []*Reference `json:"source,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Status = temp.Status
+	m.StatusDate = temp.StatusDate
+	m.Note = temp.Note
+	m.Source = temp.Source
+	return nil
 }
 
-// ToJSON converts SubstanceDefinitionCode to JSON data
+// ToJSON converts SubstanceDefinitionCode to JSON data.
 func (m *SubstanceDefinitionCode) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Status *CodeableConcept `json:"status,omitempty"`
+		StatusDate interface{} `json:"statusdate,omitempty"`
+		StatusDateElement map[string]interface{} `json:"_statusdate,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		Source []*Reference `json:"source,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	output.Status = m.Status
+	if m.StatusDate != nil && m.StatusDate.Value != nil {
+		output.StatusDate = m.StatusDate.Value
+		if m.StatusDate.Element != nil {
+			output.StatusDateElement = toMapOrNil(m.StatusDate.Element.ToJSON())
+		}
+	}
+	output.Note = m.Note
+	output.Source = m.Source
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SubstanceDefinitionCode
+// Clone creates a deep copy of SubstanceDefinitionCode.
 func (m *SubstanceDefinitionCode) Clone() *SubstanceDefinitionCode {
 	if m == nil { return nil }
 	return &SubstanceDefinitionCode{
@@ -475,7 +959,7 @@ func (m *SubstanceDefinitionCode) Clone() *SubstanceDefinitionCode {
 	}
 }
 
-// Equals checks for equality with another SubstanceDefinitionCode instance
+// Equals checks equality between two SubstanceDefinitionCode instances.
 func (m *SubstanceDefinitionCode) Equals(other *SubstanceDefinitionCode) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -493,7 +977,7 @@ func (m *SubstanceDefinitionCode) Equals(other *SubstanceDefinitionCode) bool {
 // SubstanceDefinitionName
 // Names applicable to this substance.
 type SubstanceDefinitionName struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -510,22 +994,103 @@ type SubstanceDefinitionName struct {
 	Source []*Reference `json:"source,omitempty"`
 }
 
-// NewSubstanceDefinitionName creates a new SubstanceDefinitionName instance
+// NewSubstanceDefinitionName creates a new SubstanceDefinitionName instance.
 func NewSubstanceDefinitionName() *SubstanceDefinitionName {
 	return &SubstanceDefinitionName{}
 }
 
-// FromJSON populates SubstanceDefinitionName from JSON data
+// FromJSON populates SubstanceDefinitionName from JSON data.
 func (m *SubstanceDefinitionName) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Status *CodeableConcept `json:"status,omitempty"`
+		Preferred *FhirBoolean `json:"preferred,omitempty"`
+		Language []*CodeableConcept `json:"language,omitempty"`
+		Domain []*CodeableConcept `json:"domain,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Synonym []*SubstanceDefinitionName `json:"synonym,omitempty"`
+		Translation []*SubstanceDefinitionName `json:"translation,omitempty"`
+		Official []*SubstanceDefinitionOfficial `json:"official,omitempty"`
+		Source []*Reference `json:"source,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Name = temp.Name
+	m.Type = temp.Type
+	m.Status = temp.Status
+	m.Preferred = temp.Preferred
+	m.Language = temp.Language
+	m.Domain = temp.Domain
+	m.Jurisdiction = temp.Jurisdiction
+	m.Synonym = temp.Synonym
+	m.Translation = temp.Translation
+	m.Official = temp.Official
+	m.Source = temp.Source
+	return nil
 }
 
-// ToJSON converts SubstanceDefinitionName to JSON data
+// ToJSON converts SubstanceDefinitionName to JSON data.
 func (m *SubstanceDefinitionName) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Status *CodeableConcept `json:"status,omitempty"`
+		Preferred interface{} `json:"preferred,omitempty"`
+		PreferredElement map[string]interface{} `json:"_preferred,omitempty"`
+		Language []*CodeableConcept `json:"language,omitempty"`
+		Domain []*CodeableConcept `json:"domain,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Synonym []*SubstanceDefinitionName `json:"synonym,omitempty"`
+		Translation []*SubstanceDefinitionName `json:"translation,omitempty"`
+		Official []*SubstanceDefinitionOfficial `json:"official,omitempty"`
+		Source []*Reference `json:"source,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	output.Type = m.Type
+	output.Status = m.Status
+	if m.Preferred != nil && m.Preferred.Value != nil {
+		output.Preferred = m.Preferred.Value
+		if m.Preferred.Element != nil {
+			output.PreferredElement = toMapOrNil(m.Preferred.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Domain = m.Domain
+	output.Jurisdiction = m.Jurisdiction
+	output.Synonym = m.Synonym
+	output.Translation = m.Translation
+	output.Official = m.Official
+	output.Source = m.Source
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SubstanceDefinitionName
+// Clone creates a deep copy of SubstanceDefinitionName.
 func (m *SubstanceDefinitionName) Clone() *SubstanceDefinitionName {
 	if m == nil { return nil }
 	return &SubstanceDefinitionName{
@@ -546,7 +1111,7 @@ func (m *SubstanceDefinitionName) Clone() *SubstanceDefinitionName {
 	}
 }
 
-// Equals checks for equality with another SubstanceDefinitionName instance
+// Equals checks equality between two SubstanceDefinitionName instances.
 func (m *SubstanceDefinitionName) Equals(other *SubstanceDefinitionName) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -570,7 +1135,7 @@ func (m *SubstanceDefinitionName) Equals(other *SubstanceDefinitionName) bool {
 // SubstanceDefinitionOfficial
 // Details of the official nature of this name.
 type SubstanceDefinitionOfficial struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -579,22 +1144,65 @@ type SubstanceDefinitionOfficial struct {
 	Date *FhirDateTime `json:"date,omitempty"`
 }
 
-// NewSubstanceDefinitionOfficial creates a new SubstanceDefinitionOfficial instance
+// NewSubstanceDefinitionOfficial creates a new SubstanceDefinitionOfficial instance.
 func NewSubstanceDefinitionOfficial() *SubstanceDefinitionOfficial {
 	return &SubstanceDefinitionOfficial{}
 }
 
-// FromJSON populates SubstanceDefinitionOfficial from JSON data
+// FromJSON populates SubstanceDefinitionOfficial from JSON data.
 func (m *SubstanceDefinitionOfficial) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Authority *CodeableConcept `json:"authority,omitempty"`
+		Status *CodeableConcept `json:"status,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Authority = temp.Authority
+	m.Status = temp.Status
+	m.Date = temp.Date
+	return nil
 }
 
-// ToJSON converts SubstanceDefinitionOfficial to JSON data
+// ToJSON converts SubstanceDefinitionOfficial to JSON data.
 func (m *SubstanceDefinitionOfficial) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Authority *CodeableConcept `json:"authority,omitempty"`
+		Status *CodeableConcept `json:"status,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Authority = m.Authority
+	output.Status = m.Status
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SubstanceDefinitionOfficial
+// Clone creates a deep copy of SubstanceDefinitionOfficial.
 func (m *SubstanceDefinitionOfficial) Clone() *SubstanceDefinitionOfficial {
 	if m == nil { return nil }
 	return &SubstanceDefinitionOfficial{
@@ -607,7 +1215,7 @@ func (m *SubstanceDefinitionOfficial) Clone() *SubstanceDefinitionOfficial {
 	}
 }
 
-// Equals checks for equality with another SubstanceDefinitionOfficial instance
+// Equals checks equality between two SubstanceDefinitionOfficial instances.
 func (m *SubstanceDefinitionOfficial) Equals(other *SubstanceDefinitionOfficial) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -623,7 +1231,7 @@ func (m *SubstanceDefinitionOfficial) Equals(other *SubstanceDefinitionOfficial)
 // SubstanceDefinitionRelationship
 // A link between this substance and another, with details of the relationship.
 type SubstanceDefinitionRelationship struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -639,22 +1247,99 @@ type SubstanceDefinitionRelationship struct {
 	Source []*Reference `json:"source,omitempty"`
 }
 
-// NewSubstanceDefinitionRelationship creates a new SubstanceDefinitionRelationship instance
+// NewSubstanceDefinitionRelationship creates a new SubstanceDefinitionRelationship instance.
 func NewSubstanceDefinitionRelationship() *SubstanceDefinitionRelationship {
 	return &SubstanceDefinitionRelationship{}
 }
 
-// FromJSON populates SubstanceDefinitionRelationship from JSON data
+// FromJSON populates SubstanceDefinitionRelationship from JSON data.
 func (m *SubstanceDefinitionRelationship) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		SubstanceDefinitionReference *Reference `json:"substancedefinitionreference,omitempty"`
+		SubstanceDefinitionCodeableConcept *CodeableConcept `json:"substancedefinitioncodeableconcept,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		IsDefining *FhirBoolean `json:"isdefining,omitempty"`
+		AmountQuantity *Quantity `json:"amountquantity,omitempty"`
+		AmountRatio *Ratio `json:"amountratio,omitempty"`
+		AmountString *FhirString `json:"amountstring,omitempty"`
+		RatioHighLimitAmount *Ratio `json:"ratiohighlimitamount,omitempty"`
+		Comparator *CodeableConcept `json:"comparator,omitempty"`
+		Source []*Reference `json:"source,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.SubstanceDefinitionReference = temp.SubstanceDefinitionReference
+	m.SubstanceDefinitionCodeableConcept = temp.SubstanceDefinitionCodeableConcept
+	m.Type = temp.Type
+	m.IsDefining = temp.IsDefining
+	m.AmountQuantity = temp.AmountQuantity
+	m.AmountRatio = temp.AmountRatio
+	m.AmountString = temp.AmountString
+	m.RatioHighLimitAmount = temp.RatioHighLimitAmount
+	m.Comparator = temp.Comparator
+	m.Source = temp.Source
+	return nil
 }
 
-// ToJSON converts SubstanceDefinitionRelationship to JSON data
+// ToJSON converts SubstanceDefinitionRelationship to JSON data.
 func (m *SubstanceDefinitionRelationship) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		SubstanceDefinitionReference *Reference `json:"substancedefinitionreference,omitempty"`
+		SubstanceDefinitionCodeableConcept *CodeableConcept `json:"substancedefinitioncodeableconcept,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		IsDefining interface{} `json:"isdefining,omitempty"`
+		IsDefiningElement map[string]interface{} `json:"_isdefining,omitempty"`
+		AmountQuantity *Quantity `json:"amountquantity,omitempty"`
+		AmountRatio *Ratio `json:"amountratio,omitempty"`
+		AmountString interface{} `json:"amountstring,omitempty"`
+		AmountStringElement map[string]interface{} `json:"_amountstring,omitempty"`
+		RatioHighLimitAmount *Ratio `json:"ratiohighlimitamount,omitempty"`
+		Comparator *CodeableConcept `json:"comparator,omitempty"`
+		Source []*Reference `json:"source,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.SubstanceDefinitionReference = m.SubstanceDefinitionReference
+	output.SubstanceDefinitionCodeableConcept = m.SubstanceDefinitionCodeableConcept
+	output.Type = m.Type
+	if m.IsDefining != nil && m.IsDefining.Value != nil {
+		output.IsDefining = m.IsDefining.Value
+		if m.IsDefining.Element != nil {
+			output.IsDefiningElement = toMapOrNil(m.IsDefining.Element.ToJSON())
+		}
+	}
+	output.AmountQuantity = m.AmountQuantity
+	output.AmountRatio = m.AmountRatio
+	if m.AmountString != nil && m.AmountString.Value != nil {
+		output.AmountString = m.AmountString.Value
+		if m.AmountString.Element != nil {
+			output.AmountStringElement = toMapOrNil(m.AmountString.Element.ToJSON())
+		}
+	}
+	output.RatioHighLimitAmount = m.RatioHighLimitAmount
+	output.Comparator = m.Comparator
+	output.Source = m.Source
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SubstanceDefinitionRelationship
+// Clone creates a deep copy of SubstanceDefinitionRelationship.
 func (m *SubstanceDefinitionRelationship) Clone() *SubstanceDefinitionRelationship {
 	if m == nil { return nil }
 	return &SubstanceDefinitionRelationship{
@@ -674,7 +1359,7 @@ func (m *SubstanceDefinitionRelationship) Clone() *SubstanceDefinitionRelationsh
 	}
 }
 
-// Equals checks for equality with another SubstanceDefinitionRelationship instance
+// Equals checks equality between two SubstanceDefinitionRelationship instances.
 func (m *SubstanceDefinitionRelationship) Equals(other *SubstanceDefinitionRelationship) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -697,7 +1382,7 @@ func (m *SubstanceDefinitionRelationship) Equals(other *SubstanceDefinitionRelat
 // SubstanceDefinitionSourceMaterial
 // Material or taxonomic/anatomical source for the substance.
 type SubstanceDefinitionSourceMaterial struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -708,22 +1393,67 @@ type SubstanceDefinitionSourceMaterial struct {
 	CountryOfOrigin []*CodeableConcept `json:"countryoforigin,omitempty"`
 }
 
-// NewSubstanceDefinitionSourceMaterial creates a new SubstanceDefinitionSourceMaterial instance
+// NewSubstanceDefinitionSourceMaterial creates a new SubstanceDefinitionSourceMaterial instance.
 func NewSubstanceDefinitionSourceMaterial() *SubstanceDefinitionSourceMaterial {
 	return &SubstanceDefinitionSourceMaterial{}
 }
 
-// FromJSON populates SubstanceDefinitionSourceMaterial from JSON data
+// FromJSON populates SubstanceDefinitionSourceMaterial from JSON data.
 func (m *SubstanceDefinitionSourceMaterial) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Genus *CodeableConcept `json:"genus,omitempty"`
+		Species *CodeableConcept `json:"species,omitempty"`
+		Part_ *CodeableConcept `json:"part,omitempty"`
+		CountryOfOrigin []*CodeableConcept `json:"countryoforigin,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Genus = temp.Genus
+	m.Species = temp.Species
+	m.Part_ = temp.Part_
+	m.CountryOfOrigin = temp.CountryOfOrigin
+	return nil
 }
 
-// ToJSON converts SubstanceDefinitionSourceMaterial to JSON data
+// ToJSON converts SubstanceDefinitionSourceMaterial to JSON data.
 func (m *SubstanceDefinitionSourceMaterial) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Genus *CodeableConcept `json:"genus,omitempty"`
+		Species *CodeableConcept `json:"species,omitempty"`
+		Part_ *CodeableConcept `json:"part,omitempty"`
+		CountryOfOrigin []*CodeableConcept `json:"countryoforigin,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Genus = m.Genus
+	output.Species = m.Species
+	output.Part_ = m.Part_
+	output.CountryOfOrigin = m.CountryOfOrigin
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SubstanceDefinitionSourceMaterial
+// Clone creates a deep copy of SubstanceDefinitionSourceMaterial.
 func (m *SubstanceDefinitionSourceMaterial) Clone() *SubstanceDefinitionSourceMaterial {
 	if m == nil { return nil }
 	return &SubstanceDefinitionSourceMaterial{
@@ -738,7 +1468,7 @@ func (m *SubstanceDefinitionSourceMaterial) Clone() *SubstanceDefinitionSourceMa
 	}
 }
 
-// Equals checks for equality with another SubstanceDefinitionSourceMaterial instance
+// Equals checks equality between two SubstanceDefinitionSourceMaterial instances.
 func (m *SubstanceDefinitionSourceMaterial) Equals(other *SubstanceDefinitionSourceMaterial) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

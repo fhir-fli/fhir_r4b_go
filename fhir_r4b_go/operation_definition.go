@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // OperationDefinition
 // A formal computable definition of an operation (on the RESTful interface) or a named query (using the search interaction).
 type OperationDefinition struct {
-	CanonicalResource
+	extends CanonicalResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -45,22 +47,306 @@ type OperationDefinition struct {
 	Overload []*OperationDefinitionOverload `json:"overload,omitempty"`
 }
 
-// NewOperationDefinition creates a new OperationDefinition instance
+// NewOperationDefinition creates a new OperationDefinition instance.
 func NewOperationDefinition() *OperationDefinition {
 	return &OperationDefinition{}
 }
 
-// FromJSON populates OperationDefinition from JSON data
+// FromJSON populates OperationDefinition from JSON data.
 func (m *OperationDefinition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url *FhirUri `json:"url,omitempty"`
+		Version *FhirString `json:"version,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Title *FhirString `json:"title,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Kind *OperationKind `json:"kind,omitempty"`
+		Experimental *FhirBoolean `json:"experimental,omitempty"`
+		Date *FhirDateTime `json:"date,omitempty"`
+		Publisher *FhirString `json:"publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose *FhirMarkdown `json:"purpose,omitempty"`
+		AffectsState *FhirBoolean `json:"affectsstate,omitempty"`
+		Code *FhirCode `json:"code,omitempty"`
+		Comment *FhirMarkdown `json:"comment,omitempty"`
+		Base *FhirCanonical `json:"base,omitempty"`
+		Resource []interface{} `json:"resource,omitempty"`
+		System *FhirBoolean `json:"system,omitempty"`
+		Type *FhirBoolean `json:"type,omitempty"`
+		Instance *FhirBoolean `json:"instance,omitempty"`
+		InputProfile *FhirCanonical `json:"inputprofile,omitempty"`
+		OutputProfile *FhirCanonical `json:"outputprofile,omitempty"`
+		Parameter []*OperationDefinitionParameter `json:"parameter,omitempty"`
+		Overload []*OperationDefinitionOverload `json:"overload,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Url = temp.Url
+	m.Version = temp.Version
+	m.Name = temp.Name
+	m.Title = temp.Title
+	m.Status = temp.Status
+	m.Kind = temp.Kind
+	m.Experimental = temp.Experimental
+	m.Date = temp.Date
+	m.Publisher = temp.Publisher
+	m.Contact = temp.Contact
+	m.Description = temp.Description
+	m.UseContext = temp.UseContext
+	m.Jurisdiction = temp.Jurisdiction
+	m.Purpose = temp.Purpose
+	m.AffectsState = temp.AffectsState
+	m.Code = temp.Code
+	m.Comment = temp.Comment
+	m.Base = temp.Base
+	if len(temp.Resource) > 0 {
+		m.Resource = make([]*FhirCode, len(temp.Resource))
+		for i := range temp.Resource {
+			itemMap, ok := temp.Resource[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Resource[%d]: expected map", i) }
+			primitive, err := NewFhirCodeFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Resource[%d]: %v", i, err) }
+			m.Resource[i] = primitive
+		}
+	}
+	m.System = temp.System
+	m.Type = temp.Type
+	m.Instance = temp.Instance
+	m.InputProfile = temp.InputProfile
+	m.OutputProfile = temp.OutputProfile
+	m.Parameter = temp.Parameter
+	m.Overload = temp.Overload
+	return nil
 }
 
-// ToJSON converts OperationDefinition to JSON data
+// ToJSON converts OperationDefinition to JSON data.
 func (m *OperationDefinition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Url interface{} `json:"url,omitempty"`
+		UrlElement map[string]interface{} `json:"_url,omitempty"`
+		Version interface{} `json:"version,omitempty"`
+		VersionElement map[string]interface{} `json:"_version,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Title interface{} `json:"title,omitempty"`
+		TitleElement map[string]interface{} `json:"_title,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		Kind *OperationKind `json:"kind,omitempty"`
+		Experimental interface{} `json:"experimental,omitempty"`
+		ExperimentalElement map[string]interface{} `json:"_experimental,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Publisher interface{} `json:"publisher,omitempty"`
+		PublisherElement map[string]interface{} `json:"_publisher,omitempty"`
+		Contact []*ContactDetail `json:"contact,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		UseContext []*UsageContext `json:"usecontext,omitempty"`
+		Jurisdiction []*CodeableConcept `json:"jurisdiction,omitempty"`
+		Purpose interface{} `json:"purpose,omitempty"`
+		PurposeElement map[string]interface{} `json:"_purpose,omitempty"`
+		AffectsState interface{} `json:"affectsstate,omitempty"`
+		AffectsStateElement map[string]interface{} `json:"_affectsstate,omitempty"`
+		Code interface{} `json:"code,omitempty"`
+		CodeElement map[string]interface{} `json:"_code,omitempty"`
+		Comment interface{} `json:"comment,omitempty"`
+		CommentElement map[string]interface{} `json:"_comment,omitempty"`
+		Base interface{} `json:"base,omitempty"`
+		BaseElement map[string]interface{} `json:"_base,omitempty"`
+		Resource []interface{} `json:"resource,omitempty"`
+		ResourceElement []map[string]interface{} `json:"_resource,omitempty"`
+		System interface{} `json:"system,omitempty"`
+		SystemElement map[string]interface{} `json:"_system,omitempty"`
+		Type interface{} `json:"type,omitempty"`
+		TypeElement map[string]interface{} `json:"_type,omitempty"`
+		Instance interface{} `json:"instance,omitempty"`
+		InstanceElement map[string]interface{} `json:"_instance,omitempty"`
+		InputProfile interface{} `json:"inputprofile,omitempty"`
+		InputProfileElement map[string]interface{} `json:"_inputprofile,omitempty"`
+		OutputProfile interface{} `json:"outputprofile,omitempty"`
+		OutputProfileElement map[string]interface{} `json:"_outputprofile,omitempty"`
+		Parameter []*OperationDefinitionParameter `json:"parameter,omitempty"`
+		Overload []*OperationDefinitionOverload `json:"overload,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Url != nil && m.Url.Value != nil {
+		output.Url = m.Url.Value
+		if m.Url.Element != nil {
+			output.UrlElement = toMapOrNil(m.Url.Element.ToJSON())
+		}
+	}
+	if m.Version != nil && m.Version.Value != nil {
+		output.Version = m.Version.Value
+		if m.Version.Element != nil {
+			output.VersionElement = toMapOrNil(m.Version.Element.ToJSON())
+		}
+	}
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Title != nil && m.Title.Value != nil {
+		output.Title = m.Title.Value
+		if m.Title.Element != nil {
+			output.TitleElement = toMapOrNil(m.Title.Element.ToJSON())
+		}
+	}
+	output.Status = m.Status
+	output.Kind = m.Kind
+	if m.Experimental != nil && m.Experimental.Value != nil {
+		output.Experimental = m.Experimental.Value
+		if m.Experimental.Element != nil {
+			output.ExperimentalElement = toMapOrNil(m.Experimental.Element.ToJSON())
+		}
+	}
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	if m.Publisher != nil && m.Publisher.Value != nil {
+		output.Publisher = m.Publisher.Value
+		if m.Publisher.Element != nil {
+			output.PublisherElement = toMapOrNil(m.Publisher.Element.ToJSON())
+		}
+	}
+	output.Contact = m.Contact
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.UseContext = m.UseContext
+	output.Jurisdiction = m.Jurisdiction
+	if m.Purpose != nil && m.Purpose.Value != nil {
+		output.Purpose = m.Purpose.Value
+		if m.Purpose.Element != nil {
+			output.PurposeElement = toMapOrNil(m.Purpose.Element.ToJSON())
+		}
+	}
+	if m.AffectsState != nil && m.AffectsState.Value != nil {
+		output.AffectsState = m.AffectsState.Value
+		if m.AffectsState.Element != nil {
+			output.AffectsStateElement = toMapOrNil(m.AffectsState.Element.ToJSON())
+		}
+	}
+	if m.Code != nil && m.Code.Value != nil {
+		output.Code = m.Code.Value
+		if m.Code.Element != nil {
+			output.CodeElement = toMapOrNil(m.Code.Element.ToJSON())
+		}
+	}
+	if m.Comment != nil && m.Comment.Value != nil {
+		output.Comment = m.Comment.Value
+		if m.Comment.Element != nil {
+			output.CommentElement = toMapOrNil(m.Comment.Element.ToJSON())
+		}
+	}
+	if m.Base != nil && m.Base.Value != nil {
+		output.Base = m.Base.Value
+		if m.Base.Element != nil {
+			output.BaseElement = toMapOrNil(m.Base.Element.ToJSON())
+		}
+	}
+	if len(m.Resource) > 0 {
+		output.Resource = make([]interface{}, len(m.Resource))
+		output.ResourceElement = make([]map[string]interface{}, len(m.Resource))
+		for i, item := range m.Resource {
+			if item != nil && item.Value != nil {
+				output.Resource[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.ResourceElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if m.System != nil && m.System.Value != nil {
+		output.System = m.System.Value
+		if m.System.Element != nil {
+			output.SystemElement = toMapOrNil(m.System.Element.ToJSON())
+		}
+	}
+	if m.Type != nil && m.Type.Value != nil {
+		output.Type = m.Type.Value
+		if m.Type.Element != nil {
+			output.TypeElement = toMapOrNil(m.Type.Element.ToJSON())
+		}
+	}
+	if m.Instance != nil && m.Instance.Value != nil {
+		output.Instance = m.Instance.Value
+		if m.Instance.Element != nil {
+			output.InstanceElement = toMapOrNil(m.Instance.Element.ToJSON())
+		}
+	}
+	if m.InputProfile != nil && m.InputProfile.Value != nil {
+		output.InputProfile = m.InputProfile.Value
+		if m.InputProfile.Element != nil {
+			output.InputProfileElement = toMapOrNil(m.InputProfile.Element.ToJSON())
+		}
+	}
+	if m.OutputProfile != nil && m.OutputProfile.Value != nil {
+		output.OutputProfile = m.OutputProfile.Value
+		if m.OutputProfile.Element != nil {
+			output.OutputProfileElement = toMapOrNil(m.OutputProfile.Element.ToJSON())
+		}
+	}
+	output.Parameter = m.Parameter
+	output.Overload = m.Overload
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of OperationDefinition
+// Clone creates a deep copy of OperationDefinition.
 func (m *OperationDefinition) Clone() *OperationDefinition {
 	if m == nil { return nil }
 	return &OperationDefinition{
@@ -101,7 +387,7 @@ func (m *OperationDefinition) Clone() *OperationDefinition {
 	}
 }
 
-// Equals checks for equality with another OperationDefinition instance
+// Equals checks equality between two OperationDefinition instances.
 func (m *OperationDefinition) Equals(other *OperationDefinition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -145,7 +431,7 @@ func (m *OperationDefinition) Equals(other *OperationDefinition) bool {
 // OperationDefinitionParameter
 // The parameters for the operation/query.
 type OperationDefinitionParameter struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -162,22 +448,136 @@ type OperationDefinitionParameter struct {
 	Part_ []*OperationDefinitionParameter `json:"part,omitempty"`
 }
 
-// NewOperationDefinitionParameter creates a new OperationDefinitionParameter instance
+// NewOperationDefinitionParameter creates a new OperationDefinitionParameter instance.
 func NewOperationDefinitionParameter() *OperationDefinitionParameter {
 	return &OperationDefinitionParameter{}
 }
 
-// FromJSON populates OperationDefinitionParameter from JSON data
+// FromJSON populates OperationDefinitionParameter from JSON data.
 func (m *OperationDefinitionParameter) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name *FhirCode `json:"name,omitempty"`
+		Use *OperationParameterUse `json:"use,omitempty"`
+		Min *FhirInteger `json:"min,omitempty"`
+		Max *FhirString `json:"max,omitempty"`
+		Documentation *FhirString `json:"documentation,omitempty"`
+		Type *FHIRAllTypes `json:"type,omitempty"`
+		TargetProfile []interface{} `json:"targetprofile,omitempty"`
+		SearchType *SearchParamType `json:"searchtype,omitempty"`
+		Binding *OperationDefinitionBinding `json:"binding,omitempty"`
+		ReferencedFrom []*OperationDefinitionReferencedFrom `json:"referencedfrom,omitempty"`
+		Part_ []*OperationDefinitionParameter `json:"part,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Name = temp.Name
+	m.Use = temp.Use
+	m.Min = temp.Min
+	m.Max = temp.Max
+	m.Documentation = temp.Documentation
+	m.Type = temp.Type
+	if len(temp.TargetProfile) > 0 {
+		m.TargetProfile = make([]*FhirCanonical, len(temp.TargetProfile))
+		for i := range temp.TargetProfile {
+			itemMap, ok := temp.TargetProfile[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for TargetProfile[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse TargetProfile[%d]: %v", i, err) }
+			m.TargetProfile[i] = primitive
+		}
+	}
+	m.SearchType = temp.SearchType
+	m.Binding = temp.Binding
+	m.ReferencedFrom = temp.ReferencedFrom
+	m.Part_ = temp.Part_
+	return nil
 }
 
-// ToJSON converts OperationDefinitionParameter to JSON data
+// ToJSON converts OperationDefinitionParameter to JSON data.
 func (m *OperationDefinitionParameter) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Use *OperationParameterUse `json:"use,omitempty"`
+		Min interface{} `json:"min,omitempty"`
+		MinElement map[string]interface{} `json:"_min,omitempty"`
+		Max interface{} `json:"max,omitempty"`
+		MaxElement map[string]interface{} `json:"_max,omitempty"`
+		Documentation interface{} `json:"documentation,omitempty"`
+		DocumentationElement map[string]interface{} `json:"_documentation,omitempty"`
+		Type *FHIRAllTypes `json:"type,omitempty"`
+		TargetProfile []interface{} `json:"targetprofile,omitempty"`
+		TargetProfileElement []map[string]interface{} `json:"_targetprofile,omitempty"`
+		SearchType *SearchParamType `json:"searchtype,omitempty"`
+		Binding *OperationDefinitionBinding `json:"binding,omitempty"`
+		ReferencedFrom []*OperationDefinitionReferencedFrom `json:"referencedfrom,omitempty"`
+		Part_ []*OperationDefinitionParameter `json:"part,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	output.Use = m.Use
+	if m.Min != nil && m.Min.Value != nil {
+		output.Min = m.Min.Value
+		if m.Min.Element != nil {
+			output.MinElement = toMapOrNil(m.Min.Element.ToJSON())
+		}
+	}
+	if m.Max != nil && m.Max.Value != nil {
+		output.Max = m.Max.Value
+		if m.Max.Element != nil {
+			output.MaxElement = toMapOrNil(m.Max.Element.ToJSON())
+		}
+	}
+	if m.Documentation != nil && m.Documentation.Value != nil {
+		output.Documentation = m.Documentation.Value
+		if m.Documentation.Element != nil {
+			output.DocumentationElement = toMapOrNil(m.Documentation.Element.ToJSON())
+		}
+	}
+	output.Type = m.Type
+	if len(m.TargetProfile) > 0 {
+		output.TargetProfile = make([]interface{}, len(m.TargetProfile))
+		output.TargetProfileElement = make([]map[string]interface{}, len(m.TargetProfile))
+		for i, item := range m.TargetProfile {
+			if item != nil && item.Value != nil {
+				output.TargetProfile[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.TargetProfileElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.SearchType = m.SearchType
+	output.Binding = m.Binding
+	output.ReferencedFrom = m.ReferencedFrom
+	output.Part_ = m.Part_
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of OperationDefinitionParameter
+// Clone creates a deep copy of OperationDefinitionParameter.
 func (m *OperationDefinitionParameter) Clone() *OperationDefinitionParameter {
 	if m == nil { return nil }
 	return &OperationDefinitionParameter{
@@ -198,7 +598,7 @@ func (m *OperationDefinitionParameter) Clone() *OperationDefinitionParameter {
 	}
 }
 
-// Equals checks for equality with another OperationDefinitionParameter instance
+// Equals checks equality between two OperationDefinitionParameter instances.
 func (m *OperationDefinitionParameter) Equals(other *OperationDefinitionParameter) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -222,7 +622,7 @@ func (m *OperationDefinitionParameter) Equals(other *OperationDefinitionParamete
 // OperationDefinitionBinding
 // Binds to a value set if this parameter is coded (code, Coding, CodeableConcept).
 type OperationDefinitionBinding struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -230,22 +630,61 @@ type OperationDefinitionBinding struct {
 	ValueSet *FhirCanonical `json:"valueset,omitempty"`
 }
 
-// NewOperationDefinitionBinding creates a new OperationDefinitionBinding instance
+// NewOperationDefinitionBinding creates a new OperationDefinitionBinding instance.
 func NewOperationDefinitionBinding() *OperationDefinitionBinding {
 	return &OperationDefinitionBinding{}
 }
 
-// FromJSON populates OperationDefinitionBinding from JSON data
+// FromJSON populates OperationDefinitionBinding from JSON data.
 func (m *OperationDefinitionBinding) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Strength *BindingStrength `json:"strength,omitempty"`
+		ValueSet *FhirCanonical `json:"valueset,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Strength = temp.Strength
+	m.ValueSet = temp.ValueSet
+	return nil
 }
 
-// ToJSON converts OperationDefinitionBinding to JSON data
+// ToJSON converts OperationDefinitionBinding to JSON data.
 func (m *OperationDefinitionBinding) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Strength *BindingStrength `json:"strength,omitempty"`
+		ValueSet interface{} `json:"valueset,omitempty"`
+		ValueSetElement map[string]interface{} `json:"_valueset,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Strength = m.Strength
+	if m.ValueSet != nil && m.ValueSet.Value != nil {
+		output.ValueSet = m.ValueSet.Value
+		if m.ValueSet.Element != nil {
+			output.ValueSetElement = toMapOrNil(m.ValueSet.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of OperationDefinitionBinding
+// Clone creates a deep copy of OperationDefinitionBinding.
 func (m *OperationDefinitionBinding) Clone() *OperationDefinitionBinding {
 	if m == nil { return nil }
 	return &OperationDefinitionBinding{
@@ -257,7 +696,7 @@ func (m *OperationDefinitionBinding) Clone() *OperationDefinitionBinding {
 	}
 }
 
-// Equals checks for equality with another OperationDefinitionBinding instance
+// Equals checks equality between two OperationDefinitionBinding instances.
 func (m *OperationDefinitionBinding) Equals(other *OperationDefinitionBinding) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -272,7 +711,7 @@ func (m *OperationDefinitionBinding) Equals(other *OperationDefinitionBinding) b
 // OperationDefinitionReferencedFrom
 // Identifies other resource parameters within the operation invocation that are expected to resolve to this resource.
 type OperationDefinitionReferencedFrom struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -280,22 +719,67 @@ type OperationDefinitionReferencedFrom struct {
 	SourceId *FhirString `json:"sourceid,omitempty"`
 }
 
-// NewOperationDefinitionReferencedFrom creates a new OperationDefinitionReferencedFrom instance
+// NewOperationDefinitionReferencedFrom creates a new OperationDefinitionReferencedFrom instance.
 func NewOperationDefinitionReferencedFrom() *OperationDefinitionReferencedFrom {
 	return &OperationDefinitionReferencedFrom{}
 }
 
-// FromJSON populates OperationDefinitionReferencedFrom from JSON data
+// FromJSON populates OperationDefinitionReferencedFrom from JSON data.
 func (m *OperationDefinitionReferencedFrom) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Source *FhirString `json:"source,omitempty"`
+		SourceId *FhirString `json:"sourceid,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Source = temp.Source
+	m.SourceId = temp.SourceId
+	return nil
 }
 
-// ToJSON converts OperationDefinitionReferencedFrom to JSON data
+// ToJSON converts OperationDefinitionReferencedFrom to JSON data.
 func (m *OperationDefinitionReferencedFrom) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Source interface{} `json:"source,omitempty"`
+		SourceElement map[string]interface{} `json:"_source,omitempty"`
+		SourceId interface{} `json:"sourceid,omitempty"`
+		SourceIdElement map[string]interface{} `json:"_sourceid,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Source != nil && m.Source.Value != nil {
+		output.Source = m.Source.Value
+		if m.Source.Element != nil {
+			output.SourceElement = toMapOrNil(m.Source.Element.ToJSON())
+		}
+	}
+	if m.SourceId != nil && m.SourceId.Value != nil {
+		output.SourceId = m.SourceId.Value
+		if m.SourceId.Element != nil {
+			output.SourceIdElement = toMapOrNil(m.SourceId.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of OperationDefinitionReferencedFrom
+// Clone creates a deep copy of OperationDefinitionReferencedFrom.
 func (m *OperationDefinitionReferencedFrom) Clone() *OperationDefinitionReferencedFrom {
 	if m == nil { return nil }
 	return &OperationDefinitionReferencedFrom{
@@ -307,7 +791,7 @@ func (m *OperationDefinitionReferencedFrom) Clone() *OperationDefinitionReferenc
 	}
 }
 
-// Equals checks for equality with another OperationDefinitionReferencedFrom instance
+// Equals checks equality between two OperationDefinitionReferencedFrom instances.
 func (m *OperationDefinitionReferencedFrom) Equals(other *OperationDefinitionReferencedFrom) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -322,7 +806,7 @@ func (m *OperationDefinitionReferencedFrom) Equals(other *OperationDefinitionRef
 // OperationDefinitionOverload
 // Defines an appropriate combination of parameters to use when invoking this operation, to help code generators when generating overloaded parameter sets for this operation.
 type OperationDefinitionOverload struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -330,22 +814,82 @@ type OperationDefinitionOverload struct {
 	Comment *FhirString `json:"comment,omitempty"`
 }
 
-// NewOperationDefinitionOverload creates a new OperationDefinitionOverload instance
+// NewOperationDefinitionOverload creates a new OperationDefinitionOverload instance.
 func NewOperationDefinitionOverload() *OperationDefinitionOverload {
 	return &OperationDefinitionOverload{}
 }
 
-// FromJSON populates OperationDefinitionOverload from JSON data
+// FromJSON populates OperationDefinitionOverload from JSON data.
 func (m *OperationDefinitionOverload) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ParameterName []interface{} `json:"parametername,omitempty"`
+		Comment *FhirString `json:"comment,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	if len(temp.ParameterName) > 0 {
+		m.ParameterName = make([]*FhirString, len(temp.ParameterName))
+		for i := range temp.ParameterName {
+			itemMap, ok := temp.ParameterName[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for ParameterName[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse ParameterName[%d]: %v", i, err) }
+			m.ParameterName[i] = primitive
+		}
+	}
+	m.Comment = temp.Comment
+	return nil
 }
 
-// ToJSON converts OperationDefinitionOverload to JSON data
+// ToJSON converts OperationDefinitionOverload to JSON data.
 func (m *OperationDefinitionOverload) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ParameterName []interface{} `json:"parametername,omitempty"`
+		ParameterNameElement []map[string]interface{} `json:"_parametername,omitempty"`
+		Comment interface{} `json:"comment,omitempty"`
+		CommentElement map[string]interface{} `json:"_comment,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if len(m.ParameterName) > 0 {
+		output.ParameterName = make([]interface{}, len(m.ParameterName))
+		output.ParameterNameElement = make([]map[string]interface{}, len(m.ParameterName))
+		for i, item := range m.ParameterName {
+			if item != nil && item.Value != nil {
+				output.ParameterName[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.ParameterNameElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if m.Comment != nil && m.Comment.Value != nil {
+		output.Comment = m.Comment.Value
+		if m.Comment.Element != nil {
+			output.CommentElement = toMapOrNil(m.Comment.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of OperationDefinitionOverload
+// Clone creates a deep copy of OperationDefinitionOverload.
 func (m *OperationDefinitionOverload) Clone() *OperationDefinitionOverload {
 	if m == nil { return nil }
 	return &OperationDefinitionOverload{
@@ -357,7 +901,7 @@ func (m *OperationDefinitionOverload) Clone() *OperationDefinitionOverload {
 	}
 }
 
-// Equals checks for equality with another OperationDefinitionOverload instance
+// Equals checks equality between two OperationDefinitionOverload instances.
 func (m *OperationDefinitionOverload) Equals(other *OperationDefinitionOverload) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

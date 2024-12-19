@@ -3,34 +3,76 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Period
 // A time period defined by a start and end date and optionally time.
 type Period struct {
-	DataType
+	extends DataType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	Start *FhirDateTime `json:"start,omitempty"`
 	End *FhirDateTime `json:"end,omitempty"`
 }
 
-// NewPeriod creates a new Period instance
+// NewPeriod creates a new Period instance.
 func NewPeriod() *Period {
 	return &Period{}
 }
 
-// FromJSON populates Period from JSON data
+// FromJSON populates Period from JSON data.
 func (m *Period) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Start *FhirDateTime `json:"start,omitempty"`
+		End *FhirDateTime `json:"end,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.Start = temp.Start
+	m.End = temp.End
+	return nil
 }
 
-// ToJSON converts Period to JSON data
+// ToJSON converts Period to JSON data.
 func (m *Period) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Start interface{} `json:"start,omitempty"`
+		StartElement map[string]interface{} `json:"_start,omitempty"`
+		End interface{} `json:"end,omitempty"`
+		EndElement map[string]interface{} `json:"_end,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	if m.Start != nil && m.Start.Value != nil {
+		output.Start = m.Start.Value
+		if m.Start.Element != nil {
+			output.StartElement = toMapOrNil(m.Start.Element.ToJSON())
+		}
+	}
+	if m.End != nil && m.End.Value != nil {
+		output.End = m.End.Value
+		if m.End.Element != nil {
+			output.EndElement = toMapOrNil(m.End.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Period
+// Clone creates a deep copy of Period.
 func (m *Period) Clone() *Period {
 	if m == nil { return nil }
 	return &Period{
@@ -41,7 +83,7 @@ func (m *Period) Clone() *Period {
 	}
 }
 
-// Equals checks for equality with another Period instance
+// Equals checks equality between two Period instances.
 func (m *Period) Equals(other *Period) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

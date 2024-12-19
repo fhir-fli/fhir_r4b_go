@@ -18,6 +18,8 @@ type FhirDateTimeBase struct {
 	Microsecond *string  `json:"microsecond,omitempty"`
 	TimeZone    *float64 `json:"timezone,omitempty"` // Offset in hours
 	IsUTC       bool     `json:"isUTC"`
+	Value       *string  `json:"-"`                // Cached string representation
+	Element     *Element `json:"_value,omitempty"` // Metadata element
 }
 
 // NewFhirDateTimeBase creates a new FhirDateTimeBase instance.
@@ -27,6 +29,7 @@ func NewFhirDateTimeBase(
 	month, day, hour, minute, second, millisecond *int,
 	microsecond *string,
 	timeZone *float64,
+	element *Element,
 ) *FhirDateTimeBase {
 	return &FhirDateTimeBase{
 		Year:        year,
@@ -39,11 +42,12 @@ func NewFhirDateTimeBase(
 		Microsecond: microsecond,
 		TimeZone:    timeZone,
 		IsUTC:       isUTC,
+		Element:     element,
 	}
 }
 
 // Value converts FhirDateTimeBase into a time.Time object.
-func (f *FhirDateTimeBase) Value() *time.Time {
+func (f *FhirDateTimeBase) DateTimeValue() *time.Time {
 	if f.Year == nil {
 		return nil
 	}
@@ -152,54 +156,38 @@ func (f *FhirDateTimeBase) Clone() *FhirDateTimeBase {
 		Microsecond: strPtrIfNotNil(f.Microsecond),
 		TimeZone:    floatPtrIfNotNil(f.TimeZone),
 		IsUTC:       f.IsUTC,
+		Element:     f.Element.Clone(),
 	}
-}
-
-// CompareTo compares two FhirDateTimeBase instances.
-func (f *FhirDateTimeBase) CompareTo(other *FhirDateTimeBase) int {
-	t1 := f.Value()
-	t2 := other.Value()
-
-	if t1 == nil || t2 == nil {
-		if t1 == nil && t2 == nil {
-			return 0
-		}
-		if t1 == nil {
-			return -1
-		}
-		return 1
-	}
-
-	if t1.Before(*t2) {
-		return -1
-	} else if t1.After(*t2) {
-		return 1
-	}
-	return 0
 }
 
 // MarshalJSON serializes FhirDateTimeBase to JSON.
 func (f *FhirDateTimeBase) MarshalJSON() ([]byte, error) {
-	if f.Year == nil {
-		return json.Marshal(nil)
-	}
-	return json.Marshal(map[string]interface{}{
+	data := map[string]interface{}{
 		"value": f.ToString(),
-	})
+	}
+	if f.Element != nil {
+		data["_value"] = f.Element
+	}
+	return json.Marshal(data)
 }
 
 // UnmarshalJSON deserializes JSON into FhirDateTimeBase.
 func (f *FhirDateTimeBase) UnmarshalJSON(data []byte) error {
-	var input string
-	if err := json.Unmarshal(data, &input); err != nil {
+	temp := struct {
+		Value   string   `json:"value"`
+		Element *Element `json:"_value"`
+	}{}
+
+	if err := json.Unmarshal(data, &temp); err != nil {
 		return err
 	}
 
-	parsed, err := FhirDateTimeBaseFromString(input)
+	parsed, err := FhirDateTimeBaseFromString(temp.Value)
 	if err != nil {
 		return err
 	}
 
+	parsed.Element = temp.Element
 	*f = *parsed
 	return nil
 }
@@ -225,6 +213,29 @@ func FhirDateTimeBaseFromString(input string) (*FhirDateTimeBase, error) {
 		Millisecond: intPtr(t.Nanosecond() / 1e6),
 		Microsecond: nil,
 		TimeZone:    &timeZone,
+		Element:     nil,
 	}, nil
 }
 
+// CompareTo compares two FhirDateTimeBase instances.
+func (f *FhirDateTimeBase) CompareTo(other *FhirDateTimeBase) int {
+	t1 := f.DateTimeValue()
+	t2 := other.DateTimeValue()
+
+	if t1 == nil || t2 == nil {
+		if t1 == nil && t2 == nil {
+			return 0
+		}
+		if t1 == nil {
+			return -1
+		}
+		return 1
+	}
+
+	if t1.Before(*t2) {
+		return -1
+	} else if t1.After(*t2) {
+		return 1
+	}
+	return 0
+}

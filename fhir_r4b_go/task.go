@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Task
 // A task to be performed.
 type Task struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -50,22 +51,227 @@ type Task struct {
 	Output []*TaskOutput `json:"output,omitempty"`
 }
 
-// NewTask creates a new Task instance
+// NewTask creates a new Task instance.
 func NewTask() *Task {
 	return &Task{}
 }
 
-// FromJSON populates Task from JSON data
+// FromJSON populates Task from JSON data.
 func (m *Task) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		InstantiatesCanonical *FhirCanonical `json:"instantiatescanonical,omitempty"`
+		InstantiatesUri *FhirUri `json:"instantiatesuri,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		GroupIdentifier *Identifier `json:"groupidentifier,omitempty"`
+		PartOf []*Reference `json:"partof,omitempty"`
+		Status *TaskStatus `json:"status,omitempty"`
+		StatusReason *CodeableConcept `json:"statusreason,omitempty"`
+		BusinessStatus *CodeableConcept `json:"businessstatus,omitempty"`
+		Intent *TaskIntent `json:"intent,omitempty"`
+		Priority *RequestPriority `json:"priority,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		Focus *Reference `json:"focus,omitempty"`
+		For_ *Reference `json:"for,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		ExecutionPeriod *Period `json:"executionperiod,omitempty"`
+		AuthoredOn *FhirDateTime `json:"authoredon,omitempty"`
+		LastModified *FhirDateTime `json:"lastmodified,omitempty"`
+		Requester *Reference `json:"requester,omitempty"`
+		PerformerType []*CodeableConcept `json:"performertype,omitempty"`
+		Owner *Reference `json:"owner,omitempty"`
+		Location *Reference `json:"location,omitempty"`
+		ReasonCode *CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference *Reference `json:"reasonreference,omitempty"`
+		Insurance []*Reference `json:"insurance,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		RelevantHistory []*Reference `json:"relevanthistory,omitempty"`
+		Restriction *TaskRestriction `json:"restriction,omitempty"`
+		Input []*TaskInput `json:"input,omitempty"`
+		Output []*TaskOutput `json:"output,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.InstantiatesCanonical = temp.InstantiatesCanonical
+	m.InstantiatesUri = temp.InstantiatesUri
+	m.BasedOn = temp.BasedOn
+	m.GroupIdentifier = temp.GroupIdentifier
+	m.PartOf = temp.PartOf
+	m.Status = temp.Status
+	m.StatusReason = temp.StatusReason
+	m.BusinessStatus = temp.BusinessStatus
+	m.Intent = temp.Intent
+	m.Priority = temp.Priority
+	m.Code = temp.Code
+	m.Description = temp.Description
+	m.Focus = temp.Focus
+	m.For_ = temp.For_
+	m.Encounter = temp.Encounter
+	m.ExecutionPeriod = temp.ExecutionPeriod
+	m.AuthoredOn = temp.AuthoredOn
+	m.LastModified = temp.LastModified
+	m.Requester = temp.Requester
+	m.PerformerType = temp.PerformerType
+	m.Owner = temp.Owner
+	m.Location = temp.Location
+	m.ReasonCode = temp.ReasonCode
+	m.ReasonReference = temp.ReasonReference
+	m.Insurance = temp.Insurance
+	m.Note = temp.Note
+	m.RelevantHistory = temp.RelevantHistory
+	m.Restriction = temp.Restriction
+	m.Input = temp.Input
+	m.Output = temp.Output
+	return nil
 }
 
-// ToJSON converts Task to JSON data
+// ToJSON converts Task to JSON data.
 func (m *Task) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		InstantiatesCanonical interface{} `json:"instantiatescanonical,omitempty"`
+		InstantiatesCanonicalElement map[string]interface{} `json:"_instantiatescanonical,omitempty"`
+		InstantiatesUri interface{} `json:"instantiatesuri,omitempty"`
+		InstantiatesUriElement map[string]interface{} `json:"_instantiatesuri,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		GroupIdentifier *Identifier `json:"groupidentifier,omitempty"`
+		PartOf []*Reference `json:"partof,omitempty"`
+		Status *TaskStatus `json:"status,omitempty"`
+		StatusReason *CodeableConcept `json:"statusreason,omitempty"`
+		BusinessStatus *CodeableConcept `json:"businessstatus,omitempty"`
+		Intent *TaskIntent `json:"intent,omitempty"`
+		Priority *RequestPriority `json:"priority,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Focus *Reference `json:"focus,omitempty"`
+		For_ *Reference `json:"for,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		ExecutionPeriod *Period `json:"executionperiod,omitempty"`
+		AuthoredOn interface{} `json:"authoredon,omitempty"`
+		AuthoredOnElement map[string]interface{} `json:"_authoredon,omitempty"`
+		LastModified interface{} `json:"lastmodified,omitempty"`
+		LastModifiedElement map[string]interface{} `json:"_lastmodified,omitempty"`
+		Requester *Reference `json:"requester,omitempty"`
+		PerformerType []*CodeableConcept `json:"performertype,omitempty"`
+		Owner *Reference `json:"owner,omitempty"`
+		Location *Reference `json:"location,omitempty"`
+		ReasonCode *CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference *Reference `json:"reasonreference,omitempty"`
+		Insurance []*Reference `json:"insurance,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		RelevantHistory []*Reference `json:"relevanthistory,omitempty"`
+		Restriction *TaskRestriction `json:"restriction,omitempty"`
+		Input []*TaskInput `json:"input,omitempty"`
+		Output []*TaskOutput `json:"output,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	if m.InstantiatesCanonical != nil && m.InstantiatesCanonical.Value != nil {
+		output.InstantiatesCanonical = m.InstantiatesCanonical.Value
+		if m.InstantiatesCanonical.Element != nil {
+			output.InstantiatesCanonicalElement = toMapOrNil(m.InstantiatesCanonical.Element.ToJSON())
+		}
+	}
+	if m.InstantiatesUri != nil && m.InstantiatesUri.Value != nil {
+		output.InstantiatesUri = m.InstantiatesUri.Value
+		if m.InstantiatesUri.Element != nil {
+			output.InstantiatesUriElement = toMapOrNil(m.InstantiatesUri.Element.ToJSON())
+		}
+	}
+	output.BasedOn = m.BasedOn
+	output.GroupIdentifier = m.GroupIdentifier
+	output.PartOf = m.PartOf
+	output.Status = m.Status
+	output.StatusReason = m.StatusReason
+	output.BusinessStatus = m.BusinessStatus
+	output.Intent = m.Intent
+	output.Priority = m.Priority
+	output.Code = m.Code
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Focus = m.Focus
+	output.For_ = m.For_
+	output.Encounter = m.Encounter
+	output.ExecutionPeriod = m.ExecutionPeriod
+	if m.AuthoredOn != nil && m.AuthoredOn.Value != nil {
+		output.AuthoredOn = m.AuthoredOn.Value
+		if m.AuthoredOn.Element != nil {
+			output.AuthoredOnElement = toMapOrNil(m.AuthoredOn.Element.ToJSON())
+		}
+	}
+	if m.LastModified != nil && m.LastModified.Value != nil {
+		output.LastModified = m.LastModified.Value
+		if m.LastModified.Element != nil {
+			output.LastModifiedElement = toMapOrNil(m.LastModified.Element.ToJSON())
+		}
+	}
+	output.Requester = m.Requester
+	output.PerformerType = m.PerformerType
+	output.Owner = m.Owner
+	output.Location = m.Location
+	output.ReasonCode = m.ReasonCode
+	output.ReasonReference = m.ReasonReference
+	output.Insurance = m.Insurance
+	output.Note = m.Note
+	output.RelevantHistory = m.RelevantHistory
+	output.Restriction = m.Restriction
+	output.Input = m.Input
+	output.Output = m.Output
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Task
+// Clone creates a deep copy of Task.
 func (m *Task) Clone() *Task {
 	if m == nil { return nil }
 	return &Task{
@@ -111,7 +317,7 @@ func (m *Task) Clone() *Task {
 	}
 }
 
-// Equals checks for equality with another Task instance
+// Equals checks equality between two Task instances.
 func (m *Task) Equals(other *Task) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -160,7 +366,7 @@ func (m *Task) Equals(other *Task) bool {
 // TaskRestriction
 // If the Task.focus is a request resource and the task is seeking fulfillment (i.e. is asking for the request to be actioned), this element identifies any limitations on what parts of the referenced request should be actioned.
 type TaskRestriction struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -169,22 +375,65 @@ type TaskRestriction struct {
 	Recipient []*Reference `json:"recipient,omitempty"`
 }
 
-// NewTaskRestriction creates a new TaskRestriction instance
+// NewTaskRestriction creates a new TaskRestriction instance.
 func NewTaskRestriction() *TaskRestriction {
 	return &TaskRestriction{}
 }
 
-// FromJSON populates TaskRestriction from JSON data
+// FromJSON populates TaskRestriction from JSON data.
 func (m *TaskRestriction) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Repetitions *FhirPositiveInt `json:"repetitions,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Recipient []*Reference `json:"recipient,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Repetitions = temp.Repetitions
+	m.Period = temp.Period
+	m.Recipient = temp.Recipient
+	return nil
 }
 
-// ToJSON converts TaskRestriction to JSON data
+// ToJSON converts TaskRestriction to JSON data.
 func (m *TaskRestriction) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Repetitions interface{} `json:"repetitions,omitempty"`
+		RepetitionsElement map[string]interface{} `json:"_repetitions,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Recipient []*Reference `json:"recipient,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Repetitions != nil && m.Repetitions.Value != nil {
+		output.Repetitions = m.Repetitions.Value
+		if m.Repetitions.Element != nil {
+			output.RepetitionsElement = toMapOrNil(m.Repetitions.Element.ToJSON())
+		}
+	}
+	output.Period = m.Period
+	output.Recipient = m.Recipient
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TaskRestriction
+// Clone creates a deep copy of TaskRestriction.
 func (m *TaskRestriction) Clone() *TaskRestriction {
 	if m == nil { return nil }
 	return &TaskRestriction{
@@ -197,7 +446,7 @@ func (m *TaskRestriction) Clone() *TaskRestriction {
 	}
 }
 
-// Equals checks for equality with another TaskRestriction instance
+// Equals checks equality between two TaskRestriction instances.
 func (m *TaskRestriction) Equals(other *TaskRestriction) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -213,7 +462,7 @@ func (m *TaskRestriction) Equals(other *TaskRestriction) bool {
 // TaskInput
 // Additional information that may be needed in the execution of the task.
 type TaskInput struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -270,22 +519,365 @@ type TaskInput struct {
 	ValueMeta *FhirMeta `json:"valuemeta,omitempty"`
 }
 
-// NewTaskInput creates a new TaskInput instance
+// NewTaskInput creates a new TaskInput instance.
 func NewTaskInput() *TaskInput {
 	return &TaskInput{}
 }
 
-// FromJSON populates TaskInput from JSON data
+// FromJSON populates TaskInput from JSON data.
 func (m *TaskInput) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		ValueBase64Binary *FhirBase64Binary `json:"valuebase64binary,omitempty"`
+		ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
+		ValueCanonical *FhirCanonical `json:"valuecanonical,omitempty"`
+		ValueCode *FhirCode `json:"valuecode,omitempty"`
+		ValueDate *FhirDate `json:"valuedate,omitempty"`
+		ValueDateTime *FhirDateTime `json:"valuedatetime,omitempty"`
+		ValueDecimal *FhirDecimal `json:"valuedecimal,omitempty"`
+		ValueId *FhirId `json:"valueid,omitempty"`
+		ValueInstant *FhirInstant `json:"valueinstant,omitempty"`
+		ValueInteger *FhirInteger `json:"valueinteger,omitempty"`
+		ValueMarkdown *FhirMarkdown `json:"valuemarkdown,omitempty"`
+		ValueOid *FhirOid `json:"valueoid,omitempty"`
+		ValuePositiveInt *FhirPositiveInt `json:"valuepositiveint,omitempty"`
+		ValueString *FhirString `json:"valuestring,omitempty"`
+		ValueTime *FhirTime `json:"valuetime,omitempty"`
+		ValueUnsignedInt *FhirUnsignedInt `json:"valueunsignedint,omitempty"`
+		ValueUri *FhirUri `json:"valueuri,omitempty"`
+		ValueUrl *FhirUrl `json:"valueurl,omitempty"`
+		ValueUuid *FhirUuid `json:"valueuuid,omitempty"`
+		ValueAddress *Address `json:"valueaddress,omitempty"`
+		ValueAge *Age `json:"valueage,omitempty"`
+		ValueAnnotation *Annotation `json:"valueannotation,omitempty"`
+		ValueAttachment *Attachment `json:"valueattachment,omitempty"`
+		ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+		ValueCoding *Coding `json:"valuecoding,omitempty"`
+		ValueContactPoint *ContactPoint `json:"valuecontactpoint,omitempty"`
+		ValueCount *Count `json:"valuecount,omitempty"`
+		ValueDistance *Distance `json:"valuedistance,omitempty"`
+		ValueDuration *FhirDuration `json:"valueduration,omitempty"`
+		ValueHumanName *HumanName `json:"valuehumanname,omitempty"`
+		ValueIdentifier *Identifier `json:"valueidentifier,omitempty"`
+		ValueMoney *Money `json:"valuemoney,omitempty"`
+		ValuePeriod *Period `json:"valueperiod,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueRange *Range `json:"valuerange,omitempty"`
+		ValueRatio *Ratio `json:"valueratio,omitempty"`
+		ValueReference *Reference `json:"valuereference,omitempty"`
+		ValueSampledData *SampledData `json:"valuesampleddata,omitempty"`
+		ValueSignature *Signature `json:"valuesignature,omitempty"`
+		ValueTiming *Timing `json:"valuetiming,omitempty"`
+		ValueContactDetail *ContactDetail `json:"valuecontactdetail,omitempty"`
+		ValueContributor *Contributor `json:"valuecontributor,omitempty"`
+		ValueDataRequirement *DataRequirement `json:"valuedatarequirement,omitempty"`
+		ValueExpression *FhirExpression `json:"valueexpression,omitempty"`
+		ValueParameterDefinition *ParameterDefinition `json:"valueparameterdefinition,omitempty"`
+		ValueRelatedArtifact *RelatedArtifact `json:"valuerelatedartifact,omitempty"`
+		ValueTriggerDefinition *TriggerDefinition `json:"valuetriggerdefinition,omitempty"`
+		ValueUsageContext *UsageContext `json:"valueusagecontext,omitempty"`
+		ValueDosage *Dosage `json:"valuedosage,omitempty"`
+		ValueMeta *FhirMeta `json:"valuemeta,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.ValueBase64Binary = temp.ValueBase64Binary
+	m.ValueBoolean = temp.ValueBoolean
+	m.ValueCanonical = temp.ValueCanonical
+	m.ValueCode = temp.ValueCode
+	m.ValueDate = temp.ValueDate
+	m.ValueDateTime = temp.ValueDateTime
+	m.ValueDecimal = temp.ValueDecimal
+	m.ValueId = temp.ValueId
+	m.ValueInstant = temp.ValueInstant
+	m.ValueInteger = temp.ValueInteger
+	m.ValueMarkdown = temp.ValueMarkdown
+	m.ValueOid = temp.ValueOid
+	m.ValuePositiveInt = temp.ValuePositiveInt
+	m.ValueString = temp.ValueString
+	m.ValueTime = temp.ValueTime
+	m.ValueUnsignedInt = temp.ValueUnsignedInt
+	m.ValueUri = temp.ValueUri
+	m.ValueUrl = temp.ValueUrl
+	m.ValueUuid = temp.ValueUuid
+	m.ValueAddress = temp.ValueAddress
+	m.ValueAge = temp.ValueAge
+	m.ValueAnnotation = temp.ValueAnnotation
+	m.ValueAttachment = temp.ValueAttachment
+	m.ValueCodeableConcept = temp.ValueCodeableConcept
+	m.ValueCoding = temp.ValueCoding
+	m.ValueContactPoint = temp.ValueContactPoint
+	m.ValueCount = temp.ValueCount
+	m.ValueDistance = temp.ValueDistance
+	m.ValueDuration = temp.ValueDuration
+	m.ValueHumanName = temp.ValueHumanName
+	m.ValueIdentifier = temp.ValueIdentifier
+	m.ValueMoney = temp.ValueMoney
+	m.ValuePeriod = temp.ValuePeriod
+	m.ValueQuantity = temp.ValueQuantity
+	m.ValueRange = temp.ValueRange
+	m.ValueRatio = temp.ValueRatio
+	m.ValueReference = temp.ValueReference
+	m.ValueSampledData = temp.ValueSampledData
+	m.ValueSignature = temp.ValueSignature
+	m.ValueTiming = temp.ValueTiming
+	m.ValueContactDetail = temp.ValueContactDetail
+	m.ValueContributor = temp.ValueContributor
+	m.ValueDataRequirement = temp.ValueDataRequirement
+	m.ValueExpression = temp.ValueExpression
+	m.ValueParameterDefinition = temp.ValueParameterDefinition
+	m.ValueRelatedArtifact = temp.ValueRelatedArtifact
+	m.ValueTriggerDefinition = temp.ValueTriggerDefinition
+	m.ValueUsageContext = temp.ValueUsageContext
+	m.ValueDosage = temp.ValueDosage
+	m.ValueMeta = temp.ValueMeta
+	return nil
 }
 
-// ToJSON converts TaskInput to JSON data
+// ToJSON converts TaskInput to JSON data.
 func (m *TaskInput) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		ValueBase64Binary interface{} `json:"valuebase64binary,omitempty"`
+		ValueBase64BinaryElement map[string]interface{} `json:"_valuebase64binary,omitempty"`
+		ValueBoolean interface{} `json:"valueboolean,omitempty"`
+		ValueBooleanElement map[string]interface{} `json:"_valueboolean,omitempty"`
+		ValueCanonical interface{} `json:"valuecanonical,omitempty"`
+		ValueCanonicalElement map[string]interface{} `json:"_valuecanonical,omitempty"`
+		ValueCode interface{} `json:"valuecode,omitempty"`
+		ValueCodeElement map[string]interface{} `json:"_valuecode,omitempty"`
+		ValueDate interface{} `json:"valuedate,omitempty"`
+		ValueDateElement map[string]interface{} `json:"_valuedate,omitempty"`
+		ValueDateTime interface{} `json:"valuedatetime,omitempty"`
+		ValueDateTimeElement map[string]interface{} `json:"_valuedatetime,omitempty"`
+		ValueDecimal interface{} `json:"valuedecimal,omitempty"`
+		ValueDecimalElement map[string]interface{} `json:"_valuedecimal,omitempty"`
+		ValueId interface{} `json:"valueid,omitempty"`
+		ValueIdElement map[string]interface{} `json:"_valueid,omitempty"`
+		ValueInstant interface{} `json:"valueinstant,omitempty"`
+		ValueInstantElement map[string]interface{} `json:"_valueinstant,omitempty"`
+		ValueInteger interface{} `json:"valueinteger,omitempty"`
+		ValueIntegerElement map[string]interface{} `json:"_valueinteger,omitempty"`
+		ValueMarkdown interface{} `json:"valuemarkdown,omitempty"`
+		ValueMarkdownElement map[string]interface{} `json:"_valuemarkdown,omitempty"`
+		ValueOid interface{} `json:"valueoid,omitempty"`
+		ValueOidElement map[string]interface{} `json:"_valueoid,omitempty"`
+		ValuePositiveInt interface{} `json:"valuepositiveint,omitempty"`
+		ValuePositiveIntElement map[string]interface{} `json:"_valuepositiveint,omitempty"`
+		ValueString interface{} `json:"valuestring,omitempty"`
+		ValueStringElement map[string]interface{} `json:"_valuestring,omitempty"`
+		ValueTime interface{} `json:"valuetime,omitempty"`
+		ValueTimeElement map[string]interface{} `json:"_valuetime,omitempty"`
+		ValueUnsignedInt interface{} `json:"valueunsignedint,omitempty"`
+		ValueUnsignedIntElement map[string]interface{} `json:"_valueunsignedint,omitempty"`
+		ValueUri interface{} `json:"valueuri,omitempty"`
+		ValueUriElement map[string]interface{} `json:"_valueuri,omitempty"`
+		ValueUrl interface{} `json:"valueurl,omitempty"`
+		ValueUrlElement map[string]interface{} `json:"_valueurl,omitempty"`
+		ValueUuid interface{} `json:"valueuuid,omitempty"`
+		ValueUuidElement map[string]interface{} `json:"_valueuuid,omitempty"`
+		ValueAddress *Address `json:"valueaddress,omitempty"`
+		ValueAge *Age `json:"valueage,omitempty"`
+		ValueAnnotation *Annotation `json:"valueannotation,omitempty"`
+		ValueAttachment *Attachment `json:"valueattachment,omitempty"`
+		ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+		ValueCoding *Coding `json:"valuecoding,omitempty"`
+		ValueContactPoint *ContactPoint `json:"valuecontactpoint,omitempty"`
+		ValueCount *Count `json:"valuecount,omitempty"`
+		ValueDistance *Distance `json:"valuedistance,omitempty"`
+		ValueDuration *FhirDuration `json:"valueduration,omitempty"`
+		ValueHumanName *HumanName `json:"valuehumanname,omitempty"`
+		ValueIdentifier *Identifier `json:"valueidentifier,omitempty"`
+		ValueMoney *Money `json:"valuemoney,omitempty"`
+		ValuePeriod *Period `json:"valueperiod,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueRange *Range `json:"valuerange,omitempty"`
+		ValueRatio *Ratio `json:"valueratio,omitempty"`
+		ValueReference *Reference `json:"valuereference,omitempty"`
+		ValueSampledData *SampledData `json:"valuesampleddata,omitempty"`
+		ValueSignature *Signature `json:"valuesignature,omitempty"`
+		ValueTiming *Timing `json:"valuetiming,omitempty"`
+		ValueContactDetail *ContactDetail `json:"valuecontactdetail,omitempty"`
+		ValueContributor *Contributor `json:"valuecontributor,omitempty"`
+		ValueDataRequirement *DataRequirement `json:"valuedatarequirement,omitempty"`
+		ValueExpression *FhirExpression `json:"valueexpression,omitempty"`
+		ValueParameterDefinition *ParameterDefinition `json:"valueparameterdefinition,omitempty"`
+		ValueRelatedArtifact *RelatedArtifact `json:"valuerelatedartifact,omitempty"`
+		ValueTriggerDefinition *TriggerDefinition `json:"valuetriggerdefinition,omitempty"`
+		ValueUsageContext *UsageContext `json:"valueusagecontext,omitempty"`
+		ValueDosage *Dosage `json:"valuedosage,omitempty"`
+		ValueMeta *FhirMeta `json:"valuemeta,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	if m.ValueBase64Binary != nil && m.ValueBase64Binary.Value != nil {
+		output.ValueBase64Binary = m.ValueBase64Binary.Value
+		if m.ValueBase64Binary.Element != nil {
+			output.ValueBase64BinaryElement = toMapOrNil(m.ValueBase64Binary.Element.ToJSON())
+		}
+	}
+	if m.ValueBoolean != nil && m.ValueBoolean.Value != nil {
+		output.ValueBoolean = m.ValueBoolean.Value
+		if m.ValueBoolean.Element != nil {
+			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.ToJSON())
+		}
+	}
+	if m.ValueCanonical != nil && m.ValueCanonical.Value != nil {
+		output.ValueCanonical = m.ValueCanonical.Value
+		if m.ValueCanonical.Element != nil {
+			output.ValueCanonicalElement = toMapOrNil(m.ValueCanonical.Element.ToJSON())
+		}
+	}
+	if m.ValueCode != nil && m.ValueCode.Value != nil {
+		output.ValueCode = m.ValueCode.Value
+		if m.ValueCode.Element != nil {
+			output.ValueCodeElement = toMapOrNil(m.ValueCode.Element.ToJSON())
+		}
+	}
+	if m.ValueDate != nil && m.ValueDate.Value != nil {
+		output.ValueDate = m.ValueDate.Value
+		if m.ValueDate.Element != nil {
+			output.ValueDateElement = toMapOrNil(m.ValueDate.Element.ToJSON())
+		}
+	}
+	if m.ValueDateTime != nil && m.ValueDateTime.Value != nil {
+		output.ValueDateTime = m.ValueDateTime.Value
+		if m.ValueDateTime.Element != nil {
+			output.ValueDateTimeElement = toMapOrNil(m.ValueDateTime.Element.ToJSON())
+		}
+	}
+	if m.ValueDecimal != nil && m.ValueDecimal.Value != nil {
+		output.ValueDecimal = m.ValueDecimal.Value
+		if m.ValueDecimal.Element != nil {
+			output.ValueDecimalElement = toMapOrNil(m.ValueDecimal.Element.ToJSON())
+		}
+	}
+	if m.ValueId != nil && m.ValueId.Value != nil {
+		output.ValueId = m.ValueId.Value
+		if m.ValueId.Element != nil {
+			output.ValueIdElement = toMapOrNil(m.ValueId.Element.ToJSON())
+		}
+	}
+	if m.ValueInstant != nil && m.ValueInstant.Value != nil {
+		output.ValueInstant = m.ValueInstant.Value
+		if m.ValueInstant.Element != nil {
+			output.ValueInstantElement = toMapOrNil(m.ValueInstant.Element.ToJSON())
+		}
+	}
+	if m.ValueInteger != nil && m.ValueInteger.Value != nil {
+		output.ValueInteger = m.ValueInteger.Value
+		if m.ValueInteger.Element != nil {
+			output.ValueIntegerElement = toMapOrNil(m.ValueInteger.Element.ToJSON())
+		}
+	}
+	if m.ValueMarkdown != nil && m.ValueMarkdown.Value != nil {
+		output.ValueMarkdown = m.ValueMarkdown.Value
+		if m.ValueMarkdown.Element != nil {
+			output.ValueMarkdownElement = toMapOrNil(m.ValueMarkdown.Element.ToJSON())
+		}
+	}
+	if m.ValueOid != nil && m.ValueOid.Value != nil {
+		output.ValueOid = m.ValueOid.Value
+		if m.ValueOid.Element != nil {
+			output.ValueOidElement = toMapOrNil(m.ValueOid.Element.ToJSON())
+		}
+	}
+	if m.ValuePositiveInt != nil && m.ValuePositiveInt.Value != nil {
+		output.ValuePositiveInt = m.ValuePositiveInt.Value
+		if m.ValuePositiveInt.Element != nil {
+			output.ValuePositiveIntElement = toMapOrNil(m.ValuePositiveInt.Element.ToJSON())
+		}
+	}
+	if m.ValueString != nil && m.ValueString.Value != nil {
+		output.ValueString = m.ValueString.Value
+		if m.ValueString.Element != nil {
+			output.ValueStringElement = toMapOrNil(m.ValueString.Element.ToJSON())
+		}
+	}
+	if m.ValueTime != nil && m.ValueTime.Value != nil {
+		output.ValueTime = m.ValueTime.Value
+		if m.ValueTime.Element != nil {
+			output.ValueTimeElement = toMapOrNil(m.ValueTime.Element.ToJSON())
+		}
+	}
+	if m.ValueUnsignedInt != nil && m.ValueUnsignedInt.Value != nil {
+		output.ValueUnsignedInt = m.ValueUnsignedInt.Value
+		if m.ValueUnsignedInt.Element != nil {
+			output.ValueUnsignedIntElement = toMapOrNil(m.ValueUnsignedInt.Element.ToJSON())
+		}
+	}
+	if m.ValueUri != nil && m.ValueUri.Value != nil {
+		output.ValueUri = m.ValueUri.Value
+		if m.ValueUri.Element != nil {
+			output.ValueUriElement = toMapOrNil(m.ValueUri.Element.ToJSON())
+		}
+	}
+	if m.ValueUrl != nil && m.ValueUrl.Value != nil {
+		output.ValueUrl = m.ValueUrl.Value
+		if m.ValueUrl.Element != nil {
+			output.ValueUrlElement = toMapOrNil(m.ValueUrl.Element.ToJSON())
+		}
+	}
+	if m.ValueUuid != nil && m.ValueUuid.Value != nil {
+		output.ValueUuid = m.ValueUuid.Value
+		if m.ValueUuid.Element != nil {
+			output.ValueUuidElement = toMapOrNil(m.ValueUuid.Element.ToJSON())
+		}
+	}
+	output.ValueAddress = m.ValueAddress
+	output.ValueAge = m.ValueAge
+	output.ValueAnnotation = m.ValueAnnotation
+	output.ValueAttachment = m.ValueAttachment
+	output.ValueCodeableConcept = m.ValueCodeableConcept
+	output.ValueCoding = m.ValueCoding
+	output.ValueContactPoint = m.ValueContactPoint
+	output.ValueCount = m.ValueCount
+	output.ValueDistance = m.ValueDistance
+	output.ValueDuration = m.ValueDuration
+	output.ValueHumanName = m.ValueHumanName
+	output.ValueIdentifier = m.ValueIdentifier
+	output.ValueMoney = m.ValueMoney
+	output.ValuePeriod = m.ValuePeriod
+	output.ValueQuantity = m.ValueQuantity
+	output.ValueRange = m.ValueRange
+	output.ValueRatio = m.ValueRatio
+	output.ValueReference = m.ValueReference
+	output.ValueSampledData = m.ValueSampledData
+	output.ValueSignature = m.ValueSignature
+	output.ValueTiming = m.ValueTiming
+	output.ValueContactDetail = m.ValueContactDetail
+	output.ValueContributor = m.ValueContributor
+	output.ValueDataRequirement = m.ValueDataRequirement
+	output.ValueExpression = m.ValueExpression
+	output.ValueParameterDefinition = m.ValueParameterDefinition
+	output.ValueRelatedArtifact = m.ValueRelatedArtifact
+	output.ValueTriggerDefinition = m.ValueTriggerDefinition
+	output.ValueUsageContext = m.ValueUsageContext
+	output.ValueDosage = m.ValueDosage
+	output.ValueMeta = m.ValueMeta
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TaskInput
+// Clone creates a deep copy of TaskInput.
 func (m *TaskInput) Clone() *TaskInput {
 	if m == nil { return nil }
 	return &TaskInput{
@@ -346,7 +938,7 @@ func (m *TaskInput) Clone() *TaskInput {
 	}
 }
 
-// Equals checks for equality with another TaskInput instance
+// Equals checks equality between two TaskInput instances.
 func (m *TaskInput) Equals(other *TaskInput) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -410,7 +1002,7 @@ func (m *TaskInput) Equals(other *TaskInput) bool {
 // TaskOutput
 // Outputs produced by the Task.
 type TaskOutput struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -467,22 +1059,365 @@ type TaskOutput struct {
 	ValueMeta *FhirMeta `json:"valuemeta,omitempty"`
 }
 
-// NewTaskOutput creates a new TaskOutput instance
+// NewTaskOutput creates a new TaskOutput instance.
 func NewTaskOutput() *TaskOutput {
 	return &TaskOutput{}
 }
 
-// FromJSON populates TaskOutput from JSON data
+// FromJSON populates TaskOutput from JSON data.
 func (m *TaskOutput) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		ValueBase64Binary *FhirBase64Binary `json:"valuebase64binary,omitempty"`
+		ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
+		ValueCanonical *FhirCanonical `json:"valuecanonical,omitempty"`
+		ValueCode *FhirCode `json:"valuecode,omitempty"`
+		ValueDate *FhirDate `json:"valuedate,omitempty"`
+		ValueDateTime *FhirDateTime `json:"valuedatetime,omitempty"`
+		ValueDecimal *FhirDecimal `json:"valuedecimal,omitempty"`
+		ValueId *FhirId `json:"valueid,omitempty"`
+		ValueInstant *FhirInstant `json:"valueinstant,omitempty"`
+		ValueInteger *FhirInteger `json:"valueinteger,omitempty"`
+		ValueMarkdown *FhirMarkdown `json:"valuemarkdown,omitempty"`
+		ValueOid *FhirOid `json:"valueoid,omitempty"`
+		ValuePositiveInt *FhirPositiveInt `json:"valuepositiveint,omitempty"`
+		ValueString *FhirString `json:"valuestring,omitempty"`
+		ValueTime *FhirTime `json:"valuetime,omitempty"`
+		ValueUnsignedInt *FhirUnsignedInt `json:"valueunsignedint,omitempty"`
+		ValueUri *FhirUri `json:"valueuri,omitempty"`
+		ValueUrl *FhirUrl `json:"valueurl,omitempty"`
+		ValueUuid *FhirUuid `json:"valueuuid,omitempty"`
+		ValueAddress *Address `json:"valueaddress,omitempty"`
+		ValueAge *Age `json:"valueage,omitempty"`
+		ValueAnnotation *Annotation `json:"valueannotation,omitempty"`
+		ValueAttachment *Attachment `json:"valueattachment,omitempty"`
+		ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+		ValueCoding *Coding `json:"valuecoding,omitempty"`
+		ValueContactPoint *ContactPoint `json:"valuecontactpoint,omitempty"`
+		ValueCount *Count `json:"valuecount,omitempty"`
+		ValueDistance *Distance `json:"valuedistance,omitempty"`
+		ValueDuration *FhirDuration `json:"valueduration,omitempty"`
+		ValueHumanName *HumanName `json:"valuehumanname,omitempty"`
+		ValueIdentifier *Identifier `json:"valueidentifier,omitempty"`
+		ValueMoney *Money `json:"valuemoney,omitempty"`
+		ValuePeriod *Period `json:"valueperiod,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueRange *Range `json:"valuerange,omitempty"`
+		ValueRatio *Ratio `json:"valueratio,omitempty"`
+		ValueReference *Reference `json:"valuereference,omitempty"`
+		ValueSampledData *SampledData `json:"valuesampleddata,omitempty"`
+		ValueSignature *Signature `json:"valuesignature,omitempty"`
+		ValueTiming *Timing `json:"valuetiming,omitempty"`
+		ValueContactDetail *ContactDetail `json:"valuecontactdetail,omitempty"`
+		ValueContributor *Contributor `json:"valuecontributor,omitempty"`
+		ValueDataRequirement *DataRequirement `json:"valuedatarequirement,omitempty"`
+		ValueExpression *FhirExpression `json:"valueexpression,omitempty"`
+		ValueParameterDefinition *ParameterDefinition `json:"valueparameterdefinition,omitempty"`
+		ValueRelatedArtifact *RelatedArtifact `json:"valuerelatedartifact,omitempty"`
+		ValueTriggerDefinition *TriggerDefinition `json:"valuetriggerdefinition,omitempty"`
+		ValueUsageContext *UsageContext `json:"valueusagecontext,omitempty"`
+		ValueDosage *Dosage `json:"valuedosage,omitempty"`
+		ValueMeta *FhirMeta `json:"valuemeta,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.ValueBase64Binary = temp.ValueBase64Binary
+	m.ValueBoolean = temp.ValueBoolean
+	m.ValueCanonical = temp.ValueCanonical
+	m.ValueCode = temp.ValueCode
+	m.ValueDate = temp.ValueDate
+	m.ValueDateTime = temp.ValueDateTime
+	m.ValueDecimal = temp.ValueDecimal
+	m.ValueId = temp.ValueId
+	m.ValueInstant = temp.ValueInstant
+	m.ValueInteger = temp.ValueInteger
+	m.ValueMarkdown = temp.ValueMarkdown
+	m.ValueOid = temp.ValueOid
+	m.ValuePositiveInt = temp.ValuePositiveInt
+	m.ValueString = temp.ValueString
+	m.ValueTime = temp.ValueTime
+	m.ValueUnsignedInt = temp.ValueUnsignedInt
+	m.ValueUri = temp.ValueUri
+	m.ValueUrl = temp.ValueUrl
+	m.ValueUuid = temp.ValueUuid
+	m.ValueAddress = temp.ValueAddress
+	m.ValueAge = temp.ValueAge
+	m.ValueAnnotation = temp.ValueAnnotation
+	m.ValueAttachment = temp.ValueAttachment
+	m.ValueCodeableConcept = temp.ValueCodeableConcept
+	m.ValueCoding = temp.ValueCoding
+	m.ValueContactPoint = temp.ValueContactPoint
+	m.ValueCount = temp.ValueCount
+	m.ValueDistance = temp.ValueDistance
+	m.ValueDuration = temp.ValueDuration
+	m.ValueHumanName = temp.ValueHumanName
+	m.ValueIdentifier = temp.ValueIdentifier
+	m.ValueMoney = temp.ValueMoney
+	m.ValuePeriod = temp.ValuePeriod
+	m.ValueQuantity = temp.ValueQuantity
+	m.ValueRange = temp.ValueRange
+	m.ValueRatio = temp.ValueRatio
+	m.ValueReference = temp.ValueReference
+	m.ValueSampledData = temp.ValueSampledData
+	m.ValueSignature = temp.ValueSignature
+	m.ValueTiming = temp.ValueTiming
+	m.ValueContactDetail = temp.ValueContactDetail
+	m.ValueContributor = temp.ValueContributor
+	m.ValueDataRequirement = temp.ValueDataRequirement
+	m.ValueExpression = temp.ValueExpression
+	m.ValueParameterDefinition = temp.ValueParameterDefinition
+	m.ValueRelatedArtifact = temp.ValueRelatedArtifact
+	m.ValueTriggerDefinition = temp.ValueTriggerDefinition
+	m.ValueUsageContext = temp.ValueUsageContext
+	m.ValueDosage = temp.ValueDosage
+	m.ValueMeta = temp.ValueMeta
+	return nil
 }
 
-// ToJSON converts TaskOutput to JSON data
+// ToJSON converts TaskOutput to JSON data.
 func (m *TaskOutput) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		ValueBase64Binary interface{} `json:"valuebase64binary,omitempty"`
+		ValueBase64BinaryElement map[string]interface{} `json:"_valuebase64binary,omitempty"`
+		ValueBoolean interface{} `json:"valueboolean,omitempty"`
+		ValueBooleanElement map[string]interface{} `json:"_valueboolean,omitempty"`
+		ValueCanonical interface{} `json:"valuecanonical,omitempty"`
+		ValueCanonicalElement map[string]interface{} `json:"_valuecanonical,omitempty"`
+		ValueCode interface{} `json:"valuecode,omitempty"`
+		ValueCodeElement map[string]interface{} `json:"_valuecode,omitempty"`
+		ValueDate interface{} `json:"valuedate,omitempty"`
+		ValueDateElement map[string]interface{} `json:"_valuedate,omitempty"`
+		ValueDateTime interface{} `json:"valuedatetime,omitempty"`
+		ValueDateTimeElement map[string]interface{} `json:"_valuedatetime,omitempty"`
+		ValueDecimal interface{} `json:"valuedecimal,omitempty"`
+		ValueDecimalElement map[string]interface{} `json:"_valuedecimal,omitempty"`
+		ValueId interface{} `json:"valueid,omitempty"`
+		ValueIdElement map[string]interface{} `json:"_valueid,omitempty"`
+		ValueInstant interface{} `json:"valueinstant,omitempty"`
+		ValueInstantElement map[string]interface{} `json:"_valueinstant,omitempty"`
+		ValueInteger interface{} `json:"valueinteger,omitempty"`
+		ValueIntegerElement map[string]interface{} `json:"_valueinteger,omitempty"`
+		ValueMarkdown interface{} `json:"valuemarkdown,omitempty"`
+		ValueMarkdownElement map[string]interface{} `json:"_valuemarkdown,omitempty"`
+		ValueOid interface{} `json:"valueoid,omitempty"`
+		ValueOidElement map[string]interface{} `json:"_valueoid,omitempty"`
+		ValuePositiveInt interface{} `json:"valuepositiveint,omitempty"`
+		ValuePositiveIntElement map[string]interface{} `json:"_valuepositiveint,omitempty"`
+		ValueString interface{} `json:"valuestring,omitempty"`
+		ValueStringElement map[string]interface{} `json:"_valuestring,omitempty"`
+		ValueTime interface{} `json:"valuetime,omitempty"`
+		ValueTimeElement map[string]interface{} `json:"_valuetime,omitempty"`
+		ValueUnsignedInt interface{} `json:"valueunsignedint,omitempty"`
+		ValueUnsignedIntElement map[string]interface{} `json:"_valueunsignedint,omitempty"`
+		ValueUri interface{} `json:"valueuri,omitempty"`
+		ValueUriElement map[string]interface{} `json:"_valueuri,omitempty"`
+		ValueUrl interface{} `json:"valueurl,omitempty"`
+		ValueUrlElement map[string]interface{} `json:"_valueurl,omitempty"`
+		ValueUuid interface{} `json:"valueuuid,omitempty"`
+		ValueUuidElement map[string]interface{} `json:"_valueuuid,omitempty"`
+		ValueAddress *Address `json:"valueaddress,omitempty"`
+		ValueAge *Age `json:"valueage,omitempty"`
+		ValueAnnotation *Annotation `json:"valueannotation,omitempty"`
+		ValueAttachment *Attachment `json:"valueattachment,omitempty"`
+		ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+		ValueCoding *Coding `json:"valuecoding,omitempty"`
+		ValueContactPoint *ContactPoint `json:"valuecontactpoint,omitempty"`
+		ValueCount *Count `json:"valuecount,omitempty"`
+		ValueDistance *Distance `json:"valuedistance,omitempty"`
+		ValueDuration *FhirDuration `json:"valueduration,omitempty"`
+		ValueHumanName *HumanName `json:"valuehumanname,omitempty"`
+		ValueIdentifier *Identifier `json:"valueidentifier,omitempty"`
+		ValueMoney *Money `json:"valuemoney,omitempty"`
+		ValuePeriod *Period `json:"valueperiod,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueRange *Range `json:"valuerange,omitempty"`
+		ValueRatio *Ratio `json:"valueratio,omitempty"`
+		ValueReference *Reference `json:"valuereference,omitempty"`
+		ValueSampledData *SampledData `json:"valuesampleddata,omitempty"`
+		ValueSignature *Signature `json:"valuesignature,omitempty"`
+		ValueTiming *Timing `json:"valuetiming,omitempty"`
+		ValueContactDetail *ContactDetail `json:"valuecontactdetail,omitempty"`
+		ValueContributor *Contributor `json:"valuecontributor,omitempty"`
+		ValueDataRequirement *DataRequirement `json:"valuedatarequirement,omitempty"`
+		ValueExpression *FhirExpression `json:"valueexpression,omitempty"`
+		ValueParameterDefinition *ParameterDefinition `json:"valueparameterdefinition,omitempty"`
+		ValueRelatedArtifact *RelatedArtifact `json:"valuerelatedartifact,omitempty"`
+		ValueTriggerDefinition *TriggerDefinition `json:"valuetriggerdefinition,omitempty"`
+		ValueUsageContext *UsageContext `json:"valueusagecontext,omitempty"`
+		ValueDosage *Dosage `json:"valuedosage,omitempty"`
+		ValueMeta *FhirMeta `json:"valuemeta,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	if m.ValueBase64Binary != nil && m.ValueBase64Binary.Value != nil {
+		output.ValueBase64Binary = m.ValueBase64Binary.Value
+		if m.ValueBase64Binary.Element != nil {
+			output.ValueBase64BinaryElement = toMapOrNil(m.ValueBase64Binary.Element.ToJSON())
+		}
+	}
+	if m.ValueBoolean != nil && m.ValueBoolean.Value != nil {
+		output.ValueBoolean = m.ValueBoolean.Value
+		if m.ValueBoolean.Element != nil {
+			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.ToJSON())
+		}
+	}
+	if m.ValueCanonical != nil && m.ValueCanonical.Value != nil {
+		output.ValueCanonical = m.ValueCanonical.Value
+		if m.ValueCanonical.Element != nil {
+			output.ValueCanonicalElement = toMapOrNil(m.ValueCanonical.Element.ToJSON())
+		}
+	}
+	if m.ValueCode != nil && m.ValueCode.Value != nil {
+		output.ValueCode = m.ValueCode.Value
+		if m.ValueCode.Element != nil {
+			output.ValueCodeElement = toMapOrNil(m.ValueCode.Element.ToJSON())
+		}
+	}
+	if m.ValueDate != nil && m.ValueDate.Value != nil {
+		output.ValueDate = m.ValueDate.Value
+		if m.ValueDate.Element != nil {
+			output.ValueDateElement = toMapOrNil(m.ValueDate.Element.ToJSON())
+		}
+	}
+	if m.ValueDateTime != nil && m.ValueDateTime.Value != nil {
+		output.ValueDateTime = m.ValueDateTime.Value
+		if m.ValueDateTime.Element != nil {
+			output.ValueDateTimeElement = toMapOrNil(m.ValueDateTime.Element.ToJSON())
+		}
+	}
+	if m.ValueDecimal != nil && m.ValueDecimal.Value != nil {
+		output.ValueDecimal = m.ValueDecimal.Value
+		if m.ValueDecimal.Element != nil {
+			output.ValueDecimalElement = toMapOrNil(m.ValueDecimal.Element.ToJSON())
+		}
+	}
+	if m.ValueId != nil && m.ValueId.Value != nil {
+		output.ValueId = m.ValueId.Value
+		if m.ValueId.Element != nil {
+			output.ValueIdElement = toMapOrNil(m.ValueId.Element.ToJSON())
+		}
+	}
+	if m.ValueInstant != nil && m.ValueInstant.Value != nil {
+		output.ValueInstant = m.ValueInstant.Value
+		if m.ValueInstant.Element != nil {
+			output.ValueInstantElement = toMapOrNil(m.ValueInstant.Element.ToJSON())
+		}
+	}
+	if m.ValueInteger != nil && m.ValueInteger.Value != nil {
+		output.ValueInteger = m.ValueInteger.Value
+		if m.ValueInteger.Element != nil {
+			output.ValueIntegerElement = toMapOrNil(m.ValueInteger.Element.ToJSON())
+		}
+	}
+	if m.ValueMarkdown != nil && m.ValueMarkdown.Value != nil {
+		output.ValueMarkdown = m.ValueMarkdown.Value
+		if m.ValueMarkdown.Element != nil {
+			output.ValueMarkdownElement = toMapOrNil(m.ValueMarkdown.Element.ToJSON())
+		}
+	}
+	if m.ValueOid != nil && m.ValueOid.Value != nil {
+		output.ValueOid = m.ValueOid.Value
+		if m.ValueOid.Element != nil {
+			output.ValueOidElement = toMapOrNil(m.ValueOid.Element.ToJSON())
+		}
+	}
+	if m.ValuePositiveInt != nil && m.ValuePositiveInt.Value != nil {
+		output.ValuePositiveInt = m.ValuePositiveInt.Value
+		if m.ValuePositiveInt.Element != nil {
+			output.ValuePositiveIntElement = toMapOrNil(m.ValuePositiveInt.Element.ToJSON())
+		}
+	}
+	if m.ValueString != nil && m.ValueString.Value != nil {
+		output.ValueString = m.ValueString.Value
+		if m.ValueString.Element != nil {
+			output.ValueStringElement = toMapOrNil(m.ValueString.Element.ToJSON())
+		}
+	}
+	if m.ValueTime != nil && m.ValueTime.Value != nil {
+		output.ValueTime = m.ValueTime.Value
+		if m.ValueTime.Element != nil {
+			output.ValueTimeElement = toMapOrNil(m.ValueTime.Element.ToJSON())
+		}
+	}
+	if m.ValueUnsignedInt != nil && m.ValueUnsignedInt.Value != nil {
+		output.ValueUnsignedInt = m.ValueUnsignedInt.Value
+		if m.ValueUnsignedInt.Element != nil {
+			output.ValueUnsignedIntElement = toMapOrNil(m.ValueUnsignedInt.Element.ToJSON())
+		}
+	}
+	if m.ValueUri != nil && m.ValueUri.Value != nil {
+		output.ValueUri = m.ValueUri.Value
+		if m.ValueUri.Element != nil {
+			output.ValueUriElement = toMapOrNil(m.ValueUri.Element.ToJSON())
+		}
+	}
+	if m.ValueUrl != nil && m.ValueUrl.Value != nil {
+		output.ValueUrl = m.ValueUrl.Value
+		if m.ValueUrl.Element != nil {
+			output.ValueUrlElement = toMapOrNil(m.ValueUrl.Element.ToJSON())
+		}
+	}
+	if m.ValueUuid != nil && m.ValueUuid.Value != nil {
+		output.ValueUuid = m.ValueUuid.Value
+		if m.ValueUuid.Element != nil {
+			output.ValueUuidElement = toMapOrNil(m.ValueUuid.Element.ToJSON())
+		}
+	}
+	output.ValueAddress = m.ValueAddress
+	output.ValueAge = m.ValueAge
+	output.ValueAnnotation = m.ValueAnnotation
+	output.ValueAttachment = m.ValueAttachment
+	output.ValueCodeableConcept = m.ValueCodeableConcept
+	output.ValueCoding = m.ValueCoding
+	output.ValueContactPoint = m.ValueContactPoint
+	output.ValueCount = m.ValueCount
+	output.ValueDistance = m.ValueDistance
+	output.ValueDuration = m.ValueDuration
+	output.ValueHumanName = m.ValueHumanName
+	output.ValueIdentifier = m.ValueIdentifier
+	output.ValueMoney = m.ValueMoney
+	output.ValuePeriod = m.ValuePeriod
+	output.ValueQuantity = m.ValueQuantity
+	output.ValueRange = m.ValueRange
+	output.ValueRatio = m.ValueRatio
+	output.ValueReference = m.ValueReference
+	output.ValueSampledData = m.ValueSampledData
+	output.ValueSignature = m.ValueSignature
+	output.ValueTiming = m.ValueTiming
+	output.ValueContactDetail = m.ValueContactDetail
+	output.ValueContributor = m.ValueContributor
+	output.ValueDataRequirement = m.ValueDataRequirement
+	output.ValueExpression = m.ValueExpression
+	output.ValueParameterDefinition = m.ValueParameterDefinition
+	output.ValueRelatedArtifact = m.ValueRelatedArtifact
+	output.ValueTriggerDefinition = m.ValueTriggerDefinition
+	output.ValueUsageContext = m.ValueUsageContext
+	output.ValueDosage = m.ValueDosage
+	output.ValueMeta = m.ValueMeta
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of TaskOutput
+// Clone creates a deep copy of TaskOutput.
 func (m *TaskOutput) Clone() *TaskOutput {
 	if m == nil { return nil }
 	return &TaskOutput{
@@ -543,7 +1478,7 @@ func (m *TaskOutput) Clone() *TaskOutput {
 	}
 }
 
-// Equals checks for equality with another TaskOutput instance
+// Equals checks equality between two TaskOutput instances.
 func (m *TaskOutput) Equals(other *TaskOutput) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

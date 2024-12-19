@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // ParameterDefinition
 // The parameters to the module. This collection specifies both the input and output parameters. Input parameters are provided by the caller as part of the $evaluate operation. Output parameters are included in the GuidanceResponse.
 type ParameterDefinition struct {
-	DataType
+	extends DataType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	Name *FhirCode `json:"name,omitempty"`
@@ -20,22 +21,101 @@ type ParameterDefinition struct {
 	Profile *FhirCanonical `json:"profile,omitempty"`
 }
 
-// NewParameterDefinition creates a new ParameterDefinition instance
+// NewParameterDefinition creates a new ParameterDefinition instance.
 func NewParameterDefinition() *ParameterDefinition {
 	return &ParameterDefinition{}
 }
 
-// FromJSON populates ParameterDefinition from JSON data
+// FromJSON populates ParameterDefinition from JSON data.
 func (m *ParameterDefinition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Name *FhirCode `json:"name,omitempty"`
+		Use *OperationParameterUse `json:"use,omitempty"`
+		Min *FhirInteger `json:"min,omitempty"`
+		Max *FhirString `json:"max,omitempty"`
+		Documentation *FhirString `json:"documentation,omitempty"`
+		Type *FHIRAllTypes `json:"type,omitempty"`
+		Profile *FhirCanonical `json:"profile,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.Name = temp.Name
+	m.Use = temp.Use
+	m.Min = temp.Min
+	m.Max = temp.Max
+	m.Documentation = temp.Documentation
+	m.Type = temp.Type
+	m.Profile = temp.Profile
+	return nil
 }
 
-// ToJSON converts ParameterDefinition to JSON data
+// ToJSON converts ParameterDefinition to JSON data.
 func (m *ParameterDefinition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Use *OperationParameterUse `json:"use,omitempty"`
+		Min interface{} `json:"min,omitempty"`
+		MinElement map[string]interface{} `json:"_min,omitempty"`
+		Max interface{} `json:"max,omitempty"`
+		MaxElement map[string]interface{} `json:"_max,omitempty"`
+		Documentation interface{} `json:"documentation,omitempty"`
+		DocumentationElement map[string]interface{} `json:"_documentation,omitempty"`
+		Type *FHIRAllTypes `json:"type,omitempty"`
+		Profile interface{} `json:"profile,omitempty"`
+		ProfileElement map[string]interface{} `json:"_profile,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	output.Use = m.Use
+	if m.Min != nil && m.Min.Value != nil {
+		output.Min = m.Min.Value
+		if m.Min.Element != nil {
+			output.MinElement = toMapOrNil(m.Min.Element.ToJSON())
+		}
+	}
+	if m.Max != nil && m.Max.Value != nil {
+		output.Max = m.Max.Value
+		if m.Max.Element != nil {
+			output.MaxElement = toMapOrNil(m.Max.Element.ToJSON())
+		}
+	}
+	if m.Documentation != nil && m.Documentation.Value != nil {
+		output.Documentation = m.Documentation.Value
+		if m.Documentation.Element != nil {
+			output.DocumentationElement = toMapOrNil(m.Documentation.Element.ToJSON())
+		}
+	}
+	output.Type = m.Type
+	if m.Profile != nil && m.Profile.Value != nil {
+		output.Profile = m.Profile.Value
+		if m.Profile.Element != nil {
+			output.ProfileElement = toMapOrNil(m.Profile.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ParameterDefinition
+// Clone creates a deep copy of ParameterDefinition.
 func (m *ParameterDefinition) Clone() *ParameterDefinition {
 	if m == nil { return nil }
 	return &ParameterDefinition{
@@ -51,7 +131,7 @@ func (m *ParameterDefinition) Clone() *ParameterDefinition {
 	}
 }
 
-// Equals checks for equality with another ParameterDefinition instance
+// Equals checks equality between two ParameterDefinition instances.
 func (m *ParameterDefinition) Equals(other *ParameterDefinition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

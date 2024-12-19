@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Dosage
 // Indicates how the medication is/was taken or should be taken by the patient.
 type Dosage struct {
-	BackboneType
+	extends BackboneType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -28,22 +29,127 @@ type Dosage struct {
 	MaxDosePerLifetime *Quantity `json:"maxdoseperlifetime,omitempty"`
 }
 
-// NewDosage creates a new Dosage instance
+// NewDosage creates a new Dosage instance.
 func NewDosage() *Dosage {
 	return &Dosage{}
 }
 
-// FromJSON populates Dosage from JSON data
+// FromJSON populates Dosage from JSON data.
 func (m *Dosage) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Sequence *FhirInteger `json:"sequence,omitempty"`
+		Text *FhirString `json:"text,omitempty"`
+		AdditionalInstruction []*CodeableConcept `json:"additionalinstruction,omitempty"`
+		PatientInstruction *FhirString `json:"patientinstruction,omitempty"`
+		Timing *Timing `json:"timing,omitempty"`
+		AsNeededBoolean *FhirBoolean `json:"asneededboolean,omitempty"`
+		AsNeededCodeableConcept *CodeableConcept `json:"asneededcodeableconcept,omitempty"`
+		Site *CodeableConcept `json:"site,omitempty"`
+		Route *CodeableConcept `json:"route,omitempty"`
+		Method *CodeableConcept `json:"method,omitempty"`
+		DoseAndRate []*DosageDoseAndRate `json:"doseandrate,omitempty"`
+		MaxDosePerPeriod *Ratio `json:"maxdoseperperiod,omitempty"`
+		MaxDosePerAdministration *Quantity `json:"maxdoseperadministration,omitempty"`
+		MaxDosePerLifetime *Quantity `json:"maxdoseperlifetime,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Sequence = temp.Sequence
+	m.Text = temp.Text
+	m.AdditionalInstruction = temp.AdditionalInstruction
+	m.PatientInstruction = temp.PatientInstruction
+	m.Timing = temp.Timing
+	m.AsNeededBoolean = temp.AsNeededBoolean
+	m.AsNeededCodeableConcept = temp.AsNeededCodeableConcept
+	m.Site = temp.Site
+	m.Route = temp.Route
+	m.Method = temp.Method
+	m.DoseAndRate = temp.DoseAndRate
+	m.MaxDosePerPeriod = temp.MaxDosePerPeriod
+	m.MaxDosePerAdministration = temp.MaxDosePerAdministration
+	m.MaxDosePerLifetime = temp.MaxDosePerLifetime
+	return nil
 }
 
-// ToJSON converts Dosage to JSON data
+// ToJSON converts Dosage to JSON data.
 func (m *Dosage) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Sequence interface{} `json:"sequence,omitempty"`
+		SequenceElement map[string]interface{} `json:"_sequence,omitempty"`
+		Text interface{} `json:"text,omitempty"`
+		TextElement map[string]interface{} `json:"_text,omitempty"`
+		AdditionalInstruction []*CodeableConcept `json:"additionalinstruction,omitempty"`
+		PatientInstruction interface{} `json:"patientinstruction,omitempty"`
+		PatientInstructionElement map[string]interface{} `json:"_patientinstruction,omitempty"`
+		Timing *Timing `json:"timing,omitempty"`
+		AsNeededBoolean interface{} `json:"asneededboolean,omitempty"`
+		AsNeededBooleanElement map[string]interface{} `json:"_asneededboolean,omitempty"`
+		AsNeededCodeableConcept *CodeableConcept `json:"asneededcodeableconcept,omitempty"`
+		Site *CodeableConcept `json:"site,omitempty"`
+		Route *CodeableConcept `json:"route,omitempty"`
+		Method *CodeableConcept `json:"method,omitempty"`
+		DoseAndRate []*DosageDoseAndRate `json:"doseandrate,omitempty"`
+		MaxDosePerPeriod *Ratio `json:"maxdoseperperiod,omitempty"`
+		MaxDosePerAdministration *Quantity `json:"maxdoseperadministration,omitempty"`
+		MaxDosePerLifetime *Quantity `json:"maxdoseperlifetime,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Sequence != nil && m.Sequence.Value != nil {
+		output.Sequence = m.Sequence.Value
+		if m.Sequence.Element != nil {
+			output.SequenceElement = toMapOrNil(m.Sequence.Element.ToJSON())
+		}
+	}
+	if m.Text != nil && m.Text.Value != nil {
+		output.Text = m.Text.Value
+		if m.Text.Element != nil {
+			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+		}
+	}
+	output.AdditionalInstruction = m.AdditionalInstruction
+	if m.PatientInstruction != nil && m.PatientInstruction.Value != nil {
+		output.PatientInstruction = m.PatientInstruction.Value
+		if m.PatientInstruction.Element != nil {
+			output.PatientInstructionElement = toMapOrNil(m.PatientInstruction.Element.ToJSON())
+		}
+	}
+	output.Timing = m.Timing
+	if m.AsNeededBoolean != nil && m.AsNeededBoolean.Value != nil {
+		output.AsNeededBoolean = m.AsNeededBoolean.Value
+		if m.AsNeededBoolean.Element != nil {
+			output.AsNeededBooleanElement = toMapOrNil(m.AsNeededBoolean.Element.ToJSON())
+		}
+	}
+	output.AsNeededCodeableConcept = m.AsNeededCodeableConcept
+	output.Site = m.Site
+	output.Route = m.Route
+	output.Method = m.Method
+	output.DoseAndRate = m.DoseAndRate
+	output.MaxDosePerPeriod = m.MaxDosePerPeriod
+	output.MaxDosePerAdministration = m.MaxDosePerAdministration
+	output.MaxDosePerLifetime = m.MaxDosePerLifetime
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Dosage
+// Clone creates a deep copy of Dosage.
 func (m *Dosage) Clone() *Dosage {
 	if m == nil { return nil }
 	return &Dosage{
@@ -67,7 +173,7 @@ func (m *Dosage) Clone() *Dosage {
 	}
 }
 
-// Equals checks for equality with another Dosage instance
+// Equals checks equality between two Dosage instances.
 func (m *Dosage) Equals(other *Dosage) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -94,7 +200,7 @@ func (m *Dosage) Equals(other *Dosage) bool {
 // DosageDoseAndRate
 // The amount of medication administered.
 type DosageDoseAndRate struct {
-	Element
+	extends Element
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	Type *CodeableConcept `json:"type,omitempty"`
@@ -105,22 +211,67 @@ type DosageDoseAndRate struct {
 	RateQuantity *Quantity `json:"ratequantity,omitempty"`
 }
 
-// NewDosageDoseAndRate creates a new DosageDoseAndRate instance
+// NewDosageDoseAndRate creates a new DosageDoseAndRate instance.
 func NewDosageDoseAndRate() *DosageDoseAndRate {
 	return &DosageDoseAndRate{}
 }
 
-// FromJSON populates DosageDoseAndRate from JSON data
+// FromJSON populates DosageDoseAndRate from JSON data.
 func (m *DosageDoseAndRate) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		DoseRange *Range `json:"doserange,omitempty"`
+		DoseQuantity *Quantity `json:"dosequantity,omitempty"`
+		RateRatio *Ratio `json:"rateratio,omitempty"`
+		RateRange *Range `json:"raterange,omitempty"`
+		RateQuantity *Quantity `json:"ratequantity,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.Type = temp.Type
+	m.DoseRange = temp.DoseRange
+	m.DoseQuantity = temp.DoseQuantity
+	m.RateRatio = temp.RateRatio
+	m.RateRange = temp.RateRange
+	m.RateQuantity = temp.RateQuantity
+	return nil
 }
 
-// ToJSON converts DosageDoseAndRate to JSON data
+// ToJSON converts DosageDoseAndRate to JSON data.
 func (m *DosageDoseAndRate) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		DoseRange *Range `json:"doserange,omitempty"`
+		DoseQuantity *Quantity `json:"dosequantity,omitempty"`
+		RateRatio *Ratio `json:"rateratio,omitempty"`
+		RateRange *Range `json:"raterange,omitempty"`
+		RateQuantity *Quantity `json:"ratequantity,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.Type = m.Type
+	output.DoseRange = m.DoseRange
+	output.DoseQuantity = m.DoseQuantity
+	output.RateRatio = m.RateRatio
+	output.RateRange = m.RateRange
+	output.RateQuantity = m.RateQuantity
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DosageDoseAndRate
+// Clone creates a deep copy of DosageDoseAndRate.
 func (m *DosageDoseAndRate) Clone() *DosageDoseAndRate {
 	if m == nil { return nil }
 	return &DosageDoseAndRate{
@@ -135,7 +286,7 @@ func (m *DosageDoseAndRate) Clone() *DosageDoseAndRate {
 	}
 }
 
-// Equals checks for equality with another DosageDoseAndRate instance
+// Equals checks equality between two DosageDoseAndRate instances.
 func (m *DosageDoseAndRate) Equals(other *DosageDoseAndRate) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

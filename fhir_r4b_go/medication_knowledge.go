@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // MedicationKnowledge
 // Information about a medication that is used to support knowledge.
 type MedicationKnowledge struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -41,22 +43,188 @@ type MedicationKnowledge struct {
 	Kinetics []*MedicationKnowledgeKinetics `json:"kinetics,omitempty"`
 }
 
-// NewMedicationKnowledge creates a new MedicationKnowledge instance
+// NewMedicationKnowledge creates a new MedicationKnowledge instance.
 func NewMedicationKnowledge() *MedicationKnowledge {
 	return &MedicationKnowledge{}
 }
 
-// FromJSON populates MedicationKnowledge from JSON data
+// FromJSON populates MedicationKnowledge from JSON data.
 func (m *MedicationKnowledge) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Status *MedicationKnowledgeStatusCodes `json:"status,omitempty"`
+		Manufacturer *Reference `json:"manufacturer,omitempty"`
+		DoseForm *CodeableConcept `json:"doseform,omitempty"`
+		Amount *Quantity `json:"amount,omitempty"`
+		Synonym []interface{} `json:"synonym,omitempty"`
+		RelatedMedicationKnowledge []*MedicationKnowledgeRelatedMedicationKnowledge `json:"relatedmedicationknowledge,omitempty"`
+		AssociatedMedication []*Reference `json:"associatedmedication,omitempty"`
+		ProductType []*CodeableConcept `json:"producttype,omitempty"`
+		Monograph []*MedicationKnowledgeMonograph `json:"monograph,omitempty"`
+		Ingredient []*MedicationKnowledgeIngredient `json:"ingredient,omitempty"`
+		PreparationInstruction *FhirMarkdown `json:"preparationinstruction,omitempty"`
+		IntendedRoute []*CodeableConcept `json:"intendedroute,omitempty"`
+		Cost []*MedicationKnowledgeCost `json:"cost,omitempty"`
+		MonitoringProgram []*MedicationKnowledgeMonitoringProgram `json:"monitoringprogram,omitempty"`
+		AdministrationGuidelines []*MedicationKnowledgeAdministrationGuidelines `json:"administrationguidelines,omitempty"`
+		MedicineClassification []*MedicationKnowledgeMedicineClassification `json:"medicineclassification,omitempty"`
+		Packaging *MedicationKnowledgePackaging `json:"packaging,omitempty"`
+		DrugCharacteristic []*MedicationKnowledgeDrugCharacteristic `json:"drugcharacteristic,omitempty"`
+		Contraindication []*Reference `json:"contraindication,omitempty"`
+		Regulatory []*MedicationKnowledgeRegulatory `json:"regulatory,omitempty"`
+		Kinetics []*MedicationKnowledgeKinetics `json:"kinetics,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Status = temp.Status
+	m.Manufacturer = temp.Manufacturer
+	m.DoseForm = temp.DoseForm
+	m.Amount = temp.Amount
+	if len(temp.Synonym) > 0 {
+		m.Synonym = make([]*FhirString, len(temp.Synonym))
+		for i := range temp.Synonym {
+			itemMap, ok := temp.Synonym[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Synonym[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Synonym[%d]: %v", i, err) }
+			m.Synonym[i] = primitive
+		}
+	}
+	m.RelatedMedicationKnowledge = temp.RelatedMedicationKnowledge
+	m.AssociatedMedication = temp.AssociatedMedication
+	m.ProductType = temp.ProductType
+	m.Monograph = temp.Monograph
+	m.Ingredient = temp.Ingredient
+	m.PreparationInstruction = temp.PreparationInstruction
+	m.IntendedRoute = temp.IntendedRoute
+	m.Cost = temp.Cost
+	m.MonitoringProgram = temp.MonitoringProgram
+	m.AdministrationGuidelines = temp.AdministrationGuidelines
+	m.MedicineClassification = temp.MedicineClassification
+	m.Packaging = temp.Packaging
+	m.DrugCharacteristic = temp.DrugCharacteristic
+	m.Contraindication = temp.Contraindication
+	m.Regulatory = temp.Regulatory
+	m.Kinetics = temp.Kinetics
+	return nil
 }
 
-// ToJSON converts MedicationKnowledge to JSON data
+// ToJSON converts MedicationKnowledge to JSON data.
 func (m *MedicationKnowledge) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Status *MedicationKnowledgeStatusCodes `json:"status,omitempty"`
+		Manufacturer *Reference `json:"manufacturer,omitempty"`
+		DoseForm *CodeableConcept `json:"doseform,omitempty"`
+		Amount *Quantity `json:"amount,omitempty"`
+		Synonym []interface{} `json:"synonym,omitempty"`
+		SynonymElement []map[string]interface{} `json:"_synonym,omitempty"`
+		RelatedMedicationKnowledge []*MedicationKnowledgeRelatedMedicationKnowledge `json:"relatedmedicationknowledge,omitempty"`
+		AssociatedMedication []*Reference `json:"associatedmedication,omitempty"`
+		ProductType []*CodeableConcept `json:"producttype,omitempty"`
+		Monograph []*MedicationKnowledgeMonograph `json:"monograph,omitempty"`
+		Ingredient []*MedicationKnowledgeIngredient `json:"ingredient,omitempty"`
+		PreparationInstruction interface{} `json:"preparationinstruction,omitempty"`
+		PreparationInstructionElement map[string]interface{} `json:"_preparationinstruction,omitempty"`
+		IntendedRoute []*CodeableConcept `json:"intendedroute,omitempty"`
+		Cost []*MedicationKnowledgeCost `json:"cost,omitempty"`
+		MonitoringProgram []*MedicationKnowledgeMonitoringProgram `json:"monitoringprogram,omitempty"`
+		AdministrationGuidelines []*MedicationKnowledgeAdministrationGuidelines `json:"administrationguidelines,omitempty"`
+		MedicineClassification []*MedicationKnowledgeMedicineClassification `json:"medicineclassification,omitempty"`
+		Packaging *MedicationKnowledgePackaging `json:"packaging,omitempty"`
+		DrugCharacteristic []*MedicationKnowledgeDrugCharacteristic `json:"drugcharacteristic,omitempty"`
+		Contraindication []*Reference `json:"contraindication,omitempty"`
+		Regulatory []*MedicationKnowledgeRegulatory `json:"regulatory,omitempty"`
+		Kinetics []*MedicationKnowledgeKinetics `json:"kinetics,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	output.Status = m.Status
+	output.Manufacturer = m.Manufacturer
+	output.DoseForm = m.DoseForm
+	output.Amount = m.Amount
+	if len(m.Synonym) > 0 {
+		output.Synonym = make([]interface{}, len(m.Synonym))
+		output.SynonymElement = make([]map[string]interface{}, len(m.Synonym))
+		for i, item := range m.Synonym {
+			if item != nil && item.Value != nil {
+				output.Synonym[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.SynonymElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.RelatedMedicationKnowledge = m.RelatedMedicationKnowledge
+	output.AssociatedMedication = m.AssociatedMedication
+	output.ProductType = m.ProductType
+	output.Monograph = m.Monograph
+	output.Ingredient = m.Ingredient
+	if m.PreparationInstruction != nil && m.PreparationInstruction.Value != nil {
+		output.PreparationInstruction = m.PreparationInstruction.Value
+		if m.PreparationInstruction.Element != nil {
+			output.PreparationInstructionElement = toMapOrNil(m.PreparationInstruction.Element.ToJSON())
+		}
+	}
+	output.IntendedRoute = m.IntendedRoute
+	output.Cost = m.Cost
+	output.MonitoringProgram = m.MonitoringProgram
+	output.AdministrationGuidelines = m.AdministrationGuidelines
+	output.MedicineClassification = m.MedicineClassification
+	output.Packaging = m.Packaging
+	output.DrugCharacteristic = m.DrugCharacteristic
+	output.Contraindication = m.Contraindication
+	output.Regulatory = m.Regulatory
+	output.Kinetics = m.Kinetics
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MedicationKnowledge
+// Clone creates a deep copy of MedicationKnowledge.
 func (m *MedicationKnowledge) Clone() *MedicationKnowledge {
 	if m == nil { return nil }
 	return &MedicationKnowledge{
@@ -93,7 +261,7 @@ func (m *MedicationKnowledge) Clone() *MedicationKnowledge {
 	}
 }
 
-// Equals checks for equality with another MedicationKnowledge instance
+// Equals checks equality between two MedicationKnowledge instances.
 func (m *MedicationKnowledge) Equals(other *MedicationKnowledge) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -133,7 +301,7 @@ func (m *MedicationKnowledge) Equals(other *MedicationKnowledge) bool {
 // MedicationKnowledgeRelatedMedicationKnowledge
 // Associated or related knowledge about a medication.
 type MedicationKnowledgeRelatedMedicationKnowledge struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -141,22 +309,55 @@ type MedicationKnowledgeRelatedMedicationKnowledge struct {
 	Reference []*Reference `json:"reference,omitempty"`
 }
 
-// NewMedicationKnowledgeRelatedMedicationKnowledge creates a new MedicationKnowledgeRelatedMedicationKnowledge instance
+// NewMedicationKnowledgeRelatedMedicationKnowledge creates a new MedicationKnowledgeRelatedMedicationKnowledge instance.
 func NewMedicationKnowledgeRelatedMedicationKnowledge() *MedicationKnowledgeRelatedMedicationKnowledge {
 	return &MedicationKnowledgeRelatedMedicationKnowledge{}
 }
 
-// FromJSON populates MedicationKnowledgeRelatedMedicationKnowledge from JSON data
+// FromJSON populates MedicationKnowledgeRelatedMedicationKnowledge from JSON data.
 func (m *MedicationKnowledgeRelatedMedicationKnowledge) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Reference []*Reference `json:"reference,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Reference = temp.Reference
+	return nil
 }
 
-// ToJSON converts MedicationKnowledgeRelatedMedicationKnowledge to JSON data
+// ToJSON converts MedicationKnowledgeRelatedMedicationKnowledge to JSON data.
 func (m *MedicationKnowledgeRelatedMedicationKnowledge) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Reference []*Reference `json:"reference,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Reference = m.Reference
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MedicationKnowledgeRelatedMedicationKnowledge
+// Clone creates a deep copy of MedicationKnowledgeRelatedMedicationKnowledge.
 func (m *MedicationKnowledgeRelatedMedicationKnowledge) Clone() *MedicationKnowledgeRelatedMedicationKnowledge {
 	if m == nil { return nil }
 	return &MedicationKnowledgeRelatedMedicationKnowledge{
@@ -168,7 +369,7 @@ func (m *MedicationKnowledgeRelatedMedicationKnowledge) Clone() *MedicationKnowl
 	}
 }
 
-// Equals checks for equality with another MedicationKnowledgeRelatedMedicationKnowledge instance
+// Equals checks equality between two MedicationKnowledgeRelatedMedicationKnowledge instances.
 func (m *MedicationKnowledgeRelatedMedicationKnowledge) Equals(other *MedicationKnowledgeRelatedMedicationKnowledge) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -183,7 +384,7 @@ func (m *MedicationKnowledgeRelatedMedicationKnowledge) Equals(other *Medication
 // MedicationKnowledgeMonograph
 // Associated documentation about the medication.
 type MedicationKnowledgeMonograph struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -191,22 +392,55 @@ type MedicationKnowledgeMonograph struct {
 	Source *Reference `json:"source,omitempty"`
 }
 
-// NewMedicationKnowledgeMonograph creates a new MedicationKnowledgeMonograph instance
+// NewMedicationKnowledgeMonograph creates a new MedicationKnowledgeMonograph instance.
 func NewMedicationKnowledgeMonograph() *MedicationKnowledgeMonograph {
 	return &MedicationKnowledgeMonograph{}
 }
 
-// FromJSON populates MedicationKnowledgeMonograph from JSON data
+// FromJSON populates MedicationKnowledgeMonograph from JSON data.
 func (m *MedicationKnowledgeMonograph) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Source *Reference `json:"source,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Source = temp.Source
+	return nil
 }
 
-// ToJSON converts MedicationKnowledgeMonograph to JSON data
+// ToJSON converts MedicationKnowledgeMonograph to JSON data.
 func (m *MedicationKnowledgeMonograph) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Source *Reference `json:"source,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Source = m.Source
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MedicationKnowledgeMonograph
+// Clone creates a deep copy of MedicationKnowledgeMonograph.
 func (m *MedicationKnowledgeMonograph) Clone() *MedicationKnowledgeMonograph {
 	if m == nil { return nil }
 	return &MedicationKnowledgeMonograph{
@@ -218,7 +452,7 @@ func (m *MedicationKnowledgeMonograph) Clone() *MedicationKnowledgeMonograph {
 	}
 }
 
-// Equals checks for equality with another MedicationKnowledgeMonograph instance
+// Equals checks equality between two MedicationKnowledgeMonograph instances.
 func (m *MedicationKnowledgeMonograph) Equals(other *MedicationKnowledgeMonograph) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -233,7 +467,7 @@ func (m *MedicationKnowledgeMonograph) Equals(other *MedicationKnowledgeMonograp
 // MedicationKnowledgeIngredient
 // Identifies a particular constituent of interest in the product.
 type MedicationKnowledgeIngredient struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -243,22 +477,69 @@ type MedicationKnowledgeIngredient struct {
 	Strength *Ratio `json:"strength,omitempty"`
 }
 
-// NewMedicationKnowledgeIngredient creates a new MedicationKnowledgeIngredient instance
+// NewMedicationKnowledgeIngredient creates a new MedicationKnowledgeIngredient instance.
 func NewMedicationKnowledgeIngredient() *MedicationKnowledgeIngredient {
 	return &MedicationKnowledgeIngredient{}
 }
 
-// FromJSON populates MedicationKnowledgeIngredient from JSON data
+// FromJSON populates MedicationKnowledgeIngredient from JSON data.
 func (m *MedicationKnowledgeIngredient) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ItemCodeableConcept *CodeableConcept `json:"itemcodeableconcept,omitempty"`
+		ItemReference *Reference `json:"itemreference,omitempty"`
+		IsActive *FhirBoolean `json:"isactive,omitempty"`
+		Strength *Ratio `json:"strength,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.ItemCodeableConcept = temp.ItemCodeableConcept
+	m.ItemReference = temp.ItemReference
+	m.IsActive = temp.IsActive
+	m.Strength = temp.Strength
+	return nil
 }
 
-// ToJSON converts MedicationKnowledgeIngredient to JSON data
+// ToJSON converts MedicationKnowledgeIngredient to JSON data.
 func (m *MedicationKnowledgeIngredient) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		ItemCodeableConcept *CodeableConcept `json:"itemcodeableconcept,omitempty"`
+		ItemReference *Reference `json:"itemreference,omitempty"`
+		IsActive interface{} `json:"isactive,omitempty"`
+		IsActiveElement map[string]interface{} `json:"_isactive,omitempty"`
+		Strength *Ratio `json:"strength,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.ItemCodeableConcept = m.ItemCodeableConcept
+	output.ItemReference = m.ItemReference
+	if m.IsActive != nil && m.IsActive.Value != nil {
+		output.IsActive = m.IsActive.Value
+		if m.IsActive.Element != nil {
+			output.IsActiveElement = toMapOrNil(m.IsActive.Element.ToJSON())
+		}
+	}
+	output.Strength = m.Strength
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MedicationKnowledgeIngredient
+// Clone creates a deep copy of MedicationKnowledgeIngredient.
 func (m *MedicationKnowledgeIngredient) Clone() *MedicationKnowledgeIngredient {
 	if m == nil { return nil }
 	return &MedicationKnowledgeIngredient{
@@ -272,7 +553,7 @@ func (m *MedicationKnowledgeIngredient) Clone() *MedicationKnowledgeIngredient {
 	}
 }
 
-// Equals checks for equality with another MedicationKnowledgeIngredient instance
+// Equals checks equality between two MedicationKnowledgeIngredient instances.
 func (m *MedicationKnowledgeIngredient) Equals(other *MedicationKnowledgeIngredient) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -289,7 +570,7 @@ func (m *MedicationKnowledgeIngredient) Equals(other *MedicationKnowledgeIngredi
 // MedicationKnowledgeCost
 // The price of the medication.
 type MedicationKnowledgeCost struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -298,22 +579,65 @@ type MedicationKnowledgeCost struct {
 	Cost *Money `json:"cost,omitempty"`
 }
 
-// NewMedicationKnowledgeCost creates a new MedicationKnowledgeCost instance
+// NewMedicationKnowledgeCost creates a new MedicationKnowledgeCost instance.
 func NewMedicationKnowledgeCost() *MedicationKnowledgeCost {
 	return &MedicationKnowledgeCost{}
 }
 
-// FromJSON populates MedicationKnowledgeCost from JSON data
+// FromJSON populates MedicationKnowledgeCost from JSON data.
 func (m *MedicationKnowledgeCost) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Source *FhirString `json:"source,omitempty"`
+		Cost *Money `json:"cost,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Source = temp.Source
+	m.Cost = temp.Cost
+	return nil
 }
 
-// ToJSON converts MedicationKnowledgeCost to JSON data
+// ToJSON converts MedicationKnowledgeCost to JSON data.
 func (m *MedicationKnowledgeCost) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Source interface{} `json:"source,omitempty"`
+		SourceElement map[string]interface{} `json:"_source,omitempty"`
+		Cost *Money `json:"cost,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	if m.Source != nil && m.Source.Value != nil {
+		output.Source = m.Source.Value
+		if m.Source.Element != nil {
+			output.SourceElement = toMapOrNil(m.Source.Element.ToJSON())
+		}
+	}
+	output.Cost = m.Cost
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MedicationKnowledgeCost
+// Clone creates a deep copy of MedicationKnowledgeCost.
 func (m *MedicationKnowledgeCost) Clone() *MedicationKnowledgeCost {
 	if m == nil { return nil }
 	return &MedicationKnowledgeCost{
@@ -326,7 +650,7 @@ func (m *MedicationKnowledgeCost) Clone() *MedicationKnowledgeCost {
 	}
 }
 
-// Equals checks for equality with another MedicationKnowledgeCost instance
+// Equals checks equality between two MedicationKnowledgeCost instances.
 func (m *MedicationKnowledgeCost) Equals(other *MedicationKnowledgeCost) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -342,7 +666,7 @@ func (m *MedicationKnowledgeCost) Equals(other *MedicationKnowledgeCost) bool {
 // MedicationKnowledgeMonitoringProgram
 // The program under which the medication is reviewed.
 type MedicationKnowledgeMonitoringProgram struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -350,22 +674,61 @@ type MedicationKnowledgeMonitoringProgram struct {
 	Name *FhirString `json:"name,omitempty"`
 }
 
-// NewMedicationKnowledgeMonitoringProgram creates a new MedicationKnowledgeMonitoringProgram instance
+// NewMedicationKnowledgeMonitoringProgram creates a new MedicationKnowledgeMonitoringProgram instance.
 func NewMedicationKnowledgeMonitoringProgram() *MedicationKnowledgeMonitoringProgram {
 	return &MedicationKnowledgeMonitoringProgram{}
 }
 
-// FromJSON populates MedicationKnowledgeMonitoringProgram from JSON data
+// FromJSON populates MedicationKnowledgeMonitoringProgram from JSON data.
 func (m *MedicationKnowledgeMonitoringProgram) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Name = temp.Name
+	return nil
 }
 
-// ToJSON converts MedicationKnowledgeMonitoringProgram to JSON data
+// ToJSON converts MedicationKnowledgeMonitoringProgram to JSON data.
 func (m *MedicationKnowledgeMonitoringProgram) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MedicationKnowledgeMonitoringProgram
+// Clone creates a deep copy of MedicationKnowledgeMonitoringProgram.
 func (m *MedicationKnowledgeMonitoringProgram) Clone() *MedicationKnowledgeMonitoringProgram {
 	if m == nil { return nil }
 	return &MedicationKnowledgeMonitoringProgram{
@@ -377,7 +740,7 @@ func (m *MedicationKnowledgeMonitoringProgram) Clone() *MedicationKnowledgeMonit
 	}
 }
 
-// Equals checks for equality with another MedicationKnowledgeMonitoringProgram instance
+// Equals checks equality between two MedicationKnowledgeMonitoringProgram instances.
 func (m *MedicationKnowledgeMonitoringProgram) Equals(other *MedicationKnowledgeMonitoringProgram) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -392,7 +755,7 @@ func (m *MedicationKnowledgeMonitoringProgram) Equals(other *MedicationKnowledge
 // MedicationKnowledgeAdministrationGuidelines
 // Guidelines for the administration of the medication.
 type MedicationKnowledgeAdministrationGuidelines struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -402,22 +765,63 @@ type MedicationKnowledgeAdministrationGuidelines struct {
 	PatientCharacteristics []*MedicationKnowledgePatientCharacteristics `json:"patientcharacteristics,omitempty"`
 }
 
-// NewMedicationKnowledgeAdministrationGuidelines creates a new MedicationKnowledgeAdministrationGuidelines instance
+// NewMedicationKnowledgeAdministrationGuidelines creates a new MedicationKnowledgeAdministrationGuidelines instance.
 func NewMedicationKnowledgeAdministrationGuidelines() *MedicationKnowledgeAdministrationGuidelines {
 	return &MedicationKnowledgeAdministrationGuidelines{}
 }
 
-// FromJSON populates MedicationKnowledgeAdministrationGuidelines from JSON data
+// FromJSON populates MedicationKnowledgeAdministrationGuidelines from JSON data.
 func (m *MedicationKnowledgeAdministrationGuidelines) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Dosage []*MedicationKnowledgeDosage `json:"dosage,omitempty"`
+		IndicationCodeableConcept *CodeableConcept `json:"indicationcodeableconcept,omitempty"`
+		IndicationReference *Reference `json:"indicationreference,omitempty"`
+		PatientCharacteristics []*MedicationKnowledgePatientCharacteristics `json:"patientcharacteristics,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Dosage = temp.Dosage
+	m.IndicationCodeableConcept = temp.IndicationCodeableConcept
+	m.IndicationReference = temp.IndicationReference
+	m.PatientCharacteristics = temp.PatientCharacteristics
+	return nil
 }
 
-// ToJSON converts MedicationKnowledgeAdministrationGuidelines to JSON data
+// ToJSON converts MedicationKnowledgeAdministrationGuidelines to JSON data.
 func (m *MedicationKnowledgeAdministrationGuidelines) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Dosage []*MedicationKnowledgeDosage `json:"dosage,omitempty"`
+		IndicationCodeableConcept *CodeableConcept `json:"indicationcodeableconcept,omitempty"`
+		IndicationReference *Reference `json:"indicationreference,omitempty"`
+		PatientCharacteristics []*MedicationKnowledgePatientCharacteristics `json:"patientcharacteristics,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Dosage = m.Dosage
+	output.IndicationCodeableConcept = m.IndicationCodeableConcept
+	output.IndicationReference = m.IndicationReference
+	output.PatientCharacteristics = m.PatientCharacteristics
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MedicationKnowledgeAdministrationGuidelines
+// Clone creates a deep copy of MedicationKnowledgeAdministrationGuidelines.
 func (m *MedicationKnowledgeAdministrationGuidelines) Clone() *MedicationKnowledgeAdministrationGuidelines {
 	if m == nil { return nil }
 	return &MedicationKnowledgeAdministrationGuidelines{
@@ -431,7 +835,7 @@ func (m *MedicationKnowledgeAdministrationGuidelines) Clone() *MedicationKnowled
 	}
 }
 
-// Equals checks for equality with another MedicationKnowledgeAdministrationGuidelines instance
+// Equals checks equality between two MedicationKnowledgeAdministrationGuidelines instances.
 func (m *MedicationKnowledgeAdministrationGuidelines) Equals(other *MedicationKnowledgeAdministrationGuidelines) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -448,7 +852,7 @@ func (m *MedicationKnowledgeAdministrationGuidelines) Equals(other *MedicationKn
 // MedicationKnowledgeDosage
 // Dosage for the medication for the specific guidelines.
 type MedicationKnowledgeDosage struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -456,22 +860,55 @@ type MedicationKnowledgeDosage struct {
 	Dosage []*Dosage `json:"dosage,omitempty"`
 }
 
-// NewMedicationKnowledgeDosage creates a new MedicationKnowledgeDosage instance
+// NewMedicationKnowledgeDosage creates a new MedicationKnowledgeDosage instance.
 func NewMedicationKnowledgeDosage() *MedicationKnowledgeDosage {
 	return &MedicationKnowledgeDosage{}
 }
 
-// FromJSON populates MedicationKnowledgeDosage from JSON data
+// FromJSON populates MedicationKnowledgeDosage from JSON data.
 func (m *MedicationKnowledgeDosage) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Dosage []*Dosage `json:"dosage,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Dosage = temp.Dosage
+	return nil
 }
 
-// ToJSON converts MedicationKnowledgeDosage to JSON data
+// ToJSON converts MedicationKnowledgeDosage to JSON data.
 func (m *MedicationKnowledgeDosage) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Dosage []*Dosage `json:"dosage,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Dosage = m.Dosage
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MedicationKnowledgeDosage
+// Clone creates a deep copy of MedicationKnowledgeDosage.
 func (m *MedicationKnowledgeDosage) Clone() *MedicationKnowledgeDosage {
 	if m == nil { return nil }
 	return &MedicationKnowledgeDosage{
@@ -483,7 +920,7 @@ func (m *MedicationKnowledgeDosage) Clone() *MedicationKnowledgeDosage {
 	}
 }
 
-// Equals checks for equality with another MedicationKnowledgeDosage instance
+// Equals checks equality between two MedicationKnowledgeDosage instances.
 func (m *MedicationKnowledgeDosage) Equals(other *MedicationKnowledgeDosage) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -498,7 +935,7 @@ func (m *MedicationKnowledgeDosage) Equals(other *MedicationKnowledgeDosage) boo
 // MedicationKnowledgePatientCharacteristics
 // Characteristics of the patient that are relevant to the administration guidelines (for example, height, weight, gender, etc.).
 type MedicationKnowledgePatientCharacteristics struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -507,22 +944,80 @@ type MedicationKnowledgePatientCharacteristics struct {
 	Value []*FhirString `json:"value,omitempty"`
 }
 
-// NewMedicationKnowledgePatientCharacteristics creates a new MedicationKnowledgePatientCharacteristics instance
+// NewMedicationKnowledgePatientCharacteristics creates a new MedicationKnowledgePatientCharacteristics instance.
 func NewMedicationKnowledgePatientCharacteristics() *MedicationKnowledgePatientCharacteristics {
 	return &MedicationKnowledgePatientCharacteristics{}
 }
 
-// FromJSON populates MedicationKnowledgePatientCharacteristics from JSON data
+// FromJSON populates MedicationKnowledgePatientCharacteristics from JSON data.
 func (m *MedicationKnowledgePatientCharacteristics) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		CharacteristicCodeableConcept *CodeableConcept `json:"characteristiccodeableconcept,omitempty"`
+		CharacteristicQuantity *Quantity `json:"characteristicquantity,omitempty"`
+		Value []interface{} `json:"value,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.CharacteristicCodeableConcept = temp.CharacteristicCodeableConcept
+	m.CharacteristicQuantity = temp.CharacteristicQuantity
+	if len(temp.Value) > 0 {
+		m.Value = make([]*FhirString, len(temp.Value))
+		for i := range temp.Value {
+			itemMap, ok := temp.Value[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Value[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Value[%d]: %v", i, err) }
+			m.Value[i] = primitive
+		}
+	}
+	return nil
 }
 
-// ToJSON converts MedicationKnowledgePatientCharacteristics to JSON data
+// ToJSON converts MedicationKnowledgePatientCharacteristics to JSON data.
 func (m *MedicationKnowledgePatientCharacteristics) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		CharacteristicCodeableConcept *CodeableConcept `json:"characteristiccodeableconcept,omitempty"`
+		CharacteristicQuantity *Quantity `json:"characteristicquantity,omitempty"`
+		Value []interface{} `json:"value,omitempty"`
+		ValueElement []map[string]interface{} `json:"_value,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.CharacteristicCodeableConcept = m.CharacteristicCodeableConcept
+	output.CharacteristicQuantity = m.CharacteristicQuantity
+	if len(m.Value) > 0 {
+		output.Value = make([]interface{}, len(m.Value))
+		output.ValueElement = make([]map[string]interface{}, len(m.Value))
+		for i, item := range m.Value {
+			if item != nil && item.Value != nil {
+				output.Value[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.ValueElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MedicationKnowledgePatientCharacteristics
+// Clone creates a deep copy of MedicationKnowledgePatientCharacteristics.
 func (m *MedicationKnowledgePatientCharacteristics) Clone() *MedicationKnowledgePatientCharacteristics {
 	if m == nil { return nil }
 	return &MedicationKnowledgePatientCharacteristics{
@@ -535,7 +1030,7 @@ func (m *MedicationKnowledgePatientCharacteristics) Clone() *MedicationKnowledge
 	}
 }
 
-// Equals checks for equality with another MedicationKnowledgePatientCharacteristics instance
+// Equals checks equality between two MedicationKnowledgePatientCharacteristics instances.
 func (m *MedicationKnowledgePatientCharacteristics) Equals(other *MedicationKnowledgePatientCharacteristics) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -551,7 +1046,7 @@ func (m *MedicationKnowledgePatientCharacteristics) Equals(other *MedicationKnow
 // MedicationKnowledgeMedicineClassification
 // Categorization of the medication within a formulary or classification system.
 type MedicationKnowledgeMedicineClassification struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -559,22 +1054,55 @@ type MedicationKnowledgeMedicineClassification struct {
 	Classification []*CodeableConcept `json:"classification,omitempty"`
 }
 
-// NewMedicationKnowledgeMedicineClassification creates a new MedicationKnowledgeMedicineClassification instance
+// NewMedicationKnowledgeMedicineClassification creates a new MedicationKnowledgeMedicineClassification instance.
 func NewMedicationKnowledgeMedicineClassification() *MedicationKnowledgeMedicineClassification {
 	return &MedicationKnowledgeMedicineClassification{}
 }
 
-// FromJSON populates MedicationKnowledgeMedicineClassification from JSON data
+// FromJSON populates MedicationKnowledgeMedicineClassification from JSON data.
 func (m *MedicationKnowledgeMedicineClassification) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Classification []*CodeableConcept `json:"classification,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Classification = temp.Classification
+	return nil
 }
 
-// ToJSON converts MedicationKnowledgeMedicineClassification to JSON data
+// ToJSON converts MedicationKnowledgeMedicineClassification to JSON data.
 func (m *MedicationKnowledgeMedicineClassification) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Classification []*CodeableConcept `json:"classification,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Classification = m.Classification
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MedicationKnowledgeMedicineClassification
+// Clone creates a deep copy of MedicationKnowledgeMedicineClassification.
 func (m *MedicationKnowledgeMedicineClassification) Clone() *MedicationKnowledgeMedicineClassification {
 	if m == nil { return nil }
 	return &MedicationKnowledgeMedicineClassification{
@@ -586,7 +1114,7 @@ func (m *MedicationKnowledgeMedicineClassification) Clone() *MedicationKnowledge
 	}
 }
 
-// Equals checks for equality with another MedicationKnowledgeMedicineClassification instance
+// Equals checks equality between two MedicationKnowledgeMedicineClassification instances.
 func (m *MedicationKnowledgeMedicineClassification) Equals(other *MedicationKnowledgeMedicineClassification) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -601,7 +1129,7 @@ func (m *MedicationKnowledgeMedicineClassification) Equals(other *MedicationKnow
 // MedicationKnowledgePackaging
 // Information that only applies to packages (not products).
 type MedicationKnowledgePackaging struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -609,22 +1137,55 @@ type MedicationKnowledgePackaging struct {
 	Quantity *Quantity `json:"quantity,omitempty"`
 }
 
-// NewMedicationKnowledgePackaging creates a new MedicationKnowledgePackaging instance
+// NewMedicationKnowledgePackaging creates a new MedicationKnowledgePackaging instance.
 func NewMedicationKnowledgePackaging() *MedicationKnowledgePackaging {
 	return &MedicationKnowledgePackaging{}
 }
 
-// FromJSON populates MedicationKnowledgePackaging from JSON data
+// FromJSON populates MedicationKnowledgePackaging from JSON data.
 func (m *MedicationKnowledgePackaging) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Quantity = temp.Quantity
+	return nil
 }
 
-// ToJSON converts MedicationKnowledgePackaging to JSON data
+// ToJSON converts MedicationKnowledgePackaging to JSON data.
 func (m *MedicationKnowledgePackaging) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Quantity = m.Quantity
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MedicationKnowledgePackaging
+// Clone creates a deep copy of MedicationKnowledgePackaging.
 func (m *MedicationKnowledgePackaging) Clone() *MedicationKnowledgePackaging {
 	if m == nil { return nil }
 	return &MedicationKnowledgePackaging{
@@ -636,7 +1197,7 @@ func (m *MedicationKnowledgePackaging) Clone() *MedicationKnowledgePackaging {
 	}
 }
 
-// Equals checks for equality with another MedicationKnowledgePackaging instance
+// Equals checks equality between two MedicationKnowledgePackaging instances.
 func (m *MedicationKnowledgePackaging) Equals(other *MedicationKnowledgePackaging) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -651,7 +1212,7 @@ func (m *MedicationKnowledgePackaging) Equals(other *MedicationKnowledgePackagin
 // MedicationKnowledgeDrugCharacteristic
 // Specifies descriptive properties of the medicine, such as color, shape, imprints, etc.
 type MedicationKnowledgeDrugCharacteristic struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -662,22 +1223,79 @@ type MedicationKnowledgeDrugCharacteristic struct {
 	ValueBase64Binary *FhirBase64Binary `json:"valuebase64binary,omitempty"`
 }
 
-// NewMedicationKnowledgeDrugCharacteristic creates a new MedicationKnowledgeDrugCharacteristic instance
+// NewMedicationKnowledgeDrugCharacteristic creates a new MedicationKnowledgeDrugCharacteristic instance.
 func NewMedicationKnowledgeDrugCharacteristic() *MedicationKnowledgeDrugCharacteristic {
 	return &MedicationKnowledgeDrugCharacteristic{}
 }
 
-// FromJSON populates MedicationKnowledgeDrugCharacteristic from JSON data
+// FromJSON populates MedicationKnowledgeDrugCharacteristic from JSON data.
 func (m *MedicationKnowledgeDrugCharacteristic) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+		ValueString *FhirString `json:"valuestring,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueBase64Binary *FhirBase64Binary `json:"valuebase64binary,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.ValueCodeableConcept = temp.ValueCodeableConcept
+	m.ValueString = temp.ValueString
+	m.ValueQuantity = temp.ValueQuantity
+	m.ValueBase64Binary = temp.ValueBase64Binary
+	return nil
 }
 
-// ToJSON converts MedicationKnowledgeDrugCharacteristic to JSON data
+// ToJSON converts MedicationKnowledgeDrugCharacteristic to JSON data.
 func (m *MedicationKnowledgeDrugCharacteristic) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+		ValueString interface{} `json:"valuestring,omitempty"`
+		ValueStringElement map[string]interface{} `json:"_valuestring,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueBase64Binary interface{} `json:"valuebase64binary,omitempty"`
+		ValueBase64BinaryElement map[string]interface{} `json:"_valuebase64binary,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.ValueCodeableConcept = m.ValueCodeableConcept
+	if m.ValueString != nil && m.ValueString.Value != nil {
+		output.ValueString = m.ValueString.Value
+		if m.ValueString.Element != nil {
+			output.ValueStringElement = toMapOrNil(m.ValueString.Element.ToJSON())
+		}
+	}
+	output.ValueQuantity = m.ValueQuantity
+	if m.ValueBase64Binary != nil && m.ValueBase64Binary.Value != nil {
+		output.ValueBase64Binary = m.ValueBase64Binary.Value
+		if m.ValueBase64Binary.Element != nil {
+			output.ValueBase64BinaryElement = toMapOrNil(m.ValueBase64Binary.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MedicationKnowledgeDrugCharacteristic
+// Clone creates a deep copy of MedicationKnowledgeDrugCharacteristic.
 func (m *MedicationKnowledgeDrugCharacteristic) Clone() *MedicationKnowledgeDrugCharacteristic {
 	if m == nil { return nil }
 	return &MedicationKnowledgeDrugCharacteristic{
@@ -692,7 +1310,7 @@ func (m *MedicationKnowledgeDrugCharacteristic) Clone() *MedicationKnowledgeDrug
 	}
 }
 
-// Equals checks for equality with another MedicationKnowledgeDrugCharacteristic instance
+// Equals checks equality between two MedicationKnowledgeDrugCharacteristic instances.
 func (m *MedicationKnowledgeDrugCharacteristic) Equals(other *MedicationKnowledgeDrugCharacteristic) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -710,7 +1328,7 @@ func (m *MedicationKnowledgeDrugCharacteristic) Equals(other *MedicationKnowledg
 // MedicationKnowledgeRegulatory
 // Regulatory information about a medication.
 type MedicationKnowledgeRegulatory struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -720,22 +1338,63 @@ type MedicationKnowledgeRegulatory struct {
 	MaxDispense *MedicationKnowledgeMaxDispense `json:"maxdispense,omitempty"`
 }
 
-// NewMedicationKnowledgeRegulatory creates a new MedicationKnowledgeRegulatory instance
+// NewMedicationKnowledgeRegulatory creates a new MedicationKnowledgeRegulatory instance.
 func NewMedicationKnowledgeRegulatory() *MedicationKnowledgeRegulatory {
 	return &MedicationKnowledgeRegulatory{}
 }
 
-// FromJSON populates MedicationKnowledgeRegulatory from JSON data
+// FromJSON populates MedicationKnowledgeRegulatory from JSON data.
 func (m *MedicationKnowledgeRegulatory) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		RegulatoryAuthority *Reference `json:"regulatoryauthority,omitempty"`
+		Substitution []*MedicationKnowledgeSubstitution `json:"substitution,omitempty"`
+		Schedule []*MedicationKnowledgeSchedule `json:"schedule,omitempty"`
+		MaxDispense *MedicationKnowledgeMaxDispense `json:"maxdispense,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.RegulatoryAuthority = temp.RegulatoryAuthority
+	m.Substitution = temp.Substitution
+	m.Schedule = temp.Schedule
+	m.MaxDispense = temp.MaxDispense
+	return nil
 }
 
-// ToJSON converts MedicationKnowledgeRegulatory to JSON data
+// ToJSON converts MedicationKnowledgeRegulatory to JSON data.
 func (m *MedicationKnowledgeRegulatory) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		RegulatoryAuthority *Reference `json:"regulatoryauthority,omitempty"`
+		Substitution []*MedicationKnowledgeSubstitution `json:"substitution,omitempty"`
+		Schedule []*MedicationKnowledgeSchedule `json:"schedule,omitempty"`
+		MaxDispense *MedicationKnowledgeMaxDispense `json:"maxdispense,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.RegulatoryAuthority = m.RegulatoryAuthority
+	output.Substitution = m.Substitution
+	output.Schedule = m.Schedule
+	output.MaxDispense = m.MaxDispense
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MedicationKnowledgeRegulatory
+// Clone creates a deep copy of MedicationKnowledgeRegulatory.
 func (m *MedicationKnowledgeRegulatory) Clone() *MedicationKnowledgeRegulatory {
 	if m == nil { return nil }
 	return &MedicationKnowledgeRegulatory{
@@ -749,7 +1408,7 @@ func (m *MedicationKnowledgeRegulatory) Clone() *MedicationKnowledgeRegulatory {
 	}
 }
 
-// Equals checks for equality with another MedicationKnowledgeRegulatory instance
+// Equals checks equality between two MedicationKnowledgeRegulatory instances.
 func (m *MedicationKnowledgeRegulatory) Equals(other *MedicationKnowledgeRegulatory) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -766,7 +1425,7 @@ func (m *MedicationKnowledgeRegulatory) Equals(other *MedicationKnowledgeRegulat
 // MedicationKnowledgeSubstitution
 // Specifies if changes are allowed when dispensing a medication from a regulatory perspective.
 type MedicationKnowledgeSubstitution struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -774,22 +1433,61 @@ type MedicationKnowledgeSubstitution struct {
 	Allowed *FhirBoolean `json:"allowed,omitempty"`
 }
 
-// NewMedicationKnowledgeSubstitution creates a new MedicationKnowledgeSubstitution instance
+// NewMedicationKnowledgeSubstitution creates a new MedicationKnowledgeSubstitution instance.
 func NewMedicationKnowledgeSubstitution() *MedicationKnowledgeSubstitution {
 	return &MedicationKnowledgeSubstitution{}
 }
 
-// FromJSON populates MedicationKnowledgeSubstitution from JSON data
+// FromJSON populates MedicationKnowledgeSubstitution from JSON data.
 func (m *MedicationKnowledgeSubstitution) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Allowed *FhirBoolean `json:"allowed,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Allowed = temp.Allowed
+	return nil
 }
 
-// ToJSON converts MedicationKnowledgeSubstitution to JSON data
+// ToJSON converts MedicationKnowledgeSubstitution to JSON data.
 func (m *MedicationKnowledgeSubstitution) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Allowed interface{} `json:"allowed,omitempty"`
+		AllowedElement map[string]interface{} `json:"_allowed,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	if m.Allowed != nil && m.Allowed.Value != nil {
+		output.Allowed = m.Allowed.Value
+		if m.Allowed.Element != nil {
+			output.AllowedElement = toMapOrNil(m.Allowed.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MedicationKnowledgeSubstitution
+// Clone creates a deep copy of MedicationKnowledgeSubstitution.
 func (m *MedicationKnowledgeSubstitution) Clone() *MedicationKnowledgeSubstitution {
 	if m == nil { return nil }
 	return &MedicationKnowledgeSubstitution{
@@ -801,7 +1499,7 @@ func (m *MedicationKnowledgeSubstitution) Clone() *MedicationKnowledgeSubstituti
 	}
 }
 
-// Equals checks for equality with another MedicationKnowledgeSubstitution instance
+// Equals checks equality between two MedicationKnowledgeSubstitution instances.
 func (m *MedicationKnowledgeSubstitution) Equals(other *MedicationKnowledgeSubstitution) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -816,29 +1514,58 @@ func (m *MedicationKnowledgeSubstitution) Equals(other *MedicationKnowledgeSubst
 // MedicationKnowledgeSchedule
 // Specifies the schedule of a medication in jurisdiction.
 type MedicationKnowledgeSchedule struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
 	Schedule *CodeableConcept `json:"schedule,omitempty"`
 }
 
-// NewMedicationKnowledgeSchedule creates a new MedicationKnowledgeSchedule instance
+// NewMedicationKnowledgeSchedule creates a new MedicationKnowledgeSchedule instance.
 func NewMedicationKnowledgeSchedule() *MedicationKnowledgeSchedule {
 	return &MedicationKnowledgeSchedule{}
 }
 
-// FromJSON populates MedicationKnowledgeSchedule from JSON data
+// FromJSON populates MedicationKnowledgeSchedule from JSON data.
 func (m *MedicationKnowledgeSchedule) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Schedule *CodeableConcept `json:"schedule,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Schedule = temp.Schedule
+	return nil
 }
 
-// ToJSON converts MedicationKnowledgeSchedule to JSON data
+// ToJSON converts MedicationKnowledgeSchedule to JSON data.
 func (m *MedicationKnowledgeSchedule) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Schedule *CodeableConcept `json:"schedule,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Schedule = m.Schedule
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MedicationKnowledgeSchedule
+// Clone creates a deep copy of MedicationKnowledgeSchedule.
 func (m *MedicationKnowledgeSchedule) Clone() *MedicationKnowledgeSchedule {
 	if m == nil { return nil }
 	return &MedicationKnowledgeSchedule{
@@ -849,7 +1576,7 @@ func (m *MedicationKnowledgeSchedule) Clone() *MedicationKnowledgeSchedule {
 	}
 }
 
-// Equals checks for equality with another MedicationKnowledgeSchedule instance
+// Equals checks equality between two MedicationKnowledgeSchedule instances.
 func (m *MedicationKnowledgeSchedule) Equals(other *MedicationKnowledgeSchedule) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -863,7 +1590,7 @@ func (m *MedicationKnowledgeSchedule) Equals(other *MedicationKnowledgeSchedule)
 // MedicationKnowledgeMaxDispense
 // The maximum number of units of the medication that can be dispensed in a period.
 type MedicationKnowledgeMaxDispense struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -871,22 +1598,55 @@ type MedicationKnowledgeMaxDispense struct {
 	Period *FhirDuration `json:"period,omitempty"`
 }
 
-// NewMedicationKnowledgeMaxDispense creates a new MedicationKnowledgeMaxDispense instance
+// NewMedicationKnowledgeMaxDispense creates a new MedicationKnowledgeMaxDispense instance.
 func NewMedicationKnowledgeMaxDispense() *MedicationKnowledgeMaxDispense {
 	return &MedicationKnowledgeMaxDispense{}
 }
 
-// FromJSON populates MedicationKnowledgeMaxDispense from JSON data
+// FromJSON populates MedicationKnowledgeMaxDispense from JSON data.
 func (m *MedicationKnowledgeMaxDispense) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		Period *FhirDuration `json:"period,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Quantity = temp.Quantity
+	m.Period = temp.Period
+	return nil
 }
 
-// ToJSON converts MedicationKnowledgeMaxDispense to JSON data
+// ToJSON converts MedicationKnowledgeMaxDispense to JSON data.
 func (m *MedicationKnowledgeMaxDispense) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		Period *FhirDuration `json:"period,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Quantity = m.Quantity
+	output.Period = m.Period
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MedicationKnowledgeMaxDispense
+// Clone creates a deep copy of MedicationKnowledgeMaxDispense.
 func (m *MedicationKnowledgeMaxDispense) Clone() *MedicationKnowledgeMaxDispense {
 	if m == nil { return nil }
 	return &MedicationKnowledgeMaxDispense{
@@ -898,7 +1658,7 @@ func (m *MedicationKnowledgeMaxDispense) Clone() *MedicationKnowledgeMaxDispense
 	}
 }
 
-// Equals checks for equality with another MedicationKnowledgeMaxDispense instance
+// Equals checks equality between two MedicationKnowledgeMaxDispense instances.
 func (m *MedicationKnowledgeMaxDispense) Equals(other *MedicationKnowledgeMaxDispense) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -913,7 +1673,7 @@ func (m *MedicationKnowledgeMaxDispense) Equals(other *MedicationKnowledgeMaxDis
 // MedicationKnowledgeKinetics
 // The time course of drug absorption, distribution, metabolism and excretion of a medication from the body.
 type MedicationKnowledgeKinetics struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -922,22 +1682,59 @@ type MedicationKnowledgeKinetics struct {
 	HalfLifePeriod *FhirDuration `json:"halflifeperiod,omitempty"`
 }
 
-// NewMedicationKnowledgeKinetics creates a new MedicationKnowledgeKinetics instance
+// NewMedicationKnowledgeKinetics creates a new MedicationKnowledgeKinetics instance.
 func NewMedicationKnowledgeKinetics() *MedicationKnowledgeKinetics {
 	return &MedicationKnowledgeKinetics{}
 }
 
-// FromJSON populates MedicationKnowledgeKinetics from JSON data
+// FromJSON populates MedicationKnowledgeKinetics from JSON data.
 func (m *MedicationKnowledgeKinetics) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		AreaUnderCurve []*Quantity `json:"areaundercurve,omitempty"`
+		LethalDose50 []*Quantity `json:"lethaldose50,omitempty"`
+		HalfLifePeriod *FhirDuration `json:"halflifeperiod,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.AreaUnderCurve = temp.AreaUnderCurve
+	m.LethalDose50 = temp.LethalDose50
+	m.HalfLifePeriod = temp.HalfLifePeriod
+	return nil
 }
 
-// ToJSON converts MedicationKnowledgeKinetics to JSON data
+// ToJSON converts MedicationKnowledgeKinetics to JSON data.
 func (m *MedicationKnowledgeKinetics) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		AreaUnderCurve []*Quantity `json:"areaundercurve,omitempty"`
+		LethalDose50 []*Quantity `json:"lethaldose50,omitempty"`
+		HalfLifePeriod *FhirDuration `json:"halflifeperiod,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.AreaUnderCurve = m.AreaUnderCurve
+	output.LethalDose50 = m.LethalDose50
+	output.HalfLifePeriod = m.HalfLifePeriod
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of MedicationKnowledgeKinetics
+// Clone creates a deep copy of MedicationKnowledgeKinetics.
 func (m *MedicationKnowledgeKinetics) Clone() *MedicationKnowledgeKinetics {
 	if m == nil { return nil }
 	return &MedicationKnowledgeKinetics{
@@ -950,7 +1747,7 @@ func (m *MedicationKnowledgeKinetics) Clone() *MedicationKnowledgeKinetics {
 	}
 }
 
-// Equals checks for equality with another MedicationKnowledgeKinetics instance
+// Equals checks equality between two MedicationKnowledgeKinetics instances.
 func (m *MedicationKnowledgeKinetics) Equals(other *MedicationKnowledgeKinetics) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

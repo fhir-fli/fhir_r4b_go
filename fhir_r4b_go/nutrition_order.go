@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // NutritionOrder
 // A request to supply a diet, formula feeding (enteral) or oral nutritional supplement to a patient/resident.
 type NutritionOrder struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -36,22 +38,210 @@ type NutritionOrder struct {
 	Note []*Annotation `json:"note,omitempty"`
 }
 
-// NewNutritionOrder creates a new NutritionOrder instance
+// NewNutritionOrder creates a new NutritionOrder instance.
 func NewNutritionOrder() *NutritionOrder {
 	return &NutritionOrder{}
 }
 
-// FromJSON populates NutritionOrder from JSON data
+// FromJSON populates NutritionOrder from JSON data.
 func (m *NutritionOrder) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		InstantiatesCanonical []interface{} `json:"instantiatescanonical,omitempty"`
+		InstantiatesUri []interface{} `json:"instantiatesuri,omitempty"`
+		Instantiates []interface{} `json:"instantiates,omitempty"`
+		Status *RequestStatus `json:"status,omitempty"`
+		Intent *RequestIntent `json:"intent,omitempty"`
+		Patient *Reference `json:"patient,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		DateTime *FhirDateTime `json:"datetime,omitempty"`
+		Orderer *Reference `json:"orderer,omitempty"`
+		AllergyIntolerance []*Reference `json:"allergyintolerance,omitempty"`
+		FoodPreferenceModifier []*CodeableConcept `json:"foodpreferencemodifier,omitempty"`
+		ExcludeFoodModifier []*CodeableConcept `json:"excludefoodmodifier,omitempty"`
+		OralDiet *NutritionOrderOralDiet `json:"oraldiet,omitempty"`
+		Supplement []*NutritionOrderSupplement `json:"supplement,omitempty"`
+		EnteralFormula *NutritionOrderEnteralFormula `json:"enteralformula,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	if len(temp.InstantiatesCanonical) > 0 {
+		m.InstantiatesCanonical = make([]*FhirCanonical, len(temp.InstantiatesCanonical))
+		for i := range temp.InstantiatesCanonical {
+			itemMap, ok := temp.InstantiatesCanonical[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for InstantiatesCanonical[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse InstantiatesCanonical[%d]: %v", i, err) }
+			m.InstantiatesCanonical[i] = primitive
+		}
+	}
+	if len(temp.InstantiatesUri) > 0 {
+		m.InstantiatesUri = make([]*FhirUri, len(temp.InstantiatesUri))
+		for i := range temp.InstantiatesUri {
+			itemMap, ok := temp.InstantiatesUri[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for InstantiatesUri[%d]: expected map", i) }
+			primitive, err := NewFhirUriFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse InstantiatesUri[%d]: %v", i, err) }
+			m.InstantiatesUri[i] = primitive
+		}
+	}
+	if len(temp.Instantiates) > 0 {
+		m.Instantiates = make([]*FhirUri, len(temp.Instantiates))
+		for i := range temp.Instantiates {
+			itemMap, ok := temp.Instantiates[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Instantiates[%d]: expected map", i) }
+			primitive, err := NewFhirUriFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Instantiates[%d]: %v", i, err) }
+			m.Instantiates[i] = primitive
+		}
+	}
+	m.Status = temp.Status
+	m.Intent = temp.Intent
+	m.Patient = temp.Patient
+	m.Encounter = temp.Encounter
+	m.DateTime = temp.DateTime
+	m.Orderer = temp.Orderer
+	m.AllergyIntolerance = temp.AllergyIntolerance
+	m.FoodPreferenceModifier = temp.FoodPreferenceModifier
+	m.ExcludeFoodModifier = temp.ExcludeFoodModifier
+	m.OralDiet = temp.OralDiet
+	m.Supplement = temp.Supplement
+	m.EnteralFormula = temp.EnteralFormula
+	m.Note = temp.Note
+	return nil
 }
 
-// ToJSON converts NutritionOrder to JSON data
+// ToJSON converts NutritionOrder to JSON data.
 func (m *NutritionOrder) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		InstantiatesCanonical []interface{} `json:"instantiatescanonical,omitempty"`
+		InstantiatesCanonicalElement []map[string]interface{} `json:"_instantiatescanonical,omitempty"`
+		InstantiatesUri []interface{} `json:"instantiatesuri,omitempty"`
+		InstantiatesUriElement []map[string]interface{} `json:"_instantiatesuri,omitempty"`
+		Instantiates []interface{} `json:"instantiates,omitempty"`
+		InstantiatesElement []map[string]interface{} `json:"_instantiates,omitempty"`
+		Status *RequestStatus `json:"status,omitempty"`
+		Intent *RequestIntent `json:"intent,omitempty"`
+		Patient *Reference `json:"patient,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		DateTime interface{} `json:"datetime,omitempty"`
+		DateTimeElement map[string]interface{} `json:"_datetime,omitempty"`
+		Orderer *Reference `json:"orderer,omitempty"`
+		AllergyIntolerance []*Reference `json:"allergyintolerance,omitempty"`
+		FoodPreferenceModifier []*CodeableConcept `json:"foodpreferencemodifier,omitempty"`
+		ExcludeFoodModifier []*CodeableConcept `json:"excludefoodmodifier,omitempty"`
+		OralDiet *NutritionOrderOralDiet `json:"oraldiet,omitempty"`
+		Supplement []*NutritionOrderSupplement `json:"supplement,omitempty"`
+		EnteralFormula *NutritionOrderEnteralFormula `json:"enteralformula,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	if len(m.InstantiatesCanonical) > 0 {
+		output.InstantiatesCanonical = make([]interface{}, len(m.InstantiatesCanonical))
+		output.InstantiatesCanonicalElement = make([]map[string]interface{}, len(m.InstantiatesCanonical))
+		for i, item := range m.InstantiatesCanonical {
+			if item != nil && item.Value != nil {
+				output.InstantiatesCanonical[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.InstantiatesCanonicalElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.InstantiatesUri) > 0 {
+		output.InstantiatesUri = make([]interface{}, len(m.InstantiatesUri))
+		output.InstantiatesUriElement = make([]map[string]interface{}, len(m.InstantiatesUri))
+		for i, item := range m.InstantiatesUri {
+			if item != nil && item.Value != nil {
+				output.InstantiatesUri[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.InstantiatesUriElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.Instantiates) > 0 {
+		output.Instantiates = make([]interface{}, len(m.Instantiates))
+		output.InstantiatesElement = make([]map[string]interface{}, len(m.Instantiates))
+		for i, item := range m.Instantiates {
+			if item != nil && item.Value != nil {
+				output.Instantiates[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.InstantiatesElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Status = m.Status
+	output.Intent = m.Intent
+	output.Patient = m.Patient
+	output.Encounter = m.Encounter
+	if m.DateTime != nil && m.DateTime.Value != nil {
+		output.DateTime = m.DateTime.Value
+		if m.DateTime.Element != nil {
+			output.DateTimeElement = toMapOrNil(m.DateTime.Element.ToJSON())
+		}
+	}
+	output.Orderer = m.Orderer
+	output.AllergyIntolerance = m.AllergyIntolerance
+	output.FoodPreferenceModifier = m.FoodPreferenceModifier
+	output.ExcludeFoodModifier = m.ExcludeFoodModifier
+	output.OralDiet = m.OralDiet
+	output.Supplement = m.Supplement
+	output.EnteralFormula = m.EnteralFormula
+	output.Note = m.Note
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of NutritionOrder
+// Clone creates a deep copy of NutritionOrder.
 func (m *NutritionOrder) Clone() *NutritionOrder {
 	if m == nil { return nil }
 	return &NutritionOrder{
@@ -83,7 +273,7 @@ func (m *NutritionOrder) Clone() *NutritionOrder {
 	}
 }
 
-// Equals checks for equality with another NutritionOrder instance
+// Equals checks equality between two NutritionOrder instances.
 func (m *NutritionOrder) Equals(other *NutritionOrder) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -118,7 +308,7 @@ func (m *NutritionOrder) Equals(other *NutritionOrder) bool {
 // NutritionOrderOralDiet
 // Diet given orally in contrast to enteral (tube) feeding.
 type NutritionOrderOralDiet struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -130,22 +320,77 @@ type NutritionOrderOralDiet struct {
 	Instruction *FhirString `json:"instruction,omitempty"`
 }
 
-// NewNutritionOrderOralDiet creates a new NutritionOrderOralDiet instance
+// NewNutritionOrderOralDiet creates a new NutritionOrderOralDiet instance.
 func NewNutritionOrderOralDiet() *NutritionOrderOralDiet {
 	return &NutritionOrderOralDiet{}
 }
 
-// FromJSON populates NutritionOrderOralDiet from JSON data
+// FromJSON populates NutritionOrderOralDiet from JSON data.
 func (m *NutritionOrderOralDiet) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type []*CodeableConcept `json:"type,omitempty"`
+		Schedule []*Timing `json:"schedule,omitempty"`
+		Nutrient []*NutritionOrderNutrient `json:"nutrient,omitempty"`
+		Texture []*NutritionOrderTexture `json:"texture,omitempty"`
+		FluidConsistencyType []*CodeableConcept `json:"fluidconsistencytype,omitempty"`
+		Instruction *FhirString `json:"instruction,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Schedule = temp.Schedule
+	m.Nutrient = temp.Nutrient
+	m.Texture = temp.Texture
+	m.FluidConsistencyType = temp.FluidConsistencyType
+	m.Instruction = temp.Instruction
+	return nil
 }
 
-// ToJSON converts NutritionOrderOralDiet to JSON data
+// ToJSON converts NutritionOrderOralDiet to JSON data.
 func (m *NutritionOrderOralDiet) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type []*CodeableConcept `json:"type,omitempty"`
+		Schedule []*Timing `json:"schedule,omitempty"`
+		Nutrient []*NutritionOrderNutrient `json:"nutrient,omitempty"`
+		Texture []*NutritionOrderTexture `json:"texture,omitempty"`
+		FluidConsistencyType []*CodeableConcept `json:"fluidconsistencytype,omitempty"`
+		Instruction interface{} `json:"instruction,omitempty"`
+		InstructionElement map[string]interface{} `json:"_instruction,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.Schedule = m.Schedule
+	output.Nutrient = m.Nutrient
+	output.Texture = m.Texture
+	output.FluidConsistencyType = m.FluidConsistencyType
+	if m.Instruction != nil && m.Instruction.Value != nil {
+		output.Instruction = m.Instruction.Value
+		if m.Instruction.Element != nil {
+			output.InstructionElement = toMapOrNil(m.Instruction.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of NutritionOrderOralDiet
+// Clone creates a deep copy of NutritionOrderOralDiet.
 func (m *NutritionOrderOralDiet) Clone() *NutritionOrderOralDiet {
 	if m == nil { return nil }
 	return &NutritionOrderOralDiet{
@@ -161,7 +406,7 @@ func (m *NutritionOrderOralDiet) Clone() *NutritionOrderOralDiet {
 	}
 }
 
-// Equals checks for equality with another NutritionOrderOralDiet instance
+// Equals checks equality between two NutritionOrderOralDiet instances.
 func (m *NutritionOrderOralDiet) Equals(other *NutritionOrderOralDiet) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -180,7 +425,7 @@ func (m *NutritionOrderOralDiet) Equals(other *NutritionOrderOralDiet) bool {
 // NutritionOrderNutrient
 // Class that defines the quantity and type of nutrient modifications (for example carbohydrate, fiber or sodium) required for the oral diet.
 type NutritionOrderNutrient struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -188,22 +433,55 @@ type NutritionOrderNutrient struct {
 	Amount *Quantity `json:"amount,omitempty"`
 }
 
-// NewNutritionOrderNutrient creates a new NutritionOrderNutrient instance
+// NewNutritionOrderNutrient creates a new NutritionOrderNutrient instance.
 func NewNutritionOrderNutrient() *NutritionOrderNutrient {
 	return &NutritionOrderNutrient{}
 }
 
-// FromJSON populates NutritionOrderNutrient from JSON data
+// FromJSON populates NutritionOrderNutrient from JSON data.
 func (m *NutritionOrderNutrient) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Modifier *CodeableConcept `json:"modifier,omitempty"`
+		Amount *Quantity `json:"amount,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Modifier = temp.Modifier
+	m.Amount = temp.Amount
+	return nil
 }
 
-// ToJSON converts NutritionOrderNutrient to JSON data
+// ToJSON converts NutritionOrderNutrient to JSON data.
 func (m *NutritionOrderNutrient) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Modifier *CodeableConcept `json:"modifier,omitempty"`
+		Amount *Quantity `json:"amount,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Modifier = m.Modifier
+	output.Amount = m.Amount
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of NutritionOrderNutrient
+// Clone creates a deep copy of NutritionOrderNutrient.
 func (m *NutritionOrderNutrient) Clone() *NutritionOrderNutrient {
 	if m == nil { return nil }
 	return &NutritionOrderNutrient{
@@ -215,7 +493,7 @@ func (m *NutritionOrderNutrient) Clone() *NutritionOrderNutrient {
 	}
 }
 
-// Equals checks for equality with another NutritionOrderNutrient instance
+// Equals checks equality between two NutritionOrderNutrient instances.
 func (m *NutritionOrderNutrient) Equals(other *NutritionOrderNutrient) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -230,7 +508,7 @@ func (m *NutritionOrderNutrient) Equals(other *NutritionOrderNutrient) bool {
 // NutritionOrderTexture
 // Class that describes any texture modifications required for the patient to safely consume various types of solid foods.
 type NutritionOrderTexture struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -238,22 +516,55 @@ type NutritionOrderTexture struct {
 	FoodType *CodeableConcept `json:"foodtype,omitempty"`
 }
 
-// NewNutritionOrderTexture creates a new NutritionOrderTexture instance
+// NewNutritionOrderTexture creates a new NutritionOrderTexture instance.
 func NewNutritionOrderTexture() *NutritionOrderTexture {
 	return &NutritionOrderTexture{}
 }
 
-// FromJSON populates NutritionOrderTexture from JSON data
+// FromJSON populates NutritionOrderTexture from JSON data.
 func (m *NutritionOrderTexture) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Modifier *CodeableConcept `json:"modifier,omitempty"`
+		FoodType *CodeableConcept `json:"foodtype,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Modifier = temp.Modifier
+	m.FoodType = temp.FoodType
+	return nil
 }
 
-// ToJSON converts NutritionOrderTexture to JSON data
+// ToJSON converts NutritionOrderTexture to JSON data.
 func (m *NutritionOrderTexture) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Modifier *CodeableConcept `json:"modifier,omitempty"`
+		FoodType *CodeableConcept `json:"foodtype,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Modifier = m.Modifier
+	output.FoodType = m.FoodType
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of NutritionOrderTexture
+// Clone creates a deep copy of NutritionOrderTexture.
 func (m *NutritionOrderTexture) Clone() *NutritionOrderTexture {
 	if m == nil { return nil }
 	return &NutritionOrderTexture{
@@ -265,7 +576,7 @@ func (m *NutritionOrderTexture) Clone() *NutritionOrderTexture {
 	}
 }
 
-// Equals checks for equality with another NutritionOrderTexture instance
+// Equals checks equality between two NutritionOrderTexture instances.
 func (m *NutritionOrderTexture) Equals(other *NutritionOrderTexture) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -280,7 +591,7 @@ func (m *NutritionOrderTexture) Equals(other *NutritionOrderTexture) bool {
 // NutritionOrderSupplement
 // Oral nutritional products given in order to add further nutritional value to the patient's diet.
 type NutritionOrderSupplement struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -291,22 +602,79 @@ type NutritionOrderSupplement struct {
 	Instruction *FhirString `json:"instruction,omitempty"`
 }
 
-// NewNutritionOrderSupplement creates a new NutritionOrderSupplement instance
+// NewNutritionOrderSupplement creates a new NutritionOrderSupplement instance.
 func NewNutritionOrderSupplement() *NutritionOrderSupplement {
 	return &NutritionOrderSupplement{}
 }
 
-// FromJSON populates NutritionOrderSupplement from JSON data
+// FromJSON populates NutritionOrderSupplement from JSON data.
 func (m *NutritionOrderSupplement) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		ProductName *FhirString `json:"productname,omitempty"`
+		Schedule []*Timing `json:"schedule,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		Instruction *FhirString `json:"instruction,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.ProductName = temp.ProductName
+	m.Schedule = temp.Schedule
+	m.Quantity = temp.Quantity
+	m.Instruction = temp.Instruction
+	return nil
 }
 
-// ToJSON converts NutritionOrderSupplement to JSON data
+// ToJSON converts NutritionOrderSupplement to JSON data.
 func (m *NutritionOrderSupplement) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		ProductName interface{} `json:"productname,omitempty"`
+		ProductNameElement map[string]interface{} `json:"_productname,omitempty"`
+		Schedule []*Timing `json:"schedule,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		Instruction interface{} `json:"instruction,omitempty"`
+		InstructionElement map[string]interface{} `json:"_instruction,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	if m.ProductName != nil && m.ProductName.Value != nil {
+		output.ProductName = m.ProductName.Value
+		if m.ProductName.Element != nil {
+			output.ProductNameElement = toMapOrNil(m.ProductName.Element.ToJSON())
+		}
+	}
+	output.Schedule = m.Schedule
+	output.Quantity = m.Quantity
+	if m.Instruction != nil && m.Instruction.Value != nil {
+		output.Instruction = m.Instruction.Value
+		if m.Instruction.Element != nil {
+			output.InstructionElement = toMapOrNil(m.Instruction.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of NutritionOrderSupplement
+// Clone creates a deep copy of NutritionOrderSupplement.
 func (m *NutritionOrderSupplement) Clone() *NutritionOrderSupplement {
 	if m == nil { return nil }
 	return &NutritionOrderSupplement{
@@ -321,7 +689,7 @@ func (m *NutritionOrderSupplement) Clone() *NutritionOrderSupplement {
 	}
 }
 
-// Equals checks for equality with another NutritionOrderSupplement instance
+// Equals checks equality between two NutritionOrderSupplement instances.
 func (m *NutritionOrderSupplement) Equals(other *NutritionOrderSupplement) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -339,7 +707,7 @@ func (m *NutritionOrderSupplement) Equals(other *NutritionOrderSupplement) bool 
 // NutritionOrderEnteralFormula
 // Feeding provided through the gastrointestinal tract via a tube, catheter, or stoma that delivers nutrition distal to the oral cavity.
 type NutritionOrderEnteralFormula struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -354,22 +722,101 @@ type NutritionOrderEnteralFormula struct {
 	AdministrationInstruction *FhirString `json:"administrationinstruction,omitempty"`
 }
 
-// NewNutritionOrderEnteralFormula creates a new NutritionOrderEnteralFormula instance
+// NewNutritionOrderEnteralFormula creates a new NutritionOrderEnteralFormula instance.
 func NewNutritionOrderEnteralFormula() *NutritionOrderEnteralFormula {
 	return &NutritionOrderEnteralFormula{}
 }
 
-// FromJSON populates NutritionOrderEnteralFormula from JSON data
+// FromJSON populates NutritionOrderEnteralFormula from JSON data.
 func (m *NutritionOrderEnteralFormula) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		BaseFormulaType *CodeableConcept `json:"baseformulatype,omitempty"`
+		BaseFormulaProductName *FhirString `json:"baseformulaproductname,omitempty"`
+		AdditiveType *CodeableConcept `json:"additivetype,omitempty"`
+		AdditiveProductName *FhirString `json:"additiveproductname,omitempty"`
+		CaloricDensity *Quantity `json:"caloricdensity,omitempty"`
+		RouteofAdministration *CodeableConcept `json:"routeofadministration,omitempty"`
+		Administration []*NutritionOrderAdministration `json:"administration,omitempty"`
+		MaxVolumeToDeliver *Quantity `json:"maxvolumetodeliver,omitempty"`
+		AdministrationInstruction *FhirString `json:"administrationinstruction,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.BaseFormulaType = temp.BaseFormulaType
+	m.BaseFormulaProductName = temp.BaseFormulaProductName
+	m.AdditiveType = temp.AdditiveType
+	m.AdditiveProductName = temp.AdditiveProductName
+	m.CaloricDensity = temp.CaloricDensity
+	m.RouteofAdministration = temp.RouteofAdministration
+	m.Administration = temp.Administration
+	m.MaxVolumeToDeliver = temp.MaxVolumeToDeliver
+	m.AdministrationInstruction = temp.AdministrationInstruction
+	return nil
 }
 
-// ToJSON converts NutritionOrderEnteralFormula to JSON data
+// ToJSON converts NutritionOrderEnteralFormula to JSON data.
 func (m *NutritionOrderEnteralFormula) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		BaseFormulaType *CodeableConcept `json:"baseformulatype,omitempty"`
+		BaseFormulaProductName interface{} `json:"baseformulaproductname,omitempty"`
+		BaseFormulaProductNameElement map[string]interface{} `json:"_baseformulaproductname,omitempty"`
+		AdditiveType *CodeableConcept `json:"additivetype,omitempty"`
+		AdditiveProductName interface{} `json:"additiveproductname,omitempty"`
+		AdditiveProductNameElement map[string]interface{} `json:"_additiveproductname,omitempty"`
+		CaloricDensity *Quantity `json:"caloricdensity,omitempty"`
+		RouteofAdministration *CodeableConcept `json:"routeofadministration,omitempty"`
+		Administration []*NutritionOrderAdministration `json:"administration,omitempty"`
+		MaxVolumeToDeliver *Quantity `json:"maxvolumetodeliver,omitempty"`
+		AdministrationInstruction interface{} `json:"administrationinstruction,omitempty"`
+		AdministrationInstructionElement map[string]interface{} `json:"_administrationinstruction,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.BaseFormulaType = m.BaseFormulaType
+	if m.BaseFormulaProductName != nil && m.BaseFormulaProductName.Value != nil {
+		output.BaseFormulaProductName = m.BaseFormulaProductName.Value
+		if m.BaseFormulaProductName.Element != nil {
+			output.BaseFormulaProductNameElement = toMapOrNil(m.BaseFormulaProductName.Element.ToJSON())
+		}
+	}
+	output.AdditiveType = m.AdditiveType
+	if m.AdditiveProductName != nil && m.AdditiveProductName.Value != nil {
+		output.AdditiveProductName = m.AdditiveProductName.Value
+		if m.AdditiveProductName.Element != nil {
+			output.AdditiveProductNameElement = toMapOrNil(m.AdditiveProductName.Element.ToJSON())
+		}
+	}
+	output.CaloricDensity = m.CaloricDensity
+	output.RouteofAdministration = m.RouteofAdministration
+	output.Administration = m.Administration
+	output.MaxVolumeToDeliver = m.MaxVolumeToDeliver
+	if m.AdministrationInstruction != nil && m.AdministrationInstruction.Value != nil {
+		output.AdministrationInstruction = m.AdministrationInstruction.Value
+		if m.AdministrationInstruction.Element != nil {
+			output.AdministrationInstructionElement = toMapOrNil(m.AdministrationInstruction.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of NutritionOrderEnteralFormula
+// Clone creates a deep copy of NutritionOrderEnteralFormula.
 func (m *NutritionOrderEnteralFormula) Clone() *NutritionOrderEnteralFormula {
 	if m == nil { return nil }
 	return &NutritionOrderEnteralFormula{
@@ -388,7 +835,7 @@ func (m *NutritionOrderEnteralFormula) Clone() *NutritionOrderEnteralFormula {
 	}
 }
 
-// Equals checks for equality with another NutritionOrderEnteralFormula instance
+// Equals checks equality between two NutritionOrderEnteralFormula instances.
 func (m *NutritionOrderEnteralFormula) Equals(other *NutritionOrderEnteralFormula) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -410,7 +857,7 @@ func (m *NutritionOrderEnteralFormula) Equals(other *NutritionOrderEnteralFormul
 // NutritionOrderAdministration
 // Formula administration instructions as structured data.  This repeating structure allows for changing the administration rate or volume over time for both bolus and continuous feeding.  An example of this would be an instruction to increase the rate of continuous feeding every 2 hours.
 type NutritionOrderAdministration struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -420,22 +867,63 @@ type NutritionOrderAdministration struct {
 	RateRatio *Ratio `json:"rateratio,omitempty"`
 }
 
-// NewNutritionOrderAdministration creates a new NutritionOrderAdministration instance
+// NewNutritionOrderAdministration creates a new NutritionOrderAdministration instance.
 func NewNutritionOrderAdministration() *NutritionOrderAdministration {
 	return &NutritionOrderAdministration{}
 }
 
-// FromJSON populates NutritionOrderAdministration from JSON data
+// FromJSON populates NutritionOrderAdministration from JSON data.
 func (m *NutritionOrderAdministration) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Schedule *Timing `json:"schedule,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		RateQuantity *Quantity `json:"ratequantity,omitempty"`
+		RateRatio *Ratio `json:"rateratio,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Schedule = temp.Schedule
+	m.Quantity = temp.Quantity
+	m.RateQuantity = temp.RateQuantity
+	m.RateRatio = temp.RateRatio
+	return nil
 }
 
-// ToJSON converts NutritionOrderAdministration to JSON data
+// ToJSON converts NutritionOrderAdministration to JSON data.
 func (m *NutritionOrderAdministration) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Schedule *Timing `json:"schedule,omitempty"`
+		Quantity *Quantity `json:"quantity,omitempty"`
+		RateQuantity *Quantity `json:"ratequantity,omitempty"`
+		RateRatio *Ratio `json:"rateratio,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Schedule = m.Schedule
+	output.Quantity = m.Quantity
+	output.RateQuantity = m.RateQuantity
+	output.RateRatio = m.RateRatio
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of NutritionOrderAdministration
+// Clone creates a deep copy of NutritionOrderAdministration.
 func (m *NutritionOrderAdministration) Clone() *NutritionOrderAdministration {
 	if m == nil { return nil }
 	return &NutritionOrderAdministration{
@@ -449,7 +937,7 @@ func (m *NutritionOrderAdministration) Clone() *NutritionOrderAdministration {
 	}
 }
 
-// Equals checks for equality with another NutritionOrderAdministration instance
+// Equals checks equality between two NutritionOrderAdministration instances.
 func (m *NutritionOrderAdministration) Equals(other *NutritionOrderAdministration) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

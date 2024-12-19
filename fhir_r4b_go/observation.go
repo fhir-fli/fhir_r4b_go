@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Observation
 // Measurements and simple assertions made about a patient, device or other subject.
 type Observation struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -56,22 +57,269 @@ type Observation struct {
 	Component []*ObservationComponent `json:"component,omitempty"`
 }
 
-// NewObservation creates a new Observation instance
+// NewObservation creates a new Observation instance.
 func NewObservation() *Observation {
 	return &Observation{}
 }
 
-// FromJSON populates Observation from JSON data
+// FromJSON populates Observation from JSON data.
 func (m *Observation) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		PartOf []*Reference `json:"partof,omitempty"`
+		Status *ObservationStatus `json:"status,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Focus []*Reference `json:"focus,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		EffectiveDateTime *FhirDateTime `json:"effectivedatetime,omitempty"`
+		EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+		EffectiveTiming *Timing `json:"effectivetiming,omitempty"`
+		EffectiveInstant *FhirInstant `json:"effectiveinstant,omitempty"`
+		Issued *FhirInstant `json:"issued,omitempty"`
+		Performer []*Reference `json:"performer,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+		ValueString *FhirString `json:"valuestring,omitempty"`
+		ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
+		ValueInteger *FhirInteger `json:"valueinteger,omitempty"`
+		ValueRange *Range `json:"valuerange,omitempty"`
+		ValueRatio *Ratio `json:"valueratio,omitempty"`
+		ValueSampledData *SampledData `json:"valuesampleddata,omitempty"`
+		ValueTime *FhirTime `json:"valuetime,omitempty"`
+		ValueDateTime *FhirDateTime `json:"valuedatetime,omitempty"`
+		ValuePeriod *Period `json:"valueperiod,omitempty"`
+		DataAbsentReason *CodeableConcept `json:"dataabsentreason,omitempty"`
+		Interpretation []*CodeableConcept `json:"interpretation,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		BodySite *CodeableConcept `json:"bodysite,omitempty"`
+		Method *CodeableConcept `json:"method,omitempty"`
+		Specimen *Reference `json:"specimen,omitempty"`
+		Device *Reference `json:"device,omitempty"`
+		ReferenceRange []*ObservationReferenceRange `json:"referencerange,omitempty"`
+		HasMember []*Reference `json:"hasmember,omitempty"`
+		DerivedFrom []*Reference `json:"derivedfrom,omitempty"`
+		Component []*ObservationComponent `json:"component,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.BasedOn = temp.BasedOn
+	m.PartOf = temp.PartOf
+	m.Status = temp.Status
+	m.Category = temp.Category
+	m.Code = temp.Code
+	m.Subject = temp.Subject
+	m.Focus = temp.Focus
+	m.Encounter = temp.Encounter
+	m.EffectiveDateTime = temp.EffectiveDateTime
+	m.EffectivePeriod = temp.EffectivePeriod
+	m.EffectiveTiming = temp.EffectiveTiming
+	m.EffectiveInstant = temp.EffectiveInstant
+	m.Issued = temp.Issued
+	m.Performer = temp.Performer
+	m.ValueQuantity = temp.ValueQuantity
+	m.ValueCodeableConcept = temp.ValueCodeableConcept
+	m.ValueString = temp.ValueString
+	m.ValueBoolean = temp.ValueBoolean
+	m.ValueInteger = temp.ValueInteger
+	m.ValueRange = temp.ValueRange
+	m.ValueRatio = temp.ValueRatio
+	m.ValueSampledData = temp.ValueSampledData
+	m.ValueTime = temp.ValueTime
+	m.ValueDateTime = temp.ValueDateTime
+	m.ValuePeriod = temp.ValuePeriod
+	m.DataAbsentReason = temp.DataAbsentReason
+	m.Interpretation = temp.Interpretation
+	m.Note = temp.Note
+	m.BodySite = temp.BodySite
+	m.Method = temp.Method
+	m.Specimen = temp.Specimen
+	m.Device = temp.Device
+	m.ReferenceRange = temp.ReferenceRange
+	m.HasMember = temp.HasMember
+	m.DerivedFrom = temp.DerivedFrom
+	m.Component = temp.Component
+	return nil
 }
 
-// ToJSON converts Observation to JSON data
+// ToJSON converts Observation to JSON data.
 func (m *Observation) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		PartOf []*Reference `json:"partof,omitempty"`
+		Status *ObservationStatus `json:"status,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Focus []*Reference `json:"focus,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		EffectiveDateTime interface{} `json:"effectivedatetime,omitempty"`
+		EffectiveDateTimeElement map[string]interface{} `json:"_effectivedatetime,omitempty"`
+		EffectivePeriod *Period `json:"effectiveperiod,omitempty"`
+		EffectiveTiming *Timing `json:"effectivetiming,omitempty"`
+		EffectiveInstant interface{} `json:"effectiveinstant,omitempty"`
+		EffectiveInstantElement map[string]interface{} `json:"_effectiveinstant,omitempty"`
+		Issued interface{} `json:"issued,omitempty"`
+		IssuedElement map[string]interface{} `json:"_issued,omitempty"`
+		Performer []*Reference `json:"performer,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+		ValueString interface{} `json:"valuestring,omitempty"`
+		ValueStringElement map[string]interface{} `json:"_valuestring,omitempty"`
+		ValueBoolean interface{} `json:"valueboolean,omitempty"`
+		ValueBooleanElement map[string]interface{} `json:"_valueboolean,omitempty"`
+		ValueInteger interface{} `json:"valueinteger,omitempty"`
+		ValueIntegerElement map[string]interface{} `json:"_valueinteger,omitempty"`
+		ValueRange *Range `json:"valuerange,omitempty"`
+		ValueRatio *Ratio `json:"valueratio,omitempty"`
+		ValueSampledData *SampledData `json:"valuesampleddata,omitempty"`
+		ValueTime interface{} `json:"valuetime,omitempty"`
+		ValueTimeElement map[string]interface{} `json:"_valuetime,omitempty"`
+		ValueDateTime interface{} `json:"valuedatetime,omitempty"`
+		ValueDateTimeElement map[string]interface{} `json:"_valuedatetime,omitempty"`
+		ValuePeriod *Period `json:"valueperiod,omitempty"`
+		DataAbsentReason *CodeableConcept `json:"dataabsentreason,omitempty"`
+		Interpretation []*CodeableConcept `json:"interpretation,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		BodySite *CodeableConcept `json:"bodysite,omitempty"`
+		Method *CodeableConcept `json:"method,omitempty"`
+		Specimen *Reference `json:"specimen,omitempty"`
+		Device *Reference `json:"device,omitempty"`
+		ReferenceRange []*ObservationReferenceRange `json:"referencerange,omitempty"`
+		HasMember []*Reference `json:"hasmember,omitempty"`
+		DerivedFrom []*Reference `json:"derivedfrom,omitempty"`
+		Component []*ObservationComponent `json:"component,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.BasedOn = m.BasedOn
+	output.PartOf = m.PartOf
+	output.Status = m.Status
+	output.Category = m.Category
+	output.Code = m.Code
+	output.Subject = m.Subject
+	output.Focus = m.Focus
+	output.Encounter = m.Encounter
+	if m.EffectiveDateTime != nil && m.EffectiveDateTime.Value != nil {
+		output.EffectiveDateTime = m.EffectiveDateTime.Value
+		if m.EffectiveDateTime.Element != nil {
+			output.EffectiveDateTimeElement = toMapOrNil(m.EffectiveDateTime.Element.ToJSON())
+		}
+	}
+	output.EffectivePeriod = m.EffectivePeriod
+	output.EffectiveTiming = m.EffectiveTiming
+	if m.EffectiveInstant != nil && m.EffectiveInstant.Value != nil {
+		output.EffectiveInstant = m.EffectiveInstant.Value
+		if m.EffectiveInstant.Element != nil {
+			output.EffectiveInstantElement = toMapOrNil(m.EffectiveInstant.Element.ToJSON())
+		}
+	}
+	if m.Issued != nil && m.Issued.Value != nil {
+		output.Issued = m.Issued.Value
+		if m.Issued.Element != nil {
+			output.IssuedElement = toMapOrNil(m.Issued.Element.ToJSON())
+		}
+	}
+	output.Performer = m.Performer
+	output.ValueQuantity = m.ValueQuantity
+	output.ValueCodeableConcept = m.ValueCodeableConcept
+	if m.ValueString != nil && m.ValueString.Value != nil {
+		output.ValueString = m.ValueString.Value
+		if m.ValueString.Element != nil {
+			output.ValueStringElement = toMapOrNil(m.ValueString.Element.ToJSON())
+		}
+	}
+	if m.ValueBoolean != nil && m.ValueBoolean.Value != nil {
+		output.ValueBoolean = m.ValueBoolean.Value
+		if m.ValueBoolean.Element != nil {
+			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.ToJSON())
+		}
+	}
+	if m.ValueInteger != nil && m.ValueInteger.Value != nil {
+		output.ValueInteger = m.ValueInteger.Value
+		if m.ValueInteger.Element != nil {
+			output.ValueIntegerElement = toMapOrNil(m.ValueInteger.Element.ToJSON())
+		}
+	}
+	output.ValueRange = m.ValueRange
+	output.ValueRatio = m.ValueRatio
+	output.ValueSampledData = m.ValueSampledData
+	if m.ValueTime != nil && m.ValueTime.Value != nil {
+		output.ValueTime = m.ValueTime.Value
+		if m.ValueTime.Element != nil {
+			output.ValueTimeElement = toMapOrNil(m.ValueTime.Element.ToJSON())
+		}
+	}
+	if m.ValueDateTime != nil && m.ValueDateTime.Value != nil {
+		output.ValueDateTime = m.ValueDateTime.Value
+		if m.ValueDateTime.Element != nil {
+			output.ValueDateTimeElement = toMapOrNil(m.ValueDateTime.Element.ToJSON())
+		}
+	}
+	output.ValuePeriod = m.ValuePeriod
+	output.DataAbsentReason = m.DataAbsentReason
+	output.Interpretation = m.Interpretation
+	output.Note = m.Note
+	output.BodySite = m.BodySite
+	output.Method = m.Method
+	output.Specimen = m.Specimen
+	output.Device = m.Device
+	output.ReferenceRange = m.ReferenceRange
+	output.HasMember = m.HasMember
+	output.DerivedFrom = m.DerivedFrom
+	output.Component = m.Component
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Observation
+// Clone creates a deep copy of Observation.
 func (m *Observation) Clone() *Observation {
 	if m == nil { return nil }
 	return &Observation{
@@ -123,7 +371,7 @@ func (m *Observation) Clone() *Observation {
 	}
 }
 
-// Equals checks for equality with another Observation instance
+// Equals checks equality between two Observation instances.
 func (m *Observation) Equals(other *Observation) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -178,7 +426,7 @@ func (m *Observation) Equals(other *Observation) bool {
 // ObservationReferenceRange
 // Guidance on how to interpret the value by comparison to a normal or recommended range.  Multiple reference ranges are interpreted as an "OR".   In other words, to represent two distinct target populations, two `referenceRange` elements would be used.
 type ObservationReferenceRange struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -190,22 +438,77 @@ type ObservationReferenceRange struct {
 	Text *FhirString `json:"text,omitempty"`
 }
 
-// NewObservationReferenceRange creates a new ObservationReferenceRange instance
+// NewObservationReferenceRange creates a new ObservationReferenceRange instance.
 func NewObservationReferenceRange() *ObservationReferenceRange {
 	return &ObservationReferenceRange{}
 }
 
-// FromJSON populates ObservationReferenceRange from JSON data
+// FromJSON populates ObservationReferenceRange from JSON data.
 func (m *ObservationReferenceRange) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Low *Quantity `json:"low,omitempty"`
+		High *Quantity `json:"high,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		AppliesTo []*CodeableConcept `json:"appliesto,omitempty"`
+		Age *Range `json:"age,omitempty"`
+		Text *FhirString `json:"text,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Low = temp.Low
+	m.High = temp.High
+	m.Type = temp.Type
+	m.AppliesTo = temp.AppliesTo
+	m.Age = temp.Age
+	m.Text = temp.Text
+	return nil
 }
 
-// ToJSON converts ObservationReferenceRange to JSON data
+// ToJSON converts ObservationReferenceRange to JSON data.
 func (m *ObservationReferenceRange) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Low *Quantity `json:"low,omitempty"`
+		High *Quantity `json:"high,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		AppliesTo []*CodeableConcept `json:"appliesto,omitempty"`
+		Age *Range `json:"age,omitempty"`
+		Text interface{} `json:"text,omitempty"`
+		TextElement map[string]interface{} `json:"_text,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Low = m.Low
+	output.High = m.High
+	output.Type = m.Type
+	output.AppliesTo = m.AppliesTo
+	output.Age = m.Age
+	if m.Text != nil && m.Text.Value != nil {
+		output.Text = m.Text.Value
+		if m.Text.Element != nil {
+			output.TextElement = toMapOrNil(m.Text.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ObservationReferenceRange
+// Clone creates a deep copy of ObservationReferenceRange.
 func (m *ObservationReferenceRange) Clone() *ObservationReferenceRange {
 	if m == nil { return nil }
 	return &ObservationReferenceRange{
@@ -221,7 +524,7 @@ func (m *ObservationReferenceRange) Clone() *ObservationReferenceRange {
 	}
 }
 
-// Equals checks for equality with another ObservationReferenceRange instance
+// Equals checks equality between two ObservationReferenceRange instances.
 func (m *ObservationReferenceRange) Equals(other *ObservationReferenceRange) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -240,7 +543,7 @@ func (m *ObservationReferenceRange) Equals(other *ObservationReferenceRange) boo
 // ObservationComponent
 // Some observations have multiple component observations.  These component observations are expressed as separate code value pairs that share the same attributes.  Examples include systolic and diastolic component observations for blood pressure measurement and multiple component observations for genetics observations.
 type ObservationComponent struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -261,22 +564,137 @@ type ObservationComponent struct {
 	ReferenceRange []*ObservationReferenceRange `json:"referencerange,omitempty"`
 }
 
-// NewObservationComponent creates a new ObservationComponent instance
+// NewObservationComponent creates a new ObservationComponent instance.
 func NewObservationComponent() *ObservationComponent {
 	return &ObservationComponent{}
 }
 
-// FromJSON populates ObservationComponent from JSON data
+// FromJSON populates ObservationComponent from JSON data.
 func (m *ObservationComponent) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+		ValueString *FhirString `json:"valuestring,omitempty"`
+		ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
+		ValueInteger *FhirInteger `json:"valueinteger,omitempty"`
+		ValueRange *Range `json:"valuerange,omitempty"`
+		ValueRatio *Ratio `json:"valueratio,omitempty"`
+		ValueSampledData *SampledData `json:"valuesampleddata,omitempty"`
+		ValueTime *FhirTime `json:"valuetime,omitempty"`
+		ValueDateTime *FhirDateTime `json:"valuedatetime,omitempty"`
+		ValuePeriod *Period `json:"valueperiod,omitempty"`
+		DataAbsentReason *CodeableConcept `json:"dataabsentreason,omitempty"`
+		Interpretation []*CodeableConcept `json:"interpretation,omitempty"`
+		ReferenceRange []*ObservationReferenceRange `json:"referencerange,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.ValueQuantity = temp.ValueQuantity
+	m.ValueCodeableConcept = temp.ValueCodeableConcept
+	m.ValueString = temp.ValueString
+	m.ValueBoolean = temp.ValueBoolean
+	m.ValueInteger = temp.ValueInteger
+	m.ValueRange = temp.ValueRange
+	m.ValueRatio = temp.ValueRatio
+	m.ValueSampledData = temp.ValueSampledData
+	m.ValueTime = temp.ValueTime
+	m.ValueDateTime = temp.ValueDateTime
+	m.ValuePeriod = temp.ValuePeriod
+	m.DataAbsentReason = temp.DataAbsentReason
+	m.Interpretation = temp.Interpretation
+	m.ReferenceRange = temp.ReferenceRange
+	return nil
 }
 
-// ToJSON converts ObservationComponent to JSON data
+// ToJSON converts ObservationComponent to JSON data.
 func (m *ObservationComponent) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+		ValueString interface{} `json:"valuestring,omitempty"`
+		ValueStringElement map[string]interface{} `json:"_valuestring,omitempty"`
+		ValueBoolean interface{} `json:"valueboolean,omitempty"`
+		ValueBooleanElement map[string]interface{} `json:"_valueboolean,omitempty"`
+		ValueInteger interface{} `json:"valueinteger,omitempty"`
+		ValueIntegerElement map[string]interface{} `json:"_valueinteger,omitempty"`
+		ValueRange *Range `json:"valuerange,omitempty"`
+		ValueRatio *Ratio `json:"valueratio,omitempty"`
+		ValueSampledData *SampledData `json:"valuesampleddata,omitempty"`
+		ValueTime interface{} `json:"valuetime,omitempty"`
+		ValueTimeElement map[string]interface{} `json:"_valuetime,omitempty"`
+		ValueDateTime interface{} `json:"valuedatetime,omitempty"`
+		ValueDateTimeElement map[string]interface{} `json:"_valuedatetime,omitempty"`
+		ValuePeriod *Period `json:"valueperiod,omitempty"`
+		DataAbsentReason *CodeableConcept `json:"dataabsentreason,omitempty"`
+		Interpretation []*CodeableConcept `json:"interpretation,omitempty"`
+		ReferenceRange []*ObservationReferenceRange `json:"referencerange,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	output.ValueQuantity = m.ValueQuantity
+	output.ValueCodeableConcept = m.ValueCodeableConcept
+	if m.ValueString != nil && m.ValueString.Value != nil {
+		output.ValueString = m.ValueString.Value
+		if m.ValueString.Element != nil {
+			output.ValueStringElement = toMapOrNil(m.ValueString.Element.ToJSON())
+		}
+	}
+	if m.ValueBoolean != nil && m.ValueBoolean.Value != nil {
+		output.ValueBoolean = m.ValueBoolean.Value
+		if m.ValueBoolean.Element != nil {
+			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.ToJSON())
+		}
+	}
+	if m.ValueInteger != nil && m.ValueInteger.Value != nil {
+		output.ValueInteger = m.ValueInteger.Value
+		if m.ValueInteger.Element != nil {
+			output.ValueIntegerElement = toMapOrNil(m.ValueInteger.Element.ToJSON())
+		}
+	}
+	output.ValueRange = m.ValueRange
+	output.ValueRatio = m.ValueRatio
+	output.ValueSampledData = m.ValueSampledData
+	if m.ValueTime != nil && m.ValueTime.Value != nil {
+		output.ValueTime = m.ValueTime.Value
+		if m.ValueTime.Element != nil {
+			output.ValueTimeElement = toMapOrNil(m.ValueTime.Element.ToJSON())
+		}
+	}
+	if m.ValueDateTime != nil && m.ValueDateTime.Value != nil {
+		output.ValueDateTime = m.ValueDateTime.Value
+		if m.ValueDateTime.Element != nil {
+			output.ValueDateTimeElement = toMapOrNil(m.ValueDateTime.Element.ToJSON())
+		}
+	}
+	output.ValuePeriod = m.ValuePeriod
+	output.DataAbsentReason = m.DataAbsentReason
+	output.Interpretation = m.Interpretation
+	output.ReferenceRange = m.ReferenceRange
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ObservationComponent
+// Clone creates a deep copy of ObservationComponent.
 func (m *ObservationComponent) Clone() *ObservationComponent {
 	if m == nil { return nil }
 	return &ObservationComponent{
@@ -301,7 +719,7 @@ func (m *ObservationComponent) Clone() *ObservationComponent {
 	}
 }
 
-// Equals checks for equality with another ObservationComponent instance
+// Equals checks equality between two ObservationComponent instances.
 func (m *ObservationComponent) Equals(other *ObservationComponent) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

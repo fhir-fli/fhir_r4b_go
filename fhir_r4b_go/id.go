@@ -29,6 +29,32 @@ func validateFhirId(input string) error {
 	return nil
 }
 
+// NewFhirIdFromMap creates a new FhirId instance from a map representation.
+func NewFhirIdFromMap(data map[string]interface{}) (*FhirId, error) {
+	// Extract and validate the "value" field
+	rawValue, ok := data["value"].(string)
+	if !ok || rawValue == "" {
+		return nil, errors.New("missing or invalid 'value' in map for FhirId")
+	}
+	if err := validateFhirId(rawValue); err != nil {
+		return nil, err
+	}
+
+	// Create a new FhirId instance with the value
+	fhirId := &FhirId{Value: &rawValue}
+
+	// Extract and parse the "_value" field for metadata if it exists
+	if rawElement, ok := data["_value"].(map[string]interface{}); ok {
+		element := &Element{}
+		if err := mapToStruct(rawElement, element); err != nil {
+			return nil, errors.New("failed to parse '_value' metadata for FhirId")
+		}
+		fhirId.Element = element
+	}
+
+	return fhirId, nil
+}
+
 func (fi *FhirId) FromJSON(data []byte) error {
 	temp := struct {
 		Value   *string  `json:"value"`

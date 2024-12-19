@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // RegulatedAuthorization
 // Regulatory approval, clearance or licencing related to a regulated product, treatment, facility or activity that is cited in a guidance, regulation, rule or legislative act. An example is Market Authorization relating to a Medicinal Product.
 type RegulatedAuthorization struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -33,22 +34,141 @@ type RegulatedAuthorization struct {
 	Case_ *RegulatedAuthorizationCase `json:"case,omitempty"`
 }
 
-// NewRegulatedAuthorization creates a new RegulatedAuthorization instance
+// NewRegulatedAuthorization creates a new RegulatedAuthorization instance.
 func NewRegulatedAuthorization() *RegulatedAuthorization {
 	return &RegulatedAuthorization{}
 }
 
-// FromJSON populates RegulatedAuthorization from JSON data
+// FromJSON populates RegulatedAuthorization from JSON data.
 func (m *RegulatedAuthorization) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Subject []*Reference `json:"subject,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Description *FhirMarkdown `json:"description,omitempty"`
+		Region []*CodeableConcept `json:"region,omitempty"`
+		Status *CodeableConcept `json:"status,omitempty"`
+		StatusDate *FhirDateTime `json:"statusdate,omitempty"`
+		ValidityPeriod *Period `json:"validityperiod,omitempty"`
+		Indication *CodeableReference `json:"indication,omitempty"`
+		IntendedUse *CodeableConcept `json:"intendeduse,omitempty"`
+		Basis []*CodeableConcept `json:"basis,omitempty"`
+		Holder *Reference `json:"holder,omitempty"`
+		Regulator *Reference `json:"regulator,omitempty"`
+		Case_ *RegulatedAuthorizationCase `json:"case,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Subject = temp.Subject
+	m.Type = temp.Type
+	m.Description = temp.Description
+	m.Region = temp.Region
+	m.Status = temp.Status
+	m.StatusDate = temp.StatusDate
+	m.ValidityPeriod = temp.ValidityPeriod
+	m.Indication = temp.Indication
+	m.IntendedUse = temp.IntendedUse
+	m.Basis = temp.Basis
+	m.Holder = temp.Holder
+	m.Regulator = temp.Regulator
+	m.Case_ = temp.Case_
+	return nil
 }
 
-// ToJSON converts RegulatedAuthorization to JSON data
+// ToJSON converts RegulatedAuthorization to JSON data.
 func (m *RegulatedAuthorization) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Subject []*Reference `json:"subject,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		Region []*CodeableConcept `json:"region,omitempty"`
+		Status *CodeableConcept `json:"status,omitempty"`
+		StatusDate interface{} `json:"statusdate,omitempty"`
+		StatusDateElement map[string]interface{} `json:"_statusdate,omitempty"`
+		ValidityPeriod *Period `json:"validityperiod,omitempty"`
+		Indication *CodeableReference `json:"indication,omitempty"`
+		IntendedUse *CodeableConcept `json:"intendeduse,omitempty"`
+		Basis []*CodeableConcept `json:"basis,omitempty"`
+		Holder *Reference `json:"holder,omitempty"`
+		Regulator *Reference `json:"regulator,omitempty"`
+		Case_ *RegulatedAuthorizationCase `json:"case,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Subject = m.Subject
+	output.Type = m.Type
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.Region = m.Region
+	output.Status = m.Status
+	if m.StatusDate != nil && m.StatusDate.Value != nil {
+		output.StatusDate = m.StatusDate.Value
+		if m.StatusDate.Element != nil {
+			output.StatusDateElement = toMapOrNil(m.StatusDate.Element.ToJSON())
+		}
+	}
+	output.ValidityPeriod = m.ValidityPeriod
+	output.Indication = m.Indication
+	output.IntendedUse = m.IntendedUse
+	output.Basis = m.Basis
+	output.Holder = m.Holder
+	output.Regulator = m.Regulator
+	output.Case_ = m.Case_
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of RegulatedAuthorization
+// Clone creates a deep copy of RegulatedAuthorization.
 func (m *RegulatedAuthorization) Clone() *RegulatedAuthorization {
 	if m == nil { return nil }
 	return &RegulatedAuthorization{
@@ -77,7 +197,7 @@ func (m *RegulatedAuthorization) Clone() *RegulatedAuthorization {
 	}
 }
 
-// Equals checks for equality with another RegulatedAuthorization instance
+// Equals checks equality between two RegulatedAuthorization instances.
 func (m *RegulatedAuthorization) Equals(other *RegulatedAuthorization) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -109,7 +229,7 @@ func (m *RegulatedAuthorization) Equals(other *RegulatedAuthorization) bool {
 // RegulatedAuthorizationCase
 // The case or regulatory procedure for granting or amending a regulated authorization. An authorization is granted in response to submissions/applications by those seeking authorization. A case is the administrative process that deals with the application(s) that relate to this and assesses them. Note: This area is subject to ongoing review and the workgroup is seeking implementer feedback on its use (see link at bottom of page).
 type RegulatedAuthorizationCase struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -121,22 +241,77 @@ type RegulatedAuthorizationCase struct {
 	Application []*RegulatedAuthorizationCase `json:"application,omitempty"`
 }
 
-// NewRegulatedAuthorizationCase creates a new RegulatedAuthorizationCase instance
+// NewRegulatedAuthorizationCase creates a new RegulatedAuthorizationCase instance.
 func NewRegulatedAuthorizationCase() *RegulatedAuthorizationCase {
 	return &RegulatedAuthorizationCase{}
 }
 
-// FromJSON populates RegulatedAuthorizationCase from JSON data
+// FromJSON populates RegulatedAuthorizationCase from JSON data.
 func (m *RegulatedAuthorizationCase) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Status *CodeableConcept `json:"status,omitempty"`
+		DatePeriod *Period `json:"dateperiod,omitempty"`
+		DateDateTime *FhirDateTime `json:"datedatetime,omitempty"`
+		Application []*RegulatedAuthorizationCase `json:"application,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Type = temp.Type
+	m.Status = temp.Status
+	m.DatePeriod = temp.DatePeriod
+	m.DateDateTime = temp.DateDateTime
+	m.Application = temp.Application
+	return nil
 }
 
-// ToJSON converts RegulatedAuthorizationCase to JSON data
+// ToJSON converts RegulatedAuthorizationCase to JSON data.
 func (m *RegulatedAuthorizationCase) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier *Identifier `json:"identifier,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Status *CodeableConcept `json:"status,omitempty"`
+		DatePeriod *Period `json:"dateperiod,omitempty"`
+		DateDateTime interface{} `json:"datedatetime,omitempty"`
+		DateDateTimeElement map[string]interface{} `json:"_datedatetime,omitempty"`
+		Application []*RegulatedAuthorizationCase `json:"application,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Type = m.Type
+	output.Status = m.Status
+	output.DatePeriod = m.DatePeriod
+	if m.DateDateTime != nil && m.DateDateTime.Value != nil {
+		output.DateDateTime = m.DateDateTime.Value
+		if m.DateDateTime.Element != nil {
+			output.DateDateTimeElement = toMapOrNil(m.DateDateTime.Element.ToJSON())
+		}
+	}
+	output.Application = m.Application
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of RegulatedAuthorizationCase
+// Clone creates a deep copy of RegulatedAuthorizationCase.
 func (m *RegulatedAuthorizationCase) Clone() *RegulatedAuthorizationCase {
 	if m == nil { return nil }
 	return &RegulatedAuthorizationCase{
@@ -152,7 +327,7 @@ func (m *RegulatedAuthorizationCase) Clone() *RegulatedAuthorizationCase {
 	}
 }
 
-// Equals checks for equality with another RegulatedAuthorizationCase instance
+// Equals checks equality between two RegulatedAuthorizationCase instances.
 func (m *RegulatedAuthorizationCase) Equals(other *RegulatedAuthorizationCase) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

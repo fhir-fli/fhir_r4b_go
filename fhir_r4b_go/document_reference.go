@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // DocumentReference
 // A reference to a document of any kind for any purpose. Provides metadata about the document so that the document can be discovered and managed. The scope of a document is any seralized object with a mime-type, so includes formal patient centric documents (CDA), cliical notes, scanned paper, and non-patient specific documents like policy text.
 type DocumentReference struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -35,22 +36,149 @@ type DocumentReference struct {
 	Context *DocumentReferenceContext `json:"context,omitempty"`
 }
 
-// NewDocumentReference creates a new DocumentReference instance
+// NewDocumentReference creates a new DocumentReference instance.
 func NewDocumentReference() *DocumentReference {
 	return &DocumentReference{}
 }
 
-// FromJSON populates DocumentReference from JSON data
+// FromJSON populates DocumentReference from JSON data.
 func (m *DocumentReference) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		MasterIdentifier *Identifier `json:"masteridentifier,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *DocumentReferenceStatus `json:"status,omitempty"`
+		DocStatus *CompositionStatus `json:"docstatus,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Date *FhirInstant `json:"date,omitempty"`
+		Author []*Reference `json:"author,omitempty"`
+		Authenticator *Reference `json:"authenticator,omitempty"`
+		Custodian *Reference `json:"custodian,omitempty"`
+		RelatesTo []*DocumentReferenceRelatesTo `json:"relatesto,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		SecurityLabel []*CodeableConcept `json:"securitylabel,omitempty"`
+		Content []*DocumentReferenceContent `json:"content,omitempty"`
+		Context *DocumentReferenceContext `json:"context,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.MasterIdentifier = temp.MasterIdentifier
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.DocStatus = temp.DocStatus
+	m.Type = temp.Type
+	m.Category = temp.Category
+	m.Subject = temp.Subject
+	m.Date = temp.Date
+	m.Author = temp.Author
+	m.Authenticator = temp.Authenticator
+	m.Custodian = temp.Custodian
+	m.RelatesTo = temp.RelatesTo
+	m.Description = temp.Description
+	m.SecurityLabel = temp.SecurityLabel
+	m.Content = temp.Content
+	m.Context = temp.Context
+	return nil
 }
 
-// ToJSON converts DocumentReference to JSON data
+// ToJSON converts DocumentReference to JSON data.
 func (m *DocumentReference) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		MasterIdentifier *Identifier `json:"masteridentifier,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *DocumentReferenceStatus `json:"status,omitempty"`
+		DocStatus *CompositionStatus `json:"docstatus,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Date interface{} `json:"date,omitempty"`
+		DateElement map[string]interface{} `json:"_date,omitempty"`
+		Author []*Reference `json:"author,omitempty"`
+		Authenticator *Reference `json:"authenticator,omitempty"`
+		Custodian *Reference `json:"custodian,omitempty"`
+		RelatesTo []*DocumentReferenceRelatesTo `json:"relatesto,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		SecurityLabel []*CodeableConcept `json:"securitylabel,omitempty"`
+		Content []*DocumentReferenceContent `json:"content,omitempty"`
+		Context *DocumentReferenceContext `json:"context,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.MasterIdentifier = m.MasterIdentifier
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	output.DocStatus = m.DocStatus
+	output.Type = m.Type
+	output.Category = m.Category
+	output.Subject = m.Subject
+	if m.Date != nil && m.Date.Value != nil {
+		output.Date = m.Date.Value
+		if m.Date.Element != nil {
+			output.DateElement = toMapOrNil(m.Date.Element.ToJSON())
+		}
+	}
+	output.Author = m.Author
+	output.Authenticator = m.Authenticator
+	output.Custodian = m.Custodian
+	output.RelatesTo = m.RelatesTo
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.SecurityLabel = m.SecurityLabel
+	output.Content = m.Content
+	output.Context = m.Context
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DocumentReference
+// Clone creates a deep copy of DocumentReference.
 func (m *DocumentReference) Clone() *DocumentReference {
 	if m == nil { return nil }
 	return &DocumentReference{
@@ -81,7 +209,7 @@ func (m *DocumentReference) Clone() *DocumentReference {
 	}
 }
 
-// Equals checks for equality with another DocumentReference instance
+// Equals checks equality between two DocumentReference instances.
 func (m *DocumentReference) Equals(other *DocumentReference) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -115,7 +243,7 @@ func (m *DocumentReference) Equals(other *DocumentReference) bool {
 // DocumentReferenceRelatesTo
 // Relationships that this document has with other document references that already exist.
 type DocumentReferenceRelatesTo struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -123,22 +251,55 @@ type DocumentReferenceRelatesTo struct {
 	Target *Reference `json:"target,omitempty"`
 }
 
-// NewDocumentReferenceRelatesTo creates a new DocumentReferenceRelatesTo instance
+// NewDocumentReferenceRelatesTo creates a new DocumentReferenceRelatesTo instance.
 func NewDocumentReferenceRelatesTo() *DocumentReferenceRelatesTo {
 	return &DocumentReferenceRelatesTo{}
 }
 
-// FromJSON populates DocumentReferenceRelatesTo from JSON data
+// FromJSON populates DocumentReferenceRelatesTo from JSON data.
 func (m *DocumentReferenceRelatesTo) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *DocumentRelationshipType `json:"code,omitempty"`
+		Target *Reference `json:"target,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Target = temp.Target
+	return nil
 }
 
-// ToJSON converts DocumentReferenceRelatesTo to JSON data
+// ToJSON converts DocumentReferenceRelatesTo to JSON data.
 func (m *DocumentReferenceRelatesTo) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *DocumentRelationshipType `json:"code,omitempty"`
+		Target *Reference `json:"target,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	output.Target = m.Target
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DocumentReferenceRelatesTo
+// Clone creates a deep copy of DocumentReferenceRelatesTo.
 func (m *DocumentReferenceRelatesTo) Clone() *DocumentReferenceRelatesTo {
 	if m == nil { return nil }
 	return &DocumentReferenceRelatesTo{
@@ -150,7 +311,7 @@ func (m *DocumentReferenceRelatesTo) Clone() *DocumentReferenceRelatesTo {
 	}
 }
 
-// Equals checks for equality with another DocumentReferenceRelatesTo instance
+// Equals checks equality between two DocumentReferenceRelatesTo instances.
 func (m *DocumentReferenceRelatesTo) Equals(other *DocumentReferenceRelatesTo) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -165,7 +326,7 @@ func (m *DocumentReferenceRelatesTo) Equals(other *DocumentReferenceRelatesTo) b
 // DocumentReferenceContent
 // The document and format referenced. There may be multiple content element repetitions, each with a different format.
 type DocumentReferenceContent struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -173,22 +334,55 @@ type DocumentReferenceContent struct {
 	Format *Coding `json:"format,omitempty"`
 }
 
-// NewDocumentReferenceContent creates a new DocumentReferenceContent instance
+// NewDocumentReferenceContent creates a new DocumentReferenceContent instance.
 func NewDocumentReferenceContent() *DocumentReferenceContent {
 	return &DocumentReferenceContent{}
 }
 
-// FromJSON populates DocumentReferenceContent from JSON data
+// FromJSON populates DocumentReferenceContent from JSON data.
 func (m *DocumentReferenceContent) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Attachment *Attachment `json:"attachment,omitempty"`
+		Format *Coding `json:"format,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Attachment = temp.Attachment
+	m.Format = temp.Format
+	return nil
 }
 
-// ToJSON converts DocumentReferenceContent to JSON data
+// ToJSON converts DocumentReferenceContent to JSON data.
 func (m *DocumentReferenceContent) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Attachment *Attachment `json:"attachment,omitempty"`
+		Format *Coding `json:"format,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Attachment = m.Attachment
+	output.Format = m.Format
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DocumentReferenceContent
+// Clone creates a deep copy of DocumentReferenceContent.
 func (m *DocumentReferenceContent) Clone() *DocumentReferenceContent {
 	if m == nil { return nil }
 	return &DocumentReferenceContent{
@@ -200,7 +394,7 @@ func (m *DocumentReferenceContent) Clone() *DocumentReferenceContent {
 	}
 }
 
-// Equals checks for equality with another DocumentReferenceContent instance
+// Equals checks equality between two DocumentReferenceContent instances.
 func (m *DocumentReferenceContent) Equals(other *DocumentReferenceContent) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -215,7 +409,7 @@ func (m *DocumentReferenceContent) Equals(other *DocumentReferenceContent) bool 
 // DocumentReferenceContext
 // The clinical context in which the document was prepared.
 type DocumentReferenceContext struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -228,22 +422,75 @@ type DocumentReferenceContext struct {
 	Related []*Reference `json:"related,omitempty"`
 }
 
-// NewDocumentReferenceContext creates a new DocumentReferenceContext instance
+// NewDocumentReferenceContext creates a new DocumentReferenceContext instance.
 func NewDocumentReferenceContext() *DocumentReferenceContext {
 	return &DocumentReferenceContext{}
 }
 
-// FromJSON populates DocumentReferenceContext from JSON data
+// FromJSON populates DocumentReferenceContext from JSON data.
 func (m *DocumentReferenceContext) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Encounter []*Reference `json:"encounter,omitempty"`
+		Event []*CodeableConcept `json:"event,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		FacilityType *CodeableConcept `json:"facilitytype,omitempty"`
+		PracticeSetting *CodeableConcept `json:"practicesetting,omitempty"`
+		SourcePatientInfo *Reference `json:"sourcepatientinfo,omitempty"`
+		Related []*Reference `json:"related,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Encounter = temp.Encounter
+	m.Event = temp.Event
+	m.Period = temp.Period
+	m.FacilityType = temp.FacilityType
+	m.PracticeSetting = temp.PracticeSetting
+	m.SourcePatientInfo = temp.SourcePatientInfo
+	m.Related = temp.Related
+	return nil
 }
 
-// ToJSON converts DocumentReferenceContext to JSON data
+// ToJSON converts DocumentReferenceContext to JSON data.
 func (m *DocumentReferenceContext) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Encounter []*Reference `json:"encounter,omitempty"`
+		Event []*CodeableConcept `json:"event,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		FacilityType *CodeableConcept `json:"facilitytype,omitempty"`
+		PracticeSetting *CodeableConcept `json:"practicesetting,omitempty"`
+		SourcePatientInfo *Reference `json:"sourcepatientinfo,omitempty"`
+		Related []*Reference `json:"related,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Encounter = m.Encounter
+	output.Event = m.Event
+	output.Period = m.Period
+	output.FacilityType = m.FacilityType
+	output.PracticeSetting = m.PracticeSetting
+	output.SourcePatientInfo = m.SourcePatientInfo
+	output.Related = m.Related
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of DocumentReferenceContext
+// Clone creates a deep copy of DocumentReferenceContext.
 func (m *DocumentReferenceContext) Clone() *DocumentReferenceContext {
 	if m == nil { return nil }
 	return &DocumentReferenceContext{
@@ -260,7 +507,7 @@ func (m *DocumentReferenceContext) Clone() *DocumentReferenceContext {
 	}
 }
 
-// Equals checks for equality with another DocumentReferenceContext instance
+// Equals checks equality between two DocumentReferenceContext instances.
 func (m *DocumentReferenceContext) Equals(other *DocumentReferenceContext) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

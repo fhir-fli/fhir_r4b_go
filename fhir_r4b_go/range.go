@@ -3,34 +3,64 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Range
 // A set of ordered Quantities defined by a low and high limit.
 type Range struct {
-	DataType
+	extends DataType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	Low *Quantity `json:"low,omitempty"`
 	High *Quantity `json:"high,omitempty"`
 }
 
-// NewRange creates a new Range instance
+// NewRange creates a new Range instance.
 func NewRange() *Range {
 	return &Range{}
 }
 
-// FromJSON populates Range from JSON data
+// FromJSON populates Range from JSON data.
 func (m *Range) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Low *Quantity `json:"low,omitempty"`
+		High *Quantity `json:"high,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.Low = temp.Low
+	m.High = temp.High
+	return nil
 }
 
-// ToJSON converts Range to JSON data
+// ToJSON converts Range to JSON data.
 func (m *Range) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Low *Quantity `json:"low,omitempty"`
+		High *Quantity `json:"high,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.Low = m.Low
+	output.High = m.High
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Range
+// Clone creates a deep copy of Range.
 func (m *Range) Clone() *Range {
 	if m == nil { return nil }
 	return &Range{
@@ -41,7 +71,7 @@ func (m *Range) Clone() *Range {
 	}
 }
 
-// Equals checks for equality with another Range instance
+// Equals checks equality between two Range instances.
 func (m *Range) Equals(other *Range) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

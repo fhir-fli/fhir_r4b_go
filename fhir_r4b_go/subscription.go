@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // Subscription
 // The subscription resource is used to define a push-based subscription from a server to another system. Once a subscription is registered with the server, the server checks every resource that is created or updated, and if the resource matches the given criteria, it sends a message on the defined "channel" so that another system can take an appropriate action.
 type Subscription struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -26,22 +28,125 @@ type Subscription struct {
 	Channel *SubscriptionChannel `json:"channel,omitempty"`
 }
 
-// NewSubscription creates a new Subscription instance
+// NewSubscription creates a new Subscription instance.
 func NewSubscription() *Subscription {
 	return &Subscription{}
 }
 
-// FromJSON populates Subscription from JSON data
+// FromJSON populates Subscription from JSON data.
 func (m *Subscription) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Status *SubscriptionStatusCodes `json:"status,omitempty"`
+		Contact []*ContactPoint `json:"contact,omitempty"`
+		End *FhirInstant `json:"end,omitempty"`
+		Reason *FhirString `json:"reason,omitempty"`
+		Criteria *FhirString `json:"criteria,omitempty"`
+		Error *FhirString `json:"error,omitempty"`
+		Channel *SubscriptionChannel `json:"channel,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Status = temp.Status
+	m.Contact = temp.Contact
+	m.End = temp.End
+	m.Reason = temp.Reason
+	m.Criteria = temp.Criteria
+	m.Error = temp.Error
+	m.Channel = temp.Channel
+	return nil
 }
 
-// ToJSON converts Subscription to JSON data
+// ToJSON converts Subscription to JSON data.
 func (m *Subscription) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Status *SubscriptionStatusCodes `json:"status,omitempty"`
+		Contact []*ContactPoint `json:"contact,omitempty"`
+		End interface{} `json:"end,omitempty"`
+		EndElement map[string]interface{} `json:"_end,omitempty"`
+		Reason interface{} `json:"reason,omitempty"`
+		ReasonElement map[string]interface{} `json:"_reason,omitempty"`
+		Criteria interface{} `json:"criteria,omitempty"`
+		CriteriaElement map[string]interface{} `json:"_criteria,omitempty"`
+		Error interface{} `json:"error,omitempty"`
+		ErrorElement map[string]interface{} `json:"_error,omitempty"`
+		Channel *SubscriptionChannel `json:"channel,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Status = m.Status
+	output.Contact = m.Contact
+	if m.End != nil && m.End.Value != nil {
+		output.End = m.End.Value
+		if m.End.Element != nil {
+			output.EndElement = toMapOrNil(m.End.Element.ToJSON())
+		}
+	}
+	if m.Reason != nil && m.Reason.Value != nil {
+		output.Reason = m.Reason.Value
+		if m.Reason.Element != nil {
+			output.ReasonElement = toMapOrNil(m.Reason.Element.ToJSON())
+		}
+	}
+	if m.Criteria != nil && m.Criteria.Value != nil {
+		output.Criteria = m.Criteria.Value
+		if m.Criteria.Element != nil {
+			output.CriteriaElement = toMapOrNil(m.Criteria.Element.ToJSON())
+		}
+	}
+	if m.Error != nil && m.Error.Value != nil {
+		output.Error = m.Error.Value
+		if m.Error.Element != nil {
+			output.ErrorElement = toMapOrNil(m.Error.Element.ToJSON())
+		}
+	}
+	output.Channel = m.Channel
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Subscription
+// Clone creates a deep copy of Subscription.
 func (m *Subscription) Clone() *Subscription {
 	if m == nil { return nil }
 	return &Subscription{
@@ -63,7 +168,7 @@ func (m *Subscription) Clone() *Subscription {
 	}
 }
 
-// Equals checks for equality with another Subscription instance
+// Equals checks equality between two Subscription instances.
 func (m *Subscription) Equals(other *Subscription) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -88,7 +193,7 @@ func (m *Subscription) Equals(other *Subscription) bool {
 // SubscriptionChannel
 // Details where to send notifications when resources are received that meet the criteria.
 type SubscriptionChannel struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -98,22 +203,96 @@ type SubscriptionChannel struct {
 	Header []*FhirString `json:"header,omitempty"`
 }
 
-// NewSubscriptionChannel creates a new SubscriptionChannel instance
+// NewSubscriptionChannel creates a new SubscriptionChannel instance.
 func NewSubscriptionChannel() *SubscriptionChannel {
 	return &SubscriptionChannel{}
 }
 
-// FromJSON populates SubscriptionChannel from JSON data
+// FromJSON populates SubscriptionChannel from JSON data.
 func (m *SubscriptionChannel) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *SubscriptionChannelType `json:"type,omitempty"`
+		Endpoint *FhirUrl `json:"endpoint,omitempty"`
+		Payload *FhirCode `json:"payload,omitempty"`
+		Header []interface{} `json:"header,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.Endpoint = temp.Endpoint
+	m.Payload = temp.Payload
+	if len(temp.Header) > 0 {
+		m.Header = make([]*FhirString, len(temp.Header))
+		for i := range temp.Header {
+			itemMap, ok := temp.Header[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Header[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Header[%d]: %v", i, err) }
+			m.Header[i] = primitive
+		}
+	}
+	return nil
 }
 
-// ToJSON converts SubscriptionChannel to JSON data
+// ToJSON converts SubscriptionChannel to JSON data.
 func (m *SubscriptionChannel) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *SubscriptionChannelType `json:"type,omitempty"`
+		Endpoint interface{} `json:"endpoint,omitempty"`
+		EndpointElement map[string]interface{} `json:"_endpoint,omitempty"`
+		Payload interface{} `json:"payload,omitempty"`
+		PayloadElement map[string]interface{} `json:"_payload,omitempty"`
+		Header []interface{} `json:"header,omitempty"`
+		HeaderElement []map[string]interface{} `json:"_header,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	if m.Endpoint != nil && m.Endpoint.Value != nil {
+		output.Endpoint = m.Endpoint.Value
+		if m.Endpoint.Element != nil {
+			output.EndpointElement = toMapOrNil(m.Endpoint.Element.ToJSON())
+		}
+	}
+	if m.Payload != nil && m.Payload.Value != nil {
+		output.Payload = m.Payload.Value
+		if m.Payload.Element != nil {
+			output.PayloadElement = toMapOrNil(m.Payload.Element.ToJSON())
+		}
+	}
+	if len(m.Header) > 0 {
+		output.Header = make([]interface{}, len(m.Header))
+		output.HeaderElement = make([]map[string]interface{}, len(m.Header))
+		for i, item := range m.Header {
+			if item != nil && item.Value != nil {
+				output.Header[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.HeaderElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of SubscriptionChannel
+// Clone creates a deep copy of SubscriptionChannel.
 func (m *SubscriptionChannel) Clone() *SubscriptionChannel {
 	if m == nil { return nil }
 	return &SubscriptionChannel{
@@ -127,7 +306,7 @@ func (m *SubscriptionChannel) Clone() *SubscriptionChannel {
 	}
 }
 
-// Equals checks for equality with another SubscriptionChannel instance
+// Equals checks equality between two SubscriptionChannel instances.
 func (m *SubscriptionChannel) Equals(other *SubscriptionChannel) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

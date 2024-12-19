@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // ProdCharacteristic
 // The marketing status describes the date when a medicinal product is actually put on the market or the date as of which it is no longer available.
 type ProdCharacteristic struct {
-	BackboneType
+	extends BackboneType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -25,22 +27,139 @@ type ProdCharacteristic struct {
 	Scoring *CodeableConcept `json:"scoring,omitempty"`
 }
 
-// NewProdCharacteristic creates a new ProdCharacteristic instance
+// NewProdCharacteristic creates a new ProdCharacteristic instance.
 func NewProdCharacteristic() *ProdCharacteristic {
 	return &ProdCharacteristic{}
 }
 
-// FromJSON populates ProdCharacteristic from JSON data
+// FromJSON populates ProdCharacteristic from JSON data.
 func (m *ProdCharacteristic) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Height *Quantity `json:"height,omitempty"`
+		Width *Quantity `json:"width,omitempty"`
+		Depth *Quantity `json:"depth,omitempty"`
+		Weight *Quantity `json:"weight,omitempty"`
+		NominalVolume *Quantity `json:"nominalvolume,omitempty"`
+		ExternalDiameter *Quantity `json:"externaldiameter,omitempty"`
+		Shape *FhirString `json:"shape,omitempty"`
+		Color []interface{} `json:"color,omitempty"`
+		Imprint []interface{} `json:"imprint,omitempty"`
+		Image []*Attachment `json:"image,omitempty"`
+		Scoring *CodeableConcept `json:"scoring,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Height = temp.Height
+	m.Width = temp.Width
+	m.Depth = temp.Depth
+	m.Weight = temp.Weight
+	m.NominalVolume = temp.NominalVolume
+	m.ExternalDiameter = temp.ExternalDiameter
+	m.Shape = temp.Shape
+	if len(temp.Color) > 0 {
+		m.Color = make([]*FhirString, len(temp.Color))
+		for i := range temp.Color {
+			itemMap, ok := temp.Color[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Color[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Color[%d]: %v", i, err) }
+			m.Color[i] = primitive
+		}
+	}
+	if len(temp.Imprint) > 0 {
+		m.Imprint = make([]*FhirString, len(temp.Imprint))
+		for i := range temp.Imprint {
+			itemMap, ok := temp.Imprint[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for Imprint[%d]: expected map", i) }
+			primitive, err := NewFhirStringFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse Imprint[%d]: %v", i, err) }
+			m.Imprint[i] = primitive
+		}
+	}
+	m.Image = temp.Image
+	m.Scoring = temp.Scoring
+	return nil
 }
 
-// ToJSON converts ProdCharacteristic to JSON data
+// ToJSON converts ProdCharacteristic to JSON data.
 func (m *ProdCharacteristic) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Height *Quantity `json:"height,omitempty"`
+		Width *Quantity `json:"width,omitempty"`
+		Depth *Quantity `json:"depth,omitempty"`
+		Weight *Quantity `json:"weight,omitempty"`
+		NominalVolume *Quantity `json:"nominalvolume,omitempty"`
+		ExternalDiameter *Quantity `json:"externaldiameter,omitempty"`
+		Shape interface{} `json:"shape,omitempty"`
+		ShapeElement map[string]interface{} `json:"_shape,omitempty"`
+		Color []interface{} `json:"color,omitempty"`
+		ColorElement []map[string]interface{} `json:"_color,omitempty"`
+		Imprint []interface{} `json:"imprint,omitempty"`
+		ImprintElement []map[string]interface{} `json:"_imprint,omitempty"`
+		Image []*Attachment `json:"image,omitempty"`
+		Scoring *CodeableConcept `json:"scoring,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Height = m.Height
+	output.Width = m.Width
+	output.Depth = m.Depth
+	output.Weight = m.Weight
+	output.NominalVolume = m.NominalVolume
+	output.ExternalDiameter = m.ExternalDiameter
+	if m.Shape != nil && m.Shape.Value != nil {
+		output.Shape = m.Shape.Value
+		if m.Shape.Element != nil {
+			output.ShapeElement = toMapOrNil(m.Shape.Element.ToJSON())
+		}
+	}
+	if len(m.Color) > 0 {
+		output.Color = make([]interface{}, len(m.Color))
+		output.ColorElement = make([]map[string]interface{}, len(m.Color))
+		for i, item := range m.Color {
+			if item != nil && item.Value != nil {
+				output.Color[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.ColorElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.Imprint) > 0 {
+		output.Imprint = make([]interface{}, len(m.Imprint))
+		output.ImprintElement = make([]map[string]interface{}, len(m.Imprint))
+		for i, item := range m.Imprint {
+			if item != nil && item.Value != nil {
+				output.Imprint[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.ImprintElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.Image = m.Image
+	output.Scoring = m.Scoring
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ProdCharacteristic
+// Clone creates a deep copy of ProdCharacteristic.
 func (m *ProdCharacteristic) Clone() *ProdCharacteristic {
 	if m == nil { return nil }
 	return &ProdCharacteristic{
@@ -61,7 +180,7 @@ func (m *ProdCharacteristic) Clone() *ProdCharacteristic {
 	}
 }
 
-// Equals checks for equality with another ProdCharacteristic instance
+// Equals checks equality between two ProdCharacteristic instances.
 func (m *ProdCharacteristic) Equals(other *ProdCharacteristic) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

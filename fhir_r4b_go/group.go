@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // FhirGroup
 // Represents a defined collection of entities that may be discussed or acted upon collectively but which are not expected to act collectively, and are not formally or legally recognized; i.e. a collection of entities that isn't an Organization.
 type FhirGroup struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -29,22 +30,137 @@ type FhirGroup struct {
 	Member []*GroupMember `json:"member,omitempty"`
 }
 
-// NewFhirGroup creates a new FhirGroup instance
+// NewFhirGroup creates a new FhirGroup instance.
 func NewFhirGroup() *FhirGroup {
 	return &FhirGroup{}
 }
 
-// FromJSON populates FhirGroup from JSON data
+// FromJSON populates FhirGroup from JSON data.
 func (m *FhirGroup) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Active *FhirBoolean `json:"active,omitempty"`
+		Type *GroupType `json:"type,omitempty"`
+		Actual *FhirBoolean `json:"actual,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Quantity *FhirUnsignedInt `json:"quantity,omitempty"`
+		ManagingEntity *Reference `json:"managingentity,omitempty"`
+		Characteristic []*GroupCharacteristic `json:"characteristic,omitempty"`
+		Member []*GroupMember `json:"member,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Active = temp.Active
+	m.Type = temp.Type
+	m.Actual = temp.Actual
+	m.Code = temp.Code
+	m.Name = temp.Name
+	m.Quantity = temp.Quantity
+	m.ManagingEntity = temp.ManagingEntity
+	m.Characteristic = temp.Characteristic
+	m.Member = temp.Member
+	return nil
 }
 
-// ToJSON converts FhirGroup to JSON data
+// ToJSON converts FhirGroup to JSON data.
 func (m *FhirGroup) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Active interface{} `json:"active,omitempty"`
+		ActiveElement map[string]interface{} `json:"_active,omitempty"`
+		Type *GroupType `json:"type,omitempty"`
+		Actual interface{} `json:"actual,omitempty"`
+		ActualElement map[string]interface{} `json:"_actual,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Quantity interface{} `json:"quantity,omitempty"`
+		QuantityElement map[string]interface{} `json:"_quantity,omitempty"`
+		ManagingEntity *Reference `json:"managingentity,omitempty"`
+		Characteristic []*GroupCharacteristic `json:"characteristic,omitempty"`
+		Member []*GroupMember `json:"member,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	if m.Active != nil && m.Active.Value != nil {
+		output.Active = m.Active.Value
+		if m.Active.Element != nil {
+			output.ActiveElement = toMapOrNil(m.Active.Element.ToJSON())
+		}
+	}
+	output.Type = m.Type
+	if m.Actual != nil && m.Actual.Value != nil {
+		output.Actual = m.Actual.Value
+		if m.Actual.Element != nil {
+			output.ActualElement = toMapOrNil(m.Actual.Element.ToJSON())
+		}
+	}
+	output.Code = m.Code
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Quantity != nil && m.Quantity.Value != nil {
+		output.Quantity = m.Quantity.Value
+		if m.Quantity.Element != nil {
+			output.QuantityElement = toMapOrNil(m.Quantity.Element.ToJSON())
+		}
+	}
+	output.ManagingEntity = m.ManagingEntity
+	output.Characteristic = m.Characteristic
+	output.Member = m.Member
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of FhirGroup
+// Clone creates a deep copy of FhirGroup.
 func (m *FhirGroup) Clone() *FhirGroup {
 	if m == nil { return nil }
 	return &FhirGroup{
@@ -69,7 +185,7 @@ func (m *FhirGroup) Clone() *FhirGroup {
 	}
 }
 
-// Equals checks for equality with another FhirGroup instance
+// Equals checks equality between two FhirGroup instances.
 func (m *FhirGroup) Equals(other *FhirGroup) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -97,7 +213,7 @@ func (m *FhirGroup) Equals(other *FhirGroup) bool {
 // GroupCharacteristic
 // Identifies traits whose presence r absence is shared by members of the group.
 type GroupCharacteristic struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -111,22 +227,91 @@ type GroupCharacteristic struct {
 	Period *Period `json:"period,omitempty"`
 }
 
-// NewGroupCharacteristic creates a new GroupCharacteristic instance
+// NewGroupCharacteristic creates a new GroupCharacteristic instance.
 func NewGroupCharacteristic() *GroupCharacteristic {
 	return &GroupCharacteristic{}
 }
 
-// FromJSON populates GroupCharacteristic from JSON data
+// FromJSON populates GroupCharacteristic from JSON data.
 func (m *GroupCharacteristic) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+		ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueRange *Range `json:"valuerange,omitempty"`
+		ValueReference *Reference `json:"valuereference,omitempty"`
+		Exclude *FhirBoolean `json:"exclude,omitempty"`
+		Period *Period `json:"period,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.ValueCodeableConcept = temp.ValueCodeableConcept
+	m.ValueBoolean = temp.ValueBoolean
+	m.ValueQuantity = temp.ValueQuantity
+	m.ValueRange = temp.ValueRange
+	m.ValueReference = temp.ValueReference
+	m.Exclude = temp.Exclude
+	m.Period = temp.Period
+	return nil
 }
 
-// ToJSON converts GroupCharacteristic to JSON data
+// ToJSON converts GroupCharacteristic to JSON data.
 func (m *GroupCharacteristic) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+		ValueBoolean interface{} `json:"valueboolean,omitempty"`
+		ValueBooleanElement map[string]interface{} `json:"_valueboolean,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueRange *Range `json:"valuerange,omitempty"`
+		ValueReference *Reference `json:"valuereference,omitempty"`
+		Exclude interface{} `json:"exclude,omitempty"`
+		ExcludeElement map[string]interface{} `json:"_exclude,omitempty"`
+		Period *Period `json:"period,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	output.ValueCodeableConcept = m.ValueCodeableConcept
+	if m.ValueBoolean != nil && m.ValueBoolean.Value != nil {
+		output.ValueBoolean = m.ValueBoolean.Value
+		if m.ValueBoolean.Element != nil {
+			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.ToJSON())
+		}
+	}
+	output.ValueQuantity = m.ValueQuantity
+	output.ValueRange = m.ValueRange
+	output.ValueReference = m.ValueReference
+	if m.Exclude != nil && m.Exclude.Value != nil {
+		output.Exclude = m.Exclude.Value
+		if m.Exclude.Element != nil {
+			output.ExcludeElement = toMapOrNil(m.Exclude.Element.ToJSON())
+		}
+	}
+	output.Period = m.Period
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of GroupCharacteristic
+// Clone creates a deep copy of GroupCharacteristic.
 func (m *GroupCharacteristic) Clone() *GroupCharacteristic {
 	if m == nil { return nil }
 	return &GroupCharacteristic{
@@ -144,7 +329,7 @@ func (m *GroupCharacteristic) Clone() *GroupCharacteristic {
 	}
 }
 
-// Equals checks for equality with another GroupCharacteristic instance
+// Equals checks equality between two GroupCharacteristic instances.
 func (m *GroupCharacteristic) Equals(other *GroupCharacteristic) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -165,7 +350,7 @@ func (m *GroupCharacteristic) Equals(other *GroupCharacteristic) bool {
 // GroupMember
 // Identifies the resource instances that are members of the group.
 type GroupMember struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -174,22 +359,65 @@ type GroupMember struct {
 	Inactive *FhirBoolean `json:"inactive,omitempty"`
 }
 
-// NewGroupMember creates a new GroupMember instance
+// NewGroupMember creates a new GroupMember instance.
 func NewGroupMember() *GroupMember {
 	return &GroupMember{}
 }
 
-// FromJSON populates GroupMember from JSON data
+// FromJSON populates GroupMember from JSON data.
 func (m *GroupMember) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Entity *Reference `json:"entity,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Inactive *FhirBoolean `json:"inactive,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Entity = temp.Entity
+	m.Period = temp.Period
+	m.Inactive = temp.Inactive
+	return nil
 }
 
-// ToJSON converts GroupMember to JSON data
+// ToJSON converts GroupMember to JSON data.
 func (m *GroupMember) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Entity *Reference `json:"entity,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Inactive interface{} `json:"inactive,omitempty"`
+		InactiveElement map[string]interface{} `json:"_inactive,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Entity = m.Entity
+	output.Period = m.Period
+	if m.Inactive != nil && m.Inactive.Value != nil {
+		output.Inactive = m.Inactive.Value
+		if m.Inactive.Element != nil {
+			output.InactiveElement = toMapOrNil(m.Inactive.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of GroupMember
+// Clone creates a deep copy of GroupMember.
 func (m *GroupMember) Clone() *GroupMember {
 	if m == nil { return nil }
 	return &GroupMember{
@@ -202,7 +430,7 @@ func (m *GroupMember) Clone() *GroupMember {
 	}
 }
 
-// Equals checks for equality with another GroupMember instance
+// Equals checks equality between two GroupMember instances.
 func (m *GroupMember) Equals(other *GroupMember) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

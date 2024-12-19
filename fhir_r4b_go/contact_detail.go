@@ -3,34 +3,70 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // ContactDetail
 // Specifies contact information for a person or organization.
 type ContactDetail struct {
-	DataType
+	extends DataType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	Name *FhirString `json:"name,omitempty"`
 	Telecom []*ContactPoint `json:"telecom,omitempty"`
 }
 
-// NewContactDetail creates a new ContactDetail instance
+// NewContactDetail creates a new ContactDetail instance.
 func NewContactDetail() *ContactDetail {
 	return &ContactDetail{}
 }
 
-// FromJSON populates ContactDetail from JSON data
+// FromJSON populates ContactDetail from JSON data.
 func (m *ContactDetail) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Telecom []*ContactPoint `json:"telecom,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.Name = temp.Name
+	m.Telecom = temp.Telecom
+	return nil
 }
 
-// ToJSON converts ContactDetail to JSON data
+// ToJSON converts ContactDetail to JSON data.
 func (m *ContactDetail) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Telecom []*ContactPoint `json:"telecom,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	output.Telecom = m.Telecom
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ContactDetail
+// Clone creates a deep copy of ContactDetail.
 func (m *ContactDetail) Clone() *ContactDetail {
 	if m == nil { return nil }
 	return &ContactDetail{
@@ -41,7 +77,7 @@ func (m *ContactDetail) Clone() *ContactDetail {
 	}
 }
 
-// Equals checks for equality with another ContactDetail instance
+// Equals checks equality between two ContactDetail instances.
 func (m *ContactDetail) Equals(other *ContactDetail) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

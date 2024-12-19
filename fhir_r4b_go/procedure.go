@@ -3,12 +3,14 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+	"fmt"
+)
 
 // Procedure
 // An action that is or was performed on or for a patient. This can be a physical intervention like an operation, or less invasive like long term services, counseling, or hypnotherapy.
 type Procedure struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -51,22 +53,255 @@ type Procedure struct {
 	UsedCode []*CodeableConcept `json:"usedcode,omitempty"`
 }
 
-// NewProcedure creates a new Procedure instance
+// NewProcedure creates a new Procedure instance.
 func NewProcedure() *Procedure {
 	return &Procedure{}
 }
 
-// FromJSON populates Procedure from JSON data
+// FromJSON populates Procedure from JSON data.
 func (m *Procedure) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		InstantiatesCanonical []interface{} `json:"instantiatescanonical,omitempty"`
+		InstantiatesUri []interface{} `json:"instantiatesuri,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		PartOf []*Reference `json:"partof,omitempty"`
+		Status *EventStatus `json:"status,omitempty"`
+		StatusReason *CodeableConcept `json:"statusreason,omitempty"`
+		Category *CodeableConcept `json:"category,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		PerformedDateTime *FhirDateTime `json:"performeddatetime,omitempty"`
+		PerformedPeriod *Period `json:"performedperiod,omitempty"`
+		PerformedString *FhirString `json:"performedstring,omitempty"`
+		PerformedAge *Age `json:"performedage,omitempty"`
+		PerformedRange *Range `json:"performedrange,omitempty"`
+		Recorder *Reference `json:"recorder,omitempty"`
+		Asserter *Reference `json:"asserter,omitempty"`
+		Performer []*ProcedurePerformer `json:"performer,omitempty"`
+		Location *Reference `json:"location,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		BodySite []*CodeableConcept `json:"bodysite,omitempty"`
+		Outcome *CodeableConcept `json:"outcome,omitempty"`
+		Report []*Reference `json:"report,omitempty"`
+		Complication []*CodeableConcept `json:"complication,omitempty"`
+		ComplicationDetail []*Reference `json:"complicationdetail,omitempty"`
+		FollowUp []*CodeableConcept `json:"followup,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		FocalDevice []*ProcedureFocalDevice `json:"focaldevice,omitempty"`
+		UsedReference []*Reference `json:"usedreference,omitempty"`
+		UsedCode []*CodeableConcept `json:"usedcode,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	if len(temp.InstantiatesCanonical) > 0 {
+		m.InstantiatesCanonical = make([]*FhirCanonical, len(temp.InstantiatesCanonical))
+		for i := range temp.InstantiatesCanonical {
+			itemMap, ok := temp.InstantiatesCanonical[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for InstantiatesCanonical[%d]: expected map", i) }
+			primitive, err := NewFhirCanonicalFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse InstantiatesCanonical[%d]: %v", i, err) }
+			m.InstantiatesCanonical[i] = primitive
+		}
+	}
+	if len(temp.InstantiatesUri) > 0 {
+		m.InstantiatesUri = make([]*FhirUri, len(temp.InstantiatesUri))
+		for i := range temp.InstantiatesUri {
+			itemMap, ok := temp.InstantiatesUri[i].(map[string]interface{})
+			if !ok { return fmt.Errorf("invalid value for InstantiatesUri[%d]: expected map", i) }
+			primitive, err := NewFhirUriFromMap(itemMap)
+			if err != nil { return fmt.Errorf("failed to parse InstantiatesUri[%d]: %v", i, err) }
+			m.InstantiatesUri[i] = primitive
+		}
+	}
+	m.BasedOn = temp.BasedOn
+	m.PartOf = temp.PartOf
+	m.Status = temp.Status
+	m.StatusReason = temp.StatusReason
+	m.Category = temp.Category
+	m.Code = temp.Code
+	m.Subject = temp.Subject
+	m.Encounter = temp.Encounter
+	m.PerformedDateTime = temp.PerformedDateTime
+	m.PerformedPeriod = temp.PerformedPeriod
+	m.PerformedString = temp.PerformedString
+	m.PerformedAge = temp.PerformedAge
+	m.PerformedRange = temp.PerformedRange
+	m.Recorder = temp.Recorder
+	m.Asserter = temp.Asserter
+	m.Performer = temp.Performer
+	m.Location = temp.Location
+	m.ReasonCode = temp.ReasonCode
+	m.ReasonReference = temp.ReasonReference
+	m.BodySite = temp.BodySite
+	m.Outcome = temp.Outcome
+	m.Report = temp.Report
+	m.Complication = temp.Complication
+	m.ComplicationDetail = temp.ComplicationDetail
+	m.FollowUp = temp.FollowUp
+	m.Note = temp.Note
+	m.FocalDevice = temp.FocalDevice
+	m.UsedReference = temp.UsedReference
+	m.UsedCode = temp.UsedCode
+	return nil
 }
 
-// ToJSON converts Procedure to JSON data
+// ToJSON converts Procedure to JSON data.
 func (m *Procedure) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		InstantiatesCanonical []interface{} `json:"instantiatescanonical,omitempty"`
+		InstantiatesCanonicalElement []map[string]interface{} `json:"_instantiatescanonical,omitempty"`
+		InstantiatesUri []interface{} `json:"instantiatesuri,omitempty"`
+		InstantiatesUriElement []map[string]interface{} `json:"_instantiatesuri,omitempty"`
+		BasedOn []*Reference `json:"basedon,omitempty"`
+		PartOf []*Reference `json:"partof,omitempty"`
+		Status *EventStatus `json:"status,omitempty"`
+		StatusReason *CodeableConcept `json:"statusreason,omitempty"`
+		Category *CodeableConcept `json:"category,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Subject *Reference `json:"subject,omitempty"`
+		Encounter *Reference `json:"encounter,omitempty"`
+		PerformedDateTime interface{} `json:"performeddatetime,omitempty"`
+		PerformedDateTimeElement map[string]interface{} `json:"_performeddatetime,omitempty"`
+		PerformedPeriod *Period `json:"performedperiod,omitempty"`
+		PerformedString interface{} `json:"performedstring,omitempty"`
+		PerformedStringElement map[string]interface{} `json:"_performedstring,omitempty"`
+		PerformedAge *Age `json:"performedage,omitempty"`
+		PerformedRange *Range `json:"performedrange,omitempty"`
+		Recorder *Reference `json:"recorder,omitempty"`
+		Asserter *Reference `json:"asserter,omitempty"`
+		Performer []*ProcedurePerformer `json:"performer,omitempty"`
+		Location *Reference `json:"location,omitempty"`
+		ReasonCode []*CodeableConcept `json:"reasoncode,omitempty"`
+		ReasonReference []*Reference `json:"reasonreference,omitempty"`
+		BodySite []*CodeableConcept `json:"bodysite,omitempty"`
+		Outcome *CodeableConcept `json:"outcome,omitempty"`
+		Report []*Reference `json:"report,omitempty"`
+		Complication []*CodeableConcept `json:"complication,omitempty"`
+		ComplicationDetail []*Reference `json:"complicationdetail,omitempty"`
+		FollowUp []*CodeableConcept `json:"followup,omitempty"`
+		Note []*Annotation `json:"note,omitempty"`
+		FocalDevice []*ProcedureFocalDevice `json:"focaldevice,omitempty"`
+		UsedReference []*Reference `json:"usedreference,omitempty"`
+		UsedCode []*CodeableConcept `json:"usedcode,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	if len(m.InstantiatesCanonical) > 0 {
+		output.InstantiatesCanonical = make([]interface{}, len(m.InstantiatesCanonical))
+		output.InstantiatesCanonicalElement = make([]map[string]interface{}, len(m.InstantiatesCanonical))
+		for i, item := range m.InstantiatesCanonical {
+			if item != nil && item.Value != nil {
+				output.InstantiatesCanonical[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.InstantiatesCanonicalElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	if len(m.InstantiatesUri) > 0 {
+		output.InstantiatesUri = make([]interface{}, len(m.InstantiatesUri))
+		output.InstantiatesUriElement = make([]map[string]interface{}, len(m.InstantiatesUri))
+		for i, item := range m.InstantiatesUri {
+			if item != nil && item.Value != nil {
+				output.InstantiatesUri[i] = item.Value
+			}
+			if item != nil && item.Element != nil {
+				output.InstantiatesUriElement[i] = toMapOrNil(item.Element.ToJSON())
+			}
+		}
+	}
+	output.BasedOn = m.BasedOn
+	output.PartOf = m.PartOf
+	output.Status = m.Status
+	output.StatusReason = m.StatusReason
+	output.Category = m.Category
+	output.Code = m.Code
+	output.Subject = m.Subject
+	output.Encounter = m.Encounter
+	if m.PerformedDateTime != nil && m.PerformedDateTime.Value != nil {
+		output.PerformedDateTime = m.PerformedDateTime.Value
+		if m.PerformedDateTime.Element != nil {
+			output.PerformedDateTimeElement = toMapOrNil(m.PerformedDateTime.Element.ToJSON())
+		}
+	}
+	output.PerformedPeriod = m.PerformedPeriod
+	if m.PerformedString != nil && m.PerformedString.Value != nil {
+		output.PerformedString = m.PerformedString.Value
+		if m.PerformedString.Element != nil {
+			output.PerformedStringElement = toMapOrNil(m.PerformedString.Element.ToJSON())
+		}
+	}
+	output.PerformedAge = m.PerformedAge
+	output.PerformedRange = m.PerformedRange
+	output.Recorder = m.Recorder
+	output.Asserter = m.Asserter
+	output.Performer = m.Performer
+	output.Location = m.Location
+	output.ReasonCode = m.ReasonCode
+	output.ReasonReference = m.ReasonReference
+	output.BodySite = m.BodySite
+	output.Outcome = m.Outcome
+	output.Report = m.Report
+	output.Complication = m.Complication
+	output.ComplicationDetail = m.ComplicationDetail
+	output.FollowUp = m.FollowUp
+	output.Note = m.Note
+	output.FocalDevice = m.FocalDevice
+	output.UsedReference = m.UsedReference
+	output.UsedCode = m.UsedCode
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Procedure
+// Clone creates a deep copy of Procedure.
 func (m *Procedure) Clone() *Procedure {
 	if m == nil { return nil }
 	return &Procedure{
@@ -113,7 +348,7 @@ func (m *Procedure) Clone() *Procedure {
 	}
 }
 
-// Equals checks for equality with another Procedure instance
+// Equals checks equality between two Procedure instances.
 func (m *Procedure) Equals(other *Procedure) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -163,7 +398,7 @@ func (m *Procedure) Equals(other *Procedure) bool {
 // ProcedurePerformer
 // Limited to "real" people rather than equipment.
 type ProcedurePerformer struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -172,22 +407,59 @@ type ProcedurePerformer struct {
 	OnBehalfOf *Reference `json:"onbehalfof,omitempty"`
 }
 
-// NewProcedurePerformer creates a new ProcedurePerformer instance
+// NewProcedurePerformer creates a new ProcedurePerformer instance.
 func NewProcedurePerformer() *ProcedurePerformer {
 	return &ProcedurePerformer{}
 }
 
-// FromJSON populates ProcedurePerformer from JSON data
+// FromJSON populates ProcedurePerformer from JSON data.
 func (m *ProcedurePerformer) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Function_ *CodeableConcept `json:"function,omitempty"`
+		Actor *Reference `json:"actor,omitempty"`
+		OnBehalfOf *Reference `json:"onbehalfof,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Function_ = temp.Function_
+	m.Actor = temp.Actor
+	m.OnBehalfOf = temp.OnBehalfOf
+	return nil
 }
 
-// ToJSON converts ProcedurePerformer to JSON data
+// ToJSON converts ProcedurePerformer to JSON data.
 func (m *ProcedurePerformer) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Function_ *CodeableConcept `json:"function,omitempty"`
+		Actor *Reference `json:"actor,omitempty"`
+		OnBehalfOf *Reference `json:"onbehalfof,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Function_ = m.Function_
+	output.Actor = m.Actor
+	output.OnBehalfOf = m.OnBehalfOf
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ProcedurePerformer
+// Clone creates a deep copy of ProcedurePerformer.
 func (m *ProcedurePerformer) Clone() *ProcedurePerformer {
 	if m == nil { return nil }
 	return &ProcedurePerformer{
@@ -200,7 +472,7 @@ func (m *ProcedurePerformer) Clone() *ProcedurePerformer {
 	}
 }
 
-// Equals checks for equality with another ProcedurePerformer instance
+// Equals checks equality between two ProcedurePerformer instances.
 func (m *ProcedurePerformer) Equals(other *ProcedurePerformer) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -216,7 +488,7 @@ func (m *ProcedurePerformer) Equals(other *ProcedurePerformer) bool {
 // ProcedureFocalDevice
 // A device that is implanted, removed or otherwise manipulated (calibration, battery replacement, fitting a prosthesis, attaching a wound-vac, etc.) as a focal portion of the Procedure.
 type ProcedureFocalDevice struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -224,22 +496,55 @@ type ProcedureFocalDevice struct {
 	Manipulated *Reference `json:"manipulated,omitempty"`
 }
 
-// NewProcedureFocalDevice creates a new ProcedureFocalDevice instance
+// NewProcedureFocalDevice creates a new ProcedureFocalDevice instance.
 func NewProcedureFocalDevice() *ProcedureFocalDevice {
 	return &ProcedureFocalDevice{}
 }
 
-// FromJSON populates ProcedureFocalDevice from JSON data
+// FromJSON populates ProcedureFocalDevice from JSON data.
 func (m *ProcedureFocalDevice) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Action *CodeableConcept `json:"action,omitempty"`
+		Manipulated *Reference `json:"manipulated,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Action = temp.Action
+	m.Manipulated = temp.Manipulated
+	return nil
 }
 
-// ToJSON converts ProcedureFocalDevice to JSON data
+// ToJSON converts ProcedureFocalDevice to JSON data.
 func (m *ProcedureFocalDevice) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Action *CodeableConcept `json:"action,omitempty"`
+		Manipulated *Reference `json:"manipulated,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Action = m.Action
+	output.Manipulated = m.Manipulated
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ProcedureFocalDevice
+// Clone creates a deep copy of ProcedureFocalDevice.
 func (m *ProcedureFocalDevice) Clone() *ProcedureFocalDevice {
 	if m == nil { return nil }
 	return &ProcedureFocalDevice{
@@ -251,7 +556,7 @@ func (m *ProcedureFocalDevice) Clone() *ProcedureFocalDevice {
 	}
 }
 
-// Equals checks for equality with another ProcedureFocalDevice instance
+// Equals checks equality between two ProcedureFocalDevice instances.
 func (m *ProcedureFocalDevice) Equals(other *ProcedureFocalDevice) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

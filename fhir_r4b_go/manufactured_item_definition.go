@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // ManufacturedItemDefinition
 // The definition and characteristics of a medicinal manufactured item, such as a tablet or capsule, as contained in a packaged medicinal product.
 type ManufacturedItemDefinition struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -26,22 +27,101 @@ type ManufacturedItemDefinition struct {
 	Property []*ManufacturedItemDefinitionProperty `json:"property,omitempty"`
 }
 
-// NewManufacturedItemDefinition creates a new ManufacturedItemDefinition instance
+// NewManufacturedItemDefinition creates a new ManufacturedItemDefinition instance.
 func NewManufacturedItemDefinition() *ManufacturedItemDefinition {
 	return &ManufacturedItemDefinition{}
 }
 
-// FromJSON populates ManufacturedItemDefinition from JSON data
+// FromJSON populates ManufacturedItemDefinition from JSON data.
 func (m *ManufacturedItemDefinition) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		ManufacturedDoseForm *CodeableConcept `json:"manufactureddoseform,omitempty"`
+		UnitOfPresentation *CodeableConcept `json:"unitofpresentation,omitempty"`
+		Manufacturer []*Reference `json:"manufacturer,omitempty"`
+		Ingredient []*CodeableConcept `json:"ingredient,omitempty"`
+		Property []*ManufacturedItemDefinitionProperty `json:"property,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Status = temp.Status
+	m.ManufacturedDoseForm = temp.ManufacturedDoseForm
+	m.UnitOfPresentation = temp.UnitOfPresentation
+	m.Manufacturer = temp.Manufacturer
+	m.Ingredient = temp.Ingredient
+	m.Property = temp.Property
+	return nil
 }
 
-// ToJSON converts ManufacturedItemDefinition to JSON data
+// ToJSON converts ManufacturedItemDefinition to JSON data.
 func (m *ManufacturedItemDefinition) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Status *PublicationStatus `json:"status,omitempty"`
+		ManufacturedDoseForm *CodeableConcept `json:"manufactureddoseform,omitempty"`
+		UnitOfPresentation *CodeableConcept `json:"unitofpresentation,omitempty"`
+		Manufacturer []*Reference `json:"manufacturer,omitempty"`
+		Ingredient []*CodeableConcept `json:"ingredient,omitempty"`
+		Property []*ManufacturedItemDefinitionProperty `json:"property,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	output.Status = m.Status
+	output.ManufacturedDoseForm = m.ManufacturedDoseForm
+	output.UnitOfPresentation = m.UnitOfPresentation
+	output.Manufacturer = m.Manufacturer
+	output.Ingredient = m.Ingredient
+	output.Property = m.Property
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ManufacturedItemDefinition
+// Clone creates a deep copy of ManufacturedItemDefinition.
 func (m *ManufacturedItemDefinition) Clone() *ManufacturedItemDefinition {
 	if m == nil { return nil }
 	return &ManufacturedItemDefinition{
@@ -63,7 +143,7 @@ func (m *ManufacturedItemDefinition) Clone() *ManufacturedItemDefinition {
 	}
 }
 
-// Equals checks for equality with another ManufacturedItemDefinition instance
+// Equals checks equality between two ManufacturedItemDefinition instances.
 func (m *ManufacturedItemDefinition) Equals(other *ManufacturedItemDefinition) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -88,7 +168,7 @@ func (m *ManufacturedItemDefinition) Equals(other *ManufacturedItemDefinition) b
 // ManufacturedItemDefinitionProperty
 // General characteristics of this item.
 type ManufacturedItemDefinitionProperty struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -100,22 +180,83 @@ type ManufacturedItemDefinitionProperty struct {
 	ValueAttachment *Attachment `json:"valueattachment,omitempty"`
 }
 
-// NewManufacturedItemDefinitionProperty creates a new ManufacturedItemDefinitionProperty instance
+// NewManufacturedItemDefinitionProperty creates a new ManufacturedItemDefinitionProperty instance.
 func NewManufacturedItemDefinitionProperty() *ManufacturedItemDefinitionProperty {
 	return &ManufacturedItemDefinitionProperty{}
 }
 
-// FromJSON populates ManufacturedItemDefinitionProperty from JSON data
+// FromJSON populates ManufacturedItemDefinitionProperty from JSON data.
 func (m *ManufacturedItemDefinitionProperty) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueDate *FhirDate `json:"valuedate,omitempty"`
+		ValueBoolean *FhirBoolean `json:"valueboolean,omitempty"`
+		ValueAttachment *Attachment `json:"valueattachment,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Type = temp.Type
+	m.ValueCodeableConcept = temp.ValueCodeableConcept
+	m.ValueQuantity = temp.ValueQuantity
+	m.ValueDate = temp.ValueDate
+	m.ValueBoolean = temp.ValueBoolean
+	m.ValueAttachment = temp.ValueAttachment
+	return nil
 }
 
-// ToJSON converts ManufacturedItemDefinitionProperty to JSON data
+// ToJSON converts ManufacturedItemDefinitionProperty to JSON data.
 func (m *ManufacturedItemDefinitionProperty) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Type *CodeableConcept `json:"type,omitempty"`
+		ValueCodeableConcept *CodeableConcept `json:"valuecodeableconcept,omitempty"`
+		ValueQuantity *Quantity `json:"valuequantity,omitempty"`
+		ValueDate interface{} `json:"valuedate,omitempty"`
+		ValueDateElement map[string]interface{} `json:"_valuedate,omitempty"`
+		ValueBoolean interface{} `json:"valueboolean,omitempty"`
+		ValueBooleanElement map[string]interface{} `json:"_valueboolean,omitempty"`
+		ValueAttachment *Attachment `json:"valueattachment,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Type = m.Type
+	output.ValueCodeableConcept = m.ValueCodeableConcept
+	output.ValueQuantity = m.ValueQuantity
+	if m.ValueDate != nil && m.ValueDate.Value != nil {
+		output.ValueDate = m.ValueDate.Value
+		if m.ValueDate.Element != nil {
+			output.ValueDateElement = toMapOrNil(m.ValueDate.Element.ToJSON())
+		}
+	}
+	if m.ValueBoolean != nil && m.ValueBoolean.Value != nil {
+		output.ValueBoolean = m.ValueBoolean.Value
+		if m.ValueBoolean.Element != nil {
+			output.ValueBooleanElement = toMapOrNil(m.ValueBoolean.Element.ToJSON())
+		}
+	}
+	output.ValueAttachment = m.ValueAttachment
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of ManufacturedItemDefinitionProperty
+// Clone creates a deep copy of ManufacturedItemDefinitionProperty.
 func (m *ManufacturedItemDefinitionProperty) Clone() *ManufacturedItemDefinitionProperty {
 	if m == nil { return nil }
 	return &ManufacturedItemDefinitionProperty{
@@ -131,7 +272,7 @@ func (m *ManufacturedItemDefinitionProperty) Clone() *ManufacturedItemDefinition
 	}
 }
 
-// Equals checks for equality with another ManufacturedItemDefinitionProperty instance
+// Equals checks equality between two ManufacturedItemDefinitionProperty instances.
 func (m *ManufacturedItemDefinitionProperty) Equals(other *ManufacturedItemDefinitionProperty) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

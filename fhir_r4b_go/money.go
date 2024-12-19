@@ -3,34 +3,76 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // Money
 // An amount of economic utility in some recognized currency.
 type Money struct {
-	DataType
+	extends DataType
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	Value *FhirDecimal `json:"value,omitempty"`
 	Currency *FhirCode `json:"currency,omitempty"`
 }
 
-// NewMoney creates a new Money instance
+// NewMoney creates a new Money instance.
 func NewMoney() *Money {
 	return &Money{}
 }
 
-// FromJSON populates Money from JSON data
+// FromJSON populates Money from JSON data.
 func (m *Money) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Value *FhirDecimal `json:"value,omitempty"`
+		Currency *FhirCode `json:"currency,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.Value = temp.Value
+	m.Currency = temp.Currency
+	return nil
 }
 
-// ToJSON converts Money to JSON data
+// ToJSON converts Money to JSON data.
 func (m *Money) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		Value interface{} `json:"value,omitempty"`
+		ValueElement map[string]interface{} `json:"_value,omitempty"`
+		Currency interface{} `json:"currency,omitempty"`
+		CurrencyElement map[string]interface{} `json:"_currency,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	if m.Value != nil && m.Value.Value != nil {
+		output.Value = m.Value.Value
+		if m.Value.Element != nil {
+			output.ValueElement = toMapOrNil(m.Value.Element.ToJSON())
+		}
+	}
+	if m.Currency != nil && m.Currency.Value != nil {
+		output.Currency = m.Currency.Value
+		if m.Currency.Element != nil {
+			output.CurrencyElement = toMapOrNil(m.Currency.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of Money
+// Clone creates a deep copy of Money.
 func (m *Money) Clone() *Money {
 	if m == nil { return nil }
 	return &Money{
@@ -41,7 +83,7 @@ func (m *Money) Clone() *Money {
 	}
 }
 
-// Equals checks for equality with another Money instance
+// Equals checks equality between two Money instances.
 func (m *Money) Equals(other *Money) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

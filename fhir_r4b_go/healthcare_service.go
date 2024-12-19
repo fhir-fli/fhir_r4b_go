@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // HealthcareService
 // The details of a healthcare service available at a location.
 type HealthcareService struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -43,22 +44,205 @@ type HealthcareService struct {
 	Endpoint []*Reference `json:"endpoint,omitempty"`
 }
 
-// NewHealthcareService creates a new HealthcareService instance
+// NewHealthcareService creates a new HealthcareService instance.
 func NewHealthcareService() *HealthcareService {
 	return &HealthcareService{}
 }
 
-// FromJSON populates HealthcareService from JSON data
+// FromJSON populates HealthcareService from JSON data.
 func (m *HealthcareService) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Active *FhirBoolean `json:"active,omitempty"`
+		ProvidedBy *Reference `json:"providedby,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Type []*CodeableConcept `json:"type,omitempty"`
+		Specialty []*CodeableConcept `json:"specialty,omitempty"`
+		Location []*Reference `json:"location,omitempty"`
+		Name *FhirString `json:"name,omitempty"`
+		Comment *FhirString `json:"comment,omitempty"`
+		ExtraDetails *FhirMarkdown `json:"extradetails,omitempty"`
+		Photo *Attachment `json:"photo,omitempty"`
+		Telecom []*ContactPoint `json:"telecom,omitempty"`
+		CoverageArea []*Reference `json:"coveragearea,omitempty"`
+		ServiceProvisionCode []*CodeableConcept `json:"serviceprovisioncode,omitempty"`
+		Eligibility []*HealthcareServiceEligibility `json:"eligibility,omitempty"`
+		Program []*CodeableConcept `json:"program,omitempty"`
+		Characteristic []*CodeableConcept `json:"characteristic,omitempty"`
+		Communication []*CodeableConcept `json:"communication,omitempty"`
+		ReferralMethod []*CodeableConcept `json:"referralmethod,omitempty"`
+		AppointmentRequired *FhirBoolean `json:"appointmentrequired,omitempty"`
+		AvailableTime []*HealthcareServiceAvailableTime `json:"availabletime,omitempty"`
+		NotAvailable []*HealthcareServiceNotAvailable `json:"notavailable,omitempty"`
+		AvailabilityExceptions *FhirString `json:"availabilityexceptions,omitempty"`
+		Endpoint []*Reference `json:"endpoint,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Active = temp.Active
+	m.ProvidedBy = temp.ProvidedBy
+	m.Category = temp.Category
+	m.Type = temp.Type
+	m.Specialty = temp.Specialty
+	m.Location = temp.Location
+	m.Name = temp.Name
+	m.Comment = temp.Comment
+	m.ExtraDetails = temp.ExtraDetails
+	m.Photo = temp.Photo
+	m.Telecom = temp.Telecom
+	m.CoverageArea = temp.CoverageArea
+	m.ServiceProvisionCode = temp.ServiceProvisionCode
+	m.Eligibility = temp.Eligibility
+	m.Program = temp.Program
+	m.Characteristic = temp.Characteristic
+	m.Communication = temp.Communication
+	m.ReferralMethod = temp.ReferralMethod
+	m.AppointmentRequired = temp.AppointmentRequired
+	m.AvailableTime = temp.AvailableTime
+	m.NotAvailable = temp.NotAvailable
+	m.AvailabilityExceptions = temp.AvailabilityExceptions
+	m.Endpoint = temp.Endpoint
+	return nil
 }
 
-// ToJSON converts HealthcareService to JSON data
+// ToJSON converts HealthcareService to JSON data.
 func (m *HealthcareService) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Active interface{} `json:"active,omitempty"`
+		ActiveElement map[string]interface{} `json:"_active,omitempty"`
+		ProvidedBy *Reference `json:"providedby,omitempty"`
+		Category []*CodeableConcept `json:"category,omitempty"`
+		Type []*CodeableConcept `json:"type,omitempty"`
+		Specialty []*CodeableConcept `json:"specialty,omitempty"`
+		Location []*Reference `json:"location,omitempty"`
+		Name interface{} `json:"name,omitempty"`
+		NameElement map[string]interface{} `json:"_name,omitempty"`
+		Comment interface{} `json:"comment,omitempty"`
+		CommentElement map[string]interface{} `json:"_comment,omitempty"`
+		ExtraDetails interface{} `json:"extradetails,omitempty"`
+		ExtraDetailsElement map[string]interface{} `json:"_extradetails,omitempty"`
+		Photo *Attachment `json:"photo,omitempty"`
+		Telecom []*ContactPoint `json:"telecom,omitempty"`
+		CoverageArea []*Reference `json:"coveragearea,omitempty"`
+		ServiceProvisionCode []*CodeableConcept `json:"serviceprovisioncode,omitempty"`
+		Eligibility []*HealthcareServiceEligibility `json:"eligibility,omitempty"`
+		Program []*CodeableConcept `json:"program,omitempty"`
+		Characteristic []*CodeableConcept `json:"characteristic,omitempty"`
+		Communication []*CodeableConcept `json:"communication,omitempty"`
+		ReferralMethod []*CodeableConcept `json:"referralmethod,omitempty"`
+		AppointmentRequired interface{} `json:"appointmentrequired,omitempty"`
+		AppointmentRequiredElement map[string]interface{} `json:"_appointmentrequired,omitempty"`
+		AvailableTime []*HealthcareServiceAvailableTime `json:"availabletime,omitempty"`
+		NotAvailable []*HealthcareServiceNotAvailable `json:"notavailable,omitempty"`
+		AvailabilityExceptions interface{} `json:"availabilityexceptions,omitempty"`
+		AvailabilityExceptionsElement map[string]interface{} `json:"_availabilityexceptions,omitempty"`
+		Endpoint []*Reference `json:"endpoint,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	if m.Active != nil && m.Active.Value != nil {
+		output.Active = m.Active.Value
+		if m.Active.Element != nil {
+			output.ActiveElement = toMapOrNil(m.Active.Element.ToJSON())
+		}
+	}
+	output.ProvidedBy = m.ProvidedBy
+	output.Category = m.Category
+	output.Type = m.Type
+	output.Specialty = m.Specialty
+	output.Location = m.Location
+	if m.Name != nil && m.Name.Value != nil {
+		output.Name = m.Name.Value
+		if m.Name.Element != nil {
+			output.NameElement = toMapOrNil(m.Name.Element.ToJSON())
+		}
+	}
+	if m.Comment != nil && m.Comment.Value != nil {
+		output.Comment = m.Comment.Value
+		if m.Comment.Element != nil {
+			output.CommentElement = toMapOrNil(m.Comment.Element.ToJSON())
+		}
+	}
+	if m.ExtraDetails != nil && m.ExtraDetails.Value != nil {
+		output.ExtraDetails = m.ExtraDetails.Value
+		if m.ExtraDetails.Element != nil {
+			output.ExtraDetailsElement = toMapOrNil(m.ExtraDetails.Element.ToJSON())
+		}
+	}
+	output.Photo = m.Photo
+	output.Telecom = m.Telecom
+	output.CoverageArea = m.CoverageArea
+	output.ServiceProvisionCode = m.ServiceProvisionCode
+	output.Eligibility = m.Eligibility
+	output.Program = m.Program
+	output.Characteristic = m.Characteristic
+	output.Communication = m.Communication
+	output.ReferralMethod = m.ReferralMethod
+	if m.AppointmentRequired != nil && m.AppointmentRequired.Value != nil {
+		output.AppointmentRequired = m.AppointmentRequired.Value
+		if m.AppointmentRequired.Element != nil {
+			output.AppointmentRequiredElement = toMapOrNil(m.AppointmentRequired.Element.ToJSON())
+		}
+	}
+	output.AvailableTime = m.AvailableTime
+	output.NotAvailable = m.NotAvailable
+	if m.AvailabilityExceptions != nil && m.AvailabilityExceptions.Value != nil {
+		output.AvailabilityExceptions = m.AvailabilityExceptions.Value
+		if m.AvailabilityExceptions.Element != nil {
+			output.AvailabilityExceptionsElement = toMapOrNil(m.AvailabilityExceptions.Element.ToJSON())
+		}
+	}
+	output.Endpoint = m.Endpoint
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of HealthcareService
+// Clone creates a deep copy of HealthcareService.
 func (m *HealthcareService) Clone() *HealthcareService {
 	if m == nil { return nil }
 	return &HealthcareService{
@@ -97,7 +281,7 @@ func (m *HealthcareService) Clone() *HealthcareService {
 	}
 }
 
-// Equals checks for equality with another HealthcareService instance
+// Equals checks equality between two HealthcareService instances.
 func (m *HealthcareService) Equals(other *HealthcareService) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -139,7 +323,7 @@ func (m *HealthcareService) Equals(other *HealthcareService) bool {
 // HealthcareServiceEligibility
 // Does this service have specific eligibility requirements that need to be met in order to use the service?
 type HealthcareServiceEligibility struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -147,22 +331,61 @@ type HealthcareServiceEligibility struct {
 	Comment *FhirMarkdown `json:"comment,omitempty"`
 }
 
-// NewHealthcareServiceEligibility creates a new HealthcareServiceEligibility instance
+// NewHealthcareServiceEligibility creates a new HealthcareServiceEligibility instance.
 func NewHealthcareServiceEligibility() *HealthcareServiceEligibility {
 	return &HealthcareServiceEligibility{}
 }
 
-// FromJSON populates HealthcareServiceEligibility from JSON data
+// FromJSON populates HealthcareServiceEligibility from JSON data.
 func (m *HealthcareServiceEligibility) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Comment *FhirMarkdown `json:"comment,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Code = temp.Code
+	m.Comment = temp.Comment
+	return nil
 }
 
-// ToJSON converts HealthcareServiceEligibility to JSON data
+// ToJSON converts HealthcareServiceEligibility to JSON data.
 func (m *HealthcareServiceEligibility) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Code *CodeableConcept `json:"code,omitempty"`
+		Comment interface{} `json:"comment,omitempty"`
+		CommentElement map[string]interface{} `json:"_comment,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Code = m.Code
+	if m.Comment != nil && m.Comment.Value != nil {
+		output.Comment = m.Comment.Value
+		if m.Comment.Element != nil {
+			output.CommentElement = toMapOrNil(m.Comment.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of HealthcareServiceEligibility
+// Clone creates a deep copy of HealthcareServiceEligibility.
 func (m *HealthcareServiceEligibility) Clone() *HealthcareServiceEligibility {
 	if m == nil { return nil }
 	return &HealthcareServiceEligibility{
@@ -174,7 +397,7 @@ func (m *HealthcareServiceEligibility) Clone() *HealthcareServiceEligibility {
 	}
 }
 
-// Equals checks for equality with another HealthcareServiceEligibility instance
+// Equals checks equality between two HealthcareServiceEligibility instances.
 func (m *HealthcareServiceEligibility) Equals(other *HealthcareServiceEligibility) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -189,7 +412,7 @@ func (m *HealthcareServiceEligibility) Equals(other *HealthcareServiceEligibilit
 // HealthcareServiceAvailableTime
 // A collection of times that the Service Site is available.
 type HealthcareServiceAvailableTime struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -199,22 +422,81 @@ type HealthcareServiceAvailableTime struct {
 	AvailableEndTime *FhirTime `json:"availableendtime,omitempty"`
 }
 
-// NewHealthcareServiceAvailableTime creates a new HealthcareServiceAvailableTime instance
+// NewHealthcareServiceAvailableTime creates a new HealthcareServiceAvailableTime instance.
 func NewHealthcareServiceAvailableTime() *HealthcareServiceAvailableTime {
 	return &HealthcareServiceAvailableTime{}
 }
 
-// FromJSON populates HealthcareServiceAvailableTime from JSON data
+// FromJSON populates HealthcareServiceAvailableTime from JSON data.
 func (m *HealthcareServiceAvailableTime) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		DaysOfWeek []*DaysOfWeek `json:"daysofweek,omitempty"`
+		AllDay *FhirBoolean `json:"allday,omitempty"`
+		AvailableStartTime *FhirTime `json:"availablestarttime,omitempty"`
+		AvailableEndTime *FhirTime `json:"availableendtime,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.DaysOfWeek = temp.DaysOfWeek
+	m.AllDay = temp.AllDay
+	m.AvailableStartTime = temp.AvailableStartTime
+	m.AvailableEndTime = temp.AvailableEndTime
+	return nil
 }
 
-// ToJSON converts HealthcareServiceAvailableTime to JSON data
+// ToJSON converts HealthcareServiceAvailableTime to JSON data.
 func (m *HealthcareServiceAvailableTime) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		DaysOfWeek []*DaysOfWeek `json:"daysofweek,omitempty"`
+		AllDay interface{} `json:"allday,omitempty"`
+		AllDayElement map[string]interface{} `json:"_allday,omitempty"`
+		AvailableStartTime interface{} `json:"availablestarttime,omitempty"`
+		AvailableStartTimeElement map[string]interface{} `json:"_availablestarttime,omitempty"`
+		AvailableEndTime interface{} `json:"availableendtime,omitempty"`
+		AvailableEndTimeElement map[string]interface{} `json:"_availableendtime,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.DaysOfWeek = m.DaysOfWeek
+	if m.AllDay != nil && m.AllDay.Value != nil {
+		output.AllDay = m.AllDay.Value
+		if m.AllDay.Element != nil {
+			output.AllDayElement = toMapOrNil(m.AllDay.Element.ToJSON())
+		}
+	}
+	if m.AvailableStartTime != nil && m.AvailableStartTime.Value != nil {
+		output.AvailableStartTime = m.AvailableStartTime.Value
+		if m.AvailableStartTime.Element != nil {
+			output.AvailableStartTimeElement = toMapOrNil(m.AvailableStartTime.Element.ToJSON())
+		}
+	}
+	if m.AvailableEndTime != nil && m.AvailableEndTime.Value != nil {
+		output.AvailableEndTime = m.AvailableEndTime.Value
+		if m.AvailableEndTime.Element != nil {
+			output.AvailableEndTimeElement = toMapOrNil(m.AvailableEndTime.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of HealthcareServiceAvailableTime
+// Clone creates a deep copy of HealthcareServiceAvailableTime.
 func (m *HealthcareServiceAvailableTime) Clone() *HealthcareServiceAvailableTime {
 	if m == nil { return nil }
 	return &HealthcareServiceAvailableTime{
@@ -228,7 +510,7 @@ func (m *HealthcareServiceAvailableTime) Clone() *HealthcareServiceAvailableTime
 	}
 }
 
-// Equals checks for equality with another HealthcareServiceAvailableTime instance
+// Equals checks equality between two HealthcareServiceAvailableTime instances.
 func (m *HealthcareServiceAvailableTime) Equals(other *HealthcareServiceAvailableTime) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -245,7 +527,7 @@ func (m *HealthcareServiceAvailableTime) Equals(other *HealthcareServiceAvailabl
 // HealthcareServiceNotAvailable
 // The HealthcareService is not available during this period of time due to the provided reason.
 type HealthcareServiceNotAvailable struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -253,22 +535,61 @@ type HealthcareServiceNotAvailable struct {
 	During *Period `json:"during,omitempty"`
 }
 
-// NewHealthcareServiceNotAvailable creates a new HealthcareServiceNotAvailable instance
+// NewHealthcareServiceNotAvailable creates a new HealthcareServiceNotAvailable instance.
 func NewHealthcareServiceNotAvailable() *HealthcareServiceNotAvailable {
 	return &HealthcareServiceNotAvailable{}
 }
 
-// FromJSON populates HealthcareServiceNotAvailable from JSON data
+// FromJSON populates HealthcareServiceNotAvailable from JSON data.
 func (m *HealthcareServiceNotAvailable) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		During *Period `json:"during,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Description = temp.Description
+	m.During = temp.During
+	return nil
 }
 
-// ToJSON converts HealthcareServiceNotAvailable to JSON data
+// ToJSON converts HealthcareServiceNotAvailable to JSON data.
 func (m *HealthcareServiceNotAvailable) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		During *Period `json:"during,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.During = m.During
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of HealthcareServiceNotAvailable
+// Clone creates a deep copy of HealthcareServiceNotAvailable.
 func (m *HealthcareServiceNotAvailable) Clone() *HealthcareServiceNotAvailable {
 	if m == nil { return nil }
 	return &HealthcareServiceNotAvailable{
@@ -280,7 +601,7 @@ func (m *HealthcareServiceNotAvailable) Clone() *HealthcareServiceNotAvailable {
 	}
 }
 
-// Equals checks for equality with another HealthcareServiceNotAvailable instance
+// Equals checks equality between two HealthcareServiceNotAvailable instances.
 func (m *HealthcareServiceNotAvailable) Equals(other *HealthcareServiceNotAvailable) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

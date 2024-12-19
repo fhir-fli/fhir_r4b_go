@@ -3,12 +3,13 @@
 package fhir_r4b_go
 
 import (
-	"encoding/json")
+	"encoding/json"
+)
 
 // PractitionerRole
 // A specific set of Roles/Locations/specialties/services that a practitioner may perform at an organization for a period of time.
 type PractitionerRole struct {
-	DomainResource
+	extends DomainResource
 	Id *FhirString `json:"id,omitempty"`
 	Meta *FhirMeta `json:"meta,omitempty"`
 	ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
@@ -33,22 +34,141 @@ type PractitionerRole struct {
 	Endpoint []*Reference `json:"endpoint,omitempty"`
 }
 
-// NewPractitionerRole creates a new PractitionerRole instance
+// NewPractitionerRole creates a new PractitionerRole instance.
 func NewPractitionerRole() *PractitionerRole {
 	return &PractitionerRole{}
 }
 
-// FromJSON populates PractitionerRole from JSON data
+// FromJSON populates PractitionerRole from JSON data.
 func (m *PractitionerRole) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules *FhirUri `json:"implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Active *FhirBoolean `json:"active,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Practitioner *Reference `json:"practitioner,omitempty"`
+		Organization *Reference `json:"organization,omitempty"`
+		Code []*CodeableConcept `json:"code,omitempty"`
+		Specialty []*CodeableConcept `json:"specialty,omitempty"`
+		Location []*Reference `json:"location,omitempty"`
+		HealthcareService []*Reference `json:"healthcareservice,omitempty"`
+		Telecom []*ContactPoint `json:"telecom,omitempty"`
+		AvailableTime []*PractitionerRoleAvailableTime `json:"availabletime,omitempty"`
+		NotAvailable []*PractitionerRoleNotAvailable `json:"notavailable,omitempty"`
+		AvailabilityExceptions *FhirString `json:"availabilityexceptions,omitempty"`
+		Endpoint []*Reference `json:"endpoint,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Meta = temp.Meta
+	m.ImplicitRules = temp.ImplicitRules
+	m.Language = temp.Language
+	m.Text = temp.Text
+	m.Contained = temp.Contained
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Identifier = temp.Identifier
+	m.Active = temp.Active
+	m.Period = temp.Period
+	m.Practitioner = temp.Practitioner
+	m.Organization = temp.Organization
+	m.Code = temp.Code
+	m.Specialty = temp.Specialty
+	m.Location = temp.Location
+	m.HealthcareService = temp.HealthcareService
+	m.Telecom = temp.Telecom
+	m.AvailableTime = temp.AvailableTime
+	m.NotAvailable = temp.NotAvailable
+	m.AvailabilityExceptions = temp.AvailabilityExceptions
+	m.Endpoint = temp.Endpoint
+	return nil
 }
 
-// ToJSON converts PractitionerRole to JSON data
+// ToJSON converts PractitionerRole to JSON data.
 func (m *PractitionerRole) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Meta *FhirMeta `json:"meta,omitempty"`
+		ImplicitRules interface{} `json:"implicitrules,omitempty"`
+		ImplicitRulesElement map[string]interface{} `json:"_implicitrules,omitempty"`
+		Language *CommonLanguages `json:"language,omitempty"`
+		Text *Narrative `json:"text,omitempty"`
+		Contained []*Resource `json:"contained,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Identifier []*Identifier `json:"identifier,omitempty"`
+		Active interface{} `json:"active,omitempty"`
+		ActiveElement map[string]interface{} `json:"_active,omitempty"`
+		Period *Period `json:"period,omitempty"`
+		Practitioner *Reference `json:"practitioner,omitempty"`
+		Organization *Reference `json:"organization,omitempty"`
+		Code []*CodeableConcept `json:"code,omitempty"`
+		Specialty []*CodeableConcept `json:"specialty,omitempty"`
+		Location []*Reference `json:"location,omitempty"`
+		HealthcareService []*Reference `json:"healthcareservice,omitempty"`
+		Telecom []*ContactPoint `json:"telecom,omitempty"`
+		AvailableTime []*PractitionerRoleAvailableTime `json:"availabletime,omitempty"`
+		NotAvailable []*PractitionerRoleNotAvailable `json:"notavailable,omitempty"`
+		AvailabilityExceptions interface{} `json:"availabilityexceptions,omitempty"`
+		AvailabilityExceptionsElement map[string]interface{} `json:"_availabilityexceptions,omitempty"`
+		Endpoint []*Reference `json:"endpoint,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Meta = m.Meta
+	if m.ImplicitRules != nil && m.ImplicitRules.Value != nil {
+		output.ImplicitRules = m.ImplicitRules.Value
+		if m.ImplicitRules.Element != nil {
+			output.ImplicitRulesElement = toMapOrNil(m.ImplicitRules.Element.ToJSON())
+		}
+	}
+	output.Language = m.Language
+	output.Text = m.Text
+	output.Contained = m.Contained
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.Identifier = m.Identifier
+	if m.Active != nil && m.Active.Value != nil {
+		output.Active = m.Active.Value
+		if m.Active.Element != nil {
+			output.ActiveElement = toMapOrNil(m.Active.Element.ToJSON())
+		}
+	}
+	output.Period = m.Period
+	output.Practitioner = m.Practitioner
+	output.Organization = m.Organization
+	output.Code = m.Code
+	output.Specialty = m.Specialty
+	output.Location = m.Location
+	output.HealthcareService = m.HealthcareService
+	output.Telecom = m.Telecom
+	output.AvailableTime = m.AvailableTime
+	output.NotAvailable = m.NotAvailable
+	if m.AvailabilityExceptions != nil && m.AvailabilityExceptions.Value != nil {
+		output.AvailabilityExceptions = m.AvailabilityExceptions.Value
+		if m.AvailabilityExceptions.Element != nil {
+			output.AvailabilityExceptionsElement = toMapOrNil(m.AvailabilityExceptions.Element.ToJSON())
+		}
+	}
+	output.Endpoint = m.Endpoint
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of PractitionerRole
+// Clone creates a deep copy of PractitionerRole.
 func (m *PractitionerRole) Clone() *PractitionerRole {
 	if m == nil { return nil }
 	return &PractitionerRole{
@@ -77,7 +197,7 @@ func (m *PractitionerRole) Clone() *PractitionerRole {
 	}
 }
 
-// Equals checks for equality with another PractitionerRole instance
+// Equals checks equality between two PractitionerRole instances.
 func (m *PractitionerRole) Equals(other *PractitionerRole) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -109,7 +229,7 @@ func (m *PractitionerRole) Equals(other *PractitionerRole) bool {
 // PractitionerRoleAvailableTime
 // A collection of times the practitioner is available or performing this role at the location and/or healthcareservice.
 type PractitionerRoleAvailableTime struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -119,22 +239,81 @@ type PractitionerRoleAvailableTime struct {
 	AvailableEndTime *FhirTime `json:"availableendtime,omitempty"`
 }
 
-// NewPractitionerRoleAvailableTime creates a new PractitionerRoleAvailableTime instance
+// NewPractitionerRoleAvailableTime creates a new PractitionerRoleAvailableTime instance.
 func NewPractitionerRoleAvailableTime() *PractitionerRoleAvailableTime {
 	return &PractitionerRoleAvailableTime{}
 }
 
-// FromJSON populates PractitionerRoleAvailableTime from JSON data
+// FromJSON populates PractitionerRoleAvailableTime from JSON data.
 func (m *PractitionerRoleAvailableTime) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		DaysOfWeek []*DaysOfWeek `json:"daysofweek,omitempty"`
+		AllDay *FhirBoolean `json:"allday,omitempty"`
+		AvailableStartTime *FhirTime `json:"availablestarttime,omitempty"`
+		AvailableEndTime *FhirTime `json:"availableendtime,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.DaysOfWeek = temp.DaysOfWeek
+	m.AllDay = temp.AllDay
+	m.AvailableStartTime = temp.AvailableStartTime
+	m.AvailableEndTime = temp.AvailableEndTime
+	return nil
 }
 
-// ToJSON converts PractitionerRoleAvailableTime to JSON data
+// ToJSON converts PractitionerRoleAvailableTime to JSON data.
 func (m *PractitionerRoleAvailableTime) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		DaysOfWeek []*DaysOfWeek `json:"daysofweek,omitempty"`
+		AllDay interface{} `json:"allday,omitempty"`
+		AllDayElement map[string]interface{} `json:"_allday,omitempty"`
+		AvailableStartTime interface{} `json:"availablestarttime,omitempty"`
+		AvailableStartTimeElement map[string]interface{} `json:"_availablestarttime,omitempty"`
+		AvailableEndTime interface{} `json:"availableendtime,omitempty"`
+		AvailableEndTimeElement map[string]interface{} `json:"_availableendtime,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	output.DaysOfWeek = m.DaysOfWeek
+	if m.AllDay != nil && m.AllDay.Value != nil {
+		output.AllDay = m.AllDay.Value
+		if m.AllDay.Element != nil {
+			output.AllDayElement = toMapOrNil(m.AllDay.Element.ToJSON())
+		}
+	}
+	if m.AvailableStartTime != nil && m.AvailableStartTime.Value != nil {
+		output.AvailableStartTime = m.AvailableStartTime.Value
+		if m.AvailableStartTime.Element != nil {
+			output.AvailableStartTimeElement = toMapOrNil(m.AvailableStartTime.Element.ToJSON())
+		}
+	}
+	if m.AvailableEndTime != nil && m.AvailableEndTime.Value != nil {
+		output.AvailableEndTime = m.AvailableEndTime.Value
+		if m.AvailableEndTime.Element != nil {
+			output.AvailableEndTimeElement = toMapOrNil(m.AvailableEndTime.Element.ToJSON())
+		}
+	}
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of PractitionerRoleAvailableTime
+// Clone creates a deep copy of PractitionerRoleAvailableTime.
 func (m *PractitionerRoleAvailableTime) Clone() *PractitionerRoleAvailableTime {
 	if m == nil { return nil }
 	return &PractitionerRoleAvailableTime{
@@ -148,7 +327,7 @@ func (m *PractitionerRoleAvailableTime) Clone() *PractitionerRoleAvailableTime {
 	}
 }
 
-// Equals checks for equality with another PractitionerRoleAvailableTime instance
+// Equals checks equality between two PractitionerRoleAvailableTime instances.
 func (m *PractitionerRoleAvailableTime) Equals(other *PractitionerRoleAvailableTime) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }
@@ -165,7 +344,7 @@ func (m *PractitionerRoleAvailableTime) Equals(other *PractitionerRoleAvailableT
 // PractitionerRoleNotAvailable
 // The practitioner is not available or performing this role during this period of time due to the provided reason.
 type PractitionerRoleNotAvailable struct {
-	BackboneElement
+	extends BackboneElement
 	Id *FhirString `json:"id,omitempty"`
 	Extension_ []*FhirExtension `json:"extension,omitempty"`
 	ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
@@ -173,22 +352,61 @@ type PractitionerRoleNotAvailable struct {
 	During *Period `json:"during,omitempty"`
 }
 
-// NewPractitionerRoleNotAvailable creates a new PractitionerRoleNotAvailable instance
+// NewPractitionerRoleNotAvailable creates a new PractitionerRoleNotAvailable instance.
 func NewPractitionerRoleNotAvailable() *PractitionerRoleNotAvailable {
 	return &PractitionerRoleNotAvailable{}
 }
 
-// FromJSON populates PractitionerRoleNotAvailable from JSON data
+// FromJSON populates PractitionerRoleNotAvailable from JSON data.
 func (m *PractitionerRoleNotAvailable) FromJSON(data []byte) error {
-	return json.Unmarshal(data, m)
+	temp := struct {
+		Id *FhirString `json:"id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description *FhirString `json:"description,omitempty"`
+		During *Period `json:"during,omitempty"`
+	}{}
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+	m.Id = temp.Id
+	m.Extension_ = temp.Extension_
+	m.ModifierExtension = temp.ModifierExtension
+	m.Description = temp.Description
+	m.During = temp.During
+	return nil
 }
 
-// ToJSON converts PractitionerRoleNotAvailable to JSON data
+// ToJSON converts PractitionerRoleNotAvailable to JSON data.
 func (m *PractitionerRoleNotAvailable) ToJSON() ([]byte, error) {
-	return json.Marshal(m)
+	output := struct {
+		Id interface{} `json:"id,omitempty"`
+		IdElement map[string]interface{} `json:"_id,omitempty"`
+		Extension_ []*FhirExtension `json:"extension,omitempty"`
+		ModifierExtension []*FhirExtension `json:"modifierextension,omitempty"`
+		Description interface{} `json:"description,omitempty"`
+		DescriptionElement map[string]interface{} `json:"_description,omitempty"`
+		During *Period `json:"during,omitempty"`
+	}{}
+	if m.Id != nil && m.Id.Value != nil {
+		output.Id = m.Id.Value
+		if m.Id.Element != nil {
+			output.IdElement = toMapOrNil(m.Id.Element.ToJSON())
+		}
+	}
+	output.Extension_ = m.Extension_
+	output.ModifierExtension = m.ModifierExtension
+	if m.Description != nil && m.Description.Value != nil {
+		output.Description = m.Description.Value
+		if m.Description.Element != nil {
+			output.DescriptionElement = toMapOrNil(m.Description.Element.ToJSON())
+		}
+	}
+	output.During = m.During
+	return json.Marshal(output)
 }
 
-// Clone creates a deep copy of PractitionerRoleNotAvailable
+// Clone creates a deep copy of PractitionerRoleNotAvailable.
 func (m *PractitionerRoleNotAvailable) Clone() *PractitionerRoleNotAvailable {
 	if m == nil { return nil }
 	return &PractitionerRoleNotAvailable{
@@ -200,7 +418,7 @@ func (m *PractitionerRoleNotAvailable) Clone() *PractitionerRoleNotAvailable {
 	}
 }
 
-// Equals checks for equality with another PractitionerRoleNotAvailable instance
+// Equals checks equality between two PractitionerRoleNotAvailable instances.
 func (m *PractitionerRoleNotAvailable) Equals(other *PractitionerRoleNotAvailable) bool {
 	if m == nil && other == nil { return true }
 	if m == nil || other == nil { return false }

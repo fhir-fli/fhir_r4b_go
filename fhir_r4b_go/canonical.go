@@ -3,13 +3,14 @@ package fhir_r4b_go
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"net/url"
 )
 
 // FhirCanonical represents the FHIR primitive type `canonical`.
 type FhirCanonical struct {
-	Value   *url.URL `json:"-"`          // The URL value
-	Element *Element `json:",inline"`    // Metadata (FHIR element)
+	Value   *url.URL `json:"-"`       // The URL value
+	Element *Element `json:",inline"` // Metadata (FHIR element)
 }
 
 // NewFhirCanonical creates a new FhirCanonical with validation.
@@ -22,6 +23,30 @@ func NewFhirCanonical(input string, element *Element) (*FhirCanonical, error) {
 		Value:   parsed,
 		Element: element,
 	}, nil
+}
+
+// NewFhirCanonicalFromMap creates a FhirCanonical instance from a map.
+func NewFhirCanonicalFromMap(data map[string]interface{}) (*FhirCanonical, error) {
+	valueStr, ok := data["value"].(string)
+	if !ok {
+		return nil, errors.New("missing or invalid value for FhirCanonical")
+	}
+
+	parsedValue, err := url.Parse(valueStr)
+	if err != nil {
+		return nil, fmt.Errorf("invalid URL value for FhirCanonical: %v", err)
+	}
+
+	canonical := &FhirCanonical{Value: parsedValue}
+
+	if elementData, ok := data["_value"].(map[string]interface{}); ok {
+		canonical.Element = &Element{}
+		if err := mapToStruct(elementData, canonical.Element); err != nil {
+			return nil, fmt.Errorf("failed to parse _value for FhirCanonical: %v", err)
+		}
+	}
+
+	return canonical, nil
 }
 
 // UnmarshalJSON initializes a FhirCanonical from JSON input.
