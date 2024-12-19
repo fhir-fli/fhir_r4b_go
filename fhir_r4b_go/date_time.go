@@ -1,6 +1,7 @@
 package fhir_r4b_go
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 )
@@ -31,9 +32,27 @@ func (f *FhirDateTime) MarshalJSON() ([]byte, error) {
 	return f.FhirDateTimeBase.MarshalJSON()
 }
 
-// UnmarshalJSON deserializes JSON into FhirDateTime.
 func (f *FhirDateTime) UnmarshalJSON(data []byte) error {
-	return f.FhirDateTimeBase.UnmarshalJSON(data)
+	temp := struct {
+		Value   string   `json:"value"`
+		Element *Element `json:"_value"`
+	}{}
+
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+
+	parsed, err := NewFhirDateTimeFromString(temp.Value)
+	if err != nil {
+		return err
+	}
+
+	if temp.Element != nil {
+		parsed.FhirDateTimeBase.Element = temp.Element
+	}
+
+	*f = *parsed
+	return nil
 }
 
 func NewFhirDateTimeFromString(input string) (*FhirDateTime, error) {

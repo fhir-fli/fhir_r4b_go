@@ -61,20 +61,25 @@ func (f *FhirMarkdown) MarshalJSON() ([]byte, error) {
 	return json.Marshal(data)
 }
 
-// UnmarshalJSON deserializes JSON into FhirMarkdown.
 func (f *FhirMarkdown) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Value   string   `json:"value"`
 		Element *Element `json:"_value"`
 	}{}
+
 	if err := json.Unmarshal(data, &temp); err != nil {
 		return err
 	}
+
+	// Validate the markdown format
 	if !validateMarkdown(temp.Value) {
 		return errors.New("invalid FhirMarkdown: contains invalid characters")
 	}
 	f.Value = &temp.Value
+
+	// Assign the Element if present
 	f.Element = temp.Element
+
 	return nil
 }
 

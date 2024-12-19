@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"strconv"
 )
 
 // FhirPositiveInt represents the FHIR 'integer' type.
@@ -17,6 +18,7 @@ func NewFhirPositiveInt(value int64, element *Element) *FhirPositiveInt {
 	return &FhirPositiveInt{Value: &value, Element: element}
 }
 
+// NewFhirPositiveIntFromMap creates a FhirPositiveInt instance from a map.
 func NewFhirPositiveIntFromMap(data map[string]interface{}) (*FhirPositiveInt, error) {
 	value, ok := data["value"].(*int64)
 	if !ok {
@@ -35,27 +37,25 @@ func NewFhirPositiveIntFromMap(data map[string]interface{}) (*FhirPositiveInt, e
 	return integer, nil
 }
 
-// UnmarshalJSON deserializes JSON into FhirPositiveInt.
 func (fi *FhirPositiveInt) UnmarshalJSON(data []byte) error {
-	var raw map[string]json.RawMessage
-	if err := json.Unmarshal(data, &raw); err != nil {
+	temp := struct {
+		Value   string   `json:"value"`
+		Element *Element `json:"_value"`
+	}{}
+
+	if err := json.Unmarshal(data, &temp); err != nil {
 		return err
 	}
 
-	if rawValue, exists := raw["value"]; exists {
-		var value int64
-		if err := json.Unmarshal(rawValue, &value); err != nil {
-			return err
-		}
-		fi.Value = &value
+	// Parse the value string into an int64
+	parsed, err := strconv.ParseInt(temp.Value, 10, 64)
+	if err != nil {
+		return fmt.Errorf("invalid FhirPositiveInt value: %w", err)
 	}
+	fi.Value = &parsed
 
-	if rawElement, exists := raw["_value"]; exists {
-		fi.Element = &Element{}
-		if err := json.Unmarshal(rawElement, fi.Element); err != nil {
-			return err
-		}
-	}
+	// Assign the Element if present
+	fi.Element = temp.Element
 
 	return nil
 }

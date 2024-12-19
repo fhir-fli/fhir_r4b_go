@@ -92,7 +92,6 @@ func (f *FhirXhtml) MarshalJSON() ([]byte, error) {
 	return json.Marshal(data)
 }
 
-// UnmarshalJSON deserializes JSON into FhirXhtml.
 func (f *FhirXhtml) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Value   string   `json:"value"`
@@ -103,6 +102,7 @@ func (f *FhirXhtml) UnmarshalJSON(data []byte) error {
 		return err
 	}
 
+	// Validate XHTML content
 	if err := validateXhtml(temp.Value); err != nil {
 		return err
 	}

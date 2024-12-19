@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"strconv"
 )
 
 // FhirInteger represents the FHIR 'integer' type.
@@ -36,27 +37,25 @@ func NewFhirIntegerFromMap(data map[string]interface{}) (*FhirInteger, error) {
 	return integer, nil
 }
 
-// UnmarshalJSON deserializes JSON into FhirInteger.
 func (fi *FhirInteger) UnmarshalJSON(data []byte) error {
-	var raw map[string]json.RawMessage
-	if err := json.Unmarshal(data, &raw); err != nil {
+	temp := struct {
+		Value   string   `json:"value"`
+		Element *Element `json:"_value"`
+	}{}
+
+	if err := json.Unmarshal(data, &temp); err != nil {
 		return err
 	}
 
-	if rawValue, exists := raw["value"]; exists {
-		var value int64
-		if err := json.Unmarshal(rawValue, &value); err != nil {
-			return err
-		}
-		fi.Value = &value
+	// Parse the value string into an int64
+	parsed, err := strconv.ParseInt(temp.Value, 10, 64)
+	if err != nil {
+		return fmt.Errorf("invalid FhirInteger value: %w", err)
 	}
+	fi.Value = &parsed
 
-	if rawElement, exists := raw["_value"]; exists {
-		fi.Element = &Element{}
-		if err := json.Unmarshal(rawElement, fi.Element); err != nil {
-			return err
-		}
-	}
+	// Assign the Element if present
+	fi.Element = temp.Element
 
 	return nil
 }

@@ -42,31 +42,25 @@ func NewFhirDecimalFromMap(data map[string]interface{}) (*FhirDecimal, error) {
 	return decimal, nil
 }
 
-// UnmarshalJSON deserializes JSON into FhirDecimal.
 func (fd *FhirDecimal) UnmarshalJSON(data []byte) error {
-	var raw map[string]json.RawMessage
-	if err := json.Unmarshal(data, &raw); err != nil {
+	temp := struct {
+		Value   string   `json:"value"`
+		Element *Element `json:"_value"`
+	}{}
+
+	if err := json.Unmarshal(data, &temp); err != nil {
 		return err
 	}
 
-	if rawValue, exists := raw["value"]; exists {
-		var value string
-		if err := json.Unmarshal(rawValue, &value); err != nil {
-			return err
-		}
-		parsed, err := parseDecimal(value)
-		if err != nil {
-			return err
-		}
-		fd.Value = parsed
+	// Parse the value string into a float64
+	parsed, err := parseDecimal(temp.Value)
+	if err != nil {
+		return fmt.Errorf("invalid FhirDecimal value: %w", err)
 	}
+	fd.Value = parsed
 
-	if rawElement, exists := raw["_value"]; exists {
-		fd.Element = &Element{}
-		if err := json.Unmarshal(rawElement, fd.Element); err != nil {
-			return err
-		}
-	}
+	// Assign the Element if present
+	fd.Element = temp.Element
 
 	return nil
 }

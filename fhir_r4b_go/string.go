@@ -55,17 +55,30 @@ func (f *FhirString) MarshalJSON() ([]byte, error) {
 	return json.Marshal(data)
 }
 
-// UnmarshalJSON deserializes JSON into FhirString.
 func (f *FhirString) UnmarshalJSON(data []byte) error {
-	temp := struct {
-		Value   *string  `json:"value"`
-		Element *Element `json:"_value"`
-	}{}
+	var temp interface{}
 	if err := json.Unmarshal(data, &temp); err != nil {
 		return err
 	}
-	f.Value = temp.Value
-	f.Element = temp.Element
+
+	// Handle case where the input is a simple string
+	if str, ok := temp.(string); ok {
+		f.Value = &str
+		f.Element = nil
+		return nil
+	}
+
+	// Handle case where the input is a JSON object
+	tempStruct := struct {
+		Value   *string  `json:"value"`
+		Element *Element `json:"_value"`
+	}{}
+	if err := json.Unmarshal(data, &tempStruct); err != nil {
+		return err
+	}
+
+	f.Value = tempStruct.Value
+	f.Element = tempStruct.Element
 	return nil
 }
 

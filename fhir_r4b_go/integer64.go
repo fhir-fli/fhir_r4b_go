@@ -3,6 +3,7 @@ package fhir_r4b_go
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"math/big"
 )
 
@@ -21,31 +22,25 @@ func NewFhirInteger64(input string, element *Element) (*FhirInteger64, error) {
 	return &FhirInteger64{Value: val, Element: element}, nil
 }
 
-// UnmarshalJSON deserializes JSON into FhirInteger64.
 func (f *FhirInteger64) UnmarshalJSON(data []byte) error {
-	var raw map[string]json.RawMessage
-	if err := json.Unmarshal(data, &raw); err != nil {
+	temp := struct {
+		Value   string   `json:"value"`
+		Element *Element `json:"_value"`
+	}{}
+
+	if err := json.Unmarshal(data, &temp); err != nil {
 		return err
 	}
 
-	if rawValue, exists := raw["value"]; exists {
-		var value string
-		if err := json.Unmarshal(rawValue, &value); err != nil {
-			return err
-		}
-		val, success := new(big.Int).SetString(value, 10)
-		if !success {
-			return errors.New("invalid FhirInteger64 value")
-		}
-		f.Value = val
+	// Parse the value string into a big.Int
+	val, success := new(big.Int).SetString(temp.Value, 10)
+	if !success {
+		return fmt.Errorf("invalid FhirInteger64 value: %s", temp.Value)
 	}
+	f.Value = val
 
-	if rawElement, exists := raw["_value"]; exists {
-		f.Element = &Element{}
-		if err := json.Unmarshal(rawElement, f.Element); err != nil {
-			return err
-		}
-	}
+	// Assign the Element if present
+	f.Element = temp.Element
 
 	return nil
 }

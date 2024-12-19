@@ -123,7 +123,6 @@ func (f *FhirTime) MarshalJSON() ([]byte, error) {
 	return json.Marshal(data)
 }
 
-// UnmarshalJSON deserializes JSON into FhirTime.
 func (f *FhirTime) UnmarshalJSON(data []byte) error {
 	temp := struct {
 		Value   string   `json:"value"`

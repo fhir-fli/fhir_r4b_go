@@ -57,17 +57,23 @@ func NewFhirIdFromMap(data map[string]interface{}) (*FhirId, error) {
 
 func (fi *FhirId) UnmarshalJSON(data []byte) error {
 	temp := struct {
-		Value   *string  `json:"value"`
+		Value   string   `json:"value"`
 		Element *Element `json:"_value"`
 	}{}
+
 	if err := json.Unmarshal(data, &temp); err != nil {
 		return err
 	}
-	if temp.Value != nil && validateFhirId(*temp.Value) != nil {
-		return errors.New("invalid FhirId in JSON")
+
+	// Validate the FHIR ID format
+	if err := validateFhirId(temp.Value); err != nil {
+		return err
 	}
-	fi.Value = temp.Value
+	fi.Value = &temp.Value
+
+	// Assign the Element if present
 	fi.Element = temp.Element
+
 	return nil
 }
 

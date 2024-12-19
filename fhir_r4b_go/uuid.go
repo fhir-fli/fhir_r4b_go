@@ -65,10 +65,9 @@ func (f *FhirUuid) MarshalJSON() ([]byte, error) {
 	return json.Marshal(data)
 }
 
-// UnmarshalJSON deserializes JSON into FhirUuid.
 func (f *FhirUuid) UnmarshalJSON(data []byte) error {
 	temp := struct {
-		Value   *string  `json:"value"`
+		Value   string   `json:"value"`
 		Element *Element `json:"_value"`
 	}{}
 
@@ -76,8 +75,9 @@ func (f *FhirUuid) UnmarshalJSON(data []byte) error {
 		return err
 	}
 
-	if *temp.Value != "" {
-		parsedUUID, err := uuid.Parse(*temp.Value)
+	// Validate and parse UUID
+	if temp.Value != "" {
+		parsedUUID, err := uuid.Parse(temp.Value)
 		if err != nil {
 			return errors.New("invalid FhirUuid value")
 		}

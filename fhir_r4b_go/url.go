@@ -29,53 +29,45 @@ func NewFhirUrl(input string, element *Element) (*FhirUrl, error) {
 func NewFhirUrlFromMap(data map[string]interface{}) (*FhirUrl, error) {
 	valueStr, ok := data["value"].(string)
 	if !ok {
-		return nil, errors.New("missing or invalid value for FhirCanonical")
+		return nil, errors.New("missing or invalid value for FhirUrl")
 	}
 
 	parsedValue, err := url.Parse(valueStr)
 	if err != nil {
-		return nil, fmt.Errorf("invalid URL value for FhirCanonical: %v", err)
+		return nil, fmt.Errorf("invalid URL value for FhirUrl: %v", err)
 	}
 
-	url := &FhirUrl{Value: parsedValue}
+	canonical := &FhirUrl{Value: parsedValue}
 
 	if elementData, ok := data["_value"].(map[string]interface{}); ok {
-		url.Element = &Element{}
-		if err := mapToStruct(elementData, url.Element); err != nil {
-			return nil, fmt.Errorf("failed to parse _value for FhirCanonical: %v", err)
+		canonical.Element = &Element{}
+		if err := mapToStruct(elementData, canonical.Element); err != nil {
+			return nil, fmt.Errorf("failed to parse _value for FhirUrl: %v", err)
 		}
 	}
 
-	return url, nil
+	return canonical, nil
 }
 
-// UnmarshalJSON initializes a FhirUrl from JSON input.
 func (fc *FhirUrl) UnmarshalJSON(data []byte) error {
-	var raw map[string]json.RawMessage
-	if err := json.Unmarshal(data, &raw); err != nil {
+	temp := struct {
+		Value   string   `json:"value"`
+		Element *Element `json:"_value"`
+	}{}
+
+	if err := json.Unmarshal(data, &temp); err != nil {
 		return err
 	}
 
-	// Extract value
-	if rawValue, exists := raw["value"]; exists {
-		var value string
-		if err := json.Unmarshal(rawValue, &value); err != nil {
-			return err
-		}
-		parsed, err := url.Parse(value)
-		if err != nil || parsed.Scheme == "" || parsed.Host == "" {
-			return errors.New("invalid canonical URL")
-		}
-		fc.Value = parsed
+	// Validate and parse the canonical URL
+	parsed, err := url.Parse(temp.Value)
+	if err != nil || parsed.Scheme == "" || parsed.Host == "" {
+		return errors.New("invalid FhirUrl: missing or invalid URL")
 	}
+	fc.Value = parsed
 
-	// Extract metadata
-	if rawElement, exists := raw["_value"]; exists {
-		fc.Element = &Element{}
-		if err := json.Unmarshal(rawElement, fc.Element); err != nil {
-			return err
-		}
-	}
+	// Assign the Element if present
+	fc.Element = temp.Element
 
 	return nil
 }

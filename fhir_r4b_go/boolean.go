@@ -41,28 +41,25 @@ func NewFhirBooleanFromMap(data map[string]interface{}) (*FhirBoolean, error) {
 
 // UnmarshalJSON initializes a FhirBoolean from JSON input.
 func (fb *FhirBoolean) UnmarshalJSON(data []byte) error {
-	var raw map[string]json.RawMessage
+	// Handle case where the input is a simple boolean
+	var boolValue bool
+	if err := json.Unmarshal(data, &boolValue); err == nil {
+		fb.Value = &boolValue
+		fb.Element = nil
+		return nil
+	}
+
+	// Handle case where the input is a JSON object
+	var raw struct {
+		Value   *bool    `json:"value"`
+		Element *Element `json:"_value"`
+	}
 	if err := json.Unmarshal(data, &raw); err != nil {
 		return err
 	}
 
-	// Extract value if present
-	if rawValue, exists := raw["value"]; exists {
-		var value bool
-		if err := json.Unmarshal(rawValue, &value); err != nil {
-			return err
-		}
-		fb.Value = &value
-	}
-
-	// Extract element metadata if present
-	if rawElement, exists := raw["_value"]; exists {
-		fb.Element = &Element{}
-		if err := json.Unmarshal(rawElement, fb.Element); err != nil {
-			return err
-		}
-	}
-
+	fb.Value = raw.Value
+	fb.Element = raw.Element
 	return nil
 }
 

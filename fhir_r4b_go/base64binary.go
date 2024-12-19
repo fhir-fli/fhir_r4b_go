@@ -27,31 +27,32 @@ func NewFhirBase64Binary(input string, element *Element) (*FhirBase64Binary, err
 
 // UnmarshalJSON initializes a FhirBase64Binary from JSON input.
 func (b *FhirBase64Binary) UnmarshalJSON(data []byte) error {
-	var raw map[string]json.RawMessage
+	// Handle case where the input is a simple string
+	var strValue string
+	if err := json.Unmarshal(data, &strValue); err == nil {
+		if !isValidBase64(strValue) {
+			return errors.New("invalid Base64 encoded string")
+		}
+		b.Value = &strValue
+		b.Element = nil
+		return nil
+	}
+
+	// Handle case where the input is a JSON object
+	var raw struct {
+		Value   *string  `json:"value"`
+		Element *Element `json:"_value"`
+	}
 	if err := json.Unmarshal(data, &raw); err != nil {
 		return err
 	}
 
-	// Extract value
-	if rawValue, exists := raw["value"]; exists {
-		var value string
-		if err := json.Unmarshal(rawValue, &value); err != nil {
-			return err
-		}
-		if !isValidBase64(value) {
-			return errors.New("invalid Base64 encoded string")
-		}
-		b.Value = &value
+	if raw.Value != nil && !isValidBase64(*raw.Value) {
+		return errors.New("invalid Base64 encoded string")
 	}
 
-	// Extract metadata
-	if rawElement, exists := raw["_value"]; exists {
-		b.Element = &Element{}
-		if err := json.Unmarshal(rawElement, b.Element); err != nil {
-			return err
-		}
-	}
-
+	b.Value = raw.Value
+	b.Element = raw.Element
 	return nil
 }
 

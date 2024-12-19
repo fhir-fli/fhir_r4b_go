@@ -1,6 +1,9 @@
 package fhir_r4b_go
 
-import "errors"
+import (
+	"encoding/json"
+	"errors"
+)
 
 // FhirDate represents FHIR-compliant date (year-month-day).
 type FhirDate struct {
@@ -19,9 +22,27 @@ func (f *FhirDate) MarshalJSON() ([]byte, error) {
 	return f.FhirDateTimeBase.MarshalJSON()
 }
 
-// UnmarshalJSON deserializes JSON into FhirDate.
 func (f *FhirDate) UnmarshalJSON(data []byte) error {
-	return f.FhirDateTimeBase.UnmarshalJSON(data)
+	temp := struct {
+		Value   string   `json:"value"`
+		Element *Element `json:"_value"`
+	}{}
+
+	if err := json.Unmarshal(data, &temp); err != nil {
+		return err
+	}
+
+	parsed, err := NewFhirDateFromString(temp.Value)
+	if err != nil {
+		return err
+	}
+
+	if temp.Element != nil {
+		parsed.FhirDateTimeBase.Element = temp.Element
+	}
+
+	*f = *parsed
+	return nil
 }
 
 func NewFhirDateFromString(input string) (*FhirDate, error) {

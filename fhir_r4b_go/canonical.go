@@ -49,33 +49,25 @@ func NewFhirCanonicalFromMap(data map[string]interface{}) (*FhirCanonical, error
 	return canonical, nil
 }
 
-// UnmarshalJSON initializes a FhirCanonical from JSON input.
 func (fc *FhirCanonical) UnmarshalJSON(data []byte) error {
-	var raw map[string]json.RawMessage
-	if err := json.Unmarshal(data, &raw); err != nil {
+	temp := struct {
+		Value   string   `json:"value"`
+		Element *Element `json:"_value"`
+	}{}
+
+	if err := json.Unmarshal(data, &temp); err != nil {
 		return err
 	}
 
-	// Extract value
-	if rawValue, exists := raw["value"]; exists {
-		var value string
-		if err := json.Unmarshal(rawValue, &value); err != nil {
-			return err
-		}
-		parsed, err := url.Parse(value)
-		if err != nil || parsed.Scheme == "" || parsed.Host == "" {
-			return errors.New("invalid canonical URL")
-		}
-		fc.Value = parsed
+	// Validate and parse the canonical URL
+	parsed, err := url.Parse(temp.Value)
+	if err != nil || parsed.Scheme == "" || parsed.Host == "" {
+		return errors.New("invalid FhirCanonical: missing or invalid URL")
 	}
+	fc.Value = parsed
 
-	// Extract metadata
-	if rawElement, exists := raw["_value"]; exists {
-		fc.Element = &Element{}
-		if err := json.Unmarshal(rawElement, fc.Element); err != nil {
-			return err
-		}
-	}
+	// Assign the Element if present
+	fc.Element = temp.Element
 
 	return nil
 }

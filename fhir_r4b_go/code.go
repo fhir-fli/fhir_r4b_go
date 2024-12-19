@@ -25,31 +25,34 @@ func NewFhirCode(input string, element *Element) (*FhirCode, error) {
 
 // UnmarshalJSON initializes a FhirCode from JSON input.
 func (fc *FhirCode) UnmarshalJSON(data []byte) error {
-	var raw map[string]json.RawMessage
+	// Handle case where the input is a simple string
+	var strValue string
+	if err := json.Unmarshal(data, &strValue); err == nil {
+		if err := validateFhirCode(strValue); err != nil {
+			return err
+		}
+		fc.Value = &strValue
+		fc.Element = nil
+		return nil
+	}
+
+	// Handle case where the input is a JSON object
+	var raw struct {
+		Value   *string  `json:"value"`
+		Element *Element `json:"_value"`
+	}
 	if err := json.Unmarshal(data, &raw); err != nil {
 		return err
 	}
 
-	// Extract value
-	if rawValue, exists := raw["value"]; exists {
-		var value string
-		if err := json.Unmarshal(rawValue, &value); err != nil {
-			return err
-		}
-		if err := validateFhirCode(value); err != nil {
-			return err
-		}
-		fc.Value = &value
-	}
-
-	// Extract metadata
-	if rawElement, exists := raw["_value"]; exists {
-		fc.Element = &Element{}
-		if err := json.Unmarshal(rawElement, fc.Element); err != nil {
+	if raw.Value != nil {
+		if err := validateFhirCode(*raw.Value); err != nil {
 			return err
 		}
 	}
 
+	fc.Value = raw.Value
+	fc.Element = raw.Element
 	return nil
 }
 

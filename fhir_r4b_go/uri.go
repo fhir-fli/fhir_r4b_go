@@ -25,57 +25,49 @@ func NewFhirUri(input string, element *Element) (*FhirUri, error) {
 	}, nil
 }
 
-// NewFhirUtiFromMap creates a FhirUti instance from a map.
+// NewFhirUriFromMap creates a FhirUri instance from a map.
 func NewFhirUriFromMap(data map[string]interface{}) (*FhirUri, error) {
 	valueStr, ok := data["value"].(string)
 	if !ok {
-		return nil, errors.New("missing or invalid value for FhirCanonical")
+		return nil, errors.New("missing or invalid value for FhirUri")
 	}
 
 	parsedValue, err := url.Parse(valueStr)
 	if err != nil {
-		return nil, fmt.Errorf("invalid URL value for FhirCanonical: %v", err)
+		return nil, fmt.Errorf("invalid URL value for FhirUri: %v", err)
 	}
 
-	uri := &FhirUri{Value: parsedValue}
+	canonical := &FhirUri{Value: parsedValue}
 
 	if elementData, ok := data["_value"].(map[string]interface{}); ok {
-		uri.Element = &Element{}
-		if err := mapToStruct(elementData, uri.Element); err != nil {
-			return nil, fmt.Errorf("failed to parse _value for FhirCanonical: %v", err)
+		canonical.Element = &Element{}
+		if err := mapToStruct(elementData, canonical.Element); err != nil {
+			return nil, fmt.Errorf("failed to parse _value for FhirUri: %v", err)
 		}
 	}
 
-	return uri, nil
+	return canonical, nil
 }
 
-// UnmarshalJSON initializes a FhirUri from JSON input.
 func (fc *FhirUri) UnmarshalJSON(data []byte) error {
-	var raw map[string]json.RawMessage
-	if err := json.Unmarshal(data, &raw); err != nil {
+	temp := struct {
+		Value   string   `json:"value"`
+		Element *Element `json:"_value"`
+	}{}
+
+	if err := json.Unmarshal(data, &temp); err != nil {
 		return err
 	}
 
-	// Extract value
-	if rawValue, exists := raw["value"]; exists {
-		var value string
-		if err := json.Unmarshal(rawValue, &value); err != nil {
-			return err
-		}
-		parsed, err := url.Parse(value)
-		if err != nil || parsed.Scheme == "" || parsed.Host == "" {
-			return errors.New("invalid canonical URL")
-		}
-		fc.Value = parsed
+	// Validate and parse the canonical URL
+	parsed, err := url.Parse(temp.Value)
+	if err != nil || parsed.Scheme == "" || parsed.Host == "" {
+		return errors.New("invalid FhirUri: missing or invalid URL")
 	}
+	fc.Value = parsed
 
-	// Extract metadata
-	if rawElement, exists := raw["_value"]; exists {
-		fc.Element = &Element{}
-		if err := json.Unmarshal(rawElement, fc.Element); err != nil {
-			return err
-		}
-	}
+	// Assign the Element if present
+	fc.Element = temp.Element
 
 	return nil
 }
